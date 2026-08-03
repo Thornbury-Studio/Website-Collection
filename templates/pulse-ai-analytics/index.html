@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PULSE — Know Who's Leaving Before They Do</title>
+<meta name="description" content="PULSE is a fictional AI analytics platform template built for portfolio showcase purposes — a cinematic, scroll-driven product landing page.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/pulse-ai-analytics/index.html">
+<meta name="theme-color" content="#07070f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307070f'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237c5cff'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%23fff'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PULSE">
+<meta property="og:title" content="PULSE — Know Who's Leaving Before They Do">
+<meta property="og:description" content="PULSE is a fictional AI analytics platform template built for portfolio showcase purposes — a cinematic, scroll-driven product landing page.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/pulse-ai-analytics/index.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PULSE — Know Who's Leaving Before They Do">
+<meta name="twitter:description" content="PULSE is a fictional AI analytics platform template built for portfolio showcase purposes — a cinematic, scroll-driven product landing page.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PULSE",
+  "applicationCategory": "BusinessApplication",
+  "description": "PULSE is a fictional AI churn-analytics platform template built for portfolio showcase purposes.",
+  "url": "https://website-collection-zanezhijies-projects.vercel.app/templates/pulse-ai-analytics/index.html",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="spotlight" id="spotlight" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo" aria-label="PULSE home">
+      <span class="logo-mark" aria-hidden="true"><i></i></span>
+      PULSE
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#product">Product</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#pricing" class="nav-signin">Sign in</a>
+      <a href="#cta" class="btn btn-primary" data-magnetic>Start Free</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#product">Product</a>
+  <a href="#features">Features</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#faq">FAQ</a>
+</div>
+
+<a href="../../index.html" class="back-link">&larr; Portfolio</a>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <img class="hero-ambient" id="heroAmbient" src="img/hero-universe.webp" alt="" aria-hidden="true" fetchpriority="high" width="1376" height="768">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+
+  <div class="float-layer" aria-hidden="true">
+    <div class="float-card fc-1" data-depth="0.055">
+      <div class="fc-top"><i class="fc-dot risk"></i> Churn signal</div>
+      <div class="fc-title">Northwind Labs</div>
+      <div class="fc-body">Usage down 62% over 14 days. Risk climbing.</div>
+      <div class="fc-meter" style="--w:82%"><i></i></div>
+    </div>
+    <div class="float-card fc-2" data-depth="0.09">
+      <div class="fc-top"><i class="fc-dot info"></i> AI recommendation</div>
+      <div class="fc-title">Send re-onboarding</div>
+      <div class="fc-body">Similar accounts recovered 71% of the time.</div>
+      <div class="fc-meter" style="--w:71%"><i></i></div>
+    </div>
+    <div class="float-card fc-3" data-depth="0.07">
+      <div class="fc-top"><i class="fc-dot good"></i> Recovered</div>
+      <div class="fc-title">Cobalt Systems</div>
+      <div class="fc-body">Back to healthy. $84k ARR retained.</div>
+      <div class="fc-meter" style="--w:94%"><i></i></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="eyebrow hero-eyebrow">Predictive churn intelligence</span>
+      <h1>
+        <span class="line"><span>Know who's leaving&#8288;&mdash;</span></span>
+        <span class="line"><span class="gradient-text">before they do.</span></span>
+      </h1>
+      <p class="hero-sub">PULSE watches every signal your customers give off, predicts churn weeks ahead, and tells your team exactly what to do about it.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-primary" data-magnetic>Start Free</a>
+        <a href="#product" class="btn btn-ghost" data-magnetic>
+          <span class="play" aria-hidden="true">&#9654;</span> Watch Demo
+        </a>
+      </div>
+      <p class="hero-note">No credit card required &middot; 14-day trial &middot; Cancel anytime</p>
+    </div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <span class="rail"></span>
+    Scroll to assemble
+  </div>
+</section>
+
+<!-- ============ SOCIAL PROOF ============ -->
+<section class="proof" aria-label="Customers">
+  <p class="proof-label">Trusted by revenue teams at</p>
+  <div class="proof-track" id="proofTrack">
+    <span class="proof-logo"><span class="glyph">NW</span> Northwind</span>
+    <span class="proof-logo"><span class="glyph">CB</span> Cobalt</span>
+    <span class="proof-logo"><span class="glyph">HX</span> Helix</span>
+    <span class="proof-logo"><span class="glyph">AT</span> Atlas Grid</span>
+    <span class="proof-logo"><span class="glyph">VR</span> Verdant</span>
+    <span class="proof-logo"><span class="glyph">QM</span> Quantum Mile</span>
+  </div>
+</section>
+
+<!-- ============ FEATURES (pinned panels) ============ -->
+<section class="features" id="features">
+  <div class="features-bg" aria-hidden="true">
+    <img id="signalBg" src="img/signal-panels.webp" alt="" width="1376" height="768" loading="lazy">
+  </div>
+
+  <!-- 01 PREDICT -->
+  <article class="feature-panel">
+    <div class="wrap feature-grid">
+      <div class="feature-copy reveal">
+        <p class="feature-index">01 &mdash; Predict</p>
+        <h2>See churn<br>weeks early.</h2>
+        <p>PULSE scores every account daily against 240+ behavioural signals — login decay, feature abandonment, support sentiment, invoice friction. You get a ranked list of who's slipping, long before they open a cancellation page.</p>
+        <ul class="feature-points">
+          <li>Daily risk scoring across your entire book</li>
+          <li>Signals from product, billing, and support in one model</li>
+          <li>Alerts routed to the owner who can act</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal" data-tilt>
+        <div class="fv-head">
+          <span class="fv-title">Accounts at risk</span>
+          <span class="fv-tag live">Live</span>
+        </div>
+        <div class="risk-row alert">
+          <span class="rr-avatar" style="background:#fb7185">NW</span>
+          <span><span class="rr-name">Northwind Labs</span><br><span class="rr-meta">$18.4k ARR &middot; 62% usage drop</span></span>
+          <span class="rr-score high">91</span>
+        </div>
+        <div class="risk-row">
+          <span class="rr-avatar" style="background:#fbbf24">HX</span>
+          <span><span class="rr-name">Helix Digital</span><br><span class="rr-meta">$9.1k ARR &middot; seats unused</span></span>
+          <span class="rr-score mid">67</span>
+        </div>
+        <div class="risk-row">
+          <span class="rr-avatar" style="background:#fbbf24">AT</span>
+          <span><span class="rr-name">Atlas Grid</span><br><span class="rr-meta">$24.7k ARR &middot; 2 failed invoices</span></span>
+          <span class="rr-score mid">58</span>
+        </div>
+        <div class="risk-row">
+          <span class="rr-avatar" style="background:#a3e635">VR</span>
+          <span><span class="rr-name">Verdant Co.</span><br><span class="rr-meta">$12.2k ARR &middot; healthy</span></span>
+          <span class="rr-score low">14</span>
+        </div>
+        <div class="risk-row">
+          <span class="rr-avatar" style="background:#22d3ee">CB</span>
+          <span><span class="rr-name">Cobalt Systems</span><br><span class="rr-meta">$84k ARR &middot; recovered</span></span>
+          <span class="rr-score low">08</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 EXPLAIN -->
+  <article class="feature-panel flip">
+    <div class="wrap feature-grid">
+      <div class="feature-copy reveal">
+        <p class="feature-index">02 &mdash; Explain</p>
+        <h2>Know exactly<br>why.</h2>
+        <p>A score without a reason is just anxiety. Every PULSE prediction unpacks itself — the precise signals driving the risk, weighted and ranked, in language your CS team can read out loud on a call.</p>
+        <ul class="feature-points">
+          <li>Per-account attribution, not black-box scores</li>
+          <li>Plain-English summaries generated for every alert</li>
+          <li>Compare against accounts that looked identical</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal" data-tilt data-animate="bars">
+        <div class="fv-head">
+          <span class="fv-title">Why Northwind Labs is at risk</span>
+          <span class="fv-tag">91 / 100</span>
+        </div>
+        <div class="reason">
+          <div class="reason-top"><span>Weekly active users</span><span>&minus;62%</span></div>
+          <div class="reason-bar" style="--w:88%"><i></i></div>
+        </div>
+        <div class="reason">
+          <div class="reason-top"><span>Core feature abandoned</span><span>34 days</span></div>
+          <div class="reason-bar" style="--w:74%"><i></i></div>
+        </div>
+        <div class="reason">
+          <div class="reason-top"><span>Support sentiment</span><span>Negative</span></div>
+          <div class="reason-bar" style="--w:61%"><i></i></div>
+        </div>
+        <div class="reason">
+          <div class="reason-top"><span>Champion left company</span><span>Confirmed</span></div>
+          <div class="reason-bar" style="--w:52%"><i></i></div>
+        </div>
+        <div class="reason">
+          <div class="reason-top"><span>Invoice friction</span><span>1 retry</span></div>
+          <div class="reason-bar" style="--w:23%"><i></i></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 PREVENT -->
+  <article class="feature-panel">
+    <div class="wrap feature-grid">
+      <div class="feature-copy reveal">
+        <p class="feature-index">03 &mdash; Prevent</p>
+        <h2>Fix it before<br>it breaks.</h2>
+        <p>PULSE turns each prediction into a playbook — the specific action, for the specific account, with the expected lift attached. Approve it and the work runs itself across the tools you already use.</p>
+        <ul class="feature-points">
+          <li>Playbooks ranked by predicted recovery rate</li>
+          <li>One-click execution into your CRM and inbox</li>
+          <li>Every outcome fed back into the model</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal" data-tilt data-animate="playbook">
+        <div class="fv-head">
+          <span class="fv-title">Recommended playbook</span>
+          <span class="fv-tag live">Running</span>
+        </div>
+        <div class="play-row done">
+          <span class="play-check" aria-hidden="true">&#10003;</span>
+          <span class="play-label">Flag account to owner</span>
+          <span class="play-gain">done</span>
+        </div>
+        <div class="play-row done">
+          <span class="play-check" aria-hidden="true">&#10003;</span>
+          <span class="play-label">Send re-onboarding sequence</span>
+          <span class="play-gain">+41%</span>
+        </div>
+        <div class="play-row">
+          <span class="play-check" aria-hidden="true">&#10003;</span>
+          <span class="play-label">Book executive check-in</span>
+          <span class="play-gain">+23%</span>
+        </div>
+        <div class="play-row">
+          <span class="play-check" aria-hidden="true">&#10003;</span>
+          <span class="play-label">Offer annual migration</span>
+          <span class="play-gain">+18%</span>
+        </div>
+        <div class="play-row">
+          <span class="play-check" aria-hidden="true">&#10003;</span>
+          <span class="play-label">Escalate to retention pod</span>
+          <span class="play-gain">+9%</span>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats" aria-label="Key numbers">
+  <div class="wrap">
+    <div class="stats-grid" id="stats">
+      <div class="stat">
+        <p class="stat-num" data-count="94" data-suffix="%">0%</p>
+        <p class="stat-label">Prediction accuracy</p>
+      </div>
+      <div class="stat">
+        <p class="stat-num" data-count="12000" data-sep="1">0</p>
+        <p class="stat-label">Teams</p>
+      </div>
+      <div class="stat">
+        <p class="stat-num" data-count="40" data-prefix="$" data-suffix="M">$0M</p>
+        <p class="stat-label">Revenue saved</p>
+      </div>
+      <div class="stat">
+        <p class="stat-num" data-count="480" data-suffix="M">0M</p>
+        <p class="stat-label">Predictions processed</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOWCASE ============ -->
+<section class="showcase" id="product">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The product</span>
+      <h2>Your whole retention picture, <span class="gradient-text">alive</span>.</h2>
+      <p>Not a screenshot. This is the interface, running — updating, predicting, and writing its own recommendations while you read this.</p>
+    </div>
+
+    <div class="browser reveal" id="browser" data-tilt>
+      <div class="browser-bar">
+        <span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="browser-url">app.pulse.example/retention</span>
+      </div>
+
+      <div class="app">
+        <aside class="app-side">
+          <p class="app-side-label">Workspace</p>
+          <div class="app-nav-item active"><span class="ico"></span> Retention</div>
+          <div class="app-nav-item"><span class="ico"></span> Accounts</div>
+          <div class="app-nav-item"><span class="ico"></span> Signals</div>
+          <div class="app-nav-item"><span class="ico"></span> Playbooks</div>
+          <div class="app-nav-item"><span class="ico"></span> Reports</div>
+          <p class="app-side-label" style="margin-top:1.6rem">Segments</p>
+          <div class="app-nav-item"><span class="ico"></span> Enterprise</div>
+          <div class="app-nav-item"><span class="ico"></span> Mid-market</div>
+        </aside>
+
+        <div class="app-main">
+          <div class="app-main-head">
+            <div>
+              <p class="app-h">Retention overview</p>
+              <p class="app-sub">Last 30 days &middot; auto-refreshing</p>
+            </div>
+            <span class="fv-tag live">Live</span>
+          </div>
+
+          <div class="kpi-row">
+            <div class="kpi">
+              <p class="kpi-label">At risk</p>
+              <p class="kpi-val" id="kpiRisk">38</p>
+              <p class="kpi-delta down" id="kpiRiskD">&darr; 6 today</p>
+            </div>
+            <div class="kpi">
+              <p class="kpi-label">Recovered</p>
+              <p class="kpi-val" id="kpiRec">129</p>
+              <p class="kpi-delta up" id="kpiRecD">&uarr; 12 this week</p>
+            </div>
+            <div class="kpi">
+              <p class="kpi-label">ARR protected</p>
+              <p class="kpi-val" id="kpiArr">$1.84M</p>
+              <p class="kpi-delta up">&uarr; 4.2%</p>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-head">
+              <span class="chart-title">Predicted vs. actual churn</span>
+              <span class="chart-legend">
+                <span><i style="background:#7c5cff"></i> Predicted</span>
+                <span><i style="background:#22d3ee"></i> Actual</span>
+              </span>
+            </div>
+            <canvas id="appChart" width="640" height="150" aria-hidden="true"></canvas>
+          </div>
+        </div>
+
+        <aside class="app-feed">
+          <div class="feed-head">
+            <span class="feed-title">Activity</span>
+            <span class="live-pip"><i></i> LIVE</span>
+          </div>
+          <div class="feed-list" id="feedList"></div>
+          <div class="ai-box">
+            <div class="ai-box-top">
+              <svg class="ai-spark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>
+              PULSE AI
+            </div>
+            <p id="aiType"></p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="ghost-cursor" id="ghostCursor" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="#fff"><path d="M0 0l5.6 15.2 2.2-6.4 6.4-2.2z"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLOW ============ -->
+<section class="flow">
+  <div class="wrap flow-grid">
+    <div class="flow-media reveal" data-parallax="0.06">
+      <img src="img/flow-workspace.webp" alt="A laptop on a bright desk running the PULSE analytics dashboard, surrounded by floating interface panels." width="1376" height="768" loading="lazy">
+      <span class="flow-badge"><i></i> Running on its own</span>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">The flow</span>
+      <h2 style="margin-top:1.4rem">It works while<br>you don't.</h2>
+      <p>PULSE connects once, then disappears into the background. No dashboards to babysit, no weekly export ritual. The hard part — noticing — is handled.</p>
+      <ul class="flow-list">
+        <li>
+          <span class="n">01</span>
+          <span>
+            <h3>Connect your stack</h3>
+            <p>Product events, billing, CRM, support. Ten minutes, no engineer required.</p>
+          </span>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <span>
+            <h3>PULSE learns your shape</h3>
+            <p>The model calibrates to how your customers actually behave — not an industry average.</p>
+          </span>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <span>
+            <h3>Act on what surfaces</h3>
+            <p>Your team wakes up to a ranked list and a recommended move for each account.</p>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2>Priced on what you keep.</h2>
+      <p>Every plan includes the full prediction engine. You scale seats and volume, not features.</p>
+    </div>
+
+    <div class="toggle-wrap reveal">
+      <span class="toggle-label on" id="labMonthly">Monthly</span>
+      <button class="toggle" id="billToggle" role="switch" aria-checked="false" aria-label="Toggle annual billing"><i></i></button>
+      <span class="toggle-label" id="labAnnual">Annual</span>
+      <span class="save-pill">Save 20%</span>
+    </div>
+
+    <div class="plans">
+      <div class="plan reveal">
+        <p class="plan-name">Starter</p>
+        <p class="plan-desc">For small teams protecting their first thousand accounts.</p>
+        <div class="plan-price">
+          <span class="plan-amount"><span class="cur">$</span><span class="price" data-m="49" data-a="39">49</span></span>
+          <span class="plan-per">/ month</span>
+        </div>
+        <p class="plan-billed" data-billed>Billed monthly</p>
+        <a href="#cta" class="btn btn-ghost" data-magnetic>Start Free</a>
+        <ul class="plan-features">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Up to 1,000 tracked accounts</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Daily risk scoring</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> 3 integrations</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Email alerts</li>
+        </ul>
+      </div>
+
+      <div class="plan featured reveal">
+        <span class="plan-flag">Most popular</span>
+        <p class="plan-name">Growth</p>
+        <p class="plan-desc">For revenue teams running retention as a real motion.</p>
+        <div class="plan-price">
+          <span class="plan-amount"><span class="cur">$</span><span class="price" data-m="149" data-a="119">149</span></span>
+          <span class="plan-per">/ month</span>
+        </div>
+        <p class="plan-billed" data-billed>Billed monthly</p>
+        <a href="#cta" class="btn btn-primary" data-magnetic>Start Free</a>
+        <ul class="plan-features">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Up to 25,000 tracked accounts</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Full attribution &amp; explanations</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Automated playbooks</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Unlimited integrations</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Priority support</li>
+        </ul>
+      </div>
+
+      <div class="plan reveal">
+        <p class="plan-name">Scale</p>
+        <p class="plan-desc">For platforms where a single logo moves the forecast.</p>
+        <div class="plan-price">
+          <span class="plan-amount"><span class="cur">$</span><span class="price" data-m="429" data-a="343">429</span></span>
+          <span class="plan-per">/ month</span>
+        </div>
+        <p class="plan-billed" data-billed>Billed monthly</p>
+        <a href="#cta" class="btn btn-ghost" data-magnetic>Talk to us</a>
+        <ul class="plan-features">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Unlimited tracked accounts</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Custom model tuning</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> SSO, audit logs, data residency</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Dedicated success engineer</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> 99.9% uptime SLA</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="wrap faq-grid">
+    <div class="reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2 style="font-size:clamp(2rem,4.4vw,3rem);margin-top:1.4rem">Questions,<br>answered.</h2>
+      <p style="color:var(--muted);margin-top:1rem;font-size:0.98rem">Everything teams ask before switching their retention motion over to PULSE.</p>
+    </div>
+
+    <div class="faq-list reveal" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How far ahead can PULSE predict churn?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Most accounts surface 3 to 6 weeks before they would have cancelled. The window depends on your contract length and how much product signal you send us — high-frequency products give the model more to work with, so warnings arrive earlier.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How long does setup actually take?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">About ten minutes for the connections, then roughly a week of quiet calibration while the model learns your baseline. You'll see your first scored list the same day, and it sharpens from there.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do we need a data team to run this?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. PULSE ships with pre-built connectors for the tools most teams already run, and every prediction arrives with a plain-English explanation. If you do have a data team, the raw scores are available through the API.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What happens to our data?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">It stays yours. Data is encrypted in transit and at rest, never used to train models for other customers, and deleted on request within 30 days. Scale plans can pin storage to a specific region.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can we keep using our existing CRM?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">That's the intent. PULSE isn't trying to replace where your team works — playbooks execute into your CRM, inbox, and messaging tools so the recommendation shows up where someone will actually see it.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What if the model gets it wrong?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">It will sometimes — 94% accuracy means roughly one in sixteen calls misses. Every outcome you record feeds back into the model, and the attribution view shows you exactly which signal misled it, so wrong answers are at least legible ones.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta" id="cta">
+  <canvas id="ctaCanvas" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="eyebrow reveal">Start today</span>
+    <h2 class="reveal">Stop finding out<br><span class="gradient-text">on the way out.</span></h2>
+    <p class="reveal">Fourteen days, your real data, no card. If PULSE doesn't surface an account you'd have lost, walk away.</p>
+    <div class="cta-actions reveal">
+      <a href="#top" class="btn btn-primary" data-magnetic>Start Free</a>
+      <a href="#product" class="btn btn-ghost" data-magnetic>Watch Demo</a>
+    </div>
+    <p class="cta-note reveal">Set up in 10 minutes &middot; Cancel anytime</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo"><span class="logo-mark" aria-hidden="true"><i></i></span> PULSE</a>
+        <p>A fictional AI analytics platform built as a portfolio template. Not a real business &mdash; no third-party copyrighted content is used.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Predict</a></li>
+          <li><a href="#features">Explain</a></li>
+          <li><a href="#features">Prevent</a></li>
+          <li><a href="#product">Live demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#product">About</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#cta">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>hello@pulse.example</li>
+          <li>(555) 084-2210</li>
+          <li>Remote &mdash; everywhere</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>&copy; <span id="year">2026</span> PULSE. Template for portfolio use only.</span>
+      <span>Built with GSAP &amp; Lenis</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
