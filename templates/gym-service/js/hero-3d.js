@@ -109,21 +109,22 @@ const FRAGMENT = `
 function initHero3D(canvas) {
   if (!canvas) return;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const heroSection = document.getElementById('top');
 
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-  camera.position.set(0, 0, 5.2);
+  const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+  camera.position.set(0, 0, 6.4);
 
-  const geometry = new THREE.IcosahedronGeometry(1.7, 6);
+  const geometry = new THREE.IcosahedronGeometry(2.05, 7);
   const material = new THREE.ShaderMaterial({
     vertexShader: VERTEX,
     fragmentShader: FRAGMENT,
     uniforms: {
       uTime: { value: 0 },
-      uAmp: { value: 0.32 },
+      uAmp: { value: 0.38 },
       uColor: { value: new THREE.Color(0xd4ff3f) },
       uDark: { value: new THREE.Color(0x14150f) },
     },
@@ -133,27 +134,26 @@ function initHero3D(canvas) {
     side: THREE.DoubleSide,
   });
   const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.set(1.1, 0, 0);
   scene.add(mesh);
 
-  // sparse ambient particle field
-  const particleCount = 90;
+  // ambient particle field surrounding the core
+  const particleCount = 130;
   const positions = new Float32Array(particleCount * 3);
   for (let i = 0; i < particleCount; i++) {
-    const r = 3.2 + Math.random() * 2.2;
+    const r = 3.6 + Math.random() * 2.6;
     const theta = Math.random() * Math.PI * 2;
     const phi = Math.acos(Math.random() * 2 - 1);
-    positions[i * 3] = r * Math.sin(phi) * Math.cos(theta) + 1.1;
-    positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.6;
-    positions[i * 3 + 2] = r * Math.cos(phi) * 0.6;
+    positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+    positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+    positions[i * 3 + 2] = r * Math.cos(phi) * 0.5;
   }
   const particleGeo = new THREE.BufferGeometry();
   particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   const particleMat = new THREE.PointsMaterial({
     color: 0xd4ff3f,
-    size: 0.028,
+    size: 0.03,
     transparent: true,
-    opacity: 0.55,
+    opacity: 0.5,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
   });
@@ -168,6 +168,7 @@ function initHero3D(canvas) {
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
+    if (rect.width < 1 || rect.height < 1) return;
     renderer.setSize(rect.width, rect.height, false);
     camera.aspect = rect.width / rect.height;
     camera.updateProjectionMatrix();
@@ -175,14 +176,28 @@ function initHero3D(canvas) {
   resize();
   window.addEventListener('resize', resize);
 
+  // fade + settle as the hero scrolls out of view
+  let scrollFactor = 1;
+  function onScroll() {
+    if (!heroSection) return;
+    const heroH = heroSection.offsetHeight || window.innerHeight;
+    const p = Math.min(1, Math.max(0, window.scrollY / (heroH * 0.85)));
+    scrollFactor = 1 - p;
+    canvas.style.opacity = String(Math.max(0.12, scrollFactor));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
   const clock = new THREE.Clock();
 
   function renderFrame() {
     const t = clock.getElapsedTime();
     material.uniforms.uTime.value = t;
-    mesh.rotation.y = t * 0.12 + mouse.x * 0.3;
-    mesh.rotation.x = t * 0.05 + mouse.y * 0.2;
-    points.rotation.y = t * 0.03;
+    const breathe = 1 + Math.sin(t * 0.55) * 0.045;
+    mesh.scale.setScalar(breathe * (0.82 + scrollFactor * 0.18));
+    mesh.rotation.y = t * 0.16 + mouse.x * 0.4;
+    mesh.rotation.x = t * 0.07 + mouse.y * 0.25;
+    points.rotation.y = t * 0.04;
+    points.rotation.x = mouse.y * 0.1;
     renderer.render(scene, camera);
   }
 

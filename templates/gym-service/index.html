@@ -54,6 +54,7 @@
 <div class="cursor-ring" id="cursorRing"></div>
 <noscript><style>body, a, button { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none !important; }</style></noscript>
 <a href="../../index.html" class="back-link">&larr; Portfolio</a>
+<div id="scrollProgress"></div>
 
 <div class="page" id="smooth-wrapper">
 <div id="smooth-content">
@@ -77,19 +78,20 @@
 </nav>
 
 <section class="hero" id="top">
-  <canvas id="hero-canvas"></canvas>
-  <div class="container">
-    <span class="eyebrow" data-cursor="link">Strength &amp; Conditioning</span>
-    <h1 class="hero-title">
-      <span class="line"><span class="line-inner">FORGE YOUR</span></span>
-      <span class="line"><span class="line-inner">STRONGEST SELF</span></span>
-    </h1>
-    <div class="hero-sub">
-      <p>A strength and conditioning gym for people who show up, put in the work, and don't leave until it's done.</p>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow" data-cursor="link">Strength &amp; Conditioning</span>
+      <h1 class="hero-title">
+        <span class="line"><span class="line-inner">FORGE YOUR</span></span>
+        <span class="line"><span class="line-inner">STRONGEST SELF</span></span>
+      </h1>
       <div class="hero-actions">
         <a href="#pricing" class="btn btn-accent" data-cursor="link">Start Training</a>
         <a href="#programs" class="btn btn-outline" data-cursor="link">See Programs</a>
       </div>
+    </div>
+    <div class="hero-visual">
+      <canvas id="hero-canvas"></canvas>
     </div>
   </div>
   <div class="scroll-cue"><span class="line"></span> Scroll</div>
@@ -112,22 +114,22 @@
         <div class="philosophy-panel active" data-panel="0">
           <span class="num">01</span>
           <h3>Discipline over motivation</h3>
-          <p>Motivation fades. We build training systems around habits and structure, so progress doesn't depend on how you feel walking in the door.</p>
+          <p>Motivation fades. Systems don't.</p>
         </div>
         <div class="philosophy-panel" data-panel="1">
           <span class="num">02</span>
-          <h3>Coached, not just supervised</h3>
-          <p>Every session is programmed and watched by a real coach — form corrections, load adjustments, and accountability built in.</p>
+          <h3>Coached, not supervised</h3>
+          <p>A real coach, every session.</p>
         </div>
         <div class="philosophy-panel" data-panel="2">
           <span class="num">03</span>
           <h3>Progress you can measure</h3>
-          <p>We track lifts, conditioning benchmarks, and body metrics from day one, so six months from now isn't a guess.</p>
+          <p>Lifts. Benchmarks. Tracked from day one.</p>
         </div>
         <div class="philosophy-panel" data-panel="3">
           <span class="num">04</span>
-          <h3>Recovery is part of training</h3>
-          <p>Mobility work, deload weeks, and sleep coaching are built into every program — because burnout isn't a badge of honor.</p>
+          <h3>Recovery is training</h3>
+          <p>Mobility and deloads, built in.</p>
         </div>
         <div class="philosophy-progress" id="philosophyProgress">
           <span class="active"></span><span></span><span></span><span></span>
@@ -144,16 +146,16 @@
         <span class="eyebrow">What We Offer</span>
         <h2>Programs built<br>around your goal</h2>
       </div>
-      <p>Six focused programs, all coached, all scalable to your level — from your first session to your hundredth.</p>
+      <p>Coached. Scalable. Built around you.</p>
     </div>
   </div>
   <div class="programs-grid">
-    <div class="program-card reveal-up"><span class="idx">01</span><h3>Strength Training</h3><p>Barbell-focused programming built on progressive overload.</p></div>
-    <div class="program-card reveal-up"><span class="idx">02</span><h3>Conditioning</h3><p>High-intensity intervals for engine and work capacity.</p></div>
-    <div class="program-card reveal-up"><span class="idx">03</span><h3>Powerlifting</h3><p>Squat, bench, and deadlift technique for competitive lifters.</p></div>
-    <div class="program-card reveal-up"><span class="idx">04</span><h3>Mobility &amp; Recovery</h3><p>Guided mobility sessions to keep you training pain-free.</p></div>
-    <div class="program-card reveal-up"><span class="idx">05</span><h3>Nutrition Coaching</h3><p>Macro guidance and check-ins tied to your training block.</p></div>
-    <div class="program-card reveal-up"><span class="idx">06</span><h3>Open Gym</h3><p>Full facility access to run your own programming.</p></div>
+    <div class="program-card reveal-up"><span class="idx">01</span><h3>Strength Training</h3><p>Progressive overload, barbell-first.</p></div>
+    <div class="program-card reveal-up"><span class="idx">02</span><h3>Conditioning</h3><p>Built for engine and grit.</p></div>
+    <div class="program-card reveal-up"><span class="idx">03</span><h3>Powerlifting</h3><p>Squat. Bench. Deadlift. Compete.</p></div>
+    <div class="program-card reveal-up"><span class="idx">04</span><h3>Mobility &amp; Recovery</h3><p>Train pain-free, longer.</p></div>
+    <div class="program-card reveal-up"><span class="idx">05</span><h3>Nutrition Coaching</h3><p>Macros dialed to your block.</p></div>
+    <div class="program-card reveal-up"><span class="idx">06</span><h3>Open Gym</h3><p>Full access, your program.</p></div>
   </div>
 </section>
 
@@ -173,23 +175,23 @@
         <span class="eyebrow">The Coaches</span>
         <h2>Learn from people<br>who've done it</h2>
       </div>
-      <p>Small coach-to-member ratios, so every session gets real attention.</p>
+      <p>Real coaches. Real attention.</p>
     </div>
     <div class="trainers-grid">
       <div class="trainer-card reveal-up">
-        <div class="trainer-photo"><img src="img/trainer-marcus.jpg" alt="Marcus Reed" loading="lazy"></div>
+        <div class="trainer-photo wipe-reveal"><img src="img/trainer-marcus.jpg" alt="Marcus Reed" loading="lazy"></div>
         <div class="trainer-info"><h3>Marcus Reed</h3><div class="role">Head Coach, Strength</div></div>
       </div>
       <div class="trainer-card reveal-up">
-        <div class="trainer-photo"><img src="img/trainer-aisha.jpg" alt="Aisha Bello" loading="lazy"></div>
+        <div class="trainer-photo wipe-reveal"><img src="img/trainer-aisha.jpg" alt="Aisha Bello" loading="lazy"></div>
         <div class="trainer-info"><h3>Aisha Bello</h3><div class="role">HIIT &amp; Conditioning</div></div>
       </div>
       <div class="trainer-card reveal-up">
-        <div class="trainer-photo"><img src="img/trainer-diego.jpg" alt="Diego Alvarez" loading="lazy"></div>
+        <div class="trainer-photo wipe-reveal"><img src="img/trainer-diego.jpg" alt="Diego Alvarez" loading="lazy"></div>
         <div class="trainer-info"><h3>Diego Alvarez</h3><div class="role">Powerlifting</div></div>
       </div>
       <div class="trainer-card reveal-up">
-        <div class="trainer-photo"><img src="img/trainer-sam.jpg" alt="Sam Whitfield" loading="lazy"></div>
+        <div class="trainer-photo wipe-reveal"><img src="img/trainer-sam.jpg" alt="Sam Whitfield" loading="lazy"></div>
         <div class="trainer-info"><h3>Sam Whitfield</h3><div class="role">Mobility &amp; Recovery</div></div>
       </div>
     </div>
@@ -202,12 +204,12 @@
     <h2 style="font-size:clamp(2rem,4.5vw,3rem);">What members say</h2>
   </div>
   <div class="testi-track" id="testiTrack">
-    <div class="testi-card"><p class="quote">"Six months in and I've hit lifetime PRs on every lift. The coaching actually pays attention."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">RK</div><div><div class="name">Ravi Kumar</div><div class="role">Member since 2024</div></div></div></div>
-    <div class="testi-card"><p class="quote">"First gym where the programming actually changes as I get stronger instead of staying static."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">LM</div><div><div class="name">Lena Morales</div><div class="role">Member since 2023</div></div></div></div>
-    <div class="testi-card"><p class="quote">"Conditioning classes destroyed me in the best way. My 5k time dropped by two minutes."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">DP</div><div><div class="name">David Park</div><div class="role">Member since 2025</div></div></div></div>
-    <div class="testi-card"><p class="quote">"The recovery and mobility work is why I'm still training pain-free after two knee scares."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">JT</div><div><div class="name">Jamie Torres</div><div class="role">Member since 2022</div></div></div></div>
-    <div class="testi-card"><p class="quote">"Six months in and I've hit lifetime PRs on every lift. The coaching actually pays attention."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">RK</div><div><div class="name">Ravi Kumar</div><div class="role">Member since 2024</div></div></div></div>
-    <div class="testi-card"><p class="quote">"First gym where the programming actually changes as I get stronger instead of staying static."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">LM</div><div><div class="name">Lena Morales</div><div class="role">Member since 2023</div></div></div></div>
+    <div class="testi-card"><p class="quote">"Six months in. Lifetime PRs on every lift."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">RK</div><div><div class="name">Ravi Kumar</div><div class="role">Member since 2024</div></div></div></div>
+    <div class="testi-card"><p class="quote">"Programming that evolves as I get stronger."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">LM</div><div><div class="name">Lena Morales</div><div class="role">Member since 2023</div></div></div></div>
+    <div class="testi-card"><p class="quote">"Cut two minutes off my 5k. In the best way."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">DP</div><div><div class="name">David Park</div><div class="role">Member since 2025</div></div></div></div>
+    <div class="testi-card"><p class="quote">"Still training pain-free after two knee scares."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">JT</div><div><div class="name">Jamie Torres</div><div class="role">Member since 2022</div></div></div></div>
+    <div class="testi-card"><p class="quote">"Six months in. Lifetime PRs on every lift."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">RK</div><div><div class="name">Ravi Kumar</div><div class="role">Member since 2024</div></div></div></div>
+    <div class="testi-card"><p class="quote">"Programming that evolves as I get stronger."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">LM</div><div><div class="name">Lena Morales</div><div class="role">Member since 2023</div></div></div></div>
   </div>
 </section>
 
@@ -218,7 +220,7 @@
         <span class="eyebrow">Membership</span>
         <h2>Pick your level<br>of commitment</h2>
       </div>
-      <p>No contracts. Cancel or pause anytime — we'd rather earn it every month.</p>
+      <p>No contracts. Cancel anytime.</p>
     </div>
     <div class="pricing-grid">
       <div class="price-card reveal-up">
@@ -262,7 +264,7 @@
   <div class="container">
     <span class="eyebrow" style="justify-content:center;">Start Today</span>
     <h2>READY TO <em>FORGE</em><br>AHEAD?</h2>
-    <p>Your first session is on us. No pressure, no sales pitch — just come train.</p>
+    <p>First session's on us.</p>
     <a href="#pricing" class="btn btn-accent" data-cursor="link">Claim Your Free Session</a>
   </div>
 </section>
