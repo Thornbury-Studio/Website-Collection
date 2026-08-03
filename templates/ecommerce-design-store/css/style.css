@@ -67,16 +67,19 @@ a { color: inherit; text-decoration: none; }
 .round-link span { font: 10px var(--mono); text-transform: uppercase; }
 .round-link b { align-self: flex-end; font-size: 25px; font-weight: 400; }
 
-.hero-stage { position: relative; overflow: hidden; min-height: 620px; background: var(--orange); touch-action: pan-y; perspective: 1000px; }
-.hero-stage::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 38%, rgba(255,255,255,.3), transparent 35%), linear-gradient(125deg, transparent 45%, rgba(0,0,0,.08)); }
+.hero-stage { position: relative; overflow: hidden; min-height: 620px; background: #c8a988; }
+.hero-stage::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.18), transparent 24%, transparent 72%, rgba(0,0,0,.28)); pointer-events: none; }
+.hero-photo { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; transform: scale(1.015); transition: transform .8s var(--ease); }
 .orbit { position: absolute; border: 1px solid rgba(23,23,20,.25); border-radius: 50%; }
 .orbit-one { width: 74%; aspect-ratio: 1; left: 13%; top: 17%; animation: orbit 18s linear infinite; }
 .orbit-two { width: 95%; aspect-ratio: 1; left: 2%; top: 6%; animation: orbit 28s linear infinite reverse; border-style: dashed; }
 .orbit::after { content: ""; position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--ink); top: 12%; left: 12%; }
 @keyframes orbit { to { transform: rotate(360deg); } }
 .stage-label, .feature-caption { position: absolute; z-index: 2; font: 10px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+.hero-stage .stage-label, .photo-index { color: white; text-shadow: 0 1px 12px rgba(0,0,0,.2); }
 .label-a { top: 30px; left: 30px; }
 .label-b { top: 30px; right: 30px; }
+.photo-index { position: absolute; z-index: 2; left: 30px; bottom: 28px; font: 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .spin-hint { position: absolute; z-index: 4; bottom: 26px; left: 50%; transform: translateX(-50%); border: 1px solid rgba(23,23,20,.45); border-radius: 999px; padding: 10px 18px; background: rgba(242,239,232,.18); font: 9px var(--mono); text-transform: uppercase; cursor: grab; }
 .spin-hint:active { cursor: grabbing; }
 
@@ -111,8 +114,9 @@ a { color: inherit; text-decoration: none; }
 .product-visual { position: relative; display: block; width: 100%; aspect-ratio: 4/5; border: 0; overflow: hidden; cursor: pointer; }
 .product-card:nth-child(1) .product-visual, .product-card:nth-child(4) .product-visual { aspect-ratio: 1.25; }
 .visual-orange { background: #ed7657; }.visual-blue { background: #6c8ee2; }.visual-yellow { background: #ecd47b; }.visual-green { background: #94a885; }.visual-lilac { background: #c6b2db; }.visual-red { background: #df716b; }
-.product-visual::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, rgba(255,255,255,.32), transparent 45%); transition: transform .8s var(--ease); }
-.product-visual:hover::before { transform: scale(1.2); }
+.product-visual::before { content: ""; position: absolute; z-index: 2; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.08), transparent 25%, transparent 75%, rgba(0,0,0,.08)); pointer-events: none; }
+.product-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease), filter .5s; }
+.product-visual:hover .product-photo { transform: scale(1.035); filter: saturate(1.04); }
 .badge { position: absolute; z-index: 3; top: 17px; left: 17px; padding: 8px 12px; border-radius: 999px; background: var(--paper); font: 9px var(--mono); text-transform: uppercase; }
 .badge.new { background: var(--blue); color: white; }
 .quick-label { position: absolute; z-index: 4; left: 50%; bottom: 22px; transform: translate(-50%, 20px); opacity: 0; padding: 11px 17px; border-radius: 999px; background: var(--ink); color: white; font: 9px var(--mono); text-transform: uppercase; transition: .35s var(--ease); }
@@ -165,8 +169,11 @@ a { color: inherit; text-decoration: none; }
 .value p { margin: 0; max-width: 330px; font-size: 13px; line-height: 1.7; }
 .journal .section-head a { font: 10px var(--mono); text-transform: uppercase; border-bottom: 1px solid; padding-bottom: 5px; }
 .journal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5vw; }
-.story-card { min-height: 550px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
-.story-one { background: var(--yellow); }.story-two { background: var(--lilac); }
+.story-card { position: relative; min-height: 550px; padding: 28px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; color: white; }
+.story-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 38%, rgba(0,0,0,.72)); }
+.story-card > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+.story-card:hover > img { transform: scale(1.045); }
+.story-card > div { position: relative; z-index: 2; }
 .story-card p { font: 10px var(--mono); text-transform: uppercase; }
 .story-card h3 { max-width: 500px; margin: 12px 0 0; font-size: clamp(2rem, 3vw, 3.5rem); line-height: 1; letter-spacing: -.055em; }
 .story-shape { display: block; align-self: center; width: 260px; height: 260px; transition: transform .8s var(--ease); }
@@ -208,12 +215,13 @@ footer { padding: 5vw 3vw 30px; background: var(--ink); color: var(--paper); }
 .empty-cart a { justify-self: center; border-bottom: 1px solid; font: 10px var(--mono); text-transform: uppercase; }
 .cart-line { display: grid; grid-template-columns: 76px 1fr auto; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
 .cart-thumb { width: 76px; aspect-ratio: 1; display: grid; place-items: center; background: var(--paper-2); font-size: 30px; }
+.cart-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .cart-line h3, .cart-line p { margin: 0; }.cart-line h3 { font-size: 14px; }.cart-line p { margin-top: 5px; font: 9px var(--mono); opacity: .6; }
 .cart-line button { border: 0; background: none; font: 9px var(--mono); text-transform: uppercase; cursor: pointer; }
 .cart-total { padding-top: 20px; border-top: 1px solid var(--line); }
 .cart-total > div { display: flex; justify-content: space-between; margin-bottom: 18px; }.cart-total button { width: 100%; border: 0; padding: 17px; background: var(--ink); color: white; cursor: pointer; }.cart-total p { text-align: center; font-size: 9px; }
-.quick-art { height: 42%; margin: 20px 0 30px; display: grid; place-items: center; background: var(--orange); overflow: hidden; }
-.quick-art span { width: 155px; height: 155px; border-radius: 50% 50% 18% 50%; background: rgba(255,255,255,.5); transform: rotate(20deg); transition: background .3s; }
+.quick-art { height: 46%; margin: 20px 0 30px; background: var(--paper-2); overflow: hidden; }
+.quick-art img { width: 100%; height: 100%; object-fit: cover; }
 .quick-content h2 { margin: 0 0 15px; font-size: 48px; letter-spacing: -.06em; }.quick-content > p:not(.kicker) { font-size: 13px; line-height: 1.7; }.quick-buy { margin-top: 35px; display: flex; justify-content: space-between; align-items: center; }.quick-buy strong { font: 17px var(--mono); }
 .search-panel { position: fixed; z-index: 220; inset: 0; padding: 5vw; background: var(--yellow); transform: translateY(-105%); transition: transform .55s var(--ease); }.search-panel.open { transform: none; }.search-panel > button { position: absolute; top: 30px; right: 4vw; }.search-panel label { display: block; margin-top: 15vh; font: 12px var(--mono); text-transform: uppercase; }.search-panel input { display: block; width: 100%; border: 0; border-bottom: 2px solid var(--ink); outline: 0; padding: 18px 0; background: transparent; font-size: clamp(3rem,8vw,9rem); letter-spacing: -.07em; }.search-panel p { font: 10px var(--mono); text-transform: uppercase; }
 .toast { position: fixed; z-index: 300; left: 50%; bottom: 25px; transform: translate(-50%, 150%); padding: 13px 19px; border-radius: 999px; background: var(--blue); color: white; font: 10px var(--mono); text-transform: uppercase; transition: transform .45s var(--ease); }.toast.show { transform: translate(-50%, 0); }

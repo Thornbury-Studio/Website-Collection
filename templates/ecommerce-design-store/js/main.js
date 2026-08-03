@@ -49,19 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
     const stage = document.getElementById('heroStage');
-    const lamp = stage.querySelector('.lamp');
-    let dragging = false;
-    let startX = 0;
-    let rotation = -12;
-    const updateRotation = (clientX) => {
-      rotation = Math.max(-34, Math.min(34, rotation + (clientX - startX) * 0.18));
-      startX = clientX;
-      lamp.style.setProperty('--rotate', `${rotation}deg`);
-    };
-    stage.addEventListener('pointerdown', (event) => { dragging = true; startX = event.clientX; stage.setPointerCapture(event.pointerId); });
-    stage.addEventListener('pointermove', (event) => { if (dragging) updateRotation(event.clientX); });
-    stage.addEventListener('pointerup', () => { dragging = false; });
-    stage.addEventListener('pointerleave', () => { dragging = false; });
+    const heroPhoto = stage.querySelector('.hero-photo');
+    let photoFrame;
+    stage.addEventListener('pointermove', (event) => {
+      if (photoFrame) return;
+      photoFrame = requestAnimationFrame(() => {
+        const rect = stage.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width - .5) * -10;
+        const y = ((event.clientY - rect.top) / rect.height - .5) * -10;
+        heroPhoto.style.transform = `scale(1.035) translate3d(${x}px,${y}px,0)`;
+        photoFrame = null;
+      });
+    });
+    stage.addEventListener('pointerleave', () => { heroPhoto.style.transform = ''; });
 
     document.querySelectorAll('.magnetic').forEach((element) => {
       element.addEventListener('pointermove', (event) => {
@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     price: Number(card.dataset.price),
     color: card.dataset.color,
     category: card.dataset.category,
+    image: card.dataset.image,
   });
 
   const openLayer = (element) => {
@@ -133,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     items.innerHTML = state.cart.map((item, index) => `
       <div class="cart-line">
-        <div class="cart-thumb" aria-hidden="true">●</div>
+        <div class="cart-thumb"><img src="${item.image}" alt=""></div>
         <div><h3>${item.name}</h3><p>${item.color} · $${item.price}</p></div>
         <button type="button" data-remove="${index}">Remove</button>
       </div>`).join('');
@@ -158,8 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('quickName').textContent = state.activeProduct.name;
       document.getElementById('quickColor').textContent = state.activeProduct.color;
       document.getElementById('quickPrice').textContent = `$${state.activeProduct.price}`;
-      const art = document.getElementById('quickArt');
-      art.style.background = getComputedStyle(button).backgroundColor;
+      const image = document.getElementById('quickImage');
+      image.src = state.activeProduct.image;
+      image.alt = state.activeProduct.name;
       openLayer(quickDrawer);
     });
   });
@@ -167,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('quickAdd').addEventListener('click', () => {
     if (state.activeProduct) addToCart(state.activeProduct);
   });
-  document.querySelector('[data-add-feature]').addEventListener('click', () => addToCart({ name: 'Halo Lamp', price: 189, color: document.getElementById('colorName').textContent, category: 'light' }));
+  document.querySelector('[data-add-feature]').addEventListener('click', () => addToCart({ name: 'Halo Lamp', price: 189, color: document.getElementById('colorName').textContent, category: 'light', image: 'img/halo-lifestyle.webp' }));
   document.querySelector('[data-cart-open]').addEventListener('click', () => openLayer(cartDrawer));
   document.querySelector('[data-search]').addEventListener('click', () => {
     openLayer(searchPanel);
