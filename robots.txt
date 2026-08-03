@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zanezhijie.github.io/Website-Collection/sitemap.xml
+Sitemap: https://website-collection-zanezhijies-projects.vercel.app/sitemap.xml
