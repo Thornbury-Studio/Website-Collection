@@ -253,7 +253,9 @@ h1, h2, h3, h4 {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 60% 50%, transparent 45%, var(--bg) 92%);
+  background:
+    linear-gradient(90deg, var(--bg) 0%, transparent 26%),
+    radial-gradient(ellipse at 68% 50%, transparent 40%, var(--bg) 96%);
   z-index: 1;
   pointer-events: none;
 }
