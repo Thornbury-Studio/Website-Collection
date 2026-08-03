@@ -149,12 +149,14 @@ h1, h2, h3, h4 {
 /* ---------- Grain ---------- */
 .grain {
   position: fixed;
-  inset: -10%;
+  inset: 0;
   z-index: 2;
   pointer-events: none;
-  opacity: 0.045;
-  mix-blend-mode: overlay;
-  filter: url(#grainFilter);
+  opacity: 0.1;
+  background-image:
+    radial-gradient(circle at 18% 24%, rgba(255,255,255,0.14) 0 0.6px, transparent 0.8px),
+    radial-gradient(circle at 76% 68%, rgba(255,255,255,0.1) 0 0.5px, transparent 0.7px);
+  background-size: 7px 7px, 11px 11px;
 }
 
 .page { position: relative; z-index: 3; }
@@ -313,9 +315,11 @@ h1, h2, h3, h4 {
 .marquee-track {
   display: flex;
   width: max-content;
-  gap: 0;
+  animation: marqueeLoop 24s linear infinite;
+  will-change: transform;
 }
-.marquee-track span {
+.marquee-group { display: flex; flex-shrink: 0; }
+.marquee-group span {
   font-family: var(--font-display);
   font-size: clamp(1.4rem, 3vw, 2.2rem);
   text-transform: uppercase;
@@ -326,7 +330,8 @@ h1, h2, h3, h4 {
   align-items: center;
   gap: 28px;
 }
-.marquee-track span::after { content: "\2726"; color: var(--accent); font-size: 0.9rem; }
+.marquee-group span::after { content: "\2726"; color: var(--accent); font-size: 0.9rem; }
+@keyframes marqueeLoop { to { transform: translate3d(-50%, 0, 0); } }
 
 /* ---------- Section base ---------- */
 .section { padding: 130px 0; position: relative; z-index: 3; }
@@ -343,39 +348,90 @@ h1, h2, h3, h4 {
 .section-head h2 { font-size: clamp(2.4rem, 6vw, 4.2rem); }
 .section-head p { max-width: 340px; color: var(--muted); font-size: 0.98rem; }
 
-/* ---------- Philosophy (pinned) ---------- */
+/* ---------- Philosophy story ---------- */
 .philosophy { background: var(--bg-alt); }
-.philosophy-pin {
+.philosophy-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 56px;
+  padding-bottom: 84px;
+  border-bottom: 1px solid var(--border);
+}
+.philosophy-intro h2 { font-size: clamp(2.8rem, 6vw, 5.4rem); }
+.philosophy-intro > p { color: var(--muted); max-width: 430px; padding-bottom: 8px; }
+.philosophy-story {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 60px;
-  align-items: center;
-  min-height: 60vh;
+  grid-template-columns: minmax(300px, 0.92fr) minmax(380px, 1.08fr);
+  gap: clamp(52px, 8vw, 112px);
+  align-items: start;
+}
+.philosophy-sticky {
+  position: sticky;
+  top: 112px;
+  padding-top: 84px;
 }
 .philosophy-visual {
-  aspect-ratio: 4/5;
+  aspect-ratio: 4/5.2;
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid var(--border);
   position: relative;
+  background: var(--bg);
 }
-.philosophy-visual img { width: 100%; height: 100%; object-fit: cover; }
+.philosophy-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 46%, rgba(8,8,8,0.92) 100%);
+}
+.philosophy-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.035);
+  filter: saturate(0.82) contrast(1.06);
+  transition: transform 0.8s cubic-bezier(.22,1,.36,1), filter 0.55s ease;
+}
+.philosophy-visual-copy {
+  position: absolute;
+  z-index: 2;
+  left: 28px;
+  right: 28px;
+  bottom: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  text-transform: uppercase;
+}
+.philosophy-visual-copy span { color: var(--accent); font-size: 0.72rem; letter-spacing: 0.14em; }
+.philosophy-visual-copy strong { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; text-align: right; }
 .philosophy-panels { position: relative; }
 .philosophy-panel {
-  display: none;
+  min-height: 72vh;
+  padding: 112px 0 96px;
+  border-bottom: 1px solid var(--border);
+  opacity: 0.28;
+  transform: translateY(28px);
+  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(.22,1,.36,1);
 }
-.philosophy-panel.active { display: block; }
+.philosophy-panel:last-child { border-bottom: 0; }
+.philosophy-panel.active { opacity: 1; transform: translateY(0); }
+.philosophy-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 72px; }
+.philosophy-meta > span:last-child { color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.68rem; }
 .philosophy-panel .num {
   font-family: var(--font-display);
   color: var(--accent);
-  font-size: 1.1rem;
-  margin-bottom: 14px;
+  font-size: clamp(2.2rem, 4vw, 3.7rem);
+  line-height: 1;
   display: block;
 }
-.philosophy-panel h3 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 18px; }
-.philosophy-panel p { color: var(--muted); font-size: 1.02rem; max-width: 440px; }
-.philosophy-progress { display: flex; gap: 8px; margin-top: 36px; }
-.philosophy-progress span { width: 32px; height: 3px; background: var(--border); }
+.philosophy-panel h3 { font-size: clamp(2.45rem, 5vw, 4.8rem); margin-bottom: 30px; max-width: 720px; }
+.philosophy-panel p { color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.18rem); max-width: 620px; line-height: 1.75; }
+.philosophy-panel small { display: block; margin-top: 46px; color: var(--text); text-transform: uppercase; letter-spacing: 0.13em; font-size: 0.66rem; }
+.philosophy-progress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 18px; }
+.philosophy-progress span { height: 3px; background: var(--border); transition: background 0.35s ease; }
 .philosophy-progress span.active { background: var(--accent); }
 
 /* ---------- Programs ---------- */
@@ -434,7 +490,9 @@ h1, h2, h3, h4 {
 
 /* ---------- Testimonials marquee ---------- */
 .testimonials { background: var(--bg-alt); overflow: hidden; }
-.testi-track { display: flex; gap: 24px; width: max-content; }
+.testi-track { display: flex; width: max-content; animation: testimonialLoop 42s linear infinite; will-change: transform; }
+.testi-track:hover { animation-play-state: paused; }
+.testi-group { display: flex; gap: 24px; padding-right: 24px; flex-shrink: 0; }
 .testi-card {
   width: 380px;
   flex-shrink: 0;
@@ -445,9 +503,11 @@ h1, h2, h3, h4 {
 }
 .testi-card p.quote { font-size: 1.05rem; margin-bottom: 22px; }
 .testi-person { display: flex; align-items: center; gap: 12px; }
+.testi-person .avatar { width: 42px; height: 42px; flex: 0 0 42px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; }
 .testi-person img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
 .testi-person .name { font-weight: 700; font-size: 0.9rem; }
 .testi-person .role { color: var(--muted); font-size: 0.78rem; }
+@keyframes testimonialLoop { to { transform: translate3d(-50%, 0, 0); } }
 
 /* ---------- Pricing ---------- */
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -511,7 +571,9 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 32px; }
   .hero-grid { grid-template-columns: 1fr; min-height: auto; gap: 8px; }
   .hero-visual { order: -1; height: 320px; min-height: 320px; }
   .hero-copy { padding-left: 24px; max-width: none; text-align: left; }
-  .philosophy-pin { grid-template-columns: 1fr; gap: 36px; }
+  .philosophy-intro { align-items: flex-start; }
+  .philosophy-story { grid-template-columns: 0.82fr 1.18fr; gap: 42px; }
+  .philosophy-sticky { top: 96px; }
   .programs-grid { grid-template-columns: repeat(2, 1fr); }
   .trainers-grid { grid-template-columns: repeat(2, 1fr); }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -527,4 +589,19 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 32px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .section { padding: 88px 0; }
   .hero { padding-top: 120px; }
+  .philosophy-intro { display: block; padding-bottom: 56px; }
+  .philosophy-intro > p { margin-top: 28px; }
+  .philosophy-story { display: block; }
+  .philosophy-sticky { position: relative; top: auto; padding-top: 52px; }
+  .philosophy-visual { aspect-ratio: 4/3.3; }
+  .philosophy-panel { min-height: auto; padding: 76px 0; opacity: 1; transform: none; }
+  .philosophy-meta { margin-bottom: 42px; }
+  .philosophy-panel h3 { font-size: clamp(2.3rem, 12vw, 3.6rem); }
+  .testi-card { width: min(82vw, 350px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track, .testi-track { animation-play-state: paused; }
+  .philosophy-panel { opacity: 1; transform: none; transition: none; }
+  .philosophy-visual img { transition: none; }
 }

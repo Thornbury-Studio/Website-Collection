@@ -177,9 +177,8 @@ function initHero3D(canvas) {
   resize();
   window.addEventListener('resize', resize);
 
-  // fade + settle as the hero scrolls out of view. Uses ScrollTrigger's own
-  // scroll() rather than window.scrollY, which does not track real position
-  // once ScrollSmoother is driving the page.
+  // Fade and settle as the hero scrolls out of view. ScrollTrigger keeps this
+  // synchronized with native scrolling while the renderer pauses offscreen.
   let scrollFactor = 1;
   function updateFade(scrollY) {
     if (!heroSection) return;

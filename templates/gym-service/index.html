@@ -43,12 +43,6 @@
   <div class="pre-count" id="preCount">0%</div>
 </div>
 
-<svg width="0" height="0" style="position:absolute">
-  <filter id="grainFilter">
-    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence>
-    <feColorMatrix type="saturate" values="0"></feColorMatrix>
-  </filter>
-</svg>
 <div class="grain"></div>
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -99,41 +93,62 @@
 
 <div class="marquee-strip">
   <div class="marquee-track" id="marqueeTrack">
-    <span>Strength</span><span>Conditioning</span><span>Recovery</span><span>Community</span><span>Discipline</span><span>Results</span>
-    <span>Strength</span><span>Conditioning</span><span>Recovery</span><span>Community</span><span>Discipline</span><span>Results</span>
+    <div class="marquee-group">
+      <span>Strength</span><span>Conditioning</span><span>Recovery</span><span>Community</span><span>Discipline</span><span>Results</span>
+    </div>
+    <div class="marquee-group" aria-hidden="true">
+      <span>Strength</span><span>Conditioning</span><span>Recovery</span><span>Community</span><span>Discipline</span><span>Results</span>
+    </div>
   </div>
 </div>
 
 <section class="section philosophy" id="philosophy">
   <div class="container">
-    <div class="philosophy-pin" id="philosophyPin">
-      <div class="philosophy-visual">
-        <img src="img/philosophy.jpg" alt="Athlete training at FORGE gym" loading="lazy">
+    <div class="philosophy-intro">
+      <div>
+        <span class="eyebrow">The FORGE method</span>
+        <h2>Four standards.<br>One stronger body.</h2>
       </div>
-      <div class="philosophy-panels">
-        <div class="philosophy-panel active" data-panel="0">
-          <span class="num">01</span>
-          <h3>Discipline over motivation</h3>
-          <p>Motivation fades. Systems don't.</p>
+      <p>Training works when every session belongs to a system. Scroll through the four principles that shape every program at FORGE.</p>
+    </div>
+    <div class="philosophy-story" id="philosophyStory">
+      <div class="philosophy-sticky">
+        <div class="philosophy-visual">
+        <img src="img/philosophy.jpg" alt="Athlete training at FORGE gym" loading="lazy">
+          <div class="philosophy-visual-copy">
+            <span id="philosophyVisualNumber">01 / 04</span>
+            <strong id="philosophyVisualLabel">Show up</strong>
+          </div>
         </div>
-        <div class="philosophy-panel" data-panel="1">
-          <span class="num">02</span>
-          <h3>Coached, not supervised</h3>
-          <p>A real coach, every session.</p>
-        </div>
-        <div class="philosophy-panel" data-panel="2">
-          <span class="num">03</span>
-          <h3>Progress you can measure</h3>
-          <p>Lifts. Benchmarks. Tracked from day one.</p>
-        </div>
-        <div class="philosophy-panel" data-panel="3">
-          <span class="num">04</span>
-          <h3>Recovery is training</h3>
-          <p>Mobility and deloads, built in.</p>
-        </div>
-        <div class="philosophy-progress" id="philosophyProgress">
+        <div class="philosophy-progress" id="philosophyProgress" aria-hidden="true">
           <span class="active"></span><span></span><span></span><span></span>
         </div>
+      </div>
+      <div class="philosophy-panels" aria-label="The four FORGE training principles">
+        <article class="philosophy-panel active" data-panel="0" data-label="Show up">
+          <div class="philosophy-meta"><span class="num">01</span><span>Consistency</span></div>
+          <h3>Discipline over motivation</h3>
+          <p>Motivation fades. Your training rhythm should not. We build a repeatable weekly structure around your real schedule, then make every session count.</p>
+          <small>Show up · Do the work · Stack the weeks</small>
+        </article>
+        <article class="philosophy-panel" data-panel="1" data-label="Get coached">
+          <div class="philosophy-meta"><span class="num">02</span><span>Coaching</span></div>
+          <h3>Coached, not supervised</h3>
+          <p>A coach watches how you move, adjusts the load, and knows when to push. You leave with clear feedback—not another workout copied from a screen.</p>
+          <small>Intent · Technique · Honest feedback</small>
+        </article>
+        <article class="philosophy-panel" data-panel="2" data-label="Track it">
+          <div class="philosophy-meta"><span class="num">03</span><span>Progression</span></div>
+          <h3>Progress you can measure</h3>
+          <p>Every block starts with a baseline and ends with proof. We track lifts, conditioning benchmarks, and movement quality so progress never becomes guesswork.</p>
+          <small>Baseline · Build · Test again</small>
+        </article>
+        <article class="philosophy-panel" data-panel="3" data-label="Come back stronger">
+          <div class="philosophy-meta"><span class="num">04</span><span>Longevity</span></div>
+          <h3>Recovery is training</h3>
+          <p>Adaptation happens between hard sessions. Mobility, sleep habits, and planned deloads are built into the program so you can train hard for years—not weeks.</p>
+          <small>Recover · Adapt · Return ready</small>
+        </article>
       </div>
     </div>
   </div>
@@ -204,12 +219,18 @@
     <h2 style="font-size:clamp(2rem,4.5vw,3rem);">What members say</h2>
   </div>
   <div class="testi-track" id="testiTrack">
-    <div class="testi-card"><p class="quote">"Six months in. Lifetime PRs on every lift."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">RK</div><div><div class="name">Ravi Kumar</div><div class="role">Member since 2024</div></div></div></div>
-    <div class="testi-card"><p class="quote">"Programming that evolves as I get stronger."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">LM</div><div><div class="name">Lena Morales</div><div class="role">Member since 2023</div></div></div></div>
-    <div class="testi-card"><p class="quote">"Cut two minutes off my 5k. In the best way."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">DP</div><div><div class="name">David Park</div><div class="role">Member since 2025</div></div></div></div>
-    <div class="testi-card"><p class="quote">"Still training pain-free after two knee scares."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">JT</div><div><div class="name">Jamie Torres</div><div class="role">Member since 2022</div></div></div></div>
-    <div class="testi-card"><p class="quote">"Six months in. Lifetime PRs on every lift."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">RK</div><div><div class="name">Ravi Kumar</div><div class="role">Member since 2024</div></div></div></div>
-    <div class="testi-card"><p class="quote">"Programming that evolves as I get stronger."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">LM</div><div><div class="name">Lena Morales</div><div class="role">Member since 2023</div></div></div></div>
+    <div class="testi-group">
+      <div class="testi-card"><p class="quote">"Six months in. Lifetime PRs on every lift."</p><div class="testi-person"><div class="avatar">RK</div><div><div class="name">Ravi Kumar</div><div class="role">Member since 2024</div></div></div></div>
+      <div class="testi-card"><p class="quote">"Programming that evolves as I get stronger."</p><div class="testi-person"><div class="avatar">LM</div><div><div class="name">Lena Morales</div><div class="role">Member since 2023</div></div></div></div>
+      <div class="testi-card"><p class="quote">"Cut two minutes off my 5k. In the best way."</p><div class="testi-person"><div class="avatar">DP</div><div><div class="name">David Park</div><div class="role">Member since 2025</div></div></div></div>
+      <div class="testi-card"><p class="quote">"Still training pain-free after two knee scares."</p><div class="testi-person"><div class="avatar">JT</div><div><div class="name">Jamie Torres</div><div class="role">Member since 2022</div></div></div></div>
+    </div>
+    <div class="testi-group" aria-hidden="true">
+      <div class="testi-card"><p class="quote">"Six months in. Lifetime PRs on every lift."</p><div class="testi-person"><div class="avatar">RK</div><div><div class="name">Ravi Kumar</div><div class="role">Member since 2024</div></div></div></div>
+      <div class="testi-card"><p class="quote">"Programming that evolves as I get stronger."</p><div class="testi-person"><div class="avatar">LM</div><div><div class="name">Lena Morales</div><div class="role">Member since 2023</div></div></div></div>
+      <div class="testi-card"><p class="quote">"Cut two minutes off my 5k. In the best way."</p><div class="testi-person"><div class="avatar">DP</div><div><div class="name">David Park</div><div class="role">Member since 2025</div></div></div></div>
+      <div class="testi-card"><p class="quote">"Still training pain-free after two knee scares."</p><div class="testi-person"><div class="avatar">JT</div><div><div class="name">Jamie Torres</div><div class="role">Member since 2022</div></div></div></div>
+    </div>
   </div>
 </section>
 
@@ -309,7 +330,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollSmoother.min.js"></script>
 <script src="js/main.js"></script>
 <script type="module" src="js/hero-3d.js"></script>
 </body>

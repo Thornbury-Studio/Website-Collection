@@ -1,17 +1,14 @@
-// FORGE — gym template interactivity. GSAP (core, ScrollTrigger, SplitText,
-// ScrollSmoother) loaded via CDN in index.html before this file.
+// FORGE — gym template interactivity. GSAP core, ScrollTrigger and SplitText
+// are loaded via CDN in index.html before this file.
 
 document.addEventListener('DOMContentLoaded', () => {
-  gsap.registerPlugin(ScrollTrigger, SplitText, ScrollSmoother);
+  gsap.registerPlugin(ScrollTrigger, SplitText);
 
   runPreloader(() => {
-    initSmoother();
     initHeroReveal();
     initCursor();
     initNav();
-    initMarquee();
-    initTestimonialMarquee();
-    initPhilosophyPin();
+    initPhilosophyStory();
     initReveals();
     initCounters();
     initMagnetic();
@@ -56,18 +53,6 @@ function runPreloader(done) {
         },
       });
     },
-  });
-}
-
-/* ---------------- Smooth scroll ---------------- */
-function initSmoother() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (typeof ScrollSmoother === 'undefined') return;
-  ScrollSmoother.create({
-    wrapper: '#smooth-wrapper',
-    content: '#smooth-content',
-    smooth: 1.1,
-    effects: false,
   });
 }
 
@@ -182,48 +167,47 @@ function initSound() {
   });
 }
 
-/* ---------------- Marquee ---------------- */
-function initMarquee() {
-  const track = document.getElementById('marqueeTrack');
-  if (!track) return;
-  gsap.to(track, { xPercent: -50, duration: 22, ease: 'none', repeat: -1 });
-}
-
-function initTestimonialMarquee() {
-  const track = document.getElementById('testiTrack');
-  if (!track) return;
-  const tween = gsap.to(track, { xPercent: -50, duration: 34, ease: 'none', repeat: -1 });
-  track.addEventListener('mouseenter', () => tween.timeScale(0.15));
-  track.addEventListener('mouseleave', () => tween.timeScale(1));
-}
-
-/* ---------------- Philosophy pinned scroll ---------------- */
-function initPhilosophyPin() {
-  const pinEl = document.getElementById('philosophyPin');
+/* ---------------- Philosophy scroll story ---------------- */
+function initPhilosophyStory() {
+  const story = document.getElementById('philosophyStory');
   const panels = document.querySelectorAll('.philosophy-panel');
   const dots = document.querySelectorAll('#philosophyProgress span');
   const image = document.querySelector('.philosophy-visual img');
-  if (!pinEl || !panels.length) return;
+  const visualNumber = document.getElementById('philosophyVisualNumber');
+  const visualLabel = document.getElementById('philosophyVisualLabel');
+  if (!story || !panels.length) return;
 
   const setActive = (i) => {
     panels.forEach((p, idx) => p.classList.toggle('active', idx === i));
     dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+    const active = panels[i];
+    if (visualNumber) visualNumber.textContent = `${String(i + 1).padStart(2, '0')} / ${String(panels.length).padStart(2, '0')}`;
+    if (visualLabel) visualLabel.textContent = active.dataset.label || '';
+    if (image) {
+      image.style.transform = `scale(${1.035 + i * 0.008}) translateY(${i * -0.45}%)`;
+      image.style.filter = `saturate(${0.82 + i * 0.07}) contrast(1.06)`;
+    }
   };
 
-  ScrollTrigger.create({
-    trigger: pinEl,
-    start: 'top top+=90',
-    end: '+=140%',
-    pin: true,
-    scrub: true,
-    onUpdate: (self) => {
-      const idx = Math.min(panels.length - 1, Math.floor(self.progress * panels.length));
-      setActive(idx);
-      if (image) {
-        gsap.set(image, { yPercent: -8 + self.progress * 16, scale: 1.08 - self.progress * 0.04 });
-      }
-    },
+  if (!('IntersectionObserver' in window) || window.matchMedia('(max-width: 720px)').matches) {
+    panels.forEach((panel) => panel.classList.add('active'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    if (!visible.length) return;
+    const idx = Number(visible[0].target.dataset.panel);
+    setActive(Number.isFinite(idx) ? idx : 0);
+  }, {
+    rootMargin: '-28% 0px -28% 0px',
+    threshold: [0.15, 0.35, 0.6],
   });
+
+  panels.forEach((panel) => observer.observe(panel));
+  setActive(0);
 }
 
 /* ---------------- Scroll reveals ---------------- */
