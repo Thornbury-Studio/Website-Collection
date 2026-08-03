@@ -1,88 +1,78 @@
-// FORGE hero — Three.js WebGL centerpiece: a distorted, glowing icosahedron
-// driven by a custom GLSL noise-displacement + fresnel shader. Loaded as a
-// native ES module directly from the jsdelivr CDN — no build step, no bundler.
+// FORGE hero — Three.js WebGL centerpiece: a distorted, glowing icosahedron.
+// Loaded as a native ES module directly from the jsdelivr CDN — no build
+// step, no bundler.
 //
-// The simplex noise function below is the standard Ashima Arts / Ian McEwan
-// "webgl-noise" implementation (MIT License), used essentially unmodified —
-// it's a ubiquitous math utility, not a media asset.
+// PERFORMANCE STRATEGY — "bake once, animate cheap":
+// The organic noise-displaced shape looks expensive but isn't computed live.
+// The noise is evaluated ONCE per vertex at page load (a few thousand JS
+// function calls, negligible), baked directly into the geometry's position
+// buffer. The per-frame vertex shader does only a single sin() per vertex
+// for a subtle wobble, plus rotation/scale which are transform-only and
+// cost nothing extra. The fragment shader is a plain fresnel glow — no
+// noise, no loops. The visual result reads as "continuously simulated
+// organic motion"; the actual per-frame GPU cost is near-zero.
+//
+// Device-tier scaling reduces particle count and pixel ratio on
+// lower-power hardware — same design, cheaper to draw.
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js';
 
-const NOISE_GLSL = `
-  vec3 mod289(vec3 x){ return x - floor(x * (1.0/289.0)) * 289.0; }
-  vec4 mod289(vec4 x){ return x - floor(x * (1.0/289.0)) * 289.0; }
-  vec4 permute(vec4 x){ return mod289(((x*34.0)+1.0)*x); }
-  vec4 taylorInvSqrt(vec4 r){ return 1.79284291400159 - 0.85373472095314 * r; }
+/* ---------- one-time CPU noise bake (not used per-frame) ---------- */
+function hash3(x, y, z) {
+  const h = Math.sin(x * 127.1 + y * 311.7 + z * 74.7) * 43758.5453123;
+  return h - Math.floor(h);
+}
+function valueNoise3D(x, y, z) {
+  const xi = Math.floor(x), yi = Math.floor(y), zi = Math.floor(z);
+  const xf = x - xi, yf = y - yi, zf = z - zi;
+  const u = xf * xf * (3 - 2 * xf);
+  const v = yf * yf * (3 - 2 * yf);
+  const w = zf * zf * (3 - 2 * zf);
+  const c000 = hash3(xi, yi, zi), c100 = hash3(xi + 1, yi, zi);
+  const c010 = hash3(xi, yi + 1, zi), c110 = hash3(xi + 1, yi + 1, zi);
+  const c001 = hash3(xi, yi, zi + 1), c101 = hash3(xi + 1, yi, zi + 1);
+  const c011 = hash3(xi, yi + 1, zi + 1), c111 = hash3(xi + 1, yi + 1, zi + 1);
+  const x00 = c000 * (1 - u) + c100 * u, x10 = c010 * (1 - u) + c110 * u;
+  const x01 = c001 * (1 - u) + c101 * u, x11 = c011 * (1 - u) + c111 * u;
+  const y0 = x00 * (1 - v) + x10 * v, y1 = x01 * (1 - v) + x11 * v;
+  return (y0 * (1 - w) + y1 * w) * 2 - 1; // -1..1
+}
 
-  float snoise(vec3 v){
-    const vec2 C = vec2(1.0/6.0, 1.0/3.0);
-    const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+function bakeDisplacedGeometry(radius, detail, amp) {
+  const geometry = new THREE.IcosahedronGeometry(radius, detail);
+  const pos = geometry.attributes.position;
+  const nrm = geometry.attributes.normal;
+  const bump = new Float32Array(pos.count);
 
-    vec3 i  = floor(v + dot(v, C.yyy));
-    vec3 x0 = v - i + dot(i, C.xxx);
-
-    vec3 g = step(x0.yzx, x0.xyz);
-    vec3 l = 1.0 - g;
-    vec3 i1 = min(g.xyz, l.zxy);
-    vec3 i2 = max(g.xyz, l.zxy);
-
-    vec3 x1 = x0 - i1 + C.xxx;
-    vec3 x2 = x0 - i2 + C.yyy;
-    vec3 x3 = x0 - D.yyy;
-
-    i = mod289(i);
-    vec4 p = permute(permute(permute(
-              i.z + vec4(0.0, i1.z, i2.z, 1.0))
-            + i.y + vec4(0.0, i1.y, i2.y, 1.0))
-            + i.x + vec4(0.0, i1.x, i2.x, 1.0));
-
-    float n_ = 0.142857142857;
-    vec3 ns = n_ * D.wyz - D.xzx;
-
-    vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
-    vec4 x_ = floor(j * ns.z);
-    vec4 y_ = floor(j - 7.0 * x_);
-
-    vec4 x = x_ *ns.x + ns.yyyy;
-    vec4 y = y_ *ns.x + ns.yyyy;
-    vec4 h = 1.0 - abs(x) - abs(y);
-
-    vec4 b0 = vec4(x.xy, y.xy);
-    vec4 b1 = vec4(x.zw, y.zw);
-
-    vec4 s0 = floor(b0)*2.0 + 1.0;
-    vec4 s1 = floor(b1)*2.0 + 1.0;
-    vec4 sh = -step(h, vec4(0.0));
-
-    vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy;
-    vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;
-
-    vec3 p0 = vec3(a0.xy, h.x);
-    vec3 p1 = vec3(a0.zw, h.y);
-    vec3 p2 = vec3(a1.xy, h.z);
-    vec3 p3 = vec3(a1.zw, h.w);
-
-    vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
-    p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
-
-    vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
-    m = m * m;
-    return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+    const n = valueNoise3D(x * 1.6, y * 1.6, z * 1.6);
+    bump[i] = n;
+    const nx = nrm.getX(i), ny = nrm.getY(i), nz = nrm.getZ(i);
+    pos.setXYZ(i, x + nx * n * amp, y + ny * n * amp, z + nz * n * amp);
   }
-`;
+  pos.needsUpdate = true;
+  // deliberately NOT recomputing normals: keeping the original sphere
+  // normals against the displaced surface is what gives the soft, blurry
+  // glow look (matches the original live-shader version's appearance)
+  // rather than a crisp faceted/wireframe look.
+  geometry.setAttribute('aBump', new THREE.BufferAttribute(bump, 1));
+  return geometry;
+}
 
+/* ---------- cheap per-frame shaders (no noise) ---------- */
 const VERTEX = `
-  ${NOISE_GLSL}
   uniform float uTime;
-  uniform float uAmp;
+  attribute float aBump;
   varying vec3 vNormal;
   varying vec3 vViewPosition;
-  varying float vNoise;
+  varying float vBump;
 
   void main() {
-    float n = snoise(position * 1.3 + vec3(0.0, 0.0, uTime * 0.18));
-    vNoise = n;
-    vec3 displaced = position + normal * (n * uAmp);
+    vBump = aBump;
+    // a single sin() per vertex — near-free compared to per-frame noise
+    float wobble = sin(uTime * 0.6 + position.x * 1.8 + position.y * 1.3) * 0.02;
+    vec3 displaced = position + normal * wobble;
     vec4 mvPosition = modelViewMatrix * vec4(displaced, 1.0);
     vViewPosition = -mvPosition.xyz;
     vNormal = normalize(normalMatrix * normal);
@@ -93,40 +83,49 @@ const VERTEX = `
 const FRAGMENT = `
   varying vec3 vNormal;
   varying vec3 vViewPosition;
-  varying float vNoise;
+  varying float vBump;
   uniform vec3 uColor;
   uniform vec3 uDark;
 
   void main() {
     vec3 viewDir = normalize(vViewPosition);
     float fresnel = pow(1.0 - max(dot(normalize(vNormal), viewDir), 0.0), 2.4);
-    vec3 col = mix(uDark, uColor, clamp(fresnel + vNoise * 0.2, 0.0, 1.0));
-    float alpha = clamp(fresnel * 0.85 + 0.12 + vNoise * 0.05, 0.0, 1.0);
+    vec3 col = mix(uDark, uColor, clamp(fresnel + vBump * 0.2, 0.0, 1.0));
+    float alpha = clamp(fresnel * 0.85 + 0.12 + vBump * 0.05, 0.0, 1.0);
     gl_FragColor = vec4(col, alpha);
   }
 `;
+
+function getDeviceTier() {
+  const cores = navigator.hardwareConcurrency || 4;
+  const mem = navigator.deviceMemory || 4;
+  const isMobileUA = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  const smallViewport = window.matchMedia('(max-width: 760px)').matches;
+  const low = cores <= 4 || mem <= 4 || isMobileUA || smallViewport;
+  return low ? 'low' : 'high';
+}
 
 function initHero3D(canvas) {
   if (!canvas) return;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const heroSection = document.getElementById('top');
+  const tier = getDeviceTier();
 
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: tier !== 'low' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, tier === 'low' ? 1.5 : 2));
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
   camera.position.set(0, 0, 6.4);
 
   // detail is exponential (20 * 4^detail faces) — 4 gives ~5,120 triangles,
-  // plenty for organic-looking noise displacement without tanking the frame rate
-  const geometry = new THREE.IcosahedronGeometry(2.05, 4);
+  // baked once below, so this cost is paid a single time, not per frame.
+  const geometry = bakeDisplacedGeometry(2.05, 4, 0.38);
   const material = new THREE.ShaderMaterial({
     vertexShader: VERTEX,
     fragmentShader: FRAGMENT,
     uniforms: {
       uTime: { value: 0 },
-      uAmp: { value: 0.38 },
       uColor: { value: new THREE.Color(0xd4ff3f) },
       uDark: { value: new THREE.Color(0x14150f) },
     },
@@ -138,8 +137,8 @@ function initHero3D(canvas) {
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
 
-  // ambient particle field surrounding the core
-  const particleCount = 130;
+  // ambient particle field surrounding the core — fewer on low-power devices
+  const particleCount = tier === 'low' ? 60 : 130;
   const positions = new Float32Array(particleCount * 3);
   for (let i = 0; i < particleCount; i++) {
     const r = 3.6 + Math.random() * 2.6;
