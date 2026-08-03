@@ -170,43 +170,55 @@ function initSound() {
 /* ---------------- Philosophy scroll story ---------------- */
 function initPhilosophyStory() {
   const story = document.getElementById('philosophyStory');
-  const panels = document.querySelectorAll('.philosophy-panel');
-  const dots = document.querySelectorAll('#philosophyProgress span');
-  const image = document.querySelector('.philosophy-visual img');
-  const visualNumber = document.getElementById('philosophyVisualNumber');
-  const visualLabel = document.getElementById('philosophyVisualLabel');
+  const panels = document.querySelectorAll('[data-protocol-panel]');
+  const visuals = document.querySelectorAll('[data-protocol-visual]');
+  const triggers = document.querySelectorAll('[data-protocol-trigger]');
+  const buttons = document.querySelectorAll('[data-protocol-jump]');
+  const counter = document.getElementById('protocolCounter');
+  const metricLabel = document.getElementById('protocolMetricLabel');
+  const metricValue = document.getElementById('protocolMetricValue');
   if (!story || !panels.length) return;
 
   const setActive = (i) => {
     panels.forEach((p, idx) => p.classList.toggle('active', idx === i));
-    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+    visuals.forEach((visual, idx) => visual.classList.toggle('active', idx === i));
+    buttons.forEach((button, idx) => {
+      button.classList.toggle('active', idx === i);
+      if (idx === i) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
+    });
     const active = panels[i];
-    if (visualNumber) visualNumber.textContent = `${String(i + 1).padStart(2, '0')} / ${String(panels.length).padStart(2, '0')}`;
-    if (visualLabel) visualLabel.textContent = active.dataset.label || '';
-    if (image) {
-      image.style.transform = `scale(${1.035 + i * 0.008}) translateY(${i * -0.45}%)`;
-      image.style.filter = `saturate(${0.82 + i * 0.07}) contrast(1.06)`;
-    }
+    if (counter) counter.textContent = `${String(i + 1).padStart(2, '0')} / ${String(panels.length).padStart(2, '0')}`;
+    if (metricLabel) metricLabel.textContent = active.dataset.metricLabel || '';
+    if (metricValue) metricValue.textContent = active.dataset.metricValue || '';
   };
 
-  if (!('IntersectionObserver' in window) || window.matchMedia('(max-width: 720px)').matches) {
-    panels.forEach((panel) => panel.classList.add('active'));
-    return;
-  }
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const idx = Number(button.dataset.protocolJump);
+      if (!Number.isFinite(idx)) return;
+      setActive(idx);
+      if (!window.matchMedia('(max-width: 720px)').matches) {
+        triggers[idx]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  });
+
+  if (!('IntersectionObserver' in window) || window.matchMedia('(max-width: 720px)').matches) return;
 
   const observer = new IntersectionObserver((entries) => {
     const visible = entries
       .filter((entry) => entry.isIntersecting)
       .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
     if (!visible.length) return;
-    const idx = Number(visible[0].target.dataset.panel);
+    const idx = Number(visible[0].target.dataset.protocolTrigger);
     setActive(Number.isFinite(idx) ? idx : 0);
   }, {
-    rootMargin: '-28% 0px -28% 0px',
-    threshold: [0.15, 0.35, 0.6],
+    rootMargin: '-44% 0px -44% 0px',
+    threshold: 0,
   });
 
-  panels.forEach((panel) => observer.observe(panel));
+  triggers.forEach((trigger) => observer.observe(trigger));
   setActive(0);
 }
 
