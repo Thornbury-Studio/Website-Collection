@@ -14,6 +14,12 @@
   <meta property="og:title" content="OBLIK — Objects for Better Living">
   <meta property="og:description" content="A playful e-commerce template for a fictional independent design shop.">
   <meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/ecommerce-design-store/index.html">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/ecommerce-design-store/img/og-oblik.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="628">
+  <meta property="og:image:alt" content="OBLIK Objects for Better Living — orange Halo lamp in a warm interior">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/ecommerce-design-store/img/og-oblik.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -66,17 +72,10 @@
       </div>
 
       <div class="hero-stage" id="heroStage" aria-label="OBLIK Halo table lamp in persimmon">
-        <div class="orbit orbit-one" aria-hidden="true"></div>
-        <div class="orbit orbit-two" aria-hidden="true"></div>
+        <img class="hero-photo" src="img/halo-lifestyle.webp" alt="Persimmon orange Halo table lamp on a travertine side table" width="1000" height="1250" fetchpriority="high">
         <div class="stage-label label-a">01 / HALO</div>
-        <div class="stage-label label-b">Touch dimmer</div>
-        <div class="lamp lamp-hero" aria-hidden="true">
-          <div class="lamp-glow"></div>
-          <div class="lamp-shade"><span></span></div>
-          <div class="lamp-neck"></div>
-          <div class="lamp-base"></div>
-        </div>
-        <button class="spin-hint" type="button" id="spinHint">Drag to rotate</button>
+        <div class="stage-label label-b">Persimmon / Touch dimmer</div>
+        <div class="photo-index">Designed in Copenhagen · 2026</div>
       </div>
     </section>
 
@@ -100,51 +99,51 @@
       </div>
 
       <div class="product-grid" id="productGrid">
-        <article class="product-card reveal" data-category="light" data-name="Halo Lamp" data-price="189" data-color="Persimmon">
+        <article class="product-card reveal" data-category="light" data-name="Halo Lamp" data-price="189" data-color="Persimmon" data-image="img/halo-lifestyle.webp">
           <button class="product-visual visual-orange" type="button" data-quick-view aria-label="Quick view Halo Lamp">
             <span class="badge">Bestseller</span>
-            <span class="product-art art-halo" aria-hidden="true"><i class="shade"></i><i class="stem"></i><i class="base"></i></span>
+            <img class="product-photo" src="img/halo-lifestyle.webp" alt="Halo Lamp in persimmon orange" width="1000" height="1250" loading="lazy" decoding="async">
             <span class="quick-label">Quick view</span>
           </button>
           <div class="product-info"><div><h3>Halo Lamp</h3><p>Persimmon · Dimmable</p></div><strong>$189</strong></div>
         </article>
 
-        <article class="product-card reveal" data-category="desk" data-name="Fold Tray" data-price="74" data-color="Cobalt">
+        <article class="product-card reveal" data-category="desk" data-name="Fold Tray" data-price="74" data-color="Cobalt" data-image="img/fold-tray.webp">
           <button class="product-visual visual-blue" type="button" data-quick-view aria-label="Quick view Fold Tray">
-            <span class="product-art art-tray" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img class="product-photo" src="img/fold-tray.webp" alt="Cobalt blue Fold Tray desk organizer" width="1000" height="1250" loading="lazy" decoding="async">
             <span class="quick-label">Quick view</span>
           </button>
           <div class="product-info"><div><h3>Fold Tray</h3><p>Cobalt · Powder-coated steel</p></div><strong>$74</strong></div>
         </article>
 
-        <article class="product-card reveal" data-category="light" data-name="Pebble Sconce" data-price="129" data-color="Butter">
+        <article class="product-card reveal" data-category="light" data-name="Pebble Sconce" data-price="129" data-color="Butter" data-image="img/pebble-sconce.webp">
           <button class="product-visual visual-yellow" type="button" data-quick-view aria-label="Quick view Pebble Sconce">
-            <span class="product-art art-pebble" aria-hidden="true"><i></i><b></b></span>
+            <img class="product-photo" src="img/pebble-sconce.webp" alt="Butter yellow Pebble Sconce on a plaster wall" width="1000" height="1250" loading="lazy" decoding="async">
             <span class="quick-label">Quick view</span>
           </button>
           <div class="product-info"><div><h3>Pebble Sconce</h3><p>Butter · Soft white glow</p></div><strong>$129</strong></div>
         </article>
 
-        <article class="product-card reveal" data-category="home" data-name="Loop Vase" data-price="96" data-color="Moss">
+        <article class="product-card reveal" data-category="home" data-name="Loop Vase" data-price="96" data-color="Moss" data-image="img/loop-vase.webp">
           <button class="product-visual visual-green" type="button" data-quick-view aria-label="Quick view Loop Vase">
-            <span class="product-art art-vase" aria-hidden="true"><i></i></span>
+            <img class="product-photo" src="img/loop-vase.webp" alt="Moss green Loop Vase with dried grasses" width="1000" height="1250" loading="lazy" decoding="async">
             <span class="quick-label">Quick view</span>
           </button>
           <div class="product-info"><div><h3>Loop Vase</h3><p>Moss · Hand-finished ceramic</p></div><strong>$96</strong></div>
         </article>
 
-        <article class="product-card reveal" data-category="desk" data-name="Arc Bookend" data-price="58" data-color="Lilac">
+        <article class="product-card reveal" data-category="desk" data-name="Arc Bookend" data-price="58" data-color="Lilac" data-image="img/arc-bookend.webp">
           <button class="product-visual visual-lilac" type="button" data-quick-view aria-label="Quick view Arc Bookend">
-            <span class="product-art art-arc" aria-hidden="true"><i></i><i></i></span>
+            <img class="product-photo" src="img/arc-bookend.webp" alt="Lilac Arc Bookends holding clothbound books" width="1000" height="1250" loading="lazy" decoding="async">
             <span class="quick-label">Quick view</span>
           </button>
           <div class="product-info"><div><h3>Arc Bookend</h3><p>Lilac · Cast aluminium</p></div><strong>$58</strong></div>
         </article>
 
-        <article class="product-card reveal" data-category="light" data-name="Dot Portable" data-price="149" data-color="Cherry">
+        <article class="product-card reveal" data-category="light" data-name="Dot Portable" data-price="149" data-color="Cherry" data-image="img/dot-portable.webp">
           <button class="product-visual visual-red" type="button" data-quick-view aria-label="Quick view Dot Portable">
             <span class="badge new">New</span>
-            <span class="product-art art-dot" aria-hidden="true"><i></i><b></b></span>
+            <img class="product-photo" src="img/dot-portable.webp" alt="Cherry red Dot Portable lamp at golden hour" width="1000" height="1250" loading="lazy" decoding="async">
             <span class="quick-label">Quick view</span>
           </button>
           <div class="product-info"><div><h3>Dot Portable</h3><p>Cherry · 12-hour battery</p></div><strong>$149</strong></div>
@@ -156,7 +155,7 @@
       <div class="feature-copy reveal">
         <p class="kicker">Designed to stay</p>
         <h2>One lamp.<br>Three moods.</h2>
-        <p>HALO moves from focused work light to a soft evening glow with one warm, satisfying click.</p>
+        <p>HALO moves from focused work light to a soft evening glow with one warm, satisfying click. Configure the finish below.</p>
         <div class="swatches" aria-label="Choose lamp color">
           <button class="swatch active" type="button" data-theme="orange" style="--swatch:#f15b36" aria-label="Persimmon"></button>
           <button class="swatch" type="button" data-theme="blue" style="--swatch:#2055d6" aria-label="Cobalt"></button>
@@ -183,8 +182,8 @@
     <section class="journal section" id="journal">
       <div class="section-head reveal"><div><p class="kicker">Field notes</p><h2>From the studio.</h2></div><a href="#journal">See all notes ↗</a></div>
       <div class="journal-grid">
-        <a class="story-card story-one reveal" href="#journal"><span class="story-shape shape-one" aria-hidden="true"></span><div><p>Process · 6 min</p><h3>Why we still make prototypes from paper</h3></div></a>
-        <a class="story-card story-two reveal" href="#journal"><span class="story-shape shape-two" aria-hidden="true"></span><div><p>Homes · 4 min</p><h3>A color-first apartment in Rotterdam</h3></div></a>
+        <a class="story-card story-one reveal" href="#journal"><img src="img/fold-tray.webp" alt="Fold Tray prototype on a studio table" width="1000" height="1250" loading="lazy" decoding="async"><div><p>Process · 6 min</p><h3>Why we still make prototypes from paper</h3></div></a>
+        <a class="story-card story-two reveal" href="#journal"><img src="img/pebble-sconce.webp" alt="Pebble Sconce in a warm interior" width="1000" height="1250" loading="lazy" decoding="async"><div><p>Homes · 4 min</p><h3>A color-first apartment in Rotterdam</h3></div></a>
       </div>
     </section>
 
@@ -210,7 +209,7 @@
 
   <aside class="drawer quick-drawer" id="quickDrawer" aria-hidden="true" aria-labelledby="quickName">
     <div class="drawer-head"><p>Quick view</p><button type="button" data-close aria-label="Close quick view">Close</button></div>
-    <div class="quick-art" id="quickArt"><span aria-hidden="true"></span></div>
+    <div class="quick-art" id="quickArt"><img id="quickImage" src="img/halo-lifestyle.webp" alt=""></div>
     <div class="quick-content"><p class="kicker" id="quickColor">Color</p><h2 id="quickName">Product</h2><p>Made in a small run from durable materials, with parts designed to be repaired rather than replaced.</p><div class="quick-buy"><strong id="quickPrice">$0</strong><button class="add-button" type="button" id="quickAdd">Add to cart</button></div></div>
   </aside>
 
