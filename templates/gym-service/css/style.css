@@ -439,9 +439,10 @@ h1, h2, h3, h4 {
   transition: transform 1.15s cubic-bezier(.22,1,.36,1), filter 0.7s ease;
 }
 .protocol-image.active img { transform: scale(1.025); filter: saturate(0.88) contrast(1.08) brightness(0.86); }
-.protocol-image[data-protocol-visual="1"] img { object-position: center 30%; }
-.protocol-image[data-protocol-visual="2"] img { object-position: center 24%; }
-.protocol-image[data-protocol-visual="3"] img { object-position: center 18%; }
+.protocol-image[data-protocol-visual="0"] img { object-position: center 42%; }
+.protocol-image[data-protocol-visual="1"] img { object-position: center 48%; }
+.protocol-image[data-protocol-visual="2"] img { object-position: 35% center; }
+.protocol-image[data-protocol-visual="3"] img { object-position: 38% center; }
 .protocol-scan {
   position: absolute;
   left: 0;
