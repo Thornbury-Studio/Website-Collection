@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OBLIK — Objects for Better Living</title>
+  <meta name="description" content="A fictional design-object storefront template with animated product displays and a working demo cart.">
+  <meta name="robots" content="index, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/ecommerce-design-store/index.html">
+  <meta name="theme-color" content="#f2efe8">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OBLIK">
+  <meta property="og:title" content="OBLIK — Objects for Better Living">
+  <meta property="og:description" content="A playful e-commerce template for a fictional independent design shop.">
+  <meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/ecommerce-design-store/index.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <div class="announcement" aria-label="Store announcement">
+    <div class="ticker">
+      <span>Free shipping over $120</span><i>●</i><span>Small-batch objects</span><i>●</i><span>30-day returns</span><i>●</i>
+      <span aria-hidden="true">Free shipping over $120</span><i aria-hidden="true">●</i><span aria-hidden="true">Small-batch objects</span><i aria-hidden="true">●</i><span aria-hidden="true">30-day returns</span><i aria-hidden="true">●</i>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="logo" href="#top" aria-label="OBLIK home">OBLIK<span>®</span></a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#shop">Shop</a>
+      <a href="#story">Our process</a>
+      <a href="#journal">Journal</a>
+    </nav>
+    <div class="header-actions">
+      <button class="text-button" type="button" data-search>Search</button>
+      <button class="cart-button" type="button" data-cart-open aria-label="Open cart, 0 items">
+        Cart <span class="cart-count">0</span>
+      </button>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#shop">Shop</a><a href="#story">Our process</a><a href="#journal">Journal</a>
+  </div>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="kicker reveal">Independent objects · Copenhagen</p>
+        <h1 aria-label="Light, shaped differently">
+          <span class="title-line"><span>LIGHT,</span></span>
+          <span class="title-line offset"><span>SHAPED</span></span>
+          <span class="title-line"><span>DIFFERENTLY.</span></span>
+        </h1>
+        <div class="hero-bottom reveal">
+          <p>Playful, tactile lighting for rooms that refuse to disappear into the background.</p>
+          <a class="round-link magnetic" href="#shop"><span>Shop the drop</span><b aria-hidden="true">↘</b></a>
+        </div>
+      </div>
+
+      <div class="hero-stage" id="heroStage" aria-label="OBLIK Halo table lamp in persimmon">
+        <div class="orbit orbit-one" aria-hidden="true"></div>
+        <div class="orbit orbit-two" aria-hidden="true"></div>
+        <div class="stage-label label-a">01 / HALO</div>
+        <div class="stage-label label-b">Touch dimmer</div>
+        <div class="lamp lamp-hero" aria-hidden="true">
+          <div class="lamp-glow"></div>
+          <div class="lamp-shade"><span></span></div>
+          <div class="lamp-neck"></div>
+          <div class="lamp-base"></div>
+        </div>
+        <button class="spin-hint" type="button" id="spinHint">Drag to rotate</button>
+      </div>
+    </section>
+
+    <section class="intro-strip" aria-label="Brand statement">
+      <div class="word-loop">
+        <span>FORM FOLLOWS FEELING</span><i>✦</i><span>FORM FOLLOWS FEELING</span><i>✦</i>
+      </div>
+    </section>
+
+    <section class="shop section" id="shop">
+      <div class="section-head reveal">
+        <div><p class="kicker">The current collection</p><h2>Objects with<br>good energy.</h2></div>
+        <p class="section-note">Designed slowly. Built in small runs. Made to be used every day.</p>
+      </div>
+
+      <div class="filters reveal" role="group" aria-label="Filter products">
+        <button class="filter active" type="button" data-filter="all">All <span>06</span></button>
+        <button class="filter" type="button" data-filter="light">Lighting <span>03</span></button>
+        <button class="filter" type="button" data-filter="desk">Desk <span>02</span></button>
+        <button class="filter" type="button" data-filter="home">Home <span>01</span></button>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+        <article class="product-card reveal" data-category="light" data-name="Halo Lamp" data-price="189" data-color="Persimmon">
+          <button class="product-visual visual-orange" type="button" data-quick-view aria-label="Quick view Halo Lamp">
+            <span class="badge">Bestseller</span>
+            <span class="product-art art-halo" aria-hidden="true"><i class="shade"></i><i class="stem"></i><i class="base"></i></span>
+            <span class="quick-label">Quick view</span>
+          </button>
+          <div class="product-info"><div><h3>Halo Lamp</h3><p>Persimmon · Dimmable</p></div><strong>$189</strong></div>
+        </article>
+
+        <article class="product-card reveal" data-category="desk" data-name="Fold Tray" data-price="74" data-color="Cobalt">
+          <button class="product-visual visual-blue" type="button" data-quick-view aria-label="Quick view Fold Tray">
+            <span class="product-art art-tray" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="quick-label">Quick view</span>
+          </button>
+          <div class="product-info"><div><h3>Fold Tray</h3><p>Cobalt · Powder-coated steel</p></div><strong>$74</strong></div>
+        </article>
+
+        <article class="product-card reveal" data-category="light" data-name="Pebble Sconce" data-price="129" data-color="Butter">
+          <button class="product-visual visual-yellow" type="button" data-quick-view aria-label="Quick view Pebble Sconce">
+            <span class="product-art art-pebble" aria-hidden="true"><i></i><b></b></span>
+            <span class="quick-label">Quick view</span>
+          </button>
+          <div class="product-info"><div><h3>Pebble Sconce</h3><p>Butter · Soft white glow</p></div><strong>$129</strong></div>
+        </article>
+
+        <article class="product-card reveal" data-category="home" data-name="Loop Vase" data-price="96" data-color="Moss">
+          <button class="product-visual visual-green" type="button" data-quick-view aria-label="Quick view Loop Vase">
+            <span class="product-art art-vase" aria-hidden="true"><i></i></span>
+            <span class="quick-label">Quick view</span>
+          </button>
+          <div class="product-info"><div><h3>Loop Vase</h3><p>Moss · Hand-finished ceramic</p></div><strong>$96</strong></div>
+        </article>
+
+        <article class="product-card reveal" data-category="desk" data-name="Arc Bookend" data-price="58" data-color="Lilac">
+          <button class="product-visual visual-lilac" type="button" data-quick-view aria-label="Quick view Arc Bookend">
+            <span class="product-art art-arc" aria-hidden="true"><i></i><i></i></span>
+            <span class="quick-label">Quick view</span>
+          </button>
+          <div class="product-info"><div><h3>Arc Bookend</h3><p>Lilac · Cast aluminium</p></div><strong>$58</strong></div>
+        </article>
+
+        <article class="product-card reveal" data-category="light" data-name="Dot Portable" data-price="149" data-color="Cherry">
+          <button class="product-visual visual-red" type="button" data-quick-view aria-label="Quick view Dot Portable">
+            <span class="badge new">New</span>
+            <span class="product-art art-dot" aria-hidden="true"><i></i><b></b></span>
+            <span class="quick-label">Quick view</span>
+          </button>
+          <div class="product-info"><div><h3>Dot Portable</h3><p>Cherry · 12-hour battery</p></div><strong>$149</strong></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="feature" id="story">
+      <div class="feature-copy reveal">
+        <p class="kicker">Designed to stay</p>
+        <h2>One lamp.<br>Three moods.</h2>
+        <p>HALO moves from focused work light to a soft evening glow with one warm, satisfying click.</p>
+        <div class="swatches" aria-label="Choose lamp color">
+          <button class="swatch active" type="button" data-theme="orange" style="--swatch:#f15b36" aria-label="Persimmon"></button>
+          <button class="swatch" type="button" data-theme="blue" style="--swatch:#2055d6" aria-label="Cobalt"></button>
+          <button class="swatch" type="button" data-theme="cream" style="--swatch:#eee1c6" aria-label="Oat"></button>
+        </div>
+        <button class="add-button magnetic" type="button" data-add-feature>Add Halo to cart — $189</button>
+      </div>
+      <div class="feature-stage" id="featureStage">
+        <div class="feature-caption top">Built from 4 replaceable parts</div>
+        <div class="feature-caption bottom"><span id="colorName">Persimmon</span> / Powder coat</div>
+        <div class="feature-ring" aria-hidden="true"></div>
+        <div class="lamp lamp-feature" aria-hidden="true">
+          <div class="lamp-glow"></div><div class="lamp-shade"><span></span></div><div class="lamp-neck"></div><div class="lamp-base"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="values section">
+      <div class="value reveal"><span>01</span><h3>Small batches</h3><p>We make fewer, better things and restock only when they are ready.</p></div>
+      <div class="value reveal"><span>02</span><h3>Repairable</h3><p>Replaceable parts and open assembly make every object easier to keep.</p></div>
+      <div class="value reveal"><span>03</span><h3>Lower impact</h3><p>Flat-pack shipping, recycled metals, and zero single-use plastic.</p></div>
+    </section>
+
+    <section class="journal section" id="journal">
+      <div class="section-head reveal"><div><p class="kicker">Field notes</p><h2>From the studio.</h2></div><a href="#journal">See all notes ↗</a></div>
+      <div class="journal-grid">
+        <a class="story-card story-one reveal" href="#journal"><span class="story-shape shape-one" aria-hidden="true"></span><div><p>Process · 6 min</p><h3>Why we still make prototypes from paper</h3></div></a>
+        <a class="story-card story-two reveal" href="#journal"><span class="story-shape shape-two" aria-hidden="true"></span><div><p>Homes · 4 min</p><h3>A color-first apartment in Rotterdam</h3></div></a>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div class="newsletter-orb" aria-hidden="true"></div>
+      <div class="newsletter-copy reveal"><p class="kicker">Occasional good mail</p><h2>NEW OBJECTS.<br>NO NOISE.</h2></div>
+      <form class="newsletter-form reveal" id="newsletterForm"><label for="email">Email address</label><div><input id="email" type="email" placeholder="you@example.com" required><button type="submit">Join ↗</button></div><p id="formStatus" aria-live="polite">Product drops, studio notes, and nothing daily.</p></form>
+    </section>
+  </main>
+
+  <footer>
+    <a class="footer-logo" href="#top">OBLIK</a>
+    <div class="footer-grid"><div><p>Independent objects for better living.</p><p>Copenhagen · Since 2026</p></div><div><a href="#shop">Shop</a><a href="#story">Process</a><a href="#journal">Journal</a></div><div><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Care guide</a></div><div><a href="#">Instagram ↗</a><a href="#">Pinterest ↗</a><a href="#">Email ↗</a></div></div>
+    <div class="footer-bottom"><span>© <span id="year"></span> OBLIK. Fictional portfolio template.</span><a href="../../index.html">Back to template gallery ↗</a></div>
+  </footer>
+
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="drawer cart-drawer" id="cartDrawer" aria-hidden="true" aria-labelledby="cartTitle">
+    <div class="drawer-head"><h2 id="cartTitle">Your cart <span class="cart-count">0</span></h2><button type="button" data-close aria-label="Close cart">Close</button></div>
+    <div class="cart-items" id="cartItems"><div class="empty-cart"><span>0</span><p>Your cart is beautifully empty.</p><a href="#shop" data-close>Meet the objects</a></div></div>
+    <div class="cart-total" id="cartTotal" hidden><div><span>Subtotal</span><strong>$0</strong></div><button type="button">Demo checkout ↗</button><p>Taxes and shipping calculated at checkout.</p></div>
+  </aside>
+
+  <aside class="drawer quick-drawer" id="quickDrawer" aria-hidden="true" aria-labelledby="quickName">
+    <div class="drawer-head"><p>Quick view</p><button type="button" data-close aria-label="Close quick view">Close</button></div>
+    <div class="quick-art" id="quickArt"><span aria-hidden="true"></span></div>
+    <div class="quick-content"><p class="kicker" id="quickColor">Color</p><h2 id="quickName">Product</h2><p>Made in a small run from durable materials, with parts designed to be repaired rather than replaced.</p><div class="quick-buy"><strong id="quickPrice">$0</strong><button class="add-button" type="button" id="quickAdd">Add to cart</button></div></div>
+  </aside>
+
+  <div class="search-panel" id="searchPanel" aria-hidden="true">
+    <button type="button" data-close aria-label="Close search">Close</button>
+    <label for="searchInput">What are you looking for?</label>
+    <input id="searchInput" type="search" placeholder="Try “lamp” or “desk”" autocomplete="off">
+    <p id="searchHint">Popular: Halo, portable light, tray</p>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Added to cart</div>
+  <script src="js/main.js"></script>
+</body>
+</html>
