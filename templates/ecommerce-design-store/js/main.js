@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('quickAdd').addEventListener('click', () => {
     if (state.activeProduct) addToCart(state.activeProduct);
   });
-  document.querySelector('[data-add-feature]').addEventListener('click', () => addToCart({ name: 'Halo Lamp', price: 189, color: document.getElementById('colorName').textContent, category: 'light', image: 'img/halo-lifestyle.webp' }));
+  document.querySelector('[data-add-feature]').addEventListener('click', () => addToCart({ name: 'Halo Lamp', price: 189, color: 'Persimmon', category: 'light', image: 'img/halo-lifestyle.webp' }));
   document.querySelector('[data-cart-open]').addEventListener('click', () => openLayer(cartDrawer));
   document.querySelector('[data-search]').addEventListener('click', () => {
     openLayer(searchPanel);
@@ -183,18 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const query = event.target.value.trim().toLowerCase();
     const matches = [...document.querySelectorAll('.product-card')].filter((card) => `${card.dataset.name} ${card.dataset.category}`.toLowerCase().includes(query));
     document.getElementById('searchHint').textContent = query ? `${matches.length} object${matches.length === 1 ? '' : 's'} found in this demo` : 'Popular: Halo, portable light, tray';
-  });
-
-  const themeNames = { orange: 'Persimmon', blue: 'Cobalt', cream: 'Oat' };
-  document.querySelectorAll('[data-theme]').forEach((swatch) => {
-    swatch.addEventListener('click', () => {
-      document.querySelectorAll('[data-theme]').forEach((item) => item.classList.remove('active'));
-      swatch.classList.add('active');
-      const stage = document.getElementById('featureStage');
-      stage.classList.remove('theme-blue', 'theme-cream');
-      if (swatch.dataset.theme !== 'orange') stage.classList.add(`theme-${swatch.dataset.theme}`);
-      document.getElementById('colorName').textContent = themeNames[swatch.dataset.theme];
-    });
   });
 
   document.getElementById('newsletterForm').addEventListener('submit', (event) => {
