@@ -118,7 +118,9 @@ function initHero3D(canvas) {
   const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
   camera.position.set(0, 0, 6.4);
 
-  const geometry = new THREE.IcosahedronGeometry(2.05, 7);
+  // detail is exponential (20 * 4^detail faces) — 4 gives ~5,120 triangles,
+  // plenty for organic-looking noise displacement without tanking the frame rate
+  const geometry = new THREE.IcosahedronGeometry(2.05, 4);
   const material = new THREE.ShaderMaterial({
     vertexShader: VERTEX,
     fragmentShader: FRAGMENT,
@@ -176,16 +178,17 @@ function initHero3D(canvas) {
   resize();
   window.addEventListener('resize', resize);
 
-  // fade + settle as the hero scrolls out of view
+  // fade + settle as the hero scrolls out of view. Uses ScrollTrigger's own
+  // scroll() rather than window.scrollY, which does not track real position
+  // once ScrollSmoother is driving the page.
   let scrollFactor = 1;
-  function onScroll() {
+  function updateFade(scrollY) {
     if (!heroSection) return;
     const heroH = heroSection.offsetHeight || window.innerHeight;
-    const p = Math.min(1, Math.max(0, window.scrollY / (heroH * 0.85)));
+    const p = Math.min(1, Math.max(0, scrollY / (heroH * 0.85)));
     scrollFactor = 1 - p;
     canvas.style.opacity = String(Math.max(0.12, scrollFactor));
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
 
   const clock = new THREE.Clock();
 
@@ -206,10 +209,45 @@ function initHero3D(canvas) {
     return;
   }
 
+  let rafId = null;
+  let tabHidden = false;
+
   function loop() {
     renderFrame();
-    requestAnimationFrame(loop);
+    rafId = requestAnimationFrame(loop);
   }
+
+  function syncLoop() {
+    const shouldRun = scrollFactor > 0.02 && !tabHidden;
+    if (shouldRun && rafId === null) {
+      loop();
+    } else if (!shouldRun && rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    tabHidden = document.hidden;
+    syncLoop();
+  });
+
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.create({
+      start: 0,
+      end: 'max',
+      onUpdate: (self) => {
+        updateFade(self.scroll());
+        syncLoop();
+      },
+    });
+  } else {
+    window.addEventListener('scroll', () => {
+      updateFade(window.scrollY);
+      syncLoop();
+    }, { passive: true });
+  }
+
   loop();
 }
 
