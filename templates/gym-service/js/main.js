@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCounters();
     initMagnetic();
     initSound();
+    initScrollProgress();
   });
 
   setYear();
@@ -76,7 +77,7 @@ function initHeroReveal() {
   if (!lines.length || typeof SplitText === 'undefined') return;
 
   lines.forEach((line) => {
-    const split = new SplitText(line, { type: 'chars' });
+    const split = new SplitText(line, { type: 'chars,words', wordsClass: 'word' });
     gsap.set(split.chars, { yPercent: 110, display: 'inline-block' });
     gsap.to(split.chars, {
       yPercent: 0,
@@ -88,7 +89,8 @@ function initHeroReveal() {
   });
 
   gsap.from('.eyebrow', { opacity: 0, y: 12, duration: 0.6, delay: 0.1 });
-  gsap.from('.hero-sub', { opacity: 0, y: 20, duration: 0.7, delay: 0.6 });
+  gsap.from('.hero-actions', { opacity: 0, y: 20, duration: 0.7, delay: 0.6 });
+  gsap.from('.hero-visual', { opacity: 0, scale: 0.85, duration: 1.1, ease: 'power3.out', delay: 0.3 });
   gsap.from('.scroll-cue', { opacity: 0, duration: 0.6, delay: 1 });
 }
 
@@ -200,6 +202,7 @@ function initPhilosophyPin() {
   const pinEl = document.getElementById('philosophyPin');
   const panels = document.querySelectorAll('.philosophy-panel');
   const dots = document.querySelectorAll('#philosophyProgress span');
+  const image = document.querySelector('.philosophy-visual img');
   if (!pinEl || !panels.length) return;
 
   const setActive = (i) => {
@@ -216,6 +219,9 @@ function initPhilosophyPin() {
     onUpdate: (self) => {
       const idx = Math.min(panels.length - 1, Math.floor(self.progress * panels.length));
       setActive(idx);
+      if (image) {
+        gsap.set(image, { yPercent: -8 + self.progress * 16, scale: 1.08 - self.progress * 0.04 });
+      }
     },
   });
 }
@@ -242,6 +248,32 @@ function initReveals() {
         start: 'top 82%',
       },
     });
+  });
+
+  const wipes = document.querySelectorAll('.wipe-reveal');
+  if (wipes.length) {
+    wipes.forEach((el, i) => {
+      const img = el.querySelector('img');
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: el, start: 'top 85%' },
+        delay: (i % 4) * 0.08,
+      });
+      tl.to(el, { clipPath: 'inset(0 0 0% 0)', duration: 0.9, ease: 'power4.inOut' }, 0);
+      if (img) tl.to(img, { scale: 1, duration: 1.1, ease: 'power3.out' }, 0);
+    });
+  }
+}
+
+/* ---------------- Scroll progress bar ---------------- */
+function initScrollProgress() {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  ScrollTrigger.create({
+    start: 0,
+    end: 'max',
+    onUpdate: (self) => {
+      bar.style.width = (self.progress * 100) + '%';
+    },
   });
 }
 
