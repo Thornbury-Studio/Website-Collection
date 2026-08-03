@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORGE — Strength &amp; Conditioning Gym</title>
+<meta name="description" content="FORGE is a fictional strength and conditioning gym template built for portfolio showcase purposes — an immersive, animation-driven design.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://zanezhijie.github.io/Website-Collection/templates/gym-service/index.html">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0a'/%3E%3Ctext x='16' y='23' font-family='Arial Black,sans-serif' font-weight='900' font-size='17' fill='%23d4ff3f' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FORGE">
+<meta property="og:title" content="FORGE — Strength &amp; Conditioning Gym">
+<meta property="og:description" content="FORGE is a fictional strength and conditioning gym template built for portfolio showcase purposes — an immersive, animation-driven design.">
+<meta property="og:url" content="https://zanezhijie.github.io/Website-Collection/templates/gym-service/index.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FORGE — Strength &amp; Conditioning Gym">
+<meta name="twitter:description" content="FORGE is a fictional strength and conditioning gym template built for portfolio showcase purposes — an immersive, animation-driven design.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ExerciseGym",
+  "name": "FORGE",
+  "description": "FORGE is a fictional strength and conditioning gym template built for portfolio showcase purposes.",
+  "url": "https://zanezhijie.github.io/Website-Collection/templates/gym-service/index.html"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pre-word">FORGE</div>
+  <div class="pre-bar"><div class="pre-bar-fill" id="preBarFill"></div></div>
+  <div class="pre-count" id="preCount">0%</div>
+</div>
+
+<svg width="0" height="0" style="position:absolute">
+  <filter id="grainFilter">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence>
+    <feColorMatrix type="saturate" values="0"></feColorMatrix>
+  </filter>
+</svg>
+<div class="grain"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<noscript><style>body, a, button { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none !important; }</style></noscript>
+<a href="../../index.html" class="back-link">&larr; Portfolio</a>
+
+<div class="page" id="smooth-wrapper">
+<div id="smooth-content">
+
+<nav class="nav" id="siteNav">
+  <div class="container">
+    <a href="#top" class="brand">FOR<span>GE</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#philosophy">Philosophy</a>
+      <a href="#programs">Programs</a>
+      <a href="#trainers">Trainers</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="nav-actions" style="display:flex; align-items:center; gap:14px;">
+      <a href="#pricing" class="btn btn-outline">Join Now</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <canvas id="hero-canvas"></canvas>
+  <div class="container">
+    <span class="eyebrow" data-cursor="link">Strength &amp; Conditioning</span>
+    <h1 class="hero-title">
+      <span class="line"><span class="line-inner">FORGE YOUR</span></span>
+      <span class="line"><span class="line-inner">STRONGEST SELF</span></span>
+    </h1>
+    <div class="hero-sub">
+      <p>A strength and conditioning gym for people who show up, put in the work, and don't leave until it's done.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-accent" data-cursor="link">Start Training</a>
+        <a href="#programs" class="btn btn-outline" data-cursor="link">See Programs</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span> Scroll</div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-track" id="marqueeTrack">
+    <span>Strength</span><span>Conditioning</span><span>Recovery</span><span>Community</span><span>Discipline</span><span>Results</span>
+    <span>Strength</span><span>Conditioning</span><span>Recovery</span><span>Community</span><span>Discipline</span><span>Results</span>
+  </div>
+</div>
+
+<section class="section philosophy" id="philosophy">
+  <div class="container">
+    <div class="philosophy-pin" id="philosophyPin">
+      <div class="philosophy-visual">
+        <img src="img/philosophy.jpg" alt="Athlete training at FORGE gym" loading="lazy">
+      </div>
+      <div class="philosophy-panels">
+        <div class="philosophy-panel active" data-panel="0">
+          <span class="num">01</span>
+          <h3>Discipline over motivation</h3>
+          <p>Motivation fades. We build training systems around habits and structure, so progress doesn't depend on how you feel walking in the door.</p>
+        </div>
+        <div class="philosophy-panel" data-panel="1">
+          <span class="num">02</span>
+          <h3>Coached, not just supervised</h3>
+          <p>Every session is programmed and watched by a real coach — form corrections, load adjustments, and accountability built in.</p>
+        </div>
+        <div class="philosophy-panel" data-panel="2">
+          <span class="num">03</span>
+          <h3>Progress you can measure</h3>
+          <p>We track lifts, conditioning benchmarks, and body metrics from day one, so six months from now isn't a guess.</p>
+        </div>
+        <div class="philosophy-panel" data-panel="3">
+          <span class="num">04</span>
+          <h3>Recovery is part of training</h3>
+          <p>Mobility work, deload weeks, and sleep coaching are built into every program — because burnout isn't a badge of honor.</p>
+        </div>
+        <div class="philosophy-progress" id="philosophyProgress">
+          <span class="active"></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="programs">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">What We Offer</span>
+        <h2>Programs built<br>around your goal</h2>
+      </div>
+      <p>Six focused programs, all coached, all scalable to your level — from your first session to your hundredth.</p>
+    </div>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card reveal-up"><span class="idx">01</span><h3>Strength Training</h3><p>Barbell-focused programming built on progressive overload.</p></div>
+    <div class="program-card reveal-up"><span class="idx">02</span><h3>Conditioning</h3><p>High-intensity intervals for engine and work capacity.</p></div>
+    <div class="program-card reveal-up"><span class="idx">03</span><h3>Powerlifting</h3><p>Squat, bench, and deadlift technique for competitive lifters.</p></div>
+    <div class="program-card reveal-up"><span class="idx">04</span><h3>Mobility &amp; Recovery</h3><p>Guided mobility sessions to keep you training pain-free.</p></div>
+    <div class="program-card reveal-up"><span class="idx">05</span><h3>Nutrition Coaching</h3><p>Macro guidance and check-ins tied to your training block.</p></div>
+    <div class="program-card reveal-up"><span class="idx">06</span><h3>Open Gym</h3><p>Full facility access to run your own programming.</p></div>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="stats-grid">
+    <div class="stat-item"><div class="num" data-count="1200" data-suffix="+">0</div><div class="label">Active Members</div></div>
+    <div class="stat-item"><div class="num" data-count="40" data-suffix="+">0</div><div class="label">Weekly Classes</div></div>
+    <div class="stat-item"><div class="num" data-count="12">0</div><div class="label">Expert Coaches</div></div>
+    <div class="stat-item"><div class="num" data-count="9">0</div><div class="label">Years Strong</div></div>
+  </div>
+</div>
+
+<section class="section" id="trainers">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">The Coaches</span>
+        <h2>Learn from people<br>who've done it</h2>
+      </div>
+      <p>Small coach-to-member ratios, so every session gets real attention.</p>
+    </div>
+    <div class="trainers-grid">
+      <div class="trainer-card reveal-up">
+        <div class="trainer-photo"><img src="img/trainer-marcus.jpg" alt="Marcus Reed" loading="lazy"></div>
+        <div class="trainer-info"><h3>Marcus Reed</h3><div class="role">Head Coach, Strength</div></div>
+      </div>
+      <div class="trainer-card reveal-up">
+        <div class="trainer-photo"><img src="img/trainer-aisha.jpg" alt="Aisha Bello" loading="lazy"></div>
+        <div class="trainer-info"><h3>Aisha Bello</h3><div class="role">HIIT &amp; Conditioning</div></div>
+      </div>
+      <div class="trainer-card reveal-up">
+        <div class="trainer-photo"><img src="img/trainer-diego.jpg" alt="Diego Alvarez" loading="lazy"></div>
+        <div class="trainer-info"><h3>Diego Alvarez</h3><div class="role">Powerlifting</div></div>
+      </div>
+      <div class="trainer-card reveal-up">
+        <div class="trainer-photo"><img src="img/trainer-sam.jpg" alt="Sam Whitfield" loading="lazy"></div>
+        <div class="trainer-info"><h3>Sam Whitfield</h3><div class="role">Mobility &amp; Recovery</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials section-tight">
+  <div class="container" style="margin-bottom:48px;">
+    <span class="eyebrow">Member Results</span>
+    <h2 style="font-size:clamp(2rem,4.5vw,3rem);">What members say</h2>
+  </div>
+  <div class="testi-track" id="testiTrack">
+    <div class="testi-card"><p class="quote">"Six months in and I've hit lifetime PRs on every lift. The coaching actually pays attention."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">RK</div><div><div class="name">Ravi Kumar</div><div class="role">Member since 2024</div></div></div></div>
+    <div class="testi-card"><p class="quote">"First gym where the programming actually changes as I get stronger instead of staying static."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">LM</div><div><div class="name">Lena Morales</div><div class="role">Member since 2023</div></div></div></div>
+    <div class="testi-card"><p class="quote">"Conditioning classes destroyed me in the best way. My 5k time dropped by two minutes."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">DP</div><div><div class="name">David Park</div><div class="role">Member since 2025</div></div></div></div>
+    <div class="testi-card"><p class="quote">"The recovery and mobility work is why I'm still training pain-free after two knee scares."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">JT</div><div><div class="name">Jamie Torres</div><div class="role">Member since 2022</div></div></div></div>
+    <div class="testi-card"><p class="quote">"Six months in and I've hit lifetime PRs on every lift. The coaching actually pays attention."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">RK</div><div><div class="name">Ravi Kumar</div><div class="role">Member since 2024</div></div></div></div>
+    <div class="testi-card"><p class="quote">"First gym where the programming actually changes as I get stronger instead of staying static."</p><div class="testi-person"><div class="avatar" style="width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">LM</div><div><div class="name">Lena Morales</div><div class="role">Member since 2023</div></div></div></div>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Membership</span>
+        <h2>Pick your level<br>of commitment</h2>
+      </div>
+      <p>No contracts. Cancel or pause anytime — we'd rather earn it every month.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal-up">
+        <h3>Drop-In</h3>
+        <div class="price">$25<span>/session</span></div>
+        <ul>
+          <li>Single class or open gym visit</li>
+          <li>Access to all equipment</li>
+          <li>No commitment required</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Book a Session</a>
+      </div>
+      <div class="price-card featured reveal-up">
+        <span class="tag">Most Popular</span>
+        <h3>Member</h3>
+        <div class="price">$89<span>/month</span></div>
+        <ul>
+          <li>Unlimited classes &amp; open gym</li>
+          <li>Program tracking &amp; check-ins</li>
+          <li>Member app access</li>
+          <li>Guest passes, 2 per month</li>
+        </ul>
+        <a href="#" class="btn btn-accent">Join FORGE</a>
+      </div>
+      <div class="price-card reveal-up">
+        <h3>Elite</h3>
+        <div class="price">$149<span>/month</span></div>
+        <ul>
+          <li>Everything in Member</li>
+          <li>1-on-1 coaching, 2x monthly</li>
+          <li>Nutrition coaching included</li>
+          <li>Priority class booking</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Go Elite</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <span class="eyebrow" style="justify-content:center;">Start Today</span>
+    <h2>READY TO <em>FORGE</em><br>AHEAD?</h2>
+    <p>Your first session is on us. No pressure, no sales pitch — just come train.</p>
+    <a href="#pricing" class="btn btn-accent" data-cursor="link">Claim Your Free Session</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand">FOR<span style="color:var(--accent);">GE</span></div>
+        <p>A fictional gym built as a portfolio template. Not a real business — no third-party copyrighted content is used.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#trainers">Trainers</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li>410 Ironworks Rd, Austin, TX</li>
+            <li>train@forgegym.example</li>
+            <li>(555) 021-7744</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="currentYear"></span> FORGE. Template for portfolio use only.</span>
+      <span>Built with GSAP</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollSmoother.min.js"></script>
+<script src="js/main.js"></script>
+<script type="module" src="js/hero-3d.js"></script>
+</body>
+</html>
