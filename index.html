@@ -37,7 +37,7 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0a0c;
@@ -392,6 +392,19 @@
     margin-top: 40px;
   }
   footer strong { color: var(--text); font-family: var(--font-display); font-weight: 500; }
+
+  .site-signature {
+    display: inline-block;
+    margin-left: 10px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.15rem;
+    color: var(--muted);
+    opacity: 0.4;
+    transform: rotate(-2deg);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+  .site-signature:hover { opacity: 0.85; }
 </style>
 </head>
 <body>
@@ -526,7 +539,7 @@
   </div>
 </section>
 
-<footer><strong>Website Collection</strong> — every template here is original work created for showcase purposes only. No third-party copyrighted content is used.</footer>
+<footer><strong>Website Collection</strong> — every template here is original work created for showcase purposes only. No third-party copyrighted content is used.<span class="site-signature">Zane</span></footer>
 
 </div>
 
