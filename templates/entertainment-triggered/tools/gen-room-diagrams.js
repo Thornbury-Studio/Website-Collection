@@ -264,7 +264,21 @@ const rooms = {};
   /* Three pillars at different depths — one alone read as an empty room, and
      the staggered heights are what make the space feel occupied. */
   rooms.hide = shell('hide', C.ice,
-    skirt(C.ice) + eyes([[wallL, 0.16, 0.68, 0.115, 0.17], [wallL, 0.31, 0.78, 0.075, 0.11], [wallL, 0.58, 0.15, 0.05, 0.075], [wallL, 0.83, 0.5, 0.09, 0.13], [wallR, 0.13, 0.58, 0.1, 0.15], [wallR, 0.3, 0.22, 0.055, 0.08], [wallR, 0.9, 0.72, 0.07, 0.1]]) + screen(wallR, 0.62, 0.2) +
+    /* Four to a wall, spaced evenly *along* each wall but at irregular heights
+       and sizes. Bunching two together left a hole elsewhere and read as an
+       accident rather than as something watching from every corner; the height
+       and size variation is what keeps an even spacing from looking like a grid.
+       The one at (0.64, 0.58) deliberately fills the gap under the screen. */
+    skirt(C.ice) + eyes([
+      [wallL, 0.12, 0.32, 0.06, 0.09],
+      [wallL, 0.34, 0.70, 0.115, 0.17],
+      [wallL, 0.56, 0.20, 0.045, 0.07],
+      [wallL, 0.82, 0.56, 0.085, 0.125],
+      [wallR, 0.14, 0.46, 0.095, 0.14],
+      [wallR, 0.36, 0.74, 0.055, 0.08],
+      [wallR, 0.64, 0.58, 0.08, 0.12],
+      [wallR, 0.88, 0.30, 0.105, 0.155]
+    ]) + screen(wallR, 0.62, 0.2) +
     pillar(0.24, 0.22, 11, 30) + pillar(0.5, 0.46, 15, 42) + pillar(0.78, 0.74, 12, 34) +
     '%LIT%',
     cap(0.24, 0.22, 11, 30) + cap(0.5, 0.46, 15, 42) + cap(0.78, 0.74, 12, 34), seamFloor('hide'));
