@@ -142,16 +142,22 @@ const skirt = accent =>
   poly([wallL(0, 0.95), wallL(1, 0.95), wallL(1, 1), wallL(0, 1)], accent, 'opacity=".26"');
 
 /* `lit` is drawn three times — mirrored in the floor, blurred for bloom, and
-   crisp. It is defined once and referenced by <use>; `inner` marks where the
-   crisp copy belongs with %LIT%. */
-function shell(id, accent, inner, lit = '', floorFill = '') {
+   crisp. The two decorative copies are <use> references to a single definition,
+   but the CRISP copy is emitted as real markup at the %LIT% marker.
+   That split is deliberate and load-bearing: a <use> instance does NOT pick up
+   CSS rules that match the referenced original. Verified directly — the
+   original's computed fill was green while its instances rendered black. So
+   anything that has to respond to hover (the hoop rig, the pulsing tiles and
+   buttons) must be a real element, not an instance. The decorative copies never
+   animate, so they stay cheap. */
+function shell(id, accent, inner, lit = '', floorFill = '', off = C.tileOff) {
   const litUse = lit ? `<use href="#${id}-lit"/>` : '';
   if (lit && !inner.includes('%LIT%')) throw new Error(id + ': inner is missing its %LIT% marker');
   const REFL = 0.42;
   /* --rm / --off drive the hover "wake" animation in style.css: dormant
      fittings run up to the room's accent in a staggered sweep, so hovering a
      card visibly starts something happening inside the room. */
-  return `<svg class="room-art" style="--rm:${accent};--off:${C.tileOff}" viewBox="0 28 320 196" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">` +
+  return `<svg class="room-art" style="--rm:${accent};--off:${off}" viewBox="0 28 320 196" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">` +
     `<defs>` +
       `<linearGradient id="${id}-r" x1="0" y1="0" x2="0" y2="1">` +
         `<stop offset="0" stop-color="#191130"/><stop offset="1" stop-color="#33245c"/></linearGradient>` +
@@ -182,7 +188,7 @@ function shell(id, accent, inner, lit = '', floorFill = '') {
     (lit ? `<g clip-path="url(#${id}-fc)" mask="url(#${id}-fm)" filter="url(#${id}-soft)">` +
            `<g transform="translate(0 ${r1(P(0, 0, 0)[1] * (1 + REFL))}) scale(1 ${-REFL})">${litUse}</g></g>` : '') +
     (lit ? `<g filter="url(#${id}-bloom)" opacity=".8">${litUse}</g>` : '') +
-    inner.replace('%LIT%', litUse) +
+    inner.replace('%LIT%', lit) +
     /* rims last so their lit top edges sit above the wall fills */
     poly(rimR, C.rim) + poly(rimL, C.rim) +
     `<rect x="0" y="28" width="320" height="196" fill="url(#${id}-vig)"/>` +
@@ -221,14 +227,19 @@ const rooms = {};
   const liveR = new Set(['1,0', '3,2', '2,1']), liveL = new Set(['0,1', '2,3']);
   for (let u = 0; u < 4; u++)
     for (let v = 0; v < 4; v++) {
-      const pr = wallR(0.16 + u * 0.225, 0.34 + v * 0.16);
+      const pr = wallR(0.16 + u * 0.225, 0.2 + v * 0.19);
       liveR.has(`${u},${v}`) ? (on += live(pr)) : (off += dead(pr, (u + v) % 6));
       if (u < 3) {
-        const pl = wallL(0.2 + u * 0.26, 0.36 + v * 0.16);
+        const pl = wallL(0.2 + u * 0.26, 0.22 + v * 0.19);
         liveL.has(`${u},${v}`) ? (on += live(pl)) : (off += dead(pl, (u + v + 2) % 6));
       }
     }
-  rooms.press = shell('press', C.volt, skirt(C.volt) + off + screen(wallR, 0.5, 0.16) + '%LIT%', on, seamFloor('press'));
+  /* Unlit buttons are lighter here than in other rooms: they are physical
+     buttons covering the walls and are the entire point of the room, so they
+     have to be legible when dark. At the shared --off they vanished and the
+     room looked empty. */
+  rooms.press = shell('press', C.volt, skirt(C.volt) + off + '%LIT%', on,
+    seamFloor('press'), '#4b3e7a');
 }
 
 /* 3 — Hide & Seek: one pillar. That is the whole room. */
@@ -253,7 +264,7 @@ const rooms = {};
   /* Three pillars at different depths — one alone read as an empty room, and
      the staggered heights are what make the space feel occupied. */
   rooms.hide = shell('hide', C.ice,
-    skirt(C.ice) + eyes([[wallL, 0.2, 0.28, 0.115, 0.17], [wallL, 0.62, 0.46, 0.06, 0.09], [wallR, 0.2, 0.34, 0.085, 0.13], [wallR, 0.46, 0.2, 0.05, 0.08]]) + screen(wallR, 0.62, 0.2) +
+    skirt(C.ice) + eyes([[wallL, 0.16, 0.68, 0.115, 0.17], [wallL, 0.31, 0.78, 0.075, 0.11], [wallL, 0.58, 0.15, 0.05, 0.075], [wallL, 0.83, 0.5, 0.09, 0.13], [wallR, 0.13, 0.58, 0.1, 0.15], [wallR, 0.3, 0.22, 0.055, 0.08], [wallR, 0.9, 0.72, 0.07, 0.1]]) + screen(wallR, 0.62, 0.2) +
     pillar(0.24, 0.22, 11, 30) + pillar(0.5, 0.46, 15, 42) + pillar(0.78, 0.74, 12, 34) +
     '%LIT%',
     cap(0.24, 0.22, 11, 30) + cap(0.5, 0.46, 15, 42) + cap(0.78, 0.74, 12, 34), seamFloor('hide'));
@@ -261,26 +272,48 @@ const rooms = {};
 
 /* 4 — Hoops Madness: three hoops on one wall, a few balls below. */
 {
-  /* Scored-basket glow: a soft column that rises up out of each ring on hover.
-     The gradient lives in the room's own defs so the beams inherit nothing from
-     the shell. */
+  /* At rest this is just five dark hoops on a wall — no light at all. The fire
+     only exists on hover, when the rings themselves also come on. Colours for
+     both states live in style.css so the transition is CSS's to run; the
+     gradient is in the room's own defs so the flames inherit nothing from the
+     shell. White-hot at the base through orange to a fading tip, like a real
+     flame rather than a uniform glow column. */
   let rig = '', ball = '';
-  let defs = `<defs><linearGradient id="hoops-beam" x1="0" y1="1" x2="0" y2="0">` +
-    `<stop offset="0" stop-color="${C.flame}" stop-opacity=".85"/>` +
-    `<stop offset="1" stop-color="${C.flame}" stop-opacity="0"/></linearGradient></defs>`;
+  let defs = `<defs><linearGradient id="hoops-flame" x1="0" y1="1" x2="0" y2="0">` +
+    `<stop offset="0" stop-color="#fff3c4" stop-opacity=".95"/>` +
+    `<stop offset=".4" stop-color="${C.flame}" stop-opacity=".85"/>` +
+    `<stop offset="1" stop-color="${C.hot}" stop-opacity="0"/></linearGradient></defs>`;
+
+  /* One tongue of flame: a tapered leaf rising from (cx, cy). */
+  const tongue = (cx, cy, w, ht) =>
+    `<path d="M${r1(cx - w)},${r1(cy)} Q${r1(cx - w * 0.55)},${r1(cy - ht * 0.55)} ${r1(cx)},${r1(cy - ht)} ` +
+    `Q${r1(cx + w * 0.55)},${r1(cy - ht * 0.55)} ${r1(cx + w)},${r1(cy)} Z" fill="url(#hoops-flame)"/>`;
+
   /* Five, because the room has five and the card copy says five — three left
      the art quietly contradicting the text beside it. */
   for (let i = 0; i < 5; i++) {
     const u = 0.14 + i * 0.18;
     const b = wallR(u, 0.34), h = wallR(u, 0.425);
-    /* Board as a flat plate with no outline, ring overlapping its lower edge.
-       An outlined box with a shape beneath it just reads as a little monitor. */
-    /* NOT "rise" — that class already belongs to the hero headline's line
-       reveal, and a bare .rise rule here blanked the whole headline. */
-    rig += `<g class="hoop-rise" style="--i:${i}">` +
-      `<ellipse cx="${r1(h[0])}" cy="${r1(h[1] - 12)}" rx="5" ry="13" fill="url(#hoops-beam)"/></g>` +
-      `<rect x="${r1(b[0] - 6)}" y="${r1(b[1] - 5.5)}" width="12" height="10" rx="1.4" fill="${C.flame}" opacity=".28"/>` +
-      `<ellipse class="hoop" cx="${r1(h[0])}" cy="${r1(h[1])}" rx="6.4" ry="2.5" fill="none" stroke="${C.flame}" stroke-width="2"/>`;
+    /* Three tongues per hoop at different widths and heights, each on its own
+       flicker offset, so the fire never looks like one rigid shape. */
+    const licks =
+      `<g class="lick" style="--f:0">${tongue(h[0] - 2.6, h[1], 3.1, 15)}</g>` +
+      `<g class="lick" style="--f:1">${tongue(h[0] + 0.4, h[1] - 1, 3.6, 22)}</g>` +
+      `<g class="lick" style="--f:2">${tongue(h[0] + 3, h[1], 2.7, 13)}</g>`;
+    /* opacity="0" as an attribute, not just in CSS: the bloom and reflection
+       copies are <use> instances that ignore CSS, so without it the flames
+       would show as blurred smudges even at rest. CSS still overrides it on the
+       real element when the card is hovered. */
+    rig += `<g class="hoop-fire" opacity="0" style="--i:${i}">` +
+      `<g filter="url(#hoops-bloom)" opacity=".6">${licks}</g>${licks}</g>` +
+      /* Board as a flat plate with no outline, ring overlapping its lower edge.
+         An outlined box with a shape beneath it just reads as a little monitor.
+         Rest colours are attributes so the <use> copies render them; CSS takes
+         over on the real element for the hover transition. */
+      `<rect class="hoop-plate" x="${r1(b[0] - 6)}" y="${r1(b[1] - 5.5)}" width="12" height="10" rx="1.4" ` +
+      `fill="#2a2250" stroke="#574778" stroke-width="1"/>` +
+      `<ellipse class="hoop" cx="${r1(h[0])}" cy="${r1(h[1])}" rx="6.4" ry="2.5" fill="none" ` +
+      `stroke="#9184b8" stroke-width="2"/>`;
   }
   rig = defs + rig;
   ball = trough(FLOOR_SQ * 2, 11, C.flame) + gutterBalls(8, FLOOR_SQ * 2, 11, 4.2, C.flame);
