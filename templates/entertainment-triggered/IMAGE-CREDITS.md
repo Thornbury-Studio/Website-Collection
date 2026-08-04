@@ -73,45 +73,59 @@ you can see what you're walking into before you book. The five game cards here d
 loads it at runtime. Its output is inlined directly into `index.html`, so re-running it (`node
 tools/gen-room-diagrams.js rooms.json`) regenerates the SVG for re-inlining if the geometry changes.
 
-They are deliberately *schematic*, not photographic — but the **layouts are accurate**, and that
-distinction is the whole point. The drawing is ours; the arrangement of the room is a fact about a
-physical space, the same way a floor plan is. A pretty diagram of the wrong room is worse than no
-diagram at all, so each one matches what is actually in that room:
+They sit **deliberately between realistic and abstract**. Each one shows the single thing that room
+actually is, and nothing else — one accent colour from the site palette, simple geometry, lighting
+doing the work:
 
-| Room | What the diagram shows |
-|---|---|
-| Floor Is Lava | Grid of lit LED floor tiles — white with cyan / magenta / yellow patches |
-| Press It! | Dense button fields across all three walls, bright floor |
-| Hide & Seek | Lit cylindrical pillars standing in the room to break sightlines |
-| Hoops Madness | Five hoops in a row on the back wall, balls on the floor below |
-| Hexa Blasts | Honeycomb cluster of buttons on the back wall, ball row beneath |
+| Room | What the diagram shows | Accent |
+|---|---|---|
+| Floor Is Lava | A lit floor. Five live tiles in a 5×5 grid | Hot pink |
+| Press It! | A sparse grid of wall buttons, three of them live | Volt |
+| Hide & Seek | One pillar with a lit cap. That is the whole room | Ice |
+| Hoops Madness | Three hoops on one wall, a few balls below | Flame |
+| Hexa Blasts | One honeycomb of seven, two live | Hot pink |
+| Combos | Not a room — two rooms and a plus, since it's a booking shape | Both |
 
-| Combos | Not a room — two small rooms and a plus, since it's a booking shape |
+Getting here took three passes and both wrong turns are worth recording:
 
-A first pass got several of these wrong — scattered blocks for Hide & Seek instead of pillars, hoops
-spread over two walls instead of a single row, molten orange for a floor that is actually white LED
-tile — and was corrected against the venue's own published photos (2026-08-04).
+1. **Too abstract.** Invented layouts — scattered blocks for Hide & Seek instead of a pillar, hoops
+   spread over two walls, molten orange for a floor that is white LED tile.
+2. **Too literal.** Corrected against the venue's published photos, but by then it was reproducing
+   their rooms in detail — dense multicoloured button fields, twelve-wide grids — which was both busy
+   and off-brand, and a straight-on diorama box that read flat no matter how well it was shaded.
+3. **Between the two**, which is where they are now: correct in what each room *is*, stripped to the
+   minimum that communicates it, in this site's palette rather than the venue's.
 
-The projection changed with it: a three-wall diorama box in mild perspective, which is how the venue
-frames its rooms, replacing the 45-degree corner view of the first pass.
+### What makes them read as 3D
 
-### Making them read as renders rather than diagrams
+The projection is a real axonometric camera — points are given in 3D room space and projected, rather
+than placed inside flat 2D quads. The two ground axes use **different** angles (18° and 36°), so the
+box is asymmetric; a symmetric straight-on box reads flat however carefully it is lit, which is what
+sank pass 2. Walls carry visible thickness at the top rim, which is the other cue that says "solid
+object" rather than "drawing".
 
-Correct geometry still looked flat, because flatness is a lighting problem, not a geometry one. Each
-surface now carries a gradient (dark at the ceiling, warming toward the lit skirting), corners get
-ambient occlusion, lit fittings get a bloom halo, the floor carries a pool of light and a squashed
-blurred reflection of the wall, and a vignette seats the whole thing in the card. A fine grain sits
-over the top in CSS — a render has sampling noise and flat vector fills don't, which is a good part
-of why clean SVG reads as "drawing".
+Lighting does the rest: a gradient per surface, a lit skirting where wall meets floor, a bloom halo
+on anything live, a squashed blurred reflection in the floor, and a vignette. The accent light pool
+on the floor is kept very faint — at any real strength it floods the floor and the room stops reading
+as a room.
 
-Each room's lit fittings appear three times (reflection, bloom, crisp), so they are defined once in
-`<defs>` and referenced with `<use>`; emitting them literally tripled the page weight for no visual
-gain.
+Each room's live fittings appear three times (reflection, bloom, crisp), so they are defined once in
+`<defs>` and referenced with `<use>`; emitting them literally tripled the page weight for no gain.
 
-**On the Adobe route:** the rooms were rendered to PNG and run through the Photoshop API's grain pass
-to compare. It looked good, but shipping raster would have cost the crisp scaling and the per-element
-hover animation in exchange for a texture reproducible in CSS, so the vector version shipped. Adobe
-tooling *is* used elsewhere on this page and template — the glitch frame of `venue.webp` is a real
+### Adobe tooling here
+
+`img/grain.webp` is a **Photoshop grain pass** over a flat grey plate, tiled at 16% opacity over every
+room diagram. A render has sampling noise and flat vector fills don't, which is a good part of why
+clean SVG reads as "drawing". It is cropped to 128px (~5KB) because noise is essentially
+incompressible — the full 320px tile came to 34KB, which is a lot for a texture you are not meant to
+notice.
+
+The rooms themselves were also rendered to PNG and run through the same grain pass as an experiment,
+to see whether they should ship as bitmaps. They looked good, but that would have traded away crisp
+scaling and the per-element hover animation, so the vector version shipped with the grain applied as
+an overlay instead.
+
+Adobe tooling is used elsewhere in this repo too: the glitch frame of `venue.webp` is a real
 Photoshop chromatic-aberration pass, and the Meridian team photos were graded through the same API.
 
 Inlined rather than linked so there are no extra requests and the lit elements can be animated by the
