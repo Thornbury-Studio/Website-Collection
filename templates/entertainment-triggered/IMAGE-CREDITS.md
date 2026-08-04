@@ -125,6 +125,10 @@ to see whether they should ship as bitmaps. They looked good, but that would hav
 scaling and the per-element hover animation, so the vector version shipped with the grain applied as
 an overlay instead.
 
+A halftone pass was also tried as a stylised wall texture — the aesthetic is right in principle, but
+a halftone of a flat plate is a dense high-contrast dot field that reads as moiré at these sizes and
+fights the grain already there. Not shipped.
+
 Adobe tooling is used elsewhere in this repo too: the glitch frame of `venue.webp` is a real
 Photoshop chromatic-aberration pass, and the Meridian team photos were graded through the same API.
 

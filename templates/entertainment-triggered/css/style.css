@@ -422,10 +422,18 @@ p { line-height: 1.65; color: var(--dim); }
    cursor crosses them is exactly the "chaos" the rest of this page avoids;
    the same information arrives from a quiet rise and the accent border. */
 .game { position: relative; }
+/* The little shake, back by request — one quick settle rather than a loop, and
+   it ends parked on the lift so the card stays raised while hovered. */
 .game:hover {
   background: #17122a;
-  transform: translateY(-3px);
   z-index: 2;   /* lift above neighbours so the border is never clipped by them */
+  animation: cardJolt 0.42s var(--ease) forwards;
+}
+@keyframes cardJolt {
+  0%   { transform: translateY(0) scale(1) rotate(0); }
+  35%  { transform: translateY(-5px) scale(1.014) rotate(-0.4deg); }
+  68%  { transform: translateY(-2px) scale(0.997) rotate(0.22deg); }
+  100% { transform: translateY(-3px) scale(1) rotate(0); }
 }
 
 /* The hover border lives on its own layer above the card's contents.
@@ -473,20 +481,39 @@ p { line-height: 1.65; color: var(--dim); }
   display: block;
   width: 100%;
   height: auto;
-  transition: transform 0.5s var(--ease);
+  transition: transform 0.5s var(--ease), filter 0.4s var(--ease);
 }
-.game:hover .room-art { transform: scale(1.04); }
+/* The room itself comes up in colour as you arrive — the lights coming on,
+   before any of the individual fittings start their own sweep. */
+.game:hover .room-art { transform: scale(1.04); filter: saturate(1.3) brightness(1.14); }
 
-/* Lit elements idle quietly and only run their full cycle on hover, so a
-   grid of six rooms isn't six competing animations at rest. */
-.t-lava, .b-on, .hx-on, .hoop, .t-float { transform-origin: center; }
+/* Nothing animates at rest — six rooms all idling would be noise. Everything
+   below only runs while the card is hovered. */
+.t-lava, .b-on, .hx-on, .hoop, .scr { transform-origin: center; }
 .game:hover .t-lava { animation: lavaPulse 2.4s ease-in-out infinite; }
 .game:hover .b-on { animation: btnPulse 1.1s ease-in-out infinite; }
 .game:hover .hx-on { animation: btnPulse 1.5s ease-in-out infinite; }
-.game:hover .t-float { animation: floatBob 2.8s ease-in-out infinite; }
+.game:hover .hoop { animation: hoopPulse 1.6s ease-in-out infinite; }
+.game:hover .scr { animation: scrFlick 0.9s steps(3, end) infinite; }
 @keyframes lavaPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.72; } }
 @keyframes btnPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
-@keyframes floatBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes hoopPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes scrFlick { 0%, 100% { opacity: .8; } 50% { opacity: .3; } }
+
+/* The room waking up.
+   Dormant fittings (--off) run up to the room's own accent (--rm) in a
+   staggered sweep driven by each element's --i, so hovering a card starts
+   something happening *inside* the room rather than only at its edges. Both
+   custom properties are set on the <svg> by the generator. */
+.room-art .cell { fill: var(--off, #241c44); }
+.game:hover .room-art .cell {
+  animation: cellWake 2.2s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.11s);
+}
+@keyframes cellWake {
+  0%, 55%, 100% { fill: var(--off, #241c44); }
+  22% { fill: var(--rm, #ff2d6f); }
+}
 
 .game-body {
   padding: 1.5rem 1.6rem 1.5rem;
