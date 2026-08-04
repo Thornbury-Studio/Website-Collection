@@ -869,11 +869,54 @@
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
 
-  // duplicate the logo track so the marquee loops seamlessly
-  var track = document.getElementById('proofTrack');
-  if (track) {
-    track.innerHTML += track.innerHTML;
+  /* True-loop marquee — see PATTERNS.md.
+     Clones the first row until half the track covers its container, keeping the
+     total even so -50% stays a whole period. Simply doubling the markup was not
+     enough: on a wide monitor the tail ran out mid-screen. Duration scales with
+     the clone count so the speed never changes. */
+  function trueLoopMarquee(track, secondsPerCopy) {
+    if (!track || !track.firstElementChild) return;
+    var master = track.firstElementChild.cloneNode(true);
+    var timer;
+
+    function build() {
+      // Detach the animation before touching the track. The CSS animation
+      // starts the instant the browser first paints this element, under
+      // whatever duration the stylesheet declares. This page loads GSAP,
+      // ScrollTrigger, and Lenis from a CDN before main.js even starts
+      // fetching, so real elapsed time builds up on the clock before this
+      // runs. Changing animation-duration on that already-running animation
+      // makes the browser recompute the played fraction against the NEW
+      // duration using that SAME elapsed time — the visible result is a
+      // jump/teleport the moment the CDN scripts finish. animation-name:none
+      // + a forced reflow + reapplying the name restarts the animation as a
+      // clean new instance at 0%, so there is nothing to recompute a jump from.
+      track.style.animationName = 'none';
+
+      while (track.children.length > 1) track.removeChild(track.lastElementChild);
+      var rowW = track.firstElementChild.getBoundingClientRect().width;
+      var boxW = (track.parentElement || document.body).getBoundingClientRect().width;
+      if (rowW < 1) { track.style.animationName = ''; return; }
+
+      var perHalf = Math.max(1, Math.ceil(boxW / rowW));
+      for (var i = 1; i < perHalf * 2; i++) {
+        var copy = master.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        track.appendChild(copy);
+      }
+      track.style.animationDuration = (secondsPerCopy * perHalf) + 's';
+
+      void track.offsetWidth; // force layout so the browser commits animation-name:none first
+      track.style.animationName = '';
+    }
+
+    build();
+    window.addEventListener('resize', function () {
+      clearTimeout(timer);
+      timer = setTimeout(build, 200);
+    });
   }
+  trueLoopMarquee(document.getElementById('proofTrack'), 34);
 
   // ScrollTrigger needs a refresh once fonts/images settle the layout
   if (hasGSAP) {

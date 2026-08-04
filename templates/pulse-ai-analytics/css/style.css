@@ -621,11 +621,21 @@ h1, h2, h3 {
   color: var(--dim);
   margin-bottom: 2.6rem;
 }
+/* The gap belongs on the row, not the track. On the track it made -50% land
+   half a gap short every cycle, so the seam jumped. The row's trailing
+   padding supplies the space between the last logo and the next copy's
+   first, which is what makes the row width exactly one period. See PATTERNS.md. */
 .proof-track {
   display: flex;
-  gap: 3.4rem;
   width: max-content;
   animation: drift 34s linear infinite;
+}
+.proof-row {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 3.4rem;
+  padding-right: 3.4rem;
 }
 .proof:hover .proof-track { animation-play-state: paused; }
 @keyframes drift {
