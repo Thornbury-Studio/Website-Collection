@@ -79,12 +79,21 @@ doing the work:
 
 | Room | What the diagram shows | Accent |
 |---|---|---|
-| Floor Is Lava | A lit floor. Five live tiles in a 5×5 grid | Hot pink |
-| Press It! | A sparse grid of wall buttons, three of them live | Volt |
-| Hide & Seek | One pillar with a lit cap. That is the whole room | Ice |
-| Hoops Madness | Three hoops on one wall, a few balls below | Flame |
-| Hexa Blasts | One honeycomb of seven, two live | Hot pink |
+| Floor Is Lava | A lit floor — eight live tiles in a 6×6 grid | Hot pink |
+| Press It! | A grid of wall buttons, five of them live | Volt |
+| Hide & Seek | Three pillars with lit caps, and blinking eye panels on the walls | Ice |
+| Hoops Madness | Three hoops on one wall, balls in the gutter beneath | Flame |
+| Hexa Blasts | A honeycomb of sixteen, four live, gutter below | Hot pink |
 | Combos | Not a room — two rooms and a plus, since it's a booking shape | Both |
+
+Two details come straight from the venue's own photos: the **eye panels** in Hide & Seek (which suit
+the game far better than a neutral light batten, and blink on hover), and the raised **ball gutter**
+running along the wall in the hoops and hexa rooms — in the real rooms the balls live in that, not
+loose on the floor.
+
+Everything on a wall — scoreboards included — is built from that wall's own `(u, v)` coordinates, so
+it sits flush as a parallelogram. Upright rectangles positioned near a slanted wall edge poke out
+past it on the descending side, which is what the scoreboards were doing.
 
 Getting here took three passes and both wrong turns are worth recording:
 
