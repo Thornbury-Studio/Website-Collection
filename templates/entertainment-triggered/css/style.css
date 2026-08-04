@@ -540,6 +540,20 @@ p { line-height: 1.65; color: var(--dim); }
 }
 .game:hover .pupil { animation: btnPulse 1.9s ease-in-out infinite; }
 
+/* Hoops: a column of light rises out of each ring, staggered left to right,
+   like a basket going in. Idle state is fully transparent so nothing shows
+   until the cursor arrives. */
+.hoop-rise { opacity: 0; transform-box: fill-box; transform-origin: bottom center; }
+.game:hover .hoop-rise {
+  animation: riseGlow 1.5s ease-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.22s);
+}
+@keyframes riseGlow {
+  0%   { opacity: 0; transform: translateY(6px) scaleY(0.4); }
+  25%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-12px) scaleY(1.25); }
+}
+
 .game-body {
   padding: 1.5rem 1.6rem 1.5rem;
   display: flex;

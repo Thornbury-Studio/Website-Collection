@@ -85,13 +85,19 @@ function eyes(specs) {
   }).join('');
 }
 
-/* The raised ball gutter along the base of the wall in the hoops and hexa
-   rooms — in the real rooms the balls live in this, not loose on the floor. */
+/* The raised ball platform along the base of the wall in the hoops and hexa
+   rooms — in the real rooms the balls live on this, not loose on the floor.
+   Sized in floor squares so it lines up with the seams: FLOOR_SQ * 2 spans two
+   of the squares visible on the floor. */
+const FLOOR_SQ = D / 5;
 function trough(depth, h, accent) {
   const top = [P(0, h, 0), P(W, h, 0), P(W, h, depth), P(0, h, depth)];
   const front = [P(0, h, depth), P(W, h, depth), P(W, 0, depth), P(0, 0, depth)];
   const lip = [P(0, h, depth), P(W, h, depth), P(W, h - 2.4, depth), P(0, h - 2.4, depth)];
-  return poly(front, '#170f2e') + poly(top, '#2a2050') + poly(lip, accent, 'opacity=".55"');
+  /* Top face is deliberately lighter than the floor: at two squares deep this
+     is a sizeable deck, and matching the floor tone made it read as a flat
+     painted band rather than something raised. */
+  return poly(front, '#150d29') + poly(top, '#372a63') + poly(lip, accent, 'opacity=".6"');
 }
 
 /* Balls sitting in that gutter. */
@@ -120,14 +126,13 @@ function floorSeams(n = 5) {
 const seamFloor = id => poly(floorQuad, `url(#${id}-f)`) + floorSeams();
 
 /* Vertical light battens on the left wall — depth cue plus something for the
-   hover sweep to travel along. */
-function battens(n, accent) {
-  let s = '';
-  for (let i = 0; i < n; i++) {
-    const p = wallL(0.14 + i * (0.72 / (n - 1)), 0.42);
-    s += `<rect class="cell" style="--i:${i}" x="${r1(p[0] - 1.6)}" y="${r1(p[1] - 11)}" width="3.2" height="22" rx="1.6"/>`;
-  }
-  return s;
+   hover sweep to travel along. Positions are explicit rather than evenly
+   spaced so a room can leave a gap where its scoreboard sits. */
+function battens(positions) {
+  return positions.map((u, i) => {
+    const p = wallL(u, 0.42);
+    return `<rect class="cell" style="--i:${i}" x="${r1(p[0] - 1.6)}" y="${r1(p[1] - 11)}" width="3.2" height="22" rx="1.6"/>`;
+  }).join('');
 }
 
 /* Lit skirting where each wall meets the floor. Reads as the room's own light
@@ -204,7 +209,7 @@ const rooms = {};
     hot += poly(floorCell(i, j, N, M), C.hot, 'class="t-lava" stroke="#150f2c" stroke-width="1"');
   }
   rooms.lava = shell('lava', C.hot,
-    skirt(C.hot) + battens(4, C.hot) + screen(wallR, 0.5, 0.26) + '%LIT%', hot,
+    skirt(C.hot) + battens([0.14, 0.38, 0.62, 0.86]) + screen(wallR, 0.5, 0.26) + '%LIT%', hot,
     poly(floorQuad, `url(#lava-f)`) + g);
 }
 
@@ -216,10 +221,10 @@ const rooms = {};
   const liveR = new Set(['1,0', '3,2', '2,1']), liveL = new Set(['0,1', '2,3']);
   for (let u = 0; u < 4; u++)
     for (let v = 0; v < 4; v++) {
-      const pr = wallR(0.16 + u * 0.225, 0.2 + v * 0.19);
+      const pr = wallR(0.16 + u * 0.225, 0.34 + v * 0.16);
       liveR.has(`${u},${v}`) ? (on += live(pr)) : (off += dead(pr, (u + v) % 6));
       if (u < 3) {
-        const pl = wallL(0.2 + u * 0.26, 0.22 + v * 0.19);
+        const pl = wallL(0.2 + u * 0.26, 0.36 + v * 0.16);
         liveL.has(`${u},${v}`) ? (on += live(pl)) : (off += dead(pl, (u + v + 2) % 6));
       }
     }
@@ -248,7 +253,7 @@ const rooms = {};
   /* Three pillars at different depths — one alone read as an empty room, and
      the staggered heights are what make the space feel occupied. */
   rooms.hide = shell('hide', C.ice,
-    skirt(C.ice) + eyes([[wallL, 0.3, 0.34, 0.09, 0.13], [wallL, 0.68, 0.4, 0.08, 0.12], [wallR, 0.24, 0.3, 0.075, 0.12]]) + screen(wallR, 0.62, 0.2) +
+    skirt(C.ice) + eyes([[wallL, 0.2, 0.28, 0.115, 0.17], [wallL, 0.62, 0.46, 0.06, 0.09], [wallR, 0.2, 0.34, 0.085, 0.13], [wallR, 0.46, 0.2, 0.05, 0.08]]) + screen(wallR, 0.62, 0.2) +
     pillar(0.24, 0.22, 11, 30) + pillar(0.5, 0.46, 15, 42) + pillar(0.78, 0.74, 12, 34) +
     '%LIT%',
     cap(0.24, 0.22, 11, 30) + cap(0.5, 0.46, 15, 42) + cap(0.78, 0.74, 12, 34), seamFloor('hide'));
@@ -256,20 +261,33 @@ const rooms = {};
 
 /* 4 — Hoops Madness: three hoops on one wall, a few balls below. */
 {
+  /* Scored-basket glow: a soft column that rises up out of each ring on hover.
+     The gradient lives in the room's own defs so the beams inherit nothing from
+     the shell. */
   let rig = '', ball = '';
-  for (let i = 0; i < 3; i++) {
-    const u = 0.22 + i * 0.28;
+  let defs = `<defs><linearGradient id="hoops-beam" x1="0" y1="1" x2="0" y2="0">` +
+    `<stop offset="0" stop-color="${C.flame}" stop-opacity=".85"/>` +
+    `<stop offset="1" stop-color="${C.flame}" stop-opacity="0"/></linearGradient></defs>`;
+  /* Five, because the room has five and the card copy says five — three left
+     the art quietly contradicting the text beside it. */
+  for (let i = 0; i < 5; i++) {
+    const u = 0.14 + i * 0.18;
     const b = wallR(u, 0.34), h = wallR(u, 0.425);
     /* Board as a flat plate with no outline, ring overlapping its lower edge.
        An outlined box with a shape beneath it just reads as a little monitor. */
-    rig += `<rect x="${r1(b[0] - 7)}" y="${r1(b[1] - 6)}" width="14" height="11" rx="1.5" fill="${C.flame}" opacity=".28"/>` +
-      `<ellipse class="hoop" cx="${r1(h[0])}" cy="${r1(h[1])}" rx="7.5" ry="2.8" fill="none" stroke="${C.flame}" stroke-width="2.2"/>`;
+    /* NOT "rise" — that class already belongs to the hero headline's line
+       reveal, and a bare .rise rule here blanked the whole headline. */
+    rig += `<g class="hoop-rise" style="--i:${i}">` +
+      `<ellipse cx="${r1(h[0])}" cy="${r1(h[1] - 12)}" rx="5" ry="13" fill="url(#hoops-beam)"/></g>` +
+      `<rect x="${r1(b[0] - 6)}" y="${r1(b[1] - 5.5)}" width="12" height="10" rx="1.4" fill="${C.flame}" opacity=".28"/>` +
+      `<ellipse class="hoop" cx="${r1(h[0])}" cy="${r1(h[1])}" rx="6.4" ry="2.5" fill="none" stroke="${C.flame}" stroke-width="2"/>`;
   }
-  ball = trough(17, 10, C.flame) + gutterBalls(8, 17, 10, 4.2, C.flame);
+  rig = defs + rig;
+  ball = trough(FLOOR_SQ * 2, 11, C.flame) + gutterBalls(8, FLOOR_SQ * 2, 11, 4.2, C.flame);
   rooms.hoops = shell('hoops', C.flame,
     /* Scoreboard goes on the side wall: on the hoop wall it sat straight on top
        of the third hoop. */
-    skirt(C.flame) + battens(4, C.flame) + screen(wallL, 0.52, 0.3) + '%LIT%' + ball,
+    skirt(C.flame) + battens([0.14, 0.86]) + screen(wallL, 0.52, 0.3) + '%LIT%' + ball,
     rig, seamFloor('hoops'));
 }
 
@@ -297,8 +315,8 @@ const rooms = {};
     else off += `<polygon class="cell" style="--i:${i % 7}" points="${pts(shape)}" stroke="${C.hot}" stroke-width="1" opacity=".85"/>`;
   });
   rooms.hexa = shell('hexa', C.hot,
-    skirt(C.hot) + off + screen(wallR, 0.15, 0.24, 0.11, 0.08) + '%LIT%' +
-    trough(15, 9, C.hot) + gutterBalls(9, 15, 9, 3.4, C.volt),
+    skirt(C.hot) + off + screen(wallL, 0.5, 0.3, 0.12, 0.09) + '%LIT%' +
+    trough(FLOOR_SQ * 2, 10, C.hot) + gutterBalls(9, FLOOR_SQ * 2, 10, 3.4, C.volt),
     on, seamFloor('hexa'));
 }
 
