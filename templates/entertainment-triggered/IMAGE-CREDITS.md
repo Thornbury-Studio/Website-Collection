@@ -47,6 +47,8 @@ graded with the Adobe Lightroom API.
 
 Re-encoded locally to WebP (Pillow, quality 72–74, method 6) — **26 KB for the set**.
 
+`img/venue-glitch.webp` is a derivative of `venue.webp`, run through the Photoshop API's chromatic-aberration glitch effect (red channel shifted -16px) and re-encoded to WebP (ffmpeg, ~1300×724, 35 KB). It's the hover state of the visit-section photo (`.visit-glitch` in `css/style.css`, wired up in `index.html`) — a real edit, not a CSS filter standing in for one.
+
 ### Two images were deliberately cut
 
 A laser-tag photograph (Adobe Stock 386439997) was licensed and graded for the hero, then dropped:

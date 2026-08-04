@@ -28,6 +28,73 @@
   setTimeout(light, 320);
 
   /* ----------------------------------------------------------
+     Shared "is the hero visible" flag for the two effects below —
+     tracked independently of either effect's own DOM nodes so one
+     effect's markup can't silently disable the other's gating.
+     ---------------------------------------------------------- */
+  var heroOnScreen = true;
+  if (hero && !reduced && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (e) { heroOnScreen = e[0].isIntersecting; }, { threshold: 0 }).observe(hero);
+  }
+
+  /* ----------------------------------------------------------
+     Random hero glitch
+     A brief chromatic-split jolt on the headline at an irregular
+     interval — never the same gap twice, so it reads as an
+     unstable signal rather than a metronome. Only while the hero
+     is on screen, and never for reduced-motion.
+     ---------------------------------------------------------- */
+  var heroTitle = document.querySelector('.hero-title');
+  if (heroTitle && !reduced) {
+    (function scheduleGlitch() {
+      var wait = 4200 + Math.random() * 7000; // 4.2s – 11.2s, never fixed
+      setTimeout(function () {
+        if (heroOnScreen && !document.hidden) {
+          heroTitle.classList.remove('is-glitching');
+          void heroTitle.offsetWidth; // restart the animation cleanly
+          heroTitle.classList.add('is-glitching');
+        }
+        scheduleGlitch();
+      }, wait);
+    })();
+  }
+
+  /* ----------------------------------------------------------
+     Random hero sparks
+     Small embers popping at random positions/times inside the
+     hero. Capped concurrency so it stays a texture, not noise.
+     ---------------------------------------------------------- */
+  var sparkField = document.getElementById('sparkField');
+  if (sparkField && !reduced) {
+    var liveSparks = 0;
+    var SPARK_CAP = 5;
+    var SPARK_COLORS = ['var(--volt)', 'var(--hot)', 'var(--flame)'];
+    (function scheduleSpark() {
+      var wait = 700 + Math.random() * 1600;
+      setTimeout(function () {
+        if (liveSparks < SPARK_CAP && heroOnScreen && !document.hidden) {
+          var s = document.createElement('span');
+          var color = SPARK_COLORS[Math.floor(Math.random() * SPARK_COLORS.length)];
+          var dur = (1.1 + Math.random() * 1.3).toFixed(2);
+          s.className = 'spark';
+          s.style.left = (4 + Math.random() * 92) + '%';
+          s.style.top = (30 + Math.random() * 68) + '%';
+          s.style.background = color;
+          s.style.boxShadow = '0 0 7px 1px ' + color;
+          s.style.animationDuration = dur + 's';
+          sparkField.appendChild(s);
+          liveSparks++;
+          setTimeout(function () {
+            s.remove();
+            liveSparks--;
+          }, dur * 1000);
+        }
+        scheduleSpark();
+      }, wait);
+    })();
+  }
+
+  /* ----------------------------------------------------------
      Nav
      ---------------------------------------------------------- */
   var nav = document.getElementById('nav');

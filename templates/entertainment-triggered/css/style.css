@@ -127,6 +127,7 @@ p { line-height: 1.65; color: var(--dim); }
   transition: transform 0.35s var(--ease), background 0.25s, color 0.25s, border-color 0.25s;
 }
 .btn:hover { transform: translateY(-2px); }
+.btn:active { transform: scale(0.95) translateY(0); }
 .btn-hot { background: var(--hot); color: #fff; box-shadow: 0 12px 34px -14px rgba(255, 45, 111, 0.9); }
 .btn-hot:hover { background: #ff4a82; }
 .btn-line { border-color: var(--line); color: var(--ink); }
@@ -160,15 +161,27 @@ p { line-height: 1.65; color: var(--dim); }
 }
 .logo { display: flex; align-items: center; gap: 0.55rem; }
 .logo-mark { color: var(--hot); display: block; }
-.logo-word { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 0.06em; }
-/* Full legal name, "Triggered Games" — the mark alone read as just "Triggered". */
+.logo-word { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 0.06em; text-transform: uppercase; }
+/* Full legal name is "Triggered Games" — a same-line pill keeps "Games" as
+   legible as "Triggered" instead of shrinking it into an easy-to-miss caption.
+   Markup carries proper title case (screen readers, copy-paste); this class
+   is what renders it as the all-caps tag. */
 .logo-suffix {
   font-family: var(--font-mono);
-  font-size: 0.56rem;
-  letter-spacing: 0.14em;
-  color: var(--dim);
-  margin-left: 0.4rem;
-  vertical-align: 0.15em;
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  /* .logo is a flex row with its own gap, so this margin is redundant there
+     (slightly widens that gap, harmlessly); .foot-wordmark is plain inline
+     text with no gap, where this margin is the only thing separating the
+     two words. */
+  margin-left: 0.45rem;
+  padding: 0.18rem 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  vertical-align: 0.05em;
 }
 
 .nav-links { display: flex; gap: 1.9rem; }
@@ -273,6 +286,38 @@ p { line-height: 1.65; color: var(--dim); }
 .hero.is-lit .line:nth-child(3) .rise { transition-delay: 0.14s; }
 .hero.is-lit .line:nth-child(4) .rise { transition-delay: 0.21s; }
 
+/* Ambient chaos — a brief chromatic-split jolt at random intervals (see
+   main.js), not a loop. Reads as an unstable signal, not a decoration. */
+.hero-title.is-glitching {
+  animation: titleGlitch 0.4s linear;
+}
+@keyframes titleGlitch {
+  0%, 100% { text-shadow: none; transform: translate(0); clip-path: none; }
+  8% { text-shadow: -3px 0 var(--hot), 3px 0 var(--volt); transform: translate(-3px, 0); clip-path: inset(0 0 62% 0); }
+  22% { text-shadow: 3px 0 var(--hot), -3px 0 var(--volt); transform: translate(2px, 0); clip-path: inset(48% 0 0 0); }
+  36% { text-shadow: -2px 0 var(--volt), 2px 0 var(--hot); transform: translate(-1px, 0); clip-path: inset(0 0 20% 0); }
+  50% { text-shadow: none; transform: translate(0); clip-path: none; }
+  64% { text-shadow: 2px 0 var(--hot), -2px 0 var(--volt); transform: translate(1px, 0); clip-path: inset(70% 0 0 0); }
+}
+
+/* Sparse ember-and-static particles, spawned by main.js at random offsets
+   and intervals so the timing never repeats identically. */
+.spark-field { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.spark {
+  position: absolute;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  opacity: 0;
+  animation-name: sparkPop;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: forwards;
+}
+@keyframes sparkPop {
+  0% { opacity: 0; transform: translateY(0) scale(0.5); }
+  18% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-46px) scale(1); }
+}
+
 .hero-sub { max-width: 44ch; font-size: clamp(0.95rem, 1.3vw, 1.08rem); margin-bottom: 2rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2.6rem; }
 
@@ -318,9 +363,19 @@ p { line-height: 1.65; color: var(--dim); }
   padding: 1.7rem 1.6rem 1.5rem;
   display: flex;
   flex-direction: column;
-  transition: background 0.35s var(--ease);
+  transition: background 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
-.game:hover { background: #17122a; }
+.game:hover {
+  background: #17122a;
+  box-shadow: inset 0 0 0 1px var(--hot);
+  animation: cardJolt 0.4s var(--ease);
+}
+@keyframes cardJolt {
+  0% { transform: scale(1) rotate(0); }
+  35% { transform: scale(1.012) rotate(-0.35deg); }
+  65% { transform: scale(0.997) rotate(0.2deg); }
+  100% { transform: scale(1) rotate(0); }
+}
 .game h3 { margin-bottom: 0.6rem; }
 .game > p { font-size: 0.92rem; margin-bottom: 1.3rem; }
 .game.is-flag { background: linear-gradient(155deg, #1c1030, var(--panel) 62%); }
@@ -521,13 +576,49 @@ p { line-height: 1.65; color: var(--dim); }
 .vsmall { font-size: 0.8rem !important; color: var(--dim-2); margin-top: 0.7rem; }
 
 .visit-shot {
+  position: relative;
   max-width: var(--maxw);
   margin: clamp(1.6rem, 4vw, 2.6rem) auto 0;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--line-soft);
 }
-.visit-shot img { width: 100%; filter: saturate(1.05) brightness(0.85); }
+.visit-shot img { width: 100%; display: block; filter: saturate(1.05) brightness(0.85); }
+/* The glitch layer is a Photoshop chromatic-aberration pass on the same
+   photo (see IMAGE-CREDITS.md) — a real edit, not a CSS filter fake. */
+.visit-glitch {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.12s steps(2, end);
+}
+.visit-shot:hover .visit-glitch {
+  opacity: 1;
+  animation: visitFlicker 0.7s steps(7, end) infinite;
+}
+@keyframes visitFlicker {
+  0%, 100% { opacity: 1; }
+  46% { opacity: 0.82; }
+  52% { opacity: 1; }
+  79% { opacity: 0.55; }
+  84% { opacity: 1; }
+}
+.visit-hint {
+  position: absolute; right: 0.9rem; bottom: 0.9rem;
+  font-family: var(--font-mono); font-size: 0.66rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink);
+  padding: 0.35rem 0.7rem;
+  border-radius: 100px;
+  background: rgba(7, 6, 13, 0.6);
+  border: 1px solid var(--line);
+  opacity: 0.85;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.visit-shot:hover .visit-hint { opacity: 0; }
+@media (hover: none) { .visit-hint { display: none; } }
 
 /* ============================================================
    GROUPS
