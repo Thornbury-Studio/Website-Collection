@@ -532,32 +532,58 @@ p { line-height: 1.65; color: var(--dim); }
    marks on it. Arriving opens them. They blink on individual offsets — eyes
    blinking in unison read as a light fitting, not as eyes — and the pupils
    drift, which is the detail that makes a shape feel like it is looking. */
-.eye {
+.eye, .eye-lid, .eye-iris, .eye-look {
   transform-box: fill-box;
   transform-origin: center;
-  opacity: 0.28;
-  transform: scaleY(0.22);
-  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
 }
-.game:hover .eye {
-  opacity: 1;
+.eye { opacity: 0.4; transition: opacity 0.5s var(--ease); }
+.game:hover .eye { opacity: 1; }
+
+/* Shut, the lid collapses to a thin glowing line — a dormant slit on the wall
+   rather than a squashed eye — and the iris scales away entirely, so nothing
+   can peek outside a closed lid. */
+.eye-lid {
+  transform: scaleY(0.05);
+  transition: transform 0.55s var(--ease);
+  transition-delay: calc(var(--i, 0) * 0.055s);
+}
+.eye-iris {
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+  transition-delay: calc(0.16s + var(--i, 0) * 0.055s);
+}
+/* Opening runs left to right around the room off --i, so they wake in sequence
+   rather than snapping open together. */
+.game:hover .eye-lid {
   transform: scaleY(1);
-  animation: blink 3.4s ease-in-out infinite;
-  animation-delay: calc(var(--i, 0) * 0.73s);
+  animation: blinkLid 3.6s ease-in-out infinite;
+  animation-delay: calc(0.6s + var(--i, 0) * 0.71s);
 }
-@keyframes blink {
-  0%, 88%, 100% { transform: scaleY(1); }
-  93% { transform: scaleY(0.08); }
+.game:hover .eye-iris {
+  transform: scale(1);
+  opacity: 1;
+  animation: blinkIris 3.6s ease-in-out infinite;
+  animation-delay: calc(0.6s + var(--i, 0) * 0.71s);
 }
-.pupil { transform-box: fill-box; transform-origin: center; }
-.game:hover .pupil {
-  animation: glance 4.6s ease-in-out infinite;
-  animation-delay: calc(var(--i, 0) * 0.53s);
+@keyframes blinkLid {
+  0%, 90%, 100% { transform: scaleY(1); }
+  94% { transform: scaleY(0.05); }
+}
+@keyframes blinkIris {
+  0%, 90%, 100% { transform: scale(1); }
+  94% { transform: scale(0.1); }
+}
+
+/* The glance lives on its own layer so it never fights the open/shut scale. */
+.game:hover .eye-look {
+  animation: glance 5.2s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.47s);
 }
 @keyframes glance {
-  0%, 18%, 100% { transform: translateX(0) scale(1); }
-  30%, 46% { transform: translateX(2.2px) scale(0.9); }
-  60%, 76% { transform: translateX(-2px) scale(1.08); }
+  0%, 20%, 100% { transform: translate(0, 0); }
+  34%, 48% { transform: translate(1.6px, 0.5px); }
+  62%, 80% { transform: translate(-1.5px, -0.4px); }
 }
 
 /* Hoops: a column of light rises out of each ring, staggered left to right,

@@ -73,15 +73,35 @@ function screen(wall, u, v, w = 0.13, h = 0.09) {
 }
 
 /* Lit eye panels. Hide & Seek has these on its walls, and they suit the game far
-   better than a neutral light batten — they blink on hover. */
+   better than a neutral light batten.
+
+   Built in three nested pieces so open/shut actually behaves like an eye:
+     .eye-lid   the almond, scaled vertically — shut, it is a thin glowing slit
+     .eye-iris  scaled 0..1, so the iris is simply gone while the lid is shut
+     .eye-look  translated sideways for the glance, kept separate from the scale
+   Squashing one group did all three at once, which just smeared the pupil.
+
+   The iris is sized from each eye's own measured geometry. A fixed radius made
+   the pupil larger than the smaller eyes containing it. */
 function eyes(specs) {
   const xy = p => `${r1(p[0])},${r1(p[1])}`;
+  const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
   return specs.map(([wall, u, v, w, h], i) => {
     const L = wall(u - w, v), R = wall(u + w, v);
     const T = wall(u, v - h), B = wall(u, v + h), Cc = wall(u, v);
+    /* A quadratic from L to R through control T peaks halfway, so the almond's
+       half-height is half the control distance. */
+    const halfW = dist(L, Cc), halfH = dist(T, Cc) / 2;
+    const rad = r1(Math.min(halfW * 0.42, halfH * 0.82));
+    const glint = r1(rad * 0.3);
     return `<g class="eye" style="--i:${i}">` +
-      `<path d="M${xy(L)} Q${xy(T)} ${xy(R)} Q${xy(B)} ${xy(L)} Z" fill="#0e2a33" stroke="${C.ice}" stroke-width="1.3"/>` +
-      `<circle class="pupil" cx="${r1(Cc[0])}" cy="${r1(Cc[1])}" r="2.8" fill="${C.ice}"/></g>`;
+      `<path class="eye-lid" d="M${xy(L)} Q${xy(T)} ${xy(R)} Q${xy(B)} ${xy(L)} Z" ` +
+      `fill="#0d2731" stroke="${C.ice}" stroke-width="1.3"/>` +
+      `<g class="eye-iris"><g class="eye-look">` +
+      `<circle cx="${r1(Cc[0])}" cy="${r1(Cc[1])}" r="${rad}" fill="${C.ice}"/>` +
+      `<circle cx="${r1(Cc[0])}" cy="${r1(Cc[1])}" r="${r1(rad * 0.44)}" fill="#04141b"/>` +
+      `<circle cx="${r1(Cc[0] - rad * 0.34)}" cy="${r1(Cc[1] - rad * 0.36)}" r="${glint}" fill="#fff" opacity=".9"/>` +
+      `</g></g></g>`;
   }).join('');
 }
 
