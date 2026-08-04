@@ -57,14 +57,52 @@ function floorCell(i, j, n, m) {
           flr((i + 1) / n, (j + 1) / m), flr(i / n, (j + 1) / m)];
 }
 
-/* Every room in the venue has a scoreboard. Cheap way to add somewhere for the
-   eye to go without adding clutter. */
-function screen(u, v, w = 17, h = 11) {
-  const c = wallR(u, v);
-  return `<g><rect x="${r1(c[0] - w / 2)}" y="${r1(c[1] - h / 2)}" width="${w}" height="${h}" rx="1.5" ` +
-    `fill="#0c1428" stroke="#4de0ff" stroke-width="1"/>` +
-    `<rect class="scr" x="${r1(c[0] - w / 2 + 2)}" y="${r1(c[1] - h / 2 + 2)}" width="${r1(w - 4)}" height="2" fill="#4de0ff" opacity=".8"/>` +
-    `<rect class="scr" x="${r1(c[0] - w / 2 + 2)}" y="${r1(c[1] - h / 2 + 6)}" width="${r1((w - 4) * 0.55)}" height="2" fill="#4de0ff" opacity=".45"/></g>`;
+/* Every room in the venue has a scoreboard.
+   Drawn as a parallelogram in the wall's own plane rather than an upright rect.
+   A rect centred near a slanted wall edge pokes out past it on the descending
+   side, which is exactly what these were doing. Built from wall coordinates it
+   is flush by construction and cannot escape the wall. */
+function screen(wall, u, v, w = 0.13, h = 0.09) {
+  const q = (du, dv) => wall(u + du, v + dv);
+  const face = [q(-w, -h), q(w, -h), q(w, h), q(-w, h)];
+  const bar = (dv, len) => pts([q(-w * 0.66, dv), q(-w * 0.66 + len, dv),
+                                q(-w * 0.66 + len, dv + 0.02), q(-w * 0.66, dv + 0.02)]);
+  return `<g><polygon points="${pts(face)}" fill="#0c1428" stroke="#4de0ff" stroke-width="1"/>` +
+    `<polygon class="scr" points="${bar(-0.035, w * 1.32)}" fill="#4de0ff" opacity=".8"/>` +
+    `<polygon class="scr" points="${bar(0.015, w * 0.72)}" fill="#4de0ff" opacity=".45"/></g>`;
+}
+
+/* Lit eye panels. Hide & Seek has these on its walls, and they suit the game far
+   better than a neutral light batten — they blink on hover. */
+function eyes(specs) {
+  const xy = p => `${r1(p[0])},${r1(p[1])}`;
+  return specs.map(([wall, u, v, w, h], i) => {
+    const L = wall(u - w, v), R = wall(u + w, v);
+    const T = wall(u, v - h), B = wall(u, v + h), Cc = wall(u, v);
+    return `<g class="eye" style="--i:${i}">` +
+      `<path d="M${xy(L)} Q${xy(T)} ${xy(R)} Q${xy(B)} ${xy(L)} Z" fill="#0e2a33" stroke="${C.ice}" stroke-width="1.3"/>` +
+      `<circle class="pupil" cx="${r1(Cc[0])}" cy="${r1(Cc[1])}" r="2.8" fill="${C.ice}"/></g>`;
+  }).join('');
+}
+
+/* The raised ball gutter along the base of the wall in the hoops and hexa
+   rooms — in the real rooms the balls live in this, not loose on the floor. */
+function trough(depth, h, accent) {
+  const top = [P(0, h, 0), P(W, h, 0), P(W, h, depth), P(0, h, depth)];
+  const front = [P(0, h, depth), P(W, h, depth), P(W, 0, depth), P(0, 0, depth)];
+  const lip = [P(0, h, depth), P(W, h, depth), P(W, h - 2.4, depth), P(0, h - 2.4, depth)];
+  return poly(front, '#170f2e') + poly(top, '#2a2050') + poly(lip, accent, 'opacity=".55"');
+}
+
+/* Balls sitting in that gutter. */
+function gutterBalls(n, depth, h, rad, col) {
+  let s = '';
+  for (let i = 0; i < n; i++) {
+    const p = P((i + 0.5) / n * W, h, depth * 0.5);
+    s += `<circle cx="${r1(p[0])}" cy="${r1(p[1] - rad * 0.55)}" r="${rad}" fill="${col}"/>` +
+      `<circle cx="${r1(p[0] - rad * 0.32)}" cy="${r1(p[1] - rad * 0.95)}" r="${r1(rad * 0.3)}" fill="#fff" opacity=".4"/>`;
+  }
+  return s;
 }
 
 /* Faint seams across the floor. Without them a plain floor is a flat gradient
@@ -166,7 +204,7 @@ const rooms = {};
     hot += poly(floorCell(i, j, N, M), C.hot, 'class="t-lava" stroke="#150f2c" stroke-width="1"');
   }
   rooms.lava = shell('lava', C.hot,
-    skirt(C.hot) + battens(4, C.hot) + screen(0.5, 0.22) + '%LIT%', hot,
+    skirt(C.hot) + battens(4, C.hot) + screen(wallR, 0.5, 0.26) + '%LIT%', hot,
     poly(floorQuad, `url(#lava-f)`) + g);
 }
 
@@ -185,7 +223,7 @@ const rooms = {};
         liveL.has(`${u},${v}`) ? (on += live(pl)) : (off += dead(pl, (u + v + 2) % 6));
       }
     }
-  rooms.press = shell('press', C.volt, skirt(C.volt) + off + screen(0.5, 0.06) + '%LIT%', on, seamFloor('press'));
+  rooms.press = shell('press', C.volt, skirt(C.volt) + off + screen(wallR, 0.5, 0.16) + '%LIT%', on, seamFloor('press'));
 }
 
 /* 3 — Hide & Seek: one pillar. That is the whole room. */
@@ -210,7 +248,7 @@ const rooms = {};
   /* Three pillars at different depths — one alone read as an empty room, and
      the staggered heights are what make the space feel occupied. */
   rooms.hide = shell('hide', C.ice,
-    skirt(C.ice) + battens(5, C.ice) + screen(0.5, 0.12) +
+    skirt(C.ice) + eyes([[wallL, 0.3, 0.34, 0.09, 0.13], [wallL, 0.68, 0.4, 0.08, 0.12], [wallR, 0.24, 0.3, 0.075, 0.12]]) + screen(wallR, 0.62, 0.2) +
     pillar(0.24, 0.22, 11, 30) + pillar(0.5, 0.46, 15, 42) + pillar(0.78, 0.74, 12, 34) +
     '%LIT%',
     cap(0.24, 0.22, 11, 30) + cap(0.5, 0.46, 15, 42) + cap(0.78, 0.74, 12, 34), seamFloor('hide'));
@@ -227,13 +265,12 @@ const rooms = {};
     rig += `<rect x="${r1(b[0] - 7)}" y="${r1(b[1] - 6)}" width="14" height="11" rx="1.5" fill="${C.flame}" opacity=".28"/>` +
       `<ellipse class="hoop" cx="${r1(h[0])}" cy="${r1(h[1])}" rx="7.5" ry="2.8" fill="none" stroke="${C.flame}" stroke-width="2.2"/>`;
   }
-  for (let i = 0; i < 9; i++) {
-    const p = flr(0.1 + (i % 5) * 0.2, 0.12 + Math.floor(i / 5) * 0.13);
-    ball += `<circle cx="${r1(p[0])}" cy="${r1(p[1])}" r="4" fill="${C.flame}"/>` +
-      `<circle cx="${r1(p[0] - 1.1)}" cy="${r1(p[1] - 1.2)}" r="1.2" fill="#ffd0a8" opacity=".75"/>`;
-  }
+  ball = trough(17, 10, C.flame) + gutterBalls(8, 17, 10, 4.2, C.flame);
   rooms.hoops = shell('hoops', C.flame,
-    skirt(C.flame) + battens(4, C.flame) + screen(0.78, 0.16) + '%LIT%' + ball, rig, seamFloor('hoops'));
+    /* Scoreboard goes on the side wall: on the hoop wall it sat straight on top
+       of the third hoop. */
+    skirt(C.flame) + battens(4, C.flame) + screen(wallL, 0.52, 0.3) + '%LIT%' + ball,
+    rig, seamFloor('hoops'));
 }
 
 /* 5 — Hexa Blasts: one honeycomb of seven, two of them live. */
@@ -259,7 +296,10 @@ const rooms = {};
     if (live.has(`${q},${r}`)) on += poly(shape, C.hot, 'class="hx-on"');
     else off += `<polygon class="cell" style="--i:${i % 7}" points="${pts(shape)}" stroke="${C.hot}" stroke-width="1" opacity=".85"/>`;
   });
-  rooms.hexa = shell('hexa', C.hot, skirt(C.hot) + off + screen(0.16, 0.2, 14, 9) + '%LIT%', on, seamFloor('hexa'));
+  rooms.hexa = shell('hexa', C.hot,
+    skirt(C.hot) + off + screen(wallR, 0.15, 0.24, 0.11, 0.08) + '%LIT%' +
+    trough(15, 9, C.hot) + gutterBalls(9, 15, 9, 3.4, C.volt),
+    on, seamFloor('hexa'));
 }
 
 /* 6 — Combos: not a room. Two rooms booked back to back. */

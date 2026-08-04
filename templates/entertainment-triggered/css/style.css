@@ -409,8 +409,19 @@ p { line-height: 1.65; color: var(--dim); }
   background: var(--line-soft);
   border: 1px solid var(--line-soft);
   border-radius: 12px;
-  overflow: hidden;
+  /* No overflow:hidden. A hovered card lifts and scales past the grid's edge,
+     and clipping it cut the top off the very hover border that is meant to
+     show which card you are on. The rounded outer corners are instead carried
+     by the corner cards themselves, below. */
 }
+
+/* Corner rounding follows the column count, so it has to be restated at each
+   breakpoint — with 6 cards the corner cards change as the grid reflows. */
+.game { overflow: hidden; }
+.game:first-child { border-top-left-radius: 11px; }
+.game:nth-child(3) { border-top-right-radius: 11px; }
+.game:nth-child(4) { border-bottom-left-radius: 11px; }
+.game:last-child { border-bottom-right-radius: 11px; }
 .game {
   background: var(--panel);
   display: flex;
@@ -448,6 +459,7 @@ p { line-height: 1.65; color: var(--dim); }
   z-index: 3;
   pointer-events: none;
   border: 1px solid transparent;
+  border-radius: inherit;   /* follow whichever corners this card rounds */
   transition: border-color 0.3s var(--ease);
 }
 .game:hover::after { border-color: var(--hot); }
@@ -514,6 +526,19 @@ p { line-height: 1.65; color: var(--dim); }
   0%, 55%, 100% { fill: var(--off, #241c44); }
   22% { fill: var(--rm, #ff2d6f); }
 }
+
+/* Hide & Seek's eyes blink — offset per eye so they never blink in unison,
+   which is what would make them read as a light fitting rather than eyes. */
+.eye { transform-box: fill-box; transform-origin: center; }
+.game:hover .eye {
+  animation: blink 3.4s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.73s);
+}
+@keyframes blink {
+  0%, 88%, 100% { transform: scaleY(1); }
+  93% { transform: scaleY(0.08); }
+}
+.game:hover .pupil { animation: btnPulse 1.9s ease-in-out infinite; }
 
 .game-body {
   padding: 1.5rem 1.6rem 1.5rem;
@@ -929,6 +954,12 @@ p { line-height: 1.65; color: var(--dim); }
 @media (max-width: 1080px) {
   .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .visit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* two columns: corners are 1, 2, 5, 6 */
+  .game { border-radius: 0; }
+  .game:first-child { border-top-left-radius: 11px; }
+  .game:nth-child(2) { border-top-right-radius: 11px; }
+  .game:nth-child(5) { border-bottom-left-radius: 11px; }
+  .game:last-child { border-bottom-right-radius: 11px; }
 }
 
 @media (max-width: 900px) {
@@ -951,6 +982,10 @@ p { line-height: 1.65; color: var(--dim); }
 
   .hero { min-height: auto; }
   .game-grid { grid-template-columns: minmax(0, 1fr); }
+  /* one column: only the first and last cards have outer corners */
+  .game { border-radius: 0; }
+  .game:first-child { border-radius: 11px 11px 0 0; }
+  .game:last-child { border-radius: 0 0 11px 11px; }
   .visit-grid { grid-template-columns: minmax(0, 1fr); }
   .calc-controls { grid-template-columns: minmax(0, 1fr); }
   .facts > div { flex-basis: calc(50% - 0.3rem); }
