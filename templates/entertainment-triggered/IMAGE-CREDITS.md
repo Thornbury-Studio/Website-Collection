@@ -64,8 +64,33 @@ fact grid (rooms, capacity, parallel sessions, add-ons) drawn from real numbers 
 rather than spend another sourcing/grading pass chasing a stock photo that would still be a generic
 crowd shot with no real connection to this venue.
 
-For the same reason the five game cards use type and layout rather than stock photography — no
-stock photo of someone else's venue is passed off as one of their rooms.
+## The room diagrams
+
+The real site gives each game a 3D render of its room, which is the single most useful thing on it —
+you can see what you're walking into before you book. The five game cards here do the same job with
+**original isometric SVG diagrams**, generated from computed geometry by
+[`tools/gen-room-diagrams.js`](tools/gen-room-diagrams.js). That script is build-time only — nothing
+loads it at runtime. Its output is inlined directly into `index.html`, so re-running it (`node
+tools/gen-room-diagrams.js rooms.json`) regenerates the SVG for re-inlining if the geometry changes.
+
+They are deliberately *schematic*, not photographic:
+
+| Room | What the diagram shows |
+|---|---|
+| Floor Is Lava | Molten floor grid, three safe tiles, two more hovering above |
+| Press It! | Button banks across both walls, a few lit |
+| Hide & Seek | Three obstacle blocks of different heights breaking sightlines |
+| Hoops Madness | Four ring targets at mixed heights |
+| Hexa Blasts | Staggered hex panels tiling both walls, several lit |
+| Combos | Not a room — two floors joined by a plus, since it's a booking shape |
+
+Inlined rather than linked so there are no extra requests and the lit elements can be animated by the
+page's own CSS on hover. Nothing here is traced from, screenshotted from, or derived from the real
+venue's artwork — a diagram that is obviously a diagram can't be mistaken for a photo of their rooms,
+which is the whole reason for going this way instead of buying stock renders.
+
+For the same reason the cards use no stock photography — no stock photo of someone else's venue is
+passed off as one of their rooms.
 
 ## The 3D hero
 

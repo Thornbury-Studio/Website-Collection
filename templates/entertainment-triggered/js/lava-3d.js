@@ -107,19 +107,41 @@ function boot(host) {
   const edgeMat = new THREE.LineBasicMaterial({ color: 0xc9ff3d, transparent: true, opacity: 0.55 });
   const tiles = [];
 
-  for (let i = 0; i < tier.tiles; i++) {
+  // Jittered grid rather than pure random placement. Independent Math.random()
+  // on x and z clumps badly at these counts — two tiles landing near each other
+  // is far more likely than intuition suggests. Stratifying gives every tile its
+  // own depth slice AND its own lateral column (a Latin-square arrangement), so
+  // no two can ever line up, while the jitter inside each cell keeps it from
+  // looking like a regular grid.
+  const N = tier.tiles;
+  const X_MIN = -4.4, X_MAX = 4.4;
+  const Z_MIN = -8.5, Z_MAX = -1.2;
+  const xStep = (X_MAX - X_MIN) / N;
+  const zStep = (Z_MAX - Z_MIN) / N;
+
+  const cols = Array.from({ length: N }, (_, i) => i);
+  for (let i = cols.length - 1; i > 0; i--) {           // Fisher-Yates
+    const j = Math.floor(Math.random() * (i + 1));
+    [cols[i], cols[j]] = [cols[j], cols[i]];
+  }
+
+  for (let i = 0; i < N; i++) {
     const grp = new THREE.Group();
     const mesh = new THREE.Mesh(tileGeo, tileMat);
     grp.add(mesh);
     grp.add(new THREE.LineSegments(new THREE.EdgesGeometry(tileGeo), edgeMat));
 
+    // 0.18..0.82 inside the cell keeps tiles off their shared cell borders,
+    // which is where neighbours would otherwise be able to touch.
+    const jx = 0.18 + Math.random() * 0.64;
+    const jz = 0.18 + Math.random() * 0.64;
     grp.position.set(
-      (Math.random() - 0.5) * 7,
-      0.15 + Math.random() * 0.7,
-      -1 - Math.random() * 7
+      X_MIN + (cols[i] + jx) * xStep,
+      0.2 + (i % 3) * 0.26 + Math.random() * 0.18,   // staggered heights
+      Z_MIN + (i + jz) * zStep
     );
     grp.rotation.y = Math.random() * Math.PI;
-    grp.scale.setScalar(0.7 + Math.random() * 0.6);
+    grp.scale.setScalar(0.68 + Math.random() * 0.5);
     scene.add(grp);
     tiles.push({ grp, phase: Math.random() * Math.PI * 2, baseY: grp.position.y });
   }
