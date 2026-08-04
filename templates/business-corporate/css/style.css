@@ -16,6 +16,7 @@
   --color-border: #e5e7ec;
 
   --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
   --font-heading: var(--font-sans);
   --font-body: var(--font-sans);
 
@@ -48,11 +49,15 @@ ul { list-style: none; }
   padding: 0 24px;
 }
 
+/* Serif for actual prose headings and names only — everything else that
+   rode on --font-heading (brand mark, badges, step numbers, labels) stays
+   on Inter, so the serif reads as an editorial choice, not a font change
+   applied everywhere at once. */
 h1, h2, h3, h4 {
-  font-family: var(--font-heading);
-  font-weight: 700;
+  font-family: var(--font-serif);
+  font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: var(--color-navy);
 }
 
@@ -454,7 +459,10 @@ footer {
 
 /* ---------- Team ---------- */
 .team-card { text-align: center; }
-.team-card .avatar { width: 72px; height: 72px; font-size: 1.25rem; margin: 0 auto 16px; }
+/* A slightly heavier, brand-toned ring so four photos shot on four different
+   backgrounds still read as one consistent team grid rather than four
+   unrelated headshots. */
+.team-card .avatar { width: 72px; height: 72px; font-size: 1.25rem; margin: 0 auto 16px; border-width: 2px; border-color: var(--color-gold-light); }
 .team-card h3 { font-size: 1rem; margin-bottom: 4px; }
 .team-card .role { color: var(--color-gold); font-size: 0.82rem; font-weight: 600; margin-bottom: 10px; }
 .team-card p.bio { color: var(--color-text-muted); font-size: 0.86rem; }
