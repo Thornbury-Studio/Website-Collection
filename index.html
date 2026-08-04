@@ -144,6 +144,8 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .mesh span { animation: none; }
+    .status .dot::after { animation: none; opacity: 0; }
+    .preview::before { animation: none; display: none; }
   }
 
   .page { position: relative; z-index: 2; }
@@ -182,16 +184,42 @@
   .topbar .status {
     display: flex;
     align-items: center;
-    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 4px 8px;
     font-size: 0.78rem;
     letter-spacing: 0.04em;
     color: var(--muted);
+    text-align: right;
   }
   .status .dot {
+    position: relative;
     width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--accent);
     box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  /* A quiet "live" beacon — the one thing on the page that's always moving,
+     even before the visitor touches anything. Reinforces "Actively expanding"
+     with actual motion instead of just the word. */
+  .status .dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    opacity: 0.6;
+    animation: statusPing 2.4s ease-out infinite;
+  }
+  @keyframes statusPing {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.6); opacity: 0; }
+  }
+  .status .live-count { color: var(--text); font-weight: 600; }
+  @media (max-width: 480px) {
+    /* The full phrase wraps the topbar to two lines on a narrow phone; the
+       count alone still carries the "this is real and growing" point. */
+    .status-tail { display: none; }
   }
 
   /* ---------- hero ---------- */
@@ -277,11 +305,13 @@
     overflow: hidden;
     margin-top: 60px;
   }
+  /* No gap on the track — spacing lives on the row. See PATTERNS.md. */
   .marquee {
     display: flex;
     width: max-content;
     animation: scroll 34s linear infinite;
   }
+  .marquee-row { display: flex; flex-shrink: 0; }
   .marquee span {
     display: flex;
     align-items: center;
@@ -336,6 +366,16 @@
   }
   .card:hover { border-color: rgba(182, 147, 95, 0.45); }
 
+  /* Stagger the idle shimmer per card via nth-child rather than inline
+     styles — the custom property inherits down into .preview::before. */
+  .grid .card:nth-child(1) { --sweep-delay: 0s; }
+  .grid .card:nth-child(2) { --sweep-delay: 1.3s; }
+  .grid .card:nth-child(3) { --sweep-delay: 2.6s; }
+  .grid .card:nth-child(4) { --sweep-delay: 3.9s; }
+  .grid .card:nth-child(5) { --sweep-delay: 5.2s; }
+  .grid .card:nth-child(6) { --sweep-delay: 6.5s; }
+  .grid .card:nth-child(7) { --sweep-delay: 7.8s; }
+
   .preview {
     aspect-ratio: 16/10;
     background: linear-gradient(160deg, var(--surface-2), var(--surface));
@@ -356,6 +396,27 @@
     transition: left 0.7s ease;
   }
   .card:hover .preview::after { left: 130%; }
+
+  /* Ambient shimmer — a second, slower sweep that runs on its own timer so the
+     grid still feels alive on a glance or on touch, where nothing hovers.
+     Separate layer (::before) and property (transform, not left) from the
+     hover sweep above, so the two never fight each other. Staggered per card
+     via --sweep-delay so the whole row doesn't shimmer in lockstep. */
+  .preview::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 30%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.045), transparent);
+    transform: translateX(-320%) skewX(-15deg);
+    animation: idleSweep 8s ease-in-out infinite;
+    animation-delay: var(--sweep-delay, 0s);
+    pointer-events: none;
+  }
+  @keyframes idleSweep {
+    0%, 55% { transform: translateX(-320%) skewX(-15deg); }
+    85%, 100% { transform: translateX(420%) skewX(-15deg); }
+  }
   .preview .chrome { display: flex; gap: 6px; }
   .preview .chrome i { width: 7px; height: 7px; border-radius: 50%; background: var(--border); }
   .preview .mock-nav { height: 9px; width: 50%; border-radius: 4px; background: rgba(255,255,255,0.06); }
@@ -429,7 +490,11 @@
     <span class="brand-mark">W</span>
     Website Collection
   </a>
-  <div class="status"><span class="dot"></span> Actively expanding</div>
+  <div class="status">
+    <span class="dot"></span>
+    <span class="live-count" id="liveCount">0</span> templates live
+    <span class="status-tail"> · Actively expanding</span>
+  </div>
 </div>
 
 <section class="hero">
@@ -446,17 +511,15 @@
 </section>
 
 <div class="marquee-wrap">
-  <div class="marquee">
-    <span>Business &amp; Corporate</span>
-    <span>E-Commerce &amp; Shopping</span>
-    <span>SaaS &amp; AI</span>
-    <span>Restaurant &amp; Food</span>
-    <span>Portfolio &amp; Personal</span>
-    <span>Business &amp; Corporate</span>
-    <span>E-Commerce &amp; Shopping</span>
-    <span>SaaS &amp; AI</span>
-    <span>Restaurant &amp; Food</span>
-    <span>Portfolio &amp; Personal</span>
+  <div class="marquee" id="marqueeTrack">
+    <div class="marquee-row">
+      <span>Business &amp; Corporate</span>
+      <span>E-Commerce &amp; Shopping</span>
+      <span>SaaS &amp; AI</span>
+      <span>Restaurant &amp; Food</span>
+      <span>Entertainment</span>
+      <span>Portfolio &amp; Personal</span>
+    </div>
   </div>
 </div>
 
@@ -546,7 +609,7 @@
       </div>
     </a>
 
-    <div class="card locked reveal">
+    <a class="card reveal" href="templates/restaurant-food/index.html" data-cursor="view">
       <div class="preview">
         <div class="chrome"><i></i><i></i><i></i></div>
         <div class="mock-nav"></div>
@@ -556,12 +619,34 @@
         </div>
       </div>
       <div class="card-body">
-        <span class="tag">Coming Soon</span>
-        <h3>Restaurant / Food</h3>
-        <p>Menu, locations, and ordering UI for a fictional food brand.</p>
-        <span class="badge-soon">In progress</span>
+        <span class="tag">Restaurant / Food</span>
+        <h3>EMBER</h3>
+        <p>A wood-fire restaurant with a cursor-tracked menu, a scroll-driven heat gauge, and a booking flow that actually validates.</p>
+        <span class="card-link">View Template
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </span>
       </div>
-    </div>
+    </a>
+
+    <a class="card reveal" href="templates/entertainment-triggered/index.html" data-cursor="view">
+      <div class="preview">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <div class="mock-nav"></div>
+        <div class="mock-hero">
+          <div class="mock-line w40"></div>
+          <div class="mock-blocks"><div></div><div></div><div></div></div>
+          <div class="mock-cta"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="tag">Entertainment / Redesign</span>
+        <h3>TRIGGERED</h3>
+        <p>An unofficial redesign of a real Singapore game centre — a WebGL lava floor, and a calculator that finally makes peak pricing readable.</p>
+        <span class="card-link">View Template
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+    </a>
 
     <div class="card locked reveal">
       <div class="preview">
@@ -588,6 +673,75 @@
 </div>
 
 <script>
+  // A real count, not a placeholder — read straight from the gallery grid
+  // rather than hardcoded, so it can't drift out of sync as templates are
+  // added. Counts up once on load since the topbar isn't sticky and this is
+  // the first thing a visitor sees.
+  (function () {
+    const liveEl = document.getElementById('liveCount');
+    if (!liveEl) return;
+    const total = document.querySelectorAll('.grid .card:not(.locked)').length;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      liveEl.textContent = total;
+      return;
+    }
+    const start = performance.now();
+    const dur = 900;
+    (function tick(now) {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      liveEl.textContent = Math.round(total * eased);
+      if (t < 1) requestAnimationFrame(tick);
+    })(start);
+  })();
+
+  /* True-loop marquee — see PATTERNS.md.
+     Clones the first row until half the track covers its container, keeping the
+     total even so -50% stays a whole period. Two copies is not enough on a wide
+     monitor: the tail ran out mid-screen and you watched it reset. Duration
+     scales with the clone count so the speed never changes. */
+  function trueLoopMarquee(track, secondsPerCopy) {
+    if (!track || !track.firstElementChild) return;
+    const master = track.firstElementChild.cloneNode(true);
+    let timer;
+
+    function build() {
+      // Detach the animation before touching the track. The CSS animation
+      // starts the instant the browser first paints this element, under
+      // whatever duration the stylesheet declares. If we later change
+      // animation-duration on that already-running animation, the browser
+      // recomputes the played fraction against the NEW duration using the
+      // SAME elapsed real time — the visible result is a sudden jump/teleport
+      // the moment this script finishes. animation-name:none + a forced
+      // reflow + reapplying the name restarts the animation as a clean new
+      // instance at 0%, so there is nothing to recompute a jump from.
+      track.style.animationName = 'none';
+
+      while (track.children.length > 1) track.removeChild(track.lastElementChild);
+      const rowW = track.firstElementChild.getBoundingClientRect().width;
+      const boxW = (track.parentElement || document.body).getBoundingClientRect().width;
+      if (rowW < 1) { track.style.animationName = ''; return; }
+
+      const perHalf = Math.max(1, Math.ceil(boxW / rowW));
+      for (let i = 1; i < perHalf * 2; i++) {
+        const copy = master.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        track.appendChild(copy);
+      }
+      track.style.animationDuration = (secondsPerCopy * perHalf) + 's';
+
+      void track.offsetWidth; // force layout so the browser commits animation-name:none first
+      track.style.animationName = '';
+    }
+
+    build();
+    window.addEventListener('resize', () => {
+      clearTimeout(timer);
+      timer = setTimeout(build, 200);
+    });
+  }
+  trueLoopMarquee(document.getElementById('marqueeTrack'), 34);
+
   // scroll reveal
   const revealItems = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {

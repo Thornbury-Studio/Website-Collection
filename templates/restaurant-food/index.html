@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMBER — A Wood-Fire Kitchen</title>
+<meta name="description" content="EMBER is a fictional wood-fire restaurant template built for portfolio showcase purposes — one fire, one daily menu, and a booking flow that works.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/restaurant-food/index.html">
+<meta name="theme-color" content="#100c0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23100c0a'/%3E%3Cpath d='M16 6c3 4 1 6 3 8s3 4 3 6a6 6 0 0 1-12 0c0-4 3-5 3-9 0-2 1-4 3-5z' fill='%23e8531f'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EMBER">
+<meta property="og:title" content="EMBER — A Wood-Fire Kitchen">
+<meta property="og:description" content="One fire, lit at four. A menu written the same morning it is cooked. A fictional restaurant template for portfolio showcase purposes.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/restaurant-food/index.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="EMBER — A Wood-Fire Kitchen">
+<meta name="twitter:description" content="One fire, lit at four. A menu written the same morning it is cooked. A fictional restaurant template for portfolio showcase purposes.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "EMBER",
+  "description": "A fictional wood-fire restaurant created as a website template for portfolio showcase purposes.",
+  "url": "https://website-collection-zanezhijies-projects.vercel.app/templates/restaurant-food/index.html",
+  "servesCuisine": ["Wood-fired", "Modern European"],
+  "priceRange": "$$$",
+  "acceptsReservations": "True",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "14 Foundry Lane",
+    "addressLocality": "London",
+    "postalCode": "E2 7QR",
+    "addressCountry": "GB"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday"], "opens": "17:00", "closes": "23:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "17:00", "closes": "01:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "13:00", "closes": "21:00" }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#menu">Skip to the menu</a>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo" aria-label="EMBER home">
+      <span class="logo-flame" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="20" height="20"><path d="M16 3c3.4 4.6 1.1 6.9 3.4 9.2S23.6 17 23.6 20a7.6 7.6 0 0 1-15.2 0c0-4.6 3.4-5.7 3.4-10.3C11.8 7.4 13.1 4.8 16 3z"/></svg>
+      </span>
+      <span class="logo-word">EMBER</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#fire">The Fire</a>
+      <a href="#menu" class="nav-key">Menu</a>
+      <a href="#kitchen">Kitchen</a>
+      <a href="#room">The Room</a>
+    </nav>
+    <a href="#book" class="nav-cta">Book a table</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-bed" aria-hidden="true">
+    <img class="hero-coals" id="heroCoals" src="img/hero-coals.webp" alt="" width="1800" height="1013" fetchpriority="high">
+    <img class="hero-sparks" src="img/sparks.webp" alt="" width="1400" height="788" aria-hidden="true">
+    <div class="hero-vignette"></div>
+  </div>
+
+  <canvas class="hero-embers" id="embers" aria-hidden="true"></canvas>
+
+  <div class="hero-sprigs" id="sprigs" aria-hidden="true">
+    <img class="sprig sprig-1" src="img/rosemary.webp" alt="" width="760" height="760" decoding="async">
+    <img class="sprig sprig-2" src="img/rosemary.webp" alt="" width="760" height="760" decoding="async">
+  </div>
+
+  <div class="hero-inner">
+    <p class="hero-eyebrow reveal">
+      <span class="live-dot" aria-hidden="true"></span>
+      Fire lit at 16:00 · <span id="tablesLeft">6</span> tables left tonight
+    </p>
+
+    <h1 class="hero-title">
+      <span class="line"><span class="rise">Everything here</span></span>
+      <span class="line"><span class="rise">has met the <em>fire.</em></span></span>
+    </h1>
+
+    <p class="hero-sub reveal">One hearth. Three woods — oak, beech, apple. No gas, no freezer, and a menu
+      written the same morning it is cooked. When the fire goes out, service is over.</p>
+
+    <div class="hero-actions reveal">
+      <a href="#book" class="btn btn-ember">Book a table</a>
+      <a href="#menu" class="btn btn-ghost">Read tonight's menu</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <i></i>
+  </div>
+</section>
+
+<!-- ============ TENETS ============ -->
+<!-- Static row. A glow travels along it like heat down a log, instead of the
+     usual right-to-left ticker. -->
+<section class="tenets" aria-label="How EMBER cooks">
+  <ul>
+    <li style="--i:0">Wood-fired</li>
+    <li style="--i:1">Open hearth</li>
+    <li style="--i:2">No freezer</li>
+    <li style="--i:3">Whole animal</li>
+    <li style="--i:4">Seasonal only</li>
+    <li style="--i:5">Oak · Beech · Apple</li>
+  </ul>
+</section>
+
+<!-- ============ THE FIRE ============ -->
+<section class="section fire" id="fire">
+  <div class="fire-grid">
+
+    <div class="fire-sticky">
+      <span class="eyebrow reveal">01 — The Fire</span>
+      <h2 class="reveal">Cooking is<br><em>temperature</em><br>and patience.</h2>
+      <p class="reveal">A wood fire is not one heat, it is four. We build ours at four in the afternoon and
+        spend the night moving food through it — from the open flame down to the last grey ash.</p>
+
+      <div class="coal-wrap reveal">
+        <div class="coal" id="coal" role="img"
+             aria-label="A three-dimensional coal that cools from white-hot to grey ash as the page scrolls through the four heat stages."></div>
+        <div class="gauge-read">
+          <span class="gauge-num" id="gaugeNum">900</span><span class="gauge-unit">°C</span>
+          <span class="gauge-label" id="gaugeLabel">Open flame</span>
+        </div>
+      </div>
+    </div>
+
+    <ol class="stages">
+      <li class="stage reveal" data-temp="900" data-label="Open flame">
+        <span class="stage-idx">01</span>
+        <h3>Flame</h3>
+        <p class="stage-t">900°C</p>
+        <p>Thirty seconds, no more. Flatbread goes straight into the burning wood and comes out blistered,
+          smoke-black at the edges, still soft in the middle.</p>
+      </li>
+      <li class="stage reveal" data-temp="620" data-label="Live coals">
+        <span class="stage-idx">02</span>
+        <h3>Coal</h3>
+        <p class="stage-t">620°C</p>
+        <p>The grill sits here. Sirloin, sardines, hispi cabbage — anything that wants a hard crust and
+          a cool centre. This is where most of the night happens.</p>
+      </li>
+      <li class="stage reveal" data-temp="280" data-label="Falling heat">
+        <span class="stage-idx">03</span>
+        <h3>Fall</h3>
+        <p class="stage-t">280°C</p>
+        <p>By ten the fire is tired. Brisket that went in at breakfast comes out now, twelve hours later,
+          held together by nothing but collagen and time.</p>
+      </li>
+      <li class="stage reveal" data-temp="120" data-label="Ash">
+        <span class="stage-idx">04</span>
+        <h3>Ash</h3>
+        <p class="stage-t">120°C</p>
+        <p>Beetroot and onion are buried in the embers overnight. We dig them out the next morning,
+          skins burnt to paper, and the day starts again.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ MENU ============ -->
+<section class="section menu" id="menu">
+  <div class="menu-head">
+    <div>
+      <span class="eyebrow reveal">02 — Tonight</span>
+      <h2 class="reveal">The menu, as it<br>stands <em>right now.</em></h2>
+    </div>
+    <p class="menu-note reveal">Written at 09:40 this morning after the market. Two or three things will run
+      out before close — that is the point. <span class="dot-fire" aria-hidden="true"></span> marks what the
+      kitchen is proudest of tonight.</p>
+  </div>
+
+  <div class="menu-tabs reveal" role="tablist" aria-label="Menu courses">
+    <button class="mtab is-active" role="tab" aria-selected="true" aria-controls="course-fire" id="tab-fire" data-course="fire">From the Fire</button>
+    <button class="mtab" role="tab" aria-selected="false" aria-controls="course-snacks" id="tab-snacks" data-course="snacks">Snacks</button>
+    <button class="mtab" role="tab" aria-selected="false" aria-controls="course-sides" id="tab-sides" data-course="sides">Sides</button>
+    <button class="mtab" role="tab" aria-selected="false" aria-controls="course-sweet" id="tab-sweet" data-course="sweet">Sweet</button>
+  </div>
+
+  <div class="menu-body" id="menuBody">
+
+    <ul class="course is-active" id="course-fire" role="tabpanel" aria-labelledby="tab-fire">
+      <li class="dish" data-img="img/dish-steak.webp">
+        <span class="dish-name">Dry-aged sirloin, bone marrow, oak smoke <span class="dot-fire" aria-hidden="true"></span></span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">42</span>
+        <span class="dish-desc">Sixty days on the bone. Grilled over oak, rested in its own fat, finished with marrow butter and burnt shallot.</span>
+      </li>
+      <li class="dish" data-img="img/dish-salmon.webp">
+        <span class="dish-name">Whole trout, fennel, brown butter</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">31</span>
+        <span class="dish-desc">Line-caught, split and clamped in a cage over the coals. Charred fennel, brown butter, a lot of lemon.</span>
+      </li>
+      <li class="dish" data-img="img/dish-brisket.webp">
+        <span class="dish-name">Twelve-hour brisket, black pepper, molasses <span class="dot-fire" aria-hidden="true"></span></span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">36</span>
+        <span class="dish-desc">In at seven this morning, out at seven tonight. Pepper crust, molasses glaze, pickled mustard seed.</span>
+      </li>
+      <li class="dish" data-img="img/dish-veg.webp">
+        <span class="dish-name">Hearth vegetables, stone plate, herb oil</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">26</span>
+        <span class="dish-desc">Whatever came off the van this morning, cooked hard over the coals and dressed while still too hot to touch.</span>
+      </li>
+    </ul>
+
+    <ul class="course" id="course-snacks" role="tabpanel" aria-labelledby="tab-snacks" hidden>
+      <li class="dish">
+        <span class="dish-name">Charred sourdough, cultured butter, ash salt</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">9</span>
+        <span class="dish-desc">Three-day starter, baked in the mouth of the oven. The salt is burnt leek, ground fine.</span>
+      </li>
+      <li class="dish">
+        <span class="dish-name">Ember-roasted beetroot, whipped feta, dill</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">12</span>
+        <span class="dish-desc">Buried in ash overnight. Skin peeled away at the pass, still warm.</span>
+      </li>
+      <li class="dish">
+        <span class="dish-name">Grilled sardine, burnt lemon, parsley</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">14</span>
+        <span class="dish-desc">Ninety seconds a side. Eat it with your hands while the skin is still crackling.</span>
+      </li>
+      <li class="dish">
+        <span class="dish-name">Wood-oven flatbread, garlic butter, thyme</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">10</span>
+        <span class="dish-desc">Straight onto the burning wood. Blistered black in places — leave those bits, they are the best part.</span>
+      </li>
+    </ul>
+
+    <ul class="course" id="course-sides" role="tabpanel" aria-labelledby="tab-sides" hidden>
+      <li class="dish">
+        <span class="dish-name">Fire-roasted potatoes, rosemary, sea salt</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">8</span>
+        <span class="dish-desc">Boiled, crushed, then dropped into beef fat at the hot end of the grill.</span>
+      </li>
+      <li class="dish">
+        <span class="dish-name">Charred hispi cabbage, anchovy</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">9</span>
+        <span class="dish-desc">Quartered, grilled cut-side down until nearly ruined, then dressed in anchovy butter.</span>
+      </li>
+      <li class="dish">
+        <span class="dish-name">Burnt onion, crème fraîche</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">8</span>
+        <span class="dish-desc">Whole onions cooked in the ash for six hours. Sweet the whole way through.</span>
+      </li>
+      <li class="dish">
+        <span class="dish-name">Leaves, mustard, aged sherry</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">7</span>
+        <span class="dish-desc">The only thing on the menu that never goes near the fire.</span>
+      </li>
+    </ul>
+
+    <ul class="course" id="course-sweet" role="tabpanel" aria-labelledby="tab-sweet" hidden>
+      <li class="dish">
+        <span class="dish-name">Smoked chocolate, olive oil, salt</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">11</span>
+        <span class="dish-desc">Cream smoked over apple wood, set with dark chocolate, finished with green oil.</span>
+      </li>
+      <li class="dish">
+        <span class="dish-name">Grilled peach, honey, thyme ice</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">10</span>
+        <span class="dish-desc">Halved, grilled hard, served with ice cream that melts faster than you can eat it.</span>
+      </li>
+      <li class="dish">
+        <span class="dish-name">Burnt Basque cheesecake</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">10</span>
+        <span class="dish-desc">Baked in the dying oven until the top is genuinely, deliberately burnt.</span>
+      </li>
+      <li class="dish">
+        <span class="dish-name">Coffee, cardamom, cream</span>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">6</span>
+        <span class="dish-desc">Beans roasted eight streets away. Cardamom ground to order.</span>
+      </li>
+    </ul>
+
+    <figure class="dish-peek" id="dishPeek" aria-hidden="true">
+      <img id="dishPeekImg" src="img/dish-steak.webp" alt="" width="720" height="720">
+    </figure>
+  </div>
+
+  <p class="menu-foot reveal">All prices in GBP. A discretionary 12.5% goes to the whole team.
+    Allergens listed at the pass — please ask, we cook everything to order.</p>
+</section>
+
+<!-- ============ KITCHEN ============ -->
+<section class="section kitchen" id="kitchen">
+  <div class="kitchen-grid">
+    <figure class="kitchen-shot reveal">
+      <img src="img/flambe.webp" alt="A chef finishing a dish over open flames in a pan at the EMBER pass." width="1000" height="1250" loading="lazy">
+      <figcaption>The pass, 20:40 on a Friday.</figcaption>
+    </figure>
+
+    <div class="kitchen-copy">
+      <span class="eyebrow reveal">03 — Open kitchen</span>
+      <h2 class="reveal">There is no back<br>of house. You are<br><em>sitting in it.</em></h2>
+      <p class="reveal">The hearth is the middle of the room, not behind a door. You will smell the smoke on
+        your coat tomorrow. Everyone who cooks here also carries plates, and everyone who carries plates
+        knows exactly what happened to your food.</p>
+
+      <blockquote class="pull reveal">
+        <p>“If the fire is wrong, everything after it is wrong. So we start there and work outwards.”</p>
+        <cite>Nadia Oyelaran — head of the fire</cite>
+      </blockquote>
+    </div>
+  </div>
+
+  <dl class="stats">
+    <div class="stat reveal"><dt>Fires burning</dt><dd><span class="count" data-to="1">0</span></dd></div>
+    <div class="stat reveal"><dt>Freezers</dt><dd><span class="count" data-to="0">0</span></dd></div>
+    <div class="stat reveal"><dt>Covers a night</dt><dd><span class="count" data-to="62">0</span></dd></div>
+    <div class="stat reveal"><dt>Kilos of oak, weekly</dt><dd><span class="count" data-to="340">0</span></dd></div>
+  </dl>
+</section>
+
+<!-- ============ THE ROOM ============ -->
+<section class="section room" id="room">
+  <figure class="room-shot reveal">
+    <img src="img/room.webp" alt="The EMBER dining room — timber tables and low warm light around a central hearth." width="1300" height="866" loading="lazy">
+  </figure>
+
+  <div class="room-grid">
+    <div class="reveal">
+      <span class="eyebrow">04 — The Room</span>
+      <h2>Sixty-two seats,<br>one long night.</h2>
+      <p>Timber, low light, and a bar you can eat at alone without anyone making it strange. We take
+        bookings for two to six. Larger than that, call us and we will work something out.</p>
+    </div>
+
+    <div class="hours reveal">
+      <h3>Hours</h3>
+      <table>
+        <tbody>
+          <tr><th scope="row">Tuesday — Thursday</th><td>17:00 — 23:00</td></tr>
+          <tr><th scope="row">Friday — Saturday</th><td>17:00 — 01:00</td></tr>
+          <tr><th scope="row">Sunday</th><td>13:00 — 21:00</td></tr>
+          <tr class="closed"><th scope="row">Monday</th><td>Closed — the fire rests</td></tr>
+        </tbody>
+      </table>
+      <address>
+        14 Foundry Lane<br>
+        Shoreditch, London E2 7QR<br>
+        <a href="tel:+442075550142">+44 20 7555 0142</a>
+      </address>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOKING ============ -->
+<section class="section book" id="book">
+  <div class="book-inner">
+    <span class="eyebrow reveal">05 — Reserve</span>
+    <h2 class="reveal">Take a seat by<br>the <em>hearth.</em></h2>
+
+    <form class="booking" id="booking" novalidate>
+      <fieldset class="fld">
+        <legend>Which night?</legend>
+        <div class="chips" id="dayChips" role="radiogroup" aria-label="Choose a date"></div>
+      </fieldset>
+
+      <fieldset class="fld">
+        <legend>How many?</legend>
+        <div class="stepper">
+          <button type="button" class="step" id="guestsDown" aria-label="Fewer guests">−</button>
+          <output id="guestsOut" for="guestsDown guestsUp"><strong>2</strong> guests</output>
+          <button type="button" class="step" id="guestsUp" aria-label="More guests">+</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="fld">
+        <legend>What time?</legend>
+        <div class="chips" id="timeChips" role="radiogroup" aria-label="Choose a time"></div>
+      </fieldset>
+
+      <div class="fld fld-inputs">
+        <label class="inp">
+          <span>Name</span>
+          <input type="text" id="bName" name="name" autocomplete="name" placeholder="Alex Moreau" required>
+        </label>
+        <label class="inp">
+          <span>Email</span>
+          <input type="email" id="bEmail" name="email" autocomplete="email" placeholder="alex@example.com" required>
+        </label>
+      </div>
+
+      <p class="book-error" id="bookError" role="alert" hidden></p>
+
+      <button type="submit" class="btn btn-ember btn-wide" id="bookSubmit">Request this table</button>
+      <p class="book-small">Demo only — nothing is sent anywhere. Tables are held for 15 minutes after
+        your booking time, then given to the bar.</p>
+    </form>
+
+    <div class="book-done" id="bookDone" hidden>
+      <div class="book-done-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="26" height="26"><path d="M16 3c3.4 4.6 1.1 6.9 3.4 9.2S23.6 17 23.6 20a7.6 7.6 0 0 1-15.2 0c0-4.6 3.4-5.7 3.4-10.3C11.8 7.4 13.1 4.8 16 3z"/></svg>
+      </div>
+      <h3>Table held.</h3>
+      <p id="bookSummary"></p>
+      <button type="button" class="btn btn-ghost" id="bookAgain">Change something</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <span class="logo-word">EMBER</span>
+      <p>A wood-fire kitchen in Shoreditch. Lit at four, finished when the fire is.</p>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#fire">The Fire</a>
+      <a href="#menu">Menu</a>
+      <a href="#kitchen">Kitchen</a>
+      <a href="#room">The Room</a>
+      <a href="#book">Book</a>
+      <a href="../../index.html">← All templates</a>
+    </nav>
+  </div>
+  <p class="foot-legal">
+    EMBER is a fictional restaurant. This page is an original website template built for showcase
+    purposes — no real business, menu, or booking system is represented.
+    <span class="foot-sig">Zane</span>
+  </p>
+</footer>
+
+<script src="js/main.js"></script>
+<script type="module" src="js/ember-3d.js"></script>
+</body>
+</html>

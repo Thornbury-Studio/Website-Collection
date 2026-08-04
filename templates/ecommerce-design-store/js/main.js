@@ -194,3 +194,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateCart();
 });
+
+/* True-loop marquee — see PATTERNS.md.
+   Clones the first row until half the track covers its container, keeping the
+   total even so -50% stays a whole period. Two copies is not enough on a wide
+   monitor: the tail ran out mid-screen and you watched it reset. Duration
+   scales with the clone count so the speed never changes. */
+function trueLoopMarquee(track, secondsPerCopy) {
+  if (!track || !track.firstElementChild) return;
+  const master = track.firstElementChild.cloneNode(true);
+  let timer;
+
+  function build() {
+    // Detach the animation before touching the track. The CSS animation
+    // starts the instant the browser first paints this element, under
+    // whatever duration the stylesheet declares. main.js is an external
+    // <script src>, so real fetch+parse time passes before this runs — by
+    // the time it does, the animation already has real elapsed time on the
+    // clock. Changing animation-duration on that already-running animation
+    // makes the browser recompute the played fraction against the NEW
+    // duration using that SAME elapsed time, which is exactly the visible
+    // "moves, then teleports a bit" jump. animation-name:none + a forced
+    // reflow + reapplying the name restarts the animation as a clean new
+    // instance at 0%, so there is nothing to recompute a jump from.
+    track.style.animationName = 'none';
+
+    while (track.children.length > 1) track.removeChild(track.lastElementChild);
+    const rowW = track.firstElementChild.getBoundingClientRect().width;
+    const boxW = (track.parentElement || document.body).getBoundingClientRect().width;
+    if (rowW < 1) { track.style.animationName = ''; return; }
+
+    const perHalf = Math.max(1, Math.ceil(boxW / rowW));
+    for (let i = 1; i < perHalf * 2; i++) {
+      const copy = master.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      track.appendChild(copy);
+    }
+    track.style.animationDuration = (secondsPerCopy * perHalf) + 's';
+
+    void track.offsetWidth; // force layout so the browser commits animation-name:none first
+    track.style.animationName = '';
+  }
+
+  build();
+  window.addEventListener('resize', () => {
+    clearTimeout(timer);
+    timer = setTimeout(build, 200);
+  });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  trueLoopMarquee(document.getElementById('tickerTrack'), 24);
+});
