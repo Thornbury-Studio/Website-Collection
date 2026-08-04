@@ -1,192 +1,231 @@
-/* Generates original isometric room diagrams (SVG) for the Triggered Games
-   concept redesign — one per game room. Pure computed geometry; nothing is
-   traced from or copied out of the real venue's artwork. */
+/* Generates the room diagrams (SVG) for the Triggered Games concept redesign —
+   one per game room, inlined into index.html.
+   Run: node tools/gen-room-diagrams.js rooms.json
 
-const B = [160, 80], L = [20, 152], R = [300, 152];
-const N = 4;
-const u = [(L[0] - B[0]) / N, (L[1] - B[1]) / N];   // back corner -> left wall
-const v = [(R[0] - B[0]) / N, (R[1] - B[1]) / N];   // back corner -> right wall
-const H = 66;                                        // wall height
+   These are ORIGINAL drawings built from computed geometry. Nothing is traced,
+   screenshotted or derived from the venue's own renders. What they do mirror is
+   the real *layout* of each room — five hoops in a row, a honeycomb of buttons,
+   a central pillar — because a diagram showing the wrong room is worse than no
+   diagram at all. The layout is fact about a physical space; the drawing is ours.
 
-const uLen = Math.hypot(u[0], u[1]);
-const vLen = Math.hypot(v[0], v[1]);
-const uU = [u[0] / uLen, u[1] / uLen];
-const vU = [v[0] / vLen, v[1] / vLen];
+   Projection: a three-wall diorama box in mild perspective (front edge wider
+   than back), which is how the venue frames its own rooms, rather than the
+   45-degree corner view used in the first pass. Everything is positioned by
+   bilinear interpolation inside a wall quad, so no shape needs its own
+   transform matrix. */
+
+const FY = 214, BY = 126;      // floor edge y: front, back
+const FX0 = 28, FX1 = 292;     // floor x span at the front
+const BX0 = 86, BX1 = 234;     // floor x span at the back
+const BTOP = 48, FTOP = 110;   // wall top y: at back, at front
 
 const r1 = n => Math.round(n * 10) / 10;
 const pts = a => a.map(p => `${r1(p[0])},${r1(p[1])}`).join(' ');
+const lerp = (a, b, k) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
 
-function cell(i, j) {
-  const p0 = [B[0] + i * u[0] + j * v[0], B[1] + i * u[1] + j * v[1]];
-  return [p0, [p0[0] + u[0], p0[1] + u[1]],
-          [p0[0] + u[0] + v[0], p0[1] + u[1] + v[1]],
-          [p0[0] + v[0], p0[1] + v[1]]];
+/* Quads are TL, TR, BR, BL. quadPt(q, s, t): s = 0..1 left to right,
+   t = 0..1 top to bottom (on the floor: back to front). */
+const quadPt = (q, s, t) => lerp(lerp(q.TL, q.TR, s), lerp(q.BL, q.BR, s), t);
+const quadPoly = q => pts([q.TL, q.TR, q.BR, q.BL]);
+
+const floor     = { TL: [BX0, BY],   TR: [BX1, BY],   BR: [FX1, FY], BL: [FX0, FY] };
+const backWall  = { TL: [BX0, BTOP], TR: [BX1, BTOP], BR: [BX1, BY], BL: [BX0, BY] };
+const leftWall  = { TL: [FX0, FTOP], TR: [BX0, BTOP], BR: [BX0, BY], BL: [FX0, FY] };
+const rightWall = { TL: [BX1, BTOP], TR: [FX1, FTOP], BR: [FX1, FY], BL: [BX1, BY] };
+
+/* Floor rows bunch toward the back — that is what sells the depth. */
+const depth = k => Math.pow(k, 1.3);
+
+function floorCell(row, col, rows, cols) {
+  const t0 = depth(row / rows), t1 = depth((row + 1) / rows);
+  const s0 = col / cols, s1 = (col + 1) / cols;
+  return [quadPt(floor, s0, t0), quadPt(floor, s1, t0),
+          quadPt(floor, s1, t1), quadPt(floor, s0, t1)];
 }
 
-const F = [B[0] + N * u[0] + N * v[0], B[1] + N * u[1] + N * v[1]];
-const leftWall  = [L, B, [B[0], B[1] - H], [L[0], L[1] - H]];
-const rightWall = [R, B, [B[0], B[1] - H], [R[0], R[1] - H]];
+/* The back wall faces us square-on; the side walls foreshorten toward the back,
+   so anything mounted on them shrinks as it recedes. */
+const wallScale = (q, s) =>
+  q === backWall ? 1 : (q === leftWall ? 0.68 + 0.32 * (1 - s) : 0.68 + 0.32 * s);
 
-/* place something on a wall: t = steps along the wall from the back corner,
-   h = height above the floor */
-const onLeft  = (t, h) => [B[0] + t * u[0], B[1] + t * u[1] - h];
-const onRight = (t, h) => [B[0] + t * v[0], B[1] + t * v[1] - h];
-const mLeft  = c => `matrix(${r1(uU[0])} ${r1(uU[1])} 0 -1 ${r1(c[0])} ${r1(c[1])})`;
-const mRight = c => `matrix(${r1(vU[0])} ${r1(vU[1])} 0 -1 ${r1(c[0])} ${r1(c[1])})`;
+const C = {
+  wallBack: '#2b1f4d', wallLeft: '#241a40', wallRight: '#1b1432',
+  floor: '#241b42', line: '#3b2c66',
+  white: '#e8e6f5', cyan: '#3ad2f0', magenta: '#ff3ea0', yellow: '#ffd93d',
+  ball: '#ff7a2f'
+};
 
-function hexPts(r) {
-  const a = [];
-  for (let k = 0; k < 6; k++) {
-    const ang = (Math.PI / 180) * (60 * k + 30);
-    a.push([r * Math.cos(ang), r * Math.sin(ang)]);
-  }
-  return pts(a);
+function shell(inner) {
+  return `<svg class="room-art" viewBox="0 34 320 192" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">` +
+    `<polygon points="${quadPoly(leftWall)}" fill="${C.wallLeft}"/>` +
+    `<polygon points="${quadPoly(rightWall)}" fill="${C.wallRight}"/>` +
+    `<polygon points="${quadPoly(backWall)}" fill="${C.wallBack}"/>` +
+    inner +
+    /* corner edges last, so they read above the wall fills */
+    `<g fill="none" stroke="${C.line}" stroke-width="1.2" opacity=".9">` +
+    `<polyline points="${pts([[FX0, FTOP], [BX0, BTOP], [BX1, BTOP], [FX1, FTOP]])}"/>` +
+    `<line x1="${BX0}" y1="${BTOP}" x2="${BX0}" y2="${BY}"/>` +
+    `<line x1="${BX1}" y1="${BTOP}" x2="${BX1}" y2="${BY}"/>` +
+    `</g></svg>`;
 }
 
-/* An isometric block standing on floor cell (i,j). Both visible side faces get
-   their own value so it reads as a solid object rather than an outline. */
-function block(i, j, h, accent) {
-  const [p0, p1, p2, p3] = cell(i, j);
-  const up = p => [p[0], p[1] - h];
-  return `<g class="blk">` +
-    `<polygon points="${pts([p1, p2, up(p2), up(p1)])}" fill="#2b2148"/>` +
-    `<polygon points="${pts([p2, p3, up(p3), up(p2)])}" fill="#1b1430"/>` +
-    `<polygon points="${pts([up(p0), up(p1), up(p2), up(p3)])}" fill="#3a2d60"/>` +
-    `<polyline points="${pts([up(p1), up(p2), up(p3)])}" fill="none" stroke="${accent}" stroke-width="1.6" opacity=".95"/>` +
-    `<line x1="${r1(p2[0])}" y1="${r1(p2[1])}" x2="${r1(up(p2)[0])}" y2="${r1(up(p2)[1])}" stroke="${accent}" stroke-width="1.2" opacity=".5"/>` +
-    `</g>`;
+/* Every room in the venue has a wall-mounted display. */
+function screen(q, s, t, w = 16, h = 10) {
+  const c = quadPt(q, s, t), k = wallScale(q, s);
+  return `<g><rect x="${r1(c[0] - w * k / 2)}" y="${r1(c[1] - h * k / 2)}" width="${r1(w * k)}" height="${r1(h * k)}" ` +
+    `rx="1.4" fill="#0d1830" stroke="#4de0ff" stroke-width="1"/>` +
+    `<rect x="${r1(c[0] - w * k / 2 + 1.8)}" y="${r1(c[1] - h * k / 2 + 1.8)}" width="${r1(w * k - 3.6)}" height="${r1(1.5 * k)}" fill="#4de0ff" opacity=".75"/></g>`;
 }
 
-function shell(id, extraDefs = '') {
-  return {
-    open: `<svg class="room-art" viewBox="0 4 320 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">` +
-          `<defs>` +
-          `<radialGradient id="${id}-pool" cx=".5" cy=".5" r=".5">` +
-          `<stop offset="0" stop-color="#ff2d6f" stop-opacity=".20"/>` +
-          `<stop offset="1" stop-color="#ff2d6f" stop-opacity="0"/></radialGradient>` +
-          extraDefs + `</defs>`,
-    /* walls first, then a soft pool of light on the floor for depth */
-    walls: `<polygon points="${pts(leftWall)}" fill="#1c1533"/>` +
-           `<polygon points="${pts(rightWall)}" fill="#130f26"/>` +
-           `<polyline points="${pts([[L[0], L[1] - H], [B[0], B[1] - H], [R[0], R[1] - H]])}" fill="none" stroke="#3a2d60" stroke-width="1.4"/>` +
-           `<line x1="${B[0]}" y1="${B[1]}" x2="${B[0]}" y2="${B[1] - H}" stroke="#3a2d60" stroke-width="1.4"/>`,
-    pool: `<ellipse cx="${r1((B[0] + F[0]) / 2)}" cy="${r1((B[1] + F[1]) / 2)}" rx="140" ry="70" fill="url(#${id}-pool)"/>`,
-    close: `</svg>`
+/* Lit skirting running along the base of the walls. */
+function skirt() {
+  const band = (q, col) => {
+    const a = quadPt(q, 0, 0.93), b = quadPt(q, 1, 0.93);
+    const c = quadPt(q, 1, 1), d = quadPt(q, 0, 1);
+    return `<polygon points="${pts([a, b, c, d])}" fill="${col}" opacity=".55"/>`;
   };
+  return band(backWall, '#c060ff') + band(leftWall, '#a24ee0') + band(rightWall, '#8f42c9');
 }
 
-function floorGrid(cellFn) {
+/* A row of balls resting on the floor against the back wall. */
+function ballRow(n = 13, t = 0.05) {
   let s = '';
-  for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) s += cellFn(i, j, cell(i, j));
+  for (let i = 0; i < n; i++) {
+    const c = quadPt(floor, (i + 0.5) / n, t);
+    s += `<circle cx="${r1(c[0])}" cy="${r1(c[1])}" r="3.1" fill="${C.ball}"/>` +
+         `<circle cx="${r1(c[0] - 0.8)}" cy="${r1(c[1] - 0.9)}" r="1" fill="#ffc9a0" opacity=".8"/>`;
+  }
   return s;
 }
-const plainFloor = () => floorGrid((i, j, c) =>
-  `<polygon points="${pts(c)}" fill="#191330" stroke="#2a2145" stroke-width="1.1"/>`);
 
-/* ------------------------------------------------------------------ */
+const plainFloor = (fill = C.floor, rows = 5, cols = 7) => {
+  let s = '';
+  for (let r = 0; r < rows; r++)
+    for (let c = 0; c < cols; c++)
+      s += `<polygon points="${pts(floorCell(r, c, rows, cols))}" fill="${fill}" stroke="#31255a" stroke-width=".8"/>`;
+  return s;
+};
+
 const rooms = {};
 
-/* 1 — Floor Is Lava: molten floor, a scatter of safe tiles, two hovering. */
+/* 1 — Floor Is Lava: a grid of lit LED floor tiles. The real floor is white
+   with cyan / magenta / yellow patches, not molten orange. */
 {
-  const id = 'lava';
-  const defs = `<linearGradient id="${id}-g" x1="0" y1="0" x2="0" y2="1">` +
-    `<stop offset="0" stop-color="#ff2d6f"/><stop offset="1" stop-color="#ff8a1f"/></linearGradient>`;
-  const s = shell(id, defs);
-  const safe = new Set(['1,1', '0,3', '3,2']);
-  let body = s.walls;
-  body += floorGrid((i, j, c) => safe.has(`${i},${j}`)
-    ? `<polygon class="t-safe" points="${pts(c)}" fill="#191428" stroke="#c9ff3d" stroke-width="1.5"/>`
-    : `<polygon class="t-lava" points="${pts(c)}" fill="url(#${id}-g)" stroke="#0a0812" stroke-width="1.8"/>`);
-  const hover = (i, j, lift) => {
-    const c = cell(i, j).map(p => [p[0], p[1] - lift]);
-    return `<polygon points="${pts(cell(i, j))}" fill="#07060d" opacity=".28"/>` +
-           `<polygon class="t-float" points="${pts(c)}" fill="#191428" stroke="#c9ff3d" stroke-width="1.6"/>`;
+  const ROWS = ['..11..22', '.1122.2.', '33..11..', '.3.221..', '..33.11.', '2...33..'];
+  const map = { '.': C.white, '1': C.cyan, '2': C.magenta, '3': C.yellow };
+  let g = '';
+  for (let r = 0; r < ROWS.length; r++)
+    for (let c = 0; c < 8; c++)
+      g += `<polygon class="t-lava" points="${pts(floorCell(r, c, ROWS.length, 8))}" ` +
+           `fill="${map[ROWS[r][c]]}" stroke="#1a1430" stroke-width="1"/>`;
+  let strips = '';
+  for (let i = 0; i < 6; i++) {
+    const a = quadPt(backWall, 0.08 + i * 0.17, 0.30);
+    strips += `<rect x="${r1(a[0] - 1.4)}" y="${r1(a[1] - 5)}" width="2.8" height="10" rx="1.4" fill="${C.magenta}" opacity=".8"/>`;
+  }
+  rooms.lava = shell(skirt() + g + strips + screen(backWall, 0.5, 0.14));
+}
+
+/* 2 — Press It!: dense button fields covering the walls, bright floor. */
+{
+  const cols = [C.magenta, C.cyan, C.yellow, C.white];
+  const pick = (r, c) => cols[(r * 5 + c * 3) % 4];
+  let dots = '';
+  for (let r = 0; r < 6; r++)
+    for (let c = 0; c < 12; c++) {
+      const p = quadPt(backWall, 0.05 + c * 0.0818, 0.16 + r * 0.115);
+      const on = (r * 12 + c) % 3 === 0;
+      dots += `<circle class="${on ? 'b-on' : ''}" cx="${r1(p[0])}" cy="${r1(p[1])}" r="2.4" fill="${on ? pick(r, c) : '#4b3a7a'}"/>`;
+    }
+  [leftWall, rightWall].forEach(q => {
+    for (let r = 0; r < 5; r++)
+      for (let c = 0; c < 4; c++) {
+        const s = 0.12 + c * 0.22, p = quadPt(q, s, 0.18 + r * 0.14);
+        const on = (r + c) % 3 === 0;
+        dots += `<circle class="${on ? 'b-on' : ''}" cx="${r1(p[0])}" cy="${r1(p[1])}" r="${r1(2.2 * wallScale(q, s))}" ` +
+                `fill="${on ? pick(r, c) : '#423270'}"/>`;
+      }
+  });
+  rooms.press = shell(skirt() + plainFloor('#d9d6ee') + dots + screen(backWall, 0.5, 0.05));
+}
+
+/* 3 — Hide & Seek: lit cylindrical pillars standing in the room to break
+   sightlines. A circle on this floor projects to an axis-aligned ellipse. */
+{
+  const pillar = (s, t, rad, h, col) => {
+    const b = quadPt(floor, s, t);
+    const rx = rad * 1.5, ry = rad * 0.62;
+    return `<g><ellipse cx="${r1(b[0])}" cy="${r1(b[1] + 2)}" rx="${r1(rx * 1.15)}" ry="${r1(ry)}" fill="#150f2b" opacity=".5"/>` +
+      `<rect x="${r1(b[0] - rx)}" y="${r1(b[1] - h)}" width="${r1(rx * 2)}" height="${r1(h)}" fill="${col}"/>` +
+      `<ellipse cx="${r1(b[0])}" cy="${r1(b[1])}" rx="${r1(rx)}" ry="${r1(ry)}" fill="${col}"/>` +
+      `<ellipse class="b-on" cx="${r1(b[0])}" cy="${r1(b[1] - h)}" rx="${r1(rx)}" ry="${r1(ry)}" fill="#f6f2ff"/></g>`;
   };
-  body += hover(2, 1, 24) + hover(1, 3, 15);
-  rooms[id] = s.open + body + s.close;
+  let acc = '';
+  for (let i = 0; i < 5; i++) {
+    const p = quadPt(backWall, 0.12 + i * 0.19, 0.28);
+    acc += `<rect x="${r1(p[0] - 1.3)}" y="${r1(p[1] - 6)}" width="2.6" height="12" rx="1.3" fill="${C.cyan}" opacity=".55"/>`;
+  }
+  rooms.hide = shell(skirt() + plainFloor() + acc + screen(backWall, 0.5, 0.09) +
+    pillar(0.28, 0.40, 8.5, 42, '#bdb2e6') +
+    pillar(0.68, 0.70, 11, 54, '#e6dffa'));
 }
 
-/* 2 — Press It!: buttons across both walls, a few lit at any moment. */
+/* 4 — Hoops Madness: five hoops in a row on the back wall, balls on the floor. */
 {
-  const id = 'press';
-  const s = shell(id);
-  let body = s.walls + s.pool + plainFloor();
-  const ON = '#ff2d6f', OFF = '#3d3159';
-  const bank = (m, on, list) => list.map(([t, h, lit]) => {
-    const col = lit ? ON : OFF;
-    return `<g transform="${m(on(t, h))}">` +
-      (lit ? `<circle r="15" fill="${ON}" opacity=".18"/>` : '') +
-      `<circle class="${lit ? 'b-on' : 'b-off'}" r="7.5" fill="${col}"/>` +
-      `<circle r="11" fill="none" stroke="${col}" stroke-width="1.3" opacity=".7"/></g>`;
-  }).join('');
-  body += bank(mLeft, onLeft, [[0.75, 44, 1], [1.6, 21, 0], [2.4, 47, 0], [3.2, 24, 1]]);
-  body += bank(mRight, onRight, [[0.8, 23, 0], [1.7, 46, 1], [2.5, 20, 0], [3.25, 43, 0]]);
-  rooms[id] = s.open + body + s.close;
+  let h = '';
+  for (let i = 0; i < 5; i++) {
+    const s = 0.13 + i * 0.185;
+    const bp = quadPt(backWall, s, 0.32);
+    const rp = quadPt(backWall, s, 0.50);
+    const col = [C.magenta, C.cyan, C.magenta, C.yellow, C.magenta][i];
+    h += `<g><rect x="${r1(bp[0] - 9)}" y="${r1(bp[1] - 7)}" width="18" height="14" rx="1.6" fill="#160f2c" stroke="${col}" stroke-width="1.6"/>` +
+      `<rect x="${r1(bp[0] - 4.5)}" y="${r1(bp[1] - 3.5)}" width="9" height="7" fill="${col}" opacity=".38"/>` +
+      `<ellipse class="hoop" cx="${r1(rp[0])}" cy="${r1(rp[1])}" rx="6.5" ry="2.4" fill="none" stroke="${C.ball}" stroke-width="1.8"/></g>`;
+  }
+  rooms.hoops = shell(skirt() + plainFloor() + screen(backWall, 0.5, 0.07) + h + ballRow());
 }
 
-/* 3 — Hide & Seek: obstacles that break line of sight. Back to front. */
+/* 5 — Hexa Blasts: a honeycomb cluster of buttons on the back wall. */
 {
-  const id = 'hide';
-  const s = shell(id);
-  let body = s.walls + s.pool + plainFloor();
-  body += block(0, 1, 30, '#ff2d6f');
-  body += block(1, 3, 22, '#c9ff3d');
-  body += block(3, 1, 38, '#ff8a1f');
-  rooms[id] = s.open + body + s.close;
+  const layout = [4, 5, 5, 4];               // rows that form the rounded cluster
+  const lit = new Set(['0-1', '1-0', '1-3', '2-2', '3-1', '3-3']);
+  const tint = ['#ffd93d', C.white, C.cyan];
+  let cluster = '';
+  layout.forEach((n, r) => {
+    for (let c = 0; c < n; c++) {
+      const s = 0.5 + (c - (n - 1) / 2) * 0.105;
+      const p = quadPt(backWall, s, 0.19 + r * 0.125);
+      const on = lit.has(`${r}-${c}`);
+      const col = on ? tint[(r + c) % 3] : C.magenta;
+      cluster += `<g><circle cx="${r1(p[0])}" cy="${r1(p[1])}" r="6.6" fill="#2a1240" stroke="#ff5cb0" stroke-width="1"/>` +
+        `<circle class="${on ? 'hx-on' : ''}" cx="${r1(p[0])}" cy="${r1(p[1])}" r="4.8" fill="${col}" opacity="${on ? 1 : .78}"/></g>`;
+    }
+  });
+  rooms.hexa = shell(skirt() + plainFloor() + cluster + ballRow(11, 0.06) + screen(rightWall, 0.4, 0.26));
 }
 
-/* 4 — Hoops Madness: ring targets at mixed heights. */
+/* 6 — Combos: not a room — two rooms booked back to back. */
 {
-  const id = 'hoops';
-  const s = shell(id);
-  let body = s.walls + s.pool + plainFloor();
-  const ring = (m, c, col, r) =>
-    `<g transform="${m(c)}"><circle r="${r + 5}" fill="${col}" opacity=".10"/>` +
-    `<circle class="hoop" r="${r}" fill="none" stroke="${col}" stroke-width="3.2"/></g>`;
-  body += ring(mLeft, onLeft(1.05, 41), '#ff2d6f', 14);
-  body += ring(mLeft, onLeft(2.75, 27), '#c9ff3d', 11);
-  body += ring(mRight, onRight(1.15, 27), '#ff8a1f', 11);
-  body += ring(mRight, onRight(2.85, 42), '#ff2d6f', 14);
-  rooms[id] = s.open + body + s.close;
-}
-
-/* 5 — Hexa Blasts: hex panels tiling both walls, several lit. */
-{
-  const id = 'hexa';
-  const s = shell(id);
-  let body = s.walls + s.pool + plainFloor();
-  const hp = hexPts(13);
-  const panel = (m, on, t, h, lit) => {
-    const col = lit ? '#c9ff3d' : '#332a4f';
-    return `<g transform="${m(on(t, h))}">` +
-      (lit ? `<polygon points="${hexPts(19)}" fill="#c9ff3d" opacity=".14"/>` : '') +
-      `<polygon class="${lit ? 'hx-on' : 'hx-off'}" points="${hp}" fill="${col}" ` +
-      `stroke="${lit ? '#e2ff8a' : '#453765'}" stroke-width="1.3"/></g>`;
+  const mini = (dx, scale, accent) => {
+    const m = p => [r1(160 + (p[0] - 160) * scale + dx), r1(132 + (p[1] - 150) * scale)];
+    const q = o => pts([m(o.TL), m(o.TR), m(o.BR), m(o.BL)]);
+    return `<g><polygon points="${q(leftWall)}" fill="${C.wallLeft}"/>` +
+      `<polygon points="${q(rightWall)}" fill="${C.wallRight}"/>` +
+      `<polygon points="${q(backWall)}" fill="${C.wallBack}"/>` +
+      `<polygon points="${q(floor)}" fill="${C.floor}"/>` +
+      /* only the skirting carries the accent — a fully tinted floor made these
+         read as two coloured slabs rather than two rooms */
+      `<polygon points="${pts([m(quadPt(backWall, 0, 0.9)), m(quadPt(backWall, 1, 0.9)), m([BX1, BY]), m([BX0, BY])])}" fill="${accent}" opacity=".8"/>` +
+      `<polyline points="${pts([m([FX0, FTOP]), m([BX0, BTOP]), m([BX1, BTOP]), m([FX1, FTOP])])}" fill="none" stroke="${accent}" stroke-width="1.5"/>` +
+      `<g fill="none" stroke="${accent}" stroke-width="1" opacity=".45">` +
+      `<line x1="${m([BX0, BTOP])[0]}" y1="${m([BX0, BTOP])[1]}" x2="${m([BX0, BY])[0]}" y2="${m([BX0, BY])[1]}"/>` +
+      `<line x1="${m([BX1, BTOP])[0]}" y1="${m([BX1, BTOP])[1]}" x2="${m([BX1, BY])[0]}" y2="${m([BX1, BY])[1]}"/></g></g>`;
   };
-  // staggered two-row grid on each wall
-  const rows = [[18, [0.7, 1.75, 2.8]], [46, [1.2, 2.3, 3.35]]];
-  const litL = new Set(['0-1', '1-2']), litR = new Set(['1-0', '0-2']);
-  rows.forEach(([h, ts], ri) => ts.forEach((t, ci) => {
-    body += panel(mLeft, onLeft, t, h, litL.has(`${ri}-${ci}`));
-    body += panel(mRight, onRight, t, h, litR.has(`${ri}-${ci}`));
-  }));
-  rooms[id] = s.open + body + s.close;
-}
-
-/* 6 — Combos: not a room, a booking shape. Two floors joined by a plus. */
-{
-  const id = 'combo';
-  const dia = (cx, cy, w, h, accent) =>
-    `<polygon points="${cx},${cy - h / 2} ${cx + w / 2},${cy} ${cx},${cy + h / 2} ${cx - w / 2},${cy}" ` +
-    `fill="#191330" stroke="${accent}" stroke-width="1.6"/>` +
-    `<polygon points="${cx},${cy - h / 2 + 9} ${cx + w / 2 - 16},${cy} ${cx},${cy + h / 2 - 9} ${cx - w / 2 + 16},${cy}" ` +
-    `fill="${accent}" opacity=".16"/>`;
-  rooms[id] =
-    `<svg class="room-art" viewBox="0 4 320 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">` +
-    dia(88, 130, 132, 74, '#ff2d6f') + dia(232, 130, 132, 74, '#c9ff3d') +
-    `<g stroke="#f4f2ff" stroke-width="2.6" stroke-linecap="round" opacity=".8">` +
-    `<line x1="160" y1="118" x2="160" y2="142"/><line x1="148" y1="130" x2="172" y2="130"/></g>` +
-    `</svg>`;
+  rooms.combo =
+    `<svg class="room-art" viewBox="0 34 320 192" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">` +
+    mini(-74, 0.5, '#ff3ea0') + mini(74, 0.5, '#c9ff3d') +
+    `<g stroke="#f4f2ff" stroke-width="3" stroke-linecap="round" opacity=".85">` +
+    `<line x1="160" y1="118" x2="160" y2="142"/><line x1="148" y1="130" x2="172" y2="130"/></g></svg>`;
 }
 
 require('fs').writeFileSync(process.argv[2], JSON.stringify(rooms, null, 1));

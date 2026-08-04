@@ -73,15 +73,25 @@ you can see what you're walking into before you book. The five game cards here d
 loads it at runtime. Its output is inlined directly into `index.html`, so re-running it (`node
 tools/gen-room-diagrams.js rooms.json`) regenerates the SVG for re-inlining if the geometry changes.
 
-They are deliberately *schematic*, not photographic:
+They are deliberately *schematic*, not photographic — but the **layouts are accurate**, and that
+distinction is the whole point. The drawing is ours; the arrangement of the room is a fact about a
+physical space, the same way a floor plan is. A pretty diagram of the wrong room is worse than no
+diagram at all, so each one matches what is actually in that room:
 
 | Room | What the diagram shows |
 |---|---|
-| Floor Is Lava | Molten floor grid, three safe tiles, two more hovering above |
-| Press It! | Button banks across both walls, a few lit |
-| Hide & Seek | Three obstacle blocks of different heights breaking sightlines |
-| Hoops Madness | Four ring targets at mixed heights |
-| Hexa Blasts | Staggered hex panels tiling both walls, several lit |
+| Floor Is Lava | Grid of lit LED floor tiles — white with cyan / magenta / yellow patches |
+| Press It! | Dense button fields across all three walls, bright floor |
+| Hide & Seek | Lit cylindrical pillars standing in the room to break sightlines |
+| Hoops Madness | Five hoops in a row on the back wall, balls on the floor below |
+| Hexa Blasts | Honeycomb cluster of buttons on the back wall, ball row beneath |
+
+A first pass got several of these wrong — scattered blocks for Hide & Seek instead of pillars, hoops
+spread over two walls instead of a single row, molten orange for a floor that is actually white LED
+tile — and was corrected against the venue's own published photos (2026-08-04).
+
+The projection changed with it: a three-wall diorama box in mild perspective, which is how the venue
+frames its rooms, replacing the 45-degree corner view of the first pass.
 | Combos | Not a room — two floors joined by a plus, since it's a booking shape |
 
 Inlined rather than linked so there are no extra requests and the lit elements can be animated by the
