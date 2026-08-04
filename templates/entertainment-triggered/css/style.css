@@ -421,11 +421,28 @@ p { line-height: 1.65; color: var(--dim); }
 /* A smooth lift rather than the previous shake. Six cards that twitch when the
    cursor crosses them is exactly the "chaos" the rest of this page avoids;
    the same information arrives from a quiet rise and the accent border. */
+.game { position: relative; }
 .game:hover {
   background: #17122a;
-  box-shadow: inset 0 0 0 1px var(--hot);
   transform: translateY(-3px);
+  z-index: 2;   /* lift above neighbours so the border is never clipped by them */
 }
+
+/* The hover border lives on its own layer above the card's contents.
+   As an inset box-shadow it painted on the card's background, so the art
+   panel — which has its own opaque background — covered the top half of it,
+   and the one piece of UI whose whole job is to confirm "you are on this
+   card" was the piece being hidden. */
+.game::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border: 1px solid transparent;
+  transition: border-color 0.3s var(--ease);
+}
+.game:hover::after { border-color: var(--hot); }
 
 /* ---- room diagram ----
    Original isometric SVG per room (see IMAGE-CREDITS.md). The real venue
@@ -437,18 +454,20 @@ p { line-height: 1.65; color: var(--dim); }
   border-bottom: 1px solid var(--line-soft);
   overflow: hidden;
 }
-/* Fine grain over the diagram. A render has sensor/sampling noise and flat
-   vector fills don't, which is a good part of why clean SVG reads as "flat
-   drawing" rather than "3D render". Generated in-place from feTurbulence
-   rather than shipped as a bitmap, so the art stays vector and animatable. */
+/* Fine grain over the diagram. A render has sampling noise and flat vector
+   fills don't, which is a good part of why clean SVG reads as "drawing" rather
+   than "render". The tile is a real Photoshop grain pass (see IMAGE-CREDITS.md)
+   rather than synthetic CSS noise — 128px so it stays about 5KB, since noise is
+   essentially incompressible and a full-size tile ran to 34KB. */
 .game-art::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.13;
+  opacity: 0.16;
   mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("../img/grain.webp");
+  background-size: 128px 128px;
 }
 .room-art {
   display: block;
