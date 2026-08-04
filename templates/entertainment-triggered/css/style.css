@@ -275,18 +275,82 @@ p { line-height: 1.65; color: var(--dim); }
 .hero.is-lit .line:nth-child(3) .rise { transition-delay: 0.14s; }
 .hero.is-lit .line:nth-child(4) .rise { transition-delay: 0.21s; }
 
-/* Ambient chaos — a brief chromatic-split jolt at random intervals (see
-   main.js), not a loop. Reads as an unstable signal, not a decoration. */
-.hero-title.is-glitching {
-  animation: titleGlitch 0.4s linear;
+/* ---- deliberate glitch ----
+   A faint jitter on the live text reads as "my browser is broken". This is
+   built to read as an effect instead: two hard-coloured ghost copies of the
+   headline tear sideways in opposite directions, over a scanline field, in a
+   fixed stutter rhythm. It also fires on hover, so anyone who suspects a fault
+   can reproduce it on demand and see that it's deliberate. */
+/* z-index 0 makes .rise a stacking context so the ghosts can sit *behind* the
+   real text. Painted on top they cover the headline and it just looks pink;
+   behind it, the white text stays crisp and only the colour fringes show. */
+.hero-title .rise { position: relative; z-index: 0; }
+.hero-title .rise::before,
+.hero-title .rise::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  /* the ghosts are flat colour — the <em> tint in the real line would muddy them */
+  -webkit-text-fill-color: currentColor;
 }
-@keyframes titleGlitch {
-  0%, 100% { text-shadow: none; transform: translate(0); clip-path: none; }
-  8% { text-shadow: -3px 0 var(--hot), 3px 0 var(--volt); transform: translate(-3px, 0); clip-path: inset(0 0 62% 0); }
-  22% { text-shadow: 3px 0 var(--hot), -3px 0 var(--volt); transform: translate(2px, 0); clip-path: inset(48% 0 0 0); }
-  36% { text-shadow: -2px 0 var(--volt), 2px 0 var(--hot); transform: translate(-1px, 0); clip-path: inset(0 0 20% 0); }
-  50% { text-shadow: none; transform: translate(0); clip-path: none; }
-  64% { text-shadow: 2px 0 var(--hot), -2px 0 var(--volt); transform: translate(1px, 0); clip-path: inset(70% 0 0 0); }
+.hero-title .rise::before { color: #00eaff; }
+.hero-title .rise::after { color: #ff2d6f; }
+
+.hero.is-glitching .hero-title .rise::before,
+.hero-title:hover .rise::before { animation: ghostA 0.34s ease-out both; }
+.hero.is-glitching .hero-title .rise::after,
+.hero-title:hover .rise::after { animation: ghostB 0.34s ease-out both; }
+
+/* One clean separation and a settle — deliberately not a stutter. A long
+   multi-hit tear reads as chaos, and chaos is indistinguishable from a fault.
+   Offsets stay small enough that the headline is legible the whole time. */
+@keyframes ghostA {
+  0%   { opacity: 0; transform: translate(0); }
+  15%  { opacity: .85; transform: translate(-4px, -1px); }
+  45%  { opacity: .5; transform: translate(-2px, 0); }
+  100% { opacity: 0; transform: translate(0); }
+}
+@keyframes ghostB {
+  0%   { opacity: 0; transform: translate(0); }
+  15%  { opacity: .85; transform: translate(4px, 1px); }
+  45%  { opacity: .5; transform: translate(2px, 0); }
+  100% { opacity: 0; transform: translate(0); }
+}
+
+/* A single scan line sweeping the headline, in place of the full-hero CRT
+   field. One controlled element crossing a known area is legible as an effect;
+   a screen full of flickering bars is not. */
+.glitch-bars {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    rgba(0, 234, 255, 0.06) 42%,
+    rgba(0, 234, 255, 0.55) 50%,
+    rgba(0, 234, 255, 0.06) 58%,
+    transparent 100%);
+  background-size: 100% 14px;
+  background-repeat: no-repeat;
+}
+.hero.is-glitching .glitch-bars,
+.hero:has(.hero-title:hover) .glitch-bars { animation: scanSweep 0.55s ease-out both; }
+@keyframes scanSweep {
+  0%   { opacity: 0; background-position: 0 12%; }
+  12%  { opacity: 1; }
+  85%  { opacity: .7; }
+  100% { opacity: 0; background-position: 0 78%; }
 }
 
 /* Sparse ember-and-static particles, spawned by main.js at random offsets
@@ -351,18 +415,16 @@ p { line-height: 1.65; color: var(--dim); }
   background: var(--panel);
   display: flex;
   flex-direction: column;
-  transition: background 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  transition: background 0.35s var(--ease), box-shadow 0.35s var(--ease),
+              transform 0.35s var(--ease);
 }
+/* A smooth lift rather than the previous shake. Six cards that twitch when the
+   cursor crosses them is exactly the "chaos" the rest of this page avoids;
+   the same information arrives from a quiet rise and the accent border. */
 .game:hover {
   background: #17122a;
   box-shadow: inset 0 0 0 1px var(--hot);
-  animation: cardJolt 0.4s var(--ease);
-}
-@keyframes cardJolt {
-  0% { transform: scale(1) rotate(0); }
-  35% { transform: scale(1.012) rotate(-0.35deg); }
-  65% { transform: scale(0.997) rotate(0.2deg); }
-  100% { transform: scale(1) rotate(0); }
+  transform: translateY(-3px);
 }
 
 /* ---- room diagram ----
@@ -370,9 +432,23 @@ p { line-height: 1.65; color: var(--dim); }
    shows a render of each room; a schematic diagram gives the same "here's
    what you're walking into" read without passing off artwork as theirs. */
 .game-art {
+  position: relative;
   background: linear-gradient(168deg, #120e20, #0b0914);
   border-bottom: 1px solid var(--line-soft);
   overflow: hidden;
+}
+/* Fine grain over the diagram. A render has sensor/sampling noise and flat
+   vector fills don't, which is a good part of why clean SVG reads as "flat
+   drawing" rather than "3D render". Generated in-place from feTurbulence
+   rather than shipped as a bitmap, so the art stays vector and animatable. */
+.game-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.13;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 .room-art {
   display: block;

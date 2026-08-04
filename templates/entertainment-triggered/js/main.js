@@ -44,15 +44,20 @@
      unstable signal rather than a metronome. Only while the hero
      is on screen, and never for reduced-motion.
      ---------------------------------------------------------- */
-  var heroTitle = document.querySelector('.hero-title');
-  if (heroTitle && !reduced) {
+  // The class goes on .hero, not the headline, because the scanline field
+  // covers the whole hero. Removed once the run finishes so :hover can still
+  // fire the same animations independently.
+  if (hero && !reduced) {
     (function scheduleGlitch() {
-      var wait = 4200 + Math.random() * 7000; // 4.2s – 11.2s, never fixed
+      // Infrequent on purpose. A glitch every few seconds stops being an accent
+      // and starts being the page's personality — and reads as a fault.
+      var wait = 9000 + Math.random() * 11000; // 9s – 20s, never a fixed beat
       setTimeout(function () {
         if (heroOnScreen && !document.hidden) {
-          heroTitle.classList.remove('is-glitching');
-          void heroTitle.offsetWidth; // restart the animation cleanly
-          heroTitle.classList.add('is-glitching');
+          hero.classList.remove('is-glitching');
+          void hero.offsetWidth; // restart the animation cleanly
+          hero.classList.add('is-glitching');
+          setTimeout(function () { hero.classList.remove('is-glitching'); }, 520);
         }
         scheduleGlitch();
       }, wait);
@@ -67,10 +72,10 @@
   var sparkField = document.getElementById('sparkField');
   if (sparkField && !reduced) {
     var liveSparks = 0;
-    var SPARK_CAP = 5;
+    var SPARK_CAP = 3;   // a suggestion of embers, not a particle system
     var SPARK_COLORS = ['var(--volt)', 'var(--hot)', 'var(--flame)'];
     (function scheduleSpark() {
-      var wait = 700 + Math.random() * 1600;
+      var wait = 1100 + Math.random() * 2200;
       setTimeout(function () {
         if (liveSparks < SPARK_CAP && heroOnScreen && !document.hidden) {
           var s = document.createElement('span');

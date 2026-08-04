@@ -55,18 +55,67 @@ const C = {
   ball: '#ff7a2f'
 };
 
-function shell(inner) {
+/* Flat fills read as flat vector art no matter how correct the geometry is.
+   What makes a surface look like a surface is light falling across it, so every
+   plane gets a gradient, every corner gets ambient occlusion, every lit object
+   gets a bloom halo, and the floor reflects the wall like the venue's glossy
+   floors actually do.
+
+   `lit` is the subset of the room that emits light. It appears three times —
+   mirrored into the floor, blurred for bloom, and crisp on top — so it is
+   defined once and referenced by <use>, and `inner` marks where the crisp copy
+   belongs with a %LIT% token. Emitting it three times literally tripled the
+   page weight for no visual gain. */
+function shell(id, inner, lit = '', floorFill = '') {
+  const litUse = lit ? `<use href="#${id}-lit"/>` : '';
+  if (lit && !inner.includes('%LIT%')) throw new Error(id + ': inner is missing its %LIT% marker');
+  const REFL = 0.45;   // how far the reflection is squashed
   return `<svg class="room-art" viewBox="0 34 320 192" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">` +
-    `<polygon points="${quadPoly(leftWall)}" fill="${C.wallLeft}"/>` +
-    `<polygon points="${quadPoly(rightWall)}" fill="${C.wallRight}"/>` +
-    `<polygon points="${quadPoly(backWall)}" fill="${C.wallBack}"/>` +
-    inner +
-    /* corner edges last, so they read above the wall fills */
-    `<g fill="none" stroke="${C.line}" stroke-width="1.2" opacity=".9">` +
+    `<defs>` +
+      /* wall gradients: dark at the ceiling, warming toward the lit skirting */
+      `<linearGradient id="${id}-gb" x1="0" y1="0" x2="0" y2="1">` +
+        `<stop offset="0" stop-color="#150e28"/><stop offset=".55" stop-color="#2b1f4d"/><stop offset="1" stop-color="#4b3084"/></linearGradient>` +
+      `<linearGradient id="${id}-gl" x1="0" y1="0" x2="1" y2="0">` +
+        `<stop offset="0" stop-color="#332455"/><stop offset="1" stop-color="#180f2e"/></linearGradient>` +
+      `<linearGradient id="${id}-gr" x1="1" y1="0" x2="0" y2="0">` +
+        `<stop offset="0" stop-color="#241a42"/><stop offset="1" stop-color="#130c24"/></linearGradient>` +
+      /* pool of light on the floor */
+      `<radialGradient id="${id}-pool" cx=".5" cy=".18" r=".85">` +
+        `<stop offset="0" stop-color="#b06cff" stop-opacity=".30"/><stop offset="1" stop-color="#b06cff" stop-opacity="0"/></radialGradient>` +
+      /* corner ambient occlusion */
+      `<linearGradient id="${id}-ao" x1="0" y1="0" x2="0" y2="1">` +
+        `<stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>` +
+      `<radialGradient id="${id}-vig" cx=".5" cy=".5" r=".72">` +
+        `<stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient>` +
+      `<filter id="${id}-bloom" x="-50%" y="-50%" width="200%" height="200%">` +
+        `<feGaussianBlur stdDeviation="3.4"/></filter>` +
+      `<filter id="${id}-soft" x="-50%" y="-50%" width="200%" height="200%">` +
+        `<feGaussianBlur stdDeviation="1.6"/></filter>` +
+      `<clipPath id="${id}-fc"><polygon points="${quadPoly(floor)}"/></clipPath>` +
+      `<linearGradient id="${id}-fade" x1="0" y1="0" x2="0" y2="1">` +
+        `<stop offset="0" stop-color="#fff" stop-opacity=".40"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>` +
+      `<mask id="${id}-fm"><rect x="0" y="${BY}" width="320" height="${FY - BY + 10}" fill="url(#${id}-fade)"/></mask>` +
+      (lit ? `<g id="${id}-lit">${lit}</g>` : '') +
+    `</defs>` +
+    `<polygon points="${quadPoly(leftWall)}" fill="url(#${id}-gl)"/>` +
+    `<polygon points="${quadPoly(rightWall)}" fill="url(#${id}-gr)"/>` +
+    `<polygon points="${quadPoly(backWall)}" fill="url(#${id}-gb)"/>` +
+    /* ceiling shadow down the top of each wall */
+    `<polygon points="${quadPoly(backWall)}" fill="url(#${id}-ao)" opacity=".8"/>` +
+    (floorFill || `<polygon points="${quadPoly(floor)}" fill="${C.floor}"/>`) +
+    `<polygon points="${quadPoly(floor)}" fill="url(#${id}-pool)"/>` +
+    /* the wall's lit fittings, mirrored and faded into the floor */
+    (lit ? `<g clip-path="url(#${id}-fc)" mask="url(#${id}-fm)" filter="url(#${id}-soft)">` +
+           `<g transform="translate(0 ${r1(BY * (1 + REFL))}) scale(1 ${-REFL})">${litUse}</g></g>` : '') +
+    (lit ? `<g filter="url(#${id}-bloom)" opacity=".85">${litUse}</g>` : '') +
+    inner.replace('%LIT%', litUse) +
+    /* corner edges above the fills, then a vignette to seat it in the card */
+    `<g fill="none" stroke="${C.line}" stroke-width="1.2" opacity=".75">` +
     `<polyline points="${pts([[FX0, FTOP], [BX0, BTOP], [BX1, BTOP], [FX1, FTOP]])}"/>` +
     `<line x1="${BX0}" y1="${BTOP}" x2="${BX0}" y2="${BY}"/>` +
-    `<line x1="${BX1}" y1="${BTOP}" x2="${BX1}" y2="${BY}"/>` +
-    `</g></svg>`;
+    `<line x1="${BX1}" y1="${BTOP}" x2="${BX1}" y2="${BY}"/></g>` +
+    `<rect x="0" y="34" width="320" height="192" fill="url(#${id}-vig)"/>` +
+    `</svg>`;
 }
 
 /* Every room in the venue has a wall-mounted display. */
@@ -123,7 +172,7 @@ const rooms = {};
     const a = quadPt(backWall, 0.08 + i * 0.17, 0.30);
     strips += `<rect x="${r1(a[0] - 1.4)}" y="${r1(a[1] - 5)}" width="2.8" height="10" rx="1.4" fill="${C.magenta}" opacity=".8"/>`;
   }
-  rooms.lava = shell(skirt() + g + strips + screen(backWall, 0.5, 0.14));
+  rooms.lava = shell('lava', skirt() + '%LIT%' + screen(backWall, 0.5, 0.14), strips, g);
 }
 
 /* 2 — Press It!: dense button fields covering the walls, bright floor. */
@@ -146,7 +195,8 @@ const rooms = {};
                 `fill="${on ? pick(r, c) : '#423270'}"/>`;
       }
   });
-  rooms.press = shell(skirt() + plainFloor('#d9d6ee') + dots + screen(backWall, 0.5, 0.05));
+  rooms.press = shell('press', skirt() + '%LIT%' + screen(backWall, 0.5, 0.05),
+    dots, plainFloor('#d9d6ee'));
 }
 
 /* 3 — Hide & Seek: lit cylindrical pillars standing in the room to break
@@ -165,9 +215,9 @@ const rooms = {};
     const p = quadPt(backWall, 0.12 + i * 0.19, 0.28);
     acc += `<rect x="${r1(p[0] - 1.3)}" y="${r1(p[1] - 6)}" width="2.6" height="12" rx="1.3" fill="${C.cyan}" opacity=".55"/>`;
   }
-  rooms.hide = shell(skirt() + plainFloor() + acc + screen(backWall, 0.5, 0.09) +
+  rooms.hide = shell('hide', skirt() + '%LIT%' + screen(backWall, 0.5, 0.09) +
     pillar(0.28, 0.40, 8.5, 42, '#bdb2e6') +
-    pillar(0.68, 0.70, 11, 54, '#e6dffa'));
+    pillar(0.68, 0.70, 11, 54, '#e6dffa'), acc, plainFloor());
 }
 
 /* 4 — Hoops Madness: five hoops in a row on the back wall, balls on the floor. */
@@ -182,7 +232,7 @@ const rooms = {};
       `<rect x="${r1(bp[0] - 4.5)}" y="${r1(bp[1] - 3.5)}" width="9" height="7" fill="${col}" opacity=".38"/>` +
       `<ellipse class="hoop" cx="${r1(rp[0])}" cy="${r1(rp[1])}" rx="6.5" ry="2.4" fill="none" stroke="${C.ball}" stroke-width="1.8"/></g>`;
   }
-  rooms.hoops = shell(skirt() + plainFloor() + screen(backWall, 0.5, 0.07) + h + ballRow());
+  rooms.hoops = shell('hoops', skirt() + screen(backWall, 0.5, 0.07) + '%LIT%' + ballRow(), h, plainFloor());
 }
 
 /* 5 — Hexa Blasts: a honeycomb cluster of buttons on the back wall. */
@@ -201,7 +251,7 @@ const rooms = {};
         `<circle class="${on ? 'hx-on' : ''}" cx="${r1(p[0])}" cy="${r1(p[1])}" r="4.8" fill="${col}" opacity="${on ? 1 : .78}"/></g>`;
     }
   });
-  rooms.hexa = shell(skirt() + plainFloor() + cluster + ballRow(11, 0.06) + screen(rightWall, 0.4, 0.26));
+  rooms.hexa = shell('hexa', skirt() + '%LIT%' + ballRow(11, 0.06) + screen(rightWall, 0.4, 0.26), cluster, plainFloor());
 }
 
 /* 6 — Combos: not a room — two rooms booked back to back. */

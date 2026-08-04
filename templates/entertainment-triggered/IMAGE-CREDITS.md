@@ -86,13 +86,33 @@ diagram at all, so each one matches what is actually in that room:
 | Hoops Madness | Five hoops in a row on the back wall, balls on the floor below |
 | Hexa Blasts | Honeycomb cluster of buttons on the back wall, ball row beneath |
 
+| Combos | Not a room — two small rooms and a plus, since it's a booking shape |
+
 A first pass got several of these wrong — scattered blocks for Hide & Seek instead of pillars, hoops
 spread over two walls instead of a single row, molten orange for a floor that is actually white LED
 tile — and was corrected against the venue's own published photos (2026-08-04).
 
 The projection changed with it: a three-wall diorama box in mild perspective, which is how the venue
 frames its rooms, replacing the 45-degree corner view of the first pass.
-| Combos | Not a room — two floors joined by a plus, since it's a booking shape |
+
+### Making them read as renders rather than diagrams
+
+Correct geometry still looked flat, because flatness is a lighting problem, not a geometry one. Each
+surface now carries a gradient (dark at the ceiling, warming toward the lit skirting), corners get
+ambient occlusion, lit fittings get a bloom halo, the floor carries a pool of light and a squashed
+blurred reflection of the wall, and a vignette seats the whole thing in the card. A fine grain sits
+over the top in CSS — a render has sampling noise and flat vector fills don't, which is a good part
+of why clean SVG reads as "drawing".
+
+Each room's lit fittings appear three times (reflection, bloom, crisp), so they are defined once in
+`<defs>` and referenced with `<use>`; emitting them literally tripled the page weight for no visual
+gain.
+
+**On the Adobe route:** the rooms were rendered to PNG and run through the Photoshop API's grain pass
+to compare. It looked good, but shipping raster would have cost the crisp scaling and the per-element
+hover animation in exchange for a texture reproducible in CSS, so the vector version shipped. Adobe
+tooling *is* used elsewhere on this page and template — the glitch frame of `venue.webp` is a real
+Photoshop chromatic-aberration pass, and the Meridian team photos were graded through the same API.
 
 Inlined rather than linked so there are no extra requests and the lit elements can be animated by the
 page's own CSS on hover. Nothing here is traced from, screenshotted from, or derived from the real
