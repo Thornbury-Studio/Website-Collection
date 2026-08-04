@@ -118,8 +118,17 @@ on anything live, a squashed blurred reflection in the floor, and a vignette. Th
 on the floor is kept very faint — at any real strength it floods the floor and the room stops reading
 as a room.
 
-Each room's live fittings appear three times (reflection, bloom, crisp), so they are defined once in
-`<defs>` and referenced with `<use>`; emitting them literally tripled the page weight for no gain.
+Each room's live fittings appear three times (reflection, bloom, crisp). The two decorative copies
+are `<use>` references to a single definition; the **crisp copy is emitted as real markup**.
+
+That split is load-bearing, and the reason is worth recording: **a `<use>` instance does not pick up
+CSS rules that match the referenced original.** Verified directly — the original's computed `fill`
+read as green while its rendered instances were black. Everything hover-driven therefore has to be a
+real element. Referencing all three copies was smaller, but it silently killed every hover animation
+on lit content (pulsing tiles, buttons, hex cells, the whole hoop rig), which is a bad trade for a
+few KB. Anything that must look right in the decorative copies also needs its rest state as a
+presentation *attribute*, since those copies ignore the stylesheet — that is why the hoop flames
+carry `opacity="0"` rather than relying on CSS alone.
 
 ### Adobe tooling here
 
