@@ -57,6 +57,41 @@ function floorCell(i, j, n, m) {
           flr((i + 1) / n, (j + 1) / m), flr(i / n, (j + 1) / m)];
 }
 
+/* Every room in the venue has a scoreboard. Cheap way to add somewhere for the
+   eye to go without adding clutter. */
+function screen(u, v, w = 17, h = 11) {
+  const c = wallR(u, v);
+  return `<g><rect x="${r1(c[0] - w / 2)}" y="${r1(c[1] - h / 2)}" width="${w}" height="${h}" rx="1.5" ` +
+    `fill="#0c1428" stroke="#4de0ff" stroke-width="1"/>` +
+    `<rect class="scr" x="${r1(c[0] - w / 2 + 2)}" y="${r1(c[1] - h / 2 + 2)}" width="${r1(w - 4)}" height="2" fill="#4de0ff" opacity=".8"/>` +
+    `<rect class="scr" x="${r1(c[0] - w / 2 + 2)}" y="${r1(c[1] - h / 2 + 6)}" width="${r1((w - 4) * 0.55)}" height="2" fill="#4de0ff" opacity=".45"/></g>`;
+}
+
+/* Faint seams across the floor. Without them a plain floor is a flat gradient
+   wedge and the room loses the sense of a surface receding away from you. */
+function floorSeams(n = 5) {
+  let s = '<g stroke="#31255a" stroke-width=".8" opacity=".65" fill="none">';
+  for (let i = 1; i < n; i++) {
+    const a = flr(i / n, 0), b = flr(i / n, 1);
+    const c = flr(0, i / n), d = flr(1, i / n);
+    s += `<line x1="${r1(a[0])}" y1="${r1(a[1])}" x2="${r1(b[0])}" y2="${r1(b[1])}"/>`;
+    s += `<line x1="${r1(c[0])}" y1="${r1(c[1])}" x2="${r1(d[0])}" y2="${r1(d[1])}"/>`;
+  }
+  return s + '</g>';
+}
+const seamFloor = id => poly(floorQuad, `url(#${id}-f)`) + floorSeams();
+
+/* Vertical light battens on the left wall — depth cue plus something for the
+   hover sweep to travel along. */
+function battens(n, accent) {
+  let s = '';
+  for (let i = 0; i < n; i++) {
+    const p = wallL(0.14 + i * (0.72 / (n - 1)), 0.42);
+    s += `<rect class="cell" style="--i:${i}" x="${r1(p[0] - 1.6)}" y="${r1(p[1] - 11)}" width="3.2" height="22" rx="1.6"/>`;
+  }
+  return s;
+}
+
 /* Lit skirting where each wall meets the floor. Reads as the room's own light
    source, which is what justifies the gradients on every other surface. */
 const skirt = accent =>
@@ -70,7 +105,10 @@ function shell(id, accent, inner, lit = '', floorFill = '') {
   const litUse = lit ? `<use href="#${id}-lit"/>` : '';
   if (lit && !inner.includes('%LIT%')) throw new Error(id + ': inner is missing its %LIT% marker');
   const REFL = 0.42;
-  return `<svg class="room-art" viewBox="0 28 320 196" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">` +
+  /* --rm / --off drive the hover "wake" animation in style.css: dormant
+     fittings run up to the room's accent in a staggered sweep, so hovering a
+     card visibly starts something happening inside the room. */
+  return `<svg class="room-art" style="--rm:${accent};--off:${C.tileOff}" viewBox="0 28 320 196" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">` +
     `<defs>` +
       `<linearGradient id="${id}-r" x1="0" y1="0" x2="0" y2="1">` +
         `<stop offset="0" stop-color="#191130"/><stop offset="1" stop-color="#33245c"/></linearGradient>` +
@@ -112,37 +150,42 @@ const rooms = {};
 
 /* 1 — Floor Is Lava: a lit floor, and nothing else. */
 {
-  const N = 5, M = 5;
-  const on = new Set(['1,1', '3,0', '0,3', '2,3', '4,2']);
+  const N = 6, M = 6;
+  const on = new Set(['1,1', '3,0', '0,3', '2,3', '4,2', '5,4', '2,5', '4,5']);
   let g = '';
+  let n = 0;
   for (let i = 0; i < N; i++)
-    for (let j = 0; j < M; j++)
-      g += poly(floorCell(i, j, N, M), C.tileOff, 'stroke="#150f2c" stroke-width="1"');
+    for (let j = 0; j < M; j++) {
+      if (on.has(`${i},${j}`)) continue;
+      g += `<polygon class="cell" style="--i:${(i + j) % 8}" points="${pts(floorCell(i, j, N, M))}" stroke="#150f2c" stroke-width="1"/>`;
+      n++;
+    }
   let hot = '';
   for (const k of on) {
     const [i, j] = k.split(',').map(Number);
     hot += poly(floorCell(i, j, N, M), C.hot, 'class="t-lava" stroke="#150f2c" stroke-width="1"');
   }
-  rooms.lava = shell('lava', C.hot, skirt(C.hot) + '%LIT%', hot,
+  rooms.lava = shell('lava', C.hot,
+    skirt(C.hot) + battens(4, C.hot) + screen(0.5, 0.22) + '%LIT%', hot,
     poly(floorQuad, `url(#lava-f)`) + g);
 }
 
 /* 2 — Press It!: a sparse grid of buttons, three of them live. */
 {
-  const dot = (p, col, cls) =>
-    `<circle ${cls} cx="${r1(p[0])}" cy="${r1(p[1])}" r="3.6" fill="${col}"/>`;
+  const live = (p) => `<circle class="b-on" cx="${r1(p[0])}" cy="${r1(p[1])}" r="3.6" fill="${C.volt}"/>`;
+  const dead = (p, i) => `<circle class="cell" style="--i:${i}" cx="${r1(p[0])}" cy="${r1(p[1])}" r="3.4"/>`;
   let off = '', on = '';
-  const liveR = new Set(['1,0', '2,2']), liveL = new Set(['0,1']);
-  for (let u = 0; u < 3; u++)
-    for (let v = 0; v < 3; v++) {
-      const pr = wallR(0.2 + u * 0.3, 0.24 + v * 0.22);
-      const pl = wallL(0.24 + u * 0.28, 0.26 + v * 0.22);
-      /* Unlit buttons still have to be visible or the grid — the whole point of
-         this room — disappears into the wall. */
-      (liveR.has(`${u},${v}`) ? (on += dot(pr, C.volt, 'class="b-on"')) : (off += dot(pr, '#453a72')));
-      (liveL.has(`${u},${v}`) ? (on += dot(pl, C.volt, 'class="b-on"')) : (off += dot(pl, '#382d61')));
+  const liveR = new Set(['1,0', '3,2', '2,1']), liveL = new Set(['0,1', '2,3']);
+  for (let u = 0; u < 4; u++)
+    for (let v = 0; v < 4; v++) {
+      const pr = wallR(0.16 + u * 0.225, 0.2 + v * 0.19);
+      liveR.has(`${u},${v}`) ? (on += live(pr)) : (off += dead(pr, (u + v) % 6));
+      if (u < 3) {
+        const pl = wallL(0.2 + u * 0.26, 0.22 + v * 0.19);
+        liveL.has(`${u},${v}`) ? (on += live(pl)) : (off += dead(pl, (u + v + 2) % 6));
+      }
     }
-  rooms.press = shell('press', C.volt, skirt(C.volt) + off + '%LIT%', on);
+  rooms.press = shell('press', C.volt, skirt(C.volt) + off + screen(0.5, 0.06) + '%LIT%', on, seamFloor('press'));
 }
 
 /* 3 — Hide & Seek: one pillar. That is the whole room. */
@@ -153,10 +196,10 @@ const rooms = {};
        two ground vectors, so it sits in the floor plane rather than floating */
     const rx = rad * (Math.abs(KX[0]) + Math.abs(KZ[0])) / 2;
     const ry = rad * (Math.abs(KX[1]) + Math.abs(KZ[1])) / 2;
-    return `<g><ellipse cx="${r1(b[0])}" cy="${r1(b[1])}" rx="${r1(rx * 1.2)}" ry="${r1(ry * 1.1)}" fill="#0d0918" opacity=".5"/>` +
-      `<rect x="${r1(b[0] - rx)}" y="${r1(b[1] - h)}" width="${r1(rx * 2)}" height="${r1(h)}" fill="#2c2150"/>` +
-      `<rect x="${r1(b[0] - rx)}" y="${r1(b[1] - h)}" width="${r1(rx * 0.75)}" height="${r1(h)}" fill="#382a63"/>` +
-      `<ellipse cx="${r1(b[0])}" cy="${r1(b[1])}" rx="${r1(rx)}" ry="${r1(ry)}" fill="#2c2150"/></g>`;
+    return `<g><ellipse cx="${r1(b[0])}" cy="${r1(b[1])}" rx="${r1(rx * 1.2)}" ry="${r1(ry * 1.1)}" fill="#0b0716" opacity=".75"/>` +
+      `<rect x="${r1(b[0] - rx)}" y="${r1(b[1] - h)}" width="${r1(rx * 2)}" height="${r1(h)}" fill="#3b2d68"/>` +
+      `<rect x="${r1(b[0] - rx)}" y="${r1(b[1] - h)}" width="${r1(rx * 0.75)}" height="${r1(h)}" fill="#4a3a80"/>` +
+      `<ellipse cx="${r1(b[0])}" cy="${r1(b[1])}" rx="${r1(rx)}" ry="${r1(ry)}" fill="#3b2d68"/></g>`;
   };
   const cap = (u, w, rad, h) => {
     const b = flr(u, w);
@@ -164,9 +207,13 @@ const rooms = {};
     const ry = rad * (Math.abs(KX[1]) + Math.abs(KZ[1])) / 2;
     return `<ellipse class="b-on" cx="${r1(b[0])}" cy="${r1(b[1] - h)}" rx="${r1(rx)}" ry="${r1(ry)}" fill="${C.ice}"/>`;
   };
+  /* Three pillars at different depths — one alone read as an empty room, and
+     the staggered heights are what make the space feel occupied. */
   rooms.hide = shell('hide', C.ice,
-    skirt(C.ice) + pillar(0.46, 0.42, 15, 40) + '%LIT%',
-    cap(0.46, 0.42, 15, 40));
+    skirt(C.ice) + battens(5, C.ice) + screen(0.5, 0.12) +
+    pillar(0.24, 0.22, 11, 30) + pillar(0.5, 0.46, 15, 42) + pillar(0.78, 0.74, 12, 34) +
+    '%LIT%',
+    cap(0.24, 0.22, 11, 30) + cap(0.5, 0.46, 15, 42) + cap(0.78, 0.74, 12, 34), seamFloor('hide'));
 }
 
 /* 4 — Hoops Madness: three hoops on one wall, a few balls below. */
@@ -180,11 +227,13 @@ const rooms = {};
     rig += `<rect x="${r1(b[0] - 7)}" y="${r1(b[1] - 6)}" width="14" height="11" rx="1.5" fill="${C.flame}" opacity=".28"/>` +
       `<ellipse class="hoop" cx="${r1(h[0])}" cy="${r1(h[1])}" rx="7.5" ry="2.8" fill="none" stroke="${C.flame}" stroke-width="2.2"/>`;
   }
-  for (let i = 0; i < 5; i++) {
-    const p = flr(0.16 + i * 0.17, 0.12);
-    ball += `<circle cx="${r1(p[0])}" cy="${r1(p[1])}" r="4" fill="${C.flame}"/>`;
+  for (let i = 0; i < 9; i++) {
+    const p = flr(0.1 + (i % 5) * 0.2, 0.12 + Math.floor(i / 5) * 0.13);
+    ball += `<circle cx="${r1(p[0])}" cy="${r1(p[1])}" r="4" fill="${C.flame}"/>` +
+      `<circle cx="${r1(p[0] - 1.1)}" cy="${r1(p[1] - 1.2)}" r="1.2" fill="#ffd0a8" opacity=".75"/>`;
   }
-  rooms.hoops = shell('hoops', C.flame, skirt(C.flame) + '%LIT%' + ball, rig);
+  rooms.hoops = shell('hoops', C.flame,
+    skirt(C.flame) + battens(4, C.flame) + screen(0.78, 0.16) + '%LIT%' + ball, rig, seamFloor('hoops'));
 }
 
 /* 5 — Hexa Blasts: one honeycomb of seven, two of them live. */
@@ -197,17 +246,20 @@ const rooms = {};
     }
     return a;
   };
-  /* axial honeycomb: centre plus one ring */
-  const cells = [[0, 0], [1, 0], [-1, 0], [0.5, 1], [-0.5, 1], [0.5, -1], [-0.5, -1]];
-  const live = new Set(['0,0', '-0.5,1']);
+  /* axial honeycomb: centre plus two rings, so it reads as a wall of them */
+  const cells = [
+    [0, 0], [1, 0], [-1, 0], [0.5, 1], [-0.5, 1], [0.5, -1], [-0.5, -1],
+    [2, 0], [-2, 0], [1.5, 1], [-1.5, 1], [1.5, -1], [-1.5, -1], [0, 2], [1, 2], [-1, 2]
+  ];
+  const live = new Set(['0,0', '-0.5,1', '1.5,-1', '1,2']);
   let off = '', on = '';
-  cells.forEach(([q, r]) => {
-    const p = wallR(0.5 + q * 0.115, 0.42 + r * 0.16);
-    const shape = hex(p[0], p[1], 9);
+  cells.forEach(([q, r], i) => {
+    const p = wallR(0.5 + q * 0.098, 0.36 + r * 0.145);
+    const shape = hex(p[0], p[1], 8.4);
     if (live.has(`${q},${r}`)) on += poly(shape, C.hot, 'class="hx-on"');
-    else off += poly(shape, C.tileOff, `stroke="${C.hot}" stroke-width="1" opacity=".85"`);
+    else off += `<polygon class="cell" style="--i:${i % 7}" points="${pts(shape)}" stroke="${C.hot}" stroke-width="1" opacity=".85"/>`;
   });
-  rooms.hexa = shell('hexa', C.hot, skirt(C.hot) + off + '%LIT%', on);
+  rooms.hexa = shell('hexa', C.hot, skirt(C.hot) + off + screen(0.16, 0.2, 14, 9) + '%LIT%', on, seamFloor('hexa'));
 }
 
 /* 6 — Combos: not a room. Two rooms booked back to back. */
