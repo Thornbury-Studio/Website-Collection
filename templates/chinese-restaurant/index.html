@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bái Hè 白鶴 — Set the Table</title>
+<meta name="description" content="A modern Chinese restaurant menu built as a tool: choose dishes and watch the round table set itself. Fictional brand, built for portfolio showcase purposes.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'none';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/chinese-restaurant/index.html">
+<meta name="theme-color" content="#faf8f4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c8443c'/%3E%3Ctext x='16' y='23' font-family='serif' font-size='20' fill='%23fffdfa' text-anchor='middle'%3E%E9%B6%B4%3C/text%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Website Collection">
+<meta property="og:title" content="Bái Hè 白鶴 — Set the Table">
+<meta property="og:description" content="A Chinese restaurant menu that behaves like a tool: pick dishes and the round table sets itself.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/chinese-restaurant/index.html">
+<meta name="twitter:card" content="summary">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Bái Hè 白鶴",
+  "servesCuisine": "Chinese",
+  "description": "A fictional modern Chinese restaurant built as a portfolio template. Not a real business.",
+  "url": "https://website-collection-zanezhijies-projects.vercel.app/templates/chinese-restaurant/index.html"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#menu">Skip to the menu</a>
+
+<!-- Dish artwork, defined once and referenced by <use> from both the menu card
+     and every copy that lands on the table. -->
+<svg class="sprite" aria-hidden="true" focusable="false"><symbol id="p-dumpling" viewBox="0 0 120 120"><circle cx="60" cy="60" r="47" fill="#e8d6b4" stroke="#c9ab7e" stroke-width="2"/><circle cx="60" cy="60" r="39" fill="#f2e6cd" stroke="#cdb083" stroke-width="1.2"/><line x1="25" y1="40" x2="95" y2="40" stroke="#d9c095" stroke-width="0.9" opacity=".8"/><line x1="25.5" y1="50" x2="94.5" y2="50" stroke="#d9c095" stroke-width="0.9" opacity=".8"/><line x1="26" y1="60" x2="94" y2="60" stroke="#d9c095" stroke-width="0.9" opacity=".8"/><line x1="26.5" y1="70" x2="93.5" y2="70" stroke="#d9c095" stroke-width="0.9" opacity=".8"/><line x1="27" y1="80" x2="93" y2="80" stroke="#d9c095" stroke-width="0.9" opacity=".8"/><g><path d="M47,48 Q60,30 73,48 Q60,55 47,48 Z" fill="#fbf7f1" stroke="#dfd2bb" stroke-width="1.1"/><path d="M52,45 Q56,39 60,45 Q64,39 68,45" fill="none" stroke="#cfc0a6" stroke-width="1"/><circle cx="60" cy="47" r="2.4" fill="#4a7c64" opacity=".55"/></g><g><path d="M31,72 Q44,54 57,72 Q44,79 31,72 Z" fill="#fbf7f1" stroke="#dfd2bb" stroke-width="1.1"/><path d="M36,69 Q40,63 44,69 Q48,63 52,69" fill="none" stroke="#cfc0a6" stroke-width="1"/><circle cx="44" cy="71" r="2.4" fill="#4a7c64" opacity=".55"/></g><g><path d="M63,72 Q76,54 89,72 Q76,79 63,72 Z" fill="#fbf7f1" stroke="#dfd2bb" stroke-width="1.1"/><path d="M68,69 Q72,63 76,69 Q80,63 84,69" fill="none" stroke="#cfc0a6" stroke-width="1"/><circle cx="76" cy="71" r="2.4" fill="#4a7c64" opacity=".55"/></g></symbol><symbol id="p-cucumber" viewBox="0 0 120 120"><circle cx="60" cy="60" r="45" fill="#fffdfa" stroke="#e0d9cd" stroke-width="1.8"/><circle cx="60" cy="60" r="38" fill="#efe9df" opacity=".55"/><circle cx="60" cy="60" r="34" fill="#fffdfa" stroke="#c9c0b1" stroke-width="0.8"/><g transform="rotate(-18 52 52)"><rect x="43" y="47" width="18" height="10" rx="3.5" fill="#cfe0b4" stroke="#5f8c48" stroke-width="1"/><rect x="46" y="49.5" width="12" height="5" rx="2" fill="#eaf3dc"/></g><g transform="rotate(24 68 56)"><rect x="59" y="51" width="18" height="10" rx="3.5" fill="#cfe0b4" stroke="#5f8c48" stroke-width="1"/><rect x="62" y="53.5" width="12" height="5" rx="2" fill="#eaf3dc"/></g><g transform="rotate(8 56 68)"><rect x="47" y="63" width="18" height="10" rx="3.5" fill="#cfe0b4" stroke="#5f8c48" stroke-width="1"/><rect x="50" y="65.5" width="12" height="5" rx="2" fill="#eaf3dc"/></g><g transform="rotate(-32 70 70)"><rect x="61" y="65" width="18" height="10" rx="3.5" fill="#cfe0b4" stroke="#5f8c48" stroke-width="1"/><rect x="64" y="67.5" width="12" height="5" rx="2" fill="#eaf3dc"/></g><g transform="rotate(48 60 60)"><rect x="51" y="55" width="18" height="10" rx="3.5" fill="#cfe0b4" stroke="#5f8c48" stroke-width="1"/><rect x="54" y="57.5" width="12" height="5" rx="2" fill="#eaf3dc"/></g><circle cx="45.5" cy="40" r="1.3" fill="#c0392b" opacity=".75"/><circle cx="57.5" cy="68" r="1.3" fill="#c0392b" opacity=".75"/><circle cx="63.1" cy="82.4" r="1.3" fill="#c0392b" opacity=".75"/><circle cx="65.1" cy="74" r="1.3" fill="#c0392b" opacity=".75"/><circle cx="64.9" cy="45.7" r="1.3" fill="#c0392b" opacity=".75"/><circle cx="42.5" cy="43.8" r="1.3" fill="#c0392b" opacity=".75"/><circle cx="77.9" cy="54.5" r="1.3" fill="#c0392b" opacity=".75"/></symbol><symbol id="p-squid" viewBox="0 0 120 120"><circle cx="60" cy="60" r="47" fill="#fffdfa" stroke="#e0d9cd" stroke-width="1.6"/><circle cx="60" cy="60" r="37" fill="none" stroke="#c9c0b1" stroke-width="0.9" opacity=".65"/><g><circle cx="48" cy="52" r="8" fill="#f3e6cf" stroke="#d8c49c" stroke-width="1.2"/><circle cx="48" cy="52" r="3.4" fill="#fffdfa" stroke="#ddcaa6" stroke-width="0.8"/></g><g><circle cx="68" cy="50" r="7" fill="#f3e6cf" stroke="#d8c49c" stroke-width="1.2"/><circle cx="68" cy="50" r="3" fill="#fffdfa" stroke="#ddcaa6" stroke-width="0.8"/></g><g><circle cx="58" cy="66" r="8" fill="#f3e6cf" stroke="#d8c49c" stroke-width="1.2"/><circle cx="58" cy="66" r="3.4" fill="#fffdfa" stroke="#ddcaa6" stroke-width="0.8"/></g><g><circle cx="74" cy="66" r="7" fill="#f3e6cf" stroke="#d8c49c" stroke-width="1.2"/><circle cx="74" cy="66" r="3" fill="#fffdfa" stroke="#ddcaa6" stroke-width="0.8"/></g><g><circle cx="45" cy="68" r="8" fill="#f3e6cf" stroke="#d8c49c" stroke-width="1.2"/><circle cx="45" cy="68" r="3.4" fill="#fffdfa" stroke="#ddcaa6" stroke-width="0.8"/></g><path d="M39.1,61.3 l3.5,1.5 l-3.5,1.5 Z" fill="#c8443c" opacity=".8"/><circle cx="70.3" cy="69.2" r="1.1" fill="#2a2621" opacity=".5"/><circle cx="41.3" cy="67" r="1.1" fill="#2a2621" opacity=".5"/><path d="M83.1,72.4 l3.5,1.5 l-3.5,1.5 Z" fill="#c8443c" opacity=".8"/><circle cx="44.8" cy="50.4" r="1.1" fill="#2a2621" opacity=".5"/><circle cx="54.7" cy="84.2" r="1.1" fill="#2a2621" opacity=".5"/><path d="M55.7,53.5 l3.5,1.5 l-3.5,1.5 Z" fill="#c8443c" opacity=".8"/><circle cx="46.4" cy="60.1" r="1.1" fill="#2a2621" opacity=".5"/><circle cx="54.8" cy="50.2" r="1.1" fill="#2a2621" opacity=".5"/></symbol><symbol id="p-seabass" viewBox="0 0 120 120"><circle cx="60" cy="60" r="47" fill="#fffdfa" stroke="#e0d9cd" stroke-width="1.6"/><circle cx="60" cy="60" r="37" fill="none" stroke="#c9c0b1" stroke-width="0.9" opacity=".65"/><ellipse cx="60" cy="60" rx="30" ry="12" fill="#f0ece4" stroke="#d5cbb9" stroke-width="1.2"/><path d="M88,60 l10,-8 v16 Z" fill="#eae4d8" stroke="#d5cbb9" stroke-width="1.2"/><circle cx="38" cy="57" r="2" fill="#2a2621" opacity=".65"/><path d="M46,54 Q60,49 76,55" fill="none" stroke="#d9cfbc" stroke-width="1"/><rect x="45" y="58.4" width="14" height="3.2" rx="1.6" fill="#7ba05b" opacity=".9"/><rect x="57" y="60.4" width="14" height="3.2" rx="1.6" fill="#7ba05b" opacity=".9"/><rect x="67" y="56.4" width="14" height="3.2" rx="1.6" fill="#7ba05b" opacity=".9"/><ellipse cx="57" cy="55" rx="4" ry="2" fill="#d4a53a" opacity=".8"/><ellipse cx="70" cy="65" rx="4" ry="2" fill="#d4a53a" opacity=".8"/></symbol><symbol id="p-porkbelly" viewBox="0 0 120 120"><circle cx="60" cy="60" r="45" fill="#fffdfa" stroke="#e0d9cd" stroke-width="1.8"/><circle cx="60" cy="60" r="38" fill="#efe9df" opacity=".55"/><circle cx="60" cy="60" r="34" fill="#f6ede0" stroke="#c9c0b1" stroke-width="0.8"/><g><rect x="44" y="47" width="16" height="14" rx="2.5" fill="#96603c"/><rect x="44" y="51.5" width="16" height="4" fill="#f3e6cf" opacity=".65"/><rect x="44" y="47" width="16" height="3" rx="1.5" fill="#6d4227"/></g><g><rect x="60" y="47" width="16" height="14" rx="2.5" fill="#96603c"/><rect x="60" y="51.5" width="16" height="4" fill="#f3e6cf" opacity=".65"/><rect x="60" y="47" width="16" height="3" rx="1.5" fill="#6d4227"/></g><g><rect x="52" y="57" width="16" height="14" rx="2.5" fill="#96603c"/><rect x="52" y="61.5" width="16" height="4" fill="#f3e6cf" opacity=".65"/><rect x="52" y="57" width="16" height="3" rx="1.5" fill="#6d4227"/></g><g><rect x="38" y="59" width="16" height="14" rx="2.5" fill="#96603c"/><rect x="38" y="63.5" width="16" height="4" fill="#f3e6cf" opacity=".65"/><rect x="38" y="59" width="16" height="3" rx="1.5" fill="#6d4227"/></g><g><rect x="66" y="59" width="16" height="14" rx="2.5" fill="#96603c"/><rect x="66" y="63.5" width="16" height="4" fill="#f3e6cf" opacity=".65"/><rect x="66" y="59" width="16" height="3" rx="1.5" fill="#6d4227"/></g><ellipse cx="60" cy="76" rx="20" ry="5" fill="#6d4227" opacity=".35"/></symbol><symbol id="p-mapo" viewBox="0 0 120 120"><circle cx="60" cy="60" r="45" fill="#fffdfa" stroke="#e0d9cd" stroke-width="1.8"/><circle cx="60" cy="60" r="38" fill="#efe9df" opacity=".55"/><circle cx="60" cy="60" r="34" fill="#e4694f" stroke="#c9c0b1" stroke-width="0.8"/><circle cx="60" cy="60" r="30" fill="#d8523f" opacity=".75"/><rect x="44" y="46" width="12" height="12" rx="1.5" fill="#fbf7f1" opacity="0.9" stroke="#e8ddcb" stroke-width="0.7"/><rect x="60" y="44" width="12" height="12" rx="1.5" fill="#fbf7f1" opacity="0.8200000000000001" stroke="#e8ddcb" stroke-width="0.7"/><rect x="52" y="56" width="12" height="12" rx="1.5" fill="#fbf7f1" opacity="0.74" stroke="#e8ddcb" stroke-width="0.7"/><rect x="66" y="56" width="12" height="12" rx="1.5" fill="#fbf7f1" opacity="0.9" stroke="#e8ddcb" stroke-width="0.7"/><rect x="42" y="62" width="12" height="12" rx="1.5" fill="#fbf7f1" opacity="0.8200000000000001" stroke="#e8ddcb" stroke-width="0.7"/><rect x="58" y="66" width="12" height="12" rx="1.5" fill="#fbf7f1" opacity="0.74" stroke="#e8ddcb" stroke-width="0.7"/><circle cx="54.3" cy="70.2" r="1.4" fill="#9c3a2f" opacity=".85"/><circle cx="74.2" cy="53.7" r="1.4" fill="#9c3a2f" opacity=".85"/><circle cx="53.1" cy="49.5" r="1.4" fill="#9c3a2f" opacity=".85"/><circle cx="75.9" cy="56.2" r="1.4" fill="#9c3a2f" opacity=".85"/><circle cx="47.6" cy="72.2" r="1.4" fill="#9c3a2f" opacity=".85"/><circle cx="80.2" cy="53.5" r="1.4" fill="#9c3a2f" opacity=".85"/><circle cx="47.1" cy="75.2" r="1.4" fill="#9c3a2f" opacity=".85"/><circle cx="59" cy="56.9" r="1.4" fill="#9c3a2f" opacity=".85"/><circle cx="77.3" cy="47.4" r="1.4" fill="#9c3a2f" opacity=".85"/><circle cx="66.6" cy="52.4" r="1.4" fill="#9c3a2f" opacity=".85"/><path d="M46,74 q6,-3 12,0" fill="none" stroke="#7ba05b" stroke-width="2" stroke-linecap="round"/></symbol><symbol id="p-kungpao" viewBox="0 0 120 120"><circle cx="60" cy="60" r="47" fill="#fffdfa" stroke="#e0d9cd" stroke-width="1.6"/><circle cx="60" cy="60" r="37" fill="none" stroke="#c9c0b1" stroke-width="0.9" opacity=".65"/><rect x="44" y="49" width="12" height="10" rx="3" fill="#d99a4e" stroke="#b97e38" stroke-width="0.9"/><rect x="58" y="47" width="12" height="10" rx="3" fill="#d99a4e" stroke="#b97e38" stroke-width="0.9"/><rect x="50" y="59" width="12" height="10" rx="3" fill="#d99a4e" stroke="#b97e38" stroke-width="0.9"/><rect x="64" y="59" width="12" height="10" rx="3" fill="#d99a4e" stroke="#b97e38" stroke-width="0.9"/><rect x="40" y="61" width="12" height="10" rx="3" fill="#d99a4e" stroke="#b97e38" stroke-width="0.9"/><circle cx="77.4" cy="78.2" r="2.6" fill="#f3e6cf" stroke="#d3bb92" stroke-width="0.8"/><circle cx="72" cy="42.1" r="2.6" fill="#f3e6cf" stroke="#d3bb92" stroke-width="0.8"/><circle cx="43.8" cy="50.7" r="2.6" fill="#f3e6cf" stroke="#d3bb92" stroke-width="0.8"/><circle cx="39.5" cy="54.2" r="2.6" fill="#f3e6cf" stroke="#d3bb92" stroke-width="0.8"/><circle cx="51.5" cy="63.3" r="2.6" fill="#f3e6cf" stroke="#d3bb92" stroke-width="0.8"/><circle cx="56.9" cy="57" r="2.6" fill="#f3e6cf" stroke="#d3bb92" stroke-width="0.8"/><circle cx="72.6" cy="39.7" r="2.6" fill="#f3e6cf" stroke="#d3bb92" stroke-width="0.8"/><circle cx="57.2" cy="52" r="2.6" fill="#f3e6cf" stroke="#d3bb92" stroke-width="0.8"/><g transform="rotate(20 72 50)"><rect x="64" y="48" width="16" height="4" rx="2" fill="#c8443c"/></g><g transform="rotate(-30 44 58)"><rect x="36" y="56" width="16" height="4" rx="2" fill="#c8443c"/></g><g transform="rotate(60 66 74)"><rect x="58" y="72" width="16" height="4" rx="2" fill="#c8443c"/></g></symbol><symbol id="p-gailan" viewBox="0 0 120 120"><circle cx="60" cy="60" r="47" fill="#fffdfa" stroke="#e0d9cd" stroke-width="1.6"/><circle cx="60" cy="60" r="37" fill="none" stroke="#c9c0b1" stroke-width="0.9" opacity=".65"/><g transform="rotate(20 54 60)"><rect x="46" y="42" width="7" height="34" rx="3.5" fill="#7ba05b"/><path d="M49.5,44 q-11,-7 -3,-14 q9,4 3,14 Z" fill="#5f8c48"/><path d="M49.5,50 q11,-6 4,-13 q-9,5 -4,13 Z" fill="#5f8c48" opacity=".85"/></g><g transform="rotate(-6 64 60)"><rect x="56" y="42" width="7" height="34" rx="3.5" fill="#7ba05b"/><path d="M59.5,44 q-11,-7 -3,-14 q9,4 3,14 Z" fill="#5f8c48"/><path d="M59.5,50 q11,-6 4,-13 q-9,5 -4,13 Z" fill="#5f8c48" opacity=".85"/></g><g transform="rotate(12 74 60)"><rect x="66" y="42" width="7" height="34" rx="3.5" fill="#7ba05b"/><path d="M69.5,44 q-11,-7 -3,-14 q9,4 3,14 Z" fill="#5f8c48"/><path d="M69.5,50 q11,-6 4,-13 q-9,5 -4,13 Z" fill="#5f8c48" opacity=".85"/></g><g transform="rotate(-14 82 60)"><rect x="74" y="42" width="7" height="34" rx="3.5" fill="#7ba05b"/><path d="M77.5,44 q-11,-7 -3,-14 q9,4 3,14 Z" fill="#5f8c48"/><path d="M77.5,50 q11,-6 4,-13 q-9,5 -4,13 Z" fill="#5f8c48" opacity=".85"/></g><circle cx="72.4" cy="48" r="2" fill="#f3e6cf" stroke="#d9c9a5" stroke-width="0.7"/><circle cx="68.5" cy="80" r="2" fill="#f3e6cf" stroke="#d9c9a5" stroke-width="0.7"/><circle cx="46.7" cy="54.1" r="2" fill="#f3e6cf" stroke="#d9c9a5" stroke-width="0.7"/><circle cx="68.8" cy="69.9" r="2" fill="#f3e6cf" stroke="#d9c9a5" stroke-width="0.7"/><circle cx="75.9" cy="54.4" r="2" fill="#f3e6cf" stroke="#d9c9a5" stroke-width="0.7"/><circle cx="68.5" cy="74.7" r="2" fill="#f3e6cf" stroke="#d9c9a5" stroke-width="0.7"/><circle cx="70" cy="83.5" r="2" fill="#f3e6cf" stroke="#d9c9a5" stroke-width="0.7"/><circle cx="55.4" cy="82.3" r="2" fill="#f3e6cf" stroke="#d9c9a5" stroke-width="0.7"/><circle cx="59.2" cy="54.4" r="2" fill="#f3e6cf" stroke="#d9c9a5" stroke-width="0.7"/></symbol><symbol id="p-friedrice" viewBox="0 0 120 120"><circle cx="60" cy="60" r="45" fill="#fffdfa" stroke="#e0d9cd" stroke-width="1.8"/><circle cx="60" cy="60" r="38" fill="#efe9df" opacity=".55"/><circle cx="60" cy="60" r="34" fill="#fffdfa" stroke="#c9c0b1" stroke-width="0.8"/><circle cx="60" cy="60" r="28" fill="#f6e7c8"/><rect x="39.2" y="73" width="3.4" height="2.2" rx="1.1" fill="#d4a53a" opacity=".95"/><rect x="36.8" y="56.4" width="3.4" height="2.2" rx="1.1" fill="#f7c948" opacity=".95"/><rect x="44.8" y="55" width="3.4" height="2.2" rx="1.1" fill="#e8a99a" opacity=".95"/><rect x="70.1" y="61.3" width="3.4" height="2.2" rx="1.1" fill="#7ba05b" opacity=".95"/><rect x="77.3" y="58.1" width="3.4" height="2.2" rx="1.1" fill="#f6e7c8" opacity=".95"/><rect x="76.7" y="75.1" width="3.4" height="2.2" rx="1.1" fill="#d4a53a" opacity=".95"/><rect x="36" y="58.5" width="3.4" height="2.2" rx="1.1" fill="#f7c948" opacity=".95"/><rect x="76.7" y="72" width="3.4" height="2.2" rx="1.1" fill="#e8a99a" opacity=".95"/><rect x="63.9" y="43.1" width="3.4" height="2.2" rx="1.1" fill="#7ba05b" opacity=".95"/><rect x="63.5" y="74.4" width="3.4" height="2.2" rx="1.1" fill="#f6e7c8" opacity=".95"/><rect x="65.9" y="80.7" width="3.4" height="2.2" rx="1.1" fill="#d4a53a" opacity=".95"/><rect x="77.8" y="45.1" width="3.4" height="2.2" rx="1.1" fill="#f7c948" opacity=".95"/><rect x="36.1" y="66" width="3.4" height="2.2" rx="1.1" fill="#e8a99a" opacity=".95"/><rect x="43.3" y="40.8" width="3.4" height="2.2" rx="1.1" fill="#7ba05b" opacity=".95"/><rect x="60.7" y="50.3" width="3.4" height="2.2" rx="1.1" fill="#f6e7c8" opacity=".95"/><rect x="39.1" y="46.9" width="3.4" height="2.2" rx="1.1" fill="#d4a53a" opacity=".95"/><rect x="56.3" y="37.4" width="3.4" height="2.2" rx="1.1" fill="#f7c948" opacity=".95"/><rect x="57.8" y="36.7" width="3.4" height="2.2" rx="1.1" fill="#e8a99a" opacity=".95"/><rect x="79.4" y="50.9" width="3.4" height="2.2" rx="1.1" fill="#7ba05b" opacity=".95"/><rect x="65.9" y="43.1" width="3.4" height="2.2" rx="1.1" fill="#f6e7c8" opacity=".95"/><rect x="65.8" y="67.4" width="3.4" height="2.2" rx="1.1" fill="#d4a53a" opacity=".95"/><rect x="68" y="42.4" width="3.4" height="2.2" rx="1.1" fill="#f7c948" opacity=".95"/><rect x="64.4" y="75.5" width="3.4" height="2.2" rx="1.1" fill="#e8a99a" opacity=".95"/><rect x="52.4" y="75.6" width="3.4" height="2.2" rx="1.1" fill="#7ba05b" opacity=".95"/><rect x="39.2" y="47.7" width="3.4" height="2.2" rx="1.1" fill="#f6e7c8" opacity=".95"/><rect x="57.5" y="83.7" width="3.4" height="2.2" rx="1.1" fill="#d4a53a" opacity=".95"/><rect x="53.9" y="55.5" width="3.4" height="2.2" rx="1.1" fill="#f7c948" opacity=".95"/><rect x="36.8" y="49.9" width="3.4" height="2.2" rx="1.1" fill="#e8a99a" opacity=".95"/><rect x="55.5" y="70" width="3.4" height="2.2" rx="1.1" fill="#7ba05b" opacity=".95"/><rect x="53.5" y="74.7" width="3.4" height="2.2" rx="1.1" fill="#f6e7c8" opacity=".95"/><rect x="67.8" y="65.1" width="3.4" height="2.2" rx="1.1" fill="#d4a53a" opacity=".95"/><rect x="52.2" y="39.3" width="3.4" height="2.2" rx="1.1" fill="#f7c948" opacity=".95"/><rect x="66.5" y="39.8" width="3.4" height="2.2" rx="1.1" fill="#e8a99a" opacity=".95"/><rect x="37.5" y="60.3" width="3.4" height="2.2" rx="1.1" fill="#7ba05b" opacity=".95"/><rect x="56.4" y="36.7" width="3.4" height="2.2" rx="1.1" fill="#f6e7c8" opacity=".95"/><rect x="49.7" y="69.1" width="3.4" height="2.2" rx="1.1" fill="#d4a53a" opacity=".95"/><rect x="67" y="66.3" width="3.4" height="2.2" rx="1.1" fill="#f7c948" opacity=".95"/><rect x="59.8" y="36.8" width="3.4" height="2.2" rx="1.1" fill="#e8a99a" opacity=".95"/><rect x="44.1" y="70.9" width="3.4" height="2.2" rx="1.1" fill="#7ba05b" opacity=".95"/><rect x="55.9" y="80.1" width="3.4" height="2.2" rx="1.1" fill="#f6e7c8" opacity=".95"/><rect x="81.2" y="74.7" width="3.4" height="2.2" rx="1.1" fill="#d4a53a" opacity=".95"/><rect x="68.1" y="81.9" width="3.4" height="2.2" rx="1.1" fill="#f7c948" opacity=".95"/><rect x="51.1" y="77" width="3.4" height="2.2" rx="1.1" fill="#e8a99a" opacity=".95"/><rect x="77.8" y="73.1" width="3.4" height="2.2" rx="1.1" fill="#7ba05b" opacity=".95"/><rect x="74.1" y="68.2" width="3.4" height="2.2" rx="1.1" fill="#f6e7c8" opacity=".95"/><rect x="49.2" y="53.6" width="3.4" height="2.2" rx="1.1" fill="#d4a53a" opacity=".95"/></symbol><symbol id="p-dandan" viewBox="0 0 120 120"><circle cx="60" cy="60" r="45" fill="#fffdfa" stroke="#e0d9cd" stroke-width="1.8"/><circle cx="60" cy="60" r="38" fill="#efe9df" opacity=".55"/><circle cx="60" cy="60" r="34" fill="#f2c98a" stroke="#c9c0b1" stroke-width="0.8"/><circle cx="60" cy="60" r="30" fill="#e6a24a" opacity=".5"/><circle cx="60" cy="60" r="22" fill="none" stroke="#f0d9a8" stroke-width="4" opacity="0.95"/><circle cx="60" cy="60" r="17" fill="none" stroke="#f0d9a8" stroke-width="4" opacity="0.87"/><circle cx="60" cy="60" r="12" fill="none" stroke="#f0d9a8" stroke-width="4" opacity="0.7899999999999999"/><circle cx="60" cy="60" r="26" fill="none" stroke="#c0392b" stroke-width="2.4" opacity=".55"/><circle cx="60" cy="55" r="7" fill="#6d4227" opacity=".9"/><path d="M50,74 q7,-4 14,0" fill="none" stroke="#7ba05b" stroke-width="2.2" stroke-linecap="round"/><circle cx="76.2" cy="48.5" r="1.3" fill="#9c3a2f" opacity=".8"/><circle cx="72.5" cy="67.9" r="1.3" fill="#9c3a2f" opacity=".8"/><circle cx="66.8" cy="57.4" r="1.3" fill="#9c3a2f" opacity=".8"/><circle cx="49.4" cy="73.4" r="1.3" fill="#9c3a2f" opacity=".8"/><circle cx="52.4" cy="54.7" r="1.3" fill="#9c3a2f" opacity=".8"/><circle cx="75.5" cy="76.6" r="1.3" fill="#9c3a2f" opacity=".8"/><circle cx="52.5" cy="67.7" r="1.3" fill="#9c3a2f" opacity=".8"/><circle cx="48.4" cy="62.2" r="1.3" fill="#9c3a2f" opacity=".8"/></symbol><symbol id="p-eggtart" viewBox="0 0 120 120"><circle cx="60" cy="60" r="47" fill="#fffdfa" stroke="#e0d9cd" stroke-width="1.6"/><circle cx="60" cy="60" r="37" fill="none" stroke="#c9c0b1" stroke-width="0.9" opacity=".65"/><g><circle cx="50" cy="56" r="15" fill="#f3e6cf" stroke="#d8bd8c" stroke-width="1.3"/><circle cx="50" cy="56" r="11.5" fill="#f4c65a" stroke="#e0ac3c" stroke-width="1"/><ellipse cx="47" cy="52" rx="3.5" ry="2.2" fill="#f9dd94" opacity=".8"/></g><g><circle cx="72" cy="62" r="15" fill="#f3e6cf" stroke="#d8bd8c" stroke-width="1.3"/><circle cx="72" cy="62" r="11.5" fill="#f4c65a" stroke="#e0ac3c" stroke-width="1"/><ellipse cx="69" cy="58" rx="3.5" ry="2.2" fill="#f9dd94" opacity=".8"/></g></symbol><symbol id="p-mangosago" viewBox="0 0 120 120"><circle cx="60" cy="60" r="45" fill="#fffdfa" stroke="#e0d9cd" stroke-width="1.8"/><circle cx="60" cy="60" r="38" fill="#efe9df" opacity=".55"/><circle cx="60" cy="60" r="34" fill="#fbd979" stroke="#c9c0b1" stroke-width="0.8"/><circle cx="60" cy="60" r="30" fill="#f6c04a"/><circle cx="42.9" cy="78.7" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="41" cy="42.8" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="58.3" cy="84.6" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="55.2" cy="36.6" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="59.8" cy="63.2" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="66.5" cy="66.3" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="56.3" cy="78.2" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="79.9" cy="44.6" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="59.4" cy="60.3" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="49.4" cy="68.6" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="64.1" cy="54.6" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="35.8" cy="61.8" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="46.9" cy="72.2" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="37.9" cy="64.3" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="56.3" cy="54.4" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="45" cy="51.4" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="72.8" cy="66.6" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="58.4" cy="84.9" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="50.8" cy="76.3" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="67.2" cy="60.3" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="44.7" cy="43.3" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="63.8" cy="59" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="46.5" cy="50.8" r="2.1" fill="#fbf7f1" opacity=".9"/><circle cx="79.7" cy="75.5" r="2.1" fill="#fbf7f1" opacity=".9"/><path d="M46,55 q6,-9 12,-3 q-6,6 -12,3 Z" fill="#f7a83c" stroke="#e08f27" stroke-width="0.8"/><path d="M62,61 q6,-9 12,-3 q-6,6 -12,3 Z" fill="#f7a83c" stroke="#e08f27" stroke-width="0.8"/><path d="M52,71 q6,-9 12,-3 q-6,6 -12,3 Z" fill="#f7a83c" stroke="#e08f27" stroke-width="0.8"/></symbol></svg>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-seal" aria-hidden="true">鶴</span>
+      <span class="logo-word">Bái Hè<em>白鶴</em></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#menu">Menu</a>
+      <a href="#how">How it works</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="btn btn-line nav-cta" href="#visit">Reserve</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">Cantonese &amp; Sichuan · Since 2019</p>
+      <h1>The menu is<br>a <em>round table.</em></h1>
+      <p class="lede">Chinese food is ordered for the table, not the plate — so this menu is built
+        that way. Choose a dish and it lands on the table. Keep going until the table looks right.</p>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="#menu">Start the table</a>
+        <a class="btn btn-line" href="#how">How it works</a>
+      </div>
+    </div>
+    <p class="hero-vertical" aria-hidden="true">圓桌之上&nbsp;&nbsp;共食為禮</p>
+  </div>
+</section>
+
+<!-- ============ MENU + TABLE ============ -->
+<section class="section menu-section" id="menu">
+  <div class="sec-head">
+    <span class="rule" aria-hidden="true"></span>
+    <h2>菜單 <em>The Menu</em></h2>
+    <p>Tap to place a dish. Tap again to take it back.</p>
+  </div>
+
+  <div class="layout">
+
+    <!-- ---- the menu ---- -->
+    <div class="menu-col">
+      <div class="filters" role group aria-label="Filter the menu">
+        <div class="filter-set">
+          <span class="filter-label">Show</span>
+          <button class="chip is-on" data-filter="all" aria-pressed="true">Everything</button>
+          <button class="chip" data-filter="veg" aria-pressed="false">Vegetarian</button>
+        </div>
+        <div class="filter-set">
+          <span class="filter-label">Max heat</span>
+          <div class="heat-ctl" id="heatCtl" role="radiogroup" aria-label="Maximum heat level"></div>
+        </div>
+      </div>
+
+      <div class="course" data-course="Small Plates" data-zh="小食">
+        <h3><span>小食</span> Small Plates</h3>
+        <button class="dish" data-id="dumpling" data-name="Prawn &amp; Chive Dumplings" data-price="9.80" data-cat="start" data-spice="0" data-veg="0" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-dumpling"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Prawn &amp; Chive Dumplings</span>
+            <span class="dish-zh">韭菜蝦餃 <i>jiǔ cài xiā jiǎo</i></span>
+            <span class="dish-note">Four to a basket, pleated by hand, steamed to order.</span>
+          </span>
+          <span class="dish-meta"><span class="price">9.80</span><span class="heat" data-level="0"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+
+        <button class="dish" data-id="cucumber" data-name="Smacked Cucumber" data-price="6.50" data-cat="start" data-spice="1" data-veg="1" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-cucumber"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Smacked Cucumber</span>
+            <span class="dish-zh">拍黃瓜 <i>pāi huáng guā</i></span>
+            <span class="dish-note">Bruised not sliced, so the black vinegar gets right in.</span>
+          </span>
+          <span class="dish-meta"><span class="price">6.50</span><span class="heat" data-level="1"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+
+        <button class="dish" data-id="squid" data-name="Salt &amp; Pepper Squid" data-price="12.80" data-cat="start" data-spice="1" data-veg="0" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-squid"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Salt &amp; Pepper Squid</span>
+            <span class="dish-zh">椒鹽魷魚 <i>jiāo yán yóu yú</i></span>
+            <span class="dish-note">Fried in rice flour, tossed with chilli and white pepper.</span>
+          </span>
+          <span class="dish-meta"><span class="price">12.80</span><span class="heat" data-level="1"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+      </div>
+
+      <div class="course">
+        <h3><span>主菜</span> Mains</h3>
+        <button class="dish" data-id="seabass" data-name="Steamed Sea Bass" data-price="32.00" data-cat="main" data-spice="0" data-veg="0" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-seabass"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Steamed Sea Bass</span>
+            <span class="dish-zh">清蒸鱸魚 <i>qīng zhēng lú yú</i></span>
+            <span class="dish-note">Whole fish, ginger and spring onion, hot oil poured at the pass.</span>
+          </span>
+          <span class="dish-meta"><span class="price">32.00</span><span class="heat" data-level="0"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+
+        <button class="dish" data-id="porkbelly" data-name="Red-Braised Pork Belly" data-price="24.00" data-cat="main" data-spice="0" data-veg="0" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-porkbelly"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Red-Braised Pork Belly</span>
+            <span class="dish-zh">紅燒肉 <i>hóng shāo ròu</i></span>
+            <span class="dish-note">Three hours in rock sugar and dark soy, until it gives to a spoon.</span>
+          </span>
+          <span class="dish-meta"><span class="price">24.00</span><span class="heat" data-level="0"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+
+        <button class="dish" data-id="mapo" data-name="Mapo Tofu" data-price="16.80" data-cat="main" data-spice="3" data-veg="1" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-mapo"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Mapo Tofu</span>
+            <span class="dish-zh">麻婆豆腐 <i>má pó dòu fu</i></span>
+            <span class="dish-note">Numbing, not just hot — Sichuan pepper does half the work.</span>
+          </span>
+          <span class="dish-meta"><span class="price">16.80</span><span class="heat" data-level="3"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+
+        <button class="dish" data-id="kungpao" data-name="Kung Pao Chicken" data-price="19.80" data-cat="main" data-spice="2" data-veg="0" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-kungpao"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Kung Pao Chicken</span>
+            <span class="dish-zh">宮保雞丁 <i>gōng bǎo jī dīng</i></span>
+            <span class="dish-note">Thigh meat, blistered chillies, peanuts in at the last second.</span>
+          </span>
+          <span class="dish-meta"><span class="price">19.80</span><span class="heat" data-level="2"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+      </div>
+
+      <div class="course">
+        <h3><span>蔬菜</span> Greens</h3>
+        <button class="dish" data-id="gailan" data-name="Gai Lan, Garlic" data-price="11.50" data-cat="veg" data-spice="0" data-veg="1" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-gailan"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Gai Lan, Garlic</span>
+            <span class="dish-zh">蒜蓉芥蘭 <i>suàn róng jiè lán</i></span>
+            <span class="dish-note">Blanched, then straight into the wok. Stalks still snap.</span>
+          </span>
+          <span class="dish-meta"><span class="price">11.50</span><span class="heat" data-level="0"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+      </div>
+
+      <div class="course">
+        <h3><span>主食</span> Rice &amp; Noodles</h3>
+        <button class="dish" data-id="friedrice" data-name="Yangzhou Fried Rice" data-price="13.80" data-cat="rice" data-spice="0" data-veg="0" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-friedrice"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Yangzhou Fried Rice</span>
+            <span class="dish-zh">揚州炒飯 <i>yáng zhōu chǎo fàn</i></span>
+            <span class="dish-note">Day-old rice, egg, char siu, peas. Every grain separate.</span>
+          </span>
+          <span class="dish-meta"><span class="price">13.80</span><span class="heat" data-level="0"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+
+        <button class="dish" data-id="dandan" data-name="Dan Dan Noodles" data-price="14.50" data-cat="rice" data-spice="3" data-veg="0" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-dandan"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Dan Dan Noodles</span>
+            <span class="dish-zh">擔擔麵 <i>dàn dàn miàn</i></span>
+            <span class="dish-note">Sesame, chilli oil, minced pork. Stir it yourself before the first bite.</span>
+          </span>
+          <span class="dish-meta"><span class="price">14.50</span><span class="heat" data-level="3"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+      </div>
+
+      <div class="course">
+        <h3><span>甜品</span> Sweets</h3>
+        <button class="dish" data-id="eggtart" data-name="Egg Tarts" data-price="7.50" data-cat="sweet" data-spice="0" data-veg="1" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-eggtart"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Egg Tarts</span>
+            <span class="dish-zh">蛋撻 <i>dàn tǎ</i></span>
+            <span class="dish-note">Two per order, out of the oven roughly every twenty minutes.</span>
+          </span>
+          <span class="dish-meta"><span class="price">7.50</span><span class="heat" data-level="0"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+
+        <button class="dish" data-id="mangosago" data-name="Mango Sago" data-price="8.50" data-cat="sweet" data-spice="0" data-veg="1" aria-pressed="false">
+          <svg class="dish-art" viewBox="0 0 120 120" aria-hidden="true"><use href="#p-mangosago"/></svg>
+          <span class="dish-main">
+            <span class="dish-en">Mango Sago</span>
+            <span class="dish-zh">芒果西米露 <i>máng guǒ xī mǐ lù</i></span>
+            <span class="dish-note">Cold, with pomelo. The thing to order after the mapo.</span>
+          </span>
+          <span class="dish-meta"><span class="price">8.50</span><span class="heat" data-level="0"></span></span>
+          <span class="seal" aria-hidden="true">加</span>
+        </button>
+      </div>
+
+      <p class="menu-fine">Prices in SGD, subject to service charge and GST. Bái Hè is a fictional
+        restaurant built as a portfolio template — nothing here can actually be ordered.</p>
+    </div>
+
+    <!-- ---- the table ---- -->
+    <aside class="board" id="board" aria-label="Your table">
+      <div class="board-head">
+        <h3>圓桌 <em>Your table</em></h3>
+        <button class="clear" id="clear" type="button">Clear</button>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table" id="table">
+          <div class="cloth" aria-hidden="true"></div>
+          <div class="susan" aria-hidden="true"></div>
+          <div class="settings" id="settings" aria-hidden="true"></div>
+          <div class="plates" id="plates"></div>
+          <p class="table-empty" id="tableEmpty">Tap a dish<br><span>and it lands here</span></p>
+        </div>
+      </div>
+
+      <div class="pax">
+        <span class="pax-label">Party of</span>
+        <div class="stepper">
+          <button type="button" id="paxDown" aria-label="Fewer people">&minus;</button>
+          <output id="paxOut" for="paxDown paxUp">4</output>
+          <button type="button" id="paxUp" aria-label="More people">+</button>
+        </div>
+      </div>
+
+      <p class="advice" id="advice" aria-live="polite">Tap a dish to set the table.</p>
+
+      <dl class="totals">
+        <div><dt>Dishes</dt><dd id="tDishes">0</dd></div>
+        <div><dt>Total</dt><dd id="tTotal">$0.00</dd></div>
+        <div><dt>Each</dt><dd id="tPer">$0.00</dd></div>
+      </dl>
+
+      <ul class="chosen" id="chosen"></ul>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ HOW ============ -->
+<section class="section how" id="how">
+  <div class="sec-head">
+    <span class="rule" aria-hidden="true"></span>
+    <h2>點菜之道 <em>How to order</em></h2>
+  </div>
+  <ol class="how-list">
+    <li><span class="num">01</span><h4>One dish per person</h4>
+      <p>The rough rule for a shared table. Four people, four dishes — then a rice on top.</p></li>
+    <li><span class="num">02</span><h4>Spread the cooking</h4>
+      <p>Something steamed, something fried, something braised. Not four of the same thing.</p></li>
+    <li><span class="num">03</span><h4>Always a green</h4>
+      <p>It resets the palate between the heavy dishes. The table tells you if you've skipped it.</p></li>
+    <li><span class="num">04</span><h4>Rice last</h4>
+      <p>It arrives with the mains, not before. It's there to carry sauce, not to fill you up first.</p></li>
+  </ol>
+</section>
+
+<!-- ============ VISIT ============ -->
+<section class="section visit" id="visit">
+  <div class="sec-head">
+    <span class="rule" aria-hidden="true"></span>
+    <h2>造訪 <em>Visit</em></h2>
+  </div>
+  <div class="visit-grid">
+    <div class="vcard"><h4>Where</h4><p class="vbig">18 Keong Saik Road</p><p>Singapore 089127</p><p class="vsmall">Outram Park MRT, six minutes on foot.</p></div>
+    <div class="vcard"><h4>Lunch</h4><p class="vbig">11:30 – 14:30</p><p>Tuesday to Sunday.</p><p class="vsmall">Last order 14:00. Closed Mondays.</p></div>
+    <div class="vcard"><h4>Dinner</h4><p class="vbig">17:30 – 22:00</p><p>Tuesday to Sunday.</p><p class="vsmall">Round tables seat up to ten.</p></div>
+    <div class="vcard"><h4>Bookings</h4><p class="vbig">Tables of 6+</p><p>By phone only, so we can talk the menu through.</p><p class="vsmall">Walk-ins welcome for smaller tables.</p></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot-top">
+    <div>
+      <p class="foot-mark"><span class="logo-seal" aria-hidden="true">鶴</span> Bái Hè <em>白鶴</em></p>
+      <p>18 Keong Saik Road, Singapore 089127</p>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#menu">Menu</a><a href="#how">How to order</a><a href="#visit">Visit</a>
+      <a href="../../index.html">← All templates</a>
+    </nav>
+  </div>
+  <p class="foot-legal"><strong>Fictional restaurant.</strong> Bái Hè is an original brand created for
+    portfolio showcase purposes. It is not a real business, no dish can be ordered, and every
+    illustration on this page was drawn for it. <span class="foot-sig">鶴</span></p>
+</footer>
+
+<!-- Mobile-only summary; the table lives further up the page on small screens. -->
+<div class="dock" id="dock" hidden>
+  <span class="dock-count" id="dockCount">0 dishes</span>
+  <span class="dock-total" id="dockTotal">$0.00</span>
+  <a class="dock-btn" href="#board">See the table</a>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
