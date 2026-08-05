@@ -1,0 +1,756 @@
+/* =========================================================================
+   ZHANG ZHIJIE — portfolio.  v6 "NEON".
+   Cabinet's chrome and clarity + Vector's beam graphics, in a modern game
+   shell. Tokens first: everything below is meant to be hand-tuned.
+   ========================================================================= */
+
+:root {
+  /* --- ground --------------------------------------------------------- */
+  --void:    #05060b;
+  --void-2:  #080a12;
+  --panel:   #0b0e18;
+  --panel-2: #10141f;
+  --line:    #1b2233;
+  --line-2:  #2a3450;
+
+  /* --- the three inks -------------------------------------------------- */
+  --cyan:    #22e8ff;   /* system colour */
+  --magenta: #ff2ea6;   /* live / selected */
+  --lime:    #b8ff3c;   /* verified fact */
+  --violet:  #8b5cff;
+
+  /* --- type colour ----------------------------------------------------- */
+  --ink:     var(--cyan);        /* per-block accent, overridden inline */
+  --text:    #e8edf7;
+  --mute:    #8d99b3;
+  --faint:   #5c6683;
+
+  /* --- geometry -------------------------------------------------------- */
+  --rail-h:  56px;
+  --deck-h:  60px;
+  --rail:    min(1280px, 100%);
+  --pad:     clamp(1.1rem, 4vw, 3.6rem);
+  --notch:   14px;      /* the 45° cut every panel shares */
+
+  /* --- box field ------------------------------------------------------- */
+  --cell-w:  64px;
+  --cell-h:  32px;
+  --bx-line: rgba(86,116,170,.46);
+  --bx-plus: rgba(120,158,220,.55);
+
+  /* --- type ------------------------------------------------------------ */
+  --f-disp: "Oxanium", system-ui, sans-serif;
+  --f-body: "Sora", system-ui, sans-serif;
+  --f-tel:  "Martian Mono", ui-monospace, monospace;
+
+  --ease:  cubic-bezier(.2,.9,.28,1);
+  --fast:  150ms;
+  --mid:   340ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--void); }
+
+body {
+  margin: 0;
+  padding-bottom: var(--deck-h);
+  font-family: var(--f-body); font-weight: 300;
+  font-size: 16px; line-height: 1.72;
+  color: var(--text);
+  background: var(--void);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.sr-only { position:absolute; width:1px; height:1px; margin:-1px; padding:0;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+.skip {
+  position: absolute; left: 12px; top: -60px; z-index: 99;
+  background: var(--cyan); color: #001016; padding: .55rem 1.1rem;
+  font-family: var(--f-tel); font-size: 12px; text-decoration: none;
+  transition: top var(--fast) var(--ease);
+}
+.skip:focus { top: 10px; }
+
+:where(a, button, input, textarea):focus-visible {
+  outline: 2px solid var(--cyan); outline-offset: 3px;
+}
+
+/* The notch — one shared corner cut, so every panel in the build reads as
+   the same manufactured part. */
+.notched {
+  clip-path: polygon(
+    var(--notch) 0, 100% 0, 100% calc(100% - var(--notch)),
+    calc(100% - var(--notch)) 100%, 0 100%, 0 var(--notch));
+}
+
+/* =========================================================================
+   HUD RAIL
+   ========================================================================= */
+
+.rail {
+  position: fixed; inset: 0 0 auto 0; z-index: 60;
+  height: var(--rail-h);
+  display: flex; align-items: center; gap: clamp(.7rem, 3vw, 2.2rem);
+  padding: 0 var(--pad);
+  background: rgba(5,6,11,.82);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid var(--line);
+}
+.rail__id { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
+.rail__glyph {
+  width: 16px; height: 16px; flex: none;
+  background: var(--cyan);
+  clip-path: polygon(50% 0, 100% 28%, 100% 72%, 50% 100%, 0 72%, 0 28%);
+  box-shadow: 0 0 14px rgba(34,232,255,.8);
+}
+.rail__name {
+  font-family: var(--f-disp); font-weight: 800; font-size: .95rem;
+  letter-spacing: .06em; color: var(--text);
+}
+.rail__tag {
+  font-family: var(--f-tel); font-size: 10px; letter-spacing: .1em;
+  color: var(--void); background: var(--cyan); padding: .05rem .4rem;
+}
+.rail__nav { display: flex; gap: clamp(.6rem, 2vw, 1.9rem); margin-left: auto; }
+.rail__nav a {
+  position: relative;
+  font-family: var(--f-disp); font-weight: 500; font-size: .82rem;
+  letter-spacing: .05em; text-transform: uppercase;
+  color: var(--mute); text-decoration: none; padding: .3rem 0;
+  transition: color var(--fast) var(--ease);
+}
+.rail__nav a::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 2px;
+  background: var(--cyan); box-shadow: 0 0 10px var(--cyan);
+  transition: right var(--mid) var(--ease);
+}
+.rail__nav a:hover, .rail__nav a:focus-visible, .rail__nav a[aria-current="true"] { color: var(--text); }
+.rail__nav a:hover::after, .rail__nav a:focus-visible::after,
+.rail__nav a[aria-current="true"]::after { right: 0; }
+
+.rail__stat {
+  display: flex; align-items: center; gap: .45rem;
+  flex: none; white-space: nowrap;   /* wrapping pushes it out of a 52px bar */
+  font-family: var(--f-tel); font-size: 10.5px; letter-spacing: .03em; color: var(--faint);
+}
+.dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--lime);
+  box-shadow: 0 0 10px var(--lime);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dot { animation: pulse 2.4s var(--ease) infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+}
+
+/* =========================================================================
+   HERO
+   ========================================================================= */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid; align-items: center;
+  padding: calc(var(--rail-h) + 3rem) var(--pad) 5rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ---- the box field ------------------------------------------------------
+   Ported from the React/Framer original: same skew, same cell size, same
+   hover-flash-then-slow-fade. The DOM count is derived from the viewport
+   instead of a fixed 150x100 (15 000 nodes), and the flash is a CSS
+   transition with a JS-randomised custom property rather than a per-cell
+   motion component. Same effect, ~1/20th the nodes and one event listener.
+   ------------------------------------------------------------------------ */
+.boxes {
+  position: absolute; left: 50%; top: 46%; z-index: 0;
+  display: flex;
+  transform: translate(-50%, -50%) skewX(-48deg) skewY(14deg) scale(.72) translateZ(0);
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.bx-col { flex: none; }
+.bx {
+  width: var(--cell-w); height: var(--cell-h);
+  /* deliberately brighter than --line: the lattice is the hero's subject, and
+     at panel-border weight it disappears behind the mask entirely */
+  border-right: 1px solid var(--bx-line);
+  border-top: 1px solid var(--bx-line);
+  background-color: transparent;
+  /* leaving a hovered cell fades over 2s; entering is instant (rule below) */
+  transition: background-color 2000ms linear;
+}
+.bx:hover {
+  background-color: var(--flash, var(--cyan));
+  transition: background-color 0ms;
+}
+/* the plus marks, drawn with two strips rather than 250 inline SVGs */
+.bx--plus { position: relative; }
+.bx--plus::before {
+  content: ""; position: absolute; left: -5px; top: -5px;
+  width: 10px; height: 10px; pointer-events: none;
+  background:
+    linear-gradient(var(--bx-plus), var(--bx-plus)) 50% 50% / 1px 10px no-repeat,
+    linear-gradient(var(--bx-plus), var(--bx-plus)) 50% 50% / 10px 1px no-repeat;
+}
+
+/* The radial mask. Wide and soft: the original's tight vignette buried the
+   lattice everywhere except a spot behind the headline, which is exactly
+   where it reads least. */
+.boxes__mask {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: var(--void);
+  -webkit-mask-image: radial-gradient(104% 100% at 50% 46%,
+    transparent 0%, rgba(0,0,0,.18) 52%, rgba(0,0,0,.7) 78%, #000 98%);
+          mask-image: radial-gradient(104% 100% at 50% 46%,
+    transparent 0%, rgba(0,0,0,.18) 52%, rgba(0,0,0,.7) 78%, #000 98%);
+}
+/* No scrim behind the headline. The lattice — and any cell the pointer has
+   just lit — runs straight under the type; the headline holds its own against
+   it on weight and bloom rather than by hiding what is behind it. */
+/* a slow beam sweeping the field — Vector's gun, on a wider canvas */
+.boxes__sweep {
+  position: absolute; inset: -20% -40%; z-index: 2; pointer-events: none;
+  background: linear-gradient(105deg,
+    transparent 42%, rgba(34,232,255,.12) 49%, rgba(255,46,166,.10) 51%, transparent 58%);
+  filter: blur(6px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .boxes__sweep { animation: sweep 9s var(--ease) infinite; }
+  @keyframes sweep {
+    0%   { transform: translateX(-38%) }
+    55%  { transform: translateX(38%) }
+    100% { transform: translateX(38%) }
+  }
+}
+
+/* The whole text column is pointer-transparent, so the lattice underneath stays
+   live right across it — the block itself was the wall, not just the headline:
+   a transparent background still takes the hover. Only the two buttons opt back
+   in. Cost: the hero copy is not selectable. That is the trade for cells that
+   light up behind the words. */
+.hero__inner { position: relative; z-index: 3; width: var(--rail); margin: 0 auto;
+               pointer-events: none; }
+.hero__acts .key { pointer-events: auto; }
+.hero__scroll { pointer-events: none; }
+
+.hero__eyebrow {
+  display: flex; align-items: center; gap: .7rem; flex-wrap: wrap;
+  margin: 0 0 1.1rem;
+  font-family: var(--f-tel); font-size: 12px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--mute);
+}
+.hero__rolewrap {
+  display: inline-grid; overflow: hidden;
+  min-width: 12ch; height: 1.5em; align-items: center;
+}
+.hero__role { color: var(--cyan); }
+.hero__role.is-swap { animation: roleswap 360ms var(--ease); }
+@keyframes roleswap {
+  0%   { transform: translateY(0);      opacity: 1 }
+  45%  { transform: translateY(-100%);  opacity: 0 }
+  55%  { transform: translateY(100%);   opacity: 0 }
+  100% { transform: translateY(0);      opacity: 1 }
+}
+.hero__sep { color: var(--line-2); }
+
+.hero__title {
+  margin: 0 0 1.5rem;
+  font-family: var(--f-disp); font-weight: 800;
+  font-size: clamp(3rem, 11.5vw, 8.5rem);
+  line-height: .86; letter-spacing: -.035em;
+  text-transform: uppercase;
+}
+.hero__title .glitch { display: block; }
+.hero__title .glitch--alt { color: var(--cyan); }
+/* superseded by the pointer-events rule on .hero__inner, kept explicit so a
+   future edit to that block does not silently re-erect the wall here */
+.hero__title, .hero__eyebrow { pointer-events: none; }
+
+/* Layered beam type: two offset colour plates behind a solid core, so the
+   headline glows like it is being deflected rather than drop-shadowed. */
+.glitch {
+  position: relative;
+  /* the second shadow is a dark halo hugging the letterforms — it buys back the
+     legibility the removed scrim was providing, without hiding the lattice */
+  text-shadow: 0 0 44px rgba(34,232,255,.28), 0 0 18px rgba(5,6,11,.95);
+}
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute; inset: 0;
+  pointer-events: none;
+  clip-path: inset(0);
+}
+.glitch::before { color: var(--magenta); transform: translate(-3px, 1px); mix-blend-mode: screen; opacity: .55; }
+.glitch::after  { color: var(--cyan);    transform: translate(3px, -1px); mix-blend-mode: screen; opacity: .45; }
+.glitch--alt::before { color: var(--violet); }
+.glitch--alt::after  { color: var(--magenta); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .glitch::before { animation: slipA 7s steps(1) infinite; }
+  .glitch::after  { animation: slipB 7s steps(1) infinite; }
+  /* the plates only misalign for two frames, twice a cycle — a tic, not a strobe */
+  @keyframes slipA {
+    0%,96% { transform: translate(-3px, 1px);  clip-path: inset(0) }
+    97%    { transform: translate(-11px, 1px); clip-path: inset(22% 0 58% 0) }
+    98%    { transform: translate(7px, 1px);   clip-path: inset(64% 0 12% 0) }
+    99%,100%{ transform: translate(-3px, 1px); clip-path: inset(0) }
+  }
+  @keyframes slipB {
+    0%,96% { transform: translate(3px, -1px);  clip-path: inset(0) }
+    97%    { transform: translate(10px, -1px); clip-path: inset(58% 0 22% 0) }
+    98%    { transform: translate(-6px, -1px); clip-path: inset(12% 0 64% 0) }
+    99%,100%{ transform: translate(3px, -1px); clip-path: inset(0) }
+  }
+}
+
+.hero__lede {
+  max-width: 56ch; margin: 0 0 2.2rem;
+  font-size: clamp(1rem, 1.15vw, 1.1rem); color: #b6c1d6;
+  text-shadow: 0 0 14px rgba(5,6,11,.95), 0 0 4px rgba(5,6,11,.9);
+}
+.hero__acts { display: flex; flex-wrap: wrap; gap: .8rem; margin-bottom: 3rem; }
+
+.hero__hud {
+  list-style: none; margin: 0; padding: 1.2rem 0 0;
+  border-top: 1px solid var(--line);
+  display: grid; gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  max-width: 720px;
+}
+.hero__hud b {
+  display: block;
+  font-family: var(--f-disp); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1; color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.hero__hud span {
+  display: block; margin-top: .35rem;
+  font-family: var(--f-tel); font-size: 10px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--faint);
+}
+
+.hero__scroll {
+  position: absolute; left: 50%; bottom: 1.4rem; z-index: 3;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: var(--f-tel); font-size: 10px; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--faint);
+}
+
+/* =========================================================================
+   KEYS — the action controls, inherited from the cabinet's deck
+   ========================================================================= */
+
+.key {
+  --notch: 10px;
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .78rem 1.5rem;
+  font-family: var(--f-disp); font-weight: 700; font-size: .84rem;
+  letter-spacing: .09em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  color: var(--text); background: var(--panel-2);
+  border: 1px solid var(--line-2);
+  clip-path: polygon(var(--notch) 0, 100% 0, 100% calc(100% - var(--notch)),
+                     calc(100% - var(--notch)) 100%, 0 100%, 0 var(--notch));
+  transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease),
+              transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+}
+.key svg { width: 12px; height: 12px; fill: currentColor; }
+.key:hover, .key:focus-visible {
+  background: #18203a; color: #fff; transform: translateY(-2px);
+  box-shadow: 0 10px 26px -14px rgba(34,232,255,.9);
+}
+.key--go {
+  background: var(--magenta); color: #1a0011; border-color: var(--magenta);
+  box-shadow: 0 0 30px -8px rgba(255,46,166,.75);
+}
+.key--go:hover, .key--go:focus-visible {
+  background: #ff58bb; color: #1a0011;
+  box-shadow: 0 12px 34px -10px rgba(255,46,166,.9);
+}
+.key:active { transform: translateY(1px); }
+
+/* =========================================================================
+   SECTIONS
+   ========================================================================= */
+
+.sect {
+  position: relative;
+  width: var(--rail); margin: 0 auto;
+  padding: clamp(3.4rem, 10vh, 7.5rem) var(--pad);
+  scroll-margin-top: var(--rail-h);
+}
+.sect__head { max-width: 62ch; margin-bottom: clamp(2rem, 4vh, 3.2rem); }
+.sect__h {
+  margin: 0 0 .8rem;
+  font-family: var(--f-disp); font-weight: 800;
+  font-size: clamp(1.7rem, 4.4vw, 3rem); line-height: 1.02;
+  letter-spacing: -.02em; text-transform: uppercase;
+  color: var(--text);
+}
+.sect__p { margin: 0; color: var(--mute); font-size: 1rem; }
+
+/* ---- channels ----------------------------------------------------------- */
+.channels {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+.ch--wide { grid-column: 1 / -1; }
+
+.ch a {
+  --notch: 18px;
+  position: relative;
+  display: grid; gap: 0;
+  grid-template-columns: 1fr;
+  height: 100%;
+  text-decoration: none; color: inherit;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  clip-path: polygon(var(--notch) 0, 100% 0, 100% calc(100% - var(--notch)),
+                     calc(100% - var(--notch)) 100%, 0 100%, 0 var(--notch));
+  transition: border-color var(--fast) var(--ease), background-color var(--fast) var(--ease),
+              transform var(--fast) var(--ease);
+  overflow: hidden;
+}
+.ch a:hover, .ch a:focus-visible {
+  border-color: var(--ink); background: var(--panel-2); transform: translateY(-3px);
+}
+
+.ch__art {
+  position: relative; display: block; overflow: hidden;
+  aspect-ratio: 16 / 7; background: #04050a;
+}
+.ch--wide .ch__art { aspect-ratio: 16 / 4; }
+.ch__art img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  opacity: .82;
+  transition: transform 500ms var(--ease), opacity var(--fast) var(--ease);
+}
+.ch a:hover .ch__art img { transform: scale(1.04); opacity: 1; }
+.ch__art::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(5,6,11,.1) 40%, var(--panel) 100%);
+}
+/* the web channel draws its own art — a lit perspective grid, no photo needed */
+.ch__art--grid {
+  background:
+    radial-gradient(70% 52% at 50% 100%, rgba(255,46,166,.30), transparent 72%),
+    radial-gradient(90% 60% at 50% 104%, rgba(34,232,255,.20), transparent 78%),
+    repeating-linear-gradient(90deg, rgba(34,232,255,.36) 0 1px, transparent 1px 44px),
+    repeating-linear-gradient(180deg, rgba(34,232,255,.24) 0 1px, transparent 1px 32px),
+    #04050a;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 42%, #000);
+          mask-image: linear-gradient(180deg, transparent, #000 42%, #000);
+}
+
+.ch__meta {
+  position: absolute; top: 0; left: 0; z-index: 2;
+  display: flex; align-items: center; gap: .55rem;
+  padding: .55rem .9rem .55rem 1.1rem;
+  background: var(--ink);
+}
+.ch__n { font-family: var(--f-tel); font-size: 10px; color: rgba(0,0,0,.6); }
+.ch__k {
+  font-family: var(--f-disp); font-weight: 800; font-size: .78rem;
+  letter-spacing: .12em; text-transform: uppercase; color: #04050a;
+}
+
+.ch__body { display: block; padding: 1.3rem clamp(1.1rem, 2vw, 1.7rem) 0; }
+.ch__t {
+  display: block; margin-bottom: .5rem;
+  font-family: var(--f-disp); font-weight: 700; font-size: 1.2rem;
+  letter-spacing: -.005em; color: var(--text);
+}
+.ch__d { display: block; font-size: .94rem; color: var(--mute); }
+.ch--wide .ch__d { max-width: 62ch; }
+.ch__tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
+.ch__tags i {
+  font-style: normal;
+  font-family: var(--f-tel); font-size: 9.5px; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--mute);
+  border: 1px solid var(--line-2); padding: .18rem .5rem;
+}
+.ch__go {
+  display: block; margin-top: auto;
+  padding: 1.2rem clamp(1.1rem, 2vw, 1.7rem) 1.3rem;
+  font-family: var(--f-disp); font-weight: 700; font-size: .8rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink);
+}
+.ch a { grid-template-rows: auto auto 1fr; }
+
+/* ---- showroom ----------------------------------------------------------- */
+.sites {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(292px, 1fr));
+}
+.site a {
+  --notch: 14px;
+  display: grid; text-decoration: none; color: inherit;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  clip-path: polygon(var(--notch) 0, 100% 0, 100% calc(100% - var(--notch)),
+                     calc(100% - var(--notch)) 100%, 0 100%, 0 var(--notch));
+  transition: border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.site a:hover, .site a:focus-visible { border-color: var(--ink); transform: translateY(-3px); }
+.site__shot { position: relative; display: block; overflow: hidden; aspect-ratio: 16/10; background: #04050a; }
+.site__shot img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+  transition: transform 460ms var(--ease);
+}
+.site a:hover .site__shot img { transform: scale(1.04); }
+.site__shot::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 65%, var(--panel) 100%);
+}
+.site__bar {
+  display: block; padding: .95rem clamp(.9rem, 1.6vw, 1.2rem) .2rem;
+  border-top: 2px solid var(--ink);
+}
+.site__bar b {
+  display: block;
+  font-family: var(--f-disp); font-weight: 800; font-size: 1.05rem;
+  letter-spacing: .04em; color: var(--text);
+}
+.site__bar span { display: block; font-size: .87rem; color: var(--mute); }
+.site__spec { display: flex; flex-wrap: wrap; gap: .8rem; padding: .7rem clamp(.9rem, 1.6vw, 1.2rem) 1.1rem; }
+.site__spec i {
+  font-style: normal;
+  font-family: var(--f-tel); font-size: 10px; letter-spacing: .04em; color: var(--faint);
+}
+.sites__note {
+  margin: 1.6rem 0 0; max-width: 72ch;
+  font-family: var(--f-tel); font-size: 10.5px; line-height: 1.9; color: var(--faint);
+}
+
+/* ---- records ------------------------------------------------------------ */
+.records {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.rec {
+  display: grid; gap: .25rem; align-content: start;
+  padding: 1.3rem 1.3rem 1.5rem;
+  background: var(--panel);
+  transition: background-color var(--fast) var(--ease);
+}
+.rec:hover { background: var(--panel-2); }
+.rec__k {
+  font-family: var(--f-tel); font-size: 9.5px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cyan);
+}
+.rec__t {
+  font-family: var(--f-disp); font-weight: 700; font-size: 1.06rem;
+  color: var(--text); line-height: 1.25;
+}
+.rec__d { font-size: .89rem; color: var(--mute); }
+.rec__s {
+  justify-self: start; margin-top: .6rem;
+  font-family: var(--f-tel); font-size: 9.5px; letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .16rem .55rem; border: 1px solid currentColor;
+}
+.rec__s[data-state="done"]    { color: var(--lime); }
+.rec__s[data-state="pending"] { color: #ffb43c; }
+.rec--gold .rec__k { color: var(--lime); }
+
+/* ---- profile ------------------------------------------------------------ */
+.profile {
+  display: grid; gap: clamp(1.4rem, 3vw, 2.8rem);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: start;
+}
+.facets { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.facet { background: var(--panel); padding: 1.2rem 1.3rem 1.35rem; border-left: 2px solid var(--ink); }
+.facet b {
+  display: block; margin-bottom: .3rem;
+  font-family: var(--f-disp); font-weight: 800; font-size: 1rem;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ink);
+}
+.facet p { margin: 0; font-size: .92rem; color: var(--mute); }
+
+.bio {
+  padding: 1.5rem clamp(1.2rem, 2vw, 1.8rem);
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+.bio h3 {
+  margin: 0 0 .9rem;
+  font-family: var(--f-tel); font-size: 10.5px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--cyan); font-weight: 500;
+}
+.bio p { margin: 0 0 1rem; font-size: .94rem; color: var(--mute); }
+.bio p:last-child { margin-bottom: 0; }
+
+/* ---- contact ------------------------------------------------------------ */
+.sect--contact { padding-bottom: clamp(4rem, 10vh, 8rem); }
+.contact {
+  display: grid; gap: clamp(1.6rem, 4vw, 3.4rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, .9fr);
+  align-items: start;
+}
+.lines { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: .1rem; }
+.lines li {
+  display: grid; grid-template-columns: 8.5ch 1fr; gap: 1rem; align-items: baseline;
+  padding: .7rem 0; border-bottom: 1px solid var(--line);
+}
+.lines span {
+  font-family: var(--f-tel); font-size: 9.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--faint);
+}
+.lines a {
+  color: var(--text); text-decoration: none;
+  border-bottom: 1px solid var(--line-2);
+  transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease);
+  overflow-wrap: anywhere;
+}
+.lines a:hover, .lines a:focus-visible { color: var(--cyan); border-color: var(--cyan); }
+
+.form { display: grid; gap: 1.1rem; justify-items: start; }
+.field { display: grid; gap: .35rem; width: 100%; }
+.field > span {
+  font-family: var(--f-tel); font-size: 9.5px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cyan);
+}
+.field input, .field textarea {
+  width: 100%;
+  font-family: var(--f-body); font-weight: 300; font-size: 1rem; color: var(--text);
+  background: var(--void-2); border: 1px solid var(--line-2);
+  padding: .75rem .85rem; resize: vertical;
+  transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--faint); }
+.field input:focus, .field textarea:focus {
+  outline: none; border-color: var(--cyan);
+  box-shadow: inset 0 0 24px -14px var(--cyan);
+}
+.field input:user-invalid, .field textarea:user-invalid { border-color: var(--magenta); }
+.form__out {
+  margin: 0; min-height: 1.5em;
+  font-family: var(--f-tel); font-size: 11px; color: var(--lime);
+}
+.form__out[data-state="error"] { color: var(--magenta); }
+
+/* ---- foot --------------------------------------------------------------- */
+.foot {
+  width: var(--rail); margin: 0 auto;
+  padding: 1.8rem var(--pad) 2.6rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--f-tel); font-size: 10.5px; line-height: 2; color: var(--faint);
+}
+.foot p { margin: 0; max-width: 84ch; }
+
+/* =========================================================================
+   ACTION DECK — the cabinet's control panel, rebuilt as a slim glass bar
+   ========================================================================= */
+
+.deck {
+  position: fixed; inset: auto 0 0 0; z-index: 60;
+  height: var(--deck-h);
+  display: flex; align-items: stretch; gap: 1px;
+  padding: 0 var(--pad);
+  background: rgba(5,6,11,.86);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border-top: 1px solid var(--line);
+}
+.deck__k {
+  display: flex; align-items: center; gap: .55rem;
+  padding: 0 clamp(.6rem, 1.8vw, 1.4rem);
+  text-decoration: none;
+  transition: background-color var(--fast) var(--ease);
+}
+.deck__k b {
+  display: grid; place-items: center;
+  width: 22px; height: 22px; flex: none;
+  font-family: var(--f-tel); font-size: 10px; font-weight: 500;
+  color: var(--cyan); border: 1px solid var(--line-2);
+}
+.deck__k span {
+  font-family: var(--f-disp); font-weight: 500; font-size: .78rem;
+  letter-spacing: .07em; text-transform: uppercase; color: var(--mute);
+}
+.deck__k:hover, .deck__k:focus-visible { background: rgba(34,232,255,.07); }
+.deck__k:hover span, .deck__k:focus-visible span { color: var(--text); }
+.deck__k[aria-current="true"] b { color: var(--void); background: var(--cyan); border-color: var(--cyan); }
+.deck__k[aria-current="true"] span { color: var(--text); }
+.deck__k--go { margin-left: auto; }
+.deck__k--go b { color: var(--void); background: var(--magenta); border-color: var(--magenta); }
+.deck__k--go span { color: var(--text); }
+
+/* =========================================================================
+   MOTION — one authored moment: blocks power up from an already-visible state
+   ========================================================================= */
+
+.rise { opacity: 0; transform: translateY(16px); }
+.rise.is-up {
+  opacity: 1; transform: none;
+  transition: opacity 460ms var(--ease), transform 460ms var(--ease);
+}
+
+/* =========================================================================
+   RESPONSIVE
+   ========================================================================= */
+
+/* The wide Web card goes two-column on desktop. Stacked, its 16:4 art band
+   was ~340px of empty lattice above the only text on the card. */
+@media (min-width: 900px) {
+  .ch--wide a {
+    grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+  }
+  .ch--wide .ch__art {
+    grid-column: 2; grid-row: 1 / -1;
+    aspect-ratio: auto; height: 100%; min-height: 260px;
+  }
+  .ch--wide .ch__body { grid-column: 1; grid-row: 2; padding-top: 3.4rem; }
+  .ch--wide .ch__go   { grid-column: 1; grid-row: 3; }
+  .ch--wide .ch__art--grid {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 38%, #000);
+            mask-image: linear-gradient(90deg, transparent, #000 38%, #000);
+  }
+  .ch--wide .ch__art::after {
+    background: linear-gradient(90deg, var(--panel) 0%, rgba(11,14,24,.2) 42%, transparent 70%);
+  }
+}
+
+@media (max-width: 980px) {
+  .profile, .contact { grid-template-columns: 1fr; }
+  .hero { min-height: auto; padding-top: calc(var(--rail-h) + 4.5rem); padding-bottom: 4rem; }
+  .hero__scroll { display: none; }
+}
+
+@media (max-width: 720px) {
+  :root { --rail-h: 52px; --deck-h: 56px; }
+  .rail__nav { display: none; }          /* the deck carries navigation here */
+  .rail__stat { margin-left: auto; font-size: 9.5px; }
+  .rail__name { font-size: .85rem; }
+  .deck { padding: 0 .4rem; }
+  .deck__k span { display: none; }
+  .deck__k { flex: 1 1 0; justify-content: center; padding: 0; }
+  .deck__k--go { flex: 0 0 auto; padding: 0 1rem; }
+  .deck__k--go span { display: block; }
+  .hero__hud { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .lines li { grid-template-columns: 1fr; gap: .1rem; }
+}
+
+@media (max-width: 480px) {
+  .rail__stat { display: none; }         /* no room beside the name at this width */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .rise { opacity: 1; transform: none; }
+  .bx { transition: none; }
+}

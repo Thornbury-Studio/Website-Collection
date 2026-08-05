@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>ZANE — Cabinet | Portfolio Variant 01</title>
+<meta name="description" content="An arcade-cabinet portfolio: six hand-built websites playing on one screen, behind a lit marquee and a real control panel.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ZANE — Cabinet">
+<meta property="og:description" content="Six hand-built websites, one arcade cabinet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Inline&family=Silkscreen:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!--
+THESIS: A portfolio you look at as an object, not a page. It refuses the scrolling
+  neon-on-black landing page: the cabinet is the chrome, the work plays on the screen.
+OWN-WORLD: Silkscreened vinyl on black particle board. Marquee amber under bulb light,
+  hot magenta and violet airbrush, brushed-aluminium control deck, concave arcade buttons,
+  a coin door. Bungee marquee lettering; Silkscreen for anything on the screen.
+STORY: This person builds finished, playable things. Pick one. Play it.
+FIRST VIEWPORT: Lit marquee fixed to the top, printed side-art panels left and right,
+  the CRT filling the middle with the title card, control deck fixed to the bottom carrying
+  the whole navigation. Primary action is the red START button on the deck.
+FORM: Physical arcade cabinet; candidate 1 of the grounded list; seed key 315d3d88.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+
+<a class="skip" href="#attract">Skip to content</a>
+
+<!-- ============ MARQUEE ============ -->
+<header class="marquee">
+  <div class="marquee__box">
+    <span class="marquee__art marquee__art--l" aria-hidden="true"></span>
+    <span class="marquee__title">ZANE</span>
+    <span class="marquee__art marquee__art--r" aria-hidden="true"></span>
+  </div>
+  <p class="marquee__sub">Original website templates &middot; built by hand</p>
+  <div class="marquee__bulbs" aria-hidden="true"></div>
+</header>
+
+<!-- ============ SIDE ART ============ -->
+<div class="sideart sideart--l" aria-hidden="true"><span>ZANE</span></div>
+<div class="sideart sideart--r" aria-hidden="true"><span>ZANE</span></div>
+
+<!-- ============ SCREEN ============ -->
+<main class="screen" id="attract">
+
+  <!-- HUD -->
+  <div class="hud">
+    <span class="hud__cell"><b>1UP</b> ZANE</span>
+    <span class="hud__cell"><b>HI-SCORE</b> <span id="hiScore">8&nbsp;248</span></span>
+    <span class="hud__cell hud__cell--r"><b>CREDITS</b> 06</span>
+  </div>
+
+  <!-- ---- ATTRACT ---- -->
+  <section class="attract">
+    <p class="attract__over">Now playing</p>
+    <h1 class="attract__title">SIX SITES<br><em>ONE PLAYER</em></h1>
+    <p class="attract__body">
+      Every project below is a working website in this repository &mdash; not a screenshot,
+      not a mockup, not a Figma export. No build step, no framework, no template engine.
+      Open one and it runs.
+    </p>
+    <div class="attract__cta">
+      <a class="btn btn--start" href="#select">
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2l7 4-7 4z"/></svg>
+        Press start
+      </a>
+      <a class="btn btn--ghost" href="#scores">See the scoreboard</a>
+    </div>
+    <p class="attract__blink" aria-hidden="true">&#9656; insert coin to continue</p>
+  </section>
+
+  <!-- ---- SELECT ---- -->
+  <section class="sect" id="select">
+    <header class="sect__head">
+      <h2 class="sect__title">Select your game</h2>
+      <p class="sect__note">Six cabinets. Each one opens the real, running site.</p>
+    </header>
+
+    <ul class="roster" id="roster">
+      <li class="game" style="--ink:#ff2d78">
+        <a class="game__link" href="../../templates/pulse-ai-analytics/index.html">
+          <span class="game__screen">
+            <img src="img/pulse-ai-analytics.webp" alt="The PULSE landing page: a dark starfield hero reading &lsquo;Know who&rsquo;s leaving before they do.&rsquo;" width="960" height="600" loading="lazy" decoding="async">
+          </span>
+          <span class="game__plate">
+            <b class="game__name">PULSE</b>
+            <span class="game__kind">AI analytics landing page</span>
+          </span>
+          <span class="game__meta"><span>2&nbsp;559 lines</span><span>cinematic scroll</span></span>
+        </a>
+      </li>
+      <li class="game" style="--ink:#ff8a1e">
+        <a class="game__link" href="../../templates/restaurant-food/index.html">
+          <span class="game__screen">
+            <img src="img/restaurant-food.webp" alt="The EMBER restaurant site: a wood-fire hero with drifting canvas embers." width="960" height="600" loading="lazy" decoding="async">
+          </span>
+          <span class="game__plate">
+            <b class="game__name">EMBER</b>
+            <span class="game__kind">Wood-fire restaurant</span>
+          </span>
+          <span class="game__meta"><span>1&nbsp;869 lines</span><span>zero dependencies</span></span>
+        </a>
+      </li>
+      <li class="game" style="--ink:#c6f000">
+        <a class="game__link" href="../../templates/gym-service/index.html">
+          <span class="game__screen">
+            <img src="img/gym-service.webp" alt="The FORGE gym site: a glowing green low-poly form beside the words &lsquo;Forge your strongest self&rsquo;." width="960" height="600" loading="lazy" decoding="async">
+          </span>
+          <span class="game__plate">
+            <b class="game__name">FORGE</b>
+            <span class="game__kind">Strength &amp; conditioning</span>
+          </span>
+          <span class="game__meta"><span>1&nbsp;358 lines</span><span>GSAP + Three.js</span></span>
+        </a>
+      </li>
+      <li class="game" style="--ink:#ff2d78">
+        <a class="game__link" href="../../templates/entertainment-triggered/index.html">
+          <span class="game__screen">
+            <img src="img/entertainment-triggered.webp" alt="The TRIGGERED concept site: neon type over a glowing lava grid floor." width="960" height="600" loading="lazy" decoding="async">
+          </span>
+          <span class="game__plate">
+            <b class="game__name">TRIGGERED</b>
+            <span class="game__kind">Active game centre &mdash; concept</span>
+          </span>
+          <span class="game__meta"><span>1&nbsp;129 lines</span><span>unofficial redesign</span></span>
+        </a>
+      </li>
+      <li class="game" style="--ink:#6bd5ff">
+        <a class="game__link" href="../../templates/business-corporate/index.html">
+          <span class="game__screen">
+            <img src="img/business-corporate.webp" alt="The Meridian Partners consulting site: a restrained, typographic corporate homepage." width="960" height="600" loading="lazy" decoding="async">
+          </span>
+          <span class="game__plate">
+            <b class="game__name">MERIDIAN</b>
+            <span class="game__kind">Consulting firm</span>
+          </span>
+          <span class="game__meta"><span>808 lines</span><span>4 pages</span></span>
+        </a>
+      </li>
+      <li class="game" style="--ink:#b98cff">
+        <a class="game__link" href="../../templates/ecommerce-design-store/index.html">
+          <span class="game__screen">
+            <img src="img/ecommerce-design-store.webp" alt="The OBLIK store: an editorial product grid of design objects." width="960" height="600" loading="lazy" decoding="async">
+          </span>
+          <span class="game__plate">
+            <b class="game__name">OBLIK</b>
+            <span class="game__kind">Design-object store</span>
+          </span>
+          <span class="game__meta"><span>525 lines</span><span>cart &amp; product UX</span></span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ---- STATS ---- -->
+  <section class="sect" id="stats">
+    <header class="sect__head">
+      <h2 class="sect__title">Player stats</h2>
+      <p class="sect__note">Left column is measured from the repository. Right column is a self-rating &mdash; treat it as an opinion, not a benchmark.</p>
+    </header>
+
+    <div class="stats">
+      <div class="spec">
+        <h3 class="spec__h">Spec sheet</h3>
+        <dl class="spec__list">
+          <div><dt>Sites shipped</dt><dd>06</dd></div>
+          <div><dt>Build steps</dt><dd>00</dd></div>
+          <div><dt>CSS frameworks</dt><dd>00</dd></div>
+          <div><dt>JS frameworks</dt><dd>00</dd></div>
+          <div><dt>Hand-written lines</dt><dd>8&nbsp;248</dd></div>
+          <div><dt>Sites with zero CDN calls</dt><dd>04 / 06</dd></div>
+        </dl>
+      </div>
+
+      <div class="meters">
+        <h3 class="spec__h">Ability <span>self-rated</span></h3>
+        <ul class="meter-list" id="meters">
+          <li><span class="meter__label">Layout &amp; grid</span><span class="meter"><i style="--v:92%"></i></span><span class="meter__v">92</span></li>
+          <li><span class="meter__label">Typography</span><span class="meter"><i style="--v:88%"></i></span><span class="meter__v">88</span></li>
+          <li><span class="meter__label">Motion</span><span class="meter"><i style="--v:84%"></i></span><span class="meter__v">84</span></li>
+          <li><span class="meter__label">Canvas &amp; WebGL</span><span class="meter"><i style="--v:71%"></i></span><span class="meter__v">71</span></li>
+          <li><span class="meter__label">Performance</span><span class="meter"><i style="--v:86%"></i></span><span class="meter__v">86</span></li>
+          <li><span class="meter__label">Accessibility</span><span class="meter"><i style="--v:79%"></i></span><span class="meter__v">79</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---- HIGH SCORES ---- -->
+  <section class="sect" id="scores">
+    <header class="sect__head">
+      <h2 class="sect__title">High scores</h2>
+      <p class="sect__note">Score is hand-written lines of CSS and JavaScript. Counted, not estimated.</p>
+    </header>
+
+    <table class="scores">
+      <caption class="sr-only">Templates ranked by hand-written lines of CSS and JavaScript</caption>
+      <thead>
+        <tr><th scope="col">Rank</th><th scope="col">Name</th><th scope="col">Score</th><th scope="col">Weight</th><th scope="col">CDN</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1st</td><th scope="row">PULSE</th><td>2&nbsp;559</td><td>392&nbsp;KB</td><td>3</td></tr>
+        <tr><td>2nd</td><th scope="row">EMBER</th><td>1&nbsp;869</td><td>952&nbsp;KB</td><td>0</td></tr>
+        <tr><td>3rd</td><th scope="row">FORGE</th><td>1&nbsp;358</td><td>2.5&nbsp;MB</td><td>3</td></tr>
+        <tr><td>4th</td><th scope="row">TRIGGERED</th><td>1&nbsp;129</td><td>96&nbsp;KB</td><td>0</td></tr>
+        <tr><td>5th</td><th scope="row">MERIDIAN</th><td>808</td><td>208&nbsp;KB</td><td>0</td></tr>
+        <tr><td>6th</td><th scope="row">OBLIK</th><td>525</td><td>536&nbsp;KB</td><td>0</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ---- COIN ---- -->
+  <section class="sect sect--coin" id="coin">
+    <div class="coin">
+      <div class="coin__door" aria-hidden="true">
+        <span class="coin__slot"></span>
+        <span class="coin__plate">INSERT COIN</span>
+      </div>
+      <div class="coin__copy">
+        <h2 class="sect__title">Continue?</h2>
+        <p class="sect__note">Say what you want built. I&rsquo;ll tell you honestly whether it needs a framework.</p>
+        <form class="coin__form" id="coinForm" novalidate>
+          <label class="field">
+            <span>Your email</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="player@somewhere.com">
+          </label>
+          <label class="field">
+            <span>What are we building?</span>
+            <textarea name="brief" rows="3" required placeholder="A one-page site for&hellip;"></textarea>
+          </label>
+          <button class="btn btn--start" type="submit">Insert coin</button>
+          <p class="coin__status" id="coinStatus" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="service">
+    <p>Cabinet serial <b>ZN&ndash;01</b> &middot; Variant 01 of 5 &middot; Screenshots are of this repository&rsquo;s own templates.</p>
+    <p>TRIGGERED is an unofficial concept redesign and is not affiliated with the real venue.</p>
+  </footer>
+</main>
+
+<!-- ============ CRT GLASS ============ -->
+<div class="glass" aria-hidden="true"></div>
+
+<!-- ============ CONTROL PANEL ============ -->
+<footer class="panel">
+  <div class="panel__stick" aria-hidden="true">
+    <span class="stick" id="stick"><i></i></span>
+    <span class="panel__cap">nav</span>
+  </div>
+
+  <nav class="panel__nav" aria-label="Sections">
+    <a class="key" href="#select" data-sect="select"><span class="key__cap">1</span><span class="key__lbl">Select</span></a>
+    <a class="key" href="#stats" data-sect="stats"><span class="key__cap">2</span><span class="key__lbl">Stats</span></a>
+    <a class="key" href="#scores" data-sect="scores"><span class="key__cap">3</span><span class="key__lbl">Scores</span></a>
+    <a class="key" href="#coin" data-sect="coin"><span class="key__cap">4</span><span class="key__lbl">Coin</span></a>
+  </nav>
+
+  <a class="key key--start" href="#coin"><span class="key__cap">P1</span><span class="key__lbl">Start</span></a>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
