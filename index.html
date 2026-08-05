@@ -349,6 +349,9 @@
   .section-header p { color: var(--muted); max-width: 360px; font-size: 0.94rem; line-height: 1.6; }
 
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+  /* A grid item's default min-width is auto, so a 480px screenshot sets the
+     track's minimum and auto-fit collapses the whole gallery to one column. */
+  .grid > .card { min-width: 0; }
 
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.in-view { opacity: 1; transform: translateY(0); }
@@ -429,8 +432,172 @@
   .preview .mock-blocks { display: flex; gap: 8px; }
   .preview .mock-blocks div { flex: 1; height: 24px; border-radius: 6px; background: rgba(255,255,255,0.04); }
 
-  .card.locked .preview { filter: grayscale(1) brightness(0.75); }
+  /* ---------- real screenshots in the card preview ---------- */
+  .preview--shot { padding: 0; display: block; }
+  .preview--shot .chrome {
+    position: absolute; inset: 0 0 auto 0; z-index: 2;
+    height: 22px; align-items: center; padding: 0 10px;
+    background: rgba(10,10,12,0.8);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .preview--shot img {
+    width: 100%; max-width: 100%; height: 100%; display: block;
+    object-fit: cover; object-position: top center;
+    transition: transform 0.6s ease;
+  }
+  .card:hover .preview--shot img { transform: scale(1.03); }
+
+  /* ---------- locked cards ---------- */
+  .card.locked .preview { filter: grayscale(0.85) brightness(0.62); }
   .card.locked { pointer-events: auto; }
+  .card.locked .tag { color: var(--muted); }
+  .card.locked:hover .preview { filter: grayscale(0.4) brightness(0.8); }
+  .card.is-unlocked .preview { filter: none; }
+  .card.is-unlocked .lock-badge { color: #7fd6a0; border-color: rgba(127,214,160,0.4); }
+
+  .card-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap;
+  }
+  .lock-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    font-weight: 600; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 4px 10px;
+  }
+  .lock-badge svg { width: 12px; height: 12px; }
+
+  /* Refusal feedback: a short lateral shake. Announced to the reader through
+     the modal that opens with it, so this is reinforcement, not the only cue. */
+  @keyframes cardShake {
+    0%, 100% { transform: translateX(0); }
+    15% { transform: translateX(-7px); }
+    30% { transform: translateX(6px); }
+    45% { transform: translateX(-4px); }
+    60% { transform: translateX(3px); }
+    80% { transform: translateX(-1px); }
+  }
+  .shake { animation: cardShake 420ms cubic-bezier(.36,.07,.19,.97); }
+
+  /* ---------- gear ---------- */
+  .gear {
+    display: grid; place-items: center;
+    width: 34px; height: 34px; flex: none;
+    margin-left: 14px;
+    background: transparent; border: 1px solid var(--border); border-radius: 9px;
+    color: var(--muted); cursor: pointer;
+    transition: color 0.25s ease, border-color 0.25s ease, transform 0.4s ease;
+  }
+  .gear svg { width: 17px; height: 17px; }
+  .gear:hover, .gear:focus-visible {
+    color: var(--accent); border-color: rgba(182,147,95,0.45); transform: rotate(45deg);
+  }
+
+  /* ---------- settings modal ---------- */
+  .modal { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 20px; }
+  .modal[hidden] { display: none; }
+  .modal__scrim {
+    position: absolute; inset: 0;
+    background: rgba(6,6,8,0.72);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    animation: fadeIn 0.2s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+  .modal__box {
+    position: relative; width: min(460px, 100%);
+    max-height: min(84vh, 660px); overflow-y: auto;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 30px 80px -30px rgba(0,0,0,0.9);
+    animation: modalIn 0.24s cubic-bezier(.2,.9,.3,1);
+  }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(14px) scale(.985) } to { opacity: 1; transform: none } }
+
+  .modal__top {
+    position: sticky; top: 0; z-index: 2;
+    display: flex; align-items: center; gap: 10px;
+    padding: 16px 16px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .modal__top h2 {
+    font-family: var(--font-display); font-weight: 500; font-size: 1.06rem;
+    flex: 1 1 auto;
+  }
+  .modal__back, .modal__x {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: transparent; border: 1px solid var(--border); border-radius: 8px;
+    color: var(--muted); cursor: pointer; font: inherit; font-size: 0.8rem;
+    padding: 5px 10px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .modal__x { padding: 5px; }
+  /* display on the base rule beats the UA's [hidden]{display:none} */
+  .modal__back[hidden] { display: none; }
+  .modal__back svg, .modal__x svg { width: 14px; height: 14px; }
+  .modal__back:hover, .modal__x:hover,
+  .modal__back:focus-visible, .modal__x:focus-visible { color: var(--text); border-color: var(--accent); }
+
+  .pane { display: none; padding: 18px 16px 20px; }
+  .pane.is-on { display: block; animation: paneIn 0.2s ease; }
+  @keyframes paneIn { from { opacity: 0; transform: translateX(8px) } to { opacity: 1; transform: none } }
+  .pane > p { color: var(--muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 14px; }
+
+  .row {
+    display: flex; align-items: center; gap: 12px; width: 100%;
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 11px;
+    padding: 13px 14px; margin-bottom: 10px;
+    color: var(--text); font: inherit; text-align: left; cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .row:hover, .row:focus-visible { border-color: rgba(182,147,95,0.45); background: #1b1c21; }
+  .row__i { display: grid; place-items: center; width: 34px; height: 34px; flex: none;
+            border-radius: 9px; background: var(--accent-soft); color: var(--accent); }
+  .row__i svg { width: 17px; height: 17px; }
+  .row__t { flex: 1 1 auto; display: grid; gap: 2px; }
+  .row__t b { font-size: 0.94rem; font-weight: 600; }
+  .row__t span { font-size: 0.8rem; color: var(--muted); }
+  .row__c { color: var(--muted); font-size: 1.2rem; }
+  .row__lock {
+    font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+    color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 3px 8px;
+  }
+  .row__lock[data-state="open"] { color: #7fd6a0; border-color: rgba(127,214,160,0.4); }
+
+  .facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+           background: var(--border); border: 1px solid var(--border);
+           border-radius: 11px; overflow: hidden; margin-bottom: 14px; }
+  .facts > div { background: var(--surface-2); padding: 12px 14px; }
+  .facts dt { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .facts dd { font-family: var(--font-display); font-size: 1.25rem; margin-top: 2px; }
+
+  .field { display: grid; gap: 5px; margin-bottom: 12px; }
+  .field > span { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .field input {
+    width: 100%; font: inherit; font-size: 0.95rem; color: var(--text);
+    background: var(--bg); border: 1px solid var(--border); border-radius: 9px;
+    padding: 10px 12px;
+    transition: border-color 0.2s ease;
+  }
+  .field input::placeholder { color: #55555e; }
+  .field input:focus { outline: none; border-color: var(--accent); }
+  .field input.bad { border-color: #e0645f; }
+
+  .msg { min-height: 1.3em; font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
+  .msg[data-state="error"] { color: #e0645f; }
+  .msg[data-state="ok"] { color: #7fd6a0; }
+  .admin-acts { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pane .btn { font-size: 0.85rem; padding: 10px 18px; cursor: pointer; border-radius: 9px; }
+  .fine { font-size: 0.78rem; line-height: 1.65; color: var(--muted); margin-top: 16px; }
+  .fine strong { color: var(--text); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .modal__scrim, .modal__box, .pane.is-on { animation: none; }
+    .shake { animation: none; outline: 2px solid #e0645f; outline-offset: 3px; }
+    .gear:hover { transform: none; }
+  }
 
   .card-body { padding: 24px 24px 26px; }
   .card .tag { display: inline-block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
@@ -495,6 +662,102 @@
     <span class="live-count" id="liveCount">0</span> templates live
     <span class="status-tail"> · Actively expanding</span>
   </div>
+  <button class="gear" id="gearBtn" type="button" aria-haspopup="dialog" aria-label="Settings">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="3.2"/>
+      <path d="M19.4 15a1.6 1.6 0 0 0 .32 1.77l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.6 1.6 0 0 0-1.77-.32 1.6 1.6 0 0 0-1 1.47V21a2 2 0 1 1-4 0v-.11a1.6 1.6 0 0 0-1.05-1.47 1.6 1.6 0 0 0-1.77.32l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.6 1.6 0 0 0 4.6 15a1.6 1.6 0 0 0-1.47-1H3a2 2 0 1 1 0-4h.11A1.6 1.6 0 0 0 4.6 8.9a1.6 1.6 0 0 0-.32-1.77l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.6 1.6 0 0 0 1.77.32H9a1.6 1.6 0 0 0 1-1.47V3a2 2 0 1 1 4 0v.11a1.6 1.6 0 0 0 1 1.47 1.6 1.6 0 0 0 1.77-.32l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.6 1.6 0 0 0-.32 1.77V9a1.6 1.6 0 0 0 1.47 1H21a2 2 0 1 1 0 4h-.11a1.6 1.6 0 0 0-1.47 1z"/>
+    </svg>
+  </button>
+</div>
+
+<!-- ================= SETTINGS ================= -->
+<div class="modal" id="settings" hidden>
+  <div class="modal__scrim" data-close></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+    <header class="modal__top">
+      <button class="modal__back" id="backBtn" type="button" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+        Back
+      </button>
+      <h2 id="modalTitle">Settings</h2>
+      <button class="modal__x" type="button" data-close aria-label="Close settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </header>
+
+    <!-- root menu -->
+    <div class="pane is-on" data-pane="menu">
+      <button class="row" type="button" data-go="about">
+        <span class="row__i">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </span>
+        <span class="row__t"><b>About</b><span>What this gallery is and how it&rsquo;s built</span></span>
+        <span class="row__c" aria-hidden="true">&rsaquo;</span>
+      </button>
+      <button class="row" type="button" data-go="admin">
+        <span class="row__i">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        </span>
+        <span class="row__t"><b>Admin</b><span>Manage the access password</span></span>
+        <span class="row__lock" id="adminLockPip">Locked</span>
+      </button>
+    </div>
+
+    <!-- about -->
+    <div class="pane" data-pane="about">
+      <p>A gallery of original, self-contained website templates, built for client demos.
+         Every card opens a real, working site — not a screenshot and not a prototype.</p>
+      <p>Each template is plain HTML, CSS and JavaScript with no build step, no framework
+         and no bundler. They deploy as static files and run straight from the folder.</p>
+      <dl class="facts">
+        <div><dt>Templates live</dt><dd id="aboutCount">6</dd></div>
+        <div><dt>Hand-written lines</dt><dd>8&nbsp;248</dd></div>
+        <div><dt>Build steps</dt><dd>0</dd></div>
+        <div><dt>Frameworks</dt><dd>0</dd></div>
+      </dl>
+      <p class="fine">All work here is original. No third-party copyrighted content is used.
+         TRIGGERED is an unofficial concept redesign and is not affiliated with the real venue.</p>
+    </div>
+
+    <!-- unlock prompt -->
+    <div class="pane" data-pane="unlock">
+      <p id="unlockWhy">This area is locked. Enter the password to continue.</p>
+      <form id="unlockForm" novalidate>
+        <label class="field">
+          <span>Password</span>
+          <input type="password" id="unlockPass" inputmode="numeric" autocomplete="current-password" placeholder="••••">
+        </label>
+        <p class="msg" id="unlockMsg" role="status"></p>
+        <button class="btn btn-primary" type="submit">Unlock</button>
+      </form>
+    </div>
+
+    <!-- admin -->
+    <div class="pane" data-pane="admin">
+      <p>Change the password used for every locked area of this site.</p>
+      <form id="passForm" novalidate>
+        <label class="field">
+          <span>New password</span>
+          <input type="password" id="newPass" autocomplete="new-password" placeholder="New password">
+        </label>
+        <label class="field">
+          <span>Confirm new password</span>
+          <input type="password" id="newPass2" autocomplete="new-password" placeholder="Repeat it">
+        </label>
+        <p class="msg" id="passMsg" role="status"></p>
+        <div class="admin-acts">
+          <button class="btn btn-primary" type="submit">Save password</button>
+          <button class="btn btn-outline" type="button" id="lockAgain">Lock again</button>
+        </div>
+      </form>
+      <p class="fine"><strong>Read this before relying on it.</strong> This is a front-end
+         gate, not security. The password lives in this browser&rsquo;s local storage, and
+         anyone who views the page source or disables JavaScript can reach the locked pages
+         directly. It keeps casual visitors out; it does not protect anything private.</p>
+    </div>
+
+  </div>
 </div>
 
 <section class="hero">
@@ -531,140 +794,127 @@
 
   <div class="grid">
     <a class="card reveal" href="templates/business-corporate/index.html" data-cursor="view">
-      <div class="preview">
+      <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <div class="mock-nav"></div>
-        <div class="mock-hero">
-          <div class="mock-line w60"></div>
-          <div class="mock-line w40"></div>
-          <div class="mock-cta"></div>
-        </div>
+        <img src="img/business-corporate-sm.webp" alt="The Meridian Partners homepage: a restrained, typographic consulting site." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Business / Corporate</span>
         <h3>Meridian Partners</h3>
         <p>A consulting-firm site with a hero, services grid, stats, testimonials, and a working contact form UI.</p>
-        <span class="card-link">View Template
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
         </span>
       </div>
     </a>
 
     <a class="card reveal" href="templates/gym-service/index.html" data-cursor="view">
-      <div class="preview">
+      <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <div class="mock-nav"></div>
-        <div class="mock-hero">
-          <div class="mock-line w60"></div>
-          <div class="mock-line w40"></div>
-          <div class="mock-cta"></div>
-        </div>
+        <img src="img/gym-service-sm.webp" alt="The FORGE homepage: a glowing low-poly form beside &lsquo;Forge your strongest self&rsquo;." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Fitness / Gym</span>
         <h3>FORGE</h3>
         <p>An animation-driven gym site — GSAP scroll effects, a Three.js WebGL hero, and synthesized sound.</p>
-        <span class="card-link">View Template
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
         </span>
       </div>
     </a>
 
     <a class="card reveal" href="templates/ecommerce-design-store/index.html" data-cursor="view">
-      <div class="preview">
+      <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <div class="mock-nav"></div>
-        <div class="mock-hero">
-          <div class="mock-blocks"><div></div><div></div><div></div></div>
-          <div class="mock-line w40"></div>
-        </div>
+        <img src="img/ecommerce-design-store-sm.webp" alt="The OBLIK storefront: an editorial product grid of design objects." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">E-Commerce / Design Store</span>
         <h3>OBLIK</h3>
         <p>A kinetic design-object store with product filters, color switching, quick views, and a working demo cart.</p>
-        <span class="card-link">View Template
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
         </span>
       </div>
     </a>
 
     <a class="card reveal" href="templates/pulse-ai-analytics/index.html" data-cursor="view">
-      <div class="preview">
+      <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <div class="mock-nav"></div>
-        <div class="mock-hero">
-          <div class="mock-line w60"></div>
-          <div class="mock-blocks"><div></div><div></div><div></div></div>
-          <div class="mock-line w40"></div>
-        </div>
+        <img src="img/pulse-ai-analytics-sm.webp" alt="The PULSE landing page: a dark starfield hero over a product dashboard." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">SaaS / AI Platform</span>
         <h3>PULSE</h3>
         <p>A cinematic AI-analytics landing page — a scroll-assembled particle dashboard, pinned feature panels, and a live product UI.</p>
-        <span class="card-link">View Template
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
         </span>
       </div>
     </a>
 
     <a class="card reveal" href="templates/restaurant-food/index.html" data-cursor="view">
-      <div class="preview">
+      <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <div class="mock-nav"></div>
-        <div class="mock-hero">
-          <div class="mock-line w60"></div>
-          <div class="mock-blocks"><div></div><div></div></div>
-        </div>
+        <img src="img/restaurant-food-sm.webp" alt="The EMBER homepage: a wood-fire hero with drifting embers." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Restaurant / Food</span>
         <h3>EMBER</h3>
         <p>A wood-fire restaurant with a cursor-tracked menu, a scroll-driven heat gauge, and a booking flow that actually validates.</p>
-        <span class="card-link">View Template
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
         </span>
       </div>
     </a>
 
     <a class="card reveal" href="templates/entertainment-triggered/index.html" data-cursor="view">
-      <div class="preview">
+      <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <div class="mock-nav"></div>
-        <div class="mock-hero">
-          <div class="mock-line w40"></div>
-          <div class="mock-blocks"><div></div><div></div><div></div></div>
-          <div class="mock-cta"></div>
-        </div>
+        <img src="img/entertainment-triggered-sm.webp" alt="The TRIGGERED concept site: neon type over a glowing lava grid floor." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Entertainment / Redesign</span>
         <h3>TRIGGERED</h3>
         <p>An unofficial redesign of a real Singapore game centre — a WebGL lava floor, and a calculator that finally makes peak pricing readable.</p>
-        <span class="card-link">View Template
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
         </span>
       </div>
     </a>
 
-    <div class="card locked reveal">
-      <div class="preview">
+    <a class="card locked reveal" href="portfolio/index.html" data-lock="portfolio" data-cursor="view">
+      <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <div class="mock-nav"></div>
-        <div class="mock-hero">
-          <div class="mock-line w40"></div>
-          <div class="mock-line short"></div>
-          <div class="mock-cta"></div>
-        </div>
+        <img src="img/portfolio-sm.webp" alt="Zhang Zhijie&rsquo;s portfolio: a neon lattice behind the words &lsquo;Build everything&rsquo;." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
-        <span class="tag">Coming Soon</span>
-        <h3>Portfolio / Personal</h3>
-        <p>Single-page resume-style site for an individual or freelancer.</p>
-        <span class="badge-soon">In progress</span>
+        <span class="tag">Portfolio / Personal</span>
+        <h3>Zhang Zhijie</h3>
+        <p>My own portfolio — five channels of work across web, XR, games, design and operations, with this whole gallery sitting inside it as one showroom.</p>
+        <span class="card-foot">
+          <span class="card-link">View Site
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+          <span class="lock-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            Locked
+          </span>
+        </span>
       </div>
-    </div>
+    </a>
   </div>
 </section>
 
@@ -673,6 +923,219 @@
 </div>
 
 <script>
+  /* =====================================================================
+     Settings + lock gate.
+
+     IMPORTANT, and stated plainly because it is easy to assume otherwise:
+     this is a front-end gate, not security. The password sits in this
+     browser's localStorage, the locked pages are ordinary static files, and
+     anyone who reads the source or turns JavaScript off reaches them
+     directly. It keeps casual visitors out of the personal portfolio. It
+     protects nothing.
+     ===================================================================== */
+  (function () {
+    var KEY_PASS = 'wc.pass';
+    var KEY_OPEN = 'wc.unlocked';
+    var DEFAULT_PASS = '8888';
+
+    var modal   = document.getElementById('settings');
+    var gear    = document.getElementById('gearBtn');
+    var backBtn = document.getElementById('backBtn');
+    var title   = document.getElementById('modalTitle');
+    if (!modal || !gear) return;
+
+    var panes = modal.querySelectorAll('[data-pane]');
+    var lastFocus = null;
+    var history = [];
+    var pendingHref = null;   // where to go once the visitor unlocks
+
+    var TITLES = { menu: 'Settings', about: 'About', admin: 'Admin', unlock: 'Locked' };
+
+    /* --- storage, with private-mode browsers in mind ------------------- */
+    function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+    function read(k)     { try { return localStorage.getItem(k); } catch (e) { return null; } }
+    function pass()      { return read(KEY_PASS) || DEFAULT_PASS; }
+    function isOpen()    { try { return sessionStorage.getItem(KEY_OPEN) === '1'; } catch (e) { return false; } }
+    function setOpen(v) {
+      try { v ? sessionStorage.setItem(KEY_OPEN, '1') : sessionStorage.removeItem(KEY_OPEN); } catch (e) {}
+      paintLocks();
+    }
+
+    /* --- lock state on screen ----------------------------------------- */
+    function paintLocks() {
+      var open = isOpen();
+      var pip = document.getElementById('adminLockPip');
+      if (pip) {
+        pip.textContent = open ? 'Unlocked' : 'Locked';
+        pip.setAttribute('data-state', open ? 'open' : 'shut');
+      }
+      document.querySelectorAll('.card[data-lock]').forEach(function (c) {
+        c.classList.toggle('is-unlocked', open);
+        var b = c.querySelector('.lock-badge');
+        if (b) b.lastChild.textContent = open ? ' Unlocked' : ' Locked';
+      });
+    }
+
+    /* --- panes --------------------------------------------------------- */
+    function show(name, push) {
+      panes.forEach(function (p) { p.classList.toggle('is-on', p.dataset.pane === name); });
+      if (push !== false) history.push(name);
+      title.textContent = TITLES[name] || 'Settings';
+      backBtn.hidden = history.length < 2;
+      var focusable = modal.querySelector('.pane.is-on input, .pane.is-on button');
+      if (focusable) focusable.focus();
+    }
+
+    function openModal(pane) {
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      history = [];
+      show(pane || 'menu');
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      pendingHref = null;
+      clearForms();
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    function clearForms() {
+      ['unlockPass', 'newPass', 'newPass2'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) { el.value = ''; el.classList.remove('bad'); }
+      });
+      ['unlockMsg', 'passMsg'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) { el.textContent = ''; el.removeAttribute('data-state'); }
+      });
+    }
+
+    function shake(el) {
+      if (!el) return;
+      el.classList.remove('shake');
+      void el.offsetWidth;              // force a reflow so the class re-fires
+      el.classList.add('shake');
+      setTimeout(function () { el.classList.remove('shake'); }, 460);
+    }
+
+    /* --- open / close --------------------------------------------------- */
+    gear.addEventListener('click', function () { openModal('menu'); });
+
+    modal.addEventListener('click', function (e) {
+      if (e.target.hasAttribute('data-close')) closeModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) closeModal();
+    });
+
+    backBtn.addEventListener('click', function () {
+      history.pop();
+      var prev = history[history.length - 1] || 'menu';
+      history.pop();
+      pendingHref = null;
+      show(prev);
+    });
+
+    /* --- menu rows ------------------------------------------------------ */
+    modal.querySelectorAll('[data-go]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = btn.dataset.go;
+        if (target === 'admin' && !isOpen()) {
+          pendingHref = null;
+          document.getElementById('unlockWhy').textContent =
+            'Admin is locked. Enter the password to manage it.';
+          show('unlock');
+          return;
+        }
+        show(target);
+      });
+    });
+
+    /* --- locked cards ---------------------------------------------------- */
+    document.querySelectorAll('.card[data-lock]').forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        if (isOpen()) return;                 // unlocked: follow the link normally
+        e.preventDefault();
+        shake(card);
+        pendingHref = card.getAttribute('href');
+        document.getElementById('unlockWhy').textContent =
+          'This project is locked. Enter the password to open it.';
+        openModal('unlock');
+      });
+    });
+
+    /* --- unlock ---------------------------------------------------------- */
+    document.getElementById('unlockForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var input = document.getElementById('unlockPass');
+      var msg = document.getElementById('unlockMsg');
+      if (input.value === pass()) {
+        setOpen(true);
+        if (pendingHref) { window.location.href = pendingHref; return; }
+        msg.dataset.state = 'ok';
+        msg.textContent = 'Unlocked.';
+        input.value = '';
+        // drop the unlock step out of the trail, so Back lands on the menu
+        history = ['menu'];
+        setTimeout(function () { show('admin'); }, 350);
+      } else {
+        msg.dataset.state = 'error';
+        msg.textContent = input.value ? 'Wrong password.' : 'Enter the password first.';
+        input.classList.add('bad');
+        input.select();
+        shake(modal.querySelector('.modal__box'));
+      }
+    });
+
+    document.getElementById('unlockPass').addEventListener('input', function () {
+      this.classList.remove('bad');
+    });
+
+    /* --- change the password ---------------------------------------------- */
+    document.getElementById('passForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var a = document.getElementById('newPass');
+      var b = document.getElementById('newPass2');
+      var msg = document.getElementById('passMsg');
+
+      if (!a.value) {
+        msg.dataset.state = 'error'; msg.textContent = 'Enter a new password.';
+        a.classList.add('bad'); a.focus(); shake(modal.querySelector('.modal__box')); return;
+      }
+      if (a.value.length < 4) {
+        msg.dataset.state = 'error'; msg.textContent = 'Use at least 4 characters.';
+        a.classList.add('bad'); a.focus(); shake(modal.querySelector('.modal__box')); return;
+      }
+      if (a.value !== b.value) {
+        msg.dataset.state = 'error'; msg.textContent = 'The two passwords do not match.';
+        b.classList.add('bad'); b.focus(); shake(modal.querySelector('.modal__box')); return;
+      }
+      store(KEY_PASS, a.value);
+      a.value = ''; b.value = '';
+      a.classList.remove('bad'); b.classList.remove('bad');
+      msg.dataset.state = 'ok';
+      msg.textContent = 'Password saved on this browser.';
+    });
+
+    ['newPass', 'newPass2'].forEach(function (id) {
+      document.getElementById(id).addEventListener('input', function () {
+        this.classList.remove('bad');
+      });
+    });
+
+    document.getElementById('lockAgain').addEventListener('click', function () {
+      setOpen(false);
+      clearForms();
+      show('menu');
+    });
+
+    paintLocks();
+  })();
+
   // A real count, not a placeholder — read straight from the gallery grid
   // rather than hardcoded, so it can't drift out of sync as templates are
   // added. Counts up once on load since the topbar isn't sticky and this is
@@ -681,6 +1144,8 @@
     const liveEl = document.getElementById('liveCount');
     if (!liveEl) return;
     const total = document.querySelectorAll('.grid .card:not(.locked)').length;
+    const aboutEl = document.getElementById('aboutCount');
+    if (aboutEl) aboutEl.textContent = total;   // keep About in step with the grid
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       liveEl.textContent = total;
       return;
