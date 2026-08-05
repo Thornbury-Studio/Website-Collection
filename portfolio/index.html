@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>Zhang Zhijie — Portfolio</title>
+<meta name="description" content="Zhang Zhijie (Zane) — programmer, game developer and designer in Singapore. Web builds, XR, Unity, design work, and service record.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Zhang Zhijie — Portfolio">
+<meta property="og:description" content="Programmer, game developer and designer in Singapore. Six shipped websites, XR, Unity, design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;700;800&family=Sora:wght@300;400;600&family=Martian+Mono:wght@300;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!--
+THESIS: A portfolio with more than one discipline in it, run like a modern game
+  shell. It refuses both the single-column case-study scroll and the 1980s pastiche:
+  the chrome is a live HUD, the work is a set of selectable channels, and one of
+  those channels — only one — is the website showroom.
+OWN-WORLD: Near-black indigo ground. Three neon inks: cyan as the system colour,
+  magenta as the live/selected state, lime for verified facts. Notched panels cut
+  at 45°, hairline strokes with real bloom, glass only where something is genuinely
+  layered. Oxanium display, Sora body, Martian Mono telemetry.
+STORY: One person, several disciplines, all of it real and checkable. Pick a
+  channel, see the evidence, get in touch.
+FIRST VIEWPORT: The interactive box field skewed into the floor behind a radial
+  mask, the name at display scale with its role ticker, a live HUD readout of
+  measured figures, and the primary action on a notched magenta key.
+FORM: Cabinet's chrome and clarity fused with Vector's beam graphics; seed key 315d3d88.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+
+<a class="skip" href="#work">Skip to the work</a>
+
+<!-- ================= HUD RAIL ================= -->
+<header class="rail">
+  <a class="rail__id" href="#top">
+    <span class="rail__glyph" aria-hidden="true"></span>
+    <span class="rail__name">ZHANG&nbsp;ZHIJIE</span>
+    <span class="rail__tag">ZANE</span>
+  </a>
+  <nav class="rail__nav" aria-label="Sections">
+    <a href="#work">Channels</a>
+    <a href="#showroom">Showroom</a>
+    <a href="#records">Records</a>
+    <a href="#about">Profile</a>
+  </nav>
+  <span class="rail__stat"><i class="dot" aria-hidden="true"></i> Singapore &middot; open to work</span>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <!-- Interactive box field. Cells are built by js/boxes.js; see COMPONENT-NOTES.md
+       for the port of the React/Framer original. -->
+  <div class="boxes" id="boxes" aria-hidden="true"></div>
+  <div class="boxes__mask" aria-hidden="true"></div>
+  <div class="boxes__sweep" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <p class="hero__eyebrow">
+      <span class="hero__rolewrap"><span class="hero__role" id="role">Programmer</span></span>
+      <span class="hero__sep" aria-hidden="true">/</span>
+      Singapore
+    </p>
+
+    <h1 class="hero__title">
+      <span class="glitch" data-text="BUILD">BUILD</span>
+      <span class="glitch glitch--alt" data-text="EVERYTHING">EVERYTHING</span>
+    </h1>
+
+    <p class="hero__lede">
+      I build ideas into systems and visuals &mdash; code, games, XR, and design.
+      Six shipped websites, a VR facility tour, Unity work, and an arcade-design
+      credit. Everything on this page is real and open to inspection.
+    </p>
+
+    <div class="hero__acts">
+      <a class="key key--go" href="#work">
+        <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 2l8 5-8 5z"/></svg>
+        Enter
+      </a>
+      <a class="key" href="#showroom">Website showroom</a>
+    </div>
+
+    <ul class="hero__hud">
+      <li><b data-count="6">0</b><span>disciplines</span></li>
+      <li><b data-count="6">0</b><span>sites shipped</span></li>
+      <li><b data-count="8248">0</b><span>hand-written lines</span></li>
+      <li><b data-count="0">0</b><span>build steps</span></li>
+    </ul>
+  </div>
+
+  <p class="hero__scroll" aria-hidden="true">scroll</p>
+</section>
+
+<!-- ================= CHANNELS ================= -->
+<section class="sect" id="work">
+  <header class="sect__head">
+    <h2 class="sect__h">Select a channel</h2>
+    <p class="sect__p">Five areas of work. The website showroom is one of them &mdash;
+       the rest is games, XR, design and service.</p>
+  </header>
+
+  <ul class="channels">
+    <li class="ch ch--wide" style="--ink:var(--cyan)">
+      <a href="#showroom">
+        <span class="ch__art ch__art--grid" aria-hidden="true"></span>
+        <span class="ch__meta">
+          <span class="ch__n">01</span>
+          <span class="ch__k">Web</span>
+        </span>
+        <span class="ch__body">
+          <b class="ch__t">Website showroom</b>
+          <span class="ch__d">Six original, self-contained websites. No build step, no
+            framework, no bundler &mdash; every one runs straight from its folder, and
+            every one opens for real from this page.</span>
+          <span class="ch__tags"><i>HTML</i><i>CSS</i><i>JavaScript</i><i>Three.js</i><i>GSAP</i><i>Canvas</i></span>
+        </span>
+        <span class="ch__go">Open showroom</span>
+      </a>
+    </li>
+
+    <li class="ch" style="--ink:var(--violet)">
+      <a href="https://youtu.be/rO5-3W9CMa8" rel="noopener noreferrer" target="_blank">
+        <span class="ch__art"><img src="img/xr.webp" alt="" width="960" height="540" loading="lazy" decoding="async"></span>
+        <span class="ch__meta">
+          <span class="ch__n">02</span>
+          <span class="ch__k">XR</span>
+        </span>
+        <span class="ch__body">
+          <b class="ch__t">VR 360 virtual tour &mdash; A*STAR IME</b>
+          <span class="ch__d">A 360&deg; virtual tour of the A*STAR IME workspace, so
+            prospective visitors can walk it without a site visit. Runs on headsets,
+            in a browser, or through third-party viewers &mdash; lightweight and portable.</span>
+          <span class="ch__tags"><i>360 capture</i><i>VR</i><i>WebXR delivery</i></span>
+        </span>
+        <span class="ch__go">Watch the demo &#8599;</span>
+      </a>
+    </li>
+
+    <li class="ch" style="--ink:var(--magenta)">
+      <a href="#records">
+        <span class="ch__art"><img src="img/games.webp" alt="" width="960" height="540" loading="lazy" decoding="async"></span>
+        <span class="ch__meta">
+          <span class="ch__n">03</span>
+          <span class="ch__k">Games</span>
+        </span>
+        <span class="ch__body">
+          <b class="ch__t">Game &amp; arcade design</b>
+          <span class="ch__d">Unity game production, and arcade game design for Triggered
+            Games &mdash; the active-game centre whose concept redesign also sits in the
+            showroom. Hackathon 2025 representing my school.</span>
+          <span class="ch__tags"><i>Unity</i><i>C#</i><i>Arcade design</i><i>Game feel</i></span>
+        </span>
+        <span class="ch__go">See the record</span>
+      </a>
+    </li>
+
+    <li class="ch" style="--ink:var(--lime)">
+      <a href="#records">
+        <span class="ch__art"><img src="img/design.webp" alt="" width="960" height="540" loading="lazy" decoding="async"></span>
+        <span class="ch__meta">
+          <span class="ch__n">04</span>
+          <span class="ch__k">Design</span>
+        </span>
+        <span class="ch__body">
+          <b class="ch__t">Graphic design &amp; retouching</b>
+          <span class="ch__d">Photoshop work and mini projects &mdash; composites,
+            retouching and key art. The visual half of the same habit that writes the
+            code: build the idea until you can see it.</span>
+          <span class="ch__tags"><i>Photoshop</i><i>Composite</i><i>Key art</i><i>Insta360 collab</i></span>
+        </span>
+        <span class="ch__go">See the record</span>
+      </a>
+    </li>
+
+    <li class="ch" style="--ink:var(--cyan)">
+      <a href="#records">
+        <span class="ch__art"><img src="img/ops.webp" alt="" width="960" height="540" loading="lazy" decoding="async"></span>
+        <span class="ch__meta">
+          <span class="ch__n">05</span>
+          <span class="ch__k">Ops</span>
+        </span>
+        <span class="ch__body">
+          <b class="ch__t">Service &amp; operations</b>
+          <span class="ch__d">Guardsman, Singapore Armed Forces &mdash; marksman
+            qualification, Combat Skill Badge, overseas exercises in Australia, the US
+            and Brunei. NDP 2024 sector personnel at City Hall MRT control station,
+            managing the movement of over 20,000 civilians.</span>
+          <span class="ch__tags"><i>Crowd control</i><i>Comms</i><i>High pressure</i></span>
+        </span>
+        <span class="ch__go">See the record</span>
+      </a>
+    </li>
+  </ul>
+</section>
+
+<!-- ================= SHOWROOM ================= -->
+<section class="sect" id="showroom">
+  <header class="sect__head">
+    <h2 class="sect__h">Website showroom</h2>
+    <p class="sect__p">Six sites, all live in this repository. The figures are counted
+       from the source &mdash; lines are hand-written CSS and JavaScript, weight is the
+       whole folder including images.</p>
+  </header>
+
+  <ul class="sites">
+    <li class="site" style="--ink:var(--magenta)">
+      <a href="../templates/pulse-ai-analytics/index.html">
+        <span class="site__shot"><img src="img/pulse-ai-analytics.webp" alt="The PULSE landing page: a dark starfield hero reading &lsquo;Know who&rsquo;s leaving before they do.&rsquo;" width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="site__bar"><b>PULSE</b><span>AI analytics landing page</span></span>
+        <span class="site__spec"><i>2 559 lines</i><i>392 KB</i><i>3 CDN</i></span>
+      </a>
+    </li>
+    <li class="site" style="--ink:#ff8a1e">
+      <a href="../templates/restaurant-food/index.html">
+        <span class="site__shot"><img src="img/restaurant-food.webp" alt="The EMBER restaurant site: a wood-fire hero with drifting canvas embers." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="site__bar"><b>EMBER</b><span>Wood-fire restaurant</span></span>
+        <span class="site__spec"><i>1 869 lines</i><i>952 KB</i><i>no CDN</i></span>
+      </a>
+    </li>
+    <li class="site" style="--ink:var(--lime)">
+      <a href="../templates/gym-service/index.html">
+        <span class="site__shot"><img src="img/gym-service.webp" alt="The FORGE gym site: a glowing green low-poly form beside the words &lsquo;Forge your strongest self&rsquo;." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="site__bar"><b>FORGE</b><span>Strength &amp; conditioning</span></span>
+        <span class="site__spec"><i>1 358 lines</i><i>2.5 MB</i><i>3 CDN</i></span>
+      </a>
+    </li>
+    <li class="site" style="--ink:#ff2d55">
+      <a href="../templates/entertainment-triggered/index.html">
+        <span class="site__shot"><img src="img/entertainment-triggered.webp" alt="The TRIGGERED concept site: neon type over a glowing lava grid floor." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="site__bar"><b>TRIGGERED</b><span>Game centre &mdash; concept redesign</span></span>
+        <span class="site__spec"><i>1 129 lines</i><i>96 KB</i><i>no CDN</i></span>
+      </a>
+    </li>
+    <li class="site" style="--ink:var(--cyan)">
+      <a href="../templates/business-corporate/index.html">
+        <span class="site__shot"><img src="img/business-corporate.webp" alt="The Meridian Partners consulting site: a restrained, typographic corporate homepage." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="site__bar"><b>MERIDIAN</b><span>Consulting firm, four pages</span></span>
+        <span class="site__spec"><i>808 lines</i><i>208 KB</i><i>no CDN</i></span>
+      </a>
+    </li>
+    <li class="site" style="--ink:var(--violet)">
+      <a href="../templates/ecommerce-design-store/index.html">
+        <span class="site__shot"><img src="img/ecommerce-design-store.webp" alt="The OBLIK store: an editorial product grid of design objects." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="site__bar"><b>OBLIK</b><span>Design-object store</span></span>
+        <span class="site__spec"><i>525 lines</i><i>536 KB</i><i>no CDN</i></span>
+      </a>
+    </li>
+  </ul>
+
+  <p class="sites__note">TRIGGERED is an unofficial concept redesign built for portfolio
+     purposes. It is not affiliated with, endorsed by, or operated by the real venue.</p>
+</section>
+
+<!-- ================= RECORDS ================= -->
+<section class="sect" id="records">
+  <header class="sect__head">
+    <h2 class="sect__h">Records</h2>
+    <p class="sect__p">Awards, licences and credits, as they stand.</p>
+  </header>
+
+  <ul class="records">
+    <li class="rec rec--gold">
+      <span class="rec__k">Award</span>
+      <b class="rec__t">NYAA Gold</b>
+      <span class="rec__d">National Youth Achievement Award, gold level.</span>
+      <span class="rec__s" data-state="done">Awarded</span>
+    </li>
+    <li class="rec">
+      <span class="rec__k">Credit</span>
+      <b class="rec__t">Arcade games designer</b>
+      <span class="rec__d">Triggered Games &mdash; designing rounds for an active-game centre.</span>
+      <span class="rec__s" data-state="done">Credited</span>
+    </li>
+    <li class="rec">
+      <span class="rec__k">Competition</span>
+      <b class="rec__t">Hackathon 2025</b>
+      <span class="rec__d">Represented my school; also led a collaboration project with Insta360.</span>
+      <span class="rec__s" data-state="done">Competed</span>
+    </li>
+    <li class="rec">
+      <span class="rec__k">Award</span>
+      <b class="rec__t">ACE Student</b>
+      <span class="rec__d">ACE reward for academic and co-curricular standing.</span>
+      <span class="rec__s" data-state="pending">Pending</span>
+    </li>
+    <li class="rec">
+      <span class="rec__k">Licence</span>
+      <b class="rec__t">Class 2B licence</b>
+      <span class="rec__d">Motorcycle licence, Singapore.</span>
+      <span class="rec__s" data-state="done">Held</span>
+    </li>
+    <li class="rec">
+      <span class="rec__k">Licence</span>
+      <b class="rec__t">First aid &mdash; AED / CPR</b>
+      <span class="rec__d">Certified in automated defibrillation and CPR.</span>
+      <span class="rec__s" data-state="done">Held</span>
+    </li>
+    <li class="rec">
+      <span class="rec__k">Media</span>
+      <b class="rec__t">Let&rsquo;s Talk Fitness</b>
+      <span class="rec__d">Public podcast on training, recovery and consistency.</span>
+      <span class="rec__s" data-state="done">Published</span>
+    </li>
+    <li class="rec">
+      <span class="rec__k">Service</span>
+      <b class="rec__t">Guardsman, SAF</b>
+      <span class="rec__d">Marksman qualification and Combat Skill Badge; overseas
+        exercises in Australia, the US and Brunei.</span>
+      <span class="rec__s" data-state="done">Completed</span>
+    </li>
+  </ul>
+</section>
+
+<!-- ================= PROFILE ================= -->
+<section class="sect" id="about">
+  <header class="sect__head">
+    <h2 class="sect__h">Profile</h2>
+    <p class="sect__p">Four things, and they are all the same habit: pick something hard,
+       stay on it until it works.</p>
+  </header>
+
+  <div class="profile">
+    <ul class="facets">
+      <li class="facet" style="--ink:var(--cyan)">
+        <b>Programmer</b>
+        <p>Driven by creation and problem-solving. I work across coding, graphic design
+           and game development &mdash; building ideas into systems and visuals.</p>
+      </li>
+      <li class="facet" style="--ink:var(--magenta)">
+        <b>Bodybuilder</b>
+        <p>Shaped by discipline and consistency. Through personal training I have guided
+           others toward the physique they were after.</p>
+      </li>
+      <li class="facet" style="--ink:var(--lime)">
+        <b>Musician</b>
+        <p>Three years on acoustic, electric and classical guitar.</p>
+      </li>
+      <li class="facet" style="--ink:var(--violet)">
+        <b>Boxer</b>
+        <p>Trained in endurance, power and control.</p>
+      </li>
+    </ul>
+
+    <aside class="bio">
+      <h3>Background</h3>
+      <p>Higher Nitec student with strong academic standing and a habit of taking on work
+         outside the syllabus &mdash; Hackathon 2025 for my school, a collaboration project
+         with Insta360, and the A*STAR IME virtual tour.</p>
+      <p>Before that, Guardsman in the Singapore Armed Forces: marksman qualification,
+         Combat Skill Badge, and overseas exercises in Australia, the United States and
+         Brunei. At NDP 2024 I ran a control station at City Hall MRT, managing the
+         movement of more than 20,000 civilians.</p>
+      <p>Outside all of it, I contribute to fitness and community work through Caliversity
+         and River Valley Irregulars.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="sect sect--contact" id="contact">
+  <div class="contact">
+    <div class="contact__l">
+      <h2 class="sect__h">Start something</h2>
+      <p class="sect__p">Tell me what you want built. I&rsquo;ll say honestly whether it
+         needs a framework, a game engine, or just a folder of files.</p>
+
+      <ul class="lines">
+        <li><span>Email</span><a href="mailto:zanejiepersonal@gmail.com">zanejiepersonal@gmail.com</a></li>
+        <li><span>Phone</span><a href="tel:+6583512308">+65 8351 2308</a></li>
+        <li><span>YouTube</span><a href="https://www.youtube.com/@zhang4927" rel="noopener noreferrer" target="_blank">@zhang4927</a></li>
+        <li><span>Instagram</span><a href="https://www.instagram.com/its_zhijie" rel="noopener noreferrer" target="_blank">@its_zhijie</a></li>
+      </ul>
+    </div>
+
+    <form class="form" id="contactForm" novalidate>
+      <label class="field"><span>Your email</span>
+        <input type="email" name="email" required autocomplete="email" placeholder="you@somewhere.com"></label>
+      <label class="field"><span>What are we building?</span>
+        <textarea name="brief" rows="4" required placeholder="A one-page site for&hellip;"></textarea></label>
+      <button class="key key--go" type="submit">
+        <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 2l8 5-8 5z"/></svg>
+        Send
+      </button>
+      <p class="form__out" id="formOut" role="status"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p>&copy; <span id="yr">2026</span> Zhang Zhijie. Built by hand &mdash; no framework, no build step.</p>
+  <p>Showroom thumbnails are screenshots of the sites themselves. Channel artwork is
+     AI-generated abstract key art, not photography of real projects.</p>
+</footer>
+
+<!-- ================= ACTION DECK ================= -->
+<nav class="deck" aria-label="Quick navigation">
+  <a class="deck__k" href="#work"><b>1</b><span>Channels</span></a>
+  <a class="deck__k" href="#showroom"><b>2</b><span>Showroom</span></a>
+  <a class="deck__k" href="#records"><b>3</b><span>Records</span></a>
+  <a class="deck__k" href="#about"><b>4</b><span>Profile</span></a>
+  <a class="deck__k deck__k--go" href="#contact"><b>&#9656;</b><span>Contact</span></a>
+</nav>
+
+<script src="js/boxes.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>

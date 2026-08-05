@@ -1,0 +1,460 @@
+/* =========================================================================
+   ZANE — CHIRASHI.  Variant 05.
+   An arcade operator's flyer: three fluorescent spot inks on black stock,
+   halftoned, and never quite in register.
+   ========================================================================= */
+
+:root {
+  /* --- the stock and the plates --------------------------------------- */
+  --stock:   #0c0a0d;   /* black coated paper */
+  --stock-2: #17131a;   /* the sheet, lifted off the table */
+  --pink:    #ff2e88;   /* spot 1 — fluorescent magenta */
+  --cyan:    #00e5ff;   /* spot 2 — fluorescent cyan */
+  --ivory:   #f4ecdd;   /* spot 3 — warm white */
+  --amber:   #ffa62e;
+  --lime:    #b8ff2e;
+  --grey:    #9a8f94;   /* ivory knocked back, never a neutral gray */
+
+  /* --- geometry ------------------------------------------------------- */
+  --top-h: 52px;
+  --rail:  min(1280px, 100%);
+  --pad:   clamp(1.1rem, 4.4vw, 4rem);
+  --slip:  2px;         /* how far out of register the second plate sits */
+
+  --f-disp: "Dela Gothic One", system-ui, sans-serif;
+  --f-body: "Zen Kaku Gothic New", system-ui, sans-serif;
+
+  --ease: cubic-bezier(.2,.9,.3,1);
+  --fast: 150ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: #070609; }
+
+body {
+  margin: 0;
+  font-family: var(--f-body); font-weight: 400;
+  font-size: 16px; line-height: 1.75;
+  color: var(--ivory);
+  background: var(--stock);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* paper tooth: a fine noise the whole sheet sits under */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 80; pointer-events: none;
+  opacity: .5;
+  background-image:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.045) 0 .5px, transparent 1px),
+    radial-gradient(circle at 70% 65%, rgba(0,0,0,.35) 0 .5px, transparent 1px);
+  background-size: 3px 3px, 4px 4px;
+}
+
+.sr-only { position:absolute; width:1px; height:1px; margin:-1px; padding:0;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+.skip {
+  position: absolute; left: 12px; top: -60px; z-index: 95;
+  background: var(--pink); color: #14000a; padding: .55rem 1rem;
+  font-weight: 700; text-decoration: none;
+  transition: top var(--fast) var(--ease);
+}
+.skip:focus { top: 10px; }
+
+:where(a, button, input, textarea):focus-visible {
+  outline: 3px solid var(--cyan); outline-offset: 3px;
+}
+
+/* --- registration marks ------------------------------------------------- */
+.reg {
+  position: fixed; width: 34px; height: 34px; z-index: 55;   /* under the top band */
+  color: rgba(244,236,221,.26); pointer-events: none;
+}
+.reg--tl { top: calc(var(--top-h) + 12px); left: 10px; }
+.reg--tr { top: calc(var(--top-h) + 12px); right: 10px; }
+.reg--foot { position: static; flex: 0 0 auto; color: rgba(244,236,221,.35); }
+
+/* =========================================================================
+   TOP BAND
+   ========================================================================= */
+
+.top {
+  position: sticky; top: 0; z-index: 60;
+  height: var(--top-h);
+  display: flex; align-items: center; gap: clamp(.6rem, 3vw, 2rem);
+  padding: 0 var(--pad);
+  background: var(--pink);
+  color: #14000a;
+  border-bottom: 3px solid #0c0a0d;
+}
+.top__mark {
+  font-family: var(--f-disp); font-size: 1rem; letter-spacing: .04em;
+}
+.top__nav { display: flex; gap: clamp(.5rem, 2vw, 1.6rem); margin-left: auto; }
+.top__nav a {
+  font-weight: 700; font-size: 13px; color: #14000a; text-decoration: none;
+  padding: .1rem .1rem; border-bottom: 2px solid transparent;
+  transition: border-color var(--fast) var(--ease);
+}
+.top__nav a:hover, .top__nav a:focus-visible, .top__nav a[aria-current="true"] {
+  border-color: #14000a;
+}
+.top__price { font-weight: 700; font-size: 12px; color: rgba(20,0,10,.72); }
+
+/* =========================================================================
+   MISREGISTERED HEADLINES
+   The second plate lands a hair off the first. Done as a shadow rather than a
+   duplicated text node: a copy in a pseudo-element re-wraps on its own and
+   drifts out of alignment at exactly the widths where it would be noticed.
+   ========================================================================= */
+
+.mast__h, .band, .feature__name, .coupon__h, .title__name {
+  text-shadow: calc(var(--slip) * -1.5) var(--slip) 0 var(--cyan);
+}
+.title__name { text-shadow: calc(var(--slip) * -1) var(--slip) 0 rgba(0,229,255,.8); }
+
+/* =========================================================================
+   MASTHEAD
+   ========================================================================= */
+
+.mast {
+  position: relative;
+  width: var(--rail); margin: 0 auto;
+  padding: clamp(2rem, 6vh, 4.4rem) var(--pad) clamp(2rem, 5vh, 3.4rem);
+  display: grid; gap: clamp(1.4rem, 3vw, 2.8rem);
+  grid-template-columns: minmax(0, 1.15fr) 46px minmax(0, .95fr);
+  align-items: start;
+}
+
+.mast__kicker {
+  margin: 0 0 .9rem;
+  font-weight: 700; font-size: 13px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--cyan);
+}
+.mast__h {
+  margin: 0 0 1.2rem;
+  font-family: var(--f-disp); font-weight: 400;
+  font-size: clamp(2.2rem, 6.6vw, 4.6rem); line-height: .98;
+  letter-spacing: -.015em;
+  color: var(--ivory);
+}
+.mast__lede {
+  margin: 0 0 1.6rem; max-width: 46ch;
+  font-size: clamp(.98rem, 1.1vw, 1.06rem); color: #d6cbbb;
+}
+.mast__acts { display: flex; flex-wrap: wrap; gap: .8rem; }
+
+/* the vertical strip down the gutter — a real flyer device */
+.mast__strip {
+  writing-mode: vertical-rl;
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem .3rem;
+  background: var(--cyan); color: #001417;
+  font-family: var(--f-disp); font-size: 1.35rem; letter-spacing: .2em;
+  justify-self: center;
+}
+.mast__strip-en {
+  font-family: var(--f-body); font-weight: 700; font-size: .68rem;
+  letter-spacing: .24em;
+}
+
+/* --- the featured plate -------------------------------------------------- */
+.feature { margin: 0; }
+.feature figcaption {
+  display: grid; grid-template-columns: auto 1fr; gap: 0 .8rem;
+  align-items: baseline;
+  margin-top: .8rem;
+  padding-top: .7rem; border-top: 3px solid var(--pink);
+}
+.feature figcaption b {
+  grid-row: span 2;
+  font-family: var(--f-disp); font-size: 2.4rem; line-height: .9; color: var(--pink);
+}
+.feature__name { font-family: var(--f-disp); font-size: 1.4rem; color: var(--ivory); }
+.feature__kind { font-size: .86rem; color: var(--grey); }
+
+/* =========================================================================
+   PLATES — how a photograph enters an ink world
+   ========================================================================= */
+
+.plate {
+  position: relative; display: block; overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--pink);
+}
+.plate--pink  { background: var(--pink); }
+.plate--cyan  { background: var(--cyan); }
+.plate--amber { background: var(--amber); }
+.plate--lime  { background: var(--lime); }
+
+.plate img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  display: block;
+  /* Knocked to one plate, then multiplied into the ink beneath. These are
+     dark-UI screenshots, so the exposure is pushed hard — at native levels
+     almost every dot multiplies down to bare stock. */
+  filter: grayscale(1) brightness(1.85) contrast(1.05);
+  mix-blend-mode: multiply;
+  transition: transform 420ms var(--ease);
+}
+/* the screen: a halftone rosette over the whole plate */
+.plate::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle at 50% 50%, #0c0a0d 0 .9px, transparent 1.5px);
+  background-size: 3.4px 3.4px;
+  opacity: .5;
+}
+/* and the misregistered cyan edge, one plate off */
+.plate::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  box-shadow: inset var(--slip) calc(var(--slip) * -1) 0 rgba(0,229,255,.55);
+}
+
+/* =========================================================================
+   SHEETS
+   ========================================================================= */
+
+.sheet {
+  width: var(--rail); margin: 0 auto;
+  padding: clamp(2.4rem, 7vh, 5rem) var(--pad);
+  scroll-margin-top: var(--top-h);
+}
+.band {
+  margin: 0 0 1.8rem;
+  font-family: var(--f-disp); font-weight: 400;
+  font-size: clamp(1.4rem, 3.6vw, 2.5rem); line-height: 1.05;
+  letter-spacing: -.01em; color: var(--ivory);
+  padding-bottom: .6rem;
+  border-bottom: 5px solid var(--pink);
+}
+.band i {
+  font-style: normal; font-family: var(--f-body); font-weight: 900;
+  font-size: .5em; letter-spacing: .1em; color: var(--cyan);
+  margin-left: .5em; vertical-align: .28em;
+}
+.sheet__note { margin: -.6rem 0 1.8rem; max-width: 62ch; color: var(--grey); font-size: .94rem; }
+
+/* --- the six titles ------------------------------------------------------ */
+.titles {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: clamp(1rem, 2.2vw, 1.8rem);
+  grid-template-columns: repeat(auto-fit, minmax(302px, 1fr));
+}
+.title a {
+  position: relative; display: grid; gap: 0;
+  text-decoration: none; color: inherit;
+  background: var(--stock-2);
+  padding: 10px 10px 1rem;
+  transition: transform var(--fast) var(--ease), background-color var(--fast) var(--ease);
+}
+.title a:hover, .title a:focus-visible {
+  transform: translate(-2px, -2px);
+  background: #1f1922;
+}
+.title__n {
+  position: absolute; z-index: 3; top: 2px; left: 4px;
+  font-family: var(--f-disp); font-size: 1.5rem; line-height: 1;
+  color: var(--ivory);
+  text-shadow: 2px 2px 0 var(--stock);
+}
+.title a:hover .plate img { transform: scale(1.04); }
+.title__name {
+  display: block; margin-top: .8rem;
+  font-family: var(--f-disp); font-size: 1.15rem; color: var(--ink);
+}
+.title__kind { display: block; font-size: .88rem; color: #cec2b3; line-height: 1.5; }
+.title__spec {
+  display: block; margin-top: .5rem; padding-top: .5rem;
+  border-top: 1px dashed #3a3038;
+  font-size: .78rem; letter-spacing: .04em; color: var(--grey);
+}
+.title__spec b { color: var(--ivory); font-weight: 700; }
+
+/* --- how it's made ------------------------------------------------------- */
+.howto {
+  list-style: none; margin: 0; padding: 0; counter-reset: h;
+  display: grid; gap: clamp(1.4rem, 3vw, 2.6rem);
+  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+}
+.howto li { counter-increment: h; }
+.dgm { display: block; width: 100%; max-width: 190px; height: auto; color: var(--cyan); }
+.howto h3 {
+  margin: 1rem 0 .5rem;
+  font-family: var(--f-disp); font-weight: 400; font-size: 1.05rem; line-height: 1.3;
+  color: var(--ivory);
+}
+.howto h3::before {
+  content: counter(h) ". ";
+  color: var(--pink);
+}
+.howto p { margin: 0; font-size: .94rem; color: #cec2b3; }
+
+/* --- spec table ---------------------------------------------------------- */
+.spec {
+  width: 100%; border-collapse: collapse;
+  font-size: clamp(.84rem, 1.4vw, .95rem);
+  border-top: 3px solid var(--ivory);
+  border-bottom: 3px solid var(--ivory);
+}
+.spec th, .spec td { padding: .7rem .6rem; text-align: right; }
+.spec thead th {
+  font-weight: 700; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--cyan); border-bottom: 1px solid #3a3038;
+}
+.spec th[scope="row"] {
+  text-align: left; font-family: var(--f-disp); font-weight: 400; color: var(--ivory);
+}
+.spec td:first-child { text-align: left; color: var(--pink); font-weight: 700; }
+.spec tbody tr + tr th, .spec tbody tr + tr td { border-top: 1px dashed #332a31; }
+.spec tbody tr:hover { background: rgba(255,46,136,.09); }
+.spec tfoot { border-top: 3px solid var(--pink); }
+.spec tfoot th, .spec tfoot td { color: var(--pink); font-weight: 700; }
+
+.stamps {
+  list-style: none; margin: 2rem 0 0; padding: 0;
+  display: grid; gap: .9rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+.stamps li {
+  padding: 1rem .9rem;
+  border: 3px solid var(--cyan);
+  transform: rotate(-.6deg);
+}
+.stamps li:nth-child(even) { border-color: var(--pink); transform: rotate(.7deg); }
+.stamps b {
+  display: block;
+  font-family: var(--f-disp); font-size: 2rem; line-height: 1; color: var(--ivory);
+}
+.stamps span {
+  display: block; margin-top: .3rem;
+  font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; color: var(--grey);
+}
+
+/* =========================================================================
+   THE COUPON
+   ========================================================================= */
+
+.sheet--order { padding-bottom: clamp(3rem, 8vh, 6rem); }
+.coupon { max-width: 620px; }
+.coupon__cut {
+  margin: 0 0 -1px;
+  font-size: .74rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--grey);
+}
+.coupon__body {
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  border: 3px dashed var(--ivory);
+  background: var(--stock-2);
+}
+.coupon__h {
+  margin: 0 0 .5rem;
+  font-family: var(--f-disp); font-weight: 400;
+  font-size: clamp(1.3rem, 3vw, 1.9rem); color: var(--ivory);
+}
+.coupon__h i {
+  font-style: normal; font-family: var(--f-body); font-weight: 900;
+  font-size: .52em; color: var(--cyan); margin-left: .5em; vertical-align: .25em;
+  letter-spacing: .1em;
+}
+.coupon__note { margin: 0 0 1.4rem; color: #cec2b3; font-size: .94rem; }
+.coupon__body form { display: grid; gap: 1rem; justify-items: start; }
+.field { display: grid; gap: .3rem; width: 100%; }
+.field > span {
+  font-weight: 700; font-size: .74rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--cyan);
+}
+.field input, .field textarea {
+  width: 100%; font-family: var(--f-body); font-size: 1rem; color: var(--ivory);
+  background: var(--stock); border: 2px solid #3a3038;
+  padding: .65rem .75rem; resize: vertical;
+}
+.field input::placeholder, .field textarea::placeholder { color: #6c6067; }
+.field input:focus, .field textarea:focus { border-color: var(--cyan); outline: none; }
+.field input:user-invalid, .field textarea:user-invalid { border-color: var(--pink); }
+.coupon__out { margin: 0; min-height: 1.5em; font-size: .86rem; color: var(--cyan); }
+.coupon__out[data-state="error"] { color: var(--pink); }
+
+/* =========================================================================
+   INK BUTTONS — a printed block, not a screen control
+   ========================================================================= */
+
+.ink {
+  display: inline-flex; align-items: center;
+  padding: .72rem 1.5rem;
+  font-family: var(--f-disp); font-weight: 400; font-size: .92rem;
+  letter-spacing: .02em; text-decoration: none; cursor: pointer;
+  color: #14000a; background: var(--pink); border: 3px solid var(--pink);
+  transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease),
+              background-color var(--fast) var(--ease);
+}
+.ink:hover, .ink:focus-visible {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--slip) var(--slip) 0 var(--cyan);
+}
+.ink:active { transform: none; box-shadow: none; }
+.ink--ghost { background: transparent; color: var(--ivory); border-color: var(--ivory); }
+.ink--ghost:hover, .ink--ghost:focus-visible { background: var(--ivory); color: #14000a; }
+.ink--stamp {
+  background: var(--cyan); border-color: var(--cyan); color: #001417;
+  transform: rotate(-1.2deg);
+}
+.ink--stamp:hover, .ink--stamp:focus-visible {
+  transform: rotate(-1.2deg) translate(-2px, -2px);
+  box-shadow: var(--slip) var(--slip) 0 var(--pink);
+}
+
+/* =========================================================================
+   COLOPHON
+   ========================================================================= */
+
+.colophon {
+  width: var(--rail); margin: 0 auto;
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1.6rem var(--pad) 2.6rem;
+  border-top: 1px dashed #3a3038;
+  font-size: .78rem; line-height: 1.9; color: var(--grey);
+}
+.colophon p { margin: 0; max-width: 76ch; }
+.colophon b { color: #cec2b3; }
+
+/* =========================================================================
+   MOTION — one authored moment: the plates come into register
+   ========================================================================= */
+
+.ontoplate {
+  opacity: 0;
+  transform: translate(6px, -4px);
+  transition: opacity 320ms var(--ease), transform 320ms var(--ease);
+}
+.ontoplate.is-set { opacity: 1; transform: none; }
+
+/* =========================================================================
+   RESPONSIVE
+   ========================================================================= */
+
+@media (max-width: 940px) {
+  .mast { grid-template-columns: 1fr; }
+  .mast__strip {
+    writing-mode: horizontal-tb; justify-self: start;
+    padding: .35rem 1rem; font-size: 1.1rem;
+  }
+  .feature { order: -1; }
+}
+
+@media (max-width: 600px) {
+  :root { --top-h: 48px; --slip: 1.5px; }
+  .top__nav { gap: .55rem; }
+  .top__nav a { font-size: 11px; }
+  .top__price { display: none; }
+  .spec th, .spec td { padding: .55rem .3rem; }
+  .colophon { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .ontoplate { opacity: 1; transform: none; }
+}

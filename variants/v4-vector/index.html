@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>ZANE — Vector | Portfolio Variant 04</title>
+<meta name="description" content="A vector-beam portfolio: six hand-built websites as lanes down a glowing wireframe well, drawn stroke-only on canvas.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ZANE — Vector">
+<meta property="og:description" content="Six hand-built websites, six lanes down the well.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Martian+Mono:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!--
+THESIS: Drawn with a beam, not a raster. No pixel grid, no filled cards, no
+  glassmorphism — every graphic here is a stroke, and the six projects are six
+  lanes down a well you rotate through, the way a vector cabinet moves.
+OWN-WORLD: Pure black. Monoline strokes in beam-white and cyan, one magenta lane
+  live at a time, amber for warnings. Corner ticks instead of borders; overshoot at
+  every line end, the way a real deflection yoke overshoots. Michroma caps, Martian
+  Mono telemetry. Depth is layered glow, never shadow.
+STORY: Six finished sites. Rotate the well, land on one, open it.
+FIRST VIEWPORT: The well fills the screen, receding to a vanishing point, six lanes
+  labelled at the rim with the live one burning magenta. Title lower-left, the lane's
+  name and the OPEN control at the rim.
+FORM: Vector-beam arcade; candidate 3 of the grounded list; seed key 315d3d88.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+
+<a class="skip" href="#lanes">Skip to the projects</a>
+
+<!-- ============ RAIL ============ -->
+<header class="rail">
+  <span class="rail__mark">ZANE</span>
+  <nav class="rail__nav" aria-label="Sections">
+    <a href="#lanes">Lanes</a>
+    <a href="#telemetry">Telemetry</a>
+    <a href="#method">Method</a>
+    <a href="#transmit">Transmit</a>
+  </nav>
+  <span class="rail__tel" aria-hidden="true">6 LANES / 8248 LINES</span>
+</header>
+
+<main>
+
+<!-- ============ THE WELL ============ -->
+<section class="well" id="top">
+  <canvas id="well" width="1200" height="800" aria-hidden="true"></canvas>
+
+  <div class="well__ui">
+    <h1 class="well__title">SIX SITES<br><span>DOWN THE WELL</span></h1>
+    <p class="well__body">
+      Every lane is a working website in this repository. No mockups, no build step,
+      no framework. Rotate the well and open one.
+    </p>
+    <p class="well__hint"><kbd>&larr;</kbd><kbd>&rarr;</kbd> rotate &middot; <kbd>enter</kbd> open</p>
+  </div>
+
+  <div class="well__lane" id="laneCard" style="--ink:#ff3ce0">
+    <span class="well__lnum" id="laneNum">LANE 01</span>
+    <strong class="well__lname" id="laneName">PULSE</strong>
+    <span class="well__lkind" id="laneKind">AI analytics landing page</span>
+    <a class="beam" id="laneGo" href="../../templates/pulse-ai-analytics/index.html">
+      Open lane
+      <svg viewBox="0 0 16 12" aria-hidden="true"><path d="M1 6h12M9 2l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ============ LANES ============ -->
+<section class="pane" id="lanes">
+  <header class="pane__head">
+    <h2>Six lanes</h2>
+    <p>Ordered by how much of it is hand-written. Every one opens the real, running site.</p>
+  </header>
+
+  <ol class="grid" id="grid">
+    <li class="cell" data-lane="0" style="--ink:#ff3ce0">
+      <a href="../../templates/pulse-ai-analytics/index.html">
+        <span class="cell__view"><img src="img/pulse-ai-analytics.webp" alt="The PULSE landing page: a dark starfield hero reading &lsquo;Know who&rsquo;s leaving before they do.&rsquo;" width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="cell__bar"><b>01</b><em>PULSE</em><span>2559</span></span>
+        <span class="cell__kind">AI analytics landing page &middot; scroll-linked product assembly, canvas particle field</span>
+      </a>
+    </li>
+    <li class="cell" data-lane="1" style="--ink:#ff9a3c">
+      <a href="../../templates/restaurant-food/index.html">
+        <span class="cell__view"><img src="img/restaurant-food.webp" alt="The EMBER restaurant site: a wood-fire hero with drifting canvas embers." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="cell__bar"><b>02</b><em>EMBER</em><span>1869</span></span>
+        <span class="cell__kind">Wood-fire restaurant &middot; one rAF loop drives embers, parallax and a heat gauge</span>
+      </a>
+    </li>
+    <li class="cell" data-lane="2" style="--ink:#b6ff3c">
+      <a href="../../templates/gym-service/index.html">
+        <span class="cell__view"><img src="img/gym-service.webp" alt="The FORGE gym site: a glowing green low-poly form beside the words &lsquo;Forge your strongest self&rsquo;." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="cell__bar"><b>03</b><em>FORGE</em><span>1358</span></span>
+        <span class="cell__kind">Strength &amp; conditioning &middot; Three.js displaced solid, GSAP scene sequencing</span>
+      </a>
+    </li>
+    <li class="cell" data-lane="3" style="--ink:#ff3c6e">
+      <a href="../../templates/entertainment-triggered/index.html">
+        <span class="cell__view"><img src="img/entertainment-triggered.webp" alt="The TRIGGERED concept site: neon type over a glowing lava grid floor." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="cell__bar"><b>04</b><em>TRIGGERED</em><span>1129</span></span>
+        <span class="cell__kind">Active game centre, unofficial concept &middot; lava-grid floor, price calculator</span>
+      </a>
+    </li>
+    <li class="cell" data-lane="4" style="--ink:#35f0ff">
+      <a href="../../templates/business-corporate/index.html">
+        <span class="cell__view"><img src="img/business-corporate.webp" alt="The Meridian Partners consulting site: a restrained, typographic corporate homepage." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="cell__bar"><b>05</b><em>MERIDIAN</em><span>808</span></span>
+        <span class="cell__kind">Consulting firm &middot; four pages on one typographic system</span>
+      </a>
+    </li>
+    <li class="cell" data-lane="5" style="--ink:#a97cff">
+      <a href="../../templates/ecommerce-design-store/index.html">
+        <span class="cell__view"><img src="img/ecommerce-design-store.webp" alt="The OBLIK store: an editorial product grid of design objects." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="cell__bar"><b>06</b><em>OBLIK</em><span>525</span></span>
+        <span class="cell__kind">Design-object store &middot; editorial product grid, working cart</span>
+      </a>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ TELEMETRY ============ -->
+<section class="pane" id="telemetry">
+  <header class="pane__head">
+    <h2>Telemetry</h2>
+    <p>Read off the repository. Lines are hand-written CSS and JavaScript; weight is the
+       whole folder including images.</p>
+  </header>
+
+  <table class="tel">
+    <caption class="sr-only">Measured build figures for every template</caption>
+    <thead><tr>
+      <th scope="col">Lane</th><th scope="col">Name</th><th scope="col">Lines</th>
+      <th scope="col">Weight</th><th scope="col">Pages</th><th scope="col">CDN</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>01</td><th scope="row">PULSE</th><td>2559</td><td>392 KB</td><td>1</td><td>3</td></tr>
+      <tr><td>02</td><th scope="row">EMBER</th><td>1869</td><td>952 KB</td><td>1</td><td>0</td></tr>
+      <tr><td>03</td><th scope="row">FORGE</th><td>1358</td><td>2.5 MB</td><td>1</td><td>3</td></tr>
+      <tr><td>04</td><th scope="row">TRIGGERED</th><td>1129</td><td>96 KB</td><td>1</td><td>0</td></tr>
+      <tr><td>05</td><th scope="row">MERIDIAN</th><td>808</td><td>208 KB</td><td>4</td><td>0</td></tr>
+      <tr><td>06</td><th scope="row">OBLIK</th><td>525</td><td>536 KB</td><td>1</td><td>0</td></tr>
+    </tbody>
+    <tfoot><tr><td></td><th scope="row">TOTAL</th><td>8248</td><td>4.6 MB</td><td>9</td><td>6</td></tr></tfoot>
+  </table>
+
+  <ul class="readouts">
+    <li><b>0</b><span>build steps</span></li>
+    <li><b>0</b><span>frameworks, CSS or JS</span></li>
+    <li><b>4/6</b><span>sites with no CDN at all</span></li>
+    <li><b>9</b><span>pages, all static</span></li>
+  </ul>
+</section>
+
+<!-- ============ METHOD ============ -->
+<section class="pane" id="method">
+  <header class="pane__head">
+    <h2>Method</h2>
+    <p>Three rules that hold across all six.</p>
+  </header>
+  <ol class="method">
+    <li>
+      <h3>The world comes before the grid</h3>
+      <p>Each site starts from something physical or graphic that belongs to its subject &mdash;
+         a wood fire, a lit cabinet, a deflection yoke. Layout is derived from that, not from
+         a component library.</p>
+    </li>
+    <li>
+      <h3>Bake once, animate cheap</h3>
+      <p>Noise, geometry and layout are precomputed at initialisation. Per frame there is a
+         lerp and maybe one pair of trig calls. The well on this page is one path per ring,
+         drawn three times for glow, and nothing else.</p>
+    </li>
+    <li>
+      <h3>Stop drawing when nobody is looking</h3>
+      <p>Every render loop in this repository is gated on an IntersectionObserver and on
+         document visibility. Scroll past the well and it stops costing you anything.</p>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ TRANSMIT ============ -->
+<section class="pane" id="transmit">
+  <header class="pane__head">
+    <h2>Transmit</h2>
+    <p>Say what you want built and roughly when. I&rsquo;ll tell you honestly whether it
+       should be a static site or something heavier.</p>
+  </header>
+
+  <form class="tx" id="txForm" novalidate>
+    <label class="field"><span>Return address</span>
+      <input type="email" name="email" required autocomplete="email" placeholder="you@somewhere.com"></label>
+    <label class="field"><span>Payload</span>
+      <textarea name="brief" rows="4" required placeholder="A one-page site for&hellip;"></textarea></label>
+    <button class="beam beam--solid" type="submit">
+      Transmit
+      <svg viewBox="0 0 16 12" aria-hidden="true"><path d="M1 6h12M9 2l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+    </button>
+    <p class="tx__out" id="txOut" role="status"></p>
+  </form>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p>Variant 04 of 5 &middot; screenshots are of this repository&rsquo;s own templates.</p>
+  <p>TRIGGERED is an unofficial concept redesign and is not affiliated with the real venue.</p>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

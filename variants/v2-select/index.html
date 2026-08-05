@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>ZANE — Select | Portfolio Variant 02</title>
+<meta name="description" content="A character-select portfolio: six hand-built websites as a fighter roster, with measured stats and a move list for each.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ZANE — Select">
+<meta property="og:description" content="Choose your site. Six hand-built websites on one roster.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,600;0,800;1,800&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!--
+THESIS: The portfolio is a roster, not a list. It refuses the scrolling card grid:
+  you stand in front of six fighters and commit to one before you see anything else.
+OWN-WORLD: 16-bit select screen. Royal-indigo chevron field, hot-yellow selection
+  bracket, crimson name plates, bevelled two-tone chrome (light top-left, dark
+  bottom-right), segmented power bars. Kanit extra-bold italic; Pixelify Sans for chrome.
+STORY: Six finished sites, each with measured stats and a real move list. Pick one, fight it.
+FIRST VIEWPORT: Full-height select screen — 3x2 portrait grid on the left under a
+  bracket, the selected fighter's card filling the right with portrait, bars and move
+  list. Primary action is the yellow FIGHT button on that card.
+FORM: Fighting-game character select; candidate 2 of the grounded list; seed key 315d3d88.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+
+<a class="skip" href="#select">Skip to the roster</a>
+
+<!-- ============ HUD BAR ============ -->
+<header class="hud">
+  <span class="hud__p">P1</span>
+  <span class="hud__name">ZANE</span>
+  <nav class="hud__nav" aria-label="Sections">
+    <a href="#select">Roster</a>
+    <a href="#record">Record</a>
+    <a href="#training">Training</a>
+    <a href="#challenger">Challenge</a>
+  </nav>
+  <span class="hud__timer" aria-hidden="true">99</span>
+</header>
+
+<main>
+
+<!-- ============ SELECT SCREEN ============ -->
+<section class="select" id="select">
+  <div class="select__banner">
+    <h1>Choose your site</h1>
+    <p>Six of them. Every one runs for real &mdash; no mockups on this roster.</p>
+  </div>
+
+  <div class="select__body">
+
+    <!-- ---- roster grid ---- -->
+    <div class="roster-wrap">
+      <ul class="roster" id="roster" role="listbox" aria-label="Site roster" tabindex="0" aria-activedescendant="opt-pulse">
+        <li class="fighter" id="opt-pulse"      role="option" aria-selected="true"  data-id="pulse"     style="--ink:#ff3d8b">
+          <img src="img/pulse-ai-analytics-sm.webp" alt="" width="480" height="300" decoding="async">
+          <b>PULSE</b></li>
+        <li class="fighter" id="opt-ember"      role="option" aria-selected="false" data-id="ember"     style="--ink:#ff8a1e">
+          <img src="img/restaurant-food-sm.webp" alt="" width="480" height="300" loading="lazy" decoding="async">
+          <b>EMBER</b></li>
+        <li class="fighter" id="opt-forge"      role="option" aria-selected="false" data-id="forge"     style="--ink:#c6f000">
+          <img src="img/gym-service-sm.webp" alt="" width="480" height="300" loading="lazy" decoding="async">
+          <b>FORGE</b></li>
+        <li class="fighter" id="opt-triggered"  role="option" aria-selected="false" data-id="triggered" style="--ink:#ff2d55">
+          <img src="img/entertainment-triggered-sm.webp" alt="" width="480" height="300" loading="lazy" decoding="async">
+          <b>TRIGGERED</b></li>
+        <li class="fighter" id="opt-meridian"   role="option" aria-selected="false" data-id="meridian"  style="--ink:#5ec8ff">
+          <img src="img/business-corporate-sm.webp" alt="" width="480" height="300" loading="lazy" decoding="async">
+          <b>MERIDIAN</b></li>
+        <li class="fighter" id="opt-oblik"      role="option" aria-selected="false" data-id="oblik"     style="--ink:#b98cff">
+          <img src="img/ecommerce-design-store-sm.webp" alt="" width="480" height="300" loading="lazy" decoding="async">
+          <b>OBLIK</b></li>
+      </ul>
+      <p class="roster__hint"><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>&uarr;</kbd><kbd>&darr;</kbd> move &middot; <kbd>Enter</kbd> open</p>
+    </div>
+
+    <!-- ---- fighter card ---- -->
+    <div class="card-wrap" id="cardWrap">
+
+      <article class="card is-on" data-card="pulse" style="--ink:#ff3d8b">
+        <div class="card__port"><img src="img/pulse-ai-analytics.webp" alt="The PULSE landing page: a dark starfield hero reading &lsquo;Know who&rsquo;s leaving before they do.&rsquo;" width="960" height="600" decoding="async"></div>
+        <div class="card__info">
+          <p class="card__class">AI analytics &middot; landing page</p>
+          <h2 class="card__name">PULSE</h2>
+          <ul class="bars">
+            <li><span>Code volume</span><span class="bar"><i style="--v:100%"></i></span><em>2 559 lines</em></li>
+            <li><span>Payload</span><span class="bar"><i style="--v:16%"></i></span><em>392 KB</em></li>
+            <li><span>Independence</span><span class="bar"><i style="--v:0%"></i></span><em>3 CDN calls</em></li>
+          </ul>
+          <h3 class="card__mh">Move list</h3>
+          <ul class="moves">
+            <li>Scroll-linked assembly of the product UI</li>
+            <li>Canvas particle field, device-tier scaled</li>
+            <li>Full pricing, FAQ and feature architecture</li>
+          </ul>
+          <a class="fight" href="../../templates/pulse-ai-analytics/index.html">
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2l7 4-7 4z"/></svg> Fight
+          </a>
+        </div>
+      </article>
+
+      <article class="card" data-card="ember" style="--ink:#ff8a1e" hidden>
+        <div class="card__port"><img src="img/restaurant-food.webp" alt="The EMBER restaurant site: a wood-fire hero with drifting canvas embers." width="960" height="600" loading="lazy" decoding="async"></div>
+        <div class="card__info">
+          <p class="card__class">Wood-fire restaurant</p>
+          <h2 class="card__name">EMBER</h2>
+          <ul class="bars">
+            <li><span>Code volume</span><span class="bar"><i style="--v:73%"></i></span><em>1 869 lines</em></li>
+            <li><span>Payload</span><span class="bar"><i style="--v:38%"></i></span><em>952 KB</em></li>
+            <li><span>Independence</span><span class="bar"><i style="--v:100%"></i></span><em>0 CDN calls</em></li>
+          </ul>
+          <h3 class="card__mh">Move list</h3>
+          <ul class="moves">
+            <li>One rAF loop drives embers, parallax and a heat gauge</li>
+            <li>Cursor-tracked dish photography</li>
+            <li>Zero libraries &mdash; every effect hand-written</li>
+          </ul>
+          <a class="fight" href="../../templates/restaurant-food/index.html">
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2l7 4-7 4z"/></svg> Fight
+          </a>
+        </div>
+      </article>
+
+      <article class="card" data-card="forge" style="--ink:#c6f000" hidden>
+        <div class="card__port"><img src="img/gym-service.webp" alt="The FORGE gym site: a glowing green low-poly form beside the words &lsquo;Forge your strongest self&rsquo;." width="960" height="600" loading="lazy" decoding="async"></div>
+        <div class="card__info">
+          <p class="card__class">Strength &amp; conditioning</p>
+          <h2 class="card__name">FORGE</h2>
+          <ul class="bars">
+            <li><span>Code volume</span><span class="bar"><i style="--v:53%"></i></span><em>1 358 lines</em></li>
+            <li><span>Payload</span><span class="bar"><i style="--v:100%"></i></span><em>2.5 MB</em></li>
+            <li><span>Independence</span><span class="bar"><i style="--v:0%"></i></span><em>3 CDN calls</em></li>
+          </ul>
+          <h3 class="card__mh">Move list</h3>
+          <ul class="moves">
+            <li>Three.js displaced icosahedron with smoothed normals</li>
+            <li>GSAP ScrollSmoother scene sequencing</li>
+            <li>Web Audio, opt-in and silent until asked</li>
+          </ul>
+          <a class="fight" href="../../templates/gym-service/index.html">
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2l7 4-7 4z"/></svg> Fight
+          </a>
+        </div>
+      </article>
+
+      <article class="card" data-card="triggered" style="--ink:#ff2d55" hidden>
+        <div class="card__port"><img src="img/entertainment-triggered.webp" alt="The TRIGGERED concept site: neon type over a glowing lava grid floor." width="960" height="600" loading="lazy" decoding="async"></div>
+        <div class="card__info">
+          <p class="card__class">Active game centre &middot; unofficial concept</p>
+          <h2 class="card__name">TRIGGERED</h2>
+          <ul class="bars">
+            <li><span>Code volume</span><span class="bar"><i style="--v:44%"></i></span><em>1 129 lines</em></li>
+            <li><span>Payload</span><span class="bar"><i style="--v:4%"></i></span><em>96 KB</em></li>
+            <li><span>Independence</span><span class="bar"><i style="--v:100%"></i></span><em>0 CDN calls</em></li>
+          </ul>
+          <h3 class="card__mh">Move list</h3>
+          <ul class="moves">
+            <li>Three.js lava-grid floor, one shader pass</li>
+            <li>Peak / off-peak price calculator</li>
+            <li>Ships a disclaimer &mdash; it is not the real venue&rsquo;s site</li>
+          </ul>
+          <a class="fight" href="../../templates/entertainment-triggered/index.html">
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2l7 4-7 4z"/></svg> Fight
+          </a>
+        </div>
+      </article>
+
+      <article class="card" data-card="meridian" style="--ink:#5ec8ff" hidden>
+        <div class="card__port"><img src="img/business-corporate.webp" alt="The Meridian Partners consulting site: a restrained, typographic corporate homepage." width="960" height="600" loading="lazy" decoding="async"></div>
+        <div class="card__info">
+          <p class="card__class">Consulting firm &middot; multi-page</p>
+          <h2 class="card__name">MERIDIAN</h2>
+          <ul class="bars">
+            <li><span>Code volume</span><span class="bar"><i style="--v:32%"></i></span><em>808 lines</em></li>
+            <li><span>Payload</span><span class="bar"><i style="--v:8%"></i></span><em>208 KB</em></li>
+            <li><span>Independence</span><span class="bar"><i style="--v:100%"></i></span><em>0 CDN calls</em></li>
+          </ul>
+          <h3 class="card__mh">Move list</h3>
+          <ul class="moves">
+            <li>Four pages sharing one typographic system</li>
+            <li>Restraint as the whole design argument</li>
+            <li>Reads correctly with images and scripts off</li>
+          </ul>
+          <a class="fight" href="../../templates/business-corporate/index.html">
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2l7 4-7 4z"/></svg> Fight
+          </a>
+        </div>
+      </article>
+
+      <article class="card" data-card="oblik" style="--ink:#b98cff" hidden>
+        <div class="card__port"><img src="img/ecommerce-design-store.webp" alt="The OBLIK store: an editorial product grid of design objects." width="960" height="600" loading="lazy" decoding="async"></div>
+        <div class="card__info">
+          <p class="card__class">Design-object store</p>
+          <h2 class="card__name">OBLIK</h2>
+          <ul class="bars">
+            <li><span>Code volume</span><span class="bar"><i style="--v:21%"></i></span><em>525 lines</em></li>
+            <li><span>Payload</span><span class="bar"><i style="--v:21%"></i></span><em>536 KB</em></li>
+            <li><span>Independence</span><span class="bar"><i style="--v:100%"></i></span><em>0 CDN calls</em></li>
+          </ul>
+          <h3 class="card__mh">Move list</h3>
+          <ul class="moves">
+            <li>Editorial product grid with a working cart</li>
+            <li>Object photography carrying the whole layout</li>
+            <li>Least code on the roster, by design</li>
+          </ul>
+          <a class="fight" href="../../templates/ecommerce-design-store/index.html">
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2l7 4-7 4z"/></svg> Fight
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECORD ============ -->
+<section class="pane" id="record">
+  <header class="pane__head">
+    <h2>Win record</h2>
+    <p>Bars on the roster are measured from this repository and scaled against the largest
+       value in the set. Nothing here is estimated.</p>
+  </header>
+
+  <div class="record">
+    <table class="tbl">
+      <caption class="sr-only">Every template with its measured build figures</caption>
+      <thead><tr><th scope="col">Site</th><th scope="col">Lines</th><th scope="col">Weight</th><th scope="col">Pages</th><th scope="col">CDN</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">PULSE</th><td>2 559</td><td>392 KB</td><td>1</td><td>3</td></tr>
+        <tr><th scope="row">EMBER</th><td>1 869</td><td>952 KB</td><td>1</td><td>0</td></tr>
+        <tr><th scope="row">FORGE</th><td>1 358</td><td>2.5 MB</td><td>1</td><td>3</td></tr>
+        <tr><th scope="row">TRIGGERED</th><td>1 129</td><td>96 KB</td><td>1</td><td>0</td></tr>
+        <tr><th scope="row">MERIDIAN</th><td>808</td><td>208 KB</td><td>4</td><td>0</td></tr>
+        <tr><th scope="row">OBLIK</th><td>525</td><td>536 KB</td><td>1</td><td>0</td></tr>
+      </tbody>
+      <tfoot><tr><th scope="row">Total</th><td>8 248</td><td>4.6 MB</td><td>9</td><td>6</td></tr></tfoot>
+    </table>
+
+    <ul class="totals">
+      <li><b>0</b><span>build steps</span></li>
+      <li><b>0</b><span>CSS frameworks</span></li>
+      <li><b>0</b><span>JS frameworks</span></li>
+      <li><b>4/6</b><span>sites with no CDN at all</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ TRAINING ============ -->
+<section class="pane" id="training">
+  <header class="pane__head">
+    <h2>Training mode</h2>
+    <p>How each of these gets made.</p>
+  </header>
+  <ol class="training">
+    <li>
+      <h3>Pick the world before the layout</h3>
+      <p>Every site above starts from a physical or graphic world that belongs to its
+         subject &mdash; a wood fire, a loading bay, a vector beam. The grid comes after.</p>
+    </li>
+    <li>
+      <h3>Bake once, animate cheap</h3>
+      <p>Noise, geometry and layout are precomputed at init. Per frame there is a lerp
+         and maybe one trig pair. That is why a 2.5 MB Three.js scene still holds 60fps.</p>
+    </li>
+    <li>
+      <h3>Ship it running, not rendered</h3>
+      <p>No build step, no framework, no bundler. Every site is HTML, CSS and JavaScript
+         you can open in a browser straight from the folder.</p>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ CHALLENGER ============ -->
+<section class="pane pane--cta" id="challenger">
+  <div class="cta">
+    <p class="cta__flash">Challenger approaching</p>
+    <h2>Want one built?</h2>
+    <p class="cta__body">Tell me what it is and roughly when. I&rsquo;ll say honestly whether
+       it should be a static site or something heavier.</p>
+    <form class="cta__form" id="ctaForm" novalidate>
+      <label class="field"><span>Your email</span>
+        <input type="email" name="email" required autocomplete="email" placeholder="player@somewhere.com"></label>
+      <label class="field"><span>What are we building?</span>
+        <textarea name="brief" rows="3" required placeholder="A one-page site for&hellip;"></textarea></label>
+      <button class="fight" type="submit">
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2l7 4-7 4z"/></svg> Enter the ring
+      </button>
+      <p class="cta__status" id="ctaStatus" role="status"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p>Variant 02 of 5 &middot; portraits are screenshots of this repository&rsquo;s own templates.</p>
+  <p>TRIGGERED is an unofficial concept redesign, not affiliated with the real venue.</p>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

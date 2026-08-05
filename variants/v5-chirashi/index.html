@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>ZANE — Chirashi | Portfolio Variant 05</title>
+<meta name="description" content="An arcade flyer portfolio: six hand-built websites printed in fluorescent ink on black stock, halftoned and slightly out of register.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ZANE — Chirashi">
+<meta property="og:description" content="Six hand-built websites, printed as an arcade flyer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!--
+THESIS: The arcade's paper, not its screen. This is the operator's flyer for six
+  titles — printed, not rendered — so it refuses the glowing card grid entirely:
+  halftone, spot ink, and a press that never quite hits register.
+OWN-WORLD: Fluorescent ink on black coated stock. Fluoro pink and cyan as the two
+  spot plates, ivory as the third; every headline printed twice, a hair out of
+  register. Halftone dots on every image, paper tooth over the whole sheet,
+  registration marks in the corners. Dela Gothic One display, Zen Kaku Gothic body.
+STORY: Six finished titles, their real figures printed on the sheet, and a coupon
+  at the bottom to order one.
+FIRST VIEWPORT: Masthead band — the title at poster scale with its second plate
+  showing, a vertical Japanese strip down the right edge, the featured title's
+  halftoned plate below it, and registration marks at the sheet's corners.
+FORM: Japanese arcade flyer (chirashi); candidate 5 of the grounded list — the
+  seed's assignment; seed key 315d3d88.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+
+<a class="skip" href="#titles">Skip to the titles</a>
+
+<!-- registration marks, one per corner of the sheet -->
+<svg class="reg reg--tl" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="9" fill="none" stroke="currentColor" stroke-width="1"/><path d="M20 0v40M0 20h40" stroke="currentColor" stroke-width="1"/></svg>
+<svg class="reg reg--tr" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="9" fill="none" stroke="currentColor" stroke-width="1"/><path d="M20 0v40M0 20h40" stroke="currentColor" stroke-width="1"/></svg>
+
+<header class="top">
+  <span class="top__mark">ZANE</span>
+  <nav class="top__nav" aria-label="Sections">
+    <a href="#titles">Titles</a>
+    <a href="#howto">How it&rsquo;s made</a>
+    <a href="#specs">Specs</a>
+    <a href="#order">Order</a>
+  </nav>
+  <span class="top__price">全六作 &middot; six titles</span>
+</header>
+
+<main>
+
+<!-- ============ MASTHEAD ============ -->
+<section class="mast">
+  <div class="mast__body">
+    <p class="mast__kicker">作品集 &mdash; a working collection, printed</p>
+    <h1 class="mast__h">SIX SITES<br>BUILT BY HAND</h1>
+    <p class="mast__lede">
+      Every title on this sheet is a real, running website in one repository. No build
+      step, no framework, no bundler &mdash; open the folder and it works. Figures printed
+      below are counted from the source, not estimated.
+    </p>
+    <div class="mast__acts">
+      <a class="ink" href="#titles">See all six</a>
+      <a class="ink ink--ghost" href="#order">Order one</a>
+    </div>
+  </div>
+
+  <aside class="mast__strip" aria-hidden="true">
+    <span>稼働中</span><span class="mast__strip-en">NOW RUNNING</span>
+  </aside>
+
+  <figure class="feature">
+    <div class="plate plate--pink">
+      <img src="img/pulse-ai-analytics.webp" alt="The PULSE landing page: a dark starfield hero reading &lsquo;Know who&rsquo;s leaving before they do.&rsquo;" width="960" height="600" decoding="async">
+    </div>
+    <figcaption>
+      <b>01</b>
+      <span class="feature__name">PULSE</span>
+      <span class="feature__kind">AI analytics landing page &middot; 2559 hand-written lines</span>
+    </figcaption>
+  </figure>
+</section>
+
+<!-- ============ TITLES ============ -->
+<section class="sheet" id="titles">
+  <h2 class="band">ALL SIX TITLES <i>全六作</i></h2>
+
+  <ol class="titles">
+    <li class="title" style="--ink:#ff2e88">
+      <a href="../../templates/pulse-ai-analytics/index.html">
+        <span class="title__n">01</span>
+        <span class="plate plate--pink"><img src="img/pulse-ai-analytics-sm.webp" alt="" width="480" height="300" loading="lazy" decoding="async"></span>
+        <span class="title__name">PULSE</span>
+        <span class="title__kind">AI analytics landing page</span>
+        <span class="title__spec"><b>2559</b> lines &middot; 392 KB &middot; 3 CDN</span>
+      </a>
+    </li>
+    <li class="title" style="--ink:#ffa62e">
+      <a href="../../templates/restaurant-food/index.html">
+        <span class="title__n">02</span>
+        <span class="plate plate--amber"><img src="img/restaurant-food-sm.webp" alt="" width="480" height="300" loading="lazy" decoding="async"></span>
+        <span class="title__name">EMBER</span>
+        <span class="title__kind">Wood-fire restaurant</span>
+        <span class="title__spec"><b>1869</b> lines &middot; 952 KB &middot; no CDN</span>
+      </a>
+    </li>
+    <li class="title" style="--ink:#b8ff2e">
+      <a href="../../templates/gym-service/index.html">
+        <span class="title__n">03</span>
+        <span class="plate plate--lime"><img src="img/gym-service-sm.webp" alt="" width="480" height="300" loading="lazy" decoding="async"></span>
+        <span class="title__name">FORGE</span>
+        <span class="title__kind">Strength &amp; conditioning</span>
+        <span class="title__spec"><b>1358</b> lines &middot; 2.5 MB &middot; 3 CDN</span>
+      </a>
+    </li>
+    <li class="title" style="--ink:#ff2e88">
+      <a href="../../templates/entertainment-triggered/index.html">
+        <span class="title__n">04</span>
+        <span class="plate plate--pink"><img src="img/entertainment-triggered-sm.webp" alt="" width="480" height="300" loading="lazy" decoding="async"></span>
+        <span class="title__name">TRIGGERED</span>
+        <span class="title__kind">Active game centre &mdash; unofficial concept</span>
+        <span class="title__spec"><b>1129</b> lines &middot; 96 KB &middot; no CDN</span>
+      </a>
+    </li>
+    <li class="title" style="--ink:#00e5ff">
+      <a href="../../templates/business-corporate/index.html">
+        <span class="title__n">05</span>
+        <span class="plate plate--cyan"><img src="img/business-corporate-sm.webp" alt="" width="480" height="300" loading="lazy" decoding="async"></span>
+        <span class="title__name">MERIDIAN</span>
+        <span class="title__kind">Consulting firm, four pages</span>
+        <span class="title__spec"><b>808</b> lines &middot; 208 KB &middot; no CDN</span>
+      </a>
+    </li>
+    <li class="title" style="--ink:#00e5ff">
+      <a href="../../templates/ecommerce-design-store/index.html">
+        <span class="title__n">06</span>
+        <span class="plate plate--cyan"><img src="img/ecommerce-design-store-sm.webp" alt="" width="480" height="300" loading="lazy" decoding="async"></span>
+        <span class="title__name">OBLIK</span>
+        <span class="title__kind">Design-object store</span>
+        <span class="title__spec"><b>525</b> lines &middot; 536 KB &middot; no CDN</span>
+      </a>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ HOW IT'S MADE ============ -->
+<section class="sheet" id="howto">
+  <h2 class="band">HOW IT&rsquo;S MADE <i>操作説明</i></h2>
+
+  <ol class="howto">
+    <li>
+      <svg class="dgm" viewBox="0 0 120 80" aria-hidden="true">
+        <rect x="6" y="10" width="44" height="60" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M56 40h40M88 32l10 8-10 8" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M14 22h28M14 32h20M14 42h28M14 52h16" stroke="currentColor" stroke-width="2" opacity=".55"/>
+      </svg>
+      <h3>The world comes first</h3>
+      <p>Each site starts from something real that belongs to its subject &mdash; a wood
+         fire, a lit cabinet, this sheet of paper. The grid is derived from that, never
+         from a component library.</p>
+    </li>
+    <li>
+      <svg class="dgm" viewBox="0 0 120 80" aria-hidden="true">
+        <circle cx="34" cy="40" r="24" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M34 16v48M10 40h48" stroke="currentColor" stroke-width="2" opacity=".4"/>
+        <path d="M66 40h34M92 32l10 8-10 8" fill="none" stroke="currentColor" stroke-width="2"/>
+        <rect x="100" y="30" width="14" height="20" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <h3>Bake once, animate cheap</h3>
+      <p>Noise, geometry and layout are computed once at start-up. Per frame there is a
+         lerp and maybe one pair of trig calls &mdash; which is why a 2.5&nbsp;MB Three.js
+         scene still holds its frame rate.</p>
+    </li>
+    <li>
+      <svg class="dgm" viewBox="0 0 120 80" aria-hidden="true">
+        <path d="M10 62h100" stroke="currentColor" stroke-width="2"/>
+        <rect x="16" y="42" width="18" height="20" fill="none" stroke="currentColor" stroke-width="2"/>
+        <rect x="42" y="28" width="18" height="34" fill="none" stroke="currentColor" stroke-width="2"/>
+        <rect x="68" y="14" width="18" height="48" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M94 24l8-8 8 8" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <h3>Ship it running</h3>
+      <p>No build step. No framework. No bundler. Static HTML, CSS and JavaScript that
+         run from the file system and deploy anywhere that serves files.</p>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ SPECS ============ -->
+<section class="sheet" id="specs">
+  <h2 class="band">PRINTED SPECIFICATION <i>仕様</i></h2>
+  <p class="sheet__note">Counted from the repository. Lines are hand-written CSS and
+     JavaScript; weight is the whole folder including images.</p>
+
+  <table class="spec">
+    <caption class="sr-only">Measured build figures for every template</caption>
+    <thead><tr>
+      <th scope="col">No.</th><th scope="col">Title</th><th scope="col">Lines</th>
+      <th scope="col">Weight</th><th scope="col">Pages</th><th scope="col">CDN</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>01</td><th scope="row">PULSE</th><td>2559</td><td>392 KB</td><td>1</td><td>3</td></tr>
+      <tr><td>02</td><th scope="row">EMBER</th><td>1869</td><td>952 KB</td><td>1</td><td>0</td></tr>
+      <tr><td>03</td><th scope="row">FORGE</th><td>1358</td><td>2.5 MB</td><td>1</td><td>3</td></tr>
+      <tr><td>04</td><th scope="row">TRIGGERED</th><td>1129</td><td>96 KB</td><td>1</td><td>0</td></tr>
+      <tr><td>05</td><th scope="row">MERIDIAN</th><td>808</td><td>208 KB</td><td>4</td><td>0</td></tr>
+      <tr><td>06</td><th scope="row">OBLIK</th><td>525</td><td>536 KB</td><td>1</td><td>0</td></tr>
+    </tbody>
+    <tfoot><tr><td></td><th scope="row">TOTAL</th><td>8248</td><td>4.6 MB</td><td>9</td><td>6</td></tr></tfoot>
+  </table>
+
+  <ul class="stamps">
+    <li><b>0</b><span>build steps</span></li>
+    <li><b>0</b><span>frameworks</span></li>
+    <li><b>4/6</b><span>with no CDN</span></li>
+    <li><b>9</b><span>static pages</span></li>
+  </ul>
+</section>
+
+<!-- ============ ORDER COUPON ============ -->
+<section class="sheet sheet--order" id="order">
+  <div class="coupon">
+    <p class="coupon__cut" aria-hidden="true">&#9986; cut along the line</p>
+    <div class="coupon__body">
+      <h2 class="coupon__h">ORDER FORM <i>申込書</i></h2>
+      <p class="coupon__note">Say what you want built and roughly when. I&rsquo;ll tell you
+         honestly whether it should be static or something heavier.</p>
+      <form id="orderForm" novalidate>
+        <label class="field"><span>Name / email</span>
+          <input type="email" name="email" required autocomplete="email" placeholder="you@somewhere.com"></label>
+        <label class="field"><span>What are we building?</span>
+          <textarea name="brief" rows="3" required placeholder="A one-page site for&hellip;"></textarea></label>
+        <button class="ink ink--stamp" type="submit">Send it</button>
+        <p class="coupon__out" id="orderOut" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="colophon">
+  <svg class="reg reg--foot" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="9" fill="none" stroke="currentColor" stroke-width="1"/><path d="M20 0v40M0 20h40" stroke="currentColor" stroke-width="1"/></svg>
+  <div>
+    <p><b>Variant 05 of 5.</b> Printed in three spot inks on black stock. Images are
+       screenshots of this repository&rsquo;s own templates, halftoned.</p>
+    <p>TRIGGERED is an unofficial concept redesign and is not affiliated with,
+       endorsed by, or operated by the real venue.</p>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

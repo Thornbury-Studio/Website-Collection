@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>ZANE — Phosphor | Portfolio Variant 03</title>
+<meta name="description" content="A single-gun amber CRT running its attract loop: six hand-built websites, dithered live to phosphor dots.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ZANE — Phosphor">
+<meta property="og:description" content="Attract mode. Six hand-built websites on one amber monitor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!--
+THESIS: One gun, one colour, no chrome. The portfolio refuses the neon-and-glass
+  arcade page: everything is type, hairlines and dithered phosphor on a single
+  amber monitor, and the screenshots are re-rendered into that world rather than pasted onto it.
+OWN-WORLD: Amber P3 phosphor (#ffb642) on near-black. One face at every size,
+  VT323. Hairline rules instead of boxes, a blinking block cursor, a function-key
+  bar along the bottom lip. Depth comes from bloom and scanlines, never from cards.
+STORY: Six finished sites. Move the cursor down the directory, watch each one
+  resolve on the monitor, press enter to open the real thing.
+FIRST VIEWPORT: Status line pinned top. Left, the title at display scale with a
+  live cursor. Right, the monitor — a canvas dithering the selected screenshot to
+  amber dots in real time. Function-key bar pinned bottom carries navigation.
+FORM: Monochrome CRT attract mode; candidate 4 of the grounded list; seed key 315d3d88.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+
+<a class="skip" href="#top">Skip to content</a>
+
+<!-- ============ STATUS LINE ============ -->
+<header class="status">
+  <span>ZANE</span>
+  <span class="status__sep" aria-hidden="true">/</span>
+  <span>ATTRACT MODE</span>
+  <span class="status__sep" aria-hidden="true">/</span>
+  <span>CREDIT <b>00</b></span>
+  <span class="status__hi">HI <b>8248</b></span>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__type">
+    <h1>SIX SITES.<br>NO BUILD STEP.<i class="cur" aria-hidden="true"></i></h1>
+    <p class="hero__body">
+      Everything on this monitor is a working website in this repository. Not a mockup,
+      not a case-study screenshot. Move down the directory and press enter to open one.
+    </p>
+    <p class="hero__hint">
+      <kbd>&uarr;</kbd><kbd>&darr;</kbd> select &middot; <kbd>enter</kbd> open &middot;
+      <kbd>1</kbd>&ndash;<kbd>6</kbd> jump
+    </p>
+  </div>
+
+  <figure class="monitor">
+    <canvas id="crt" width="640" height="400" role="img"
+            aria-label="The selected website, redrawn as amber phosphor dots"></canvas>
+    <figcaption class="monitor__cap">
+      <span id="crtName">PULSE</span>
+      <span class="monitor__sub" id="crtSub">AI ANALYTICS &middot; 2559 LINES</span>
+    </figcaption>
+  </figure>
+</section>
+
+<!-- ============ DIRECTORY ============ -->
+<section class="pane" id="dir">
+  <h2 class="pane__h">&gt; DIRECTORY</h2>
+
+  <ul class="dir" id="dirList" role="listbox" aria-label="Site directory" tabindex="0" aria-activedescendant="d-pulse">
+    <li class="row" id="d-pulse" role="option" aria-selected="true"
+        data-img="img/pulse-ai-analytics.webp" data-name="PULSE"
+        data-sub="AI ANALYTICS &middot; 2559 LINES"
+        data-href="../../templates/pulse-ai-analytics/index.html">
+      <span class="row__n">01</span>
+      <span class="row__name">PULSE</span>
+      <span class="row__kind">AI analytics landing page</span>
+      <span class="row__num">2559</span>
+      <span class="row__go">OPEN &rsaquo;</span>
+    </li>
+    <li class="row" id="d-ember" role="option" aria-selected="false"
+        data-img="img/restaurant-food.webp" data-name="EMBER"
+        data-sub="WOOD-FIRE RESTAURANT &middot; 1869 LINES"
+        data-href="../../templates/restaurant-food/index.html">
+      <span class="row__n">02</span>
+      <span class="row__name">EMBER</span>
+      <span class="row__kind">Wood-fire restaurant</span>
+      <span class="row__num">1869</span>
+      <span class="row__go">OPEN &rsaquo;</span>
+    </li>
+    <li class="row" id="d-forge" role="option" aria-selected="false"
+        data-img="img/gym-service.webp" data-name="FORGE"
+        data-sub="STRENGTH &amp; CONDITIONING &middot; 1358 LINES"
+        data-href="../../templates/gym-service/index.html">
+      <span class="row__n">03</span>
+      <span class="row__name">FORGE</span>
+      <span class="row__kind">Strength &amp; conditioning</span>
+      <span class="row__num">1358</span>
+      <span class="row__go">OPEN &rsaquo;</span>
+    </li>
+    <li class="row" id="d-triggered" role="option" aria-selected="false"
+        data-img="img/entertainment-triggered.webp" data-name="TRIGGERED"
+        data-sub="GAME CENTRE CONCEPT &middot; 1129 LINES"
+        data-href="../../templates/entertainment-triggered/index.html">
+      <span class="row__n">04</span>
+      <span class="row__name">TRIGGERED</span>
+      <span class="row__kind">Active game centre &mdash; unofficial concept</span>
+      <span class="row__num">1129</span>
+      <span class="row__go">OPEN &rsaquo;</span>
+    </li>
+    <li class="row" id="d-meridian" role="option" aria-selected="false"
+        data-img="img/business-corporate.webp" data-name="MERIDIAN"
+        data-sub="CONSULTING &middot; 4 PAGES &middot; 808 LINES"
+        data-href="../../templates/business-corporate/index.html">
+      <span class="row__n">05</span>
+      <span class="row__name">MERIDIAN</span>
+      <span class="row__kind">Consulting firm, four pages</span>
+      <span class="row__num">808</span>
+      <span class="row__go">OPEN &rsaquo;</span>
+    </li>
+    <li class="row" id="d-oblik" role="option" aria-selected="false"
+        data-img="img/ecommerce-design-store.webp" data-name="OBLIK"
+        data-sub="DESIGN-OBJECT STORE &middot; 525 LINES"
+        data-href="../../templates/ecommerce-design-store/index.html">
+      <span class="row__n">06</span>
+      <span class="row__name">OBLIK</span>
+      <span class="row__kind">Design-object store</span>
+      <span class="row__num">525</span>
+      <span class="row__go">OPEN &rsaquo;</span>
+    </li>
+  </ul>
+
+  <noscript>
+    <p class="ns">Scripts are off, so the monitor stays dark and the list is plain.
+       Every name above still links straight to its site.</p>
+  </noscript>
+</section>
+
+<!-- ============ LOG ============ -->
+<section class="pane" id="log">
+  <h2 class="pane__h">&gt; BUILD LOG</h2>
+  <p class="pane__note">Counted from the repository, not estimated. Lines are hand-written CSS
+     and JavaScript; weight is the whole folder.</p>
+
+  <table class="log">
+    <caption class="sr-only">Measured build figures for every template</caption>
+    <thead><tr>
+      <th scope="col">#</th><th scope="col">NAME</th><th scope="col">LINES</th>
+      <th scope="col">WEIGHT</th><th scope="col">PAGES</th><th scope="col">CDN</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>01</td><th scope="row">PULSE</th><td>2559</td><td>392 KB</td><td>1</td><td>3</td></tr>
+      <tr><td>02</td><th scope="row">EMBER</th><td>1869</td><td>952 KB</td><td>1</td><td>0</td></tr>
+      <tr><td>03</td><th scope="row">FORGE</th><td>1358</td><td>2.5 MB</td><td>1</td><td>3</td></tr>
+      <tr><td>04</td><th scope="row">TRIGGERED</th><td>1129</td><td>96 KB</td><td>1</td><td>0</td></tr>
+      <tr><td>05</td><th scope="row">MERIDIAN</th><td>808</td><td>208 KB</td><td>4</td><td>0</td></tr>
+      <tr><td>06</td><th scope="row">OBLIK</th><td>525</td><td>536 KB</td><td>1</td><td>0</td></tr>
+    </tbody>
+    <tfoot><tr><td></td><th scope="row">TOTAL</th><td>8248</td><td>4.6 MB</td><td>9</td><td>6</td></tr></tfoot>
+  </table>
+</section>
+
+<!-- ============ NOTE ============ -->
+<section class="pane" id="note">
+  <h2 class="pane__h">&gt; OPERATOR NOTE</h2>
+  <div class="note">
+    <p>Every site here starts from a physical or graphic world that belongs to its subject &mdash;
+       a wood fire, a loading bay, a lit cabinet &mdash; and the layout is derived from that world
+       rather than from a component library.</p>
+    <p>The engineering rule underneath is simple: bake once, animate cheap. Noise, geometry and
+       layout are precomputed at initialisation; per frame there is a lerp and maybe one pair of
+       trig calls. That is why a 2.5&nbsp;MB Three.js scene still holds its frame rate on a laptop.</p>
+    <p>No build step. No framework. No bundler. Open any folder in the repository and the site
+       runs from the file system.</p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="pane" id="coin">
+  <h2 class="pane__h">&gt; INSERT COIN</h2>
+  <form class="term" id="termForm" novalidate>
+    <label class="line">
+      <span class="line__p">EMAIL&gt;</span>
+      <input type="email" name="email" required autocomplete="email" placeholder="player@somewhere.com">
+    </label>
+    <label class="line line--tall">
+      <span class="line__p">BRIEF&gt;</span>
+      <textarea name="brief" rows="3" required placeholder="A one-page site for&hellip;"></textarea>
+    </label>
+    <button class="go" type="submit">TRANSMIT</button>
+    <p class="term__out" id="termOut" role="status"></p>
+  </form>
+</section>
+
+</main>
+
+<!-- ============ FUNCTION KEY BAR ============ -->
+<nav class="fkeys" aria-label="Sections">
+  <a href="#dir"><b>F1</b> Directory</a>
+  <a href="#log"><b>F2</b> Log</a>
+  <a href="#note"><b>F3</b> Note</a>
+  <a href="#coin"><b>F4</b> Coin</a>
+  <span class="fkeys__end">VARIANT 03/05</span>
+</nav>
+
+<footer class="foot">
+  <p>Images are screenshots of this repository&rsquo;s own templates, dithered at runtime.
+     TRIGGERED is an unofficial concept redesign and is not affiliated with the real venue.</p>
+</footer>
+
+<div class="crtglass" aria-hidden="true"></div>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
