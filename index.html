@@ -85,59 +85,13 @@
     background-size: 128px 128px;
   }
 
-  /* ---------- custom cursor ----------
-     A dot that tracks the real pointer 1:1 (zero lag — it IS where your
-     mouse is) plus a slim ring that trails it just enough to read as a
-     soft follow, not a detached "ball". Both fade in on first movement so
-     there's no stale circle sitting at the viewport centre on load. */
-  @media (hover: hover) and (pointer: fine) {
-    body, a, button { cursor: none; }
-  }
-  .cursor-dot, .cursor-ring {
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 999;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .cursor-dot, .cursor-ring { display: block; }
-  }
-  .cursor-dot.active, .cursor-ring.active { opacity: 1; }
-  .cursor-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-  .cursor-ring {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    border: 1px solid rgba(242, 241, 236, 0.32);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.25s ease, width 0.22s cubic-bezier(.22,1,.36,1),
-      height 0.22s cubic-bezier(.22,1,.36,1), border-color 0.22s ease,
-      background 0.22s ease;
-  }
-  .cursor-ring span {
-    opacity: 0;
-    transform: translateY(2px);
-    font-size: 0.66rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: var(--accent);
-    transition: opacity 0.18s ease, transform 0.18s ease;
-  }
-  .cursor-ring.link { width: 44px; height: 44px; border-color: var(--accent); }
-  .cursor-ring.view {
-    width: 68px; height: 68px;
-    background: var(--accent-soft); border-color: var(--accent);
-  }
-  .cursor-ring.view span { opacity: 1; transform: translateY(0); }
+  /* ---------- cursor ----------
+     Deliberately the native one. A JS-driven cursor can never beat the OS
+     here: the pointer is composited by the system at hardware latency,
+     while any DIV that "follows" it must wait for a mousemove event, a
+     script frame and a composite — so it always reads as lag, no matter
+     how tight the lerp. The hover affordance lives on the card instead
+     (see .card-link / .preview), which costs nothing to track. */
 
   /* ---------- background mesh ---------- */
   .mesh {
@@ -477,8 +431,14 @@
   .preview--shot .chrome {
     position: absolute; inset: 0 0 auto 0; z-index: 2;
     height: 22px; align-items: center; padding: 0 10px;
-    background: rgba(10,10,12,0.8);
-    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    /* Fully opaque, not backdrop-filter. This bar sits on EVERY card, and a
+       backdrop-filter is per-element compositor work (separate backdrop
+       root + readback) paid the moment a card scrolls into view — the exact
+       moment jank is visible. The blur was only ever hiding the 20% of the
+       screenshot bleeding through; going solid removes the bleed-through
+       instead of smearing it, which is what a browser chrome bar should
+       look like anyway, and costs the compositor nothing. */
+    background: #0a0a0c;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
   .preview--shot img {
@@ -679,9 +639,6 @@
 
 <div class="mesh"><span></span><span></span></div>
 <div class="grain"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"><span id="cursorLabel">View</span></div>
-<noscript><style>body, a, button { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none !important; }</style></noscript>
 
 <div class="page">
 
@@ -745,7 +702,7 @@
          and no bundler. They deploy as static files and run straight from the folder.</p>
       <dl class="facts">
         <div><dt>Templates live</dt><dd id="aboutCount">7</dd></div>
-        <div><dt>Hand-written lines</dt><dd>16&nbsp;820</dd></div>
+        <div><dt>Hand-written lines</dt><dd>18&nbsp;612</dd></div>
         <div><dt>Build steps</dt><dd>0</dd></div>
         <div><dt>Frameworks</dt><dd>0</dd></div>
       </dl>
@@ -827,7 +784,7 @@
   </div>
 
   <div class="grid">
-    <a class="card reveal" href="templates/business-corporate/index.html" data-cursor="view">
+    <a class="card reveal" href="templates/business-corporate/index.html">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/business-corporate-sm.webp" alt="The Meridian Partners homepage: a restrained, typographic consulting site." width="480" height="300" loading="lazy" decoding="async">
@@ -844,7 +801,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/gym-service/index.html" data-cursor="view">
+    <a class="card reveal" href="templates/gym-service/index.html">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/gym-service-sm.webp" alt="The FORGE homepage: a glowing low-poly form beside &lsquo;Forge your strongest self&rsquo;." width="480" height="300" loading="lazy" decoding="async">
@@ -861,7 +818,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/ecommerce-design-store/index.html" data-cursor="view">
+    <a class="card reveal" href="templates/ecommerce-design-store/index.html">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/ecommerce-design-store-sm.webp" alt="The OBLIK storefront: an editorial product grid of design objects." width="480" height="300" loading="lazy" decoding="async">
@@ -878,7 +835,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/pulse-ai-analytics/index.html" data-cursor="view">
+    <a class="card reveal" href="templates/pulse-ai-analytics/index.html">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/pulse-ai-analytics-sm.webp" alt="The PULSE landing page: a dark starfield hero over a product dashboard." width="480" height="300" loading="lazy" decoding="async">
@@ -895,7 +852,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/restaurant-food/index.html" data-cursor="view">
+    <a class="card reveal" href="templates/restaurant-food/index.html">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/restaurant-food-sm.webp" alt="The EMBER homepage: a wood-fire hero with drifting embers." width="480" height="300" loading="lazy" decoding="async">
@@ -912,7 +869,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/entertainment-triggered/index.html" data-cursor="view">
+    <a class="card reveal" href="templates/entertainment-triggered/index.html">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/entertainment-triggered-sm.webp" alt="The TRIGGERED concept site: neon type over a glowing lava grid floor." width="480" height="300" loading="lazy" decoding="async">
@@ -929,7 +886,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/chinese-restaurant/index.html" data-cursor="view">
+    <a class="card reveal" href="templates/chinese-restaurant/index.html">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/chinese-restaurant-sm.webp" alt="The B&aacute;i H&egrave; menu: dish rows on the left, a round table filling with plates on the right." width="480" height="300" loading="lazy" decoding="async">
@@ -946,7 +903,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/sys-2026-wearable/index.html" data-cursor="view">
+    <a class="card reveal" href="templates/sys-2026-wearable/index.html">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/sys-2026-wearable-sm.webp" alt="The SYS-2026 launch page: a machined field terminal on a forearm behind the words &lsquo;When the network goes down, this doesn&rsquo;t.&rsquo;" width="480" height="300" loading="lazy" decoding="async">
@@ -963,7 +920,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/law-firm/index.html" data-cursor="view">
+    <a class="card reveal" href="templates/law-firm/index.html">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/law-firm-sm.webp" alt="The AMICUS homepage: a warm ivory hero reading &lsquo;You don&rsquo;t have to face this alone&rsquo; beside an intake form." width="480" height="300" loading="lazy" decoding="async">
@@ -980,7 +937,24 @@
       </div>
     </a>
 
-    <a class="card locked reveal" href="portfolio/index.html" data-lock="portfolio" data-cursor="view">
+    <a class="card reveal" href="templates/watch-atelier/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/watch-atelier-sm.webp" alt="The AUREL homepage: an art-deco gilt watch on dark slate beside the words &lsquo;One hundred years, one second at a time.&rsquo;" width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Luxury / Product Page</span>
+        <h3>AUREL</h3>
+        <p>An old-money watch house &mdash; an AI-filmed light-sweep hero, scroll-driven chapters, and a seven-reference boutique with filters and quick-look.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card locked reveal" href="portfolio/index.html" data-lock="portfolio">
       <div class="preview preview--shot">
 
         <div class="chrome"><i></i><i></i><i></i></div>
@@ -1325,56 +1299,36 @@
   const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   /* Pointer feedback engine.
-     Every piece of mouse feedback — cursor ring, magnetic buttons, card
-     tilt, mesh parallax — funnels into ONE requestAnimationFrame writer,
-     built on three rules that keep rich feedback cheap at any card count:
+     The cursor itself is the browser's own (see the cursor note in the CSS).
+     What's left is feedback attached to elements — magnetic buttons and card
+     tilt — plus mesh parallax, funnelled into ONE requestAnimationFrame
+     writer built on three rules that keep it cheap at any card count:
 
      1. Handlers record state; only the rAF writes styles. Events can fire
         far faster than the display refreshes — work done per-event is
         wasted, work done per-frame is bounded.
      2. Frames never read layout. Geometry is captured once on hover entry
-        and invalidated by scroll/resize; the old version called
-        getBoundingClientRect (and offsetWidth, per frame, forever) inside
-        hot paths, forcing the browser to stop and measure.
+        and invalidated by scroll/resize; reading getBoundingClientRect
+        inside a hot path forces the browser to stop and measure.
      3. Hover targeting is delegated: two document-level listeners replace
         a pair of listeners on every link, button and card, so new cards
-        cost zero wiring. And the loop puts itself to sleep once the ring
-        has settled and nothing is hovered — an idle page runs no script
-        at all. */
+        cost zero wiring. With no cursor element to ease into place there is
+        nothing to settle, so the loop stops on the very next frame after
+        the pointer leaves a button or card — an idle page, and a page
+        whose pointer is merely passing over dead space, runs no script. */
   if (isFinePointer) {
-    const dot = document.getElementById('cursorDot');
-    const ring = document.getElementById('cursorRing');
-    const label = document.getElementById('cursorLabel');
     const meshEl = document.querySelector('.mesh');
-    const RING_W = { none: 30, link: 44, view: 68 };   // mirrors the CSS state sizes
 
     const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
-    const ringPos = { x: mouse.x, y: mouse.y };
-    // The ring's CSS width animates between states; centring must follow it.
-    // The old code polled offsetWidth every frame (a layout read in the hot
-    // path) — lerping our own copy toward the target tracks the transition
-    // closely enough that the centre never jumps, and reads nothing.
-    let ringTarget = RING_W.none;
-    let ringW = RING_W.none;
-    let hoverEl = null;
     let btn = null, btnRect = null;
     let card = null, cardRect = null;
     let rectsStale = false;
     let raf = 0;
-    let primed = false;   // true once the real pointer has moved at least once
 
     function wake() { if (!raf) raf = requestAnimationFrame(tick); }
 
     function tick() {
       raf = 0;
-      // A tight lerp (0.35) keeps the ring reading as "attached" to the
-      // pointer rather than trailing behind it like a dragged weight —
-      // just enough smoothing to soften direction changes.
-      ringPos.x += (mouse.x - ringPos.x) * 0.35;
-      ringPos.y += (mouse.y - ringPos.y) * 0.35;
-      ringW += (ringTarget - ringW) * 0.3;
-      ring.style.transform = `translate(${ringPos.x - ringW / 2}px, ${ringPos.y - ringW / 2}px)`;
-
       if (rectsStale) {          // the page moved under the cursor
         if (btn) btnRect = btn.getBoundingClientRect();
         if (card) cardRect = card.getBoundingClientRect();
@@ -1390,28 +1344,12 @@
         const py = (mouse.y - cardRect.top) / cardRect.height - 0.5;
         card.style.transform = `perspective(900px) rotateX(${py * -6}deg) rotateY(${px * 6}deg) translateY(-4px)`;
       }
-
-      const settled = Math.abs(mouse.x - ringPos.x) < 0.35 &&
-                      Math.abs(mouse.y - ringPos.y) < 0.35 &&
-                      Math.abs(ringTarget - ringW) < 0.35;
-      if (!settled || btn || card) wake();
     }
 
     window.addEventListener('mousemove', (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
-      // the dot snaps instantly by design; one transform write is fine here
-      dot.style.transform = `translate(${mouse.x - 3}px, ${mouse.y - 3}px)`;
-      if (!primed) {
-        // first real movement: place the ring right on the pointer instead
-        // of letting it lerp in from the viewport centre, then fade both in
-        primed = true;
-        ringPos.x = mouse.x;
-        ringPos.y = mouse.y;
-        dot.classList.add('active');
-        ring.classList.add('active');
-      }
-      wake();
+      if (btn || card) wake();   // nothing hovered = nothing to draw
     }, { passive: true });
 
     function releaseBtn(b) {
@@ -1425,15 +1363,6 @@
     }
 
     document.addEventListener('mouseover', (e) => {
-      const a = e.target.closest('a, button');
-      if (a !== hoverEl) {
-        hoverEl = a;
-        const isView = !!a && a.dataset.cursor === 'view';
-        ring.classList.toggle('view', isView);
-        ring.classList.toggle('link', !!a && !isView);
-        ringTarget = !a ? RING_W.none : (isView ? RING_W.view : RING_W.link);
-        if (isView) label.textContent = 'View';
-      }
       const b = e.target.closest('.btn');
       if (b !== btn) {
         if (btn) releaseBtn(btn);
@@ -1448,20 +1377,14 @@
         // transform writes stay instant while only the border animates
         if (c) c.style.transition = 'border-color 0.4s ease';
       }
-      wake();
+      if (btn || card) wake();
     });
 
-    // cursor left the window: release everything and fade out
+    // cursor left the window: release everything
     document.addEventListener('mouseout', (e) => {
       if (e.relatedTarget) return;
-      hoverEl = null;
-      ring.classList.remove('view', 'link');
-      ringTarget = RING_W.none;
       if (btn) { releaseBtn(btn); btn = null; btnRect = null; }
       if (card) { releaseCard(card); card = null; cardRect = null; }
-      dot.classList.remove('active');
-      ring.classList.remove('active');
-      primed = false;   // re-snap (instead of flying in) when the pointer returns
     });
 
     // One rAF-throttled scroll listener: mesh parallax (a transform on a
@@ -1473,11 +1396,14 @@
         scrollRaf = 0;
         if (meshEl) meshEl.style.transform = `translateY(${(window.scrollY * 0.08).toFixed(1)}px)`;
         rectsStale = true;
-        wake();
+        if (btn || card) wake();   // stale rects only matter while something is hovered
       });
     }, { passive: true });
 
-    window.addEventListener('resize', () => { rectsStale = true; wake(); }, { passive: true });
+    window.addEventListener('resize', () => {
+      rectsStale = true;
+      if (btn || card) wake();
+    }, { passive: true });
   }
 </script>
 
