@@ -1117,6 +1117,9 @@ details.is-open .det-inner p { transition-delay: .12s; }
                                       color-mix(in srgb, var(--sw) 82%, #000) 100%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(0,0,0,.35);
 }
+.swatches .sw-olive { --sw: #4A5033; }
+.swatches .sw-graphite { --sw: #2E3033; }
+.swatches .sw-raw { --sw: #A8A79C; }
 .swatches b { font: 600 .84rem/1 var(--sans); }
 .swatches i { font: 500 .68rem/1 var(--mono); font-style: normal; color: var(--muted); letter-spacing: .08em; }
 /* Visually hidden rather than zero-sized: a 0x0 control can be dropped from
