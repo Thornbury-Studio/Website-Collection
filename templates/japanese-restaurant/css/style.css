@@ -182,10 +182,13 @@ input, select, output { font: inherit; color: inherit; }
   transition: color .2s var(--ease);
 }
 .tab.is-active { color: var(--ink); font-weight: 700; }
+/* The slide between tabs is the transform; width snaps to the new tab's
+   size untransitioned, which reads fine at 2.5px tall and avoids animating
+   a layout property. */
 .tab-ink {
   position: absolute; bottom: 0; left: 0; height: 2.5px; width: 60px;
   background: var(--aka); border-radius: 2px 2px 0 0;
-  transition: transform .25s var(--ease), width .25s var(--ease);
+  transition: transform .25s var(--ease);
 }
 
 /* ----------------------------------------------------------------- filters */
