@@ -178,6 +178,21 @@ const out = {};
 for (const k in dishes) {
   out[k] = `<symbol id="p-${k}" viewBox="0 0 120 120">${dishes[k]}</symbol>`;
 }
-require('fs').writeFileSync(process.argv[2], JSON.stringify(out, null, 1));
+const path = require('node:path');
+const fs = require('node:fs');
+
+const outArg = process.argv[2];
+if (!outArg) {
+  console.error('Usage: node gen-plates.js <output-file.json>');
+  process.exit(1);
+}
+
+const outPath = path.resolve(__dirname, outArg);
+if (outPath !== __dirname && !outPath.startsWith(__dirname + path.sep)) {
+  console.error(`Refusing to write outside ${__dirname}: ${outPath}`);
+  process.exit(1);
+}
+
+fs.writeFileSync(outPath, JSON.stringify(out, null, 1));
 console.log(Object.keys(out).length + ' plates: ' +
   Object.entries(out).map(([k, v]) => `${k}(${v.length})`).join(' '));
