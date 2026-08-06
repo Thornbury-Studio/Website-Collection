@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYS-2026 — Field Terminal</title>
+<meta name="description" content="SYS-2026 is a fictional wrist-mounted field terminal built as a website template for portfolio showcase purposes — its own radio, its own maps, its own sensors, and no network to depend on.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/sys-2026-wearable/index.html">
+<meta name="theme-color" content="#0B0C09">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B0C09'/%3E%3Crect x='6' y='9' width='20' height='14' rx='2.5' fill='none' stroke='%234A5033' stroke-width='2'/%3E%3Cpath d='M9 19l3.5-4.5 3 3.5 2.5-5 2.5 6' fill='none' stroke='%2363F58C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SYS-2026">
+<meta property="og:title" content="SYS-2026 — Field Terminal">
+<meta property="og:description" content="A wrist-mounted field terminal with its own radio, its own maps and its own power. A fictional product template for portfolio showcase purposes.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/sys-2026-wearable/index.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/sys-2026-wearable/img/hero-wrist.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SYS-2026 — Field Terminal">
+<meta name="twitter:description" content="A wrist-mounted field terminal with its own radio, its own maps and its own power. A fictional product template for portfolio showcase purposes.">
+<meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/sys-2026-wearable/img/hero-wrist.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "SYS-2026 Field Terminal",
+  "description": "A fictional wrist-mounted field terminal — ionising-radiation detection, offline navigation, sub-GHz mesh messaging, wideband receive and biometrics in a machined aluminium case. Created as a website template for portfolio showcase purposes; not a real product and not for sale.",
+  "category": "Concept hardware",
+  "url": "https://website-collection-zanezhijies-projects.vercel.app/templates/sys-2026-wearable/index.html",
+  "image": "https://website-collection-zanezhijies-projects.vercel.app/templates/sys-2026-wearable/img/hero-wrist.webp",
+  "brand": { "@type": "Brand", "name": "SYS-2026" },
+  "offers": {
+    "@type": "Offer",
+    "price": "1480",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/PreOrder"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#anatomy">Skip to the hardware breakdown</a>
+
+<!-- ============================ scroll progress ============================ -->
+<div class="scroll-rail" aria-hidden="true"><span id="scrollFill"></span></div>
+
+<!-- ================================= nav ================================== -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="SYS-2026, back to top">
+    <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+      <rect x="1.5" y="1.5" width="37" height="37" rx="6" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".45"/>
+      <rect x="7.5" y="11" width="25" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M11 24.5l4.5-6 3.8 4.5 3.2-6.5 3.4 8" fill="none" stroke="var(--phos)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="6" cy="6" r="1.1" fill="currentColor" opacity=".5"/>
+      <circle cx="34" cy="6" r="1.1" fill="currentColor" opacity=".5"/>
+      <circle cx="6" cy="34" r="1.1" fill="currentColor" opacity=".5"/>
+      <circle cx="34" cy="34" r="1.1" fill="currentColor" opacity=".5"/>
+    </svg>
+    <span class="brand-text">
+      <b>SYS&#8209;2026</b>
+      <i>Field Terminal</i>
+    </span>
+  </a>
+
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#anatomy">Hardware</a>
+    <a href="#console">The screen</a>
+    <a href="#build">Build</a>
+    <a href="#ledger">What&rsquo;s real</a>
+    <a href="#specs">Specs</a>
+  </nav>
+
+  <a class="nav-cta" href="#reserve">
+    Reserve
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+  </a>
+</header>
+
+<main id="top">
+
+<!-- ================================= hero ================================= -->
+<section class="hero" id="hero">
+  <div class="hero-media">
+    <video id="heroVideo" class="hero-video" poster="img/hero-wrist.webp" muted loop playsinline preload="none" aria-label="The SYS-2026 worn on a forearm; a hand turns its knurled dial and the screen brightens.">
+      <source src="video/hero-dial.mp4" type="video/mp4">
+    </video>
+    <img class="hero-still" src="img/hero-wrist.webp" alt="" width="1920" height="1072" aria-hidden="true">
+    <div class="hero-scrim"></div>
+  </div>
+
+  <div class="hero-inner">
+    <p class="overline">
+      <span class="dot"></span>
+      SYS&#8209;2026 &middot; Concept study &middot; Not a shipping product
+    </p>
+
+    <h1>
+      <span class="line"><span>When the network</span></span>
+      <span class="line"><span>goes down, <em>this doesn&rsquo;t.</em></span></span>
+    </h1>
+
+    <p class="hero-sub">
+      A wrist-mounted field terminal with its own radio, its own maps, its own sensors and its
+      own power. No cell tower. No account. No monthly fee. It is a computer you can service
+      with a 2&nbsp;mm hex key.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#anatomy">
+        Open the hardware
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#console">Try the screen</a>
+    </div>
+
+    <dl class="hero-stats">
+      <div><dt>Standby</dt><dd>9 <span>days</span></dd></div>
+      <div><dt>Mesh range</dt><dd>12 <span>km</span></dd></div>
+      <div><dt>Sealed to</dt><dd>IP68 <span>&middot; 2 m</span></dd></div>
+      <div><dt>Mass</dt><dd>486 <span>g</span></dd></div>
+    </dl>
+  </div>
+
+  <div class="hero-foot">
+    <p class="boot-line" id="bootLine" aria-live="off"><span class="boot-caret"></span></p>
+    <p class="scroll-cue"><span class="cue-bar"><i></i></span> Scroll</p>
+  </div>
+</section>
+
+<!-- ============================== boot sequence ============================ -->
+<section class="boot" id="boot" aria-label="Power-on self test">
+  <div class="boot-stage">
+    <div class="stage-grid" aria-hidden="true"></div>
+
+    <div class="boot-copy">
+      <p class="eyebrow">00 / Power on</p>
+      <h2>Eleven seconds<br>from cold.</h2>
+      <p class="lede">
+        No account to sign into, no pairing, no waiting on a handshake with a server that may
+        not answer. It checks its own hardware, tells you what it found, and hands you the screen.
+      </p>
+      <p class="boot-note">
+        The sequence below runs by itself the moment it reaches you, at the speed the hardware
+        would actually take.
+      </p>
+      <button class="boot-replay" id="bootReplay" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/>
+        </svg>
+        Run it again
+      </button>
+    </div>
+
+    <div class="boot-frame">
+      <header class="boot-head">
+        <span class="chip">POST</span>
+        <span class="boot-title">Power-on self test</span>
+        <span class="boot-pct" id="bootPct">0%</span>
+      </header>
+      <div class="boot-bar" aria-hidden="true"><i id="bootBar"></i></div>
+      <ol class="boot-list" id="bootList">
+        <li data-boot data-ms="520"><b>ROM</b> <span>v4.11 &middot; 512 KB verified</span></li>
+        <li data-boot data-ms="340"><b>PWR</b> <span>11 600 mAh &middot; cell balance nominal</span></li>
+        <li data-boot data-ms="300"><b>DSP</b> <span>640 &times; 480 transflective &middot; backlight off</span></li>
+        <li data-boot data-ms="900"><b>DET</b> <span>GM tube 480 V bias &middot; plateau reached</span></li>
+        <li data-boot data-ms="1100"><b>NAV</b> <span>GNSS 21 sv tracked &middot; magnetometer trimmed</span></li>
+        <li data-boot data-ms="640"><b>RF</b>  <span>868 MHz mesh up &middot; receiver 150 kHz&ndash;1.7 GHz</span></li>
+        <li data-boot data-ms="380"><b>BIO</b> <span>PPG puck seated &middot; skin contact good</span></li>
+        <li data-boot data-ms="420"><b>CRT</b> <span>cartridge A &middot; 61.4 GB free</span></li>
+      </ol>
+      <footer class="boot-done" id="bootDone">
+        <span class="ok">&#10003;</span> All subsystems nominal. Terminal ready.
+      </footer>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ anatomy =============================== -->
+<section class="anatomy" id="anatomy" aria-label="Hardware breakdown">
+  <div class="anatomy-stage">
+    <div class="stage-grid" aria-hidden="true"></div>
+
+    <header class="stage-head">
+      <p class="eyebrow">01 / Hardware</p>
+      <h2>Six things bolted<br>inside one case.</h2>
+    </header>
+
+    <div class="device-wrap">
+      <!-- The orbit: 80 frames of a motion-control pass around the unit,
+           scrubbed by scroll on a canvas. The still is the pre-JS and
+           reduced-motion fallback. -->
+      <canvas class="device-orbit" id="orbitCanvas" width="1080" height="608" role="img"
+              aria-label="A camera moves around the SYS-2026 as you scroll, exposing the dial flank, the fastener seam, the top controls and the strap lugs."></canvas>
+      <img class="device-img" id="deviceStill" src="img/device-master.webp" alt="The SYS-2026 field terminal on a steel workbench: an olive-drab machined case with a green screen, a knurled dial, three toggle switches and a nylon strap." width="1600" height="1195" loading="lazy" decoding="async">
+      <p class="orbit-hud" id="orbitHud" aria-hidden="true">
+        <span class="orbit-cam">CAM</span>
+        <span id="orbitDeg">000&deg;</span>
+      </p>
+    </div>
+
+    <div class="callouts" id="callouts">
+      <article class="callout" data-i="0">
+        <p class="c-idx">01</p>
+        <h3>Transflective display</h3>
+        <p class="c-part">3.5&Prime; monochrome &middot; 640 &times; 480 &middot; no backlight required</p>
+        <p class="c-body">The brighter it gets outside, the more readable it becomes &mdash; it reflects sunlight instead of fighting it. Holding a static screen costs about 40&nbsp;&micro;A, which is why standby is measured in days.</p>
+      </article>
+      <article class="callout" data-i="1">
+        <p class="c-idx">02</p>
+        <h3>Ionising-radiation detector</h3>
+        <p class="c-part">Halogen-quenched Geiger&ndash;M&uuml;ller tube &middot; 0.01&ndash;1000 &micro;Sv/h</p>
+        <p class="c-body">A real glass tube, not an estimate from a chip. It clicks because a particle actually hit it. Dose rate, accumulated dose, and a rate alarm you set yourself.</p>
+      </article>
+      <article class="callout" data-i="2">
+        <p class="c-idx">03</p>
+        <h3>Navigation stack</h3>
+        <p class="c-part">Multi-band GNSS &middot; 3-axis magnetometer &middot; barometric altimeter</p>
+        <p class="c-body">Vector maps live on the cartridge, so position, heading and altitude never touch a server. It knows where you are in a canyon with no signal because nothing about it needed signal.</p>
+      </article>
+      <article class="callout" data-i="3">
+        <p class="c-idx">04</p>
+        <h3>Radio, both directions</h3>
+        <p class="c-part">Sub-GHz mesh transceiver &middot; 150 kHz&ndash;1.7 GHz receiver</p>
+        <p class="c-body">Short text and position hops unit to unit &mdash; up to 12&nbsp;km line of sight, further through the mesh. Separately, a receive-only tuner for emergency broadcast, marine, air band and shortwave.</p>
+      </article>
+      <article class="callout" data-i="4">
+        <p class="c-idx">05</p>
+        <h3>Biometric puck</h3>
+        <p class="c-part">Reflective PPG &middot; SpO&#8322; &middot; skin temperature</p>
+        <p class="c-body">Pressed against the underside of the forearm, where the signal is cleaner than at the wrist bone. Heart rate, oxygen saturation and core-temperature drift &mdash; logged locally, uploaded nowhere.</p>
+      </article>
+      <article class="callout" data-i="5">
+        <p class="c-idx">06</p>
+        <h3>Cartridge bay</h3>
+        <p class="c-part">microSD in a machined aluminium shell &middot; hot-swappable</p>
+        <p class="c-body">Maps, logs, waveforms, firmware. Eject it with a gloved thumb and hand it to somebody. That is the entire sync protocol, and it works in a blackout.</p>
+      </article>
+    </div>
+
+    <ol class="stage-ticks" id="stageTicks" aria-label="Jump to a component">
+      <li><button type="button" data-jump="0"><b>01</b><span>Display</span></button></li>
+      <li><button type="button" data-jump="1"><b>02</b><span>Detector</span></button></li>
+      <li><button type="button" data-jump="2"><b>03</b><span>Navigation</span></button></li>
+      <li><button type="button" data-jump="3"><b>04</b><span>Radio</span></button></li>
+      <li><button type="button" data-jump="4"><b>05</b><span>Biometrics</span></button></li>
+      <li><button type="button" data-jump="5"><b>06</b><span>Cartridge</span></button></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================= detail band ============================== -->
+<section class="band" aria-label="Detail photography">
+  <figure>
+    <img src="img/detail-dial.webp" alt="Macro photograph of the knurled aluminium dial, the three toggle switches under their guard rail and the small analogue gauge." width="1400" height="781" loading="lazy" decoding="async">
+    <figcaption><b>Gloves stay on.</b> One dial, three toggles, no touchscreen. Every control has a detent you can feel through 3&nbsp;mm of neoprene.</figcaption>
+  </figure>
+  <figure>
+    <img src="img/detail-screen.webp" alt="Macro photograph of the display: scratched cover glass over a green phosphor screen with visible scan lines." width="1400" height="781" loading="lazy" decoding="async">
+    <figcaption><b>Scratches are fine.</b> The cover glass is a sacrificial part. Two screws, ninety seconds, and it is new again.</figcaption>
+  </figure>
+</section>
+
+<!-- =============================== console ================================ -->
+<section class="console" id="console">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">02 / The interface</p>
+      <h2>Six modes. One dial.<br>Nothing hidden in a menu.</h2>
+      <p class="lede">
+        This is the actual screen, running in your browser. Turn the dial, flip a switch, or use
+        your arrow keys &mdash; the terminal responds the same way the hardware would.
+      </p>
+    </header>
+
+    <div class="console-rig">
+
+      <!-- ---------------- device ---------------- -->
+      <div class="rig-device">
+        <div class="rig-shell">
+          <div class="shell-top">
+            <div class="toggle-rail" role="group" aria-label="Panel switches">
+              <button class="tgl" id="tglPower" aria-pressed="true">
+                <span class="tgl-stick"></span><span class="tgl-label">PWR</span>
+              </button>
+              <button class="tgl" id="tglLight" aria-pressed="false">
+                <span class="tgl-stick"></span><span class="tgl-label">LAMP</span>
+              </button>
+              <button class="tgl" id="tglPhos" aria-pressed="false">
+                <span class="tgl-stick"></span><span class="tgl-label">AMBER</span>
+              </button>
+            </div>
+            <div class="gauge" aria-hidden="true">
+              <svg viewBox="0 0 60 60">
+                <circle cx="30" cy="30" r="27" fill="#15180F" stroke="#8C7340" stroke-width="2.5"/>
+                <circle cx="30" cy="30" r="23" fill="none" stroke="#000" stroke-width="1" opacity=".5"/>
+                <path d="M11 38a22 22 0 0 1 38 0" fill="none" stroke="#C9CCBC" stroke-width="1.6" opacity=".5"/>
+                <path d="M11 38a22 22 0 0 1 38 0" fill="none" stroke="var(--oxide)" stroke-width="1.6"
+                      stroke-dasharray="11 90" stroke-dashoffset="-52"/>
+                <g stroke="#C9CCBC" stroke-width="1.3" opacity=".55">
+                  <path d="M13 32l3 .6M18.5 22l2.4 2M30 17.5v3.2M41.5 22l-2.4 2M47 32l-3 .6"/>
+                </g>
+                <line id="gaugeNeedle" x1="30" y1="38" x2="30" y2="17" stroke="#E8E4D6" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="30" cy="38" r="2.6" fill="#9AA08C"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- ---------------- screen ---------------- -->
+          <div class="screen-bezel">
+            <div class="screen" id="screen" data-mode="rad">
+              <div class="scr-head">
+                <span id="scrMode">RAD</span>
+                <span class="scr-sep"></span>
+                <span id="scrClock">--:--:--</span>
+                <span class="scr-sep"></span>
+                <span id="scrBatt">BAT 87%</span>
+              </div>
+
+              <div class="scr-body">
+                <!-- RAD -->
+                <div class="pane" data-pane="rad" id="pane-rad" role="tabpanel" aria-labelledby="tab-rad" tabindex="0">
+                  <p class="big" id="radValue">0.11</p>
+                  <p class="big-unit">&micro;Sv/h &middot; <span id="radState">BACKGROUND</span></p>
+                  <div class="bars" id="radBars"></div>
+                  <ul class="kv">
+                    <li><span>Accumulated</span><b id="radAcc">0.0043 mSv</b></li>
+                    <li><span>Alarm at</span><b>2.50 &micro;Sv/h</b></li>
+                    <li><span>Tube</span><b>GM &middot; 480 V</b></li>
+                  </ul>
+                </div>
+                <!-- NAV -->
+                <div class="pane" data-pane="nav" id="pane-nav" role="tabpanel" aria-labelledby="tab-nav" tabindex="0">
+                  <div class="nav-row">
+                    <div class="compass" aria-hidden="true">
+                      <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+                        <circle cx="50" cy="50" r="32" fill="none" stroke="currentColor" stroke-width="1" opacity=".2" stroke-dasharray="2 4"/>
+                        <g id="compassRose">
+                          <path d="M50 12v8M50 80v8M12 50h8M80 50h8" stroke="currentColor" stroke-width="1.5" opacity=".5"/>
+                          <path d="M50 20l7 26-7-5-7 5z" fill="currentColor"/>
+                        </g>
+                        <path d="M50 6l4 7h-8z" fill="currentColor"/>
+                      </svg>
+                    </div>
+                    <ul class="kv tall">
+                      <li><span>Heading</span><b id="navHdg">341&deg; NNW</b></li>
+                      <li><span>Position</span><b id="navPos">61.4283 N<br>7.0912 E</b></li>
+                      <li><span>Altitude</span><b id="navAlt">438 m</b></li>
+                      <li><span>Fix</span><b>21 sv &middot; 1.4 m</b></li>
+                    </ul>
+                  </div>
+                  <p class="pane-foot">Sheet 14-C loaded from cartridge &middot; offline</p>
+                </div>
+                <!-- MESH -->
+                <div class="pane" data-pane="mesh" id="pane-mesh" role="tabpanel" aria-labelledby="tab-mesh" tabindex="0">
+                  <ul class="nodes" id="meshNodes"></ul>
+                  <p class="pane-foot"><span id="meshCount">4</span> units in range &middot; 868 MHz &middot; last hop 2.1 km</p>
+                </div>
+                <!-- RADIO -->
+                <div class="pane" data-pane="radio" id="pane-radio" role="tabpanel" aria-labelledby="tab-radio" tabindex="0">
+                  <p class="big" id="radioFreq">162.550</p>
+                  <p class="big-unit">MHz &middot; <span id="radioBand">VHF WX</span></p>
+                  <div class="tuner" id="tuner" aria-hidden="true"><i class="tuner-mark"></i></div>
+                  <ul class="kv">
+                    <li><span>Signal</span><b id="radioSig">&#9608;&#9608;&#9608;&#9608;&#9617;</b></li>
+                    <li><span>Mode</span><b>Receive only</b></li>
+                  </ul>
+                </div>
+                <!-- VITALS -->
+                <div class="pane" data-pane="vitals" id="pane-vitals" role="tabpanel" aria-labelledby="tab-vitals" tabindex="0">
+                  <svg class="ecg" viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+                    <polyline id="ecgLine" fill="none" stroke="currentColor" stroke-width="1.6" points=""/>
+                  </svg>
+                  <ul class="kv">
+                    <li><span>Heart rate</span><b id="vitHr">64 bpm</b></li>
+                    <li><span>SpO&#8322;</span><b id="vitSpo">98%</b></li>
+                    <li><span>Skin temp</span><b id="vitTmp">33.8 &deg;C</b></li>
+                    <li><span>Contact</span><b>Good</b></li>
+                  </ul>
+                </div>
+                <!-- DATA -->
+                <div class="pane" data-pane="data" id="pane-data" role="tabpanel" aria-labelledby="tab-data" tabindex="0">
+                  <ul class="files">
+                    <li><b>maps/sheet-14c.vmap</b><span>412 MB</span></li>
+                    <li><b>logs/dose-2026-08.csv</b><span>1.1 MB</span></li>
+                    <li><b>logs/track-0841.gpx</b><span>318 KB</span></li>
+                    <li><b>rf/scan-vhf.iq</b><span>96 MB</span></li>
+                    <li><b>fw/sys-4.11.img</b><span>512 KB</span></li>
+                  </ul>
+                  <p class="pane-foot">Cartridge A &middot; 61.4 GB free &middot; safe to eject</p>
+                </div>
+              </div>
+
+              <div class="scr-foot" id="scrFoot">TURN DIAL OR PRESS &larr; &rarr;</div>
+
+              <div class="crt" aria-hidden="true"></div>
+              <div class="glass" aria-hidden="true"></div>
+              <div class="screen-off" id="screenOff"><span>SCREEN OFF</span></div>
+            </div>
+          </div>
+
+          <div class="shell-bottom">
+            <div class="grille" aria-hidden="true"></div>
+            <p class="shell-serial">SYS-2026 &middot; UNIT 001 &middot; ASSY 06</p>
+          </div>
+
+          <!-- ---------------- dial ---------------- -->
+          <div class="dial-mount">
+            <button class="dial" id="dial" role="slider" aria-label="Mode dial"
+                    aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="RAD">
+              <span class="dial-face"><i class="dial-notch"></i></span>
+            </button>
+          </div>
+        </div>
+
+        <p class="rig-hint">
+          <span><b>Dial</b> drag or scroll it</span>
+          <span><b>&larr; &rarr;</b> step through modes</span>
+          <span><b>Switches</b> power, backlight, phosphor</span>
+        </p>
+      </div>
+
+      <!-- ---------------- explainer ---------------- -->
+      <div class="rig-side">
+        <ul class="mode-list" id="modeList" role="tablist" aria-label="Terminal modes">
+          <li role="presentation"><button role="tab" id="tab-rad"    aria-controls="pane-rad"    aria-selected="true"  data-mode="rad"><b>RAD</b><span>Dose rate &amp; accumulated exposure</span></button></li>
+          <li role="presentation"><button role="tab" id="tab-nav"    aria-controls="pane-nav"    aria-selected="false" data-mode="nav"><b>NAV</b><span>Offline position, heading, altitude</span></button></li>
+          <li role="presentation"><button role="tab" id="tab-mesh"   aria-controls="pane-mesh"   aria-selected="false" data-mode="mesh"><b>MESH</b><span>Units in range, carrier-free</span></button></li>
+          <li role="presentation"><button role="tab" id="tab-radio"  aria-controls="pane-radio"  aria-selected="false" data-mode="radio"><b>RADIO</b><span>Wideband receive, 150 kHz&ndash;1.7 GHz</span></button></li>
+          <li role="presentation"><button role="tab" id="tab-vitals" aria-controls="pane-vitals" aria-selected="false" data-mode="vitals"><b>VITALS</b><span>Heart rate, SpO&#8322;, skin temperature</span></button></li>
+          <li role="presentation"><button role="tab" id="tab-data"   aria-controls="pane-data"   aria-selected="false" data-mode="data"><b>DATA</b><span>Everything on the cartridge</span></button></li>
+        </ul>
+
+        <div class="ux-note" id="uxNote">
+          <p class="ux-label">Why it works like this</p>
+          <p class="ux-body" id="uxBody">Radiation is the one number that has to be readable at arm&rsquo;s length, so it gets the whole top half of the screen and nothing else competes with it.</p>
+        </div>
+
+        <p class="live" id="liveStatus" role="status" aria-live="polite">Mode: RAD.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ build ================================= -->
+<section class="build" id="build">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">03 / Construction</p>
+      <h2>Built like infrastructure,<br>not like a phone.</h2>
+      <p class="lede">
+        Twenty-two parts. Nine of them user-replaceable with a hex key that ships in the strap.
+        Nothing is glued, and nothing is paired to a serial number.
+      </p>
+    </header>
+
+    <figure class="teardown reveal">
+      <img src="img/teardown.webp" alt="Overhead teardown: the machined chassis, ribbed rear cover, display module, Geiger tube, circuit board, coin cell, battery, dial, toggle switches, fasteners, hex driver and nylon strap laid out in a grid on a steel bench." width="1920" height="1072" loading="lazy" decoding="async">
+      <figcaption>Every part in a production unit, laid out in assembly order.</figcaption>
+    </figure>
+
+    <div class="build-grid">
+      <article class="reveal">
+        <h3>6082&#8209;T6 aluminium, cut from billet</h3>
+        <p>A 1.9&nbsp;mm minimum wall, cerakote over hard anodising, and chamfers wide enough to take a drop on the corner without deforming the seal groove. It is heavier than it needs to be, deliberately.</p>
+      </article>
+      <article class="reveal">
+        <h3>One gasket, one seam</h3>
+        <p>A single captive O&#8209;ring in a machined channel means one thing to inspect and one thing to replace. Sealed to IP68 at two metres for an hour, and it still opens with a hex key.</p>
+      </article>
+      <article class="reveal">
+        <h3>Power you can carry spare</h3>
+        <p>An 11 600&nbsp;mAh pack that lifts out in one piece &mdash; forty hours of mixed use, nine days idle, and roughly three weeks if you leave it on the detector alone.</p>
+      </article>
+      <article class="reveal">
+        <h3>Serviceable on a tailgate</h3>
+        <p>Display, glass, battery, strap, dial and cartridge door are all separate line items. No adhesive, no proprietary driver, no board-level pairing.</p>
+      </article>
+    </div>
+
+    <figure class="edge-shot reveal">
+      <img src="img/profile-edge.webp" alt="The terminal stood on its edge, showing the full thickness of the case, the seam line, hex fasteners, a sealed port cover and the strap lug." width="1200" height="896" loading="lazy" decoding="async">
+      <figcaption>28.4&nbsp;mm thick at the seam. The port cover is a captive part &mdash; you cannot lose it.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================================ ledger ================================ -->
+<section class="ledger" id="ledger">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">04 / Honesty</p>
+      <h2>What&rsquo;s real,<br>and what isn&rsquo;t.</h2>
+      <p class="lede">
+        The fun of a wrist computer is imagining it does everything. Most of this one is
+        off-the-shelf engineering that already exists. Some of it is not, and pretending
+        otherwise would be the cheap way out.
+      </p>
+    </header>
+
+    <div class="ledger-cols">
+      <div class="led-col led-real">
+        <h3><span class="led-tag ok">Real today</span> Built from parts you can buy</h3>
+        <ul>
+          <li><b>Geiger&ndash;M&uuml;ller detection:</b> handheld dosimeters have used the same tube design for seventy years.</li>
+          <li><b>Sub-GHz mesh messaging:</b> long-range low-bandwidth radio mesh is an ordinary, licence-free technology.</li>
+          <li><b>Offline vector maps + GNSS:</b> every serious handheld navigator already does this without a network.</li>
+          <li><b>Wideband receive:</b> software-defined receivers cover this range on a chip the size of a stamp.</li>
+          <li><b>PPG heart rate &amp; SpO&#8322;:</b> the same optical sensing in any fitness band, moved somewhere it reads better.</li>
+          <li><b>Transflective monochrome LCD:</b> the reason old handhelds ran for weeks on two AAs.</li>
+          <li><b>IP68 machined enclosure:</b> routine for dive and survey instruments.</li>
+        </ul>
+      </div>
+
+      <div class="led-col led-fake">
+        <h3><span class="led-tag no">Still fiction</span> Kept because it looks good</h3>
+        <ul>
+          <li><b>Diagnosing an injury from your wrist:</b> a sensor can flag that something is wrong. It cannot tell you what.</li>
+          <li><b>Targeting assistance:</b> entertaining on screen, meaningless strapped to a forearm.</li>
+          <li><b>Naming an unknown chemical:</b> that needs a spectrometer and a bench, not a wrist.</li>
+          <li><b>Decades on one cell:</b> the physics is not close, and any product claiming it is lying.</li>
+          <li><b>Opening doors and machinery:</b> possible over short-range radio, but nobody would let one device hold all those keys.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="ledger-foot">
+      <b>And the honest disclosure:</b> SYS&#8209;2026 does not exist. This page is a website template
+      built to show what a product launch can feel like &mdash; the photography is generated, the
+      figures are invented but internally consistent, and the reserve form below takes no money
+      and sends nothing anywhere.
+    </p>
+  </div>
+</section>
+
+<!-- ================================ field ================================= -->
+<section class="field" id="field" aria-label="In the field">
+  <div class="field-media">
+    <video id="fieldVideo" class="field-video" poster="img/field-dusk.webp" muted loop playsinline preload="none" aria-label="A hiker on a gravel forest road at dusk tilts their forearm to read the terminal; mist drifts through the pines.">
+      <source src="video/field-dusk.mp4" type="video/mp4">
+    </video>
+    <img class="field-still" src="img/field-dusk.webp" alt="" width="1920" height="1072" loading="lazy" decoding="async" aria-hidden="true">
+    <div class="field-scrim"></div>
+  </div>
+  <div class="field-inner">
+    <p class="eyebrow">05 / In use</p>
+    <h2>Blue hour, no bars,<br>forty kilometres in.</h2>
+    <p class="lede">
+      The map is on the cartridge. The heading comes from a magnetometer. The message to the
+      other unit goes out at 868&nbsp;MHz whether or not a single tower is standing.
+    </p>
+    <ul class="field-chips">
+      <li><b>&minus;30&deg;C</b> cold start</li>
+      <li><b>+60&deg;C</b> sustained</li>
+      <li><b>IP68</b> 2 m / 1 h</li>
+      <li><b>1.5 m</b> drop to concrete</li>
+      <li><b>40 h</b> mixed use</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================================ specs ================================= -->
+<section class="specs" id="specs">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">06 / Specification</p>
+      <h2>The whole sheet.</h2>
+    </header>
+
+    <div class="spec-tools">
+      <button class="spec-toggle" id="specToggle" type="button" aria-pressed="false" aria-controls="specGroups">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        <span id="specToggleLabel">Expand all</span>
+      </button>
+    </div>
+
+    <div class="spec-groups" id="specGroups">
+      <details open>
+        <summary><span>Display &amp; controls</span><i></i></summary>
+        <div class="det-body"><div class="det-inner"><table>
+          <tbody>
+            <tr><th scope="row">Panel</th><td>3.5&Prime; transflective monochrome, 640 &times; 480, 60 Hz</td></tr>
+            <tr><th scope="row">Cover</th><td>2.4 mm chemically strengthened glass, replaceable</td></tr>
+            <tr><th scope="row">Illumination</th><td>Edge-lit, 5 levels, red-safe at level 1</td></tr>
+            <tr><th scope="row">Controls</th><td>Detented rotary dial, 3 sealed toggles, 1 recessed reset</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+      <details>
+        <summary><span>Sensing</span><i></i></summary>
+        <div class="det-body"><div class="det-inner"><table>
+          <tbody>
+            <tr><th scope="row">Radiation</th><td>Halogen-quenched GM tube, 0.01&ndash;1000 &micro;Sv/h, &plusmn;15%</td></tr>
+            <tr><th scope="row">Position</th><td>Multi-band GNSS, 1.4 m CEP typical, cold fix &lt; 28 s</td></tr>
+            <tr><th scope="row">Heading</th><td>3-axis magnetometer, tilt compensated, &plusmn;2&deg;</td></tr>
+            <tr><th scope="row">Altitude</th><td>Barometric, &plusmn;1 m relative</td></tr>
+            <tr><th scope="row">Biometrics</th><td>Reflective PPG, SpO&#8322;, skin temperature &plusmn;0.2 &deg;C</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+      <details>
+        <summary><span>Radio</span><i></i></summary>
+        <div class="det-body"><div class="det-inner"><table>
+          <tbody>
+            <tr><th scope="row">Mesh</th><td>868 / 915 MHz, +22 dBm, 12 km line of sight</td></tr>
+            <tr><th scope="row">Receiver</th><td>150 kHz &ndash; 1.7 GHz, AM / FM / SSB, receive only</td></tr>
+            <tr><th scope="row">Short range</th><td>BLE 5.4 for firmware only, off by default</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+      <details>
+        <summary><span>Power &amp; body</span><i></i></summary>
+        <div class="det-body"><div class="det-inner"><table>
+          <tbody>
+            <tr><th scope="row">Cell</th><td>11 600 mAh Li-ion, user-replaceable, USB-C 30 W</td></tr>
+            <tr><th scope="row">Runtime</th><td>40 h mixed &middot; 9 days standby &middot; 21 days detector only</td></tr>
+            <tr><th scope="row">Chassis</th><td>6082-T6 aluminium, hard anodised + cerakote</td></tr>
+            <tr><th scope="row">Sealing</th><td>IP68, 2 m for 1 h, single captive O-ring</td></tr>
+            <tr><th scope="row">Dimensions</th><td>132 &times; 94 &times; 28.4 mm</td></tr>
+            <tr><th scope="row">Mass</th><td>486 g with strap and cartridge</td></tr>
+            <tr><th scope="row">Storage</th><td>64 or 256 GB machined cartridge, hot-swappable</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== reserve ================================ -->
+<section class="reserve" id="reserve">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">07 / Configure</p>
+      <h2>Build the one<br>you would actually carry.</h2>
+      <p class="lede">A demonstration configurator. It updates a real total, validates a real form, and submits to nothing at all.</p>
+    </header>
+
+    <div class="cfg">
+      <div class="cfg-options">
+
+        <fieldset class="opt" data-opt="finish">
+          <legend>Finish</legend>
+          <div class="swatches">
+            <label><input type="radio" name="finish" value="olive" data-price="0" checked>
+              <span class="sw" style="--sw:#4A5033"></span><b>Olive drab</b><i>Included</i></label>
+            <label><input type="radio" name="finish" value="graphite" data-price="60">
+              <span class="sw" style="--sw:#2E3033"></span><b>Graphite</b><i>+ $60</i></label>
+            <label><input type="radio" name="finish" value="raw" data-price="140">
+              <span class="sw" style="--sw:#A8A79C"></span><b>Raw aluminium</b><i>+ $140</i></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="opt" data-opt="phosphor">
+          <legend>Screen phosphor <span class="opt-hint">&mdash; changes the demo above</span></legend>
+          <div class="pills">
+            <label><input type="radio" name="phosphor" value="green" data-price="0" checked><span>Green P1</span></label>
+            <label><input type="radio" name="phosphor" value="amber" data-price="35"><span>Amber P3 &nbsp;+ $35</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="opt" data-opt="strap">
+          <legend>Strap</legend>
+          <div class="pills">
+            <label><input type="radio" name="strap" value="nylon" data-price="0" checked><span>Ballistic nylon</span></label>
+            <label><input type="radio" name="strap" value="lined" data-price="90"><span>Leather-lined &nbsp;+ $90</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="opt" data-opt="cartridge">
+          <legend>Cartridge</legend>
+          <div class="pills">
+            <label><input type="radio" name="cartridge" value="64" data-price="0" checked><span>64 GB</span></label>
+            <label><input type="radio" name="cartridge" value="256" data-price="120"><span>256 GB &nbsp;+ $120</span></label>
+          </div>
+        </fieldset>
+      </div>
+
+      <aside class="cfg-summary">
+        <p class="sum-label">Your configuration</p>
+        <ul class="sum-list" id="sumList"></ul>
+        <p class="sum-total"><span>Total</span><b id="sumTotal">$1,480</b></p>
+
+        <form class="res-form" id="resForm" novalidate>
+          <div class="fld">
+            <label for="rName">Name</label>
+            <input id="rName" name="name" type="text" autocomplete="name" required aria-describedby="eName">
+            <p class="err" id="eName"></p>
+          </div>
+          <div class="fld">
+            <label for="rEmail">Email</label>
+            <input id="rEmail" name="email" type="email" autocomplete="email" required aria-describedby="eEmail">
+            <p class="err" id="eEmail"></p>
+          </div>
+          <div class="fld">
+            <label for="rRegion">Ship to</label>
+            <select id="rRegion" name="region" required aria-describedby="eRegion">
+              <option value="">Select a region</option>
+              <option>North America</option>
+              <option>Europe</option>
+              <option>Asia Pacific</option>
+              <option>Rest of world</option>
+            </select>
+            <p class="err" id="eRegion"></p>
+          </div>
+          <button class="btn btn-primary btn-wide" type="submit" id="resSubmit">Reserve this build</button>
+          <p class="form-note">Demonstration only &mdash; nothing is sent, stored or charged.</p>
+          <p class="form-ok" id="resOk" role="status" aria-live="polite"></p>
+        </form>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================================= faq ================================== -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">08 / Questions</p>
+      <h2>The ones that<br>actually get asked.</h2>
+    </header>
+    <div class="faq-list">
+      <details>
+        <summary><span>Is this a real product I can buy?</span><i></i></summary>
+        <div class="det-body"><div class="det-inner"><p>No. SYS&#8209;2026 is a fictional product invented for a website template. Nothing here is for sale, and the reserve form is a UI demonstration.</p></div></div>
+      </details>
+      <details>
+        <summary><span>Why a monochrome screen in 2026?</span><i></i></summary>
+        <div class="det-body"><div class="det-inner"><p>Because a transflective panel gets more readable in bright sun and costs almost nothing to hold an image. A colour screen would halve the runtime and be harder to read on a glacier.</p></div></div>
+      </details>
+      <details>
+        <summary><span>What happens with no signal at all?</span><i></i></summary>
+        <div class="det-body"><div class="det-inner"><p>Everything except the mesh keeps working, and the mesh only needs another unit, not a tower. Maps, detection, navigation and logging never had a network dependency to lose.</p></div></div>
+      </details>
+      <details>
+        <summary><span>Does it send my data anywhere?</span><i></i></summary>
+        <div class="det-body"><div class="det-inner"><p>There is nowhere to send it. Logs live on a cartridge you can pull out with a gloved thumb. Bluetooth exists for firmware and is off unless you flip it on.</p></div></div>
+      </details>
+      <details>
+        <summary><span>486 grams is heavy.</span><i></i></summary>
+        <div class="det-body"><div class="det-inner"><p>It is. That is the cost of a metal case, a replaceable cell and a glass detector tube. A lighter version of this device would be a different, more disposable device.</p></div></div>
+      </details>
+      <details>
+        <summary><span>Who is it for?</span><i></i></summary>
+        <div class="det-body"><div class="det-inner"><p>In the fiction: survey crews, back-country guides and anyone whose job continues after the infrastructure stops. In reality: a design study about what that product would look like.</p></div></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-brand">SYS&#8209;2026 <span>Field Terminal</span></p>
+      <p class="foot-copy">
+        A fictional product and an original design, created as a website template for portfolio
+        showcase purposes. All imagery on this page was generated for this template. No
+        third-party copyrighted content is used.
+      </p>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#anatomy">Hardware</a>
+      <a href="#console">The screen</a>
+      <a href="#build">Build</a>
+      <a href="#ledger">What&rsquo;s real</a>
+      <a href="#specs">Specs</a>
+      <a href="../../index.html">&larr; Back to the gallery</a>
+    </nav>
+  </div>
+  <p class="foot-rule">Website Collection &middot; template showcase<span class="foot-sig">Zane</span></p>
+</footer>
+
+<!-- inspiration tab -->
+<button class="insp" id="insp" aria-expanded="false">
+  <span class="insp-i" aria-hidden="true">i</span>
+  <span class="insp-txt">Inspired by the Fallout Pip&#8209;Boy</span>
+</button>
+<div class="insp-pop" id="inspPop" hidden>
+  <p><b>Where the idea came from.</b></p>
+  <p>The wrist-mounted terminal in the <i>Fallout</i> games and series &mdash; the Pip&#8209;Boy &mdash; is the reference
+  for the <i>concept</i>: one rugged instrument on your forearm that replaces a dozen separate tools.</p>
+  <p>SYS&#8209;2026 is an original design, not a reproduction. The device, the brand, the artwork and the
+  interface here were all made for this template, and it is not affiliated with or endorsed by
+  Bethesda Softworks or Amazon Studios.</p>
+  <button class="insp-close" id="inspClose">Close</button>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
