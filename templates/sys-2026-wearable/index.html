@@ -196,15 +196,25 @@
     </header>
 
     <div class="device-wrap">
-      <!-- The orbit: 80 frames of a motion-control pass around the unit,
-           scrubbed by scroll on a canvas. The still is the pre-JS and
-           reduced-motion fallback. -->
-      <canvas class="device-orbit" id="orbitCanvas" width="1280" height="720" role="img"
-              aria-label="A camera moves around the SYS-2026 as you scroll, exposing the dial flank, the fastener seam, the top controls and the strap lugs."></canvas>
-      <img class="device-img" id="deviceStill" src="img/device-master.webp" alt="The SYS-2026 field terminal on a steel workbench: an olive-drab machined case with a green screen, a knurled dial, three toggle switches and a nylon strap." width="1600" height="1195" loading="lazy" decoding="async">
+      <!-- Six studio views of the unit, one per component. The active callout
+           chooses the view. Each is a separate still generated from the same
+           master reference and checked by hand, because a scrubbed AI orbit
+           video cannot hold a rigid object's geometry through a revolution —
+           the previous version visibly rearranged the hardware mid-turn. -->
+      <div class="device-views" id="deviceViews" role="img"
+           aria-label="The SYS-2026 field terminal photographed from six angles as you scroll: the phosphor screen up close, the internals laid out flat, the front three-quarter with the map up, the ribbed back with its antenna cable, the underside sensor puck, and the cartridge half-ejected from its bay.">
+        <img class="view is-on" src="img/detail-screen.webp" alt="" aria-hidden="true" width="1400" height="781" decoding="async">
+        <img class="view" src="img/teardown.webp" alt="" aria-hidden="true" width="1920" height="1072" loading="lazy" decoding="async">
+        <img class="view" src="img/device-master.webp" alt="" aria-hidden="true" width="1600" height="1195" loading="lazy" decoding="async">
+        <img class="view" src="img/view-rear.webp" alt="" aria-hidden="true" width="1920" height="1072" loading="lazy" decoding="async">
+        <img class="view" src="img/view-underside.webp" alt="" aria-hidden="true" width="1920" height="1072" loading="lazy" decoding="async">
+        <img class="view" src="img/view-cartridge.webp" alt="" aria-hidden="true" width="1920" height="1072" loading="lazy" decoding="async">
+      </div>
       <p class="orbit-hud" id="orbitHud" aria-hidden="true">
         <span class="orbit-cam">CAM</span>
-        <span id="orbitDeg">000&deg;</span>
+        <span id="viewIdx">01/06</span>
+        <span class="hud-sep">&middot;</span>
+        <span id="viewName">DISPLAY</span>
       </p>
     </div>
 

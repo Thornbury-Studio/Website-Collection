@@ -38,11 +38,26 @@ lettering and no logos** anywhere in frame.
 | `img/profile-edge.webp` | Side profile, seam and strap lug | image-to-image from master |
 | `video/hero-dial.mp4` | A hand turns the dial, studio | image-to-video from `hero-wrist` |
 | `video/field-dusk.mp4` | Wrist tilts to read, mist drifts | image-to-video from `field-dusk` |
-| `img/orbit/f000–f079.webp` | 80-frame camera orbit around the unit | image-to-video from master (8 s, 720p), frames extracted with ffmpeg |
+| `img/view-rear.webp` | Rear three-quarter: heat-sink spine, cable collar | image-to-image from master |
+| `img/view-underside.webp` | Underside: biometric sensor puck, gasket line | image-to-image from master |
+| `img/view-cartridge.webp` | Cartridge half-ejected from its bay | image-to-image from master |
 
-The orbit sequence drives the "Hardware" section: the frames are drawn to a canvas and scrubbed
-by scroll position, because seeking a real `<video>` snaps to keyframes and stutters. 80 frames
-at 1080 px wide total ~1.7 MB, lazy-loaded only when the section approaches.
+### The orbit that was cut
+
+The first build of the "Hardware" section scrubbed an 80-frame AI camera-orbit video
+(image-to-video from the master, 720p) on a canvas. It was removed after review — for two
+reasons that reinforce each other. The frames were 720p stretched across a ~1240 px stage,
+which read as soft at any zoom. And image-to-video cannot hold a rigid object's geometry
+through a revolution: partway around, the dial migrated from the right flank to front-centre,
+the toggle rail morphed into a different plate, and the grille swapped sides — the camera was
+orbiting a device that did not stay the same device.
+
+The section now cuts between **six locked-off stills**, one per component callout — screen
+macro, teardown flat-lay, front three-quarter, rear three-quarter, underside, cartridge bay —
+each generated image-to-image from the same master and checked against it by hand before
+shipping. A still can be QA'd; a video frame in the middle of a morph cannot be fixed. The six
+views total ~680 KB against the orbit's 2.4 MB across 80 requests, and the canvas scrub loop
+went with it — the crossfade is two CSS properties.
 
 ## Post-processing
 

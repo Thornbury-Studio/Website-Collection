@@ -9,7 +9,6 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
-  var lerp  = function (a, b, t) { return a + (b - a) * t; };
 
   /* ==================================================================
      1. Scroll engine
@@ -141,81 +140,31 @@
       });
     });
   });
-  var devWrap  = document.querySelector('.device-wrap');
   var lastStop = -1;
 
-  /* -- orbit frame sequence ---------------------------------------------
-     Source frames are 1280x720 (the video's native resolution). The canvas
-     element can render as wide as ~1240 CSS px, which on a 2x/3x display
-     needs 2480+ real pixels to look sharp — feeding it a fixed 1280x720
-     buffer left the browser upscaling the whole canvas via CSS, which is a
-     second, blurrier stretch on top of whatever drawImage already did.
-     Sizing the raster to the element's own CSS box × devicePixelRatio
-     makes drawImage do one clean upscale straight to native pixels. */
-  var ORBIT_N = 80;
-  var ORBIT_AR = 720 / 1280;
-  var orbitCanvas = document.getElementById('orbitCanvas');
-  var orbitCtx = orbitCanvas ? orbitCanvas.getContext('2d') : null;
-  var orbitDeg = document.getElementById('orbitDeg');
-  var orbitFrames = [];        // HTMLImageElement per frame, filled lazily
-  var orbitLoaded = 0;
-  var orbitStarted = false;
-  var orbitFrame = -1;         // currently drawn frame
-  var orbitTarget = 0;         // frame scroll wants
-  var orbitShown = 0;          // smoothed position, for inertia
-  var orbitDpr = Math.min(window.devicePixelRatio || 1, 2.5);
-  var orbitRasterW = 0;        // last raster width set, so resize is a no-op when unchanged
+  /* -- component views ---------------------------------------------------
+     The stage used to scrub an 80-frame AI orbit video on a canvas. That
+     died of two things at once: the frames were 720p stretched across a
+     ~1240px stage, and image-to-video cannot hold a rigid object's geometry
+     through a revolution — the dial, grille and toggle rail visibly
+     migrated around the case mid-turn. Six locked-off stills generated
+     from one master reference (and checked against it by hand) give the
+     same "camera moves around the hardware" read with none of the morph,
+     at a seventh of the payload. */
+  var VIEW_NAMES = ['DISPLAY', 'DETECTOR', 'NAVIGATION', 'RADIO', 'BIOMETRIC', 'CARTRIDGE'];
+  var views = [].slice.call(document.querySelectorAll('#deviceViews .view'));
+  var viewIdx = document.getElementById('viewIdx');
+  var viewName = document.getElementById('viewName');
+  var shownView = 0;
 
-  function orbitResize() {
-    if (!orbitCanvas || !devWrap) return;
-    // The canvas is display:none pre-orbit, so read the always-visible
-    // wrap's width rather than the canvas's own (0x0) bounding rect.
-    var cssW = devWrap.getBoundingClientRect().width;
-    if (!cssW) return;
-    var targetW = Math.round(cssW * orbitDpr);
-    if (Math.abs(targetW - orbitRasterW) < 8) return;   // ignore sub-pixel jitter
-    orbitRasterW = targetW;
-    orbitCanvas.width = targetW;
-    orbitCanvas.height = Math.round(targetW * ORBIT_AR);
-    orbitCtx.imageSmoothingEnabled = true;
-    orbitCtx.imageSmoothingQuality = 'high';
-    orbitFrame = -1;   // new, blank buffer — force the next tick to redraw
-  }
-
-  function orbitLoad() {
-    if (orbitStarted || !orbitCtx || reduced) return;
-    orbitStarted = true;
-    orbitResize();
-    for (var i = 0; i < ORBIT_N; i++) {
-      (function (i) {
-        var im = new Image();
-        im.decoding = 'async';
-        im.src = 'img/orbit/f' + String(i).padStart(3, '0') + '.webp';
-        im.onload = function () {
-          orbitFrames[i] = im;
-          orbitLoaded++;
-          // switch over once the sequence is dense enough to look continuous
-          if (orbitLoaded === Math.floor(ORBIT_N * 0.4)) {
-            devWrap.classList.add('is-orbiting');
-            orbitResize();      // wrap's box may have shifted going 4:3 -> 16:9
-            orbitFrame = -1;
-          }
-        };
-      })(i);
+  function setView(i) {
+    if (i === shownView || !views.length) return;
+    shownView = i;
+    for (var v = 0; v < views.length; v++) {
+      views[v].classList.toggle('is-on', v === i);
     }
-  }
-
-  function orbitDraw(f) {
-    // nearest loaded frame at or below f, so gaps during load never blank
-    var i = f;
-    while (i >= 0 && !orbitFrames[i]) i--;
-    if (i < 0) return;
-    if (i === orbitFrame) return;
-    orbitFrame = i;
-    orbitCtx.drawImage(orbitFrames[i], 0, 0, orbitCanvas.width, orbitCanvas.height);
-    if (orbitDeg) {
-      orbitDeg.textContent = String(Math.round(i / (ORBIT_N - 1) * 360)).padStart(3, '0') + '°';
-    }
+    if (viewIdx)  viewIdx.textContent = '0' + (i + 1) + '/0' + views.length;
+    if (viewName) viewName.textContent = VIEW_NAMES[i] || '';
   }
 
   function renderAnatomy(p) {
@@ -229,9 +178,8 @@
         if (ticks[i])    ticks[i].classList.toggle('is-on', on);
       }
       lastStop = stop;
+      setView(stop);
     }
-
-    orbitTarget = q * (ORBIT_N - 1);
   }
 
   /* ---- nav / rail --------------------------------------------------- */
@@ -254,64 +202,22 @@
       }
     }
 
-    if (!reduced) {
-      if (anatSec) {
-        renderAnatomy(sectionProgress(anatSec));
-        // light inertia so fast flicks glide instead of strobing
-        orbitShown = lerp(orbitShown, orbitTarget, 0.22);
-        if (orbitCtx && devWrap.classList.contains('is-orbiting')) {
-          orbitDraw(clamp(Math.round(orbitShown), 0, ORBIT_N - 1));
-        }
-      }
+    if (!reduced && anatSec) {
+      renderAnatomy(sectionProgress(anatSec));
     }
 
     ticking = false;
   }
 
-  // The camera lerp needs frames of its own, so run continuously while
-  // the anatomy stage is anywhere near the viewport; otherwise only on
-  // scroll. Cheap either way — this is a few property writes.
-  var running = false;
-  function loop() {
-    frame();
-    if (running) requestAnimationFrame(loop);
-  }
-  function setRunning(on) {
-    if (on === running) return;
-    running = on;
-    if (on) requestAnimationFrame(loop);
-  }
-
+  // Stops only change on scroll, and the crossfade itself is CSS — so a
+  // scroll-gated rAF is all the loop this section needs. The old version
+  // ran a continuous rAF loop to lerp the orbit scrub between events;
+  // that entire cost is gone with the canvas.
   window.addEventListener('scroll', function () {
-    if (!running && !ticking) { ticking = true; requestAnimationFrame(frame); }
+    if (!ticking) { ticking = true; requestAnimationFrame(frame); }
   }, { passive: true });
 
-  window.addEventListener('resize', function () { measure(); orbitResize(); frame(); });
-
-  if (anatSec && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) {
-      if (es[0].isIntersecting) orbitLoad();   // fetch frames one screen early
-      setRunning(es[0].isIntersecting);
-    }, { rootMargin: '40% 0px' }).observe(anatSec);
-    // Backgrounded tabs never fire IO; load once the user is anywhere near.
-    window.addEventListener('scroll', function onFirst() {
-      if (window.scrollY > anatSec.offsetTop - window.innerHeight * 2) {
-        orbitLoad();
-        window.removeEventListener('scroll', onFirst);
-      }
-    }, { passive: true });
-  } else {
-    setRunning(true);
-    orbitLoad();
-  }
-
-  document.addEventListener('visibilitychange', function () {
-    if (document.hidden) setRunning(false);
-    else if (anatSec) {
-      var r = anatSec.getBoundingClientRect();
-      setRunning(r.top < window.innerHeight * 1.4 && r.bottom > -window.innerHeight * 0.4);
-    }
-  });
+  window.addEventListener('resize', function () { measure(); frame(); });
 
   frame();
   setTimeout(function () { measure(); frame(); }, 400);
