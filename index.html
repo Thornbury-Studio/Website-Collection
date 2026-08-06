@@ -67,9 +67,7 @@
   a { color: inherit; }
   ::selection { background: var(--accent); color: var(--bg); }
 
-  @media (hover: hover) and (pointer: fine) {
-    body, a, button { cursor: none; }
-  }
+  /* custom cursor disabled — using the system cursor */
 
   /* ---------- grain texture ----------
      A pre-baked 128px tile (a real Photoshop grain pass, ~5KB), not a live
@@ -87,43 +85,59 @@
     background-size: 128px 128px;
   }
 
-  /* ---------- custom cursor ---------- */
+  /* ---------- custom cursor ----------
+     A dot that tracks the real pointer 1:1 (zero lag — it IS where your
+     mouse is) plus a slim ring that trails it just enough to read as a
+     soft follow, not a detached "ball". Both fade in on first movement so
+     there's no stale circle sitting at the viewport centre on load. */
+  @media (hover: hover) and (pointer: fine) {
+    body, a, button { cursor: none; }
+  }
   .cursor-dot, .cursor-ring {
     position: fixed;
     top: 0; left: 0;
     pointer-events: none;
     z-index: 999;
     display: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
   }
   @media (hover: hover) and (pointer: fine) {
     .cursor-dot, .cursor-ring { display: block; }
   }
+  .cursor-dot.active, .cursor-ring.active { opacity: 1; }
   .cursor-dot {
-    width: 5px; height: 5px;
+    width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--accent);
   }
   .cursor-ring {
-    width: 38px; height: 38px;
+    width: 30px; height: 30px;
     border-radius: 50%;
-    border: 1px solid rgba(242, 241, 236, 0.35);
-    transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    border: 1px solid rgba(242, 241, 236, 0.32);
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: opacity 0.25s ease, width 0.22s cubic-bezier(.22,1,.36,1),
+      height 0.22s cubic-bezier(.22,1,.36,1), border-color 0.22s ease,
+      background 0.22s ease;
   }
   .cursor-ring span {
     opacity: 0;
-    font-size: 0.68rem;
+    transform: translateY(2px);
+    font-size: 0.66rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 600;
-    color: var(--bg);
-    transition: opacity 0.2s ease;
+    color: var(--accent);
+    transition: opacity 0.18s ease, transform 0.18s ease;
   }
-  .cursor-ring.link { width: 54px; height: 54px; border-color: var(--accent); }
-  .cursor-ring.view { width: 84px; height: 84px; background: var(--accent); border-color: var(--accent); }
-  .cursor-ring.view span { opacity: 1; }
+  .cursor-ring.link { width: 44px; height: 44px; border-color: var(--accent); }
+  .cursor-ring.view {
+    width: 68px; height: 68px;
+    background: var(--accent-soft); border-color: var(--accent);
+  }
+  .cursor-ring.view span { opacity: 1; transform: translateY(0); }
 
   /* ---------- background mesh ---------- */
   .mesh {
@@ -1332,7 +1346,7 @@
     const ring = document.getElementById('cursorRing');
     const label = document.getElementById('cursorLabel');
     const meshEl = document.querySelector('.mesh');
-    const RING_W = { none: 38, link: 54, view: 84 };   // mirrors the CSS state sizes
+    const RING_W = { none: 30, link: 44, view: 68 };   // mirrors the CSS state sizes
 
     const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
     const ringPos = { x: mouse.x, y: mouse.y };
@@ -1347,14 +1361,18 @@
     let card = null, cardRect = null;
     let rectsStale = false;
     let raf = 0;
+    let primed = false;   // true once the real pointer has moved at least once
 
     function wake() { if (!raf) raf = requestAnimationFrame(tick); }
 
     function tick() {
       raf = 0;
-      ringPos.x += (mouse.x - ringPos.x) * 0.16;
-      ringPos.y += (mouse.y - ringPos.y) * 0.16;
-      ringW += (ringTarget - ringW) * 0.22;
+      // A tight lerp (0.35) keeps the ring reading as "attached" to the
+      // pointer rather than trailing behind it like a dragged weight —
+      // just enough smoothing to soften direction changes.
+      ringPos.x += (mouse.x - ringPos.x) * 0.35;
+      ringPos.y += (mouse.y - ringPos.y) * 0.35;
+      ringW += (ringTarget - ringW) * 0.3;
       ring.style.transform = `translate(${ringPos.x - ringW / 2}px, ${ringPos.y - ringW / 2}px)`;
 
       if (rectsStale) {          // the page moved under the cursor
@@ -1383,7 +1401,16 @@
       mouse.x = e.clientX;
       mouse.y = e.clientY;
       // the dot snaps instantly by design; one transform write is fine here
-      dot.style.transform = `translate(${mouse.x - 2.5}px, ${mouse.y - 2.5}px)`;
+      dot.style.transform = `translate(${mouse.x - 3}px, ${mouse.y - 3}px)`;
+      if (!primed) {
+        // first real movement: place the ring right on the pointer instead
+        // of letting it lerp in from the viewport centre, then fade both in
+        primed = true;
+        ringPos.x = mouse.x;
+        ringPos.y = mouse.y;
+        dot.classList.add('active');
+        ring.classList.add('active');
+      }
       wake();
     }, { passive: true });
 
@@ -1424,7 +1451,7 @@
       wake();
     });
 
-    // cursor left the window: release everything
+    // cursor left the window: release everything and fade out
     document.addEventListener('mouseout', (e) => {
       if (e.relatedTarget) return;
       hoverEl = null;
@@ -1432,6 +1459,9 @@
       ringTarget = RING_W.none;
       if (btn) { releaseBtn(btn); btn = null; btnRect = null; }
       if (card) { releaseCard(card); card = null; cardRect = null; }
+      dot.classList.remove('active');
+      ring.classList.remove('active');
+      primed = false;   // re-snap (instead of flying in) when the pointer returns
     });
 
     // One rAF-throttled scroll listener: mesh parallax (a transform on a
