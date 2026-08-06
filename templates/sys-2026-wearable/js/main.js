@@ -144,8 +144,16 @@
   var devWrap  = document.querySelector('.device-wrap');
   var lastStop = -1;
 
-  /* -- orbit frame sequence ------------------------------------------- */
+  /* -- orbit frame sequence ---------------------------------------------
+     Source frames are 1280x720 (the video's native resolution). The canvas
+     element can render as wide as ~1240 CSS px, which on a 2x/3x display
+     needs 2480+ real pixels to look sharp — feeding it a fixed 1280x720
+     buffer left the browser upscaling the whole canvas via CSS, which is a
+     second, blurrier stretch on top of whatever drawImage already did.
+     Sizing the raster to the element's own CSS box × devicePixelRatio
+     makes drawImage do one clean upscale straight to native pixels. */
   var ORBIT_N = 80;
+  var ORBIT_AR = 720 / 1280;
   var orbitCanvas = document.getElementById('orbitCanvas');
   var orbitCtx = orbitCanvas ? orbitCanvas.getContext('2d') : null;
   var orbitDeg = document.getElementById('orbitDeg');
@@ -155,10 +163,29 @@
   var orbitFrame = -1;         // currently drawn frame
   var orbitTarget = 0;         // frame scroll wants
   var orbitShown = 0;          // smoothed position, for inertia
+  var orbitDpr = Math.min(window.devicePixelRatio || 1, 2.5);
+  var orbitRasterW = 0;        // last raster width set, so resize is a no-op when unchanged
+
+  function orbitResize() {
+    if (!orbitCanvas || !devWrap) return;
+    // The canvas is display:none pre-orbit, so read the always-visible
+    // wrap's width rather than the canvas's own (0x0) bounding rect.
+    var cssW = devWrap.getBoundingClientRect().width;
+    if (!cssW) return;
+    var targetW = Math.round(cssW * orbitDpr);
+    if (Math.abs(targetW - orbitRasterW) < 8) return;   // ignore sub-pixel jitter
+    orbitRasterW = targetW;
+    orbitCanvas.width = targetW;
+    orbitCanvas.height = Math.round(targetW * ORBIT_AR);
+    orbitCtx.imageSmoothingEnabled = true;
+    orbitCtx.imageSmoothingQuality = 'high';
+    orbitFrame = -1;   // new, blank buffer — force the next tick to redraw
+  }
 
   function orbitLoad() {
     if (orbitStarted || !orbitCtx || reduced) return;
     orbitStarted = true;
+    orbitResize();
     for (var i = 0; i < ORBIT_N; i++) {
       (function (i) {
         var im = new Image();
@@ -170,7 +197,8 @@
           // switch over once the sequence is dense enough to look continuous
           if (orbitLoaded === Math.floor(ORBIT_N * 0.4)) {
             devWrap.classList.add('is-orbiting');
-            orbitFrame = -1;   // force a redraw
+            orbitResize();      // wrap's box may have shifted going 4:3 -> 16:9
+            orbitFrame = -1;
           }
         };
       })(i);
@@ -258,7 +286,7 @@
     if (!running && !ticking) { ticking = true; requestAnimationFrame(frame); }
   }, { passive: true });
 
-  window.addEventListener('resize', function () { measure(); frame(); });
+  window.addEventListener('resize', function () { measure(); orbitResize(); frame(); });
 
   if (anatSec && 'IntersectionObserver' in window) {
     new IntersectionObserver(function (es) {
