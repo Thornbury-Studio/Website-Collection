@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMICUS — Counsel That Stands With You</title>
+<meta name="description" content="AMICUS is a fictional law firm template built for portfolio showcase purposes — an intake-first, warm and precise landing page for a modern practice.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/law-firm/index.html">
+<meta name="theme-color" content="#f6f1e8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23211d18'/%3E%3Cpath d='M16 7l7 18h-3.4l-1.5-4h-8.2l-1.5 4H5L12 7z' fill='%23f6f1e8'/%3E%3Cpath d='M13.2 18h5.6L16 10.6z' fill='%239c4a2f'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMICUS">
+<meta property="og:title" content="AMICUS — Counsel That Stands With You">
+<meta property="og:description" content="AMICUS is a fictional law firm template built for portfolio showcase purposes — an intake-first, warm and precise landing page for a modern practice.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/law-firm/index.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AMICUS — Counsel That Stands With You">
+<meta name="twitter:description" content="AMICUS is a fictional law firm template built for portfolio showcase purposes — an intake-first, warm and precise landing page for a modern practice.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "AMICUS",
+  "description": "AMICUS is a fictional law firm created as a portfolio template. The firm, its attorneys, and its results are invented.",
+  "url": "https://website-collection-zanezhijies-projects.vercel.app/templates/law-firm/index.html"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo" aria-label="AMICUS home">
+      <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M16 7l7 18h-3.4l-1.5-4h-8.2l-1.5 4H9L16 7z" fill="var(--paper)"/></svg>
+      AMICUS
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="#practice">Practice</a>
+      <a href="#results">Results</a>
+      <a href="#people">People</a>
+      <a href="#insights">Guides</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="nav-phone" href="tel:+15550142026">(555) 014-2026</a>
+      <a class="btn btn-solid btn-sm" href="#intake">Free consultation</a>
+      <button class="nav-burger" id="navBurger" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
+        <i></i><i></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow reveal">Amicus — Latin, <em>“friend.”</em></p>
+      <h1 class="reveal">You don’t have to face this <em>alone.</em></h1>
+      <p class="hero-sub reveal">The call is free. The advice is honest. And from the moment you reach us, your problem has people — ones who explain everything, hide nothing, and have done this two thousand times.</p>
+      <ul class="hero-proof reveal" aria-label="Why people choose us">
+        <li>No fee unless you win<sup>†</sup></li>
+        <li>A person, not a phone tree</li>
+        <li>Everything you say is privileged</li>
+      </ul>
+    </div>
+
+    <!-- Intake card -->
+    <div class="intake reveal" id="intake">
+      <form class="intake-card" id="intakeForm" novalidate>
+        <div class="intake-head">
+          <span class="intake-kicker">Tell us what happened</span>
+          <span class="intake-step" id="intakeStep">Takes ~30 seconds</span>
+        </div>
+
+        <fieldset class="intake-pane is-active" id="paneType">
+          <legend class="intake-q">What do you need help with?</legend>
+          <div class="chip-grid" id="chipGrid">
+            <button type="button" class="chip" data-case="Family">Family &amp; divorce</button>
+            <button type="button" class="chip" data-case="Injury">Injury &amp; accidents</button>
+            <button type="button" class="chip" data-case="Employment">Work &amp; employment</button>
+            <button type="button" class="chip" data-case="Estate">Wills &amp; estates</button>
+            <button type="button" class="chip" data-case="Business">Small business</button>
+            <button type="button" class="chip" data-case="Other">Something else</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="intake-pane" id="paneDetails">
+          <legend class="intake-q">Where can we reach you?</legend>
+          <div class="field">
+            <label for="fName">Your name</label>
+            <input id="fName" name="name" type="text" autocomplete="name" placeholder="First name is fine" required>
+          </div>
+          <div class="field">
+            <label for="fPhone">Phone or email</label>
+            <input id="fPhone" name="contact" type="text" autocomplete="tel" placeholder="However you’d like us to reach you" required>
+          </div>
+          <div class="field">
+            <label for="fNote">Anything you want us to know <span class="opt">(optional)</span></label>
+            <textarea id="fNote" name="note" rows="2" placeholder="A sentence is plenty."></textarea>
+          </div>
+          <p class="field-error" id="fieldError" role="alert" hidden>We just need a name and one way to reach you.</p>
+          <div class="intake-nav">
+            <button type="button" class="btn btn-ghost btn-sm" id="backBtn">Back</button>
+            <button type="submit" class="btn btn-solid" id="sendBtn">Request my free call</button>
+          </div>
+        </fieldset>
+
+        <div class="intake-pane intake-done" id="paneDone" role="status">
+          <svg viewBox="0 0 48 48" class="done-mark" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 24.5l6.5 6.5L33 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3 id="doneTitle">Thank you.</h3>
+          <p id="doneCopy">A real person will call you back within two hours, 9am–9pm, seven days a week. If it’s urgent, call us right now on <a href="tel:+15550142026">(555) 014-2026</a>.</p>
+        </div>
+
+        <p class="intake-fine">Free &amp; confidential · No obligation · This demo form doesn’t send anything</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Trust bar -->
+  <div class="trustbar">
+    <dl class="trust-grid">
+      <div class="trust-item reveal"><dt>Recovered for clients</dt><dd>$<span class="count" data-count="184" data-suffix="M">0</span></dd></div>
+      <div class="trust-item reveal"><dt>Matters resolved</dt><dd><span class="count" data-count="2400" data-suffix="+">0</span></dd></div>
+      <div class="trust-item reveal"><dt>Outcomes in clients’ favor</dt><dd><span class="count" data-count="96" data-suffix="%">0</span></dd></div>
+      <div class="trust-item reveal"><dt>Longest you’ll wait for a callback</dt><dd><span class="count" data-count="2" data-suffix="h">0</span></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ PRACTICE AREAS ============ -->
+<section class="section practice" id="practice">
+  <div class="section-head">
+    <p class="eyebrow reveal">Practice areas</p>
+    <h2 class="reveal">Whatever it is, say it plainly.<br><em>We’ll take it from there.</em></h2>
+  </div>
+  <ol class="practice-list">
+    <li class="practice-row reveal">
+      <a href="#intake">
+        <span class="p-num">01</span>
+        <span class="p-name">Family &amp; Divorce</span>
+        <span class="p-desc">Custody, separation, support — handled firmly in court and gently everywhere else.</span>
+        <span class="p-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li class="practice-row reveal">
+      <a href="#intake">
+        <span class="p-num">02</span>
+        <span class="p-name">Injury &amp; Accidents</span>
+        <span class="p-desc">You heal. We deal with the insurer — and we don’t accept their first number.</span>
+        <span class="p-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li class="practice-row reveal">
+      <a href="#intake">
+        <span class="p-num">03</span>
+        <span class="p-name">Work &amp; Employment</span>
+        <span class="p-desc">Fired, harassed, unpaid, or pushed out — your workplace has rules. We enforce them.</span>
+        <span class="p-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li class="practice-row reveal">
+      <a href="#intake">
+        <span class="p-num">04</span>
+        <span class="p-name">Wills &amp; Estates</span>
+        <span class="p-desc">Plans written in plain English, and contested estates untangled without tearing families apart.</span>
+        <span class="p-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li class="practice-row reveal">
+      <a href="#intake">
+        <span class="p-num">05</span>
+        <span class="p-name">Small Business</span>
+        <span class="p-desc">Contracts, disputes, and partnerships — protection sized and priced for real businesses.</span>
+        <span class="p-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ CASE RESULTS ============ -->
+<section class="section section-alt results" id="results">
+  <div class="section-head">
+    <p class="eyebrow reveal">Case results</p>
+    <h2 class="reveal">Won <em>quietly.</em></h2>
+    <p class="section-sub reveal">Names changed, details blurred — outcomes real to the story we’re telling. Select a matter to read how it actually went.</p>
+  </div>
+
+  <div class="ledger" id="ledger">
+    <article class="case reveal">
+      <h3><button class="case-row" aria-expanded="false">
+        <span class="c-result">$2.3M</span>
+        <span class="c-matter">Delivery driver, spinal injury</span>
+        <span class="c-meta">Injury · 2025</span>
+        <span class="c-toggle" aria-hidden="true"></span>
+      </button></h3>
+      <div class="case-body">
+        <div class="case-body-inner">
+          <p><strong>The situation.</strong> A rear-end collision at a loading dock left our client unable to work. The insurer’s first offer — made while he was still in a brace — was $90,000.</p>
+          <p><strong>What we did.</strong> We declined, politely. Then we built the file they should have feared: vocational experts, a life-care plan, and the dock’s own maintenance logs.</p>
+          <p><strong>Where it landed.</strong> $2.3 million, settled eleven days before trial. He never set foot in a courtroom.</p>
+          <blockquote>“They talked to me like a person, and to the insurer like a wall.”</blockquote>
+        </div>
+      </div>
+    </article>
+
+    <article class="case reveal">
+      <h3><button class="case-row" aria-expanded="false">
+        <span class="c-result">Full custody</span>
+        <span class="c-matter">Mother of two, relocation dispute</span>
+        <span class="c-meta">Family · 2025</span>
+        <span class="c-toggle" aria-hidden="true"></span>
+      </button></h3>
+      <div class="case-body">
+        <div class="case-body-inner">
+          <p><strong>The situation.</strong> A custody arrangement that worked on paper collapsed when the other parent announced a move across the country with three weeks’ notice.</p>
+          <p><strong>What we did.</strong> An emergency motion within 48 hours, then something rarer: a parenting plan so specific and so fair the judge adopted it nearly verbatim.</p>
+          <p><strong>Where it landed.</strong> Primary custody, school stability, and holidays that don’t need a lawyer to schedule anymore.</p>
+          <blockquote>“The first night I slept properly in months was the night after our first meeting.”</blockquote>
+        </div>
+      </div>
+    </article>
+
+    <article class="case reveal">
+      <h3><button class="case-row" aria-expanded="false">
+        <span class="c-result">$640K</span>
+        <span class="c-matter">Engineer, wrongful termination</span>
+        <span class="c-meta">Employment · 2024</span>
+        <span class="c-toggle" aria-hidden="true"></span>
+      </button></h3>
+      <div class="case-body">
+        <div class="case-body-inner">
+          <p><strong>The situation.</strong> Twelve years of excellent reviews, then a termination two weeks after she reported a safety issue. The company called it “restructuring.”</p>
+          <p><strong>What we did.</strong> We requested the restructure paperwork. There wasn’t any. Discovery surfaced messages that made the real reason plain.</p>
+          <p><strong>Where it landed.</strong> $640,000 and a neutral reference — plus the safety issue got fixed.</p>
+          <blockquote>“I thought I was unemployable. Turns out I was right, and they were liable.”</blockquote>
+        </div>
+      </div>
+    </article>
+
+    <article class="case reveal">
+      <h3><button class="case-row" aria-expanded="false">
+        <span class="c-result">Estate intact</span>
+        <span class="c-matter">Three siblings, contested will</span>
+        <span class="c-meta">Estate · 2024</span>
+        <span class="c-toggle" aria-hidden="true"></span>
+      </button></h3>
+      <div class="case-body">
+        <div class="case-body-inner">
+          <p><strong>The situation.</strong> A handwritten codicil surfaced after the funeral, leaving the family home to a caretaker hired eight months earlier. The siblings were ready to litigate each other, too.</p>
+          <p><strong>What we did.</strong> A forensic document examiner, a quiet deposition, and — just as important — mediation that kept three siblings speaking to each other.</p>
+          <p><strong>Where it landed.</strong> The codicil was withdrawn before trial. The estate passed as their mother intended, and Sunday dinners survived.</p>
+          <blockquote>“They saved the inheritance. Honestly, they saved the family.”</blockquote>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ ATTORNEYS ============ -->
+<section class="section people" id="people">
+  <div class="section-head">
+    <p class="eyebrow reveal">The people in your corner</p>
+    <h2 class="reveal">Precise on paper. <em>Warm in person.</em></h2>
+  </div>
+  <div class="people-grid">
+    <article class="lawyer reveal">
+      <figure class="lawyer-photo">
+        <img src="img/attorney-voss.webp" alt="Eleanor Voss, a woman in her late fifties with a silver bob, smiling warmly." width="600" height="800" loading="lazy" decoding="async">
+      </figure>
+      <div class="lawyer-body">
+        <h3>Eleanor Voss</h3>
+        <p class="lawyer-role">Founding Partner · Family Law</p>
+        <p class="lawyer-bio">Twenty-six years of custody and divorce work, and still answers her own phone. Judges know her arguments arrive organized; clients know their calls get returned the same day.</p>
+        <p class="lawyer-why"><em>“Nobody plans to need me. So when they do, I make it as human as I can.”</em></p>
+      </div>
+    </article>
+
+    <article class="lawyer reveal">
+      <figure class="lawyer-photo">
+        <img src="img/attorney-bell.webp" alt="Marcus Bell, a man in his late forties with a salt-and-pepper beard, calm and assured." width="600" height="800" loading="lazy" decoding="async">
+      </figure>
+      <div class="lawyer-body">
+        <h3>Marcus Bell</h3>
+        <p class="lawyer-role">Partner · Injury &amp; Accidents</p>
+        <p class="lawyer-bio">A former insurance-defense attorney who switched sides and brought the playbook with him. He knows what the other table fears, because he used to sit at it.</p>
+        <p class="lawyer-why"><em>“The insurer has nine lawyers. You get to have me.”</em></p>
+      </div>
+    </article>
+
+    <article class="lawyer reveal">
+      <figure class="lawyer-photo">
+        <img src="img/attorney-lin.webp" alt="Grace Lin, a woman in her mid thirties with dark hair tied back, attentive and composed." width="600" height="800" loading="lazy" decoding="async">
+      </figure>
+      <div class="lawyer-body">
+        <h3>Grace Lin</h3>
+        <p class="lawyer-role">Senior Associate · Employment</p>
+        <p class="lawyer-bio">Wage theft, retaliation, and quiet discrimination — she reads employment contracts the way auditors read ledgers. Fluent in Mandarin, ruthless in discovery.</p>
+        <p class="lawyer-why"><em>“Most clients just want to be believed. That part costs nothing.”</em></p>
+      </div>
+    </article>
+
+    <article class="lawyer reveal">
+      <figure class="lawyer-photo">
+        <img src="img/attorney-reyes.webp" alt="Daniel Reyes, a man in his mid thirties with dark curly hair, smiling approachably." width="600" height="800" loading="lazy" decoding="async">
+      </figure>
+      <div class="lawyer-body">
+        <h3>Daniel Reyes</h3>
+        <p class="lawyer-role">Associate · Estates &amp; Small Business</p>
+        <p class="lawyer-bio">Writes wills people actually understand and contracts founders actually read. Half his practice is preventing the lawsuits the other half of the firm handles. Fluent in Spanish.</p>
+        <p class="lawyer-why"><em>“Good paperwork is just kindness to your future self.”</em></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="section section-alt process" id="process">
+  <div class="process-grid">
+    <div class="process-copy">
+      <p class="eyebrow reveal">What happens when you call</p>
+      <h2 class="reveal">No mystery. <em>No meter running.</em></h2>
+      <p class="section-sub reveal">The scariest part of calling a law firm is not knowing what happens next. So here is exactly what happens next.</p>
+      <figure class="office-shot reveal">
+        <img src="img/office.webp" alt="A warm office with tall windows, oak shelves, and linen armchairs around a round table." width="1280" height="714" loading="lazy" decoding="async">
+        <figcaption>Our meeting room. Coffee’s included; the clock isn’t running.</figcaption>
+      </figure>
+    </div>
+    <ol class="steps">
+      <li class="step reveal">
+        <span class="step-num">01</span>
+        <div>
+          <h3>We listen. Twenty minutes, free.</h3>
+          <p>You talk, we take notes. No jargon, no judgment, no invoice. By the end you’ll know whether you have a case — even if the honest answer is that you don’t need us.</p>
+        </div>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">02</span>
+        <div>
+          <h3>You get a plan in writing.</h3>
+          <p>Within two days: what we’d do, how long it should take, and what it costs — flat fee or no-win-no-fee wherever the matter allows. No surprises clause included, literally.</p>
+        </div>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">03</span>
+        <div>
+          <h3>We carry it from here.</h3>
+          <p>Paperwork, deadlines, phone calls with people you’d rather never speak to — ours now. You get plain-English updates every week, and a direct line to your attorney. Not a portal. A person.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section voices" id="voices">
+  <div class="section-head">
+    <p class="eyebrow reveal">In their words</p>
+    <h2 class="reveal">People we’ve <em>stood beside.</em></h2>
+  </div>
+  <div class="quote-stage reveal" id="quoteStage">
+    <figure class="quote is-active">
+      <blockquote>“I called four firms. Three sent me forms. Amicus sent me Eleanor, on the phone, that afternoon.”</blockquote>
+      <figcaption>Priya · Custody matter</figcaption>
+    </figure>
+    <figure class="quote">
+      <blockquote>“They told me my case was worth less than I hoped — then explained why, line by line. I trusted them completely after that. We won more than their estimate.”</blockquote>
+      <figcaption>Tomas · Injury claim</figcaption>
+    </figure>
+    <figure class="quote">
+      <blockquote>“Every week, an email in actual English: what happened, what’s next, what it means. My last firm sent me invoices with codes on them.”</blockquote>
+      <figcaption>Danielle · Employment dispute</figcaption>
+    </figure>
+    <figure class="quote">
+      <blockquote>“My brother and I were one letter away from never speaking again. They settled the estate and somehow un-burned that bridge.”</blockquote>
+      <figcaption>Kenji · Contested will</figcaption>
+    </figure>
+    <div class="quote-nav">
+      <button class="q-btn" id="qPrev" aria-label="Previous testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></button>
+      <div class="q-dots" id="qDots" role="tablist" aria-label="Testimonials"></div>
+      <button class="q-btn" id="qNext" aria-label="Next testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSIGHTS ============ -->
+<section class="section section-alt insights" id="insights">
+  <div class="section-head">
+    <p class="eyebrow reveal">Guides &amp; insights</p>
+    <h2 class="reveal">The law, in <em>plain English.</em></h2>
+    <p class="section-sub reveal">Free, unlocked, written by our attorneys. Because you shouldn’t need a lawyer to understand whether you need a lawyer.</p>
+  </div>
+  <div class="insight-grid">
+    <a class="insight reveal" href="#insights" aria-label="Guide: The first 48 hours after a crash">
+      <span class="i-tag">Injury</span>
+      <h3>The first 48 hours after a crash</h3>
+      <p>What to photograph, what to sign, and the one sentence never to say to an adjuster.</p>
+      <span class="i-foot"><span>6 min read</span><span class="i-arrow" aria-hidden="true">Read<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span>
+    </a>
+    <a class="insight reveal" href="#insights" aria-label="Guide: Divorce, in order of what actually happens">
+      <span class="i-tag">Family</span>
+      <h3>Divorce, in order of what actually happens</h3>
+      <p>The timeline nobody hands you — filings, mediation, and where the money really goes.</p>
+      <span class="i-foot"><span>9 min read</span><span class="i-arrow" aria-hidden="true">Read<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span>
+    </a>
+    <a class="insight reveal" href="#insights" aria-label="Guide: Fired today? Read this tonight">
+      <span class="i-tag">Employment</span>
+      <h3>Fired today? Read this tonight.</h3>
+      <p>Severance, references, and the documents to save before your laptop gets wiped.</p>
+      <span class="i-foot"><span>5 min read</span><span class="i-arrow" aria-hidden="true">Read<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span>
+    </a>
+    <a class="insight reveal" href="#insights" aria-label="Guide: Wills vs. trusts, minus the jargon">
+      <span class="i-tag">Estates</span>
+      <h3>Wills vs. trusts, minus the jargon</h3>
+      <p>Which one you need, what each costs, and why “I’m too young for this” isn’t a plan.</p>
+      <span class="i-foot"><span>7 min read</span><span class="i-arrow" aria-hidden="true">Read<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span>
+    </a>
+    <a class="insight reveal" href="#insights" aria-label="Guide: What no-win-no-fee actually means">
+      <span class="i-tag">Fees</span>
+      <h3>What “no win, no fee” actually means</h3>
+      <p>The honest math of contingency fees — including the parts other firms put in footnotes.</p>
+      <span class="i-foot"><span>4 min read</span><span class="i-arrow" aria-hidden="true">Read<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span>
+    </a>
+    <a class="insight reveal" href="#insights" aria-label="Guide: How long will my case take?">
+      <span class="i-tag">Process</span>
+      <h3>How long will my case take?</h3>
+      <p>Real timelines by matter type, and the three things that slow cases down most.</p>
+      <span class="i-foot"><span>6 min read</span><span class="i-arrow" aria-hidden="true">Read<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="section cta" id="contact">
+  <div class="cta-inner">
+    <h2 class="reveal">Talk to someone <em>today.</em></h2>
+    <p class="reveal">Twenty minutes, free, no obligation. Worst case, you leave with good advice.</p>
+    <div class="cta-actions reveal">
+      <a class="btn btn-solid btn-lg" href="#intake">Request a free call</a>
+      <a class="cta-phone" href="tel:+15550142026">or dial (555) 014-2026</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#top" class="logo logo-footer">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M16 7l7 18h-3.4l-1.5-4h-8.2l-1.5 4H9L16 7z" fill="var(--ink)"/></svg>
+        AMICUS
+      </a>
+      <p>48 Harbor Row, Suite 300<br>Portland, OR 97209<br><a href="tel:+15550142026">(555) 014-2026</a></p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="#practice">Practice areas</a>
+      <a href="#results">Case results</a>
+      <a href="#people">Attorneys</a>
+      <a href="#insights">Guides</a>
+      <a href="#intake">Free consultation</a>
+    </nav>
+    <div class="footer-note">
+      <p><sup>†</sup> Contingency arrangements apply to eligible matters only. Prior results don’t guarantee similar outcomes.</p>
+      <p>AMICUS is a <strong>fictional law firm</strong> — a portfolio template. The attorneys are not real people (their portraits are AI-generated), the results are invented, and nothing on this page is legal advice.</p>
+      <p class="footer-copy">© <span id="year">2026</span> AMICUS LLP — Attorney advertising, if it were real.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
