@@ -468,6 +468,17 @@
     padding: 4px 10px;
   }
   .lock-badge svg { width: 12px; height: 12px; }
+  .wip-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    font-weight: 600; color: var(--accent);
+    border: 1px dashed rgba(182, 147, 95, 0.5); border-radius: 999px;
+    padding: 4px 10px;
+  }
+  .wip-badge i {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+  }
 
   /* Refusal feedback: a short lateral shake. Announced to the reader through
      the modal that opens with it, so this is reinforcement, not the only cue. */
@@ -702,7 +713,7 @@
          and no bundler. They deploy as static files and run straight from the folder.</p>
       <dl class="facts">
         <div><dt>Templates live</dt><dd id="aboutCount">7</dd></div>
-        <div><dt>Hand-written lines</dt><dd>18&nbsp;612</dd></div>
+        <div><dt>Hand-written lines</dt><dd>19&nbsp;925</dd></div>
         <div><dt>Build steps</dt><dd>0</dd></div>
         <div><dt>Frameworks</dt><dd>0</dd></div>
       </dl>
@@ -950,6 +961,24 @@
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
           </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/dental-care/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/dental-care-sm.webp" alt="The Brightside Dental homepage: a cream hero with an illustrated arched window, a happy tooth, and a booking button." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Healthcare / Dental</span>
+        <h3>BRIGHTSIDE</h3>
+        <p>A warm family dental practice &mdash; a comfort menu for nervous patients, honest pricing, FAQ, and a booking flow that calls you back.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+          <span class="wip-badge"><i></i>In progress &mdash; photos pending</span>
         </span>
       </div>
     </a>
