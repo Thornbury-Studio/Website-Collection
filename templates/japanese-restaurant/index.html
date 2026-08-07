@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>KIYO 清 — Order Online</title>
+<meta name="description" content="KIYO is a fictional Japanese kitchen built as a website template for portfolio showcase purposes — a mobile-first menu, one-tap ordering, and an express checkout that never leaves the page.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/japanese-restaurant/index.html">
+<meta name="theme-color" content="#FAF7F2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23FAF7F2'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23B23A32'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KIYO">
+<meta property="og:title" content="KIYO 清 — Order Online">
+<meta property="og:description" content="Ramen, donburi, izakaya sides and matcha — ordered in three taps. A fictional restaurant template for portfolio showcase purposes.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/japanese-restaurant/index.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/japanese-restaurant/img/hero.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KIYO 清 — Order Online">
+<meta name="twitter:description" content="Ramen, donburi, izakaya sides and matcha — ordered in three taps. A fictional restaurant template for portfolio showcase purposes.">
+<meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/japanese-restaurant/img/hero.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "KIYO",
+  "alternateName": "清",
+  "description": "A fictional Japanese kitchen created as a website template for portfolio showcase purposes.",
+  "url": "https://website-collection-zanezhijies-projects.vercel.app/templates/japanese-restaurant/index.html",
+  "image": "https://website-collection-zanezhijies-projects.vercel.app/templates/japanese-restaurant/img/hero.webp",
+  "servesCuisine": ["Japanese", "Ramen", "Izakaya"],
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "8 Lantern Row",
+    "addressLocality": "Portland",
+    "addressRegion": "OR",
+    "postalCode": "97209",
+    "addressCountry": "US"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "11:30", "closes": "21:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "11:30", "closes": "22:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "21:00" }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#menu">Skip to the menu</a>
+
+<!-- =============================== header ================================ -->
+<header class="hd" id="hd">
+  <a class="brand" href="#top" aria-label="KIYO, back to top">
+    <span class="brand-seal" aria-hidden="true">清</span>
+    <span class="brand-name">KIYO<i>Japanese Kitchen</i></span>
+  </a>
+  <p class="hd-status"><span class="dot" aria-hidden="true"></span>Open until 21:30</p>
+  <button class="hd-cart" id="hdCart" aria-label="Open cart">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1.2 12.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
+    <span class="hd-cart-n" id="hdCartN" hidden>0</span>
+  </button>
+</header>
+
+<main id="top">
+
+<!-- ================================ hero ================================= -->
+<section class="hero">
+  <div class="hero-media" aria-hidden="true">
+    <img src="img/hero.webp" alt="" width="1920" height="1080" fetchpriority="high" decoding="async">
+    <div class="hero-scrim"></div>
+  </div>
+  <div class="hero-body">
+    <p class="hero-kicker">Ramen &middot; Donburi &middot; Izakaya &middot; Matcha</p>
+    <h1>Dinner, settled<br>in three taps.</h1>
+    <p class="hero-sub">Order ahead for pickup in about 15 minutes, or delivery across the neighbourhood. No account, no app.</p>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#menu">Start an order</a>
+      <p class="hero-note" id="heroEta"><b>~15 min</b> pickup &middot; <b>$0</b> fees today</p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== category tabs ============================= -->
+<nav class="tabs" id="tabs" aria-label="Menu categories">
+  <a href="#c-mains" class="tab is-active" data-cat="mains">Mains</a>
+  <a href="#c-sides" class="tab" data-cat="sides">Sides</a>
+  <a href="#c-desserts" class="tab" data-cat="desserts">Desserts</a>
+  <a href="#c-drinks" class="tab" data-cat="drinks">Drinks</a>
+  <span class="tab-ink" id="tabInk" aria-hidden="true"></span>
+</nav>
+
+<!-- ============================ dietary filters ========================== -->
+<div class="filters" id="filters" role="group" aria-label="Dietary filters">
+  <button class="chip is-on" data-filter="all" aria-pressed="true">All</button>
+  <button class="chip" data-filter="vegetarian" aria-pressed="false"><i class="tag-i t-veg" aria-hidden="true"></i>Vegetarian</button>
+  <button class="chip" data-filter="vegan" aria-pressed="false"><i class="tag-i t-vegan" aria-hidden="true"></i>Vegan</button>
+  <button class="chip" data-filter="gluten-free" aria-pressed="false"><i class="tag-i t-gf" aria-hidden="true"></i>Gluten-free</button>
+  <button class="chip" data-filter="spicy" aria-pressed="false"><i class="tag-i t-spicy" aria-hidden="true"></i>Spicy</button>
+  <p class="filter-live" id="filterLive" role="status" aria-live="polite"></p>
+</div>
+
+<!-- ================================ menu ================================= -->
+<div class="menu" id="menu">
+  <section class="cat" id="c-mains" aria-labelledby="h-mains">
+    <h2 id="h-mains">Mains <span lang="ja">主菜</span></h2>
+    <div class="grid" data-cat="mains"></div>
+  </section>
+  <section class="cat" id="c-sides" aria-labelledby="h-sides">
+    <h2 id="h-sides">Sides <span lang="ja">小皿</span></h2>
+    <div class="grid" data-cat="sides"></div>
+  </section>
+  <section class="cat" id="c-desserts" aria-labelledby="h-desserts">
+    <h2 id="h-desserts">Desserts <span lang="ja">甘味</span></h2>
+    <div class="grid" data-cat="desserts"></div>
+  </section>
+  <section class="cat" id="c-drinks" aria-labelledby="h-drinks">
+    <h2 id="h-drinks">Drinks <span lang="ja">飲物</span></h2>
+    <div class="grid" data-cat="drinks"></div>
+  </section>
+
+  <noscript><p class="noscript">The interactive menu needs JavaScript. This is a demonstration template — nothing can actually be ordered.</p></noscript>
+</div>
+
+<!-- =============================== footer ================================ -->
+<footer class="ft">
+  <p class="ft-brand"><span aria-hidden="true">清</span> KIYO</p>
+  <p class="ft-copy">A fictional restaurant and an original design, created as a website template for portfolio
+  showcase purposes. The ordering flow is a working demonstration: it validates, totals and confirms,
+  but sends nothing, stores nothing beyond your browser, and charges no one.
+  Photography is licensed Adobe Stock — see IMAGE-CREDITS.md.</p>
+  <a class="ft-back" href="../../index.html">&larr; Back to the gallery</a>
+</footer>
+
+</main>
+
+<!-- ========================= floating cart bar =========================== -->
+<button class="cartbar" id="cartbar" hidden aria-label="Review order">
+  <span class="cartbar-n" id="cartbarN">1</span>
+  <span class="cartbar-label">Review order</span>
+  <span class="cartbar-total" id="cartbarTotal">$0.00</span>
+</button>
+
+<!-- ========================== modifier drawer ============================ -->
+<div class="veil" id="modVeil" hidden></div>
+<div class="drawer" id="modDrawer" role="dialog" aria-modal="true" aria-labelledby="modTitle" hidden>
+  <div class="drawer-grip" aria-hidden="true"></div>
+  <div class="drawer-scroll" id="modScroll">
+    <!-- src is swapped by JS before the drawer is ever unhidden; the data URI
+         keeps it a valid image even in that unopened state -->
+    <div class="mod-hero"><img id="modImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Crect width='640' height='640' fill='%23EFEAE2'/%3E%3C/svg%3E" alt="" width="640" height="640"></div>
+    <div class="mod-head">
+      <h3 id="modTitle">Item</h3>
+      <p class="mod-jp" id="modJp" lang="ja"></p>
+      <p class="mod-desc" id="modDesc"></p>
+    </div>
+    <form id="modForm"></form>
+  </div>
+  <div class="drawer-foot">
+    <div class="qty" aria-label="Quantity">
+      <button type="button" id="qtyMinus" aria-label="Decrease quantity">&minus;</button>
+      <output id="qtyOut" aria-live="polite">1</output>
+      <button type="button" id="qtyPlus" aria-label="Increase quantity">+</button>
+    </div>
+    <button class="btn btn-solid btn-grow" id="modAdd">Add &middot; <span id="modPrice">$0.00</span></button>
+  </div>
+  <button class="drawer-close" id="modClose" aria-label="Close">&times;</button>
+</div>
+
+<!-- ============================ cart drawer ============================== -->
+<div class="veil" id="cartVeil" hidden></div>
+<div class="drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+  <div class="drawer-grip" aria-hidden="true"></div>
+  <div class="drawer-scroll">
+    <div class="cart-head">
+      <h3 id="cartTitle">Your order</h3>
+      <button class="cart-clear" id="cartClear">Clear all</button>
+    </div>
+    <ul class="cart-list" id="cartList"></ul>
+    <p class="cart-empty" id="cartEmpty" hidden>Your order is empty. The gyoza are worth a look.</p>
+    <dl class="cart-sums" id="cartSums">
+      <div><dt>Subtotal</dt><dd id="sumSub">$0.00</dd></div>
+      <div><dt>Tax (8%)</dt><dd id="sumTax">$0.00</dd></div>
+      <div class="sum-total"><dt>Total</dt><dd id="sumTotal">$0.00</dd></div>
+    </dl>
+  </div>
+  <div class="drawer-foot">
+    <button class="btn btn-solid btn-grow" id="toCheckout">Checkout</button>
+  </div>
+  <button class="drawer-close" id="cartClose" aria-label="Close">&times;</button>
+</div>
+
+<!-- ============================== checkout =============================== -->
+<div class="sheet" id="checkout" role="dialog" aria-modal="true" aria-labelledby="coTitle" hidden>
+  <header class="sheet-head">
+    <button class="sheet-back" id="coBack" aria-label="Back to cart">&larr;</button>
+    <h3 id="coTitle">Checkout</h3>
+    <p class="sheet-demo">Demo &middot; nothing is charged</p>
+  </header>
+
+  <form class="sheet-body" id="coForm" novalidate>
+
+    <fieldset class="co-block">
+      <legend>How do you want it?</legend>
+      <div class="seg" role="radiogroup" aria-label="Fulfillment">
+        <label><input type="radio" name="fulfil" value="asap" checked><span><b>Pickup</b><i>ASAP &middot; ~15 min</i></span></label>
+        <label><input type="radio" name="fulfil" value="later"><span><b>Pickup</b><i>Schedule</i></span></label>
+        <label><input type="radio" name="fulfil" value="delivery"><span><b>Delivery</b><i>~35 min &middot; $3.90</i></span></label>
+      </div>
+
+      <div class="co-when" id="coWhen" hidden>
+        <label class="fld"><span>Pickup time</span>
+          <select id="coTime" name="time"></select>
+        </label>
+      </div>
+
+      <div class="co-addr" id="coAddr" hidden>
+        <label class="fld"><span>Street address</span>
+          <input type="text" id="adStreet" name="street" autocomplete="street-address" placeholder="e.g. 214 Alder Street">
+          <em class="err" id="eStreet"></em>
+        </label>
+        <div class="fld-row">
+          <label class="fld"><span>Apt / unit <small>optional</small></span>
+            <input type="text" id="adUnit" name="unit" autocomplete="address-line2">
+          </label>
+          <label class="fld"><span>ZIP</span>
+            <input type="text" id="adZip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="97209">
+            <em class="err" id="eZip"></em>
+          </label>
+        </div>
+        <p class="addr-check" id="addrCheck" role="status" aria-live="polite"></p>
+      </div>
+    </fieldset>
+
+    <fieldset class="co-block">
+      <legend>Who's it for?</legend>
+      <label class="fld"><span>Name</span>
+        <input type="text" id="coName" name="name" autocomplete="name">
+        <em class="err" id="eName"></em>
+      </label>
+      <div class="fld-row">
+        <label class="fld"><span>Mobile</span>
+          <input type="tel" id="coPhone" name="phone" inputmode="tel" autocomplete="tel" placeholder="(503) 555-0100">
+          <em class="err" id="ePhone"></em>
+        </label>
+        <label class="fld"><span>Email <small>for the receipt</small></span>
+          <input type="email" id="coEmail" name="email" autocomplete="email">
+          <em class="err" id="eEmail"></em>
+        </label>
+      </div>
+      <label class="fld"><span>Order note <small>optional</small></span>
+        <input type="text" id="coNote" name="note" maxlength="120" placeholder="Allergies, no cutlery, ring the bell&hellip;">
+      </label>
+    </fieldset>
+
+    <fieldset class="co-block">
+      <legend>Payment</legend>
+      <div class="paybtns">
+        <button type="button" class="paybtn pay-apple" id="payApple" aria-pressed="false">Apple&nbsp;Pay</button>
+        <button type="button" class="paybtn pay-google" id="payGoogle" aria-pressed="false"><b>G</b>&nbsp;Pay</button>
+      </div>
+      <p class="pay-or"><span>or pay by card</span></p>
+      <div class="cardbox" id="cardBox">
+        <label class="fld"><span>Card number</span>
+          <input type="text" id="ccNum" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242" maxlength="19">
+          <em class="err" id="eCcNum"></em>
+        </label>
+        <div class="fld-row">
+          <label class="fld"><span>Expiry</span>
+            <input type="text" id="ccExp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM / YY" maxlength="7">
+            <em class="err" id="eCcExp"></em>
+          </label>
+          <label class="fld"><span>CVC</span>
+            <input type="text" id="ccCvc" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4">
+            <em class="err" id="eCcCvc"></em>
+          </label>
+        </div>
+      </div>
+      <p class="pay-note" id="payNote">Demonstration checkout — card fields validate their format and nothing more. No number you type is sent, stored or charged.</p>
+    </fieldset>
+
+    <div class="co-summary" id="coSummary"></div>
+
+    <button class="btn btn-solid btn-big" id="coPlace" type="submit">Place order &middot; <span id="coTotal">$0.00</span></button>
+  </form>
+</div>
+
+<!-- ============================ confirmation ============================= -->
+<div class="sheet sheet-done" id="doneSheet" role="dialog" aria-modal="true" aria-labelledby="doneTitle" hidden>
+  <div class="done-body">
+    <div class="done-seal" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M20 33l8.5 8.5L44 25" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="done-tick"/></svg></div>
+    <h3 id="doneTitle">Order in.</h3>
+    <p class="done-no">Ticket <b id="doneNo">K-000</b></p>
+    <p class="done-line" id="doneLine">We&rsquo;ll text you when it&rsquo;s ready.</p>
+    <p class="done-demo">This was a demonstration — no food is coming, and nothing was charged. But a real checkout would feel exactly like this.</p>
+    <button class="btn btn-solid" id="doneClose">Back to the menu</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="js/menu-data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
