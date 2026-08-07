@@ -1,7 +1,7 @@
 /* ==========================================================================
    LONG TABLE — all-day buffet
-   The quiet one: warm white, ink, one beet-red accent. Instrument Serif for
-   display, Instrument Sans for everything else. No overlays, no drawers, no
+   The quiet one: warm white, ink, one beet-red accent. Newsreader for
+   display, Hanken Grotesk for everything else. No overlays, no drawers, no
    tricks — the page is a single readable column with a seven-day rotation.
    ========================================================================== */
 
@@ -24,13 +24,13 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Instrument Sans', 'Segoe UI', sans-serif;
+  font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
   font-size: 17px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2 { font-family: 'Instrument Serif', serif; font-weight: 400; line-height: 1.08; }
+h1, h2 { font-family: 'Newsreader', serif; font-weight: 400; line-height: 1.08; }
 h1 em, h2 em { font-style: italic; color: var(--beet); }
 
 img { display: block; max-width: 100%; height: auto; }
@@ -55,7 +55,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 40px); }
 }
 
 .mark {
-  font-family: 'Instrument Serif', serif; font-size: 1.35rem; letter-spacing: .06em;
+  font-family: 'Newsreader', serif; font-size: 1.35rem; letter-spacing: .06em;
   color: var(--ink); text-decoration: none; white-space: nowrap;
 }
 
@@ -88,7 +88,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 40px); }
   flex: 1 1 180px; background: var(--card); padding: 18px 22px;
   display: grid; gap: 2px;
 }
-.price-strip strong { font-family: 'Instrument Serif', serif; font-size: 1.9rem; font-weight: 400; }
+.price-strip strong { font-family: 'Newsreader', serif; font-size: 1.9rem; font-weight: 400; }
 .price-strip span { color: var(--ink-soft); font-size: .88rem; font-weight: 600; }
 
 .kids-note { color: var(--ink-soft); font-size: .92rem; margin-bottom: 34px; }
@@ -149,7 +149,7 @@ section h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 8px; padding-to
   font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
   color: var(--ink-soft); font-weight: 700; margin-bottom: 8px;
 }
-.line-card .big { font-family: 'Instrument Serif', serif; font-size: 1.45rem; line-height: 1.25; }
+.line-card .big { font-family: 'Newsreader', serif; font-size: 1.45rem; line-height: 1.25; }
 .line-card .theme { color: var(--beet); font-style: italic; }
 .line-card ul { list-style: none; margin-top: 8px; }
 .line-card li { padding: 3px 0; color: var(--ink-soft); }
@@ -165,7 +165,7 @@ section h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 8px; padding-to
 }
 .station img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: auto; }
 .station-body { padding: 20px 22px; }
-.station-body h3 { font-family: 'Instrument Serif', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 6px; }
+.station-body h3 { font-family: 'Newsreader', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 6px; }
 .station-body .blurb { color: var(--ink-soft); font-size: .93rem; margin-bottom: 12px; }
 .station-body ul { list-style: none; font-size: .9rem; }
 .station-body li { padding: 2.5px 0; border-top: 1px dashed var(--line); color: var(--ink-soft); }
@@ -181,7 +181,7 @@ section h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 8px; padding-to
   overflow: hidden; border-spacing: 0;
 }
 .hours caption {
-  text-align: left; font-family: 'Instrument Serif', serif; font-size: 1.25rem;
+  text-align: left; font-family: 'Newsreader', serif; font-size: 1.25rem;
   padding: 14px 18px 6px;
   background: var(--card); border: 1px solid var(--line); border-bottom: none;
   border-radius: var(--radius) var(--radius) 0 0;
@@ -196,7 +196,7 @@ section h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 8px; padding-to
 /* ---------- Visit ---------- */
 
 .visit-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
-.visit-cols h3 { font-family: 'Instrument Serif', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 8px; }
+.visit-cols h3 { font-family: 'Newsreader', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 8px; }
 .visit-cols p { color: var(--ink-soft); font-size: .95rem; }
 .visit-small { font-size: .86rem !important; margin-top: 6px; }
 
@@ -208,7 +208,7 @@ section h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 8px; padding-to
   padding: 40px clamp(18px, 4vw, 40px) 50px;
   text-align: center; display: grid; gap: 8px; color: var(--ink-soft);
 }
-.foot-mark { font-family: 'Instrument Serif', serif; font-size: 1.3rem; letter-spacing: .06em; color: var(--ink); }
+.foot-mark { font-family: 'Newsreader', serif; font-size: 1.3rem; letter-spacing: .06em; color: var(--ink); }
 .foot-fine { font-size: .85rem; max-width: 64ch; margin: 6px auto 0; }
 
 /* ---------- Responsive ---------- */
