@@ -76,6 +76,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/indian-restaurant/index.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/watch-atelier/index.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

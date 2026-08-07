@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>KESAR — Curry House &amp; Tandoor | Order for the Table</title>
+  <meta name="description" content="KESAR is a fictional London curry house built as an ordering demo: a 30-dish menu book, set feasts for the table, spice levels per dish, and a full demo checkout in pounds.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/indian-restaurant/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="KESAR — Curry House &amp; Tandoor">
+  <meta property="og:description" content="Order for the table: set dawat feasts, thirty dishes, four heats. A demo ordering site — nothing is charged.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/indian-restaurant/img/hero.webp">
+  <meta name="theme-color" content="#F7EFDF">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="skip" href="#menu">Skip to the menu</a>
+
+  <!-- ===== Header ===== -->
+  <header class="top" id="top">
+    <a class="mark" href="#top" aria-label="KESAR home">
+      <span class="mark-en">KESAR</span>
+      <span class="mark-hi" lang="hi">केसर</span>
+    </a>
+    <nav class="top-nav" aria-label="Page">
+      <a href="#dawat">Feasts</a>
+      <a href="#menu">Menu</a>
+      <a href="#order">Your order</a>
+    </nav>
+    <a class="top-total" href="#order" id="topTotal" aria-label="Go to your order">£0.00</a>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="hero-frame">
+      <img src="img/hero.webp" alt="A mixed grill board: seekh kebabs, chicken tikka and lamb over charred onions, naan and raita alongside." width="1920" height="1080" fetchpriority="high">
+    </div>
+    <div class="hero-copy">
+      <p class="hero-kicker" lang="hi">दावत — <span lang="en">an invitation to feast</span></p>
+      <h1>The good table<br>is a <em>full</em> table.</h1>
+      <p class="hero-sub">Thirty dishes from the tandoor and the pot, cooked the long way.
+        Order for the whole table with one tap, or build your own spread dish by dish.</p>
+      <div class="hero-cta">
+        <a class="btn btn-solid" href="#dawat">Set the table</a>
+        <a class="btn btn-line" href="#menu">Browse the menu</a>
+      </div>
+      <p class="hero-hours">Open daily 12:00–22:30 · 44 Ledger Row, London E1 · Collection &amp; local delivery</p>
+    </div>
+  </section>
+
+  <!-- ===== Dawat (feasts) ===== -->
+  <section class="dawat" id="dawat" aria-labelledby="dawatTitle">
+    <div class="chapter-head reveal">
+      <span class="rule" aria-hidden="true"></span>
+      <h2 id="dawatTitle">The Dawat</h2>
+      <p class="chapter-hi" lang="hi">दावत</p>
+      <span class="rule" aria-hidden="true"></span>
+    </div>
+    <p class="chapter-note reveal">A dawat is a feast you throw for people you like.
+      Pick the size of your table and we compose it — starters, curries, biryani, breads and sweets,
+      balanced so nothing runs out first. One tap adds the lot.</p>
+
+    <div class="dawat-grid">
+      <figure class="dawat-photo reveal">
+        <img src="img/dawat.webp" alt="A table crowded with steel katoris: curries, dal, rice, breads and sweets making up a full thali." width="1600" height="1000" loading="lazy">
+        <figcaption>Everything at once — the only correct way.</figcaption>
+      </figure>
+      <div class="dawat-cards" id="dawatCards"><!-- feast cards render here --></div>
+    </div>
+  </section>
+
+  <!-- ===== Menu book ===== -->
+  <section class="menu" id="menu" aria-labelledby="menuTitle">
+    <div class="chapter-head reveal">
+      <span class="rule" aria-hidden="true"></span>
+      <h2 id="menuTitle">The Menu</h2>
+      <p class="chapter-hi" lang="hi">मेन्यू</p>
+      <span class="rule" aria-hidden="true"></span>
+    </div>
+
+    <nav class="toc reveal" id="toc" aria-label="Menu chapters"><!-- chapter links render here --></nav>
+
+    <div class="filters reveal" role="group" aria-label="Filter dishes">
+      <button class="chip is-on" data-filter="all" type="button">Everything</button>
+      <button class="chip" data-filter="veg" type="button"><span class="mark-veg" aria-hidden="true"></span>Vegetarian</button>
+      <button class="chip" data-filter="nonveg" type="button"><span class="mark-nonveg" aria-hidden="true"></span>Non-veg</button>
+      <button class="chip" data-filter="noheat" type="button">No heat</button>
+    </div>
+
+    <div id="chapters"><!-- chapters + dishes render here --></div>
+  </section>
+
+  <!-- ===== Order ===== -->
+  <section class="order" id="order" aria-labelledby="orderTitle">
+    <div class="chapter-head reveal">
+      <span class="rule" aria-hidden="true"></span>
+      <h2 id="orderTitle">Your Order</h2>
+      <p class="chapter-hi" lang="hi">आपका ऑर्डर</p>
+      <span class="rule" aria-hidden="true"></span>
+    </div>
+
+    <div class="order-grid">
+      <div class="order-list-wrap">
+        <ul class="order-list" id="orderList"><!-- lines render here --></ul>
+        <p class="order-empty" id="orderEmpty">Nothing yet. The menu above is where the trouble starts.</p>
+        <dl class="order-sums" id="orderSums" hidden>
+          <div><dt>Subtotal</dt><dd id="sumSub">£0.00</dd></div>
+          <div id="rowDeliv" hidden><dt>Delivery</dt><dd id="sumDeliv">£2.50</dd></div>
+          <div class="sum-total"><dt>Total</dt><dd id="sumTotal">£0.00</dd></div>
+        </dl>
+      </div>
+
+      <form class="order-form" id="orderForm" novalidate hidden>
+        <fieldset class="fulfil">
+          <legend>How are you getting it?</legend>
+          <div class="fulfil-row" role="radiogroup" aria-label="Fulfilment">
+            <button type="button" class="fulfil-btn is-on" id="fulfilPickup" aria-pressed="true">Collection<small>Ready in ~25 min</small></button>
+            <button type="button" class="fulfil-btn" id="fulfilDeliv" aria-pressed="false">Delivery<small>E1 · E2 · E3 only</small></button>
+          </div>
+          <div class="field" id="postcodeField" hidden>
+            <label for="postcode">Delivery postcode</label>
+            <input id="postcode" name="postcode" type="text" autocomplete="postal-code" placeholder="E1 6AN">
+            <p class="err" id="postcodeErr" hidden>We only deliver to E1, E2 and E3 postcodes.</p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Who's it for?</legend>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name">
+            <p class="err" id="nameErr" hidden>We need a name to call out.</p>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="07&hairsp;— UK mobile">
+              <p class="err" id="phoneErr" hidden>That doesn't look like a UK number.</p>
+            </div>
+            <div class="field">
+              <label for="email">Email <span class="opt">(for the receipt)</span></label>
+              <input id="email" name="email" type="email" autocomplete="email">
+              <p class="err" id="emailErr" hidden>That email doesn't look right.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Payment</legend>
+          <div class="pay-row" role="radiogroup" aria-label="Payment method">
+            <button type="button" class="pay-btn is-on" data-pay="card" aria-pressed="true">Card</button>
+            <button type="button" class="pay-btn" data-pay="applepay" aria-pressed="false">Apple&nbsp;Pay</button>
+            <button type="button" class="pay-btn" data-pay="googlepay" aria-pressed="false">Google&nbsp;Pay</button>
+          </div>
+          <div id="cardFields">
+            <div class="field">
+              <label for="cardNum">Card number</label>
+              <input id="cardNum" name="cardNum" inputmode="numeric" autocomplete="cc-number" placeholder="4444 4444 4444 4444">
+              <p class="err" id="cardNumErr" hidden>Card numbers have 16 digits.</p>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="cardExp">Expiry</label>
+                <input id="cardExp" name="cardExp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY">
+                <p class="err" id="cardExpErr" hidden>Use MM/YY, in the future.</p>
+              </div>
+              <div class="field">
+                <label for="cardCvc">CVC</label>
+                <input id="cardCvc" name="cardCvc" inputmode="numeric" autocomplete="cc-csc" placeholder="123">
+                <p class="err" id="cardCvcErr" hidden>Three digits on the back.</p>
+              </div>
+            </div>
+          </div>
+          <p class="wallet-note" id="walletNote" hidden>Wallet payment is simulated in this demo — no sheet will open.</p>
+        </fieldset>
+
+        <button class="btn btn-solid btn-place" type="submit" id="placeBtn">Place order — <span id="placeTotal">£0.00</span></button>
+        <p class="demo-note">This is a portfolio demonstration. The order is validated in your browser,
+          sent nowhere, and <strong>nothing is ever charged</strong>.</p>
+      </form>
+    </div>
+
+    <div class="done" id="done" hidden>
+      <div class="done-card">
+        <p class="done-mark" aria-hidden="true">✳</p>
+        <h3 id="doneHead">Shukriya — order noted.</h3>
+        <p id="doneBody">If KESAR were real, the tandoor would already be lit.
+          This demo stores your order only in this browser and charges nothing.</p>
+        <button class="btn btn-line" type="button" id="againBtn">Start a fresh order</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Sticky order bar ===== -->
+  <div class="bar" id="bar" hidden>
+    <a href="#order" class="bar-inner" aria-label="Review your order">
+      <span class="bar-count" id="barCount">0</span>
+      <span class="bar-label">View your order</span>
+      <span class="bar-total" id="barTotal">£0.00</span>
+    </a>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="foot">
+    <p class="foot-mark">KESAR <span lang="hi">केसर</span></p>
+    <p>44 Ledger Row, Whitechapel, London E1 · Daily 12:00–22:30 · 020 7946 0044</p>
+    <p class="foot-fine">KESAR is a fictional restaurant built as a portfolio template.
+      The dishes are real recipes, the photographs are licensed Adobe Stock, and the checkout is a
+      demonstration — it validates, then goes nowhere. Part of the
+      <a href="../../index.html">Website Collection</a>.</p>
+  </footer>
+
+  <script src="js/menu-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
