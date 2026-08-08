@@ -89,7 +89,7 @@
         brief.focus(); return;
       }
       out.dataset.state = 'ok';
-      out.textContent = 'Demo coupon — no mailbox wired up yet. Copy your note and email it.';
+    out.textContent = 'Thanks — please contact us directly to continue.';
     });
   }
 

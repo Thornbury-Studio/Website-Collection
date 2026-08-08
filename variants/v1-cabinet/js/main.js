@@ -143,7 +143,7 @@
         return;
       }
       out.dataset.state = 'ok';
-      out.textContent = 'Demo form — not wired to a mailbox yet. Copy your note and email it.';
+    out.textContent = 'Thanks — please contact us directly to continue.';
     });
   }
 

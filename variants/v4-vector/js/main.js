@@ -15,7 +15,7 @@
       href: '../../templates/restaurant-food/index.html',       ink: '#ff9a3c' },
     { name: 'FORGE',     kind: 'Strength & conditioning',
       href: '../../templates/gym-service/index.html',           ink: '#b6ff3c' },
-    { name: 'TRIGGERED', kind: 'Active game centre — unofficial concept',
+    { name: 'TRIGGERED', kind: 'Active game centre',
       href: '../../templates/entertainment-triggered/index.html', ink: '#ff3c6e' },
     { name: 'MERIDIAN',  kind: 'Consulting firm, four pages',
       href: '../../templates/business-corporate/index.html',    ink: '#35f0ff' },
@@ -289,7 +289,7 @@
         brief.focus(); return;
       }
       out.dataset.state = 'ok';
-      out.textContent = 'Demo form, no receiver wired up yet. Copy your note and email it over.';
+    out.textContent = 'Thanks — please contact us directly to continue.';
     });
   })();
 

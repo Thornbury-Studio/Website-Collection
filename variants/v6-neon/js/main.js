@@ -188,7 +188,7 @@
         brief.focus(); return;
       }
       out.dataset.state = 'ok';
-      out.textContent = 'Demo form, no mailbox wired up yet — email zanejiepersonal@gmail.com directly.';
+    out.textContent = 'Thanks — please contact us directly to continue.';
     });
   }
 
