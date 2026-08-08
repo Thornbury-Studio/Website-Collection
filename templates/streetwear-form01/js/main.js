@@ -52,6 +52,58 @@
     grid.appendChild(b);
   });
 
+  /* ---------- lockers ---------- */
+
+  var lockerGrid = document.getElementById('lockerGrid');
+  if (lockerGrid && window.F01_LOCKERS) {
+    window.F01_LOCKERS.forEach(function (lk) {
+      var total = lk.pieces.reduce(function (s, id) {
+        return s + P.find(function (p) { return p.id === id; }).price;
+      }, 0);
+
+      var card = document.createElement('article');
+      card.className = 'locker';
+
+      var img = document.createElement('img');
+      img.src = lk.img;
+      img.alt = lk.alt;
+      img.width = 900; img.height = 1200;
+      img.loading = 'lazy';
+      card.appendChild(img);
+
+      var bar = document.createElement('div');
+      bar.className = 'locker-bar';
+      bar.innerHTML = '<span class="locker-code">' + esc(lk.code) + '</span>' +
+        '<span class="locker-theme">' + esc(lk.theme) + '</span>';
+      card.appendChild(bar);
+
+      var ul = document.createElement('ul');
+      ul.className = 'locker-pieces';
+      lk.pieces.forEach(function (id) {
+        var pi = P.findIndex(function (p) { return p.id === id; });
+        var p = P[pi];
+        var li = document.createElement('li');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'locker-piece';
+        btn.innerHTML = '<span class="lp-code">' + esc(p.code) + '</span>' +
+          '<span>' + esc(p.name) + '</span>' +
+          '<span class="lp-price">' + usd(p.price) + '</span>';
+        btn.addEventListener('click', function () { openTake(pi); });
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+      card.appendChild(ul);
+
+      var tot = document.createElement('p');
+      tot.className = 'locker-total';
+      tot.innerHTML = '<span>THE WHOLE LOCKER</span><span>' + usd(total) + '</span>';
+      card.appendChild(tot);
+
+      lockerGrid.appendChild(card);
+    });
+  }
+
   /* ---------- takeover ---------- */
 
   var take = document.getElementById('take');

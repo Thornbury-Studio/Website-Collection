@@ -26,6 +26,17 @@ The sock runner was generated twice: the first attempt came out with side-stripe
 close to a real sportswear brand's design language, so it was regenerated with an explicitly
 smooth, unmarked upper. Only the clean version ships.
 
+The LOCKERS section adds two more models — none of the three people depicted are real:
+
+| File | Model | Role |
+|---|---|---|
+| img/locker01.webp | crop of the campaign master | LOCKER/01 — The Commute |
+| img/locker02.webp | gemini-3-pro-image (2K), refs: master + shell + runner | LOCKER/02 — The Downpour |
+| img/locker03.webp | gemini-3-pro-image (2K), refs: master + vest + tote | LOCKER/03 — The Load-Out |
+
+Each locker shot was generated with the campaign master **and the relevant product images**
+attached as references, so the new models wear the literal pieces sold on the page.
+
 PNG output was cover-cropped and re-encoded to WebP with Pillow (hero 1500×2000 q84, products
 1100×1100 q82).
 
