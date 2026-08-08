@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>MORROW &amp; FINCH — Heritage Menswear Since 1934</title>
+  <meta name="description" content="Morrow &amp; Finch is a fictional heritage menswear house built as a portfolio template: a working shop — catalogue, product pages, order book and demo checkout — dressed as a 1930s catalogue. All photography is AI-generated.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/vintage-menswear/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MORROW &amp; FINCH — Made for Another Era">
+  <meta property="og:description" content="Ten garments, five departments, one working order book. A 1930s catalogue that functions as a modern shop.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/vintage-menswear/img/hero.webp">
+  <meta name="theme-color" content="#F1E9D6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="skip" href="#catalogue">Skip to the catalogue</a>
+
+  <header class="top" id="top">
+    <a class="mark" href="index.html">
+      <span class="mark-name">Morrow &amp; Finch</span>
+      <span class="mark-est">Gentlemen's Outfitters · Est. 1934</span>
+    </a>
+    <nav class="top-nav" aria-label="Page">
+      <a href="#catalogue">Catalogue</a>
+      <a href="#shop">The Shop</a>
+    </nav>
+    <button class="book-btn" id="bookBtn" type="button" aria-haspopup="dialog">
+      Order Book <span class="book-count" id="bookCount" aria-label="items in order book">0</span>
+    </button>
+  </header>
+
+  <!-- ===== Cover ===== -->
+  <section class="cover">
+    <img class="cover-photo" src="img/hero.webp" alt="A man in a long camel overcoat and three-piece suit stands on a foggy 1930s London street, gloves in hand." width="1920" height="1080" fetchpriority="high">
+    <div class="cover-scrim" aria-hidden="true"></div>
+    <div class="cover-copy">
+      <p class="cover-kicker">Autumn &amp; Winter Catalogue · No. 91</p>
+      <h1>Made for<br>Another Era.</h1>
+      <p class="cover-sub">Cloth cut to last decades, photographed the year it was made.
+        Ten garments, five departments, posted anywhere in the Kingdom.</p>
+      <a class="btn-cover" href="#catalogue">Open the catalogue</a>
+    </div>
+  </section>
+
+  <!-- ===== Contents ===== -->
+  <nav class="contents" id="contents" aria-label="Catalogue departments">
+    <h2 class="contents-title">Contents</h2>
+    <ol class="contents-list" id="contentsList"><!-- rendered --></ol>
+  </nav>
+
+  <!-- ===== Catalogue ===== -->
+  <main class="catalogue" id="catalogue">
+    <div id="departments"><!-- departments + plates render here --></div>
+  </main>
+
+  <!-- ===== The shop ===== -->
+  <section class="shop" id="shop" aria-labelledby="shopTitle">
+    <div class="shop-rule" aria-hidden="true"></div>
+    <h2 id="shopTitle">The Shop</h2>
+    <div class="shop-cols">
+      <p>Morrow &amp; Finch has stood at <strong>14 Ledbury Row, London</strong> since 1934 —
+        first as a tailor's, then as an outfitter's, always under the same name over the door.
+        Everything in this catalogue is cut, sewn or knitted in Britain.</p>
+      <p>Orders are taken through the <em>order book</em>; collection from the shop is free and
+        the post is four shillings and sixpence — which is to say £4.50, we have modernised
+        <em>some</em> things. Alterations are included in the price of any tailoring.</p>
+    </div>
+  </section>
+
+  <!-- ===== Order book (cart) ===== -->
+  <div class="book-veil" id="bookVeil" hidden></div>
+  <aside class="book" id="book" role="dialog" aria-modal="true" aria-labelledby="bookTitle" hidden>
+    <header class="book-head">
+      <h2 id="bookTitle">Order Book</h2>
+      <button class="book-close" id="bookClose" type="button" aria-label="Close the order book">Close ✕</button>
+    </header>
+
+    <ul class="book-lines" id="bookLines"><!-- rendered --></ul>
+    <p class="book-empty" id="bookEmpty">Nothing entered yet. The catalogue awaits your pencil.</p>
+
+    <div class="book-tail" id="bookTail" hidden>
+      <dl class="book-sums">
+        <div><dt>Goods</dt><dd id="sumGoods">£0.00</dd></div>
+        <div id="rowPost" hidden><dt>Post &amp; packing</dt><dd>£4.50</dd></div>
+        <div class="sum-total"><dt>Total</dt><dd id="sumTotal">£0.00</dd></div>
+      </dl>
+
+      <form id="orderForm" novalidate>
+        <div class="fulfil-row" role="radiogroup" aria-label="Delivery">
+          <button type="button" class="fulfil-btn is-on" id="fulCollect" aria-pressed="true">Collect from the shop</button>
+          <button type="button" class="fulfil-btn" id="fulPost" aria-pressed="false">By post — £4.50</button>
+        </div>
+        <div class="field">
+          <label for="obName">Name</label>
+          <input id="obName" type="text" autocomplete="name">
+          <p class="err" id="obNameErr" hidden>The book needs a name.</p>
+        </div>
+        <div class="field">
+          <label for="obPhone">Telephone</label>
+          <input id="obPhone" type="tel" autocomplete="tel" placeholder="A UK number">
+          <p class="err" id="obPhoneErr" hidden>That number doesn't look right.</p>
+        </div>
+        <div class="field" id="addrField" hidden>
+          <label for="obAddr">Postal address</label>
+          <input id="obAddr" type="text" autocomplete="street-address" placeholder="House, street, town, postcode">
+          <p class="err" id="obAddrErr" hidden>The postman will need more than that.</p>
+        </div>
+        <div class="field">
+          <label for="obCard">Card number</label>
+          <input id="obCard" inputmode="numeric" autocomplete="cc-number" placeholder="4444 4444 4444 4444">
+          <p class="err" id="obCardErr" hidden>Card numbers have sixteen digits.</p>
+        </div>
+        <button class="place-btn" type="submit">Enter the order — <span id="placeTotal">£0.00</span></button>
+        <p class="book-fine">A demonstration: your order is checked in this browser, written to no
+          ledger, and <strong>nothing is ever charged</strong>.</p>
+      </form>
+
+      <div class="book-done" id="bookDone" hidden>
+        <h3 id="doneHead">Entered and initialled.</h3>
+        <p id="doneBody"></p>
+        <button class="fulfil-btn" id="doneAgain" type="button">Begin a fresh page</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== Footer ===== -->
+  <footer class="foot">
+    <p class="foot-mark">Morrow &amp; Finch</p>
+    <p class="foot-line">14 Ledbury Row, London · Est. 1934 · Telephone: TEMple&nbsp;Bar&nbsp;0134</p>
+    <p class="foot-fine">Morrow &amp; Finch is a fictional shop built as a portfolio template. Every
+      photograph — the man on Ledbury Row and all ten catalogue plates — was generated with AI
+      (Gemini) for this project and depicts no real person, garment or place. The checkout is a
+      demonstration and charges nothing. Part of the <a href="../../index.html">Website Collection</a>.</p>
+  </footer>
+
+  <script src="js/catalog-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
