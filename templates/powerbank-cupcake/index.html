@@ -133,6 +133,28 @@
       <p class="p2-readout" aria-hidden="true"><span id="cakeLeft">87</span><i>%</i><b>cake left</b></p>
     </div>
   </div>
+
+  <figure class="product-shot reveal">
+    <img src="img/product-hero.webp"
+         alt="The Cupcake power bank standing upright: a moulded pink-and-white frosting swirl over a fluted case, with a small colour screen reading 92 percent."
+         width="900" height="1037" loading="lazy" decoding="async">
+    <figcaption>One number on the front. Nothing else.</figcaption>
+  </figure>
+
+  <div class="colorways reveal">
+    <figure>
+      <img src="img/product-vanilla.webp"
+           alt="The Cupcake power bank lying flat in the Vanilla colorway: pink and white stripes with an embroidered cupcake patch."
+           width="620" height="714" loading="lazy" decoding="async">
+      <figcaption>Vanilla</figcaption>
+    </figure>
+    <figure>
+      <img src="img/product-matcha.webp"
+           alt="The Cupcake power bank lying flat in the Matcha colorway: mint and pink stripes with a rainbow cupcake patch."
+           width="620" height="714" loading="lazy" decoding="async">
+      <figcaption>Matcha</figcaption>
+    </figure>
+  </div>
 </section>
 
 <!-- ============ THE NAME ============ -->
@@ -195,14 +217,15 @@
 <section class="buy" id="buy">
   <p class="buy-kicker reveal">Pick a flavor — it recolors the whole site, like it will your bag</p>
   <div class="flavors reveal" id="flavors" role="group" aria-label="Colorway">
-    <button class="flavor is-on" data-flavor="vanilla"><i></i>Vanilla</button>
-    <button class="flavor" data-flavor="matcha"><i></i>Matcha</button>
-    <button class="flavor" data-flavor="velvet"><i></i>Red Velvet</button>
+    <button class="flavor is-on" data-flavor="vanilla" aria-pressed="true"><i></i>Vanilla</button>
+    <button class="flavor" data-flavor="matcha" aria-pressed="false"><i></i>Matcha</button>
+    <button class="flavor" data-flavor="velvet" aria-pressed="false"><i></i>Red Velvet</button>
   </div>
   <h2 class="buy-head reveal"><span class="p-sans">$49.</span> <span class="p-serif">That&rsquo;s the whole price.</span></h2>
   <p class="buy-sub reveal">Cable included. Shipping included. Two-year warranty included. Frosting, regrettably, not included.</p>
   <div class="buy-cta reveal">
-    <button class="btn-big" id="buyBtn"><span>Add to cart</span></button>
+    <!-- aria-live so the swap to the demo-cart message is announced, not silent -->
+    <button class="btn-big" id="buyBtn"><span aria-live="polite">Add to cart</span></button>
     <p class="buy-fine">This demo cart doesn&rsquo;t charge anyone anything.</p>
   </div>
 
@@ -228,13 +251,74 @@
       <p>Slowly, honestly. 30W keeps a light laptop alive through a long meeting; it won&rsquo;t feed a gaming rig. We&rsquo;d rather tell you that here than let a product page imply otherwise.</p>
     </details>
     <details class="faq-item reveal">
-      <summary>Why is there no app?</summary>
+      <summary>Why is there no app?<span class="faq-toggle" aria-hidden="true"></span></summary>
       <p>Because it&rsquo;s a battery. The number on the front is the app. Firmware updates ship over the cable on the rare day we need one.</p>
     </details>
     <details class="faq-item reveal">
-      <summary>Is the name a joke?</summary>
+      <summary>Is the name a joke?<span class="faq-toggle" aria-hidden="true"></span></summary>
       <p>The name is a joke. The 500-cycle cell, the aluminium shell, the two-year warranty, and the thermal firmware are not. We find this division of labor works well.</p>
     </details>
+  </div>
+</section>
+
+<!-- ============ SPECIAL EDITION ============ -->
+<section class="special" aria-labelledby="special-head">
+  <div class="special-inner">
+    <figure class="special-shot reveal">
+      <img src="img/product-macaron.webp"
+           alt="The Macaron special edition: three macarons stacked inside a brass-framed glass case, with a round screen on top reading 92 percent."
+           width="760" height="875" loading="lazy" decoding="async">
+    </figure>
+
+    <div class="special-copy">
+      <p class="special-kicker reveal">One more thing</p>
+      <h2 class="special-head reveal" id="special-head">
+        <span class="p-serif">The</span> <span class="p-sans">MACARON.</span><br>
+        <span class="p-serif">A different pastry entirely.</span>
+      </h2>
+      <p class="reveal">Three macarons under glass in a brass frame. It is smaller, heavier, and
+        objectively less practical than the Cupcake &mdash; one output instead of two, five thousand
+        milliamp-hours instead of ten. We made four hundred of them because we wanted to.</p>
+
+      <dl class="special-specs reveal">
+        <div><dt>Capacity</dt><dd>5,000 mAh</dd></div>
+        <div><dt>Ports</dt><dd>One out, one in</dd></div>
+        <div><dt>Case</dt><dd>Brass &amp; glass</dd></div>
+        <div><dt>Made</dt><dd>400 units</dd></div>
+      </dl>
+
+      <p class="special-price reveal"><span class="p-sans">$89.</span>
+        <span class="p-serif">Sold out, obviously.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOUNDER ============ -->
+<section class="founder" aria-labelledby="founder-head">
+  <div class="founder-inner">
+    <figure class="founder-photo reveal">
+      <div class="founder-frame">
+        <span class="founder-fallback" aria-hidden="true">E</span>
+        <img src="img/eric-ceo.webp" alt="Eric, Cupcake's chief executive, in a navy suit in a bright office."
+             width="640" height="800" loading="lazy" decoding="async">
+      </div>
+      <figcaption>The man who signed off on the name</figcaption>
+    </figure>
+
+    <div class="founder-copy">
+      <p class="founder-kicker reveal">Office of the chief executive</p>
+      <h2 class="founder-head reveal" id="founder-head">
+        <!-- whitespace between the spans is deliberate: <br> contributes no
+             space to the accessible name, so without it this reads aloud as
+             "ERICchief executive officer" -->
+        <span class="p-sans">ERIC</span>
+        <br>
+        <span class="p-serif">chief executive officer</span>
+      </h2>
+      <blockquote class="founder-quote reveal">
+        <p>&ldquo;I love cupcake&hellip;&rdquo;</p>
+      </blockquote>
+    </div>
   </div>
 </section>
 
@@ -251,12 +335,49 @@
         <a href="#buy">Buy</a>
       </nav>
       <div class="footer-note">
-        <p>CUPCAKE is a <strong>fictional product</strong> — a portfolio template. The specs, prices, and reviews are invented, and the typography is the product shot: the only photographs on this page are of actual cupcakes (CC0, credited in the repo), because the product doesn&rsquo;t exist and the cupcakes do.</p>
+        <button type="button" class="info-open" id="infoOpen">
+          For more information
+          <span class="info-open-arrow" aria-hidden="true">→</span>
+        </button>
         <p class="footer-copy">© <span id="year">2026</span> Cupcake Energy Co. — Batteries not excluded.</p>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- ============ DISCLAIMER MODAL ============ -->
+<dialog class="info-modal" id="infoModal" aria-labelledby="infoModalTitle">
+  <div class="info-modal-inner">
+    <button type="button" class="info-close" id="infoClose" aria-label="Close">&times;</button>
+
+    <p class="info-kicker">Full disclaimer</p>
+    <h2 class="info-title" id="infoModalTitle">
+      <span class="p-sans">ABOUT</span> <span class="p-serif">this page.</span>
+    </h2>
+
+    <div class="info-body">
+      <p><strong>CUPCAKE is a fictional product.</strong> This page is a website template built to
+        demonstrate design and front-end work. It is not a real shop, nothing here can be bought, and
+        the company does not exist.</p>
+
+      <h3>What is invented</h3>
+      <p>The brand, the product, every specification and price, the comparison table, the reviews and
+        the people quoted in them, and the chief executive. The &ldquo;Add to cart&rdquo; button is a
+        demonstration and never charges anyone or places an order.</p>
+
+      <h3>Imagery</h3>
+      <p>The four product photographs and the portrait of &ldquo;Eric&rdquo; are
+        <strong>AI-generated</strong> (Google Gemini). They depict no real product and no real person.
+        The cupcake photographs are genuine and released under <strong>CC0</strong> (public domain
+        dedication) via StockSnap. Full sourcing, including the AI provenance, is recorded in
+        <code>IMAGE-CREDITS.md</code> alongside this template.</p>
+
+      <h3>Typefaces</h3>
+      <p>Archivo, Instrument Serif and Space Mono, served from Google Fonts under the SIL Open Font
+        License.</p>
+    </div>
+  </div>
+</dialog>
 
 <script src="js/main.js" defer></script>
 </body>
