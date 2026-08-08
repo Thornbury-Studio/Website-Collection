@@ -2,8 +2,8 @@
    CUPCAKE — fictional power bank template
    Maximalist typography: an ultra-black expanded grotesque
    (Archivo) colliding with a high-contrast italic serif
-   (Instrument Serif), mono for hardware truth. Zero imagery —
-   the type is the product shot.
+   (Instrument Serif), mono for hardware truth. Type does most of
+   the work; one composited product shot, the rest is punctuation.
    Flavor system: [data-flavor] on <body> swaps the accent set.
    Effects budget: transform/opacity only, IO-gated reveals.
    ============================================================ */
@@ -82,9 +82,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* ---------- reveal ---------- */
 
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+/* Elements only start hidden when scripting is actually available to bring
+   them back. Hiding them unconditionally meant a JS failure left 98% of the
+   page's text invisible — including the hero headline. */
+.reveal { transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal-line { transition: opacity .8s var(--ease) .35s, transform .8s var(--ease) .35s; }
+@media (scripting: enabled) {
+  .reveal { opacity: 0; transform: translateY(26px); }
+  .reveal-line { opacity: 0; transform: translateY(16px); }
+}
 .reveal.is-in { opacity: 1; transform: none; }
-.reveal-line { opacity: 0; transform: translateY(16px); transition: opacity .8s var(--ease) .35s, transform .8s var(--ease) .35s; }
 body.is-ready .reveal-line { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-line { opacity: 1; transform: none; transition: none; }
@@ -230,8 +237,12 @@ body.is-ready .reveal-line { opacity: 1; transform: none; }
 .hero-word .h-line { display: block; overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
 .hero-word .h-line > .w-sans, .hero-word .h-line > .w-serif {
   display: inline-block;
-  transform: translateY(112%);
   transition: transform 1s var(--ease);
+}
+/* Same guard as .reveal — the headline is the worst thing to lose. */
+@media (scripting: enabled) {
+  .hero-word .h-line > .w-sans,
+  .hero-word .h-line > .w-serif { transform: translateY(112%); }
 }
 .hero-word .w-serif { transition-delay: .1s; color: var(--accent-deep); margin-left: .02em; }
 body.is-ready .hero-word .h-line > span { transform: none; }
@@ -258,7 +269,7 @@ body.is-ready .hero-word .h-line > span { transform: none; }
   border: 2px solid var(--ink);
   background: #fffdf8;
   padding: 8px 8px 10px;
-  box-shadow: 6px 6px 0 var(--accent-soft);
+  box-shadow: 6px 6px 0 var(--accent);
   transition: box-shadow .5s var(--ease);
 }
 .hero-chip img { display: block; width: 100%; height: auto; }
@@ -383,6 +394,97 @@ body.is-ready .hero-word .h-line > span { transform: none; }
   margin-left: .6rem; color: var(--ink-soft);
 }
 
+/* Product photography. These are full-bleed photographs rather than cutouts,
+   so they get a soft rounded crop instead of the hard framed-photo treatment
+   used for the cupcake punctuation shots. */
+.product-shot {
+  max-width: 620px;
+  margin: clamp(2.5rem, 6vw, 4.5rem) auto 0;
+}
+.product-shot img {
+  display: block; width: 100%; height: auto;
+  border-radius: 14px;
+}
+.product-shot figcaption {
+  font-family: var(--mono); font-size: .74rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ink-soft);
+  margin-top: 1rem; text-align: center;
+}
+
+.colorways {
+  max-width: 900px;
+  margin: 1.4rem auto 0;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(.8rem, 2vw, 1.4rem);
+}
+.colorways img { display: block; width: 100%; height: auto; border-radius: 12px; }
+.colorways figcaption {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-soft);
+  margin-top: .6rem; text-align: center;
+}
+@media (max-width: 560px) { .colorways { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   SPECIAL EDITION
+   Dark ground so the limited run reads as a separate moment from
+   the main product, and lands between two paper sections.
+   ============================================================ */
+
+.special {
+  background: var(--ink); color: var(--paper);
+  padding: clamp(4rem, 9vw, 7rem) clamp(1.25rem, 4vw, 2rem);
+}
+.special-inner {
+  max-width: var(--wrap); margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, .46fr) minmax(0, .54fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.special-shot img {
+  display: block; width: 100%; height: auto;
+  border-radius: 14px;
+  max-width: 420px;
+}
+.special-kicker {
+  font-family: var(--mono); font-size: .8rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 1rem;
+}
+.special-head {
+  font-size: clamp(2.2rem, 5.2vw, 3.9rem);
+  line-height: 1;
+  margin-bottom: 1.4rem;
+}
+.special-head .p-serif { color: var(--accent); }
+.special-copy > p { color: rgba(244, 241, 234, .78); max-width: 40em; }
+
+.special-specs {
+  margin: 2rem 0 1.6rem;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.2rem;
+  border-top: 1px solid rgba(244, 241, 234, .25);
+  padding-top: 1.4rem;
+}
+.special-specs dt {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(244, 241, 234, .55);
+  margin-bottom: .3rem;
+}
+.special-specs dd { font-family: var(--serif); font-style: italic; font-size: 1.1rem; }
+
+.special-price { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+.special-price .p-sans { color: var(--accent); }
+.special-price .p-serif { color: rgba(244, 241, 234, .6); }
+
+@media (max-width: 860px) {
+  .special-inner { grid-template-columns: 1fr; }
+  .special-shot img { max-width: 320px; }
+}
+@media (max-width: 560px) {
+  .special-specs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 860px) { .poster-2-grid { grid-template-columns: 1fr; } }
 
 /* ============================================================
@@ -403,7 +505,7 @@ body.is-ready .hero-word .h-line > span { transform: none; }
   background: #fffdf8;
   padding: 10px 10px 12px;
   transform: rotate(-2deg);
-  box-shadow: 8px 8px 0 var(--accent-soft);
+  box-shadow: 8px 8px 0 var(--accent);
   transition: box-shadow .5s var(--ease);
 }
 .name-photo img { display: block; width: 100%; height: auto; }
@@ -541,6 +643,98 @@ body.is-ready .hero-word .h-line > span { transform: none; }
 .faq-item p { padding: 0 0 1.2rem; color: var(--ink-soft); max-width: 44em; }
 
 /* ============================================================
+   FOUNDER
+   Same framed-photo idiom as the hero chip and Exhibit A: 2px ink
+   border, cream mat, a degree of rotation, offset tint shadow.
+   ============================================================ */
+
+.founder {
+  border-top: 2px solid var(--ink);
+  padding: clamp(4rem, 9vw, 7rem) clamp(1.25rem, 4vw, 2rem);
+}
+.founder-inner {
+  max-width: var(--wrap); margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, .4fr) minmax(0, .6fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.founder-photo {
+  border: 2px solid var(--ink);
+  background: #fffdf8;
+  padding: 10px 10px 12px;
+  transform: rotate(-1.5deg);
+  box-shadow: 10px 10px 0 var(--accent);
+  transition: box-shadow .5s var(--ease);
+  max-width: 330px;
+  width: 100%;
+  justify-self: center;
+}
+/* Fixed ratio so the frame holds its shape even if the portrait is
+   missing — the fallback monogram sits underneath and the image
+   covers it once loaded. */
+.founder-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--accent-soft);
+  transition: background-color .5s var(--ease);
+}
+.founder-frame img {
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 22%;
+}
+.founder-frame.is-broken img { display: none; }
+.founder-fallback {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-family: var(--sans);
+  font-variation-settings: "wdth" 125, "wght" 900;
+  font-size: 5rem; color: var(--accent-deep);
+}
+.founder-photo figcaption {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ink-soft);
+  margin-top: .7rem; text-align: center;
+}
+
+.founder-kicker {
+  font-family: var(--mono); font-size: .85rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-soft);
+  margin-bottom: .9rem;
+}
+.founder-head {
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  line-height: .95;
+  margin-bottom: 1.6rem;
+}
+.founder-head .p-serif { color: var(--accent-deep); font-size: .62em; }
+
+.founder-quote p {
+  font-family: var(--serif); font-style: italic;
+  /* Sized to carry the column — this page shouts everywhere else, so a
+     timid pull quote here reads as a hole rather than restraint. */
+  font-size: clamp(2.2rem, 5.5vw, 4.6rem);
+  line-height: 1.08;
+  text-indent: -.4em;          /* hang the opening quote mark */
+}
+.founder-note {
+  margin-top: 1.6rem;
+  font-family: var(--mono); font-size: .78rem; line-height: 1.7;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--accent);
+  padding-left: .9rem;
+  max-width: 40em;
+}
+
+@media (max-width: 860px) {
+  .founder-inner { grid-template-columns: 1fr; }
+  .founder-photo { max-width: 260px; justify-self: start; }
+  .founder-quote p { text-indent: 0; }
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 
@@ -568,5 +762,83 @@ body.is-ready .hero-word .h-line > span { transform: none; }
 .footer-note { max-width: 46em; font-size: .9rem; color: var(--ink-soft); }
 .footer-note p { margin-bottom: .7rem; }
 .footer-note strong { color: var(--ink); }
-.footer-copy { font-family: var(--mono); font-size: .78rem; }
+.footer-copy { font-family: var(--mono); font-size: .78rem; margin-bottom: 0; }
+
+/* ---------- "for more information" ---------- */
+
+.info-open {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .7rem 1.25rem;
+  margin-bottom: 1.1rem;
+  font-family: var(--sans);
+  font-variation-settings: "wdth" 112, "wght" 700;
+  font-size: .86rem; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  transition: background-color .25s var(--ease), color .25s var(--ease);
+}
+.info-open:hover { background: var(--ink); color: var(--paper); }
+.info-open-arrow { transition: transform .3s var(--ease); }
+.info-open:hover .info-open-arrow { transform: translateX(3px); }
+
+/* ---------- disclaimer modal ----------
+   Native <dialog>, so Esc, focus trapping and inertness come from the
+   browser rather than hand-rolled JS. */
+
+.info-modal {
+  width: min(640px, calc(100vw - 2rem));
+  max-height: min(80vh, 720px);
+  /* The `* { margin: 0 }` reset at the top of this file kills the UA
+     stylesheet's `margin: auto` on <dialog>, which is what centres it —
+     without this the modal pins to the top-left corner. */
+  margin: auto;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 12px 12px 0 var(--accent);
+}
+.info-modal::backdrop { background: rgba(21, 20, 18, .55); }
+.info-modal-inner {
+  position: relative;
+  padding: clamp(1.6rem, 4vw, 2.6rem);
+  overflow-y: auto;
+  max-height: inherit;
+}
+
+.info-close {
+  position: absolute; top: .6rem; right: .9rem;
+  width: 40px; height: 40px;
+  font-size: 1.8rem; line-height: 1;
+  color: var(--ink-soft);
+  border-radius: 50%;
+  transition: color .2s var(--ease), background-color .2s var(--ease);
+}
+.info-close:hover { color: var(--ink); background: var(--accent-soft); }
+
+.info-kicker {
+  font-family: var(--mono); font-size: .72rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: .6rem;
+}
+.info-title { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1; margin-bottom: 1.4rem; }
+.info-title .p-serif { color: var(--accent-deep); }
+
+.info-body p { font-size: .95rem; color: var(--ink-soft); margin-bottom: 1rem; }
+.info-body strong { color: var(--ink); }
+.info-body h3 {
+  font-family: var(--mono); font-size: .72rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink);
+  margin: 1.5rem 0 .5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.info-body code {
+  font-family: var(--mono); font-size: .88em;
+  background: var(--accent-soft); padding: .1em .35em; border-radius: 3px;
+}
 @media (max-width: 640px) { .footer-cols { grid-template-columns: 1fr; } }
