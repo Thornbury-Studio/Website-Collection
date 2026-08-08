@@ -145,6 +145,43 @@ button { font: inherit; cursor: pointer; }
 .cell-price { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: .82rem; color: var(--silver); }
 .cell:hover .cell-price { color: var(--ink); }
 
+/* ---------- Lockers ---------- */
+
+.lockers { max-width: 1280px; margin: 0 auto; padding: clamp(50px, 7vw, 90px) clamp(16px, 3vw, 36px) 0; }
+
+.locker-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; background: var(--white); }
+
+.locker { background: var(--white); display: grid; align-content: start; }
+.locker > img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+
+.locker-bar {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 12px 14px; background: var(--white); border-top: 1px solid var(--line);
+}
+.locker-code { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; color: var(--silver); }
+.locker-theme { font-family: 'Big Shoulders', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 1.15rem; margin-left: auto; }
+
+.locker-pieces { list-style: none; background: var(--white); }
+.locker-piece {
+  display: flex; align-items: baseline; gap: 10px; width: 100%;
+  border: none; border-top: 1px solid var(--line); background: var(--white);
+  padding: 10px 14px; text-align: left;
+  font-family: 'IBM Plex Mono', monospace; font-size: .78rem; letter-spacing: .05em;
+  color: var(--ink);
+  transition: background .15s ease;
+}
+.locker-piece:hover { background: var(--grey); }
+.locker-piece .lp-code { color: var(--silver); min-width: 44px; }
+.locker-piece .lp-price { margin-left: auto; color: var(--silver); }
+.locker-piece:hover .lp-price { color: var(--ink); }
+
+.locker-total {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 12px 14px; background: var(--white); border-top: 1px solid var(--ink);
+  font-family: 'IBM Plex Mono', monospace; font-size: .82rem;
+}
+.locker-total span:last-child { margin-left: auto; }
+
 /* ---------- System ---------- */
 
 .system {
@@ -285,6 +322,7 @@ button { font: inherit; cursor: pointer; }
 
 @media (max-width: 960px) {
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .locker-grid { grid-template-columns: minmax(0, 1fr); max-width: 520px; margin-inline: auto; }
 }
 
 @media (max-width: 560px) {

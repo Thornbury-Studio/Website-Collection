@@ -86,3 +86,25 @@ window.F01_PRODUCTS = [
     desc: 'Folded cuff, no label, no slogan. The quietest thing we make.'
   }
 ];
+
+/* Lockers — three kits, one per model. pieces reference product ids. */
+window.F01_LOCKERS = [
+  {
+    code: 'LOCKER/01', theme: 'THE COMMUTE', img: 'img/locker01.webp',
+    who: 'MODEL A — DROP 02 CAMPAIGN',
+    alt: 'A tall East Asian model in the oversized graphite tee, wide black trousers, monochrome sneakers and cross-body bag.',
+    pieces: ['t01', 'p03', 's05', 'b06']
+  },
+  {
+    code: 'LOCKER/02', theme: 'THE DOWNPOUR', img: 'img/locker02.webp',
+    who: 'MODEL B — DROP 02 CAMPAIGN',
+    alt: 'A Black model in the black modular shell zipped to the collar, wide trousers, white sock runners and a black beanie.',
+    pieces: ['j02', 'p03', 'r10', 'k12']
+  },
+  {
+    code: 'LOCKER/03', theme: 'THE LOAD-OUT', img: 'img/locker03.webp',
+    who: 'MODEL C — DROP 02 CAMPAIGN',
+    alt: 'A grey-haired model in his sixties wearing the silver utility vest over the bone longsleeve, silver cargos, sneakers, tote in hand.',
+    pieces: ['v09', 'l07', 'c04', 's05', 't11']
+  }
+];
