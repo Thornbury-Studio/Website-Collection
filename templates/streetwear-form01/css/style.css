@@ -117,15 +117,13 @@ button { font: inherit; cursor: pointer; }
 .index-head h2 { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: .78rem; text-transform: none; }
 #indexNote { color: var(--silver); }
 
-.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2px; background: var(--white); }
+/* Uniform grid: every cell the same, tight 2px joints, three across. */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; background: var(--white); }
 
 .cell {
   position: relative; border: none; background: var(--grey); padding: 0; text-align: left;
-  overflow: hidden; display: block; color: var(--ink);
+  overflow: hidden; display: grid; color: var(--ink);
 }
-/* The broken rhythm: a=5 cols, b=7 cols, alternating sides. */
-.cell[data-span='a'] { grid-column: span 5; }
-.cell[data-span='b'] { grid-column: span 7; }
 
 .cell img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
 .cell:hover img { transform: scale(1.045); }
@@ -136,23 +134,16 @@ button { font: inherit; cursor: pointer; }
   color: var(--ink);
 }
 
+/* Info bar is part of every card, always visible — one style, twelve products. */
 .cell-bar {
-  position: absolute; left: 0; right: 0; bottom: 0;
   display: flex; align-items: baseline; gap: 12px;
-  padding: 12px 14px;
-  background: color-mix(in srgb, var(--white) 88%, transparent);
-  backdrop-filter: blur(6px);
-  translate: 0 102%;
-  transition: translate .35s cubic-bezier(.2, .7, .2, 1);
+  padding: 11px 14px 13px;
+  background: var(--white);
+  border-top: 1px solid var(--line);
 }
-.cell:hover .cell-bar, .cell:focus-visible .cell-bar { translate: 0 0; }
-.cell-name { font-family: 'Big Shoulders', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 1.25rem; }
-.cell-price { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: .82rem; }
-
-/* Touch devices can't hover: keep the bar visible. */
-@media (hover: none) {
-  .cell-bar { translate: 0 0; }
-}
+.cell-name { font-family: 'Big Shoulders', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 1.15rem; }
+.cell-price { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: .82rem; color: var(--silver); }
+.cell:hover .cell-price { color: var(--ink); }
 
 /* ---------- System ---------- */
 
@@ -292,9 +283,12 @@ button { font: inherit; cursor: pointer; }
   .system { grid-template-columns: minmax(0, 1fr); }
 }
 
-@media (max-width: 720px) {
-  .cell[data-span='a'], .cell[data-span='b'] { grid-column: span 12; }
-  .cell img { aspect-ratio: 4 / 3; }
+@media (max-width: 960px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
   .hero-word { bottom: 0; }
 }
 

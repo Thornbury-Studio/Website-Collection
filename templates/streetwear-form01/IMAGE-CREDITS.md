@@ -20,13 +20,17 @@ images. One palette — black, white, silver — one backdrop, one light.
 |---|---|---|
 | img/hero.webp | gemini-3-pro-image (2K) | Campaign master |
 | img/t01-tee.webp, img/p03-trouser.webp, img/s05-sneaker.webp, img/b06-bag.webp | gemini-2.5-flash-image | The exact pieces worn in the master |
-| img/j02-jacket.webp, img/c04-cargo.webp | gemini-2.5-flash-image | Collection pieces in the same system |
+| img/j02-jacket.webp, img/c04-cargo.webp, img/l07-longsleeve.webp, img/h08-hoodie.webp, img/v09-vest.webp, img/r10-runner.webp, img/t11-tote.webp, img/k12-beanie.webp | gemini-2.5-flash-image | Collection pieces in the same system |
+
+The sock runner was generated twice: the first attempt came out with side-stripe markings too
+close to a real sportswear brand's design language, so it was regenerated with an explicitly
+smooth, unmarked upper. Only the clean version ships.
 
 PNG output was cover-cropped and re-encoded to WebP with Pillow (hero 1500×2000 q84, products
-1100×1100 q82). Total imagery ~114 KB — monochrome compresses beautifully.
+1100×1100 q82).
 
 ## What is real and what is not
 
-The shop works: six pieces, a full-screen product takeover with prev/next, size selection, and
+The shop works: twelve pieces, a full-screen product takeover with prev/next, size selection, and
 a minimal cart persisted in localStorage (`f01.cart.v1`). Checkout validates an email and a
 sixteen-digit card format, then goes nowhere by design and says so in its own voice.
