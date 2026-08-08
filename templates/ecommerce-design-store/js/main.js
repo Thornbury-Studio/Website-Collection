@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('newsletterForm').addEventListener('submit', (event) => {
     event.preventDefault();
     const status = document.getElementById('formStatus');
-    status.textContent = 'You’re on the fictional list. Thanks for trying the demo.';
+    out.textContent = 'Thanks — please contact us directly to continue.';
     event.target.reset();
   });
 
