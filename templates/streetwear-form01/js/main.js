@@ -42,7 +42,6 @@
     var b = document.createElement('button');
     b.type = 'button';
     b.className = 'cell';
-    b.dataset.span = p.span;
     b.setAttribute('aria-label', p.name + ', ' + usd(p.price));
     b.innerHTML =
       '<img src="' + p.img + '" alt="" width="1100" height="1100" loading="lazy">' +
@@ -70,7 +69,7 @@
     document.getElementById('takePrice').textContent = usd(p.price);
     document.getElementById('takeFabric').textContent = p.fabric.toUpperCase();
     document.getElementById('takeDesc').textContent = p.desc;
-    document.getElementById('takePos').textContent = p.idx + ' / 0' + P.length;
+    document.getElementById('takePos').textContent = p.idx + ' / ' + String(P.length).padStart(2, '0');
 
     var sz = document.getElementById('takeSizes');
     sz.innerHTML = '';
