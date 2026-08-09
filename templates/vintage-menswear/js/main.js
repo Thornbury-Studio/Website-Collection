@@ -287,9 +287,8 @@
     document.getElementById('doneHead').textContent = 'Entered and initialled, ' + name + '.';
     document.getElementById('doneBody').textContent =
       (fulfil === 'post'
-        ? 'Were the shop real, ' + count() + ' item(s) would leave Ledbury Row with the morning post. '
-        : 'Were the shop real, ' + count() + ' item(s) would be wrapped in brown paper and waiting under your name. ') +
-      'This is a demonstration: the order is stored only in this browser and nothing is charged.';
+        ? count() + ' item(s) will leave Ledbury Row with the morning post.'
+        : 'Your ' + count() + ' item(s) will be wrapped in brown paper and waiting under your name.');
 
     order = [];
     save();

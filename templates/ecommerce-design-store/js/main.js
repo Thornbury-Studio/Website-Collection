@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('searchInput').addEventListener('input', (event) => {
     const query = event.target.value.trim().toLowerCase();
     const matches = [...document.querySelectorAll('.product-card')].filter((card) => `${card.dataset.name} ${card.dataset.category}`.toLowerCase().includes(query));
-    document.getElementById('searchHint').textContent = query ? `${matches.length} object${matches.length === 1 ? '' : 's'} found in this demo` : 'Popular: Halo, portable light, tray';
+    document.getElementById('searchHint').textContent = query ? `${matches.length} object${matches.length === 1 ? '' : 's'} found` : 'Popular: Halo, portable light, tray';
   });
 
   document.getElementById('newsletterForm').addEventListener('submit', (event) => {

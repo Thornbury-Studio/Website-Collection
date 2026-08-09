@@ -446,9 +446,8 @@
     document.getElementById('doneHead').textContent = 'Shukriya, ' + name + ' — order noted.';
     document.getElementById('doneBody').textContent =
       (fulfil === 'delivery'
-        ? 'If KESAR were real, ' + count() + ' items would be heading to your door in about 45 minutes. '
-        : 'If KESAR were real, your ' + count() + ' items would be ready to collect in about 25 minutes. ') +
-      'This demo stores your order only in this browser and nothing is charged.';
+        ? count() + ' item(s) on their way — about 45 minutes to your door.'
+        : 'Your ' + count() + ' item(s) will be ready to collect in about 25 minutes.');
 
     order = [];
     save();

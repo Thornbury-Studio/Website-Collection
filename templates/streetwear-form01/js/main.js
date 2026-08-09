@@ -270,8 +270,7 @@
 
     document.getElementById('doneLine').textContent =
       'ORDER LOGGED — ' + count() + ' ITEM(S), ' + usd(subtotal()) +
-      '. IF FORM/01 WERE REAL, A CONFIRMATION WOULD BE IN YOUR INBOX. ' +
-      'THIS IS A DEMO: STORED IN THIS BROWSER ONLY, NOTHING CHARGED.';
+      '. CONFIRMATION ON ITS WAY TO YOUR INBOX.';
 
     cart = [];
     save();

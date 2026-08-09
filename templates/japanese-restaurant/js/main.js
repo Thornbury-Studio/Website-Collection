@@ -427,9 +427,9 @@
     $('payGoogle').setAttribute('aria-pressed', String(method === 'google'));
     $('cardBox').classList.toggle('is-off', method !== 'card');
     $('payNote').textContent = method === 'card'
-      ? 'Demonstration checkout — card fields validate their format and nothing more. No number you type is sent, stored or charged.'
-      : 'Demonstration checkout — in production this button would open the ' +
-        (method === 'apple' ? 'Apple Pay' : 'Google Pay') + ' sheet. Nothing is charged here.';
+      ? 'We accept Visa, Mastercard and American Express.'
+      : 'You will be asked to confirm in ' +
+        (method === 'apple' ? 'Apple Pay' : 'Google Pay') + '.';
   }
   $('payApple').addEventListener('click', function () { setPay(payMethod === 'apple' ? 'card' : 'apple'); });
   $('payGoogle').addEventListener('click', function () { setPay(payMethod === 'google' ? 'card' : 'google'); });
