@@ -83,7 +83,10 @@ button { font: inherit; cursor: pointer; }
 .hero-photo img { height: 100%; width: auto; max-width: none; object-fit: cover; }
 
 .hero-word {
-  position: absolute; left: clamp(8px, 2vw, 40px); bottom: -1.5vw; z-index: 2;
+  /* Was bottom: -1.5vw — the wordmark's own box ran below the hero's edge,
+     and .hero's overflow:hidden clipped the bleed straight off. Matches the
+     clamp() spacing already used by .hero-tag/.hero-meta/.hero-cta. */
+  position: absolute; left: clamp(8px, 2vw, 40px); bottom: clamp(20px, 4vh, 56px); z-index: 2;
   font-size: clamp(5.2rem, 17vw, 15rem);
   letter-spacing: -.01em;
   mix-blend-mode: multiply; color: var(--ink);
@@ -327,7 +330,9 @@ button { font: inherit; cursor: pointer; }
 
 @media (max-width: 560px) {
   .grid { grid-template-columns: minmax(0, 1fr); }
-  .hero-word { bottom: 0; }
+  /* Was bottom: 0 — flush against the hero's own edge, no clearance before
+     the index heading below it. Small but real breathing room instead. */
+  .hero-word { bottom: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
