@@ -200,7 +200,7 @@
     buyBtn.addEventListener('click', function () {
       if (bought || !buyLabel) return;
       bought = true;
-      buyLabel.textContent = 'In cart — it isn’t, this is a demo';
+      buyLabel.textContent = 'Added to cart';
       setTimeout(function () {
         buyLabel.textContent = 'Add to cart';
         bought = false;

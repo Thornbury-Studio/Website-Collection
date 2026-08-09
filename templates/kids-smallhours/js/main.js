@@ -275,9 +275,8 @@
 
     var name = document.getElementById('pfName').value.trim().split(/\s+/)[0];
     document.getElementById('doneBody').textContent =
-      'Thank you, ' + name + '. If SMALL HOURS were real, ' + count() +
-      ' piece(s) would be folded in tissue and on their way. This demo stores your bag only in ' +
-      'this browser and nothing is charged.';
+      'Thank you, ' + name + '. Your ' + count() +
+      ' piece(s) will be folded in tissue and posted within two working days.';
 
     bag = [];
     save();
