@@ -234,7 +234,10 @@
     line-height: 1.12;
     letter-spacing: -0.01em;
   }
-  .hero h1 .line { display: block; overflow: hidden; }
+  /* overflow:hidden masks the slide-up reveal, but it also clips descenders —
+     the italic g of "glanced" and the j of "just". Pad the mask below the
+     baseline and pull the same amount back so the spacing is unchanged. */
+  .hero h1 .line { display: block; overflow: hidden; padding-bottom: 0.16em; margin-bottom: -0.16em; }
   .hero h1 .line span { display: block; opacity: 0; transform: translateY(110%); animation: reveal 0.9s cubic-bezier(.22,1,.36,1) forwards; }
   .hero h1 .line:nth-child(1) span { animation-delay: 0.15s; }
   .hero h1 .line:nth-child(2) span { animation-delay: 0.3s; }
@@ -771,8 +774,7 @@
   </h1>
   <p>A growing collection of original, self-contained website templates for client demos. Every one is a working site, not a screenshot — click in and see for yourself.</p>
   <div class="hero-actions">
-    <a href="templates/business-corporate/index.html" class="btn btn-primary">Open Meridian Partners</a>
-    <a href="#gallery" class="btn btn-outline">Browse Gallery</a>
+    <a href="#gallery" class="btn btn-primary">Browse Gallery</a>
   </div>
 </section>
 
