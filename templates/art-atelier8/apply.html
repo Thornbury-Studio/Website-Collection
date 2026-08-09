@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Membership — ATELIER № 8</title>
+  <meta name="description" content="Registration of interest for membership of Atelier № 8. Twelve members are admitted a year; the committee reads in March and September, and writes to everyone either way.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/art-atelier8/apply.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Membership — ATELIER № 8">
+  <meta property="og:description" content="Registration of interest. Twelve members a year.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/art-atelier8/img/no8-plate1.webp">
+  <meta name="theme-color" content="#FAF9F5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="apply">
+
+  <a class="skip" href="#main">Skip to the form</a>
+
+  <header class="top">
+    <a class="mark" href="index.html">ATELIER <em>№ 8</em></a>
+    <nav class="top-nav" aria-label="Site">
+      <a href="collection.html">The Hang</a>
+      <a href="viewings.html">Calendar</a>
+      <a href="apply.html" aria-current="page">Membership</a>
+      <a href="login.html">Sign in</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <header class="page-head">
+      <h1>Registration of interest</h1>
+      <p>Twelve members are admitted a year. The committee reads in March and September,
+        looks for people rather than portfolios, and writes to everyone — either way.
+        A proposer helps; the right line about what you live with helps more.</p>
+    </header>
+
+    <form class="sheet" id="applyForm" novalidate>
+      <div class="field">
+        <label for="aName">Name</label>
+        <input class="f-input" id="aName" type="text" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="aMail">Email</label>
+        <input class="f-input" id="aMail" type="email" autocomplete="email" spellcheck="false">
+        <p class="f-hint" id="mailHint"></p>
+      </div>
+      <div class="field">
+        <label for="aCity">City</label>
+        <input class="f-input" id="aCity" type="text" autocomplete="address-level2">
+      </div>
+      <div class="field">
+        <label for="aProp">Proposed by <span class="opt">— if a member sends you</span></label>
+        <input class="f-input" id="aProp" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="aLine">What do you live with? <span class="opt">— a line is enough</span></label>
+        <textarea class="f-input" id="aLine" rows="3"
+          placeholder="A small Anh still life in the kitchen, three prints I outbid a friend for, one empty wall I think about."></textarea>
+        <p class="f-hint" id="lineHint"></p>
+      </div>
+      <button class="btn" id="applyBtn" type="submit">
+        <span id="applyLabel">Register interest</span>
+        <svg class="b-spin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+      </button>
+      <p class="sheet-note">The register is confidential. Nothing is shared, nothing is
+        sold, and no one is telephoned at dinner time.</p>
+    </form>
+
+    <div class="sheet" id="applyDone" hidden>
+      <p class="noted" id="applyNoted"></p>
+      <div class="sheet-alt">
+        <p>While the committee reads —</p>
+        <a class="tlink" href="collection.html">View the hang</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p class="mark-foot">ATELIER <em>№ 8</em></p>
+    <a href="viewings.html">Calendar</a>
+    <a href="apply.html">Membership</a>
+    <p>Eight rooms, an unmarked door · Members and invited guests</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

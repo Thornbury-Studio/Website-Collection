@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Sign in — ATELIER № 8</title>
+  <meta name="description" content="Members sign in by link, never by password. Enter the address the club holds for you and a key follows.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/art-atelier8/login.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sign in — ATELIER № 8">
+  <meta property="og:description" content="Members sign in by link, never by password.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/art-atelier8/img/no8-plate1.webp">
+  <meta name="theme-color" content="#FAF9F5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="login">
+
+  <a class="skip" href="#main">Skip to sign in</a>
+
+  <header class="top">
+    <a class="mark" href="index.html">ATELIER <em>№ 8</em></a>
+    <nav class="top-nav" aria-label="Site">
+      <a href="collection.html">The Hang</a>
+      <a href="viewings.html">Calendar</a>
+      <a href="apply.html">Membership</a>
+      <a href="login.html" aria-current="page">Sign in</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <header class="page-head">
+      <h1>Members</h1>
+      <p>Sign-ins are by link, never by password — the club keeps no secrets it could
+        lose. Enter the address we hold for you and a key follows.</p>
+    </header>
+
+    <form class="sheet" id="loginForm" novalidate>
+      <div class="field">
+        <label for="lMail">Your address with the club</label>
+        <input class="f-input" id="lMail" type="email" autocomplete="email" spellcheck="false">
+        <p class="f-hint" id="loginHint"></p>
+      </div>
+      <button class="btn" id="loginBtn" type="submit">
+        <span id="loginLabel">Send my key</span>
+        <svg class="b-spin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+      </button>
+    </form>
+
+    <div class="sheet" id="loginDone" hidden>
+      <p class="noted">If <strong id="loginEcho"></strong> is among the members, a key
+        is on its way — it opens for one hour. If nothing arrives, the address the club
+        holds may differ; write to the registrar from the one you used to join.</p>
+    </div>
+
+    <div class="sheet sheet-alt">
+      <p>Not yet a member?</p>
+      <a class="tlink" href="apply.html">Registration of interest</a>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p class="mark-foot">ATELIER <em>№ 8</em></p>
+    <a href="viewings.html">Calendar</a>
+    <a href="apply.html">Membership</a>
+    <p>Eight rooms, an unmarked door · Members and invited guests</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
