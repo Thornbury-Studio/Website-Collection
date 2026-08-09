@@ -140,4 +140,29 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/index.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/book.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/game.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/club.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/concierge.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
