@@ -33,7 +33,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=meridian-refresh-2">
+<link rel="stylesheet" href="css/style.css?v=2026-08-09">
 </head>
 <body>
 
@@ -49,6 +49,7 @@
     </a>
     <nav class="nav-links">
       <a href="index.html" class="active">Home</a>
+      <a href="#work">Work</a>
       <a href="about.html">About</a>
       <a href="services.html">Services</a>
       <a href="contact.html">Contact</a>
@@ -71,15 +72,13 @@
         <p>We bring commercial clarity to companies at a turning point — when the answer has to be sharper than another slide deck.</p>
         <div class="hero-actions">
           <a href="contact.html" class="btn btn-primary">Start a conversation <span>↗</span></a>
-          <a href="services.html" class="text-link">Explore our practice <span>→</span></a>
+          <a href="#work" class="text-link">See the work <span>→</span></a>
         </div>
       </div>
-      <aside class="signal-card" aria-label="Meridian engagement framework">
-        <div class="signal-topline"><span>Meridian signal</span><span>01 / 03</span></div>
-        <div class="signal-orbit"><span class="orbit-core">M</span><span class="orbit-label orbit-label-one">Position</span><span class="orbit-label orbit-label-two">Momentum</span><span class="orbit-label orbit-label-three">Precision</span></div>
-        <p>Every engagement starts by finding the one decision that changes the rest.</p>
-        <div class="signal-footer"><span>Current focus</span><strong>Growth architecture</strong></div>
-      </aside>
+      <figure class="hero-figure">
+        <img src="img/hero-session.webp" alt="Three Meridian advisers mid-discussion around a table, printed charts pinned to the wall behind them." width="1600" height="1200" fetchpriority="high">
+        <figcaption>Week two of an engagement. Still asking questions.</figcaption>
+      </figure>
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
@@ -148,53 +147,68 @@
   </div>
 </section>
 
-<section class="section section-alt">
+<!-- ===== Selected work ===== -->
+<section class="section section-alt" id="work">
+  <div class="container">
+    <div class="section-header work-header">
+      <div>
+        <span class="eyebrow">Selected work</span>
+        <h2>Four engagements, and what actually changed</h2>
+      </div>
+      <p>Every one of these began with a different question than the one we were hired to answer.
+        Select a client to read what happened.</p>
+    </div>
+
+    <div class="work-tabs" role="tablist" aria-label="Selected engagements" id="workTabs"></div>
+    <div class="work-panel" id="workPanel"></div>
+  </div>
+</section>
+
+<!-- ===== How we work ===== -->
+<section class="section" id="method">
   <div class="container">
     <div class="section-header center">
-      <span class="eyebrow">Client Feedback</span>
-      <h2>Trusted by teams who value results</h2>
+      <span class="eyebrow">The engagement</span>
+      <h2>Four stages, and a firm end date</h2>
+      <p>We are not interested in becoming part of your cost base. Here is exactly how an
+        engagement runs, and what you hold at the end of each stage.</p>
     </div>
-    <div class="grid grid-3">
-      <div class="testimonial-card reveal">
-        <p class="quote">"Meridian rebuilt our go-to-market strategy in under two months."</p>
-        <div class="testimonial-person">
-          <div class="avatar">JR</div>
-          <div>
-            <div class="name">Jamie Reyes</div>
-            <div class="role">COO, Nova Retail Co.</div>
-          </div>
-        </div>
+    <ol class="method-track" id="methodTrack"></ol>
+    <div class="method-detail" id="methodDetail"></div>
+  </div>
+</section>
+
+<!-- ===== Perspectives ===== -->
+<section class="section section-alt" id="writing">
+  <div class="container">
+    <div class="section-header work-header">
+      <div>
+        <span class="eyebrow">Perspectives</span>
+        <h2>What we are arguing about</h2>
       </div>
-      <div class="testimonial-card reveal">
-        <p class="quote">"Their team found six figures in savings we didn't know existed."</p>
-        <div class="testimonial-person">
-          <div class="avatar">DK</div>
-          <div>
-            <div class="name">Dana Kim</div>
-            <div class="role">Founder, Brightpath Logistics</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal">
-        <p class="quote">"We came in for an audit and left with a five-year roadmap."</p>
-        <div class="testimonial-person">
-          <div class="avatar">TA</div>
-          <div>
-            <div class="name">Theo Alvarez</div>
-            <div class="role">CEO, Corvus Analytics</div>
-          </div>
-        </div>
-      </div>
+      <p>We publish when we have changed our mind about something. Roughly six times a year.</p>
     </div>
+    <div class="writing-list" id="writingList"></div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="cta-banner reveal">
-      <h2>Ready to move forward?</h2>
-      <p>Book a free 30-minute consultation and see how Meridian Partners can support your next stage of growth.</p>
-      <a href="contact.html" class="btn btn-primary">Book a Consultation</a>
+      <div class="cta-copy">
+        <span class="eyebrow">Start here</span>
+        <h2>Tell us the decision you are stuck on.</h2>
+        <p>Thirty minutes, no deck, no obligation. If we are not the right people for it, we will
+          usually know inside the half hour — and we will say so.</p>
+      </div>
+      <div class="cta-side">
+        <a href="contact.html" class="btn btn-primary">Book a conversation <span>↗</span></a>
+        <ul class="cta-facts">
+          <li><strong>Ellery Voss</strong> takes the first call, every time</li>
+          <li>Engagements run <strong>9–20 weeks</strong>, priced as a fixed fee</li>
+          <li>We take on <strong>fourteen</strong> a year</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -248,6 +262,7 @@
   </div>
 </footer>
 
+<script src="js/site-data.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
