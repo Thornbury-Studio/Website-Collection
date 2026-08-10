@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>The Menu — HOTLINE | Bird, Stacks, Fries &amp; Dips</title>
+  <meta name="description" content="The full HOTLINE menu: buttermilk-brined bird, smashed stacks, twice-cooked fries, four dips and cold drinks. Every dish carries a heat number from one to five.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/fastfood-hotline/menu.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Menu — HOTLINE">
+  <meta property="og:description" content="Bird, stacks, fries and dips. Every dish carries a heat number from one to five.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/fastfood-hotline/img/p-hotline.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Menu — HOTLINE">
+  <meta name="twitter:description" content="Bird, stacks, fries and dips. Every dish carries a heat number from one to five.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/fastfood-hotline/img/p-hotline.webp">
+  <meta name="theme-color" content="#0B0B0C">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#menuOut">Skip to the dishes</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="HOTLINE home">
+    <span class="mark__dot" aria-hidden="true"></span>HOTLINE
+  </a>
+  <nav class="top-nav" aria-label="Primary">
+    <a href="menu.html" aria-current="page">Menu</a>
+    <a href="index.html#box">Build a box</a>
+    <a href="index.html#find">Find us</a>
+  </nav>
+  <span class="pip" id="statusPip" data-open="0">
+    <span class="pip__led" aria-hidden="true"></span><span id="statusText">Checking</span>
+  </span>
+  <a class="top-bag" href="order.html" id="topBag" data-empty="1">
+    Bag <span class="top-bag__n" id="bagCount">0</span>
+  </a>
+</header>
+
+<main>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="hero__kick u-label"><i aria-hidden="true"></i>Seventeen dishes · Kitchen open till four</p>
+      <h1 class="page-head__h">The menu</h1>
+      <p class="page-head__p">Everything is fried to order, so the busy hours run a little longer.
+        Every dish carries a heat number — set the dial below to hide anything hotter than you want.</p>
+    </div>
+  </section>
+
+  <!-- filters -->
+  <div class="filters" id="filters">
+    <div class="wrap filters__in">
+      <div class="filters__set" role="group" aria-label="Filter by section" id="catSet"></div>
+      <label class="filters__heat" for="heatCap">
+        <span class="u-label">Max heat</span>
+        <input type="range" id="heatCap" min="0" max="5" step="1" value="5"
+               aria-describedby="heatCapOut">
+        <output class="filters__heatv u-num" id="heatCapOut" for="heatCap">Any</output>
+      </label>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p class="menu-count u-label" id="menuCount" role="status"></p>
+  </div>
+
+  <div id="menuOut"></div>
+
+  <section class="band reveal" aria-labelledby="boxBandTitle">
+    <img class="band__img" src="img/ed-spread.webp" width="1800" height="1125" loading="lazy" decoding="async"
+         alt="Several stacked burgers and a loaded wrap grouped on a dark reflective counter.">
+    <div class="band__over">
+      <div class="wrap">
+        <div class="band__copy">
+          <h2 class="band__h" id="boxBandTitle">Four things<br>make a <em>box</em>.</h2>
+          <p class="band__p">A main, a side, a dip and a drink come to three dollars less than the
+            same four things bought apart. The discount applies itself at checkout.</p>
+          <a class="btn btn--acid" href="index.html#box"><span>Build a box</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="foot__mark">Hotline</p>
+        <p class="foot__tag">Fried after dark. A late-night counter on Jalan Besar, open until four.</p>
+      </div>
+      <div>
+        <p class="foot__h">Menu</p>
+        <div class="foot__l">
+          <a href="menu.html">Everything</a>
+          <a href="index.html#box">Build a box</a>
+          <a href="order.html">Your bag</a>
+        </div>
+      </div>
+      <div>
+        <p class="foot__h">Visit</p>
+        <div class="foot__l">
+          <span>88 Jalan Besar, #01–04</span>
+          <span>Singapore 208888</span>
+          <span>Daily 17:00 — 04:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="foot__bar">
+      <p>© 2026 Hotline Fried Chicken Co.</p>
+      <p>Allergen information available at the counter.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Your bag" aria-hidden="true">
+  <div class="drawer__top">
+    <p class="drawer__t">Your bag</p>
+    <button class="drawer__x" id="drawerClose" type="button" aria-label="Close bag">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body" id="drawerBody"></div>
+  <div class="drawer__foot">
+    <p class="tot"><span>Total</span><b class="u-num" id="drawerTotal">$0.00</b></p>
+    <a class="btn btn--solid btn--wide" href="order.html"><span>Go to checkout</span></a>
+  </div>
+</aside>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>
