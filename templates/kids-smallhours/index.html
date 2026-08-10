@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>SMALL HOURS — Children's Clothing, Made Slowly</title>
+  <meta name="description" content="SMALL HOURS — children's clothing made slowly. Twelve pieces a season in organic cotton, European linen and undyed merino. Free delivery over S$120.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/kids-smallhours/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SMALL HOURS — Children's Clothing, Made Slowly">
+  <meta property="og:description" content="The Long Afternoon — twelve pieces in oat, butter, sage and clay. A quiet shop for small people.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/kids-smallhours/img/sh-hero.webp">
+  <meta name="theme-color" content="#FAF7F1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="skip" href="#new">Skip to the shop</a>
+
+  <header class="top" id="top">
+    <a class="mark" href="index.html">SMALL&nbsp;HOURS</a>
+    <nav class="top-nav" aria-label="Shop">
+      <a href="#new">New In</a>
+      <a href="#collections">Collections</a>
+      <a href="#campaign">Journal</a>
+    </nav>
+    <button class="bag-btn" id="bagBtn" type="button" aria-haspopup="dialog">Bag <span id="bagCount">0</span></button>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <img class="hero-photo" src="img/sh-hero.webp" alt="Two children walk hand in hand down a sunlit garden path, one in a butter linen shirt and clay shorts, the other in a sage tee and ecru trousers." width="1920" height="1080" fetchpriority="high">
+    <div class="hero-foot">
+      <div>
+        <p class="hero-kicker">The Long Afternoon — new for the season</p>
+        <h1>Clothes for the slowest<br>hours of childhood.</h1>
+      </div>
+      <a class="hero-link" href="#new">Shop new in</a>
+    </div>
+  </section>
+
+  <!-- ===== New in ===== -->
+  <section class="block" id="new">
+    <div class="block-head">
+      <h2>New in</h2>
+      <a class="quiet-link" href="#everything">View everything</a>
+    </div>
+    <div class="product-strip" id="newStrip"><!-- rendered --></div>
+  </section>
+
+  <!-- ===== Collections ===== -->
+  <section class="block" id="collections">
+    <div class="block-head"><h2>Collections</h2></div>
+    <div class="collection-grid" id="collectionGrid"><!-- rendered --></div>
+  </section>
+
+  <!-- ===== Campaign ===== -->
+  <section class="campaign" id="campaign">
+    <img src="img/ed-afternoon.webp" alt="The two children crouch at the edge of a pond among large tropical leaves, small in a wide sunlit frame." width="1400" height="1050" loading="lazy">
+    <div class="campaign-copy">
+      <p class="hero-kicker">The Journal — No. 1</p>
+      <h2>The Long Afternoon</h2>
+      <p>We shot this season in a garden that belongs to nobody in particular, in the hour when
+        the light goes soft and dinner is still a rumour. No poses, no direction — just two
+        children, a pond, and clothes that could keep up. Everything they wore is in the range.</p>
+      <a class="quiet-link" href="#everything">Shop the campaign</a>
+    </div>
+  </section>
+
+  <!-- ===== Everything ===== -->
+  <section class="block" id="everything">
+    <div class="block-head">
+      <h2>Everything</h2>
+      <div class="filter-row" role="group" aria-label="Filter by collection" id="filterRow">
+        <button class="filter is-on" data-col="all" type="button">All</button>
+        <!-- collection filters rendered -->
+      </div>
+    </div>
+    <div class="product-grid" id="allGrid"><!-- rendered --></div>
+  </section>
+
+  <!-- ===== Notes (values) ===== -->
+  <section class="notes">
+    <img src="img/ed-detail.webp" alt="A neat stack of folded children's clothing in sage, butter, oat and clay on a wooden bench in garden light." width="1400" height="1050" loading="lazy">
+    <ul class="notes-list">
+      <li><h3>Made slowly</h3><p>Twelve pieces a season, cut to be handed down, not thrown out.</p></li>
+      <li><h3>Honest fabric</h3><p>Organic cotton, European linen, undyed merino. Nothing that crinkles.</p></li>
+      <li><h3>Sized for growing</h3><p>Cut roomy on purpose — most pieces span two ages comfortably.</p></li>
+    </ul>
+  </section>
+
+  <!-- ===== Bag drawer ===== -->
+  <div class="veil" id="veil" hidden></div>
+  <aside class="bag" id="bag" role="dialog" aria-modal="true" aria-labelledby="bagTitle" hidden>
+    <header class="bag-head">
+      <h2 id="bagTitle">Your bag</h2>
+      <button class="bag-close" id="bagClose" type="button" aria-label="Close bag">Close</button>
+    </header>
+    <ul class="bag-lines" id="bagLines"></ul>
+    <p class="bag-empty" id="bagEmpty">Nothing yet. The afternoon is young.</p>
+    <div class="bag-tail" id="bagTail" hidden>
+      <p class="bag-ship" id="bagShip"></p>
+      <p class="bag-total"><span>Total</span><span id="bagTotal">S$0</span></p>
+      <form id="payForm" novalidate>
+        <div class="field">
+          <label for="pfName">Name</label>
+          <input id="pfName" type="text" autocomplete="name">
+          <p class="err" id="pfNameErr" hidden>We need a name for the parcel.</p>
+        </div>
+        <div class="field">
+          <label for="pfEmail">Email</label>
+          <input id="pfEmail" type="email" autocomplete="email">
+          <p class="err" id="pfEmailErr" hidden>That email doesn't look right.</p>
+        </div>
+        <div class="field">
+          <label for="pfCard">Card number</label>
+          <input id="pfCard" inputmode="numeric" autocomplete="cc-number" placeholder="4444 4444 4444 4444">
+          <p class="err" id="pfCardErr" hidden>Card numbers have sixteen digits.</p>
+        </div>
+        <button class="pay-btn" type="submit">Place order — <span id="payTotal">S$0</span></button>
+        <p class="bag-fine">Free delivery over S$120. Exchanges within 30 days.</p>
+      </form>
+      <div class="bag-done" id="bagDone" hidden>
+        <h3>Wrapped and ribboned.</h3>
+        <p id="doneBody"></p>
+        <button class="quiet-link as-btn" id="doneAgain" type="button">Keep browsing</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== Footer ===== -->
+  <footer class="foot">
+    <p class="foot-mark">SMALL HOURS</p>
+    <p class="foot-line">Children's clothing, made slowly · Tiong Bahru, Singapore · Free delivery over S$120</p>
+
+  </footer>
+
+  <script src="js/shop-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

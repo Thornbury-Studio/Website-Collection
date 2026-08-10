@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>AUREON — Member Home</title>
+  <meta name="description" content="The Aureon Club member portal — your next round, today at the club, fixtures, your game, and the concierge desk, all in one quiet place.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AUREON — Member Home">
+  <meta property="og:description" content="Part clubhouse concierge, part member portal — the digital home of the Aureon Club.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/img/au-course.webp">
+  <meta name="theme-color" content="#F7F5F1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Albert+Sans:ital,wght@0,300..900;1,300..900&family=Fragment+Mono:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+<!--
+THESIS: A members' platform as the member's own locker of engraved ephemera — every
+booking, request and record the club issues comes back as a numbered, tagged artifact.
+It refuses the colourful sports-app dashboard and the generic luxury-spa template alike.
+OWN-WORLD: Warm linen ground and soft stone panels; graphite ink; Marcellus inscriptional
+capitals on every plate; Albert Sans as the club's hand; Fragment Mono serials; one
+champagne-brushed rule per plate, hairline silver everywhere else; confirmations engrave
+letter by letter. No bright green, no purple, nothing loud.
+STORY: A member is greeted by name, sees the next round and the day at the club, books in
+one calm flow, and everything they do is anticipated — calendar, lunch, caddie, guest —
+before they ask.
+FIRST VIEWPORT: Misty dawn course photograph across the top; the brass-plate greeting
+set into its lower edge; beneath, the locker grid — NEXT ROUND tag, TODAY AT THE CLUB,
+THIS WEEK, MY GAME — with the engraved nav tabs above everything.
+FORM: The member's engraved ephemera (tags, plates, serials) — candidate 7 of 7 on the
+ordered list, seed a397e08a.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
+review, the verdict, and DESIGN.md
+-->
+
+  <a class="skip" href="#main">Skip to your locker</a>
+
+  <header class="top">
+    <a class="crest" href="index.html" aria-label="Aureon Club home">
+      <svg class="crest-ring" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5"/>
+        <path d="M13 27 L20 11 L27 27 M15.8 21.5 h8.4"/>
+      </svg>
+      <span class="crest-name">AUREON<em>est. 1907</em></span>
+    </a>
+    <nav class="top-nav" aria-label="Member areas">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="book.html">Book a Round</a>
+      <a href="game.html">My Game</a>
+      <a href="club.html">The Club</a>
+      <a href="concierge.html">Concierge</a>
+    </nav>
+    <p class="member-chip"><span class="member-name">J.&nbsp;Ashworth</span><span class="member-no">№&nbsp;0212</span></p>
+    <button class="nav-burger" id="navBurger" type="button" aria-expanded="false" aria-controls="topNavList" aria-label="Menu">
+      <svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </header>
+
+  <main id="main">
+
+    <!-- Greeting over the course -->
+    <section class="home-hero">
+      <img class="home-hero-photo" src="img/au-course.webp" alt="The first fairway in warm morning sun, a leather bag resting against the old stone wall, long soft shadows on the grass." width="2400" height="1018" fetchpriority="high">
+      <div class="greeting plate">
+        <p class="greeting-word"><span id="greetWord">Good day</span>, Mr.&nbsp;Ashworth.</p>
+        <p class="greeting-date" id="greetDate">Saturday</p>
+        <p class="conditions-line">
+          <span class="cond-dot" aria-hidden="true"></span>
+          Course open &middot; Greens 10.5 &middot; Light SW breeze &middot; Sunset 8:41&nbsp;pm
+        </p>
+      </div>
+    </section>
+
+    <!-- The locker -->
+    <section class="locker wrap">
+
+      <article class="plate plate-next" aria-labelledby="nextTitle">
+        <header class="plate-head">
+          <h2 id="nextTitle">Next round</h2>
+          <span class="serial" id="nextSerial">№ 4471</span>
+        </header>
+        <div class="tag tag-lg" id="nextTag">
+          <span class="tag-hole" aria-hidden="true"></span>
+          <div class="tag-body">
+            <p class="tag-title" id="nextWhen">Saturday · 07:12</p>
+            <p class="tag-meta" id="nextMeta">White tees · 3 players · caddie reserved</p>
+          </div>
+          <span class="tag-end" aria-hidden="true"></span>
+        </div>
+        <div class="chip-row" role="group" aria-label="Before you arrive">
+          <button class="chip" type="button" id="calChip">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            Add to calendar</button>
+          <a class="chip" href="club.html#dining">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8m4-8v8M7 7h4M9 11v10M16 3c-1.5 1.8-2 3.8-2 6 0 2 .8 3 2 3v9"/></svg>
+            Lunch after</a>
+          <a class="chip" href="club.html#notices">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4l7 3 7-3v13"/><path d="M5 21h14"/></svg>
+            Conditions</a>
+          <a class="chip" href="book.html">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>
+            Manage</a>
+        </div>
+      </article>
+
+      <article class="plate" aria-labelledby="todayTitle">
+        <header class="plate-head">
+          <h2 id="todayTitle">Today at the club</h2>
+          <span class="serial" id="todayStamp">—</span>
+        </header>
+        <ul class="today-list">
+          <li>
+            <span class="today-what">Practice bays</span>
+            <span class="today-state" id="baysState">4 of 6 free</span>
+          </li>
+          <li>
+            <span class="today-what">The Morning Room</span>
+            <span class="today-state">Tables from 12:30</span>
+          </li>
+          <li>
+            <span class="today-what">Recovery suite</span>
+            <span class="today-state">Two slots this afternoon</span>
+          </li>
+          <li>
+            <span class="today-what">Fitting studio</span>
+            <span class="today-state">By arrangement</span>
+          </li>
+        </ul>
+        <a class="quiet-link" href="club.html">Everything at the club</a>
+      </article>
+
+      <article class="plate" aria-labelledby="weekTitle">
+        <header class="plate-head">
+          <h2 id="weekTitle">This week</h2>
+          <span class="serial">Fixtures</span>
+        </header>
+        <ul class="fixture-list" id="homeFixtures">
+          <li>
+            <span class="fx-date"><strong>Sat</strong>16</span>
+            <span class="fx-body"><span class="fx-name">The Captain's Prize</span><span class="fx-meta">Medal · draw closes Thursday</span></span>
+            <span class="fx-state" data-ev="captains">—</span>
+          </li>
+          <li>
+            <span class="fx-date"><strong>Wed</strong>20</span>
+            <span class="fx-body"><span class="fx-name">Twilight Foursomes</span><span class="fx-meta">6:00 pm · supper follows</span></span>
+            <span class="fx-state" data-ev="twilight">—</span>
+          </li>
+          <li>
+            <span class="fx-date"><strong>Fri</strong>22</span>
+            <span class="fx-body"><span class="fx-name">Cellar Evening</span><span class="fx-meta">The 1907 Room · members and one guest</span></span>
+            <span class="fx-state" data-ev="cellar">—</span>
+          </li>
+        </ul>
+        <a class="quiet-link" href="club.html#fixtures">The season's card</a>
+      </article>
+
+      <article class="plate" aria-labelledby="gameTitle">
+        <header class="plate-head">
+          <h2 id="gameTitle">My game</h2>
+          <span class="serial">Season to date</span>
+        </header>
+        <div class="hcp-row">
+          <p class="hcp-big"><span>12.4</span><em>handicap index</em></p>
+          <p class="hcp-drift">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l6 6 4-4 6 6"/><path d="M20 11v5h-5"/></svg>
+            down 0.3 this season
+          </p>
+        </div>
+        <svg class="spark" id="homeSpark" viewBox="0 0 220 56" role="img" aria-label="Your last five gross scores: 88, 86, 89, 85, 84."></svg>
+        <p class="spark-note">Last five rounds — steadying nicely.</p>
+        <a class="quiet-link" href="game.html">The full record</a>
+      </article>
+
+      <article class="plate plate-desk" aria-labelledby="deskTitle">
+        <header class="plate-head">
+          <h2 id="deskTitle">The desk</h2>
+          <span class="serial">Concierge</span>
+        </header>
+        <p class="desk-line">Lockers, transport, guest arrangements, a table nobody else
+          can get — anything outside the ordinary, put it in writing and consider it
+          in hand.</p>
+        <a class="btn btn-solid" href="concierge.html">Write to the desk</a>
+      </article>
+
+      <article class="plate" aria-labelledby="houseTitle">
+        <header class="plate-head">
+          <h2 id="houseTitle">House account</h2>
+          <span class="serial">Settled monthly</span>
+        </header>
+        <ul class="today-list">
+          <li><span class="today-what">Guest green fee — R.&nbsp;Hart, Sat&nbsp;2</span><span class="today-state">£48</span></li>
+          <li><span class="today-what">The Morning Room, lunch for three</span><span class="today-state">£74</span></li>
+          <li><span class="today-what">Pro shop — glove, a dozen balls</span><span class="today-state">£41</span></li>
+          <li><span class="today-what">Member's rate saved you, this month</span><span class="today-state">£62</span></li>
+        </ul>
+        <div class="chip-row">
+          <a class="chip" href="concierge.html?service=other">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3v2m8-2v2M4 8h16M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg>
+            Query an entry</a>
+        </div>
+      </article>
+
+      <article class="plate" aria-labelledby="noticeTitle">
+        <header class="plate-head">
+          <h2 id="noticeTitle">From the secretary</h2>
+          <span class="serial">Notices</span>
+        </header>
+        <ul class="notice-list">
+          <li>
+            <p class="notice-head">Greens: hollow-tining, Mon 25 – Tue 26</p>
+            <p class="notice-body">Temporary greens on 4, 9 and 13 both days. The course is otherwise open, and the greens will be the better for it by the weekend.</p>
+          </li>
+          <li>
+            <p class="notice-head">The pro shop's autumn trunk show, Sat 16</p>
+            <p class="notice-body">Fittings in the studio from ten. Members' pricing stands for the week; ask for Callum.</p>
+          </li>
+        </ul>
+      </article>
+
+    </section>
+  </main>
+
+  <footer class="foot wrap">
+    <div class="foot-rule">
+      <p class="foot-crest">AUREON <em>· est. 1907</em></p>
+      <nav aria-label="Footer">
+        <a href="club.html#notices">Course conditions</a>
+        <a href="concierge.html">Concierge</a>
+        <a href="index.html#main">Member home</a>
+      </nav>
+      <p class="foot-fine">One Fairway Lane · By the sea · Members and their guests only</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>My Game — AUREON</title>
+  <meta name="description" content="Your handicap, your rounds, your scorecards and the pro's notes — the club's quiet record of your game.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/game.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="My Game — AUREON">
+  <meta property="og:description" content="Score history, handicap trend, personal bests and coaching notes, kept like club records.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/img/au-green.webp">
+  <meta name="theme-color" content="#F7F5F1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Albert+Sans:ital,wght@0,300..900;1,300..900&family=Fragment+Mono:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="game">
+
+  <a class="skip" href="#main">Skip to your record</a>
+
+  <header class="top">
+    <a class="crest" href="index.html" aria-label="Aureon Club home">
+      <svg class="crest-ring" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5"/>
+        <path d="M13 27 L20 11 L27 27 M15.8 21.5 h8.4"/>
+      </svg>
+      <span class="crest-name">AUREON<em>est. 1907</em></span>
+    </a>
+    <nav class="top-nav" aria-label="Member areas">
+      <a href="index.html">Home</a>
+      <a href="book.html">Book a Round</a>
+      <a href="game.html" aria-current="page">My Game</a>
+      <a href="club.html">The Club</a>
+      <a href="concierge.html">Concierge</a>
+    </nav>
+    <p class="member-chip"><span class="member-name">J.&nbsp;Ashworth</span><span class="member-no">№&nbsp;0212</span></p>
+    <button class="nav-burger" id="navBurger" type="button" aria-expanded="false" aria-controls="topNavList" aria-label="Menu">
+      <svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </header>
+
+  <main id="main" class="wrap page-head-wrap">
+    <header class="page-head">
+      <h1>My game</h1>
+      <p class="page-lede">The club keeps your record the way it keeps everything —
+        accurately, privately, and without fuss.</p>
+    </header>
+
+    <div class="game-top">
+      <article class="plate plate-hcp" aria-labelledby="hcpTitle">
+        <header class="plate-head">
+          <h2 id="hcpTitle">Handicap index</h2>
+          <span class="serial">WHS · revised nightly</span>
+        </header>
+        <div class="hcp-row hcp-row-lg">
+          <p class="hcp-big hcp-huge"><span>12.4</span><em>lowest in four seasons</em></p>
+          <p class="hcp-drift">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l6 6 4-4 6 6"/><path d="M20 11v5h-5"/></svg>
+            down 0.3 this season
+          </p>
+        </div>
+        <svg class="trend" id="hcpTrend" viewBox="0 0 560 150" role="img"
+          aria-label="Handicap index over twelve months, easing from 13.6 down to 12.4."></svg>
+        <div class="trend-axis" aria-hidden="true">
+          <span>Sep</span><span>Nov</span><span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Aug</span>
+        </div>
+      </article>
+
+      <figure class="game-fig">
+        <img src="img/au-green.webp" alt="The ninth green in low golden light, dew sparkling around the hole and flagstick." width="1184" height="864" loading="lazy" decoding="async">
+        <figcaption>The ninth, most mornings — your best scoring hole this season.</figcaption>
+      </figure>
+    </div>
+
+    <section class="plate" aria-labelledby="cardsTitle">
+      <header class="plate-head">
+        <h2 id="cardsTitle">Rounds</h2>
+        <span class="serial">Last eight</span>
+      </header>
+      <p class="sheet-note">Open any round for the card itself.</p>
+      <div class="rounds" id="rounds">
+
+        <details class="round">
+          <summary>
+            <span class="rd-date">Sun 10 Aug</span>
+            <span class="rd-comp">Sunday medal</span>
+            <span class="rd-gross"><strong>84</strong><em>gross</em></span>
+            <span class="rd-net">72 net</span>
+            <span class="rd-putts">30 putts</span>
+            <svg class="ic rd-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="card-strip" role="img" aria-label="Hole by hole: out in 41, back in 43.">
+            <ol class="holes">
+              <li><span>1</span><strong>5</strong></li><li><span>2</span><strong>4</strong></li>
+              <li><span>3</span><strong>4</strong></li><li><span>4</span><strong>5</strong></li>
+              <li><span>5</span><strong>3</strong></li><li><span>6</span><strong>5</strong></li>
+              <li><span>7</span><strong>4</strong></li><li><span>8</span><strong>6</strong></li>
+              <li class="nine"><span>9</span><strong>5</strong></li>
+              <li><span>10</span><strong>4</strong></li><li><span>11</span><strong>5</strong></li>
+              <li><span>12</span><strong>4</strong></li><li><span>13</span><strong>5</strong></li>
+              <li><span>14</span><strong>4</strong></li><li><span>15</span><strong>6</strong></li>
+              <li><span>16</span><strong>4</strong></li><li><span>17</span><strong>5</strong></li>
+              <li><span>18</span><strong>6</strong></li>
+            </ol>
+            <p class="card-note">Out 41, back 43. Two putts inside eight feet on 15 and 18 — the pro has thoughts.</p>
+          </div>
+        </details>
+
+        <details class="round">
+          <summary>
+            <span class="rd-date">Sat 2 Aug</span>
+            <span class="rd-comp">Bounce game</span>
+            <span class="rd-gross"><strong>85</strong><em>gross</em></span>
+            <span class="rd-net">73 net</span>
+            <span class="rd-putts">31 putts</span>
+            <svg class="ic rd-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="card-strip">
+            <ol class="holes">
+              <li><span>1</span><strong>4</strong></li><li><span>2</span><strong>5</strong></li>
+              <li><span>3</span><strong>4</strong></li><li><span>4</span><strong>6</strong></li>
+              <li><span>5</span><strong>3</strong></li><li><span>6</span><strong>5</strong></li>
+              <li><span>7</span><strong>5</strong></li><li><span>8</span><strong>5</strong></li>
+              <li class="nine"><span>9</span><strong>4</strong></li>
+              <li><span>10</span><strong>5</strong></li><li><span>11</span><strong>4</strong></li>
+              <li><span>12</span><strong>5</strong></li><li><span>13</span><strong>4</strong></li>
+              <li><span>14</span><strong>5</strong></li><li><span>15</span><strong>5</strong></li>
+              <li><span>16</span><strong>4</strong></li><li><span>17</span><strong>4</strong></li>
+              <li><span>18</span><strong>4</strong></li>
+            </ol>
+            <p class="card-note">A quiet 39 coming home. The new gapping between the 7-iron and the 9 is paying already.</p>
+          </div>
+        </details>
+
+        <details class="round">
+          <summary>
+            <span class="rd-date">Sun 27 Jul</span>
+            <span class="rd-comp">Sunday medal</span>
+            <span class="rd-gross"><strong>89</strong><em>gross</em></span>
+            <span class="rd-net">77 net</span>
+            <span class="rd-putts">34 putts</span>
+            <svg class="ic rd-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="card-strip">
+            <ol class="holes">
+              <li><span>1</span><strong>5</strong></li><li><span>2</span><strong>5</strong></li>
+              <li><span>3</span><strong>4</strong></li><li><span>4</span><strong>6</strong></li>
+              <li><span>5</span><strong>4</strong></li><li><span>6</span><strong>5</strong></li>
+              <li><span>7</span><strong>5</strong></li><li><span>8</span><strong>6</strong></li>
+              <li class="nine"><span>9</span><strong>5</strong></li>
+              <li><span>10</span><strong>5</strong></li><li><span>11</span><strong>5</strong></li>
+              <li><span>12</span><strong>4</strong></li><li><span>13</span><strong>5</strong></li>
+              <li><span>14</span><strong>5</strong></li><li><span>15</span><strong>6</strong></li>
+              <li><span>16</span><strong>4</strong></li><li><span>17</span><strong>5</strong></li>
+              <li><span>18</span><strong>5</strong></li>
+            </ol>
+            <p class="card-note">Wind off the sea all day. Thirty-four putts is the whole story.</p>
+          </div>
+        </details>
+
+        <details class="round">
+          <summary>
+            <span class="rd-date">Sat 19 Jul</span>
+            <span class="rd-comp">Fourball, w/ Hart</span>
+            <span class="rd-gross"><strong>86</strong><em>gross</em></span>
+            <span class="rd-net">74 net</span>
+            <span class="rd-putts">32 putts</span>
+            <svg class="ic rd-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="card-strip">
+            <ol class="holes">
+              <li><span>1</span><strong>4</strong></li><li><span>2</span><strong>5</strong></li>
+              <li><span>3</span><strong>5</strong></li><li><span>4</span><strong>5</strong></li>
+              <li><span>5</span><strong>3</strong></li><li><span>6</span><strong>6</strong></li>
+              <li><span>7</span><strong>4</strong></li><li><span>8</span><strong>5</strong></li>
+              <li class="nine"><span>9</span><strong>5</strong></li>
+              <li><span>10</span><strong>4</strong></li><li><span>11</span><strong>5</strong></li>
+              <li><span>12</span><strong>5</strong></li><li><span>13</span><strong>4</strong></li>
+              <li><span>14</span><strong>5</strong></li><li><span>15</span><strong>5</strong></li>
+              <li><span>16</span><strong>5</strong></li><li><span>17</span><strong>4</strong></li>
+              <li><span>18</span><strong>3</strong></li>
+            </ol>
+            <p class="card-note">Birdie at the last in front of the terrace. Hart bought the drinks; the card keeps the proof.</p>
+          </div>
+        </details>
+
+        <details class="round">
+          <summary>
+            <span class="rd-date">Sun 13 Jul</span>
+            <span class="rd-comp">Sunday medal</span>
+            <span class="rd-gross"><strong>88</strong><em>gross</em></span>
+            <span class="rd-net">76 net</span>
+            <span class="rd-putts">33 putts</span>
+            <svg class="ic rd-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="card-strip">
+            <ol class="holes">
+              <li><span>1</span><strong>5</strong></li><li><span>2</span><strong>4</strong></li>
+              <li><span>3</span><strong>5</strong></li><li><span>4</span><strong>6</strong></li>
+              <li><span>5</span><strong>4</strong></li><li><span>6</span><strong>5</strong></li>
+              <li><span>7</span><strong>4</strong></li><li><span>8</span><strong>5</strong></li>
+              <li class="nine"><span>9</span><strong>5</strong></li>
+              <li><span>10</span><strong>5</strong></li><li><span>11</span><strong>4</strong></li>
+              <li><span>12</span><strong>5</strong></li><li><span>13</span><strong>5</strong></li>
+              <li><span>14</span><strong>4</strong></li><li><span>15</span><strong>6</strong></li>
+              <li><span>16</span><strong>4</strong></li><li><span>17</span><strong>5</strong></li>
+              <li><span>18</span><strong>5</strong></li>
+            </ol>
+            <p class="card-note">Steady, unspectacular, four over on the par fives. That's the winter project named.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <div class="game-lower">
+      <section class="plate" aria-labelledby="proTitle">
+        <header class="plate-head">
+          <h2 id="proTitle">The pro's note</h2>
+          <span class="serial">After Tuesday's lesson</span>
+        </header>
+        <blockquote class="pro-note">
+          <p>&ldquo;Ball position has crept forward again — we reset it and the strike came
+            back within a dozen swings. Before the Captain's Prize I want one more look at
+            the 60-yard pitch. Bring the 54.&rdquo;</p>
+          <cite>— D. Whitcombe, Head Professional</cite>
+        </blockquote>
+        <div class="tag" id="lessonTag">
+          <span class="tag-hole" aria-hidden="true"></span>
+          <div class="tag-body">
+            <p class="tag-title">Next lesson · Tue 19 · 4:00 pm</p>
+            <p class="tag-meta">The studio · bring the 54° wedge</p>
+          </div>
+          <span class="tag-end" aria-hidden="true"></span>
+        </div>
+        <div class="chip-row">
+          <a class="chip" href="concierge.html?service=coaching">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20v-8m0 0 8-8m-8 8L4 4"/></svg>
+            Book another lesson</a>
+          <a class="chip" href="concierge.html?service=fitting">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l4 4L7 21H3v-4L14 6zM12 8l4 4"/></svg>
+            Wedge fitting</a>
+        </div>
+      </section>
+
+      <section class="plate" aria-labelledby="bestsTitle">
+        <header class="plate-head">
+          <h2 id="bestsTitle">Personal bests</h2>
+          <span class="serial">Engraved, quietly</span>
+        </header>
+        <ul class="bests">
+          <li><strong>78</strong><span>lowest gross<em>Autumn Meeting, last year</em></span></li>
+          <li><strong>11/14</strong><span>fairways in one round<em>Sat 2 Aug, this season</em></span></li>
+          <li><strong>268 yd</strong><span>longest measured drive<em>the 16th, downwind, witnessed</em></span></li>
+        </ul>
+        <p class="desk-line">Records are kept from competition and attested cards only.
+          The 268 had three witnesses and none of them will let you forget it.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="foot wrap">
+    <div class="foot-rule">
+      <p class="foot-crest">AUREON <em>· est. 1907</em></p>
+      <nav aria-label="Footer">
+        <a href="club.html#notices">Course conditions</a>
+        <a href="concierge.html">Concierge</a>
+        <a href="index.html#main">Member home</a>
+      </nav>
+      <p class="foot-fine">One Fairway Lane · By the sea · Members and their guests only</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

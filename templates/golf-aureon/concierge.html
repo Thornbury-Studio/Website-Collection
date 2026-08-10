@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Concierge — AUREON</title>
+  <meta name="description" content="Lockers, transport, guest arrangements, private events — put it in writing to the desk and consider it in hand.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/concierge.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Concierge — AUREON">
+  <meta property="og:description" content="The desk is yours: anything outside the ordinary bookings, in writing, in hand.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/img/au-lockers.webp">
+  <meta name="theme-color" content="#F7F5F1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Albert+Sans:ital,wght@0,300..900;1,300..900&family=Fragment+Mono:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="concierge">
+
+  <a class="skip" href="#main">Skip to the desk</a>
+
+  <header class="top">
+    <a class="crest" href="index.html" aria-label="Aureon Club home">
+      <svg class="crest-ring" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5"/>
+        <path d="M13 27 L20 11 L27 27 M15.8 21.5 h8.4"/>
+      </svg>
+      <span class="crest-name">AUREON<em>est. 1907</em></span>
+    </a>
+    <nav class="top-nav" aria-label="Member areas">
+      <a href="index.html">Home</a>
+      <a href="book.html">Book a Round</a>
+      <a href="game.html">My Game</a>
+      <a href="club.html">The Club</a>
+      <a href="concierge.html" aria-current="page">Concierge</a>
+    </nav>
+    <p class="member-chip"><span class="member-name">J.&nbsp;Ashworth</span><span class="member-no">№&nbsp;0212</span></p>
+    <button class="nav-burger" id="navBurger" type="button" aria-expanded="false" aria-controls="topNavList" aria-label="Menu">
+      <svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </header>
+
+  <main id="main" class="wrap page-head-wrap">
+    <header class="page-head">
+      <h1>The desk is yours</h1>
+      <p class="page-lede">Bookings have their own pages; this one is for everything else.
+        Put it in writing — a line is plenty — and the desk will come back to you
+        before the day is out.</p>
+    </header>
+
+    <div class="desk-grid">
+
+      <form class="plate plate-compose" id="deskForm" novalidate>
+        <header class="plate-head">
+          <h2>A note to the desk</h2>
+          <span class="serial">In confidence</span>
+        </header>
+
+        <div class="b-field">
+          <label for="reqKind">The matter</label>
+          <select class="b-input" id="reqKind">
+            <option value="locker">Lockers &amp; storage</option>
+            <option value="transport">Transport &amp; travel</option>
+            <option value="guest">Guest arrangements</option>
+            <option value="private">A private event</option>
+            <option value="coaching">Coaching with the pro</option>
+            <option value="fitting">Club fitting</option>
+            <option value="recovery">Recovery suite</option>
+            <option value="practice">Practice bays</option>
+            <option value="other">Something else entirely</option>
+          </select>
+        </div>
+
+        <div class="b-field">
+          <label for="reqText">In your own words</label>
+          <textarea class="b-input b-area" id="reqText" rows="4"
+            placeholder="Two guests arriving Friday on the 4:10 — could a car meet them, and a quiet table for three at seven?"></textarea>
+          <p class="b-hint" id="reqHint">The desk reads every word; brevity is welcome, detail is used.</p>
+        </div>
+
+        <div class="b-field">
+          <label for="reqWhen">When it matters</label>
+          <input class="b-input" id="reqWhen" type="text" placeholder="Friday, before 4 pm" autocomplete="off">
+        </div>
+
+        <button class="btn btn-solid" id="deskBtn" type="submit">
+          <span id="deskLabel">Hand it to the desk</span>
+          <svg class="b-spin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+        </button>
+      </form>
+
+      <aside class="desk-side">
+        <div class="plate plate-keeper">
+          <header class="plate-head">
+            <h2>At the desk</h2>
+            <span class="serial">7 am – 9 pm</span>
+          </header>
+          <p class="keeper-name">M.&nbsp;Delacroix</p>
+          <p class="keeper-role">Head Concierge, eleventh season</p>
+          <p class="desk-line">Knows the trains, the tides, every maître d' within thirty
+            miles, and which lockers are becoming available before the board does.</p>
+          <p class="keeper-line">House line <strong>ext. 3</strong> · from outside <strong>01749 400212</strong></p>
+        </div>
+
+        <div class="plate">
+          <header class="plate-head">
+            <h2>In hand</h2>
+            <span class="serial" id="ledgerCount">—</span>
+          </header>
+          <ul class="ledger" id="ledger"><!-- rendered --></ul>
+          <p class="ledger-empty" id="ledgerEmpty">Nothing in hand. When you write to the
+            desk, your notes and their state live here.</p>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer class="foot wrap">
+    <div class="foot-rule">
+      <p class="foot-crest">AUREON <em>· est. 1907</em></p>
+      <nav aria-label="Footer">
+        <a href="club.html#notices">Course conditions</a>
+        <a href="concierge.html">Concierge</a>
+        <a href="index.html#main">Member home</a>
+      </nav>
+      <p class="foot-fine">One Fairway Lane · By the sea · Members and their guests only</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

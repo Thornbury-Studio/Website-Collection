@@ -23,7 +23,7 @@
   var nav = $('nav');
   var chargeFill = $('chargeFill');
   var chargeLabel = $('chargeLabel');
-  var chargeWrap = chargeFill.closest('.charge');
+  var chargeWrap = chargeFill ? chargeFill.closest('.charge') : null;
   var lastPct = -1;
   var lastScrolled = false;
   var scrollRaf = 0;
@@ -35,17 +35,17 @@
     var scrolled = y > 24;
     if (scrolled !== lastScrolled) {
       lastScrolled = scrolled;
-      nav.classList.toggle('is-scrolled', scrolled);
+      if (nav) nav.classList.toggle('is-scrolled', scrolled);
     }
 
     var max = document.documentElement.scrollHeight - window.innerHeight;
     var p = max > 0 ? Math.min(Math.max(y / max, 0), 1) : 0;
     var pct = Math.round(p * 100);
-    chargeFill.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    if (chargeFill) chargeFill.style.transform = 'scaleX(' + p.toFixed(4) + ')';
     if (pct !== lastPct) {
       lastPct = pct;
-      chargeLabel.textContent = pct + '%';
-      chargeWrap.classList.toggle('is-full', pct >= 100);
+      if (chargeLabel) chargeLabel.textContent = pct + '%';
+      if (chargeWrap) chargeWrap.classList.toggle('is-full', pct >= 100);
     }
   }
 
@@ -67,6 +67,12 @@
       }
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
     revealEls.forEach(function (el) { revealIO.observe(el); });
+    // Safety net, same as the sibling templates: if the observer never fires
+    // (layout quirk, odd engine), show everything rather than leave the page
+    // blank. The CSS `scripting` guard covers JS being off entirely.
+    setTimeout(function () {
+      revealEls.forEach(function (el) { el.classList.add('is-in'); });
+    }, 2500);
   } else {
     revealEls.forEach(function (el) { el.classList.add('is-in'); });
   }
@@ -126,7 +132,7 @@
   }
 
   var counts = document.querySelectorAll('.spec-num');
-  if ('IntersectionObserver' in window) {
+  if ('IntersectionObserver' in window && counts.length) {
     var countIO = new IntersectionObserver(function (entries) {
       for (var i = 0; i < entries.length; i++) {
         if (entries[i].isIntersecting) {
@@ -161,30 +167,91 @@
   /* ---------- flavor switcher ---------- */
 
   var flavors = $('flavors');
-  flavors.addEventListener('click', function (e) {
-    var btn = e.target.closest('.flavor');
-    if (!btn) return;
-    document.body.setAttribute('data-flavor', btn.getAttribute('data-flavor'));
-    flavors.querySelectorAll('.flavor').forEach(function (f) {
-      f.classList.toggle('is-on', f === btn);
+  if (flavors) {
+    var setFlavor = function (name) {
+      document.body.setAttribute('data-flavor', name);
+      flavors.querySelectorAll('.flavor').forEach(function (f) {
+        var on = f.getAttribute('data-flavor') === name;
+        f.classList.toggle('is-on', on);
+        f.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      // Survives a reload — picking a colorway then losing it on refresh
+      // reads as a bug rather than a demo.
+      try { localStorage.setItem('cupcake.flavor', name); } catch (err) {}
+    };
+
+    flavors.addEventListener('click', function (e) {
+      var btn = e.target.closest('.flavor');
+      if (btn) setFlavor(btn.getAttribute('data-flavor'));
     });
-  });
+
+    try {
+      var saved = localStorage.getItem('cupcake.flavor');
+      if (saved && flavors.querySelector('.flavor[data-flavor="' + saved + '"]')) setFlavor(saved);
+    } catch (err) {}
+  }
 
   /* ---------- fake cart button ---------- */
 
   var buyBtn = $('buyBtn');
-  var bought = false;
-  buyBtn.addEventListener('click', function () {
-    if (bought) return;
-    bought = true;
-    buyBtn.querySelector('span').textContent = 'In cart — it isn’t, this is a demo';
-    setTimeout(function () {
-      buyBtn.querySelector('span').textContent = 'Add to cart';
-      bought = false;
-    }, 2600);
-  });
+  if (buyBtn) {
+    var buyLabel = buyBtn.querySelector('span');
+    var bought = false;
+    buyBtn.addEventListener('click', function () {
+      if (bought || !buyLabel) return;
+      bought = true;
+      buyLabel.textContent = 'Added to cart';
+      setTimeout(function () {
+        buyLabel.textContent = 'Add to cart';
+        bought = false;
+      }, 2600);
+    });
+  }
+
+  /* ---------- founder portrait fallback ----------
+     CSP here is script-src 'self', so an inline onerror attribute would be
+     blocked. If the portrait ever goes missing the monogram underneath it
+     shows instead of a broken-image icon. */
+
+  var founderImg = document.querySelector('.founder-frame img');
+  if (founderImg) {
+    var markBroken = function () {
+      founderImg.parentNode.classList.add('is-broken');
+    };
+    founderImg.addEventListener('error', markBroken);
+    // Covers the case where the error fired before this script ran.
+    if (founderImg.complete && founderImg.naturalWidth === 0) markBroken();
+  }
+
+  /* ---------- disclaimer modal ----------
+     Native <dialog>: Esc, focus trapping and background inertness are the
+     browser's job. Older engines without showModal() fall back to the plain
+     `open` attribute, which still shows the content rather than nothing. */
+
+  var infoModal = $('infoModal');
+  var infoOpen = $('infoOpen');
+  var infoClose = $('infoClose');
+
+  if (infoModal && infoOpen) {
+    infoOpen.addEventListener('click', function () {
+      if (typeof infoModal.showModal === 'function') infoModal.showModal();
+      else infoModal.setAttribute('open', '');
+    });
+
+    var closeInfo = function () {
+      if (typeof infoModal.close === 'function') infoModal.close();
+      else infoModal.removeAttribute('open');
+    };
+    if (infoClose) infoClose.addEventListener('click', closeInfo);
+
+    // Clicking the backdrop lands on the <dialog> itself, not its contents.
+    infoModal.addEventListener('click', function (e) {
+      if (e.target === infoModal) closeInfo();
+    });
+  }
 
   /* ---------- footer year ---------- */
 
-  $('year').textContent = new Date().getFullYear();
+  var yearEl = $('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();

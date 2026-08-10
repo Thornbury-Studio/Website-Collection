@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>EVEN — The Running App for Holding Pace</title>
+  <meta name="description" content="EVEN is a running app for the quiet kind of fast. No leaderboards, no kudos to chase — a calm record of every run, an evenness score, and printable race-day pace bands.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/running-even/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EVEN — The Running App for Holding Pace">
+  <meta property="og:description" content="No leaderboards. No kudos economy. A quiet record of you, getting steadier — plus printable race-day pace bands.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/running-even/img/ev-hero.webp">
+  <meta name="theme-color" content="#FBFBFC">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Spline+Sans+Mono:wght@300..700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!--
+THESIS: The page is a race-day pace band worn at full scale — a ten-kilometre run from
+start to finish where even pacing, not heroics, is the promise. It refuses the dark
+leaderboard dashboard and the hype-metric hero.
+OWN-WORLD: Laminated cool-white card on a pale silver ground; hairline steel rules;
+charcoal tabular numerals in Spline Sans Mono; Schibsted Grotesk speaking; one brushed
+sheen that follows the pointer. No green, no purple, nothing loud.
+STORY: A runner tired of feed noise arrives, understands EVEN keeps runs like records
+instead of content, builds a printable pace band, and takes the app.
+FIRST VIEWPORT: Full-bleed fog photograph, runner right; headline and one action in the
+left negative space; the laminated ten-cell band strip along the bottom edge, ticking
+under a travelling sheen; the split rail fixed at the right edge reading 0.0 km.
+FORM: Race-day pace band — candidate 5 of 7 on the ordered list, seed 05530ac4.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
+review, the verdict, and DESIGN.md
+-->
+
+  <a class="skip" href="#feed">Skip to content</a>
+
+  <header class="top" id="top">
+    <a class="mark" href="#" aria-label="EVEN — back to the start">
+      <svg class="mark-rule" viewBox="0 0 44 8" aria-hidden="true"><path d="M2 4h40" stroke-linecap="round"/></svg>
+      EVEN
+    </a>
+    <nav class="top-nav" aria-label="Site">
+      <a href="#feed">The app</a>
+      <a href="#band">Pace bands</a>
+      <a href="#block">Training</a>
+      <a href="#plans">Plans</a>
+    </nav>
+    <a class="btn btn-solid btn-sm" href="#plans">Get EVEN</a>
+  </header>
+
+  <!-- Split rail: scroll position read as distance -->
+  <div class="rail" id="rail" aria-hidden="true">
+    <span class="rail-end">0.0</span>
+    <div class="rail-track" id="railTrack">
+      <div class="rail-fill" id="railFill"></div>
+      <div class="rail-thumb" id="railThumb">
+        <span class="rail-km" id="railKm">0.0</span>
+        <span class="rail-at" id="railAt">0:00</span>
+      </div>
+    </div>
+    <span class="rail-end">10.0</span>
+  </div>
+  <div class="railbar" id="railbar" aria-hidden="true">
+    <i class="railbar-fill" id="railbarFill"></i>
+    <span class="railbar-km" id="railbarKm">0.0 km</span>
+  </div>
+
+  <!-- ===== KM 0 · Start ===== -->
+  <section class="hero" data-km="0">
+    <picture>
+      <source media="(max-width: 700px)" srcset="img/ev-hero-sm.webp">
+      <img class="hero-photo" src="img/ev-hero.webp"
+        alt="A lone runner in charcoal and grey mid-stride on a pale concrete embankment, deep in silver morning fog."
+        width="2400" height="1018" fetchpriority="high">
+    </picture>
+    <div class="hero-copy">
+      <h1>Run yourself<br>even.</h1>
+      <p>EVEN is a running app for the quiet kind of fast. No leaderboards,
+        no kudos to chase — a calm record of you, getting steadier.</p>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="#plans">Get EVEN — it's free</a>
+        <a class="btn btn-ghost" href="#band">Build a race band</a>
+      </div>
+    </div>
+    <div class="hero-band">
+      <p class="hero-cue" id="heroCue">This page is ten kilometres long. Scroll to start.</p>
+      <div class="band band-sheen" id="heroStrip" role="img" aria-label="A laminated pace band: ten kilometres at 5:40 each, finishing in 56:40.">
+        <div class="band-clasp">
+          <span class="band-title">SUN&nbsp;10&nbsp;K</span>
+          <span class="band-goal">56:40</span>
+        </div>
+        <ol class="band-cells">
+          <li><span>km 1</span><strong>5:40</strong><em>5:40</em></li>
+          <li><span>km 2</span><strong>5:40</strong><em>11:20</em></li>
+          <li><span>km 3</span><strong>5:40</strong><em>17:00</em></li>
+          <li><span>km 4</span><strong>5:40</strong><em>22:40</em></li>
+          <li><span>km 5</span><strong>5:40</strong><em>28:20</em></li>
+          <li><span>km 6</span><strong>5:40</strong><em>34:00</em></li>
+          <li><span>km 7</span><strong>5:40</strong><em>39:40</em></li>
+          <li><span>km 8</span><strong>5:40</strong><em>45:20</em></li>
+          <li><span>km 9</span><strong>5:40</strong><em>51:00</em></li>
+          <li><span>km 10</span><strong>5:40</strong><em>56:40</em></li>
+        </ol>
+        <div class="band-clasp band-clasp-end">
+          <span class="band-title">FINISH</span>
+          <span class="band-goal">5:40&nbsp;/km</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KM 1 · The feed ===== -->
+  <section class="km" id="feed" data-km="1">
+    <div class="km-rule reveal"><span class="km-tag">km 1</span></div>
+    <div class="split-2">
+      <div class="reveal">
+        <h2>The feed is just you.</h2>
+        <p class="lede">Open EVEN after a run and there's no scoreboard waiting.
+          There's your run, kept like a record card — every kilometre on its own
+          line, and one number we actually care about: how level you held it.</p>
+        <p>Tap any kilometre to see how far it drifted from your target. Drift
+          is information, not judgement — the last one is allowed to be quick.
+          You may kick, after all.</p>
+        <div class="even-note reveal">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="ic"><path d="M3 12h6l2-5 3 10 2-5h5"/></svg>
+          <p><strong>Evenness</strong> scores every run 0–100 on how steadily you
+            held your pace. Not how hard you went — how well you held.</p>
+        </div>
+      </div>
+      <article class="runcard reveal" aria-label="A recorded run in the EVEN app">
+        <header class="runcard-head">
+          <div>
+            <h3>Sunday morning 10&nbsp;K</h3>
+            <p class="runcard-when">Sun 26 Jul · 7:04 am · Riverside loop</p>
+          </div>
+          <div class="even-score" id="evenScore">
+            <svg viewBox="0 0 64 64" class="even-dial" aria-hidden="true">
+              <circle class="even-dial-bg" cx="32" cy="32" r="28"/>
+              <circle class="even-dial-arc" id="evenArc" cx="32" cy="32" r="28"/>
+            </svg>
+            <span class="even-num" id="evenNum">0</span>
+            <span class="even-lbl">evenness</span>
+          </div>
+        </header>
+        <dl class="runcard-stats">
+          <div><dt>Distance</dt><dd>10.0 <i>km</i></dd></div>
+          <div><dt>Time</dt><dd>56:33</dd></div>
+          <div><dt>Avg pace</dt><dd>5:39 <i>/km</i></dd></div>
+        </dl>
+        <table class="splits" id="splitTable">
+          <caption class="sr-only">Kilometre splits against a 5:40 target</caption>
+          <thead><tr><th scope="col">km</th><th scope="col">split</th><th scope="col" class="ta-r">vs target</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>5:44</td><td class="ta-r" data-d="+4"></td></tr>
+            <tr><td>2</td><td>5:41</td><td class="ta-r" data-d="+1"></td></tr>
+            <tr><td>3</td><td>5:39</td><td class="ta-r" data-d="-1"></td></tr>
+            <tr><td>4</td><td>5:41</td><td class="ta-r" data-d="+1"></td></tr>
+            <tr><td>5</td><td>5:38</td><td class="ta-r" data-d="-2"></td></tr>
+            <tr><td>6</td><td>5:40</td><td class="ta-r" data-d="0"></td></tr>
+            <tr><td>7</td><td>5:39</td><td class="ta-r" data-d="-1"></td></tr>
+            <tr><td>8</td><td>5:42</td><td class="ta-r" data-d="+2"></td></tr>
+            <tr><td>9</td><td>5:38</td><td class="ta-r" data-d="-2"></td></tr>
+            <tr><td>10</td><td>5:31</td><td class="ta-r" data-d="-9"></td></tr>
+          </tbody>
+        </table>
+        <p class="runcard-foot">Steadiest run this month. The kick on km&nbsp;10 cost you two
+          evenness points and was worth every one of them.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== KM 3 · The band builder ===== -->
+  <section class="km km-tint" id="band" data-km="3">
+    <div class="km-rule reveal"><span class="km-tag">km 3</span></div>
+    <div class="band-head reveal">
+      <h2>Paper beats panic.</h2>
+      <p class="lede">Watches die and nerves lie. A pace band on your wrist is
+        race-day truth at a glance: the split you need, at every marker, decided
+        while you were still calm. Build yours here — print it, tape it on.</p>
+    </div>
+
+    <form class="builder reveal" id="builder" novalidate>
+      <fieldset class="b-field">
+        <legend>Distance</legend>
+        <div class="seg" role="radiogroup" aria-label="Race distance">
+          <label><input type="radio" name="dist" value="5" ><span>5&nbsp;K</span></label>
+          <label><input type="radio" name="dist" value="10" checked><span>10&nbsp;K</span></label>
+          <label><input type="radio" name="dist" value="21.0975"><span>Half</span></label>
+          <label><input type="radio" name="dist" value="42.195"><span>Marathon</span></label>
+        </div>
+      </fieldset>
+      <div class="b-field">
+        <label for="goalTime">Goal time</label>
+        <input class="b-input" id="goalTime" name="goalTime" type="text" inputmode="numeric"
+          placeholder="52:30" autocomplete="off" spellcheck="false" aria-describedby="goalHint">
+        <p class="b-hint" id="goalHint">Like 52:30 — or 1:55:00 for the long ones.</p>
+      </div>
+      <fieldset class="b-field">
+        <legend>Strategy</legend>
+        <div class="seg" role="radiogroup" aria-label="Pacing strategy">
+          <label><input type="radio" name="strat" value="even" checked><span>Dead even</span></label>
+          <label><input type="radio" name="strat" value="neg"><span>Gentle negative</span></label>
+        </div>
+      </fieldset>
+      <button class="btn btn-solid b-go" id="buildBtn" type="submit">
+        <span class="b-go-label">Set my splits</span>
+        <svg class="b-go-spin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+      </button>
+    </form>
+
+    <div class="b-result" id="bandResult" aria-live="polite">
+      <div class="b-empty" id="bandEmpty">
+        <div class="band band-ghost" aria-hidden="true">
+          <div class="band-clasp"><span class="band-title">YOUR&nbsp;RACE</span><span class="band-goal">--:--</span></div>
+          <ol class="band-cells">
+            <li><span>km 1</span><strong>-:--</strong><em>-:--</em></li>
+            <li><span>km 2</span><strong>-:--</strong><em>-:--</em></li>
+            <li><span>km 3</span><strong>-:--</strong><em>-:--</em></li>
+            <li><span>km 4</span><strong>-:--</strong><em>-:--</em></li>
+            <li><span>km 5</span><strong>-:--</strong><em>-:--</em></li>
+          </ol>
+        </div>
+        <p>No band yet. Set a goal above — it takes about four seconds,
+          which is less than you'll lose at the first water station.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KM 6 · Interlude ===== -->
+  <section class="interlude" data-km="6">
+    <div class="km-rule reveal"><span class="km-tag">km 6</span></div>
+    <figure class="interlude-fig reveal">
+      <img src="img/ev-bridge.webp" loading="lazy" decoding="async" width="1248" height="832"
+        alt="Seen from above, the runner crosses a wide pale concrete bridge alone in silver fog.">
+      <figcaption>
+        <blockquote>
+          <p>&ldquo;The fastest runners I coach are the most boring ones. They run the
+            same pace all day. Then one day the same pace is fast.&rdquo;</p>
+        </blockquote>
+        <cite>— every good coach, eventually</cite>
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ===== KM 7 · Training ===== -->
+  <section class="km" id="block" data-km="7">
+    <div class="km-rule reveal"><span class="km-tag">km 7</span></div>
+    <div class="split-2 split-2-rev">
+      <figure class="block-fig reveal">
+        <img src="img/ev-shoes.webp" loading="lazy" decoding="async" width="1000" height="730"
+          alt="Looking straight down at grey running shoes on wet pale asphalt, ready to start.">
+      </figure>
+      <div class="reveal">
+        <h2>Six weeks of boring, on purpose.</h2>
+        <p class="lede">The Steady Block is EVEN's training plan: six weeks that
+          repeat more than they surprise. Every week tells you exactly what it
+          wants. None of it is heroic. All of it adds up.</p>
+        <ol class="weeks" id="weeks">
+          <li class="week">
+            <button class="week-btn" type="button" aria-expanded="false">
+              <span class="week-no">wk 1</span><span class="week-name">Base</span>
+              <span class="week-km">24 km</span>
+              <svg class="ic week-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="week-more"><p>Four easy runs. Nothing brave. Tue 6 easy · Thu 6 easy · Sat 4 easy · Sun 8 long.</p></div>
+          </li>
+          <li class="week">
+            <button class="week-btn" type="button" aria-expanded="false">
+              <span class="week-no">wk 2</span><span class="week-name">Base</span>
+              <span class="week-km">27 km</span>
+              <svg class="ic week-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="week-more"><p>The same four runs — one gets longer. Tue 6 easy · Thu 7 easy · Sat 4 easy · Sun 10 long.</p></div>
+          </li>
+          <li class="week">
+            <button class="week-btn" type="button" aria-expanded="false">
+              <span class="week-no">wk 3</span><span class="week-name">Rhythm</span>
+              <span class="week-km">30 km</span>
+              <svg class="ic week-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="week-more"><p>Two runs pick up to steady. Hold, don't push. Tue 7 w/ 3 steady · Thu 7 easy · Sat 5 w/ 2 steady · Sun 11 long.</p></div>
+          </li>
+          <li class="week">
+            <button class="week-btn" type="button" aria-expanded="false">
+              <span class="week-no">wk 4</span><span class="week-name">Absorb</span>
+              <span class="week-km">22 km</span>
+              <svg class="ic week-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="week-more"><p>A step back on purpose. The fitness lands while you jog. Tue 5 easy · Thu 6 easy · Sat rest · Sun 11 long, gentle.</p></div>
+          </li>
+          <li class="week">
+            <button class="week-btn" type="button" aria-expanded="false">
+              <span class="week-no">wk 5</span><span class="week-name">Rhythm</span>
+              <span class="week-km">32 km</span>
+              <svg class="ic week-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="week-more"><p>Steady runs stretch. The pace starts feeling like yours. Tue 8 w/ 4 steady · Thu 7 easy · Sat 5 w/ 3 steady · Sun 12 long.</p></div>
+          </li>
+          <li class="week">
+            <button class="week-btn" type="button" aria-expanded="false">
+              <span class="week-no">wk 6</span><span class="week-name">Sharpen</span>
+              <span class="week-km">26 km</span>
+              <svg class="ic week-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="week-more"><p>Short, level efforts at goal pace. Then rest. Then race. Tue 6 w/ 3 @ goal · Thu 5 easy · Sat 3 w/ strides · Sun race day.</p></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KM 9 · Plans ===== -->
+  <section class="km km-tint" id="plans" data-km="9">
+    <div class="km-rule reveal"><span class="km-tag">km 9</span></div>
+    <div class="band-head reveal">
+      <h2>Two ways to run.</h2>
+      <p class="lede">Both of them quiet. EVEN records everything and never asks
+        you to perform it. Club adds the tools for racing well.</p>
+    </div>
+    <div class="plans reveal">
+      <div class="plan">
+        <header class="plan-head">
+          <h3>EVEN</h3>
+          <p class="plan-price"><strong>Free</strong><span>forever</span></p>
+        </header>
+        <ul class="plan-list">
+          <li>Every run recorded, kept, exportable</li>
+          <li>Evenness score on every run</li>
+          <li>One pace band at a time</li>
+          <li>A feed with exactly one runner in it</li>
+        </ul>
+        <button class="btn btn-ghost plan-btn" type="button" data-plan="EVEN">Start running</button>
+      </div>
+      <div class="plan plan-club">
+        <header class="plan-head">
+          <h3>EVEN Club</h3>
+          <p class="plan-price"><strong>$4</strong><span>a month</span></p>
+        </header>
+        <ul class="plan-list">
+          <li>Unlimited printable pace bands</li>
+          <li>Steady Blocks — 6 to 16-week plans</li>
+          <li>Race-day watch mode, splits at a glance</li>
+          <li>Split-by-split replays of every race</li>
+        </ul>
+        <button class="btn btn-solid plan-btn" type="button" data-plan="EVEN Club">Try Club free for 30 days</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KM 10 · Finish ===== -->
+  <footer class="finish" data-km="10">
+    <div class="km-rule reveal"><span class="km-tag">km 10</span></div>
+    <div class="finish-inner reveal">
+      <p class="finish-big"><span id="finishKm">10.0</span><i>km</i></p>
+      <p class="finish-line">You just ran this page. The real thing feels better.</p>
+      <a class="btn btn-solid" href="#plans">Get EVEN — it's free</a>
+      <p class="finish-stores">On the App Store and Google Play</p>
+    </div>
+    <div class="foot-rule">
+      <a class="mark mark-foot" href="#top">
+        <svg class="mark-rule" viewBox="0 0 44 8" aria-hidden="true"><path d="M2 4h40" stroke-linecap="round"/></svg>
+        EVEN
+      </a>
+      <nav aria-label="Legal">
+        <a href="#top">Privacy</a>
+        <a href="#top">Terms</a>
+        <a href="#top">hello@runeven.app</a>
+      </nav>
+      <p>© 2026 EVEN</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
