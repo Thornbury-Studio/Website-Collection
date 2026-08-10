@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Website Template Portfolio | Original Client-Ready Templates</title>
-<meta name="description" content="A gallery of original, copyright-free website templates for client showcase purposes.">
+<meta name="description" content="A collection of client-ready website experiences.">
 <meta name="robots" content="index, follow">
 <meta name="google-site-verification" content="MTLz2nf2yOCRsuPiWpfSKXMDBfyYcRBji2pYsYoqpcg" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'self';">
@@ -28,7 +28,7 @@
   "@type": "WebSite",
   "name": "Website Collection",
   "url": "https://website-collection-zanezhijies-projects.vercel.app/",
-  "description": "A gallery of original, copyright-free website templates for client showcase purposes.",
+  "description": "A collection of client-ready website experiences.",
   "publisher": {
     "@type": "Person",
     "name": "Zane"
@@ -234,7 +234,10 @@
     line-height: 1.12;
     letter-spacing: -0.01em;
   }
-  .hero h1 .line { display: block; overflow: hidden; }
+  /* overflow:hidden masks the slide-up reveal, but it also clips descenders —
+     the italic g of "glanced" and the j of "just". Pad the mask below the
+     baseline and pull the same amount back so the spacing is unchanged. */
+  .hero h1 .line { display: block; overflow: hidden; padding-bottom: 0.16em; margin-bottom: -0.16em; }
   .hero h1 .line span { display: block; opacity: 0; transform: translateY(110%); animation: reveal 0.9s cubic-bezier(.22,1,.36,1) forwards; }
   .hero h1 .line:nth-child(1) span { animation-delay: 0.15s; }
   .hero h1 .line:nth-child(2) span { animation-delay: 0.3s; }
@@ -707,20 +710,20 @@
 
     <!-- about -->
     <div class="pane" data-pane="about">
-      <p>A gallery of original, self-contained website templates, built for client demos.
-         Every card opens a real, working site — not a screenshot and not a prototype.</p>
+      <p>A collection of client-ready websites created by members of our agency.
+         Every card opens a complete, working experience.</p>
       <p>Each template is plain HTML, CSS and JavaScript with no build step, no framework
          and no bundler. They deploy as static files and run straight from the folder.</p>
       <dl class="facts">
         <div><dt>Templates live</dt><dd id="aboutCount">7</dd></div>
         <div><dt>Trackers &amp; cookies</dt><dd>0</dd></div>
-        <div><dt>Build steps</dt><dd>0</dd></div>
-        <div><dt>Frameworks</dt><dd>0</dd></div>
+        <div><dt>Setup required</dt><dd>None</dd></div>
+        <div><dt>Runs on</dt><dd>Any host</dd></div>
       </dl>
-      <p class="fine">Every layout, and all code, is original work. Imagery is either original,
-         AI&#8209;generated for the template, public domain, or licensed stock &mdash; each template&rsquo;s
-         IMAGE&#8209;CREDITS file records exactly which. TRIGGERED is an unofficial concept redesign and
-         is not affiliated with the real venue.</p>
+      <p class="fine">Every site in this collection is designed and built by members of our agency.
+         The brands, products and copy are original concepts created for presentation. Imagery is
+         either licensed royalty-free or generated with AI &mdash; nothing here is used under anyone
+         else&rsquo;s copyright.</p>
     </div>
 
     <!-- unlock prompt -->
@@ -771,8 +774,7 @@
   </h1>
   <p>A growing collection of original, self-contained website templates for client demos. Every one is a working site, not a screenshot — click in and see for yourself.</p>
   <div class="hero-actions">
-    <a href="templates/business-corporate/index.html" class="btn btn-primary">Open Meridian Partners</a>
-    <a href="#gallery" class="btn btn-outline">Browse Gallery</a>
+    <a href="#gallery" class="btn btn-primary">Browse Gallery</a>
   </div>
 </section>
 
@@ -784,6 +786,7 @@
       <span>SaaS &amp; AI</span>
       <span>Restaurant &amp; Food</span>
       <span>Entertainment</span>
+      <span>Health &amp; Fitness</span>
       <span>Product &amp; Hardware</span>
       <span>Portfolio &amp; Personal</span>
     </div>
@@ -800,12 +803,12 @@
     <a class="card reveal" href="templates/business-corporate/index.html">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <img src="img/business-corporate-sm.webp" alt="The Meridian Partners homepage: a restrained, typographic consulting site." width="480" height="300" loading="lazy" decoding="async">
+        <img src="img/business-corporate-sm.webp" alt="The Meridian Partners homepage: a navy hero beside a photograph of three advisers mid-session." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Business / Corporate</span>
         <h3>Meridian Partners</h3>
-        <p>A consulting-firm site with a hero, services grid, stats, testimonials, and a working contact form UI.</p>
+        <p>An independent strategy office that argues with evidence &mdash; four case studies you can switch between, a four-stage engagement model, and published thinking.</p>
         <span class="card-foot">
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
@@ -839,7 +842,7 @@
       <div class="card-body">
         <span class="tag">E-Commerce / Design Store</span>
         <h3>OBLIK</h3>
-        <p>A kinetic design-object store with product filters, color switching, quick views, and a working demo cart.</p>
+        <p>A kinetic design-object store with product filters, color switching, quick views, and an interactive cart.</p>
         <span class="card-foot">
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
@@ -984,6 +987,108 @@
       </div>
     </a>
 
+    <a class="card reveal" href="templates/kids-smallhours/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/kids-smallhours-sm.webp" alt="The SMALL HOURS homepage: two children walk a sunlit garden path under a quiet serif wordmark." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">E-commerce / Childrenswear</span>
+        <h3>SMALL HOURS</h3>
+        <p>A premium kids' fashion brand built the quiet way &mdash; one enormous AI-shot garden campaign, twelve flat-lay pieces in four collections, age-based sizing and a bag that knows when delivery is free.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/streetwear-form01/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/streetwear-form01-sm.webp" alt="The FORM/01 hero: a model in oversized grey techwear filling the screen, the giant word FORM/01 overlapping him." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">E-commerce / Streetwear</span>
+        <h3>FORM/01</h3>
+        <p>A monochrome techwear label with a broken product grid, full-screen takeovers, and a cart that speaks in mono.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/vintage-menswear/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/vintage-menswear-sm.webp" alt="The MORROW &amp; FINCH cover: a man in a camel overcoat on a foggy 1930s street beside &lsquo;Made for Another Era&rsquo;." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">E-commerce / Heritage</span>
+        <h3>MORROW &amp; FINCH</h3>
+        <p>A working menswear shop dressed as a 1930s catalogue &mdash; ten AI-photographed plates in five departments, product pages, and an Order Book cart written like a ledger.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/gym-local/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/gym-local-sm.webp" alt="The HOYT'S homepage: &lsquo;Train where the town trains&rsquo; in huge poster type, &lsquo;town&rsquo; in red." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Fitness / Local Gym</span>
+        <h3>HOYT&rsquo;S</h3>
+        <p>A neighborhood boxing gym as a riso print &mdash; every photo run through a two-color duotone, and a 33-class weekly timetable that marks today's column from the visitor's own clock.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/buffet-longtable/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/buffet-longtable-sm.webp" alt="The LONG TABLE homepage: &lsquo;One price. The whole spread.&rsquo; in large serif type over a three-price strip." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Restaurant / Buffet</span>
+        <h3>LONG TABLE</h3>
+        <p>An all-day buffet told as plainly as possible &mdash; one price, six stations, a seven-day rotation that defaults to today, and an open-now pill computed live from the posted hours.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/indian-restaurant/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/indian-restaurant-sm.webp" alt="The KESAR homepage: a mixed grill in a gold arch frame beside &lsquo;The good table is a full table&rsquo;." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Restaurant / Online Ordering</span>
+        <h3>KESAR केसर</h3>
+        <p>A London curry house that orders for the whole table &mdash; set dawat feasts priced per head, a 30-dish menu book with inline spice and portion pickers, and a checkout in pounds.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
     <a class="card reveal" href="templates/watch-atelier/index.html">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
@@ -1045,6 +1150,57 @@
         <span class="tag">Fashion / E-Commerce</span>
         <h3>OVERCAST</h3>
         <p>A clothing label sold on cloth rather than models &mdash; a three-page storefront with filters, a product page, and a bag that survives navigation.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/running-even/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/running-even-sm.webp" alt="The EVEN homepage: a runner in silver fog above a laminated pace-band strip of ten 5:40 splits." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Fitness / Running App</span>
+        <h3>EVEN</h3>
+        <p>A running app that keeps the feed quiet &mdash; the page reads as a ten-kilometre run with a live split rail, an evenness score, and a printable race-day pace-band builder.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/golf-aureon/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/golf-aureon-sm.webp" alt="The AUREON member home: a greeting plate over a sunlit links course in warm vintage-film tones." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Members' Platform / Golf Club</span>
+        <h3>AUREON</h3>
+        <p>A private golf club's digital concierge across five member pages &mdash; a live tee sheet, a manifest that writes itself, engraved confirmation tags, and a desk that anticipates lunch, guests and your calendar before you ask.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/art-atelier8/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/art-atelier8-sm.webp" alt="The ATELIER № 8 frontispiece: one abstract painting centred on near-white, a catalogue caption beneath." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Members' Club / Art Gallery</span>
+        <h3>ATELIER № 8</h3>
+        <p>A private art club set as the catalogue of its current hang &mdash; one plate per screen under a lifting tissue leaf, provenance and price-on-application enquiries, a calendar of dinners, and membership as a registration of interest.</p>
         <span class="card-foot">
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>

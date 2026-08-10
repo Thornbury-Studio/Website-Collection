@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Catalogue Plate — MORROW &amp; FINCH</title>
+  <meta name="description" content="A catalogue plate from Morrow &amp; Finch, gentlemen's outfitters on Ledbury Row since 1934.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/vintage-menswear/product.html">
+  <meta name="theme-color" content="#F1E9D6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-product">
+
+  <a class="skip" href="#plate">Skip to the plate</a>
+
+  <header class="top">
+    <a class="mark" href="index.html">
+      <span class="mark-name">Morrow &amp; Finch</span>
+      <span class="mark-est">Gentlemen's Outfitters · Est. 1934</span>
+    </a>
+    <nav class="top-nav" aria-label="Page">
+      <a href="index.html#catalogue">Catalogue</a>
+      <a href="index.html#shop">The Shop</a>
+    </nav>
+    <button class="book-btn" id="bookBtn" type="button" aria-haspopup="dialog">
+      Order Book <span class="book-count" id="bookCount" aria-label="items in order book">0</span>
+    </button>
+  </header>
+
+  <main class="plate-page" id="plate">
+    <p class="crumb"><a href="index.html#catalogue">← Back to the catalogue</a></p>
+    <article class="plate-detail" id="plateDetail"><!-- rendered from ?id= --></article>
+  </main>
+
+  <!-- Order book: same structure as index -->
+  <div class="book-veil" id="bookVeil" hidden></div>
+  <aside class="book" id="book" role="dialog" aria-modal="true" aria-labelledby="bookTitle" hidden>
+    <header class="book-head">
+      <h2 id="bookTitle">Order Book</h2>
+      <button class="book-close" id="bookClose" type="button" aria-label="Close the order book">Close ✕</button>
+    </header>
+    <ul class="book-lines" id="bookLines"></ul>
+    <p class="book-empty" id="bookEmpty">Nothing entered yet. The catalogue awaits your pencil.</p>
+    <div class="book-tail" id="bookTail" hidden>
+      <dl class="book-sums">
+        <div><dt>Goods</dt><dd id="sumGoods">£0.00</dd></div>
+        <div id="rowPost" hidden><dt>Post &amp; packing</dt><dd>£4.50</dd></div>
+        <div class="sum-total"><dt>Total</dt><dd id="sumTotal">£0.00</dd></div>
+      </dl>
+      <form id="orderForm" novalidate>
+        <div class="fulfil-row" role="radiogroup" aria-label="Delivery">
+          <button type="button" class="fulfil-btn is-on" id="fulCollect" aria-pressed="true">Collect from the shop</button>
+          <button type="button" class="fulfil-btn" id="fulPost" aria-pressed="false">By post — £4.50</button>
+        </div>
+        <div class="field">
+          <label for="obName">Name</label>
+          <input id="obName" type="text" autocomplete="name">
+          <p class="err" id="obNameErr" hidden>The book needs a name.</p>
+        </div>
+        <div class="field">
+          <label for="obPhone">Telephone</label>
+          <input id="obPhone" type="tel" autocomplete="tel" placeholder="A UK number">
+          <p class="err" id="obPhoneErr" hidden>That number doesn't look right.</p>
+        </div>
+        <div class="field" id="addrField" hidden>
+          <label for="obAddr">Postal address</label>
+          <input id="obAddr" type="text" autocomplete="street-address" placeholder="House, street, town, postcode">
+          <p class="err" id="obAddrErr" hidden>The postman will need more than that.</p>
+        </div>
+        <div class="field">
+          <label for="obCard">Card number</label>
+          <input id="obCard" inputmode="numeric" autocomplete="cc-number" placeholder="4444 4444 4444 4444">
+          <p class="err" id="obCardErr" hidden>Card numbers have sixteen digits.</p>
+        </div>
+        <button class="place-btn" type="submit">Enter the order — <span id="placeTotal">£0.00</span></button>
+        <p class="book-fine">Alterations are included with all tailoring. Post &amp; packing £4.50.</p>
+      </form>
+      <div class="book-done" id="bookDone" hidden>
+        <h3 id="doneHead">Entered and initialled.</h3>
+        <p id="doneBody"></p>
+        <button class="fulfil-btn" id="doneAgain" type="button">Begin a fresh page</button>
+      </div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <p class="foot-mark">Morrow &amp; Finch</p>
+    <p class="foot-line">14 Ledbury Row, London · Est. 1934 · Telephone: TEMple&nbsp;Bar&nbsp;0134</p>
+
+  </footer>
+
+  <script src="js/catalog-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

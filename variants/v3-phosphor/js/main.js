@@ -325,7 +325,7 @@
         brief.focus(); return;
       }
       out.dataset.state = 'ok';
-      out.textContent = 'NO RECEIVER — demo form, not wired to a mailbox. Copy your note and email it.';
+    out.textContent = 'Thanks — please contact us directly to continue.';
     });
   })();
 

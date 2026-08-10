@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Calendar — ATELIER № 8</title>
+  <meta name="description" content="The club's calendar: private views, artist dinners, works-on-paper mornings and first-access evenings. Members and one guest, unless noted.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/art-atelier8/viewings.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Calendar — ATELIER № 8">
+  <meta property="og:description" content="Private views, artist dinners, first access. Members and one guest.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/art-atelier8/img/no8-dinner.webp">
+  <meta name="theme-color" content="#FAF9F5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="cal">
+
+  <a class="skip" href="#main">Skip to the calendar</a>
+
+  <header class="top">
+    <a class="mark" href="index.html">ATELIER <em>№ 8</em></a>
+    <nav class="top-nav" aria-label="Site">
+      <a href="collection.html">The Hang</a>
+      <a href="viewings.html" aria-current="page">Calendar</a>
+      <a href="apply.html">Membership</a>
+      <a href="login.html">Sign in</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <header class="page-head">
+      <h1>Calendar</h1>
+      <p>Small rooms, small numbers. Everything is members and one guest unless noted,
+        and nothing is repeated — if an evening passes, it passed.</p>
+    </header>
+
+    <div class="cal">
+
+      <article class="cal-row">
+        <p class="cal-date"><strong>Sat 16 Aug</strong><span>7 – 10 pm</span></p>
+        <div>
+          <h2 class="cal-name">Private view — the Autumn Hang</h2>
+          <p class="cal-meta">Rooms I–III opened together for one evening; Ilse Kaan and
+            Tomas Revell in the rooms with their work. Wine from the club's cellar.</p>
+          <p class="cal-terms">Members and one guest</p>
+        </div>
+        <div class="cal-act" data-ev="view"></div>
+      </article>
+
+      <article class="cal-row">
+        <p class="cal-date"><strong>Thu 21 Aug</strong><span>8 pm</span></p>
+        <div>
+          <h2 class="cal-name">Dinner with Ilse Kaan</h2>
+          <p class="cal-meta">Twelve places at the long table beneath <i>The Hour
+            Between</i>. She talks about the painting when the plates are cleared,
+            and stays late.</p>
+          <p class="cal-terms">Members only · twelve places</p>
+        </div>
+        <div class="cal-act" data-ev="dinner"></div>
+      </article>
+
+      <article class="cal-row">
+        <p class="cal-date"><strong>Sun 31 Aug</strong><span>10 am – 1 pm</span></p>
+        <div>
+          <h2 class="cal-name">Works on paper, by appointment</h2>
+          <p class="cal-meta">Plates II and VI out of their frames and on the table,
+            with cotton gloves and the registrar in attendance. Half-hour appointments.</p>
+          <p class="cal-terms">Members only · by the half hour</p>
+        </div>
+        <div class="cal-act" data-ev="paper"></div>
+      </article>
+
+      <article class="cal-row">
+        <p class="cal-date"><strong>Fri 5 Sep</strong><span>6 pm</span></p>
+        <div>
+          <h2 class="cal-name">First access — the September consignment</h2>
+          <p class="cal-meta">Nine new works, one evening ahead of everyone. Prices
+            named in the room and held for members for forty-eight hours.</p>
+          <p class="cal-terms">Members only</p>
+        </div>
+        <div class="cal-act" data-ev="access"></div>
+      </article>
+
+    </div>
+
+    <figure class="dinner-fig reveal">
+      <div class="plate-fig">
+        <img src="img/no8-dinner.webp" alt="A long table set for twelve in candlelight beneath one large lit painting in the gallery." width="1248" height="832" loading="lazy" decoding="async">
+        <div class="tissue" aria-hidden="true"></div>
+      </div>
+      <figcaption>The long table, Room IV — where the dinners happen and the artists stay late.</figcaption>
+    </figure>
+  </main>
+
+  <footer class="foot">
+    <p class="mark-foot">ATELIER <em>№ 8</em></p>
+    <a href="viewings.html">Calendar</a>
+    <a href="apply.html">Membership</a>
+    <p>Eight rooms, an unmarked door · Members and invited guests</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

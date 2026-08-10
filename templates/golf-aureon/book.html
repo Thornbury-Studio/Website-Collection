@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Book a Round — AUREON</title>
+  <meta name="description" content="Choose your day and your time from the tee sheet, set your party, add a caddie or a buggy, and let the club arrange the rest.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/book.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Book a Round — AUREON">
+  <meta property="og:description" content="The tee sheet, your party, and everything after the round — arranged in one quiet flow.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/img/au-course.webp">
+  <meta name="theme-color" content="#F7F5F1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Albert+Sans:ital,wght@0,300..900;1,300..900&family=Fragment+Mono:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="book">
+
+  <a class="skip" href="#main">Skip to the tee sheet</a>
+
+  <header class="top">
+    <a class="crest" href="index.html" aria-label="Aureon Club home">
+      <svg class="crest-ring" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5"/>
+        <path d="M13 27 L20 11 L27 27 M15.8 21.5 h8.4"/>
+      </svg>
+      <span class="crest-name">AUREON<em>est. 1907</em></span>
+    </a>
+    <nav class="top-nav" aria-label="Member areas">
+      <a href="index.html">Home</a>
+      <a href="book.html" aria-current="page">Book a Round</a>
+      <a href="game.html">My Game</a>
+      <a href="club.html">The Club</a>
+      <a href="concierge.html">Concierge</a>
+    </nav>
+    <p class="member-chip"><span class="member-name">J.&nbsp;Ashworth</span><span class="member-no">№&nbsp;0212</span></p>
+    <button class="nav-burger" id="navBurger" type="button" aria-expanded="false" aria-controls="topNavList" aria-label="Menu">
+      <svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </header>
+
+  <main id="main" class="wrap page-head-wrap">
+    <header class="page-head">
+      <h1>Book a round</h1>
+      <p class="page-lede">The sheet below is live for the coming week. Choose your day and
+        your time, tell us who's coming, and the club will see to the rest.</p>
+    </header>
+
+    <div class="book-grid">
+      <form class="book-flow" id="bookForm" novalidate>
+
+        <section class="plate" aria-labelledby="dayTitle">
+          <header class="plate-head">
+            <h2 id="dayTitle">The day</h2>
+            <span class="serial">Step I</span>
+          </header>
+          <div class="day-row" id="dayRow" role="radiogroup" aria-label="Choose a day"><!-- rendered --></div>
+        </section>
+
+        <section class="plate" aria-labelledby="teeTitle">
+          <header class="plate-head">
+            <h2 id="teeTitle">The tee</h2>
+            <span class="serial">Step II</span>
+          </header>
+          <p class="sheet-note" id="sheetNote">First light to mid-morning. Names on the sheet stay between members and the starter.</p>
+          <div class="tee-sheet" id="teeSheet" role="radiogroup" aria-label="Choose a tee time"><!-- rendered --></div>
+        </section>
+
+        <section class="plate" aria-labelledby="partyTitle">
+          <header class="plate-head">
+            <h2 id="partyTitle">The party</h2>
+            <span class="serial">Step III</span>
+          </header>
+
+          <div class="party-row">
+            <span class="party-label" id="playersLabel">Players</span>
+            <div class="stepper" role="group" aria-labelledby="playersLabel">
+              <button class="step-btn" type="button" id="fewerBtn" aria-label="Fewer players">
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg>
+              </button>
+              <span class="step-count" id="playerCount" aria-live="polite">3</span>
+              <button class="step-btn" type="button" id="moreBtn" aria-label="More players">
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+            <p class="party-hint">You and up to three others.</p>
+          </div>
+
+          <div class="guest-rows" id="guestRows"><!-- rendered guest inputs --></div>
+
+          <div class="toggle-rows">
+            <label class="toggle-row">
+              <input type="checkbox" id="caddieTgl" checked>
+              <span class="toggle-pip" aria-hidden="true"></span>
+              <span class="toggle-body"><strong>Caddie</strong><em>Walking, with the best reader of the tenth green in the county</em></span>
+            </label>
+            <label class="toggle-row">
+              <input type="checkbox" id="buggyTgl">
+              <span class="toggle-pip" aria-hidden="true"></span>
+              <span class="toggle-body"><strong>Buggy</strong><em>Two seats, kept at the starter's hut</em></span>
+            </label>
+            <label class="toggle-row">
+              <input type="checkbox" id="lunchTgl">
+              <span class="toggle-pip" aria-hidden="true"></span>
+              <span class="toggle-body"><strong>Lunch after</strong><em>A table in the Morning Room, about an hour past your finish</em></span>
+            </label>
+          </div>
+        </section>
+
+      </form>
+
+      <!-- The folio writes itself -->
+      <aside class="folio" aria-label="Your round, as it stands">
+        <div class="plate plate-folio">
+          <header class="plate-head">
+            <h2>The manifest</h2>
+            <span class="serial" id="folioSerial">unissued</span>
+          </header>
+          <dl class="folio-lines">
+            <div><dt>Day</dt><dd id="fDay">—</dd></div>
+            <div><dt>Tee</dt><dd id="fTee">—</dd></div>
+            <div><dt>Party</dt><dd id="fParty">—</dd></div>
+            <div><dt>On the bag</dt><dd id="fBag">—</dd></div>
+            <div><dt>After</dt><dd id="fAfter">—</dd></div>
+          </dl>
+          <button class="btn btn-solid btn-issue" id="issueBtn" type="button" disabled>
+            <span id="issueLabel">Choose a tee time</span>
+            <svg class="b-spin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+          </button>
+          <p class="folio-fine">Green fees and guest fees go to the house account, as ever.</p>
+        </div>
+
+        <div class="issued" id="issuedWrap" hidden>
+          <div class="tag tag-lg tag-issued" id="issuedTag">
+            <span class="tag-hole" aria-hidden="true"></span>
+            <div class="tag-body">
+              <p class="tag-title engrave" id="issuedTitle">—</p>
+              <p class="tag-meta" id="issuedMeta">—</p>
+            </div>
+            <span class="tag-end" aria-hidden="true"></span>
+          </div>
+          <p class="anticipate-word">While we have you —</p>
+          <div class="chip-row" id="anticipateRow"><!-- rendered chips --></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="foot wrap">
+    <div class="foot-rule">
+      <p class="foot-crest">AUREON <em>· est. 1907</em></p>
+      <nav aria-label="Footer">
+        <a href="club.html#notices">Course conditions</a>
+        <a href="concierge.html">Concierge</a>
+        <a href="index.html#main">Member home</a>
+      </nav>
+      <p class="foot-fine">One Fairway Lane · By the sea · Members and their guests only</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

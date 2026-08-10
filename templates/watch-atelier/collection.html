@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Collection — AUREL</title>
-<meta name="description" content="The AUREL collection — the Centenary 1926 tank in six dials and the 1931 Ronde. A fictional watch house built as a portfolio template.">
+<meta name="description" content="The AUREL collection — seven references in steel, gold and platinum, each finished by hand in our atelier.">
 <meta name="robots" content="index, follow">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -322,7 +322,8 @@
     <button type="button" class="rd-close" id="qvClose" aria-label="Close">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
-    <figure class="qv-photo"><img id="qvImg" src="" alt="" width="900" height="1200"></figure>
+    <!-- transparent 1px seed; collection.js swaps in the reference photo on open -->
+    <figure class="qv-photo"><img id="qvImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" width="900" height="1200"></figure>
     <div class="qv-body">
       <span class="product-ref" id="qvRef"></span>
       <h3 id="qvName"></h3>
@@ -361,7 +362,7 @@
       </div>
       <p class="rd-error" id="rdError" role="alert" hidden>A name and an email, and we can hold your place.</p>
       <button type="submit" class="btn-deco rd-submit"><span>Place my request</span></button>
-      <p class="rd-fine">This demo form doesn&rsquo;t send anything.</p>
+      <p class="rd-fine">Please contact the atelier to continue.</p>
     </div>
     <div class="rd-step" id="rdStepDone" hidden>
       <svg class="rd-seal" viewBox="0 0 64 64" aria-hidden="true">
@@ -393,7 +394,7 @@
       <a href="index.html#voices">Collectors</a>
     </nav>
     <div class="footer-note">
-      <p>AUREL is a <strong>fictional watch house</strong> &mdash; a portfolio template. The maison, the collectors, and the prices are invented; the photography and film are AI&#8209;generated for this design. Nothing here is for sale.</p>
+
       <p class="footer-copy">&copy; <span id="year">2026</span> AUREL &mdash; Maison d&rsquo;Horlogerie, if it were real.</p>
     </div>
   </div>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>HOYT'S — Boxing &amp; Strength Since 1987 | The Weekly Schedule</title>
+  <meta name="description" content="HOYT'S — boxing and strength on Carbon Street since 1987. Thirty-three classes a week, three coaches, no contracts.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/gym-local/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HOYT'S — Boxing &amp; Strength Since 1987">
+  <meta property="og:description" content="Train where the town trains. Thirty-three classes a week, three coaches, no contracts.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/gym-local/img/hero.webp">
+  <meta name="theme-color" content="#F5F1E8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="skip" href="#week">Skip to the schedule</a>
+
+  <header class="top">
+    <a class="mark" href="#">HOYT&rsquo;S</a>
+    <p class="est" aria-label="Established 1987">EST. 1987</p>
+    <nav class="top-nav" aria-label="Page">
+      <a href="#week">Schedule</a>
+      <a href="#join">Join</a>
+      <a href="#coaches">Coaches</a>
+      <a href="#house">The house</a>
+    </nav>
+    <a class="daypass" href="#join">Day pass — $15</a>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-type">
+        <h1><span>Train</span> <span>where the</span> <span class="red">town</span> <span>trains.</span></h1>
+        <p class="hero-sub">Boxing and barbells on Carbon Street since 1987. Two rings, no mirrors,
+          walls of iron, and coffee that could strip paint. First visit is on the house.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#week">This week's classes</a>
+          <a class="btn btn-ghost" href="#join">Join — no contract</a>
+        </div>
+      </div>
+      <figure class="hero-photo">
+        <img src="img/hero.webp" alt="A boxer works a heavy bag by the window, printed in the gym's red duotone." width="1920" height="1150" fetchpriority="high">
+        <figcaption>Morning bagwork, shot in house colors.</figcaption>
+      </figure>
+      <ul class="hero-strip" role="list">
+        <li>33 classes a week</li>
+        <li>5:30am weekday open</li>
+        <li>No contracts, ever</li>
+        <li>Kids train cheap</li>
+      </ul>
+    </section>
+
+    <!-- Weekly schedule -->
+    <section class="week" id="week" aria-labelledby="weekTitle">
+      <h2 id="weekTitle">The week<span class="red">.</span></h2>
+      <p class="section-note">Every class, every week, same times. <span id="todayNote"></span></p>
+
+      <div class="filters" role="group" aria-label="Filter classes" id="typeFilters">
+        <button class="chip is-on" data-type="all" type="button">Everything</button>
+        <!-- type chips rendered -->
+      </div>
+
+      <div class="grid-wrap">
+        <div class="sched" id="sched"><!-- rendered --></div>
+      </div>
+      <p class="sched-fine">Classes are included in every membership and the day pass. Fight Team
+        is invite-only — earn it in Fundamentals. Under-16s train only in the kids and family hours.</p>
+    </section>
+
+    <!-- Join -->
+    <section class="join" id="join" aria-labelledby="joinTitle">
+      <h2 id="joinTitle">Joining is one sentence<span class="red">.</span></h2>
+      <p class="section-note">"I'd like to train." Said to Marge, at the desk. That's it — here's what it costs.</p>
+      <div class="price-cards">
+        <div class="price-card">
+          <h3>Day pass</h3>
+          <p class="price">$15</p>
+          <ul>
+            <li>Everything, for a day</li>
+            <li>Classes included</li>
+            <li>Gloves to borrow</li>
+          </ul>
+        </div>
+        <div class="price-card is-main">
+          <p class="flag">Most people</p>
+          <h3>Monthly</h3>
+          <p class="price">$45<small>/mo</small></p>
+          <ul>
+            <li>All classes, all hours</li>
+            <li>No contract, no initiation fee</li>
+            <li>Cancel by telling Marge</li>
+            <li>Kids add-on $15/mo</li>
+          </ul>
+        </div>
+        <div class="price-card">
+          <h3>Yearly</h3>
+          <p class="price">$420<small>/yr</small></p>
+          <ul>
+            <li>Two months free, effectively</li>
+            <li>A key-fob for 5:30am</li>
+            <li>Your name on the wall board</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- The floor -->
+    <section class="floor" aria-label="Around the gym">
+      <div class="floor-grid">
+        <figure class="reveal">
+          <img src="img/strength.webp" alt="A lifter sets up under a loaded bar in the squat rack, printed in red duotone." width="900" height="640" loading="lazy">
+          <figcaption>The racks</figcaption>
+        </figure>
+        <figure class="reveal">
+          <img src="img/boxer.webp" alt="A boxer leans into the heavy bag mid-combination, printed in red duotone." width="900" height="640" loading="lazy">
+          <figcaption>The bags</figcaption>
+        </figure>
+        <figure class="reveal">
+          <img src="img/yoga.webp" alt="A mat class stretches together in the upstairs room, printed in red duotone." width="900" height="640" loading="lazy">
+          <figcaption>The quiet room</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Coaches -->
+    <section class="coaches" id="coaches" aria-labelledby="coachTitle">
+      <h2 id="coachTitle">The coaches<span class="red">.</span></h2>
+      <div class="coach-grid" id="coachGrid"><!-- rendered --></div>
+    </section>
+
+    <!-- The house -->
+    <section class="house" id="house" aria-labelledby="houseTitle">
+      <h2 id="houseTitle">House rules &amp; hours<span class="red">.</span></h2>
+      <div class="house-cols">
+        <div class="house-card">
+          <h3>Hours</h3>
+          <ul class="hours-list">
+            <li><span>Mon–Fri</span><span>5:30 – 22:00</span></li>
+            <li><span>Saturday</span><span>7:00 – 20:00</span></li>
+            <li><span>Sunday</span><span>8:00 – 18:00</span></li>
+          </ul>
+        </div>
+        <div class="house-card">
+          <h3>The rules</h3>
+          <ul class="rules-list">
+            <li>Rerack your plates. Marge knows.</li>
+            <li>Wraps under gloves, always.</li>
+            <li>Ask before you spar. Answer honestly after.</li>
+            <li>The radio is Frank's. This is not negotiable.</li>
+          </ul>
+        </div>
+        <div class="house-card">
+          <h3>Find us</h3>
+          <p>1412 Carbon Street<br>Pittsburgh, PA 15203</p>
+          <p class="small">(412) 555-0187 · Street parking, or the lot behind Vico's.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mark">HOYT&rsquo;S <span>EST. 1987</span></p>
+
+  </footer>
+
+  <script src="js/schedule-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

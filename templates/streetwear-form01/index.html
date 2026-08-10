@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>FORM/01 — Clothing for What's Next</title>
+  <meta name="description" content="FORM/01 — technical streetwear in black, white and silver. Twelve pieces engineered to be worn together, in one system.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/streetwear-form01/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FORM/01 — CLOTHING FOR WHAT'S NEXT.">
+  <meta property="og:description" content="Six pieces, one system. A monochrome shop where the interface floats around the photography.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/streetwear-form01/img/hero.webp">
+  <meta name="theme-color" content="#FAFAFA">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,500;10..72,700;10..72,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="skip" href="#index">Skip to the index</a>
+
+  <header class="top">
+    <a class="mark" href="#">FORM/01</a>
+    <nav class="top-nav" aria-label="Page">
+      <a href="#index">INDEX</a>
+      <a href="#lockers">LOCKERS</a>
+      <a href="#system">SYSTEM</a>
+    </nav>
+    <button class="cart-btn" id="cartBtn" type="button" aria-haspopup="dialog">CART&nbsp;[<span id="cartCount">0</span>]</button>
+  </header>
+
+  <!-- ===== Hero: photograph carries the screen, UI floats ===== -->
+  <section class="hero">
+    <figure class="hero-photo">
+      <img src="img/hero.webp" alt="A model in an oversized graphite tee, wide black technical trousers and chunky monochrome sneakers, centered on seamless grey." width="1500" height="2000" fetchpriority="high">
+    </figure>
+    <h1 class="hero-word" aria-label="FORM 01">FORM<span>/01</span></h1>
+    <p class="hero-tag">CLOTHING FOR<br>WHAT'S NEXT.</p>
+    <p class="hero-meta mono">SS/26 — DROP 02<br>12 PIECES / 1 SYSTEM</p>
+    <a class="hero-cta mono" href="#index">VIEW INDEX ↓</a>
+  </section>
+
+  <!-- ===== Index (product grid) ===== -->
+  <main class="index" id="index">
+    <div class="index-head">
+      <h2 class="mono">INDEX — 12 ITEMS</h2>
+      <p class="mono" id="indexNote">TAP ANY PIECE TO OPEN IT</p>
+    </div>
+    <div class="grid" id="grid"><!-- rendered --></div>
+  </main>
+
+  <!-- ===== Lockers (three kits, three models) ===== -->
+  <section class="lockers" id="lockers">
+    <div class="index-head">
+      <h2 class="mono">LOCKERS — 3 KITS</h2>
+      <p class="mono">ONE OUTFIT PER MODEL / TAP A PIECE TO OPEN IT</p>
+    </div>
+    <div class="locker-grid" id="lockerGrid"><!-- rendered --></div>
+  </section>
+
+  <!-- ===== System (manifesto) ===== -->
+  <section class="system" id="system">
+    <h2 class="system-word">ONE<br>SYSTEM.</h2>
+    <div class="system-body">
+      <p>Twelve pieces engineered to be worn together in any combination. One palette — black,
+        white, silver — so nothing you buy next year argues with anything you bought this year.</p>
+      <dl class="system-specs mono">
+        <div><dt>SHELL</dt><dd>3L WATERPROOF / TAPED</dd></div>
+        <div><dt>COTTON</dt><dd>420GSM HEAVYWEIGHT</dd></div>
+        <div><dt>HARDWARE</dt><dd>MATTE / SILENT</dd></div>
+        <div><dt>LOGOS</dt><dd>NONE VISIBLE</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== Product takeover ===== -->
+  <div class="take" id="take" role="dialog" aria-modal="true" aria-labelledby="takeName" hidden>
+    <button class="take-close mono" id="takeClose" type="button" aria-label="Close product view">CLOSE ✕</button>
+    <!-- src is a transparent 1px seed; main.js swaps in the product image when the takeover opens -->
+    <figure class="take-photo"><img id="takeImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" width="1100" height="1100"></figure>
+    <div class="take-rail">
+      <p class="mono take-code" id="takeCode"></p>
+      <h2 id="takeName"></h2>
+      <p class="take-price" id="takePrice"></p>
+      <p class="take-fabric mono" id="takeFabric"></p>
+      <p class="take-desc" id="takeDesc"></p>
+      <p class="mono take-label">SIZE</p>
+      <div class="take-sizes" id="takeSizes"></div>
+      <button class="take-add" id="takeAdd" type="button">ADD TO CART</button>
+      <p class="mono take-nav">
+        <button class="linkish mono" id="takePrev" type="button">← PREV</button>
+        <span id="takePos"></span>
+        <button class="linkish mono" id="takeNext" type="button">NEXT →</button>
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== Cart panel ===== -->
+  <div class="veil" id="veil" hidden></div>
+  <aside class="cart" id="cart" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+    <header class="cart-head">
+      <h2 class="mono" id="cartTitle">CART</h2>
+      <button class="linkish mono" id="cartClose" type="button">CLOSE ✕</button>
+    </header>
+    <ul class="cart-lines mono" id="cartLines"></ul>
+    <p class="cart-empty mono" id="cartEmpty">EMPTY.</p>
+    <div class="cart-tail" id="cartTail" hidden>
+      <p class="cart-total mono">TOTAL <span id="cartTotal">$0</span></p>
+      <form id="payForm" novalidate>
+        <div class="field">
+          <label class="mono" for="pfEmail">EMAIL</label>
+          <input id="pfEmail" type="email" autocomplete="email">
+          <p class="err mono" id="pfEmailErr" hidden>NEEDS A REAL EMAIL</p>
+        </div>
+        <div class="field">
+          <label class="mono" for="pfCard">CARD</label>
+          <input id="pfCard" inputmode="numeric" autocomplete="cc-number" placeholder="16 DIGITS">
+          <p class="err mono" id="pfCardErr" hidden>16 DIGITS</p>
+        </div>
+        <button class="pay-btn" type="submit">CHECKOUT — <span id="payTotal">$0</span></button>
+        <p class="cart-fine mono">FREE SHIPPING WORLDWIDE. 30-DAY RETURNS.</p>
+      </form>
+      <div class="cart-done" id="cartDone" hidden>
+        <p class="mono" id="doneLine"></p>
+        <button class="linkish mono" id="doneReset" type="button">START OVER</button>
+      </div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+
+
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

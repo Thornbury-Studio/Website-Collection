@@ -130,7 +130,7 @@
         brief.focus(); return;
       }
       out.dataset.state = 'ok';
-      out.textContent = 'Demo form — no mailbox wired up yet. Copy your note and send it over.';
+    out.textContent = 'Thanks — please contact us directly to continue.';
     });
   })();
 

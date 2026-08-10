@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CUPCAKE — A Serious Power Bank With an Unserious Name</title>
-<meta name="description" content="CUPCAKE is a fictional power bank brand template built for portfolio showcase purposes — a maximalist-typography product page with no photography at all.">
+<meta name="description" content="CUPCAKE — a pocket-sized power bank engineered like it matters. 10,000mAh, 45W, and a very good reason to look twice.">
 <meta name="robots" content="index, follow">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -15,18 +15,18 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CUPCAKE">
 <meta property="og:title" content="CUPCAKE — A Serious Power Bank With an Unserious Name">
-<meta property="og:description" content="CUPCAKE is a fictional power bank brand template built for portfolio showcase purposes — a maximalist-typography product page with no photography at all.">
+<meta property="og:description" content="CUPCAKE — a pocket-sized power bank engineered like it matters. 10,000mAh, 45W, and a very good reason to look twice.">
 <meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/powerbank-cupcake/index.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CUPCAKE — A Serious Power Bank With an Unserious Name">
-<meta name="twitter:description" content="CUPCAKE is a fictional power bank brand template built for portfolio showcase purposes — a maximalist-typography product page with no photography at all.">
+<meta name="twitter:description" content="CUPCAKE — a pocket-sized power bank engineered like it matters. 10,000mAh, 45W, and a very good reason to look twice.">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "CUPCAKE",
-  "description": "CUPCAKE is a fictional power bank created as a portfolio template. The product, specs, prices, and reviews are invented.",
+  "description": "CUPCAKE — a pocket-sized power bank engineered like it matters. 10,000mAh, 45W, and a very good reason to look twice.",
   "url": "https://website-collection-zanezhijies-projects.vercel.app/templates/powerbank-cupcake/index.html"
 }
 </script>
@@ -133,6 +133,28 @@
       <p class="p2-readout" aria-hidden="true"><span id="cakeLeft">87</span><i>%</i><b>cake left</b></p>
     </div>
   </div>
+
+  <figure class="product-shot reveal">
+    <img src="img/product-hero.webp"
+         alt="The Cupcake power bank standing upright: a moulded pink-and-white frosting swirl over a fluted case, with a small colour screen reading 92 percent."
+         width="900" height="1037" loading="lazy" decoding="async">
+    <figcaption>One number on the front. Nothing else.</figcaption>
+  </figure>
+
+  <div class="colorways reveal">
+    <figure>
+      <img src="img/product-vanilla.webp"
+           alt="The Cupcake power bank lying flat in the Vanilla colorway: pink and white stripes with an embroidered cupcake patch."
+           width="620" height="714" loading="lazy" decoding="async">
+      <figcaption>Vanilla</figcaption>
+    </figure>
+    <figure>
+      <img src="img/product-matcha.webp"
+           alt="The Cupcake power bank lying flat in the Matcha colorway: mint and pink stripes with a rainbow cupcake patch."
+           width="620" height="714" loading="lazy" decoding="async">
+      <figcaption>Matcha</figcaption>
+    </figure>
+  </div>
 </section>
 
 <!-- ============ THE NAME ============ -->
@@ -195,15 +217,16 @@
 <section class="buy" id="buy">
   <p class="buy-kicker reveal">Pick a flavor — it recolors the whole site, like it will your bag</p>
   <div class="flavors reveal" id="flavors" role="group" aria-label="Colorway">
-    <button class="flavor is-on" data-flavor="vanilla"><i></i>Vanilla</button>
-    <button class="flavor" data-flavor="matcha"><i></i>Matcha</button>
-    <button class="flavor" data-flavor="velvet"><i></i>Red Velvet</button>
+    <button class="flavor is-on" data-flavor="vanilla" aria-pressed="true"><i></i>Vanilla</button>
+    <button class="flavor" data-flavor="matcha" aria-pressed="false"><i></i>Matcha</button>
+    <button class="flavor" data-flavor="velvet" aria-pressed="false"><i></i>Red Velvet</button>
   </div>
   <h2 class="buy-head reveal"><span class="p-sans">$49.</span> <span class="p-serif">That&rsquo;s the whole price.</span></h2>
   <p class="buy-sub reveal">Cable included. Shipping included. Two-year warranty included. Frosting, regrettably, not included.</p>
   <div class="buy-cta reveal">
-    <button class="btn-big" id="buyBtn"><span>Add to cart</span></button>
-    <p class="buy-fine">This demo cart doesn&rsquo;t charge anyone anything.</p>
+    <!-- aria-live so the swap to the demo-cart message is announced, not silent -->
+    <button class="btn-big" id="buyBtn"><span aria-live="polite">Add to cart</span></button>
+    <p class="buy-fine">Contact us to continue.</p>
   </div>
 
   <figure class="buy-sticker reveal" aria-hidden="true">
@@ -228,13 +251,74 @@
       <p>Slowly, honestly. 30W keeps a light laptop alive through a long meeting; it won&rsquo;t feed a gaming rig. We&rsquo;d rather tell you that here than let a product page imply otherwise.</p>
     </details>
     <details class="faq-item reveal">
-      <summary>Why is there no app?</summary>
+      <summary>Why is there no app?<span class="faq-toggle" aria-hidden="true"></span></summary>
       <p>Because it&rsquo;s a battery. The number on the front is the app. Firmware updates ship over the cable on the rare day we need one.</p>
     </details>
     <details class="faq-item reveal">
-      <summary>Is the name a joke?</summary>
+      <summary>Is the name a joke?<span class="faq-toggle" aria-hidden="true"></span></summary>
       <p>The name is a joke. The 500-cycle cell, the aluminium shell, the two-year warranty, and the thermal firmware are not. We find this division of labor works well.</p>
     </details>
+  </div>
+</section>
+
+<!-- ============ SPECIAL EDITION ============ -->
+<section class="special" aria-labelledby="special-head">
+  <div class="special-inner">
+    <figure class="special-shot reveal">
+      <img src="img/product-macaron.webp"
+           alt="The Macaron special edition: three macarons stacked inside a brass-framed glass case, with a round screen on top reading 92 percent."
+           width="760" height="875" loading="lazy" decoding="async">
+    </figure>
+
+    <div class="special-copy">
+      <p class="special-kicker reveal">One more thing</p>
+      <h2 class="special-head reveal" id="special-head">
+        <span class="p-serif">The</span> <span class="p-sans">MACARON.</span><br>
+        <span class="p-serif">A different pastry entirely.</span>
+      </h2>
+      <p class="reveal">Three macarons under glass in a brass frame. It is smaller, heavier, and
+        objectively less practical than the Cupcake &mdash; one output instead of two, five thousand
+        milliamp-hours instead of ten. We made four hundred of them because we wanted to.</p>
+
+      <dl class="special-specs reveal">
+        <div><dt>Capacity</dt><dd>5,000 mAh</dd></div>
+        <div><dt>Ports</dt><dd>One out, one in</dd></div>
+        <div><dt>Case</dt><dd>Brass &amp; glass</dd></div>
+        <div><dt>Made</dt><dd>400 units</dd></div>
+      </dl>
+
+      <p class="special-price reveal"><span class="p-sans">$89.</span>
+        <span class="p-serif">Sold out, obviously.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOUNDER ============ -->
+<section class="founder" aria-labelledby="founder-head">
+  <div class="founder-inner">
+    <figure class="founder-photo reveal">
+      <div class="founder-frame">
+        <span class="founder-fallback" aria-hidden="true">E</span>
+        <img src="img/eric-ceo.webp" alt="Eric, Cupcake's chief executive, in a navy suit in a bright office."
+             width="640" height="800" loading="lazy" decoding="async">
+      </div>
+      <figcaption>The man who signed off on the name</figcaption>
+    </figure>
+
+    <div class="founder-copy">
+      <p class="founder-kicker reveal">Office of the chief executive</p>
+      <h2 class="founder-head reveal" id="founder-head">
+        <!-- whitespace between the spans is deliberate: <br> contributes no
+             space to the accessible name, so without it this reads aloud as
+             "ERICchief executive officer" -->
+        <span class="p-sans">ERIC</span>
+        <br>
+        <span class="p-serif">chief executive officer</span>
+      </h2>
+      <blockquote class="founder-quote reveal">
+        <p>&ldquo;I love cupcake&hellip;&rdquo;</p>
+      </blockquote>
+    </div>
   </div>
 </section>
 
@@ -251,12 +335,38 @@
         <a href="#buy">Buy</a>
       </nav>
       <div class="footer-note">
-        <p>CUPCAKE is a <strong>fictional product</strong> — a portfolio template. The specs, prices, and reviews are invented, and the typography is the product shot: the only photographs on this page are of actual cupcakes (CC0, credited in the repo), because the product doesn&rsquo;t exist and the cupcakes do.</p>
+        <button type="button" class="info-open" id="infoOpen">
+          For more information
+          <span class="info-open-arrow" aria-hidden="true">→</span>
+        </button>
         <p class="footer-copy">© <span id="year">2026</span> Cupcake Energy Co. — Batteries not excluded.</p>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- ============ DISCLAIMER MODAL ============ -->
+<dialog class="info-modal" id="infoModal" aria-labelledby="infoModalTitle">
+  <div class="info-modal-inner">
+    <button type="button" class="info-close" id="infoClose" aria-label="Close">&times;</button>
+
+    <p class="info-kicker">Full disclaimer</p>
+    <h2 class="info-title" id="infoModalTitle">
+      <span class="p-sans">ABOUT</span> <span class="p-serif">this page.</span>
+    </h2>
+
+    <div class="info-body">
+
+      <h3>About the brand</h3>
+      <p>CUPCAKE is an original concept brand. The product, its specifications, the comparison
+        table, the reviews and the people quoted in them were all created for this project.</p>
+
+      <h3>Typefaces</h3>
+      <p>Archivo, Instrument Serif and Space Mono, served from Google Fonts under the SIL Open Font
+        License.</p>
+    </div>
+  </div>
+</dialog>
 
 <script src="js/main.js" defer></script>
 </body>

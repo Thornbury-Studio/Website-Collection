@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>LONG TABLE — All-Day Buffet | One Price, The Whole Spread</title>
+  <meta name="description" content="LONG TABLE — an all-day buffet in Minneapolis. One price, six stations, a carver on duty, and a spread that changes daily.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/buffet-longtable/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LONG TABLE — All-Day Buffet">
+  <meta property="og:description" content="One price, the whole spread. Six stations, a carver on duty, and a rotation that changes daily.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/buffet-longtable/img/hero.webp">
+  <meta name="theme-color" content="#FAF8F3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="skip" href="#today">Skip to today's line</a>
+
+  <header class="top">
+    <a class="mark" href="#">LONG&nbsp;TABLE</a>
+    <nav class="top-nav" aria-label="Page">
+      <a href="#today">Today</a>
+      <a href="#stations">Stations</a>
+      <a href="#hours">Hours &amp; prices</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <p class="open-pill" id="openPill" aria-live="polite">…</p>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>One price.<br>The <em>whole</em> spread.</h1>
+        <p class="hero-sub">Six stations, a carver on duty at every service, bread from our own
+          ovens, and dessert until you surrender. No menus, no decisions, no reservations —
+          just take a plate.</p>
+        <div class="price-strip" role="list">
+          <div role="listitem"><strong>$19.95</strong><span>Lunch, weekdays</span></div>
+          <div role="listitem"><strong>$27.95</strong><span>Dinner, every day</span></div>
+          <div role="listitem"><strong>$24.95</strong><span>Weekend brunch</span></div>
+        </div>
+        <p class="kids-note">Kids 5–12 half price · under 5 eat free · drinks included, always.</p>
+      </div>
+      <figure class="hero-photo">
+        <img src="img/hero.webp" alt="A guest fills a plate at the buffet line, trays of hot food stretching down the counter." width="1920" height="1150" fetchpriority="high">
+      </figure>
+    </section>
+
+    <!-- Today on the line -->
+    <section class="today" id="today" aria-labelledby="todayTitle">
+      <h2 id="todayTitle" class="reveal">On the line <em id="dayWord">today</em></h2>
+      <p class="section-note reveal">The spread rotates on a seven-day cycle. Pick a day if you're planning ahead.</p>
+
+      <div class="day-tabs reveal" role="tablist" aria-label="Day of the week" id="dayTabs"></div>
+
+      <div class="line-grid" id="lineGrid" aria-live="polite"><!-- rendered --></div>
+    </section>
+
+    <!-- Stations -->
+    <section class="stations" id="stations" aria-labelledby="stationsTitle">
+      <h2 id="stationsTitle" class="reveal">The six stations</h2>
+      <p class="section-note reveal">What never leaves the line, no matter the day.</p>
+      <div class="station-grid" id="stationGrid"><!-- rendered --></div>
+    </section>
+
+    <!-- Hours & prices -->
+    <section class="hours" id="hours" aria-labelledby="hoursTitle">
+      <h2 id="hoursTitle" class="reveal">Hours &amp; prices</h2>
+      <div class="hours-tables reveal">
+        <table>
+          <caption>Seatings</caption>
+          <tbody>
+            <tr><th scope="row">Lunch</th><td>Mon–Fri</td><td>11:00 – 15:00</td></tr>
+            <tr><th scope="row">Dinner</th><td>Every day</td><td>16:30 – 21:00</td></tr>
+            <tr><th scope="row">Brunch</th><td>Sat–Sun</td><td>09:30 – 15:00</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <caption>Per person</caption>
+          <tbody>
+            <tr><th scope="row">Lunch</th><td>$19.95</td></tr>
+            <tr><th scope="row">Dinner</th><td>$27.95</td></tr>
+            <tr><th scope="row">Weekend brunch</th><td>$24.95</td></tr>
+            <tr><th scope="row">Kids 5–12</th><td>Half price</td></tr>
+            <tr><th scope="row">Under 5</th><td>Free</td></tr>
+            <tr><th scope="row">Seniors, weekday lunch</th><td>$16.95</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hours-fine reveal">Price covers the whole line and the drink station — coffee, tea,
+        soda and lemonade. Prime rib nights (Fri–Sat) included at dinner, no surcharge. We don't
+        do takeout boxes; we do encourage second helpings.</p>
+    </section>
+
+    <!-- Visit -->
+    <section class="visit" id="visit" aria-labelledby="visitTitle">
+      <h2 id="visitTitle" class="reveal">Finding us</h2>
+      <div class="visit-cols reveal">
+        <div>
+          <h3>Address</h3>
+          <p>2210 Hennock Avenue&nbsp;S<br>Minneapolis, MN 55404</p>
+          <p class="visit-small">Free lot behind the building, street parking on Hennock.</p>
+        </div>
+        <div>
+          <h3>Walk-ins only</h3>
+          <p>No reservations — the line moves fast, even Sundays. Parties of 10+ can call ahead
+            and we'll push tables together: (612)&nbsp;555-0188.</p>
+        </div>
+        <div>
+          <h3>Good to know</h3>
+          <p>Every dish is labeled at the line — vegetarian, gluten-aware and the big-eight
+            allergens. Ask any carver or line cook; they cooked it, they know.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mark">LONG TABLE</p>
+    <p>2210 Hennock Avenue S, Minneapolis · (612) 555-0188</p>
+
+  </footer>
+
+  <script src="js/menu-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

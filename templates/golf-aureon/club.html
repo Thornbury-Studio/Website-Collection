@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>The Club — AUREON</title>
+  <meta name="description" content="Fixtures and evenings, the dining rooms, the practice bays and recovery suite, and the secretary's notices — the club, in one place.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/club.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Club — AUREON">
+  <meta property="og:description" content="Fixtures, dining, amenities and notices for members and their guests.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/golf-aureon/img/au-lounge.webp">
+  <meta name="theme-color" content="#F7F5F1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Albert+Sans:ital,wght@0,300..900;1,300..900&family=Fragment+Mono:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="club">
+
+  <a class="skip" href="#main">Skip to the club</a>
+
+  <header class="top">
+    <a class="crest" href="index.html" aria-label="Aureon Club home">
+      <svg class="crest-ring" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5"/>
+        <path d="M13 27 L20 11 L27 27 M15.8 21.5 h8.4"/>
+      </svg>
+      <span class="crest-name">AUREON<em>est. 1907</em></span>
+    </a>
+    <nav class="top-nav" aria-label="Member areas">
+      <a href="index.html">Home</a>
+      <a href="book.html">Book a Round</a>
+      <a href="game.html">My Game</a>
+      <a href="club.html" aria-current="page">The Club</a>
+      <a href="concierge.html">Concierge</a>
+    </nav>
+    <p class="member-chip"><span class="member-name">J.&nbsp;Ashworth</span><span class="member-no">№&nbsp;0212</span></p>
+    <button class="nav-burger" id="navBurger" type="button" aria-expanded="false" aria-controls="topNavList" aria-label="Menu">
+      <svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </header>
+
+  <main id="main">
+
+    <section class="club-hero">
+      <img class="club-hero-photo" src="img/au-lounge.webp" alt="The morning lounge: honey leather armchairs by a limestone fireplace, sunlight pouring in over the course beyond tall windows." width="1248" height="832" fetchpriority="high">
+      <div class="club-hero-copy wrap">
+        <h1>The club</h1>
+        <p class="page-lede">What's on, where to eat, and everything the clubhouse keeps
+          ready for you — with the secretary's notices at the end, as tradition demands.</p>
+      </div>
+    </section>
+
+    <div class="wrap">
+
+      <!-- Fixtures -->
+      <section class="plate" id="fixtures" aria-labelledby="fxTitle">
+        <header class="plate-head">
+          <h2 id="fxTitle">Fixtures &amp; evenings</h2>
+          <span class="serial">The season's card</span>
+        </header>
+        <ul class="fixture-list fixture-list-lg">
+          <li>
+            <span class="fx-date"><strong>Sat</strong>16</span>
+            <span class="fx-body">
+              <span class="fx-name">The Captain's Prize</span>
+              <span class="fx-meta">Medal, full field · shotgun 8:00 · dinner and the giving of the cup from 7:00 pm</span>
+            </span>
+            <button class="btn btn-ghost btn-sm rsvp" type="button" data-ev="captains">Enter the draw</button>
+          </li>
+          <li>
+            <span class="fx-date"><strong>Wed</strong>20</span>
+            <span class="fx-body">
+              <span class="fx-name">Twilight Foursomes</span>
+              <span class="fx-meta">Nine holes from 6:00 pm, supper in the Morning Room after · draw on the night</span>
+            </span>
+            <button class="btn btn-ghost btn-sm rsvp" type="button" data-ev="twilight">Put my name down</button>
+          </li>
+          <li>
+            <span class="fx-date"><strong>Fri</strong>22</span>
+            <span class="fx-body">
+              <span class="fx-name">Cellar Evening</span>
+              <span class="fx-meta">Six wines, one long table in the 1907 Room · members and one guest · twenty places</span>
+            </span>
+            <button class="btn btn-ghost btn-sm rsvp" type="button" data-ev="cellar">Take two places</button>
+          </li>
+          <li>
+            <span class="fx-date"><strong>Sat</strong>30</span>
+            <span class="fx-body">
+              <span class="fx-name">Autumn Meeting, first round</span>
+              <span class="fx-meta">The season's principal medal · draw published the Wednesday prior</span>
+            </span>
+            <button class="btn btn-ghost btn-sm rsvp" type="button" data-ev="autumn">Enter the draw</button>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Dining -->
+      <section class="dining-band" id="dining" aria-labelledby="diningTitle">
+        <figure class="dining-fig">
+          <img src="img/au-dining.webp" alt="A round table dressed in ivory linen by the window of the private dining room, the sunlit course and a red flag beyond." width="1248" height="832" loading="lazy" decoding="async">
+        </figure>
+        <div class="plate plate-dining">
+          <header class="plate-head">
+            <h2 id="diningTitle">The dining rooms</h2>
+            <span class="serial">Kitchen till 9:30 pm</span>
+          </header>
+          <ul class="rooms">
+            <li><strong>The Morning Room</strong><span>Breakfast from 7, lunch from 12:30 — spikes welcome</span></li>
+            <li><strong>The 1907 Room</strong><span>Dinner from 6:30 — jackets, bookings, candlelight</span></li>
+            <li><strong>The Terrace</strong><span>Weather permitting, and it usually is</span></li>
+          </ul>
+          <form class="table-form" id="tableForm" novalidate>
+            <div class="tf-row">
+              <label class="tf-field">
+                <span>Day</span>
+                <select id="tableDay"><!-- rendered --></select>
+              </label>
+              <label class="tf-field">
+                <span>Time</span>
+                <select id="tableTime">
+                  <option>12:30</option><option>1:00</option><option>1:30</option>
+                  <option>6:30</option><option>7:00</option><option>7:30</option><option>8:00</option>
+                </select>
+              </label>
+              <label class="tf-field">
+                <span>Party</span>
+                <select id="tableParty">
+                  <option>2</option><option selected>3</option><option>4</option><option>6</option><option>8</option>
+                </select>
+              </label>
+            </div>
+            <button class="btn btn-solid" id="tableBtn" type="submit">
+              <span id="tableLabel">Reserve the table</span>
+              <svg class="b-spin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+            </button>
+            <p class="tf-confirm" id="tableConfirm" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- Amenities -->
+      <section aria-labelledby="amenTitle" class="amenities-wrap">
+        <header class="band-head">
+          <h2 id="amenTitle">Kept ready</h2>
+          <p class="page-lede">The quieter rooms of the club. Each is a note to the desk away.</p>
+        </header>
+        <div class="amenities">
+          <article class="amenity">
+            <img src="img/au-practice.webp" alt="A stone-and-timber practice bay, a golfer holding his finish against the sunlit range." width="1200" height="800" loading="lazy" decoding="async">
+            <div class="amenity-body">
+              <h3>The practice bays</h3>
+              <p>Six covered bays facing the morning sun, balls to the horizon, coffee brought out on the cold days.</p>
+              <a class="chip" href="concierge.html?service=practice">
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>
+                Hold a bay</a>
+            </div>
+          </article>
+          <article class="amenity">
+            <img src="img/au-lockers.webp" alt="Walnut lockers with brass nameplates glowing in window sun, a leather bench, one bag of clubs resting against the panelling." width="1184" height="864" loading="lazy" decoding="async">
+            <div class="amenity-body">
+              <h3>The locker room</h3>
+              <p>Walnut, brass, and your name on the plate. Club storage, re-gripping and shoe care handled overnight.</p>
+              <a class="chip" href="concierge.html?service=locker">
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>
+                Locker arrangements</a>
+            </div>
+          </article>
+          <article class="amenity">
+            <img src="img/au-recovery.webp" alt="A treatment room in warm limestone: a massage table in ivory linen, oat towels on a walnut side table, sun through sheer curtains." width="1184" height="864" loading="lazy" decoding="async">
+            <div class="amenity-body">
+              <h3>The recovery suite</h3>
+              <p>Physio, cold plunge and a proper stretch under someone who has seen your swing and forgiven it.</p>
+              <a class="chip" href="concierge.html?service=recovery">
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>
+                Book a treatment</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Notices -->
+      <section class="plate" id="notices" aria-labelledby="ntTitle">
+        <header class="plate-head">
+          <h2 id="ntTitle">Conditions &amp; notices</h2>
+          <span class="serial" id="noticeStamp">Posted 6:05 am</span>
+        </header>
+        <div class="cond-grid">
+          <div class="cond-cell"><span>Course</span><strong>Open, all eighteen</strong></div>
+          <div class="cond-cell"><span>Greens</span><strong>10.5 on the stimp</strong></div>
+          <div class="cond-cell"><span>Pins</span><strong>Back third, kind</strong></div>
+          <div class="cond-cell"><span>Wind</span><strong>SW 8 mph, freshening</strong></div>
+          <div class="cond-cell"><span>Buggies</span><strong>Paths only on 7 &amp; 12</strong></div>
+          <div class="cond-cell"><span>Sunset</span><strong>8:41 pm</strong></div>
+        </div>
+        <ul class="notice-list">
+          <li>
+            <p class="notice-head">Greens: hollow-tining, Mon 25 – Tue 26</p>
+            <p class="notice-body">Temporary greens on 4, 9 and 13 both days. The course is otherwise open, and the greens will be the better for it by the weekend.</p>
+          </li>
+          <li>
+            <p class="notice-head">The causeway path</p>
+            <p class="notice-body">Resurfacing between the 11th tee and the shore path is finished a week early. The committee thanks members for their patience and their restraint in the suggestion book.</p>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="foot wrap">
+    <div class="foot-rule">
+      <p class="foot-crest">AUREON <em>· est. 1907</em></p>
+      <nav aria-label="Footer">
+        <a href="club.html#notices">Course conditions</a>
+        <a href="concierge.html">Concierge</a>
+        <a href="index.html#main">Member home</a>
+      </nav>
+      <p class="foot-fine">One Fairway Lane · By the sea · Members and their guests only</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

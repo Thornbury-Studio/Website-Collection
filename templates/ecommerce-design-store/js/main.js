@@ -182,13 +182,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('searchInput').addEventListener('input', (event) => {
     const query = event.target.value.trim().toLowerCase();
     const matches = [...document.querySelectorAll('.product-card')].filter((card) => `${card.dataset.name} ${card.dataset.category}`.toLowerCase().includes(query));
-    document.getElementById('searchHint').textContent = query ? `${matches.length} object${matches.length === 1 ? '' : 's'} found in this demo` : 'Popular: Halo, portable light, tray';
+    document.getElementById('searchHint').textContent = query ? `${matches.length} object${matches.length === 1 ? '' : 's'} found` : 'Popular: Halo, portable light, tray';
   });
 
   document.getElementById('newsletterForm').addEventListener('submit', (event) => {
     event.preventDefault();
     const status = document.getElementById('formStatus');
-    status.textContent = 'You’re on the fictional list. Thanks for trying the demo.';
+    out.textContent = 'Thanks — please contact us directly to continue.';
     event.target.reset();
   });
 
