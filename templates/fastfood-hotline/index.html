@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>HOTLINE — Fried After Dark | Late-Night Chicken &amp; Stacks</title>
+  <meta name="description" content="HOTLINE is a late-night counter on Jalan Besar: buttermilk-brined fried chicken, smashed stacks and twice-cooked fries, served until four in the morning.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/fastfood-hotline/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HOTLINE — Fried After Dark">
+  <meta property="og:description" content="Buttermilk-brined bird, smashed stacks and twice-cooked fries. Open until four.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/fastfood-hotline/img/hero-stack.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HOTLINE — Fried After Dark">
+  <meta name="twitter:description" content="Buttermilk-brined bird, smashed stacks and twice-cooked fries. Open until four.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/fastfood-hotline/img/hero-stack.webp">
+  <meta name="theme-color" content="#0B0B0C">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#signature">Skip to the menu</a>
+
+<!-- ===================== header ===================== -->
+<header class="top">
+  <a class="mark" href="index.html" aria-label="HOTLINE home">
+    <span class="mark__dot" aria-hidden="true"></span>HOTLINE
+  </a>
+  <nav class="top-nav" aria-label="Primary">
+    <a href="menu.html">Menu</a>
+    <a href="#box">Build a box</a>
+    <a href="#find">Find us</a>
+  </nav>
+  <span class="pip" id="statusPip" data-open="0">
+    <span class="pip__led" aria-hidden="true"></span><span id="statusText">Checking</span>
+  </span>
+  <a class="top-bag" href="order.html" id="topBag" data-empty="1">
+    Bag <span class="top-bag__n" id="bagCount">0</span>
+  </a>
+</header>
+
+<main>
+
+  <!-- ===================== hero ===================== -->
+  <section class="hero">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="wrap hero__in">
+      <div>
+        <p class="hero__kick u-label"><i aria-hidden="true"></i>17:00 — 04:00 · Jalan Besar</p>
+        <h1 class="hero__h">
+          <span>Fried</span>
+          <span>after <em>dark</em>.</span>
+        </h1>
+        <p class="hero__sub">Buttermilk-brined bird and smashed stacks out of a hot kitchen,
+          served until four in the morning. Order ahead, walk in, or have it brought to your door.</p>
+        <div class="hero__cta">
+          <a class="btn btn--solid" href="menu.html"><span>Order now</span></a>
+          <a class="btn btn--line" href="#box"><span>Build a box</span></a>
+        </div>
+        <p class="counter">
+          <span class="counter__l" id="counterLabel">Last orders in</span>
+          <span class="counter__v u-num" id="counterValue">--:--:--</span>
+        </p>
+      </div>
+
+      <div class="hero__media">
+        <img src="img/hero-stack.webp" width="1500" height="1829" fetchpriority="high" decoding="async"
+             alt="The Double: a two-patty cheeseburger on a sesame bun, lit against black with its reflection beneath.">
+        <p class="hero__stamp"><b>$14</b><span>The Double</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== kitchen ticker ===================== -->
+  <section class="ticker" aria-label="Orders leaving the kitchen">
+    <div class="ticker__track" id="ticker">
+      <div class="ticker__row" id="tickerRow">
+        <span class="ticker__i ticker__i--live"><b>#4471</b> Two doubles, extra hot <s>· on the pass</s></span>
+        <span class="ticker__i"><b>#4470</b> Half bird, slaw <s>· 4 min</s></span>
+        <span class="ticker__i"><b>#4468</b> Popcorn, fire sauce <s>· 6 min</s></span>
+        <span class="ticker__i"><b>#4467</b> Late one, loaded fries <s>· 7 min</s></span>
+        <span class="ticker__i"><b>#4465</b> Smoke stack ×3 <s>· 9 min</s></span>
+        <span class="ticker__i"><b>#4463</b> The hotline, yuzu <s>· 11 min</s></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== signature ===================== -->
+  <section class="sec" id="signature" aria-labelledby="sigTitle">
+    <div class="wrap">
+      <div class="chapter reveal">
+        <span class="chapter__no u-num">01</span>
+        <h2 class="chapter__t" id="sigTitle">The short list</h2>
+        <p class="chapter__aside">Six things carry the kitchen. Everything else on the menu exists
+          to sit next to one of them.</p>
+      </div>
+      <div class="grid" id="sigGrid"></div>
+      <p class="mt-l">
+        <a class="btn btn--line" href="menu.html"><span>See the whole menu</span></a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== box builder ===================== -->
+  <section class="sec sec--tight" id="box" aria-labelledby="boxTitle">
+    <div class="wrap">
+      <div class="chapter reveal">
+        <span class="chapter__no u-num">02</span>
+        <h2 class="chapter__t" id="boxTitle">Build a box</h2>
+        <p class="chapter__aside">One main, one side, one dip, one drink. The box always comes out
+          cheaper than the four things bought apart.</p>
+      </div>
+
+      <div class="box reveal">
+        <div class="box__grid">
+          <div class="box__picks" id="boxPicks"></div>
+          <aside class="box__out" aria-live="polite">
+            <p class="u-label">Your box</p>
+            <div class="box__lines" id="boxLines"></div>
+            <p class="box__save" id="boxSave" hidden><span>You save</span><b class="u-num" id="boxSaveV">$0.00</b></p>
+            <p class="box__tot"><span>Box total</span><b class="u-num" id="boxTotal">$0.00</b></p>
+            <button class="btn btn--solid btn--wide" id="boxAdd" type="button" disabled><span>Add box to bag</span></button>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== heat scale ===================== -->
+  <section class="sec sec--tight" aria-labelledby="heatTitle">
+    <div class="wrap">
+      <div class="chapter reveal">
+        <span class="chapter__no u-num">03</span>
+        <h2 class="chapter__t" id="heatTitle">The scale</h2>
+        <p class="chapter__aside">Every dish carries a number. Ask for it a level down and we will
+          not be offended.</p>
+      </div>
+      <div class="scale reveal">
+        <div class="scale__c">
+          <p class="scale__n u-num">01</p>
+          <p class="scale__t">Warm</p>
+          <p class="scale__d">Seasoning only. Sweet, salted, a little pepper at the back.</p>
+        </div>
+        <div class="scale__c">
+          <p class="scale__n u-num">02</p>
+          <p class="scale__t">Mild</p>
+          <p class="scale__d">Gochugaru in the dredge. You would feed it to anyone.</p>
+        </div>
+        <div class="scale__c">
+          <p class="scale__n u-num">03</p>
+          <p class="scale__t">House</p>
+          <p class="scale__d">Where the kitchen thinks the food tastes best. Most orders land here.</p>
+        </div>
+        <div class="scale__c">
+          <p class="scale__n u-num">04</p>
+          <p class="scale__t">Hot</p>
+          <p class="scale__d">Fermented chilli in the glaze. Order a lemonade at the same time.</p>
+        </div>
+        <div class="scale__c">
+          <p class="scale__n u-num">05</p>
+          <p class="scale__t">Fire</p>
+          <p class="scale__d">Served on the side by default. We will bring it in a separate pot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== late band ===================== -->
+  <section class="band reveal" aria-labelledby="lateTitle">
+    <img class="band__img" src="img/band-basket.webp" width="2400" height="1000" loading="lazy" decoding="async"
+         alt="A paper-lined basket of fried chicken pieces and fries, shot from above on black.">
+    <div class="band__over">
+      <div class="wrap">
+        <div class="band__copy">
+          <h2 class="band__h" id="lateTitle">The kitchen<br>closes at <em>four</em>.</h2>
+          <p class="band__p">Last orders go in at 03:30. After midnight the queue moves faster than
+            delivery does, and the fryers are at their best around two.</p>
+          <a class="btn btn--acid" href="menu.html"><span>Order for tonight</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== find ===================== -->
+  <section class="sec" id="find" aria-labelledby="findTitle">
+    <div class="wrap">
+      <div class="chapter reveal">
+        <span class="chapter__no u-num">04</span>
+        <h2 class="chapter__t" id="findTitle">Find us</h2>
+        <p class="chapter__aside">One counter, two ways to get it. Delivery runs a three-kilometre
+          radius while the kitchen is open.</p>
+      </div>
+      <div class="find reveal">
+        <div class="find__c">
+          <p class="find__t">The counter</p>
+          <p class="find__d">88 Jalan Besar, #01–04<br>Singapore 208888</p>
+          <p class="find__m">Daily · 17:00 — 04:00</p>
+        </div>
+        <div class="find__c">
+          <p class="find__t">Collection</p>
+          <p class="find__d">Order ahead and skip the queue. Most orders are boxed within twelve minutes.</p>
+          <p class="find__m">Ready in ~12 min</p>
+        </div>
+        <div class="find__c">
+          <p class="find__t">Delivery</p>
+          <p class="find__d">Three kilometres from the counter, while the kitchen is open. Flat fee, no surge.</p>
+          <p class="find__m">$4.00 · 25—40 min</p>
+        </div>
+        <div class="find__c">
+          <p class="find__t">Large orders</p>
+          <p class="find__d">Boxes of twenty and up for the office, the shoot or the shift. Give us a day.</p>
+          <p class="find__m">hello@hotline.example</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== footer ===================== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="foot__mark">Hotline</p>
+        <p class="foot__tag">Fried after dark. A late-night counter on Jalan Besar, open until four.</p>
+      </div>
+      <div>
+        <p class="foot__h">Menu</p>
+        <div class="foot__l">
+          <a href="menu.html">Everything</a>
+          <a href="menu.html#bird">Bird</a>
+          <a href="menu.html#stacks">Stacks</a>
+          <a href="index.html#box">Build a box</a>
+        </div>
+      </div>
+      <div>
+        <p class="foot__h">Visit</p>
+        <div class="foot__l">
+          <span>88 Jalan Besar, #01–04</span>
+          <span>Singapore 208888</span>
+          <span>Daily 17:00 — 04:00</span>
+          <a href="index.html#find">Delivery radius</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot__bar">
+      <p>© 2026 Hotline Fried Chicken Co.</p>
+      <p>Allergen information available at the counter.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== bag drawer ===================== -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Your bag" aria-hidden="true">
+  <div class="drawer__top">
+    <p class="drawer__t">Your bag</p>
+    <button class="drawer__x" id="drawerClose" type="button" aria-label="Close bag">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body" id="drawerBody"></div>
+  <div class="drawer__foot">
+    <p class="tot"><span>Total</span><b class="u-num" id="drawerTotal">$0.00</b></p>
+    <a class="btn btn--solid btn--wide" href="order.html"><span>Go to checkout</span></a>
+  </div>
+</aside>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

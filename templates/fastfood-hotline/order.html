@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Your Order — HOTLINE | Collection &amp; Delivery</title>
+  <meta name="description" content="Review your HOTLINE order, pick collection or delivery within three kilometres of Jalan Besar, and send it through to the kitchen.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/fastfood-hotline/order.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Your Order — HOTLINE">
+  <meta property="og:description" content="Collection or delivery, sent straight to the kitchen.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/fastfood-hotline/img/band-basket.webp">
+  <meta name="theme-color" content="#0B0B0C">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#orderMain">Skip to your order</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="HOTLINE home">
+    <span class="mark__dot" aria-hidden="true"></span>HOTLINE
+  </a>
+  <nav class="top-nav" aria-label="Primary">
+    <a href="menu.html">Menu</a>
+    <a href="index.html#box">Build a box</a>
+    <a href="index.html#find">Find us</a>
+  </nav>
+  <span class="pip" id="statusPip" data-open="0">
+    <span class="pip__led" aria-hidden="true"></span><span id="statusText">Checking</span>
+  </span>
+  <a class="top-bag" href="order.html" id="topBag" data-empty="1" aria-current="page">
+    Bag <span class="top-bag__n" id="bagCount">0</span>
+  </a>
+</header>
+
+<main id="orderMain">
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="hero__kick u-label"><i aria-hidden="true"></i>Step one of one</p>
+      <h1 class="page-head__h">Your order</h1>
+    </div>
+  </section>
+
+  <!-- empty state -->
+  <section class="wrap" id="emptyState" hidden>
+    <div class="empty">
+      <p class="empty__h">Nothing in the bag yet.</p>
+      <p class="empty__p">The kitchen is ready when you are.</p>
+      <a class="btn btn--solid" href="menu.html"><span>Open the menu</span></a>
+    </div>
+  </section>
+
+  <!-- order -->
+  <section class="wrap" id="orderState" hidden>
+    <div class="order">
+
+      <div class="order__lines">
+        <div class="chapter">
+          <span class="chapter__no u-num">01</span>
+          <h2 class="chapter__t">The bag</h2>
+        </div>
+        <div id="orderLines"></div>
+
+        <div class="chapter mt-l">
+          <span class="chapter__no u-num">02</span>
+          <h2 class="chapter__t">How you want it</h2>
+        </div>
+
+        <div class="seg" role="radiogroup" aria-label="Collection or delivery">
+          <button class="seg__b" type="button" role="radio" aria-checked="true" data-mode="collect">
+            <b>Collection</b><span>Ready in ~12 min · free</span>
+          </button>
+          <button class="seg__b" type="button" role="radio" aria-checked="false" data-mode="deliver">
+            <b>Delivery</b><span>25—40 min · $4.00</span>
+          </button>
+        </div>
+
+        <form class="form" id="orderForm" novalidate>
+          <div class="field">
+            <label for="fName">Name</label>
+            <input id="fName" name="name" type="text" autocomplete="name" required placeholder="Who is picking it up?">
+            <p class="field__err" id="eName" hidden>Tell us who the order is for.</p>
+          </div>
+
+          <div class="field">
+            <label for="fPhone">Mobile</label>
+            <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="8123 4567">
+            <p class="field__err" id="ePhone" hidden>An eight-digit Singapore mobile, starting 8 or 9.</p>
+          </div>
+
+          <div class="field" id="addrField" hidden>
+            <label for="fAddr">Address</label>
+            <input id="fAddr" name="address" type="text" autocomplete="street-address" placeholder="Block, street and unit">
+            <p class="field__err" id="eAddr" hidden>We need somewhere to bring it.</p>
+          </div>
+
+          <div class="field" id="postField" hidden>
+            <label for="fPost">Postcode</label>
+            <input id="fPost" name="postcode" type="text" inputmode="numeric" maxlength="6" placeholder="208888">
+            <p class="field__hint">Delivery covers postcodes 20—21 and 30—33.</p>
+            <p class="field__err" id="ePost" hidden>That postcode is outside the delivery radius.</p>
+          </div>
+
+          <div class="field">
+            <label for="fNote">Anything else</label>
+            <textarea id="fNote" name="note" rows="2" placeholder="Heat down a level, no pickles, leave at the door…"></textarea>
+          </div>
+        </form>
+      </div>
+
+      <!-- summary -->
+      <aside class="order__sum">
+        <div class="sum">
+          <p class="u-label">Summary</p>
+          <div class="sum__rows" id="sumRows"></div>
+          <p class="sum__row sum__row--save" id="sumSave" hidden>
+            <span id="sumSaveL">Box saving</span><b class="u-num" id="sumSaveV">−$0.00</b>
+          </p>
+          <p class="sum__row" id="sumFeeRow" hidden><span>Delivery</span><b class="u-num" id="sumFee">$4.00</b></p>
+          <p class="sum__total"><span>To pay</span><b class="u-num" id="sumTotal">$0.00</b></p>
+          <p class="sum__pay u-label" id="sumPay">Pay at the counter</p>
+          <button class="btn btn--solid btn--wide" id="sendBtn" type="submit" form="orderForm">
+            <span>Send to the kitchen</span>
+          </button>
+          <p class="sum__closed" id="sumClosed" hidden>
+            The kitchen is closed right now — we will hold this and start it when the fryers are on.
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- confirmation -->
+  <section class="wrap" id="doneState" hidden>
+    <div class="done">
+      <p class="done__no u-num" id="doneNo">#0000</p>
+      <h2 class="done__h">In the fryer.</h2>
+      <p class="done__p" id="doneP"></p>
+      <div class="done__grid" id="doneLines"></div>
+      <p class="done__foot">
+        <a class="btn btn--line" href="menu.html"><span>Order something else</span></a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="foot__mark">Hotline</p>
+        <p class="foot__tag">Fried after dark. A late-night counter on Jalan Besar, open until four.</p>
+      </div>
+      <div>
+        <p class="foot__h">Menu</p>
+        <div class="foot__l">
+          <a href="menu.html">Everything</a>
+          <a href="index.html#box">Build a box</a>
+        </div>
+      </div>
+      <div>
+        <p class="foot__h">Visit</p>
+        <div class="foot__l">
+          <span>88 Jalan Besar, #01–04</span>
+          <span>Singapore 208888</span>
+          <span>Daily 17:00 — 04:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="foot__bar">
+      <p>© 2026 Hotline Fried Chicken Co.</p>
+      <p>Allergen information available at the counter.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/order.js"></script>
+</body>
+</html>
