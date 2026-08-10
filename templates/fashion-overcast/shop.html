@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Collection — OVERCAST</title>
+<meta name="description" content="All eight pieces of the OVERCAST AW26 collection — outerwear, knitwear, shirting, trousers and accessories. A fictional label built as a portfolio template.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/fashion-overcast/shop.html">
+<meta name="theme-color" content="#f5f4f1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2316181a'/%3E%3Cpath d='M8 19.5h16M8 15h16M11 10.5h13' stroke='%23f5f4f1' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta property="og:title" content="The Collection — OVERCAST">
+<meta property="og:description" content="All eight pieces of the OVERCAST AW26 collection.">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="announce" aria-hidden="true">
+  <div class="announce-track">
+    <div class="announce-row">
+      <span>Complimentary shipping over $150</span><span>&mdash;</span>
+      <span>Free returns within 30 days</span><span>&mdash;</span>
+      <span>AW26 &mdash; The Grey Hours, now in stock</span><span>&mdash;</span>
+      <span>Made in limited runs</span><span>&mdash;</span>
+    </div>
+  </div>
+</div>
+
+<header class="head" id="head">
+  <div class="head-in">
+    <nav class="nav-l" aria-label="Primary">
+      <a class="nav-a" href="shop.html" aria-current="page">Shop</a>
+      <a class="nav-a" href="index.html#collection">Collection</a>
+      <a class="nav-a" href="index.html#cloth">Cloth</a>
+      <a class="nav-a" href="index.html#atelier">About</a>
+    </nav>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span><i></i><i></i></span></button>
+    <a class="logo" href="index.html">OVERCAST</a>
+    <div class="head-r">
+      <button class="icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn" id="cartBtn" aria-label="Open bag">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8z" stroke-linejoin="round"/><path d="M9.5 8V6.5a2.5 2.5 0 0 1 5 0V8" stroke-linecap="round"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mnav" id="mnav" aria-label="Mobile">
+  <button class="icon-btn mnav-close" id="mnavClose" aria-label="Close menu">
+    <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
+  </button>
+  <a href="shop.html">Shop</a>
+  <a href="index.html#collection">Collection</a>
+  <a href="index.html#cloth">Cloth</a>
+  <a href="index.html#atelier">About</a>
+</nav>
+
+<main id="main">
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow rv">Autumn / Winter 26</p>
+    <h1 class="display rv">The Grey <em>Hours</em></h1>
+    <p class="rv rv-d1">Eight pieces, cut generously, in cloth chosen to be warm at nine degrees and bearable at seventeen. Sizes are marked out rather than removed — everything returns in the next run.</p>
+  </div>
+</section>
+
+<div class="filters">
+  <div class="filters-in">
+    <div class="chips" id="chips" role="group" aria-label="Filter by category">
+      <button class="chip on" data-cat="all">All</button>
+      <button class="chip" data-cat="Outerwear">Outerwear</button>
+      <button class="chip" data-cat="Knitwear">Knitwear</button>
+      <button class="chip" data-cat="Shirting">Shirting</button>
+      <button class="chip" data-cat="Trousers">Trousers</button>
+      <button class="chip" data-cat="Accessories">Accessories</button>
+    </div>
+    <div class="filters-right">
+      <span class="count-lbl" id="countLbl" role="status">Eight pieces</span>
+      <label class="skip-link" for="sort">Sort by</label>
+      <select class="sort" id="sort">
+        <option value="featured">Featured</option>
+        <option value="low">Price — low to high</option>
+        <option value="high">Price — high to low</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<section class="sec sec-tight">
+  <div class="wrap">
+    <div class="p-grid" id="grid"></div>
+    <p class="cart-fine" id="empty" hidden>Nothing in that category yet.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo">OVERCAST</span>
+        <p>Mid-weight layering for changeable weather. Made in small runs, photographed as cloth.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="shop.html">All pieces</a></li>
+          <li><a href="shop.html">Outerwear</a></li>
+          <li><a href="shop.html">Knitwear</a></li>
+          <li><a href="shop.html">Accessories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="index.html#atelier">Sizing &amp; fit</a></li>
+          <li><a href="index.html#atelier">Shipping</a></li>
+          <li><a href="index.html#atelier">Returns</a></li>
+          <li><a href="index.html#atelier">Care</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>House</h4>
+        <ul>
+          <li><a href="index.html#cloth">The cloth library</a></li>
+          <li><a href="index.html#atelier">How we work</a></li>
+          <li><a href="index.html#atelier">Stockists</a></li>
+          <li><a href="index.html#atelier">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <p class="foot-note"><strong>OVERCAST is a fictional label</strong> — a portfolio template. The brand, garments, mills, prices and stock levels are invented, and no payment can be taken. Photography is licensed Adobe Stock, credited in the repository.</p>
+      <p>&copy; <span class="yr">2026</span> Overcast</p>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="cart" id="cart" aria-hidden="true" aria-label="Shopping bag">
+  <div class="cart-head">
+    <h2>Your bag</h2>
+    <button class="icon-btn" id="cartClose" aria-label="Close bag">
+      <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="ship-bar">
+    <p id="shipNote"><b>$150</b> away from complimentary shipping.</p>
+    <div class="ship-track"><div class="ship-fill" id="shipFill"></div></div>
+  </div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-foot">
+    <div class="cart-line"><span>Subtotal</span><span id="cartSub">$0</span></div>
+    <div class="cart-line"><span>Shipping</span><span>Calculated at checkout</span></div>
+    <div class="cart-line total"><span>Total</span><span id="cartTotal">$0</span></div>
+    <button class="btn btn-fill btn-block" id="checkout"><span>Checkout</span></button>
+    <p class="cart-fine">Demo storefront &mdash; no payment is taken.</p>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <span id="toastMsg"></span>
+</div>
+
+<script src="js/store.js" defer></script>
+<script src="js/shop.js" defer></script>
+</body>
+</html>
