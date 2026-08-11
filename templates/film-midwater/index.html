@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIDWATER — A Film by Mara Voss | Pelagic Pictures</title>
+<meta name="description" content="MIDWATER is a feature documentary about the ocean between the light and the floor — a single descent in six stations, from the surf line to the lantern town of the deep.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/film-midwater/">
+<meta name="theme-color" content="#020409">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23020409'/%3E%3Ccircle cx='16' cy='11' r='5.5' fill='none' stroke='%238fd0cc' stroke-width='1.6'/%3E%3Cpath d='M16 16.5v9' stroke='%238fd0cc' stroke-width='1.6'/%3E%3Cpath d='M11 22l5 3.5 5-3.5' fill='none' stroke='%23e0a33e' stroke-width='1.6'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="video.movie">
+<meta property="og:site_name" content="MIDWATER">
+<meta property="og:title" content="MIDWATER — A Film by Mara Voss">
+<meta property="og:description" content="A feature documentary about the ocean between the light and the floor. One descent, six stations. In cinemas now.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/film-midwater/">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/film-midwater/img/still-mother.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MIDWATER — A Film by Mara Voss">
+<meta name="twitter:description" content="A feature documentary about the ocean between the light and the floor. One descent, six stations.">
+<meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/film-midwater/img/still-mother.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Movie",
+  "name": "MIDWATER",
+  "description": "A feature documentary about the ocean between the light and the floor — a single descent in six stations.",
+  "director": { "@type": "Person", "name": "Mara Voss" },
+  "productionCompany": { "@type": "Organization", "name": "Pelagic Pictures" },
+  "duration": "PT78M",
+  "url": "https://website-collection-zanezhijies-projects.vercel.app/templates/film-midwater/"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;1,300;1,400&family=Martian+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" as="image" href="img/poster-hero.webp">
+</head>
+<body class="page-descent">
+<!--
+THESIS: The film's site IS the survey record of one descent — instruments frame
+the cinema instead of a trailer-hero with a play button (the category default
+this page refuses).
+OWN-WORLD: Abyss blue-black deepening with scroll; pale phosphor-cyan
+instrument hairlines and Martian Mono data; one amber signal for the human
+layer; Spectral extralight cinema type; echo-sounder strip chart at the edge.
+STORY: A visitor sinks through six stations of 4K ocean, hears the water
+thicken, reads the depth ticking down — and surfaces wanting a seat.
+FIRST VIEWPORT: Full-bleed churning sea under WebGL grain; billing block over
+lower third: PELAGIC PICTURES PRESENTS / MIDWATER / one-line premise; depth
+0 M and BEGIN DESCENT at the fold; HUD corners carry timecode and sound.
+FORM: Research-vessel instrument survey — direction 7 of 7 on my ordered
+list, assigned by seed 2c086b6d.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the
+finish review, the verdict, and DESIGN.md.
+-->
+
+<a class="skip" href="#stations">Skip to the stations</a>
+
+<header class="topbar" id="topbar">
+  <a class="wordmark" href="index.html" aria-label="MIDWATER home">MIDWATER</a>
+  <nav class="topnav" aria-label="Site">
+    <a href="index.html" aria-current="page">The Descent</a>
+    <a href="film.html">The Film</a>
+    <a href="screenings.html">Screenings</a>
+  </nav>
+  <button class="sound" id="soundToggle" type="button" aria-pressed="false">
+    <svg class="sound-ic" viewBox="0 0 18 18" aria-hidden="true"><path class="s-body" d="M3 7v4h3l4 3.4V3.6L6 7H3z"/><path class="s-w1" d="M12.5 6.5a3.6 3.6 0 0 1 0 5"/><path class="s-w2" d="M14.3 4.7a6.2 6.2 0 0 1 0 8.6"/></svg>
+    <span class="sound-label">Sound off</span>
+  </button>
+</header>
+
+<!-- depth-tinted water: two fixed layers crossfaded by scroll -->
+<div class="water" aria-hidden="true">
+  <div class="water-a"></div>
+  <div class="water-b" id="waterDeep"></div>
+</div>
+<canvas class="snow" id="snow" aria-hidden="true"></canvas>
+
+<!-- echo-sounder strip chart, desktop only -->
+<aside class="sounder" id="sounder" aria-hidden="true">
+  <canvas id="sounderCanvas"></canvas>
+</aside>
+
+<!-- instrument frame -->
+<div class="hud" aria-hidden="true">
+  <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
+  <div class="hud-corner bl"></div><div class="hud-corner br"></div>
+  <div class="hud-item hud-tc"><span class="hud-key">TC</span> <span id="hudTimecode">00:00:00:00</span></div>
+  <div class="hud-item hud-depth"><span id="hudDepth">0</span><span class="hud-unit">M</span></div>
+  <div class="hud-item hud-data">
+    <span><span class="hud-key">PRES</span> <span id="hudPres">1.0 ATM</span></span>
+    <span><span class="hud-key">LIGHT</span> <span id="hudLight">100%</span></span>
+    <span><span class="hud-key">TEMP</span> <span id="hudTemp">27.0°C</span></span>
+  </div>
+</div>
+
+<!-- station index -->
+<nav class="stnav" id="stnav" aria-label="Stations">
+  <a href="#top" data-stn="hero"><span>SFC</span></a>
+  <a href="#stn-1" data-stn="1"><span>01</span></a>
+  <a href="#stn-2" data-stn="2"><span>02</span></a>
+  <a href="#stn-3" data-stn="3"><span>03</span></a>
+  <a href="#stn-4" data-stn="4"><span>04</span></a>
+  <a href="#stn-5" data-stn="5"><span>05</span></a>
+  <a href="#stn-6" data-stn="6"><span>06</span></a>
+  <a href="#credits" data-stn="end"><span>END</span></a>
+</nav>
+
+<main id="top">
+
+  <!-- ======================= HERO ======================= -->
+  <section class="hero" id="hero" data-depth-from="0" data-depth-to="0">
+    <div class="hero-media">
+      <video id="heroVideo" class="hero-video" muted playsinline loop preload="auto" poster="img/poster-hero.webp"></video>
+      <canvas id="heroGL" class="hero-gl"></canvas>
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+
+    <div class="hero-billing">
+      <p class="billing-top"><span>Pelagic Pictures presents</span><span class="billing-dot"> · </span><span>a film by Mara Voss</span></p>
+      <h1 class="title">MIDWATER</h1>
+      <p class="premise">A film about the ocean between the light and the floor.</p>
+      <div class="hero-actions">
+        <a class="btn-signal" href="screenings.html">Find a screening</a>
+        <button class="btn-dive" id="diveSound" type="button"><svg class="dive-ic" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="7" r="2.2" fill="currentColor"/></svg>Dive with sound</button>
+      </div>
+    </div>
+
+    <div class="hero-foot">
+      <p class="begin">Begin descent</p>
+      <svg class="begin-arrow" viewBox="0 0 12 26" aria-hidden="true"><path d="M6 1v22M1.5 18.5 6 23l4.5-4.5"/></svg>
+    </div>
+  </section>
+
+  <!-- ======================= STATIONS ======================= -->
+  <div id="stations">
+
+  <section class="station" id="stn-1" data-depth-from="0" data-depth-to="6"
+           data-video="video/surface.mp4" data-poster="img/poster-surface.webp">
+    <div class="frame">
+      <video class="stn-video" muted playsinline loop preload="none" poster="img/poster-surface.webp" aria-label="Aerial footage of surfers waiting beyond the break"></video>
+      <div class="stn-caption">
+        <p class="stn-id">Station 01 · 0–6 m</p>
+        <h2 class="stn-name">The Last People</h2>
+        <p class="stn-line">Where the ocean still belongs to us — for the length of one held breath.</p>
+      </div>
+      <div class="stn-margin" aria-hidden="true">
+        <span>SEA STATE 4</span><span>SWELL SW 1.8 M</span><span>CONTACTS 23</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="station" id="stn-2" data-depth-from="6" data-depth-to="22"
+           data-video="video/descent.mp4" data-poster="img/poster-descent.webp">
+    <div class="frame">
+      <video class="stn-video" muted playsinline loop preload="none" poster="img/poster-descent.webp" aria-label="Two freedivers descending a dive line into blue water"></video>
+      <div class="stn-caption">
+        <p class="stn-id">Station 02 · 22 m</p>
+        <h2 class="stn-name">The Line</h2>
+        <p class="stn-line">Two breaths, one rope, no bottom.</p>
+      </div>
+      <div class="stn-margin" aria-hidden="true">
+        <span>DESCENT 1.1 M/S</span><span>HEART 42 BPM</span><span>LINE ANGLE 0°</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="station" id="stn-3" data-depth-from="22" data-depth-to="44"
+           data-video="video/school.mp4" data-poster="img/poster-school.webp">
+    <div class="frame">
+      <video class="stn-video" muted playsinline loop preload="none" poster="img/poster-school.webp" aria-label="A dense school of fish turning in open blue water"></video>
+      <div class="stn-caption">
+        <p class="stn-id">Station 03 · 44 m</p>
+        <h2 class="stn-name">The Cloud</h2>
+        <p class="stn-line">A single animal wearing ten thousand bodies.</p>
+      </div>
+      <div class="stn-margin" aria-hidden="true">
+        <span>ECHO DENSE</span><span>TARGET 10⁴</span><span>BEARING SHIFTING</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="station" id="stn-4" data-depth-from="44" data-depth-to="92"
+           data-video="video/whale.mp4" data-poster="img/poster-whale.webp">
+    <div class="frame">
+      <video class="stn-video" muted playsinline loop preload="none" poster="img/poster-whale.webp" aria-label="A humpback whale and her calf swimming through deep blue"></video>
+      <div class="stn-caption">
+        <p class="stn-id">Station 04 · 92 m</p>
+        <h2 class="stn-name">Leviathan</h2>
+        <p class="stn-line">The mother sings so low the sea itself carries her.</p>
+      </div>
+      <div class="stn-margin" aria-hidden="true">
+        <span>CONTACT 30 T</span><span>SECOND CONTACT SMALL</span><span>SONG 40 HZ</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="station" id="stn-5" data-depth-from="92" data-depth-to="640"
+           data-video="video/jellies.mp4" data-poster="img/poster-jellies.webp">
+    <div class="frame">
+      <video class="stn-video" muted playsinline loop preload="none" poster="img/poster-jellies.webp" aria-label="Small luminous jellyfish drifting in black water"></video>
+      <div class="stn-caption">
+        <p class="stn-id">Station 05 · 640 m</p>
+        <h2 class="stn-name">Lantern Town</h2>
+        <p class="stn-line">Where the sun has never been, everyone brings their own light.</p>
+      </div>
+      <div class="stn-margin" aria-hidden="true">
+        <span>LIGHT 0.0%</span><span>BIOLUM ACTIVE</span><span>FALL 2 CM/S</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="station" id="stn-6" data-depth-from="640" data-depth-to="10"
+           data-video="video/return.mp4" data-poster="img/poster-return.webp">
+    <div class="frame">
+      <video class="stn-video" muted playsinline loop preload="none" poster="img/poster-return.webp" aria-label="Sunlight rays breaking through water over a rocky grotto"></video>
+      <div class="stn-caption">
+        <p class="stn-id">Station 06 · Ascent</p>
+        <h2 class="stn-name">The Return</h2>
+        <p class="stn-line">The surface, remembered.</p>
+      </div>
+      <div class="stn-margin" aria-hidden="true">
+        <span>ASCENT 0.3 M/S</span><span>STOP 5 M · 3 MIN</span><span>SKY CONFIRMED</span>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <!-- ======================= CREDITS ======================= -->
+  <section class="credits" id="credits">
+    <p class="credits-open">MIDWATER was filmed over four years, in seven seas,<br>between zero and six hundred and forty metres.</p>
+
+    <dl class="credit-roll">
+      <div><dt>Directed by</dt><dd>Mara Voss</dd></div>
+      <div><dt>Produced by</dt><dd>Ainsley Chua · Pelagic Pictures</dd></div>
+      <div><dt>Cinematography</dt><dd>Nadezhda Moryak · Jess Loiterton · Dio Patcho · Jun&nbsp;Ho&nbsp;Lee · Adrien Jacta · Chew&nbsp;HanYang</dd></div>
+      <div><dt>Edited by</dt><dd>Tobi Okafor</dd></div>
+      <div><dt>Original score</dt><dd>Jonas Reppe</dd></div>
+      <div><dt>Sound design</dt><dd>Dragon Studio</dd></div>
+    </dl>
+
+    <div class="credits-close">
+      <img class="credits-poster" src="img/onesheet-sm.webp" width="320" height="480" alt="MIDWATER one-sheet poster: a lone humpback whale descending into dark water under thin rays of light" loading="lazy">
+      <div class="credits-cta">
+        <p class="credits-note">The descent ends here.<br>The film is 78 minutes longer.</p>
+        <a class="btn-signal" href="screenings.html">Reserve a seat</a>
+        <a class="btn-quiet" href="film.html">About the film</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p class="foot-brand">MIDWATER · a Pelagic Pictures film</p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="film.html">The Film</a>
+      <a href="screenings.html">Screenings</a>
+      <a href="mailto:desk@pelagicpictures.example">Press &amp; bookings</a>
+    </nav>
+    <p class="foot-fine">© 2026 Pelagic Pictures. 78 min · 2.39:1 · 5.1</p>
+  </footer>
+
+</main>
+
+<script src="js/shared.js"></script>
+<script src="js/descent.js"></script>
+</body>
+</html>

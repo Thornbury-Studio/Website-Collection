@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Screenings — MIDWATER | Pelagic Pictures</title>
+<meta name="description" content="Upcoming screenings of MIDWATER — dates, cities and reservations. Presented in 2.39:1 with 5.1 sound, several dates with a Q&A.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/film-midwater/screenings.html">
+<meta name="theme-color" content="#020409">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23020409'/%3E%3Ccircle cx='16' cy='11' r='5.5' fill='none' stroke='%238fd0cc' stroke-width='1.6'/%3E%3Cpath d='M16 16.5v9' stroke='%238fd0cc' stroke-width='1.6'/%3E%3Cpath d='M11 22l5 3.5 5-3.5' fill='none' stroke='%23e0a33e' stroke-width='1.6'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIDWATER">
+<meta property="og:title" content="Screenings — MIDWATER">
+<meta property="og:description" content="Upcoming screenings of MIDWATER — dates, cities and reservations.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/film-midwater/screenings.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/film-midwater/img/still-grotto.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;1,300;1,400&family=Martian+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-sub">
+
+<a class="skip" href="#list">Skip to the screenings</a>
+
+<header class="topbar">
+  <a class="wordmark" href="index.html" aria-label="MIDWATER home">MIDWATER</a>
+  <nav class="topnav" aria-label="Site">
+    <a href="index.html">The Descent</a>
+    <a href="film.html">The Film</a>
+    <a href="screenings.html" aria-current="page">Screenings</a>
+  </nav>
+  <button class="sound" id="soundToggle" type="button" aria-pressed="false">
+    <svg class="sound-ic" viewBox="0 0 18 18" aria-hidden="true"><path class="s-body" d="M3 7v4h3l4 3.4V3.6L6 7H3z"/><path class="s-w1" d="M12.5 6.5a3.6 3.6 0 0 1 0 5"/><path class="s-w2" d="M14.3 4.7a6.2 6.2 0 0 1 0 8.6"/></svg>
+    <span class="sound-label">Sound off</span>
+  </button>
+</header>
+
+<main>
+  <header class="scr-head">
+    <h1 class="scr-title rise">Screenings</h1>
+    <p class="scr-sub rise">The film is presented in 2.39 : 1 with 5.1 sound, at cinemas that agree to run it dark — no phones, no late seating after the surface is left. Reservations are held at the door under your name.</p>
+  </header>
+
+  <section class="scr-list" id="list" aria-live="polite">
+    <!-- rows are written by js/screenings.js; without JS the notice below stands -->
+    <noscript>
+      <p class="scr-sub">The live screening calendar needs JavaScript. For current dates and reservations, write to
+      <a href="mailto:desk@pelagicpictures.example">desk@pelagicpictures.example</a>.</p>
+    </noscript>
+  </section>
+
+  <section class="host">
+    <div class="host-in">
+      <div>
+        <h2>Host a screening</h2>
+        <p>Cinemas, festivals, schools and research institutions can book MIDWATER with a speaker from the crew. Tell us where the film should surface next, and the desk will reply within three days.</p>
+      </div>
+      <form class="host-form" id="hostForm" novalidate>
+        <div class="field">
+          <label for="hostVenue">Venue or organisation</label>
+          <input id="hostVenue" name="venue" type="text" autocomplete="organization" required>
+          <span class="field-err" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="hostEmail">Contact email</label>
+          <input id="hostEmail" name="email" type="email" autocomplete="email" required>
+          <span class="field-err" aria-live="polite"></span>
+        </div>
+        <button class="btn-signal" type="submit">Send the request</button>
+        <p class="noted" id="hostNoted" hidden></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">MIDWATER · a Pelagic Pictures film</p>
+  <nav class="foot-nav" aria-label="Footer">
+    <a href="index.html">The Descent</a>
+    <a href="film.html">The Film</a>
+    <a href="mailto:desk@pelagicpictures.example">Press &amp; bookings</a>
+  </nav>
+  <p class="foot-fine">© 2026 Pelagic Pictures. 78 min · 2.39:1 · 5.1</p>
+</footer>
+
+<script src="js/shared.js"></script>
+<script src="js/screenings.js"></script>
+</body>
+</html>
