@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Col Noir — Mountain Bulletin | High-Alpine Freeride Domain, 1 840–3 260 m</title>
+<meta name="description" content="Today's mountain bulletin for Col Noir: avalanche danger by elevation, snowpack, wind, lift status and terrain openings — issued every morning at 08:00, valid to 17:00.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/ski-colnoir/">
+<meta name="theme-color" content="#f5f6f4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f5f6f4'/%3E%3Cpath d='M4 26 L13 8 L19 19 L23 12 L28 26 Z' fill='%2316181a'/%3E%3Cpath d='M13 8 L16 14 L11 14 Z' fill='%23d8272c'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Col Noir">
+<meta property="og:title" content="Col Noir — Mountain Bulletin">
+<meta property="og:description" content="Avalanche danger, snowpack, wind and lift status for the Col Noir freeride domain — the mountain's daily truth, issued at 08:00.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/ski-colnoir/">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/ski-colnoir/img/still-spires.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Col Noir — Mountain Bulletin">
+<meta name="twitter:description" content="Avalanche danger, snowpack, wind and lift status for the Col Noir freeride domain.">
+<meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/ski-colnoir/img/still-spires.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SkiResort",
+  "name": "Col Noir",
+  "description": "High-alpine freeride domain, 1 840–3 260 m. Seven lifts, six sectors, one honest bulletin every morning.",
+  "url": "https://website-collection-zanezhijies-projects.vercel.app/templates/ski-colnoir/"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Chivo+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" as="image" href="img/poster-hero.webp">
+</head>
+<body>
+<!--
+THESIS: The resort's site IS its morning avalanche bulletin — the mountain's
+operational truth as the interface, refusing the category's luxury-lodge
+hero with a BOOK NOW button.
+OWN-WORLD: Glacier paper, hard ink rules, one Swiss red for structure and
+action; the European danger scale as the only other chroma, always as data.
+Archivo (expanded, 900) is the office's voice; Chivo Mono carries every
+measurement. Full-bleed 4K mountain footage breaks the report like weather
+breaks a day.
+STORY: A rider reads today's danger, snow, wind and lifts in one scroll,
+believes the mountain is real, and buys tomorrow's pass from the same
+document.
+FIRST VIEWPORT: Masthead + issue strip over a luminous piste film; the
+bulletin title stacked huge at the fold; the black danger card riding the
+hero's bottom edge with the day's rating, words, and the five-step scale.
+FORM: The avalanche bulletin — direction 4 of 7 on my ordered list,
+assigned by seed c869996b.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the
+finish review, the verdict, and DESIGN.md.
+-->
+
+<a class="skip" href="#report">Skip to the report</a>
+
+<header class="mast">
+  <div class="mast-in">
+    <a class="mark" href="index.html" aria-label="Col Noir home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="none"/><path d="M4 26 L13 8 L19 19 L23 12 L28 26 Z" fill="currentColor"/><path d="M13 8 L16 14 L11 14 Z" fill="#d8272c"/></svg>
+      <span><b>Col Noir</b><small>1 840 – 3 260 M</small></span>
+    </a>
+    <nav class="mnav" aria-label="Site">
+      <a href="index.html" aria-current="page">Bulletin</a>
+      <a href="terrain.html">Terrain</a>
+      <a href="passes.html">Passes</a>
+    </nav>
+    <button class="snd" type="button" aria-pressed="false">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8h3M5.5 8c2.5 0 3-4 5.5-4M5.5 8c2.5 0 3 4 5.5 4M11.5 8h3"/></svg>
+      <span class="snd-label">Wind off</span>
+    </button>
+  </div>
+</header>
+
+<div class="issue" id="issueStrip" aria-live="polite">
+  <span>Bulletin <b id="isNo">№ —</b></span>
+  <span id="isDate">—</span>
+  <span>Issued <b>08:00</b> · valid to <b>17:00</b></span>
+  <span id="isLifts">Lifts —</span>
+  <span id="isFlash" class="flash" hidden></span>
+</div>
+
+<main>
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="hero">
+    <video id="heroVideo" muted playsinline loop preload="auto" poster="img/poster-hero.webp" aria-label="A chairlift line climbing a bright piste into sun haze"></video>
+    <div class="hero-grad" aria-hidden="true"></div>
+    <div class="hero-body">
+      <h1 class="hero-title">The mountain,<br><span class="thin">reported honestly.</span></h1>
+      <p class="hero-sub">High-alpine freeride domain <span class="sep">///</span> seven lifts <span class="sep">///</span> six sectors <span class="sep">///</span> one bulletin every morning</p>
+    </div>
+  </section>
+
+  <div class="danger-card" id="dangerCard">
+    <div class="danger-num" id="dgNum">–</div>
+    <div class="danger-what">
+      <p class="word" id="dgWord">—</p>
+      <p class="where" id="dgWhere">—</p>
+    </div>
+    <div class="scale" id="dgScale" role="img" aria-label="European avalanche danger scale, five steps">
+      <i></i><i></i><i></i><i></i><i></i>
+    </div>
+  </div>
+
+  <!-- ================= REPORT ================= -->
+  <div class="report" id="report">
+
+    <section class="sect" id="snow">
+      <div class="sect-head">
+        <span class="sect-no">01</span>
+        <h2 class="sect-title">Snow</h2>
+        <span class="sect-aside" id="snowAside">Plateau board · 2 450 m</span>
+      </div>
+      <div class="stats rise" id="snowStats"></div>
+      <div class="duo" style="margin-top: clamp(26px, 4vh, 44px);">
+        <p class="prose rise" id="snowProse"></p>
+        <figure class="diagram rise">
+          <svg id="depthSvg" viewBox="0 0 460 240" role="img" aria-label="Snow depth by elevation band"></svg>
+          <figcaption>Fig. 1 — Settled depth by elevation band, cm</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sect" id="weather">
+      <div class="sect-head">
+        <span class="sect-no">02</span>
+        <h2 class="sect-title">Weather</h2>
+        <span class="sect-aside" id="wxAside">Summit anemometer · 3 260 m</span>
+      </div>
+      <div class="stats rise" id="wxStats"></div>
+      <div class="duo" style="margin-top: clamp(26px, 4vh, 44px);">
+        <figure class="diagram rise">
+          <svg id="windSvg" viewBox="0 0 460 240" role="img" aria-label="Wind direction and strength"></svg>
+          <figcaption id="windCap">Fig. 2 — Wind at the summit stations</figcaption>
+        </figure>
+        <p class="prose rise" id="wxProse"></p>
+      </div>
+    </section>
+  </div>
+
+  <!-- footage band -->
+  <section class="band" aria-label="This morning on the hill">
+    <video data-src="video/peaks.mp4" muted playsinline loop preload="none" poster="img/poster-peaks.webp"></video>
+    <p class="band-quote rise">The forecast is a guess.<br>The bulletin is a measurement.</p>
+    <p class="fig">Fig. 3 <span class="sep">///</span> first light on the crête, 07:12</p>
+  </section>
+
+  <div class="report">
+    <section class="sect" id="dangerSect">
+      <div class="sect-head">
+        <span class="sect-no">03</span>
+        <h2 class="sect-title">Avalanche danger</h2>
+        <span class="sect-aside">European scale 1–5</span>
+      </div>
+      <div class="duo">
+        <figure class="diagram rise">
+          <svg id="bandsSvg" viewBox="0 0 460 260" role="img" aria-label="Danger rating by elevation band"></svg>
+          <figcaption>Fig. 4 — Rating by elevation band</figcaption>
+        </figure>
+        <div>
+          <p class="prose rise" id="dangerProse"></p>
+          <div class="problems rise" id="problems" style="margin-top: 24px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sect" id="lifts">
+      <div class="sect-head">
+        <span class="sect-no">04</span>
+        <h2 class="sect-title">Lifts</h2>
+        <span class="sect-aside" id="liftAside">— of 7 spinning</span>
+      </div>
+      <div class="board rise" id="liftBoard" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <section class="band" aria-label="Base area">
+    <video data-src="video/village.mp4" muted playsinline loop preload="none" poster="img/poster-village.webp"></video>
+    <p class="fig">Fig. 5 <span class="sep">///</span> the plaza from the TC Col Noir, 09:40</p>
+  </section>
+
+  <div class="report">
+    <section class="sect" id="observations">
+      <div class="sect-head">
+        <span class="sect-no">05</span>
+        <h2 class="sect-title">Observations</h2>
+        <span class="sect-aside">Patrol · lifts · snow study</span>
+      </div>
+      <ul class="obs rise" id="obsList"></ul>
+    </section>
+
+    <section class="sect" id="terrainTeaser">
+      <div class="sect-head">
+        <span class="sect-no">06</span>
+        <h2 class="sect-title">The terrain</h2>
+        <span class="sect-aside"><a href="terrain.html" style="color: inherit;">Full sector report →</a></span>
+      </div>
+      <div class="sectors rise" id="sectorTeaser"></div>
+      <div style="margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap;">
+        <a class="btn" href="passes.html">Buy tomorrow's pass</a>
+        <a class="btn-ghost" href="terrain.html">Read the terrain</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Col Noir · the mountain, reported honestly</p>
+  <nav class="foot-nav" aria-label="Footer">
+    <a href="terrain.html">Terrain</a>
+    <a href="passes.html">Passes</a>
+    <a href="mailto:bulletin@colnoir.example">Bulletin desk</a>
+  </nav>
+  <p class="foot-fine">Bulletin issued daily 08:00 · valid to 17:00 · ride what you can read</p>
+</footer>
+
+<nav class="subnav-mobile" aria-label="Site">
+  <a href="index.html" aria-current="page">Bulletin</a>
+  <a href="terrain.html">Terrain</a>
+  <a href="passes.html">Passes</a>
+</nav>
+
+<canvas class="snowfall" id="snowfall" aria-hidden="true"></canvas>
+
+<script src="js/model.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/bulletin.js"></script>
+</body>
+</html>
