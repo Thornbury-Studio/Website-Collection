@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" data-flavor="citrus">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'">
+  <title>The Fizzics Lab — UNSTILL Sparkling Botanical Soda</title>
+  <meta name="description" content="Carbonation as a playground: nucleate bubbles, load pressure into a can you should not shake, and run the real butterfly-pea pH colour change with a slider.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/soda-unstill/lab.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Fizzics Lab — UNSTILL">
+  <meta property="og:description" content="Carbonation as a playground: nucleate bubbles, load pressure into a can you should not shake, and run the real butterfly-pea pH colour change with a slider.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/soda-unstill/img/hero-poster.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Fizzics Lab — UNSTILL">
+  <meta name="twitter:description" content="Carbonation as a playground: nucleate bubbles, load pressure into a can you should not shake, and run the real butterfly-pea pH colour change with a slider.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/soda-unstill/img/hero-poster.webp">
+  <meta name="theme-color" content="#f4efe6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Martian+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="page">
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="mark" href="index.html">UN<i>STILL</i></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="flavors.html">Flavours</a>
+      <a href="lab.html" aria-current="page">The Fizzics Lab</a>
+      <a href="packs.html">Build a crate</a>
+      <a href="story.html">Story</a>
+      <a href="stockists.html">Stockists</a>
+    </nav>
+    <div class="flavors" role="group" aria-label="Choose your flavour — recolours the whole site">
+      <button type="button" class="f-citrus" data-flavor="citrus" aria-pressed="true" aria-label="Citrus Riot, yellow"></button>
+      <button type="button" class="f-burn" data-flavor="burn" aria-pressed="false" aria-label="Slow Burn, red-orange"></button>
+      <button type="button" class="f-mood" data-flavor="mood" aria-pressed="false" aria-label="Mood Ring, indigo"></button>
+      <button type="button" class="f-snap" data-flavor="snap" aria-pressed="false" aria-label="Cold Snap, green"></button>
+    </div>
+    <button class="shake-btn" id="shakeBtn" type="button"
+            aria-describedby="shakeLive">
+      <span class="shake-btn__fill" aria-hidden="true"></span>
+      <span class="shake-btn__ban" aria-hidden="true"></span>
+      <span class="shake-btn__txt">Do not shake</span>
+    </button>
+    <a class="basket-btn" id="basketBtn" href="packs.html" data-empty="1">
+      <span class="basket-btn__txt">Crate</span>
+      <span class="basket-btn__n" id="basketCount">0</span>
+    </a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="flavors.html">Flavours</a>
+      <a href="lab.html" aria-current="page">The Fizzics Lab</a>
+      <a href="packs.html">Build a crate</a>
+      <a href="story.html">Story</a>
+      <a href="stockists.html">Stockists</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="wrap">
+      <div class="flavors" role="group" aria-label="Choose your flavour — recolours the whole site">
+        <button type="button" class="f-citrus" data-flavor="citrus" aria-pressed="true" aria-label="Citrus Riot, yellow"></button>
+        <button type="button" class="f-burn" data-flavor="burn" aria-pressed="false" aria-label="Slow Burn, red-orange"></button>
+        <button type="button" class="f-mood" data-flavor="mood" aria-pressed="false" aria-label="Mood Ring, indigo"></button>
+        <button type="button" class="f-snap" data-flavor="snap" aria-pressed="false" aria-label="Cold Snap, green"></button>
+      </div>
+    </div>
+  </div>
+  <p class="u-hide" id="shakeLive" role="status" aria-live="assertive"></p>
+</header>
+
+<main id="main">
+
+  <section class="bay--top bay--half">
+    <div class="wrap">
+      <p class="label">Interactive</p>
+      <h1>The Fizzics Lab</h1>
+      <p class="lede">Everything a can of UNSTILL does, taken apart where you can poke it.
+        Every demo below is computed live — nothing is a recording.</p>
+    </div>
+  </section>
+
+  <section class="bay--half">
+    <div class="wrap">
+      <div class="cols cols--2">
+
+        <div class="lab-panel reveal">
+          <div class="lab-panel__head">
+            <h3>Nucleation tank</h3>
+            <span class="sticker sticker--bone tilt-r">Click the liquid</span>
+          </div>
+          <canvas id="tankCanvas" width="640" height="420"
+                  aria-label="A simulated tank of soda. Clicking or tapping anywhere in it seeds a stream of bubbles at that point, like a scratch on the inside of a glass."></canvas>
+          <div class="lab-controls">
+            <label>Carbonation
+              <input class="slider" type="range" id="carbSlider" min="1" max="10" value="6">
+            </label>
+            <label>Temperature <span class="num" id="tempOut">6&deg;C</span>
+              <input class="slider" type="range" id="tempSlider" min="1" max="30" value="6">
+            </label>
+          </div>
+          <div class="lab-panel__body">
+            <p>Bubbles do not form in the open liquid — they need an edge, a scratch, a speck
+              of dust. That is a nucleation site, and it is why a scratched glass fizzes down
+              its own flaw line. Warmer soda holds less CO&#8322;
+              (<span class="num" id="henryOut">—</span> of saturation at the current
+              temperature), so the tank fizzes harder and dies faster as you warm it.</p>
+          </div>
+        </div>
+
+        <div class="lab-panel reveal reveal--d1">
+          <div class="lab-panel__head">
+            <h3>Mood Ring pH bench</h3>
+            <span class="sticker sticker--bone tilt-l">Real chemistry</span>
+          </div>
+          <canvas id="phCanvas" width="640" height="420"
+                  aria-label="A glass of Mood Ring soda whose colour follows the pH slider: teal in alkaline conditions, indigo at neutral, violet then hot pink as acid is added."></canvas>
+          <div class="lab-controls">
+            <label>Squeeze the lime — pH <span class="num" id="phOut">7.0</span>
+              <input class="slider" type="range" id="phSlider" min="20" max="100" value="70">
+            </label>
+          </div>
+          <div class="lab-panel__body">
+            <p>Butterfly pea flower is full of anthocyanins — pigments whose structure, and so
+              whose colour, depends on pH. Alkaline: teal. Neutral: the deep indigo in the can.
+              Add lime and the molecule re-folds: violet at pH&nbsp;5,
+              hot pink by pH&nbsp;3. This is the exact mechanism in a poured glass of
+              Mood Ring, not an artist's impression of it.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="bay--half">
+    <div class="wrap">
+      <div class="note">
+        <p><strong>The button in the header is also an experiment.</strong> Pressure in a
+          shaken can does not rise because gas is created — it rises because shaking sheds
+          thousands of micro-bubbles into the liquid, each one a ready-made nucleation site.
+          Open it and they all vent at once. Hold the button and see. We did warn you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bay">
+    <div class="wrap">
+      <h2>Three numbers we run the brewery on</h2>
+      <div class="stats stats--3">
+        <div class="stat"><b>3.2 vol</b><span>CO&#8322; volumes at canning — fizzier than a
+          lager, calmer than champagne, tuned to carry botanicals</span></div>
+        <div class="stat"><b>4&deg;C</b><span>the cold-chain ceiling from tank to fridge,
+          because warm storage costs carbonation you paid for</span></div>
+        <div class="stat"><b>0</b><span>flavourings on the ingredients lists. If the juice
+          cannot do it, the can does not say it</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <span class="foot__mark">UNSTILL</span>
+        <p>Sparkling botanical soda.<br>Unit 9, Ferment Yard<br>Hackney Wick, London E9 5EN</p>
+      </div>
+      <div>
+        <h2>Drink</h2>
+        <ul>
+          <li><a href="flavors.html">The flavours</a></li>
+          <li><a href="packs.html">Build a crate</a></li>
+          <li><a href="stockists.html">Stockists</a></li>
+          <li><a href="lab.html">The Fizzics Lab</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul>
+          <li><a href="story.html">Story</a></li>
+          <li><a href="about.html">About &amp; legal</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html">Wholesale</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>The rule</h2>
+        <p>Shake-activated botanicals settle. Turn the can over once, slowly, before you open
+          it. That is the only instruction this company has ever issued.</p>
+      </div>
+    </div>
+    <div class="foot__fine">
+      <p>&copy; <span data-year>2026</span> UNSTILL Drinks Ltd. Registered in England.
+        All four flavours contain sugar; none contains caffeine, sweeteners or anything we
+        cannot pronounce.</p>
+      <p><a href="about.html#legal">Terms &amp; privacy</a> &middot;
+         <a href="about.html#nutrition">Nutrition</a> &middot;
+         <a href="contact.html">Press</a></p>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#page -->
+
+<script src="js/store.js"></script>
+<script src="js/fizz.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/lab.js"></script>
+</body>
+</html>
