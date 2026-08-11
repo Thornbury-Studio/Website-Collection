@@ -20,7 +20,7 @@ that scope; no attribution is required and none is printed on-page.
 
 | Shipped file | Mixkit source | Subject |
 |---|---|---|
-| `video/hero.mp4/.webm` | Clip 45674, "Multicoloured ink exploding" | Ink erupting on black — the hero, trimmed to its first eruption cycle (1.5–15.5 s of 87 s) |
+| `video/hero.mp4/.webm` | Clip 45674, "Multicoloured ink exploding" | Ink erupting on black — the hero, trimmed to its first eruption cycle (1.5–11.5 s of 87 s) |
 | `video/pour.mp4/.webm` | Clip 41999, "Texture of red ink in water on a white background" | Red ink blooming on white — the flavour pages |
 | `video/collide.mp4/.webm` | Clip 45675, "Bright orange and blue ink exploding" | Two inks colliding — the story page |
 
