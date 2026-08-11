@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Book a Stay — SALTFIELD</title>
+  <meta name="description" content="Book a stay at Saltfield: pick a room, choose your nights, and the house works out the rate season by season. Two nights or more, all year.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/coastal-saltfield/book.html">
+  <meta name="theme-color" content="#F5F2EA">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Albert+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#bookMain">Skip to booking</a>
+
+<header class="top">
+  <div class="top__in">
+    <a class="mark" href="index.html">Salt<em>field</em></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="rooms.html">Rooms</a>
+      <a href="kitchen.html">Kitchen</a>
+      <a href="bathhouse.html">Bathhouse</a>
+      <a href="notes.html">Notes</a>
+    </nav>
+    <a class="top-book" id="bookLink" href="book.html" data-hold="0" aria-current="page"><span id="bookLabel">Book</span></a>
+  </div>
+  <div class="conditions">
+    <div class="conditions__in" id="conditions"><span>A shore house on a tidal field</span></div>
+  </div>
+</header>
+
+<main id="bookMain">
+
+  <section class="sec--tight" id="bookState">
+    <div class="wrap">
+      <p class="eyebrow u-label"><i aria-hidden="true"></i>Book a stay</p>
+      <h1>Pick a room,<br>and the house does the <em>sums</em>.</h1>
+      <p class="lede mt-m">Every night is priced in the season it falls in, the 9% shore levy is
+        already in the figure you see, and nothing is charged today — the house takes payment
+        on the sideboard when you leave, the old way.</p>
+
+      <div class="book mt-l">
+        <form class="book__form" id="bookForm" novalidate>
+
+          <p class="u-label">The room</p>
+          <div class="roomseg" role="radiogroup" aria-label="Choose a room" id="roomSeg"></div>
+          <p class="field__err" id="eRoom" hidden>Choose one of the six.</p>
+
+          <p class="u-label mt-m">The dates</p>
+          <div class="fields2">
+            <div class="field">
+              <label for="fIn">Arrive</label>
+              <input type="date" id="fIn" name="arrive" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="fOut">Leave</label>
+              <input type="date" id="fOut" name="leave" autocomplete="off">
+            </div>
+          </div>
+          <p class="field__err" id="eDates" hidden></p>
+
+          <div class="field">
+            <label for="fGuests">Guests</label>
+            <select id="fGuests" name="guests">
+              <option value="1">One</option>
+              <option value="2" selected>Two</option>
+              <option value="3">Three</option>
+            </select>
+            <p class="field__hint" id="guestsHint" hidden>Only The Bay sleeps three — pick it above,
+              or bring one fewer.</p>
+          </div>
+
+          <p class="u-label mt-m">Who is coming</p>
+          <div class="field">
+            <label for="fName">Name</label>
+            <input type="text" id="fName" name="name" autocomplete="name" placeholder="Whose stay is this?">
+            <p class="field__err" id="eName" hidden>The ledger needs a name.</p>
+          </div>
+          <div class="field">
+            <label for="fEmail">Email</label>
+            <input type="email" id="fEmail" name="email" autocomplete="email" inputmode="email" placeholder="For the confirmation, nothing else">
+            <p class="field__err" id="eEmail" hidden>That address doesn't look right.</p>
+          </div>
+          <div class="field">
+            <label for="fNote">Anything we should know</label>
+            <textarea id="fNote" name="note" rows="3" placeholder="Allergies, late arrival, a dog who behaves…"></textarea>
+          </div>
+        </form>
+
+        <aside>
+          <div class="qcard" aria-label="Your stay">
+            <p class="u-label">Your stay</p>
+            <div class="qcard__rows" id="sumRows" aria-live="polite"></div>
+            <p class="qcard__why" id="sumWhy" aria-live="polite">Pick a room and dates —
+              the figure appears as you go.</p>
+            <div class="qcard__total" id="sumTotalRow" hidden>
+              <span>To settle at the house</span><b class="u-num" id="sumTotal">$0</b>
+            </div>
+            <button class="btn btn--ink btn--wide" id="sendBtn" type="submit" form="bookForm">
+              <span class="spin" aria-hidden="true"></span><span id="sendLabel">Ask the house</span>
+            </button>
+            <p class="qcard__note">Nothing is charged online. The house replies within a day —
+              usually by supper.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- confirmation -->
+  <section class="sec--tight" id="doneState" hidden>
+    <div class="wrap">
+      <div class="done">
+        <p class="done__ref u-num" id="doneRef">SF–0000</p>
+        <h1>The ledger has <em>your name</em>.</h1>
+        <p class="done__p" id="doneP"></p>
+        <dl class="facts" id="doneFacts"></dl>
+        <p><a class="btn btn--line" href="notes.html">Read the field notes while you wait</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <p class="foot__mark">Saltfield</p>
+      <p>A shore house on a tidal field. Six rooms, a kitchen, a bathhouse,
+        and the dunes at the end of the lane.</p>
+      <img src="img/sketch.webp" width="240" height="179" loading="lazy" decoding="async" alt="">
+    </div>
+    <div>
+      <p class="foot__h">The house</p>
+      <div class="foot__l">
+        <a href="rooms.html">Rooms &amp; rates</a>
+        <a href="kitchen.html">The kitchen</a>
+        <a href="bathhouse.html">The bathhouse</a>
+        <a href="notes.html">Field notes</a>
+        <a href="book.html" aria-current="page">Book a stay</a>
+      </div>
+    </div>
+    <div>
+      <p class="foot__h">Find us</p>
+      <div class="foot__l">
+        <span>Saltfield, off the coast lane</span>
+        <span>By the tidal field, 54°36′N 0°54′W</span>
+        <span>stay@saltfield.example</span>
+        <span>Two nights or more, all year</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot__bar">
+    <p>© 2026 Saltfield House</p>
+    <p>The kitchen can cook around most things — tell us when you book.</p>
+  </div>
+</footer>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/book.js"></script>
+</body>
+</html>

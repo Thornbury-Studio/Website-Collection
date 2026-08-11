@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Room — SALTFIELD</title>
+  <meta name="description" content="One of Saltfield's six rooms: what it looks at, what it holds, and its rate for your dates, priced night by night.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/coastal-saltfield/room.html">
+  <meta name="theme-color" content="#F5F2EA">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Albert+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#roomMain">Skip to the room</a>
+
+<header class="top">
+  <div class="top__in">
+    <a class="mark" href="index.html">Salt<em>field</em></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="rooms.html" aria-current="page">Rooms</a>
+      <a href="kitchen.html">Kitchen</a>
+      <a href="bathhouse.html">Bathhouse</a>
+      <a href="notes.html">Notes</a>
+    </nav>
+    <a class="top-book" id="bookLink" href="book.html" data-hold="0"><span id="bookLabel">Book</span></a>
+  </div>
+  <div class="conditions">
+    <div class="conditions__in" id="conditions"><span>A shore house on a tidal field</span></div>
+  </div>
+</header>
+
+<main id="roomMain">
+
+  <section class="sec--tight">
+    <div class="wrap">
+      <p class="eyebrow u-label"><i aria-hidden="true"></i><a href="rooms.html">The six rooms</a> · <span id="crumb">Room</span></p>
+      <noscript><p class="lede">This page needs JavaScript to show the room —
+        <a href="rooms.html">the rooms page</a> lists all six without it.</p></noscript>
+      <div class="detail" id="detail" hidden>
+
+        <div>
+          <h1 id="rName">The room</h1>
+          <p class="lede mt-m" id="rLine"></p>
+          <figure class="mt-l reveal">
+            <div class="plate"><img id="rImg" src="img/room-fen.webp" width="1200" height="900" decoding="async" alt=""></div>
+            <figcaption class="caption"><span id="rCap"></span><i aria-hidden="true"></i><span id="rCap2"></span></figcaption>
+          </figure>
+          <ul class="detail__list" id="rDetails"></ul>
+          <figure class="mt-l reveal">
+            <div class="plate"><img src="img/detail-morning.webp" width="1100" height="1375" loading="lazy" decoding="async"
+                 alt="The corner of a made bed by a tall window, thin curtains half drawn on green country light."></div>
+            <figcaption class="caption"><span>Mornings here</span><i aria-hidden="true"></i><span>Breakfast until eleven</span></figcaption>
+          </figure>
+        </div>
+
+        <aside>
+          <div class="qcard" aria-label="Dates and rate">
+            <p class="u-label">Your dates</p>
+            <div class="fields2">
+              <div class="field">
+                <label for="qIn">Arrive</label>
+                <input type="date" id="qIn" name="arrive">
+              </div>
+              <div class="field">
+                <label for="qOut">Leave</label>
+                <input type="date" id="qOut" name="leave">
+              </div>
+            </div>
+            <div class="qcard__rows" id="qRows" aria-live="polite"></div>
+            <p class="qcard__why" id="qWhy" aria-live="polite"></p>
+            <div class="qcard__total" id="qTotalRow" hidden>
+              <span>Your stay</span><b class="u-num" id="qTotal">$0</b>
+            </div>
+            <button class="btn btn--ink btn--wide" id="qHold" type="button" disabled>
+              <span class="spin" aria-hidden="true"></span><span id="qHoldLabel">Hold these dates</span>
+            </button>
+            <p class="qcard__note">Holding costs nothing and books nothing — it carries this room
+              and your dates to the booking page while you look around.</p>
+            <p class="qcard__facts u-label" id="rFacts"></p>
+          </div>
+        </aside>
+
+      </div>
+      <div id="notFound" hidden>
+        <h1>That room isn't ours.</h1>
+        <p class="lede mt-m">The link may be old — <a class="linkline" href="rooms.html">all six rooms are here</a>.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <p class="foot__mark">Saltfield</p>
+      <p>A shore house on a tidal field. Six rooms, a kitchen, a bathhouse,
+        and the dunes at the end of the lane.</p>
+      <img src="img/sketch.webp" width="240" height="179" loading="lazy" decoding="async" alt="">
+    </div>
+    <div>
+      <p class="foot__h">The house</p>
+      <div class="foot__l">
+        <a href="rooms.html">Rooms &amp; rates</a>
+        <a href="kitchen.html">The kitchen</a>
+        <a href="bathhouse.html">The bathhouse</a>
+        <a href="notes.html">Field notes</a>
+        <a href="book.html">Book a stay</a>
+      </div>
+    </div>
+    <div>
+      <p class="foot__h">Find us</p>
+      <div class="foot__l">
+        <span>Saltfield, off the coast lane</span>
+        <span>By the tidal field, 54°36′N 0°54′W</span>
+        <span>stay@saltfield.example</span>
+        <span>Two nights or more, all year</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot__bar">
+    <p>© 2026 Saltfield House</p>
+    <p>The kitchen can cook around most things — tell us when you book.</p>
+  </div>
+</footer>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/room.js"></script>
+</body>
+</html>

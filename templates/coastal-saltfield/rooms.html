@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>The Six Rooms — SALTFIELD | Rooms &amp; Rates</title>
+  <meta name="description" content="Saltfield's six rooms, no two alike: field, dune, garden and sea outlooks, priced by season, two nights or more. Rates and what each room holds.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/coastal-saltfield/rooms.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Six Rooms — SALTFIELD">
+  <meta property="og:description" content="No two alike: field, dune, garden and sea outlooks, priced by season.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/coastal-saltfield/img/room-bay.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Six Rooms — SALTFIELD">
+  <meta name="twitter:description" content="No two alike: field, dune, garden and sea outlooks, priced by season.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/coastal-saltfield/img/room-bay.webp">
+  <meta name="theme-color" content="#F5F2EA">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Albert+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#roomsGrid">Skip to the rooms</a>
+
+<header class="top">
+  <div class="top__in">
+    <a class="mark" href="index.html">Salt<em>field</em></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="rooms.html" aria-current="page">Rooms</a>
+      <a href="kitchen.html">Kitchen</a>
+      <a href="bathhouse.html">Bathhouse</a>
+      <a href="notes.html">Notes</a>
+    </nav>
+    <a class="top-book" id="bookLink" href="book.html" data-hold="0"><span id="bookLabel">Book</span></a>
+  </div>
+  <div class="conditions">
+    <div class="conditions__in" id="conditions"><span>A shore house on a tidal field</span></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="sec--tight">
+    <div class="wrap">
+      <p class="eyebrow u-label"><i aria-hidden="true"></i>Rooms &amp; rates</p>
+      <h1>Six rooms, <em>no two alike</em>.</h1>
+      <p class="lede mt-m">Each room is named for what it looks at or where it came from,
+        priced by season, and held for you at two nights or more. Rates below are each
+        room's quiet-months price; the exact figure for your dates is worked out to the
+        night when you book.</p>
+    </div>
+  </section>
+
+  <section class="sec--tight" aria-label="The rooms">
+    <div class="wrap">
+      <div class="filters" role="group" aria-label="Filter the rooms" id="filterSet">
+        <button class="fchip" type="button" role="switch" aria-pressed="true"  data-f="all">All six</button>
+        <button class="fchip" type="button" role="switch" aria-pressed="false" data-f="sea">Sea &amp; dune outlooks</button>
+        <button class="fchip" type="button" role="switch" aria-pressed="false" data-f="garden">Garden &amp; field</button>
+        <button class="fchip" type="button" role="switch" aria-pressed="false" data-f="three">Room for three</button>
+        <button class="fchip" type="button" role="switch" aria-pressed="false" data-f="tub">With a tub</button>
+        <span class="fcount u-label" id="fCount" role="status"></span>
+      </div>
+      <div class="rgrid" id="roomsGrid"></div>
+      <p class="mt-l" id="fEmpty" hidden>No room matches that combination —
+        <button class="linkline" type="button" id="fReset">show all six</button>.</p>
+    </div>
+  </section>
+
+  <section class="sec--tight" aria-labelledby="seasonTitle">
+    <div class="wrap">
+      <div class="chapter reveal">
+        <span class="u-label u-num">Rates</span>
+        <h2 class="h2" id="seasonTitle">Three seasons, one rule</h2>
+        <p class="chapter__aside">Every night is priced in the season it falls in —
+          a stay across a boundary is priced night by night.</p>
+      </div>
+      <div class="seasons reveal">
+        <div>
+          <h3 class="h3">The quiet months</h3>
+          <p>November through March. The fires are lit, the bathhouse earns its keep,
+            and the house is yours for less.</p>
+          <span class="u-label">Base rate −15%</span>
+        </div>
+        <div>
+          <h3 class="h3">Season</h3>
+          <p>April, May, September and October. The garden and the light at their best,
+            the crowds elsewhere.</p>
+          <span class="u-label">Base rate</span>
+        </div>
+        <div>
+          <h3 class="h3">High summer</h3>
+          <p>June through August. Long evenings on the field, supper outside,
+            the jetty warm underfoot.</p>
+          <span class="u-label">Base rate +25%</span>
+        </div>
+      </div>
+      <p class="lede mt-l reveal">A 9% shore levy is added to lodging — it maintains the dune path
+        and the jetty, and the figure you see at booking already includes it.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <p class="foot__mark">Saltfield</p>
+      <p>A shore house on a tidal field. Six rooms, a kitchen, a bathhouse,
+        and the dunes at the end of the lane.</p>
+      <img src="img/sketch.webp" width="240" height="179" loading="lazy" decoding="async" alt="">
+    </div>
+    <div>
+      <p class="foot__h">The house</p>
+      <div class="foot__l">
+        <a href="rooms.html" aria-current="page">Rooms &amp; rates</a>
+        <a href="kitchen.html">The kitchen</a>
+        <a href="bathhouse.html">The bathhouse</a>
+        <a href="notes.html">Field notes</a>
+        <a href="book.html">Book a stay</a>
+      </div>
+    </div>
+    <div>
+      <p class="foot__h">Find us</p>
+      <div class="foot__l">
+        <span>Saltfield, off the coast lane</span>
+        <span>By the tidal field, 54°36′N 0°54′W</span>
+        <span>stay@saltfield.example</span>
+        <span>Two nights or more, all year</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot__bar">
+    <p>© 2026 Saltfield House</p>
+    <p>The kitchen can cook around most things — tell us when you book.</p>
+  </div>
+</footer>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/rooms.js"></script>
+</body>
+</html>
