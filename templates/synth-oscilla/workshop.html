@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>The Workshop — OSCILLA | Forty a Month, by Hand</title>
+  <meta name="description" content="Two rooms above a joinery: how an Oscilla instrument is made, from bare board to boxed and signed, in eleven working days.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/synth-oscilla/workshop.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Workshop — OSCILLA | Forty a Month, by Hand">
+  <meta property="og:description" content="Two rooms above a joinery: how an Oscilla instrument is made, from bare board to boxed and signed, in eleven working days.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/synth-oscilla/img/w-solder.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Workshop — OSCILLA | Forty a Month, by Hand">
+  <meta name="twitter:description" content="Two rooms above a joinery: how an Oscilla instrument is made, from bare board to boxed and signed, in eleven working days.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/synth-oscilla/img/w-solder.webp">
+  <meta name="theme-color" content="#101216">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#how">Skip to how they are made</a>
+
+<header class="top">
+  <div class="top__in">
+    <a class="mark" href="index.html">
+      <span class="mark__led" id="markLed" data-on="0" aria-hidden="true"></span><span>Oscilla</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="instruments.html">Instruments</a>
+      <a href="signal.html">The signal path</a>
+      <a href="workshop.html" aria-current="page">Workshop</a>
+      <a href="support.html">Support</a>
+    </nav>
+    <span class="transport">
+      <button class="tbtn" id="btnPower" type="button" aria-pressed="false" aria-label="Switch sound on">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg>
+      </button>
+      <button class="tbtn" id="btnMute" type="button" aria-pressed="false" aria-label="Mute" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg>
+      </button>
+    </span>
+    <a class="basket-btn" id="basketBtn" href="order.html" data-full="0">
+      Basket <span class="basket-btn__n" id="basketCount">0</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <section class="sec--tight">
+    <div class="wrap">
+      <p class="eyebrow u-label"><i aria-hidden="true"></i>The workshop</p>
+      <h1>Forty a month,<br>by four pairs of <span class="amber">hands</span>.</h1>
+      <p class="lede mt-m">Two rooms above a joinery. One of them smells of solder and the other
+        of oak. Everything we sell is built, tested and boxed between them, which is the only
+        reason a company this size can answer the phone.</p>
+    </div>
+  </section>
+
+  <section aria-label="The bench">
+    <div class="wrap">
+      <div class="figure reveal">
+        <img src="img/w-solder.webp" width="1600" height="1066" decoding="async"
+             alt="A soldering iron touching a board, solder smoke curling up through raking light.">
+        <p class="caption"><span>Hand-stuffed boards</span><i aria-hidden="true"></i><span>Every one tested twice</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="how" aria-labelledby="howTitle">
+    <div class="wrap">
+      <div class="chapter reveal">
+        <span class="u-label u-num">01</span>
+        <h2 class="h2" id="howTitle">How one gets made</h2>
+        <p class="chapter__aside">Eleven working days from bare board to boxed, most of which is
+          waiting for oak to settle.</p>
+      </div>
+      <dl class="specs reveal">
+        <div><dt>Day one</dt><dd>Bare boards in. Every one gets a continuity check before a part goes on.</dd></div>
+        <div><dt>Days two to four</dt><dd>Through-hole by hand. The whole analogue path is through-hole, because it is repairable in twenty years.</dd></div>
+        <div><dt>Day five</dt><dd>First power-up on a current-limited supply. About one board in thirty argues.</dd></div>
+        <div><dt>Days six to nine</dt><dd>Panels anodised off site. Oak cheeks cut, sanded and oiled here, then left to settle.</dd></div>
+        <div><dt>Day ten</dt><dd>Calibration: oscillator tracking across five octaves, filter self-oscillation, envelope times against a scope.</dd></div>
+        <div><dt>Day eleven</dt><dd>Two hours of burn-in on a fixed pattern, then boxed with its own signed test sheet.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec--tight" aria-labelledby="notTitle">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__copy reveal">
+          <p class="eyebrow u-label"><i aria-hidden="true"></i>What we will not do</p>
+          <h2 class="h2" id="notTitle">No glued cases,<br>no secret parts.</h2>
+          <p>Every instrument opens with six screws and an ordinary driver. The schematic for each
+            one is published the week it ships, and we hold boards in stock for as long as the
+            parts exist.</p>
+          <p>We would rather sell you one instrument that outlives us than four that do not. It is
+            a worse business and a better bench.</p>
+          <a class="linkline" href="support.html">Service and schematics</a>
+        </div>
+        <div class="figure reveal">
+          <img src="img/w-studio.webp" width="1600" height="1066" loading="lazy" decoding="async"
+               alt="A player at a bench of instruments in a low-lit room, hands resting on a pad controller.">
+          <p class="caption"><span>Burn-in, day eleven</span><i aria-hidden="true"></i><span>Two hours, fixed pattern</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <p class="foot__mark">Oscilla</p>
+      <p>Four small electronic instruments, designed together and built in small batches.</p>
+    </div>
+    <div>
+      <p class="foot__h">Instruments</p>
+      <div class="foot__l">
+        <a href="instrument.html?i=field">Field — the voice</a>
+        <a href="instrument.html?i=tide">Tide — filter &amp; delay</a>
+        <a href="instrument.html?i=dusk">Dusk — percussion</a>
+        <a href="instrument.html?i=north">North — sequencer</a>
+      </div>
+    </div>
+    <div>
+      <p class="foot__h">More</p>
+      <div class="foot__l">
+        <a href="signal.html">The signal path</a>
+        <a href="workshop.html" aria-current="page">The workshop</a>
+        <a href="support.html">Support &amp; service</a>
+        <a href="order.html">Your basket</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot__bar">
+    <p>© 2026 Oscilla Instruments</p>
+    <p>Two-year warranty · Schematics published for every instrument</p>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Your basket" aria-hidden="true">
+  <div class="drawer__top">
+    <p class="drawer__t">Basket</p>
+    <button class="drawer__x" id="drawerClose" type="button" aria-label="Close basket">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body" id="drawerBody"></div>
+  <div class="drawer__foot">
+    <p class="saving" id="drawerSave" hidden><span>Set saving</span><b class="u-num" id="drawerSaveV">−$0.00</b></p>
+    <p class="tot"><span>Total</span><b class="u-num" id="drawerTotal">$0.00</b></p>
+    <a class="btn btn--amber btn--wide" href="order.html">Go to checkout</a>
+  </div>
+</aside>
+
+<script src="js/audio.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/page.js"></script>
+</body>
+</html>

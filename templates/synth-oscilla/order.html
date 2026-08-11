@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Checkout — OSCILLA</title>
+  <meta name="description" content="Order an Oscilla instrument. Nothing is charged online — we invoice when your instrument goes on the bench.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/synth-oscilla/order.html">
+  <meta name="theme-color" content="#101216">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#orderState">Skip to checkout</a>
+
+<header class="top">
+  <div class="top__in">
+    <a class="mark" href="index.html">
+      <span class="mark__led" id="markLed" data-on="0" aria-hidden="true"></span><span>Oscilla</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="instruments.html">Instruments</a>
+      <a href="signal.html">The signal path</a>
+      <a href="workshop.html">Workshop</a>
+      <a href="support.html">Support</a>
+    </nav>
+    <span class="transport">
+      <button class="tbtn" id="btnPower" type="button" aria-pressed="false" aria-label="Switch sound on">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg>
+      </button>
+      <button class="tbtn" id="btnMute" type="button" aria-pressed="false" aria-label="Mute" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg>
+      </button>
+    </span>
+    <a class="basket-btn" id="basketBtn" href="order.html" data-full="0">
+      Basket <span class="basket-btn__n" id="basketCount">0</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <section class="sec--tight" id="orderState">
+    <div class="wrap">
+      <p class="eyebrow u-label"><i aria-hidden="true"></i>Checkout</p>
+      <h1>Where should it <span class="amber">go</span>?</h1>
+
+      <div id="emptyState" hidden>
+        <p class="lede mt-m">Nothing in the basket yet.</p>
+        <p class="mt-m"><a class="btn btn--amber" href="instruments.html">See the range</a></p>
+      </div>
+
+      <div class="split mt-l align-start" id="fullState" hidden>
+        <div>
+          <div class="chapter"><span class="u-label u-num">01</span><h2 class="h2">Your basket</h2></div>
+          <div id="orderLines"></div>
+
+          <div class="chapter mt-l"><span class="u-label u-num">02</span><h2 class="h2">Delivery</h2></div>
+          <form class="stack" id="orderForm" novalidate>
+            <div class="fields2">
+              <div class="field">
+                <label for="fName">Name</label>
+                <input type="text" id="fName" autocomplete="name" placeholder="Who is it for?">
+                <p class="field__err" id="eName" hidden>We need a name for the parcel.</p>
+              </div>
+              <div class="field">
+                <label for="fEmail">Email</label>
+                <input type="email" id="fEmail" autocomplete="email" inputmode="email" placeholder="For the test sheet and tracking">
+                <p class="field__err" id="eEmail" hidden>That address does not look right.</p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="fAddr">Address</label>
+              <textarea id="fAddr" rows="3" autocomplete="street-address" placeholder="Street, city, postcode"></textarea>
+              <p class="field__err" id="eAddr" hidden>Somewhere to send it, please.</p>
+            </div>
+            <div class="fields2">
+              <div class="field">
+                <label for="fCountry">Country</label>
+                <select id="fCountry">
+                  <option value="dom">Domestic — free, 3–5 days</option>
+                  <option value="eu">Europe — $38, 5–8 days</option>
+                  <option value="world">Rest of world — $64, 8–14 days</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="fNote">Anything else</label>
+                <input type="text" id="fNote" placeholder="Leave with a neighbour, etc.">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <aside>
+          <div class="qcard panel">
+            <p class="u-label">Summary</p>
+            <div id="sumRows" aria-live="polite"></div>
+            <p class="saving" id="sumSave" hidden><span id="sumSaveL">Set saving</span><b class="u-num" id="sumSaveV">-$0.00</b></p>
+            <div class="sumrow"><span>Shipping</span><b class="u-num" id="sumShip">Free</b></div>
+            <p class="tot">
+              <span>Total</span><b class="u-num" id="sumTotal">$0.00</b>
+            </p>
+            <button class="btn btn--amber btn--wide" id="sendBtn" type="submit" form="orderForm">
+              <span class="spin" aria-hidden="true"></span><span id="sendLabel">Place the order</span>
+            </button>
+            <p class="field__hint">Nothing is charged here. We invoice when your instrument goes on
+              the bench, and you can cancel any time before that.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec--tight" id="doneState" hidden>
+    <div class="wrap">
+      <div class="narrow">
+        <p class="u-label amber" id="doneRef">OS-0000</p>
+        <h1 class="mt-m">On the <span class="amber">bench</span>.</h1>
+        <p class="lede mt-m" id="doneP"></p>
+        <dl class="specs mt-l" id="doneFacts"></dl>
+        <p class="mt-l"><a class="btn btn--line" href="signal.html">Learn the signal path while you wait</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <p class="foot__mark">Oscilla</p>
+      <p>Four small electronic instruments, designed together and built in small batches.</p>
+    </div>
+    <div>
+      <p class="foot__h">Instruments</p>
+      <div class="foot__l">
+        <a href="instrument.html?i=field">Field — the voice</a>
+        <a href="instrument.html?i=tide">Tide — filter &amp; delay</a>
+        <a href="instrument.html?i=dusk">Dusk — percussion</a>
+        <a href="instrument.html?i=north">North — sequencer</a>
+      </div>
+    </div>
+    <div>
+      <p class="foot__h">More</p>
+      <div class="foot__l">
+        <a href="signal.html">The signal path</a>
+        <a href="workshop.html">The workshop</a>
+        <a href="support.html">Support &amp; service</a>
+        <a href="order.html" aria-current="page">Your basket</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot__bar">
+    <p>© 2026 Oscilla Instruments</p>
+    <p>Two-year warranty · Schematics published for every instrument</p>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Your basket" aria-hidden="true">
+  <div class="drawer__top">
+    <p class="drawer__t">Basket</p>
+    <button class="drawer__x" id="drawerClose" type="button" aria-label="Close basket">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body" id="drawerBody"></div>
+  <div class="drawer__foot">
+    <p class="saving" id="drawerSave" hidden><span>Set saving</span><b class="u-num" id="drawerSaveV">−$0.00</b></p>
+    <p class="tot"><span>Total</span><b class="u-num" id="drawerTotal">$0.00</b></p>
+    <a class="btn btn--amber btn--wide" href="order.html">Go to checkout</a>
+  </div>
+</aside>
+
+<script src="js/audio.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/order.js"></script>
+</body>
+</html>
