@@ -23,6 +23,9 @@
             R.esc(m.id) + '">Join</button></span>' +
         '</div></div>';
     }).join('');
+    /* Injected after the reveal observer's first scan — must be rescanned or
+       the tiers hold their space at opacity 0 forever. */
+    if (root.VelaUI) root.VelaUI.rescanReveals();
   }
 
   /* How many ordinary visits a membership has to replace before it pays for

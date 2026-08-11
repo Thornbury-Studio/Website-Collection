@@ -66,39 +66,58 @@
 
   /* ---- Reveals ----------------------------------------------------------- */
 
-  function initReveals() {
-    var items = $$('.reveal');
+  /* The observer only knows about elements that exist when it scans, so any
+     script that injects markup carrying .reveal must call rescanReveals()
+     afterwards — otherwise the injected content sits at opacity 0 forever
+     while still holding its layout space (the membership tiers shipped that
+     way once). */
+  var revealIO = null;
+
+  function rescanReveals() {
+    var items = $$('.reveal:not([data-rv])');
     if (!items.length) return;
-
-    var showAll = function () {
-      items.forEach(function (el) { el.classList.add('is-in'); });
-    };
-
-    if (!('IntersectionObserver' in root) ||
-        root.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      showAll();
+    if (!revealIO) {
+      items.forEach(function (el) {
+        el.setAttribute('data-rv', '1');
+        el.classList.add('is-in');
+      });
       return;
     }
+    items.forEach(function (el) {
+      el.setAttribute('data-rv', '1');
+      revealIO.observe(el);
+    });
+  }
 
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  function showAllReveals() {
+    $$('.reveal').forEach(function (el) {
+      el.setAttribute('data-rv', '1');
+      el.classList.add('is-in');
+    });
+  }
 
-    items.forEach(function (el) { io.observe(el); });
+  function initReveals() {
+    if ('IntersectionObserver' in root &&
+        !root.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      revealIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            revealIO.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    }
+    rescanReveals();
 
     /* Failsafe. In a background or hidden tab the observer never fires and an
        ungated page would serve nothing but whitespace. */
     root.setTimeout(function () {
-      if (doc.visibilityState !== 'visible') showAll();
+      if (doc.visibilityState !== 'visible') showAllReveals();
     }, 1200);
     doc.addEventListener('visibilitychange', function () {
       if (doc.visibilityState === 'visible') return;
-      showAll();
+      showAllReveals();
     });
   }
 
@@ -190,5 +209,5 @@
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', boot);
   else boot();
 
-  root.VelaUI = { $: $, $$: $$ };
+  root.VelaUI = { $: $, $$: $$, rescanReveals: rescanReveals };
 })(window, document);
