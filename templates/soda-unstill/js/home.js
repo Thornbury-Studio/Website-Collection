@@ -32,6 +32,9 @@
         U.money(U.pricing.can) + '</span><span class="label">330 ml</span></div>' +
         '</div></a>';
     }).join('');
+    /* These cards were injected after the reveal observer's first scan; without
+       a rescan they hold their space at opacity 0 forever. */
+    if (root.UnstillUI) root.UnstillUI.rescanReveals();
   }
 
   function figures() {
