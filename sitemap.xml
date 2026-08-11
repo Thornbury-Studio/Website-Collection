@@ -265,4 +265,54 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/index.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/sky-tonight.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/whats-on.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/exhibitions.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/visit.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/learning.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/research.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/membership.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/about.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/contact.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>

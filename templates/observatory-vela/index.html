@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'">
+  <title>VELA — Observatory &amp; Sky Centre, Hallow Fell</title>
+  <meta name="description" content="A working observatory and public sky centre 612 metres up on the Cumbrian fells. Dome shows daily, telescope nights on the 1.2 metre, and a sky map computed live for tonight.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VELA — Observatory &amp; Sky Centre">
+  <meta property="og:description" content="Where the sky still gets properly dark. Dome shows, telescope nights and a live sky map for Hallow Fell.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/img/hero-dome.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VELA — Observatory &amp; Sky Centre">
+  <meta name="twitter:description" content="Where the sky still gets properly dark. Dome shows, telescope nights and a live sky map for Hallow Fell.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/img/hero-dome.webp">
+  <meta name="theme-color" content="#f2eee6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="tonight">
+    <div class="wrap">
+      <p class="tonight__in" id="tonight">
+        <span class="tonight__item"><span class="tonight__dot" aria-hidden="true"></span>Reading tonight&rsquo;s sky&hellip;</span>
+      </p>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <a class="mark" href="index.html" aria-current="page">
+      <span class="mark__word">VELA</span>
+      <span class="mark__sub">Observatory &amp; Sky Centre</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="sky-tonight.html">Sky tonight</a>
+      <a href="whats-on.html">What&rsquo;s on</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="visit.html">Visit</a>
+      <a href="learning.html">Learning</a>
+      <a href="membership.html">Membership</a>
+    </nav>
+    <div class="bar__tools">
+      <button class="vision" id="visionBtn" type="button" aria-pressed="false">
+        <span class="vision__led" aria-hidden="true"></span>
+        <span class="vision__txt">Red light</span>
+      </button>
+      <a class="basket-btn" id="basketBtn" href="tickets.html" data-empty="1">
+        <span class="basket-btn__txt">Tickets</span>
+        <span class="basket-btn__n" id="basketCount">0</span>
+      </a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="sky-tonight.html">Sky tonight</a>
+      <a href="whats-on.html">What&rsquo;s on</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="visit.html">Visit</a>
+      <a href="learning.html">Learning</a>
+      <a href="research.html">Research</a>
+      <a href="membership.html">Membership</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================ hero ============================ -->
+  <section class="hero">
+    <div class="hero__media">
+      <video id="heroVideo" autoplay muted loop playsinline preload="metadata"
+             poster="img/hero-dome.webp" aria-hidden="true" tabindex="-1">
+        <source src="video/hero.webm" type="video/webm">
+        <source src="video/hero.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="wrap hero__in">
+      <div>
+        <p class="label">Hallow Fell &middot; 54.4832&deg; N &middot; 612 m</p>
+        <h1>Where the sky still gets properly dark</h1>
+        <p class="lede hero__lede">VELA is a working observatory and a public sky centre on the
+          Cumbrian fells, forty minutes from the nearest street light. The 1.2-metre telescope
+          runs most clear nights of the year, and on three of them a week you can book a place
+          at the eyepiece.</p>
+        <div class="btn-row">
+          <a class="btn btn--signal" href="whats-on.html">Book a session</a>
+          <a class="btn btn--on-night" href="sky-tonight.html">See tonight&rsquo;s sky</a>
+        </div>
+      </div>
+
+      <!-- Every figure here is computed for this moment, not typed in. -->
+      <div class="readout" id="readout">
+        <div class="readout__head">
+          <span class="label">Tonight at Hallow Fell</span>
+          <span class="label num" id="readoutDate">&mdash;</span>
+        </div>
+        <dl id="readoutList">
+          <dt>Sunset</dt><dd id="rSunset">&mdash;</dd>
+          <dt>Astronomical dark</dt><dd id="rDark">&mdash;</dd>
+          <dt>Hours of true dark</dt><dd id="rDuration">&mdash;</dd>
+          <dt>Moon</dt><dd id="rMoon">&mdash;</dd>
+          <dt>Brightest up now</dt><dd id="rBrightest">&mdash;</dd>
+        </dl>
+        <p class="readout__foot" id="readoutNote">Computed for this location from your device
+          clock.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ intro ============================ -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <div class="head__mark"><span class="head__no">01</span><span class="label">The place</span></div>
+          <h2>An observatory that lets people in</h2>
+        </div>
+        <p>Most research telescopes are closed to the public and most public telescopes are not
+          used for research. VELA is both. The instruments that run our survey programme on a
+          Tuesday are the ones you look through on a Friday, and the person showing you Saturn
+          is the person who took the data.</p>
+      </div>
+
+      <div class="stats reveal">
+        <div class="stat"><b>21.7</b><span>Zenith sky brightness, magnitudes per square arcsecond &mdash; Bortle class 2</span></div>
+        <div class="stat"><b>1.2 m</b><span>Ritchey&ndash;Chr&eacute;tien reflector, the Fell Telescope</span></div>
+        <div class="stat"><b>1963</b><span>Founded as a university outstation; public since 1998</span></div>
+        <div class="stat"><b>96</b><span>Seats under the 14-metre planetarium dome</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ sky tonight ============================ -->
+  <section class="bay night-bay">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <div class="head__mark"><span class="head__no">02</span><span class="label">Live</span></div>
+          <h2>What is over the fell right now</h2>
+        </div>
+        <p>This map is drawn from a catalogue of 223 stars and the positions of the Sun, Moon and
+          planets, computed for our latitude and your clock. The band across it is the real
+          galactic plane. Drag a finger or point at anything to identify it.</p>
+      </div>
+
+      <div class="cols cols--2">
+        <div class="reveal">
+          <div class="sky">
+            <canvas class="sky__canvas" id="skyCanvas" width="640" height="640"
+                    tabindex="0" role="img"
+                    aria-label="An all-sky map of the current sky above the observatory. Use the list beside it for the same information as text."></canvas>
+            <div class="sky__tip" id="skyTip" hidden></div>
+            <p class="sky__hint">North at top, east at left &middot; the rim is the horizon</p>
+          </div>
+        </div>
+        <div class="reveal reveal--d1">
+          <h3>Up now, brightest first</h3>
+          <div class="table-scroll">
+            <table class="data" id="upNow">
+              <caption>Objects more than ten degrees above the horizon.</caption>
+              <thead>
+                <tr><th scope="col">Object</th><th scope="col">Direction</th>
+                    <th scope="col" class="n">Altitude</th><th scope="col" class="n">Mag</th></tr>
+              </thead>
+              <tbody><tr><td colspan="4">Reading the sky&hellip;</td></tr></tbody>
+            </table>
+          </div>
+          <p class="btn-row"><a class="arrow" href="sky-tonight.html">Open the full sky map
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ what's on ============================ -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <div class="head__mark"><span class="head__no">03</span><span class="label">What&rsquo;s on</span></div>
+          <h2>The next few days</h2>
+        </div>
+        <p>Dome shows run every day except Tuesday. Telescope nights are offered only on dates
+          the sky actually reaches astronomical darkness, which is why they disappear from this
+          list between May and August.</p>
+      </div>
+      <div id="homeProgramme" class="reveal">
+        <p class="u-mut">Loading the programme&hellip;</p>
+      </div>
+      <p class="btn-row"><a class="btn btn--ghost" href="whats-on.html">See the whole programme</a></p>
+    </div>
+  </section>
+
+  <!-- ============================ the dark ============================ -->
+  <section class="bay night-bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div class="reveal">
+          <div class="head">
+            <div>
+              <div class="head__mark"><span class="head__no">04</span><span class="label">The dark</span></div>
+              <h2>Eighty-five nights a year, this place cannot go dark</h2>
+            </div>
+          </div>
+          <p>At 54.4832&deg; north the Sun does not fall the full eighteen degrees below the
+            horizon between 10 May and 2 August. There is no astronomical darkness at all in
+            those weeks &mdash; not late, not briefly. It simply does not happen.</p>
+          <p>So we do not pretend otherwise. The deep-sky season runs from August to April, and
+            the light months go to the Sun instead: hydrogen-alpha on the terrace, prominences,
+            sunspot counts for the century-long record the observatory has kept since 1963.</p>
+          <p>On the longest night in December there are twelve hours and fifteen minutes of true
+            dark. On 8 May there are fifty-six minutes.</p>
+          <p class="btn-row"><a class="arrow" href="research.html">How we use the season
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></p>
+        </div>
+        <figure class="fig reveal reveal--d1">
+          <img src="img/fell-silhouette.webp" width="2000" height="1125" loading="lazy" decoding="async"
+               alt="A lone figure standing beneath a bare tree on open moorland, with the Milky Way arching overhead and a faint band of light along the horizon.">
+          <figcaption>The fell looking south-west in late August, when true dark returns after
+            the summer gap.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ three rooms ============================ -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <div class="head__mark"><span class="head__no">05</span><span class="label">Inside</span></div>
+          <h2>Four buildings and a hill</h2>
+        </div>
+        <p>The centre is small on purpose. You can see all of it in an afternoon and still have
+          time to sit in the dome.</p>
+      </div>
+
+      <div class="cols cols--3">
+        <a class="card reveal" href="exhibitions.html">
+          <div class="card__media">
+            <img src="img/gallery.webp" width="1600" height="900" loading="lazy" decoding="async"
+                 alt="A darkened gallery of astronomical instruments, with brass sextants and a clockwork orrery lit from inside glass cases.">
+          </div>
+          <div class="card__body">
+            <span class="tag">Permanent galleries</span>
+            <h3>Exhibitions</h3>
+            <p>Four rooms of instruments, plates and the machinery of measurement, including the
+              1908 refractor still in its original dome.</p>
+            <span class="card__foot"><span class="arrow">Galleries
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span>
+          </div>
+        </a>
+
+        <a class="card reveal reveal--d1" href="learning.html">
+          <div class="card__media">
+            <img src="img/learning-family.webp" width="1600" height="1067" loading="lazy" decoding="async"
+                 alt="An adult and a child in silhouette beside a small telescope on a tripod, one of them pointing up at a deep blue twilight sky.">
+          </div>
+          <div class="card__body">
+            <span class="tag">Schools and groups</span>
+            <h3>Learning</h3>
+            <p>Half-day and full-day programmes for key stages 2 to 5, teacher resources, and
+              Saturday mornings for young astronomers.</p>
+            <span class="card__foot"><span class="arrow">Learning
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span>
+          </div>
+        </a>
+
+        <a class="card reveal reveal--d2" href="research.html">
+          <div class="card__media">
+            <img src="img/control.webp" width="1600" height="900" loading="lazy" decoding="async"
+                 alt="An observatory control room at night: a curved desk of monitors showing faint plots and star fields, lit only by red overhead lamps.">
+          </div>
+          <div class="card__body">
+            <span class="tag">The observatory</span>
+            <h3>Research</h3>
+            <p>What the telescope is actually pointed at &mdash; the variable-star programme, the
+              plate archive, and the sky-brightness record.</p>
+            <span class="card__foot"><span class="arrow">Research
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ membership ============================ -->
+  <section class="bay bay--half">
+    <div class="wrap">
+      <hr class="rule">
+      <div class="cols cols--2 bay--half">
+        <div class="reveal">
+          <h2>Come back as often as you like</h2>
+          <p class="lede">Membership is the only sensible way to visit an observatory, because
+            the one thing nobody can promise you is a clear night.</p>
+        </div>
+        <div class="reveal reveal--d1">
+          <p>Members are admitted free for a year, take a quarter off every dome show and
+            telescope night, and book two weeks before general release &mdash; which matters,
+            because the 1.2-metre only seats twenty-four.</p>
+          <p class="btn-row">
+            <a class="btn" href="membership.html">Membership from <span id="memberFrom">&mdash;</span></a>
+            <a class="btn btn--ghost" href="visit.html">Plan a visit</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <span class="foot__mark">VELA</span>
+        <p>Observatory &amp; Sky Centre<br>Hallow Fell Road, Ravenglass<br>Cumbria CA18 1SQ</p>
+        <p class="num">54.4832&deg; N &middot; 3.1104&deg; W &middot; 612 m</p>
+      </div>
+      <div>
+        <h2>Visit</h2>
+        <ul>
+          <li><a href="visit.html">Plan your visit</a></li>
+          <li><a href="whats-on.html">What&rsquo;s on</a></li>
+          <li><a href="exhibitions.html">Exhibitions</a></li>
+          <li><a href="tickets.html">Tickets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>The observatory</h2>
+        <ul>
+          <li><a href="sky-tonight.html">Sky tonight</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="learning.html">Learning</a></li>
+          <li><a href="about.html">About VELA</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Support</h2>
+        <ul>
+          <li><a href="membership.html">Membership</a></li>
+          <li><a href="membership.html#patrons">Patrons</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="about.html#access">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__fine">
+      <p>&copy; <span data-year>2026</span> VELA Observatory &amp; Sky Centre, an independent
+        charitable trust. Telescope sessions are weather-dependent and refunded in full if
+        cloud stops the session going ahead.</p>
+      <p><a href="about.html#legal">Terms &amp; privacy</a> &middot;
+         <a href="about.html#access">Accessibility</a> &middot;
+         <a href="contact.html">Press &amp; media</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/sky.js"></script>
+<script src="js/stars.js"></script>
+<script src="js/store.js"></script>
+<script src="js/skymap.js"></script>
+<script src="js/render.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
