@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" data-flavor="citrus">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'">
+  <title>Never Still — UNSTILL Sparkling Botanical Soda</title>
+  <meta name="description" content="UNSTILL makes sparkling botanical soda in four loud flavours. Real juice, real chaos, no caffeine. This site recolours itself to whichever can you choose — and yes, you can shake it.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/soda-unstill/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Never Still — UNSTILL">
+  <meta property="og:description" content="UNSTILL makes sparkling botanical soda in four loud flavours. Real juice, real chaos, no caffeine. This site recolours itself to whichever can you choose — and yes, you can shake it.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/soda-unstill/img/lineup.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Never Still — UNSTILL">
+  <meta name="twitter:description" content="UNSTILL makes sparkling botanical soda in four loud flavours. Real juice, real chaos, no caffeine. This site recolours itself to whichever can you choose — and yes, you can shake it.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/soda-unstill/img/lineup.webp">
+  <meta name="theme-color" content="#f4efe6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Martian+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="page">
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="mark" href="index.html">UN<i>STILL</i></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="flavors.html">Flavours</a>
+      <a href="lab.html">The Fizzics Lab</a>
+      <a href="packs.html">Build a crate</a>
+      <a href="story.html">Story</a>
+      <a href="stockists.html">Stockists</a>
+    </nav>
+    <div class="flavors" role="group" aria-label="Choose your flavour — recolours the whole site">
+      <button type="button" class="f-citrus" data-flavor="citrus" aria-pressed="true" aria-label="Citrus Riot, yellow"></button>
+      <button type="button" class="f-burn" data-flavor="burn" aria-pressed="false" aria-label="Slow Burn, red-orange"></button>
+      <button type="button" class="f-mood" data-flavor="mood" aria-pressed="false" aria-label="Mood Ring, indigo"></button>
+      <button type="button" class="f-snap" data-flavor="snap" aria-pressed="false" aria-label="Cold Snap, green"></button>
+    </div>
+    <button class="shake-btn" id="shakeBtn" type="button"
+            aria-describedby="shakeLive">
+      <span class="shake-btn__fill" aria-hidden="true"></span>
+      <span class="shake-btn__ban" aria-hidden="true"></span>
+      <span class="shake-btn__txt">Do not shake</span>
+    </button>
+    <a class="basket-btn" id="basketBtn" href="packs.html" data-empty="1">
+      <span class="basket-btn__txt">Crate</span>
+      <span class="basket-btn__n" id="basketCount">0</span>
+    </a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="flavors.html">Flavours</a>
+      <a href="lab.html">The Fizzics Lab</a>
+      <a href="packs.html">Build a crate</a>
+      <a href="story.html">Story</a>
+      <a href="stockists.html">Stockists</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="wrap">
+      <div class="flavors" role="group" aria-label="Choose your flavour — recolours the whole site">
+        <button type="button" class="f-citrus" data-flavor="citrus" aria-pressed="true" aria-label="Citrus Riot, yellow"></button>
+        <button type="button" class="f-burn" data-flavor="burn" aria-pressed="false" aria-label="Slow Burn, red-orange"></button>
+        <button type="button" class="f-mood" data-flavor="mood" aria-pressed="false" aria-label="Mood Ring, indigo"></button>
+        <button type="button" class="f-snap" data-flavor="snap" aria-pressed="false" aria-label="Cold Snap, green"></button>
+      </div>
+    </div>
+  </div>
+  <p class="u-hide" id="shakeLive" role="status" aria-live="assertive"></p>
+</header>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="hero__media">
+      <video class="v-dark" autoplay muted loop playsinline preload="metadata"
+             poster="img/hero-poster.webp" aria-hidden="true" tabindex="-1">
+        <source src="video/hero.webm" type="video/webm">
+        <source src="video/hero.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="wrap hero__in">
+      <p class="label"><span class="sticker sticker--bone tilt-l">Sparkling botanical soda</span></p>
+      <h1>Never<br><span class="h-tilt">still</span></h1>
+      <p class="lede">Four flavours. Real juice. No caffeine.
+        The ink in this film is what your drink is doing right now.</p>
+      <div class="hero__stickers">
+        <span class="sticker tilt-r">Shake-activated botanicals</span>
+        <span class="sticker sticker--band tilt-l">No sweeteners</span>
+        <span class="sticker sticker--bone tilt-0">330 ml</span>
+      </div>
+      <div class="btn-row">
+        <a class="btn" href="packs.html">Build a crate</a>
+        <a class="btn btn--ghost" href="flavors.html">Meet the flavours</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee" data-speed="20">
+      <div class="marquee-row">
+        <span>Never still</span><i>&#9679;</i><span>Shake first, apologise later</span><i>&#9679;</i>
+        <span>Loud by design</span><i>&#9679;</i><span>Real juice only</span><i>&#9679;</i>
+        <span>Agitation is an ingredient</span><i>&#9679;</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- the range -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div class="reveal">
+          <p class="label">The range</p>
+          <h2>Pick a can.<br>The site follows.</h2>
+        </div>
+        <div class="reveal reveal--d1">
+          <p>Those four dots in the header are the range. Choose one and everything on every
+            page — panels, buttons, even the ink films — re-brews itself in that flavour.
+            The cans wear each other's colours as a band, because no can is an island.</p>
+        </div>
+      </div>
+      <div class="cols cols--4 bay--half" id="rangeCards"></div>
+      <figure class="frame reveal">
+        <img src="img/lineup.webp" width="1170" height="676" loading="lazy" decoding="async"
+             alt="Four slim unlabelled cans in a row on a white studio background: yellow with an indigo band, red-orange with a green band, indigo with a yellow band, and green with an orange band.">
+      </figure>
+    </div>
+  </section>
+
+  <!-- mood ring feature -->
+  <section class="vband">
+    <div class="vband__media vband__media--light">
+      <video class="v-light" autoplay muted loop playsinline preload="metadata"
+             poster="img/pour-poster.webp" aria-hidden="true" tabindex="-1">
+        <source src="video/pour.webm" type="video/webm">
+        <source src="video/pour.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="vband__scrim"></div>
+    <div class="wrap vband__in bay">
+      <div class="cols cols--2">
+        <div class="reveal">
+          <p class="label">The party trick</p>
+          <h2>One of these changes colour in the glass</h2>
+          <p>Mood Ring is brewed on butterfly pea flower — a natural pH indicator. Pour it,
+            squeeze the lime, and it flips from indigo to violet to hot pink while you watch.
+            Chemistry, not colouring.</p>
+          <p class="btn-row">
+            <a class="btn btn--ghost" href="flavor.html?id=mood">Meet Mood Ring</a>
+            <a class="btn btn--ink" href="lab.html">See how it works</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- crate teaser -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div class="reveal">
+          <p class="label">The crate</p>
+          <h2>Twelve cans, your rules</h2>
+          <p>Fill a crate with any mix of the four. A full crate takes
+            <b class="num" id="crateDiscountPct">—</b> off the can price, and a subscription
+            takes another <b class="num" id="subDiscountPct">—</b> off that. The maths is done
+            in front of you, per crate, in the builder.</p>
+          <p class="btn-row"><a class="btn" href="packs.html">Start stacking</a></p>
+        </div>
+        <div class="reveal reveal--d1">
+          <div class="stats stats--3">
+            <div class="stat"><b class="num" id="statCan">—</b><span>a can, on its own</span></div>
+            <div class="stat"><b class="num" id="statCrate">—</b><span>a mixed crate of twelve</span></div>
+            <div class="stat"><b class="num" id="statSub">—</b><span>the same crate, subscribed</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-wrap marquee-wrap--ink" aria-hidden="true">
+    <div class="marquee" data-speed="26">
+      <div class="marquee-row">
+        <span>Yuzu + ginger</span><i>&#9670;</i><span>Blood orange + chilli</span><i>&#9670;</i>
+        <span>Butterfly pea + lime</span><i>&#9670;</i><span>Cucumber + Sichuan pepper</span><i>&#9670;</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- stockists teaser -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div class="reveal">
+          <p class="label">Out there</p>
+          <h2>In the wild</h2>
+          <p>We are in <b class="num" id="statShops">—</b> independent shops across
+            <b class="num" id="statCities">—</b> UK cities, and precisely zero supermarkets.
+            That is a decision, not a shortfall.</p>
+          <p class="btn-row"><a class="btn btn--ghost" href="stockists.html">Find your nearest</a></p>
+        </div>
+        <div class="reveal reveal--d1">
+          <p class="note">Run a shop with a good fridge and strong opinions?
+            <a href="contact.html">Talk to us about wholesale</a>. We deliver by cargo bike
+            inside London, which the cans genuinely enjoy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <span class="foot__mark">UNSTILL</span>
+        <p>Sparkling botanical soda.<br>Unit 9, Ferment Yard<br>Hackney Wick, London E9 5EN</p>
+      </div>
+      <div>
+        <h2>Drink</h2>
+        <ul>
+          <li><a href="flavors.html">The flavours</a></li>
+          <li><a href="packs.html">Build a crate</a></li>
+          <li><a href="stockists.html">Stockists</a></li>
+          <li><a href="lab.html">The Fizzics Lab</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul>
+          <li><a href="story.html">Story</a></li>
+          <li><a href="about.html">About &amp; legal</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html">Wholesale</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>The rule</h2>
+        <p>Shake-activated botanicals settle. Turn the can over once, slowly, before you open
+          it. That is the only instruction this company has ever issued.</p>
+      </div>
+    </div>
+    <div class="foot__fine">
+      <p>&copy; <span data-year>2026</span> UNSTILL Drinks Ltd. Registered in England.
+        All four flavours contain sugar; none contains caffeine, sweeteners or anything we
+        cannot pronounce.</p>
+      <p><a href="about.html#legal">Terms &amp; privacy</a> &middot;
+         <a href="about.html#nutrition">Nutrition</a> &middot;
+         <a href="contact.html">Press</a></p>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#page -->
+
+<script src="js/store.js"></script>
+<script src="js/fizz.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" data-flavor="citrus">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'">
+  <title>Build a Crate — UNSTILL Sparkling Botanical Soda</title>
+  <meta name="description" content="Fill a twelve-can crate with any mix of the four UNSTILL flavours. Crate and subscription discounts are computed in front of you, per crate.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/soda-unstill/packs.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Build a Crate — UNSTILL">
+  <meta property="og:description" content="Fill a twelve-can crate with any mix of the four UNSTILL flavours. Crate and subscription discounts are computed in front of you, per crate.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/soda-unstill/img/lineup.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Build a Crate — UNSTILL">
+  <meta name="twitter:description" content="Fill a twelve-can crate with any mix of the four UNSTILL flavours. Crate and subscription discounts are computed in front of you, per crate.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/soda-unstill/img/lineup.webp">
+  <meta name="theme-color" content="#f4efe6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Martian+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="page">
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="mark" href="index.html">UN<i>STILL</i></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="flavors.html">Flavours</a>
+      <a href="lab.html">The Fizzics Lab</a>
+      <a href="packs.html" aria-current="page">Build a crate</a>
+      <a href="story.html">Story</a>
+      <a href="stockists.html">Stockists</a>
+    </nav>
+    <div class="flavors" role="group" aria-label="Choose your flavour — recolours the whole site">
+      <button type="button" class="f-citrus" data-flavor="citrus" aria-pressed="true" aria-label="Citrus Riot, yellow"></button>
+      <button type="button" class="f-burn" data-flavor="burn" aria-pressed="false" aria-label="Slow Burn, red-orange"></button>
+      <button type="button" class="f-mood" data-flavor="mood" aria-pressed="false" aria-label="Mood Ring, indigo"></button>
+      <button type="button" class="f-snap" data-flavor="snap" aria-pressed="false" aria-label="Cold Snap, green"></button>
+    </div>
+    <button class="shake-btn" id="shakeBtn" type="button"
+            aria-describedby="shakeLive">
+      <span class="shake-btn__fill" aria-hidden="true"></span>
+      <span class="shake-btn__ban" aria-hidden="true"></span>
+      <span class="shake-btn__txt">Do not shake</span>
+    </button>
+    <a class="basket-btn" id="basketBtn" href="packs.html" data-empty="1">
+      <span class="basket-btn__txt">Crate</span>
+      <span class="basket-btn__n" id="basketCount">0</span>
+    </a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="flavors.html">Flavours</a>
+      <a href="lab.html">The Fizzics Lab</a>
+      <a href="packs.html" aria-current="page">Build a crate</a>
+      <a href="story.html">Story</a>
+      <a href="stockists.html">Stockists</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="wrap">
+      <div class="flavors" role="group" aria-label="Choose your flavour — recolours the whole site">
+        <button type="button" class="f-citrus" data-flavor="citrus" aria-pressed="true" aria-label="Citrus Riot, yellow"></button>
+        <button type="button" class="f-burn" data-flavor="burn" aria-pressed="false" aria-label="Slow Burn, red-orange"></button>
+        <button type="button" class="f-mood" data-flavor="mood" aria-pressed="false" aria-label="Mood Ring, indigo"></button>
+        <button type="button" class="f-snap" data-flavor="snap" aria-pressed="false" aria-label="Cold Snap, green"></button>
+      </div>
+    </div>
+  </div>
+  <p class="u-hide" id="shakeLive" role="status" aria-live="assertive"></p>
+</header>
+
+<main id="main">
+
+  <section class="bay--top bay--half">
+    <div class="wrap">
+      <p class="label">Shop</p>
+      <h1>Build a crate</h1>
+      <p class="lede">Twelve slots, four flavours, your call. The maths runs live and it
+        is the same maths the checkout charges.</p>
+    </div>
+  </section>
+
+  <section class="bay--half">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div>
+          <div class="crate" id="crate" role="group" aria-label="Your crate, twelve slots. Filled slots can be clicked to remove that can."></div>
+          <div class="crate-adders" id="crateAdders" role="group" aria-label="Add cans to the crate"></div>
+          <p class="field__hint bay--half" id="crateHint">Empty crate. Add cans below, or grab a
+            preset.</p>
+          <div class="btn-row">
+            <button class="btn btn--sm btn--ghost" type="button" data-preset="even">3 &times; each</button>
+            <button class="btn btn--sm btn--ghost" type="button" data-preset="citrus">All Citrus Riot</button>
+            <button class="btn btn--sm btn--ghost" type="button" data-preset="burn">All Slow Burn</button>
+            <button class="btn btn--sm btn--ghost" type="button" data-preset="clear">Empty it</button>
+          </div>
+        </div>
+        <div>
+          <div class="totals" id="crateTotals"></div>
+          <div class="field bay--half">
+            <label for="subCheck"><input type="checkbox" id="subCheck"> Subscribe — a crate
+              like this one, monthly</label>
+            <span class="field__hint" id="subHint"></span>
+          </div>
+          <p class="btn-row">
+            <button class="btn" type="button" id="addCrate" disabled>Fill the crate first</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bay--half">
+    <div class="wrap">
+      <hr class="rule">
+      <h2 class="bay--half">Your order</h2>
+      <div id="basketBody"></div>
+      <div class="totals" id="orderTotals"></div>
+      <div id="checkoutBlock" hidden>
+        <hr class="rule">
+        <h2 class="bay--half">Where is it going</h2>
+        <form id="checkoutForm" novalidate>
+          <div class="cols cols--2">
+            <div class="field">
+              <label for="cName">Name</label>
+              <input class="input" id="cName" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="cEmail">Email</label>
+              <input class="input" id="cEmail" name="email" type="email" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="cPostcode">Postcode</label>
+            <input class="input" id="cPostcode" name="postcode" type="text" autocomplete="postal-code" required
+                   aria-describedby="cPostcodeHint">
+            <span class="field__hint" id="cPostcodeHint">Cargo-bike delivery inside London;
+              carbon-neutral courier everywhere else in the UK.</span>
+          </div>
+          <p class="btn-row">
+            <button class="btn" type="submit">Continue to payment</button>
+          </p>
+          <p class="field__hint">Payment happens with our payment provider. Card details never
+            touch this site.</p>
+        </form>
+        <div id="checkoutDone" hidden></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <span class="foot__mark">UNSTILL</span>
+        <p>Sparkling botanical soda.<br>Unit 9, Ferment Yard<br>Hackney Wick, London E9 5EN</p>
+      </div>
+      <div>
+        <h2>Drink</h2>
+        <ul>
+          <li><a href="flavors.html">The flavours</a></li>
+          <li><a href="packs.html">Build a crate</a></li>
+          <li><a href="stockists.html">Stockists</a></li>
+          <li><a href="lab.html">The Fizzics Lab</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul>
+          <li><a href="story.html">Story</a></li>
+          <li><a href="about.html">About &amp; legal</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html">Wholesale</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>The rule</h2>
+        <p>Shake-activated botanicals settle. Turn the can over once, slowly, before you open
+          it. That is the only instruction this company has ever issued.</p>
+      </div>
+    </div>
+    <div class="foot__fine">
+      <p>&copy; <span data-year>2026</span> UNSTILL Drinks Ltd. Registered in England.
+        All four flavours contain sugar; none contains caffeine, sweeteners or anything we
+        cannot pronounce.</p>
+      <p><a href="about.html#legal">Terms &amp; privacy</a> &middot;
+         <a href="about.html#nutrition">Nutrition</a> &middot;
+         <a href="contact.html">Press</a></p>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#page -->
+
+<script src="js/store.js"></script>
+<script src="js/fizz.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/packs.js"></script>
+</body>
+</html>
