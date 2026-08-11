@@ -90,7 +90,7 @@
           '<p class="scr-act"><button class="btn-row" type="button" aria-expanded="false">' +
             (reserved ? 'View hold' : (full ? 'Join waitlist' : 'Reserve')) + '</button></p>' +
         '</div>' +
-        '<div class="scr-form" id="drawer-' + i + '"><div class="scr-form-in"></div></div>';
+        '<div class="scr-form" id="drawer-' + i + '"><div class="scr-form-wrap"><div class="scr-form-in"></div></div></div>';
       frag.appendChild(row);
       wireRow(row, show, i);
     });
@@ -103,19 +103,17 @@
     var inner = row.querySelector('.scr-form-in');
     var open = false;
 
-    function setDrawer(h) { drawer.style.height = h + 'px'; }
-
     function openDrawer() {
       buildDrawer();
       open = true;
       btn.setAttribute('aria-expanded', 'true');
-      setDrawer(inner.offsetHeight + 8);
+      drawer.classList.add('open');
       if (MW.ping) MW.ping();
     }
     function closeDrawer() {
       open = false;
       btn.setAttribute('aria-expanded', 'false');
-      setDrawer(0);
+      drawer.classList.remove('open');
     }
 
     btn.addEventListener('click', function () { open ? closeDrawer() : openDrawer(); });
@@ -133,7 +131,7 @@
           delete store[show.key];
           saveStore(store);
           refreshRow();
-          buildDrawer(); setDrawer(inner.offsetHeight + 8);
+          buildDrawer();
         });
         return;
       }
@@ -164,7 +162,6 @@
           out.textContent = seats;
           inner.querySelector('.seats button[data-d="-1"]').disabled = seats === 1;
           inner.querySelector('.seats button[data-d="1"]').disabled = seats === 4;
-          setDrawer(inner.offsetHeight + 8);
         });
       });
 
@@ -174,7 +171,7 @@
         var ok = true;
         ok = check(nm, function (v) { return v.trim().length >= 2; }, 'The door list needs a name.') && ok;
         ok = check(em, function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); }, 'That email will not survive the depth — check it.') && ok;
-        if (!ok) { setDrawer(inner.offsetHeight + 8); return; }
+        if (!ok) return;
         var code = 'MW-' + (hash(show.key + em.value.trim()) % 9000 + 1000);
         store[show.key] = {
           name: nm.value.trim(), email: em.value.trim(),
@@ -192,7 +189,6 @@
             : 'Logged. ' + seats + (seats > 1 ? ' seats' : ' seat') + ' held at ' + escapeHtml(show.v.venue) +
               ', ' + fmtDate(show.when) + ' — quote <span class="code">' + code + '</span> at the door.') +
           '</p>';
-        setDrawer(inner.offsetHeight + 8);
       });
     }
 

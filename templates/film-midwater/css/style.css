@@ -154,12 +154,13 @@ a { color: inherit; }
 }
 .stnav a::before {
   content: ''; position: absolute; left: 0; top: 50%;
-  width: 7px; height: 1px; background: var(--line-strong);
-  transform: translateY(-50%); transition: width 0.25s, background 0.25s;
+  width: 12px; height: 1px; background: var(--line-strong);
+  transform: translateY(-50%) scaleX(0.58); transform-origin: left center;
+  transition: transform 0.25s, background 0.25s;
 }
 .stnav a:hover { color: var(--cyan); }
 .stnav a.live { color: var(--amber); }
-.stnav a.live::before { width: 12px; background: var(--amber); }
+.stnav a.live::before { transform: translateY(-50%) scaleX(1); background: var(--amber); }
 
 /* ---------- hero ---------- */
 .hero { position: relative; height: 100svh; overflow: hidden; }
@@ -512,8 +513,13 @@ a { color: inherit; }
   .scr-main > .scr-act { grid-area: act; }
 }
 
-/* reservation drawer inside a row */
-.scr-form { overflow: hidden; height: 0; transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+/* reservation drawer inside a row — grid-rows 0fr->1fr, no height math */
+.scr-form {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scr-form.open { grid-template-rows: 1fr; }
+.scr-form > .scr-form-wrap { overflow: hidden; min-height: 0; }
 .scr-form-in {
   display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) 130px auto;
   gap: 16px; align-items: end; padding: 6px 0 26px;
