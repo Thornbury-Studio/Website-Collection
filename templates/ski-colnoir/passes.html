@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passes — Col Noir | Day Passes Priced by the Bulletin</title>
+<meta name="description" content="Buy a Col Noir day pass: seven days ahead, each priced with its own forecast bulletin. Storm days say so before you pay. Passes live in your on-device wallet.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/ski-colnoir/passes.html">
+<meta name="theme-color" content="#f5f6f4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f5f6f4'/%3E%3Cpath d='M4 26 L13 8 L19 19 L23 12 L28 26 Z' fill='%2316181a'/%3E%3Cpath d='M13 8 L16 14 L11 14 Z' fill='%23d8272c'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Col Noir">
+<meta property="og:title" content="Passes — Col Noir">
+<meta property="og:description" content="Seven days ahead, each priced with its own forecast bulletin. Storm days say so before you pay.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/ski-colnoir/passes.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/ski-colnoir/img/still-liftline.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Chivo+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#buy">Skip to the pass desk</a>
+
+<header class="mast">
+  <div class="mast-in">
+    <a class="mark" href="index.html" aria-label="Col Noir home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 26 L13 8 L19 19 L23 12 L28 26 Z" fill="currentColor"/><path d="M13 8 L16 14 L11 14 Z" fill="#d8272c"/></svg>
+      <span><b>Col Noir</b><small>1 840 – 3 260 M</small></span>
+    </a>
+    <nav class="mnav" aria-label="Site">
+      <a href="index.html">Bulletin</a>
+      <a href="terrain.html">Terrain</a>
+      <a href="passes.html" aria-current="page">Passes</a>
+    </nav>
+    <button class="snd" type="button" aria-pressed="false">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8h3M5.5 8c2.5 0 3-4 5.5-4M5.5 8c2.5 0 3 4 5.5 4M11.5 8h3"/></svg>
+      <span class="snd-label">Wind off</span>
+    </button>
+  </div>
+</header>
+
+<div class="issue">
+  <span>Pass desk · gates open <b>08:30</b></span>
+  <span>Wind-hold refunds are automatic — the gate knows</span>
+</div>
+
+<main>
+  <section class="band" style="height: clamp(280px, 44svh, 460px);" aria-label="The lift line">
+    <video data-src="video/piste.mp4" muted playsinline loop preload="none" poster="img/poster-piste.webp"></video>
+    <p class="band-quote rise">Every day is priced<br>with its own weather.</p>
+    <p class="fig">Fig. 7 <span class="sep">///</span> TS Forêt line, 10:05</p>
+  </section>
+
+  <div class="report" id="buy" style="padding-top: clamp(30px, 5vh, 56px);">
+    <div class="sect-head">
+      <span class="sect-no">DESK</span>
+      <h1 class="sect-title">Day passes</h1>
+      <span class="sect-aside">Forecast bulletins · next seven days</span>
+    </div>
+
+    <p class="prose rise" style="margin-bottom: 26px;">Pick a day. Each carries its <strong>forecast bulletin</strong> — danger, fresh snow, wind — computed the same way the morning report is. A day the wind will likely hold the top cables is priced down and says why. If the mountain closes more than half its lifts on your day, the gate refunds you before you ask.</p>
+
+    <div class="day-strip rise" id="dayStrip" role="group" aria-label="Choose your day"></div>
+
+    <form class="pass-form" id="passForm" novalidate>
+      <div class="field">
+        <label for="pfName">Name on the pass</label>
+        <input id="pfName" type="text" autocomplete="name">
+        <span class="field-err" aria-live="polite"></span>
+      </div>
+      <div class="field">
+        <label for="pfEmail">Email</label>
+        <input id="pfEmail" type="email" autocomplete="email" inputmode="email">
+        <span class="field-err" aria-live="polite"></span>
+      </div>
+      <div class="field">
+        <label id="pfCatL" for="pfCat">Category</label>
+        <select id="pfCat">
+          <option value="adult">Adult — full rate</option>
+          <option value="youth">Youth 8–17 — ×0.6</option>
+          <option value="dawn">Dawn patrol 08:30–11:00 — ×0.55</option>
+        </select>
+        <span class="field-err"></span>
+      </div>
+      <div class="field">
+        <label id="pfQtyL">Passes</label>
+        <div class="count" role="group" aria-labelledby="pfQtyL">
+          <button type="button" data-d="-1" aria-label="One fewer" disabled>−</button>
+          <output id="pfQty">1</output>
+          <button type="button" data-d="1" aria-label="One more">+</button>
+        </div>
+        <span class="field-err"></span>
+      </div>
+      <div class="field">
+        <span class="field-err"></span>
+        <button class="btn" type="submit" id="pfGo">Issue — CHF —</button>
+      </div>
+    </form>
+
+    <p class="noted" id="passNoted" hidden></p>
+
+    <div class="sect-head" style="margin-top: clamp(50px, 8vh, 90px);">
+      <span class="sect-no">WALLET</span>
+      <h2 class="sect-title">Your passes</h2>
+      <span class="sect-aside" id="walletAside">Stored on this device</span>
+    </div>
+    <p class="prose rise" id="walletEmpty">Nothing here yet. A pass you issue lives on this device and draws itself above — show it at the gate, or release it for an instant refund.</p>
+    <div class="wallet" id="wallet"></div>
+  </div>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Col Noir · the mountain, reported honestly</p>
+  <nav class="foot-nav" aria-label="Footer">
+    <a href="index.html">Bulletin</a>
+    <a href="terrain.html">Terrain</a>
+    <a href="mailto:bulletin@colnoir.example">Bulletin desk</a>
+  </nav>
+  <p class="foot-fine">Bulletin issued daily 08:00 · valid to 17:00 · ride what you can read</p>
+</footer>
+
+<nav class="subnav-mobile" aria-label="Site">
+  <a href="index.html">Bulletin</a>
+  <a href="terrain.html">Terrain</a>
+  <a href="passes.html" aria-current="page">Passes</a>
+</nav>
+
+<script src="js/model.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/passes.js"></script>
+</body>
+</html>
