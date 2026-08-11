@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'">
+  <title>What’s On — VELA Observatory &amp; Sky Centre</title>
+  <meta name="description" content="Dome shows every day but Tuesday, telescope nights on the 1.2 metre when the sky reaches astronomical darkness, solar sessions through the light months, and the monthly Fell Lecture.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/whats-on.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="What’s On — VELA Observatory">
+  <meta property="og:description" content="Dome shows, telescope nights and solar sessions at Hallow Fell.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/img/eyepiece.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What’s On — VELA Observatory">
+  <meta name="twitter:description" content="Dome shows, telescope nights and solar sessions at Hallow Fell.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/img/eyepiece.webp">
+  <meta name="theme-color" content="#f2eee6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="tonight">
+    <div class="wrap">
+      <p class="tonight__in" id="tonight">
+        <span class="tonight__item"><span class="tonight__dot" aria-hidden="true"></span>Reading tonight&rsquo;s sky&hellip;</span>
+      </p>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <a class="mark" href="index.html">
+      <span class="mark__word">VELA</span>
+      <span class="mark__sub">Observatory &amp; Sky Centre</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="sky-tonight.html">Sky tonight</a>
+      <a href="whats-on.html" aria-current="page">What&rsquo;s on</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="visit.html">Visit</a>
+      <a href="learning.html">Learning</a>
+      <a href="membership.html">Membership</a>
+    </nav>
+    <div class="bar__tools">
+      <button class="vision" id="visionBtn" type="button" aria-pressed="false">
+        <span class="vision__led" aria-hidden="true"></span>
+        <span class="vision__txt">Red light</span>
+      </button>
+      <a class="basket-btn" id="basketBtn" href="tickets.html" data-empty="1">
+        <span class="basket-btn__txt">Tickets</span>
+        <span class="basket-btn__n" id="basketCount">0</span>
+      </a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="sky-tonight.html">Sky tonight</a>
+      <a href="whats-on.html" aria-current="page">What&rsquo;s on</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="visit.html">Visit</a>
+      <a href="learning.html">Learning</a>
+      <a href="research.html">Research</a>
+      <a href="membership.html">Membership</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="bay--top">
+    <div class="wrap">
+      <p class="label">Programme</p>
+      <h1>What&rsquo;s on</h1>
+      <p class="lede prose">Dome shows run every day except Tuesday. Telescope nights are offered
+        on Thursdays, Fridays and Saturdays &mdash; but only on dates the sky here actually
+        reaches astronomical darkness, so they thin out in spring and vanish altogether between
+        10 May and 2 August.</p>
+    </div>
+  </section>
+
+  <section class="bay--half">
+    <div class="wrap">
+      <div class="filters" role="group" aria-label="Filter the programme">
+        <span class="label">Show</span>
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">Everything</button>
+        <button class="chip" type="button" data-filter="dome" aria-pressed="false">Dome shows</button>
+        <button class="chip" type="button" data-filter="telescope" aria-pressed="false">Telescope nights</button>
+        <button class="chip" type="button" data-filter="solar" aria-pressed="false">Solar</button>
+        <button class="chip" type="button" data-filter="lecture" aria-pressed="false">Lectures</button>
+      </div>
+      <div class="filters">
+        <span class="label">Range</span>
+        <button class="chip" type="button" data-days="7" aria-pressed="true">Next 7 days</button>
+        <button class="chip" type="button" data-days="14" aria-pressed="false">14 days</button>
+        <button class="chip" type="button" data-days="30" aria-pressed="false">30 days</button>
+      </div>
+      <p class="u-mut num" id="programmeCount" role="status" aria-live="polite">&nbsp;</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div id="programme"><p class="u-mut">Building the programme&hellip;</p></div>
+    </div>
+  </section>
+
+  <!-- ============================ prices ============================ -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="head__mark"><span class="head__no">01</span><span class="label">Prices</span></div>
+          <h2>What things cost</h2>
+        </div>
+        <p>Admission covers the galleries, the terrace and the grounds. Dome shows and telescope
+          nights are booked on top, and are cheaper if you are already coming in.</p>
+      </div>
+      <div class="cols cols--2">
+        <div>
+          <h3>Admission</h3>
+          <div class="table-scroll">
+            <table class="data" id="admissionTable">
+              <thead><tr><th scope="col">Ticket</th><th scope="col">Who it is for</th>
+                <th scope="col" class="n">Price</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h3>Sessions</h3>
+          <div class="table-scroll">
+            <table class="data" id="sessionTable">
+              <thead><tr><th scope="col">Session</th><th scope="col">Notes</th>
+                <th scope="col" class="n">Price</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="note bay--half"><strong>Members</strong> are admitted free and take
+            <span id="memberPct">&mdash;</span> off every session on this page.
+            <a href="membership.html">See membership</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ weather ============================ -->
+  <section class="bay night-bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div>
+          <div class="head">
+            <div>
+              <div class="head__mark"><span class="head__no">02</span><span class="label">The honest bit</span></div>
+              <h2>Cloud happens, and we refund it</h2>
+            </div>
+          </div>
+          <p>This is Cumbria. Roughly two telescope nights in five are lost to cloud, and we will
+            not pretend to you that a booking is a guarantee of seeing anything.</p>
+          <p>If the session cannot run we refund the full amount, automatically, within three
+            working days &mdash; you do not need to ask. If it half-runs, because the cloud came
+            in after an hour, you get a free rebooking instead.</p>
+          <p>The dome shows are indoors and run whatever the sky is doing, which is why we suggest
+            booking one on the same visit.</p>
+        </div>
+        <figure class="fig">
+          <img src="img/eyepiece.webp" width="1600" height="1067" loading="lazy" decoding="async"
+               alt="A person leaning to the eyepiece of a telescope on a tripod, silhouetted against a deep blue star-filled sky.">
+          <figcaption>Twenty-four places a night on the 1.2 metre. Everyone gets time at the
+            eyepiece, not a queue past it.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <span class="foot__mark">VELA</span>
+        <p>Observatory &amp; Sky Centre<br>Hallow Fell Road, Ravenglass<br>Cumbria CA18 1SQ</p>
+        <p class="num">54.4832&deg; N &middot; 3.1104&deg; W &middot; 612 m</p>
+      </div>
+      <div>
+        <h2>Visit</h2>
+        <ul>
+          <li><a href="visit.html">Plan your visit</a></li>
+          <li><a href="whats-on.html">What&rsquo;s on</a></li>
+          <li><a href="exhibitions.html">Exhibitions</a></li>
+          <li><a href="tickets.html">Tickets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>The observatory</h2>
+        <ul>
+          <li><a href="sky-tonight.html">Sky tonight</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="learning.html">Learning</a></li>
+          <li><a href="about.html">About VELA</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Support</h2>
+        <ul>
+          <li><a href="membership.html">Membership</a></li>
+          <li><a href="membership.html#patrons">Patrons</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="about.html#access">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__fine">
+      <p>&copy; <span data-year>2026</span> VELA Observatory &amp; Sky Centre, an independent
+        charitable trust. Telescope sessions are weather-dependent and refunded in full if
+        cloud stops the session going ahead.</p>
+      <p><a href="about.html#legal">Terms &amp; privacy</a> &middot;
+         <a href="about.html#access">Accessibility</a> &middot;
+         <a href="contact.html">Press &amp; media</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/sky.js"></script>
+<script src="js/stars.js"></script>
+<script src="js/store.js"></script>
+<script src="js/render.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/whats-on.js"></script>
+</body>
+</html>

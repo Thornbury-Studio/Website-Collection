@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'">
+  <title>About — VELA Observatory &amp; Sky Centre</title>
+  <meta name="description" content="VELA Observatory & Sky Centre: founded 1963, public since 1998, an independent charitable trust on Hallow Fell. Access statement, terms and privacy.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/about.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About — VELA Observatory">
+  <meta property="og:description" content="VELA Observatory & Sky Centre: founded 1963, public since 1998, an independent charitable trust on Hallow Fell. Access statement, terms and privacy.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/img/plates.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About — VELA Observatory">
+  <meta name="twitter:description" content="VELA Observatory & Sky Centre: founded 1963, public since 1998, an independent charitable trust on Hallow Fell. Access statement, terms and privacy.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/img/plates.webp">
+  <meta name="theme-color" content="#f2eee6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="tonight">
+    <div class="wrap">
+      <p class="tonight__in" id="tonight">
+        <span class="tonight__item"><span class="tonight__dot" aria-hidden="true"></span>Reading tonight&rsquo;s sky&hellip;</span>
+      </p>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <a class="mark" href="index.html">
+      <span class="mark__word">VELA</span>
+      <span class="mark__sub">Observatory &amp; Sky Centre</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="sky-tonight.html">Sky tonight</a>
+      <a href="whats-on.html">What&rsquo;s on</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="visit.html">Visit</a>
+      <a href="learning.html">Learning</a>
+      <a href="membership.html">Membership</a>
+    </nav>
+    <div class="bar__tools">
+      <button class="vision" id="visionBtn" type="button" aria-pressed="false">
+        <span class="vision__led" aria-hidden="true"></span>
+        <span class="vision__txt">Red light</span>
+      </button>
+      <a class="basket-btn" id="basketBtn" href="tickets.html" data-empty="1">
+        <span class="basket-btn__txt">Tickets</span>
+        <span class="basket-btn__n" id="basketCount">0</span>
+      </a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="sky-tonight.html">Sky tonight</a>
+      <a href="whats-on.html">What&rsquo;s on</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="visit.html">Visit</a>
+      <a href="learning.html">Learning</a>
+      <a href="research.html">Research</a>
+      <a href="membership.html">Membership</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="bay--top">
+    <div class="wrap">
+      <p class="label">About</p>
+      <h1>VELA</h1>
+      <p class="lede prose">An independent charitable trust running a working observatory and a
+        public sky centre on Hallow Fell, in west Cumbria.</p>
+    </div>
+  </section>
+
+  <section class="bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div class="prose">
+          <h2>How it got here</h2>
+          <p>The site began in 1963 as an outstation, chosen for the least light-polluted ground
+            within reach of a university that had run out of usable sky at home. For thirty-five
+            years it was three huts and a transit instrument, and the public were not invited.</p>
+          <p>The university withdrew in 1996. Rather than let the site close, the staff and a
+            group of local members set up the trust that still runs it, and opened to visitors in
+            1998 &mdash; on the argument that a dark sky nobody is allowed to look at is not
+            really being protected by anyone.</p>
+          <p>The planetarium was added in 2004, the 1.2&nbsp;metre replaced the original 0.6 in
+            2019, and the 1908 Cooke refractor was restored the same year.</p>
+
+          <h2>How it is run</h2>
+          <p>VELA is an independent charitable trust with nine trustees, four of them elected by
+            the membership. It takes no regular public funding: admissions cover the building,
+            membership and donations cover the science and the schools programme.</p>
+          <p>Fourteen people work here, six of them part-time, plus about forty volunteers who do
+            everything from plate digitisation to standing on a cold terrace explaining what a
+            globular cluster is for the ninetieth time.</p>
+        </div>
+        <figure class="fig">
+          <img src="img/plates.webp" width="1200" height="900" loading="lazy" decoding="async"
+               alt="A photographic plate archive: a wall of shallow wooden drawers partly open, with a large glass plate of a dense star field standing lit on a light box beside cotton gloves and a loupe.">
+          <figcaption>The plate room. Eleven thousand four hundred pieces of glass, and the reason
+            the trust exists at all.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="bay night-bay" id="dark">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="head__mark"><span class="head__no">01</span><span class="label">The pledge</span></div>
+          <h2>What we do about the light</h2>
+        </div>
+        <p>Protecting a dark sky is mostly unglamorous committee work, and it is the single most
+          useful thing this observatory does.</p>
+      </div>
+      <div class="cols cols--2">
+        <div class="prose">
+          <p>Every external light on this site is shielded, below 2700&nbsp;K, on a timer, and
+            aimed downward. The car park lighting goes off entirely on telescope nights. We
+            measure our own contribution to sky glow and publish it with everything else.</p>
+          <p>Beyond the boundary we work with the neighbouring parishes on street lighting
+            replacement. Three have now converted to shielded warm fittings, which is worth more
+            to the sky above this fell than any instrument we could buy.</p>
+        </div>
+        <div class="prose">
+          <p>If you are a parish council, a landowner or a business within about twenty kilometres
+            and you are replacing lighting, talk to us first. We will survey it, model the effect
+            and write the specification, free.</p>
+          <p><a href="contact.html">Get in touch about lighting</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bay" id="access">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="head__mark"><span class="head__no">02</span><span class="label">Access</span></div>
+          <h2>Access statement</h2>
+        </div>
+        <p>Written plainly, and kept honest about what is not accessible as well as what is.</p>
+      </div>
+      <div class="cols cols--2">
+        <div class="prose">
+          <h3>Step-free</h3>
+          <p>The entrance, shop, Meridian Room, all four galleries, the planetarium and the
+            observing terrace are step-free throughout, with a level route from the accessible
+            parking bays. Accessible toilets by the entrance and by the dome.</p>
+          <h3>Not step-free</h3>
+          <p>The 1908 refractor is reached by fourteen stairs with a handrail and there is no
+            lift. The dome is a listed timber structure and there is nowhere to install one. A
+            live feed from its eyepiece runs on a screen in the Measuring Room during every
+            public session.</p>
+          <h3>Wheelchairs and seating</h3>
+          <p>Six wheelchair spaces in the planetarium, bookable with any show. Two manual
+            wheelchairs to borrow, free. Seating every thirty metres or so throughout, and folding
+            stools to take onto the terrace.</p>
+        </div>
+        <div class="prose">
+          <h3>Deaf and hard of hearing</h3>
+          <p>Hearing loop in the planetarium, the Ransome Room and at the ticket desk. Every dome
+            show is captioned. BSL-interpreted shows run on the first Sunday of the month at
+            13:00, and we will arrange an interpreter for any session with two weeks&rsquo; notice.</p>
+          <h3>Blind and partially sighted</h3>
+          <p>Audio description for all four galleries. A handling collection of instrument
+            replicas and three-dimensional prints of the Moon, Saturn and a spiral galaxy that are
+            genuinely worth touching. Assistance dogs welcome everywhere including the terrace.</p>
+          <h3>Relaxed and sensory</h3>
+          <p>Relaxed dome shows on the second Saturday of the month: lights up, sound down, free
+            movement, no minimum noise expectation. Ear defenders at the desk. A quiet room off
+            the Meridian Room with no timed access.</p>
+          <p>Carers and personal assistants are admitted free with the person they support, and
+            do not need a separate ticket.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bay" id="legal">
+    <div class="wrap wrap--tight">
+      <div class="head">
+        <div>
+          <div class="head__mark"><span class="head__no">03</span><span class="label">Terms</span></div>
+          <h2>Terms, tickets and privacy</h2>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Tickets and refunds</h3>
+        <p>Admission tickets are valid for the date shown and can be moved to another date up to
+          24&nbsp;hours beforehand at no charge. Dome show tickets are for the stated performance;
+          latecomers cannot be admitted once the dome is dark, for the obvious reason.</p>
+        <p>Telescope nights are weather-dependent. If a session is cancelled you are refunded in
+          full, automatically, within three working days &mdash; you do not need to contact us. If
+          a session is cut short by cloud after it has begun, you are offered a free rebooking
+          instead. Cancellation decisions are made by the duty astronomer by 16:00 on the day and
+          notified by email and text.</p>
+        <p>You may cancel any booking for a full refund up to 48&nbsp;hours before it starts.
+          Inside 48&nbsp;hours we can usually still move you to another date.</p>
+
+        <h3>On site</h3>
+        <p>Children under 16 must be accompanied by an adult, and under 12s cannot attend
+          telescope nights &mdash; they run late and get cold, and it is not enjoyable for them.
+          White light is not permitted past the terrace door. We may ask anyone using it to put it
+          away, and to leave if they will not.</p>
+        <p>The fell is exposed and the paths are unlit beyond the marked route. Please stay on the
+          marked route after dark.</p>
+
+        <h3>Privacy</h3>
+        <p>We collect only what a booking needs: your name, email, phone number if you give one,
+          and anything you tell us about access requirements. Access information is used to
+          arrange your visit and is deleted after it.</p>
+        <p>Payment is handled entirely by our payment provider. Card details never reach this
+          site and we do not store them.</p>
+        <p>This website sets no advertising or analytics cookies and there is no third-party
+          tracking on it. Your red-light preference and anything in your basket are kept in your
+          own browser&rsquo;s local storage, on your device, and are never sent to us. Clearing
+          your browser data removes them.</p>
+        <p>Booking records are kept for seven years for accounting purposes, then deleted. We do
+          not sell or share mailing lists. To see, correct or delete what we hold about you, email
+          <a href="contact.html">the office</a> and we will action it within a month.</p>
+
+        <h3>Copyright</h3>
+        <p>Observational data published by VELA &mdash; light curves, the digitised plate archive
+          and the sky-brightness series &mdash; is released for any use, including commercial, with
+          citation. Site text and photography are &copy; VELA Observatory &amp; Sky Centre unless
+          otherwise stated.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <span class="foot__mark">VELA</span>
+        <p>Observatory &amp; Sky Centre<br>Hallow Fell Road, Ravenglass<br>Cumbria CA18 1SQ</p>
+        <p class="num">54.4832&deg; N &middot; 3.1104&deg; W &middot; 612 m</p>
+      </div>
+      <div>
+        <h2>Visit</h2>
+        <ul>
+          <li><a href="visit.html">Plan your visit</a></li>
+          <li><a href="whats-on.html">What&rsquo;s on</a></li>
+          <li><a href="exhibitions.html">Exhibitions</a></li>
+          <li><a href="tickets.html">Tickets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>The observatory</h2>
+        <ul>
+          <li><a href="sky-tonight.html">Sky tonight</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="learning.html">Learning</a></li>
+          <li><a href="about.html">About VELA</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Support</h2>
+        <ul>
+          <li><a href="membership.html">Membership</a></li>
+          <li><a href="membership.html#patrons">Patrons</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="about.html#access">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__fine">
+      <p>&copy; <span data-year>2026</span> VELA Observatory &amp; Sky Centre, an independent
+        charitable trust. Telescope sessions are weather-dependent and refunded in full if
+        cloud stops the session going ahead.</p>
+      <p><a href="about.html#legal">Terms &amp; privacy</a> &middot;
+         <a href="about.html#access">Accessibility</a> &middot;
+         <a href="contact.html">Press &amp; media</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/sky.js"></script>
+<script src="js/stars.js"></script>
+<script src="js/store.js"></script>
+<script src="js/render.js"></script>
+<script src="js/ui.js"></script>
+
+</body>
+</html>

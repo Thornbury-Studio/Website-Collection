@@ -1,0 +1,1213 @@
+/* ==========================================================================
+   VELA — Observatory & Sky Centre
+
+   Two complete themes live here.
+
+   The default is the institution by day: warm paper, dense ink, one signal
+   red. The second is the dome at night — an astronomer's red-light mode, the
+   protocol observatories actually work under, because white light destroys
+   dark adaptation and takes twenty minutes to get back. It is set on <html>
+   as data-vision="night" and is a genuine theme, not a filter: every token
+   swaps, and photography is pushed to red monochrome so no white rectangle
+   can flash out of a page and undo the reader's night vision.
+
+   Every colour pair in both themes clears WCAG AA (4.5:1 body, 3:1 large and
+   non-text). The muted tones are the ones that fail in practice, so they were
+   measured rather than eyeballed.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Tokens
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Day — paper and ink */
+  --paper:        #f2eee6;
+  --paper-2:      #e9e3d8;
+  --paper-3:      #ddd5c7;
+  --ink:          #15171b;   /* 15.9:1 on paper */
+  --ink-2:        #33373f;   /* 10.4:1 */
+  --muted:        #5e5a52;   /*  5.9:1 — measured, not guessed */
+  --rule:         #cec5b4;
+  --rule-soft:    #e0d9cc;
+  --signal:       #b02f26;   /*  5.5:1 on paper */
+  --signal-deep:  #8a251e;
+  --signal-wash:  #f6e7e3;
+  /* The same accent, lifted for use on a dark ground. --signal itself is only
+     3.0:1 on --night, so dark sections swap to this. */
+  --signal-on-night:      #e2685a;   /* 5.9:1 on --night */
+  --signal-on-night-deep: #f08a7d;   /* 8.0:1 */
+  /* What goes on top of a signal-coloured fill. It cannot be hard-coded white:
+     the red lightens per theme, and white on the night accent is only 2.8:1. */
+  --on-signal:    #ffffff;   /* 6.4:1 on --signal */
+
+  /* Surfaces that are dark in both themes (the sky panels) */
+  --night:        #0b0d11;
+  --night-2:      #12151b;
+  --night-rule:   #262b34;
+  --on-night:     #eae6dd;   /* 14.7:1 on --night */
+  --on-night-mut: #9aa1ad;   /*  6.4:1 on --night */
+  --star:         #ffffff;
+  --star-warm:    #ffd9a8;
+  --star-cool:    #b9d4ff;
+  --plot:         #d9483a;
+
+  --shadow: 0 1px 2px rgba(21, 23, 27, .05), 0 8px 28px rgba(21, 23, 27, .07);
+  --shadow-lift: 0 2px 6px rgba(21, 23, 27, .08), 0 22px 54px rgba(21, 23, 27, .13);
+
+  --display: 'Spectral', Georgia, 'Times New Roman', serif;
+  --ui: 'Public Sans', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --mono: 'Azeret Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --wrap: 78rem;
+  --wrap-tight: 56rem;
+  --gutter: clamp(1.15rem, 4vw, 2.75rem);
+  --bay: clamp(3.75rem, 8vw, 7.5rem);
+
+  --radius: 2px;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* Red-light mode. Deep red on black is what a dome runs on. */
+[data-vision="night"] {
+  --paper:        #07070a;
+  --paper-2:      #0d0c0f;
+  --paper-3:      #141215;
+  --ink:          #ff3b2f;   /*  5.9:1 on --paper */
+  --ink-2:        #e64438;
+  --muted:        #d9483a;   /*  4.9:1 — the tone that decides this theme */
+  --rule:         #56201c;
+  --rule-soft:    #351512;
+  --signal:       #ff6a5c;
+  --signal-deep:  #ff8b80;
+  --signal-wash:  #1a0805;
+  --signal-on-night:      #ff6a5c;
+  --signal-on-night-deep: #ff8b80;
+  --on-signal:    #07070a;   /* 7.1:1 on the night accent */
+
+  --night:        #000000;
+  --night-2:      #080505;
+  --night-rule:   #4a1c18;
+  --on-night:     #ff3b2f;
+  --on-night-mut: #d9483a;
+  --star:         #ff6a5c;
+  --star-warm:    #ff8b80;
+  --star-cool:    #ff5548;
+  --plot:         #ff6a5c;
+
+  --shadow: none;
+  --shadow-lift: 0 0 0 1px #56201c;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset
+   -------------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* No overflow-x here. Hiding it masks real overflow — scrollWidth then
+     matches clientWidth while copy is silently clipped off the edge. */
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ui);
+  font-size: 1rem;
+  line-height: 1.62;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .28s var(--ease), color .28s var(--ease);
+}
+
+/* [hidden] must beat any class rule that sets display, or a toggled panel
+   reappears the moment it also carries a layout class. */
+[hidden] { display: none !important; }
+
+img, svg, video, canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;   /* load-bearing: without it a width/height attribute wins as
+                     the box narrows and every photo renders as a sliver */
+}
+
+a { color: inherit; }
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+::selection { background: var(--signal); color: var(--paper); }
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: .8rem 1.15rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip:focus { left: .5rem; top: .5rem; }
+
+.u-visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   3. Typography
+   -------------------------------------------------------------------------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.015em;
+  margin: 0 0 .5em;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2.35rem, 1.35rem + 4.4vw, 5rem); }
+h2 { font-size: clamp(1.85rem, 1.2rem + 2.6vw, 3.15rem); }
+h3 { font-size: clamp(1.25rem, 1.05rem + .85vw, 1.7rem); }
+h4 { font-size: 1.1rem; letter-spacing: -.005em; }
+
+p { margin: 0 0 1.15em; }
+p:last-child { margin-bottom: 0; }
+
+.lede {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 1.02rem + .6vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.prose { max-width: 40rem; }
+.prose h2 { margin-top: 2.2em; }
+.prose h3 { margin-top: 1.8em; }
+.prose > :first-child { margin-top: 0; }
+.prose a { color: var(--signal); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+.prose a:hover { color: var(--signal-deep); }
+.prose ul, .prose ol { margin: 0 0 1.15em; padding-left: 1.25rem; }
+.prose li { margin-bottom: .45em; }
+.prose li::marker { color: var(--signal); }
+
+/* The label used throughout for eyebrows, table heads and figure captions. */
+.label {
+  font-family: var(--mono);
+  font-size: .69rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.num {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+}
+
+.u-signal { color: var(--signal); }
+.u-mut { color: var(--muted); }
+
+/* --------------------------------------------------------------------------
+   4. Layout
+   -------------------------------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.wrap--tight { max-width: var(--wrap-tight); }
+
+.bay { padding-block: var(--bay); }
+.bay--top { padding-top: var(--bay); }
+.bay--half { padding-block: calc(var(--bay) * .55); }
+
+.rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+
+/* A numbered section head, the print-institution device the site leans on. */
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .9rem;
+  padding-top: 1.35rem;
+  border-top: 2px solid var(--ink);
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+.head__mark {
+  display: flex;
+  align-items: baseline;
+  gap: .8rem;
+}
+.head__no {
+  font-family: var(--mono);
+  font-size: .69rem;
+  letter-spacing: .13em;
+  color: var(--signal);
+  font-weight: 500;
+}
+.head p { max-width: 44rem; color: var(--muted); margin: 0; }
+
+@media (min-width: 56rem) {
+  .head {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+  }
+  .head h2 { margin-bottom: 0; }
+}
+
+.cols {
+  display: grid;
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+}
+/* Two-up can stay on auto-fit: any child count divides by one or two, so there
+   is no arrangement that strands one. */
+.cols--2 { grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); }
+
+/* Fixed-count groups cannot. auto-fit always passes through a two-track stage
+   on the way down, and two tracks leave the third card alone on its own row —
+   which is exactly what happened to these at 768px, and to the membership tiers
+   at 1024px where four minimums plus three gaps came to 939px against 936px of
+   room. Stepping explicitly through counts that divide is the only arrangement
+   that is always full. */
+.cols--3 { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 46rem) { .cols--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.cols--tiers { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 40rem) { .cols--tiers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 68rem) { .cols--tiers { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* --------------------------------------------------------------------------
+   5. Header
+   -------------------------------------------------------------------------- */
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* The live strip: what the sky is doing right now, computed on every page. */
+.tonight {
+  background: var(--night);
+  color: var(--on-night-mut);
+  border-bottom: 1px solid var(--night-rule);
+  font-family: var(--mono);
+  font-size: .69rem;
+  letter-spacing: .05em;
+}
+.tonight__in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem 1.35rem;
+  padding-block: .5rem;
+  min-height: 2.1rem;
+}
+.tonight b {
+  color: var(--on-night);
+  font-weight: 500;
+}
+.tonight__dot {
+  display: inline-block;
+  width: .42rem; height: .42rem;
+  border-radius: 50%;
+  background: var(--plot);
+  margin-right: .5rem;
+  vertical-align: baseline;
+}
+.tonight__item { display: flex; align-items: center; gap: .4rem; }
+.tonight__sep { color: var(--on-night-mut); }
+@media (max-width: 46rem) { .tonight__item--wide { display: none; } }
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-block: .85rem;
+}
+
+.mark {
+  display: flex;
+  align-items: baseline;
+  gap: .55rem;
+  text-decoration: none;
+  margin-right: auto;
+  flex-shrink: 0;
+}
+.mark__word {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  line-height: 1;
+}
+.mark__sub {
+  display: none;
+  font-family: var(--mono);
+  font-size: .6rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+@media (min-width: 52rem) { .mark__sub { display: block; } }
+
+.nav {
+  display: none;
+  gap: clamp(.9rem, 1.9vw, 1.75rem);
+  align-items: center;
+}
+.nav a {
+  text-decoration: none;
+  font-size: .875rem;
+  font-weight: 500;
+  padding-block: .35rem;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: border-color .18s var(--ease), color .18s var(--ease);
+}
+.nav a:hover { color: var(--signal); }
+.nav a[aria-current="page"] { border-bottom-color: var(--signal); }
+@media (min-width: 62rem) { .nav { display: flex; } }
+
+.bar__tools { display: flex; align-items: center; gap: .5rem; }
+
+/* Red-light switch */
+.vision {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  padding: .38rem .7rem;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: border-color .18s var(--ease), color .18s var(--ease);
+}
+.vision:hover { border-color: var(--signal); color: var(--signal); }
+.vision__led {
+  width: .5rem; height: .5rem;
+  border-radius: 50%;
+  background: var(--rule);
+  transition: background-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.vision[aria-pressed="true"] { border-color: var(--signal); color: var(--signal); }
+.vision[aria-pressed="true"] .vision__led {
+  background: var(--signal);
+  box-shadow: 0 0 0 3px rgba(255, 59, 47, .22);
+}
+.vision__txt { display: none; }
+@media (min-width: 44rem) { .vision__txt { display: inline; } }
+
+.burger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem; height: 2.5rem;
+  border: 1px solid var(--rule);
+  background: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.burger svg { width: 1.1rem; height: 1.1rem; }
+@media (min-width: 62rem) { .burger { display: none; } }
+
+.drawer {
+  border-top: 1px solid var(--rule);
+  background: var(--paper-2);
+}
+.drawer nav {
+  display: grid;
+  padding-block: .6rem;
+}
+.drawer a {
+  text-decoration: none;
+  padding: .72rem 0;
+  font-weight: 500;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.drawer a:last-child { border-bottom: 0; }
+.drawer a[aria-current="page"] { color: var(--signal); }
+@media (min-width: 62rem) { .drawer { display: none !important; } }
+
+/* --------------------------------------------------------------------------
+   6. Buttons
+   -------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  padding: .78rem 1.4rem;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: .9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .18s var(--ease), border-color .18s var(--ease),
+              color .18s var(--ease), transform .18s var(--ease);
+}
+.btn:hover { background: var(--signal); border-color: var(--signal); color: var(--on-signal); }
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+
+.btn--ghost { background: none; color: var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+.btn--signal { background: var(--signal); border-color: var(--signal); color: var(--on-signal); }
+.btn--signal:hover { background: var(--signal-deep); border-color: var(--signal-deep); }
+
+.btn--on-night { border-color: var(--on-night); background: none; color: var(--on-night); }
+.btn--on-night:hover { background: var(--on-night); color: var(--night); }
+
+.btn--sm { padding: .5rem .9rem; font-size: .8rem; }
+.btn[disabled] { opacity: .42; pointer-events: none; }
+
+.btn-row { display: flex; flex-wrap: wrap; gap: .7rem; }
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-weight: 600;
+  font-size: .9rem;
+  text-decoration: none;
+  color: var(--signal);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+.arrow svg { width: .95rem; height: .95rem; transition: transform .2s var(--ease); }
+.arrow:hover svg { transform: translateX(3px); }
+
+/* --------------------------------------------------------------------------
+   7. Hero
+   -------------------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  background: var(--night);
+  color: var(--on-night);
+  overflow: hidden;   /* scoped to this section, never to body */
+  isolation: isolate;
+}
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.hero__media img, .hero__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .58;
+}
+.hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, var(--night) 2%, rgba(11, 13, 17, .35) 46%, rgba(11, 13, 17, .68) 100%);
+}
+.hero__in {
+  position: relative;
+  padding-block: clamp(4.5rem, 13vw, 9.5rem);
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+}
+.hero h1 { color: var(--on-night); margin-bottom: .28em; }
+.hero__lede { color: var(--on-night); opacity: .88; max-width: 34rem; }
+.hero .label { color: var(--on-night-mut); }
+
+@media (min-width: 60rem) {
+  .hero__in { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: end; }
+}
+
+/* The readout card sitting on the hero — real numbers, updated live. */
+.readout {
+  background: rgba(7, 9, 12, .82);
+  border: 1px solid var(--night-rule);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  backdrop-filter: blur(6px);
+}
+[data-vision="night"] .readout { background: #000; }
+.readout__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: .75rem;
+  margin-bottom: .95rem;
+  border-bottom: 1px solid var(--night-rule);
+}
+.readout dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .6rem 1rem;
+  align-items: baseline;
+}
+.readout dt {
+  font-family: var(--mono);
+  font-size: .66rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--on-night-mut);
+}
+.readout dd {
+  margin: 0;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: .88rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--on-night);
+}
+.readout dd b { color: var(--plot); font-weight: 500; }
+.readout__foot {
+  margin-top: 1.05rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--night-rule);
+  font-size: .78rem;
+  color: var(--on-night-mut);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   8. Sky map
+   -------------------------------------------------------------------------- */
+
+.sky {
+  position: relative;
+  background: var(--night);
+  border: 1px solid var(--night-rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.sky__canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  touch-action: manipulation;
+}
+.sky__hint {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: .6rem .85rem;
+  font-family: var(--mono);
+  font-size: .66rem;
+  letter-spacing: .06em;
+  color: var(--on-night-mut);
+  background: linear-gradient(to top, rgba(7, 9, 12, .92), transparent);
+  pointer-events: none;
+}
+.sky__tip {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  background: var(--night-2);
+  border: 1px solid var(--night-rule);
+  border-radius: var(--radius);
+  padding: .5rem .68rem;
+  font-family: var(--mono);
+  font-size: .7rem;
+  line-height: 1.45;
+  color: var(--on-night);
+  white-space: nowrap;
+  transform: translate(-50%, -125%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .55);
+}
+.sky__tip b { color: var(--plot); font-weight: 500; display: block; }
+
+.sky-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  border: 1px solid var(--rule);
+  background: none;
+  border-radius: 100px;
+  padding: .4rem .82rem;
+  font-family: var(--mono);
+  font-size: .66rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color .16s var(--ease), color .16s var(--ease),
+              background-color .16s var(--ease);
+}
+.chip:hover { border-color: var(--signal); color: var(--signal); }
+.chip[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+[data-vision="night"] .chip[aria-pressed="true"] {
+  background: var(--signal-wash);
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+.slider {
+  flex: 1 1 12rem;
+  min-width: 9rem;
+  accent-color: var(--signal);
+}
+
+/* --------------------------------------------------------------------------
+   9. Cards, media, figures
+   -------------------------------------------------------------------------- */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color .2s var(--ease), transform .2s var(--ease),
+              box-shadow .2s var(--ease);
+}
+a.card:hover {
+  border-color: var(--ink);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+.card__media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--night);
+}
+.card__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .6s var(--ease);
+}
+a.card:hover .card__media img { transform: scale(1.035); }
+.card__body {
+  padding: 1.2rem 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  flex: 1;
+}
+.card__body h3 { margin: 0; }
+.card__body p { color: var(--muted); font-size: .92rem; margin: 0; }
+.card__foot {
+  margin-top: auto;
+  padding-top: .9rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.tagset { display: flex; flex-wrap: wrap; gap: .4rem; }
+.tag {
+  font-family: var(--mono);
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  padding: .22rem .58rem;
+  color: var(--muted);
+}
+.tag--signal { border-color: var(--signal); color: var(--signal); }
+.tag--solid { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+figure { margin: 0; }
+.fig img {
+  width: 100%;
+  border-radius: var(--radius);
+}
+.fig figcaption {
+  margin-top: .7rem;
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .04em;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.frame {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--night);
+}
+
+/* In red-light mode every photograph goes red monochrome. A white-ish image
+   left alone would flare out of the page and undo the reader's adaptation,
+   which is the whole point of the mode. */
+[data-vision="night"] img:not(.no-vision),
+[data-vision="night"] video {
+  filter: grayscale(1) brightness(.52) sepia(1) hue-rotate(-28deg) saturate(5.5);
+}
+
+/* -------------------------------------------------------------------------
+   10. Programme list
+   ------------------------------------------------------------------------- */
+
+.session {
+  display: grid;
+  gap: .85rem 1.5rem;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+  align-items: start;
+}
+.session:first-of-type { border-top: 1px solid var(--rule); }
+.session__when {
+  font-family: var(--mono);
+  font-size: .8rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.session__when b { display: block; font-weight: 500; font-size: 1.05rem; }
+.session__when span { color: var(--muted); font-size: .72rem; letter-spacing: .06em; }
+.session__body h3 { margin-bottom: .3rem; font-size: 1.2rem; }
+.session__body p { color: var(--muted); font-size: .9rem; margin: .35rem 0 0; max-width: 42rem; }
+.session__side {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  align-items: flex-start;
+}
+.session__price {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+.session__price span { color: var(--muted); font-size: .72rem; display: block; }
+.session--gone { opacity: .55; }
+
+@media (min-width: 48rem) {
+  .session { grid-template-columns: 9rem minmax(0, 1fr) 11rem; }
+  .session__side { align-items: flex-end; text-align: right; }
+}
+
+.avail {
+  font-family: var(--mono);
+  font-size: .66rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: .38rem;
+}
+.avail::before {
+  content: '';
+  width: .45rem; height: .45rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+.avail--ok { color: #2f6b45; }
+.avail--low { color: var(--signal); }
+.avail--none { color: var(--muted); }
+[data-vision="night"] .avail--ok { color: var(--muted); }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  align-items: center;
+  padding-bottom: 1.35rem;
+}
+
+/* -------------------------------------------------------------------------
+   11. Tables and data
+   ------------------------------------------------------------------------- */
+
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .875rem;
+  min-width: 34rem;
+}
+table.data caption {
+  text-align: left;
+  padding-bottom: .8rem;
+  color: var(--muted);
+  font-size: .82rem;
+}
+table.data th, table.data td {
+  text-align: left;
+  padding: .7rem .9rem .7rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+  vertical-align: baseline;
+}
+table.data thead th {
+  font-family: var(--mono);
+  font-size: .66rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  border-bottom: 1px solid var(--rule);
+}
+table.data td.n, table.data th.n {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  padding-right: 0;
+}
+table.data tbody tr:last-child td { border-bottom: 0; }
+
+/* Same rule as the card rows: step through counts that divide the number of
+   items, never through one that does not. The default carries four. */
+.stats {
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 34rem) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 62rem) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.stats--3 { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 46rem) { .stats--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Four items inside a half-width column: a viewport media query cannot see that
+   the column is narrow, so this one stays two-up at every size above mobile. */
+.stats--2 { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 30rem) { .stats--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 62rem) { .stats--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.stat { background: var(--paper); padding: 1.25rem 1.15rem; }
+.stat b {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.02em;
+  margin-bottom: .35rem;
+}
+.stat span { font-size: .8rem; color: var(--muted); line-height: 1.4; display: block; }
+/* A stat whose value is a phrase rather than a figure — "Waxing crescent" at
+   display size would wrap to three lines in a narrow track. */
+.stat--word b { font-size: clamp(1.15rem, 1rem + .7vw, 1.55rem); line-height: 1.15; }
+
+/* -------------------------------------------------------------------------
+   12. Forms
+   ------------------------------------------------------------------------- */
+
+.field { display: grid; gap: .4rem; margin-bottom: 1.1rem; }
+.field > label { font-size: .84rem; font-weight: 600; }
+.field__hint { font-size: .78rem; color: var(--muted); }
+
+.input, select.input, textarea.input {
+  width: 100%;
+  padding: .72rem .85rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  transition: border-color .16s var(--ease);
+}
+.input:focus { border-color: var(--signal); }
+textarea.input { min-height: 8rem; resize: vertical; }
+select.input {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 1.1rem) 55%, calc(100% - .72rem) 55%;
+  background-size: .38rem .38rem, .38rem .38rem;
+  background-repeat: no-repeat;
+  padding-right: 2.2rem;
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.stepper button {
+  width: 2.3rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.stepper button:hover { background: var(--paper-2); color: var(--signal); }
+.stepper output {
+  min-width: 2.4rem;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: .9rem;
+  border-inline: 1px solid var(--rule);
+}
+
+.note {
+  border-left: 2px solid var(--signal);
+  background: var(--signal-wash);
+  padding: 1rem 1.15rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: .9rem;
+}
+.note p:last-child { margin-bottom: 0; }
+.note strong { color: var(--signal-deep); }
+
+/* -------------------------------------------------------------------------
+   13. Basket
+   ------------------------------------------------------------------------- */
+
+.basket-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  padding: .45rem .8rem;
+  text-decoration: none;
+  font-size: .82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color .18s var(--ease), color .18s var(--ease);
+}
+.basket-btn:hover { background: var(--ink); color: var(--paper); }
+.basket-btn__n {
+  font-family: var(--mono);
+  font-size: .7rem;
+  background: var(--signal);
+  color: var(--on-signal);
+  border-radius: 100px;
+  min-width: 1.32rem;
+  padding: .05rem .3rem;
+  text-align: center;
+}
+/* An empty badge drops its fill rather than tinting itself: muted-on-rule came
+   out at 4.0:1 in daylight and 3.1:1 in red-light mode. */
+.basket-btn[data-empty="1"] .basket-btn__n { background: none; color: inherit; }
+.basket-btn__txt { display: none; }
+@media (min-width: 38rem) { .basket-btn__txt { display: inline; } }
+
+.line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .5rem 1.25rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+  align-items: start;
+}
+.line__title { font-weight: 600; }
+.line__meta { font-size: .82rem; color: var(--muted); font-family: var(--mono); }
+.line__sum { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+.line__ctl { display: flex; gap: .6rem; align-items: center; margin-top: .5rem; }
+
+.link-quiet {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-size: .78rem;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+.link-quiet:hover { color: var(--signal); }
+
+.totals {
+  display: grid;
+  gap: .55rem;
+  padding-top: 1.15rem;
+}
+.totals__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+}
+.totals__row span:first-child { font-family: var(--ui); color: var(--muted); }
+.totals__row--sum {
+  border-top: 2px solid var(--ink);
+  margin-top: .5rem;
+  padding-top: .85rem;
+  font-size: 1.15rem;
+}
+.totals__row--sum span:first-child { color: var(--ink); font-weight: 600; }
+.totals__row--save span:last-child { color: var(--signal); }
+
+.empty {
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius);
+  padding: clamp(2rem, 6vw, 3.5rem);
+  text-align: center;
+  color: var(--muted);
+}
+
+/* -------------------------------------------------------------------------
+   14. Panels on the night ground
+   ------------------------------------------------------------------------- */
+
+/* A dark section remaps the tokens rather than restating each element, which is
+   what an earlier version did — and it missed figcaption, caption and prose
+   links, leaving --muted grey and --signal deep red sitting on near-black at
+   2.8:1 and 3.0:1. Anything that reads a token is now correct on this ground by
+   construction, including elements added later. */
+.night-bay {
+  --paper: var(--night);
+  --paper-2: var(--night-2);
+  --paper-3: var(--night-2);
+  --ink: var(--on-night);
+  --ink-2: var(--on-night);
+  --muted: var(--on-night-mut);
+  --rule: var(--night-rule);
+  --rule-soft: var(--night-rule);
+  --signal: var(--signal-on-night);
+  --signal-deep: var(--signal-on-night-deep);
+  /* The lifted red is light enough that white sits on it at 3.3:1, so anything
+     filled with the accent in here takes dark text instead. */
+  --on-signal: var(--night);
+  background: var(--night);
+  color: var(--on-night);
+}
+.night-bay .head { border-top-color: var(--on-night); }
+.night-bay table.data thead th { border-bottom-color: var(--on-night-mut); }
+
+/* -------------------------------------------------------------------------
+   15. Footer
+   ------------------------------------------------------------------------- */
+
+.foot {
+  background: var(--night);
+  color: var(--on-night-mut);
+  padding-block: clamp(3rem, 7vw, 5rem) 2rem;
+  font-size: .875rem;
+}
+.foot a { color: var(--on-night); text-decoration: none; }
+.foot a:hover { color: var(--plot); }
+.foot__grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--night-rule);
+}
+.foot h2, .foot h3 {
+  color: var(--on-night);
+  font-family: var(--mono);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.foot__mark {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--on-night);
+  display: block;
+  margin-bottom: .6rem;
+}
+.foot__fine {
+  padding-top: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 1.75rem;
+  font-size: .78rem;
+  line-height: 1.6;
+}
+.foot__fine p { margin: 0; max-width: 40rem; }
+
+/* -------------------------------------------------------------------------
+   16. Motion
+   ------------------------------------------------------------------------- */
+
+/* Reveals only exist once JS has added .js-anim to <html>. If the observer
+   never fires — a hidden tab, a blocked script — the page is simply visible,
+   which is the correct failure. */
+.js-anim .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+}
+.js-anim .reveal.is-in { opacity: 1; transform: none; }
+.js-anim .reveal--d1 { transition-delay: .08s; }
+.js-anim .reveal--d2 { transition-delay: .16s; }
+.js-anim .reveal--d3 { transition-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js-anim .reveal { opacity: 1; transform: none; }
+}
+
+/* -------------------------------------------------------------------------
+   17. Print
+   ------------------------------------------------------------------------- */
+
+@media print {
+  .top, .foot, .sky-controls, .burger, .vision, .basket-btn, .skip { display: none !important; }
+  body { background: #fff; color: #000; }
+  .hero { background: #fff; color: #000; }
+  .hero__media { display: none; }
+  .hero h1, .hero__lede { color: #000; }
+  a[href^="http"]::after { content: ' (' attr(href) ')'; font-size: .8em; }
+}

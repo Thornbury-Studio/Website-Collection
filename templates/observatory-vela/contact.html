@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'">
+  <title>Contact — VELA Observatory &amp; Sky Centre</title>
+  <meta name="description" content="How to reach VELA Observatory & Sky Centre: the office, group and school bookings, data and collaboration requests, lighting advice and press enquiries.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/contact.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact — VELA Observatory">
+  <meta property="og:description" content="How to reach VELA Observatory & Sky Centre: the office, group and school bookings, data and collaboration requests, lighting advice and press enquiries.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/img/dome-night.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact — VELA Observatory">
+  <meta name="twitter:description" content="How to reach VELA Observatory & Sky Centre: the office, group and school bookings, data and collaboration requests, lighting advice and press enquiries.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/img/dome-night.webp">
+  <meta name="theme-color" content="#f2eee6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="tonight">
+    <div class="wrap">
+      <p class="tonight__in" id="tonight">
+        <span class="tonight__item"><span class="tonight__dot" aria-hidden="true"></span>Reading tonight&rsquo;s sky&hellip;</span>
+      </p>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <a class="mark" href="index.html">
+      <span class="mark__word">VELA</span>
+      <span class="mark__sub">Observatory &amp; Sky Centre</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="sky-tonight.html">Sky tonight</a>
+      <a href="whats-on.html">What&rsquo;s on</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="visit.html">Visit</a>
+      <a href="learning.html">Learning</a>
+      <a href="membership.html">Membership</a>
+    </nav>
+    <div class="bar__tools">
+      <button class="vision" id="visionBtn" type="button" aria-pressed="false">
+        <span class="vision__led" aria-hidden="true"></span>
+        <span class="vision__txt">Red light</span>
+      </button>
+      <a class="basket-btn" id="basketBtn" href="tickets.html" data-empty="1">
+        <span class="basket-btn__txt">Tickets</span>
+        <span class="basket-btn__n" id="basketCount">0</span>
+      </a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="sky-tonight.html">Sky tonight</a>
+      <a href="whats-on.html">What&rsquo;s on</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="visit.html">Visit</a>
+      <a href="learning.html">Learning</a>
+      <a href="research.html">Research</a>
+      <a href="membership.html">Membership</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="bay--top">
+    <div class="wrap">
+      <p class="label">Contact</p>
+      <h1>Get in touch</h1>
+      <p class="lede prose">Fourteen people work here and we answer our own email. Expect a reply
+        within two working days, or the same day if it is about a booking this week.</p>
+    </div>
+  </section>
+
+  <section class="bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div>
+          <form id="contactForm" novalidate>
+            <div class="field">
+              <label for="fSubject">What is it about</label>
+              <select class="input" id="fSubject" name="subject">
+                <option value="visit">A visit or a booking</option>
+                <option value="access">Access requirements</option>
+                <option value="schools">Schools and group visits</option>
+                <option value="data">Data, archive or collaboration</option>
+                <option value="lighting">Lighting advice for a parish or business</option>
+                <option value="patron">Patronage and giving</option>
+                <option value="press">Press and media</option>
+              </select>
+            </div>
+            <div class="cols cols--2">
+              <div class="field">
+                <label for="fName">Your name</label>
+                <input class="input" id="fName" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="fEmail">Email</label>
+                <input class="input" id="fEmail" name="email" type="email" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="fMessage">Message</label>
+              <textarea class="input" id="fMessage" name="message" rows="6" required></textarea>
+            </div>
+            <p class="btn-row"><button class="btn btn--signal" type="submit">Send</button></p>
+            <p class="field__hint" id="formHint" role="status" aria-live="polite">We use what you
+              send only to answer you.</p>
+          </form>
+          <div id="contactDone" hidden></div>
+        </div>
+
+        <div class="prose">
+          <h2>Directly</h2>
+          <p><b>Office and bookings</b><br>
+            <a href="tel:+441229717400">+44 1229 717 400</a><br>
+            Monday to Friday, 09:00&ndash;16:30</p>
+          <p><b>Post</b><br>
+            VELA Observatory &amp; Sky Centre<br>
+            Hallow Fell Road<br>
+            Ravenglass<br>
+            Cumbria CA18 1SQ</p>
+          <p><b>Where that is</b><br>
+            <span class="num">54.4832&deg; N, 3.1104&deg; W</span><br>
+            612&nbsp;m above sea level</p>
+          <h3>On the night</h3>
+          <p>If you are already on your way to a telescope night and something has gone wrong
+            &mdash; the road, the weather, your train &mdash; call the office number and it
+            diverts to the duty astronomer after 18:00.</p>
+          <h3>Weather cancellations</h3>
+          <p>You do not need to contact us. The decision is made by 16:00 and you will get an
+            email and a text either way, including when it <em>is</em> going ahead.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bay night-bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <figure class="fig">
+          <img src="img/dome-night.webp" width="1600" height="900" loading="lazy" decoding="async"
+               alt="Inside the observatory dome at night: a large reflecting telescope angled up through the open shutter slit, with a wedge of star field visible and the curved dome wall lit only by dim red lamps.">
+        </figure>
+        <div class="prose">
+          <h2>Press and media</h2>
+          <p>We are glad to talk to journalists, and glad to host filming, but the terrace is
+            genuinely dark and a lighting rig on it would end the session for twenty-four paying
+            visitors. Daytime filming is straightforward; night filming needs planning and a
+            conversation.</p>
+          <p>High-resolution images of the site, the instruments and our own astronomical data are
+            available on request for editorial use.</p>
+          <p>For anything with a deadline inside 48 hours, call the office rather than emailing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <span class="foot__mark">VELA</span>
+        <p>Observatory &amp; Sky Centre<br>Hallow Fell Road, Ravenglass<br>Cumbria CA18 1SQ</p>
+        <p class="num">54.4832&deg; N &middot; 3.1104&deg; W &middot; 612 m</p>
+      </div>
+      <div>
+        <h2>Visit</h2>
+        <ul>
+          <li><a href="visit.html">Plan your visit</a></li>
+          <li><a href="whats-on.html">What&rsquo;s on</a></li>
+          <li><a href="exhibitions.html">Exhibitions</a></li>
+          <li><a href="tickets.html">Tickets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>The observatory</h2>
+        <ul>
+          <li><a href="sky-tonight.html">Sky tonight</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="learning.html">Learning</a></li>
+          <li><a href="about.html">About VELA</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Support</h2>
+        <ul>
+          <li><a href="membership.html">Membership</a></li>
+          <li><a href="membership.html#patrons">Patrons</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="about.html#access">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__fine">
+      <p>&copy; <span data-year>2026</span> VELA Observatory &amp; Sky Centre, an independent
+        charitable trust. Telescope sessions are weather-dependent and refunded in full if
+        cloud stops the session going ahead.</p>
+      <p><a href="about.html#legal">Terms &amp; privacy</a> &middot;
+         <a href="about.html#access">Accessibility</a> &middot;
+         <a href="contact.html">Press &amp; media</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/sky.js"></script>
+<script src="js/stars.js"></script>
+<script src="js/store.js"></script>
+<script src="js/render.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'">
+  <title>Sky Tonight — VELA Observatory &amp; Sky Centre</title>
+  <meta name="description" content="A live all-sky map for Hallow Fell, with the twilight ladder, the Moon, the planets and the length of tonight's astronomical darkness, all computed for this latitude.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/sky-tonight.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sky Tonight — VELA Observatory">
+  <meta property="og:description" content="A live all-sky map computed for Hallow Fell, 54.4832° N.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/img/pleiades.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sky Tonight — VELA Observatory">
+  <meta name="twitter:description" content="A live all-sky map computed for Hallow Fell, 54.4832° N.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/observatory-vela/img/pleiades.webp">
+  <meta name="theme-color" content="#f2eee6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="tonight">
+    <div class="wrap">
+      <p class="tonight__in" id="tonight">
+        <span class="tonight__item"><span class="tonight__dot" aria-hidden="true"></span>Reading tonight&rsquo;s sky&hellip;</span>
+      </p>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <a class="mark" href="index.html">
+      <span class="mark__word">VELA</span>
+      <span class="mark__sub">Observatory &amp; Sky Centre</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="sky-tonight.html" aria-current="page">Sky tonight</a>
+      <a href="whats-on.html">What&rsquo;s on</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="visit.html">Visit</a>
+      <a href="learning.html">Learning</a>
+      <a href="membership.html">Membership</a>
+    </nav>
+    <div class="bar__tools">
+      <button class="vision" id="visionBtn" type="button" aria-pressed="false">
+        <span class="vision__led" aria-hidden="true"></span>
+        <span class="vision__txt">Red light</span>
+      </button>
+      <a class="basket-btn" id="basketBtn" href="tickets.html" data-empty="1">
+        <span class="basket-btn__txt">Tickets</span>
+        <span class="basket-btn__n" id="basketCount">0</span>
+      </a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="sky-tonight.html" aria-current="page">Sky tonight</a>
+      <a href="whats-on.html">What&rsquo;s on</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="visit.html">Visit</a>
+      <a href="learning.html">Learning</a>
+      <a href="research.html">Research</a>
+      <a href="membership.html">Membership</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="bay--top">
+    <div class="wrap">
+      <p class="label">Live &middot; computed for 54.4832&deg; N, 3.1104&deg; W</p>
+      <h1>Sky tonight</h1>
+      <p class="lede prose">Everything on this page is worked out from your device clock and this
+        observatory&rsquo;s coordinates &mdash; star positions, the Moon&rsquo;s phase, where the
+        planets are and how long the darkness lasts. Nothing here was written down in advance.</p>
+    </div>
+  </section>
+
+  <!-- ============================ the map ============================ -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div>
+          <div class="sky">
+            <canvas class="sky__canvas" id="skyCanvas" width="760" height="760"
+                    tabindex="0" role="img"
+                    aria-label="An all-sky map of the sky above the observatory. Press the left and right arrow keys to step through the named objects on it; each one is announced below the map.">
+            </canvas>
+            <div class="sky__tip" id="skyTip" hidden></div>
+            <p class="sky__hint">North at top, east at left &middot; the rim is the horizon</p>
+          </div>
+
+          <div class="sky-controls">
+            <button class="chip" id="cFigures" type="button" aria-pressed="true">Constellations</button>
+            <button class="chip" id="cLabels" type="button" aria-pressed="true">Labels</button>
+            <button class="chip" id="cNow" type="button" aria-pressed="true">Now</button>
+          </div>
+
+          <div class="field bay--half">
+            <label for="timeScrub">Move the sky forward or back
+              <span class="num u-signal" id="scrubOut">now</span></label>
+            <input class="slider" id="timeScrub" type="range" min="-720" max="720" step="15" value="0"
+                   aria-describedby="scrubHint">
+            <p class="field__hint" id="scrubHint">Twelve hours either side of the present. The sky
+              turns fifteen degrees an hour.</p>
+          </div>
+
+          <p class="u-visually-hidden" id="skyAnnounce" role="status" aria-live="polite"></p>
+        </div>
+
+        <div>
+          <h2>Tonight&rsquo;s twilight</h2>
+          <p class="u-mut">Twilight is measured by how far the Sun is below the horizon. Deep-sky
+            observing needs the last of these &mdash; and at this latitude it is not always
+            available.</p>
+          <div class="table-scroll">
+            <table class="data" id="twilight">
+              <caption>All times are British time at the observatory.</caption>
+              <thead>
+                <tr><th scope="col">Stage</th><th scope="col">Sun below</th>
+                    <th scope="col" class="n">Evening</th><th scope="col" class="n">Morning</th></tr>
+              </thead>
+              <tbody><tr><td colspan="4">Computing&hellip;</td></tr></tbody>
+            </table>
+          </div>
+
+          <h2 class="bay--half">The Moon</h2>
+          <div class="stats stats--2" id="moonStats">
+            <div class="stat"><b>&mdash;</b><span>Illuminated</span></div>
+            <div class="stat"><b>&mdash;</b><span>Phase</span></div>
+            <div class="stat"><b>&mdash;</b><span>Age in days</span></div>
+          </div>
+          <p class="u-mut bay--half" id="moonNote">A bright Moon washes out everything faint, so
+            our deep-sky sessions are scheduled around it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ planets ============================ -->
+  <section class="bay night-bay">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="head__mark"><span class="head__no">01</span><span class="label">Solar system</span></div>
+          <h2>Where the planets are</h2>
+        </div>
+        <p>Positions are computed from orbital elements rather than looked up, so this table is
+          right for the moment you loaded the page &mdash; and for whatever time you scrub the
+          slider to.</p>
+      </div>
+      <div class="table-scroll">
+        <table class="data" id="planets">
+          <caption>Altitude is degrees above the horizon; a negative value means it is below and
+            cannot be seen.</caption>
+          <thead>
+            <tr><th scope="col">Planet</th><th scope="col">Right ascension</th>
+                <th scope="col">Declination</th><th scope="col">Direction</th>
+                <th scope="col" class="n">Altitude</th><th scope="col" class="n">Mag</th>
+                <th scope="col" class="n">Distance</th></tr>
+          </thead>
+          <tbody><tr><td colspan="7">Computing&hellip;</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ season ============================ -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div class="prose">
+          <h2>Why the season matters here</h2>
+          <p>Astronomical darkness means the Sun is more than eighteen degrees below the horizon,
+            with no sunlight reaching even the top of the atmosphere. Above about 49 degrees of
+            latitude there are weeks each summer when that never happens.</p>
+          <p>At Hallow Fell the gap runs from <strong>10 May to 2 August</strong> &mdash;
+            eighty-five nights. The Sun bottoms out around twelve degrees down at midsummer, which
+            is nautical twilight: fine for the Moon, the planets and double stars, useless for
+            galaxies.</p>
+          <p>The rest of the year more than makes up for it. On 19 December there are twelve hours
+            and fifteen minutes of true dark in a single night, which is more than most of
+            southern Europe gets at any time of year.</p>
+          <p><a href="whats-on.html">Telescope nights</a> are only offered on dates that reach real
+            darkness. If you are visiting in June, book a <a href="whats-on.html">solar
+            session</a> instead &mdash; the Sun is a genuinely good target and we have the filters
+            for it.</p>
+        </div>
+        <figure class="fig">
+          <img src="img/pleiades.webp" width="1600" height="1067" loading="lazy" decoding="async"
+               alt="The Pleiades star cluster: a tight knot of blue-white stars wrapped in faint nebulosity against a dense field of fainter stars.">
+          <figcaption>The Pleiades, photographed from the fell in November. Needs full
+            astronomical darkness to show the nebulosity at all.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <span class="foot__mark">VELA</span>
+        <p>Observatory &amp; Sky Centre<br>Hallow Fell Road, Ravenglass<br>Cumbria CA18 1SQ</p>
+        <p class="num">54.4832&deg; N &middot; 3.1104&deg; W &middot; 612 m</p>
+      </div>
+      <div>
+        <h2>Visit</h2>
+        <ul>
+          <li><a href="visit.html">Plan your visit</a></li>
+          <li><a href="whats-on.html">What&rsquo;s on</a></li>
+          <li><a href="exhibitions.html">Exhibitions</a></li>
+          <li><a href="tickets.html">Tickets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>The observatory</h2>
+        <ul>
+          <li><a href="sky-tonight.html">Sky tonight</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="learning.html">Learning</a></li>
+          <li><a href="about.html">About VELA</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Support</h2>
+        <ul>
+          <li><a href="membership.html">Membership</a></li>
+          <li><a href="membership.html#patrons">Patrons</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="about.html#access">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__fine">
+      <p>&copy; <span data-year>2026</span> VELA Observatory &amp; Sky Centre, an independent
+        charitable trust. Telescope sessions are weather-dependent and refunded in full if
+        cloud stops the session going ahead.</p>
+      <p><a href="about.html#legal">Terms &amp; privacy</a> &middot;
+         <a href="about.html#access">Accessibility</a> &middot;
+         <a href="contact.html">Press &amp; media</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/sky.js"></script>
+<script src="js/stars.js"></script>
+<script src="js/store.js"></script>
+<script src="js/skymap.js"></script>
+<script src="js/render.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/sky-page.js"></script>
+</body>
+</html>
