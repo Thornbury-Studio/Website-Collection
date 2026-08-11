@@ -27,8 +27,15 @@ that scope; no attribution is required and none is printed on-page.
 Clips 286 and 229 were downloaded for review and cut: 286 duplicated 45674's role and 229
 was too calm for the brand.
 
-All three were re-encoded (1280×720, 24 fps, light hqdn3d, H.264 + VP9) to a combined
-6.1 MB for six files. **The four flavour treatments ship no extra video:** each flavour
+All three were re-encoded with a role-based quality budget rather than one setting for
+all: `pour` is a framed foreground element on white and gets the most bits (its true 1080p
+source runs ~30 Mbps); `hero` is full-bleed and gets a Lanczos upscale to 1080 plus a light
+unsharp, because Mixkit publishes no 1080 for that clip and a good offline resample beats
+the browser's own upscale at the 1.5–3× factors a large or retina display asks for;
+`collide` sits behind a 55% scrim mid-page and stays native 720p. VP9 is capped with
+constrained quality (`-crf` with `-b:v`) because high-entropy sharpened ink otherwise runs
+to 5 Mbps. Combined 13.3 MB for six files — but what a visitor actually downloads is
+3.4 MB on the home page, 1.0 MB on a flavour page and 1.5 MB on the story page. **The four flavour treatments ship no extra video:** each flavour
 applies its own `hue-rotate` filter rule to the same two clips, so choosing a flavour
 re-inks the films live at zero bytes of additional weight.
 
