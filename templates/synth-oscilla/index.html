@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>OSCILLA — Four Instruments, One Voice</title>
+  <meta name="description" content="OSCILLA builds four small electronic instruments designed to be played together: Field, Tide, Dusk and North. Play one in your browser — every note is generated live, not recorded.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/synth-oscilla/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OSCILLA — Four Instruments, One Voice">
+  <meta property="og:description" content="Four small electronic instruments, designed to be played together. Play one right here.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/synth-oscilla/img/hero-rig.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OSCILLA — Four Instruments, One Voice">
+  <meta name="twitter:description" content="Four small electronic instruments, designed to be played together. Play one right here.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/synth-oscilla/img/hero-rig.webp">
+  <meta name="theme-color" content="#101216">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#play">Skip to the instrument</a>
+
+<header class="top">
+  <div class="top__in">
+    <a class="mark" href="index.html" aria-current="page">
+      <span class="mark__led" id="markLed" data-on="0" aria-hidden="true"></span><span>Oscilla</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="instruments.html">Instruments</a>
+      <a href="signal.html">The signal path</a>
+      <a href="workshop.html">Workshop</a>
+      <a href="support.html">Support</a>
+    </nav>
+    <span class="transport">
+      <button class="tbtn" id="btnPower" type="button" aria-pressed="false" aria-label="Switch sound on">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg>
+      </button>
+      <button class="tbtn" id="btnMute" type="button" aria-pressed="false" aria-label="Mute" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg>
+      </button>
+    </span>
+    <a class="basket-btn" id="basketBtn" href="order.html" data-full="0">
+      Basket <span class="basket-btn__n" id="basketCount">0</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- hero -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div>
+        <p class="eyebrow u-label"><i aria-hidden="true"></i>Built in small batches</p>
+        <h1>Four instruments,<br>one <span class="amber">voice</span>.</h1>
+        <p class="hero__sub">Field, Tide, Dusk and North were designed together and sound like it.
+          The one below is real — press the switch and play it. Nothing here is a recording.</p>
+        <div class="hero__cta">
+          <a class="btn btn--amber" href="#play">Play one now</a>
+          <a class="btn btn--line" href="instruments.html">See the range</a>
+        </div>
+      </div>
+      <div class="hero__media reveal">
+        <img src="img/hero-rig.webp" width="2000" height="1075" fetchpriority="high" decoding="async"
+             alt="Four Oscilla instruments side by side on a birch bench, joined by slack coloured patch cables.">
+      </div>
+    </div>
+  </section>
+
+  <!-- the playable panel -->
+  <section class="sec--tight" id="play" aria-labelledby="playTitle">
+    <div class="wrap">
+      <div class="chapter reveal">
+        <span class="u-label u-num">01</span>
+        <h2 class="h2" id="playTitle">Hear it, then decide</h2>
+        <p class="chapter__aside">Two oscillators, a resonant lowpass, an envelope and a damped
+          delay — running in this page.</p>
+      </div>
+      <div class="panel reveal" data-panel="field" data-seq></div>
+    </div>
+  </section>
+
+  <!-- the range -->
+  <section class="sec--tight" aria-labelledby="rangeTitle">
+    <div class="wrap">
+      <div class="chapter reveal">
+        <span class="u-label u-num">02</span>
+        <h2 class="h2" id="rangeTitle">The range</h2>
+        <p class="chapter__aside">Four boxes that clock, filter and feed each other without an
+          adapter in sight.</p>
+      </div>
+      <div class="grid" id="rangeGrid"></div>
+      <div class="mt-l reveal">
+        <p class="lede">Take all four and the set comes down by <span class="amber" id="bundleOff"></span>
+          — <span class="u-num" id="bundlePrice"></span> instead of <span class="u-num" id="bundleFull"></span>.</p>
+        <p class="mt-m"><button class="btn btn--amber" type="button" data-add-bundle>Add the set</button></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- workshop band -->
+  <section class="band reveal" aria-labelledby="madeTitle">
+    <img src="img/w-solder.webp" width="1600" height="1066" loading="lazy" decoding="async"
+         alt="A soldering iron touching a board, solder smoke curling through the light.">
+    <div class="band__over">
+      <div class="wrap">
+        <p class="u-label">The workshop</p>
+        <h2 class="h2" id="madeTitle">Forty a month,<br>by four pairs of hands.</h2>
+        <p class="mt-m"><a class="btn btn--line" href="workshop.html">How they are made</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- signal path teaser -->
+  <section class="sec" aria-labelledby="sigTitle">
+    <div class="wrap">
+      <div class="split">
+        <div class="figure reveal">
+          <img src="img/panel-macro.webp" width="1700" height="1062" loading="lazy" decoding="async"
+               alt="Macro of three knurled knobs with amber caps and a lit amber indicator on a charcoal panel.">
+          <p class="caption"><span>Detent knobs, amber caps</span><i aria-hidden="true"></i><span>Field, top row</span></p>
+        </div>
+        <div class="split__copy reveal">
+          <p class="eyebrow u-label"><i aria-hidden="true"></i>The signal path</p>
+          <h2 class="h2" id="sigTitle">You can hear<br>every stage.</h2>
+          <p>Most instruments ask you to take the block diagram on faith. Ours lets you stand at
+            each point in the chain and listen — oscillators alone, then the filter, then the
+            envelope, then the delay.</p>
+          <p>It is the fastest way to understand what a synthesiser is actually doing, and it
+            takes about ninety seconds.</p>
+          <a class="linkline" href="signal.html">Walk the chain</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <p class="foot__mark">Oscilla</p>
+      <p>Four small electronic instruments, designed together and built in small batches.</p>
+    </div>
+    <div>
+      <p class="foot__h">Instruments</p>
+      <div class="foot__l">
+        <a href="instrument.html?i=field">Field — the voice</a>
+        <a href="instrument.html?i=tide">Tide — filter &amp; delay</a>
+        <a href="instrument.html?i=dusk">Dusk — percussion</a>
+        <a href="instrument.html?i=north">North — sequencer</a>
+      </div>
+    </div>
+    <div>
+      <p class="foot__h">More</p>
+      <div class="foot__l">
+        <a href="signal.html">The signal path</a>
+        <a href="workshop.html">The workshop</a>
+        <a href="support.html">Support &amp; service</a>
+        <a href="order.html">Your basket</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot__bar">
+    <p>© 2026 Oscilla Instruments</p>
+    <p>Two-year warranty · Schematics published for every instrument</p>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Your basket" aria-hidden="true">
+  <div class="drawer__top">
+    <p class="drawer__t">Basket</p>
+    <button class="drawer__x" id="drawerClose" type="button" aria-label="Close basket">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body" id="drawerBody"></div>
+  <div class="drawer__foot">
+    <p class="saving" id="drawerSave" hidden><span>Set saving</span><b class="u-num" id="drawerSaveV">−$0.00</b></p>
+    <p class="tot"><span>Total</span><b class="u-num" id="drawerTotal">$0.00</b></p>
+    <a class="btn btn--amber btn--wide" href="order.html">Go to checkout</a>
+  </div>
+</aside>
+
+<script src="js/audio.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/panel.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

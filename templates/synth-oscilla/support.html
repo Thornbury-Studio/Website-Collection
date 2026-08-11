@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Support &amp; Service — OSCILLA</title>
+  <meta name="description" content="Two-year warranty, flat-fee bench repairs after that, parts sold indefinitely, and a published schematic for every instrument Oscilla has made.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/synth-oscilla/support.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Support &amp; Service — OSCILLA">
+  <meta property="og:description" content="Two-year warranty, flat-fee bench repairs after that, parts sold indefinitely, and a published schematic for every instrument Oscilla has made.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/synth-oscilla/img/panel-macro.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Support &amp; Service — OSCILLA">
+  <meta name="twitter:description" content="Two-year warranty, flat-fee bench repairs after that, parts sold indefinitely, and a published schematic for every instrument Oscilla has made.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/synth-oscilla/img/panel-macro.webp">
+  <meta name="theme-color" content="#101216">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#service">Skip to service</a>
+
+<header class="top">
+  <div class="top__in">
+    <a class="mark" href="index.html">
+      <span class="mark__led" id="markLed" data-on="0" aria-hidden="true"></span><span>Oscilla</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="instruments.html">Instruments</a>
+      <a href="signal.html">The signal path</a>
+      <a href="workshop.html">Workshop</a>
+      <a href="support.html" aria-current="page">Support</a>
+    </nav>
+    <span class="transport">
+      <button class="tbtn" id="btnPower" type="button" aria-pressed="false" aria-label="Switch sound on">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg>
+      </button>
+      <button class="tbtn" id="btnMute" type="button" aria-pressed="false" aria-label="Mute" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg>
+      </button>
+    </span>
+    <a class="basket-btn" id="basketBtn" href="order.html" data-full="0">
+      Basket <span class="basket-btn__n" id="basketCount">0</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <section class="sec--tight">
+    <div class="wrap">
+      <p class="eyebrow u-label"><i aria-hidden="true"></i>Support</p>
+      <h1>We answer<br>the <span class="amber">phone</span>.</h1>
+      <p class="lede mt-m">Four people make these, and the same four fix them. Nothing here is
+        handled by a portal, and there is no tier above the person who reads your email.</p>
+    </div>
+  </section>
+
+  <section class="sec--tight" id="service" aria-labelledby="serviceTitle">
+    <div class="wrap">
+      <div class="chapter reveal">
+        <span class="u-label u-num">01</span>
+        <h2 class="h2" id="serviceTitle">Service</h2>
+        <p class="chapter__aside">Out of warranty is not the same as out of luck.</p>
+      </div>
+      <dl class="specs reveal">
+        <div><dt>Warranty</dt><dd>Two years, parts and labour, from the date on your test sheet</dd></div>
+        <div><dt>Out of warranty</dt><dd>Flat bench fee, plus parts at what they cost us</dd></div>
+        <div><dt>Turnaround</dt><dd>Usually ten working days from arrival</dd></div>
+        <div><dt>Accidental damage</dt><dd>Still fixable. Send a photograph and we will quote</dd></div>
+        <div><dt>Parts</dt><dd>Knobs, cheeks, jacks and encoders sold individually, indefinitely</dd></div>
+        <div><dt>Where to write</dt><dd>bench@oscilla.example</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec--tight" aria-labelledby="docsTitle">
+    <div class="wrap">
+      <div class="chapter reveal">
+        <span class="u-label u-num">02</span>
+        <h2 class="h2" id="docsTitle">Documents &amp; firmware</h2>
+        <p class="chapter__aside">Published for every instrument, including the ones we no longer
+          make.</p>
+      </div>
+      <dl class="specs reveal">
+        <div><dt>Field · OS-1</dt><dd>Manual, schematic, calibration notes &mdash; firmware 2.4</dd></div>
+        <div><dt>Tide · OS-2</dt><dd>Manual, schematic, expression pedal wiring &mdash; firmware 1.8</dd></div>
+        <div><dt>Dusk · OS-3</dt><dd>Manual, schematic, pad sensitivity guide &mdash; firmware 1.6</dd></div>
+        <div><dt>North · OS-4</dt><dd>Manual, schematic, clock and gate specification &mdash; firmware 3.1</dd></div>
+      </dl>
+      <p class="lede mt-l reveal">Firmware goes on over USB from any browser that speaks WebMIDI,
+        and every release stays downloadable &mdash; including the one you preferred.</p>
+    </div>
+  </section>
+
+  <section class="sec--tight" aria-labelledby="qTitle">
+    <div class="wrap">
+      <div class="chapter reveal">
+        <span class="u-label u-num">03</span>
+        <h2 class="h2" id="qTitle">Asked often</h2>
+      </div>
+      <dl class="specs reveal">
+        <div><dt>Will these work with my modular?</dt><dd>Yes &mdash; clock, gate and pitch are standard levels</dd></div>
+        <div><dt>Is there a plugin version?</dt><dd>No, and there will not be</dd></div>
+        <div><dt>Can I buy just the boards?</dt><dd>Field and Tide, yes. Write to the bench</dd></div>
+        <div><dt>Do you ship abroad?</dt><dd>Everywhere, at cost, duties shown before you pay</dd></div>
+        <div><dt>Second-hand units?</dt><dd>We service any of them, whoever you bought it from</dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <p class="foot__mark">Oscilla</p>
+      <p>Four small electronic instruments, designed together and built in small batches.</p>
+    </div>
+    <div>
+      <p class="foot__h">Instruments</p>
+      <div class="foot__l">
+        <a href="instrument.html?i=field">Field — the voice</a>
+        <a href="instrument.html?i=tide">Tide — filter &amp; delay</a>
+        <a href="instrument.html?i=dusk">Dusk — percussion</a>
+        <a href="instrument.html?i=north">North — sequencer</a>
+      </div>
+    </div>
+    <div>
+      <p class="foot__h">More</p>
+      <div class="foot__l">
+        <a href="signal.html">The signal path</a>
+        <a href="workshop.html">The workshop</a>
+        <a href="support.html" aria-current="page">Support &amp; service</a>
+        <a href="order.html">Your basket</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot__bar">
+    <p>© 2026 Oscilla Instruments</p>
+    <p>Two-year warranty · Schematics published for every instrument</p>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Your basket" aria-hidden="true">
+  <div class="drawer__top">
+    <p class="drawer__t">Basket</p>
+    <button class="drawer__x" id="drawerClose" type="button" aria-label="Close basket">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body" id="drawerBody"></div>
+  <div class="drawer__foot">
+    <p class="saving" id="drawerSave" hidden><span>Set saving</span><b class="u-num" id="drawerSaveV">−$0.00</b></p>
+    <p class="tot"><span>Total</span><b class="u-num" id="drawerTotal">$0.00</b></p>
+    <a class="btn btn--amber btn--wide" href="order.html">Go to checkout</a>
+  </div>
+</aside>
+
+<script src="js/audio.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/page.js"></script>
+</body>
+</html>
