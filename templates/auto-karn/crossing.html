@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Crossing — One Day, Five Sectors, Our Seats | KARN</title>
+<meta name="description" content="Book the KARN Crossing: all five machines across all five sectors of the closed peninsula in one day. Compare machines from your garage, read today's leg conditions, and enter the manifest.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/auto-karn/crossing.html">
+<meta name="theme-color" content="#0a0b0d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0b0d'/%3E%3Cpath d='M8 6v20M8 16l12-10M8 16l12 10' stroke='%23ff4d00' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KARN">
+<meta property="og:title" content="The Crossing — One Day, Five Sectors, Our Seats">
+<meta property="og:description" content="All five machines across all five sectors in one day. The peninsula decides the date; you decide the seat.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/auto-karn/crossing.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/auto-karn/img/brekka-hero.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Crossing — One Day, Five Sectors, Our Seats">
+<meta name="twitter:description" content="All five machines, all five sectors, one day.">
+<meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/auto-karn/img/brekka-hero.webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-sector="SC-04">
+<a class="skip" href="#main">Skip to content</a>
+<div class="rim" aria-hidden="true"></div>
+<p class="hud-cond hudt" data-hud-cond aria-hidden="true">—</p>
+<p class="hud-vel hudt" data-hud-vel aria-hidden="true">000 KM/H</p>
+
+<header class="topbar settled">
+  <a class="wordmark" href="index.html">K<i>A</i>RN <span class="sub">CLOSED PENINSULA · 61° N</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#chart">The Peninsula</a>
+    <a href="index.html#fleet">Machines</a>
+    <a href="crossing.html" aria-current="page">The Crossing</a>
+    <a href="#compare" data-garage-count>Garage</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- THE DAY -->
+  <section class="plate" id="crossHero" aria-labelledby="chTitle">
+    <div class="media" aria-hidden="true">
+      <video muted playsinline loop preload="auto" poster="img/poster-tunnel.webp" data-io>
+        <source src="video/nightroad.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="plate-copy">
+      <p class="plate-kicker hudt snap">TWICE MONTHLY · WEATHER PERMITTING · TWO SEATS PER MACHINE</p>
+      <h1 class="mega plate-name snap d1" id="chTitle">THE<br>CROSSING</h1>
+      <div class="plate-row snap d2">
+        <p class="plate-note">Dawn on the salt. Mid-morning on the Ring. Ash before lunch,
+          the Works after it, and the Kyst Road as the lights come on — all five machines,
+          all five sectors, one day, our telemetry watching over your shoulder.</p>
+        <a class="btn-ign" href="#book">ENTER THE MANIFEST</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE LEGS -->
+  <section class="block" aria-labelledby="legsTitle">
+    <div class="block-head">
+      <h2 class="hudt hudt-dim" id="legsTitle">01 · TODAY'S LEGS</h2>
+      <p class="hudt hudt-cy" data-legs-date>—</p>
+    </div>
+    <div class="ledger hudt snap" id="legsHost"></div>
+    <p class="hudt hudt-dim mt-14 snap d1">CONDITIONS FROM THE DAILY MODEL · A LEG ON HOLD IS
+      RESEQUENCED, NEVER SKIPPED · THE PENINSULA DECIDES</p>
+  </section>
+
+  <!-- COMPARE -->
+  <section class="block" id="compare" aria-labelledby="cmpTitle">
+    <div class="block-head">
+      <h2 class="hudt hudt-dim" id="cmpTitle">02 · COMPARE MACHINES</h2>
+      <p class="hudt hudt-dim" data-garage-note>PICK ANY TWO · YOUR GARAGE LOADS FIRST</p>
+    </div>
+    <div class="compare-pick" id="pickHost" role="group" aria-label="Choose two machines to compare"></div>
+    <div class="vs" id="vsHost">
+      <div class="vs-empty hudt hudt-dim">PICK TWO MACHINES ABOVE — THE SHEET FILLS ITSELF</div>
+    </div>
+  </section>
+
+  <!-- BOOK -->
+  <section class="block" id="book" aria-labelledby="bookTitle">
+    <div class="block-head">
+      <h2 class="hudt hudt-dim" id="bookTitle">03 · THE MANIFEST</h2>
+      <p class="hudt hudt-dim">A HUMAN REPLIES · WITHIN TWO DAYS · NO DEPOSITS UNTIL A DATE HOLDS</p>
+    </div>
+    <div class="form-wrap">
+      <form id="bookForm" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label class="hudt" for="fName">NAME</label>
+            <input id="fName" name="name" type="text" autocomplete="name" required>
+            <p class="err hudt" id="eName">WE NEED A NAME FOR THE MANIFEST.</p>
+          </div>
+          <div class="field">
+            <label class="hudt" for="fMail">EMAIL</label>
+            <input id="fMail" name="email" type="email" autocomplete="email" required>
+            <p class="err hudt" id="eMail">THAT ADDRESS WILL NOT CARRY — CHECK IT.</p>
+          </div>
+          <div class="field">
+            <label class="hudt" for="fSeat">THE SEAT YOU CARE MOST ABOUT</label>
+            <select id="fSeat" name="seat">
+              <option value="">All five equally</option>
+              <option value="monolit">T1 MONOLIT · the salt</option>
+              <option value="serra">R2 SERRA · the Ring</option>
+              <option value="brekka">K4 BREKKA · the dunes</option>
+              <option value="nokt">G3 NOKT · the coast</option>
+              <option value="varde">E0 VARDE · the works</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="hudt" for="fWin">PREFERRED WINDOW</label>
+            <select id="fWin" name="window">
+              <option value="">First available</option>
+              <option value="early">Early season · long light</option>
+              <option value="mid">Mid season · stable salt</option>
+              <option value="late">Late season · storm dunes</option>
+            </select>
+          </div>
+          <div class="field wide">
+            <label class="hudt" for="fMsg">WHAT SHOULD THE DAY PROVE TO YOU?</label>
+            <textarea id="fMsg" name="message" required></textarea>
+            <p class="err hudt" id="eMsg">ONE LINE IS ENOUGH — WHAT YOU DRIVE, WHAT YOU WANT FROM OURS.</p>
+          </div>
+        </div>
+        <div class="plate-row">
+          <button class="btn-ign" type="submit">ENTER THE MANIFEST</button>
+        </div>
+        <p class="stamped hudt" id="bookNoted" hidden></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="manifest">
+  <div class="m-row">
+    <div class="m-cell">
+      <p class="m-mark">K<i>A</i>RN</p>
+      <p class="hudt hudt-dim foot-note">CLOSED PROVING PENINSULA · 61.1° N<br>VISITS BY MANIFEST ONLY · THE PENINSULA DECIDES</p>
+    </div>
+    <div class="m-cell">
+      <p class="hudt hudt-dim m-label">MACHINES</p>
+      <ul>
+        <li><a href="monolit.html">T1 MONOLIT</a></li>
+        <li><a href="serra.html">R2 SERRA</a></li>
+        <li><a href="brekka.html">K4 BREKKA</a></li>
+        <li><a href="nokt.html">G3 NOKT</a></li>
+        <li><a href="varde.html">E0 VARDE</a></li>
+      </ul>
+    </div>
+    <div class="m-cell">
+      <p class="hudt hudt-dim m-label">THE WORLD</p>
+      <ul>
+        <li><a href="index.html#chart">The peninsula</a></li>
+        <li><a href="index.html#fleet">The machines</a></li>
+        <li><a href="crossing.html">The Crossing</a></li>
+      </ul>
+    </div>
+    <div class="m-cell">
+      <p class="hudt hudt-dim m-label">ACTIONS</p>
+      <ul>
+        <li><a href="crossing.html#book">Book the Crossing</a></li>
+        <li><a href="crossing.html#compare">Compare machines</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="m-fine hudt">
+    <span>KARN AUTOMOBIL · EST. 1994 · FIVE MACHINES ONLY</span>
+    <span>SHEET X · THE CROSSING · EVERY FIGURE COMPUTED</span>
+  </div>
+</footer>
+
+<script src="js/ui.js"></script>
+<script src="js/crossing.js"></script>
+</body>
+</html>
