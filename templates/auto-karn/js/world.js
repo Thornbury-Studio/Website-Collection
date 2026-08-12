@@ -6,9 +6,13 @@
   /* ---------- the scrub ---------- */
 
   var scrubSection = document.getElementById('entry');
-  var scrubVideo = document.getElementById('scrubVideo');
+  var scrubCanvas = document.getElementById('scrubCanvas');
   var scrubMeter = document.getElementById('scrubMeter');
-  K.wireScrub(scrubSection, scrubVideo, scrubMeter);
+  K.wireScrubSeq(scrubSection, scrubCanvas, scrubMeter, {
+    count: 180,
+    hi: 'video/seq-hi/f-%03d.webp',
+    lo: 'video/seq-lo/f-%03d.webp'
+  });
 
   // chapter lines swap with progress
   if (!K.reduced && scrubSection) {

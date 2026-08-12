@@ -8,12 +8,14 @@ rate-limiting at download time, 2026-08-12, so entries link to source pages).
 
 | File | Source | Pexels ID |
 |---|---|---|
-| video/tunnel-4k.mp4, video/tunnel-hd.mp4 | Driving through illuminated tunnel at night | [33938671](https://www.pexels.com/video/33938671/) |
+| video/seq-hi/ + video/seq-lo/ (180-frame scrub sequences) | Driving through illuminated tunnel at night | [33938671](https://www.pexels.com/video/33938671/) |
 | video/nightroad.mp4 | Driving on a road at night | [2876665](https://www.pexels.com/video/2876665/) |
 
-The tunnel ships at native 3840×2160 (H.264 crf 21, GOP 12 for scroll-
-scrubbing; a 1920 tier serves small screens). The night road ships at native
-3840×2160. `img/poster-tunnel.webp` is a frame from the tunnel clip.
+The tunnel entry ships as a 180-frame scrub sequence (15 frames per second
+of drive) extracted straight from the 4K source — 2560-wide WebP for desktop,
+1280 for small screens — drawn to canvas for zero-seek-latency scrubbing;
+video seeking at any GOP stuttered. The night road ships at native 3840×2160.
+`img/poster-tunnel.webp` is the sequence's first frame.
 
 ## Video (downloaded, rejected)
 

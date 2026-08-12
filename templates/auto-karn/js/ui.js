@@ -365,17 +365,88 @@
     });
   }
 
-  /* ---------- the scrub: video time driven by scroll ---------- */
+  /* ---------- the scrub: a pre-extracted frame sequence on canvas.
+     Seeking a long-GOP video teleports (every currentTime write decodes
+     from the nearest keyframe); frames drawn to canvas have zero seek
+     latency. Coarse pass loads every 8th frame so the drive works within
+     ~2s; the fill pass completes it; a small bitmap LRU keeps memory sane
+     and the drawer always paints the nearest frame it owns. ---------- */
 
-  K.wireScrub = function (section, video, readout) {
-    if (!section || !video) return;
-    if (K.reduced) { section.classList.add('scrub-static'); return; }
-    var target = 0, current = 0, duration = 0, painting = false;
-    // metadata can be ready BEFORE this runs (file:// and warm caches load
-    // instantly) — the listener alone loses that race and duration stays 0,
-    // leaving the scrub dead while the meter moves. Read it both ways.
-    if (video.readyState >= 1 && video.duration) duration = video.duration;
-    video.addEventListener('loadedmetadata', function () { duration = video.duration; });
+  K.scrubState = { total: 0, loaded: 0, drawn: -1 };
+
+  K.wireScrubSeq = function (section, canvas, readout, opts) {
+    if (!section || !canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext('2d');
+    var N = opts.count;
+    var hi = (window.innerWidth * (window.devicePixelRatio || 1)) > 1500 &&
+             !(window.matchMedia('(prefers-reduced-data: reduce)').matches);
+    var pat = hi ? opts.hi : opts.lo;
+    // Image elements, not fetch(): fetch is blocked on file:// pages and this
+    // template must survive being opened straight from disk. The browser
+    // owns the decode cache; we only track which frames have arrived.
+    var frames = new Array(N);
+    var ready = new Array(N);
+    K.scrubState.total = N;
+
+    function url(i) { return pat.replace('%03d', String(i + 1).padStart(3, '0')); }
+
+    function fetchFrame(i) {
+      if (frames[i]) return Promise.resolve();
+      return new Promise(function (resolve) {
+        var im = new Image();
+        im.decoding = 'async';
+        im.onload = function () { ready[i] = true; K.scrubState.loaded++; resolve(); };
+        im.onerror = function () { frames[i] = null; resolve(); };
+        im.src = url(i);
+        frames[i] = im;
+      });
+    }
+
+    function nearestOwned(i) {
+      for (var d = 0; d < N; d++) {
+        if (ready[i - d]) return i - d;
+        if (ready[i + d]) return i + d;
+      }
+      return -1;
+    }
+
+    function size() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = Math.min(Math.round(canvas.clientWidth * dpr), hi ? 2560 : 1280);
+      var h = Math.round(w * canvas.clientHeight / Math.max(1, canvas.clientWidth));
+      if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; K.scrubState.drawn = -1; }
+    }
+
+    function draw(bm) {
+      // cover-fit
+      var cw = canvas.width, ch = canvas.height;
+      var s = Math.max(cw / bm.width, ch / bm.height);
+      var dw = bm.width * s, dh = bm.height * s;
+      ctx.drawImage(bm, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+    }
+
+    var target = 0, current = 0, painting = false;
+
+    function paintIndex(iWanted) {
+      var i = nearestOwned(iWanted);
+      if (i < 0) return;
+      if (K.scrubState.drawn !== i) {
+        draw(frames[i]);
+        K.scrubState.drawn = i;
+      }
+    }
+
+    function step() {
+      current += (target - current) * 0.22;
+      paintIndex(Math.round(current * (N - 1)));
+      if (readout) {
+        var m = Math.round((1 - current) * 1400);
+        readout.textContent = 'SURFACE −' + String(m).padStart(4, '0') + ' M';
+      }
+      if (Math.abs(target - current) > 0.0015) requestAnimationFrame(step);
+      else painting = false;
+    }
+
     function onScroll() {
       var r = section.getBoundingClientRect();
       var span = r.height - window.innerHeight;
@@ -383,17 +454,31 @@
       target = K.clamp(-r.top / span, 0, 1);
       if (!painting) { painting = true; requestAnimationFrame(step); }
     }
-    function step() {
-      current += (target - current) * 0.18;
-      if (duration) {
-        try { video.currentTime = current * (duration - 0.05); } catch (e) { /* seeking */ }
-      }
-      if (readout) {
-        var m = Math.round((1 - current) * 1400);
-        readout.textContent = 'SURFACE −' + String(m).padStart(4, '0') + ' M';
-      }
-      if (Math.abs(target - current) > 0.001) requestAnimationFrame(step);
-      else painting = false;
+
+    size();
+    window.addEventListener('resize', function () { size(); onScroll(); });
+
+    // coarse pass first (every 8th frame), then fill the rest sequentially
+    var coarse = [];
+    for (var i = 0; i < N; i += 8) coarse.push(i);
+    Promise.all(coarse.map(fetchFrame)).then(function () {
+      // first paint, even before any scroll
+      paintIndex(Math.round(current * (N - 1)));
+      onScroll();
+      if (window.matchMedia('(prefers-reduced-data: reduce)').matches) return;
+      var next = 0;
+      (function fill() {
+        while (next < N && frames[next]) next++;
+        if (next >= N) return;
+        fetchFrame(next).then(function () { setTimeout(fill, 8); });
+      }());
+    });
+
+    if (K.reduced) {
+      section.classList.add('scrub-static');
+      // a single static frame, no scroll wiring
+      fetchFrame(0).then(function () { if (ready[0]) { size(); draw(frames[0]); K.scrubState.drawn = 0; } });
+      return;
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
