@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enquiry — Book a Viewing at Your Working Hour | NOON, Havnsund</title>
+<meta name="description" content="Ask about an open floor or book a viewing at the hour you would actually use the space. A person from the house replies within two working days.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/spaces-noon/enquiry.html">
+<meta name="theme-color" content="#f7f4ee">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f7f4ee'/%3E%3Ccircle cx='12' cy='16' r='6' fill='none' stroke='%238e96a3' stroke-width='1.6'/%3E%3Ccircle cx='21' cy='16' r='6' fill='%23c8781c'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NOON">
+<meta property="og:title" content="Enquiry — Book a Viewing at Your Working Hour">
+<meta property="og:description" content="Ask about an open floor. Viewings at the hour you would actually use the space.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/spaces-noon/enquiry.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/spaces-noon/img/int-signal.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Enquiry — Book a Viewing at Your Working Hour">
+<meta name="twitter:description" content="Ask about an open floor. Viewings at the hour you would actually use the space.">
+<meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/spaces-noon/img/int-signal.webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..420&family=Instrument+Sans:wght@400;500&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sheet-frame" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a class="wordmark" href="index.html">N<span class="o-shade">O</span><span class="o-sun">O</span>N <span class="city">Havnsund · 55.7° N</span></a>
+  <p class="solar-clock survey" data-solar-clock>—</p>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#holdings">The Buildings</a>
+    <a href="practice.html">The Practice</a>
+    <a href="enquiry.html" aria-current="page">Enquiry</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <header class="bldg-head">
+    <p class="crumb survey reveal">The day book · Sheet A-06</p>
+    <h1 class="display bldg-title reveal d1">Ask about a floor</h1>
+    <div class="bldg-meta survey reveal d2">
+      <span>A person replies · within two working days</span>
+      <span class="sunlit">Viewings at your working hour</span>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="enqTitle">
+    <div class="sec-head">
+      <h2 class="survey sec-no" id="enqTitle">01 · The enquiry</h2>
+      <p class="survey survey-soft">No account · no mailing list · no chasing</p>
+    </div>
+
+    <div class="form-wrap">
+      <form id="enqForm" novalidate>
+        <div class="field">
+          <span class="survey survey-soft chosen-label">Your floor, as surveyed</span>
+          <p class="survey chosen-line" id="chosenLine">Nothing chosen yet — pick a building
+            below, or leave it to us and describe the light you need.</p>
+        </div>
+        <div class="form-grid">
+          <div class="field">
+            <label class="survey" for="fName">Your name</label>
+            <input id="fName" name="name" type="text" autocomplete="name" required>
+            <p class="err survey" id="eName">We need a name to write back to.</p>
+          </div>
+          <div class="field">
+            <label class="survey" for="fMail">Email</label>
+            <input id="fMail" name="email" type="email" autocomplete="email" required>
+            <p class="err survey" id="eMail">That address will not carry — check it for us.</p>
+          </div>
+          <div class="field">
+            <label class="survey" for="fWork">Your practice <span class="survey-soft">(optional)</span></label>
+            <input id="fWork" name="practice" type="text" autocomplete="organization" placeholder="">
+          </div>
+          <div class="field">
+            <label class="survey" for="fBldg">Building</label>
+            <select id="fBldg" name="building">
+              <option value="">Not sure yet</option>
+              <option value="lantern">The Lantern Works</option>
+              <option value="meridian">The Meridian Hall</option>
+              <option value="grain">The Grain Store</option>
+              <option value="signal">The Signal House</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="survey" for="fFloor">Floor</label>
+            <select id="fFloor" name="floor">
+              <option value="">Any open floor</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="survey" for="fHour">Viewing hour <span class="survey-soft">(solar)</span></label>
+            <select id="fHour" name="hour">
+              <option value="">Whenever suits the house</option>
+              <option value="09">09:00 — morning light</option>
+              <option value="12">12:00 — noon, flatters nothing</option>
+              <option value="16">16:00 — the long afternoon</option>
+              <option value="19">19:00 — golden hour</option>
+            </select>
+          </div>
+          <div class="field wide">
+            <label class="survey" for="fMsg">What happens on this floor, and what light does it need?</label>
+            <textarea id="fMsg" name="message" required></textarea>
+            <p class="err survey" id="eMsg">A line or two is enough — the work, the hours you keep, the light it wants.</p>
+          </div>
+        </div>
+        <div class="hero-cta">
+          <button class="btn-solid" type="submit">Enter it in the book</button>
+        </div>
+        <p class="noted" id="enqNoted" hidden></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="summons">
+    <h2 class="chapter-t reveal">Rather see the buildings first?</h2>
+    <div class="hero-cta reveal d1">
+      <a class="btn-line" href="index.html#holdings">The holdings</a>
+      <a class="btn-line" href="practice.html">The practice</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="titleblock">
+  <div class="tb-row">
+    <div class="tb-cell">
+      <p class="tb-mark">N<span class="o-shade">O</span><span class="o-sun">O</span>N</p>
+      <p class="survey survey-soft foot-note">A building house · Teglgade 4, Havnsund<br>Viewings by appointment, at your working hour</p>
+    </div>
+    <div class="tb-cell">
+      <p class="survey survey-soft tb-label">The holdings</p>
+      <ul>
+        <li><a href="lantern.html">The Lantern Works</a></li>
+        <li><a href="meridian.html">The Meridian Hall</a></li>
+        <li><a href="grain.html">The Grain Store</a></li>
+        <li><a href="signal.html">The Signal House</a></li>
+      </ul>
+    </div>
+    <div class="tb-cell">
+      <p class="survey survey-soft tb-label">The house</p>
+      <ul>
+        <li><a href="practice.html">The practice</a></li>
+        <li><a href="practice.html#method">The survey method</a></li>
+        <li><a href="practice.html#stewardship">Stewardship</a></li>
+      </ul>
+    </div>
+    <div class="tb-cell">
+      <p class="survey survey-soft tb-label">Enquiries</p>
+      <ul>
+        <li><a href="enquiry.html" aria-current="page">Book a viewing</a></li>
+        <li><a href="enquiry.html">Ask about a floor</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tb-fine survey">
+    <span>NOON Ejendomme · Havnsund · 55.7° N</span>
+    <span>Sheet A-06 · Enquiry · Rev C · Scale 1:1</span>
+  </div>
+</footer>
+
+<script src="js/ui.js"></script>
+<script src="js/enquiry.js"></script>
+</body>
+</html>
