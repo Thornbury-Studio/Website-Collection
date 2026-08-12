@@ -405,4 +405,39 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/spaces-noon/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/spaces-noon/lantern.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/spaces-noon/meridian.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/spaces-noon/grain.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/spaces-noon/signal.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/spaces-noon/practice.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/spaces-noon/enquiry.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
