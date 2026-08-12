@@ -371,6 +371,10 @@
     if (!section || !video) return;
     if (K.reduced) { section.classList.add('scrub-static'); return; }
     var target = 0, current = 0, duration = 0, painting = false;
+    // metadata can be ready BEFORE this runs (file:// and warm caches load
+    // instantly) — the listener alone loses that race and duration stays 0,
+    // leaving the scrub dead while the meter moves. Read it both ways.
+    if (video.readyState >= 1 && video.duration) duration = video.duration;
     video.addEventListener('loadedmetadata', function () { duration = video.duration; });
     function onScroll() {
       var r = section.getBoundingClientRect();
