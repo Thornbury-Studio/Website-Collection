@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commission a Bell — Name the Note | Harlowe Bell Foundry</title>
+<meta name="description" content="Choose a strike note and see the bell it implies — diameter, weight and guide price computed from founders' rules — then strike it aloud and open a commission enquiry with Harlowe.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/foundry-harlowe/commission.html">
+<meta name="theme-color" content="#0d0a06">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0a06'/%3E%3Cpath d='M16 5c-1 0-1.8.8-1.8 1.8v.9C10.6 8.6 8.5 11.4 8.5 15.5v6h15v-6c0-4.1-2.1-6.9-5.7-7.8v-.9C17.8 5.8 17 5 16 5z' fill='none' stroke='%23d9a441' stroke-width='1.4'/%3E%3Ccircle cx='16' cy='24.6' r='1.6' fill='%23d9a441'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Harlowe Bell Foundry">
+<meta property="og:title" content="Commission a Bell — Name the Note">
+<meta property="og:description" content="Pick a strike note; the tool computes your bell's diameter, weight and guide price, and strikes it aloud.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/foundry-harlowe/commission.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/foundry-harlowe/img/bell-single.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Commission a Bell — Name the Note">
+<meta name="twitter:description" content="Pick a strike note; the tool computes your bell and strikes it aloud.">
+<meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/foundry-harlowe/img/bell-single.webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-sub">
+<a class="skip" href="#main">Skip to content</a>
+<div class="frame-edge" aria-hidden="true"><span class="fc"></span></div>
+
+<header class="topbar">
+  <a class="wordmark" href="index.html">Harlowe <span class="est">est. 1842</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="bells.html">The Bells</a>
+    <a href="commission.html" aria-current="page">Commission</a>
+    <a href="foundry.html">The Foundry</a>
+    <button class="snd" type="button" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span class="snd-label">Bells off</span></button>
+  </nav>
+</header>
+
+<main id="main">
+
+  <header class="page-head">
+    <p class="crumb ledger reveal">Commissions · New castings</p>
+    <h1 class="page-title cool">Name the note</h1>
+  </header>
+  <p class="page-lede reveal">Every bell begins as a single decision: what should it sing?
+    Choose a strike note below. The rules our tuners work by — frequency times diameter is a
+    constant of the trade; weight follows the fourth power of the mouth — will give you the
+    bell your note implies. Then strike it, and hear what you are asking us to found.</p>
+
+  <section class="config" aria-label="Bell configurator">
+    <div class="keybed reveal">
+      <div class="keybed-head ledger">
+        <span>Strike notes · G3 – C6</span>
+        <span class="ledger-dim">Press to choose &amp; hear</span>
+      </div>
+      <div class="octave" id="keybed">
+        <div>
+          <p class="octave-label ledger">Great bells · 3rd octave</p>
+          <div class="octave-row" data-octave="3" data-notes="G A B"></div>
+        </div>
+        <div>
+          <p class="octave-label ledger">Tenors &amp; tolling bells · 4th octave</p>
+          <div class="octave-row" data-octave="4" data-notes="C D E F G A B"></div>
+        </div>
+        <div>
+          <p class="octave-label ledger">Trebles &amp; chapel bells · 5th octave</p>
+          <div class="octave-row" data-octave="5" data-notes="C D E F G A B"></div>
+        </div>
+        <div>
+          <p class="octave-label ledger">The small end · 6th octave</p>
+          <div class="octave-row" data-octave="6" data-notes="C"></div>
+        </div>
+      </div>
+      <p class="ledger ledger-dim keybed-foot">Any pitch between these can be cast —
+        the mould does not care for key signatures. Name it in your enquiry.</p>
+    </div>
+
+    <div class="spec-sheet" aria-live="polite">
+      <div class="spec-head">
+        <span class="spec-note-name" id="specNote">D4</span>
+        <span class="ledger ledger-dim" id="specRole">A tenor's note</span>
+      </div>
+
+      <div class="profile-box" aria-hidden="true">
+        <svg id="profileSvg" viewBox="0 0 300 260" role="img" aria-label="Scaled cross-section profile of the chosen bell">
+          <line class="p-axis" x1="150" y1="8" x2="150" y2="228"></line>
+          <path class="p-curve" id="pCurveR" d=""></path>
+          <path class="p-mirror" id="pCurveL" d=""></path>
+          <line class="p-scale" id="pScaleBar" x1="0" y1="244" x2="0" y2="244" stroke-width="1"></line>
+          <text id="pScaleTxt" x="150" y="258" text-anchor="middle"></text>
+        </svg>
+      </div>
+
+      <div class="spec-rows ledger">
+        <div class="srow"><span class="ledger-dim">Strike note</span><span class="sval" id="oF">—</span></div>
+        <div class="srow"><span class="ledger-dim">Nominal · Hum</span><span class="sval" id="oNom">—</span></div>
+        <div class="srow"><span class="ledger-dim">Mouth diameter</span><span class="sval" id="oD">—</span></div>
+        <div class="srow"><span class="ledger-dim">Weight, tuned</span><span class="sval" id="oW">—</span></div>
+        <div class="srow"><span class="ledger-dim">In the old measure</span><span class="sval aged" id="oCwt">—</span></div>
+        <div class="srow"><span class="ledger-dim">Guide price, cast &amp; tuned</span><span class="sval hot" id="oPrice">—</span></div>
+        <div class="srow"><span class="ledger-dim">From pour to first strike</span><span class="sval" id="oWeeks">—</span></div>
+      </div>
+
+      <div class="spec-actions">
+        <button class="btn-cast" type="button" id="hearBtn">Strike this bell</button>
+        <a class="btn-quiet" href="#enquiry" id="takeBtn">Take this spec to enquiry</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="band-wrap" aria-hidden="true">
+    <div class="band">
+      <div class="band-row">
+        <span>Frequency by diameter is constant</span>
+        <svg class="leaf" width="18" height="10" viewBox="0 0 18 10" aria-hidden="true"><path d="M1 5h6M11 5h6" stroke="currentColor" stroke-width="1"/><circle cx="9" cy="5" r="1.6" fill="currentColor"/></svg>
+        <span>Weight by the fourth power of the mouth</span>
+        <svg class="leaf" width="18" height="10" viewBox="0 0 18 10" aria-hidden="true"><path d="M1 5h6M11 5h6" stroke="currentColor" stroke-width="1"/><circle cx="9" cy="5" r="1.6" fill="currentColor"/></svg>
+        <span>A bell can only be tuned down</span>
+        <svg class="leaf" width="18" height="10" viewBox="0 0 18 10" aria-hidden="true"><path d="M1 5h6M11 5h6" stroke="currentColor" stroke-width="1"/><circle cx="9" cy="5" r="1.6" fill="currentColor"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <section id="enquiry" aria-labelledby="enqTitle">
+    <header class="page-head">
+      <p class="crumb ledger reveal">The day book</p>
+      <h2 class="page-title page-title--sub cool" id="enqTitle">Open an enquiry</h2>
+    </header>
+    <p class="page-lede reveal">Tell us who the bell is for and what it should say. A founder —
+      not a form letter — replies within three working days, with first thoughts on profile,
+      inscription and tower.</p>
+
+    <div class="form-wrap">
+      <form id="enqForm" novalidate>
+        <div class="field">
+          <span class="ledger ledger-dim chosen-label">Your chosen bell</span>
+          <p class="ledger chosen-line" id="chosenLine">No note chosen yet — name one above, or leave it to us.</p>
+        </div>
+        <div class="form-grid">
+          <div class="field">
+            <label class="ledger" for="fName">Your name</label>
+            <input id="fName" name="name" type="text" autocomplete="name" required>
+            <p class="err ledger" id="eName">Give us a name to write back to.</p>
+          </div>
+          <div class="field">
+            <label class="ledger" for="fMail">Email</label>
+            <input id="fMail" name="email" type="email" autocomplete="email" required>
+            <p class="err ledger" id="eMail">That address will not carry — check it for us.</p>
+          </div>
+          <div class="field">
+            <label class="ledger" for="fInst">Church, tower or institution <span class="ledger-dim">(optional)</span></label>
+            <input id="fInst" name="institution" type="text" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label class="ledger" for="fKind">The work</label>
+            <select id="fKind" name="kind">
+              <option value="new">A new bell</option>
+              <option value="ring">A ring or augmentation</option>
+              <option value="carillon">A carillon</option>
+              <option value="restoration">Restoration of existing bells</option>
+              <option value="unsure">Not sure yet</option>
+            </select>
+          </div>
+          <div class="field wide">
+            <label class="ledger" for="fMsg">What should this bell say, and for whom?</label>
+            <textarea id="fMsg" name="message" required></textarea>
+            <p class="err ledger" id="eMsg">A line or two is enough — who it is for, and where it will hang.</p>
+          </div>
+        </div>
+        <div class="spec-actions">
+          <button class="btn-cast" type="submit">Enter it in the book</button>
+        </div>
+        <p class="noted" id="enqNoted" hidden></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div>
+    <p class="f-mark">Harlowe</p>
+    <address>The Bell Yard, Foundry Lane<br>Aldenmoor, England</address>
+    <p class="foot-note">By appointment, and on open days.</p>
+  </div>
+  <div>
+    <h3>The work</h3>
+    <ul>
+      <li><a href="bells.html">Single bells &amp; tenors</a></li>
+      <li><a href="bells.html#rings">Rings &amp; peals</a></li>
+      <li><a href="bells.html#carillons">Carillons</a></li>
+      <li><a href="bells.html#restoration">Restoration</a></li>
+    </ul>
+  </div>
+  <div>
+    <h3>The house</h3>
+    <ul>
+      <li><a href="foundry.html">History</a></li>
+      <li><a href="foundry.html#craft">The craft</a></li>
+      <li><a href="foundry.html#visits">Visits</a></li>
+    </ul>
+  </div>
+  <div>
+    <h3>Commissions</h3>
+    <ul>
+      <li><a href="commission.html">Name your note</a></li>
+      <li><a href="commission.html#enquiry">Open an enquiry</a></li>
+    </ul>
+  </div>
+  <div class="fine ledger ledger-dim">
+    <span>Harlowe Bell Foundry · est. 1842</span>
+    <span>Cast in bronze · 77 : 23</span>
+  </div>
+</footer>
+
+<script src="js/ui.js"></script>
+<script src="js/commission.js"></script>
+</body>
+</html>
