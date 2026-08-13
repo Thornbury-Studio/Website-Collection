@@ -47,7 +47,7 @@
 
   /* ---------------- the field ---------------- */
   var SPANS = { continental: 's7', hemi: 's5', saloon: 's4 tall-m', landaulet: 's4 tall-m', chrome: 's4 tall-m',
-                roadster: 's6', aircooled: 's6 tall-m', emerald: 's4 tall-m', sodium: 's4 tall-m', sealed: 's4 tall-m' };
+                roadster: 's6 tall-m', aircooled: 's6 tall-m', emerald: 's4 tall-m', sodium: 's4 tall-m', sealed: 's4 tall-m' };
 
   var grid = document.getElementById('fieldGrid');
   grid.innerHTML = ENTRIES.map(function (e) {
@@ -82,6 +82,8 @@
     var img = p.querySelector('img');
     img.style.position = 'absolute';
     img.style.inset = '0';
+    var fe = ENTRIES.filter(function (x) { return x.id === p.getAttribute('data-entry'); })[0];
+    if (fe && fe.plate.focus) img.style.objectPosition = fe.plate.focus;
   });
   Array.prototype.forEach.call(grid.querySelectorAll('[data-pin]'), N.bindPin);
 
