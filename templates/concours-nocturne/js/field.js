@@ -46,14 +46,19 @@
   })();
 
   /* ---------------- the field ---------------- */
+  /* Orientation follows the photograph: portrait plates get portrait boxes,
+     landscape plates get wide ones. The sealed entry closes the field on a
+     full-width band. */
   var SPANS = { continental: 's7', hemi: 's5', saloon: 's4 tall-m', landaulet: 's4 tall-m', chrome: 's4 tall-m',
-                roadster: 's6 tall-m', aircooled: 's6 tall-m', emerald: 's4 tall-m', sodium: 's4 tall-m', sealed: 's4 tall-m' };
+                roadster: 's6 tall-m', aircooled: 's6', emerald: 's4 tall-m', sodium: 's4 tall-m', sealed: 's12' };
 
   var grid = document.getElementById('fieldGrid');
   grid.innerHTML = ENTRIES.map(function (e) {
-    var sizes = SPANS[e.id].indexOf('s7') === 0 || SPANS[e.id].indexOf('s8') === 0
-      ? '(max-width: 860px) 94vw, 58vw'
-      : '(max-width: 860px) 94vw, 38vw';
+    var span = SPANS[e.id];
+    var sizes = span.indexOf('s12') === 0 ? '94vw'
+      : (span.indexOf('s7') === 0 || span.indexOf('s8') === 0)
+        ? '(max-width: 860px) 94vw, 58vw'
+        : '(max-width: 860px) 94vw, 38vw';
     return '<article class="plate ' + SPANS[e.id] + '" data-entry="' + e.id + '" data-cls="' + e.cls + '">' +
       '<a class="plate-cover" href="entry.html?e=' + e.id + '" aria-label="Entry ' + e.no + ' — ' + e.name + '">' +
         '<img src="' + e.plate.src + '-1600.webp" srcset="' + N.srcset(e.plate.src) + '" sizes="' + sizes + '"' +
