@@ -25,6 +25,7 @@
   img.width = E.plate.w; img.height = E.plate.h;
   img.alt = E.plate.alt;
   img.style.viewTransitionName = 'vt-' + E.id;
+  if (E.plate.focus) img.style.objectPosition = E.plate.focus;
   N.bindLamp($('stage'));
 
   /* head */

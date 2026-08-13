@@ -18,7 +18,7 @@
       name: 'The Black Continental',
       spec: 'W12 grand tourer · black over black hide',
       era: 'Modern era',
-      plate: { src: 'img/e-continental', w: 6656, h: 3744, alt: 'A black grand touring coupé photographed in a black studio, its bodywork carrying a single sweep of light' },
+      plate: { src: 'img/e-continental', focus: '50% 50%', w: 6656, h: 3744, alt: 'A black grand touring coupé photographed in a black studio, its bodywork carrying a single sweep of light' },
       details: [
         { src: 'img/d-continental-lamp', w: 5100, h: 3400, alt: 'Twin round headlamps of the black grand tourer, lit', cap: 'Lamps, held at dusk setting for judging' },
         { src: 'img/d-continental-tail', w: 5100, h: 3400, alt: 'An oval tail lamp glowing red against black coachwork', cap: 'Tail lamp, the only red permitted on the field' }
@@ -36,7 +36,7 @@
       name: 'American Two-Door, Hemi Era',
       spec: 'V8 hardtop · deep black · red halo lamps',
       era: '1970s',
-      plate: { src: 'img/e-hemi', w: 5472, h: 3648, alt: 'A black American muscle hardtop parked in a dark lot, tail lamps glowing as red rings' },
+      plate: { src: 'img/e-hemi', focus: '62% 58%', w: 5472, h: 3648, alt: 'A black American muscle hardtop parked in a dark lot, tail lamps glowing as red rings' },
       details: [],
       card: { coachwork: 26, interior: 21, dark: 24, provenance: 18 },
       citation: 'Arrived on its own wheels, at night, as this class demands. The halo lamps carry the whole rear elevation; judges are asked to stand twenty paces back before scoring.',
@@ -51,7 +51,7 @@
       name: 'Saloon in Old Gold',
       spec: 'Straight-six saloon · original bronze-gold lacquer',
       era: '1970s',
-      plate: { src: 'img/e-saloon', w: 3940, h: 5219, alt: 'A bronze-gold vintage saloon photographed at night against a dark wall', portrait: true },
+      plate: { src: 'img/e-saloon', focus: '50% 45%', w: 3940, h: 5219, alt: 'A bronze-gold vintage saloon photographed at night against a dark wall', portrait: true },
       details: [
         { src: 'img/d-saloon-bench', w: 2592, h: 1728, alt: 'A cream leather bench seat inside a vintage saloon', cap: 'Front bench, parchment hide, one careful family' }
       ],
@@ -68,7 +68,7 @@
       name: 'The Formal Car',
       spec: 'Coachbuilt limousine · black over midnight blue',
       era: '1960s',
-      plate: { src: 'img/e-landaulet', w: 3376, h: 4220, alt: 'A coachbuilt limousine parked beneath warm lamps at night outside a modern building', portrait: true },
+      plate: { src: 'img/e-landaulet', focus: '50% 62%', w: 3376, h: 4220, alt: 'A coachbuilt limousine parked beneath warm lamps at night outside a modern building', portrait: true },
       details: [
         { src: 'img/d-landaulet-ornament', w: 2784, h: 3712, alt: 'The winged ornament and grille of a formal car in golden light', cap: 'Radiator ornament, unlacquered, polished by hand', portrait: true }
       ],
@@ -85,7 +85,7 @@
       name: 'Chrome Age Coupé',
       spec: 'Postwar coupé · black lacquer · full brightwork',
       era: '1940s',
-      plate: { src: 'img/e-chrome', w: 4000, h: 6000, alt: 'The chrome grille and single round headlamp of a 1940s black coupé in rain-wet darkness', portrait: true },
+      plate: { src: 'img/e-chrome', focus: '50% 60%', w: 4000, h: 6000, alt: 'The chrome grille and single round headlamp of a 1940s black coupé in rain-wet darkness', portrait: true },
       details: [
         { src: 'img/d-chrome-hood', w: 4000, h: 6000, alt: 'A dark vintage hood carrying one white sweep of reflected light', cap: 'Bonnet, judged for reflection continuity', portrait: true }
       ],
@@ -102,7 +102,7 @@
       name: 'Competition Roadster',
       spec: 'Race number carried in period · lamps in period lenses',
       era: '1950s',
-      plate: { src: 'img/e-roadster', w: 4000, h: 5985, alt: 'A vintage competition car at night with warm headlights on, race number on the door', portrait: true },
+      plate: { src: 'img/e-roadster', focus: '50% 68%', w: 4000, h: 5985, alt: 'A vintage competition car at night with warm headlights on, race number on the door', portrait: true },
       details: [
         { src: 'img/d-roadster-wheel', w: 9000, h: 6000, alt: 'A black vintage steering wheel and dark dashboard with chrome bezels', cap: 'Wheel and fascia, competition trim' },
         { src: 'img/d-roadster-dash', w: 2000, h: 3000, alt: 'A cognac leather dashboard with classic instruments', cap: 'Instruments, period glass, original needles', portrait: true }
@@ -120,7 +120,7 @@
       name: 'Air-Cooled, In Motion',
       spec: 'Rear-engined coupé · judged at speed',
       era: '1990s',
-      plate: { src: 'img/e-aircooled', w: 4000, h: 6000, alt: 'A black rear-engined sports coupé photographed at night with the city lights drawn into streaks behind it', portrait: true },
+      plate: { src: 'img/e-aircooled', focus: '50% 55%', w: 4000, h: 6000, alt: 'A black rear-engined sports coupé photographed at night with the city lights drawn into streaks behind it', portrait: true },
       details: [],
       card: { coachwork: 25, interior: 21, dark: 23, provenance: 17 },
       citation: 'The only class judged with the cars moving. Entries are scored through a single held pan at the field’s north gate; what blurs and what stays sharp is the whole examination.',
@@ -135,7 +135,7 @@
       name: 'Emerald, After Dark',
       spec: 'Air-cooled coupé · deep green over black',
       era: '1990s',
-      plate: { src: 'img/e-emerald', w: 3283, h: 4924, alt: 'A dark green sports coupé at a night gathering, one headlamp beam cutting the darkness', portrait: true },
+      plate: { src: 'img/e-emerald', focus: '45% 60%', w: 3283, h: 4924, alt: 'A dark green sports coupé at a night gathering, one headlamp beam cutting the darkness', portrait: true },
       details: [],
       card: { coachwork: 26, interior: 22, dark: 22, provenance: 16 },
       citation: 'Green reads as black until the lamp crosses it, and then it doesn’t. The class regulations call this “a colour with discretion,” and award it the benefit of the dark.',
@@ -150,7 +150,7 @@
       name: 'The Sodium Coupé',
       spec: 'Two-door tourer · bronze under streetlight',
       era: '1970s',
-      plate: { src: 'img/e-sodium', w: 4160, h: 6240, alt: 'A bronze 1970s coupé parked at night under sodium streetlight', portrait: true },
+      plate: { src: 'img/e-sodium', focus: '50% 60%', w: 4160, h: 6240, alt: 'A bronze 1970s coupé parked at night under sodium streetlight', portrait: true },
       details: [],
       card: { coachwork: 25, interior: 21, dark: 24, provenance: 15 },
       citation: 'Entered under the field’s oldest rule: a touring car must be judged under the light it actually lives beneath. Sodium light was chosen; the paint was mixed for it. Both facts are in the file.',
@@ -165,7 +165,7 @@
       name: 'Entry Sealed',
       spec: 'Coachwork sighted once, at collection',
       era: 'Undisclosed',
-      plate: { src: 'img/e-sealed', w: 4672, h: 7008, alt: 'The silhouette of a classic car in near-total darkness, a single rake of light along its roofline', portrait: true },
+      plate: { src: 'img/e-sealed', focus: '50% 35%', w: 4672, h: 7008, alt: 'The silhouette of a classic car in near-total darkness, a single rake of light along its roofline', portrait: true },
       details: [],
       card: null,
       citation: 'One entry each year arrives under seal and is unveiled only when the field lamps are lit. The photograph above is the only record the house will release: one rake of light, one roofline.',
