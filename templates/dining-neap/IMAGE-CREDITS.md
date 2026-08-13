@@ -21,7 +21,7 @@ sharpened. Video additionally: 24 fps, audio stripped.
 | `img/dorado-{800,1600,2560}.webp` | 635381345 | Whole dorade on ice, pale blue concrete |
 | `img/salmon-{800,1600,2560}.webp` | 388168177 | Salmon cut on dark ice |
 | `img/haddock-{800,1600,2560}.webp` | 286542201 | Whole haddock bedded in ice |
-| `video/fish-1600.{webm,mp4}`, `img/fish-poster-1600.webp` | 539764457 | School of silver fish churning at the surface, 4K source |
+| `video/fish-4k.mp4`, `img/fish-poster-4k.webp` | 539764457 | School of silver fish churning at the surface — center-cropped to 3840×1440 at native pixel density (cropped, never scaled), 24 fps H.264. No WebM: VP9 macroblocks on this churn at any web-sane bitrate, so the single clean H.264 is served to every browser |
 
 ## Licensed but not shipped
 
