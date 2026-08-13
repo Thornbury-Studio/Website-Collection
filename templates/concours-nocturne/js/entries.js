@@ -51,7 +51,7 @@
       name: 'Saloon in Old Gold',
       spec: 'Straight-six saloon · original bronze-gold lacquer',
       era: '1970s',
-      plate: { src: 'img/e-saloon', focus: '50% 45%', w: 3940, h: 5219, alt: 'A bronze-gold vintage saloon photographed at night against a dark wall', portrait: true },
+      plate: { src: 'img/e-saloon', focus: '50% 50%', w: 3940, h: 5219, alt: 'A bronze-gold vintage saloon photographed at night against a dark wall', portrait: true },
       details: [
         { src: 'img/d-saloon-bench', w: 2592, h: 1728, alt: 'A cream leather bench seat inside a vintage saloon', cap: 'Front bench, parchment hide, one careful family' }
       ],
@@ -68,7 +68,7 @@
       name: 'The Formal Car',
       spec: 'Coachbuilt limousine · black over midnight blue',
       era: '1960s',
-      plate: { src: 'img/e-landaulet', focus: '50% 62%', w: 3376, h: 4220, alt: 'A coachbuilt limousine parked beneath warm lamps at night outside a modern building', portrait: true },
+      plate: { src: 'img/e-landaulet', focus: '50% 58%', w: 3819, h: 5729, alt: 'A black formal saloon at night on wet cobbles, its tall chrome grille and winged ornament lit against stone columns', portrait: true },
       details: [
         { src: 'img/d-landaulet-ornament', w: 2784, h: 3712, alt: 'The winged ornament and grille of a formal car in golden light', cap: 'Radiator ornament, unlacquered, polished by hand', portrait: true }
       ],
@@ -85,7 +85,7 @@
       name: 'Chrome Age Coupé',
       spec: 'Postwar coupé · black lacquer · full brightwork',
       era: '1940s',
-      plate: { src: 'img/e-chrome', focus: '50% 60%', w: 4000, h: 6000, alt: 'The chrome grille and single round headlamp of a 1940s black coupé in rain-wet darkness', portrait: true },
+      plate: { src: 'img/e-chrome', focus: '50% 55%', w: 4000, h: 6000, alt: 'The chrome grille and single round headlamp of a 1940s black coupé in rain-wet darkness', portrait: true },
       details: [
         { src: 'img/d-chrome-hood', w: 4000, h: 6000, alt: 'A dark vintage hood carrying one white sweep of reflected light', cap: 'Bonnet, judged for reflection continuity', portrait: true }
       ],
@@ -116,18 +116,18 @@
       ]
     },
     {
-      id: 'aircooled', no: '07', cls: 'sport',
-      name: 'Air-Cooled, In Motion',
-      spec: 'Rear-engined coupé · judged at speed',
-      era: '1990s',
-      plate: { src: 'img/e-aircooled', focus: '50% 55%', w: 4000, h: 6000, alt: 'A black rear-engined sports coupé photographed at night with the city lights drawn into streaks behind it', portrait: true },
+      id: 'aircooled', no: '07', cls: 'chrome',
+      name: 'The Drive-Past',
+      spec: 'Fifties American two-door · turquoise over ivory',
+      era: '1950s',
+      plate: { src: 'img/e-aircooled', focus: '46% 56%', w: 6720, h: 4480, alt: 'A turquoise and ivory 1950s American two-door standing at the kerb at night while passing traffic draws long light trails across the road behind it' },
       details: [],
       card: { coachwork: 25, interior: 21, dark: 23, provenance: 17 },
-      citation: 'The only class judged with the cars moving. Entries are scored through a single held pan at the field’s north gate; what blurs and what stays sharp is the whole examination.',
+      citation: 'Photographed during the drive-past, standing still while the boulevard moved around it. The exposure runs long enough that the traffic becomes weather and the car becomes the only fixed thing in the frame — which is, in the end, what this class is asking.',
       notes: [
         'Driven to the field every year of its entry.',
-        'Original paint on every panel but one, declared.',
-        'The pan photograph above is the judging record itself.'
+        'Two-tone lacquer original; the ivory has aged a half-shade warmer than the factory card.',
+        'The long exposure above is the judging record itself.'
       ]
     },
     {
@@ -165,13 +165,13 @@
       name: 'Entry Sealed',
       spec: 'Coachwork sighted once, at collection',
       era: 'Undisclosed',
-      plate: { src: 'img/e-sealed', focus: '50% 35%', w: 4672, h: 7008, alt: 'The silhouette of a classic car in near-total darkness, a single rake of light along its roofline', portrait: true },
+      plate: { src: 'img/e-sealed', focus: '62% 56%', w: 5908, h: 3939, alt: 'A car standing under a fitted cover in the dark, its roofline, screen pillar and wheel arches reading clearly through the fabric' },
       details: [],
       card: null,
-      citation: 'One entry each year arrives under seal and is unveiled only when the field lamps are lit. The photograph above is the only record the house will release: one rake of light, one roofline.',
+      citation: 'One entry each year arrives under seal and is unveiled only when the field lamps are lit. The photograph above is the only record the house will release: the cover, and the shape it fails to hide.',
       notes: [
         'Class assignment announced at unveiling.',
-        'The judges have not seen it. Neither have we, properly.',
+        'The cover has not come off since collection. The judges have not seen it either.',
         'Rosettes may be pinned in advance. They always are.'
       ]
     }
