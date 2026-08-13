@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Menus — NEAP</title>
+<meta name="description" content="Two services written by the moon: the Flood menu on spring tides, the Still menu on neap tides. Read tonight's, and the tide clock for the next twenty-eight nights.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/dining-neap/menu.html">
+<meta name="theme-color" content="#f3f0e9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f3f0e9'/%3E%3Cpath d='M16 5a11 11 0 1 0 0 22 13.5 11 0 0 1 0-22Z' fill='%23274850'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NEAP">
+<meta property="og:title" content="The Menus — NEAP">
+<meta property="og:description" content="The Flood menu on spring tides, the Still menu on neap tides. The moon decides which is served tonight.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/dining-neap/menu.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/dining-neap/img/hero-water-1600.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Menus — NEAP">
+<meta name="twitter:description" content="Two services written by the moon. The tide clock for the next twenty-eight nights.">
+<meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/dining-neap/img/hero-water-1600.webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head on-paper">
+  <a class="brand" href="index.html" aria-label="NEAP, home">
+    <svg class="moon-glyph" data-moon width="26" height="26" viewBox="0 0 100 100" aria-hidden="true"></svg>
+    NEAP
+  </a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="menu.html" aria-current="page">The Menus</a>
+    <a href="source.html">The Source</a>
+    <a href="reservations.html">Reservations</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <header class="menu-head wrap">
+    <span class="t-kicker reveal">The menus</span>
+    <h1 class="t-sec reveal d1">What the tide brings.</h1>
+    <p class="reveal d2 menu-tonight-line t-mono muted" data-menu-tonight-line></p>
+    <noscript><p class="muted">The menus follow the tide; tonight's service is marked at the counter.</p></noscript>
+  </header>
+
+  <section class="menus wrap" aria-label="The two services">
+    <article class="menu-card" data-menu-flood aria-label="The Flood menu"></article>
+    <article class="menu-card" data-menu-still aria-label="The Still menu"></article>
+  </section>
+
+  <section class="wrap" aria-label="Supplements and pairings">
+    <div class="menu-aside reveal">
+      <div>
+        <h3>Beside the menu</h3>
+        <ul class="aside-list" data-supplements></ul>
+      </div>
+      <div>
+        <h3>Poured alongside</h3>
+        <ul class="aside-list" data-pairings></ul>
+      </div>
+    </div>
+    <div class="menu-notes reveal">
+      <p>The menu is taken whole; the kitchen cannot subtract once the boats have spoken.</p>
+      <p>Allergies in writing, <span data-notice-hours>72</span> hours ahead &mdash; the sea will accommodate what it can.</p>
+      <p>Water is our own, filtered and poured without asking. Service is counted in.</p>
+    </div>
+  </section>
+
+  <!-- tide clock -->
+  <section class="sec cal" aria-labelledby="cal-h">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="t-kicker">The tide clock</span>
+        <h2 class="t-sec" id="cal-h">The next twenty-eight nights.</h2>
+        <p class="muted reveal" data-cal-note></p>
+      </div>
+      <div class="cal-grid reveal" data-cal></div>
+      <p class="cal-legend reveal">
+        <span><span class="swatch spring" aria-hidden="true"></span>spring tides &mdash; Flood menu</span>
+        <span><span class="swatch" aria-hidden="true"></span>neap tides &mdash; Still menu</span>
+        <span>N &mdash; new moon &nbsp; F &mdash; full moon</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="sec cta">
+    <div class="wrap">
+      <span class="t-kicker reveal">Reservations</span>
+      <h2 class="reveal d1">Eat by the moon.</h2>
+      <p class="reveal d2">Choose a night from the tide clock; the counter will tell you which menu it holds.</p>
+      <p class="btn-wrap reveal d3"><a class="btn btn-paper" href="reservations.html">Ask for a seat</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="foot-grid">
+    <div>
+      <span class="foot-brand">
+        <svg class="moon-glyph" data-moon width="24" height="24" viewBox="0 0 100 100" aria-hidden="true"></svg>
+        NEAP
+      </span>
+      <p class="foot-tag">A tasting counter set to the tide.</p>
+    </div>
+    <div>
+      <h3>Visit</h3>
+      <address>
+        The Slipway<br>
+        3 Harbour Steps<br>
+        by the old ice house
+      </address>
+    </div>
+    <div>
+      <h3>Write</h3>
+      <ul>
+        <li><a href="reservations.html">Reservations</a></li>
+        <li><a href="menu.html">The menus</a></li>
+        <li><a href="source.html">The source</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-line">
+    <span>&copy; <span data-year>2026</span> NEAP</span>
+    <span data-tide-phase></span>
+  </div>
+</footer>
+
+<script src="js/tide.js"></script>
+<script src="js/menus.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>
