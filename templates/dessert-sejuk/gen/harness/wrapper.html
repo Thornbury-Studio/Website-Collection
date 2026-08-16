@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SEJUK harness</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #dde3e6; }
+  iframe { display: block; border: 0; margin: 0 auto; background: #fff; }
+</style>
+</head>
+<body>
+<script>
+  // ?page=index.html&w=375&mode=measure|shot
+  var q = new URLSearchParams(location.search);
+  var page = q.get("page") || "index.html";
+  var W = parseInt(q.get("w") || "375", 10);
+  var mode = q.get("mode") || "measure";
+
+  var frame = document.createElement("iframe");
+  frame.width = W;
+  frame.height = 900;
+  frame.src = "../../" + page;
+  document.body.appendChild(frame);
+
+  var out = document.createElement("pre");
+  out.id = "out";
+  out.style.cssText = "position:fixed;left:-9999px;top:0;";
+  document.body.appendChild(out);
+
+  function report(obj) {
+    out.textContent = "HARNESS_JSON " + JSON.stringify(obj);
+    document.title = "done-" + page + "-" + W;
+  }
+
+  frame.addEventListener("load", function () {
+    var win = frame.contentWindow;
+    var doc = frame.contentDocument;
+
+    // Kill transition/animation TIME but never force reveal classes —
+    // the page's own observers must do the revealing.
+    var kill = doc.createElement("style");
+    kill.textContent = "*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;animation-duration:0s!important;animation-delay:0s!important;}";
+    doc.head.appendChild(kill);
+
+    // Force images eager; decode-nudge repaints so late decodes still paint
+    // under virtual time. (Never re-set src — that breaks the vt loader.)
+    Array.prototype.forEach.call(doc.images, function (img) {
+      img.loading = "eager";
+      if (img.decode) img.decode().then(function () {
+        doc.body.style.outline = doc.body.style.outline ? "" : "1px solid transparent";
+      }).catch(function () {});
+    });
+
+    setTimeout(function () {
+      // Grow the iframe so everything intersects, then sweep scroll events
+      // so scroll-wired reveals run (vt swallows real scroll events).
+      var H = Math.max(doc.documentElement.scrollHeight, 900);
+      frame.height = H;
+      var step;
+      for (step = 0; step <= H; step += 600) {
+        win.scrollTo(0, step);
+        win.dispatchEvent(new Event("scroll"));
+      }
+      win.scrollTo(0, 0);
+      win.dispatchEvent(new Event("scroll"));
+
+      setTimeout(function () {
+        if (mode === "shot") {
+          document.title = "done-" + page + "-" + W;
+          return;
+        }
+        var de = doc.documentElement;
+        var res = {
+          page: page,
+          w: W,
+          scrollWidth: de.scrollWidth,
+          clientWidth: de.clientWidth,
+          overflow: de.scrollWidth - de.clientWidth,
+          culprits: [],
+          slivers: [],
+          unrevealed: 0,
+          hiddenCards: 0,
+          gridIssues: [],
+        };
+        // widest offenders
+        Array.prototype.forEach.call(doc.querySelectorAll("*"), function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.right > de.clientWidth + 1 || r.left < -1) {
+            if (res.culprits.length < 8)
+              res.culprits.push(el.tagName + "." + String(el.className).split(" ")[0] + " right=" + Math.round(r.right) + " left=" + Math.round(r.left));
+          }
+        });
+        // image slivers: rendered AR vs natural AR
+        Array.prototype.forEach.call(doc.images, function (img) {
+          if (!img.naturalWidth) return;
+          var r = img.getBoundingClientRect();
+          if (r.width < 8 || r.height < 8) return;
+          var want = img.naturalWidth / img.naturalHeight;
+          var got = r.width / r.height;
+          var objectFit = win.getComputedStyle(img).objectFit;
+          if (objectFit === "none" || objectFit === "fill" || objectFit === "") {
+            if (Math.abs(want - got) / want > 0.12)
+              res.slivers.push(img.src.split("/").pop() + " want=" + want.toFixed(2) + " got=" + got.toFixed(2));
+          }
+        });
+        // reveals that never revealed
+        res.unrevealed = doc.querySelectorAll(".js-anim .reveal:not(.is-in), .reveal:not(.is-in)").length;
+        // cards at opacity 0 holding space
+        Array.prototype.forEach.call(doc.querySelectorAll(".card, .flow-step, .outlet-card"), function (el) {
+          var cs = win.getComputedStyle(el);
+          var r = el.getBoundingClientRect();
+          if (parseFloat(cs.opacity) < 0.5 && r.height > 20 && !el.hidden) res.hiddenCards++;
+        });
+        // grid track count vs visible children
+        Array.prototype.forEach.call(doc.querySelectorAll(".board, .slot-grid, .stat-row, .outlet-grid, .foot-grid, .outlet-strip"), function (g) {
+          var cs = win.getComputedStyle(g);
+          if (cs.display !== "grid") return;
+          var tracks = cs.gridTemplateColumns.split(" ").length;
+          var kids = Array.prototype.filter.call(g.children, function (k) { return !k.hidden; }).length;
+          if (kids > 0 && kids % tracks !== 0 && kids > tracks) {
+            res.gridIssues.push(String(g.className).split(" ")[0] + " tracks=" + tracks + " kids=" + kids);
+          }
+        });
+        report(res);
+      }, 900);
+    }, 700);
+  });
+</script>
+</body>
+</html>

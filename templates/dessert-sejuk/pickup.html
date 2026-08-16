@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--
+  BUILD STATUS: INCOMPLETE — dessert photography not yet generated.
+  Pages render with broken image placeholders until img/*.webp exist.
+  See README.md and HANDOFF.md in this folder. Not linked from the hub.
+-->
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Order Pickup — SEJUK°</title>
+<meta name="description" content="Send your chit ahead: pick a room, pick a slot, and we start shaving when you're near. Pay at the counter.">
+<meta name="robots" content="noindex, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#f2f5f6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2310222e'/%3E%3Cpath d='M6 23 L16 8 L26 23 Z' fill='%23eef3f5'/%3E%3Ccircle cx='24.5' cy='7.5' r='2.6' fill='none' stroke='%23c8203e' stroke-width='1.8'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400;500;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap head-bar">
+    <a class="wordmark" href="index.html">SEJUK<sup>°</sup></a>
+    <nav class="head-nav" aria-label="Main">
+      <a href="menu.html">The board</a>
+      <a href="house.html">The house</a>
+      <a href="visit.html">Visit</a>
+    </nav>
+    <button type="button" class="chit-btn" data-open-chit aria-label="Open your chit">
+      CHIT <span class="chit-count" data-chit-count>0</span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="section" aria-labelledby="pickup-title">
+    <div class="wrap">
+      <p class="kicker reveal">Pickup only</p>
+      <h1 class="display-sm reveal" id="pickup-title">Send the chit&nbsp;ahead.</h1>
+      <p class="lede reveal d1 lede-gap">Pick a room, pick a slot, and the blade starts on the slot — not
+      before. There's no delivery and never will be; snow doesn't survive a
+      scooter. Payment happens at the counter.</p>
+    </div>
+  </section>
+
+  <section class="section section-tight" aria-label="Pickup details">
+    <div class="wrap">
+      <div id="flow-root"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-mark">SEJUK<sup>°</sup></p>
+      <p class="foot-tag">An equatorial ice house</p>
+    </div>
+    <div class="foot-col">
+      <h4>Visit</h4>
+      <p>56 Eng Hoon Street, #01-70<br>Singapore 160056</p>
+      <p>208 Joo Chiat Road<br>Singapore 427469</p>
+    </div>
+    <div class="foot-col foot-hours">
+      <h4>Hours · Joo Chiat</h4>
+      <div data-hours="joo-chiat"></div>
+    </div>
+    <div class="foot-col">
+      <h4>The house</h4>
+      <a href="menu.html">The board</a>
+      <a href="pickup.html">Order pickup</a>
+      <a href="house.html">The house</a>
+      <a href="visit.html">Visit &amp; contact</a>
+    </div>
+  </div>
+  <div class="wrap foot-base">
+    <span>© <span data-year>2026</span> SEJUK ICE HOUSE PTE LTD</span>
+    <span>ICE WAITS FOR NO ONE</span>
+  </div>
+</footer>
+
+<script src="js/catalogue.js"></script>
+<script src="js/service.js"></script>
+<script src="js/chit.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/pickup.js"></script>
+</body>
+</html>
