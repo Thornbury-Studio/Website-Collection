@@ -1,0 +1,7 @@
+# Internal docs and tooling that should stay in git history but never be
+# served as public static files. This project has no build step, so Vercel
+# otherwise deploys the whole repo verbatim — anything not listed here is
+# publicly fetchable by URL once deployed.
+*.md
+db/
+.impeccable/

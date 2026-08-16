@@ -271,10 +271,13 @@
     gap: 8px;
     padding: 14px 28px;
     border-radius: 999px;
+    font-family: inherit;
     font-weight: 500;
     font-size: 0.9rem;
     text-decoration: none;
+    background: none;
     border: 1px solid transparent;
+    cursor: pointer;
     will-change: transform;
     transition: border-color 0.25s ease, background 0.25s ease;
   }
@@ -340,6 +343,17 @@
 
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+  /* ---------- empty-state views (client preview / our clients) ---------- */
+  .empty-state {
+    text-align: center;
+    padding: 60px 24px 80px;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+  .empty-state p { color: var(--muted); font-size: 1rem; line-height: 1.7; }
+  .empty-state .fine { margin-top: 12px; font-size: 0.85rem; opacity: 0.75; }
+  .empty-state .btn { margin-top: 32px; }
 
   .card {
     position: relative;
@@ -607,6 +621,34 @@
   .fine { font-size: 0.78rem; line-height: 1.65; color: var(--muted); margin-top: 16px; }
   .fine strong { color: var(--text); }
 
+  /* ---------- admin sub-tabs (Testing / Change Password) ---------- */
+  .subtabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .subtab {
+    flex: 1; font: inherit; font-size: 0.82rem; font-weight: 600;
+    color: var(--muted); background: none; border: 1px solid var(--border);
+    border-radius: 9px; padding: 9px 10px; cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+  .subtab:hover { color: var(--text); }
+  .subtab.is-on { color: var(--text); background: var(--surface-2); border-color: rgba(182,147,95,0.45); }
+  .subpane { display: none; }
+  .subpane.is-on { display: block; }
+
+  .test-block { margin-bottom: 18px; }
+  .test-block h3 {
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; margin-bottom: 8px;
+  }
+  .test-list { display: grid; gap: 8px; }
+  .test-row {
+    border: 1px solid var(--border); border-radius: 9px; padding: 10px 12px;
+    display: grid; gap: 2px;
+  }
+  .test-row b { font-size: 0.86rem; }
+  .test-row span { font-size: 0.76rem; color: var(--muted); }
+  .test-empty, .test-error { font-size: 0.82rem; color: var(--muted); }
+  .test-error { color: #e0645f; }
+
   @media (prefers-reduced-motion: reduce) {
     .modal__scrim, .modal__box, .pane.is-on { animation: none; }
     .shake { animation: none; outline: 2px solid #e0645f; outline-offset: 3px; }
@@ -699,11 +741,18 @@
         <span class="row__t"><b>About</b><span>What this gallery is and how it&rsquo;s built</span></span>
         <span class="row__c" aria-hidden="true">&rsaquo;</span>
       </button>
+      <button class="row" type="button" id="clientPreviewRow">
+        <span class="row__i">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        </span>
+        <span class="row__t"><b>Client Preview</b><span>In-progress builds staged for review</span></span>
+        <span class="row__lock" id="clientPreviewLockPip">Locked</span>
+      </button>
       <button class="row" type="button" data-go="admin">
         <span class="row__i">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
         </span>
-        <span class="row__t"><b>Admin</b><span>Manage the access password</span></span>
+        <span class="row__t"><b>Admin</b><span>Manage the password, or test what it protects</span></span>
         <span class="row__lock" id="adminLockPip">Locked</span>
       </button>
     </div>
@@ -732,7 +781,7 @@
       <form id="unlockForm" novalidate>
         <label class="field">
           <span>Password</span>
-          <input type="password" id="unlockPass" inputmode="numeric" autocomplete="current-password" placeholder="••••">
+          <input type="password" id="unlockPass" autocomplete="current-password" placeholder="••••">
         </label>
         <p class="msg" id="unlockMsg" role="status"></p>
         <button class="btn btn-primary" type="submit">Unlock</button>
@@ -741,26 +790,52 @@
 
     <!-- admin -->
     <div class="pane" data-pane="admin">
-      <p>Change the password used for every locked area of this site.</p>
-      <form id="passForm" novalidate>
-        <label class="field">
-          <span>New password</span>
-          <input type="password" id="newPass" autocomplete="new-password" placeholder="New password">
-        </label>
-        <label class="field">
-          <span>Confirm new password</span>
-          <input type="password" id="newPass2" autocomplete="new-password" placeholder="Repeat it">
-        </label>
-        <p class="msg" id="passMsg" role="status"></p>
-        <div class="admin-acts">
-          <button class="btn btn-primary" type="submit">Save password</button>
-          <button class="btn btn-outline" type="button" id="lockAgain">Lock again</button>
+      <div class="subtabs">
+        <button type="button" class="subtab is-on" data-subtab="testing">Testing</button>
+        <button type="button" class="subtab" data-subtab="password">Change Password</button>
+      </div>
+
+      <div class="subpane is-on" data-subpane="testing">
+        <p>A simulated version of what this password actually protects &mdash; fake records,
+           served by the same authenticated API the real gate runs on. Nothing below is real
+           client data.</p>
+        <div class="test-block">
+          <h3>Simulated client records</h3>
+          <div class="test-list" id="testClients">Loading&hellip;</div>
         </div>
-      </form>
-      <p class="fine"><strong>Read this before relying on it.</strong> This is a front-end
-         gate, not security. The password lives in this browser&rsquo;s local storage, and
-         anyone who views the page source or disables JavaScript can reach the locked pages
-         directly. It keeps casual visitors out; it does not protect anything private.</p>
+        <div class="test-block">
+          <h3>Simulated backend info</h3>
+          <div class="test-list" id="testBackend">Loading&hellip;</div>
+        </div>
+        <div class="admin-acts">
+          <button class="btn btn-outline" type="button" id="refreshTest">Refresh</button>
+        </div>
+      </div>
+
+      <div class="subpane" data-subpane="password">
+        <p>Change the password used for every locked area of this site.</p>
+        <form id="passForm" novalidate>
+          <label class="field">
+            <span>New password</span>
+            <input type="password" id="newPass" autocomplete="new-password" placeholder="New password">
+          </label>
+          <label class="field">
+            <span>Confirm new password</span>
+            <input type="password" id="newPass2" autocomplete="new-password" placeholder="Repeat it">
+          </label>
+          <p class="msg" id="passMsg" role="status"></p>
+          <button class="btn btn-primary" type="submit">Save password</button>
+        </form>
+        <p class="fine"><strong>What actually enforces this.</strong> The password is hashed
+           (scrypt, salted) and stored in Supabase; a Vercel serverless function checks it
+           server-side and never ships the hash or the real value to the browser. Unlocking
+           sets a signed, httpOnly session cookie &mdash; there is no password anywhere in
+           client-side code or storage. Attempts are rate-limited per IP.</p>
+      </div>
+
+      <div class="admin-acts">
+        <button class="btn btn-outline" type="button" id="lockAgain">Lock again</button>
+      </div>
     </div>
 
   </div>
@@ -774,7 +849,8 @@
   </h1>
   <p>A growing collection of original, self-contained website templates for client demos. Every one is a working site, not a screenshot — click in and see for yourself.</p>
   <div class="hero-actions">
-    <a href="#gallery" class="btn btn-primary">Browse Gallery</a>
+    <a href="#gallery" class="btn btn-primary" data-view="gallery">Browse Gallery</a>
+    <a href="#clients" class="btn btn-outline" data-view="clients">Our Clients</a>
   </div>
 </section>
 
@@ -1420,6 +1496,30 @@
   </div>
 </section>
 
+<section class="section" id="client-preview" hidden>
+  <div class="section-header">
+    <div><h2>Client Preview</h2></div>
+    <p>In-progress client builds, staged here for review before they go anywhere public.</p>
+  </div>
+  <div class="empty-state">
+    <p>Nothing staged for preview right now.</p>
+    <p class="fine">Check back once a project is ready to be looked at.</p>
+    <button type="button" class="btn btn-outline" data-view="gallery">Back to gallery</button>
+  </div>
+</section>
+
+<section class="section" id="clients" hidden>
+  <div class="section-header">
+    <div><h2>Our Clients</h2></div>
+    <p>Real client sites, shown once they ship and the client agrees to be featured.</p>
+  </div>
+  <div class="empty-state">
+    <p>No client showcases yet.</p>
+    <p class="fine">This is where real, live projects will appear &mdash; a case study, not a template.</p>
+    <button type="button" class="btn btn-outline" data-view="gallery">Back to gallery</button>
+  </div>
+</section>
+
 <footer><strong>Website Collection</strong> — every site here is designed and built by members of our agency for showcase purposes only. Imagery is either licensed royalty-free or generated with AI.<span class="site-signature">Zane</span></footer>
 
 </div>
@@ -1428,18 +1528,16 @@
   /* =====================================================================
      Settings + lock gate.
 
-     IMPORTANT, and stated plainly because it is easy to assume otherwise:
-     this is a front-end gate, not security. The password sits in this
-     browser's localStorage, the locked pages are ordinary static files, and
-     anyone who reads the source or turns JavaScript off reaches them
-     directly. It keeps casual visitors out of the personal portfolio. It
-     protects nothing.
+     The password itself never reaches this script. Unlocking, changing the
+     password, and reading the simulated test data are all separate calls to
+     /api/* — plain Vercel serverless functions (no framework, no build
+     step) that hold the Supabase service key and a session secret, neither
+     of which is ever sent to the browser. This file only tracks the last
+     answer those endpoints gave it (`state.unlocked`) so the UI can paint
+     itself; the real gate is enforced server-side on every protected call,
+     regardless of what this variable says.
      ===================================================================== */
   (function () {
-    var KEY_PASS = 'wc.pass';
-    var KEY_OPEN = 'wc.unlocked';
-    var DEFAULT_PASS = '8888';
-
     var modal   = document.getElementById('settings');
     var gear    = document.getElementById('gearBtn');
     var backBtn = document.getElementById('backBtn');
@@ -1450,18 +1548,32 @@
     var lastFocus = null;
     var history = [];
     var pendingHref = null;   // where to go once the visitor unlocks
+    var pendingView = null;   // which in-page view to switch to once the visitor unlocks
+    var state = { unlocked: false };
 
     var TITLES = { menu: 'Settings', about: 'About', admin: 'Admin', unlock: 'Locked' };
 
-    /* --- storage, with private-mode browsers in mind ------------------- */
-    function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
-    function read(k)     { try { return localStorage.getItem(k); } catch (e) { return null; } }
-    function pass()      { return read(KEY_PASS) || DEFAULT_PASS; }
-    function isOpen()    { try { return sessionStorage.getItem(KEY_OPEN) === '1'; } catch (e) { return false; } }
-    function setOpen(v) {
-      try { v ? sessionStorage.setItem(KEY_OPEN, '1') : sessionStorage.removeItem(KEY_OPEN); } catch (e) {}
-      paintLocks();
+    /* --- server calls ---------------------------------------------------- */
+    function api(path, options) {
+      return fetch(path, Object.assign({ credentials: 'same-origin' }, options))
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (body) {
+            return { ok: res.ok, status: res.status, body: body };
+          });
+        });
     }
+
+    function refreshSession() {
+      return api('/api/session').then(function (r) {
+        state.unlocked = !!(r.ok && r.body && r.body.unlocked);
+        paintLocks();
+      }).catch(function () {
+        state.unlocked = false;
+        paintLocks();
+      });
+    }
+
+    function isOpen() { return state.unlocked; }
 
     /* --- lock state on screen ----------------------------------------- */
     function paintLocks() {
@@ -1471,7 +1583,12 @@
         pip.textContent = open ? 'Unlocked' : 'Locked';
         pip.setAttribute('data-state', open ? 'open' : 'shut');
       }
-      document.querySelectorAll('.card[data-lock]').forEach(function (c) {
+      var previewPip = document.getElementById('clientPreviewLockPip');
+      if (previewPip) {
+        previewPip.textContent = open ? 'Unlocked' : 'Locked';
+        previewPip.setAttribute('data-state', open ? 'open' : 'shut');
+      }
+      document.querySelectorAll('[data-lock]').forEach(function (c) {
         c.classList.toggle('is-unlocked', open);
         var b = c.querySelector('.lock-badge');
         if (b) b.lastChild.textContent = open ? ' Unlocked' : ' Locked';
@@ -1500,6 +1617,7 @@
       modal.hidden = true;
       document.body.style.overflow = '';
       pendingHref = null;
+      pendingView = null;
       clearForms();
       if (lastFocus && lastFocus.focus) lastFocus.focus();
     }
@@ -1527,7 +1645,7 @@
     gear.addEventListener('click', function () { openModal('menu'); });
 
     modal.addEventListener('click', function (e) {
-      if (e.target.hasAttribute('data-close')) closeModal();
+      if (e.target.closest('[data-close]')) closeModal();
     });
 
     document.addEventListener('keydown', function (e) {
@@ -1539,31 +1657,57 @@
       var prev = history[history.length - 1] || 'menu';
       history.pop();
       pendingHref = null;
+      pendingView = null;
       show(prev);
     });
 
     /* --- menu rows ------------------------------------------------------ */
+    function goAdmin() {
+      show('admin');
+      loadTestData();
+    }
+
     modal.querySelectorAll('[data-go]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var target = btn.dataset.go;
         if (target === 'admin' && !isOpen()) {
           pendingHref = null;
+          pendingView = null;
           document.getElementById('unlockWhy').textContent =
             'Admin is locked. Enter the password to manage it.';
           show('unlock');
           return;
         }
+        if (target === 'admin') { goAdmin(); return; }
         show(target);
       });
     });
 
-    /* --- locked cards ---------------------------------------------------- */
-    document.querySelectorAll('.card[data-lock]').forEach(function (card) {
+    /* --- client preview row --------------------------------------------- */
+    var clientPreviewRow = document.getElementById('clientPreviewRow');
+    if (clientPreviewRow) {
+      clientPreviewRow.addEventListener('click', function () {
+        if (!isOpen()) {
+          pendingHref = null;
+          pendingView = 'client-preview';
+          document.getElementById('unlockWhy').textContent =
+            'Client Preview is locked. Enter the password to open it.';
+          show('unlock');
+          return;
+        }
+        closeModal();
+        activateView('client-preview');
+      });
+    }
+
+    /* --- locked cards & links ---------------------------------------------- */
+    document.querySelectorAll('[data-lock]').forEach(function (card) {
       card.addEventListener('click', function (e) {
         if (isOpen()) return;                 // unlocked: follow the link normally
         e.preventDefault();
         shake(card);
         pendingHref = card.getAttribute('href');
+        pendingView = null;
         document.getElementById('unlockWhy').textContent =
           'This project is locked. Enter the password to open it.';
         openModal('unlock');
@@ -1575,22 +1719,59 @@
       e.preventDefault();
       var input = document.getElementById('unlockPass');
       var msg = document.getElementById('unlockMsg');
-      if (input.value === pass()) {
-        setOpen(true);
-        if (pendingHref) { window.location.href = pendingHref; return; }
-        msg.dataset.state = 'ok';
-        msg.textContent = 'Unlocked.';
-        input.value = '';
-        // drop the unlock step out of the trail, so Back lands on the menu
-        history = ['menu'];
-        setTimeout(function () { show('admin'); }, 350);
-      } else {
+      var submitBtn = e.target.querySelector('button[type="submit"]');
+
+      if (!input.value) {
         msg.dataset.state = 'error';
-        msg.textContent = input.value ? 'Wrong password.' : 'Enter the password first.';
+        msg.textContent = 'Enter the password first.';
         input.classList.add('bad');
         input.select();
         shake(modal.querySelector('.modal__box'));
+        return;
       }
+
+      submitBtn.disabled = true;
+      msg.removeAttribute('data-state');
+      msg.textContent = 'Checking…';
+
+      api('/api/unlock', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: input.value }),
+      }).then(function (r) {
+        submitBtn.disabled = false;
+        if (r.ok) {
+          state.unlocked = true;
+          paintLocks();
+          if (pendingHref) { window.location.href = pendingHref; return; }
+          if (pendingView) {
+            var toShow = pendingView;
+            pendingView = null;
+            closeModal();
+            activateView(toShow);
+            return;
+          }
+          msg.dataset.state = 'ok';
+          msg.textContent = 'Unlocked.';
+          input.value = '';
+          // drop the unlock step out of the trail, so Back lands on the menu
+          history = ['menu'];
+          setTimeout(goAdmin, 350);
+          return;
+        }
+        msg.dataset.state = 'error';
+        msg.textContent = r.status === 429
+          ? 'Too many attempts. Try again in a few minutes.'
+          : (r.body && r.body.error) || 'Wrong password.';
+        input.classList.add('bad');
+        input.select();
+        shake(modal.querySelector('.modal__box'));
+      }).catch(function () {
+        submitBtn.disabled = false;
+        msg.dataset.state = 'error';
+        msg.textContent = 'Could not reach the server. Try again.';
+        shake(modal.querySelector('.modal__box'));
+      });
     });
 
     document.getElementById('unlockPass').addEventListener('input', function () {
@@ -1603,6 +1784,7 @@
       var a = document.getElementById('newPass');
       var b = document.getElementById('newPass2');
       var msg = document.getElementById('passMsg');
+      var submitBtn = e.target.querySelector('button[type="submit"]');
 
       if (!a.value) {
         msg.dataset.state = 'error'; msg.textContent = 'Enter a new password.';
@@ -1616,11 +1798,39 @@
         msg.dataset.state = 'error'; msg.textContent = 'The two passwords do not match.';
         b.classList.add('bad'); b.focus(); shake(modal.querySelector('.modal__box')); return;
       }
-      store(KEY_PASS, a.value);
-      a.value = ''; b.value = '';
-      a.classList.remove('bad'); b.classList.remove('bad');
-      msg.dataset.state = 'ok';
-      msg.textContent = 'Password saved on this browser.';
+
+      submitBtn.disabled = true;
+      msg.removeAttribute('data-state');
+      msg.textContent = 'Saving…';
+
+      api('/api/admin/password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newPassword: a.value }),
+      }).then(function (r) {
+        submitBtn.disabled = false;
+        if (r.ok) {
+          a.value = ''; b.value = '';
+          a.classList.remove('bad'); b.classList.remove('bad');
+          msg.dataset.state = 'ok';
+          msg.textContent = 'Password saved in Supabase.';
+          return;
+        }
+        if (r.status === 401) {
+          state.unlocked = false;
+          paintLocks();
+          msg.dataset.state = 'error';
+          msg.textContent = 'Your session expired. Lock again and re-enter the password.';
+          return;
+        }
+        msg.dataset.state = 'error';
+        msg.textContent = (r.body && r.body.error) || 'Could not save the password.';
+        shake(modal.querySelector('.modal__box'));
+      }).catch(function () {
+        submitBtn.disabled = false;
+        msg.dataset.state = 'error';
+        msg.textContent = 'Could not reach the server. Try again.';
+      });
     });
 
     ['newPass', 'newPass2'].forEach(function (id) {
@@ -1630,13 +1840,87 @@
     });
 
     document.getElementById('lockAgain').addEventListener('click', function () {
-      setOpen(false);
-      clearForms();
-      show('menu');
+      api('/api/lock', { method: 'POST' }).then(function () {
+        state.unlocked = false;
+        paintLocks();
+        clearForms();
+        show('menu');
+      });
     });
 
-    paintLocks();
+    /* --- admin sub-tabs: Testing / Change Password ----------------------- */
+    var subtabs = modal.querySelectorAll('.subtab');
+    subtabs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        subtabs.forEach(function (b) { b.classList.toggle('is-on', b === btn); });
+        modal.querySelectorAll('.subpane').forEach(function (p) {
+          p.classList.toggle('is-on', p.dataset.subpane === btn.dataset.subtab);
+        });
+        if (btn.dataset.subtab === 'testing') loadTestData();
+      });
+    });
+
+    function escapeHtml(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function renderTestList(el, rows, renderRow) {
+      if (!rows) { el.innerHTML = '<p class="test-error">Could not load — try again.</p>'; return; }
+      if (!rows.length) { el.innerHTML = '<p class="test-empty">No records.</p>'; return; }
+      el.innerHTML = rows.map(renderRow).join('');
+    }
+
+    function loadTestData() {
+      var clientsEl = document.getElementById('testClients');
+      var backendEl = document.getElementById('testBackend');
+      if (!clientsEl || !backendEl) return;
+      clientsEl.textContent = 'Loading…';
+      backendEl.textContent = 'Loading…';
+
+      api('/api/test/clients').then(function (r) {
+        renderTestList(clientsEl, r.ok ? r.body.clients : null, function (c) {
+          return '<div class="test-row"><b>' + escapeHtml(c.name) + '</b><span>' +
+            escapeHtml(c.email) + (c.phone ? ' · ' + escapeHtml(c.phone) : '') + '</span><span>' +
+            escapeHtml(c.notes) + '</span></div>';
+        });
+      }).catch(function () { renderTestList(clientsEl, null); });
+
+      api('/api/test/backend-info').then(function (r) {
+        renderTestList(backendEl, r.ok ? r.body.backend : null, function (b) {
+          return '<div class="test-row"><b>' + escapeHtml(b.service_name) + '</b><span>' +
+            escapeHtml(b.internal_note) + '</span></div>';
+        });
+      }).catch(function () { renderTestList(backendEl, null); });
+    }
+
+    var refreshTestBtn = document.getElementById('refreshTest');
+    if (refreshTestBtn) refreshTestBtn.addEventListener('click', loadTestData);
+
+    refreshSession();
   })();
+
+  /* =====================================================================
+     View switching — Gallery / Client Preview / Our Clients share this one
+     page frame (topbar, hero, footer, settings). Only the section below the
+     marquee swaps; nothing here ever navigates to a different file.
+     ===================================================================== */
+  function activateView(name) {
+    ['gallery', 'client-preview', 'clients'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.hidden = (id !== name);
+    });
+    var target = document.getElementById(name);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.querySelectorAll('[data-view]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      activateView(el.dataset.view);
+    });
+  });
 
   // A real count, not a placeholder — read straight from the gallery grid
   // rather than hardcoded, so it can't drift out of sync as templates are
