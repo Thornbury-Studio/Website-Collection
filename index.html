@@ -473,6 +473,41 @@
   .card.is-unlocked .preview { filter: none; }
   .card.is-unlocked .lock-badge { color: #7fd6a0; border-color: rgba(127,214,160,0.4); }
 
+  /* ---------- stealth cards ----------
+     A stronger cover than .locked alone: an opaque veil over the WHOLE
+     card (image + title + description), not just a dimmed screenshot.
+     Used for work that shouldn't be publicly readable yet — e.g. a real
+     client project before the client has signed off on it going live.
+     The card stays in the grid at its normal spot; only its contents are
+     hidden. Same admin password / same modal as every other locked card —
+     this is a visibility toggle, not a second security system. Remove the
+     "stealth" class (and "locked", and data-lock, if no longer needed)
+     once the project is ready to show. */
+  .card.stealth .stealth-veil {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    padding: 28px;
+    /* Fully opaque — not a semi-transparent scrim. This covers a real
+       client's unreleased work, so nothing underneath may be visible at
+       any alpha, not even faintly at the edges. */
+    background: var(--bg);
+  }
+  .card.stealth .stealth-veil svg { width: 30px; height: 30px; color: var(--accent); }
+  .card.stealth .stealth-veil strong {
+    color: #fff; font-size: 1rem; letter-spacing: 0.03em;
+    font-family: var(--font-display); font-weight: 500;
+  }
+  .card.stealth .stealth-veil span { font-size: 0.82rem; color: var(--muted); max-width: 30ch; line-height: 1.5; }
+  .card.stealth:hover .stealth-veil { background: var(--surface); }
+  .card.stealth.is-unlocked .stealth-veil { display: none; }
+
   .card-foot {
     display: flex; align-items: center; justify-content: space-between;
     gap: 12px; flex-wrap: wrap;
@@ -1472,6 +1507,90 @@
       </div>
     </a>
 
+    <a class="card reveal" href="templates/dining-neap/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/dining-neap-sm.webp" alt="The NEAP homepage: the word &lsquo;NEAP&rsquo; in tracked serif caps over deep blue open water, above the line &lsquo;a tasting counter set to the tide&rsquo;." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Restaurant / Fine Dining</span>
+        <h3>NEAP</h3>
+        <p>A fourteen-seat tasting counter whose menu is written by the moon &mdash; real lunar arithmetic decides whether the Flood or the Still menu is served tonight, a computed tide clock maps the next twenty-eight nights, and the dishes themselves are pure typography. One 4K hero, a school of silver fish on film, and a reservations desk that answers in the house&rsquo;s own voice.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/cafe-loam/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/cafe-loam-sm.webp" alt="The LOAM homepage: the words &lsquo;Good coffee, no theatre.&rsquo; over a warm photograph of espresso running into two white cups." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Caf&eacute; / Food &amp; Drink</span>
+        <h3>LOAM</h3>
+        <p>A neighbourhood caf&eacute; and small roastery, built thumb-first. Every item on the board is photographed as one consistent shoot; tap anything to build a tray that follows you between pages, steps quantities, notes the counter and computes its own pickup time. A taste finder narrows sixteen items by milk, strength and temperature, and the kitchen honestly closes when the clock says so.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card locked stealth reveal" href="templates/professor-brawn/index.html" data-lock="professor-brawn">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/professor-brawn-sm.webp" alt="The Professor Brawn Caf&eacute; homepage: the words &lsquo;Eat well. Do good.&rsquo; beside a plate of battered fish and chips, over a warm parchment layout." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Caf&eacute; / Client Redesign</span>
+        <h3>PROFESSOR BRAWN</h3>
+        <p>A full redesign concept for a real Singapore social-enterprise caf&eacute;, built entirely from the client's own recovered photography and verified facts. The menu becomes a browsable course catalogue with an outlet toggle and honest per-caf&eacute; pricing, the mission is woven through as a story rather than a plea, and every fact &mdash; hours, parking, WhatsApp lines, venue packages &mdash; matches the live business.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+          <span class="lock-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            Locked
+          </span>
+        </span>
+      </div>
+      <div class="stealth-veil">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.5 18.5 0 0 1 5.06-5.94"/><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a18.51 18.51 0 0 1-2.16 3.19"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        <strong>Unavailable</strong>
+        <span>Client project &mdash; not public yet. Admin password required to preview.</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/dessert-sejuk/index.html">
+      <div class="preview">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <div class="mock-nav"></div>
+        <div class="mock-hero">
+          <div class="mock-line w60"></div>
+          <div class="mock-line w40"></div>
+          <div class="mock-cta"></div>
+        </div>
+        <div class="mock-blocks"><div></div><div></div><div></div></div>
+      </div>
+      <div class="card-body">
+        <span class="tag">Dessert / Shaved Ice</span>
+        <h3>SEJUK&deg;</h3>
+        <p>An equatorial ice house selling snow-fine shaved milk-ice in Singapore flavours, pickup only, because an ice lives fifteen minutes. The board sizes and stacks each peak in a sheet that prices itself live; a kopitiam chit follows you between pages, computes its own shave time, and generates pickup slots from each room&rsquo;s real hours minus the last-shave cutoff.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+          <span class="wip-badge"><i></i>In progress &mdash; photos pending</span>
+        </span>
+      </div>
+    </a>
+
     <a class="card locked reveal" href="portfolio/index.html" data-lock="portfolio">
       <div class="preview preview--shot">
 
@@ -1592,6 +1711,23 @@
         c.classList.toggle('is-unlocked', open);
         var b = c.querySelector('.lock-badge');
         if (b) b.lastChild.textContent = open ? ' Unlocked' : ' Locked';
+      });
+      // Stealth cards additionally hide their real title/description from
+      // assistive tech while veiled — the veil's own text becomes the
+      // card's accessible name via aria-label, since aria-hidden children
+      // don't stop an ancestor's own aria-label from being announced.
+      document.querySelectorAll('.card.stealth[data-lock]').forEach(function (c) {
+        var preview = c.querySelector('.preview');
+        var body = c.querySelector('.card-body');
+        if (open) {
+          c.removeAttribute('aria-label');
+          if (preview) preview.removeAttribute('aria-hidden');
+          if (body) body.removeAttribute('aria-hidden');
+        } else {
+          c.setAttribute('aria-label', 'Hidden project. Not public yet — enter the admin password to preview.');
+          if (preview) preview.setAttribute('aria-hidden', 'true');
+          if (body) body.setAttribute('aria-hidden', 'true');
+        }
       });
     }
 

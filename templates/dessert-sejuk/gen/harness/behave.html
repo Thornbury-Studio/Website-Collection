@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SEJUK behaviour harness</title>
+</head>
+<body>
+<pre id="out"></pre>
+<script>
+  var results = [];
+  function t(name, ok, detail) {
+    results.push((ok ? "PASS" : "FAIL") + " " + name + (detail ? " — " + detail : ""));
+  }
+  function finish() {
+    document.getElementById("out").textContent =
+      "BEHAVE_JSON " + JSON.stringify(results);
+    document.title = "behave-done";
+  }
+
+  function frame(src) {
+    return new Promise(function (res) {
+      var f = document.createElement("iframe");
+      f.width = 420;
+      f.height = 900;
+      f.src = src;
+      f.addEventListener("load", function () { setTimeout(function () { res(f); }, 400); });
+      document.body.appendChild(f);
+    });
+  }
+
+  (async function () {
+    try {
+      /* ---------- 1 · menu page: item sheet math ---------- */
+      var mf = await frame("../../menu.html");
+      var mw = mf.contentWindow, md = mf.contentDocument;
+      var cat = mw.SEJUK.cat;
+
+      mw.localStorage.clear();
+
+      t("catalogue loaded", !!cat && cat.ICES.length === 8, "ices=" + (cat && cat.ICES.length));
+
+      /* open the sheet for the signature */
+      var chooseBtn = md.querySelector('[data-choose="gunung-pandan"]');
+      t("choose button exists", !!chooseBtn);
+      chooseBtn.click();
+      await new Promise(function (r) { setTimeout(r, 350); });
+      var sheet = md.querySelector(".item-sheet");
+      t("item sheet opened", sheet && !sheet.hidden);
+
+      /* size to berdua + two add-ons; price must be computed */
+      var berduaChip = sheet.querySelector('[data-size-chip="berdua"]');
+      berduaChip.click();
+      var boxes = sheet.querySelectorAll(".addon-row input");
+      boxes[0].click(); /* extra gula 1.50 */
+      boxes[1].click(); /* kaya cloud 2.00 */
+      boxes[0].dispatchEvent(new Event("change", { bubbles: true }));
+      boxes[1].dispatchEvent(new Event("change", { bubbles: true }));
+      await new Promise(function (r) { setTimeout(r, 100); });
+      var item = cat.byId("gunung-pandan");
+      var want = item.price + cat.BERDUA_SURCHARGE + 1.5 + 2.0;
+      var addBtn = sheet.querySelector("[data-sheet-add]");
+      t("sheet price computed", addBtn.textContent.indexOf(cat.fmt(want)) !== -1,
+        "btn='" + addBtn.textContent + "' want " + cat.fmt(want));
+
+      addBtn.click();
+      await new Promise(function (r) { setTimeout(r, 300); });
+      var chit = mw.SEJUK.chit;
+      t("line added with options", chit.lines().length === 1 &&
+        chit.lines()[0].size === "berdua" && chit.lines()[0].addons.length === 2);
+      t("chit badge shows 1", md.querySelector("[data-chit-count]").textContent === "1");
+      t("card marked on-chit", md.querySelector('[data-item="gunung-pandan"] .card-add').classList.contains("is-on-chit") ||
+        md.querySelector('[data-on-chit="gunung-pandan"]').classList.contains("is-on-chit"));
+
+      /* quick add a drink via delegated data-add */
+      md.querySelector('[data-add="kopi-peng"]').click();
+      await new Promise(function (r) { setTimeout(r, 200); });
+      t("drink added", chit.count() === 2, "count=" + chit.count());
+      var wantTotal = want + cat.byId("kopi-peng").price;
+      t("total computed from catalogue", Math.abs(chit.total() - wantTotal) < 0.001,
+        "total=" + chit.total() + " want=" + wantTotal);
+      var wantReady = Math.ceil((180 + 150 + 45) / 60);
+      t("ready-in computed from shave model", chit.readyIn() === wantReady,
+        "ready=" + chit.readyIn() + " want=" + wantReady);
+
+      /* filters */
+      var dfChip = md.querySelector('[data-filter-diet="df"]');
+      dfChip.click();
+      await new Promise(function (r) { setTimeout(r, 200); });
+      var visibleIces = md.querySelectorAll("[data-item]:not([hidden])").length;
+      t("dairy-free filter shows 4", visibleIces === 4, "visible=" + visibleIces);
+      dfChip.click();
+      await new Promise(function (r) { setTimeout(r, 100); });
+
+      /* service hours rendered (footer) */
+      t("hours table renders 7 days", md.querySelector('[data-hours="joo-chiat"]').querySelectorAll(".hours-row").length === 7);
+
+      /* ---------- 2 · pickup page: slots + ticket ---------- */
+      var pf = await frame("../../pickup.html");
+      var pw = pf.contentWindow, pd = pf.contentDocument;
+      await new Promise(function (r) { setTimeout(r, 300); });
+
+      t("chit persisted across pages", pw.SEJUK.chit.count() === 2, "count=" + pw.SEJUK.chit.count());
+
+      var radios = pd.querySelectorAll('input[name="outlet"]');
+      t("two rooms offered", radios.length === 2);
+      t("room status lines live", /Open|Closed|Opens/.test(pd.querySelectorAll(".pick-option .o-sub.mono")[0].textContent));
+      radios[1].click();
+      radios[1].dispatchEvent(new Event("change", { bubbles: true }));
+      await new Promise(function (r) { setTimeout(r, 300); });
+
+      var slots = pd.querySelectorAll(".slot");
+      var dayChips = pd.querySelectorAll(".opt-row .chip");
+      t("day chips offered", dayChips.length === 2);
+      if (!slots.length) {
+        /* late-night run: today may be done — flip to tomorrow */
+        dayChips[1].click();
+        await new Promise(function (r) { setTimeout(r, 300); });
+        slots = pd.querySelectorAll(".slot");
+      }
+      t("slots computed", slots.length > 0, "slots=" + slots.length);
+
+      if (slots.length) {
+        /* earliest slot must respect ready-in */
+        var ready = pw.SEJUK.chit.readyIn();
+        var now = new Date();
+        var firstLabel = slots[0].textContent;
+        var parts = firstLabel.split(":");
+        var firstMins = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+        var todaySelected = dayChips[0].getAttribute("aria-pressed") === "true";
+        if (todaySelected) {
+          var nowMins = now.getHours() * 60 + now.getMinutes();
+          t("first slot ≥ now + ready", firstMins >= nowMins + ready - 1,
+            "first=" + firstLabel + " now+ready=" + (nowMins + ready));
+        } else {
+          t("first slot ≥ open + ready (tomorrow)", firstMins >= 720 + ready - 1, "first=" + firstLabel);
+        }
+
+        slots[0].click();
+        await new Promise(function (r) { setTimeout(r, 200); });
+
+        var nameInput = pd.querySelector('input[autocomplete="name"]');
+        var telInput = pd.querySelector('input[type="tel"]');
+        nameInput.value = "Ari Tan";
+        nameInput.dispatchEvent(new Event("input", { bubbles: true }));
+
+        /* bad phone first: must be rejected */
+        telInput.value = "12345";
+        telInput.dispatchEvent(new Event("input", { bubbles: true }));
+        var sendBtn = null;
+        pd.querySelectorAll("#chit-summary .btn").forEach(function (b) { sendBtn = b; });
+        sendBtn.click();
+        await new Promise(function (r) { setTimeout(r, 200); });
+        t("bad phone rejected", !pd.querySelector(".ticket") && pd.querySelector(".field.is-bad"));
+
+        telInput.value = "9123 4567";
+        telInput.dispatchEvent(new Event("input", { bubbles: true }));
+        pd.querySelectorAll("#chit-summary .btn").forEach(function (b) { sendBtn = b; });
+        sendBtn.click();
+        await new Promise(function (r) { setTimeout(r, 400); });
+
+        var ticket = pd.querySelector(".ticket");
+        t("ticket rendered", !!ticket);
+        t("ticket carries chit no", ticket && /CHIT (TB|JC)-\d{3}/.test(ticket.textContent));
+        t("ticket carries total", ticket && ticket.textContent.indexOf(pd.defaultView.SEJUK.cat.fmt(wantTotal)) !== -1);
+        t("chit cleared after send", pw.SEJUK.chit.count() === 0);
+
+        /* reload keeps the ticket */
+        var pf2 = await frame("../../pickup.html");
+        await new Promise(function (r) { setTimeout(r, 400); });
+        t("ticket survives reload", !!pf2.contentDocument.querySelector(".ticket"));
+        pf2.contentWindow.localStorage.removeItem("sejuk.order.v1");
+      }
+
+      /* ---------- 3 · chit revalidation drops ghosts ---------- */
+      mw.localStorage.setItem("sejuk.chit.v1", JSON.stringify({ lines: [{ id: "unicorn-float", qty: 3 }, { id: "kopi-peng", qty: 99 }], note: "x" }));
+      var vf = await frame("../../menu.html");
+      await new Promise(function (r) { setTimeout(r, 300); });
+      var lines = vf.contentWindow.SEJUK.chit.lines();
+      t("ghost item dropped on load", lines.length === 1 && lines[0].id === "kopi-peng");
+      t("quantity clamped to 9", lines[0].qty === 9, "qty=" + lines[0].qty);
+      vf.contentWindow.localStorage.clear();
+    } catch (e) {
+      t("harness crashed", false, e.message + " @ " + (e.stack || "").split("\n")[1]);
+    }
+    finish();
+  })();
+</script>
+</body>
+</html>

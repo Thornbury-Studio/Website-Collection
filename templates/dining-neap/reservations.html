@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reservations — NEAP</title>
+<meta name="description" content="Fourteen seats, two seatings, bookings released at noon on the first of each month. Ask the counter for a night and it will tell you which menu the moon has planned.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/dining-neap/reservations.html">
+<meta name="theme-color" content="#f3f0e9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f3f0e9'/%3E%3Cpath d='M16 5a11 11 0 1 0 0 22 13.5 11 0 0 1 0-22Z' fill='%23274850'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NEAP">
+<meta property="og:title" content="Reservations — NEAP">
+<meta property="og:description" content="Fourteen seats, two seatings, bookings released at noon on the first of each month.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/dining-neap/reservations.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/dining-neap/img/hero-water-1600.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reservations — NEAP">
+<meta name="twitter:description" content="Fourteen seats, two seatings, bookings released at noon on the first of each month.">
+<meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/dining-neap/img/hero-water-1600.webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head on-paper">
+  <a class="brand" href="index.html" aria-label="NEAP, home">
+    <svg class="moon-glyph" data-moon width="26" height="26" viewBox="0 0 100 100" aria-hidden="true"></svg>
+    NEAP
+  </a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="menu.html">The Menus</a>
+    <a href="source.html">The Source</a>
+    <a href="reservations.html" aria-current="page">Reservations</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="t-kicker">Reservations</span>
+        <h1 class="t-sec">The counter holds <span data-seats>fourteen</span>.</h1>
+      </div>
+
+      <div class="res-grid">
+        <div>
+          <p class="t-lede reveal">Two seatings a night, at <span data-seatings>17:45 and 20:45</span>. Ask for a night; the counter will tell you which menu the moon has planned for it.</p>
+
+          <div class="release-note reveal d1">
+            <p><span class="t-mono">Open now</span> &mdash; nights through <strong data-open-through>&mdash;</strong>.</p>
+            <p><span class="t-mono">Next release</span> &mdash; <span data-next-release>&mdash;</span>, when <span data-next-month>&mdash;</span> opens.</p>
+          </div>
+
+          <ul class="house-rules reveal d2">
+            <li>
+              <span class="n">01</span>
+              <p>Parties of <span data-max-party>four</span> at most. The counter is a row, not a room; larger tables would have to shout.</p>
+            </li>
+            <li>
+              <span class="n">02</span>
+              <p>The menu is taken whole. Allergies in writing <span data-notice-hours>72</span> hours ahead, and the kitchen will meet them properly rather than by subtraction.</p>
+            </li>
+            <li>
+              <span class="n">03</span>
+              <p>A deposit of <span data-deposit>120</span> per guest holds the seat and comes off the bill. Inside <span data-notice-hours>72</span> hours it stays with the boats, who have already been paid.</p>
+            </li>
+            <li>
+              <span class="n">04</span>
+              <p>Children are welcome at the early seating from twelve years &mdash; the age at which a nine-course argument about adjectives becomes interesting.</p>
+            </li>
+            <li>
+              <span class="n">05</span>
+              <p>The telephone rings in an empty room during service. Write instead; writing gets answered between tides.</p>
+            </li>
+            <li>
+              <span class="n">06</span>
+              <p>An evening at the counter can be given to someone else &mdash; ask, and a card in ink will be posted to them.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div data-form-wrap>
+            <form class="res-form reveal" data-res-form novalidate>
+              <h2>Ask for a seat</h2>
+              <p class="form-sub">A request, not yet a booking &mdash; the counter replies in writing.</p>
+
+              <div class="field">
+                <label for="r-name">Name</label>
+                <input id="r-name" name="name" type="text" autocomplete="name" required>
+                <p class="err"></p>
+              </div>
+
+              <div class="field">
+                <label for="r-email">Email</label>
+                <input id="r-email" name="email" type="email" autocomplete="email" required>
+                <p class="err"></p>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="r-date">Night</label>
+                  <input id="r-date" name="date" type="date" required>
+                  <p class="err"></p>
+                </div>
+                <div class="field">
+                  <label for="r-seating">Seating</label>
+                  <select id="r-seating" name="seating">
+                    <option value="17:45">17:45</option>
+                    <option value="20:45">20:45</option>
+                  </select>
+                  <p class="err"></p>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="r-seats">Seats</label>
+                <select id="r-seats" name="seats">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+                <p class="err"></p>
+              </div>
+
+              <div class="field">
+                <label for="r-notes">Anything the kitchen should know</label>
+                <textarea id="r-notes" name="notes" rows="3"></textarea>
+                <p class="err"></p>
+              </div>
+
+              <button class="btn" type="submit">Ask the counter</button>
+            </form>
+          </div>
+
+          <div class="held reveal" data-held hidden>
+            <h2>Held.</h2>
+            <p>For <strong data-held-name></strong> &mdash; <span data-held-line></span></p>
+            <p data-held-moon></p>
+            <p class="t-mono">Request <span data-held-code></span></p>
+            <p class="muted">The counter has your request and replies in writing before the next tide turns. Nothing is owed until the reply.</p>
+            <div class="held-actions">
+              <a class="btn" href="menu.html">Read the menus</a>
+              <button class="btn btn-ghost" type="button" data-release>Let the request go</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="foot-grid">
+    <div>
+      <span class="foot-brand">
+        <svg class="moon-glyph" data-moon width="24" height="24" viewBox="0 0 100 100" aria-hidden="true"></svg>
+        NEAP
+      </span>
+      <p class="foot-tag">A tasting counter set to the tide.</p>
+    </div>
+    <div>
+      <h3>Visit</h3>
+      <address>
+        The Slipway<br>
+        3 Harbour Steps<br>
+        by the old ice house
+      </address>
+    </div>
+    <div>
+      <h3>Write</h3>
+      <ul>
+        <li><a href="reservations.html">Reservations</a></li>
+        <li><a href="menu.html">The menus</a></li>
+        <li><a href="source.html">The source</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-line">
+    <span>&copy; <span data-year>2026</span> NEAP</span>
+    <span data-tide-phase></span>
+  </div>
+</footer>
+
+<script src="js/tide.js"></script>
+<script src="js/menus.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/reserve.js"></script>
+</body>
+</html>
