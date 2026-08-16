@@ -17,6 +17,12 @@
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js';
 
+function visualRandom() {
+  const bytes = new Uint32Array(1);
+  window.crypto.getRandomValues(bytes);
+  return bytes[0] / 0x100000000;
+}
+
 /* ---------- one-time CPU noise bake (not used per-frame) ---------- */
 function hash3(x, y, z) {
   const h = Math.sin(x * 127.1 + y * 311.7 + z * 74.7) * 43758.5453123;
@@ -141,9 +147,9 @@ function initHero3D(canvas) {
   const particleCount = tier === 'low' ? 60 : 130;
   const positions = new Float32Array(particleCount * 3);
   for (let i = 0; i < particleCount; i++) {
-    const r = 3.6 + Math.random() * 2.6;
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos(Math.random() * 2 - 1);
+    const r = 3.6 + visualRandom() * 2.6;
+    const theta = visualRandom() * Math.PI * 2;
+    const phi = Math.acos(visualRandom() * 2 - 1);
     positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
     positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
     positions[i * 3 + 2] = r * Math.cos(phi) * 0.5;

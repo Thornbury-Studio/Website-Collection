@@ -126,7 +126,7 @@
         track.appendChild(copy);
       }
       track.style.animationDuration = (secondsPerCopy * perHalf) + 's';
-      void track.offsetWidth; /* commit the detach before reattaching */
+      track.offsetWidth; /* commit the detach before reattaching */
       track.style.animationName = '';
     }
 

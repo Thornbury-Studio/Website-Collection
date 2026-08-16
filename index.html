@@ -1772,7 +1772,7 @@
     function shake(el) {
       if (!el) return;
       el.classList.remove('shake');
-      void el.offsetWidth;              // force a reflow so the class re-fires
+      el.offsetWidth;                   // force a reflow so the class re-fires
       el.classList.add('shake');
       setTimeout(function () { el.classList.remove('shake'); }, 460);
     }
@@ -2117,7 +2117,7 @@
       }
       track.style.animationDuration = (secondsPerCopy * perHalf) + 's';
 
-      void track.offsetWidth; // force layout so the browser commits animation-name:none first
+      track.offsetWidth; // force layout so the browser commits animation-name:none first
       track.style.animationName = '';
     }
 
@@ -2179,8 +2179,6 @@
         the pointer leaves a button or card — an idle page, and a page
         whose pointer is merely passing over dead space, runs no script. */
   if (isFinePointer) {
-    const meshEl = document.querySelector('.mesh');
-
     const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
     let btn = null, btnRect = null;
     let card = null, cardRect = null;
@@ -2249,14 +2247,14 @@
       if (card) { releaseCard(card); card = null; cardRect = null; }
     });
 
-    // One rAF-throttled scroll listener: mesh parallax (a transform on a
-    // filter-free layer — compositor-only) plus hover-rect invalidation.
+    // One rAF-throttled scroll listener for hover-rect invalidation. The
+    // background mesh stays fixed to the viewport so it does not drift out of
+    // phase with opposite corners while the gallery scrolls.
     let scrollRaf = 0;
     window.addEventListener('scroll', () => {
       if (scrollRaf) return;
       scrollRaf = requestAnimationFrame(() => {
         scrollRaf = 0;
-        if (meshEl) meshEl.style.transform = `translateY(${(window.scrollY * 0.08).toFixed(1)}px)`;
         rectsStale = true;
         if (btn || card) wake();   // stale rects only matter while something is hovered
       });

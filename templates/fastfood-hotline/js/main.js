@@ -133,7 +133,7 @@
       }
       track.style.animationDuration = (secondsPerCopy * perHalf) + 's';
 
-      void track.offsetWidth;      // load-bearing: commits animation-name:none first
+      track.offsetWidth;      // load-bearing: commits animation-name:none first
       track.style.animationName = '';
     }
 

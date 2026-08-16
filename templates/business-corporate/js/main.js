@@ -66,7 +66,7 @@ function initWork() {
         </dl>
       </aside>`;
     panel.classList.remove('is-swapping');
-    void panel.offsetWidth;
+    panel.offsetWidth;
     panel.classList.add('is-swapping');
   }
 
@@ -109,7 +109,7 @@ function initMethod() {
       <p class="md-detail">${esc(s.detail)}</p>
       <p class="md-gives"><span>You hold at the end</span>${esc(s.gives)}</p>`;
     detail.classList.remove('is-swapping');
-    void detail.offsetWidth;
+    detail.offsetWidth;
     detail.classList.add('is-swapping');
   }
 

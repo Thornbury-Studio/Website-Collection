@@ -144,7 +144,7 @@
       paint(e.detail);
       if (topBag && !reduce) {
         topBag.classList.remove('is-bump');
-        void topBag.offsetWidth;          // restart the transition cleanly
+        topBag.offsetWidth;          // restart the transition cleanly
         topBag.classList.add('is-bump');
         setTimeout(function () { topBag.classList.remove('is-bump'); }, 340);
       }
@@ -154,7 +154,7 @@
       if (!drawer) return;
       lastFocus = document.activeElement;
       scrim.hidden = false;
-      void scrim.offsetWidth;
+      scrim.offsetWidth;
       scrim.classList.add('is-open');
       drawer.classList.add('is-open');
       drawer.setAttribute('aria-hidden', 'false');

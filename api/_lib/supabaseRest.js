@@ -12,6 +12,9 @@ async function sbFetch(path, options) {
   if (!SUPABASE_URL || !SERVICE_KEY) {
     throw new Error('Supabase is not configured (missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY).');
   }
+  if (!path || typeof path !== 'string' || !path.startsWith('/')) {
+    throw new Error('Invalid Supabase REST path.');
+  }
 
   // A hung upstream shouldn't be able to hold a Vercel function open for its
   // full execution budget — cap every Supabase call explicitly rather than
@@ -21,14 +24,16 @@ async function sbFetch(path, options) {
 
   let res;
   try {
-    res = await fetch(SUPABASE_URL + '/rest/v1' + path, {
+    const baseUrl = SUPABASE_URL.replace(/\/+$/, '');
+    const restUrl = new URL(baseUrl + '/rest/v1' + path);
+    res = await fetch(restUrl.toString(), {
       ...options,
       signal: controller.signal,
       headers: {
         apikey: SERVICE_KEY,
         Authorization: 'Bearer ' + SERVICE_KEY,
         'Content-Type': 'application/json',
-        ...(options && options.headers),
+        ...options?.headers,
       },
     });
   } finally {

@@ -329,7 +329,6 @@ p:last-child { margin-bottom: 0; }
   width: .85rem; height: .85rem;
   border: 2.5px solid #b3260b;
   border-radius: 50%;
-  position: relative;
   flex-shrink: 0;
 }
 .shake-btn__ban::after {

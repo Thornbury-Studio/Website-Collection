@@ -353,7 +353,6 @@ h1 em, h2 em { font-style: normal; color: var(--coral-deep); }
 .service h3 { font-size: 1.38rem; }
 .service p { font-size: .96rem; color: var(--ink-soft); flex: 1; }
 .service-price {
-  align-self: flex-start;
   font-size: .82rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
   color: var(--teal);
   padding-top: .7rem; margin-top: .2rem;

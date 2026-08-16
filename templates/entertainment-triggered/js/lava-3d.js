@@ -16,6 +16,12 @@
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js';
 
+function visualRandom() {
+  const bytes = new Uint32Array(1);
+  window.crypto.getRandomValues(bytes);
+  return bytes[0] / 0x100000000;
+}
+
 const host = document.getElementById('lava');
 if (host && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   try { boot(host); } catch (e) { host.classList.add('is-dead'); }
@@ -107,7 +113,7 @@ function boot(host) {
   const edgeMat = new THREE.LineBasicMaterial({ color: 0xc9ff3d, transparent: true, opacity: 0.55 });
   const tiles = [];
 
-  // Jittered grid rather than pure random placement. Independent Math.random()
+  // Jittered grid rather than pure random placement. Independent visualRandom()
   // on x and z clumps badly at these counts — two tiles landing near each other
   // is far more likely than intuition suggests. Stratifying gives every tile its
   // own depth slice AND its own lateral column (a Latin-square arrangement), so
@@ -121,7 +127,7 @@ function boot(host) {
 
   const cols = Array.from({ length: N }, (_, i) => i);
   for (let i = cols.length - 1; i > 0; i--) {           // Fisher-Yates
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(visualRandom() * (i + 1));
     [cols[i], cols[j]] = [cols[j], cols[i]];
   }
 
@@ -133,17 +139,17 @@ function boot(host) {
 
     // 0.18..0.82 inside the cell keeps tiles off their shared cell borders,
     // which is where neighbours would otherwise be able to touch.
-    const jx = 0.18 + Math.random() * 0.64;
-    const jz = 0.18 + Math.random() * 0.64;
+    const jx = 0.18 + visualRandom() * 0.64;
+    const jz = 0.18 + visualRandom() * 0.64;
     grp.position.set(
       X_MIN + (cols[i] + jx) * xStep,
-      0.2 + (i % 3) * 0.26 + Math.random() * 0.18,   // staggered heights
+      0.2 + (i % 3) * 0.26 + visualRandom() * 0.18,   // staggered heights
       Z_MIN + (i + jz) * zStep
     );
-    grp.rotation.y = Math.random() * Math.PI;
-    grp.scale.setScalar(0.68 + Math.random() * 0.5);
+    grp.rotation.y = visualRandom() * Math.PI;
+    grp.scale.setScalar(0.68 + visualRandom() * 0.5);
     scene.add(grp);
-    tiles.push({ grp, phase: Math.random() * Math.PI * 2, baseY: grp.position.y });
+    tiles.push({ grp, phase: visualRandom() * Math.PI * 2, baseY: grp.position.y });
   }
 
   /* ---------- sizing ---------- */
