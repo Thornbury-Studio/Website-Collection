@@ -10,8 +10,14 @@ module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (!requireSession(req, res)) return;
 
+  let body;
   try {
-    const body = req.body && typeof req.body === 'object' ? req.body : JSON.parse(req.body || '{}');
+    body = req.body && typeof req.body === 'object' ? req.body : JSON.parse(req.body || '{}');
+  } catch (e) {
+    return res.status(400).json({ error: 'Invalid request body.' });
+  }
+
+  try {
     const newPassword = typeof body.newPassword === 'string' ? body.newPassword : '';
     if (newPassword.length < 4) {
       return res.status(400).json({ error: 'Use at least 4 characters.' });
