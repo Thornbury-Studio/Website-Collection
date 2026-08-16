@@ -257,7 +257,7 @@
       $('cartbarTotal').textContent = money(sub);
       if (popped && !reduced) {
         cartbar.classList.remove('is-pop');
-        void cartbar.offsetWidth;
+        cartbar.offsetWidth;
         cartbar.classList.add('is-pop');
       }
     }

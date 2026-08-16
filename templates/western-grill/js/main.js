@@ -244,7 +244,7 @@
     $('ticketbarTotal').textContent = money(s);
     if (bump && !reduced && n) {
       bar.classList.remove('is-bump');
-      void bar.offsetWidth;
+      bar.offsetWidth;
       bar.classList.add('is-bump');
     }
 

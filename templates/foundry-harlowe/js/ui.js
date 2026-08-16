@@ -144,7 +144,7 @@
           cNS.style.transformOrigin = x + 'px ' + y + 'px';
           svg.appendChild(cNS);
           // force layout so the animation class lands as a fresh instance
-          void cNS.getBBox();
+          cNS.getBBox();
           cNS.classList.add('go');
           setTimeout(function () { if (cNS.parentNode) cNS.parentNode.removeChild(cNS); }, 2000);
         }, i * 140);
@@ -271,7 +271,7 @@
         track.appendChild(copy);
       }
       track.style.animationDuration = (secondsPerCopy * perHalf) + 's';
-      void track.offsetWidth; // commit animation-name:none before reattaching
+      track.offsetWidth; // commit animation-name:none before reattaching
       track.style.animationName = '';
     }
     build();

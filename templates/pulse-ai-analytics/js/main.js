@@ -906,7 +906,7 @@
       }
       track.style.animationDuration = (secondsPerCopy * perHalf) + 's';
 
-      void track.offsetWidth; // force layout so the browser commits animation-name:none first
+      track.offsetWidth; // force layout so the browser commits animation-name:none first
       track.style.animationName = '';
     }
 

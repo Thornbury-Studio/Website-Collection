@@ -187,9 +187,35 @@ if (!outArg) {
   process.exit(1);
 }
 
-const outPath = path.resolve(__dirname, outArg);
-if (outPath !== __dirname && !outPath.startsWith(__dirname + path.sep)) {
-  console.error(`Refusing to write outside ${__dirname}: ${outPath}`);
+function resolveOutputPath(rawArg) {
+  if (rawArg.includes('\0')) {
+    throw new Error('Output path contains an invalid null byte.');
+  }
+
+  const baseDir = fs.realpathSync(__dirname);
+  const candidate = path.resolve(baseDir, rawArg);
+  const parentDir = fs.realpathSync(path.dirname(candidate));
+  const relativeParent = path.relative(baseDir, parentDir);
+  const relativeTarget = path.relative(baseDir, candidate);
+
+  if (
+    relativeTarget === '' ||
+    relativeTarget.startsWith('..') ||
+    path.isAbsolute(relativeTarget) ||
+    relativeParent.startsWith('..') ||
+    path.isAbsolute(relativeParent)
+  ) {
+    throw new Error(`Refusing to write outside ${baseDir}: ${candidate}`);
+  }
+
+  return candidate;
+}
+
+let outPath;
+try {
+  outPath = resolveOutputPath(outArg);
+} catch (error) {
+  console.error(error.message);
   process.exit(1);
 }
 

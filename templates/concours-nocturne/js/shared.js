@@ -56,7 +56,7 @@
       var pinned = N.togglePin(btn.getAttribute('data-pin'));
       if (pinned && !N.reduced) {
         btn.classList.remove('stamp');
-        void btn.offsetWidth;
+        btn.offsetWidth;
         btn.classList.add('stamp');
       }
     });

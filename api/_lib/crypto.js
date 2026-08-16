@@ -2,7 +2,7 @@
 // and session-token signing (HMAC-SHA256). Nothing here ever leaves the
 // server: these functions only run inside /api/* handlers.
 
-const crypto = require('crypto');
+const crypto = require('node:crypto');
 
 const SCRYPT_KEYLEN = 64;
 
@@ -13,10 +13,14 @@ function hashPassword(password, salt) {
 }
 
 function verifyPassword(password, salt, hash) {
-  const candidate = crypto.scryptSync(password, salt, SCRYPT_KEYLEN);
-  const stored = Buffer.from(hash, 'hex');
-  if (candidate.length !== stored.length) return false;
-  return crypto.timingSafeEqual(candidate, stored);
+  try {
+    const candidate = crypto.scryptSync(password, salt, SCRYPT_KEYLEN);
+    const stored = Buffer.from(hash, 'hex');
+    if (candidate.length !== stored.length) return false;
+    return crypto.timingSafeEqual(candidate, stored);
+  } catch {
+    return false;
+  }
 }
 
 function sign(payload, secret) {
@@ -42,7 +46,7 @@ function verifySessionToken(token, secret) {
   try {
     const data = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
     return typeof data.exp === 'number' && data.exp > Date.now();
-  } catch (e) {
+  } catch {
     return false;
   }
 }

@@ -1,6 +1,7 @@
 const { verifyPassword, createSessionToken, hashIp } = require('./_lib/crypto');
 const { getPasswordRecord, recordAttempt, countRecentAttempts } = require('./_lib/authData');
 const { serializeCookie, isHttps } = require('./_lib/cookies');
+const { parseJsonBody } = require('./_lib/requestBody');
 
 const SESSION_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours
 const MAX_ATTEMPTS = 8;
@@ -25,15 +26,11 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Server not configured.' });
   }
 
-  let body;
-  try {
-    body = req.body && typeof req.body === 'object' ? req.body : JSON.parse(req.body || '{}');
-  } catch (e) {
-    return res.status(400).json({ error: 'Invalid request body.' });
-  }
+  const parsed = parseJsonBody(req);
+  if (!parsed.ok) return res.status(parsed.status).json({ error: parsed.error });
 
   try {
-    const password = typeof body.password === 'string' ? body.password : '';
+    const password = typeof parsed.body.password === 'string' ? parsed.body.password : '';
 
     // Cheapest possible reject first — no DB call, no scrypt — before any
     // real work happens on a request shaped to waste it.

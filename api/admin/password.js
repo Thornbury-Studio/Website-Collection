@@ -1,6 +1,7 @@
 const { requireSession } = require('../_lib/requireSession');
 const { hashPassword } = require('../_lib/crypto');
 const { setPasswordRecord } = require('../_lib/authData');
+const { parseJsonBody } = require('../_lib/requestBody');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -10,15 +11,11 @@ module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (!requireSession(req, res)) return;
 
-  let body;
-  try {
-    body = req.body && typeof req.body === 'object' ? req.body : JSON.parse(req.body || '{}');
-  } catch (e) {
-    return res.status(400).json({ error: 'Invalid request body.' });
-  }
+  const parsed = parseJsonBody(req);
+  if (!parsed.ok) return res.status(parsed.status).json({ error: parsed.error });
 
   try {
-    const newPassword = typeof body.newPassword === 'string' ? body.newPassword : '';
+    const newPassword = typeof parsed.body.newPassword === 'string' ? parsed.body.newPassword : '';
     if (newPassword.length < 4) {
       return res.status(400).json({ error: 'Use at least 4 characters.' });
     }

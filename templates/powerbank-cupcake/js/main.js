@@ -102,7 +102,7 @@
       }
       track.style.animationDuration = (secondsPerCopy * perHalf) + 's';
 
-      void track.offsetWidth; // commit animation-name:none before restoring
+      track.offsetWidth; // commit animation-name:none before restoring
       track.style.animationName = '';
     }
 

@@ -125,7 +125,7 @@
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.stnav a'));
   var lastLive = -2;
   /* live station = whichever section actually covers the viewport middle */
-  function paintNav(y) {
+  function paintNav() {
     var idx = -1; /* -1 hero, 0..5 stations, 6 end */
     var mid = vh * 0.5;
     for (var i = 0; i < stations.length; i++) {
@@ -137,7 +137,6 @@
     lastLive = idx;
     navLinks.forEach(function (a, i) { a.classList.toggle('live', i === idx + 1); });
     if (idx >= 0 && idx < stations.length && MW.ping) MW.ping();
-    void y;
   }
 
   /* ---------------- marine snow ---------------- */
@@ -417,7 +416,7 @@
       s._video.style.clipPath = 'inset(' + inset.toFixed(2) + '% 0 ' + inset.toFixed(2) + '% 0)';
     }
 
-    paintNav(scrollY);
+    paintNav();
     snowDraw(shownDepth, t);
     sounderDraw(shownDepth);
     if (heroOnScreen) glDraw(t);

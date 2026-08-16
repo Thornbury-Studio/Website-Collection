@@ -160,7 +160,7 @@
     document.addEventListener('oscilla:basket', function (e) {
       paint(e.detail);
       if (btn && !reduce) {
-        btn.classList.remove('is-bump'); void btn.offsetWidth; btn.classList.add('is-bump');
+        btn.classList.remove('is-bump'); btn.offsetWidth; btn.classList.add('is-bump');
         setTimeout(function () { btn.classList.remove('is-bump'); }, 320);
       }
     });
@@ -168,7 +168,7 @@
     function open() {
       if (!drawer) return;
       lastFocus = document.activeElement;
-      scrim.hidden = false; void scrim.offsetWidth;
+      scrim.hidden = false; scrim.offsetWidth;
       scrim.classList.add('is-open'); drawer.classList.add('is-open');
       drawer.setAttribute('aria-hidden', 'false');
       var x = $('#drawerClose'); if (x) x.focus();

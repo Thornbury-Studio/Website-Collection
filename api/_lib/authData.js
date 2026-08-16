@@ -2,7 +2,7 @@ const { sbFetch } = require('./supabaseRest');
 
 async function getPasswordRecord() {
   const rows = await sbFetch('/site_auth?id=eq.1&select=hash,salt');
-  return rows && rows[0] ? rows[0] : null;
+  return rows?.[0] || null;
 }
 
 async function setPasswordRecord(hash, salt) {

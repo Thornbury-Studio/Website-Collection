@@ -17,6 +17,12 @@
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js';
 
+function visualRandom() {
+  const bytes = new Uint32Array(1);
+  window.crypto.getRandomValues(bytes);
+  return bytes[0] / 0x100000000;
+}
+
 const host = document.getElementById('coal');
 if (host && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   try { boot(host); } catch (e) { host.classList.add('is-dead'); }
@@ -230,10 +236,10 @@ function boot(host) {
   const vel = new Float32Array(N);
   const spread = 1.55;
   for (let i = 0; i < N; i++) {
-    pts[i * 3] = (Math.random() - 0.5) * spread * 2;
-    pts[i * 3 + 1] = -1.3 + Math.random() * 3.6;
-    pts[i * 3 + 2] = (Math.random() - 0.5) * spread * 2;
-    vel[i] = 0.0035 + Math.random() * 0.007;
+    pts[i * 3] = (visualRandom() - 0.5) * spread * 2;
+    pts[i * 3 + 1] = -1.3 + visualRandom() * 3.6;
+    pts[i * 3 + 2] = (visualRandom() - 0.5) * spread * 2;
+    vel[i] = 0.0035 + visualRandom() * 0.007;
   }
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(pts, 3));
@@ -297,8 +303,8 @@ function boot(host) {
       p[i * 3 + 1] += vel[i] * lift;
       if (p[i * 3 + 1] > 2.3) {
         p[i * 3 + 1] = -1.3;
-        p[i * 3] = (Math.random() - 0.5) * spread * 2;
-        p[i * 3 + 2] = (Math.random() - 0.5) * spread * 2;
+        p[i * 3] = (visualRandom() - 0.5) * spread * 2;
+        p[i * 3 + 2] = (visualRandom() - 0.5) * spread * 2;
       }
     }
     pGeo.attributes.position.needsUpdate = true;

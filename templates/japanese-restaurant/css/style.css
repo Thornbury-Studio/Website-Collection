@@ -165,7 +165,7 @@ input, select, output { font: inherit; color: inherit; }
 
 .tabs {
   position: sticky; top: var(--hd-h); z-index: 110;
-  display: flex; position: sticky;
+  display: flex;
   height: var(--tabs-h);
   background: var(--paper);
   border-bottom: 1px solid var(--line);

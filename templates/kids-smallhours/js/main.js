@@ -235,7 +235,7 @@
     c.textContent = count();
     var btn = document.getElementById('bagBtn');
     btn.classList.remove('bump');
-    void btn.offsetWidth;
+    btn.offsetWidth;
     btn.classList.add('bump');
   }
 

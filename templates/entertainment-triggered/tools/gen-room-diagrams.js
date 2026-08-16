@@ -405,5 +405,43 @@ const rooms = {};
     `<line x1="160" y1="126" x2="160" y2="150"/><line x1="148" y1="138" x2="172" y2="138"/></g></svg>`;
 }
 
-require('fs').writeFileSync(process.argv[2], JSON.stringify(rooms, null, 1));
+const fs = require('node:fs');
+const path = require('node:path');
+
+function resolveOutputPath(rawArg) {
+  if (!rawArg) {
+    throw new Error('Usage: node tools/gen-room-diagrams.js <output-file.json>');
+  }
+  if (rawArg.includes('\0')) {
+    throw new Error('Output path contains an invalid null byte.');
+  }
+
+  const baseDir = fs.realpathSync(__dirname);
+  const candidate = path.resolve(baseDir, rawArg);
+  const parentDir = fs.realpathSync(path.dirname(candidate));
+  const relativeParent = path.relative(baseDir, parentDir);
+  const relativeTarget = path.relative(baseDir, candidate);
+
+  if (
+    relativeTarget === '' ||
+    relativeTarget.startsWith('..') ||
+    path.isAbsolute(relativeTarget) ||
+    relativeParent.startsWith('..') ||
+    path.isAbsolute(relativeParent)
+  ) {
+    throw new Error(`Refusing to write outside ${baseDir}: ${candidate}`);
+  }
+
+  return candidate;
+}
+
+let outPath;
+try {
+  outPath = resolveOutputPath(process.argv[2]);
+} catch (error) {
+  console.error(error.message);
+  process.exit(1);
+}
+
+fs.writeFileSync(outPath, JSON.stringify(rooms, null, 1));
 console.log(Object.entries(rooms).map(([k, s]) => `${k}: ${s.length} chars`).join('\n'));

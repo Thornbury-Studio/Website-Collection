@@ -55,7 +55,7 @@
       setTimeout(function () {
         if (heroOnScreen && !document.hidden) {
           hero.classList.remove('is-glitching');
-          void hero.offsetWidth; // restart the animation cleanly
+          hero.offsetWidth; // restart the animation cleanly
           hero.classList.add('is-glitching');
           setTimeout(function () { hero.classList.remove('is-glitching'); }, 520);
         }
