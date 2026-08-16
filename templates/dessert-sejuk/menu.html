@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Board — SEJUK°</title>
+<meta name="description" content="Eight ices, a warm counter, cold drinks and syrup to take home. Solo or berdua, shaved to order. Browse the board and start a chit — pay at the counter.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/dessert-sejuk/menu.html">
+<meta name="theme-color" content="#f2f5f6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2310222e'/%3E%3Cpath d='M6 23 L16 8 L26 23 Z' fill='%23eef3f5'/%3E%3Ccircle cx='24.5' cy='7.5' r='2.6' fill='none' stroke='%23c8203e' stroke-width='1.8'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SEJUK">
+<meta property="og:title" content="The Board — SEJUK°">
+<meta property="og:description" content="Eight ices, a warm counter, cold drinks and syrup to take home. Shaved to order — ice waits for no one.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/dessert-sejuk/menu.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/dessert-sejuk/img/gunung-pandan-800.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400;500;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap head-bar">
+    <a class="wordmark" href="index.html">SEJUK<sup>°</sup></a>
+    <nav class="head-nav" aria-label="Main">
+      <a href="menu.html" aria-current="page">The board</a>
+      <a href="house.html">The house</a>
+      <a href="visit.html">Visit</a>
+    </nav>
+    <button type="button" class="chit-btn" data-open-chit aria-label="Open your chit">
+      CHIT <span class="chit-count" data-chit-count>0</span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="section" aria-labelledby="board-title">
+    <div class="wrap">
+      <p class="kicker reveal">The board</p>
+      <h1 class="display-sm reveal" id="board-title">Eight peaks, a warm counter, and things in&nbsp;bottles.</h1>
+      <p class="lede reveal d1 lede-gap">Tap an ice to size it — solo, or berdua for two spoons — and stack the
+      top. Your chit starts the blade; you pay at the counter. Every ice can
+      be shaved onto coconut snow instead of milk, just say so in the note.</p>
+    </div>
+  </section>
+
+  <div class="chip-bar" aria-label="Filter the board">
+    <div class="wrap">
+      <div class="chip-row">
+        <button type="button" class="chip" data-filter-family="heritage" aria-pressed="false">Heritage</button>
+        <button type="button" class="chip" data-filter-family="fruit" aria-pressed="false">Fruit</button>
+        <button type="button" class="chip" data-filter-family="kopi" aria-pressed="false">Kopi &amp; malt</button>
+        <button type="button" class="chip" data-filter-diet="df" aria-pressed="false">Dairy-free</button>
+        <button type="button" class="chip" data-filter-diet="vg" aria-pressed="false">Vegan</button>
+        <button type="button" class="chip" data-filter-diet="nogluten" aria-pressed="false">No gluten</button>
+      </div>
+      <p class="board-count" data-board-count aria-live="polite">All 8 on the board</p>
+    </div>
+  </div>
+
+  <section class="section" aria-labelledby="ices-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="kicker">01° · The ices</p>
+          <h2 class="section-title" id="ices-title">Shaved when you're&nbsp;here.</h2>
+        </div>
+      </div>
+
+      <div class="board" id="ice-board">
+
+        <article class="card reveal" data-item="gunung-pandan" data-family="heritage" data-flags="">
+          <div class="card-img">
+            <img src="img/gunung-pandan-800.webp" srcset="img/gunung-pandan-400.webp 400w, img/gunung-pandan-800.webp 800w" sizes="(min-width: 900px) 23vw, (min-width: 640px) 33vw, 50vw" width="800" height="800" alt="Gunung Pandan: a tall dome of pale green pandan milk-snow, gula melaka syrup running down, toasted coconut on the peak." loading="lazy" decoding="async">
+            <span class="card-flag">Bestseller</span>
+          </div>
+          <div class="card-body">
+            <div class="card-name-row"><span class="swatch sw-pandan" aria-hidden="true"></span><h3 class="card-name">Gunung Pandan</h3></div>
+            <p class="card-tag">The signature peak</p>
+            <p class="card-desc">Pandan milk-snow, molten gula melaka core, toasted coconut, kaya custard down one slope.</p>
+            <div class="card-foot">
+              <span><span class="card-from">from</span><span class="price" data-price="gunung-pandan"></span></span>
+              <button type="button" class="card-add" data-choose="gunung-pandan" data-on-chit="gunung-pandan">Choose</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal d1" data-item="bandung-monsoon" data-family="heritage" data-flags="">
+          <div class="card-img">
+            <img src="img/bandung-monsoon-800.webp" srcset="img/bandung-monsoon-400.webp 400w, img/bandung-monsoon-800.webp 800w" sizes="(min-width: 900px) 23vw, (min-width: 640px) 33vw, 50vw" width="800" height="800" alt="Bandung Monsoon: rose-pink milk snow with basil seeds clinging like rain and a ribbon of sweet milk." loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <div class="card-name-row"><span class="swatch sw-bandung" aria-hidden="true"></span><h3 class="card-name">Bandung Monsoon</h3></div>
+            <p class="card-tag">Pink, properly</p>
+            <p class="card-desc">Rose bandung snow, basil-seed rain, sweet milk at the peak. The void deck remembers.</p>
+            <div class="card-foot">
+              <span><span class="card-from">from</span><span class="price" data-price="bandung-monsoon"></span></span>
+              <button type="button" class="card-add" data-choose="bandung-monsoon" data-on-chit="bandung-monsoon">Choose</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal d2" data-item="malt-avalanche" data-family="kopi" data-flags="gluten">
+          <div class="card-img">
+            <img src="img/malt-avalanche-800.webp" srcset="img/malt-avalanche-400.webp 400w, img/malt-avalanche-800.webp 800w" sizes="(min-width: 900px) 23vw, (min-width: 640px) 33vw, 50vw" width="800" height="800" alt="Malt Avalanche: deep cocoa-brown malt snow, chocolate rubble down one slope, condensed milk over the summit." loading="lazy" decoding="async">
+            <span class="card-flag">Bestseller</span>
+          </div>
+          <div class="card-body">
+            <div class="card-name-row"><span class="swatch sw-malt" aria-hidden="true"></span><h3 class="card-name">Malt Avalanche</h3></div>
+            <p class="card-tag">Poured at the counter</p>
+            <p class="card-desc">Dark malt snow, chocolate rubble, condensed milk poured in front of you. You say when.</p>
+            <div class="diet-row"><span class="diet">gluten</span></div>
+            <div class="card-foot">
+              <span><span class="card-from">from</span><span class="price" data-price="malt-avalanche"></span></span>
+              <button type="button" class="card-add" data-choose="malt-avalanche" data-on-chit="malt-avalanche">Choose</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal d3" data-item="chendol-glacier" data-family="heritage" data-flags="df vg">
+          <div class="card-img">
+            <img src="img/chendol-glacier-800.webp" srcset="img/chendol-glacier-400.webp 400w, img/chendol-glacier-800.webp 800w" sizes="(min-width: 900px) 23vw, (min-width: 640px) 33vw, 50vw" width="800" height="800" alt="Chendol Glacier: white coconut snow draped with green pandan chendol, red beans and gula melaka syrup." loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <div class="card-name-row"><span class="swatch sw-chendol" aria-hidden="true"></span><h3 class="card-name">Chendol Glacier</h3></div>
+            <p class="card-tag">Dairy-free</p>
+            <p class="card-desc">Coconut snow, chendol cut each morning, slow red beans, gula melaka from Melaka.</p>
+            <div class="diet-row"><span class="diet">dairy-free</span><span class="diet">vegan</span></div>
+            <div class="card-foot">
+              <span><span class="card-from">from</span><span class="price" data-price="chendol-glacier"></span></span>
+              <button type="button" class="card-add" data-choose="chendol-glacier" data-on-chit="chendol-glacier">Choose</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal" data-item="soursop-squall" data-family="fruit" data-flags="df vg">
+          <div class="card-img">
+            <img src="img/soursop-squall-800.webp" srcset="img/soursop-squall-400.webp 400w, img/soursop-squall-800.webp 800w" sizes="(min-width: 900px) 23vw, (min-width: 640px) 33vw, 50vw" width="800" height="800" alt="Soursop Squall: pale ivory soursop granita with a coarse sparkling texture and calamansi halves on top." loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <div class="card-name-row"><span class="swatch sw-soursop" aria-hidden="true"></span><h3 class="card-name">Soursop Squall</h3></div>
+            <p class="card-tag">The sharpest cold</p>
+            <p class="card-desc">Soursop crushed with calamansi, frozen into sparkling granita. The sourest thing we own.</p>
+            <div class="diet-row"><span class="diet">dairy-free</span><span class="diet">vegan</span></div>
+            <div class="card-foot">
+              <span><span class="card-from">from</span><span class="price" data-price="soursop-squall"></span></span>
+              <button type="button" class="card-add" data-choose="soursop-squall" data-on-chit="soursop-squall">Choose</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal d1" data-item="mango-sticky-peak" data-family="fruit" data-flags="df">
+          <div class="card-img">
+            <img src="img/mango-sticky-peak-800.webp" srcset="img/mango-sticky-peak-400.webp 400w, img/mango-sticky-peak-800.webp 800w" sizes="(min-width: 900px) 23vw, (min-width: 640px) 33vw, 50vw" width="800" height="800" alt="Mango Sticky Peak: coconut snow stacked with golden mango cubes, toasted rice and salted coconut caramel." loading="lazy" decoding="async">
+            <span class="card-flag">Season</span>
+          </div>
+          <div class="card-body">
+            <div class="card-name-row"><span class="swatch sw-mango" aria-hidden="true"></span><h3 class="card-name">Mango Sticky Peak</h3></div>
+            <p class="card-tag">Gone by evening</p>
+            <p class="card-desc">Coconut snow, ripe mango, toasted-rice crunch, salted coconut caramel. While the crate lasts.</p>
+            <div class="diet-row"><span class="diet">dairy-free</span></div>
+            <div class="card-foot">
+              <span><span class="card-from">from</span><span class="price" data-price="mango-sticky-peak"></span></span>
+              <button type="button" class="card-add" data-choose="mango-sticky-peak" data-on-chit="mango-sticky-peak">Choose</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal d2" data-item="kopi-tarik-summit" data-family="kopi" data-flags="gluten">
+          <div class="card-img">
+            <img src="img/kopi-tarik-summit-800.webp" srcset="img/kopi-tarik-summit-400.webp 400w, img/kopi-tarik-summit-800.webp 800w" sizes="(min-width: 900px) 23vw, (min-width: 640px) 33vw, 50vw" width="800" height="800" alt="Kopi Tarik Summit: coffee-brown milk snow, butter toast cubes at the base, condensed milk pulled across the peak." loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <div class="card-name-row"><span class="swatch sw-kopi" aria-hidden="true"></span><h3 class="card-name">Kopi Tarik Summit</h3></div>
+            <p class="card-tag">Breakfast, frozen</p>
+            <p class="card-desc">Kopi-o snow pulled with condensed milk, butter-sugar toast at the base. The morning, at −4°.</p>
+            <div class="diet-row"><span class="diet">gluten</span></div>
+            <div class="card-foot">
+              <span><span class="card-from">from</span><span class="price" data-price="kopi-tarik-summit"></span></span>
+              <button type="button" class="card-add" data-choose="kopi-tarik-summit" data-on-chit="kopi-tarik-summit">Choose</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal d3" data-item="lychee-kacang" data-family="heritage" data-flags="df">
+          <div class="card-img">
+            <img src="img/lychee-kacang-800.webp" srcset="img/lychee-kacang-400.webp 400w, img/lychee-kacang-800.webp 800w" sizes="(min-width: 900px) 23vw, (min-width: 640px) 33vw, 50vw" width="800" height="800" alt="Lychee Kacang: blush-white lychee snow over whole lychees, grass jelly cubes and attap seeds, ruby syrup on the peak." loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <div class="card-name-row"><span class="swatch sw-lychee" aria-hidden="true"></span><h3 class="card-name">Lychee Kacang</h3></div>
+            <p class="card-tag">A polite remembering</p>
+            <p class="card-desc">Lychee snow, attap chee, grass jelly, pearl barley — ice kacang with its elbows off the table.</p>
+            <div class="diet-row"><span class="diet">dairy-free</span></div>
+            <div class="card-foot">
+              <span><span class="card-from">from</span><span class="price" data-price="lychee-kacang"></span></span>
+              <button type="button" class="card-add" data-choose="lychee-kacang" data-on-chit="lychee-kacang">Choose</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="board-empty" data-board-empty hidden>
+        <p>Nothing on the board matches that mix of filters.</p>
+        <button type="button" class="btn-quiet" data-filter-reset>Clear the filters</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tight" aria-labelledby="warm-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="kicker">02° · The warm counter</p>
+          <h2 class="section-title" id="warm-title">Three warm things, for&nbsp;contrast.</h2>
+        </div>
+      </div>
+      <div class="board board-3">
+        <article class="card reveal">
+          <div class="card-img">
+            <img src="img/ondeh-mochi-800.webp" srcset="img/ondeh-mochi-400.webp 400w, img/ondeh-mochi-800.webp 800w" sizes="(min-width: 900px) 30vw, (min-width: 640px) 33vw, 50vw" width="800" height="800" alt="Ondeh Trio: three pandan-green mochi rolled in grated coconut, one broken open with palm sugar flowing out." loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <div class="card-name-row"><span class="swatch sw-pandan" aria-hidden="true"></span><h3 class="card-name">Ondeh Trio</h3></div>
+            <p class="card-desc">Three warm pandan mochi rolled in fresh coconut. The gula floods out; this is the point.</p>
+            <div class="diet-row"><span class="diet">dairy-free</span><span class="diet">vegan</span></div>
+            <div class="card-foot">
+              <span class="price" data-price="ondeh-mochi"></span>
+              <button type="button" class="card-add" data-add="ondeh-mochi" data-on-chit="ondeh-mochi">Add</button>
+            </div>
+          </div>
+        </article>
+        <article class="card reveal d1">
+          <div class="card-img">
+            <img src="img/gula-waffle-800.webp" srcset="img/gula-waffle-400.webp 400w, img/gula-waffle-800.webp 800w" sizes="(min-width: 900px) 30vw, (min-width: 640px) 33vw, 50vw" width="800" height="800" alt="Gula Butter Waffle: a crisp golden waffle strip brushed with dark palm-sugar butter glaze, glaze dripping from one corner." loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <div class="card-name-row"><span class="swatch sw-gula" aria-hidden="true"></span><h3 class="card-name">Gula Butter Waffle</h3></div>
+            <p class="card-desc">A crisp strip under dark gula-butter glaze. Order beside something cold and alternate.</p>
+            <div class="diet-row"><span class="diet">gluten</span></div>
+            <div class="card-foot">
+              <span class="price" data-price="gula-waffle"></span>
+              <button type="button" class="card-add" data-add="gula-waffle" data-on-chit="gula-waffle">Add</button>
+            </div>
+          </div>
+        </article>
+        <article class="card reveal d2">
+          <div class="card-img">
+            <img src="img/tang-yuan-800.webp" srcset="img/tang-yuan-400.webp 400w, img/tang-yuan-800.webp 800w" sizes="(min-width: 900px) 30vw, (min-width: 640px) 33vw, 50vw" width="800" height="800" alt="Ginger Tang Yuan: three white rice balls floating in clear amber ginger soup with curls of young ginger." loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <div class="card-name-row"><span class="swatch sw-ginger" aria-hidden="true"></span><h3 class="card-name">Ginger Tang Yuan</h3></div>
+            <p class="card-desc">Three rice balls in clear young-ginger soup. For the friend who claims to be cold.</p>
+            <div class="diet-row"><span class="diet">dairy-free</span><span class="diet">vegan</span></div>
+            <div class="card-foot">
+              <span class="price" data-price="tang-yuan"></span>
+              <button type="button" class="card-add" data-add="tang-yuan" data-on-chit="tang-yuan">Add</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tight" aria-labelledby="drinks-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="kicker">03° · Cold drinks</p>
+          <h2 class="section-title" id="drinks-title">To hold in the other&nbsp;hand.</h2>
+        </div>
+      </div>
+      <div class="mlist reveal">
+        <div class="mrow">
+          <span class="swatch sw-kopi" aria-hidden="true"></span>
+          <div class="mrow-main">
+            <p class="mrow-name">Kopi Peng</p>
+            <p class="mrow-desc">Proper sock kopi over clear ice.</p>
+          </div>
+          <span class="mrow-dots" aria-hidden="true"></span>
+          <span class="price" data-price="kopi-peng"></span>
+          <button type="button" class="card-add" data-add="kopi-peng" data-on-chit="kopi-peng">Add</button>
+        </div>
+        <div class="mrow">
+          <span class="swatch sw-pandan" aria-hidden="true"></span>
+          <div class="mrow-main">
+            <p class="mrow-name">Pandan Cold Brew</p>
+            <p class="mrow-desc">Green tea cold-brewed with pandan, unsweetened.</p>
+          </div>
+          <span class="mrow-dots" aria-hidden="true"></span>
+          <span class="price" data-price="pandan-brew"></span>
+          <button type="button" class="card-add" data-add="pandan-brew" data-on-chit="pandan-brew">Add</button>
+        </div>
+        <div class="mrow">
+          <span class="swatch sw-soursop" aria-hidden="true"></span>
+          <div class="mrow-main">
+            <p class="mrow-name">Jasmine Calamansi Fizz</p>
+            <p class="mrow-desc">Jasmine tea, calamansi, soda. No syrup unless you ask.</p>
+          </div>
+          <span class="mrow-dots" aria-hidden="true"></span>
+          <span class="price" data-price="jasmine-fizz"></span>
+          <button type="button" class="card-add" data-add="jasmine-fizz" data-on-chit="jasmine-fizz">Add</button>
+        </div>
+        <div class="mrow">
+          <span class="swatch sw-ginger" aria-hidden="true"></span>
+          <div class="mrow-main">
+            <p class="mrow-name">Whole Young Coconut</p>
+            <p class="mrow-desc">One coconut, one straw, one spoon.</p>
+          </div>
+          <span class="mrow-dots" aria-hidden="true"></span>
+          <span class="price" data-price="young-coconut"></span>
+          <button type="button" class="card-add" data-add="young-coconut" data-on-chit="young-coconut">Add</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tight" aria-labelledby="bottles-title">
+    <div class="wrap split split-rev">
+      <div class="split-media reveal">
+        <img src="img/syrup-bottles-800.webp" srcset="img/syrup-bottles-400.webp 400w, img/syrup-bottles-800.webp 800w" sizes="(min-width: 900px) 46vw, 92vw" width="800" height="800" alt="Three tall glass bottles of SEJUK syrup — amber gula melaka, green pandan and rose-red bandung — beaded with condensation." loading="lazy" decoding="async">
+      </div>
+      <div class="split-copy">
+        <p class="kicker reveal">04° · Take-home</p>
+        <h2 class="section-title reveal" id="bottles-title">The syrup kitchen, bottled.</h2>
+        <p class="lede reveal d1">Small batches, poured on the day they're made, sold until the shelf is
+        bare. Collect with your chit at either room.</p>
+        <div class="mlist reveal d2">
+          <div class="mrow">
+            <span class="swatch sw-gula" aria-hidden="true"></span>
+            <div class="mrow-main">
+              <p class="mrow-name">Gula Melaka Syrup</p>
+              <p class="mrow-desc">250 ml · smoked palm sugar, nothing else.</p>
+            </div>
+            <span class="mrow-dots" aria-hidden="true"></span>
+            <span class="price" data-price="gula-syrup"></span>
+            <button type="button" class="card-add" data-add="gula-syrup" data-on-chit="gula-syrup">Add</button>
+          </div>
+          <div class="mrow">
+            <span class="swatch sw-pandan" aria-hidden="true"></span>
+            <div class="mrow-main">
+              <p class="mrow-name">Pandan Syrup</p>
+              <p class="mrow-desc">250 ml · pressed leaf and cane sugar.</p>
+            </div>
+            <span class="mrow-dots" aria-hidden="true"></span>
+            <span class="price" data-price="pandan-syrup"></span>
+            <button type="button" class="card-add" data-add="pandan-syrup" data-on-chit="pandan-syrup">Add</button>
+          </div>
+          <div class="mrow">
+            <span class="swatch sw-bandung" aria-hidden="true"></span>
+            <div class="mrow-main">
+              <p class="mrow-name">Bandung Rose Syrup</p>
+              <p class="mrow-desc">250 ml · the monsoon itself.</p>
+            </div>
+            <span class="mrow-dots" aria-hidden="true"></span>
+            <span class="price" data-price="bandung-syrup"></span>
+            <button type="button" class="card-add" data-add="bandung-syrup" data-on-chit="bandung-syrup">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-mark">SEJUK<sup>°</sup></p>
+      <p class="foot-tag">An equatorial ice house</p>
+    </div>
+    <div class="foot-col">
+      <h4>Visit</h4>
+      <p>56 Eng Hoon Street, #01-70<br>Singapore 160056</p>
+      <p>208 Joo Chiat Road<br>Singapore 427469</p>
+    </div>
+    <div class="foot-col foot-hours">
+      <h4>Hours · Joo Chiat</h4>
+      <div data-hours="joo-chiat"></div>
+    </div>
+    <div class="foot-col">
+      <h4>The house</h4>
+      <a href="menu.html">The board</a>
+      <a href="pickup.html">Order pickup</a>
+      <a href="house.html">The house</a>
+      <a href="visit.html">Visit &amp; contact</a>
+    </div>
+  </div>
+  <div class="wrap foot-base">
+    <span>© <span data-year>2026</span> SEJUK ICE HOUSE PTE LTD</span>
+    <span>ICE WAITS FOR NO ONE</span>
+  </div>
+</footer>
+
+<script src="js/catalogue.js"></script>
+<script src="js/service.js"></script>
+<script src="js/chit.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>
