@@ -25,8 +25,14 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Server not configured.' });
   }
 
+  let body;
   try {
-    const body = req.body && typeof req.body === 'object' ? req.body : JSON.parse(req.body || '{}');
+    body = req.body && typeof req.body === 'object' ? req.body : JSON.parse(req.body || '{}');
+  } catch (e) {
+    return res.status(400).json({ error: 'Invalid request body.' });
+  }
+
+  try {
     const password = typeof body.password === 'string' ? body.password : '';
 
     // Cheapest possible reject first — no DB call, no scrypt — before any
