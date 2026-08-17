@@ -13,6 +13,19 @@ async function setPasswordRecord(hash, salt) {
   });
 }
 
+async function getClientPasswordRecord() {
+  const rows = await sbFetch('/client_auth?id=eq.1&select=hash,salt');
+  return rows?.[0] || null;
+}
+
+async function setClientPasswordRecord(hash, salt) {
+  await sbFetch('/client_auth?id=eq.1', {
+    method: 'PATCH',
+    headers: { Prefer: 'return=minimal' },
+    body: JSON.stringify({ hash, salt, updated_at: new Date().toISOString() }),
+  });
+}
+
 async function recordAttempt(ipHash, success) {
   await sbFetch('/login_attempts', {
     method: 'POST',
@@ -41,6 +54,8 @@ async function getTestBackendInfo() {
 module.exports = {
   getPasswordRecord,
   setPasswordRecord,
+  getClientPasswordRecord,
+  setClientPasswordRecord,
   recordAttempt,
   countRecentAttempts,
   getTestClients,

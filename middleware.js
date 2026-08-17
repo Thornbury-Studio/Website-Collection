@@ -14,12 +14,31 @@
    cookie, "<base64url payload>.<base64url HMAC-SHA256>", signed with
    SESSION_SECRET. Nothing about logging in changes.
 
+   Three session roles now exist (see api/_lib/crypto.js's createSessionToken):
+     - 'admin'         — /api/unlock. Opens /portfolio and every client-preview
+                          slug below.
+     - 'client'        — /api/unlock-client. Opens every client-preview slug,
+                          never /portfolio. This is the shared password an
+                          agent types in while physically walking a client
+                          through Client Preview — not something handed to a
+                          client to use unsupervised.
+     - 'client-scoped'  — /api/preview/redeem, from a per-client signed link.
+                          Opens exactly the one slug the link was minted for,
+                          nothing else — a client with their own link can't
+                          browse to another client's staged build.
+
    The one constraint: middleware runs on the Edge Runtime, which has no
    node:crypto — so api/_lib/crypto.js cannot be imported here. The verify
    below is a deliberate line-for-line reimplementation of verifySessionToken()
    on Web Crypto. If the token format there ever changes, this must change with
    it, or the two will silently disagree and lock everyone out.
    ============================================================================= */
+
+// Every template folder currently staged for client review. Adding one here
+// requires also adding it to `matcher` below — the matcher decides which
+// requests reach this file at all; this list decides who's let through once
+// they do.
+const CLIENT_PREVIEW_SLUGS = ['professor-brawn'];
 
 export const config = {
   // Both the bare path and everything beneath it — the bare form does not match
@@ -72,21 +91,53 @@ function safeEqual(a, b) {
   return diff === 0;
 }
 
-async function hasValidSession(token, secret) {
-  if (!token || typeof token !== 'string') return false;
+// Returns the verified claims object (role, slug, exp) on success, or null
+// on any failure — tampered signature, expired token, malformed payload.
+// Mirrors verifySessionToken() in api/_lib/crypto.js exactly.
+async function readSession(token, secret) {
+  if (!token || typeof token !== 'string') return null;
   const parts = token.split('.');
-  if (parts.length !== 2) return false;
+  if (parts.length !== 2) return null;
 
   const [payload, signature] = parts;
   const expected = await signBase64Url(payload, secret);
-  if (!safeEqual(signature, expected)) return false;
+  if (!safeEqual(signature, expected)) return null;
 
   try {
     const data = JSON.parse(base64UrlToBinary(payload));
-    return typeof data.exp === 'number' && data.exp > Date.now();
+    if (typeof data.exp !== 'number' || data.exp <= Date.now()) return null;
+    return data;
   } catch {
-    return false;
+    return null;
   }
+}
+
+function isPortfolioPath(pathname) {
+  return pathname === '/portfolio' || pathname.startsWith('/portfolio/');
+}
+
+// Returns the matching slug ('professor-brawn', etc.) if pathname falls
+// under a gated client-preview folder, else null.
+function clientSlugFor(pathname) {
+  for (const slug of CLIENT_PREVIEW_SLUGS) {
+    if (pathname === '/templates/' + slug || pathname.startsWith('/templates/' + slug + '/')) {
+      return slug;
+    }
+  }
+  return null;
+}
+
+// A session may pass a given request for more than one reason (an admin can
+// open anything gated below; a client-scoped link only opens its own slug) —
+// this is the single place that decision is made, so middleware() itself
+// stays a plain "allowed? return : redirect".
+function sessionAllows(session, pathname) {
+  if (!session) return false;
+  if (isPortfolioPath(pathname)) return session.role === 'admin';
+  const slug = clientSlugFor(pathname);
+  if (!slug) return false;
+  if (session.role === 'admin' || session.role === 'client') return true;
+  return session.role === 'client-scoped' && session.slug === slug;
 }
 
 /* Read the cookie off the raw header rather than a framework helper, so this
@@ -106,13 +157,14 @@ function readCookie(request, name) {
 export default async function middleware(request) {
   const secret = process.env.SESSION_SECRET;
   const token = readCookie(request, 'wc_session');
+  const url = new URL(request.url);
 
   // Fails closed on purpose: a missing SESSION_SECRET is a misconfigured
   // deployment, and the safe reading of that is "nobody gets in", not
   // "everybody does".
-  if (secret && (await hasValidSession(token, secret))) return;
+  const session = secret ? await readSession(token, secret) : null;
+  if (sessionAllows(session, url.pathname)) return;
 
-  const url = new URL(request.url);
   const home = new URL('/', url);
   home.searchParams.set('locked', url.pathname);
 

@@ -57,7 +57,7 @@ module.exports = async function handler(req, res) {
       return res.status(401).json({ error: 'Incorrect password.' });
     }
 
-    const token = createSessionToken(SESSION_SECRET, SESSION_TTL_MS);
+    const token = createSessionToken(SESSION_SECRET, SESSION_TTL_MS, { role: 'admin' });
     res.setHeader('Set-Cookie', serializeCookie('wc_session', token, {
       httpOnly: true,
       secure: isHttps(req),

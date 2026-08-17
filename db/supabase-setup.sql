@@ -9,12 +9,30 @@
 -- never shipped to the browser. So even if someone finds the anon key, they
 -- can select nothing from these tables.
 
+-- The admin password. Opens /portfolio and the Admin panel (Testing, Change
+-- Password), and also opens every Client Preview slug (an admin can see
+-- everything a client credential can).
 create table if not exists site_auth (
   id int primary key default 1,
   hash text not null,
   salt text not null,
   updated_at timestamptz not null default now(),
   constraint site_auth_single_row check (id = 1)
+);
+
+-- The shared Client Preview password — deliberately a separate credential
+-- from site_auth, even though both are set to the same value for now. This
+-- is the password an agent types in while physically walking a client
+-- through the Client Preview gallery; it opens every staged build but never
+-- /portfolio or the Admin panel. Per-client signed links (api/preview/
+-- redeem.js) are the mechanism for handing a client their own scoped link
+-- without sharing this password at all.
+create table if not exists client_auth (
+  id int primary key default 1,
+  hash text not null,
+  salt text not null,
+  updated_at timestamptz not null default now(),
+  constraint client_auth_single_row check (id = 1)
 );
 
 create table if not exists login_attempts (
@@ -39,6 +57,7 @@ create table if not exists test_backend_info (
 );
 
 alter table site_auth enable row level security;
+alter table client_auth enable row level security;
 alter table login_attempts enable row level security;
 alter table test_clients enable row level security;
 alter table test_backend_info enable row level security;
@@ -57,12 +76,26 @@ create index if not exists login_attempts_ip_time
 -- the password afterwards from Settings > Admin > Change Password — that
 -- flow generates and stores its own hash, so this initial one only matters
 -- for the very first login.
+-- IMPORTANT: paste in this exact order — hash first, salt second. The node
+-- command above prints "salt:" before "hash:", which is the opposite order;
+-- copying its output top-to-bottom into these two columns swaps them and
+-- silently locks out every password forever (hash and salt end up the wrong
+-- byte lengths — 16 bytes where 64 is expected and vice versa — so the
+-- length check in verifyPassword() fails before it even compares anything).
 insert into site_auth (id, hash, salt)
 values (
   1,
-  '6896f7e1ac649615071506c92c81a17e',
-  '36a4e08c7b63fdc99cb03e011128dbf211e17b8a3e18229798af4b6631fa368dafde40f63e64f9fe7d5d9a94c629e8471341e79b0319ed174d2b687f80d26ae6'
+  '<paste the printed "hash:" value here — 128 hex chars>',
+  '<paste the printed "salt:" value here — 32 hex chars>'
 )
+on conflict (id) do nothing;
+
+-- Client Preview starts out on the same password as Admin — copied straight
+-- from site_auth rather than pasted separately, so there's no second hash to
+-- get wrong. They're still two independent rows from this point on: change
+-- one from Settings > Admin > Client Access and the other is untouched.
+insert into client_auth (id, hash, salt)
+select 1, hash, salt from site_auth where id = 1
 on conflict (id) do nothing;
 
 -- Obviously-fake seed data for the Testing tab (Settings > Admin > Testing).
