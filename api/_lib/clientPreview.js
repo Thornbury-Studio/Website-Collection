@@ -8,6 +8,7 @@
 // staged project to both, or the two will disagree about what's gated.
 const CLIENT_PREVIEW_SLUGS = {
   'professor-brawn': '/templates/professor-brawn/index.html',
+  'timestealer-cafe': '/templates/timestealer-cafe/index.html',
 };
 
 module.exports = { CLIENT_PREVIEW_SLUGS };
