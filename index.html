@@ -132,14 +132,21 @@
 
   .page { position: relative; z-index: 2; }
 
-  /* ---------- expired-preview-link banner ---------- */
+  /* ---------- expired-preview-link banner ----------
+     display must stay OFF by default and only turn on for :not([hidden]) —
+     an author-stylesheet `display` set directly on this class would win over
+     the browser's built-in `[hidden] { display: none }` regardless of the
+     hidden attribute's value, since author rules beat user-agent rules
+     outright, independent of selector specificity. Setting display here
+     unconditionally is exactly what silently defeated `hidden` before. */
   .site-notice {
-    display: flex; align-items: center; justify-content: center; gap: 16px;
+    align-items: center; justify-content: center; gap: 16px;
     max-width: 1180px; margin: 20px auto 0; padding: 12px 20px;
     border-radius: 10px; background: rgba(224,100,95,0.14);
     border: 1px solid rgba(224,100,95,0.35);
     color: var(--text); font-size: 0.88rem; text-align: center;
   }
+  .site-notice:not([hidden]) { display: flex; }
   .site-notice button {
     background: none; border: none; color: inherit; opacity: 0.7;
     font-size: 1.1rem; line-height: 1; cursor: pointer;
