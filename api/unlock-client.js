@@ -1,7 +1,14 @@
 const { verifyPassword, createSessionToken, hashIp } = require('./_lib/crypto');
-const { getPasswordRecord, recordAttempt, countRecentAttempts } = require('./_lib/authData');
+const { getClientPasswordRecord, recordAttempt, countRecentAttempts } = require('./_lib/authData');
 const { serializeCookie, isHttps } = require('./_lib/cookies');
 const { parseJsonBody } = require('./_lib/requestBody');
+
+// Same shape as unlock.js, checked against client_auth instead of site_auth
+// and issuing role:'client' instead of role:'admin' — this password opens
+// every Client Preview slug and nothing else (see middleware.js). It's the
+// password an agent types in while physically walking a client through
+// their build, not a credential handed to a client to use unsupervised —
+// for that, see api/preview/redeem.js's per-client signed links.
 
 const SESSION_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours
 const MAX_ATTEMPTS = 8;
@@ -38,17 +45,17 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'Incorrect password.' });
     }
 
+    // Shares the rate-limit bucket (by IP hash) with /api/unlock — the same
+    // caller hammering either endpoint gets throttled either way.
     const ipHash = hashIp(clientIp(req), SESSION_SECRET);
     const since = new Date(Date.now() - WINDOW_MS).toISOString();
 
-    // Rate limit BEFORE touching the password check — a blocked caller
-    // never even reaches verifyPassword, so throttling can't be timed out.
     const recent = await countRecentAttempts(ipHash, since);
     if (recent >= MAX_ATTEMPTS) {
       return res.status(429).json({ error: 'Too many attempts. Try again later.' });
     }
 
-    const record = await getPasswordRecord();
+    const record = await getClientPasswordRecord();
     const ok = !!record && !!password && verifyPassword(password, record.salt, record.hash);
 
     await recordAttempt(ipHash, ok);
@@ -57,7 +64,7 @@ module.exports = async function handler(req, res) {
       return res.status(401).json({ error: 'Incorrect password.' });
     }
 
-    const token = createSessionToken(SESSION_SECRET, SESSION_TTL_MS, { role: 'admin' });
+    const token = createSessionToken(SESSION_SECRET, SESSION_TTL_MS, { role: 'client' });
     res.setHeader('Set-Cookie', serializeCookie('wc_session', token, {
       httpOnly: true,
       secure: isHttps(req),
@@ -66,7 +73,7 @@ module.exports = async function handler(req, res) {
     }));
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('unlock error:', err.message);
+    console.error('unlock-client error:', err.message);
     return res.status(500).json({ error: 'Something went wrong.' });
   }
 };

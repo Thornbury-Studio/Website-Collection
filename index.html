@@ -132,6 +132,20 @@
 
   .page { position: relative; z-index: 2; }
 
+  /* ---------- expired-preview-link banner ---------- */
+  .site-notice {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    max-width: 1180px; margin: 20px auto 0; padding: 12px 20px;
+    border-radius: 10px; background: rgba(224,100,95,0.14);
+    border: 1px solid rgba(224,100,95,0.35);
+    color: var(--text); font-size: 0.88rem; text-align: center;
+  }
+  .site-notice button {
+    background: none; border: none; color: inherit; opacity: 0.7;
+    font-size: 1.1rem; line-height: 1; cursor: pointer; padding: 0 4px;
+  }
+  .site-notice button:hover { opacity: 1; }
+
   /* ---------- nav ---------- */
   .topbar {
     display: flex;
@@ -745,6 +759,11 @@
 
 <div class="page">
 
+<div class="site-notice" id="previewNotice" hidden role="status">
+  <span>That preview link has expired or is no longer valid. Contact us for a new one.</span>
+  <button type="button" id="previewNoticeClose" aria-label="Dismiss">&times;</button>
+</div>
+
 <div class="topbar">
   <a href="index.html" class="brand">
     <span class="brand-mark">W</span>
@@ -840,6 +859,7 @@
       <div class="subtabs">
         <button type="button" class="subtab is-on" data-subtab="testing">Testing</button>
         <button type="button" class="subtab" data-subtab="password">Change Password</button>
+        <button type="button" class="subtab" data-subtab="client">Client Access</button>
       </div>
 
       <div class="subpane is-on" data-subpane="testing">
@@ -878,6 +898,41 @@
            server-side and never ships the hash or the real value to the browser. Unlocking
            sets a signed, httpOnly session cookie &mdash; there is no password anywhere in
            client-side code or storage. Attempts are rate-limited per IP.</p>
+      </div>
+
+      <div class="subpane" data-subpane="client">
+        <p>Client Preview runs on its own password, separate from this one &mdash; changing
+           either here never touches the other.</p>
+        <form id="clientPassForm" novalidate>
+          <label class="field">
+            <span>New Client Preview password</span>
+            <input type="password" id="newClientPass" autocomplete="new-password" placeholder="New password">
+          </label>
+          <label class="field">
+            <span>Confirm new password</span>
+            <input type="password" id="newClientPass2" autocomplete="new-password" placeholder="Repeat it">
+          </label>
+          <p class="msg" id="clientPassMsg" role="status"></p>
+          <button class="btn btn-primary" type="submit">Save client password</button>
+        </form>
+
+        <p class="fine" style="margin-top:28px;"><strong>Per-client link.</strong> Opens one
+           staged build directly &mdash; no password prompt, and it never leads anywhere else
+           on this site. Nothing to share but the one URL.</p>
+        <form id="clientLinkForm" novalidate>
+          <label class="field">
+            <span>Project</span>
+            <select id="clientLinkSlug">
+              <option value="professor-brawn">Professor Brawn</option>
+            </select>
+          </label>
+          <button class="btn btn-outline" type="submit">Generate link</button>
+        </form>
+        <div class="field" id="clientLinkResultWrap" hidden>
+          <span>Link (valid 90 days)</span>
+          <input type="text" id="clientLinkResult" readonly>
+        </div>
+        <p class="msg" id="clientLinkMsg" role="status"></p>
       </div>
 
       <div class="admin-acts">
@@ -1659,7 +1714,7 @@
      /api/* — plain Vercel serverless functions (no framework, no build
      step) that hold the Supabase service key and a session secret, neither
      of which is ever sent to the browser. This file only tracks the last
-     answer those endpoints gave it (`state.unlocked`) so the UI can paint
+     answer those endpoints gave it (`state.role`) so the UI can paint
      itself; the real gate is enforced server-side on every protected call,
      regardless of what this variable says.
      ===================================================================== */
@@ -1675,7 +1730,8 @@
     var history = [];
     var pendingHref = null;   // where to go once the visitor unlocks
     var pendingView = null;   // which in-page view to switch to once the visitor unlocks
-    var state = { unlocked: false };
+    var pendingKind = 'admin'; // which password the open unlock prompt is checking: 'admin' or 'client'
+    var state = { role: null }; // null | 'admin' | 'client' | 'client-scoped' — mirrors /api/session
 
     var TITLES = { menu: 'Settings', about: 'About', admin: 'Admin', unlock: 'Locked' };
 
@@ -1691,33 +1747,45 @@
 
     function refreshSession() {
       return api('/api/session').then(function (r) {
-        state.unlocked = !!(r.ok && r.body && r.body.unlocked);
+        state.role = (r.ok && r.body && r.body.role) || null;
         paintLocks();
       }).catch(function () {
-        state.unlocked = false;
+        state.role = null;
         paintLocks();
       });
     }
 
-    function isOpen() { return state.unlocked; }
+    // Admin opens /portfolio, the Admin panel, and every Client Preview slug.
+    // 'client' (the shared Client Preview password) and 'client-scoped' (a
+    // per-client signed link) never count as admin — a client session must
+    // never paint the Admin row as open.
+    function isAdminOpen() { return state.role === 'admin'; }
+    // Client Preview's own row/gallery — the shared password OR admin opens
+    // it. A 'client-scoped' link session deliberately does NOT: it's good
+    // for exactly the one slug it was minted for, not the whole gallery, so
+    // a client who came in via their own link still sees Client Preview as
+    // Locked if they wander back to the hub.
+    function isClientOpen() { return state.role === 'admin' || state.role === 'client'; }
 
     /* --- lock state on screen ----------------------------------------- */
     function paintLocks() {
-      var open = isOpen();
+      var adminOpen = isAdminOpen();
+      var clientOpen = isClientOpen();
       var pip = document.getElementById('adminLockPip');
       if (pip) {
-        pip.textContent = open ? 'Unlocked' : 'Locked';
-        pip.setAttribute('data-state', open ? 'open' : 'shut');
+        pip.textContent = adminOpen ? 'Unlocked' : 'Locked';
+        pip.setAttribute('data-state', adminOpen ? 'open' : 'shut');
       }
       var previewPip = document.getElementById('clientPreviewLockPip');
       if (previewPip) {
-        previewPip.textContent = open ? 'Unlocked' : 'Locked';
-        previewPip.setAttribute('data-state', open ? 'open' : 'shut');
+        previewPip.textContent = clientOpen ? 'Unlocked' : 'Locked';
+        previewPip.setAttribute('data-state', clientOpen ? 'open' : 'shut');
       }
+      // Every [data-lock] card today (portfolio) is admin-only.
       document.querySelectorAll('[data-lock]').forEach(function (c) {
-        c.classList.toggle('is-unlocked', open);
+        c.classList.toggle('is-unlocked', adminOpen);
         var b = c.querySelector('.lock-badge');
-        if (b) b.lastChild.textContent = open ? ' Unlocked' : ' Locked';
+        if (b) b.lastChild.textContent = adminOpen ? ' Unlocked' : ' Locked';
       });
       // Stealth cards additionally hide their real title/description from
       // assistive tech while veiled — the veil's own text becomes the
@@ -1726,7 +1794,7 @@
       document.querySelectorAll('.card.stealth[data-lock]').forEach(function (c) {
         var preview = c.querySelector('.preview');
         var body = c.querySelector('.card-body');
-        if (open) {
+        if (adminOpen) {
           c.removeAttribute('aria-label');
           if (preview) preview.removeAttribute('aria-hidden');
           if (body) body.removeAttribute('aria-hidden');
@@ -1766,14 +1834,16 @@
     }
 
     function clearForms() {
-      ['unlockPass', 'newPass', 'newPass2'].forEach(function (id) {
+      ['unlockPass', 'newPass', 'newPass2', 'newClientPass', 'newClientPass2'].forEach(function (id) {
         var el = document.getElementById(id);
         if (el) { el.value = ''; el.classList.remove('bad'); }
       });
-      ['unlockMsg', 'passMsg'].forEach(function (id) {
+      ['unlockMsg', 'passMsg', 'clientPassMsg', 'clientLinkMsg'].forEach(function (id) {
         var el = document.getElementById(id);
         if (el) { el.textContent = ''; el.removeAttribute('data-state'); }
       });
+      var linkResultWrap = document.getElementById('clientLinkResultWrap');
+      if (linkResultWrap) linkResultWrap.hidden = true;
     }
 
     function shake(el) {
@@ -1813,9 +1883,10 @@
     modal.querySelectorAll('[data-go]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var target = btn.dataset.go;
-        if (target === 'admin' && !isOpen()) {
+        if (target === 'admin' && !isAdminOpen()) {
           pendingHref = null;
           pendingView = null;
+          pendingKind = 'admin';
           document.getElementById('unlockWhy').textContent =
             'Admin is locked. Enter the password to manage it.';
           show('unlock');
@@ -1830,9 +1901,10 @@
     var clientPreviewRow = document.getElementById('clientPreviewRow');
     if (clientPreviewRow) {
       clientPreviewRow.addEventListener('click', function () {
-        if (!isOpen()) {
+        if (!isClientOpen()) {
           pendingHref = null;
           pendingView = 'client-preview';
+          pendingKind = 'client';
           document.getElementById('unlockWhy').textContent =
             'Client Preview is locked. Enter the password to open it.';
           show('unlock');
@@ -1844,13 +1916,15 @@
     }
 
     /* --- locked cards & links ---------------------------------------------- */
+    // Every [data-lock] card today (portfolio) is admin-only.
     document.querySelectorAll('[data-lock]').forEach(function (card) {
       card.addEventListener('click', function (e) {
-        if (isOpen()) return;                 // unlocked: follow the link normally
+        if (isAdminOpen()) return;            // unlocked: follow the link normally
         e.preventDefault();
         shake(card);
         pendingHref = card.getAttribute('href');
         pendingView = null;
+        pendingKind = 'admin';
         document.getElementById('unlockWhy').textContent =
           'This project is locked. Enter the password to open it.';
         openModal('unlock');
@@ -1877,30 +1951,33 @@
       msg.removeAttribute('data-state');
       msg.textContent = 'Checking…';
 
-      api('/api/unlock', {
+      var unlockUrl = pendingKind === 'client' ? '/api/unlock-client' : '/api/unlock';
+
+      api(unlockUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: input.value }),
       }).then(function (r) {
         submitBtn.disabled = false;
         if (r.ok) {
-          state.unlocked = true;
-          paintLocks();
-          if (pendingHref) { window.location.href = pendingHref; return; }
-          if (pendingView) {
-            var toShow = pendingView;
-            pendingView = null;
-            closeModal();
-            activateView(toShow);
-            return;
-          }
-          msg.dataset.state = 'ok';
-          msg.textContent = 'Unlocked.';
-          input.value = '';
-          // drop the unlock step out of the trail, so Back lands on the menu
-          history = ['menu'];
-          setTimeout(goAdmin, 350);
-          return;
+          // Re-derive state.role from the server rather than assuming —
+          // single source of truth for what the cookie actually grants.
+          return refreshSession().then(function () {
+            if (pendingHref) { window.location.href = pendingHref; return; }
+            if (pendingView) {
+              var toShow = pendingView;
+              pendingView = null;
+              closeModal();
+              activateView(toShow);
+              return;
+            }
+            msg.dataset.state = 'ok';
+            msg.textContent = 'Unlocked.';
+            input.value = '';
+            // drop the unlock step out of the trail, so Back lands on the menu
+            history = ['menu'];
+            setTimeout(goAdmin, 350);
+          });
         }
         msg.dataset.state = 'error';
         msg.textContent = r.status === 429
@@ -1960,8 +2037,7 @@
           return;
         }
         if (r.status === 401) {
-          state.unlocked = false;
-          paintLocks();
+          refreshSession();
           msg.dataset.state = 'error';
           msg.textContent = 'Your session expired. Lock again and re-enter the password.';
           return;
@@ -1982,9 +2058,112 @@
       });
     });
 
+    /* --- change the Client Preview password -------------------------------- */
+    document.getElementById('clientPassForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var a = document.getElementById('newClientPass');
+      var b = document.getElementById('newClientPass2');
+      var msg = document.getElementById('clientPassMsg');
+      var submitBtn = e.target.querySelector('button[type="submit"]');
+
+      if (!a.value) {
+        msg.dataset.state = 'error'; msg.textContent = 'Enter a new password.';
+        a.classList.add('bad'); a.focus(); shake(modal.querySelector('.modal__box')); return;
+      }
+      if (a.value.length < 4) {
+        msg.dataset.state = 'error'; msg.textContent = 'Use at least 4 characters.';
+        a.classList.add('bad'); a.focus(); shake(modal.querySelector('.modal__box')); return;
+      }
+      if (a.value !== b.value) {
+        msg.dataset.state = 'error'; msg.textContent = 'The two passwords do not match.';
+        b.classList.add('bad'); b.focus(); shake(modal.querySelector('.modal__box')); return;
+      }
+
+      submitBtn.disabled = true;
+      msg.removeAttribute('data-state');
+      msg.textContent = 'Saving…';
+
+      api('/api/client/password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newPassword: a.value }),
+      }).then(function (r) {
+        submitBtn.disabled = false;
+        if (r.ok) {
+          a.value = ''; b.value = '';
+          a.classList.remove('bad'); b.classList.remove('bad');
+          msg.dataset.state = 'ok';
+          msg.textContent = 'Client Preview password saved in Supabase.';
+          return;
+        }
+        if (r.status === 401) {
+          refreshSession();
+          msg.dataset.state = 'error';
+          msg.textContent = 'Your session expired. Lock again and re-enter the password.';
+          return;
+        }
+        msg.dataset.state = 'error';
+        msg.textContent = (r.body && r.body.error) || 'Could not save the password.';
+        shake(modal.querySelector('.modal__box'));
+      }).catch(function () {
+        submitBtn.disabled = false;
+        msg.dataset.state = 'error';
+        msg.textContent = 'Could not reach the server. Try again.';
+      });
+    });
+
+    ['newClientPass', 'newClientPass2'].forEach(function (id) {
+      document.getElementById(id).addEventListener('input', function () {
+        this.classList.remove('bad');
+      });
+    });
+
+    /* --- generate a per-client signed link ---------------------------------- */
+    document.getElementById('clientLinkForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var slugEl = document.getElementById('clientLinkSlug');
+      var msg = document.getElementById('clientLinkMsg');
+      var resultWrap = document.getElementById('clientLinkResultWrap');
+      var result = document.getElementById('clientLinkResult');
+      var submitBtn = e.target.querySelector('button[type="submit"]');
+
+      submitBtn.disabled = true;
+      resultWrap.hidden = true;
+      msg.removeAttribute('data-state');
+      msg.textContent = 'Generating…';
+
+      api('/api/client/generate-link', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: slugEl.value }),
+      }).then(function (r) {
+        submitBtn.disabled = false;
+        if (r.ok) {
+          msg.textContent = '';
+          result.value = r.body.url;
+          resultWrap.hidden = false;
+          result.focus();
+          result.select();
+          return;
+        }
+        if (r.status === 401) {
+          refreshSession();
+          msg.dataset.state = 'error';
+          msg.textContent = 'Your session expired. Lock again and re-enter the password.';
+          return;
+        }
+        msg.dataset.state = 'error';
+        msg.textContent = (r.body && r.body.error) || 'Could not generate a link.';
+      }).catch(function () {
+        submitBtn.disabled = false;
+        msg.dataset.state = 'error';
+        msg.textContent = 'Could not reach the server. Try again.';
+      });
+    });
+
     document.getElementById('lockAgain').addEventListener('click', function () {
       api('/api/lock', { method: 'POST' }).then(function () {
-        state.unlocked = false;
+        state.role = null;
         paintLocks();
         clearForms();
         show('menu');
@@ -2064,19 +2243,45 @@
 
       pendingHref = target;
       pendingView = null;
+      // Only /portfolio is admin-gated; every other bounce this middleware
+      // sends here is a Client Preview slug, so the shared client password
+      // is the right one to prompt for.
+      pendingKind = target.indexOf('/portfolio') === 0 ? 'admin' : 'client';
 
       // If the session is actually fine (an expired cookie that has since been
       // renewed in another tab, say), just go, rather than asking again.
       refreshSession().then(function () {
-        if (isOpen()) { window.location.href = target; return; }
+        var alreadyOpen = pendingKind === 'admin' ? isAdminOpen() : isClientOpen();
+        if (alreadyOpen) { window.location.href = target; return; }
         document.getElementById('unlockWhy').textContent =
           'That area is private. Enter the password to continue.';
         openModal('unlock');
       });
     }
 
+    /* --- expired/invalid per-client link ----------------------------------
+       api/preview/redeem.js sends an unrecognised or expired token here as
+       /?preview=invalid. There's no password to offer a client in that
+       state — just say so and let them get back to browsing. */
+    function resumeFromInvalidPreview() {
+      var params = new URLSearchParams(location.search);
+      if (params.get('preview') !== 'invalid') return;
+      var clean = location.pathname + location.hash;
+      window.history.replaceState({}, '', clean);
+      var notice = document.getElementById('previewNotice');
+      if (notice) notice.hidden = false;
+    }
+
+    var previewNoticeClose = document.getElementById('previewNoticeClose');
+    if (previewNoticeClose) {
+      previewNoticeClose.addEventListener('click', function () {
+        document.getElementById('previewNotice').hidden = true;
+      });
+    }
+
     refreshSession();
     resumeFromLockedRedirect();
+    resumeFromInvalidPreview();
   })();
 
   /* =====================================================================
