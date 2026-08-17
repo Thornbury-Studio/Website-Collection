@@ -195,6 +195,13 @@ function boot(host) {
   function stop() { running = false; }
   document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
 
+  /* The browser caps live WebGL contexts per process and reclaims the oldest,
+     so this grid can be taken away mid-visit. Three.js restores its own GL
+     state, but the loop has to be parked and resumed by hand or the canvas
+     stays blank after the context comes back. */
+  renderer.domElement.addEventListener('webglcontextlost', () => { stop(); }, false);
+  renderer.domElement.addEventListener('webglcontextrestored', () => { start(); }, false);
+
   host.classList.add('is-live');
   start();
 }

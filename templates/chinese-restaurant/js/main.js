@@ -138,7 +138,7 @@
       var d = byId[id];
       var li = document.createElement('li');
       li.innerHTML = '<button type="button" aria-label="Remove ' + d.name + '">&times;</button>' +
-        '<span style="flex:1;color:inherit">' + d.name + '</span><span>' + money(d.price) + '</span>';
+        '<span class="chosen-name">' + d.name + '</span><span>' + money(d.price) + '</span>';
       li.querySelector('button').addEventListener('click', function () { toggle(id); });
       elChosen.appendChild(li);
     });

@@ -47,38 +47,46 @@ function valueNoise3D(x, y, z) {
 function bakeDisplacedGeometry(radius, detail, amp) {
   const geometry = new THREE.IcosahedronGeometry(radius, detail);
   const pos = geometry.attributes.position;
-  const nrm = geometry.attributes.normal;
-  const bump = new Float32Array(pos.count);
 
   for (let i = 0; i < pos.count; i++) {
     const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
-    const n = valueNoise3D(x * 1.6, y * 1.6, z * 1.6);
-    bump[i] = n;
-    const nx = nrm.getX(i), ny = nrm.getY(i), nz = nrm.getZ(i);
-    pos.setXYZ(i, x + nx * n * amp, y + ny * n * amp, z + nz * n * amp);
+    const n = valueNoise3D(x * 2.2, y * 2.2, z * 2.2);
+    // Displace RADIALLY, not along the vertex normal. IcosahedronGeometry is
+    // non-indexed, so triangles sharing a corner hold separate copies of it;
+    // along per-face normals those copies drift apart and the hull splits into
+    // floating shards. The radial direction is a pure function of position, so
+    // every copy of a corner moves identically and the hull stays welded.
+    const len = Math.hypot(x, y, z) || 1;
+    const d = 1 + (n * amp) / len;
+    pos.setXYZ(i, x * d, y * d, z * d);
   }
   pos.needsUpdate = true;
-  // deliberately NOT recomputing normals: keeping the original sphere
-  // normals against the displaced surface is what gives the soft, blurry
-  // glow look (matches the original live-shader version's appearance)
-  // rather than a crisp faceted/wireframe look.
-  geometry.setAttribute('aBump', new THREE.BufferAttribute(bump, 1));
+  // Non-indexed geometry means this assigns one normal per face, which is
+  // exactly what is wanted here: crisp facets that catch the key light
+  // individually and give the mass a readable, machined surface.
+  geometry.computeVertexNormals();
   return geometry;
 }
 
-/* ---------- cheap per-frame shaders (no noise) ---------- */
+/* ---------- cheap per-frame shaders (no noise) ----------
+   The solid and the edge overlay must apply an identical per-vertex wobble or
+   the wireframe slides off the surface it is drawing, so both start from this
+   same displacement expression. */
+const DISPLACE = `
+  float wobbleAmount(vec3 p, float t) {
+    return sin(t * 0.6 + p.x * 1.8 + p.y * 1.3) * 0.02;
+  }
+`;
+
 const VERTEX = `
   uniform float uTime;
-  attribute float aBump;
   varying vec3 vNormal;
   varying vec3 vViewPosition;
-  varying float vBump;
+  ${DISPLACE}
 
   void main() {
-    vBump = aBump;
     // a single sin() per vertex — near-free compared to per-frame noise
-    float wobble = sin(uTime * 0.6 + position.x * 1.8 + position.y * 1.3) * 0.02;
-    vec3 displaced = position + normal * wobble;
+    vec3 displaced = position + normalize(position) * wobbleAmount(position, uTime);
     vec4 mvPosition = modelViewMatrix * vec4(displaced, 1.0);
     vViewPosition = -mvPosition.xyz;
     vNormal = normalize(normalMatrix * normal);
@@ -86,19 +94,62 @@ const VERTEX = `
   }
 `;
 
+/* Opaque, front-faces only, depth-tested: the silhouette is the point. The
+   previous material was additive and double-sided, so every fragment summed
+   light through the whole volume in both directions and the accent colour
+   clipped to flat lime across the entire shape — a glowing blob with no
+   surface. Here the accent is spent only on the rim and the lit facet
+   highlights, and the body stays graphite. */
 const FRAGMENT = `
   varying vec3 vNormal;
   varying vec3 vViewPosition;
-  varying float vBump;
-  uniform vec3 uColor;
-  uniform vec3 uDark;
+  uniform vec3 uAccent;
+  uniform vec3 uBody;
 
   void main() {
-    vec3 viewDir = normalize(vViewPosition);
-    float fresnel = pow(1.0 - max(dot(normalize(vNormal), viewDir), 0.0), 2.4);
-    vec3 col = mix(uDark, uColor, clamp(fresnel + vBump * 0.2, 0.0, 1.0));
-    float alpha = clamp(fresnel * 0.85 + 0.12 + vBump * 0.05, 0.0, 1.0);
-    gl_FragColor = vec4(col, alpha);
+    vec3 N = normalize(vNormal);
+    vec3 V = normalize(vViewPosition);
+    vec3 L = normalize(vec3(-0.45, 0.72, 0.55));
+
+    float lambert = max(dot(N, L), 0.0);
+    float fill    = 0.5 + 0.5 * dot(N, normalize(vec3(0.35, -0.55, 0.42)));
+    float fresnel = pow(1.0 - max(dot(N, V), 0.0), 2.2);
+
+    // Dark metal LIT by the accent, rather than a body coloured with it: the
+    // graphite carries only ambient, and every lime contribution arrives as
+    // light. Facets square-on to the camera still catch the key, so the mass
+    // reads solid instead of hollowing out into a black centre.
+    // Whitening the key a little stops the lit facets reading as moulded green
+    // plastic; the accent stays pure in the rim, where it is doing brand work.
+    vec3 keyColor = mix(uAccent, vec3(1.0), 0.18);
+
+    vec3 col = uBody * (0.45 + fill * 0.55);
+    col += keyColor * lambert * 0.40;
+    col += uAccent * fresnel * 0.45;
+    col += vec3(1.0) * pow(lambert, 24.0) * 0.22;  // tight spec, keeps edges honest
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+const EDGE_VERTEX = `
+  uniform float uTime;
+  varying float vFade;
+  ${DISPLACE}
+
+  void main() {
+    vec3 displaced = position + normalize(position) * wobbleAmount(position, uTime);
+    vec4 mvPosition = modelViewMatrix * vec4(displaced, 1.0);
+    vFade = smoothstep(-2.8, 2.0, mvPosition.z);
+    gl_Position = projectionMatrix * mvPosition;
+  }
+`;
+
+const EDGE_FRAGMENT = `
+  uniform vec3 uAccent;
+  varying float vFade;
+
+  void main() {
+    gl_FragColor = vec4(uAccent, 0.10 + vFade * 0.42);
   }
 `;
 
@@ -124,24 +175,44 @@ function initHero3D(canvas) {
   const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
   camera.position.set(0, 0, 6.4);
 
-  // detail is exponential (20 * 4^detail faces) — 4 gives ~5,120 triangles,
-  // baked once below, so this cost is paid a single time, not per frame.
-  const geometry = bakeDisplacedGeometry(2.05, 4, 0.38);
+  // detail is exponential (20 * 4^detail faces). 3 gives 1,280 — coarse enough
+  // that individual facets stay legible as facets at hero size, fine enough to
+  // still read as a mass rather than a die. Baked once below, so the noise cost
+  // is paid a single time, not per frame.
+  const ACCENT = 0xd4ff3f;
+  const geometry = bakeDisplacedGeometry(2.0, 3, 0.30);
+  const uTime = { value: 0 };
+
   const material = new THREE.ShaderMaterial({
     vertexShader: VERTEX,
     fragmentShader: FRAGMENT,
     uniforms: {
-      uTime: { value: 0 },
-      uColor: { value: new THREE.Color(0xd4ff3f) },
-      uDark: { value: new THREE.Color(0x14150f) },
+      uTime,
+      uAccent: { value: new THREE.Color(ACCENT) },
+      uBody: { value: new THREE.Color(0x2b2f26) },
     },
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-    side: THREE.DoubleSide,
+    // Pushed a touch away from the camera in depth only, so the edge overlay
+    // below lands cleanly on the surface instead of z-fighting it.
+    polygonOffset: true,
+    polygonOffsetFactor: 1,
+    polygonOffsetUnits: 1,
   });
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
+
+  // Structural edge overlay — depth-tested against the solid, so only the
+  // facets actually facing the viewer draw and the object reads as opaque.
+  const edges = new THREE.LineSegments(
+    new THREE.WireframeGeometry(geometry),
+    new THREE.ShaderMaterial({
+      vertexShader: EDGE_VERTEX,
+      fragmentShader: EDGE_FRAGMENT,
+      uniforms: { uTime, uAccent: { value: new THREE.Color(ACCENT) } },
+      transparent: true,
+      depthWrite: false,
+    })
+  );
+  mesh.add(edges);
 
   // ambient particle field surrounding the core — fewer on low-power devices
   const particleCount = tier === 'low' ? 60 : 130;
@@ -157,10 +228,10 @@ function initHero3D(canvas) {
   const particleGeo = new THREE.BufferGeometry();
   particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   const particleMat = new THREE.PointsMaterial({
-    color: 0xd4ff3f,
+    color: ACCENT,
     size: 0.03,
     transparent: true,
-    opacity: 0.5,
+    opacity: 0.38,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
   });
@@ -215,6 +286,27 @@ function initHero3D(canvas) {
 
   let rafId = null;
   let tabHidden = false;
+  let contextLost = false;
+
+  /* Chrome only keeps a limited number of live WebGL contexts per process and
+     drops the oldest when it runs over — which is exactly what happens to a
+     visitor who opens several of these templates in tabs. Three.js already
+     calls preventDefault() on the lost event and re-initialises GL state when
+     the browser hands the context back, but it does not know about this loop,
+     so without these two listeners the canvas keeps burning frames while it is
+     dead and stays blank after a restore. */
+  canvas.addEventListener('webglcontextlost', () => {
+    contextLost = true;
+    canvas.classList.add('is-context-lost');
+    syncLoop();
+  }, false);
+
+  canvas.addEventListener('webglcontextrestored', () => {
+    contextLost = false;
+    canvas.classList.remove('is-context-lost');
+    resize();
+    syncLoop();
+  }, false);
 
   function loop() {
     renderFrame();
@@ -222,7 +314,7 @@ function initHero3D(canvas) {
   }
 
   function syncLoop() {
-    const shouldRun = scrollFactor > 0.02 && !tabHidden;
+    const shouldRun = scrollFactor > 0.02 && !tabHidden && !contextLost;
     if (shouldRun && rafId === null) {
       loop();
     } else if (!shouldRun && rafId !== null) {

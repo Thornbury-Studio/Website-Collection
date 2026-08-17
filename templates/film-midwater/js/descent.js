@@ -261,6 +261,31 @@
   var uni = {};
   var mouse = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5, amp: 0, ramp: 0 };
 
+  /* The browser hands out a limited number of live WebGL contexts per process
+     (Chrome drops the oldest once it is over budget), so a visitor who opens
+     several of these templates in tabs will have this one taken away. That is
+     the whole "hero is black about half the time" report.
+
+     Two things are needed to survive it. preventDefault() on the lost event is
+     what marks the context as recoverable at all — without it the browser will
+     never issue a restore, and this canvas stays dead for the life of the page.
+     Then the restored event has to rebuild everything, because the program,
+     buffers and texture all died with the old context. glInit() is self
+     contained and ends by re-running glSize(), so calling it again is the whole
+     rebuild. */
+  glCanvas.addEventListener('webglcontextlost', function (e) {
+    e.preventDefault();
+    gl = null;
+    glProg = null;
+    glTex = null;
+    glReady = false;
+    hero.classList.remove('gl-on');
+  }, false);
+
+  glCanvas.addEventListener('webglcontextrestored', function () {
+    glInit();
+  }, false);
+
   function glInit() {
     if (reduced) return;
     gl = glCanvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'low-power' });

@@ -275,34 +275,46 @@ h1, h2, h3, h4 {
 
 /* ---------- Logo strip ---------- */
 .logo-strip {
-  padding: 40px 0;
+  padding: 0;
   border-bottom: 1px solid var(--color-border);
 }
 
 .logo-strip .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px 40px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0;
 }
 
 .logo-strip .strip-label {
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  padding: 22px 28px 22px 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  width: 100%;
-  text-align: center;
-  margin-bottom: 4px;
+  white-space: nowrap;
 }
 
-.logo-chip {
+.strip-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+}
+
+.strip-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 14px;
+  border-left: 1px solid var(--color-border);
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   letter-spacing: 0.01em;
-  color: var(--color-text-muted);
+  color: var(--color-navy);
+  text-align: center;
 }
 
 /* ---------- Cards / grid ---------- */
@@ -671,6 +683,13 @@ footer {
 
 .faq-item.open .plus { transform: rotate(45deg); }
 
+/* Animated max-height, driven from scrollHeight in main.js. The grid
+   0fr -> 1fr technique is the better-behaved pattern and was tried here, but it
+   cannot collapse: padding sits outside min-height, so the row floors at the
+   answer's 18px padding-bottom and every closed question keeps a strip of
+   --color-bg-alt. Fixing that needs a padding-free wrapper element inside each
+   panel. Worth doing if this markup is ever touched; not worth the churn for a
+   transition that runs once per click. */
 .faq-answer {
   max-height: 0;
   overflow: hidden;
@@ -739,7 +758,7 @@ footer {
 .signal-footer { display:block; border-top:1px solid rgba(255,255,255,.13); padding-top:16px; }.signal-footer strong { display:block; margin-top:5px; color:#fff; font-size:.9rem; letter-spacing:0; text-transform:none; }
 .signal-orbit { position:relative; width:220px; height:220px; margin:5px auto; border:1px solid rgba(226,196,139,.38); border-radius:50%; }.signal-orbit::before,.signal-orbit::after { content:""; position:absolute; border-radius:50%; inset:28px; border:1px solid rgba(226,196,139,.2); }.signal-orbit::after { inset:70px; background:rgba(226,196,139,.12); }.orbit-core { position:absolute; inset:0; display:grid; place-items:center; color:var(--color-gold-light); font-family:var(--font-serif); font-size:2.2rem; z-index:2; }.orbit-label { position:absolute; color:rgba(255,255,255,.7); font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; }.orbit-label-one { top:8px; left:-13px; }.orbit-label-two { right:-37px; top:106px; }.orbit-label-three { bottom:12px; left:-25px; }.signal-card > p { color:rgba(255,255,255,.68); font-size:.88rem; line-height:1.55; max-width:290px; }
 .hero-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:58px; border-top:1px solid rgba(255,255,255,.15); }.hero-stat { padding:25px 0 27px; }.hero-stat + .hero-stat { border-left:1px solid rgba(255,255,255,.15); padding-left:28px; }.hero-stat .num { font-size:2rem; }.hero-stat .num span { color:var(--color-gold-light); font-size:.8em; }
-.section-alt { background:#f1efe9; }.card { position:relative; padding:36px 30px 28px; transition:transform var(--transition),border-color var(--transition),box-shadow var(--transition); }.card:hover { border-color:var(--color-gold); transform:translateY(-6px); box-shadow:0 18px 40px rgba(11,19,40,.09); }.card-index { position:absolute; top:22px; right:24px; font-size:.72rem; letter-spacing:.1em; color:var(--color-gold); font-weight:700; }.card-link { display:inline-block; margin-top:25px; color:var(--color-navy); font-size:.8rem; font-weight:700; }
+.section-alt { background:#f1efe9; }.card { position:relative; padding:36px 30px 28px; transition:transform var(--transition),border-color var(--transition),box-shadow var(--transition); }.card:hover { border-color:var(--color-gold); transform:translateY(-6px); box-shadow:0 18px 40px rgba(11,19,40,.09); }.card-link { display:inline-block; margin-top:25px; color:var(--color-navy); font-size:.8rem; font-weight:700; }
 .cta-banner { background:var(--color-navy); color:#fff; padding:64px 56px; }.cta-banner h2 { color:#fff; }.cta-banner p { color:rgba(255,255,255,.63); }
 @media (max-width:960px) { .hero-grid { grid-template-columns:1fr; min-height:0; }.signal-card { justify-self:start; max-width:520px; min-height:330px; } }
 @media (max-width:720px) { .hero { padding-top:68px; }.hero h1 { font-size:clamp(2.8rem,14vw,4.1rem); }.hero-stats { grid-template-columns:1fr; margin-top:54px; }.hero-stat + .hero-stat { border-left:0; border-top:1px solid rgba(255,255,255,.15); padding-left:0; }.signal-card { min-height:300px; } }
@@ -852,8 +871,11 @@ footer {
 }
 .method-track::before {
   content: ''; position: absolute; top: -2px; left: 0; height: 2px;
-  width: calc(var(--progress) * 100%); background: var(--color-gold);
-  transition: width .35s ease;
+  width: 100%; background: var(--color-gold);
+  /* scaleX rather than an animated width: a solid bar scales identically and
+     the transition stays off the layout path. */
+  transform: scaleX(var(--progress)); transform-origin: left;
+  transition: transform .35s ease;
 }
 .method-step { display: grid; }
 .ms-btn {
@@ -895,9 +917,16 @@ footer {
   display: grid; grid-template-columns: 190px minmax(0,1fr) 30px;
   gap: clamp(16px,3vw,40px); align-items: center;
   padding: 26px 4px; border-bottom: 1px solid var(--color-border);
-  transition: background var(--transition), padding-left var(--transition);
+  transition: background var(--transition);
 }
-.writing-row:hover { background: rgba(16,25,46,.03); padding-left: 14px; }
+.writing-row:hover { background: rgba(16,25,46,.03); }
+/* The slide used to be animated padding-left on the row, which reflowed the
+   grid on every hover. Translating the two text cells reproduces it exactly —
+   .wr-go is justify-self:end so it never moved with the padding either — and
+   runs on the compositor. */
+.wr-meta, .wr-main { transition: transform var(--transition); }
+.writing-row:hover .wr-meta,
+.writing-row:hover .wr-main { transform: translateX(14px); }
 .wr-meta { display: grid; gap: 4px; }
 .wr-tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--color-gold); font-weight: 600; }
 .wr-date { font-size: .82rem; color: var(--color-text-muted); }
@@ -951,3 +980,146 @@ footer {
 /* HTML width/height attributes set a fixed CSS height, which cancels aspect-ratio.
    Let the ratio drive height for every photograph added by this upgrade. */
 .hero-figure img, .work-photo img { height: auto; }
+
+/* ===========================================================
+   The three practices.
+
+   Replaces a grid of bordered icon cards. The cards opted out of
+   every device the rest of the page runs on, so this rail is built
+   only from moves that already exist here: the hairline column
+   dividers from .hero-stats, the gold ordinal from .ms-n, the
+   italic-serif framing line from .work-brief, the gold dash list
+   from .work-outcomes, and the scaleX gold rule from .work-tab.
+   =========================================================== */
+.practice-rail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--color-border);
+}
+
+.practice {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 34px 34px 30px 0;
+}
+
+.practice + .practice {
+  border-left: 1px solid var(--color-border);
+  padding-left: 34px;
+}
+
+/* The gold rule rides the rail's own top border, same as .work-tab::after
+   rides the tab strip's. */
+.practice::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 34px;
+  height: 2px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .34s ease;
+}
+
+.practice + .practice::before { left: 34px; }
+.practice:hover::before,
+.practice:focus-within::before { transform: scaleX(1); }
+
+.pr-n {
+  font-family: var(--font-serif);
+  font-size: .85rem;
+  letter-spacing: .1em;
+  color: var(--color-gold);
+  margin-bottom: 14px;
+}
+
+.practice h3 {
+  font-size: 1.5rem;
+  letter-spacing: -0.015em;
+  margin-bottom: 12px;
+}
+
+.pr-for {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.06rem;
+  line-height: 1.4;
+  color: var(--color-navy);
+  margin-bottom: 14px;
+}
+
+/* Grows to absorb the slack so the three .pr-list rules land on one baseline
+   however unevenly the prose above them wraps. */
+.pr-body {
+  flex-grow: 1;
+  color: var(--color-text-muted);
+  font-size: .95rem;
+  margin-bottom: 22px;
+}
+
+.pr-list {
+  display: grid;
+  gap: 9px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+  width: 100%;
+}
+
+.pr-list li {
+  position: relative;
+  padding-left: 22px;
+  font-size: .9rem;
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.pr-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .62em;
+  width: 10px;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.practice .card-link { padding-top: 26px; }
+
+@media (max-width: 900px) {
+  .practice-rail { grid-template-columns: minmax(0, 1fr); }
+  .practice { padding: 30px 0 28px; }
+  .practice + .practice {
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
+    padding-left: 0;
+  }
+  .practice::before,
+  .practice + .practice::before { left: 0; right: 0; }
+  .practice + .practice::before { top: -1px; }
+}
+
+/* --- Logo strip on narrow screens: the five cells stop fitting in a row --- */
+@media (max-width: 860px) {
+  .logo-strip .container { grid-template-columns: minmax(0, 1fr); }
+  .logo-strip .strip-label {
+    padding: 18px 0 12px;
+    border-bottom: 1px solid var(--color-border);
+    justify-content: center;
+  }
+  .strip-list {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .strip-list li { padding: 15px 10px; border-top: 1px solid var(--color-border); }
+  .strip-list li:nth-child(odd) { border-left: 0; }
+  .strip-list li:nth-child(-n+2) { border-top: 0; }
+  .strip-list li:last-child { grid-column: 1 / -1; border-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .practice::before { transition: none; }
+}

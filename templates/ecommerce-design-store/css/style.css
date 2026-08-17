@@ -54,16 +54,21 @@ a { color: inherit; text-decoration: none; }
 .mobile-menu a { font-size: 30px; font-weight: 600; }
 
 .hero { min-height: calc(100svh - 108px); display: grid; grid-template-columns: 56% 44%; border-bottom: 1px solid var(--line); }
-.hero-copy { display: flex; flex-direction: column; justify-content: center; padding: 7vw 3vw 4vw; overflow: hidden; }
+/* Container context for the headline. The h1 sits in a 56% column but was
+   sized in vw, so it could not know how much room it actually had: at ~1280
+   the offset line overran by 5px and wrapped, turning a designed three-line
+   title into a ragged four. Sizing the type and the offset from the column
+   keeps the ratio fixed, so the three lines hold at every width. */
+.hero-copy { display: flex; flex-direction: column; justify-content: center; padding: 7vw 3vw 4vw; overflow: hidden; container-type: inline-size; }
 .kicker { margin: 0 0 18px; font: 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
-.hero h1 { margin: 0; font-size: clamp(3.4rem, 6.55vw, 6.9rem); line-height: .82; letter-spacing: -.08em; font-weight: 600; }
+.hero h1 { margin: 0; font-size: clamp(2.6rem, 12cqw, 6.6rem); line-height: .82; letter-spacing: -.08em; font-weight: 600; }
 .title-line { display: block; overflow: hidden; padding: 0 .08em .1em 0; }
 .title-line span { display: block; transform: translateY(110%) rotate(3deg); animation: title-in 1s var(--ease) forwards; }
 .title-line:nth-child(2) span { animation-delay: .1s; }
 .title-line:nth-child(3) span { animation-delay: .2s; }
-.title-line.offset { padding-left: 10vw; }
+.title-line.offset { padding-left: 16cqw; }
 @keyframes title-in { to { transform: none; } }
-.hero-bottom { margin-top: 48px; padding-left: 10vw; display: flex; gap: 35px; align-items: center; }
+.hero-bottom { margin-top: 48px; padding-left: 16cqw; display: flex; gap: 35px; align-items: center; }
 .hero-bottom > p { max-width: 350px; margin: 0; line-height: 1.65; font-size: 14px; }
 .round-link { width: 122px; height: 122px; flex: 0 0 auto; border-radius: 50%; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; background: var(--blue); color: white; transition: transform .4s var(--ease), background .3s; }
 .round-link:hover { background: var(--orange); }
@@ -250,7 +255,7 @@ footer { padding: 5vw 3vw 30px; background: var(--ink); color: var(--paper); }
 .toast { position: fixed; z-index: 300; left: 50%; bottom: 25px; transform: translate(-50%, 150%); padding: 13px 19px; border-radius: 999px; background: var(--blue); color: white; font: 10px var(--mono); text-transform: uppercase; transition: transform .45s var(--ease); }.toast.show { transform: translate(-50%, 0); }
 
 @media (max-width: 980px) {
-  .hero { grid-template-columns: 1fr; }.hero-stage { min-height: 600px; }.hero-copy { min-height: 74svh; }.hero h1 { font-size: clamp(3.7rem,12.6vw,7rem); }
+  .hero { grid-template-columns: 1fr; }.hero-stage { min-height: 600px; }.hero-copy { min-height: 74svh; }
   .origin-note { grid-template-columns: 1fr; }.origin-note > div { max-width: 650px; }
   .product-card, .product-card:nth-child(n) { grid-column: span 6; }.product-card:nth-child(n) .product-visual { aspect-ratio: 4/5; }
   .studio-story { grid-template-columns: 1fr; }.studio-photo { min-height: 75svh; }.studio-copy { padding: 100px 5vw; }
@@ -259,7 +264,7 @@ footer { padding: 5vw 3vw 30px; background: var(--ink); color: var(--paper); }
 }
 @media (max-width: 700px) {
   .site-header { grid-template-columns: 1fr auto; padding: 0 18px; }.desktop-nav, .text-button { display: none; }.menu-button { display: block; }.header-actions { gap: 15px; }
-  .hero-copy { padding: 70px 18px 45px; min-height: 68svh; }.hero h1 { font-size: clamp(2.85rem,12.5vw,5.5rem); }.title-line.offset { padding-left: 3vw; }.hero-bottom { padding-left: 0; flex-direction: column; align-items: flex-start; }.round-link { align-self: flex-end; width: 108px; height: 108px; }
+  .hero-copy { padding: 70px 18px 45px; min-height: 68svh; }.title-line.offset { padding-left: 8cqw; }.hero-bottom { padding-left: 0; flex-direction: column; align-items: flex-start; }.round-link { align-self: flex-end; width: 108px; height: 108px; }
   .hero-stage { min-height: 530px; }.lamp { width: 260px; height: 420px; }.lamp-shade { width: 245px; }.lamp-neck { height: 195px; }.lamp-base { bottom: 34px; }.label-b { display: none; }
   .origin-note { padding: 65px 18px; }.origin-note > div { grid-template-columns: 1fr; }.origin-note > p { font-size: 2.4rem; }
   .section { padding: 88px 18px; }.section-head { align-items: flex-start; flex-direction: column; }.section-note { max-width: 100%; }.filters { margin-right: -18px; }

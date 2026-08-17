@@ -265,12 +265,25 @@ p { line-height: 1.65; color: var(--smoke); }
   to   { transform: translate3d(-3%, -8%, 0) scale(1.18); }
 }
 
+/* The radial is centred at 22% 45% and only 15% opaque there — which is exactly
+   where the headline and standfirst sit, so the copy was landing on the
+   brightest coals with the thinnest scrim under it. The first band below darkens
+   the copy side only, leaving the right of the frame (sprigs, live embers) at
+   full strength. */
 .hero-vignette {
   position: absolute;
   inset: 0;
   background:
+    linear-gradient(var(--scrim-angle, 100deg), rgba(16, 12, 10, 0.88) 0%, rgba(16, 12, 10, 0.66) 30%, rgba(16, 12, 10, 0.18) 55%, transparent 70%),
     radial-gradient(115% 85% at 22% 45%, rgba(16, 12, 10, 0.15) 0%, rgba(16, 12, 10, 0.82) 58%, var(--char) 100%),
     linear-gradient(to bottom, rgba(16, 12, 10, 0.7) 0%, transparent 28%, transparent 62%, var(--char) 100%);
+}
+
+/* On a phone the copy spans the full width, so a left-weighted scrim leaves the
+   ends of every line on bright coals. Tipping it to run top-down puts the dark
+   end under the whole text block instead of one side of it. */
+@media (max-width: 760px) {
+  .hero-vignette { --scrim-angle: 168deg; }
 }
 
 .hero-embers {
@@ -524,6 +537,19 @@ p { line-height: 1.65; color: var(--smoke); }
    ============================================================ */
 .menu { background: var(--soot); border-block: 1px solid var(--line-soft); }
 
+/* The dish list runs narrower than the rest of the page. At the full 1320px
+   every row left an empty right half — a 600px dotted leader between name and
+   price, and a description occupying a third of the line — which read as an
+   unfinished layout rather than a menu. Stepping in under the full-width
+   header also gives the section its own rhythm, like a card laid on the table. */
+.menu { --menu-w: 900px; }
+
+/* The narrow list shares the header's left edge rather than centring under it,
+   so the step-in reads as a deliberate change of measure instead of a block
+   that drifted off the grid. Below --maxw this collapses to 0 and everything
+   sits flush left together, exactly as the header does. */
+.menu { --menu-inset: max(0px, calc((100% - var(--maxw)) / 2)); }
+
 .menu-head {
   max-width: var(--maxw);
   margin: 0 auto clamp(2.5rem, 5vw, 4rem);
@@ -545,8 +571,8 @@ p { line-height: 1.65; color: var(--smoke); }
 }
 
 .menu-tabs {
-  max-width: var(--maxw);
-  margin: 0 auto 2.5rem;
+  max-width: var(--menu-w);
+  margin: 0 auto 2.5rem var(--menu-inset);
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -567,7 +593,7 @@ p { line-height: 1.65; color: var(--smoke); }
 .mtab:hover { color: var(--bone); border-color: var(--smoke-dim); }
 .mtab.is-active { color: #fff; background: var(--ember); border-color: var(--ember); }
 
-.menu-body { position: relative; max-width: var(--maxw); margin-inline: auto; }
+.menu-body { position: relative; max-width: var(--menu-w); margin-inline: var(--menu-inset) auto; }
 
 .course { list-style: none; display: none; }
 .course.is-active { display: block; animation: fadeUp 0.55s var(--ease) both; }
@@ -648,8 +674,8 @@ p { line-height: 1.65; color: var(--smoke); }
 .dish-peek.is-on { opacity: 1; transform: translate3d(-50%, -50%, 0) scale(1) rotate(-3deg); }
 
 .menu-foot {
-  max-width: var(--maxw);
-  margin: 2.5rem auto 0;
+  max-width: var(--menu-w);
+  margin: 2.5rem auto 0 var(--menu-inset);
   font-size: 0.84rem;
   color: var(--smoke-dim);
 }

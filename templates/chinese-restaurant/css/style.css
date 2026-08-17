@@ -372,6 +372,11 @@ p { line-height: 1.7; color: var(--ink-2); }
 .chosen { list-style: none; margin-top: 1rem; display: grid; gap: 0.4rem; }
 .chosen li { display: flex; justify-content: space-between; gap: 0.6rem; font-size: 0.84rem; color: var(--ink-2); }
 .chosen li span { font-variant-numeric: tabular-nums; color: var(--ink-3); }
+/* Carries what used to be an inline style="flex:1;color:inherit" on this span.
+   This template's style-src has no 'unsafe-inline', so the browser dropped that
+   attribute outright and the name stopped flexing — which left the price sitting
+   against the name instead of at the end of the row. */
+.chosen li .chosen-name { flex: 1; color: inherit; }
 .chosen li button { color: var(--ink-3); font-size: 0.9rem; line-height: 1; }
 .chosen li button:hover { color: var(--red); }
 

@@ -5,9 +5,56 @@
    is one draw call with two uniforms. */
 (function () {
   'use strict';
+
+  /* The browser caps live WebGL contexts per process and reclaims the oldest,
+     so this massif can be taken away mid-visit. Recovering needs two things:
+     preventDefault() on the lost event, without which the browser never offers
+     the context back at all, and a full rebuild on restore, because the
+     program, buffers and heightfield all died with the old context.
+
+     build() registers pointer, resize and visibility listeners and closes over
+     its own rotation state, so re-running it on the same element would leave
+     the old handlers fighting the new ones over a stale closure. Each build
+     therefore scopes every listener it adds to an AbortController and hands
+     back destroy(), so the previous instance can be torn down cleanly and the
+     canvas element itself is never touched. The handle returned here is stable
+     and delegates to whichever instance is current. */
   window.CNMassif = function (canvas, sectors) {
+    var inst = build(canvas, sectors);
+    if (!inst) return null;
+
+    var lastSel = null;
+
+    canvas.addEventListener('webglcontextlost', function (e) {
+      e.preventDefault();
+      if (inst) { inst.destroy(); inst = null; }
+    }, false);
+
+    canvas.addEventListener('webglcontextrestored', function () {
+      /* Next frame, not this handler: getContext during the restore event can
+         still hand back the dying context. */
+      requestAnimationFrame(function () {
+        inst = build(canvas, sectors);
+        if (inst && lastSel) inst.select(lastSel);
+      });
+    }, false);
+
+    return {
+      select: function (id) { lastSel = id; if (inst) inst.select(id); },
+      stop: function () { if (inst) inst.stop(); }
+    };
+  };
+
+  function build(canvas, sectors) {
     var gl = canvas.getContext('webgl', { antialias: true, alpha: false, powerPreference: 'low-power' });
     if (!gl) return null;
+
+    /* Everything this build subscribes to is scoped to one controller, so a
+       rebuild after context loss can drop the previous instance's handlers
+       instead of leaving two closures driving the same canvas. */
+    var ac = new AbortController();
+    var sig = { signal: ac.signal };
+    var io = null;
 
     /* ---------- heightfield: one main ridge, a bowl, couloir notches ---------- */
     var NX = 110, NZ = 78;
@@ -104,10 +151,10 @@
     var rotY = -0.35, targetRot = -0.35, tilt = 0.62, sel = -10;
     var dragging = false, lastX = 0, auto = true;
 
-    canvas.addEventListener('pointerdown', function (e) { dragging = true; auto = false; lastX = e.clientX; canvas.setPointerCapture(e.pointerId); });
-    canvas.addEventListener('pointermove', function (e) { if (dragging) { targetRot += (e.clientX - lastX) * 0.006; lastX = e.clientX; } });
-    canvas.addEventListener('pointerup', function () { dragging = false; });
-    canvas.addEventListener('pointercancel', function () { dragging = false; });
+    canvas.addEventListener('pointerdown', function (e) { dragging = true; auto = false; lastX = e.clientX; canvas.setPointerCapture(e.pointerId); }, sig);
+    canvas.addEventListener('pointermove', function (e) { if (dragging) { targetRot += (e.clientX - lastX) * 0.006; lastX = e.clientX; } }, sig);
+    canvas.addEventListener('pointerup', function () { dragging = false; }, sig);
+    canvas.addEventListener('pointercancel', function () { dragging = false; }, sig);
 
     function mat(w, hpx) {
       /* tilt + rotate + ortho-ish perspective, hand-rolled */
@@ -128,9 +175,10 @@
     document.addEventListener('visibilitychange', function () {
       running = !document.hidden;
       if (running) requestAnimationFrame(frame);
-    });
+    }, sig);
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: 0.02 }).observe(canvas);
+      io = new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: 0.02 });
+      io.observe(canvas);
     }
 
     function size() {
@@ -141,7 +189,7 @@
       gl.viewport(0, 0, canvas.width, canvas.height);
     }
     size();
-    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(size, 180); });
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(size, 180); }, sig);
 
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function frame() {
@@ -160,7 +208,8 @@
 
     return {
       select: function (id) { sel = id && sectorX[id] !== undefined ? sectorX[id] : -10; },
-      stop: function () { running = false; }
+      stop: function () { running = false; },
+      destroy: function () { running = false; ac.abort(); if (io) io.disconnect(); }
     };
   };
 })();
