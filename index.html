@@ -355,6 +355,18 @@
   .empty-state .fine { margin-top: 12px; font-size: 0.85rem; opacity: 0.75; }
   .empty-state .btn { margin-top: 32px; }
 
+  /* Client Preview keeps the empty state's centred "back" affordance even once
+     something is staged, so the way out of the section does not move depending
+     on whether it has anything in it. */
+  .preview-foot { text-align: center; padding: 48px 24px 0; }
+
+  /* auto-fill rather than the gallery's auto-fit. With a single staged build
+     auto-fit collapses the empty tracks and stretches that one card across the
+     full width, which reads as a banner and blows its screenshot up well past
+     the resolution it was captured at. auto-fill keeps the column rhythm, so
+     one card looks like a card and the section fills in as more are staged. */
+  #client-preview .grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+
   .card {
     position: relative;
     background: var(--surface);
@@ -1541,32 +1553,6 @@
       </div>
     </a>
 
-    <a class="card locked stealth reveal" href="templates/professor-brawn/index.html" data-lock="professor-brawn">
-      <div class="preview preview--shot">
-        <div class="chrome"><i></i><i></i><i></i></div>
-        <img src="img/professor-brawn-sm.webp" alt="The Professor Brawn Caf&eacute; homepage: the words &lsquo;Eat well. Do good.&rsquo; beside a plate of battered fish and chips, over a warm parchment layout." width="480" height="300" loading="lazy" decoding="async">
-      </div>
-      <div class="card-body">
-        <span class="tag">Caf&eacute; / Client Redesign</span>
-        <h3>PROFESSOR BRAWN</h3>
-        <p>A full redesign concept for a real Singapore social-enterprise caf&eacute;, built entirely from the client's own recovered photography and verified facts. The menu becomes a browsable course catalogue with an outlet toggle and honest per-caf&eacute; pricing, the mission is woven through as a story rather than a plea, and every fact &mdash; hours, parking, WhatsApp lines, venue packages &mdash; matches the live business.</p>
-        <span class="card-foot">
-          <span class="card-link">View Template
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-          </span>
-          <span class="lock-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-            Locked
-          </span>
-        </span>
-      </div>
-      <div class="stealth-veil">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.5 18.5 0 0 1 5.06-5.94"/><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a18.51 18.51 0 0 1-2.16 3.19"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-        <strong>Unavailable</strong>
-        <span>Client project &mdash; not public yet. Admin password required to preview.</span>
-      </div>
-    </a>
-
     <a class="card reveal" href="templates/dessert-sejuk/index.html">
       <div class="preview">
         <div class="chrome"><i></i><i></i><i></i></div>
@@ -1620,9 +1606,30 @@
     <div><h2>Client Preview</h2></div>
     <p>In-progress client builds, staged here for review before they go anywhere public.</p>
   </div>
-  <div class="empty-state">
-    <p>Nothing staged for preview right now.</p>
-    <p class="fine">Check back once a project is ready to be looked at.</p>
+
+  <!-- Reaching this section already required the password, so the cards in it
+       are ordinary cards: no stealth veil, no per-card lock badge. Gating the
+       card as well as the room it sits in only made the same wall twice. -->
+  <div class="grid">
+    <a class="card reveal" href="templates/professor-brawn/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/professor-brawn-sm.webp" alt="The Professor Brawn Caf&eacute; homepage: the words &lsquo;Eat well. Do good.&rsquo; beside a plate of battered fish and chips, over a warm parchment layout." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Caf&eacute; / Client Redesign &middot; In review</span>
+        <h3>PROFESSOR BRAWN</h3>
+        <p>A full redesign concept for a real Singapore social-enterprise caf&eacute;, built entirely from the client's own recovered photography and verified facts. The menu becomes a browsable course catalogue with an outlet toggle and honest per-caf&eacute; pricing, the mission is woven through as a story rather than a plea, and every fact &mdash; hours, parking, WhatsApp lines, venue packages &mdash; matches the live business.</p>
+        <span class="card-foot">
+          <span class="card-link">Open preview
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+  </div>
+
+  <div class="preview-foot">
     <button type="button" class="btn btn-outline" data-view="gallery">Back to gallery</button>
   </div>
 </section>
@@ -2034,7 +2041,42 @@
     var refreshTestBtn = document.getElementById('refreshTest');
     if (refreshTestBtn) refreshTestBtn.addEventListener('click', loadTestData);
 
+    /* --- returning from an Edge Middleware bounce -------------------------
+       middleware.js turns anyone without a valid session away from /portfolio
+       and /templates/professor-brawn, sending them here as /?locked=<path>.
+       Pick that up so the bounce lands on the password prompt and then carries
+       on to where they were going, instead of dumping them on the homepage
+       with no explanation. */
+    function resumeFromLockedRedirect() {
+      var target = new URLSearchParams(location.search).get('locked');
+      if (!target) return;
+
+      // Strip the parameter straight away: it has done its job, and leaving it
+      // in the URL would re-fire this on every refresh and get bookmarked.
+      var clean = location.pathname + location.hash;
+      window.history.replaceState({}, '', clean);
+
+      // `locked` arrives from the query string, so treat it as hostile. Only a
+      // single-slash, same-origin path is allowed to become a navigation —
+      // "//evil.com" and "https://evil.com" are both protocol-relative or
+      // absolute and would turn this into an open redirect.
+      if (target.charAt(0) !== '/' || target.charAt(1) === '/') return;
+
+      pendingHref = target;
+      pendingView = null;
+
+      // If the session is actually fine (an expired cookie that has since been
+      // renewed in another tab, say), just go, rather than asking again.
+      refreshSession().then(function () {
+        if (isOpen()) { window.location.href = target; return; }
+        document.getElementById('unlockWhy').textContent =
+          'That area is private. Enter the password to continue.';
+        openModal('unlock');
+      });
+    }
+
     refreshSession();
+    resumeFromLockedRedirect();
   })();
 
   /* =====================================================================
@@ -2065,7 +2107,10 @@
   (function () {
     const liveEl = document.getElementById('liveCount');
     if (!liveEl) return;
-    const total = document.querySelectorAll('.grid .card:not(.locked)').length;
+    // Scoped to #gallery: Client Preview now has a grid of its own, and a
+    // client build staged for review is not a gallery template. Counting every
+    // .grid on the page would quietly inflate this the moment one is staged.
+    const total = document.querySelectorAll('#gallery .grid .card:not(.locked)').length;
     const aboutEl = document.getElementById('aboutCount');
     if (aboutEl) aboutEl.textContent = total;   // keep About in step with the grid
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
