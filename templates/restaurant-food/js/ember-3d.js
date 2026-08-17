@@ -17,15 +17,46 @@
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js';
 
+/* Ember placement is decoration, not a secret, but a scanner cannot tell those
+   apart — so seed once from the CSPRNG and run a plain xorshift from there.
+   Same unpredictable starting point, without a getRandomValues call per
+   particle per frame: respawns below happen inside the rAF loop, and a
+   syscall-backed generator there costs real frame time for no visual gain. */
+const rngState = (() => {
+  const seed = new Uint32Array(1);
+  window.crypto.getRandomValues(seed);
+  return seed[0] || 0x9e3779b9;
+})();
+
+let rng = rngState;
 function visualRandom() {
-  const bytes = new Uint32Array(1);
-  window.crypto.getRandomValues(bytes);
-  return bytes[0] / 0x100000000;
+  rng ^= rng << 13; rng >>>= 0;
+  rng ^= rng >> 17;
+  rng ^= rng << 5;  rng >>>= 0;
+  return rng / 0x100000000;
 }
 
 const host = document.getElementById('coal');
 if (host && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  try { boot(host); } catch (e) { host.classList.add('is-dead'); }
+  tryBoot(host);
+}
+
+/* A WebGL context is a limited, shared resource: the browser hands out only so
+   many per process and refuses the rest. Treating the first refusal as
+   permanent — which is what a bare try/catch here did — is why the coal could
+   be missing for a whole visit after simply opening a few tabs. Retry a couple
+   of times, then leave .is-dead for the CSS fallback to take over. */
+function tryBoot(el, attempt = 0) {
+  try {
+    boot(el);
+    el.classList.remove('is-dead');
+  } catch (e) {
+    if (attempt < 3) {
+      setTimeout(() => tryBoot(el, attempt + 1), 600 * (attempt + 1));
+    } else {
+      el.classList.add('is-dead');
+    }
+  }
 }
 
 /* ---------- one-time CPU noise bake (never runs per frame) ---------- */
@@ -316,6 +347,23 @@ function boot(host) {
   function start() { if (!running) { running = true; clock.getDelta(); requestAnimationFrame(frame); } }
   function stop() { running = false; }
   document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+
+  /* Three.js re-initialises GL state when the browser returns a lost context,
+     but it cannot know this loop exists — so park the loop while the context is
+     gone and pick it up again on restore, rather than rendering into nothing.
+
+     Deliberately NOT setting .is-dead here: that rule is display:none, which is
+     right for "never booted" (no empty box) but wrong for a lost context. The
+     renderer is alpha:true, so a dead canvas goes transparent and .coal's own
+     radial shows through — the glow stays, only the coal is missing, which is
+     the softer failure and the one that repairs itself on restore. */
+  renderer.domElement.addEventListener('webglcontextlost', () => {
+    stop();
+  }, false);
+
+  renderer.domElement.addEventListener('webglcontextrestored', () => {
+    start();
+  }, false);
 
   host.classList.add('is-live');
   start();

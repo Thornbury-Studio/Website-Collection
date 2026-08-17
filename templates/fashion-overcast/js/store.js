@@ -163,6 +163,13 @@ window.OC = (function () {
     document.addEventListener('click', function (e) {
       var b = e.target.closest('[data-add]');
       if (!b || b.disabled) return;
+      /* On the shop grid these size buttons sit inside the card's
+         <a href="product.html">, so without this the click carries on to the
+         anchor: the size is added to the bag and the visitor is navigated away
+         from the grid in the same gesture, which reads as the quick-add being
+         broken. Stop the click here — picking a size is the whole action. */
+      e.preventDefault();
+      e.stopPropagation();
       add(b.getAttribute('data-add'), b.getAttribute('data-size'), { open: false });
     });
 

@@ -9,7 +9,16 @@
   'use strict';
 
   var U = H.ui, $ = U.$;
-  var state = { cat: 'all', heat: 5 };
+
+  /* The footer links to menu.html#bird and menu.html#stacks, so open on that
+     section when asked. Nothing read the hash before, which made both links
+     land on an unfiltered menu and look like dead navigation. */
+  function catFromHash() {
+    var want = (location.hash || '').replace('#', '');
+    return want && H.cats && H.cats.some(function (c) { return c.id === want; }) ? want : 'all';
+  }
+
+  var state = { cat: catFromHash(), heat: 5 };
 
   var SECTIONS = [
     { id: 'bird',   no: '01', title: 'Bird',          note: 'Brined overnight, dredged twice, fried to order.' },
@@ -32,6 +41,16 @@
       state.cat = b.getAttribute('data-cat');
       U.$$('.fchip', set).forEach(function (x) {
         x.setAttribute('aria-pressed', String(x === b));
+      });
+      render();
+    });
+
+    // Arriving at #bird from #stacks is a hash change, not a load, so the
+    // chips and the list have to follow it too.
+    window.addEventListener('hashchange', function () {
+      state.cat = catFromHash();
+      U.$$('.fchip', set).forEach(function (x) {
+        x.setAttribute('aria-pressed', String(x.getAttribute('data-cat') === state.cat));
       });
       render();
     });
