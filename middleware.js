@@ -38,7 +38,7 @@
 // requires also adding it to `matcher` below — the matcher decides which
 // requests reach this file at all; this list decides who's let through once
 // they do.
-const CLIENT_PREVIEW_SLUGS = ['professor-brawn', 'timestealer-cafe'];
+const CLIENT_PREVIEW_SLUGS = ['professor-brawn', 'timestealer-cafe', 'zz-pipeline-test'];
 
 export const config = {
   // Both the bare path and everything beneath it — the bare form does not match
@@ -51,6 +51,8 @@ export const config = {
     '/templates/professor-brawn/:path*',
     '/templates/timestealer-cafe',
     '/templates/timestealer-cafe/:path*',
+    '/templates/zz-pipeline-test',
+    '/templates/zz-pipeline-test/:path*',
   ],
 };
 
