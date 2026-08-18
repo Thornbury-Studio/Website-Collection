@@ -7,10 +7,14 @@ single shoot.
 
 ## 1. The desserts — generated
 
-Product photography was generated with Google image models
-(`nano-banana-pro-preview`, falling back to `gemini-3.1-flash-image` under
-load) at 4K, then graded and exported to WebP at 800 px and 400 px squares
-(hero and wide frames at up to 2560 px).
+Product photography was generated on **18 August 2026** with Google's
+**Nano Banana 2** (`nano_banana_2`, served as `nano_banana_flash`) via the
+Higgsfield API — the originally planned direct Gemini route
+(`nano-banana-pro-preview` / `gemini-3.1-flash-image`) had returned HTTP 429
+for the whole of the original build session, which is what left this template
+unfinished. Square frames were generated at 2K and the wide frames at 2K–4K,
+then graded and exported to WebP at 800 px and 400 px squares (hero and wide
+frames at up to 2560 px).
 
 They read as one photographer because a single STYLE block was repeated
 **verbatim** across every prompt — pale frost-blue seamless, soft cold
@@ -21,7 +25,17 @@ logos and labels. Only the subject sentence changed. All eight ices share
 the same footed stainless bowl clause; the warm counter shares the same
 stoneware plate clause.
 
-_Exact per-file model attribution is completed below once the batch lands._
+**Per-file model attribution:** every frame in both tables below was
+generated with `nano_banana_2` at 2K, except `hero-pour` and `ice-texture`,
+which were re-rolled at 2K after 4K attempts failed, and `sharing-spoons`,
+which returned 5504x3072. `hero-pour` took three attempts — the first two
+failed outright — and its final subject sentence is lightly rephrased from
+`gen/PROMPTS.md` (the shared STYLE block is untouched, per the house rule).
+`syrup-bottles` carries an extra clause forcing the kraft label bands to be
+completely blank; it is the frame most prone to inventing lettering.
+
+No frame was rejected for breaking the set: all fifteen held the same bowl,
+background and light direction on the first accepted generation.
 
 | File(s) | Subject |
 | --- | --- |
