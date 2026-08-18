@@ -1,20 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 453 150" role="img" aria-label="Professor Brawn Inclusive Cafe">
-  <!-- Original wordmark lockup for this preview: our crest plus type. It does
-       not reproduce or imitate the client's own logo. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 453 150" role="img" aria-label="Common Ground Cafe">
+  <!-- Original wordmark lockup for this preview: our crest plus type. -->
   <defs>
-    <linearGradient id="pbPlum2" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="cgPlum2" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#5b2d86"/>
       <stop offset="1" stop-color="#241536"/>
     </linearGradient>
   </defs>
   <g transform="translate(6,12) scale(0.84)">
-    <path d="M59 3 L110 20 v54c0 39-26 61-51 73C34 135 8 113 8 74V20z" fill="url(#pbPlum2)"/>
+    <path d="M59 3 L110 20 v54c0 39-26 61-51 73C34 135 8 113 8 74V20z" fill="url(#cgPlum2)"/>
     <path d="M59 11 L102 25 v49c0 34-22 53-43 64-21-11-43-30-43-64V25z" fill="none" stroke="#c9a227" stroke-width="2.4"/>
     <text x="59" y="54" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
-          font-size="32" font-weight="700" fill="#faf4e6" letter-spacing="1">PB</text>
+          font-size="29" font-weight="700" fill="#faf4e6" letter-spacing="0.5">CG</text>
   </g>
-  <text x="118" y="66" font-family="Georgia, 'Times New Roman', serif" font-size="37"
-        font-weight="700" fill="#241536" letter-spacing="-0.5">Professor Brawn</text>
+  <text x="118" y="66" font-family="Georgia, 'Times New Roman', serif" font-size="34"
+        font-weight="700" fill="#241536" letter-spacing="-0.5">Common Ground</text>
   <text x="120" y="97" font-family="system-ui, 'Segoe UI', sans-serif" font-size="16.5"
-        font-weight="600" fill="#745607" letter-spacing="4.2">INCLUSIVE CAFÉ</text>
+        font-weight="600" fill="#745607" letter-spacing="3.6">COMMUNITY KITCHEN</text>
 </svg>

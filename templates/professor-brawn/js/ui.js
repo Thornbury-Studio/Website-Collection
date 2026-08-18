@@ -1,4 +1,4 @@
-/* Professor Brawn — shared chrome: reveals, nav, the open-now clock. */
+/* Common Ground Café — shared chrome: reveals, nav, the open-now clock. */
 (function () {
   "use strict";
 
