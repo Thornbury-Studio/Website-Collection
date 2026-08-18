@@ -38,7 +38,7 @@
 // requires also adding it to `matcher` below — the matcher decides which
 // requests reach this file at all; this list decides who's let through once
 // they do.
-const CLIENT_PREVIEW_SLUGS = ['professor-brawn', 'timestealer-cafe', 'gig-cafe', 'fancy-nails-paradise'];
+const CLIENT_PREVIEW_SLUGS = ['professor-brawn', 'timestealer-cafe', 'gig-cafe', 'fancy-nails-paradise', 'cafe-bombom'];
 
 export const config = {
   // Both the bare path and everything beneath it — the bare form does not match
@@ -55,6 +55,8 @@ export const config = {
     '/templates/gig-cafe/:path*',
     '/templates/fancy-nails-paradise',
     '/templates/fancy-nails-paradise/:path*',
+    '/templates/cafe-bombom',
+    '/templates/cafe-bombom/:path*',
   ],
 };
 
