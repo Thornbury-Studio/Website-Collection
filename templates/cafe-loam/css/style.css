@@ -667,3 +667,16 @@ h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; line-height: 1.1
 @media (prefers-reduced-motion: reduce) {
   .js-anim .reveal { opacity: 1; transform: none; }
 }
+
+/* ===================================================== touch targets ====
+   Thumb, not cursor. The mood chips are the primary control on the menu page
+   and need to be comfortably thumb-sized, with space between them so one tap
+   cannot catch two. */
+@media (pointer: coarse) {
+  .chip { min-height: 44px; display: inline-flex; align-items: center; }
+  .site-nav a { min-height: 44px; display: inline-flex; align-items: center; }
+  /* footer links fill their column so the tap target is the whole row */
+  .site-foot a, .foot-grid a { min-height: 44px; display: flex; align-items: center; }
+  .btn { min-height: 44px; }
+  .chip:active, .btn:active { transform: scale(.96); }
+}

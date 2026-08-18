@@ -1153,3 +1153,23 @@ details.sample .inner p { margin: 0; color: var(--ink-soft); }
   white-space: nowrap;
   border: 0;
 }
+
+/* ===================================================== touch targets ====
+   Thumb, not cursor. Filter chips were 124x31 and the footer links 67x17 —
+   the footer column in particular was a stack of near-unhittable targets.
+   :hover does not exist on touch, so presses carry the feedback instead. */
+@media (pointer: coarse) {
+  .chip { min-height: 44px; display: inline-flex; align-items: center; }
+  .btn { min-height: 44px; }
+  .site-nav a, .site-foot a { min-height: 44px; display: inline-flex; align-items: center; }
+  .nav-toggle { width: 46px; height: 46px; }
+
+  /* outlet toggle and the department jump-nav are the two controls a diner
+     actually drives this page with; both sat around 30px tall. */
+  .seg button { min-height: 44px; padding-inline: 14px; }
+  .hot, .wa { min-height: 44px; display: inline-flex; align-items: center; }
+  .dept-nav a { min-height: 44px; display: inline-flex; align-items: center; }
+  .dept-nav { gap: .5rem; }
+
+  .chip:active, .btn:active, .seg button:active { transform: scale(.96); }
+}

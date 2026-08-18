@@ -741,3 +741,19 @@ h1.hero__h {
 .sec--tight { padding-block: clamp(3rem, 7vw, 5.5rem); }
 .stack-sm { display: flex; flex-direction: column; gap: 1rem; }
 .mt-l { margin-top: clamp(1.8rem, 4vw, 3rem); }
+
+/* ===================================================== touch targets ====
+   Thumb, not cursor. The add-to-cart buttons were 60x33 — the single most
+   tapped control on the page, and under half a fingertip tall. Filter chips
+   were 63x33. Both now clear 44px, with press feedback replacing the :hover
+   states that never fire on a touchscreen. */
+@media (pointer: coarse) {
+  .add { min-height: 44px; min-width: 44px; padding-inline: 16px; }
+  .fchip { min-height: 44px; display: inline-flex; align-items: center; }
+  .drawer__x { width: 44px; height: 44px; }
+  .top-nav a, .foot a { min-height: 44px; display: inline-flex; align-items: center; }
+  input, select { min-height: 44px; }
+
+  .add:active, .fchip:active { transform: scale(.94); }
+  .row:active { background: rgba(244, 241, 234, .06); }
+}

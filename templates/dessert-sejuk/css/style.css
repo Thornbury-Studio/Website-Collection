@@ -1940,3 +1940,16 @@ button {
     gap: 10px;
   }
 }
+
+/* ===================================================== touch targets ====
+   Thumb, not cursor. The add buttons sat at 44x41 and the chips at 65x41 —
+   close enough to look fine on desktop, still under the threshold for a
+   reliable tap. Press states stand in for :hover, which touch never triggers. */
+@media (pointer: coarse) {
+  .card-add { min-width: 44px; min-height: 44px; }
+  .chip { min-height: 44px; display: inline-flex; align-items: center; }
+  .chip-bar { gap: 10px; }
+  .head-nav a, .site-foot a { min-height: 44px; display: inline-flex; align-items: center; }
+
+  .card-add:active, .chip:active { transform: scale(.94); }
+}
