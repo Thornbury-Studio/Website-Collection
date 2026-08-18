@@ -11,6 +11,7 @@ const CLIENT_PREVIEW_SLUGS = {
   'timestealer-cafe': '/templates/timestealer-cafe/index.html',
   'gig-cafe': '/templates/gig-cafe/index.html',
   'fancy-nails-paradise': '/templates/fancy-nails-paradise/index.html',
+  'cafe-bombom': '/templates/cafe-bombom/index.html',
 };
 
 module.exports = { CLIENT_PREVIEW_SLUGS };
