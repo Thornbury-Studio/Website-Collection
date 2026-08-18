@@ -1,11 +1,28 @@
 # BRIGHTSIDE — media provenance
 
-This template contains **no photography and no AI-generated imagery**. Every visual —
-the arched-window hero scene, the happy tooth mark, the smile arc, the service icons,
-the comfort-menu icons, and the three team portraits — is **hand-written inline SVG**,
-original to this template.
+Every visual except the three team portraits — the arched-window hero scene, the
+happy tooth mark, the smile arc, the service icons and the comfort-menu icons — is
+**hand-written inline SVG**, original to this template.
 
-## Why there are no photos
+The **three team portraits are generated imagery**, added 18 August 2026 with
+Google's **Nano Banana 2** (`nano_banana_2`) via Higgsfield, replacing the
+illustrated placeholders described below. They depict no real person. One
+STYLE block was repeated verbatim across all three prompts — window light from
+the left, softly out-of-focus cream-and-oak interior, sage-green scrubs,
+head-and-shoulders three-quarter framing, and an explicit ban on lettering and
+badges — so the three read as one sitting at one practice rather than three
+unrelated stock headshots. Only the subject sentence changed. Dr. Rosa's frame
+needed one re-roll after an outright generation failure.
+
+The section's former "Illustrated for now" line has been removed rather than
+reworded: it is no longer true, and per the portfolio content policy a child
+site carries no provenance notes in its ordinary copy. Provenance lives here.
+
+The portraits are deliberately swappable — square, single `<img>`, fixed
+`aspect-ratio`, no cropping logic — so real photography can replace them by
+dropping in files of the same names.
+
+## Why the rest is illustrated, and why no real faces were used
 
 The template was built after the Higgsfield generation budget ran out, so imagery had
 to come from genuinely copyright-free sources. A search of Openverse (CC0 / public
