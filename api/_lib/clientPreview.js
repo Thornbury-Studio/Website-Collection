@@ -9,6 +9,7 @@
 const CLIENT_PREVIEW_SLUGS = {
   'professor-brawn': '/templates/professor-brawn/index.html',
   'timestealer-cafe': '/templates/timestealer-cafe/index.html',
+  'zz-pipeline-test': '/templates/zz-pipeline-test/index.html',
 };
 
 module.exports = { CLIENT_PREVIEW_SLUGS };
