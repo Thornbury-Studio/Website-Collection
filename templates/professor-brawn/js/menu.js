@@ -1,4 +1,4 @@
-/* Professor Brawn — menu page renderer. Builds the course catalogue from
+/* Common Ground Café — menu page renderer. Builds the menu from
    PB_DATA with an outlet toggle and honest filters. */
 (function () {
   "use strict";
@@ -225,7 +225,7 @@
   bindChip("chip-picks", "picks");
   render();
 
-  /* WhatsApp CTA reflects the selected outlet. */
+  /* Enquiry CTA reflects the selected outlet. */
   var waBtn = document.getElementById("menu-wa");
   if (waBtn) {
     waBtn.addEventListener("click", function (e) {

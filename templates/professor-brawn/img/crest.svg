@@ -1,27 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118 150" role="img" aria-label="Professor Brawn crest">
-  <!-- Original mark for this preview. A shield badge carrying a PB monogram
-       over a fork-and-quill cross: the fork for the kitchen, the quill for the
-       school campus the cafes sit on. Deliberately NOT a character mascot —
-       the client's own mascot is a child's artwork and is not imitated here. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118 150" role="img" aria-label="Common Ground crest">
+  <!-- Original mark for this preview: a shield badge with a CG monogram over
+       a fork-and-spoon cross. -->
   <defs>
-    <linearGradient id="pbPlum" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="cgPlum" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#5b2d86"/>
       <stop offset="1" stop-color="#241536"/>
     </linearGradient>
   </defs>
-  <path d="M59 3 L110 20 v54c0 39-26 61-51 73C34 135 8 113 8 74V20z" fill="url(#pbPlum)"/>
+  <path d="M59 3 L110 20 v54c0 39-26 61-51 73C34 135 8 113 8 74V20z" fill="url(#cgPlum)"/>
   <path d="M59 11 L102 25 v49c0 34-22 53-43 64-21-11-43-30-43-64V25z" fill="none" stroke="#c9a227" stroke-width="2.4"/>
-  <!-- fork -->
   <g stroke="#e7cf8c" stroke-width="2.6" stroke-linecap="round" fill="none">
     <path d="M42 108 L42 84"/>
     <path d="M36 62 v14c0 4 2.6 8 6 8s6-4 6-8V62"/>
     <path d="M39 62 v11M45 62 v11"/>
   </g>
-  <!-- quill -->
   <g stroke="#e7cf8c" stroke-width="2.6" stroke-linecap="round" fill="none">
-    <path d="M76 108 L76 86"/>
-    <path d="M76 86c0-12 4-20 10-24-1 12-3 20-10 24z"/>
+    <ellipse cx="76" cy="70" rx="6" ry="9"/>
+    <path d="M76 79 L76 108"/>
   </g>
   <text x="59" y="52" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
-        font-size="30" font-weight="700" fill="#faf4e6" letter-spacing="1">PB</text>
+        font-size="27" font-weight="700" fill="#faf4e6" letter-spacing="0.5">CG</text>
 </svg>

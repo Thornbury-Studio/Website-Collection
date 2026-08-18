@@ -1,4 +1,4 @@
-/* Professor Brawn — home page: prices pulled from the catalogue so copy can
+/* Common Ground Café — home page: prices pulled from the catalogue so copy can
    never drift from the menu, plus the specials board. */
 (function () {
   "use strict";

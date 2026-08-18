@@ -1,5 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118 150">
-  <!-- Single-colour silhouette of the original crest, used as a CSS mask for
-       the watermark treatment. Solid shape only — masks ignore colour. -->
+  <!-- Single-colour silhouette of the crest, used as a CSS mask. -->
   <path d="M59 3 L110 20 v54c0 39-26 61-51 73C34 135 8 113 8 74V20z" fill="#000"/>
 </svg>
