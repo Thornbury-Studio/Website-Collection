@@ -1173,3 +1173,15 @@ details.sample .inner p { margin: 0; color: var(--ink-soft); }
 
   .chip:active, .btn:active, .seg button:active { transform: scale(.96); }
 }
+
+/* Dateline replaces a figcaption whose photograph was removed — the fact
+   survives, the empty frame does not. */
+.dateline {
+  font: 600 0.85rem var(--sans);
+  color: var(--brass);
+  letter-spacing: 0.04em;
+  margin: 0.6rem 0 0;
+}
+/* Delivery partners are named in text; their button artwork is their
+   trademark and is not reproduced here. */
+.order-name { font-weight: 700; }
