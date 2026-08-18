@@ -414,6 +414,8 @@ h1 em, h2 em { font-style: normal; color: var(--coral-deep); }
   max-width: 260px; margin: 0 auto 1.1rem;
   transition: transform .4s var(--ease);
 }
+/* Portraits are square; pin the ratio so a slow load cannot collapse the row. */
+.member-art img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
 .member:hover .member-art { transform: translateY(-4px) rotate(-1deg); }
 @media (prefers-reduced-motion: reduce) { .member:hover .member-art { transform: none; } }
 
