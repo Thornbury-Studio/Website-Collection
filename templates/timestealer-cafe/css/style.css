@@ -519,3 +519,22 @@ a.dish:hover .dish-img img { transform: scale(1.045); }
   body { font-size: 16px; }
   .hero-stamp { position: static; margin-top: 1rem; max-width: none; }
 }
+
+/* ===================================================== touch targets ====
+   Thumb, not cursor. Chips were 104x35 and footer links 31x18 — 15 of this
+   page's 16 interactive elements missed the 44px threshold. :hover never
+   fires on touch, so the press state carries the feedback. */
+@media (pointer: coarse) {
+  .chip { min-height: 44px; }
+  .btn { min-height: 44px; }
+  .site-nav a { min-height: 44px; display: inline-flex; align-items: center; }
+  /* footer links were only 31px wide — a thumb needs the whole row, not the
+     width of the word, so these stretch to fill their column. */
+  .foot-list a { min-height: 44px; display: flex; align-items: center; }
+  .nav-toggle { width: 46px; height: 46px; }
+  .menu-search input { min-height: 46px; }
+  .chips { gap: .65rem; }
+
+  .chip:active, .btn:active { transform: scale(.96); }
+  .faq summary { padding-block: 1.3rem; }
+}

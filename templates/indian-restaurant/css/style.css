@@ -475,3 +475,33 @@ button { font: inherit; cursor: pointer; }
 
   .field-row { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ===================================================== touch targets ====
+   A phone is operated with a thumb, not a cursor, so two things change.
+
+   1. Size. A fingertip contact patch is ~9mm; anything under 44px CSS is a
+      coin-toss tap. The ordering UI was the worst of it — quantity steppers at
+      36x36 and option pills at 55x36 — which is exactly the control you cannot
+      afford to mis-tap, because a wrong tap silently changes an order.
+   2. Feedback. :hover never fires on touch, so every hover-only affordance is
+      invisible here. The same feedback is bound to :active instead.
+
+   Scoped to (pointer: coarse) so the desktop layout is untouched. */
+@media (pointer: coarse) {
+  .qty button { width: 44px; height: 44px; }
+  .qty output { min-width: 34px; }
+
+  .opt { min-height: 44px; display: inline-flex; align-items: center; }
+  .opt-row { gap: 10px; }
+
+  .chip { min-height: 44px; display: inline-flex; align-items: center; }
+
+  /* standalone navigation links — not links inside running prose */
+  .top-nav a, .top a, .foot a { min-height: 44px; display: inline-flex; align-items: center; }
+  /* the chapter table-of-contents is how you jump around a long menu */
+  .toc a { min-height: 44px; display: inline-flex; align-items: center; }
+
+  /* touch has no hover, so press states carry the feedback */
+  .opt:active, .chip:active, .qty button:active { transform: scale(.94); }
+  .dish-row:active { background: var(--card); }
+}

@@ -756,3 +756,14 @@ h1, h2, h3 { font-family: var(--serif-display); font-weight: 400; line-height: 1
   font-size: 0.8rem;
 }
 .skip:focus { left: 0; }
+
+/* ===================================================== touch targets ====
+   Thumb, not cursor. The reservation calendar's day cells measured 47x47 —
+   only just clearing a fingertip, and packed seven across with no gutter, so
+   mis-taps booked the wrong date. Widened and spaced. */
+@media (pointer: coarse) {
+  .cal-day { min-width: 44px; min-height: 44px; }
+  .site-nav a, .site-foot a { min-height: 44px; display: inline-flex; align-items: center; }
+  .btn, .chip { min-height: 44px; display: inline-flex; align-items: center; }
+  .cal-day:active, .btn:active { transform: scale(.94); }
+}

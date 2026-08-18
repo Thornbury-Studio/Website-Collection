@@ -747,3 +747,67 @@ input, select, output { font: inherit; color: inherit; }
   }
   .dish:hover .dish-shot img { transform: none; }
 }
+
+/* ===================================================== touch targets ====
+   Thumb, not cursor. Category pills were 60x36 and rail links 78x40. */
+@media (pointer: coarse) {
+  .pill { min-height: 44px; display: inline-flex; align-items: center; }
+  .rail-nav a, .foot a { min-height: 44px; display: inline-flex; align-items: center; }
+  .pill:active { transform: scale(.94); }
+  .dish:active { transform: scale(.99); }
+}
+
+/* ============================================== mobile menu density ====
+   On a phone the dish card stacked a 4:3 photo above the text, which made each
+   card 373px tall — about 2.3 dishes per screen, and 15.9 screens to reach the
+   bottom of the menu. That is the longest scroll in the collection.
+
+   Below 720px the card becomes the delivery-app row instead: text left, a 96px
+   square thumb right. Same information, ~6 dishes per screen. The photo earns
+   less space because on a menu the name and price are what people scan; the
+   picture only has to confirm what the dish is.
+
+   The description clamps to two lines so every row is the same height — a
+   ragged column is far harder to scan than a slightly truncated one. */
+@media (max-width: 719px) {
+  .dish {
+    flex-direction: row-reverse;
+    align-items: stretch;
+    gap: .85rem;
+    padding: .8rem .85rem;
+  }
+
+  .dish-shot {
+    aspect-ratio: 1 / 1;
+    width: 96px; flex: 0 0 96px;
+    border-radius: 10px;
+    align-self: center;
+  }
+
+  .dish-body { padding: 0; justify-content: center; min-width: 0; }
+
+  .dish-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-top: .25rem;
+  }
+
+  /* the weight badge overlapped a 96px thumb; move it inline with the name */
+  .dish-weight {
+    position: static;
+    display: inline-block;
+    margin-left: .4rem;
+    background: none; color: var(--ink-3);
+    padding: 0;
+  }
+}
+
+/* ==================================================== legible on glass ====
+   Several labels sat at .6rem — 9.6px, the smallest type in the collection and
+   unreadable at arm's length on a phone. Nothing drops below 12px on mobile. */
+@media (max-width: 719px) {
+  .dish-weight, .cl-mods, .check-empty span { font-size: .75rem; }
+  .pill, .tag, .rail-nav a { font-size: .78rem; }
+}

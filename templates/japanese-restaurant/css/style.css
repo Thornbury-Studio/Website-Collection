@@ -640,3 +640,10 @@ input, select, output { font: inherit; color: inherit; }
   }
   .done-tick { stroke-dashoffset: 0; }
 }
+
+/* Chips measured 51x40 on a phone — just under a reliable thumb target. */
+@media (pointer: coarse) {
+  .chip { min-height: 44px; display: inline-flex; align-items: center; }
+  .tabs a, .ft a { min-height: 44px; display: inline-flex; align-items: center; }
+  .chip:active, .item:active { transform: scale(.97); }
+}

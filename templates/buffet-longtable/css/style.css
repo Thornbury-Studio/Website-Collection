@@ -234,3 +234,11 @@ section h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 8px; padding-to
 
   .hours-tables { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ===================================================== touch targets ====
+   Thumb, not cursor. */
+@media (pointer: coarse) {
+  .top-nav a, .foot a { min-height: 44px; display: inline-flex; align-items: center; }
+  .btn, .chip { min-height: 44px; display: inline-flex; align-items: center; }
+  .btn:active, .chip:active { transform: scale(.96); }
+}

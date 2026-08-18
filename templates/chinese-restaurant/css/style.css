@@ -458,3 +458,36 @@ p { line-height: 1.7; color: var(--ink-2); }
   }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ===================================================== touch targets ====
+   Thumb, not cursor.
+
+   The important fix here is not sizing, it is discoverability. Each plate on
+   the table carries a '取消' remove label revealed only by .tp:hover — and
+   hover does not exist on a touchscreen, so on a phone there was no way to
+   learn that a plate can be taken back off the table at all.
+
+   Centring it permanently would cover the dish, so on touch it becomes a small
+   always-visible corner badge instead: discoverable, without hiding the food. */
+@media (hover: none) {
+  .tp::after {
+    opacity: 1;
+    left: auto; right: -4px; top: -4px;
+    transform: scale(1);
+    font-size: 0.6rem; padding: 0.2em 0.42em;
+  }
+  .tp:hover::after { transform: scale(1); }
+}
+
+@media (pointer: coarse) {
+  .tp { min-width: 44px; min-height: 44px; }
+  .nav-links a, .foot a { min-height: 44px; display: inline-flex; align-items: center; }
+  .chip, .btn { min-height: 44px; display: inline-flex; align-items: center; }
+  /* spice-level and quantity controls were 30x30 — the smallest live
+     controls in the collection, and the ones that change an order. */
+  .heat, .clear, .qty button,
+  #paxDown, #paxUp { min-width: 44px; min-height: 44px; }
+  .dock-btn { min-height: 44px; }
+  .foot a { min-height: 44px; display: flex; align-items: center; }
+  .tp:active { transform: translate(-50%, -50%) scale(.93); }
+}
