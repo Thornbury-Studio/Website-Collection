@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Services &amp; Prices — Fancy Nails Paradise</title>
+<meta name="description" content="Manicures, pedicures, gel, gelish, acrylic and dip powder extensions and nail art at Fancy Nails Paradise, Tampines Street 11. Express manicure from $10.">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#FCFAF8">
+<link rel="icon" href="img/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap bar">
+    <a class="brand" href="index.html" aria-label="Fancy Nails Paradise — home">
+      <svg class="mark" viewBox="0 0 32 32" width="30" height="30" fill="none" aria-hidden="true">
+        <path d="M16 4c3.6 0 6.2 2.4 6.2 6v9.4c0 4.2-2.7 7.2-6.2 7.2s-6.2-3-6.2-7.2V10c0-3.6 2.6-6 6.2-6z" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M10.4 12.6c3.6-1.7 7.6-1.7 11.2 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-txt"><b>Fancy Nails</b><small>Paradise</small></span>
+    </a>
+
+    <div class="nav-shell">
+      <div class="scrim"></div>
+      <nav class="site-nav" id="nav" aria-label="Main">
+      <button class="nav-close" type="button" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <a href="index.html">Home</a>
+      <a href="services.html" aria-current="page">Services &amp; Prices</a>
+      <a href="visit.html">Visit &amp; Book</a>
+      <a href="tel:+6597785712">Call 9778 5712</a>
+    </nav>
+    </div>
+
+    <div class="head-cta">
+      <a class="btn btn-primary" href="tel:+6597785712">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        Book by phone
+      </a>
+    </div>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow reveal">Services &amp; prices</p>
+      <h1 class="reveal">What we do, and what it costs.</h1>
+      <p class="lede reveal measure">Search or filter to find what you want. Prices start from the figures shown &mdash; length, shape and design change the final number, and you&rsquo;ll always hear it before anyone starts.</p>
+
+      <div class="price-tools reveal">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <label class="sr-only" for="svcSearch">Search services</label>
+          <input type="search" id="svcSearch" placeholder="Search &mdash; gel, pedicure, acrylic&hellip;" autocomplete="off">
+        </div>
+        <div class="chips" id="svcChips" role="group" aria-label="Filter by category"></div>
+      </div>
+
+      <p class="count" id="svcCount" role="status" aria-live="polite"></p>
+      <div id="svcList"></div>
+    </div>
+  </section>
+
+  <section class="section section-shell">
+    <div class="wrap">
+      <p class="eyebrow reveal">Good to know</p>
+      <h2 class="reveal">Before you come.</h2>
+      <div class="faq reveal">
+        <details>
+          <summary>Do I need an appointment?</summary>
+          <p>Walk in any time we&rsquo;re open and we&rsquo;ll fit you in if there&rsquo;s a chair. Evenings and weekends get busy, so a quick call ahead saves you waiting.</p>
+        </details>
+        <details>
+          <summary>How long does a set take?</summary>
+          <p>An express manicure is about twenty minutes. A full gel set with art can take up to two hours. Tell us what you want when you call and we&rsquo;ll give you a realistic time.</p>
+        </details>
+        <details>
+          <summary>Can you remove gel from another salon?</summary>
+          <p>Yes. We soak it off gently rather than filing it away. Removal is free when you&rsquo;re having a new set done the same visit.</p>
+        </details>
+        <details>
+          <summary>I&rsquo;ve got a picture of what I want. Is that okay?</summary>
+          <p>Please bring it &mdash; a screenshot is the clearest way to show us. We&rsquo;ll tell you honestly whether it will work on your nail length and what it will cost.</p>
+        </details>
+        <details>
+          <summary>Do you do men&rsquo;s nails?</summary>
+          <p>Yes, manicures and pedicures both. Shape, cuticle tidy and buff, with colour only if you want it.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <span class="brand">
+          <svg class="mark" viewBox="0 0 32 32" width="30" height="30" fill="none" aria-hidden="true">
+            <path d="M16 4c3.6 0 6.2 2.4 6.2 6v9.4c0 4.2-2.7 7.2-6.2 7.2s-6.2-3-6.2-7.2V10c0-3.6 2.6-6 6.2-6z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M10.4 12.6c3.6-1.7 7.6-1.7 11.2 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <span class="brand-txt"><b>Fancy Nails</b><small>Paradise</small></span>
+        </span>
+        <p>139 Tampines Street 11, #01-56<br>Singapore 521139</p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul class="foot-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services &amp; Prices</a></li>
+          <li><a href="visit.html">Visit &amp; Book</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Salon</h4>
+        <ul class="foot-list">
+          <li><a href="tel:+6597785712">9778 5712</a></li>
+          <li><span>Open daily 10am &ndash; 8pm</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span data-year>2026</span> Fancy Nails Paradise</span>
+      <span>Tampines, Singapore</span>
+    </div>
+  </div>
+</footer>
+
+<div class="bookbar">
+  <a class="btn btn-primary" href="tel:+6597785712">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+    Call
+  </a>
+  <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&amp;query=139+Tampines+Street+11+%2301-56+Singapore+521139" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Directions
+  </a>
+</div>
+
+<div class="bookbar">
+  <a class="btn btn-primary" href="tel:+6597785712">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+    Call
+  </a>
+  <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&amp;query=139+Tampines+Street+11+%2301-56+Singapore+521139" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Directions
+  </a>
+</div>
+
+<script src="js/ui.js"></script>
+<script src="js/services-data.js"></script>
+<script src="js/services.js"></script>
+</body>
+</html>
