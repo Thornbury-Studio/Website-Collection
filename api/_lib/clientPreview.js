@@ -12,6 +12,7 @@ const CLIENT_PREVIEW_SLUGS = {
   'gig-cafe': '/templates/gig-cafe/index.html',
   'fancy-nails-paradise': '/templates/fancy-nails-paradise/index.html',
   'cafe-bombom': '/templates/cafe-bombom/index.html',
+  'threes-a-crowd': '/templates/threes-a-crowd/index.html',
 };
 
 module.exports = { CLIENT_PREVIEW_SLUGS };
