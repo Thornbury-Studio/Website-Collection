@@ -199,19 +199,19 @@
         price: 25,
         blurb: "This month's special: tender, succulent lamb with lemongrass and spices.",
         img: "promo-lamb",
-        alt: "Poster for this month's special: a bowl of fragrant lamb stew over rice with pickled vegetables and a stick of lemongrass, only $25++."
+        alt: "Slow-cooked lamb on mashed potato with greens and a dark sauce."
       },
       {
         name: "Weekday Lunch Bowls",
         blurb: "New specialty bowls of deliciousness, weekdays at both cafés.",
         img: "promo-bowls",
-        alt: "Poster for the new weekday lunch bowls, a lineup of specialty rice bowls."
+        alt: "A grain bowl with sliced chicken, avocado, broccoli and cucumber, seen from above."
       },
       {
         name: "Mocktail of the Month",
         blurb: "Sweet, tangy and fizzy goodness at both outlets.",
         img: "promo-mocktail",
-        alt: "Poster for the mocktail of the month, a tall glass of an iced fizzy mocktail."
+        alt: "Two tall glasses of iced grapefruit and pomegranate mocktail."
       }
     ],
 
