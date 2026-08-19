@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<title>Book a Ride — GYRE</title>
+<meta name="description" content="Book a demonstration ride at GYRE Hall, Singapore. Choose your machine and licence class — the ride is the argument.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Chakra+Petch:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+
+<header class="top">
+  <a class="wordmark" href="index.html"><span class="halo-mark" aria-hidden="true"></span>GYRE</a>
+  <nav aria-label="Primary">
+    <a href="garage.html">The garage</a>
+    <a href="teardown.html">Teardown</a>
+    <a href="ride.html" class="nav-cta">Book a ride</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="garage.html">The garage</a>
+  <a href="teardown.html">Teardown</a>
+  <a href="ride.html">Book a ride</a>
+  <span class="label">GYRE — Singapore</span>
+</aside>
+
+<main id="main" class="stage-sec ride-page">
+  <div class="wrap">
+    <div class="sec-head"><span class="label">Demonstrations · Tue–Sun</span></div>
+    <div class="ride-grid">
+      <div>
+        <h1 class="reveal">The ride is the argument.</h1>
+        <p class="lede reveal d1">Thirty minutes, a marked-out route through Kallang, and whichever machine you can legally hold open. We do not do pillion laps of a car park.</p>
+        <p class="ride-note muted reveal d2">Bring your licence and your own helmet if you prefer — we stock Shoei loaners in most sizes. Demonstrations are free; conviction is expensive.</p>
+        <div class="outlet-card reveal d2">
+          <span class="label">GYRE Hall</span>
+          <p class="muted">12 Kallang Junction<br>Singapore 339266</p>
+          <p class="muted">Tue–Sun, 10:00am–7:00pm<br>Closed Mondays</p>
+          <a href="mailto:ride@gyremotors.sg">ride@gyremotors.sg</a>
+        </div>
+      </div>
+      <form id="ride-form">
+        <div class="field">
+          <label class="label" for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label class="label" for="f-machine">Machine</label>
+          <select id="f-machine" name="machine"></select>
+        </div>
+        <div class="field">
+          <label class="label" for="f-licence">Licence class</label>
+          <select id="f-licence" name="licence">
+            <option>Class 2B</option>
+            <option>Class 2A</option>
+            <option>Class 2</option>
+            <option>Overseas licence</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="f-date">Preferred date</label>
+          <input id="f-date" name="date" type="date">
+        </div>
+        <button class="btn btn-arm" type="submit">Compose booking email</button>
+        <p class="muted ride-mailnote">Submitting opens your mail app with the booking pre-filled — nothing is sent until you press send.</p>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <a class="wordmark" href="index.html"><span class="halo-mark" aria-hidden="true"></span>GYRE</a>
+      <p class="muted foot-blurb">Five machines, one physics. Designed and assembled in Singapore.</p>
+    </div>
+    <nav aria-label="Site">
+      <span class="label">Site</span>
+      <a href="garage.html">The garage</a>
+      <a href="teardown.html">Teardown</a>
+      <a href="ride.html">Book a ride</a>
+    </nav>
+    <div>
+      <span class="label">GYRE Hall</span>
+      <p class="muted">12 Kallang Junction<br>Singapore 339266</p>
+      <a href="mailto:ride@gyremotors.sg">ride@gyremotors.sg</a>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span class="label">GYRE Motors Pte Ltd</span>
+    <span class="label">Ride within your licence. Always wear the gear.</span>
+  </div>
+</footer>
+
+</div>
+<script src="js/bikes-data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/ride.js"></script>
+</body>
+</html>
