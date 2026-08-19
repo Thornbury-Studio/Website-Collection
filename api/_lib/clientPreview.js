@@ -13,6 +13,7 @@ const CLIENT_PREVIEW_SLUGS = {
   'fancy-nails-paradise': '/templates/fancy-nails-paradise/index.html',
   'cafe-bombom': '/templates/cafe-bombom/index.html',
   'threes-a-crowd': '/templates/threes-a-crowd/index.html',
+  'ae-unisex-salon': '/templates/ae-unisex-salon/index.html',
 };
 
 module.exports = { CLIENT_PREVIEW_SLUGS };
