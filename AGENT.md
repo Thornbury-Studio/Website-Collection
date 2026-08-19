@@ -2,7 +2,7 @@
 
 Reference doc for any agent working in this repo. Two questions only: why this
 exists, and where things live. For code-level rules see [CLAUDE.md](CLAUDE.md),
-[PRODUCT.md](PRODUCT.md), [PATTERNS.md](PATTERNS.md).
+[PRODUCT.md](PRODUCT.md), [PATTERNS.md](PATTERNS.md), [VIDEO-POLICY.md](VIDEO-POLICY.md).
 
 ## Why
 
@@ -34,6 +34,7 @@ It serves two audiences from two different pages, and they must not be conflated
 | `PRODUCT.md` | Product truth for the *personal portfolio* — catalog, audience, brand pin, banned claims |
 | `PATTERNS.md` | Reusable code patterns that keep getting re-broken per template (e.g. marquee true-loop) |
 | `CLAUDE.md` | Content policy — no demo/fictional/AI disclaimers inside child-site copy |
+| `VIDEO-POLICY.md` | AI video credit conservation — plan once, generate once, source-priority order before spending video credits |
 | `.env` | `GEMINI_API_KEY` for template imagery (nano-banana) — local to this machine, gitignored |
 | `~/.claude/projects/.../memory/` | Cross-session knowledge: build recipe, image-gen usage, verification traps, multi-machine sync notes |
 
