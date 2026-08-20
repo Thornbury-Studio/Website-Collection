@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<title>The Archive — FATHOM</title>
+<meta name="description" content="All thirty-six plates of Descent I. Search by name, filter by depth zone, essence, rarity, or what your Log is still missing.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Spline+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="wordmark" href="index.html">FATHOM <small>Meridian Trench Survey</small></a>
+  <nav aria-label="Primary">
+    <a href="index.html">Desk</a>
+    <a href="archive.html">Archive</a>
+    <a href="binder.html">The Log</a>
+    <a href="trawl.html">Trawl</a>
+  </nav>
+  <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false"><span>Sound off</span></button>
+</header>
+
+<nav class="dock" aria-label="Primary">
+  <a href="index.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8l6-5 6 5v6H2z"/></svg>Desk</a>
+  <a href="archive.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="5" height="7" rx="1"/><rect x="9" y="2" width="5" height="7" rx="1"/><rect x="2" y="11" width="12" height="3" rx="1"/></svg>Archive</a>
+  <a href="binder.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="2" width="10" height="12" rx="1.5"/><path d="M6 2v12"/></svg>Log</a>
+  <a href="trawl.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="6" r="4"/><path d="M4 13c1.3-1.6 2.6-2 4-2s2.7.4 4 2"/></svg>Trawl</a>
+</nav>
+
+<main id="main" class="sec">
+  <div class="wrap">
+    <div class="sec-head"><span class="label">The archive · Descent I</span></div>
+    <h1 class="fade">Every plate the Survey has issued.</h1>
+
+    <div class="controls">
+      <div class="search-row">
+        <label class="search-box">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>
+          <span class="visually-hidden-label" hidden>Search plates</span>
+          <input id="search" type="search" placeholder="Search plates — name, zone, essence…" aria-label="Search plates">
+        </label>
+        <div class="chip-row" id="own-row" role="group" aria-label="Ownership filter">
+          <button class="chip" type="button" data-own="all" aria-pressed="true">All</button>
+          <button class="chip" type="button" data-own="owned" aria-pressed="false">Logged</button>
+          <button class="chip" type="button" data-own="missing" aria-pressed="false">Missing</button>
+        </div>
+        <button class="chip adv-toggle" id="adv-toggle" type="button" aria-expanded="false">More filters</button>
+      </div>
+      <div id="adv" hidden>
+        <div class="controls">
+          <div><span class="label">Depth zone</span><div class="chip-row" id="f-zone" role="group" aria-label="Zone filter"></div></div>
+          <div><span class="label">Essence</span><div class="chip-row" id="f-ess" role="group" aria-label="Essence filter"></div></div>
+          <div><span class="label">Luminance</span><div class="chip-row" id="f-rar" role="group" aria-label="Rarity filter"></div></div>
+        </div>
+      </div>
+      <span class="result-line" id="result-line" role="status"></span>
+    </div>
+
+    <div class="plate-grid" id="archive-grid" data-inspect></div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <a class="wordmark" href="index.html">FATHOM</a>
+      <p class="muted">Specimen plates from the deep, issued by the Meridian Trench Survey. Descent I — The Long Dark.</p>
+    </div>
+    <nav aria-label="Site">
+      <span class="label">Site</span>
+      <a href="archive.html">Archive</a>
+      <a href="binder.html">The Log</a>
+      <a href="trawl.html">Trawl</a>
+    </nav>
+    <div>
+      <span class="label">The Survey</span>
+      <p class="muted">Recording the water column since the first descent. Correspondence: <a href="mailto:archive@fathomsurvey.sg">archive@fathomsurvey.sg</a></p>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span class="label">Fathom Archive</span>
+    <span class="label">Some light never surfaces.</span>
+  </div>
+</footer>
+
+<script src="js/cards-data.js"></script>
+<script src="js/collection.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/holo.js"></script>
+<script src="js/archive.js"></script>
+</body>
+</html>

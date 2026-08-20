@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<title>FATHOM — Plates from the Deep</title>
+<meta name="description" content="The specimen archive of the Meridian Trench Survey. Thirty-six collectible plates from Descent I — trawl the deep, log what surfaces, complete The Long Dark.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Spline+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="wordmark" href="index.html">FATHOM <small>Meridian Trench Survey</small></a>
+  <nav aria-label="Primary">
+    <a href="index.html">Desk</a>
+    <a href="archive.html">Archive</a>
+    <a href="binder.html">The Log</a>
+    <a href="trawl.html">Trawl</a>
+  </nav>
+  <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false"><span>Sound off</span></button>
+</header>
+
+<nav class="dock" aria-label="Primary">
+  <a href="index.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8l6-5 6 5v6H2z"/></svg>Desk</a>
+  <a href="archive.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="5" height="7" rx="1"/><rect x="9" y="2" width="5" height="7" rx="1"/><rect x="2" y="11" width="12" height="3" rx="1"/></svg>Archive</a>
+  <a href="binder.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="2" width="10" height="12" rx="1.5"/><path d="M6 2v12"/></svg>Log</a>
+  <a href="trawl.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="6" r="4"/><path d="M4 13c1.3-1.6 2.6-2 4-2s2.7.4 4 2"/></svg>Trawl</a>
+</nav>
+
+<main id="main">
+
+  <section class="desk-hero wrap">
+    <div>
+      <span class="label">Meridian Trench Survey · Descent I</span>
+      <h1>Some light never surfaces.</h1>
+      <p class="lede">FATHOM is the Survey's archive of the deep — thirty-six specimen plates from the sunlit fringe to the trench floor. Trawl the dark, log what comes up, and try to finish what the Survey started.</p>
+      <div class="hero-cta">
+        <a class="btn btn-ink" href="trawl.html">Trawl the deep</a>
+        <a class="btn btn-line" href="archive.html">Browse the archive</a>
+      </div>
+    </div>
+    <div class="hero-plate" id="hero-plate" data-inspect></div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head"><span class="label">The expedition desk</span></div>
+      <div class="desk-cards">
+        <div class="desk-card fade">
+          <h3>Expedition status</h3>
+          <div class="gauge" id="stat-pct"></div>
+          <a class="btn btn-line" href="binder.html">Open the Log</a>
+        </div>
+        <div class="desk-card fade">
+          <h3>Rarity ledger</h3>
+          <div class="gauge" id="stat-rar"></div>
+        </div>
+        <div class="desk-card fade">
+          <h3>Display shelf</h3>
+          <p class="muted">Pin up to four plates from their detail view.</p>
+          <div class="shelf" id="shelf" data-inspect></div>
+        </div>
+        <div class="desk-card fade">
+          <h3>Survey stamps</h3>
+          <div class="milestones" id="milestones"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="recent-wrap" hidden>
+    <div class="wrap">
+      <div class="sec-head"><span class="label">Recently logged</span></div>
+      <div class="plate-grid recent-grid" id="recent" data-inspect></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head"><span class="label">How the archive works</span></div>
+      <div class="desk-cards">
+        <div class="desk-card fade">
+          <h3><span class="label">01</span> Trawl</h3>
+          <p class="muted">Haul the net and five plates surface, face down. Every trawl is free. Some lights are rarer than others; the deep does not negotiate.</p>
+        </div>
+        <div class="desk-card fade">
+          <h3><span class="label">02</span> Log</h3>
+          <p class="muted">Turned plates join your Log — the Survey's binder of record. Empty slots stay embossed on the page, so you always know what's still down there.</p>
+        </div>
+        <div class="desk-card fade">
+          <h3><span class="label">03</span> Complete</h3>
+          <p class="muted">Finish spreads, earn the Survey's stamps, and close out Descent I. The archive remembers everything on this device, and nothing anywhere else.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="teaser-set fade">
+        <span><b>Descent II — The Glass Gardens.</b> The Survey has filed its manifest.</span>
+        <span class="label">In preparation</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <a class="wordmark" href="index.html">FATHOM</a>
+      <p class="muted">Specimen plates from the deep, issued by the Meridian Trench Survey. Descent I — The Long Dark.</p>
+    </div>
+    <nav aria-label="Site">
+      <span class="label">Site</span>
+      <a href="archive.html">Archive</a>
+      <a href="binder.html">The Log</a>
+      <a href="trawl.html">Trawl</a>
+    </nav>
+    <div>
+      <span class="label">The Survey</span>
+      <p class="muted">Recording the water column since the first descent. Correspondence: <a href="mailto:archive@fathomsurvey.sg">archive@fathomsurvey.sg</a></p>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span class="label">Fathom Archive</span>
+    <span class="label">Some light never surfaces.</span>
+  </div>
+</footer>
+
+<script src="js/cards-data.js"></script>
+<script src="js/collection.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/holo.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
