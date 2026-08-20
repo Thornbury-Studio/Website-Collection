@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<title>The Trawl — FATHOM</title>
+<meta name="description" content="Haul the net. Five plates surface every trawl — free, unlimited, and honest about the odds. Turn them one by one and see what the deep sends up.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Spline+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="wordmark" href="index.html">FATHOM <small>Meridian Trench Survey</small></a>
+  <nav aria-label="Primary">
+    <a href="index.html">Desk</a>
+    <a href="archive.html">Archive</a>
+    <a href="binder.html">The Log</a>
+    <a href="trawl.html">Trawl</a>
+  </nav>
+  <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false"><span>Sound off</span></button>
+</header>
+
+<nav class="dock" aria-label="Primary">
+  <a href="index.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8l6-5 6 5v6H2z"/></svg>Desk</a>
+  <a href="archive.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="5" height="7" rx="1"/><rect x="9" y="2" width="5" height="7" rx="1"/><rect x="2" y="11" width="12" height="3" rx="1"/></svg>Archive</a>
+  <a href="binder.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="2" width="10" height="12" rx="1.5"/><path d="M6 2v12"/></svg>Log</a>
+  <a href="trawl.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="6" r="4"/><path d="M4 13c1.3-1.6 2.6-2 4-2s2.7.4 4 2"/></svg>Trawl</a>
+</nav>
+
+<main id="main" class="trawl-stage">
+  <div id="trawl-stage">
+    <span class="label">The trawl · five plates a haul · always free</span>
+    <h1>Haul the net.</h1>
+
+    <div>
+      <button class="net" id="net" type="button" aria-label="Hold to haul the trawl net">
+        <span class="cb-word">FATHOM</span>
+        <span class="net-progress" aria-hidden="true"><i></i></span>
+      </button>
+      <p class="muted trawl-hint" id="trawl-hint">Hold the net to haul — keyboard: press Enter.</p>
+    </div>
+
+    <div class="reveal-row" id="reveal-row" hidden></div>
+    <div class="trawl-summary" id="trawl-summary" hidden></div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <a class="wordmark" href="index.html">FATHOM</a>
+      <p class="muted">Specimen plates from the deep, issued by the Meridian Trench Survey. Descent I — The Long Dark.</p>
+    </div>
+    <nav aria-label="Site">
+      <span class="label">Site</span>
+      <a href="archive.html">Archive</a>
+      <a href="binder.html">The Log</a>
+      <a href="trawl.html">Trawl</a>
+    </nav>
+    <div>
+      <span class="label">The Survey</span>
+      <p class="muted">Recording the water column since the first descent. Correspondence: <a href="mailto:archive@fathomsurvey.sg">archive@fathomsurvey.sg</a></p>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span class="label">Fathom Archive</span>
+    <span class="label">Some light never surfaces.</span>
+  </div>
+</footer>
+
+<script src="js/cards-data.js"></script>
+<script src="js/collection.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/holo.js"></script>
+<script src="js/trawl.js"></script>
+</body>
+</html>
