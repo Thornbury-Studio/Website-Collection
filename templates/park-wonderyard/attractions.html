@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<title>The Board — WONDERYARD</title>
+<meta name="description" content="Every WONDERYARD attraction on one board: world, type, intensity and what's running right now. Filter by world or thrill level and plan your route.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Archivo:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="wordmark" href="index.html">W<b>O</b>NDERYARD</a>
+  <nav aria-label="Primary">
+    <a href="attractions.html">The Board</a>
+    <a href="map.html">Park Map</a>
+    <a href="plan.html">Plan a Day</a>
+    <a class="nav-cta" href="plan.html#tickets">Tickets</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="attractions.html">The Board</a>
+  <a href="map.html">Park Map</a>
+  <a href="plan.html">Plan a Day</a>
+  <a href="plan.html#tickets">Tickets</a>
+  <span class="label">WONDERYARD — Wondervale. Gates 10:00, firework 22:45.</span>
+</aside>
+
+<main id="main">
+  <div class="wrap">
+    <header class="page-head reveal">
+      <span class="kicker">Departures, arrivals, splashdowns</span>
+      <h1>The Board</h1>
+      <p class="lede">Everything running at WONDERYARD, listed the way a station would list trains. Statuses follow the park clock &mdash; what you see is what today looks like.</p>
+    </header>
+
+    <div class="filters" role="group" aria-label="Filter the board">
+      <span class="flabel">World</span>
+      <button class="fbtn" type="button" data-fw="all" aria-pressed="true">All</button>
+      <button class="fbtn" type="button" data-fw="yard" aria-pressed="false">The Yard</button>
+      <button class="fbtn" type="button" data-fw="tilt" aria-pressed="false">Tilt</button>
+      <button class="fbtn" type="button" data-fw="soak" aria-pressed="false">Soak</button>
+      <button class="fbtn" type="button" data-fw="sideways" aria-pressed="false">Sideways</button>
+      <button class="fbtn" type="button" data-fw="giants" aria-pressed="false">Little Giants</button>
+      <button class="fbtn" type="button" data-fw="afterdark" aria-pressed="false">Afterdark</button>
+      <span class="fsep" aria-hidden="true"></span>
+      <span class="flabel">Nerve</span>
+      <button class="fbtn" type="button" data-fi="all" aria-pressed="true">Any</button>
+      <button class="fbtn" type="button" data-fi="calm" aria-pressed="false">Calm (1&ndash;2)</button>
+      <button class="fbtn" type="button" data-fi="lively" aria-pressed="false">Lively (3)</button>
+      <button class="fbtn" type="button" data-fi="fierce" aria-pressed="false">Fierce (4&ndash;5)</button>
+    </div>
+
+    <div class="board reveal" aria-live="polite">
+      <div class="board-head">
+        <span>Attraction</span><span>World</span><span class="btype">Type</span><span>Height</span><span>Now</span>
+      </div>
+      <div id="board-rows"></div>
+    </div>
+
+    <section class="hgt" id="heights">
+      <h2>How tall is tall enough?</h2>
+      <p class="lede">Four attractions have height rules; everything else takes everyone. Measured in shoes, kindly.</p>
+      <div class="chart" id="hgt-chart"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <span class="fmark">W<b>O</b>NDERYARD</span>
+      <p>1 Wondervale Loop, 40 minutes from the city.<br>Gates 10:00 &middot; firework 22:45 &middot; close 23:00, daily.</p>
+    </div>
+    <div>
+      <h4>The park</h4>
+      <a href="attractions.html">The Board</a>
+      <a href="map.html">Park Map</a>
+      <a href="index.html#afterdark">Afterdark</a>
+    </div>
+    <div>
+      <h4>Visiting</h4>
+      <a href="plan.html#tickets">Tickets</a>
+      <a href="plan.html#hours">Hours</a>
+      <a href="plan.html#getting-here">Getting here</a>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <a href="plan.html#access">Accessibility</a>
+      <a href="plan.html#faq">Questions</a>
+    </div>
+    <p class="fine">WONDERYARD &middot; Wondervale &middot; Come out and play.</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/board.js"></script>
+</body>
+</html>

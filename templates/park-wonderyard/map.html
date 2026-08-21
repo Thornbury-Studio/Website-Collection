@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<title>Park Map — WONDERYARD</title>
+<meta name="description" content="Find your way around WONDERYARD's six worlds — The Yard, Tilt, Soak, Sideways, Little Giants and the lake where the last firework goes up. Tap a district to see what lives there.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Archivo:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/map.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="wordmark" href="index.html">W<b>O</b>NDERYARD</a>
+  <nav aria-label="Primary">
+    <a href="attractions.html">The Board</a>
+    <a href="map.html">Park Map</a>
+    <a href="plan.html">Plan a Day</a>
+    <a class="nav-cta" href="plan.html#tickets">Tickets</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="attractions.html">The Board</a>
+  <a href="map.html">Park Map</a>
+  <a href="plan.html">Plan a Day</a>
+  <a href="plan.html#tickets">Tickets</a>
+  <span class="label">WONDERYARD — Wondervale. Gates 10:00, firework 22:45.</span>
+</aside>
+
+<main id="main">
+  <div class="wrap">
+    <header class="page-head reveal">
+      <span class="kicker">You are here (well, at the gate)</span>
+      <h1>The Map</h1>
+      <p class="lede">Six worlds on one looping path. Tap a district to see what lives in it &mdash; and flip the sky to see where the park goes at night.</p>
+    </header>
+
+    <div class="maplay">
+      <div class="mapbox reveal" id="mapbox">
+        <button class="map-toggle" id="sky-toggle" type="button" aria-pressed="false">&#9789; See it at night</button>
+        <svg viewBox="0 0 1000 720" role="img" aria-labelledby="map-title map-desc">
+          <title id="map-title">Illustrated map of WONDERYARD</title>
+          <desc id="map-desc">The Yard sits at the centre. Tilt is north, Soak west, Sideways east, Little Giants south-west. A lake fills the south-east corner, joined to The Yard by the Lantern Route. The gate is at the south.</desc>
+
+          <!-- lake -->
+          <path class="lake" d="M700 520 C 760 470, 880 470, 940 520 C 985 560, 985 640, 930 675 C 860 715, 740 710, 690 660 C 650 620, 655 555, 700 520 Z"/>
+          <g class="lakelabel"><text x="810" y="600" text-anchor="middle" font-size="20">THE LAKE</text>
+          <text class="sub" x="810" y="622" text-anchor="middle" font-size="12">one firework, 22:45</text></g>
+          <circle class="fwdot" cx="810" cy="545" r="5"/>
+          <g class="fwburst" aria-hidden="true">
+            <line x1="810" y1="500" x2="810" y2="478"/>
+            <line x1="790" y1="510" x2="775" y2="495"/>
+            <line x1="830" y1="510" x2="845" y2="495"/>
+            <line x1="785" y1="530" x2="765" y2="528"/>
+            <line x1="835" y1="530" x2="855" y2="528"/>
+          </g>
+
+          <!-- paths (the loop + lantern route) -->
+          <path class="mpath" d="M500 640 C 470 560, 470 520, 500 470 C 530 420, 560 400, 545 340 C 530 280, 470 260, 470 200"/>
+          <path class="mpath" d="M470 430 C 380 430, 320 400, 250 360"/>
+          <path class="mpath" d="M545 400 C 640 380, 700 330, 760 300"/>
+          <path class="mpath" d="M470 470 C 380 490, 320 520, 260 560"/>
+          <path class="mpath lantern" d="M560 460 C 620 490, 650 520, 700 560"/>
+
+          <!-- TILT (north) -->
+          <g class="dist dist-tilt" data-w="tilt" tabindex="0" role="button" aria-label="Tilt — thrill district, north">
+            <path class="blob" d="M360 60 C 430 25, 560 25, 620 70 C 665 105, 660 170, 620 205 C 560 250, 430 250, 375 210 C 330 175, 320 95, 360 60 Z"/>
+            <path class="deco coaster-line" d="M370 170 C 400 100, 430 100, 455 170 C 480 240 505 90 540 90 C 575 90, 580 150, 610 140" fill="none"/>
+            <text x="490" y="150" text-anchor="middle" font-size="30">TILT</text>
+          </g>
+
+          <!-- SOAK (west) -->
+          <g class="dist dist-soak" data-w="soak" tabindex="0" role="button" aria-label="Soak — water district, west">
+            <path class="blob" d="M80 260 C 130 215, 250 210, 305 250 C 350 285, 355 355, 315 395 C 260 445, 140 445, 90 400 C 45 360, 40 300, 80 260 Z"/>
+            <path class="deco wave" d="M120 340 q 20 -14 40 0 q 20 14 40 0 q 20 -14 40 0" fill="none"/>
+            <path class="deco wave" d="M140 370 q 20 -14 40 0 q 20 14 40 0" fill="none"/>
+            <text x="200" y="315" text-anchor="middle" font-size="30">SOAK</text>
+          </g>
+
+          <!-- THE YARD (centre) -->
+          <g class="dist dist-yard" data-w="yard" tabindex="0" role="button" aria-label="The Yard — central district">
+            <path class="blob" d="M420 300 C 460 265, 560 265, 600 305 C 635 340, 635 410, 600 445 C 555 485, 460 485, 425 445 C 390 405, 385 335, 420 300 Z"/>
+            <g class="deco hand" aria-hidden="true">
+              <line x1="510" y1="395" x2="510" y2="330"/>
+              <line x1="510" y1="345" x2="492" y2="330"/>
+              <line x1="510" y1="340" x2="501" y2="323"/>
+              <line x1="510" y1="338" x2="510" y2="318"/>
+              <line x1="510" y1="340" x2="519" y2="323"/>
+              <line x1="510" y1="345" x2="528" y2="330"/>
+            </g>
+            <text x="510" y="430" text-anchor="middle" font-size="24">THE YARD</text>
+          </g>
+
+          <!-- SIDEWAYS (east) -->
+          <g class="dist dist-side" data-w="sideways" tabindex="0" role="button" aria-label="Sideways — surreal playground district, east">
+            <path class="blob" d="M700 180 C 760 140, 870 145, 915 190 C 955 230, 950 300, 905 335 C 850 375, 745 370, 700 330 C 660 292, 660 215, 700 180 Z"/>
+            <g class="deco house" aria-hidden="true">
+              <path d="M770 285 l 14 -38 l 42 8 l -8 34 Z" fill="none"/>
+              <path d="M784 247 l 30 -16 l 24 22" fill="none"/>
+            </g>
+            <text x="805" y="315" text-anchor="middle" font-size="24">SIDEWAYS</text>
+          </g>
+
+          <!-- LITTLE GIANTS (south-west) -->
+          <g class="dist dist-giants" data-w="giants" tabindex="0" role="button" aria-label="Little Giants — family district, south west">
+            <path class="blob" d="M130 520 C 180 480, 290 480, 340 520 C 380 555, 378 615, 335 650 C 280 690, 175 685, 130 645 C 90 608, 92 552, 130 520 Z"/>
+            <g class="deco grass" aria-hidden="true">
+              <path d="M215 560 q -6 -30 6 -48" fill="none"/>
+              <path d="M235 560 q 2 -34 14 -44" fill="none"/>
+              <path d="M257 562 q -4 -26 8 -40" fill="none"/>
+            </g>
+            <text x="238" y="608" text-anchor="middle" font-size="21">LITTLE GIANTS</text>
+          </g>
+
+          <!-- gate -->
+          <g class="gate" aria-hidden="true">
+            <path class="gatearch" d="M470 660 a 30 30 0 0 1 60 0" fill="none"/>
+            <line class="gateleg" x1="470" y1="660" x2="470" y2="685"/>
+            <line class="gateleg" x1="530" y1="660" x2="530" y2="685"/>
+            <text class="gatepin" x="500" y="708" text-anchor="middle" font-size="14">THE GATE &middot; YOU ARE HERE</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="maplist" id="maplist" aria-label="Districts"></div>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <span class="fmark">W<b>O</b>NDERYARD</span>
+      <p>1 Wondervale Loop, 40 minutes from the city.<br>Gates 10:00 &middot; firework 22:45 &middot; close 23:00, daily.</p>
+    </div>
+    <div>
+      <h4>The park</h4>
+      <a href="attractions.html">The Board</a>
+      <a href="map.html">Park Map</a>
+      <a href="index.html#afterdark">Afterdark</a>
+    </div>
+    <div>
+      <h4>Visiting</h4>
+      <a href="plan.html#tickets">Tickets</a>
+      <a href="plan.html#hours">Hours</a>
+      <a href="plan.html#getting-here">Getting here</a>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <a href="plan.html#access">Accessibility</a>
+      <a href="plan.html#faq">Questions</a>
+    </div>
+    <p class="fine">WONDERYARD &middot; Wondervale &middot; Come out and play.</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/map.js"></script>
+</body>
+</html>
