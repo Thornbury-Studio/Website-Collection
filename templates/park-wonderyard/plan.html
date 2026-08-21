@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<title>Plan a Day — WONDERYARD</title>
+<meta name="description" content="Tickets, hours, directions, food and accessibility for a day at WONDERYARD. Gates open 10:00, the firework goes up 22:45, and the Afterdark ticket starts at 5pm.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Archivo:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="wordmark" href="index.html">W<b>O</b>NDERYARD</a>
+  <nav aria-label="Primary">
+    <a href="attractions.html">The Board</a>
+    <a href="map.html">Park Map</a>
+    <a href="plan.html">Plan a Day</a>
+    <a class="nav-cta" href="plan.html#tickets">Tickets</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="attractions.html">The Board</a>
+  <a href="map.html">Park Map</a>
+  <a href="plan.html">Plan a Day</a>
+  <a href="plan.html#tickets">Tickets</a>
+  <span class="label">WONDERYARD — Wondervale. Gates 10:00, firework 22:45.</span>
+</aside>
+
+<main id="main">
+  <div class="wrap">
+    <header class="page-head reveal">
+      <span class="kicker">The practical page</span>
+      <h1>Plan a Day</h1>
+      <p class="lede">Everything you need before the gate: tickets, hours, how to get to Wondervale, what to eat and what to know. The rest, the park will teach you.</p>
+    </header>
+
+    <section id="tickets" aria-labelledby="tickets-h">
+      <h2 class="disp reveal" id="tickets-h">Tickets</h2>
+      <div class="tix" id="tix-cards"></div>
+      <p class="lede reveal">Kids are under-12. Under-3s walk in free and are statistically the loudest fans of the Hundredhand. Tickets are sold at the gate and never sell out for Wondervale residents on weekdays.</p>
+    </section>
+
+    <div class="plangrid">
+      <div class="pcol">
+        <section class="pblock reveal" id="hours" aria-labelledby="hours-h">
+          <h2 id="hours-h">Hours</h2>
+          <div class="hrs" id="hrs-list"></div>
+          <p>Soak&rsquo;s water attractions wind down at 20:00 so the district can turn into the quietest corner of Afterdark. The Board always knows first.</p>
+        </section>
+
+        <section class="pblock reveal" id="getting-here" aria-labelledby="gh-h">
+          <h2 id="gh-h">Getting here</h2>
+          <div class="dirlist">
+            <div class="d"><span class="dk">By train</span><span class="dv">Wondervale Parkway station, 12 minutes on foot along the flag path. Trains every 10 minutes from the city.</span></div>
+            <div class="d"><span class="dk">By car</span><span class="dv">40 minutes from the city on the western expressway. 6,000 covered spaces; the yellow car park is closest to the gate.</span></div>
+            <div class="d"><span class="dk">By shuttle</span><span class="dv">Direct shuttles from the airport and central station, first out 08:40, last back 23:30 &mdash; after the firework, before the car park empties.</span></div>
+            <div class="d"><span class="dk">On foot, at the end</span><span class="dv">The Lantern Route back to the gate is the recommended exit. Allow twelve unhurried minutes.</span></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="pcol">
+        <section class="pblock reveal" id="food" aria-labelledby="food-h">
+          <h2 id="food-h">Eating</h2>
+          <p>The Snackworks in The Yard runs all day &mdash; twelve counters, one rule: nothing you could easily make at home. From 18:00 the Night Market takes over with a cast of cooks that changes nightly. Every district keeps water fountains, and Soak&rsquo;s are the coldest. Allergy maps are printed at every counter, and every kitchen can tell you exactly what is in everything.</p>
+        </section>
+
+        <section class="pblock reveal" id="access" aria-labelledby="access-h">
+          <h2 id="access-h">Accessibility</h2>
+          <p>Step-free routes reach every district and every food counter; the loop path has no stairs anywhere on it. Seventeen of our twenty attractions take guests without transfer; Loosetooth, The Grandfather and Vertigo Garden need a transfer and our crews are trained and unhurried about it. Quiet hours in Sideways run 10:00&ndash;11:00 daily &mdash; no music, no horns, machinery at half volume. Sensory maps, ear defenders and access passes live at Guest Services, just inside the gate on the left.</p>
+        </section>
+
+        <section class="pblock reveal faq" id="faq" aria-labelledby="faq-h">
+          <h2 id="faq-h">Asked often</h2>
+          <details>
+            <summary>Is one day enough?</summary>
+            <p>Honestly: almost. You can walk all six worlds in a day if you start at ten. What you can&rsquo;t do in one day is queue for Loosetooth twice, hold the Slow Race record and still make the Night Market before the good stall sells out. That&rsquo;s what the Two Days ticket is for.</p>
+          </details>
+          <details>
+            <summary>What happens if it rains?</summary>
+            <p>The park stays open and Soak becomes ideologically confusing. Rainroom is, for obvious reasons, unaffected. Coasters pause in storms and the Board says so the moment it happens.</p>
+          </details>
+          <details>
+            <summary>Why only one firework?</summary>
+            <p>Because you remember one. A twenty-minute barrage is wallpaper by minute six. One firework, once, with everyone watching &mdash; that&rsquo;s a full stop, not a screensaver.</p>
+          </details>
+          <details>
+            <summary>Can adults go in Little Giants?</summary>
+            <p>Yes, except The Fort&rsquo;s tower, which is defended by its residents. The giant bench takes all sizes and is frankly one of the best seats in the park.</p>
+          </details>
+          <details>
+            <summary>Do I need to book the firework?</summary>
+            <p>No. It&rsquo;s launched over the lake and visible from most of the park. The shore fills from 22:15; the Lantern Route is the pretty way there.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <span class="fmark">W<b>O</b>NDERYARD</span>
+      <p>1 Wondervale Loop, 40 minutes from the city.<br>Gates 10:00 &middot; firework 22:45 &middot; close 23:00, daily.</p>
+    </div>
+    <div>
+      <h4>The park</h4>
+      <a href="attractions.html">The Board</a>
+      <a href="map.html">Park Map</a>
+      <a href="index.html#afterdark">Afterdark</a>
+    </div>
+    <div>
+      <h4>Visiting</h4>
+      <a href="plan.html#tickets">Tickets</a>
+      <a href="plan.html#hours">Hours</a>
+      <a href="plan.html#getting-here">Getting here</a>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <a href="plan.html#access">Accessibility</a>
+      <a href="plan.html#faq">Questions</a>
+    </div>
+    <p class="fine">WONDERYARD &middot; Wondervale &middot; Come out and play.</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/plan.js"></script>
+</body>
+</html>

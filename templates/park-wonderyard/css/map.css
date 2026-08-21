@@ -1,0 +1,57 @@
+/* WONDERYARD — map page styles: SVG district fills (day + night),
+   decorations, and the firework that only exists at night. */
+
+/* district fills — day */
+.dist-yard   .blob { fill: #eaa62f; }
+.dist-tilt   .blob { fill: #cd5030; }
+.dist-soak   .blob { fill: #4da3b5; }
+.dist-side   .blob { fill: #8a6fc0; }
+.dist-giants .blob { fill: #6da35b; }
+
+/* district fills — night: the same park, sunk into indigo */
+.nightmode .dist-yard   .blob { fill: #6d4c17; }
+.nightmode .dist-tilt   .blob { fill: #6e2b18; }
+.nightmode .dist-soak   .blob { fill: #1e4a56; }
+.nightmode .dist-side   .blob { fill: #453263; }
+.nightmode .dist-giants .blob { fill: #2f4a28; }
+.nightmode .dist path.blob { stroke: #0c0a18; }
+
+/* labels */
+.lakelabel text { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; fill: #274c56; letter-spacing: .08em; }
+.lakelabel .sub { font-family: "Archivo", sans-serif; font-weight: 600; letter-spacing: .02em; }
+.nightmode .lakelabel text { fill: #9fb4e8; }
+
+/* decorations inside districts */
+.deco { stroke: #2a2417; stroke-width: 3; stroke-linecap: round; }
+.deco.coaster-line { stroke-dasharray: 1 7; }
+.deco.hand line { stroke-width: 4; }
+.nightmode .deco { stroke: #0c0a18; }
+.nightmode .dist-yard .deco.hand line { stroke: #39c4d8; }
+
+/* gate */
+.gatearch, .gateleg { stroke: #2a2417; stroke-width: 5; }
+.gatepin { font-family: "Archivo", sans-serif; font-weight: 800; fill: #57493a; letter-spacing: .12em; }
+.nightmode .gatearch, .nightmode .gateleg { stroke: #b0a8cd; }
+.nightmode .gatepin { fill: #b0a8cd; }
+
+/* firework: day = a dot on the lake; night = the burst */
+.fwdot { fill: #c8401e; }
+.fwburst { stroke: #f5c86e; stroke-width: 3.5; stroke-linecap: round; opacity: 0; transition: opacity .35s ease .1s; }
+.nightmode .fwdot { fill: #ffd98c; }
+.nightmode .fwburst { opacity: 1; }
+.nightmode .fwburst line { animation: fw-flicker 2.2s ease-in-out infinite alternate; }
+@keyframes fw-flicker {
+  from { stroke-width: 2.5; }
+  to   { stroke-width: 4.5; }
+}
+
+/* map night ground handled by .mapbox.nightmode in style.css */
+.map-toggle[aria-pressed="true"] { background: #191630; color: #f0ecff; border-color: #f0ecff; box-shadow: 3px 3px 0 #f0ecff; }
+
+/* list accent hookup */
+.mitem.w-yard     { --macc: var(--acc-yard); }
+.mitem.w-tilt     { --macc: var(--acc-tilt); }
+.mitem.w-soak     { --macc: var(--acc-soak); }
+.mitem.w-sideways { --macc: var(--acc-side); }
+.mitem.w-giants   { --macc: var(--acc-giants); }
+.mitem.w-afterdark{ --macc: var(--acc-dark); }
