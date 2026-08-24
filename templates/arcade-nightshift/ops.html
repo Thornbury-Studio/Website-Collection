@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<title>NS/OPS — Facility View</title>
+<meta name="description" content="NIGHTSHIFT operations portal: facility cameras, event log and zone power state outside operating hours.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="ops-body">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="ops-top">
+  <span class="sysname">NS/OPS &middot; <b>FACILITY VIEW</b></span>
+  <span class="meta">SITE: MERIDIAN B1</span>
+  <span class="meta">SHIFT: NIGHT &middot; UNATTENDED</span>
+  <span class="meta" id="ops-clock">--:--:--</span>
+  <span class="spacer"></span>
+  <a class="back" href="index.html">Return to public site</a>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <p class="ops-note">You are viewing the facility outside operating hours. Recording is continuous. This session is read-only. Faults are ticketed automatically &mdash; do not attend site without a second keyholder.</p>
+
+    <div class="ops-layout">
+      <div class="cam-grid" id="cam-grid" aria-label="Facility cameras"></div>
+
+      <div class="ops-rail">
+        <section class="ops-panel" aria-labelledby="log-h">
+          <div class="ph" id="log-h"><span>Event log &middot; tonight</span><b>LIVE</b></div>
+          <div class="log" id="ops-log"></div>
+        </section>
+
+        <section class="ops-panel" aria-labelledby="pw-h">
+          <div class="ph" id="pw-h"><span>Zone power</span></div>
+          <div class="statuslist" id="ops-power"></div>
+        </section>
+
+        <section class="ops-panel" aria-labelledby="lp-h">
+          <div class="ph" id="lp-h"><span>Lost property &middot; 90-day hold</span></div>
+          <ul class="lost" id="ops-lost"></ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/ops.js"></script>
+</body>
+</html>

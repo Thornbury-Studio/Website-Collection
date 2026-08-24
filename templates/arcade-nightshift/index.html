@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<title>NIGHTSHIFT — Play Late</title>
+<meta name="description" content="NIGHTSHIFT is a late-night gaming centre: a racing arena, a rhythm wall, a prize gallery and a corridor of machines that exist nowhere else. Open 10:00 to 02:00, every night.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Inter+Tight:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="wordmark" href="index.html">NIGHT<i>SHIFT</i></a>
+  <span class="clock" id="venue-clock"><span class="dot" aria-hidden="true"></span><span class="ct">--:--</span></span>
+  <nav aria-label="Primary">
+    <a href="floor.html">The Floor</a>
+    <a href="visit.html">Visit</a>
+    <a href="visit.html#rooms">Rooms</a>
+    <a class="nav-cta" href="visit.html#pass">Night Pass</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="floor.html">The Floor</a>
+  <a href="visit.html">Visit</a>
+  <a href="visit.html#rooms">Rooms</a>
+  <a href="visit.html#pass">Night Pass</a>
+  <span class="label">Open 10:00–02:00, nightly. Kitchen till 01:00.</span>
+</aside>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero reveal">
+    <div class="hero-media">
+      <img src="img/floor-open-1280.webp"
+           srcset="img/floor-open-1280.webp 1280w, img/floor-open-2560.webp 2560w"
+           sizes="100vw" width="2560" height="1428" fetchpriority="high" decoding="async"
+           alt="The NIGHTSHIFT main floor at night: rows of charcoal arcade cabinets edged in amber light, players at the machines, a mezzanine above.">
+    </div>
+    <div class="hero-copy">
+      <span class="kicker">A gaming centre &middot; open till two</span>
+      <h1>PLAY <i>LATE.</i></h1>
+      <p class="lede">Ninety-two machines, seven zones, one kitchen that runs later than your excuses. NIGHTSHIFT is what a night out looks like when the night is the point.</p>
+      <div class="hero-row">
+        <a class="btn" href="visit.html#pass">Get a Night Pass</a>
+        <a class="btn btn-ghost" href="floor.html">See the floor</a>
+        <span class="hero-fact">10:00 &ndash; 02:00 &middot; NIGHTLY</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GRID ================= -->
+  <section class="zone" id="grid">
+    <div class="wrap">
+      <div class="zplate reveal">
+        <span class="znum">ZONE 01</span>
+        <h2 class="zname">GRID</h2>
+        <p class="zkick">The racing arena</p>
+        <p class="zblurb">Four networked motion pods and a twin drift cab, raced under one suspended leaderboard. Qualifying runs all night; the wall remembers everything.</p>
+        <div class="plates">
+          <div class="plate">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="pname">Overcut</span>
+            <span class="pmeta"><span class="pmodel">NS-GRD-02</span><span>2 players</span><span>drift twin cab</span></span>
+            <p>Twin drift cabs with a clutch pedal that actually matters. Best enjoyed by exactly two people who used to be friends.</p>
+          </div>
+        </div>
+      </div>
+      <div class="zmedia">
+        <figure class="shot reveal">
+          <img src="img/grid-open-800.webp" srcset="img/grid-open-800.webp 800w, img/grid-open-1600.webp 1600w"
+               sizes="(max-width: 1020px) 92vw, 56vw" width="1600" height="894" loading="lazy" decoding="async"
+               alt="Four enclosed racing pods with triple screens mid-race, spectators behind, the leaderboard glowing overhead.">
+          <figcaption class="cap">GRID &middot; qualifying, 11pm</figcaption>
+        </figure>
+        <div class="duo">
+          <div class="sigplate plate reveal d1">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="tag">Signature</span>
+            <h3>Hairpin</h3>
+            <span class="pmeta"><span class="pmodel">NS-GRD-01</span><span>4 players</span><span>motion pods</span></span>
+            <p>Four enclosed motion pods on one live circuit. The pods lean into every corner; your stomach files a complaint one apex late.</p>
+            <p class="service">Service: pod 3 seat runner replaced twice this year.</p>
+          </div>
+          <figure class="shot reveal d2">
+            <img src="img/grid-crowd-700.webp" srcset="img/grid-crowd-700.webp 700w, img/grid-crowd-1200.webp 1200w"
+                 sizes="(max-width: 760px) 92vw, 26vw" width="1200" height="800" loading="lazy" decoding="async"
+                 alt="A group of friends crowded around a racing cabinet, one on the wheel, the rest coaching loudly.">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VOLT ================= -->
+  <section class="zone flip" id="volt">
+    <div class="wrap">
+      <div class="zplate reveal">
+        <span class="znum">ZONE 02</span>
+        <h2 class="zname">VOLT</h2>
+        <p class="zkick">Rhythm &amp; reaction</p>
+        <p class="zblurb">The loud corner. A nine-pad rhythm wall, a wall of a hundred and twenty buttons, and footwork cabinets that have ended friendships.</p>
+        <div class="plates">
+          <div class="plate">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="pname">Flicker</span>
+            <span class="pmeta"><span class="pmodel">NS-VLT-02</span><span>1&ndash;2 players</span><span>reaction wall</span></span>
+            <p>A hundred and twenty buttons, sixty seconds, one wall of light. Clear it and the whole zone hears about it.</p>
+          </div>
+          <div class="plate">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="pname">Slipstep</span>
+            <span class="pmeta"><span class="pmodel">NS-VLT-03</span><span>1&ndash;2 players</span><span>footwork</span></span>
+            <p>The floor tells you where to be; your feet disagree; the crowd takes the floor&rsquo;s side.</p>
+          </div>
+        </div>
+      </div>
+      <div class="zmedia">
+        <figure class="shot reveal">
+          <img src="img/volt-open-800.webp" srcset="img/volt-open-800.webp 800w, img/volt-open-1600.webp 1600w"
+               sizes="(max-width: 1020px) 92vw, 56vw" width="1600" height="894" loading="lazy" decoding="async"
+               alt="A player mid-move on the nine-pad rhythm wall, pads glowing amber, friends watching from the rail.">
+          <figcaption class="cap">VOLT &middot; Tempo Zero, mid-combo</figcaption>
+        </figure>
+        <div class="duo">
+          <div class="sigplate plate reveal d1">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="tag">Signature</span>
+            <h3>Tempo Zero</h3>
+            <span class="pmeta"><span class="pmodel">NS-VLT-01</span><span>1 player</span><span>nine-pad wall</span></span>
+            <p>A nine-pad wall that starts polite and ends personal. The top grade has been reached four times. Twice by the same person.</p>
+            <p class="service">Service: attract board replaced three times &mdash; cause not found.</p>
+          </div>
+          <figure class="shot reveal d2">
+            <img src="img/crowd-cheer-700.webp" srcset="img/crowd-cheer-700.webp 700w, img/crowd-cheer-1200.webp 1200w"
+                 sizes="(max-width: 760px) 92vw, 26vw" width="1200" height="800" loading="lazy" decoding="async"
+                 alt="Friends cheering a player on at a cabinet, mid-victory.">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ARENA ================= -->
+  <section class="zone" id="arena">
+    <div class="wrap">
+      <div class="zplate reveal">
+        <span class="znum">ZONE 03</span>
+        <h2 class="zname">ARENA</h2>
+        <p class="zkick">Competitive multiplayer</p>
+        <p class="zblurb">Six-seat co-op pods and a proper 5v5 stage with a casters&rsquo; desk. Book it with your team or turn up and get drafted.</p>
+        <div class="plates">
+          <div class="plate">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="pname">Kingmaker</span>
+            <span class="pmeta"><span class="pmodel">NS-ARN-02</span><span>10 players</span><span>5v5 stage</span></span>
+            <p>The 5v5 stage, with a casters&rsquo; desk we will absolutely let your friend use. Monthly open runs on the last Saturday.</p>
+          </div>
+        </div>
+      </div>
+      <div class="zmedia">
+        <figure class="shot reveal">
+          <img src="img/arena-crowd-700.webp" srcset="img/arena-crowd-700.webp 700w, img/arena-crowd-1200.webp 1200w"
+               sizes="(max-width: 1020px) 92vw, 56vw" width="1200" height="800" loading="lazy" decoding="async"
+               alt="A player at a competitive station mid-match, teammates leaning in behind the chair.">
+          <figcaption class="cap">ARENA &middot; scrim night</figcaption>
+        </figure>
+        <div class="sigplate plate reveal d1">
+          <span class="screw1"></span><span class="screw2"></span>
+          <span class="tag">Signature</span>
+          <h3>Fireteam Six</h3>
+          <span class="pmeta"><span class="pmodel">NS-ARN-01</span><span>6 players</span><span>co-op pod</span></span>
+          <p>A six-seat pod for one shared campaign. Nobody drives alone; every seat has one job and one excuse.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VIDEO STRIP ================= -->
+  <div class="strip">
+    <video id="strip-video" muted loop playsinline preload="none"
+           poster="img/buttons-strip-poster.jpg"
+           data-src="img/buttons-strip.mp4" data-src-small="img/buttons-strip-960.mp4"
+           width="2560" height="1066" aria-label="Close-up of hands working glowing arcade buttons in the dark."></video>
+    <span class="strip-cap">The floor, from close up</span>
+    <button class="media-toggle" id="strip-toggle" type="button" aria-pressed="true">Pause motion</button>
+  </div>
+
+  <!-- ================= VAULT ================= -->
+  <section class="zone flip" id="vault">
+    <div class="wrap">
+      <div class="zplate reveal">
+        <span class="znum">ZONE 04</span>
+        <h2 class="zname">VAULT</h2>
+        <p class="zkick">The prize gallery</p>
+        <p class="zblurb">Redemption, presented like a gallery: glass cases, real spotlights, and prizes worth the walk. The case lighting runs on its own schedule.</p>
+        <div class="plates">
+          <div class="plate">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="pname">Penthouse</span>
+            <span class="pmeta"><span class="pmodel">NS-VAU-02</span><span>1 player</span><span>stacker tower</span></span>
+            <p>A stacker built like a lift going up a tower. Floor by floor, steadier hands. The top floor pays out the case.</p>
+          </div>
+        </div>
+      </div>
+      <div class="zmedia">
+        <figure class="shot reveal">
+          <img src="img/vault-open-800.webp" srcset="img/vault-open-800.webp 800w, img/vault-open-1600.webp 1600w"
+               sizes="(max-width: 1020px) 92vw, 56vw" width="1600" height="894" loading="lazy" decoding="async"
+               alt="The prize gallery: glass cases on plinths under warm spotlights, a couple browsing, staff at the redemption counter.">
+          <figcaption class="cap">VAULT &middot; the long look</figcaption>
+        </figure>
+        <div class="duo">
+          <div class="sigplate plate reveal d1">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="tag">Signature</span>
+            <h3>The Case</h3>
+            <span class="pmeta"><span class="pmodel">NS-VAU-01</span><span>redemption</span></span>
+            <p>The glass wall at the end of the night. Everything in it can be won; the top shelf takes roughly a season of Fridays.</p>
+            <p class="service">Service: case lighting on its own circuit since fit-out.</p>
+          </div>
+          <figure class="shot reveal d2">
+            <img src="img/vault-claw-700.webp" srcset="img/vault-claw-700.webp 700w, img/vault-claw-1200.webp 1200w"
+                 sizes="(max-width: 760px) 92vw, 26vw" width="1200" height="800" loading="lazy" decoding="async"
+                 alt="A claw machine grabber in close-up, mid-descent.">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SIDEQUEST ================= -->
+  <section class="zone" id="sidequest">
+    <div class="wrap">
+      <div class="zplate reveal">
+        <span class="znum">ZONE 05</span>
+        <h2 class="zname">SIDEQUEST</h2>
+        <p class="zkick">The strange corridor</p>
+        <p class="zblurb">A corridor of small machines that exist nowhere else. One has a single button. One has a telephone. One is just a column of light. People get attached.</p>
+        <div class="plates">
+          <div class="plate">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="pname">The Longest Minute</span>
+            <span class="pmeta"><span class="pmodel">NS-SDQ-01</span><span>1 player</span></span>
+            <p>Hold the button for exactly sixty seconds. No clock is provided. Closest attempt this year: 60.4.</p>
+          </div>
+          <div class="plate">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="pname">Dial Tone</span>
+            <span class="pmeta"><span class="pmodel">NS-SDQ-02</span><span>1 player</span></span>
+            <p>A rotary phone on a cabinet. Sometimes it rings. If you answer, the game starts. We don&rsquo;t decide when it rings.</p>
+          </div>
+          <div class="plate">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="pname">Lighthouse</span>
+            <span class="pmeta"><span class="pmodel">NS-SDQ-04</span><span>1 player</span></span>
+            <p>A single column of light. Catch it at the top. That&rsquo;s the whole game. Nobody has.</p>
+          </div>
+        </div>
+      </div>
+      <div class="zmedia">
+        <figure class="shot reveal">
+          <img src="img/sidequest-open-800.webp" srcset="img/sidequest-open-800.webp 800w, img/sidequest-open-1600.webp 1600w"
+               sizes="(max-width: 1020px) 92vw, 56vw" width="1600" height="894" loading="lazy" decoding="async"
+               alt="The SIDEQUEST corridor: a row of small, unusual cabinets — one with a single oversized button, one with a rotary telephone — a visitor browsing.">
+          <figcaption class="cap">SIDEQUEST &middot; choose carefully</figcaption>
+        </figure>
+        <figure class="shot reveal d1">
+          <img src="img/candid-cabinet-700.webp" srcset="img/candid-cabinet-700.webp 700w, img/candid-cabinet-1200.webp 1200w"
+               sizes="(max-width: 1020px) 92vw, 40vw" width="1200" height="800" loading="lazy" decoding="async"
+               alt="A visitor lit up mid-laugh at a cabinet, hands on the buttons.">
+          <figcaption class="cap">Regulars form quickly</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TABLE ================= -->
+  <section class="zone flip" id="table">
+    <div class="wrap">
+      <div class="zplate reveal">
+        <span class="znum">ZONE 06</span>
+        <h2 class="zname">TABLE</h2>
+        <p class="zkick">Food &amp; social</p>
+        <p class="zblurb">Burgers, baskets, cold drinks and a view of the floor. Kitchen runs to one, which is later than you think you&rsquo;ll need and exactly as late as you will.</p>
+        <div class="plates">
+          <div class="plate">
+            <span class="screw1"></span><span class="screw2"></span>
+            <span class="pname">ROOMS</span>
+            <span class="pmeta"><span class="pmodel">PRIVATE HIRE</span><span>up to 10</span></span>
+            <p>Four private rooms for crews, birthdays and grudge matches. Your machines, your playlist, your door. <a href="visit.html#rooms">Book a room &rarr;</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="zmedia">
+        <figure class="shot reveal">
+          <img src="img/table-open-800.webp" srcset="img/table-open-800.webp 800w, img/table-open-1600.webp 1600w"
+               sizes="(max-width: 1020px) 92vw, 56vw" width="1600" height="894" loading="lazy" decoding="async"
+               alt="TABLE at full service: friends over burgers and baskets at dark-wood tables, the glowing arcade floor through the archway beyond.">
+          <figcaption class="cap">TABLE &middot; between rounds</figcaption>
+        </figure>
+        <figure class="shot reveal d1">
+          <img src="img/table-burger-700.webp" srcset="img/table-burger-700.webp 700w, img/table-burger-1200.webp 1200w"
+               sizes="(max-width: 1020px) 92vw, 40vw" width="1200" height="800" loading="lazy" decoding="async"
+               alt="A burger with fries and onion rings on a metal tray.">
+          <figcaption class="cap">Kitchen till 01:00</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LEAGUES ================= -->
+  <section class="leagues" id="leagues">
+    <div class="wrap">
+      <span class="kicker reveal">Standing fixtures</span>
+      <h2 class="disp reveal" id="leagues-h">The week, as played</h2>
+      <div class="lgrid" id="league-cards"></div>
+    </div>
+  </section>
+
+  <!-- ================= PRICING ================= -->
+  <section class="pricing" id="pass">
+    <div class="wrap">
+      <span class="kicker reveal">Night Pass</span>
+      <h2 class="disp reveal">One card. The whole floor.</h2>
+      <div class="tix" id="topup-cards"></div>
+      <p class="fine reveal">Games run 8&ndash;20 credits. Entry is free &mdash; you pay to play, not to exist. Passes never expire; see <a href="visit.html#faq">questions</a>.</p>
+    </div>
+  </section>
+
+  <!-- ================= AFTER TWO ================= -->
+  <div class="aftertwo">
+    <div class="wrap">
+      <p><b>The last game ends at two.</b> The building doesn&rsquo;t. Machines hold their attract loops, the cases stay lit, and the cameras keep watching an empty floor.</p>
+      <a href="ops.html">NS/OPS &middot; facility view &rarr;</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <span class="fmark">NIGHT<i>SHIFT</i></span>
+      <p>B1, 88 Meridian Walk &middot; open 10:00&ndash;02:00, nightly.<br>Kitchen till 01:00. Last race 01:40.</p>
+    </div>
+    <div>
+      <h4>Play</h4>
+      <a href="floor.html">The Floor</a>
+      <a href="index.html#leagues">Leagues</a>
+      <a href="visit.html#rooms">Rooms</a>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <a href="visit.html#pass">Night Pass</a>
+      <a href="visit.html#hours">Hours</a>
+      <a href="visit.html#getting-here">Getting here</a>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <a href="visit.html#access">Accessibility</a>
+      <a href="visit.html#faq">Questions</a>
+      <a href="visit.html#rules">House rules</a>
+    </div>
+    <p class="fine"><span>NIGHTSHIFT &middot; play late.</span><span><a href="ops.html">Operations (staff)</a></span></p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
