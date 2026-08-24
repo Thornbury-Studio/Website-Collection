@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<title>The Floor — NIGHTSHIFT</title>
+<meta name="description" content="Every NIGHTSHIFT machine with a reputation, plate by plate: model numbers, player counts and service history across GRID, VOLT, ARENA, VAULT and SIDEQUEST.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Inter+Tight:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="wordmark" href="index.html">NIGHT<i>SHIFT</i></a>
+  <span class="clock" id="venue-clock"><span class="dot" aria-hidden="true"></span><span class="ct">--:--</span></span>
+  <nav aria-label="Primary">
+    <a href="floor.html">The Floor</a>
+    <a href="visit.html">Visit</a>
+    <a href="visit.html#rooms">Rooms</a>
+    <a class="nav-cta" href="visit.html#pass">Night Pass</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="floor.html">The Floor</a>
+  <a href="visit.html">Visit</a>
+  <a href="visit.html#rooms">Rooms</a>
+  <a href="visit.html#pass">Night Pass</a>
+  <span class="label">Open 10:00–02:00, nightly. Kitchen till 01:00.</span>
+</aside>
+
+<main id="main">
+  <div class="wrap">
+    <header class="page-head reveal">
+      <span class="kicker">Machine index</span>
+      <h1>The Floor</h1>
+      <p class="lede">Ninety-two machines on the floor; these are the ones with reputations. Every plate carries its model number and its service history, because a machine you trust is a machine you queue for.</p>
+    </header>
+
+    <div class="filters" role="group" aria-label="Filter by zone">
+      <button class="fbtn" type="button" data-z="all" aria-pressed="true">All zones</button>
+      <button class="fbtn" type="button" data-z="grid" aria-pressed="false">GRID</button>
+      <button class="fbtn" type="button" data-z="volt" aria-pressed="false">VOLT</button>
+      <button class="fbtn" type="button" data-z="arena" aria-pressed="false">ARENA</button>
+      <button class="fbtn" type="button" data-z="vault" aria-pressed="false">VAULT</button>
+      <button class="fbtn" type="button" data-z="sidequest" aria-pressed="false">SIDEQUEST</button>
+    </div>
+
+    <div class="mgrid" id="machine-grid" aria-live="polite"></div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <span class="fmark">NIGHT<i>SHIFT</i></span>
+      <p>B1, 88 Meridian Walk &middot; open 10:00&ndash;02:00, nightly.<br>Kitchen till 01:00. Last race 01:40.</p>
+    </div>
+    <div>
+      <h4>Play</h4>
+      <a href="floor.html">The Floor</a>
+      <a href="index.html#leagues">Leagues</a>
+      <a href="visit.html#rooms">Rooms</a>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <a href="visit.html#pass">Night Pass</a>
+      <a href="visit.html#hours">Hours</a>
+      <a href="visit.html#getting-here">Getting here</a>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <a href="visit.html#access">Accessibility</a>
+      <a href="visit.html#faq">Questions</a>
+      <a href="visit.html#rules">House rules</a>
+    </div>
+    <p class="fine"><span>NIGHTSHIFT &middot; play late.</span><span><a href="ops.html">Operations (staff)</a></span></p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/floor.js"></script>
+</body>
+</html>
