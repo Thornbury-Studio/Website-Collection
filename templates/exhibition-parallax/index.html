@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>PARALLAX — An Exhibition of Objects That Cannot Exist</title>
+<meta name="description" content="PARALLAX is an international exhibition of digital art dedicated to impossible objects — matter, architecture and organisms that could not survive physical reality. Exhibit 00 is the website itself.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/exhibition-parallax/index.html">
+<meta name="theme-color" content="#ece8e0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ece8e0'/%3E%3Cpath d='M16 7l7.5 13h-15z' fill='none' stroke='%23191610' stroke-width='2.4'/%3E%3Cpath d='M16 12.4l4.7 8.1' stroke='%23ece8e0' stroke-width='3.4'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PARALLAX">
+<meta property="og:title" content="PARALLAX — Objects That Cannot Exist">
+<meta property="og:description" content="An international exhibition of impossible objects. Exhibit 00 is the website you are holding.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/exhibition-parallax/index.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/exhibition-parallax/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Archivo+Black&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<noscript><style>.gate{display:none}</style></noscript>
+</head>
+<body id="top">
+<script>
+/* Runs before first paint: mark scripting on, and fold the site down to the
+   plain catalogue if the 3D module never arrives (CDN failure, old browser). */
+document.documentElement.classList.add('js');
+addEventListener('click', function (e) {
+  if (window.__parallax) return;
+  var t = e.target && e.target.closest ? e.target.closest('#gate-skip') : null;
+  if (t) document.documentElement.classList.add('no-3d');
+});
+setTimeout(function () {
+  if (!window.__parallax) document.documentElement.classList.add('no-3d');
+}, 8000);
+</script>
+<a class="skip" href="#catalogue">Skip to the catalogue</a>
+
+<!-- ══ THE THRESHOLD ══ -->
+<div class="gate" id="gate" role="dialog" aria-label="Entrance">
+  <p class="gate-kicker">An international exhibition of digital art</p>
+  <h1 class="gate-mark" aria-label="PARALLAX">PARALLA<span class="gate-x">X</span></h1>
+  <p class="gate-thesis">Objects that cannot exist.</p>
+  <p class="gate-sub">Nine works of impossible matter, staged in the only room that will hold them &mdash; this one.</p>
+  <button class="gate-enter" id="enter" type="button" disabled>
+    <span class="ge-wait">Preparing the room&hellip;</span>
+    <span class="ge-go">Enter Exhibit 00</span>
+  </button>
+  <a class="gate-skip" href="#catalogue" id="gate-skip">or skip the walk and read the catalogue</a>
+  <p class="gate-foot">Exhibit 00 is the website you are holding.</p>
+</div>
+
+<!-- ══ CHROME ══ -->
+<header class="chrome" id="chrome">
+  <a class="wordmark" href="index.html">PARALLAX</a>
+  <p class="chrome-exh" id="hud-exh" aria-hidden="true">EXH.&nbsp;<span id="hud-exh-no">00</span>&thinsp;/&thinsp;04</p>
+  <a class="chrome-index" href="#catalogue">Index</a>
+</header>
+
+<!-- ══ THE WALK (scroll height, canvas is injected behind) ══ -->
+<div class="track" id="track" aria-hidden="true"></div>
+
+<!-- wall labels: fixed, act-driven -->
+<aside class="labels" id="labels" aria-hidden="true">
+  <div class="label" data-act="0">
+    <p class="l-no">Exhibit 00</p>
+    <h2 class="l-title">The Exhibition Itself</h2>
+    <p class="l-meta">PARALLAX &middot; 2027</p>
+    <p class="l-mat">One browser, eight letters, your line of sight</p>
+    <p class="l-note">Nothing here is arranged. You are.</p>
+  </div>
+  <div class="label" data-act="1">
+    <p class="l-no">Exhibit 01</p>
+    <h2 class="l-title">Vessel, Pouring Itself Back Together</h2>
+    <p class="l-meta">Amara Okafor &middot; 2026</p>
+    <p class="l-mat">Unfired porcelain, gravity in refusal</p>
+    <p class="l-note">It has been almost finished for three hundred years.</p>
+  </div>
+  <div class="label" data-act="2">
+    <p class="l-no">Exhibit 02</p>
+    <h2 class="l-title">Nine Doors, Larger Inside</h2>
+    <p class="l-meta">Ren Ishikawa &middot; 2026</p>
+    <p class="l-mat">Architecture, disobedience</p>
+    <p class="l-note">Each door is smaller than the last. The room does not agree.</p>
+  </div>
+  <div class="label" data-act="3">
+    <p class="l-no">Exhibit 03</p>
+    <h2 class="l-title">A Surface Learning to Swallow Itself</h2>
+    <p class="l-meta">Beatriz Sandoval &middot; 2026</p>
+    <p class="l-mat">One continuous side, endless appetite</p>
+    <p class="l-note">It has no inside. It is trying anyway.</p>
+  </div>
+  <div class="label" data-act="4">
+    <p class="l-no">Exhibit 04</p>
+    <h2 class="l-title">Alignment No.&thinsp;00</h2>
+    <p class="l-meta">Everyone, at once &middot; 2027</p>
+    <p class="l-mat">Every fragment in the building, one line of sight</p>
+    <p class="l-note">Stand exactly here.</p>
+  </div>
+  <div class="label label-coda" data-act="5">
+    <p class="l-note">It was never joined.<br>You were simply standing in the right place.</p>
+  </div>
+</aside>
+
+<!-- HUD -->
+<p class="hud-sight" id="hud-sight" aria-hidden="true">SIGHTLINE&nbsp;<span id="hud-pct">000</span></p>
+<p class="cue" id="cue" aria-hidden="true"><span class="cue-desktop">Scroll &mdash; the sightline moves</span><span class="cue-touch">Scroll &mdash; drag sideways to bend the sightline</span></p>
+<p class="align-lock" id="align-lock" aria-hidden="true">PARALLAX</p>
+
+<!-- ══ THE CATALOGUE ══ -->
+<main class="catalogue" id="catalogue">
+
+  <section class="cat-mast">
+    <p class="cat-kicker">Parallax &middot; The Catalogue</p>
+    <h2 class="cat-head"><span>Every object here would fail</span> <span>instantly, anywhere else.</span></h2>
+    <p class="cat-state">PARALLAX is an international exhibition of impossible objects &mdash; matter, architecture and organisms that could not survive physical reality for a single frame. The browser is the only room that will hold them. Admission begins with Exhibit&nbsp;00, which you have just walked through: the exhibition&rsquo;s first impossible object, a building made of nothing, entered from anywhere, larger inside than out.</p>
+  </section>
+
+  <section class="works" id="works" aria-labelledby="works-h">
+    <h3 class="sec-h" id="works-h"><span class="sec-no">I</span>The Works</h3>
+    <ol class="work-list">
+      <li class="work" data-tone="w0">
+        <span class="w-no">00</span>
+        <div class="w-body"><h4>The Exhibition Itself</h4><p class="w-mat">One browser, eight letters, your line of sight</p></div>
+        <span class="w-artist">PARALLAX</span>
+      </li>
+      <li class="work" data-tone="w1">
+        <span class="w-no">01</span>
+        <div class="w-body"><h4>Vessel, Pouring Itself Back Together</h4><p class="w-mat">Unfired porcelain, gravity in refusal</p></div>
+        <span class="w-artist">Amara Okafor</span>
+      </li>
+      <li class="work" data-tone="w2">
+        <span class="w-no">02</span>
+        <div class="w-body"><h4>Nine Doors, Larger Inside</h4><p class="w-mat">Architecture, disobedience</p></div>
+        <span class="w-artist">Ren Ishikawa</span>
+      </li>
+      <li class="work" data-tone="w3">
+        <span class="w-no">03</span>
+        <div class="w-body"><h4>A Surface Learning to Swallow Itself</h4><p class="w-mat">One continuous side, endless appetite</p></div>
+        <span class="w-artist">Beatriz Sandoval</span>
+      </li>
+      <li class="work" data-tone="w4">
+        <span class="w-no">04</span>
+        <div class="w-body"><h4>Alignment No.&thinsp;00</h4><p class="w-mat">Every fragment in the building, one line of sight</p></div>
+        <span class="w-artist">Everyone, at once</span>
+      </li>
+      <li class="work" data-tone="w5">
+        <span class="w-no">05</span>
+        <div class="w-body"><h4>Weather, Indoors</h4><p class="w-mat">A sealed room, one cloud, raining upward</p></div>
+        <span class="w-artist">Danil Moroz</span>
+      </li>
+      <li class="work" data-tone="w6">
+        <span class="w-no">06</span>
+        <div class="w-body"><h4>The Knot That Isn&rsquo;t</h4><p class="w-mat">Rope with one end and no other</p></div>
+        <span class="w-artist">Priya Raghunathan</span>
+      </li>
+      <li class="work" data-tone="w7">
+        <span class="w-no">07</span>
+        <div class="w-body"><h4>A Shadow With Nothing to Cast It</h4><p class="w-mat">Light, absence</p></div>
+        <span class="w-artist">Halima Nasser</span>
+      </li>
+      <li class="work" data-tone="w8">
+        <span class="w-no">08</span>
+        <div class="w-body"><h4>Machine for Postponing Endings</h4><p class="w-mat">Brass, hope, recursion</p></div>
+        <span class="w-artist">June Park</span>
+      </li>
+    </ol>
+    <p class="works-note">Works 01&ndash;04 are staged inside Exhibit&nbsp;00 and can be walked at any hour. Works 05&ndash;08 join the digital staging as the tour opens each city.</p>
+  </section>
+
+  <section class="artists" id="artists" aria-labelledby="artists-h">
+    <h3 class="sec-h" id="artists-h"><span class="sec-no">II</span>The Artists</h3>
+    <ul class="artist-grid">
+      <li><strong>Amara Okafor</strong><span>Lagos</span></li>
+      <li><strong>Ren Ishikawa</strong><span>Osaka</span></li>
+      <li><strong>Beatriz Sandoval</strong><span>Mexico City</span></li>
+      <li><strong>Danil Moroz</strong><span>Kyiv</span></li>
+      <li><strong>Priya Raghunathan</strong><span>Chennai</span></li>
+      <li><strong>Halima Nasser</strong><span>Cairo</span></li>
+      <li><strong>June Park</strong><span>Seoul</span></li>
+      <li class="artist-you"><strong>&hellip;and the visitors</strong><span>Alignment No.&thinsp;00 does not exist until someone stands in the right place.</span></li>
+    </ul>
+  </section>
+
+  <section class="visit" id="visit" aria-labelledby="visit-h">
+    <h3 class="sec-h" id="visit-h"><span class="sec-no">III</span>Visit</h3>
+    <ul class="cities">
+      <li>
+        <span class="c-city">Singapore</span>
+        <span class="c-venue">Tanjong Works</span>
+        <span class="c-dates">09 Jan &mdash; 22 Mar 2027</span>
+        <span class="c-flag">Opening city</span>
+      </li>
+      <li>
+        <span class="c-city">Rotterdam</span>
+        <span class="c-venue">Haven Vier</span>
+        <span class="c-dates">18 Apr &mdash; 28 Jun 2027</span>
+      </li>
+      <li>
+        <span class="c-city">Seoul</span>
+        <span class="c-venue">The Mullae Foundry</span>
+        <span class="c-dates">21 Aug &mdash; 01 Nov 2027</span>
+      </li>
+    </ul>
+    <p class="visit-note">The physical stagings pair each work with its documentation &mdash; the drawings, moulds and maquettes that failed to build it. The digital staging never closes.</p>
+  </section>
+
+  <section class="tickets" id="tickets">
+    <div class="tix-card">
+      <p class="tix-line">Admission to Exhibit&nbsp;00 is free,<br>and already underway.</p>
+      <form class="notify" id="notify" action="#" method="get">
+        <label class="n-label" for="n-mail">Word, when the doors become physical</label>
+        <div class="n-row">
+          <input class="n-mail" id="n-mail" name="email" type="email" placeholder="you@somewhere" autocomplete="email" required>
+          <button class="n-go" type="submit">Hold a place</button>
+        </div>
+        <p class="n-done" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p class="foot-mark">PARALLAX</p>
+    <p class="foot-line">Exhibit 00 &middot; An exhibition of objects that cannot exist</p>
+    <div class="foot-row">
+      <a href="#top" id="rewalk">Walk it again</a>
+      <span>Singapore &middot; Rotterdam &middot; Seoul &middot; 2027</span>
+    </div>
+  </footer>
+
+</main>
+
+<!-- grain + vignette over the scene -->
+<div class="finish" aria-hidden="true"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
