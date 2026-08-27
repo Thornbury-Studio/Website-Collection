@@ -664,6 +664,12 @@
     <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/horology-eon/</loc>
     <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/horology-eon-v2/</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 </urlset>
