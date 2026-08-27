@@ -36,6 +36,29 @@ readable DOM — it is also the whole site under no-JS / CDN failure.
 
 ## Art direction
 
+**The elevation pass (same day):** the first build proved the concept with
+primitive boxes; the second pass made the matter itself authored. Nothing
+conceptual changed — every decision below is about preciousness:
+
+- **Beveled, hand-drawn shards.** Six silhouettes (two plates, a blade, a
+  barlet, two chips) drawn as 2-D outlines and extruded with a chamfer;
+  faceted normals. The bevel is what catches the light — it is the whole
+  difference between primitive and porcelain.
+- **Three material castes.** Glazed porcelain body (~81%), dichroic lustre
+  (~14%), and kintsugi gold (~5%). The gold is one population that travels
+  the entire walk: it pours the vessel back together, sets the inner circle
+  of the rose window, and veins the ink tri-bar at the climax.
+- **A room with weather.** A camera-following gradient dome (paper light
+  above, warm shadow below, the act's pigment breathing at the horizon)
+  replaced the flat void. Numerals are visibility-gated to their own act so
+  nothing ghosts across rooms.
+- **Per-act iridescence dial** (`IRID_ACT`): the vessel and torus shimmer;
+  the colonnade is dry limestone — architecture doesn't wear petrol.
+- **Hierarchy of mass.** Seven hand-placed keystone monoliths anchor the
+  entry field; idle drift scales inversely with size, so big matter is
+  heavy and fine matter floats. The torus warms as matter passes its
+  throat; tri-bar ends are tapered flush so the silhouette stays deliberate.
+
 - **Porcelain, not black.** The predictable experimental-3D move is chrome on
   black; this is an over-lit bone-white void (`#ece8e0`) with warm/cool
   hemisphere shading. Colour lives **only on matter**: a dichroic thin-film
