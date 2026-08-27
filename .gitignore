@@ -4,3 +4,5 @@ Thumbs.db
 .vercel
 .env*
 templates/*/src/
+
+templates/horology-eon-v2/src-plates/
