@@ -647,7 +647,7 @@
     display: flex; align-items: center; gap: 12px; width: 100%;
     background: var(--surface-2); border: 1px solid var(--border); border-radius: 11px;
     padding: 13px 14px; margin-bottom: 10px;
-    color: var(--text); font: inherit; text-align: left; cursor: pointer;
+    color: var(--text); font: inherit; text-align: left; text-decoration: none; cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
   .row:hover, .row:focus-visible { border-color: rgba(182,147,95,0.45); background: #1b1c21; }
@@ -816,6 +816,13 @@
         <span class="row__t"><b>About</b><span>What this gallery is and how it&rsquo;s built</span></span>
         <span class="row__c" aria-hidden="true">&rsaquo;</span>
       </button>
+      <a class="row" href="lab/index.html">
+        <span class="row__i">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6.2L4.8 18a1.8 1.8 0 0 0 1.55 2.7h11.3A1.8 1.8 0 0 0 19.2 18L14 9.2V3"/><path d="M8 15h8"/></svg>
+        </span>
+        <span class="row__t"><b>Lab</b><span>Experimental prototypes and technical R&amp;D</span></span>
+        <span class="row__c" aria-hidden="true">&rsaquo;</span>
+      </a>
       <button class="row" type="button" id="clientPreviewRow">
         <span class="row__i">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
@@ -1631,6 +1638,23 @@
         <span class="tag">Collectibles / Digital Card Universe</span>
         <h3>FATHOM</h3>
         <p>An original deep-sea creature-card universe presented as a naturalist&rsquo;s logbook &mdash; thirty-six plates across five depth zones with a luminescence-based rarity ladder, pointer-lit foil and holo materials, a nine-slot binder with embossed missing slots, and a free trawl that makes collecting itself the product.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="templates/exhibition-parallax/index.html">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/exhibition-parallax-sm.webp" alt="PARALLAX aligned through a storm of porcelain fragments: the word composes itself in bold ink type the instant the sightline is right." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Culture / Digital-Art Exhibition</span>
+        <h3>PARALLAX</h3>
+        <p>An international exhibition of objects that cannot exist, whose website is itself Exhibit 00 &mdash; a single WebGL walk through a porcelain void where thirteen hundred fragments keep reassembling: a word that only spells from one spot, a vessel pouring itself back together, nine doors larger inside, a surface swallowing itself, and an impossible triangle that closes only where you stand &mdash; move, and it was never joined.</p>
         <span class="card-foot">
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
