@@ -32,11 +32,13 @@ const INK = '#191610';
 const PIGMENTS = [
   new THREE.Color('#8e8aa8'), // 00 silver-violet
   new THREE.Color('#2b4bc9'), // 01 cobalt
-  new THREE.Color('#c08a2a'), // 02 ochre
+  new THREE.Color('#a89066'), // 02 dry sandstone
   new THREE.Color('#1e7f66'), // 03 viridian
   new THREE.Color('#8f84b8'), // 04 silver-violet, denser
   new THREE.Color('#8e8aa8'), // 05 dissolve
 ];
+/* per-act iridescence: the vessel and torus may shimmer; architecture is dry */
+const IRID_ACT = [0.55, 0.6, 0.24, 0.62, 0.5, 0.45];
 
 /* ── seeded random (stable art direction across loads) ────────────────── */
 let _seed = 22;
@@ -138,6 +140,8 @@ const shardUniforms = {
   uFogDensity: { value: FOG0 },
   uTime: { value: 0 },
   uInkify: { value: 0 }, // act 4: the tri-bar prints itself in ink
+  uGlow: { value: 0 },   // act 3: matter warms as it passes the throat
+  uGlowPos: { value: new THREE.Vector3() },
 };
 
 const shardMaterial = new THREE.ShaderMaterial({
@@ -145,10 +149,15 @@ const shardMaterial = new THREE.ShaderMaterial({
   vertexShader: /* glsl */ `
     attribute float aRand;
     attribute float aBar;
+    attribute float aGild;
+    attribute float aLus;
     varying vec3 vN; varying vec3 vWp; varying float vR; varying float vBar;
+    varying float vGild; varying float vLus;
     void main() {
       vR = aRand;
       vBar = aBar;
+      vGild = aGild;
+      vLus = aLus;
       mat4 im = instanceMatrix;
       vec4 wp = modelMatrix * im * vec4(position, 1.0);
       vWp = wp.xyz;
@@ -158,9 +167,10 @@ const shardMaterial = new THREE.ShaderMaterial({
   `,
   fragmentShader: /* glsl */ `
     varying vec3 vN; varying vec3 vWp; varying float vR; varying float vBar;
+    varying float vGild; varying float vLus;
     uniform vec3 uPigment; uniform float uIrid;
     uniform vec3 uFogColor; uniform float uFogDensity; uniform float uTime;
-    uniform float uInkify;
+    uniform float uInkify; uniform float uGlow; uniform vec3 uGlowPos;
 
     vec3 spectral(float t) {
       // iq cosine palette, biased toward the act pigment
@@ -174,29 +184,47 @@ const shardMaterial = new THREE.ShaderMaterial({
       if (!gl_FrontFacing) N = -N;
       vec3 V = normalize(cameraPosition - vWp);
       float ndv = max(dot(N, V), 0.0);
-
-      // hemisphere: cool sky, warm ground, under-faces settle into shadow
       float sky = N.y * 0.5 + 0.5;
-      vec3 warm = vec3(0.955, 0.912, 0.855);
-      vec3 cool = vec3(0.895, 0.915, 0.945);
-      vec3 base = mix(warm, cool, sky) * (0.72 + 0.28 * pow(sky, 1.4));
+
+      // glazed porcelain body: cool light from above, warm bounce below,
+      // under-faces settle into real shadow
+      vec3 warm = vec3(0.945, 0.888, 0.815);
+      vec3 cool = vec3(0.9, 0.925, 0.962);
+      vec3 base = mix(warm, cool, sky) * (0.6 + 0.4 * pow(sky, 1.3));
       base *= 0.95 + 0.09 * vR;
 
-      // key light
+      // warm key, glaze sheen: one broad, one fired-tight
       vec3 L = normalize(vec3(0.42, 0.78, 0.35));
-      float dif = max(dot(N, L), 0.0);
-      base += vec3(0.10) * dif;
       vec3 H = normalize(L + V);
-      base += vec3(0.20) * pow(max(dot(N, H), 0.0), 30.0);
+      float dif = max(dot(N, L), 0.0);
+      float ndh = max(dot(N, H), 0.0);
+      base += vec3(0.125, 0.112, 0.09) * dif;
+      float sheen = pow(ndh, 7.0) * 0.09 + pow(ndh, 64.0) * 0.34;
 
-      // dichroic film on grazing angles only — colour lives on the matter
+      // thin porcelain edges pass light — rims lift toward paper white
+      float rim = pow(1.0 - ndv, 4.0);
+      base += vec3(0.28, 0.255, 0.21) * rim * 0.5;
+
+      // dichroic film at grazing angles; lustre shards fire much harder
       float fres = pow(1.0 - ndv, 3.1);
       vec3 film = spectral(fres * 1.25 + vR * 0.4 + uTime * 0.012);
-      film = mix(film, uPigment, 0.52);
-      vec3 col = mix(base, film, fres * uIrid);
+      film = mix(film, uPigment, 0.68);
+      float lusBoost = 1.0 + vLus * 1.8;
+      vec3 col = mix(base, film, clamp(fres * uIrid * lusBoost, 0.0, 0.85));
+      col += vec3(sheen) * (1.0 + vLus * 1.7);
 
-      // alignment: the gathered bars darken into a printed glyph
-      float ink = vBar * uInkify;
+      // kintsugi: the gilded caste
+      vec3 gold = vec3(0.57, 0.43, 0.205) * (0.5 + 0.5 * dif);
+      gold += vec3(1.0, 0.83, 0.5) * (pow(ndh, 24.0) * 0.95 + pow(ndh, 6.0) * 0.22);
+      gold += vec3(0.95, 0.8, 0.55) * fres * 0.55;
+      col = mix(col, gold, vGild);
+
+      // the swallow: matter warms as it approaches the throat
+      float g = (1.0 - smoothstep(2.2, 5.6, distance(vWp, uGlowPos))) * uGlow;
+      col += vec3(0.4, 0.24, 0.1) * g * 0.55;
+
+      // alignment: the bars print in ink; the gold veins stay gold
+      float ink = vBar * uInkify * (1.0 - vGild);
       vec3 inkCol = vec3(0.15, 0.14, 0.125) + film * 0.06;
       col = mix(col, inkCol, ink * 0.85);
 
@@ -209,13 +237,42 @@ const shardMaterial = new THREE.ShaderMaterial({
 });
 
 /* ═══════════════════════════════════════════════════════════════════════
-   GEOMETRY GROUPS: slab / rod / chip
+   GEOMETRY: authored porcelain shards.
+   Every silhouette is drawn by hand and extruded with a chamfered bevel —
+   the bevel is what catches the light and makes an edge worth looking at.
+   Facets stay flat (non-indexed normals): fired clay, not soap.
    ═══════════════════════════════════════════════════════════════════════ */
+function shard(points, depth, bevel, tx, ty, tz) {
+  const shape = new THREE.Shape();
+  shape.moveTo(points[0][0], points[0][1]);
+  for (let i = 1; i < points.length; i++) shape.lineTo(points[i][0], points[i][1]);
+  shape.closePath();
+  let geo = new THREE.ExtrudeGeometry(shape, {
+    depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel,
+    bevelSegments: 1, steps: 1,
+  });
+  geo.center();
+  geo.rotateX(Math.PI / 2); // thickness becomes Y
+  geo = geo.toNonIndexed();
+  geo.computeVertexNormals();
+  geo.computeBoundingBox();
+  const b = geo.boundingBox, sz = new THREE.Vector3();
+  b.getSize(sz);
+  geo.scale(tx / sz.x, ty / sz.y, tz / sz.z);
+  return geo;
+}
+
 const N = CFG.count;
 const GROUPS = [
-  { name: 'slab', geo: new THREE.BoxGeometry(1, 0.22, 0.62), frac: 0.45 },
-  { name: 'rod', geo: new THREE.BoxGeometry(1, 0.16, 0.16), frac: 0.3 },
-  { name: 'chip', geo: new THREE.TetrahedronGeometry(0.34), frac: 0.25 },
+  // plates — the porcelain body
+  { name: 'plateA', geo: shard([[0, 0], [1, 0.06], [0.94, 0.62], [0.08, 0.55]], 0.3, 0.07, 1, 0.2, 0.68), frac: 0.22 },
+  { name: 'plateB', geo: shard([[0, 0.05], [1, 0], [0.9, 0.4], [0.12, 0.46]], 0.3, 0.06, 1, 0.18, 0.5), frac: 0.2 },
+  // blades and barlets — structure members
+  { name: 'blade', geo: shard([[0, 0.05], [0.45, 0], [1, 0.08], [0.97, 0.16], [0.5, 0.22], [0.05, 0.16]], 0.28, 0.05, 1, 0.13, 0.2), frac: 0.18 },
+  { name: 'barlet', geo: shard([[0, 0], [1, 0.04], [0.96, 0.3], [0.05, 0.34]], 0.42, 0.08, 1, 0.3, 0.34), frac: 0.12 },
+  // chips — the fine matter
+  { name: 'chipA', geo: shard([[0, 0], [1, 0.12], [0.35, 0.9]], 0.3, 0.06, 0.4, 0.14, 0.4), frac: 0.15 },
+  { name: 'chipB', geo: shard([[0.1, 0], [0.9, 0.05], [1, 0.55], [0.5, 1], [0, 0.5]], 0.28, 0.06, 0.32, 0.12, 0.3), frac: 0.13 },
 ];
 let acc = 0;
 for (const g of GROUPS) {
@@ -223,7 +280,7 @@ for (const g of GROUPS) {
   g.start = acc;
   acc += g.count;
 }
-GROUPS[2].count += N - acc; // remainder
+GROUPS[GROUPS.length - 1].count += N - acc; // remainder
 
 const meshes = [];
 for (const g of GROUPS) {
@@ -317,18 +374,35 @@ function buildF0() {
       }
     }
     const bigAllowed = radial > 11;
-    const s = 0.35 + rnd() * (bigAllowed && rnd() < 0.07 ? 2.6 : 1.0);
+    const s = 0.3 + rnd() * (bigAllowed && rnd() < 0.05 ? 2.2 : 0.85);
     putE(0, i, x, y, z, rnd() * 6.3, rnd() * 6.3, rnd() * 6.3, s, s * (0.6 + rnd() * 0.8), s);
+  }
+  // keystones: seven monoliths, each placed by hand. They are what makes
+  // the field look arranged by someone rather than emitted by something.
+  const KEYSTONES = [
+    { p: [-11.5, 2.4, 6.5], r: [0.12, 0.5, 0.08], s: [4.6, 1.3, 3.0] },
+    { p: [10.5, -3.0, 2.0], r: [-0.08, -0.35, 0.15], s: [3.8, 1.05, 2.7] },
+    { p: [-13.5, -5.0, -6.0], r: [0.05, 0.9, -0.1], s: [5.4, 1.5, 3.3] },
+    { p: [13.0, 4.4, -9.0], r: [0.2, -0.7, 0.05], s: [5.0, 1.25, 3.1] },
+    { p: [0.5, 8.2, -15.0], r: [0.4, 0.1, 0.35], s: [6.2, 1.6, 3.5] },
+    { p: [-8.2, -1.4, 15.5], r: [0.03, 0.25, 0.55], s: [2.7, 0.85, 1.9] },
+    { p: [16.0, 0.6, -17.0], r: [0.0, -0.5, 0.2], s: [5.2, 1.4, 3.1] },
+  ];
+  let k = 0;
+  for (let i = GROUPS[0].start; i < GROUPS[0].start + GROUPS[0].count && k < KEYSTONES.length; i++) {
+    if (inst[i].r < 0.05 || inst[i].r > 0.86) continue; // keystones stay porcelain
+    const ks = KEYSTONES[k++];
+    putE(0, i, ks.p[0], ks.p[1], ks.p[2], ks.r[0], ks.r[1], ks.r[2], ks.s[0], ks.s[1], ks.s[2]);
   }
 }
 
 /* F1 — VESSEL: amphora surface + upward debris stream */
 function vesselProfile(t) {
-  let r = 0.6 + 1.95 * Math.exp(-Math.pow((t - 0.42) / 0.26, 2));
-  r += 0.5 * Math.exp(-Math.pow((t - 1.0) / 0.07, 2));   // lip
-  r += 0.28 * Math.exp(-Math.pow((t - 0.0) / 0.06, 2));  // foot
-  r -= 0.55 * Math.exp(-Math.pow((t - 0.82) / 0.09, 2)); // neck pinch
-  return Math.max(r, 0.35);
+  let r = 0.52 + 2.0 * Math.exp(-Math.pow((t - 0.4) / 0.22, 2));
+  r += 0.44 * Math.exp(-Math.pow((t - 1.0) / 0.055, 2));  // lip
+  r += 0.24 * Math.exp(-Math.pow((t - 0.0) / 0.05, 2));   // foot
+  r -= 0.62 * Math.exp(-Math.pow((t - 0.8) / 0.085, 2));  // neck pinch
+  return Math.max(r, 0.3);
 }
 function buildF1() {
   const H = 8, Y0 = -5.5;
@@ -349,8 +423,8 @@ function buildF1() {
     _c.crossVectors(_b, _a).normalize();
     _m.makeBasis(_a, _b, _c);
     _q.setFromRotationMatrix(_m);
-    const sw = 0.55 + rnd() * 0.75;
-    put(1, i, x, y, z, _q.x, _q.y, _q.z, _q.w, sw, 0.5 + rnd() * 0.4, 0.62 + rnd() * 0.5);
+    const sw = 0.5 + rnd() * 0.65;
+    put(1, i, x, y, z, _q.x, _q.y, _q.z, _q.w, sw, 0.34 + rnd() * 0.26, 0.56 + rnd() * 0.45);
     // a share of the surface pours: loops up from the debris field below
     if (it.r < 0.30) {
       role[i] |= 1;
@@ -400,16 +474,24 @@ function buildF2() {
       rx: 0, ry: 0, rz: a + Math.PI / 2, sx: 1.5 + rnd() * 0.6, big: 1,
     });
   }
+  // the inner circle is reserved for the gilded caste — a gold ring set
+  // inside the rose window, the corridor's one jewel
   const RN2 = 40;
+  const goldRing = [];
   for (let j = 0; j < RN2; j++) {
     const a = (j / RN2) * Math.PI * 2;
-    slots.push({
+    goldRing.push({
       x: RING.x + Math.cos(a) * 6.4, y: RING.y + Math.sin(a) * 6.4, z: RING.z - 1.5,
-      rx: 0, ry: 0, rz: a, sx: 1.0 + rnd() * 0.4, big: 1,
+      rx: 0, ry: 0, rz: a, sx: 1.0 + rnd() * 0.3, big: 1,
     });
   }
-  let s = 0;
+  let s = 0, gr = 0;
   for (let i = 0; i < N; i++) {
+    if (inst[i].r < 0.045 && gr < goldRing.length) {
+      const sl = goldRing[gr++];
+      putE(2, i, sl.x, sl.y, sl.z, sl.rx, sl.ry, sl.rz, sl.sx, 0.85, 0.85);
+      continue;
+    }
     if (s < slots.length && i % 10 < 8) {
       const sl = slots[s++];
       putE(2, i, sl.x, sl.y, sl.z, sl.rx, sl.ry, sl.rz, sl.sx, 0.9 + rnd() * 0.5, 0.9 + rnd() * 0.5);
@@ -417,7 +499,7 @@ function buildF2() {
       // corridor dust — drifting flakes low along the walls
       const z = CORR_Z0 + rnd() * (CFG.portals * CORR_DZ + 10);
       const side = rnd() < 0.5 ? -1 : 1;
-      dust(2, i, CORR_X + side * (5 + rnd() * 5), CORR_Y + (rnd() - 0.3) * 6, z, 0.5, 3.5);
+      dust(2, i, CORR_X + side * (5 + rnd() * 5), CORR_Y + (rnd() - 0.3) * 6, z, 0.4, 3.5);
     }
   }
 }
@@ -466,7 +548,8 @@ function buildF4() {
   for (let i = 0; i < N; i++) {
     if (i % 10 < 7) {
       const bar = bars[bi % 3]; bi++;
-      const t = rnd();
+      const t = 0.045 + rnd() * 0.91;
+      const endTaper = t > 0.86 || t < 0.14 ? 0.55 : 1; // flush ends, no antennae
       const off1 = (rnd() - 0.5) * 1.15 * W, off2 = (rnd() - 0.5) * 1.15 * W;
       _a.copy(bar.a);
       _b.set(_a.y, _a.z, _a.x); // any perpendicular for box cross-section
@@ -478,7 +561,7 @@ function buildF4() {
       _m.makeBasis(_a, _b, _c);
       _q.setFromRotationMatrix(_m);
       put(4, i, p.x, p.y, p.z, _q.x, _q.y, _q.z, _q.w,
-        0.8 + rnd() * 0.7, 0.36 + rnd() * 0.22, 0.36 + rnd() * 0.22);
+        (0.8 + rnd() * 0.7) * endTaper, 0.36 + rnd() * 0.22, 0.36 + rnd() * 0.22);
       jitterAmp[i] = 1.2 + rnd() * 3.2;
       barFlag[i] = 1;
     } else {
@@ -505,11 +588,68 @@ function buildLifts() {
 }
 
 buildF0(); buildF1(); buildF2(); buildF3(); buildF4(); buildF5(); buildLifts();
+/* material castes: most matter is glazed porcelain; ~14% carries lustre;
+   ~5% is kintsugi gold — the same gold travels the whole walk (it pours the
+   vessel, rings the rose window, veins the tri-bar) */
+const isGild = (i) => inst[i].r < 0.045;
+const isLus = (i) => inst[i].r > 0.86;
 for (const g of GROUPS) {
-  const attr = new Float32Array(g.count);
-  for (let li = 0; li < g.count; li++) attr[li] = barFlag[g.start + li];
-  g.geo.setAttribute('aBar', new THREE.InstancedBufferAttribute(attr, 1));
+  const bar = new Float32Array(g.count);
+  const gild = new Float32Array(g.count);
+  const lus = new Float32Array(g.count);
+  for (let li = 0; li < g.count; li++) {
+    const i = g.start + li;
+    bar[li] = barFlag[i];
+    gild[li] = isGild(i) ? 1 : 0;
+    lus[li] = isLus(i) ? 1 : 0;
+  }
+  g.geo.setAttribute('aBar', new THREE.InstancedBufferAttribute(bar, 1));
+  g.geo.setAttribute('aGild', new THREE.InstancedBufferAttribute(gild, 1));
+  g.geo.setAttribute('aLus', new THREE.InstancedBufferAttribute(lus, 1));
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ATMOSPHERE: a gradient dome that follows the camera — the room has
+   weather now: paper light above, warm shadow below, the act's pigment
+   breathing at the horizon.
+   ═══════════════════════════════════════════════════════════════════════ */
+const domeUniforms = {
+  uBase: { value: PORCELAIN.clone() },
+  uPig: { value: PIGMENTS[0].clone() },
+  uFlat: { value: 0 },
+};
+const dome = new THREE.Mesh(
+  new THREE.SphereGeometry(150, 32, 24),
+  new THREE.ShaderMaterial({
+    uniforms: domeUniforms,
+    side: THREE.BackSide,
+    depthWrite: false,
+    fog: false,
+    vertexShader: /* glsl */ `
+      varying vec3 vDir;
+      void main() {
+        vDir = normalize(position);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: /* glsl */ `
+      varying vec3 vDir;
+      uniform vec3 uBase; uniform vec3 uPig; uniform float uFlat;
+      void main() {
+        float t = smoothstep(-0.42, 0.6, vDir.y);
+        vec3 top = uBase * 1.06 + vec3(-0.004, 0.001, 0.009);
+        vec3 bot = uBase * 0.952 + vec3(0.012, 0.005, -0.005);
+        vec3 col = mix(bot, top, t);
+        col = mix(col, mix(uPig, uBase, 0.65), 0.06 * max(0.0, 1.0 - abs(vDir.y) * 1.6));
+        col = mix(col, uBase, uFlat);
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  })
+);
+dome.renderOrder = -1;
+dome.frustumCulled = false;
+scene.add(dome);
 
 /* ═══════════════════════════════════════════════════════════════════════
    ACT SEGMENTS
@@ -610,6 +750,7 @@ function layoutLetters() {
 
 /* catalogue numerals standing in the world */
 const numeralPlanes = [];
+const NUMERAL_WINDOWS = [[0.09, 0.36], [0.29, 0.6], [0.5, 0.79]];
 function buildNumerals() {
   const defs = [
     { text: '01', pos: V3(-20.5, 0.8, -35), toward: V3(-9, -0.5, -20), h: 5.5 },
@@ -741,7 +882,8 @@ function readFormation(f, i, t, outP, outQ, outS) {
     outQ.set(fQuat[1][i * 4], fQuat[1][i * 4 + 1], fQuat[1][i * 4 + 2], fQuat[1][i * 4 + 3]);
     // grow in from dust, settle at full size, exhale before the loop restarts
     const out = cyc > 0.9 ? 1 - (cyc - 0.9) / 0.1 : 1;
-    const grow = (0.25 + 0.75 * k) * Math.max(out, 0.12);
+    let grow = (0.25 + 0.75 * k) * Math.max(out, 0.12);
+    if (role[i] & 1 && inst[i].r < 0.045) grow *= 0.62; // gold pours fine, not chunky
     outS.set(fScale[1][i * 3] * grow, fScale[1][i * 3 + 1] * grow, fScale[1][i * 3 + 2] * grow);
     return;
   }
@@ -761,8 +903,8 @@ function readFormation(f, i, t, outP, outQ, outS) {
     outP.y += Math.sin(i * 78.233 + time * 0.55 + 2) * j * 0.8;
     outP.z += Math.cos(i * 37.719 + time * 0.62) * j;
   }
-  // idle breath
-  const amp = REDUCED ? 0 : IDLE_AMP[f];
+  // idle breath — big matter is heavy and barely stirs, fine matter drifts
+  const amp = REDUCED ? 0 : IDLE_AMP[f] * THREE.MathUtils.clamp(0.8 / Math.max(outS.x, 0.4), 0.16, 1.5);
   if (amp > 0) {
     const ph = i * 0.618;
     outP.x += Math.sin(time * 0.4 + ph) * amp;
@@ -788,7 +930,13 @@ function composeFrame(p, dt) {
   // pigment drift
   const pigA = PIGMENTS[seg.f0], pigB = PIGMENTS[seg.f1];
   shardUniforms.uPigment.value.copy(pigA).lerp(pigB, segT);
+  shardUniforms.uIrid.value = THREE.MathUtils.lerp(IRID_ACT[seg.f0], IRID_ACT[seg.f1], segT);
   shardUniforms.uTime.value = time;
+
+  // the throat glow lives only while the torus is the work on view
+  shardUniforms.uGlow.value = THREE.MathUtils.smoothstep(p, 0.56, 0.62) *
+    (1 - THREE.MathUtils.smoothstep(p, 0.72, 0.78));
+  shardUniforms.uGlowPos.value.copy(TORUS);
 
   // fragments
   for (const g of GROUPS) {
@@ -848,9 +996,9 @@ function composeFrame(p, dt) {
     pl.quaternion.copy(pl.userData.baseQuat);
     if (drift > 0.001) {
       _q.setFromEuler(_e.set(
-        Math.sin(time * 0.21 + pl.userData.phase) * 0.16 * drift,
-        Math.sin(time * 0.17 + pl.userData.phase * 2) * 0.24 * drift,
-        Math.sin(time * 0.13 + pl.userData.phase * 3) * 0.1 * drift
+        Math.sin(time * 0.16 + pl.userData.phase) * 0.09 * drift,
+        Math.sin(time * 0.13 + pl.userData.phase * 2) * 0.14 * drift,
+        Math.sin(time * 0.1 + pl.userData.phase * 3) * 0.06 * drift
       ));
       pl.quaternion.multiply(_q);
     }
@@ -869,14 +1017,26 @@ function composeFrame(p, dt) {
   shardUniforms.uInkify.value = THREE.MathUtils.smoothstep(p, 0.815, 0.85) *
     (1 - THREE.MathUtils.smoothstep(p, 0.955, 0.995));
 
+  // numerals exist only while their room is on view
+  for (let i = 0; i < numeralPlanes.length; i++) {
+    const w = NUMERAL_WINDOWS[i];
+    numeralPlanes[i].visible = p >= w[0] && p <= w[1];
+  }
+
   // fog leans with the act, thins for the climax, and lifts to white at the end
   const clearBell = Math.exp(-Math.pow((p - 0.87) / 0.11, 2));
   const fogT = Math.max(0.024 + 0.006 * Math.sin(p * Math.PI) - 0.019 * clearBell, 0.005);
   const fade = THREE.MathUtils.smoothstep(p, 0.94, 1);
   shardUniforms.uFogDensity.value = fogT + fade * 0.09;
   scene.fog.density = shardUniforms.uFogDensity.value;
-  scene.fog.color.copy(PORCELAIN).lerp(shardUniforms.uPigment.value, 0.045);
+  scene.fog.color.copy(PORCELAIN).lerp(shardUniforms.uPigment.value, 0.05);
   renderer.setClearColor(scene.fog.color);
+
+  // the dome rides with the camera and grades the room per act
+  dome.position.copy(camera.position);
+  domeUniforms.uBase.value.copy(scene.fog.color);
+  domeUniforms.uPig.value.copy(shardUniforms.uPigment.value);
+  domeUniforms.uFlat.value = fade;
 
   // alignment quality — the visitor can break it by moving
   const swayBreak = THREE.MathUtils.clamp(1 - (Math.abs(swayX) * 1.5 + Math.abs(swayY) * 1.2), 0, 1);
