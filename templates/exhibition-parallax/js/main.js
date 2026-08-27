@@ -253,7 +253,8 @@ function shard(points, depth, bevel, tx, ty, tz) {
   });
   geo.center();
   geo.rotateX(Math.PI / 2); // thickness becomes Y
-  geo = geo.toNonIndexed();
+  // ExtrudeGeometry already ships non-indexed with flat per-face vertices,
+  // so faceted normals fall straight out of computeVertexNormals() here.
   geo.computeVertexNormals();
   geo.computeBoundingBox();
   const b = geo.boundingBox, sz = new THREE.Vector3();
