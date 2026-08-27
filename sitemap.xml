@@ -654,4 +654,10 @@
     <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/linia-alva/</loc>
     <lastmod>2026-08-18</lastmod>
   </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/exhibition-parallax/</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
