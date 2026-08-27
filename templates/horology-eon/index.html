@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>Eon Atelier — Instruments for the Other Kinds of Time</title>
+<meta name="description" content="Eon Atelier is an independent watchmaking house on Ushant. Its first instrument, Meantime, keeps four registers — the tide, the shadow, the while, the sky — and no hours at all.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/horology-eon/index.html">
+<meta name="theme-color" content="#0d1115">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1115'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23e9e3d5' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='16' r='4.2' fill='none' stroke='%23e9e3d5' stroke-width='1'/%3E%3Ccircle cx='16' cy='7.4' r='1.9' fill='%235d82d6'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eon Atelier">
+<meta property="og:title" content="Eon Atelier — No. 1, Meantime">
+<meta property="og:description" content="Four registers. No hours. The tide, the shadow, the while and the sky — and every register on this page is running.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/horology-eon/index.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/horology-eon/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&family=Spline+Sans+Mono:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<noscript><style>.gate{display:none}</style></noscript>
+</head>
+<body id="top">
+<script>
+/* Runs before first paint: mark scripting on, and fold the site down to the
+   papers if the 3D module never arrives (CDN failure, old browser). */
+document.documentElement.classList.add('js');
+addEventListener('click', function (e) {
+  if (window.__eon) return;
+  var t = e.target && e.target.closest ? e.target.closest('#gate-skip') : null;
+  if (t) document.documentElement.classList.add('no-3d');
+});
+setTimeout(function () {
+  if (!window.__eon) document.documentElement.classList.add('no-3d');
+}, 8000);
+</script>
+<a class="skip" href="#papers">Skip to the papers</a>
+
+<!-- ══ THE GATE ══ -->
+<div class="gate" id="gate" role="dialog" aria-label="Entrance">
+  <p class="gate-kicker">Independent watchmakers &middot; Ushant</p>
+  <h1 class="gate-mark">EON ATELIER</h1>
+  <p class="gate-thesis">Instruments for the other kinds of time.</p>
+  <p class="gate-sub">Our first calibre keeps four registers &mdash; the tide, the shadow, the while, the sky &mdash; and no hours at all. It is wound, and it is running.</p>
+  <button class="gate-enter" id="enter" type="button" disabled>
+    <span class="ge-wait">Assembling the calibre&hellip;</span>
+    <span class="ge-go">Wind the movement</span>
+  </button>
+  <a class="gate-skip" href="#papers" id="gate-skip">or read the papers unwound</a>
+  <p class="gate-foot">No.&thinsp;1 &mdash; Meantime &middot; on this page, live</p>
+</div>
+
+<!-- ══ CHROME ══ -->
+<header class="chrome" id="chrome">
+  <a class="wordmark" href="index.html">EON&nbsp;ATELIER</a>
+  <p class="chrome-reg" id="hud-reg" aria-hidden="true">CAL.&nbsp;C.1&nbsp;&mdash;&nbsp;WOUND</p>
+  <a class="chrome-papers" href="#papers">The Papers</a>
+</header>
+
+<!-- ══ THE DESCENT (scroll height; canvas is injected behind) ══ -->
+<div class="track" id="track" aria-hidden="true"></div>
+
+<!-- wall labels: fixed, act-driven -->
+<aside class="labels" id="labels" aria-hidden="true">
+  <div class="label" data-act="0">
+    <p class="l-no">No.&thinsp;1</p>
+    <h2 class="l-title">Meantime</h2>
+    <p class="l-meta">Eon Atelier &middot; Calibre C.1</p>
+    <p class="l-mat">Tantalum, sapphire, four registers, no hands</p>
+    <p class="l-note">Where the hands should stand, a heartbeat.</p>
+  </div>
+  <div class="label" data-act="1">
+    <p class="l-no">The Calibre</p>
+    <h2 class="l-title">The dial is a lid</h2>
+    <p class="l-mat">611 components &middot; 43 jewels &middot; 18,000 vph</p>
+    <p class="l-note">Beneath it, one wheel drives four other kinds of time.</p>
+  </div>
+  <div class="label" data-act="2">
+    <p class="l-no">Register I</p>
+    <h2 class="l-title">Aestus &mdash; the tide</h2>
+    <p class="l-mat">Lunar train, 1&thinsp;:&thinsp;29.53 &middot; a basin of levelled silver</p>
+    <p class="l-note">The sea keeps a schedule older than ours. The register holds the water today&rsquo;s moon is raising.</p>
+  </div>
+  <div class="label" data-act="3">
+    <p class="l-no">Register II</p>
+    <h2 class="l-title">Umbra &mdash; the shadow</h2>
+    <p class="l-mat">Gnomon, blued steel &middot; engraved meridian arc</p>
+    <p class="l-note">The first clock was a stick and its shadow. This one carries no sun of its own &mdash; move your light, and it reads it.</p>
+  </div>
+  <div class="label" data-act="4">
+    <p class="l-no">Register III</p>
+    <h2 class="l-title">Memoria &mdash; the while</h2>
+    <p class="l-mat">A barrel wound by presence &middot; one mark per ten seconds attended</p>
+    <p class="l-note">It has been counting since you arrived.</p>
+  </div>
+  <div class="label" data-act="5">
+    <p class="l-no">Register IIII</p>
+    <h2 class="l-title">Sidera &mdash; the sky</h2>
+    <p class="l-mat">Six rails, six lacquer planets, today&rsquo;s true arrangement</p>
+    <p class="l-note">Under every dial there was always a solar system.</p>
+  </div>
+  <div class="label label-coda" data-act="6">
+    <p class="l-note">The hour is the least<br>of what is happening.</p>
+  </div>
+</aside>
+
+<!-- HUD -->
+<div class="hud-res" id="hud-res-wrap" aria-hidden="true">
+  <span class="hr-label">RESERVE</span>
+  <span class="hr-bar"><i id="hud-res-bar"></i></span>
+  <span class="hr-val"><span id="hud-res">96</span>&nbsp;H</span>
+</div>
+<p class="cue" id="cue" aria-hidden="true"><span class="cue-desktop">Scroll &mdash; the reserve unwinds &middot; your pointer carries the lamp</span><span class="cue-touch">Scroll to unwind &middot; drag sideways to swing the lamp</span></p>
+
+<!-- ══ THE PAPERS ══ -->
+<main class="papers" id="papers">
+
+  <section class="pp-mast">
+    <p class="pp-kicker">Eon Atelier &middot; The Papers</p>
+    <h2 class="pp-head"><span>Four registers.</span> <span>No hours.</span></h2>
+    <p class="pp-state">Eon Atelier builds mechanical instruments for the kinds of time a clock leaves out. Our first, <em>Meantime</em>, indicates the tide, the shadow, the while and the sky &mdash; and nothing else. The instrument above is not a picture of it. Every register on this page is running: the moon is today&rsquo;s, the planets are today&rsquo;s, the lamp is yours, and the barrel has been winding on your attention since you arrived.</p>
+  </section>
+
+  <section class="pp-sec" id="calibre" aria-labelledby="calibre-h">
+    <h3 class="sec-h" id="calibre-h"><span class="sec-no">I</span>The Calibre</h3>
+    <dl class="spec">
+      <div><dt>Calibre</dt><dd>C.1 &ldquo;Meantime&rdquo;, manually wound by wear</dd></div>
+      <div><dt>Diameter</dt><dd>36.6 mm</dd></div>
+      <div><dt>Height</dt><dd>8.1 mm</dd></div>
+      <div><dt>Components</dt><dd>611</dd></div>
+      <div><dt>Jewels</dt><dd>43, in gold chatons</dd></div>
+      <div><dt>Balance</dt><dd>18,000 vph, free-sprung, visible at centre</dd></div>
+      <div><dt>Reserve</dt><dd>96 hours</dd></div>
+      <div><dt>Registers</dt><dd>Four &mdash; Aestus, Umbra, Memoria, Sidera</dd></div>
+      <div class="spec-null"><dt>Hours indicated</dt><dd>None</dd></div>
+      <div><dt>Case</dt><dd>Tantalum, &Oslash; 41 mm, brushed and bevelled</dd></div>
+      <div><dt>Glass</dt><dd>Domed sapphire, both faces</dd></div>
+      <div><dt>Finishing</dt><dd>C&ocirc;tes droites, perlage, thermally blued screws</dd></div>
+    </dl>
+  </section>
+
+  <section class="pp-sec" id="registers" aria-labelledby="registers-h">
+    <h3 class="sec-h" id="registers-h"><span class="sec-no">II</span>The Registers</h3>
+    <ol class="reg-list">
+      <li class="reg">
+        <span class="r-no">I</span>
+        <div class="r-body">
+          <h4>Aestus &mdash; the tide</h4>
+          <p>A lunar train geared 1&thinsp;:&thinsp;29.53 carries the moon&rsquo;s age; a basin of levelled silver carries its pull. Spring tides at the syzygies, neaps at the quarters. The register does not name a harbour &mdash; it names the reason every harbour keeps its own book.</p>
+          <p class="r-live" id="live-aestus" aria-live="off">&nbsp;</p>
+        </div>
+      </li>
+      <li class="reg">
+        <span class="r-no">II</span>
+        <div class="r-body">
+          <h4>Umbra &mdash; the shadow</h4>
+          <p>A gnomon of blued steel over an engraved meridian arc. It keeps no sun of its own; it reads whatever light its owner brings &mdash; a window, a desk lamp, a candle carried across a room. The oldest instrument in the calibre, and the only one that needs you.</p>
+          <p class="r-live" id="live-umbra" aria-live="off">&nbsp;</p>
+        </div>
+      </li>
+      <li class="reg">
+        <span class="r-no">III</span>
+        <div class="r-body">
+          <h4>Memoria &mdash; the while</h4>
+          <p>A barrel that winds on presence. Every ten seconds of being attended to, the drum takes one engraved mark; the spring keeps what the marks measure. It cannot run backwards and it cannot be set. Nothing about it can be corrected, which is the point.</p>
+          <p class="r-live" id="live-memoria" aria-live="off">&nbsp;</p>
+        </div>
+      </li>
+      <li class="reg">
+        <span class="r-no">IIII</span>
+        <div class="r-body">
+          <h4>Sidera &mdash; the sky</h4>
+          <p>Six rails, six lacquer planets, one gold sun. The arrangement is today&rsquo;s, by mean element; Mercury completes its rail in a season of wear, Saturn in a working life. It is slow. So is the sky.</p>
+          <p class="r-live" id="live-sidera" aria-live="off">&nbsp;</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="pp-sec" id="atelier" aria-labelledby="atelier-h">
+    <h3 class="sec-h" id="atelier-h"><span class="sec-no">III</span>The Atelier</h3>
+    <div class="at-cols">
+      <p class="at-lead">Eon Atelier occupies the keeper&rsquo;s house of a decommissioned tide-gauge station on Ushant, at the western edge of France, where the Atlantic rehearses twice a day. The house measured the sea for a century; we kept its instruments and its habit. The atelier was founded in 2011 by L&eacute;onie Vasseur, formerly of the Vall&eacute;e de Joux, who left a celebrated complications bench with one conviction: that the hour is solved, and everything else worth measuring is not.</p>
+      <ul class="at-facts">
+        <li><strong>Nine</strong><span>hands at the bench</span></li>
+        <li><strong>Eleven</strong><span>instruments a year</span></li>
+        <li><strong>One</strong><span>calibre at a time</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="pp-sec" id="correspond" aria-labelledby="correspond-h">
+    <h3 class="sec-h" id="correspond-h"><span class="sec-no">IIII</span>Correspondence</h3>
+    <ol class="steps">
+      <li><span class="s-no">01</span><h4>The letter</h4><p>Commissions begin with a letter &mdash; who you are, and which of the four times you find yourself missing. We answer every one, not quickly.</p></li>
+      <li><span class="s-no">02</span><h4>The sitting</h4><p>A day at the station: the bench, the sea, the calibre under a loupe. Dimensions are taken; so are impressions.</p></li>
+      <li><span class="s-no">03</span><h4>The wait</h4><p>Fourteen months. The list is not published and cannot be shortened. The wait is part of the instrument.</p></li>
+      <li><span class="s-no">04</span><h4>Delivery</h4><p>By hand, at the atelier, at a low tide of your choosing. The register will already agree with the water outside.</p></li>
+    </ol>
+    <div class="cor-card">
+      <p class="cor-price">From CHF 240,000 &middot; eleven a year</p>
+      <a class="cor-link" href="mailto:correspond@eonatelier.ch">correspond@eonatelier.ch</a>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p class="foot-mark">EON ATELIER</p>
+    <p class="foot-line">Instruments for the other kinds of time &middot; Ushant, Finist&egrave;re</p>
+    <div class="foot-row">
+      <a href="#top" id="rewind">Wind it again</a>
+      <span class="foot-credit">Site &mdash; <a href="https://thornburystudio.com">Thornbury Studio, Singapore</a></span>
+    </div>
+  </footer>
+
+</main>
+
+<!-- grain + vignette over the scene -->
+<div class="finish" aria-hidden="true"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
