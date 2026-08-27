@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>INTERACTION-001 — Warp — Thornbury Lab</title>
+<meta name="description" content="A loom held under tension. Move across the threads and the frame answers — an instrument built from pointer velocity, direction and crossing.">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="theme-color" content="#0c0a1d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230c0a1d'/%3E%3Cg stroke='%236ee7c8' stroke-width='1.6'%3E%3Cpath d='M10 6v20'/%3E%3Cpath d='M16 6v20'/%3E%3Cpath d='M22 6v20'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/interaction-001.css">
+</head>
+<body>
+
+<canvas id="warp" aria-label="An interactive field of tuned threads. Move the pointer across them to play."></canvas>
+
+<div class="chrome chrome--tl">
+  <div class="wordmark">WARP</div>
+  <p class="tagline">The warp is held.<br>You are the weft.</p>
+</div>
+
+<div class="chrome chrome--tr">
+  <div class="readout">
+    <span class="readout__n" id="count">0</span>
+    <span class="micro">crossings</span>
+  </div>
+</div>
+
+<p class="hint micro" id="hint">
+  <span class="hint__pointer">Move across the threads</span>
+  <span class="hint__touch">Drag across the threads · two fingers for chords</span>
+</p>
+
+<div class="chrome chrome--bl">
+  <a class="back micro" href="../index.html">← Interaction Lab</a>
+</div>
+
+<div class="chrome chrome--br">
+  <button class="sound" id="sound" type="button" aria-pressed="true">
+    <span class="sound__dot" aria-hidden="true"></span>
+    Sound <span class="sound__state">On</span>
+  </button>
+</div>
+
+<noscript>
+  <div class="nojs">
+    <div>
+      <div class="wordmark">WARP</div>
+      <p>This piece is an instrument — it is made entirely of what you do to it,
+         so it needs JavaScript to run. INTERACTION-001, Thornbury Lab.</p>
+    </div>
+  </div>
+</noscript>
+
+<script src="js/interaction-001.js"></script>
+</body>
+</html>

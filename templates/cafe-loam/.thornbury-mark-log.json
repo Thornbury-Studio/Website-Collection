@@ -1,0 +1,7 @@
+{
+  "seeded": "2026-08-27",
+  "phrasing": "Design & build \u2014 Thornbury Studio, Singapore",
+  "files": ["index.html", "menu.html", "beans.html", "visit.html"],
+  "location": "footer .foot-line, as a new sibling span (data-service-line left untouched \u2014 it renders live open/closed status via LOAM_SERVICE, confirmed before editing)",
+  "verified": "rendered in a real browser via chrome-devtools MCP: credit visible, linked to https://thornburystudio.com, live status line still functioning"
+}
