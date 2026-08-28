@@ -426,11 +426,13 @@ h2.display { font-size: clamp(2rem, 4.6vw, 3.4rem); }
 .pkg-card:hover::before { transform: translateX(300%) rotate(8deg); }
 
 .pkg-tier { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+/* Sized so the three profiles are actually distinguishable — at 56px they
+   all collapsed into the same anonymous wedge. */
 .pkg-icon {
-  width: 56px; height: 34px; flex: none;
+  width: 98px; height: 41px; flex: none;
   color: var(--gold);
 }
-.pkg-icon svg { width: 100%; height: 100%; }
+.pkg-icon svg { width: 100%; height: 100%; display: block; }
 .pkg-card h3 { font-size: 1.28rem; font-weight: 700; letter-spacing: 0.005em; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .pkg-fits { font-size: 0.88rem; color: var(--muted); margin-top: -8px; }
 
@@ -516,50 +518,67 @@ h2.display { font-size: clamp(2rem, 4.6vw, 3.4rem); }
   display: grid;
 }
 
-.paint-stage {
-  padding: 30px 26px 10px;
-  display: grid; place-items: center;
-}
-.paintcar { width: 100%; max-width: 780px; height: auto; display: block; }
-.paintviz--compact .paint-stage { padding: 26px 18px 14px; }
-.paintviz--compact .paintcar { max-width: 480px; }
+/* Full-bleed: the crop runs to the card edge, so the stage adds no padding. */
+.paint-stage { display: block; overflow: hidden; }
+.paintpanel { width: 100%; height: auto; display: block; }
 
-.paint-shadow { fill: rgba(0, 0, 0, 0.5); }
-.paint-body {
-  fill: var(--paint, #4A4E54);
-  transition: none;
-}
-.paint-body--base { stroke: rgba(0, 0, 0, 0.35); stroke-width: 1.5; }
-.paint-sheen {
+/* The coat itself — every highlight below is layered over this. */
+.paint-coat { fill: var(--paint, #4A4E54); }
+
+/* Ceiling strips: tight and bright on gloss, wide and faint on satin. */
+.paint-strip {
   fill: none;
   stroke: #fff;
-  stroke-width: 7;
   stroke-linecap: round;
-  opacity: calc(var(--sheen, 0.4) * 0.5);
-  filter: blur(3px);
+  opacity: calc(var(--sheen, 0.6) * var(--strip-o, 0.4));
+  filter: blur(var(--strip-blur, 8px));
 }
-.paint-glass { fill: #14171B; }
-.paint-pillar { stroke: rgba(0, 0, 0, 0.5); stroke-width: 7; stroke-linecap: round; }
-.paint-line { stroke: rgba(0, 0, 0, 0.3); stroke-width: 2; fill: none; }
-.paint-handle { fill: rgba(0, 0, 0, 0.42); }
-.paint-lamp { fill: #EDF0F4; opacity: 0.92; }
-.paint-lamp--rear { fill: #C4453F; opacity: 0.85; }
-.paint-intake { fill: rgba(0, 0, 0, 0.45); }
-.paint-well { fill: var(--bg-2); }
-.paint-tyre { fill: #101114; }
-.paint-rim { fill: #5E6369; }
-.paint-rim-inner { fill: #7C8188; }
-.paint-hub { fill: #26282C; }
-.paint-mist { pointer-events: none; }
+/* The tight core is what makes a clearcoat look wet rather than chalky. */
+.paint-strip--core { filter: blur(calc(var(--strip-blur, 8px) * 0.22)); }
+
+.paint-shoulder {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.2;
+  opacity: calc(var(--sheen, 0.6) * 0.16);
+  filter: blur(1.4px);
+}
+
+.paint-crease-hi {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.6;
+  opacity: calc(0.10 + var(--sheen, 0.6) * 0.34);
+  filter: blur(0.6px);
+}
+.paint-crease-lo {
+  fill: none;
+  stroke: #000;
+  stroke-width: 9;
+  opacity: 0.20;
+  transform: translateY(7px);
+  filter: blur(4px);
+}
+
+.paint-shut { fill: none; stroke: #000; stroke-width: 3.4; opacity: 0.5; filter: blur(0.7px); }
+.paint-shut-hi { fill: none; stroke: #fff; stroke-width: 1.2; opacity: calc(var(--sheen, 0.6) * 0.30); }
+
+.paint-flake {
+  opacity: var(--flake, 0.3);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.paint-mist, .paint-wet { pointer-events: none; }
 
 .paint-gloss { opacity: 0; }
 .paint-gloss.is-sweeping {
-  animation: paint-gloss 760ms ease-out 1;
+  animation: paint-gloss 820ms ease-out 1;
 }
 @keyframes paint-gloss {
-  0%   { opacity: 0; transform: skewX(-16deg) translateX(0); }
+  0%   { opacity: 0; transform: skewX(-12deg) translateX(0); }
   15%  { opacity: 1; }
-  100% { opacity: 0; transform: skewX(-16deg) translateX(1180px); }
+  100% { opacity: 0; transform: skewX(-12deg) translateX(1240px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .paint-gloss.is-sweeping { animation: none; }
@@ -613,8 +632,11 @@ h2.display { font-size: clamp(2rem, 4.6vw, 3.4rem); }
 }
 .paint-note svg { width: 14px; height: 14px; flex: none; margin-top: 2px; color: var(--gold-deep); }
 
+/* Touch sizing: keep the names as long as they fit, but never a small target. */
+@media (max-width: 900px) {
+  .paint-swatch { min-height: 44px; }
+}
 @media (max-width: 560px) {
-  .paint-stage { padding: 22px 14px 10px; }
   .paint-bar { padding: 16px 16px 18px; }
   .paint-swatch-name { display: none; }
   .paint-swatch { padding: 8px; }

@@ -23,9 +23,14 @@ coverage tiers (front / mid / full), which was wrong. The three options are
 
 | Category | Covers |
 |---|---|
-| Sedan | Saloons, hatchbacks, compact coupés |
+| Sedan / Hatchback | Saloons, hatchbacks, compact coupés |
 | SUV / MPV | Larger panels, taller doors |
-| Supercar / Performance | Complex aero, deep curves, delicate finishes |
+| Sports / Supercar | Complex aero, deep curves, delicate finishes |
+
+Each card carries a restrained technical side-profile drawn as an open
+contour plus two wheel arches — a spec-sheet line, not a filled icon. They are
+rendered at 98px because at 56px the three profiles collapsed into the same
+anonymous wedge and the categories stopped being legible at a glance.
 
 **Coverage is a separate, orthogonal choice** — front end, high-impact panels,
 or full body — and every coverage level is available on every category. The
@@ -61,26 +66,48 @@ everywhere.
 
 ## Spray paint visualiser (`js/paint.js`)
 
-A consultation aid for the Level 4 spray division, added 29 Aug 2026 to show
-the workshop does full colour changes, not just repair paint.
+A consultation aid for the Level 4 spray division, showing the workshop does
+full colour changes, not just repair paint.
 
-A stylised side-profile car is drawn in SVG, and picking a swatch repaints the
-body with a **soft-edged sweep travelling nose to tail**: an incoming coat sits
-over the current one behind an SVG mask whose gradient rect is animated on rAF,
-so the boundary feathers like spray rather than snapping like a background
-swap. A mist plume rides the leading edge, and a gloss band sweeps once the
-coat lands. Finishes carry their own sheen value, so satin black reads flatter
-than pearl white. `prefers-reduced-motion` swaps the colour instantly.
+**The subject is a body panel, not a car.** A first attempt drew a side-profile
+car; it read as a cartoon configurator and cost the page credibility, so it was
+replaced with a **full-bleed crop of a curved panel under booth lighting** —
+which is what a painter actually assesses a colour on. The crop runs off every
+edge on purpose: an outlined panel floating in the frame reads as a
+lozenge-shaped object, while a crop reads as a section of a much larger car.
 
-Deliberately a **silhouette, not a photograph**: it shows the finish family
-honestly instead of implying a render of the customer's own car. Both
-placements carry an explicit concept-preview disclaimer, and the fuller one
-states that colour is confirmed against a sprayed test card under booth light.
+Curvature is carried by the surface, not the silhouette:
+
+- a **character crease** splits the panel into an upper plane angled toward the
+  ceiling and a lower plane falling away from it, each with its own gradient;
+- **ceiling strip reflections** are drawn twice — a wide halo and a tight core —
+  because that pairing is what separates a wet clearcoat from a chalky one;
+- **metallic flake** is greyscale fractal noise blended over the coat;
+- a **panel shut line** at the trailing edge says "body panel", not "swatch";
+- a booth **vignette** keeps it lit from above rather than evenly flooded.
+
+Selecting a finish lays the new coat down behind an SVG mask whose gradient
+rect is animated on rAF, so the boundary **feathers like spray** instead of
+snapping like a background swap. A spray fan rides the leading edge with a
+wet-edge flash just behind it, and a booth light travels the fresh clearcoat
+once the coat lands. Finish is a look, not just a colour: each carries `sheen`
+and `flake` values, and sheen also drives the strip blur — so satin black
+scatters the ceiling strips wide and matte while pearl white holds them tight.
+`prefers-reduced-motion` swaps instantly.
+
+Still deliberately **drawn, not photographic** — it shows the finish family
+honestly rather than implying a render of the customer's own car. Both
+placements carry a concept-preview disclaimer; the fuller one states that
+colour is confirmed against a sprayed test card under booth light.
 
 - **Homepage** — compact teaser (four finishes, icon-only swatches) in the
   supporting-services band, linking through to the full tool.
 - **Services `#colour`** — full interaction: six finishes with names and
   finish specs, larger stage, full disclaimer.
+
+**Performance note:** the flake must be rendered into a 128px `<pattern>` tile.
+Running `feTurbulence` across the whole 900×300 panel re-rasterises on paint
+and is far too expensive; the tile is cached and repeated instead.
 
 ## Live customer/admin prototype (frontend-only, by design)
 
@@ -188,6 +215,34 @@ Three real bugs found and fixed in this pass:
 Known and left alone: footer link rows are ~16px tall on mobile. Pre-existing
 across the template, and fixing it properly means restructuring the footer —
 worth doing before launch, out of scope for a content correction.
+
+### Third pass (29 Aug 2026) — panel visualiser + category labels
+
+Categories relabelled to Sedan / Hatchback, SUV / MPV, Sports / Supercar, and
+the car illustration in the visualiser replaced with the panel crop described
+above. Store key bumped to `eam-jobs-v3` (older blobs are removed on load) so
+no reviewer sees stale category names.
+
+Re-verified: 5 pages × 9 widths (320→1440) at zero overflow in rendered state
+with the gutter assertion, no JS errors after exercising swatches, coverage
+tabs, tracker lookup and the console gate, one `h1` per page with no heading
+jumps, every WhatsApp link asserted against the verified number, and the
+cross-tab console→tracker sync re-confirmed on the Sports / Supercar job.
+Performance traced at 6× CPU throttle: LCP 706 ms, CLS 0.00.
+
+Two verification notes worth keeping:
+- **The contrast probe was lying about translucent chips.** Reading
+  `backgroundColor` and taking the first three channels treats
+  `rgba(217,164,65,0.13)` as opaque gold, which scored the gold-on-gold-ghost
+  category pill at 1.36:1 — an alarming false failure. Compositing the alpha
+  stack down to the page ground first gives its real 9.89:1. Any future audit
+  of this template must composite, or it will chase phantom failures on every
+  `--gold-ghost` chip.
+- **rAF frame counts from this harness are meaningless** — the driven window is
+  occluded, so it reports ~2 fps even with the element under test hidden. It
+  briefly looked like the visualiser had tanked the page. Use a performance
+  trace for real numbers; the flake tiling fix above came from reasoning about
+  filter cost, not from that probe.
 
 ## If the client engages: launch checklist
 

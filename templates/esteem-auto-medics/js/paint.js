@@ -1,47 +1,54 @@
 /* Esteem Auto Medics — spray paint visualiser.
-   A consultation aid for the Level 4 spray division: pick a colour and the
-   body is repainted by a soft-edged sweep travelling nose-to-tail, with mist
-   at the leading edge and a gloss pass once the coat lands.
+   A consultation aid for the Level 4 spray division.
 
-   Built as a stylised side profile rather than a photograph so the colour is
-   honest — it shows the finish family, not a rendered promise of the exact
-   paint. Final colour is matched to the car's paint code in the booth. */
+   The subject is a curved body panel under booth lighting, not a car
+   illustration: a character crease splits it into an upper plane that catches
+   the ceiling strips and a lower plane that falls away from them, with
+   clearcoat specular, metallic flake and a panel shut line at the trailing
+   edge. That is what a painter actually assesses a colour on, and it keeps the
+   preview about the finish rather than about a cartoon vehicle.
+
+   Selecting a colour lays the new coat down behind a soft-edged mask sweeping
+   across the panel, with spray mist and a wet leading edge, then a booth light
+   travels the fresh clearcoat. Final colour is matched in the booth, and the
+   page says so. */
 
 (function () {
   'use strict';
 
   var NS = 'http://www.w3.org/2000/svg';
   var VB_W = 900;
-  var VB_H = 340;
-  /* Drawing space stays 0..340 tall; the window is cropped to the car so the
-     card isn't padded out with empty sky. */
-  var VIEW = '0 94 900 222';
+  var VB_H = 300;
 
-  /* Body silhouette. Wheel wells are punched by drawing ground-coloured discs
-     over the body, which avoids arc-direction maths in the outline itself.
-     Proportioned like a saloon: ~0.6 of length is wheelbase, front overhang
-     shorter than rear, beltline well below the roof so the glass reads. */
-  var BODY =
-    'M 44 236 C 44 221 53 211 67 207 L 216 193 C 242 191 260 188 284 185 ' +
-    'L 342 126 C 350 118 360 114 372 113 L 566 110 C 582 110 594 114 604 122 ' +
-    'L 688 177 L 828 185 C 851 188 865 197 869 212 C 873 229 871 245 862 254 ' +
-    'L 48 254 C 41 250 41 242 44 236 Z';
+  /* Full-bleed crop. The surface runs off every edge on purpose — an outlined
+     panel floating in the frame reads as a lozenge-shaped object, whereas a
+     crop reads as a section of a much larger car. Curvature is carried by the
+     character line and the plane shading, not by the silhouette. */
+  var PANEL = 'M 0 0 L ' + VB_W + ' 0 L ' + VB_W + ' ' + VB_H + ' L 0 ' + VB_H + ' Z';
 
-  var GLASS =
-    'M 302 181 L 352 134 C 358 128 366 125 375 125 L 560 122 ' +
-    'C 571 122 579 125 585 131 L 648 177 Z';
+  var CREASE = 'M 0 168 C 220 140 560 132 900 158';
+  var SHOULDER = 'M 0 74 C 240 52 580 46 900 66';
 
-  var SHUTS = ['M 308 186 L 320 252', 'M 472 182 L 480 252', 'M 604 184 L 612 252'];
+  /* The two planes either side of the character line. */
+  var UPPER = 'M 0 0 L 900 0 L 900 158 C 560 132 220 140 0 168 Z';
+  var LOWER = 'M 0 168 C 220 140 560 132 900 158 L 900 300 L 0 300 Z';
 
-  var WHEELS = [{ x: 210, y: 248 }, { x: 686, y: 248 }];
+  /* Ceiling strip reflections, running parallel to the crease. Each is drawn
+     twice — a wide halo and a tight core — which is what separates a glossy
+     clearcoat from a soft satin one. */
+  var STRIPS = [
+    { d: 'M -20 104 C 240 78 580 70 920 92',  w: 26, o: 0.34, core: 5 },
+    { d: 'M -20 140 C 240 116 580 108 920 130', w: 9, o: 0.24, core: 2 },
+    { d: 'M -20 238 C 240 216 580 210 920 230', w: 16, o: 0.13, core: 0 }
+  ];
 
   var COLOURS = [
-    { id: 'pearl',    name: 'Pearl White',   spec: 'Three-stage pearl · high gloss', hex: '#E8E6E0', sheen: 0.55 },
-    { id: 'graphite', name: 'Graphite Grey', spec: 'Metallic · medium flake',        hex: '#4A4E54', sheen: 0.40 },
-    { id: 'candy',    name: 'Candy Red',     spec: 'Candy over silver base',         hex: '#A81726', sheen: 0.50 },
-    { id: 'satin',    name: 'Satin Black',   spec: 'Satin clear · low sheen',        hex: '#1A1A1C', sheen: 0.12 },
-    { id: 'racing',   name: 'Racing Blue',   spec: 'Solid · high gloss',             hex: '#1B4C93', sheen: 0.50 },
-    { id: 'bronze',   name: 'Liquid Bronze', spec: 'Metallic · coarse flake',        hex: '#8A6B2F', sheen: 0.45 }
+    { id: 'pearl',    name: 'Pearl White',   spec: 'Three-stage pearl · high gloss', hex: '#E8E6E0', sheen: 0.72, flake: 0.30 },
+    { id: 'graphite', name: 'Graphite Grey', spec: 'Metallic · medium flake',        hex: '#4A4E54', sheen: 0.60, flake: 0.42 },
+    { id: 'candy',    name: 'Candy Red',     spec: 'Candy over silver base',         hex: '#A81726', sheen: 0.68, flake: 0.26 },
+    { id: 'satin',    name: 'Satin Black',   spec: 'Satin clear · low sheen',        hex: '#1A1A1C', sheen: 0.14, flake: 0.06 },
+    { id: 'racing',   name: 'Racing Blue',   spec: 'Solid · high gloss',             hex: '#1B4C93', sheen: 0.66, flake: 0.08 },
+    { id: 'bronze',   name: 'Liquid Bronze', spec: 'Metallic · coarse flake',        hex: '#8A6B2F', sheen: 0.56, flake: 0.52 }
   ];
 
   function el(name, attrs) {
@@ -50,112 +57,147 @@
     return node;
   }
 
-  /* One SVG car. `uid` keeps defs ids unique when two visualisers coexist. */
-  function buildCar(mount, uid) {
+  function buildPanel(mount, uid) {
     var svg = el('svg', {
-      viewBox: VIEW,
-      class: 'paintcar',
+      viewBox: '0 0 ' + VB_W + ' ' + VB_H,
+      class: 'paintpanel',
       role: 'img',
-      'aria-label': 'Car paint colour preview'
+      'aria-label': 'Paint finish preview on a curved body panel under booth lighting'
     });
 
     var defs = el('defs', {});
 
-    // Soft-edged wipe: a wide rect filled with a white→transparent ramp. Moving
-    // it left-to-right reveals the incoming colour with a feathered spray edge.
+    // Soft-edged wipe: a wide rect filled with a white→transparent ramp.
     var grad = el('linearGradient', { id: 'pg-' + uid, x1: '0', y1: '0', x2: '1', y2: '0' });
     grad.appendChild(el('stop', { offset: '0', 'stop-color': '#fff' }));
-    grad.appendChild(el('stop', { offset: '0.60', 'stop-color': '#fff' }));
-    grad.appendChild(el('stop', { offset: '0.78', 'stop-color': '#999' }));
+    grad.appendChild(el('stop', { offset: '0.62', 'stop-color': '#fff' }));
+    grad.appendChild(el('stop', { offset: '0.80', 'stop-color': '#8a8a8a' }));
     grad.appendChild(el('stop', { offset: '1', 'stop-color': '#000' }));
     defs.appendChild(grad);
 
-    var mask = el('mask', { id: 'pm-' + uid, maskUnits: 'userSpaceOnUse', x: '0', y: '0', width: VB_W, height: VB_H });
+    var mask = el('mask', { id: 'pm-' + uid, maskUnits: 'userSpaceOnUse', x: 0, y: 0, width: VB_W, height: VB_H });
     var maskRect = el('rect', { x: -1900, y: 0, width: 1900, height: VB_H, fill: 'url(#pg-' + uid + ')' });
     mask.appendChild(maskRect);
     defs.appendChild(mask);
 
-    // Body-shaped clip so the gloss sweep and mist never spill onto the ground.
     var clip = el('clipPath', { id: 'pc-' + uid });
-    clip.appendChild(el('path', { d: BODY }));
+    clip.appendChild(el('path', { d: PANEL }));
     defs.appendChild(clip);
 
     var mistGrad = el('radialGradient', { id: 'pmist-' + uid });
-    mistGrad.appendChild(el('stop', { offset: '0', 'stop-color': '#fff', 'stop-opacity': '0.34' }));
-    mistGrad.appendChild(el('stop', { offset: '0.55', 'stop-color': '#fff', 'stop-opacity': '0.12' }));
+    mistGrad.appendChild(el('stop', { offset: '0', 'stop-color': '#fff', 'stop-opacity': '0.30' }));
+    mistGrad.appendChild(el('stop', { offset: '0.55', 'stop-color': '#fff', 'stop-opacity': '0.10' }));
     mistGrad.appendChild(el('stop', { offset: '1', 'stop-color': '#fff', 'stop-opacity': '0' }));
     defs.appendChild(mistGrad);
 
     var glossGrad = el('linearGradient', { id: 'pgloss-' + uid, x1: '0', y1: '0', x2: '1', y2: '0' });
     glossGrad.appendChild(el('stop', { offset: '0', 'stop-color': '#fff', 'stop-opacity': '0' }));
-    glossGrad.appendChild(el('stop', { offset: '0.5', 'stop-color': '#fff', 'stop-opacity': '0.42' }));
+    glossGrad.appendChild(el('stop', { offset: '0.5', 'stop-color': '#fff', 'stop-opacity': '0.30' }));
     glossGrad.appendChild(el('stop', { offset: '1', 'stop-color': '#fff', 'stop-opacity': '0' }));
     defs.appendChild(glossGrad);
 
-    // Rocker shading — keeps a flat fill from reading as a paper cut-out.
+    // Wet leading edge — fresh paint flashes before it flows out.
+    var wetGrad = el('linearGradient', { id: 'pwet-' + uid, x1: '0', y1: '0', x2: '1', y2: '0' });
+    wetGrad.appendChild(el('stop', { offset: '0', 'stop-color': '#fff', 'stop-opacity': '0' }));
+    wetGrad.appendChild(el('stop', { offset: '0.55', 'stop-color': '#fff', 'stop-opacity': '0.45' }));
+    wetGrad.appendChild(el('stop', { offset: '1', 'stop-color': '#fff', 'stop-opacity': '0' }));
+    defs.appendChild(wetGrad);
+
+    // Plane shading: the upper face is turned toward the lights.
+    var upGrad = el('linearGradient', { id: 'pup-' + uid, x1: '0', y1: '0', x2: '0', y2: '1' });
+    upGrad.appendChild(el('stop', { offset: '0', 'stop-color': '#fff', 'stop-opacity': '0.16' }));
+    upGrad.appendChild(el('stop', { offset: '1', 'stop-color': '#fff', 'stop-opacity': '0.02' }));
+    defs.appendChild(upGrad);
+
     var lowGrad = el('linearGradient', { id: 'plow-' + uid, x1: '0', y1: '0', x2: '0', y2: '1' });
-    lowGrad.appendChild(el('stop', { offset: '0', 'stop-color': '#000', 'stop-opacity': '0' }));
-    lowGrad.appendChild(el('stop', { offset: '1', 'stop-color': '#000', 'stop-opacity': '0.42' }));
+    lowGrad.appendChild(el('stop', { offset: '0', 'stop-color': '#000', 'stop-opacity': '0.06' }));
+    lowGrad.appendChild(el('stop', { offset: '1', 'stop-color': '#000', 'stop-opacity': '0.46' }));
     defs.appendChild(lowGrad);
+
+    /* Metallic flake — greyscale fractal noise over the coat. Rendered into a
+       128px tile and repeated: running feTurbulence across the whole panel
+       instead costs the page ~2fps, since the filter re-rasterises on paint. */
+    var flakeFilter = el('filter', { id: 'pflakef-' + uid, x: '0', y: '0', width: '100%', height: '100%' });
+    flakeFilter.appendChild(el('feTurbulence', { type: 'fractalNoise', baseFrequency: '0.9', numOctaves: '2', seed: '11' }));
+    flakeFilter.appendChild(el('feColorMatrix', { type: 'saturate', values: '0' }));
+    defs.appendChild(flakeFilter);
+
+    var flakePat = el('pattern', { id: 'pflake-' + uid, width: 128, height: 128, patternUnits: 'userSpaceOnUse' });
+    flakePat.appendChild(el('rect', { width: 128, height: 128, filter: 'url(#pflakef-' + uid + ')' }));
+    defs.appendChild(flakePat);
 
     svg.appendChild(defs);
 
-    svg.appendChild(el('ellipse', { cx: 456, cy: 286, rx: 382, ry: 14, class: 'paint-shadow' }));
-
-    // Current coat, then the incoming coat masked over it.
-    var base = el('path', { d: BODY, class: 'paint-body paint-body--base' });
+    // 1 — current coat, 2 — incoming coat behind the sweep mask.
+    var base = el('path', { d: PANEL, class: 'paint-coat paint-coat--base' });
     svg.appendChild(base);
 
     var overGroup = el('g', { mask: 'url(#pm-' + uid + ')' });
-    var over = el('path', { d: BODY, class: 'paint-body paint-body--over' });
+    var over = el('path', { d: PANEL, class: 'paint-coat paint-coat--over' });
     overGroup.appendChild(over);
     svg.appendChild(overGroup);
 
-    // Everything that shapes the surface is clipped to the body, so highlights
-    // and the gloss pass never spill onto the glass or the ground.
-    var body = el('g', { 'clip-path': 'url(#pc-' + uid + ')' });
-    body.appendChild(el('rect', { x: 0, y: 196, width: VB_W, height: 70, fill: 'url(#plow-' + uid + ')' }));
-    var sheen = el('path', {
-      d: 'M 108 216 C 240 202 380 196 520 196 C 630 196 720 202 812 212',
-      class: 'paint-sheen'
+    // 3 — everything that shapes the surface sits above both coats.
+    var surface = el('g', { 'clip-path': 'url(#pc-' + uid + ')' });
+
+    surface.appendChild(el('path', { d: UPPER, fill: 'url(#pup-' + uid + ')' }));
+    surface.appendChild(el('path', { d: LOWER, fill: 'url(#plow-' + uid + ')' }));
+
+    var flake = el('rect', { x: 0, y: 0, width: VB_W, height: VB_H, fill: 'url(#pflake-' + uid + ')', class: 'paint-flake' });
+    surface.appendChild(flake);
+
+    var stripEls = [];
+    STRIPS.forEach(function (s) {
+      var halo = el('path', { d: s.d, class: 'paint-strip', 'stroke-width': s.w });
+      halo.style.setProperty('--strip-o', String(s.o));
+      surface.appendChild(halo);
+      stripEls.push(halo);
+      if (s.core) {
+        var core = el('path', { d: s.d, class: 'paint-strip paint-strip--core', 'stroke-width': s.core });
+        core.style.setProperty('--strip-o', String(s.o * 1.5));
+        surface.appendChild(core);
+        stripEls.push(core);
+      }
     });
-    body.appendChild(sheen);
-    var gloss = el('rect', { x: -240, y: -40, width: 150, height: VB_H + 80, fill: 'url(#pgloss-' + uid + ')', transform: 'skewX(-16)', class: 'paint-gloss' });
-    body.appendChild(gloss);
-    svg.appendChild(body);
 
-    var glass = el('path', { d: GLASS, class: 'paint-glass' });
-    svg.appendChild(glass);
-    svg.appendChild(el('path', { d: 'M 466 124 L 470 179', class: 'paint-pillar' }));
+    // Crease: a bright catch on the turn, a shadow just under it.
+    surface.appendChild(el('path', { d: CREASE, class: 'paint-crease-lo' }));
+    var creaseHi = el('path', { d: CREASE, class: 'paint-crease-hi' });
+    surface.appendChild(creaseHi);
+    surface.appendChild(el('path', { d: SHOULDER, class: 'paint-shoulder' }));
 
-    // Shut lines, handles, lamps — reads as a car, not a blob.
-    SHUTS.forEach(function (d) {
-      svg.appendChild(el('path', { d: d, class: 'paint-line' }));
-    });
-    svg.appendChild(el('rect', { x: 392, y: 194, width: 32, height: 7, rx: 3.5, class: 'paint-handle' }));
-    svg.appendChild(el('rect', { x: 524, y: 192, width: 32, height: 7, rx: 3.5, class: 'paint-handle' }));
-    svg.appendChild(el('path', { d: 'M 50 212 C 60 208 74 205 90 203 L 87 217 L 52 221 Z', class: 'paint-lamp' }));
-    svg.appendChild(el('path', { d: 'M 828 191 L 862 197 C 868 202 871 207 872 213 L 830 207 Z', class: 'paint-lamp paint-lamp--rear' }));
-    svg.appendChild(el('path', { d: 'M 52 234 L 100 230 L 98 243 L 52 245 Z', class: 'paint-intake' }));
+    // Panel shut line at the trailing edge — says "body panel", not "swatch".
+    surface.appendChild(el('path', { d: 'M 812 -10 L 800 310', class: 'paint-shut' }));
+    surface.appendChild(el('path', { d: 'M 817 -10 L 805 310', class: 'paint-shut-hi' }));
 
-    // Mist puff rides the leading edge of the wipe. Kept inside the cropped
-    // viewBox so the soft gradient never meets a hard window edge.
+    var wet = el('rect', { x: -60, y: -20, width: 46, height: VB_H + 40, fill: 'url(#pwet-' + uid + ')', class: 'paint-wet', opacity: '0' });
+    surface.appendChild(wet);
+
+    var gloss = el('rect', { x: -300, y: -60, width: 190, height: VB_H + 120, fill: 'url(#pgloss-' + uid + ')', transform: 'skewX(-12)', class: 'paint-gloss' });
+    surface.appendChild(gloss);
+
+    // Booth falloff — the crop is lit from above, not evenly flooded.
+    var vig = el('radialGradient', { id: 'pvig-' + uid, cx: '0.5', cy: '0.22', r: '0.95' });
+    vig.appendChild(el('stop', { offset: '0.35', 'stop-color': '#000', 'stop-opacity': '0' }));
+    vig.appendChild(el('stop', { offset: '1', 'stop-color': '#000', 'stop-opacity': '0.5' }));
+    defs.appendChild(vig);
+    surface.appendChild(el('rect', { x: 0, y: 0, width: VB_W, height: VB_H, fill: 'url(#pvig-' + uid + ')' }));
+
+    svg.appendChild(surface);
+
+    // Spray fan rides the leading edge, outside the clip so it reads as air.
     var mist = el('g', { class: 'paint-mist', opacity: '0' });
-    mist.appendChild(el('ellipse', { cx: 0, cy: 202, rx: 46, ry: 78, fill: 'url(#pmist-' + uid + ')' }));
-    mist.appendChild(el('ellipse', { cx: 16, cy: 168, rx: 30, ry: 52, fill: 'url(#pmist-' + uid + ')' }));
-    mist.appendChild(el('ellipse', { cx: -10, cy: 232, rx: 26, ry: 44, fill: 'url(#pmist-' + uid + ')' }));
+    mist.appendChild(el('ellipse', { cx: 0, cy: 150, rx: 52, ry: 190, fill: 'url(#pmist-' + uid + ')' }));
+    mist.appendChild(el('ellipse', { cx: 24, cy: 108, rx: 28, ry: 118, fill: 'url(#pmist-' + uid + ')' }));
+    mist.appendChild(el('ellipse', { cx: -16, cy: 206, rx: 24, ry: 96, fill: 'url(#pmist-' + uid + ')' }));
     svg.appendChild(mist);
 
-    WHEELS.forEach(function (w) {
-      svg.appendChild(el('circle', { cx: w.x, cy: w.y, r: 63, class: 'paint-well' }));
-      svg.appendChild(el('circle', { cx: w.x, cy: w.y, r: 54, class: 'paint-tyre' }));
-      svg.appendChild(el('circle', { cx: w.x, cy: w.y, r: 29, class: 'paint-rim' }));
-      svg.appendChild(el('circle', { cx: w.x, cy: w.y, r: 26, class: 'paint-rim-inner' }));
-      svg.appendChild(el('circle', { cx: w.x, cy: w.y, r: 8, class: 'paint-hub' }));
-    });
-
     mount.appendChild(svg);
-    return { svg: svg, base: base, over: over, maskRect: maskRect, mist: mist, gloss: gloss, sheen: sheen };
+    return {
+      svg: svg, base: base, over: over, maskRect: maskRect,
+      mist: mist, gloss: gloss, wet: wet, flake: flake,
+      strips: stripEls, creaseHi: creaseHi
+    };
   }
 
   function build(mount, opts) {
@@ -174,13 +216,14 @@
     var stage = document.createElement('div');
     stage.className = 'paint-stage';
     root.appendChild(stage);
-    var car = buildCar(stage, uid);
+    var p = buildPanel(stage, uid);
 
     var bar = document.createElement('div');
     bar.className = 'paint-bar';
 
     var readout = document.createElement('div');
     readout.className = 'paint-readout';
+    readout.setAttribute('aria-live', 'polite');
     var nameEl = document.createElement('strong');
     var specEl = document.createElement('span');
     readout.appendChild(nameEl);
@@ -189,10 +232,7 @@
     var list = document.createElement('div');
     list.className = 'paint-swatches';
     list.setAttribute('role', 'group');
-    list.setAttribute('aria-label', 'Preview a paint colour');
-
-    // Live region so the readout is announced when a swatch is activated.
-    readout.setAttribute('aria-live', 'polite');
+    list.setAttribute('aria-label', 'Preview a paint finish');
 
     bar.appendChild(readout);
     bar.appendChild(list);
@@ -204,9 +244,17 @@
     var raf = null;
     var busy = false;
 
-    car.base.style.setProperty('--paint', current.hex);
-    car.over.style.setProperty('--paint', current.hex);
-    car.sheen.style.setProperty('--sheen', String(current.sheen));
+    /* Gloss is a look, not just an opacity: a low-sheen finish scatters the
+       ceiling strips wide, a high-gloss one holds them tight. */
+    function applyFinish(c) {
+      p.svg.style.setProperty('--sheen', String(c.sheen));
+      p.svg.style.setProperty('--flake', String(c.flake));
+      p.svg.style.setProperty('--strip-blur', (5 + (1 - c.sheen) * 17).toFixed(1) + 'px');
+    }
+
+    p.base.style.setProperty('--paint', current.hex);
+    p.over.style.setProperty('--paint', current.hex);
+    applyFinish(current);
     nameEl.textContent = current.name;
     specEl.textContent = current.spec;
 
@@ -214,7 +262,7 @@
       if (next.id === current.id || busy) return;
       busy = true;
 
-      car.over.style.setProperty('--paint', next.hex);
+      p.over.style.setProperty('--paint', next.hex);
       nameEl.textContent = next.name;
       specEl.textContent = next.spec;
 
@@ -223,45 +271,50 @@
       });
 
       function land() {
-        // Promote the incoming coat to the base, then reset the mask so the
-        // next pass starts from a clean nose-to-tail sweep.
-        car.base.style.setProperty('--paint', next.hex);
-        car.sheen.style.setProperty('--sheen', String(next.sheen));
-        car.maskRect.setAttribute('x', String(-1900));
-        car.mist.setAttribute('opacity', '0');
+        p.base.style.setProperty('--paint', next.hex);
+        applyFinish(next);
+        p.maskRect.setAttribute('x', String(-1900));
+        p.mist.setAttribute('opacity', '0');
+        p.wet.setAttribute('opacity', '0');
         current = next;
         busy = false;
       }
 
       if (reduced) { land(); return; }
 
+      // The finish changes with the coat, so cross-fade it during the pass.
+      applyFinish({
+        sheen: (current.sheen + next.sheen) / 2,
+        flake: (current.flake + next.flake) / 2
+      });
+
       var from = -1900;
-      var to = -640;            // white ramp fully past the tail
-      var dur = 880;
+      var to = -600;
+      var dur = 900;
       var start = null;
       if (raf) cancelAnimationFrame(raf);
-
-      car.gloss.classList.remove('is-sweeping');
+      p.gloss.classList.remove('is-sweeping');
 
       function step(ts) {
         if (start === null) start = ts;
         var t = Math.min(1, (ts - start) / dur);
         var e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
         var x = from + (to - from) * e;
-        car.maskRect.setAttribute('x', String(x));
+        p.maskRect.setAttribute('x', String(x));
 
-        // Leading edge of the ramp, in user units.
-        var edge = x + 1900 * 0.70;
-        car.mist.setAttribute('transform', 'translate(' + edge.toFixed(1) + ' 0)');
-        car.mist.setAttribute('opacity', String(t < 0.08 ? t / 0.08 : (t > 0.86 ? Math.max(0, (1 - t) / 0.14) : 1)));
+        var edge = x + 1900 * 0.71;
+        var fade = t < 0.08 ? t / 0.08 : (t > 0.86 ? Math.max(0, (1 - t) / 0.14) : 1);
+        p.mist.setAttribute('transform', 'translate(' + edge.toFixed(1) + ' 0)');
+        p.mist.setAttribute('opacity', String(fade));
+        p.wet.setAttribute('x', String((edge - 23).toFixed(1)));
+        p.wet.setAttribute('opacity', String(fade));
 
         if (t < 1) {
           raf = requestAnimationFrame(step);
         } else {
           land();
-          // Gloss pass reads as the clear coat flashing off under the lights.
-          void car.gloss.getBoundingClientRect().width;
-          car.gloss.classList.add('is-sweeping');
+          void p.gloss.getBoundingClientRect().width;
+          p.gloss.classList.add('is-sweeping');
         }
       }
       raf = requestAnimationFrame(step);
