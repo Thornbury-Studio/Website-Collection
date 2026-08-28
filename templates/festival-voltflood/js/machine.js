@@ -54,7 +54,12 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
     uAmp: { value: 2.0 },
     uColA: { value: COL.acidDim.clone() },
     uColB: { value: COL.acid.clone() },
-    uOpacity: { value: 0.6 }
+    uOpacity: { value: 0.6 },
+    uPtr: { value: new THREE.Vector2(0, 0) },      // pointer, floor-local
+    uPtrAmp: { value: 0 },                          // interference height
+    uSurge: { value: 0 },                           // discharge envelope
+    uSurgeR: { value: 0 },                          // shockwave radius
+    uSurgeC: { value: new THREE.Vector2(0, 0) }     // shockwave centre
   };
   var floorMat = new THREE.ShaderMaterial({
     uniforms: floorUniforms,
@@ -64,14 +69,23 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
     vertexShader: [
       "uniform float uTime;",
       "uniform float uAmp;",
+      "uniform vec2 uPtr;",
+      "uniform float uPtrAmp;",
+      "uniform float uSurge;",
+      "uniform float uSurgeR;",
+      "uniform vec2 uSurgeC;",
       "varying float vH;",
       "void main() {",
       "  vec3 p = position;",
       "  float w = sin(p.x * 0.045 + uTime * 1.7) * 0.9",
       "          + sin(p.y * 0.06 - uTime * 1.15) * 0.7",
       "          + sin((p.x + p.y) * 0.021 + uTime * 0.6) * 1.3;",
-      "  p.z += w * uAmp;",
-      "  vH = clamp(w * 0.32 + 0.5, 0.0, 1.0);",
+      "  float d = distance(p.xy, uPtr);",
+      "  float ripple = exp(-d * d * 0.0007) * sin(d * 0.17 - uTime * 8.0) * uPtrAmp;",
+      "  float sd = distance(p.xy, uSurgeC) - uSurgeR;",
+      "  float ring = exp(-sd * sd * 0.0045) * uSurge * 16.0;",
+      "  p.z += w * uAmp + ripple + ring;",
+      "  vH = clamp(w * 0.32 + 0.5 + abs(ripple) * 0.12 + ring * 0.06, 0.0, 1.0);",
       "  gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);",
       "}"
     ].join("\n"),
@@ -370,13 +384,42 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
   var lastBeatSeen = -1;
   var clock = new THREE.Clock();
 
-  function beamPattern(beat, i) {
-    /* stepped fan choreography: alternating spread / converge / sweep */
-    var block = Math.floor(beat / 4) % 3;
+  /* signal touch: pointer projected onto the floor plane */
+  var ptrWorld = new THREE.Vector3(0, 0, -20);
+  var ptrNdc = new THREE.Vector3();
+  var ptrAmpCur = 0;
+  var surgeSeen = null;
+  var surgeEnv = 0;
+
+  function projectPointer() {
+    ptrNdc.set(S.px, -S.py, 0.5).unproject(camera);
+    ptrNdc.sub(camera.position).normalize();
+    if (ptrNdc.y < -0.04) {
+      var tHit = -camera.position.y / ptrNdc.y;
+      ptrWorld.set(
+        Math.max(-300, Math.min(300, camera.position.x + ptrNdc.x * tHit)),
+        0,
+        Math.max(-200, Math.min(190, camera.position.z + ptrNdc.z * tHit))
+      );
+    }
+  }
+
+  /* beam choreography: each stage reconfigures the rig structurally */
+  function beamPattern(beat, i, t) {
     var frac = NBEAMS === 1 ? 0.5 : i / (NBEAMS - 1);
+    if (S.stage === "flood") {
+      /* wide synchronized low sway, off the step clock */
+      return Math.sin(t * 0.55 + frac * 1.1) * 1.25;
+    }
+    if (S.stage === "drain") {
+      /* every beam folds to one centre point */
+      return Math.atan2(0 - (-66 + 132 * frac), 55) * 0.9;
+    }
+    var step = S.stage === "grid" ? 2 : 4;      // grid: double-time chase
+    var block = Math.floor(beat / step) % 3;
     if (block === 0) return (frac - 0.5) * 1.5;                      // spread fan
     if (block === 1) return (0.5 - frac) * 1.1;                      // crossed
-    return Math.sin((beat % 4) * Math.PI / 2 + i * 0.55) * 0.85;     // sweep
+    return Math.sin((beat % step) * Math.PI / step * 2 + i * 0.55) * 0.85; // sweep
   }
 
   function tick() {
@@ -385,6 +428,32 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
 
     smoothP += (S.v - smoothP) * 0.07;
     exposure += ((1 - S.dim * 0.68) - exposure) * 0.06;
+
+    /* ---- signal touch ---- */
+    projectPointer();
+    var charge = S.charge || 0;
+    var ptrAmpTgt = S.reduced ? 0 : 3 + charge * 8;
+    ptrAmpCur += (ptrAmpTgt - ptrAmpCur) * 0.08;
+    floorUniforms.uPtr.value.set(ptrWorld.x, -ptrWorld.z);
+    floorUniforms.uPtrAmp.value = ptrAmpCur;
+
+    if (S.surge && S.surge !== surgeSeen) {
+      surgeSeen = S.surge;
+      floorUniforms.uSurgeC.value.set(ptrWorld.x, -ptrWorld.z);
+      jolt = 1.7;                      // scatter the logotype slabs
+    }
+    if (surgeSeen) {
+      var age = (performance.now() - surgeSeen.t) / 1000;
+      if (age < 1.8) {
+        surgeEnv = Math.exp(-age * 2.7) * (0.35 + surgeSeen.power * 0.85);
+        floorUniforms.uSurge.value = surgeEnv;
+        floorUniforms.uSurgeR.value = age * 175;
+      } else {
+        surgeEnv = 0;
+        floorUniforms.uSurge.value = 0;
+      }
+    }
+    var aimW = Math.min(1, charge * 1.7 + surgeEnv * 1.4);
 
     /* channel colours */
     var tgt = chTargets[S.stage || ""] || chTargets[""];
@@ -401,17 +470,26 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
     floorUniforms.uOpacity.value = 0.62 * exposure;
 
     /* beams */
+    var lerpRate = S.stage === "drain" ? 0.035 : S.stage === "grid" ? 0.14 : 0.09;
+    if (aimW > 0.01) lerpRate = 0.16;
     for (var i = 0; i < beams.length; i++) {
       var bm = beams[i];
-      var target = beamPattern(S.beatCount, i) + S.px * 0.3;
-      bm.cur += (target - bm.cur) * 0.09;
+      var patAngle = beamPattern(S.beatCount, i, t) + S.px * 0.3;
+      var aimAngle = Math.max(-1.15, Math.min(1.15,
+        Math.atan2(ptrWorld.x - bm.g.position.x, 55)));
+      var target = patAngle * (1 - aimW) + aimAngle * aimW;
+      bm.cur += (target - bm.cur) * lerpRate;
       bm.g.rotation.z = bm.cur;
-      bm.g.rotation.x = Math.sin(t * 0.4 + bm.seed) * 0.12 + S.py * 0.08;
+      var baseX = Math.sin(t * 0.4 + bm.seed) * 0.12 + S.py * 0.08 +
+                  (S.stage === "flood" ? -0.22 : 0);
+      var aimX = Math.max(-0.9, Math.min(0.35, -Math.atan2(ptrWorld.z + 55, 55)));
+      bm.g.rotation.x = baseX * (1 - aimW) + aimX * aimW;
       bm.mat.color.copy(curBeam);
       bm.head.color.copy(curBeam);
       var flick = 0.75 + kick * 0.45 + Math.sin(t * 2.1 + bm.seed * 3.3) * 0.12;
-      bm.mat.opacity = 0.085 * flick * exposure * (0.65 + smoothP * 0.7);
-      bm.head.opacity = 0.9 * exposure;
+      bm.mat.opacity = 0.085 * (flick + surgeEnv * 2.2 + charge * 0.7) *
+                       exposure * (0.65 + smoothP * 0.7);
+      bm.head.opacity = Math.min(1, 0.9 + surgeEnv) * exposure;
     }
 
     /* speaker cones */
@@ -459,7 +537,7 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
         ud.hy + Math.sin(t * 0.07 + ud.ph * 2) * 5,
         ud.hz
       );
-      hzS.material.opacity = (0.035 + smoothP * 0.05 + kick * 0.012) * exposure;
+      hzS.material.opacity = (0.035 + smoothP * 0.05 + kick * 0.012 + surgeEnv * 0.05) * exposure;
       hzS.material.color.copy(curBeam);
     }
 

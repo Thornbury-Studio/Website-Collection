@@ -16,6 +16,8 @@
     px: 0, py: 0,    // pointer interference −1..1
     stage: null,     // "grid" | "flood" | "drain" | null
     dim: 0,          // machine exposure damping over text-dense ranges
+    charge: 0,       // signal-touch: held-pointer charge 0..1
+    surge: null,     // signal-touch: last discharge {t, power}
     bpm: 132,
     t0: performance.now(),
     beatPhase: 0,
@@ -85,15 +87,59 @@
     if (e.key === "Escape") setNav(false);
   });
 
-  /* ---------------- pointer = interference ---------------- */
-  var fine = window.matchMedia("(pointer: fine)").matches;
-  if (fine && !reduced) {
-    window.addEventListener("mousemove", function (e) {
+  /* ---------------- signal touch: pointer = interference ----------------
+     The pointer is a physical interference source: the machine's floor
+     ripples where you point, press-and-hold charges the rig (beams swing
+     to track you), and release discharges a surge through the room. */
+  var coarse = window.matchMedia("(pointer: coarse)").matches;
+  var charging = false, chargeT0 = 0, tapT0 = 0, tapY = 0;
+  var surgeFlashUntil = 0;
+
+  function fireSurge(power) {
+    VFSTATE.surge = { t: performance.now(), power: power };
+    surgeFlashUntil = performance.now() + 1300;
+    glitchPulse();
+    if (audioOn()) surgeHit(power);
+  }
+  function endCharge(fire) {
+    if (charging && fire && VFSTATE.charge > 0.06) fireSurge(VFSTATE.charge);
+    charging = false;
+    doc.body.classList.remove("charging");
+  }
+  if (!reduced) {
+    window.addEventListener("pointermove", function (e) {
       VFSTATE.px = (e.clientX / window.innerWidth) * 2 - 1;
       VFSTATE.py = (e.clientY / window.innerHeight) * 2 - 1;
       root.style.setProperty("--gx", VFSTATE.px.toFixed(3));
       root.style.setProperty("--gy", VFSTATE.py.toFixed(3));
     }, { passive: true });
+
+    window.addEventListener("pointerdown", function (e) {
+      if (e.button > 0) return;
+      var tEl = e.target instanceof Element ? e.target : null;
+      if (tEl && tEl.closest("a, button, input, select, textarea, [tabindex], .top, .drawer, .hud")) return;
+      VFSTATE.px = (e.clientX / window.innerWidth) * 2 - 1;
+      VFSTATE.py = (e.clientY / window.innerHeight) * 2 - 1;
+      if (coarse) {                       // touch: quick tap = discharge
+        tapT0 = performance.now();
+        tapY = e.clientY;
+      } else {                            // fine pointer: hold to charge
+        charging = true;
+        chargeT0 = performance.now();
+        doc.body.classList.add("charging");
+      }
+    }, { passive: true });
+
+    window.addEventListener("pointerup", function (e) {
+      if (coarse) {
+        if (performance.now() - tapT0 < 320 && Math.abs(e.clientY - tapY) < 12 && tapT0) fireSurge(0.5);
+        tapT0 = 0;
+        return;
+      }
+      endCharge(true);
+    }, { passive: true });
+    window.addEventListener("pointercancel", function () { tapT0 = 0; endCharge(false); }, { passive: true });
+    window.addEventListener("blur", function () { tapT0 = 0; endCharge(false); });
   }
 
   /* ---------------- stage activation (zones + schedule) ---------------- */
@@ -132,6 +178,9 @@
   var lastPhaseLabel = "";
   var lastBeat = -1;
   var lastPct = -1;
+  var hudEl = doc.querySelector(".hud");
+  var mobileMq = window.matchMedia("(max-width: 700px)");
+  var lastHudOp = -1;
 
   function glitchPulse() {
     if (reduced) return;
@@ -153,6 +202,19 @@
     if (v > 0.08) dim = Math.min(1, (v - 0.08) / 0.1) * 0.6;
     if (v > 0.9) dim = 0.6 + (v - 0.9) * 2;      // drain out at the foot
     VFSTATE.dim = Math.min(0.85, dim);
+
+    /* signal-touch charge: grows under the held pointer, decays free */
+    if (charging) VFSTATE.charge = Math.min(1, (now - chargeT0) / 1100);
+    else VFSTATE.charge = (VFSTATE.charge || 0) * 0.88;
+
+    /* mobile: the HUD yields exactly when the machine dims for content */
+    if (hudEl && mobileMq.matches) {
+      var hop = Math.round((1 - Math.min(1, VFSTATE.dim * 1.3) * 0.75) * 100) / 100;
+      if (hop !== lastHudOp) { lastHudOp = hop; hudEl.style.opacity = String(hop); }
+    } else if (lastHudOp !== -1 && hudEl) {
+      lastHudOp = -1;
+      hudEl.style.opacity = "";
+    }
 
     /* clock */
     var beatLen = 60000 / VFSTATE.bpm;
@@ -178,6 +240,8 @@
     }
     var label = PHASES[0][1];
     for (var i = 0; i < PHASES.length; i++) if (v >= PHASES[i][0]) label = PHASES[i][1];
+    if (charging) label = "CHARGING·" + ("00" + Math.round(VFSTATE.charge * 100)).slice(-3);
+    else if (now < surgeFlashUntil) label = "SURGE·DISCHARGE";
     if (label !== lastPhaseLabel && hudPhase) {
       lastPhaseLabel = label;
       hudPhase.textContent = label;
@@ -333,54 +397,162 @@
     doc.querySelectorAll(".stat-n[data-count]").forEach(runCounter);
   }
 
-  /* ---------------- sound engine (synthesized, opt-in) ---------------- */
+  /* ---------------- sound engine: OVERDRIVE (synthesized, opt-in) ------
+     Hype bass-boosted arrangement, built entirely in the browser so it is
+     copyright-free by construction: saturated gliding 808 sub, phonk
+     cowbell lead, punch kick with sidechain pump, claps on the backbeat,
+     driven hats and an 8-bar filter riser. Same clock as the visuals. */
   var soundBtn = doc.getElementById("soundbtn");
-  var AC = null, master = null, noiseBuf = null, schedTimer = null, nextBeatT = 0, beatIdx = 0;
+  var AC = null, master = null, duck = null, noiseBuf = null,
+      schedTimer = null, nextBeatT = 0, beatIdx = 0;
 
-  function makeNoise(ac) {
-    var len = Math.floor(ac.sampleRate * 0.08);
+  function audioOn() { return !!(schedTimer && AC); }
+
+  function makeNoise(ac, secs) {
+    var len = Math.floor(ac.sampleRate * secs);
     var buf = ac.createBuffer(1, len, ac.sampleRate);
     var d = buf.getChannelData(0);
     for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
     return buf;
   }
-  function kick(ac, t) {
-    var o = ac.createOscillator(), g = ac.createGain();
+  function makeSat(ac) {
+    var ws = ac.createWaveShaper();
+    var n = 512, c = new Float32Array(n);
+    for (var i = 0; i < n; i++) {
+      var x = (i / (n - 1)) * 2 - 1;
+      c[i] = Math.tanh(x * 2.4);          // the "bass boost" saturation
+    }
+    ws.curve = c;
+    ws.oversample = "2x";
+    return ws;
+  }
+  function pump(t) {                       // sidechain duck on every kick
+    duck.gain.cancelScheduledValues(t);
+    duck.gain.setValueAtTime(0.42, t);
+    duck.gain.linearRampToValueAtTime(1, t + 0.24);
+  }
+  function kick(t) {
+    var o = AC.createOscillator(), g = AC.createGain();
     o.type = "sine";
-    o.frequency.setValueAtTime(150, t);
-    o.frequency.exponentialRampToValueAtTime(43, t + 0.11);
-    g.gain.setValueAtTime(0.85, t);
-    g.gain.exponentialRampToValueAtTime(0.001, t + 0.26);
-    o.connect(g).connect(master);
-    o.start(t); o.stop(t + 0.3);
+    o.frequency.setValueAtTime(205, t);
+    o.frequency.exponentialRampToValueAtTime(38, t + 0.1);
+    g.gain.setValueAtTime(1.0, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+    o.connect(g).connect(duck);
+    o.start(t); o.stop(t + 0.32);
+    var s = AC.createBufferSource(), hf = AC.createBiquadFilter(), cg = AC.createGain();
+    s.buffer = noiseBuf;                   // attack click
+    hf.type = "highpass"; hf.frequency.value = 3200;
+    cg.gain.setValueAtTime(0.5, t);
+    cg.gain.exponentialRampToValueAtTime(0.001, t + 0.02);
+    s.connect(hf).connect(cg).connect(duck);
+    s.start(t); s.stop(t + 0.03);
+    pump(t);
   }
-  function hat(ac, t, open) {
-    var s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain();
+  function clap(t) {
+    for (var i = 0; i < 3; i++) {
+      var s = AC.createBufferSource(), f = AC.createBiquadFilter(), g = AC.createGain();
+      s.buffer = noiseBuf;
+      f.type = "bandpass"; f.frequency.value = 1400; f.Q.value = 1.1;
+      var tt = t + i * 0.012;
+      g.gain.setValueAtTime(i === 2 ? 0.34 : 0.16, tt);
+      g.gain.exponentialRampToValueAtTime(0.001, tt + (i === 2 ? 0.2 : 0.03));
+      s.connect(f).connect(g).connect(duck);
+      s.start(tt); s.stop(tt + 0.24);
+    }
+  }
+  function hat(t, vol, open) {
+    var s = AC.createBufferSource(), f = AC.createBiquadFilter(), g = AC.createGain();
     s.buffer = noiseBuf;
-    f.type = "highpass"; f.frequency.value = 7600;
-    g.gain.setValueAtTime(open ? 0.22 : 0.12, t);
-    g.gain.exponentialRampToValueAtTime(0.001, t + (open ? 0.09 : 0.045));
-    s.connect(f).connect(g).connect(master);
-    s.start(t);
+    f.type = "highpass"; f.frequency.value = 7800;
+    g.gain.setValueAtTime(vol, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + (open ? 0.12 : 0.04));
+    s.connect(f).connect(g).connect(duck);
+    s.start(t); s.stop(t + 0.14);
   }
-  var BASSLINE = [55, 55, 65.41, 49];  // A1 A1 C2 G1 over the bar
-  function bass(ac, t, note) {
-    var o = ac.createOscillator(), f = ac.createBiquadFilter(), g = ac.createGain();
-    o.type = "sawtooth";
-    o.frequency.value = note;
-    f.type = "lowpass"; f.frequency.setValueAtTime(420, t);
-    f.frequency.exponentialRampToValueAtTime(150, t + 0.4);
-    g.gain.setValueAtTime(0.16, t + 0.06);
-    g.gain.exponentialRampToValueAtTime(0.001, t + 0.42);
-    o.connect(f).connect(g).connect(master);
-    o.start(t + 0.05); o.stop(t + 0.46);
+  /* gliding 808 line over 8 beats: A1 A1 . C2 / A1 G1 A1 D2 */
+  var B808 = [
+    [55, 0], [55, 0], [0, 0], [65.41, 55],
+    [55, 0], [49, 0], [55, 0], [73.42, 55]
+  ];
+  function b808(t, f, glideTo) {
+    var o = AC.createOscillator(), g = AC.createGain();
+    o.type = "sine";
+    o.frequency.setValueAtTime(f, t);
+    if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + 0.34);
+    g.gain.setValueAtTime(0.0, t);
+    g.gain.linearRampToValueAtTime(0.62, t + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.44);
+    o.connect(g).connect(duck);
+    o.start(t); o.stop(t + 0.48);
+  }
+  /* phonk cowbell lead, two hits per beat over an 8-beat phrase (Am) */
+  var COWS = [
+    [440, 0], [0, 523.25], [440, 392], [0, 0],
+    [329.63, 0], [0, 392], [349.23, 329.63], [293.66, 0]
+  ];
+  function cow(t, f) {
+    var g = AC.createGain(), bp = AC.createBiquadFilter();
+    bp.type = "bandpass"; bp.frequency.value = f * 2.4; bp.Q.value = 1.4;
+    g.gain.setValueAtTime(0.2, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.24);
+    [f, f * 1.48].forEach(function (ff) {
+      var o = AC.createOscillator();
+      o.type = "square";
+      o.frequency.value = ff;
+      o.connect(bp);
+      o.start(t); o.stop(t + 0.26);
+    });
+    bp.connect(g).connect(duck);
+  }
+  function riser(t, len) {                 // last bar of every 8 beats
+    var s = AC.createBufferSource(), f = AC.createBiquadFilter(), g = AC.createGain();
+    s.buffer = noiseBuf; s.loop = true;
+    f.type = "bandpass"; f.Q.value = 2.2;
+    f.frequency.setValueAtTime(320, t);
+    f.frequency.exponentialRampToValueAtTime(5600, t + len);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.2, t + len);
+    g.gain.setValueAtTime(0.0001, t + len + 0.01);
+    s.connect(f).connect(g).connect(duck);
+    s.start(t); s.stop(t + len + 0.05);
+  }
+  function surgeHit(power) {               // the discharge, heard
+    if (!AC) return;
+    var t = AC.currentTime + 0.02;
+    var o = AC.createOscillator(), g = AC.createGain();
+    o.type = "sine";
+    o.frequency.setValueAtTime(96, t);
+    o.frequency.exponentialRampToValueAtTime(28, t + 0.7);
+    g.gain.setValueAtTime(0.5 + power * 0.3, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.85);
+    o.connect(g).connect(duck);
+    o.start(t); o.stop(t + 0.9);
+    var s = AC.createBufferSource(), f = AC.createBiquadFilter(), ng = AC.createGain();
+    s.buffer = noiseBuf; s.loop = true;
+    f.type = "lowpass";
+    f.frequency.setValueAtTime(6400, t);
+    f.frequency.exponentialRampToValueAtTime(180, t + 0.55);
+    ng.gain.setValueAtTime(0.3, t);
+    ng.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+    s.connect(f).connect(ng).connect(duck);
+    s.start(t); s.stop(t + 0.65);
   }
   function scheduler() {
     var beatLen = 60 / VFSTATE.bpm;
-    while (nextBeatT < AC.currentTime + 0.24) {
-      kick(AC, nextBeatT);
-      hat(AC, nextBeatT + beatLen / 2, beatIdx % 4 === 3);
-      bass(AC, nextBeatT, BASSLINE[beatIdx % 4]);
+    while (nextBeatT < AC.currentTime + 0.26) {
+      var t = nextBeatT, p8 = beatIdx % 8;
+      kick(t);
+      if (beatIdx % 2 === 1) clap(t);
+      hat(t + beatLen * 0.25, 0.09, false);
+      hat(t + beatLen * 0.5, 0.2, beatIdx % 4 === 3);
+      hat(t + beatLen * 0.75, 0.09, false);
+      var bn = B808[p8];
+      if (bn[0]) b808(t, bn[0], bn[1]);
+      var cn = COWS[p8];
+      if (cn[0]) cow(t, cn[0]);
+      if (cn[1]) cow(t + beatLen * 0.5, cn[1]);
+      if (p8 === 7) riser(t, beatLen);
       nextBeatT += beatLen;
       beatIdx++;
     }
@@ -390,11 +562,15 @@
       var Ctor = window.AudioContext || window.webkitAudioContext;
       if (!Ctor) return false;
       AC = new Ctor();
+      duck = AC.createGain();
+      duck.gain.value = 1;
       master = AC.createGain();
-      master.gain.value = 0.42;
+      master.gain.value = 0.38;
       var comp = AC.createDynamicsCompressor();
-      master.connect(comp).connect(AC.destination);
-      noiseBuf = makeNoise(AC);
+      comp.threshold.value = -18;
+      comp.ratio.value = 6;
+      duck.connect(makeSat(AC)).connect(master).connect(comp).connect(AC.destination);
+      noiseBuf = makeNoise(AC, 0.6);
     }
     AC.resume();
     nextBeatT = AC.currentTime + 0.08;
