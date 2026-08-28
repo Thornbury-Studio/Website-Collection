@@ -98,7 +98,10 @@ THREE.ColorManagement.enabled = false;
     expoLine: { value: 1 },
     hot: { value: -1 },
     hotAmt: { value: 0 },
-    lock: { value: 0 }
+    lock: { value: 0 },
+    beam: { value: 1 },      /* per-station beam intensity            */
+    warp: { value: 0 },      /* pointer distortion on the carousel    */
+    rev: { value: 1 }        /* which way the bulb chase runs         */
   };
 
   /* ═══════════════ shader chunks ═══════════════════════════════════ */
@@ -141,6 +144,25 @@ THREE.ColorManagement.enabled = false;
     "float fogFade(vec3 wpos, float k){",
     "  float d = length(wpos - cameraPosition);",
     "  return clamp(exp(-k * d * d), 0.0, 1.0);",
+    "}"
+  ].join("\n");
+
+  /* One definition of where a mask actually is, used by the masks and by
+     the shadows they throw, so the two can never drift apart. */
+  var MASK_MOVE = [
+    "vec3 maskCentre(vec3 c, float seed, float turn, float sc, vec3 ptr, float amt, float t){",
+    "  float bob = sin(t * 0.5 + seed * 12.6) * 0.24;",
+    "  vec3 to = ptr - c;",
+    "  float dd = length(to);",
+    /* a mask the size of a door does not get dragged across the hall by a
+       cursor — weight the pull against its own scale */
+    "  float heavy = 1.0 / (1.0 + sc * sc * 0.62);",
+    "  float pull = amt * exp(-dd * dd * 0.0016) * turn * heavy;",
+    "  vec3 dir = to / max(dd, 0.001);",
+    "  vec3 tang = normalize(cross(dir, vec3(0.0, 1.0, 0.0)) + vec3(0.001));",
+    "  return c + vec3(0.0, bob, 0.0)",
+    "       + dir * pull * min(dd * 0.42, 5.4)",
+    "       + tang * pull * 3.1 * sin(t * 0.7 + seed * 6.2831);",
     "}"
   ].join("\n");
 
@@ -349,12 +371,18 @@ THREE.ColorManagement.enabled = false;
       "  float spin = uTime * (0.34 + hot * 0.5) + vIdx * 1.7;",
       "  float sw = sin(a * 3.0 + spin - r * 6.2) * 0.5 + 0.5;",
       "  float sw2 = sin(a * 5.0 - spin * 0.7 + r * 3.1) * 0.5 + 0.5;",
-      "  float core = pow(1.0 - r, 1.5);",
-      "  vec3 col = mix(uChan * 0.95, uMerc * 1.15, sw * 0.55 + sw2 * 0.2) * core;",
-      "  float rim = pow(max(0.0, 1.0 - abs(r - 0.93) * 18.0), 2.0);",
-      "  col += mix(uChan2, uMerc, 0.4 + hot * 0.5) * rim * (1.15 + hot * 1.1);",
+      "  float core = pow(1.0 - r, 2.8);",
+      /* concentric shutters and radial spokes: an aperture, not a fog ball */
+      "  float rings = pow(max(0.0, sin(r * 15.0 - spin * 1.6)), 6.0) * (1.0 - r);",
+      "  float spokes = pow(max(0.0, sin(a * 7.0 + spin * 0.8)), 8.0) * (1.0 - r) * r;",
+      "  vec3 tint = mix(uChan, uMerc, 0.30 + hot * 0.30);",
+      "  vec3 col = tint * (core * 0.55 + rings * 0.85 + spokes * 0.7);",
+      "  col *= 0.75 + 0.45 * (sw * 0.6 + sw2 * 0.4);",
+      "  float rim = pow(max(0.0, 1.0 - abs(r - 0.94) * 22.0), 2.0);",
+      "  col += mix(uChan2, uMerc, 0.35 + hot * 0.5) * rim * (1.25 + hot * 1.1);",
       "  col = mix(col, col.gbr, uLock * 0.8);",
-      "  float alpha = (core * 0.80 + rim * 1.0) * (0.70 + hot * 0.55);",
+      "  float alpha = (core * 0.42 + rings * 0.55 + spokes * 0.4 + rim * 1.0)",
+      "              * (0.72 + hot * 0.55);",
       "  gl_FragColor = vec4(col * uExpo, alpha * fogFade(vW, uFogK));",
       "}"
     ].join("\n"),
@@ -426,19 +454,19 @@ THREE.ColorManagement.enabled = false;
   var bulbMat = new THREE.ShaderMaterial({
     uniforms: {
       uTime: U.time, uChan: U.chan, uExpo: U.expoLine, uFogK: U.fogK,
-      uKick: U.kick, uLock: U.lock, uDpr: { value: DPR },
+      uKick: U.kick, uLock: U.lock, uDpr: { value: DPR }, uRev: U.rev,
       uGilt: { value: COL.gilt.clone() }, uBone: { value: COL.bone.clone() }
     },
     vertexShader: [
       "attribute float aSeed; attribute float aKind; attribute float aIx;",
-      "uniform float uTime, uKick, uDpr;",
+      "uniform float uTime, uKick, uDpr, uRev;",
       "varying float vLit; varying float vKind;",
       "void main(){",
       "  vKind = aKind;",
       "  vec4 w = modelMatrix * vec4(position, 1.0);",
       "  vec4 mv = viewMatrix * w;",
       /* a slow chase along the wire, plus a per-bulb worn flicker */
-      "  float chase = 0.55 + 0.45 * sin(aIx * 0.62 - uTime * 2.1 + aKind * 2.0);",
+      "  float chase = 0.55 + 0.45 * sin(aIx * 0.62 - uTime * 2.1 * uRev + aKind * 2.0);",
       "  float flick = 0.80 + 0.20 * sin(uTime * 3.1 + aSeed * 39.0);",
       "  float dud = step(0.045, fract(aSeed * 17.3));",
       "  vLit = chase * flick * dud * (0.75 + uKick * 0.45);",
@@ -470,6 +498,199 @@ THREE.ColorManagement.enabled = false;
   bulbs.frustumCulled = false;
   scene.add(bulbs);
 
+  /* --- searchlight beams: seven rigs sweeping the hall ------------- */
+  var beamGeo = new THREE.CylinderGeometry(0.30, 6.2, 27, 14, 1, true);
+  beamGeo.translate(0, -13.5, 0);            /* hang from the mount point */
+  idxAttr(beamGeo, NB, function (i) { return i; });
+
+  var beamMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: U.time, uChan: U.chan, uExpo: U.expoLine, uFogK: U.fogK,
+      uHot: U.hot, uHotAmt: U.hotAmt, uBeam: U.beam, uLock: U.lock,
+      uGilt: { value: COL.gilt.clone() }
+    },
+    vertexShader: [
+      "attribute float aIdx;",
+      "varying vec2 vU; varying vec3 vW; varying float vIdx;",
+      "void main(){",
+      "  vU = uv; vIdx = aIdx;",
+      "  vec4 w = modelMatrix * instanceMatrix * vec4(position, 1.0);",
+      "  vW = w.xyz;",
+      "  gl_Position = projectionMatrix * viewMatrix * w;",
+      "}"
+    ].join("\n"),
+    fragmentShader: [
+      "precision highp float;",
+      "uniform float uTime, uExpo, uFogK, uHot, uHotAmt, uBeam, uLock;",
+      "uniform vec3 uChan, uGilt;",
+      "varying vec2 vU; varying vec3 vW; varying float vIdx;",
+      FOG_FN,
+      "void main(){",
+      "  float hot = (1.0 - step(0.5, abs(vIdx - uHot))) * uHotAmt;",
+      "  float along = pow(vU.y, 1.9);",
+      "  float across = abs(vU.x * 2.0 - 1.0);",
+      "  float edge = smoothstep(0.55, 1.0, across) * 0.7 + 0.3;",
+      "  float flick = 0.86 + 0.14 * sin(uTime * 7.3 + vIdx * 11.0);",
+      "  vec3 col = mix(uChan, uGilt, 0.35 + hot * 0.4);",
+      "  float a = along * edge * flick * uBeam * (0.125 + hot * 0.11);",
+      /* the sweep will walk a cone straight through the camera; without
+         this the whole frame detonates white for a second */
+      "  a *= smoothstep(2.5, 15.0, length(vW - cameraPosition));",
+      "  col = mix(col, col.gbr, uLock * 0.85);",
+      "  gl_FragColor = vec4(col * uExpo, a * fogFade(vW, uFogK));",
+      "}"
+    ].join("\n"),
+    transparent: true, blending: THREE.AdditiveBlending,
+    depthTest: true, depthWrite: false, side: THREE.DoubleSide, fog: false
+  });
+
+  var beams = new THREE.InstancedMesh(beamGeo, beamMat, NB);
+  beams.frustumCulled = false;
+  beams.renderOrder = 11;
+  scene.add(beams);
+  var beamMount = [];
+  for (var bm = 0; bm < NB; bm++) {
+    beamMount.push(new THREE.Vector3(boothPos[bm].x * 0.80, 15.6, boothPos[bm].z * 0.80));
+  }
+
+  /* --- impossible signage: a named board over every booth ---------- */
+  var signCan = document.createElement("canvas");
+  signCan.width = 1024; signCan.height = 1024;
+  var SIGN_TEXT = [
+    "THE FACE EXCHANGE", "HALL OF DISAGREEING MIRRORS", "ALWAYS A WINNER",
+    "THE LISTENING RANGE", "DEEP END CAROUSEL", "THE ORACLE STUB",
+    "NO EXIT THIS WAY"
+  ];
+  var signTex = new THREE.CanvasTexture(signCan);
+  signTex.minFilter = THREE.LinearFilter;
+  signTex.generateMipmaps = false;
+  signTex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+
+  function drawSigns() {
+    var c = signCan.getContext("2d");
+    c.clearRect(0, 0, 1024, 1024);
+    c.textAlign = "center";
+    c.textBaseline = "middle";
+    for (var i = 0; i < 7; i++) {
+      var y = i * 128 + 64;
+      c.strokeStyle = "rgba(224,180,87,0.55)";
+      c.lineWidth = 3;
+      c.strokeRect(14, y - 50, 996, 100);
+      c.fillStyle = "#E0B457";
+      for (var bx = 40; bx < 1000; bx += 42) {
+        c.beginPath(); c.arc(bx, y - 50, 4.5, 0, 7); c.fill();
+        c.beginPath(); c.arc(bx, y + 50, 4.5, 0, 7); c.fill();
+      }
+      c.font = "700 54px 'Bodoni Moda', Georgia, serif";
+      c.fillStyle = "#F4EADA";
+      c.fillText(SIGN_TEXT[i], 512, y + 2);
+    }
+    signTex.needsUpdate = true;
+  }
+  drawSigns();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawSigns);
+
+  var signGeo = new THREE.PlaneGeometry(10.2, 1.28);
+  idxAttr(signGeo, NB, function (i) { return i; });
+  var signMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uMap: { value: signTex }, uTime: U.time, uChan: U.chan, uExpo: U.expoLine,
+      uFogK: U.fogK, uHot: U.hot, uHotAmt: U.hotAmt, uLock: U.lock
+    },
+    vertexShader: [
+      "attribute float aIdx;",
+      "varying vec2 vU; varying vec3 vW; varying float vIdx;",
+      "void main(){",
+      "  vU = uv; vIdx = aIdx;",
+      "  vec4 w = modelMatrix * instanceMatrix * vec4(position, 1.0);",
+      "  vW = w.xyz;",
+      "  gl_Position = projectionMatrix * viewMatrix * w;",
+      "}"
+    ].join("\n"),
+    fragmentShader: [
+      "precision highp float;",
+      "uniform sampler2D uMap; uniform vec3 uChan;",
+      "uniform float uTime, uExpo, uFogK, uHot, uHotAmt, uLock;",
+      "varying vec2 vU; varying vec3 vW; varying float vIdx;",
+      FOG_FN,
+      "void main(){",
+      "  vec2 uvv = vec2(vU.x, (vIdx + 1.0 - vU.y) / 8.0);",
+      "  vec4 t = texture2D(uMap, uvv);",
+      "  if (t.a < 0.02) discard;",
+      "  float hot = (1.0 - step(0.5, abs(vIdx - uHot))) * uHotAmt;",
+      "  float buzz = 0.72 + 0.28 * sin(uTime * 2.1 + vIdx * 4.7);",
+      "  buzz *= 0.86 + 0.14 * sin(uTime * 23.0 + vIdx * 9.0);",
+      "  vec3 col = mix(t.rgb, uChan, 0.34 + hot * 0.4) * (0.75 + hot * 1.25) * buzz;",
+      "  col = mix(col, col.gbr, uLock * 0.85);",
+      "  gl_FragColor = vec4(col * uExpo, t.a * (0.62 + hot * 0.38) * fogFade(vW, uFogK));",
+      "}"
+    ].join("\n"),
+    transparent: true, blending: THREE.AdditiveBlending,
+    depthTest: true, depthWrite: false, side: THREE.DoubleSide, fog: false
+  });
+  var signs = new THREE.InstancedMesh(signGeo, signMat, NB);
+  signs.frustumCulled = false;
+  signs.renderOrder = 22;
+  for (var sg = 0; sg < NB; sg++) {
+    _m.copy(boothBasis[sg]);
+    _m.setPosition(boothPos[sg].x, LEG_H + 4.7, boothPos[sg].z);
+    signs.setMatrixAt(sg, _m);
+  }
+  signs.instanceMatrix.needsUpdate = true;
+  scene.add(signs);
+
+  /* --- the tank lip reads itself out loud -------------------------- */
+  var tickCan = document.createElement("canvas");
+  tickCan.width = 2048; tickCan.height = 64;
+  var tickTex = new THREE.CanvasTexture(tickCan);
+  tickTex.wrapS = THREE.RepeatWrapping;
+  tickTex.repeat.x = 4;
+  tickTex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+
+  function drawTicker() {
+    var c = tickCan.getContext("2d");
+    c.clearRect(0, 0, 2048, 64);
+    c.font = "700 34px 'Space Mono', monospace";
+    c.textBaseline = "middle";
+    c.fillStyle = "#F4EADA";
+    var msg = "STAND STILL  \u25C6  THE LIGHTS ARE OURS  \u25C6  EXCHANGE BEFORE 03:00  \u25C6  ";
+    var x = 0;
+    while (x < 2048) { c.fillText(msg, x, 34); x += c.measureText(msg).width; }
+    tickTex.needsUpdate = true;
+  }
+  drawTicker();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawTicker);
+
+  var tickMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uMap: { value: tickTex }, uTime: U.time, uChan: U.chan,
+      uExpo: U.expoLine, uFogK: U.fogK, uLock: U.lock
+    },
+    vertexShader: WORLD_VERT,
+    fragmentShader: [
+      "precision highp float;",
+      "uniform sampler2D uMap; uniform vec3 uChan;",
+      "uniform float uTime, uExpo, uFogK, uLock;",
+      "varying vec2 vU; varying vec3 vW;",
+      FOG_FN,
+      "void main(){",
+      "  vec4 t = texture2D(uMap, vU);",
+      "  if (t.a < 0.03) discard;",
+      "  vec3 col = mix(uChan, vec3(1.0), 0.34) * (0.5 + 0.5 * sin(uTime * 1.4 + vU.x * 18.0));",
+      "  col = mix(col, col.gbr, uLock * 0.85);",
+      "  gl_FragColor = vec4(col * uExpo, t.a * 0.5 * fogFade(vW, uFogK));",
+      "}"
+    ].join("\n"),
+    transparent: true, blending: THREE.AdditiveBlending,
+    depthTest: true, depthWrite: false, side: THREE.DoubleSide, fog: false
+  });
+  var ticker = new THREE.Mesh(
+    new THREE.CylinderGeometry(R_PIT + 0.35, R_PIT + 0.35, 1.15, 96, 1, true), tickMat);
+  ticker.position.y = -0.72;
+  ticker.renderOrder = 18;
+  ticker.frustumCulled = false;
+  scene.add(ticker);
+
   /* ─── masks — the signature object ──────────────────────────────── */
   var maskGeo = new THREE.PlaneGeometry(1, 1);
   var NM = CFG.masks;
@@ -487,11 +708,16 @@ THREE.ColorManagement.enabled = false;
       "attribute float aSeed; attribute float aArche; attribute float aTurn;",
       "attribute vec3 aTint;",
       "uniform vec3 uPtr; uniform float uPtrAmt, uTime;",
+      MASK_MOVE,
       "varying vec2 vU; varying float vSeed, vArche, vFace; varying vec3 vTint; varying vec3 vW;",
       "void main(){",
       "  vU = uv; vSeed = aSeed; vArche = aArche; vTint = aTint;",
       "  mat4 im = instanceMatrix;",
-      "  vec4 wc = modelMatrix * im * vec4(0.0, 0.0, 0.0, 1.0);",
+      "  vec4 home = modelMatrix * im * vec4(0.0, 0.0, 0.0, 1.0);",
+      /* the null does not just turn the masks, it draws them out of the
+         crowd and swings them round its rim */
+      "  vec3 ctr = maskCentre(home.xyz, aSeed, aTurn, length(im[0].xyz), uPtr, uPtrAmt, uTime);",
+      "  vec4 wc = vec4(ctr, 1.0);",
       "  float sx = length(im[0].xyz);",
       "  float sy = length(im[1].xyz);",
       "  vec3 toCam = normalize(cameraPosition - wc.xyz);",
@@ -508,9 +734,7 @@ THREE.ColorManagement.enabled = false;
       "  float c = cos(sway), s = sin(sway);",
       "  vec3 r2 = right * c + up * s;",
       "  vec3 u2 = up * c - right * s;",
-      "  float bob = sin(uTime * 0.5 + aSeed * 12.6) * 0.22;",
-      "  vec3 wp = wc.xyz + vec3(0.0, bob, 0.0)",
-      "          + r2 * (position.x * sx) + u2 * (position.y * sy);",
+      "  vec3 wp = wc.xyz + r2 * (position.x * sx) + u2 * (position.y * sy);",
       "  vW = wp;",
       "  gl_Position = projectionMatrix * viewMatrix * vec4(wp, 1.0);",
       "}"
@@ -560,7 +784,11 @@ THREE.ColorManagement.enabled = false;
       "  vec3 col = face * rim * (0.85 + vFace * 1.5 + uKick * 0.22)",
       "           + uChan * fill * 0.085;",
       "  col = mix(col, col.gbr, uLock * 0.9);",
-      "  float alpha = (rim * 0.92 + fill * 0.10) * flick * (0.5 + vFace * 0.8);",
+      "  float alpha = (rim * 0.92 + fill * 0.07) * flick * (0.5 + vFace * 0.8);",
+      /* A mask on the lens is a glowing ball, not a mask — the pull can walk
+         one right up to the camera, so give them all a near clip the same
+         way the haze has one. */
+      "  alpha *= smoothstep(3.0, 13.0, length(vW - cameraPosition));",
       "  gl_FragColor = vec4(col * uExpo, alpha * fogFade(vW, uFogK));",
       "}"
     ].join("\n"),
@@ -583,21 +811,25 @@ THREE.ColorManagement.enabled = false;
       var a = Math.random() * TAU;
       /* a loose band around the ring, thinning toward the pit */
       var band = Math.random();
-      /* three shoals: a crowd out past the booths, a thin drift of small
-         ones down in the empty tank, and a few large enough to pass the
-         camera — they are line art, so they crowd the frame without ever
-         taking the copy with them */
-      var rr = 26 + Math.random() * 32;
+      /* Three shoals, all of them clear of the camera's own orbit (r 8-21):
+         a crowd out past the booths, a drift down inside the empty tank
+         where the camera never goes, and a few large ones just outside the
+         orbit that pass close without ever landing on the lens. */
+      var rr = 27 + Math.random() * 31;
       var y = 1.2 + Math.pow(Math.random(), 0.72) * 15.5;
       var sc = 1.0 + Math.pow(Math.random(), 2.0) * 2.5;
       if (band >= 0.62 && band < 0.80) {
-        rr = 6 + Math.random() * 9;
-        y = -6.0 + Math.random() * 12;
-        sc = 0.5 + Math.random() * 0.9;
-      } else if (band >= 0.80) {
-        rr = 16 + Math.random() * 11;
-        y = 1.5 + Math.random() * 13;
-        sc = 3.2 + Math.random() * 2.4;
+        rr = 4 + Math.random() * 10;
+        y = -7.4 + Math.random() * 6.2;      /* below the deck, in the tank */
+        sc = 0.5 + Math.random() * 1.0;
+      } else if (band >= 0.80 && band < 0.90) {
+        rr = 5 + Math.random() * 16;          /* overhead, in the roof space */
+        y = 18.5 + Math.random() * 9;
+        sc = 1.6 + Math.random() * 2.2;
+      } else if (band >= 0.90) {
+        rr = 23.5 + Math.random() * 10;
+        y = 2.0 + Math.random() * 12;
+        sc = 2.9 + Math.random() * 1.8;
       }
       _pos.set(Math.cos(a) * rr, y, Math.sin(a) * rr);
       _s.setScalar(sc);
@@ -613,6 +845,55 @@ THREE.ColorManagement.enabled = false;
     masks.instanceMatrix.needsUpdate = true;
     scene.add(masks);
   })();
+
+  /* --- what the masks throw on the deck --------------------------- */
+  var shadowGeo = new THREE.CircleGeometry(1, 18);
+  shadowGeo.setAttribute("aSeed", new THREE.InstancedBufferAttribute(mSeed, 1));
+  shadowGeo.setAttribute("aTurn", new THREE.InstancedBufferAttribute(mTurn, 1));
+  var shadowMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: U.time, uPtr: U.ptr, uPtrAmt: U.ptrAmt, uExpo: U.expo, uLock: U.lock
+    },
+    vertexShader: [
+      "attribute float aSeed; attribute float aTurn;",
+      "uniform vec3 uPtr; uniform float uPtrAmt, uTime;",
+      MASK_MOVE,
+      "varying float vFade; varying vec2 vU;",
+      "void main(){",
+      "  vU = uv;",
+      "  mat4 im = instanceMatrix;",
+      "  vec4 home = modelMatrix * im * vec4(0.0, 0.0, 0.0, 1.0);",
+      "  float sc = length(im[0].xyz);",
+      "  vec3 ctr = maskCentre(home.xyz, aSeed, aTurn, sc, uPtr, uPtrAmt, uTime);",
+      "  float h = clamp(ctr.y, 0.0, 20.0);",
+      "  float spread = 1.0 + h * 0.19;",
+      /* only the ones over the deck throw anything, and the higher they
+         ride the wider and fainter it gets */
+      "  vFade = (1.0 - smoothstep(1.0, 15.0, h)) * step(0.7, ctr.y);",
+      "  vec3 wp = vec3(ctr.x + position.x * sc * spread, 0.035,",
+      "                 ctr.z + position.y * sc * spread);",
+      "  gl_Position = projectionMatrix * viewMatrix * vec4(wp, 1.0);",
+      "}"
+    ].join("\n"),
+    fragmentShader: [
+      "precision highp float;",
+      "uniform float uExpo, uLock;",
+      "varying float vFade; varying vec2 vU;",
+      "void main(){",
+      "  float d = length(vU * 2.0 - 1.0);",
+      "  if (d > 1.0) discard;",
+      "  float a = pow(1.0 - d, 1.7) * vFade * 0.42 * uExpo * (1.0 - uLock * 0.7);",
+      "  gl_FragColor = vec4(0.016, 0.010, 0.028, a);",
+      "}"
+    ].join("\n"),
+    transparent: true, blending: THREE.NormalBlending,
+    depthTest: true, depthWrite: false, fog: false
+  });
+  var maskShadows = new THREE.InstancedMesh(shadowGeo, shadowMat, NM);
+  maskShadows.frustumCulled = false;
+  maskShadows.renderOrder = 5;
+  maskShadows.instanceMatrix = masks.instanceMatrix;
+  scene.add(maskShadows);
 
   /* ─── the carousel drum: the programme, printed and turning ─────── */
   var drumCanvas = document.createElement("canvas");
@@ -662,9 +943,28 @@ THREE.ColorManagement.enabled = false;
   var drumMat = new THREE.ShaderMaterial({
     uniforms: {
       uMap: { value: drumTex }, uTime: U.time, uChan: U.chan, uExpo: U.expo,
-      uFogK: U.fogK, uLock: U.lock, uNight: U.night
+      uFogK: U.fogK, uLock: U.lock, uNight: U.night,
+      uWarp: U.warp, uPtr: U.ptr
     },
-    vertexShader: WORLD_VERT,
+    /* the drum is not rigid: point at it and the printed programme buckles */
+    vertexShader: [
+      "uniform float uWarp, uTime; uniform vec3 uPtr;",
+      "varying vec3 vW; varying vec2 vU;",
+      "void main(){",
+      "  vU = uv;",
+      "  vec3 pos = position;",
+      "  vec4 w0 = modelMatrix * vec4(pos, 1.0);",
+      "  float d = length(w0.xz - uPtr.xz);",
+      "  float k = uWarp * exp(-d * d * 0.0035);",
+      "  float ripple = sin(uv.x * 34.0 - uTime * 2.6) * 0.6",
+      "               + sin(uv.y * 8.0 + uTime * 1.9) * 0.4;",
+      "  pos.xz *= 1.0 + k * ripple * 0.17;",
+      "  pos.y += k * ripple * 0.55;",
+      "  vec4 w = modelMatrix * vec4(pos, 1.0);",
+      "  vW = w.xyz;",
+      "  gl_Position = projectionMatrix * viewMatrix * w;",
+      "}"
+    ].join("\n"),
     fragmentShader: [
       "precision highp float;",
       "uniform sampler2D uMap; uniform vec3 uChan, uNight;",
@@ -1021,6 +1321,9 @@ THREE.ColorManagement.enabled = false;
     "  float lens = (1.0 - smoothstep(uLensR - soft, uLensR + soft, d)) * uLensAmt * (1.0 - uLock);",
     "  vec3 nulled = vec3(1.0) - col;",
     "  nulled = mix(nulled, nulled.gbr, 0.55);",
+    "  float lum = dot(col, vec3(0.299, 0.587, 0.114));",
+    "  vec3 hollow = col * 0.22 + uChan * 0.035;",
+    "  nulled = mix(hollow, nulled, smoothstep(0.045, 0.34, lum));",
     "  col = mix(col, nulled, lens);",
     /* the rim of the hole */
     "  float rim = 1.0 - smoothstep(0.0, soft * 1.6, abs(d - uLensR));",
@@ -1095,9 +1398,21 @@ THREE.ColorManagement.enabled = false;
   var K_LY   = [ 4.4,  4.6,  4.0, -3.0,  4.8, -1.8,  6.0];
   var K_OUT  = [ 1.0,  1.0,  1.0,  0.0,  1.0,  0.15, 0.85];
   var K_LEAD = [ 0.00, 0.04, 0.00, 0.18, 0.02, 0.00, 0.22];
+  /* Each turn is lit and staged differently, so the seven stations are
+     seven rooms rather than one room seen from seven angles. */
+  var K_FOG  = [ 1.00, 1.20, 0.95, 0.62, 1.10, 1.75, 0.85];  /* air density  */
+  var K_BEAM = [ 1.00, 0.62, 1.55, 0.42, 0.90, 0.18, 1.25];  /* searchlights */
+  var K_SPIN = [ 1.00, 0.85, 1.15, 2.30, 0.95, 0.22,-1.40];  /* carousel     */
+  var K_REV  = [ 1.00, 1.00, 1.00, 1.00, 1.00,-1.00,-1.00];  /* bulb chase   */
+  var K_SWAY = [ 0.60, 0.85, 1.30, 0.45, 1.00, 0.30, 1.15];  /* beam sweep   */
 
   var camPos = new THREE.Vector3();
   var camLook = new THREE.Vector3();
+  var _bq = new THREE.Quaternion();
+  var _down = new THREE.Vector3(0, -1, 0);
+  var _aim = new THREE.Vector3();
+  var _one = new THREE.Vector3(1, 1, 1);
+  var _bt = new THREE.Vector3();
   var _ring = new THREE.Vector3();
   var _ctr = new THREE.Vector3();
 
@@ -1148,7 +1463,10 @@ THREE.ColorManagement.enabled = false;
 
     /* ring position, eased so a flick of the wheel does not snap the world */
     smoothSF += (S.stationF - smoothSF) * (REDUCED ? 0.4 : 0.075);
-    samplePath(smoothSF);
+    /* the visitor can lean on the ring: holding the pointer out toward
+       either edge pushes the turn, and it drifts back when they let go */
+    var sfNow = smoothSF + (S.turnPush || 0);
+    samplePath(sfNow);
 
     /* the pointer leans the whole room */
     var lean = S.active * (REDUCED ? 0 : 1);
@@ -1188,8 +1506,35 @@ THREE.ColorManagement.enabled = false;
        presence over the copy where the big light sources have to yield */
     U.expoLine.value = 0.46 + exposure * 0.54;
 
-    /* drum + haze idle motion */
-    drum.rotation.y = -t * 0.075;
+    /* what this turn looks like */
+    var sfc = Math.max(0, Math.min(6, sfNow));
+    U.fogK.value = 0.000105 * cr(K_FOG, sfc);
+    U.rev.value = cr(K_REV, sfc);
+    var beamAmt = Math.max(0, cr(K_BEAM, sfc));
+    U.beam.value = beamAmt * (0.75 + kick * 0.25);
+    U.warp.value = S.nullAmt * (REDUCED ? 0 : 1);
+
+    /* seven searchlights: each sweeps its own arc, and all seven lean
+       toward the null when the visitor is holding one */
+    if (!REDUCED) {
+      var sway = cr(K_SWAY, sfc);
+      for (var bi2 = 0; bi2 < NB; bi2++) {
+        var swp = t * 0.21 * sway + bi2 * (TAU / NB);
+        var tr = 21 + Math.sin(t * 0.17 + bi2 * 1.3) * 17;
+        _bt.set(Math.cos(swp) * tr, 0.0, Math.sin(swp) * tr);
+        _bt.x += (U.ptr.value.x - _bt.x) * 0.42 * S.nullAmt;
+        _bt.z += (U.ptr.value.z - _bt.z) * 0.42 * S.nullAmt;
+        _aim.copy(_bt).sub(beamMount[bi2]).normalize();
+        _bq.setFromUnitVectors(_down, _aim);
+        _m.compose(beamMount[bi2], _bq, _one);
+        beams.setMatrixAt(bi2, _m);
+      }
+      beams.instanceMatrix.needsUpdate = true;
+    }
+
+    /* drum + ticker + haze idle motion */
+    drum.rotation.y = -t * 0.075 * cr(K_SPIN, sfc);
+    ticker.rotation.y = t * 0.045;
     drumMat.uniforms.uMap.value.offset.x = t * 0.012;
     for (var i = 0; i < hazeGroup.length; i++) {
       var hh = hazeGroup[i];
@@ -1245,6 +1590,8 @@ THREE.ColorManagement.enabled = false;
     } else if (tier === 3) {
       glyphs.geometry.setDrawRange(0, Math.floor(NG * 0.45));
       masks.count = Math.max(40, Math.floor(NM * 0.55));
+      maskShadows.count = masks.count;
+      beams.visible = false;
       for (var i = hazeGroup.length - 1; i >= Math.max(2, hazeGroup.length - 2); i--) {
         hazeGroup[i].s.visible = false;
       }
@@ -1281,6 +1628,17 @@ THREE.ColorManagement.enabled = false;
     U.expo.value = 1;
     U.expoLine.value = 1;
     U.ptrAmt.value = 0;
+    U.beam.value = 1;
+    U.warp.value = 0;
+    U.rev.value = 1;
+    for (var rb = 0; rb < NB; rb++) {
+      _bt.set(Math.cos(rb * 1.1) * 27, 0, Math.sin(rb * 1.1) * 27);
+      _aim.copy(_bt).sub(beamMount[rb]).normalize();
+      _bq.setFromUnitVectors(_down, _aim);
+      _m.compose(beamMount[rb], _bq, _one);
+      beams.setMatrixAt(rb, _m);
+    }
+    beams.instanceMatrix.needsUpdate = true;
     U.kick.value = 0.3;
     U.chan.value.copy(COL.sodium);
     U.chan2.value.copy(COL.gilt);
@@ -1308,7 +1666,20 @@ THREE.ColorManagement.enabled = false;
   });
 
   resize();
-  window.NC = { ready: true, three: THREE.REVISION };
+  /* A handle on the layers. Bisecting a blown-out frame by toggling
+     .visible from the console is the only way to attribute one, and
+     guessing at it from screenshots costs far more than this line. */
+  window.NC = {
+    ready: true, three: THREE.REVISION,
+    layers: {
+      deck: deck, pitFloor: pitFloor, pitWall: pitWall,
+      arches: arches, legs: legs, portals: portals,
+      beams: beams, signs: signs, ticker: ticker,
+      wire: wire, bulbs: bulbs, masks: masks, maskShadows: maskShadows,
+      drum: drum, glyphs: glyphs,
+      haze: hazeGroup.map(function (h) { return h.s; })
+    }
+  };
 
   if (REDUCED) {
     renderStatic();
