@@ -7,10 +7,10 @@
 (function () {
   'use strict';
 
-  /* v2: job records carry a vehicle category (Sedan / SUV-MPV / Supercar) and
-     a coverage level as separate fields — bumping the key retires any v1 demo
-     state still sitting in a reviewer's browser. */
-  var KEY = 'eam-jobs-v2';
+  /* v3: job records carry a vehicle category (Sedan-Hatchback / SUV-MPV /
+     Sports-Supercar) and a coverage level as separate fields — bumping the key
+     retires older demo state still sitting in a reviewer's browser. */
+  var KEY = 'eam-jobs-v3';
   var EVT = 'eam:jobs-changed';
 
   var STAGE_LIBRARY = {
@@ -71,7 +71,7 @@
         vehicle: 'BMW 320i · Mineral Grey',
         customer: 'Marcus T.',
         service: 'ppf',
-        category: 'Sedan',
+        category: 'Sedan / Hatchback',
         coverage: 'High-impact panels',
         bay: 'Level 1 · Bay 3',
         stageIndex: 2,
@@ -94,7 +94,7 @@
         vehicle: 'Toyota Corolla Altis · White',
         customer: 'Priya N.',
         service: 'accident',
-        category: 'Sedan',
+        category: 'Sedan / Hatchback',
         coverage: null,
         bay: 'Level 1 · Bay 1',
         stageIndex: 3,
@@ -161,7 +161,7 @@
         vehicle: 'Porsche 718 Cayman · Guards Red',
         customer: 'Terence L.',
         service: 'ppf',
-        category: 'Supercar / Performance',
+        category: 'Sports / Supercar',
         coverage: 'Full body',
         bay: 'Level 1 · Bay 2',
         stageIndex: 1,
@@ -198,8 +198,9 @@
 
   function load() {
     try {
-      // Drop the v1 blob so a reviewer's browser isn't carrying dead demo state.
+      // Drop superseded blobs so a reviewer's browser carries no dead state.
       localStorage.removeItem('eam-jobs-v1');
+      localStorage.removeItem('eam-jobs-v2');
     } catch (e) { /* storage unavailable */ }
     try {
       var raw = localStorage.getItem(KEY);
