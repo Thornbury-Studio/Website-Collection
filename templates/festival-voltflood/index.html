@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>VOLT//FLOOD — 13–15 Nov 2026 · Substation 9, Singapore</title>
+<meta name="description" content="VOLT//FLOOD Edition IV: three nights of controlled overload at Substation 9, Pasir Panjang. Sound systems, light rigs, projection and three thousand bodies wired into one unstable machine. 13–15 November 2026.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ======== THE MACHINE (fixed WebGL stage) ======== -->
+<div class="stage" id="stage" aria-hidden="true">
+  <canvas id="gl"></canvas>
+  <!-- designed static state when the module never boots -->
+  <div class="no3d-back">
+    <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <rect width="1200" height="700" fill="#060608"/>
+      <g stroke="#1c1e14" stroke-width="1">
+        <path d="M0 700 L520 340 M120 700 L540 348 M260 700 L560 356 M420 700 L580 364 M1200 700 L680 340 M1080 700 L660 348 M940 700 L640 356 M780 700 L620 364"/>
+        <path d="M0 480 H1200 M0 540 H1200 M0 620 H1200"/>
+      </g>
+      <g stroke="#2a2d18" stroke-width="2">
+        <path d="M200 120 V420 M230 120 V420 M200 150 L230 180 M200 210 L230 240 M200 270 L230 300 M200 330 L230 360"/>
+        <path d="M970 120 V420 M1000 120 V420 M970 150 L1000 180 M970 210 L1000 240 M970 270 L1000 300 M970 330 L1000 360"/>
+        <path d="M200 130 H1000 M200 158 H1000 M200 130 L240 158 M320 130 L360 158 M440 130 L480 158 M560 130 L600 158 M680 130 L720 158 M800 130 L840 158 M920 130 L960 158"/>
+      </g>
+      <g opacity="0.5">
+        <path d="M280 160 L120 640 L440 640 Z" fill="#d8f224" opacity="0.05"/>
+        <path d="M470 160 L330 640 L610 640 Z" fill="#d8f224" opacity="0.04"/>
+        <path d="M730 160 L590 640 L870 640 Z" fill="#6ed3ff" opacity="0.04"/>
+        <path d="M920 160 L760 640 L1080 640 Z" fill="#d8f224" opacity="0.05"/>
+      </g>
+      <g fill="#0c0d10" stroke="#23251c" stroke-width="1.5">
+        <rect x="60" y="430" width="120" height="250"/><rect x="1020" y="430" width="120" height="250"/>
+      </g>
+      <g fill="none" stroke="#3a3d2a" stroke-width="1.5">
+        <circle cx="120" cy="470" r="14"/><circle cx="120" cy="530" r="18"/><circle cx="120" cy="600" r="24"/>
+        <circle cx="1080" cy="470" r="14"/><circle cx="1080" cy="530" r="18"/><circle cx="1080" cy="600" r="24"/>
+      </g>
+    </svg>
+  </div>
+</div>
+<div class="scanlines" aria-hidden="true"></div>
+
+<!-- ======== HUD ======== -->
+<div class="hud" aria-hidden="true">
+  <div class="hud-volt">
+    <span class="hv-label">VOLTAGE</span>
+    <span class="hv-track"><i class="hv-fill" id="hv-fill"></i></span>
+    <span class="hv-read" id="hv-read">000%</span>
+  </div>
+  <div class="hud-clock">
+    <i class="beat-dot" id="beat-dot"></i>
+    <span id="hud-phase">SIGNAL·ACQ</span>
+    <span class="hud-sep">/</span>
+    <span>132 BPM</span>
+    <span class="hud-sep">/</span>
+    <span id="hud-count">T−000</span>
+  </div>
+</div>
+<div class="edge-ticker" aria-hidden="true"><span>EDITION IV — SUBSTATION 9 — PASIR PANJANG — 13.14.15 NOV 2026 — ONE MACHINE, BARELY HELD —</span></div>
+
+<!-- ======== HEADER ======== -->
+<header class="top">
+  <a class="wordmark" href="index.html">VOLT<em>//</em>FLOOD</a>
+  <nav aria-label="Primary">
+    <a href="#machine">Machine</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#zones">Zones</a>
+    <a href="#archive">Archive</a>
+    <a class="btn btn-acid" href="#access">Get access</a>
+  </nav>
+  <div class="top-tools">
+    <button class="soundbtn" id="soundbtn" type="button" aria-pressed="false">
+      <span class="sb-bars"><i></i><i></i><i></i><i></i></span>
+      <span class="sb-text">SOUND&nbsp;ON</span>
+    </button>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="#machine">Machine</a>
+  <a href="#schedule">Schedule</a>
+  <a href="#zones">Zones</a>
+  <a href="#archive">Archive</a>
+  <a href="#access">Get access</a>
+  <span class="label">VOLT//FLOOD — Edition IV — Substation 9, Singapore</span>
+</aside>
+
+<main id="main">
+
+  <!-- ================= SIGNAL / HERO ================= -->
+  <section class="hero" id="signal">
+    <div class="wrap">
+      <p class="kicker reveal"><span class="kdot"></span>EDITION IV — THREE NIGHTS OF CONTROLLED OVERLOAD</p>
+      <h1 class="logotype reveal" id="logotype" data-glitch>
+        <span class="lt-line">
+          <span class="lt-base">VOLT//</span>
+          <span class="lt-ghost lt-ga" aria-hidden="true">VOLT//</span>
+          <span class="lt-ghost lt-gb" aria-hidden="true">VOLT//</span>
+        </span>
+        <span class="lt-line lt-line2">
+          <span class="lt-base">FLOOD</span>
+          <span class="lt-ghost lt-ga" aria-hidden="true">FLOOD</span>
+          <span class="lt-ghost lt-gb" aria-hidden="true">FLOOD</span>
+        </span>
+      </h1>
+      <div class="hero-meta reveal d1">
+        <p class="mono meta-line">13&#8288;—&#8288;15&nbsp;NOV&nbsp;2026 &nbsp;·&nbsp; SUBSTATION&nbsp;9 &nbsp;·&nbsp; PASIR&nbsp;PANJANG &nbsp;·&nbsp; SINGAPORE</p>
+        <p class="lede">Sound systems, light rigs, projection and three thousand bodies, wired into one unstable machine. You are the interference.</p>
+        <div class="hero-row">
+          <a class="btn btn-acid" href="#access">GET ACCESS</a>
+          <a class="btn btn-ghost" href="#schedule">SIGNAL SCHEDULE</a>
+        </div>
+      </div>
+    </div>
+    <p class="scroll-cue mono" aria-hidden="true">SCROLL TO RAISE VOLTAGE <span class="cue-arrow">▼</span></p>
+  </section>
+
+  <!-- ================= MACHINE ================= -->
+  <section class="sect sect-machine" id="machine">
+    <div class="wrap">
+      <p class="kicker reveal"><span class="kdot"></span>THE MACHINE</p>
+      <h2 class="slab reveal" data-glitch>SOUND. LIGHT. CROWD.<br>ARCHITECTURE.<br><span class="slab-acid">ONE MACHINE, BARELY HELD.</span></h2>
+      <div class="machine-grid">
+        <p class="body-l reveal d1">VOLT//FLOOD runs the whole building as a single instrument. Every fixture, every driver, every projection surface hangs off one master clock at 132&nbsp;BPM &mdash; when the low end moves, the light moves; when the crowd moves, the machine feels it. Nothing in the room is a backdrop. The room is the act.</p>
+        <div class="stat-rail reveal d2">
+          <div class="stat"><span class="stat-n mono" data-count="41" data-suffix="kW">0</span><span class="stat-l">total sound power</span></div>
+          <div class="stat"><span class="stat-n mono" data-count="212" data-suffix="">0</span><span class="stat-l">light fixtures on the clock</span></div>
+          <div class="stat"><span class="stat-n mono" id="stat-bodies" data-suffix="">0</span><span class="stat-l">bodies at full flood</span></div>
+          <div class="stat"><span class="stat-n mono" data-count="132" data-suffix="BPM">0</span><span class="stat-l">master clock, all rooms</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCHEDULE ================= -->
+  <section class="sect sect-schedule" id="schedule">
+    <div class="wrap">
+      <p class="kicker reveal"><span class="kdot"></span>SIGNAL SCHEDULE</p>
+      <h2 class="slab reveal" data-glitch>THREE NIGHTS.<br><span class="slab-acid">ONE VOLTAGE CURVE.</span></h2>
+      <p class="body-m reveal d1">Friday charges the grid. Saturday opens the flood. Sunday drains what is left of you. Hover a name &mdash; the machine answers.</p>
+
+      <div class="night reveal" data-ch="grid">
+        <header class="night-head">
+          <span class="night-tag mono">N°01 — FRI 13 NOV</span>
+          <h3 class="night-name">SURGE</h3>
+          <span class="night-note mono">GRID HALL · DOORS 19:00</span>
+        </header>
+        <ol class="bill">
+          <li class="act" data-ch="grid"><span class="act-t mono">20:00</span><span class="act-n">CURRENT COMMITTEE</span><span class="act-x mono">LIVE RIG</span></li>
+          <li class="act" data-ch="grid"><span class="act-t mono">21:30</span><span class="act-n">KILO NOIR</span><span class="act-x mono">A/V SET</span></li>
+          <li class="act" data-ch="grid"><span class="act-t mono">23:00</span><span class="act-n">SIGNAL ORPHAN</span><span class="act-x mono">A/V SET</span></li>
+          <li class="act" data-ch="grid"><span class="act-t mono">01:00</span><span class="act-n">VOLTA MARROW</span><span class="act-x mono">LIVE RIG</span></li>
+          <li class="act" data-ch="grid"><span class="act-t mono">03:00</span><span class="act-n">PRESSURE ETIQUETTE</span><span class="act-x mono">CLOSING</span></li>
+        </ol>
+      </div>
+
+      <div class="night reveal" data-ch="flood">
+        <header class="night-head">
+          <span class="night-tag mono">N°02 — SAT 14 NOV</span>
+          <h3 class="night-name">FLOOD</h3>
+          <span class="night-note mono">ALL ZONES · DOORS 19:00</span>
+        </header>
+        <ol class="bill">
+          <li class="act" data-ch="flood"><span class="act-t mono">20:00</span><span class="act-n">DRENCH</span><span class="act-x mono">A/V SET</span></li>
+          <li class="act" data-ch="flood"><span class="act-t mono">21:30</span><span class="act-n">SALT CATHEDRAL</span><span class="act-x mono">LIVE RIG</span></li>
+          <li class="act" data-ch="flood"><span class="act-t mono">23:00</span><span class="act-n">GHOST CIRCUIT</span><span class="act-x mono">A/V SET</span></li>
+          <li class="act" data-ch="flood"><span class="act-t mono">01:00</span><span class="act-n">RAIL&times;3</span><span class="act-x mono">LIVE RIG</span></li>
+          <li class="act" data-ch="flood"><span class="act-t mono">03:00</span><span class="act-n">MOTH DISCIPLINE</span><span class="act-x mono">CLOSING</span></li>
+        </ol>
+      </div>
+
+      <div class="night reveal" data-ch="drain">
+        <header class="night-head">
+          <span class="night-tag mono">N°03 — SUN 15 NOV</span>
+          <h3 class="night-name">DRAIN</h3>
+          <span class="night-note mono">TUNNEL ONLY · DOORS 18:00</span>
+        </header>
+        <ol class="bill">
+          <li class="act" data-ch="drain"><span class="act-t mono">19:00</span><span class="act-n">STATIC CHOIR</span><span class="act-x mono">AMBIENT</span></li>
+          <li class="act" data-ch="drain"><span class="act-t mono">20:30</span><span class="act-n">MIRROR TIDE</span><span class="act-x mono">AMBIENT</span></li>
+          <li class="act" data-ch="drain"><span class="act-t mono">22:00</span><span class="act-n">AFTERCURRENT</span><span class="act-x mono">LIVE RIG</span></li>
+          <li class="act" data-ch="drain"><span class="act-t mono">00:00</span><span class="act-n">LOW TIDE TRIBUNAL</span><span class="act-x mono">TILL CLOSE</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ZONES ================= -->
+  <section class="sect sect-zones" id="zones">
+    <div class="wrap">
+      <p class="kicker reveal"><span class="kdot"></span>ZONES</p>
+      <h2 class="slab reveal" data-glitch>THREE ROOMS.<br><span class="slab-acid">THREE PRESSURES.</span></h2>
+      <div class="zone-grid">
+        <article class="zone reveal d1" data-ch="grid" tabindex="0">
+          <span class="zone-tag mono">ZONE 01 · MAIN HALL</span>
+          <h3 class="zone-name">GRID</h3>
+          <p>The rig itself. Ninety-six moving heads on a live truss, a wall of subs tuned to the turbine hall&rsquo;s own resonance, and the master clock driving all of it from a cage in the middle of the floor.</p>
+          <dl class="zone-data mono">
+            <div><dt>CAPACITY</dt><dd data-cap="2400">2,400</dd></div>
+            <div><dt>PROGRAM</dt><dd>PEAK / LIVE RIGS</dd></div>
+            <div><dt>CEILING</dt><dd>22 M</dd></div>
+          </dl>
+        </article>
+        <article class="zone reveal d2" data-ch="flood" tabindex="0">
+          <span class="zone-tag mono">ZONE 02 · BASS CHAMBER</span>
+          <h3 class="zone-name">FLOODROOM</h3>
+          <p>Below the hall, mostly below 80&nbsp;Hz. Projection thrown onto falling mist, pressure you read with your ribs, and a ceiling you can touch. Nine hundred people and no sightlines &mdash; only signal.</p>
+          <dl class="zone-data mono">
+            <div><dt>CAPACITY</dt><dd data-cap="900">900</dd></div>
+            <div><dt>PROGRAM</dt><dd>LOW END / MIST</dd></div>
+            <div><dt>CEILING</dt><dd>3.2 M</dd></div>
+          </dl>
+        </article>
+        <article class="zone reveal d3" data-ch="drain" tabindex="0">
+          <span class="zone-tag mono">ZONE 03 · THE TUNNEL</span>
+          <h3 class="zone-name">DRAIN</h3>
+          <p>The cable run out of the substation, cleared and lit with one slow lamp. Ambient sets, standing water, the storm upstairs arriving through concrete. Where the machine lets you go.</p>
+          <dl class="zone-data mono">
+            <div><dt>CAPACITY</dt><dd data-cap="350">350</dd></div>
+            <div><dt>PROGRAM</dt><dd>AMBIENT / DECOMP</dd></div>
+            <div><dt>CEILING</dt><dd>2.6 M</dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ACCESS ================= -->
+  <section class="sect sect-access" id="access">
+    <div class="wrap">
+      <p class="kicker reveal"><span class="kdot"></span>ACCESS</p>
+      <h2 class="slab reveal" data-glitch>LOCK YOUR<br><span class="slab-acid">SIGNAL.</span></h2>
+      <p class="body-m reveal d1">Capacity is the venue&rsquo;s, not ours &mdash; when the rooms are full, the doors are done. Reservations hold a wristband at the door for this evening; payment is at collection.</p>
+      <div class="tier-grid" id="tier-grid"><!-- tiers rendered from js/data --></div>
+      <p class="mono access-fine reveal">18+ · ID AT DOOR · FREE EARPLUGS AND WATER AT EVERY ENTRANCE · MANAGED LIGHT LEVELS IN ALL ZONES</p>
+    </div>
+  </section>
+
+  <!-- ================= MANIFESTO / ARCHIVE ================= -->
+  <section class="sect sect-archive" id="archive">
+    <div class="wrap">
+      <div class="mani reveal">
+        <p class="kicker"><span class="kdot"></span>MANIFESTO</p>
+        <p class="mani-line">We don&rsquo;t book headliners. We build a machine and invite the people who can drive it. The storm is composed. The chaos is on purpose. Come stand inside the signal.</p>
+      </div>
+      <div class="arch reveal d1">
+        <p class="kicker"><span class="kdot"></span>TRANSMISSION ARCHIVE</p>
+        <ul class="arch-list">
+          <li><span class="mono arch-ed">ED.I — 2023</span><span class="arch-name">THE DRY DOCK</span><span class="arch-note">The one that leaked. 40&nbsp;mm of rain, zero downtime.</span></li>
+          <li><span class="mono arch-ed">ED.II — 2024</span><span class="arch-name">THE TURBINE HALL</span><span class="arch-note">The blackout set: eleven minutes, no light but phones.</span></li>
+          <li><span class="mono arch-ed">ED.III — 2025</span><span class="arch-name">THE INCINERATOR</span><span class="arch-note">The year the grid sang &mdash; feedback tuned to the room key.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <span class="wordmark wm-foot">VOLT<em>//</em>FLOOD</span>
+        <p class="mono foot-line">SUBSTATION 9 · 90 PASIR PANJANG ROAD · SINGAPORE</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="#machine">Machine</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#zones">Zones</a>
+        <a href="#access">Access</a>
+      </nav>
+      <div class="foot-contact mono">
+        <a href="mailto:signal@voltflood.sg">SIGNAL@VOLTFLOOD.SG</a>
+        <span>PRESS: PRESS@VOLTFLOOD.SG</span>
+        <span>PRODUCED BY FLOODWORKS PTE&nbsp;LTD</span>
+      </div>
+    </div>
+    <p class="mono foot-legal">&copy; 2026 FLOODWORKS PTE LTD · EDITION IV · 13—15 NOV 2026</p>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script type="module" src="js/machine.js"></script>
+</body>
+</html>
