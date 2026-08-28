@@ -7,7 +7,10 @@
 (function () {
   'use strict';
 
-  var KEY = 'eam-jobs-v1';
+  /* v2: job records carry a vehicle category (Sedan / SUV-MPV / Supercar) and
+     a coverage level as separate fields — bumping the key retires any v1 demo
+     state still sitting in a reviewer's browser. */
+  var KEY = 'eam-jobs-v2';
   var EVT = 'eam:jobs-changed';
 
   var STAGE_LIBRARY = {
@@ -68,10 +71,11 @@
         vehicle: 'BMW 320i · Mineral Grey',
         customer: 'Marcus T.',
         service: 'ppf',
-        pkg: 'B',
+        category: 'Sedan',
+        coverage: 'High-impact panels',
         bay: 'Level 1 · Bay 3',
         stageIndex: 2,
-        areas: ['bumper-f', 'lamp-l', 'lamp-r', 'bonnet', 'fender-l', 'fender-r', 'mirror-l', 'mirror-r'],
+        areas: ['bumper-f', 'lamp-l', 'lamp-r', 'bonnet', 'fender-l', 'fender-r', 'mirror-l', 'mirror-r', 'door-l', 'door-r'],
         eta: 'Sat, before noon',
         notes: [
           { day: 2, text: 'Vehicle received, walk-around photos taken with owner.' },
@@ -90,7 +94,8 @@
         vehicle: 'Toyota Corolla Altis · White',
         customer: 'Priya N.',
         service: 'accident',
-        pkg: null,
+        category: 'Sedan',
+        coverage: null,
         bay: 'Level 1 · Bay 1',
         stageIndex: 3,
         areas: ['door-l', 'fender-l', 'bumper-f'],
@@ -113,7 +118,8 @@
         vehicle: 'Mazda CX-5 · Jet Black',
         customer: 'Daniel W.',
         service: 'spray',
-        pkg: null,
+        category: 'SUV / MPV',
+        coverage: null,
         bay: 'Level 4 · Booth 2',
         stageIndex: 3,
         areas: ['bonnet', 'roof', 'boot', 'door-l', 'door-r', 'quarter-l', 'quarter-r', 'fender-l', 'fender-r', 'bumper-f', 'bumper-r'],
@@ -135,7 +141,8 @@
         vehicle: 'Honda Vezel · Lunar Silver',
         customer: 'Aisyah R.',
         service: 'service',
-        pkg: null,
+        category: 'SUV / MPV',
+        coverage: null,
         bay: 'Level 1 · Bay 5',
         stageIndex: 3,
         areas: [],
@@ -146,6 +153,29 @@
         ],
         photos: [
           { label: 'Brake pad wear', count: 2, day: 0 }
+        ]
+      },
+      {
+        id: 'EAM-2608-019',
+        plate: 'SPQ7788E',
+        vehicle: 'Porsche 718 Cayman · Guards Red',
+        customer: 'Terence L.',
+        service: 'ppf',
+        category: 'Supercar / Performance',
+        coverage: 'Full body',
+        bay: 'Level 1 · Bay 2',
+        stageIndex: 1,
+        areas: ['bumper-f', 'lamp-l', 'lamp-r', 'mirror-l', 'mirror-r', 'bonnet',
+                'fender-l', 'fender-r', 'door-l', 'door-r', 'roof', 'quarter-l',
+                'quarter-r', 'boot', 'bumper-r'],
+        eta: 'Next Fri',
+        notes: [
+          { day: 1, text: 'Received for full-body film. Front splitter and side intakes photographed before any work.' },
+          { day: 0, text: 'Decontamination wash done. Paint reading taken across every panel before film goes on.' }
+        ],
+        photos: [
+          { label: 'Arrival walk-around', count: 9, day: 1 },
+          { label: 'Paint depth readings', count: 5, day: 0 }
         ]
       }
     ];
@@ -167,6 +197,10 @@
   }
 
   function load() {
+    try {
+      // Drop the v1 blob so a reviewer's browser isn't carrying dead demo state.
+      localStorage.removeItem('eam-jobs-v1');
+    } catch (e) { /* storage unavailable */ }
     try {
       var raw = localStorage.getItem(KEY);
       if (raw) {

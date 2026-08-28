@@ -15,16 +15,41 @@ client's outreach says PPF is the business priority. This build inverts that:
 support the trust story ("a full workshop behind the film") instead of
 competing with it.
 
+## Packages are vehicle categories, not coverage tiers
+
+**Corrected 29 Aug 2026.** The first pass modelled the three PPF options as
+coverage tiers (front / mid / full), which was wrong. The three options are
+**vehicle categories**:
+
+| Category | Covers |
+|---|---|
+| Sedan | Saloons, hatchbacks, compact coupés |
+| SUV / MPV | Larger panels, taller doors |
+| Supercar / Performance | Complex aero, deep curves, delicate finishes |
+
+**Coverage is a separate, orthogonal choice** — front end, high-impact panels,
+or full body — and every coverage level is available on every category. The
+quote is then a function of exact model, coverage, film brand, paint condition
+and fitting work. Nothing in the UI implies a category has a fixed panel count
+or maps to a front/mid/rear split.
+
+This split is enforced in the data model: `js/coverage.js` exports `COVERAGE`
+(three levels with indicative panel sets), and the vehicle category lives
+separately on job records and in the enquiry form. There is no "Package A/B/C"
+anywhere in the prototype.
+
 ## The ownable device: one coverage map, three jobs
 
 A single top-down car, drawn once in SVG (`js/coverage.js`, 15 paintable
 panels + glass), carries the whole site:
 
-1. **Hero (index)** — interactive package comparison: tabs A/B/C light up the
-   panels each tier wraps, with a live "8 of 15 panels wrapped" caption. The
-   three packages are *seen*, not just listed, within the first viewport.
-2. **Services** — the same three coverage shapes side by side, next to a
-   film-layer stack diagram.
+1. **Hero (index)** — interactive coverage explainer: tabs switch between
+   front end / high impact / full body and the panels light up, with a caption
+   naming what that level protects. Coverage is *seen* in the first viewport;
+   the vehicle categories are the package cards directly below.
+2. **Services** — the same three coverage shapes side by side under a
+   "coverage levels — choose on top of your vehicle category" caption, beside
+   the category pills and the film-layer stack diagram.
 3. **Tracker & staff console** — the same car becomes the live job map:
    panels being worked on pulse gold on the customer's tracking page and on
    every job card in the console. The marketing device and the product device
@@ -33,6 +58,29 @@ panels + glass), carries the whole site:
 Panel keys are shared between `coverage.js` and the job records in
 `store.js` (`areas`), so a job's work areas render on the identical geometry
 everywhere.
+
+## Spray paint visualiser (`js/paint.js`)
+
+A consultation aid for the Level 4 spray division, added 29 Aug 2026 to show
+the workshop does full colour changes, not just repair paint.
+
+A stylised side-profile car is drawn in SVG, and picking a swatch repaints the
+body with a **soft-edged sweep travelling nose to tail**: an incoming coat sits
+over the current one behind an SVG mask whose gradient rect is animated on rAF,
+so the boundary feathers like spray rather than snapping like a background
+swap. A mist plume rides the leading edge, and a gloss band sweeps once the
+coat lands. Finishes carry their own sheen value, so satin black reads flatter
+than pearl white. `prefers-reduced-motion` swaps the colour instantly.
+
+Deliberately a **silhouette, not a photograph**: it shows the finish family
+honestly instead of implying a render of the customer's own car. Both
+placements carry an explicit concept-preview disclaimer, and the fuller one
+states that colour is confirmed against a sprayed test card under booth light.
+
+- **Homepage** — compact teaser (four finishes, icon-only swatches) in the
+  supporting-services band, linking through to the full tool.
+- **Services `#colour`** — full interaction: six finishes with names and
+  finish specs, larger stage, full disclaimer.
 
 ## Live customer/admin prototype (frontend-only, by design)
 
@@ -76,13 +124,13 @@ the five services, 20+ years shareholder experience, the two divisions.
 WhatsApp-enabled (taken from the card; flagged in the old brief — every
 `wa.me` link builds from one constant in `js/ui.js` and `js/contact.js`).
 
-**Shipped as designed "being finalised" states, never invented:** PPF package
-names (neutral A/B/C with `Name TBC` chips), prices ("$ —"), inclusions
-beyond the coverage split, film brand, warranty terms, opening hours, email.
-The dashed gold `.tbc` chip is the single visual for all of these — it reads
-as a product state, not a broken slot. The three coverage *shapes*
-(front guard / full front / full body) are industry-standard tiers used so the
-comparison demonstrates the mechanism; final scope is the client's call.
+**Shipped as designed "being finalised" states, never invented:** per-category
+pricing ("$ —"), film brand, warranty terms, exact inclusions, opening hours,
+email. The dashed gold `.tbc` chip is the single visual for all of these — it
+reads as a product state, not a broken slot. The three coverage levels are
+described as what we'd talk through at a walk-around, with the exact panel
+list explicitly agreed before film is cut; the indicative panel sets on the
+map demonstrate the mechanism, and final scope is the client's call.
 
 No reviews, no testimonials, no year-opened claim, no invented specifics.
 
@@ -108,18 +156,46 @@ transmitted or stored.
 - Contrast audited computationally on live computed styles (26 pairs).
 - Exactly one `h1` per page, no heading-level jumps, every image alt-texted
   with intrinsic dimensions, every input labelled, no dead anchors.
-- Functional: tier tabs (5/8/15 panels), tracker lookup (plate and
-  dash/case-insensitive job ref, error state), admin advance/note/photo-set,
-  and the cross-tab live sync — advance in console, tracker updated in the
-  other tab without reload.
+- Functional: coverage tabs, tracker lookup (plate and dash/case-insensitive
+  job ref, error state), admin advance/note/photo-set, and the cross-tab live
+  sync — advance in console, tracker updated in the other tab without reload.
 - `[hidden] { display: none !important }` shipped after the gate's `hidden`
   attribute lost to `.gate { display: grid }` — the exact trap in
   `headless-verification-traps`.
 
+### Second pass (29 Aug 2026) — categories + visualiser
+
+Re-ran the full battery after the corrections. All 5 pages × 9 widths
+(320→1440) at zero overflow **in rendered state**, and additionally asserted
+nothing sits inside the 24px left gutter. Twelve new colour pairs audited
+(worst 5.26:1). One `h1` per page, no heading jumps. No JS errors on any page
+after exercising swatches, coverage tabs, tracker lookup and the console gate;
+all 19 `wa.me` links across the site assert against the verified number.
+Cross-tab sync re-verified on the new Supercar job.
+
+Three real bugs found and fixed in this pass:
+- **`.svc-detail` silently killed `.wrap`'s gutter.** Both classes sit on the
+  same element and `.svc-detail { padding: 72px 0 }` won on source order, so
+  every services section ran flush to the screen edge on mobile. Invisible to
+  an overflow sweep — copy at `left: 0` overflows nothing. Now caught by a
+  gutter assertion, not just a width one.
+- **Paint swatches were 35px tap targets** on the compact teaser; icon-only
+  swatches now pad to 44px, and `.btn--sm` gets a 44px floor under 900px since
+  the per-category CTAs are the main phone conversion.
+- **The mist plume was clipped by the cropped viewBox**, giving a soft
+  gradient a hard rectangular top edge. Repositioned inside the window.
+
+Known and left alone: footer link rows are ~16px tall on mobile. Pre-existing
+across the template, and fixing it properly means restructuring the footer —
+worth doing before launch, out of scope for a content correction.
+
 ## If the client engages: launch checklist
 
-1. Confirm PPF package names, prices, inclusions, film brand, warranty —
-   replace the `.tbc` states (all in `index.html` + `services.html`).
+1. Confirm per-category PPF pricing, exact inclusions, film brand and warranty
+   — replace the `.tbc` states (all in `index.html` + `services.html`).
+   Confirm too whether coverage naming should match the workshop's own terms.
+2. Confirm which paint finishes the spray division actually offers, so the
+   visualiser's six swatches match reality (currently a representative set).
 2. Confirm WhatsApp line; hours + email into `contact.html` and footers.
 3. Real workshop photography to replace the licensed stock set (keep the
    grade pipeline in `IMAGE-CREDITS.md`).

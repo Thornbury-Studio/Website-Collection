@@ -46,7 +46,8 @@
 
       var vehicle = document.createElement('span');
       vehicle.className = 'jc-vehicle';
-      vehicle.textContent = job.vehicle + ' · ' + job.serviceLabel;
+      vehicle.textContent = job.vehicle + ' · ' + job.serviceLabel +
+        (job.category ? ' · ' + job.category : '');
 
       var ready = job.stageIndex === job.stages.length - 1;
       var chip = document.createElement('span');
@@ -81,11 +82,12 @@
 
     text('ad-plate', job.plate);
     text('ad-vehicle', job.vehicle);
-    text('ad-ref', 'Job ' + job.id + (job.pkg ? ' · Package ' + job.pkg : ''));
+    text('ad-ref', 'Job ' + job.id + (job.coverage ? ' · ' + job.coverage : ''));
     text('ad-owner', job.customer);
     text('ad-bay', job.bay);
     text('ad-eta', job.eta);
     text('ad-service', job.serviceLabel);
+    text('ad-category', job.category || '—');
 
     var ready = job.stageIndex === job.stages.length - 1;
     var chip = document.getElementById('ad-chip');

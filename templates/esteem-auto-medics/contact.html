@@ -89,16 +89,35 @@
               <input type="text" id="qf-vehicle" name="vehicle" placeholder="e.g. BMW 320i, 2023">
             </div>
             <div class="qfield">
+              <label for="qf-category">Vehicle category</label>
+              <select id="qf-category" name="category">
+                <option value="Sedan">Sedan</option>
+                <option value="SUV / MPV">SUV / MPV</option>
+                <option value="Supercar / Performance">Supercar / Performance</option>
+                <option value="Not sure">Not sure</option>
+              </select>
+            </div>
+          </div>
+          <div class="qrow">
+            <div class="qfield">
               <label for="qf-service">What do you need?</label>
               <select id="qf-service" name="service">
-                <option value="PPF — not sure which package">PPF — not sure which package</option>
-                <option value="PPF — Package A (front guard)">PPF — Package A (front guard)</option>
-                <option value="PPF — Package B (full front)">PPF — Package B (full front)</option>
-                <option value="PPF — Package C (full body)">PPF — Package C (full body)</option>
+                <option value="Paint Protection Film">Paint Protection Film</option>
+                <option value="Custom colour change / respray">Custom colour change / respray</option>
                 <option value="Accident repair / insurance claim">Accident repair / insurance claim</option>
-                <option value="Spray painting">Spray painting</option>
+                <option value="Spray painting (panel or bumper)">Spray painting (panel or bumper)</option>
                 <option value="Servicing &amp; maintenance">Servicing &amp; maintenance</option>
                 <option value="Something else">Something else</option>
+              </select>
+            </div>
+            <div class="qfield">
+              <label for="qf-coverage">PPF coverage interest</label>
+              <select id="qf-coverage" name="coverage">
+                <option value="Not sure — please advise">Not sure — please advise</option>
+                <option value="Front end">Front end</option>
+                <option value="High-impact panels">High-impact panels</option>
+                <option value="Full body">Full body</option>
+                <option value="Not applicable">Not applicable</option>
               </select>
             </div>
           </div>
