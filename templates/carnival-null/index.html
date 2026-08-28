@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>NULL CARNIVAL — The Seventh Turn · One night, 14 Nov 2026</title>
+<meta name="description" content="NULL CARNIVAL is a travelling night fair that appears once in a decommissioned civic building and never returns to it. The Seventh Turn runs for one night — 14 November 2026, 20:00 until the lights are returned. Six booths, one dark hour, masks issued at the gate.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0A0711">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ======== THE MIDWAY (fixed WebGL stage) ======== -->
+<div class="stage" id="stage" aria-hidden="true">
+  <canvas id="gl"></canvas>
+  <!-- designed static state, revealed if the module never boots -->
+  <div class="no3d-back">
+    <svg viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <radialGradient id="fpool" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#FF8A2B" stop-opacity="0.30"/>
+          <stop offset="1" stop-color="#FF8A2B" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="fmerc" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#6FF2C4" stop-opacity="0.22"/>
+          <stop offset="1" stop-color="#6FF2C4" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1400" height="800" fill="#0A0711"/>
+      <ellipse cx="700" cy="640" rx="620" ry="150" fill="url(#fpool)"/>
+      <ellipse cx="290" cy="600" rx="240" ry="80" fill="url(#fmerc)"/>
+      <g stroke="#1B1426" stroke-width="1">
+        <path d="M0 560 H1400 M0 600 H1400 M0 648 H1400 M0 704 H1400 M0 768 H1400"/>
+        <path d="M700 540 L700 800 M560 540 L430 800 M420 540 L60 800 M840 540 L970 800 M980 540 L1340 800"/>
+      </g>
+      <g fill="none" stroke="#3A2C1A" stroke-width="3">
+        <path d="M150 560 V430 a105 105 0 0 1 210 0 V560"/>
+        <path d="M470 552 V452 a80 80 0 0 1 160 0 V552"/>
+        <path d="M790 552 V452 a80 80 0 0 1 160 0 V552"/>
+        <path d="M1055 560 V430 a105 105 0 0 1 210 0 V560"/>
+      </g>
+      <g fill="none" stroke="#E0B457" stroke-width="2" opacity="0.55">
+        <path d="M150 560 V430 a105 105 0 0 1 210 0 V560"/>
+        <path d="M1055 560 V430 a105 105 0 0 1 210 0 V560"/>
+      </g>
+      <ellipse cx="255" cy="500" rx="72" ry="86" fill="#050309" stroke="#6FF2C4" stroke-width="1.5" opacity="0.7"/>
+      <ellipse cx="550" cy="508" rx="54" ry="66" fill="#050309" stroke="#FF8A2B" stroke-width="1.5" opacity="0.6"/>
+      <ellipse cx="870" cy="508" rx="54" ry="66" fill="#050309" stroke="#FF2D55" stroke-width="1.5" opacity="0.6"/>
+      <ellipse cx="1160" cy="500" rx="72" ry="86" fill="#050309" stroke="#6FF2C4" stroke-width="1.5" opacity="0.7"/>
+      <g fill="none" stroke="#2A2038" stroke-width="1.2">
+        <path d="M60 300 Q360 400 700 316 Q1040 232 1340 330"/>
+        <path d="M60 190 Q360 300 700 210 Q1040 120 1340 226"/>
+      </g>
+      <g fill="none" stroke="#E0B457" stroke-width="7" stroke-linecap="round" stroke-dasharray="0 40" opacity="0.85">
+        <path d="M60 300 Q360 400 700 316 Q1040 232 1340 330"/>
+        <path d="M60 190 Q360 300 700 210 Q1040 120 1340 226"/>
+      </g>
+      <g fill="none" stroke="#F4EADA" stroke-width="2" opacity="0.38">
+        <path d="M366 128 c30 -34 84 -34 114 0 c14 42 -6 96 -57 118 c-51 -22 -71 -76 -57 -118 Z"/>
+        <path d="M905 165 c24 -27 67 -27 91 0 c11 34 -5 77 -46 94 c-41 -17 -57 -60 -45 -94 Z"/>
+        <path d="M1215 96 c19 -22 54 -22 73 0 c9 27 -4 62 -37 76 c-33 -14 -45 -49 -36 -76 Z"/>
+      </g>
+      <g fill="#0A0711">
+        <ellipse cx="404" cy="176" rx="12" ry="9"/><ellipse cx="442" cy="176" rx="12" ry="9"/>
+        <ellipse cx="936" cy="207" rx="9" ry="7"/><ellipse cx="967" cy="207" rx="9" ry="7"/>
+        <ellipse cx="1239" cy="132" rx="7" ry="6"/><ellipse cx="1264" cy="132" rx="7" ry="6"/>
+      </g>
+    </svg>
+  </div>
+</div>
+<div class="veil" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ======== HUD ======== -->
+<div class="hud" aria-hidden="true">
+  <span class="hud-turn"><i class="turn-dial"><i class="turn-hand" id="turnHand"></i></i><b id="hudTurn">000&deg;</b></span>
+  <span class="hud-sep"></span>
+  <span class="hud-station" id="hudStation">GATE</span>
+  <span class="hud-sep"></span>
+  <span class="hud-count" id="hudCount">T&minus;000 : 00 : 00</span>
+</div>
+
+<!-- ======== HEADER ======== -->
+<header class="top">
+  <a class="brand" href="#gate">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 28 28"><path d="M4.4 9.6c2.2-3.6 16.9-3.6 19.2 0 1.4 6.6-1.7 13.4-9.6 16.6C6.1 23 3 16.2 4.4 9.6Z" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="10.1" cy="13.2" rx="2.1" ry="2.6" fill="currentColor"/><ellipse cx="17.9" cy="13.2" rx="2.1" ry="2.6" fill="currentColor"/></svg>
+    </span>
+    <span class="brand-text">NULL&thinsp;CARNIVAL</span>
+  </a>
+  <nav class="ring-nav" aria-label="Stations">
+    <button type="button" class="stn is-on" data-go="gate">Gate</button>
+    <button type="button" class="stn" data-go="premise">Premise</button>
+    <button type="button" class="stn" data-go="midway">Midway</button>
+    <button type="button" class="stn" data-go="program">Program</button>
+    <button type="button" class="stn" data-go="sites">Sites</button>
+    <button type="button" class="stn" data-go="rules">Rules</button>
+  </nav>
+  <div class="top-act">
+    <button type="button" class="snd" id="sndBtn" aria-pressed="false">
+      <span class="snd-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="snd-lbl">Calliope</span>
+    </button>
+    <a class="cta cta-sm" href="#access">Entry</a>
+    <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="drawer">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span class="vh">Menu</span>
+    </button>
+  </div>
+</header>
+
+<!-- ======== RIBBON (the ring, unrolled) ======== -->
+<div class="ribbon" aria-hidden="true">
+  <div class="ribbon-track" id="ribbonTrack">
+    <div class="ribbon-row">
+      <span>THE SEVENTH TURN</span><i>&#9670;</i>
+      <span>ONE NIGHT ONLY</span><i>&#9670;</i>
+      <span>NATATORIUM 4 &middot; KAMPONG BUGIS</span><i>&#9670;</i>
+      <span>14 NOV 2026 &middot; 20:00 &rarr; 05:12</span><i>&#9670;</i>
+      <span>MASKS ISSUED AT THE GATE</span><i>&#9670;</i>
+      <span>THE NULL HOUR &middot; 00:00</span><i>&#9670;</i>
+      <span>SITE RELEASED SIX HOURS BEFORE</span><i>&#9670;</i>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ======== 01 GATE ======== -->
+<section class="stn-sec sec-gate" id="gate" data-station="0" data-ch="sodium">
+  <div class="gate-in">
+    <p class="eyebrow reveal"><span class="ey-mark">&#9670;</span> Edition VII <span class="ey-sep">/</span> <span class="nul" data-true="LOAD-IN 12 NOV">The Seventh Turn</span></p>
+
+    <h1 class="wordmark reveal d1">
+      <span class="vh">NULL CARNIVAL</span>
+      <span class="wm-plate" aria-hidden="true">
+        <svg viewBox="0 0 1200 430" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <mask id="ncut" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="430">
+              <path d="M40 168 Q600 40 1160 168 L1160 306 Q600 400 40 306 Z" fill="#fff"/>
+              <text class="cutword" x="600" y="304" text-anchor="middle">NULL</text>
+            </mask>
+            <linearGradient id="plateg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#5A2A19"/>
+              <stop offset="0.34" stop-color="#8C441F"/>
+              <stop offset="0.52" stop-color="#6B301A"/>
+              <stop offset="1" stop-color="#2C1310"/>
+            </linearGradient>
+          </defs>
+          <path class="plate" d="M40 168 Q600 40 1160 168 L1160 306 Q600 400 40 306 Z" fill="url(#plateg)" mask="url(#ncut)"/>
+          <text class="cutword cut-edge" x="600" y="304" text-anchor="middle">NULL</text>
+          <path class="plate-rule" d="M40 168 Q600 40 1160 168 L1160 306 Q600 400 40 306 Z" fill="none"/>
+          <path class="plate-rule plate-rule-in" d="M62 178 Q600 62 1138 178 L1138 296 Q600 378 62 296 Z" fill="none"/>
+          <path class="bulbs bulbs-glow" d="M40 168 Q600 40 1160 168"/>
+          <path class="bulbs bulbs-glow" d="M40 306 Q600 400 1160 306"/>
+          <path class="bulbs" d="M40 168 Q600 40 1160 168"/>
+          <path class="bulbs" d="M40 306 Q600 400 1160 306"/>
+        </svg>
+      </span>
+      <span class="wm-word" aria-hidden="true">CARNIVAL</span>
+    </h1>
+
+    <div class="gate-meta reveal d2">
+      <p class="gm-line"><b>Sat 14 November 2026</b> <span class="gm-sep">&middot;</span> 20:00 until the lights are returned</p>
+      <p class="gm-line gm-site"><span class="nul" data-true="BUILDING 4 &middot; DRY SINCE 2011">Natatorium 4</span>, Kampong Bugis <span class="gm-sep">&middot;</span> a decommissioned public swimming complex</p>
+    </div>
+
+    <div class="gate-act reveal d3">
+      <a class="cta cta-lg" href="#access">Take a stub<span class="cta-x" aria-hidden="true">&#8599;</span></a>
+      <a class="cta cta-ghost" href="#midway">Walk the midway</a>
+    </div>
+
+    <p class="gate-note reveal d3">The address is released to stub holders six hours before the gate. Do not travel before you are told where.</p>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true"><i></i><span>TURN</span></div>
+</section>
+
+<!-- ======== 02 PREMISE ======== -->
+<section class="stn-sec sec-premise" id="premise" data-station="1" data-ch="mercury">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <span class="sec-no">02</span>
+      <h2 class="sec-h" data-tear>What it is</h2>
+    </header>
+    <div class="premise-grid">
+      <div class="premise-body reveal d1">
+        <p class="lede">A carnival is a machine for making a place stop being itself for one night. We bring one into buildings that have already stopped being themselves &mdash; drained pools, dead malls, terminated train halls, plazas nobody crosses any more &mdash; and we run it once.</p>
+        <p>Six booths, a carousel on the floor of an empty pool, fourteen mirrors that disagree, and a prize shelf with nothing on it. Every visitor is issued a mask at the gate and asked to hand it to someone else before three in the morning. Nothing is sold inside. Nothing is filmed by us.</p>
+        <p>At midnight the building goes dark for eleven minutes. That is the only part of the night we can promise will happen exactly on time.</p>
+      </div>
+      <ul class="facts reveal d2">
+        <li><b>01</b><span>One night per site</span><em>We do not return. The Seventh Turn happens once, and then Natatorium 4 goes back to being a locked building.</em></li>
+        <li><b>02</b><span>A face, on entry</span><em>Masks are issued at the gate and are yours to give away. Leaving in the one you arrived in is permitted, and noted.</em></li>
+        <li><b>03</b><span>Managed light</span><em>Ours are the only lights in the building. Levels are held low and moved slowly. No flash.</em></li>
+        <li><b>04</b><span>Eleven dark minutes</span><em>00:00 &mdash; the Null Hour. Stand where you are. Stewards carry sodium lamps and will find you.</em></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======== 03 MIDWAY ======== -->
+<section class="stn-sec sec-midway" id="midway" data-station="2" data-ch="sodium">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <span class="sec-no">03</span>
+      <h2 class="sec-h" data-tear>The midway</h2>
+      <p class="sec-sub">Six booths on a ring, turning slowly all night. Take one and the hall re-lights around it.</p>
+    </header>
+
+    <ul class="booths">
+      <li class="booth reveal" data-ch="sodium" data-booth="1" tabindex="0">
+        <span class="booth-no">Booth 01</span>
+        <h3 class="booth-h"><span class="nul" data-true="KIT RETURN">The Face Exchange</span></h3>
+        <p>Hand in a face, receive a face. The transaction is not reversible and is not recorded. Two hundred and forty blanks are in rotation; by 02:00 none of them are where they started.</p>
+        <span class="booth-foot"><i>&#9670;</i> Pool deck, north</span>
+      </li>
+      <li class="booth reveal d1" data-ch="mercury" data-booth="2" tabindex="0">
+        <span class="booth-no">Booth 02</span>
+        <h3 class="booth-h"><span class="nul" data-true="GLASS STORE">Hall of Disagreeing Mirrors</span></h3>
+        <p>Fourteen mirrors, no two of which return the same person. The fifteenth is not a mirror and is the only way out of the room. Capacity six.</p>
+        <span class="booth-foot"><i>&#9670;</i> Changing block, east</span>
+      </li>
+      <li class="booth reveal d2" data-ch="carmine" data-booth="3" tabindex="0">
+        <span class="booth-no">Booth 03</span>
+        <h3 class="booth-h"><span class="nul" data-true="EMPTY SHELF">Always A Winner</span></h3>
+        <p>A prize booth with an empty shelf. Every visitor wins. The prize is issued as a six-digit number that you are asked to remember and never write down.</p>
+        <span class="booth-foot"><i>&#9670;</i> Spectator stand, row C</span>
+      </li>
+      <li class="booth reveal" data-ch="sodium" data-booth="4" tabindex="0">
+        <span class="booth-no">Booth 04</span>
+        <h3 class="booth-h"><span class="nul" data-true="TONE LANE">The Listening Range</span></h3>
+        <p>Ten lanes. The targets are frequencies rather than ducks. Hit one and the key of the whole building moves with it &mdash; everyone hears what you did, nobody knows it was you.</p>
+        <span class="booth-foot"><i>&#9670;</i> Filtration corridor</span>
+      </li>
+      <li class="booth reveal d1" data-ch="mercury" data-booth="5" tabindex="0">
+        <span class="booth-no">Booth 05</span>
+        <h3 class="booth-h"><span class="nul" data-true="PIT FLOOR &minus;3.8">Deep End Carousel</span></h3>
+        <p>Installed on the floor of the empty pool at minus three point eight metres. Eight horses, no music of its own, turning against the direction of the midway. It has never been wet.</p>
+        <span class="booth-foot"><i>&#9670;</i> Main tank, deep</span>
+      </li>
+      <li class="booth reveal d2" data-ch="carmine" data-booth="6" tabindex="0">
+        <span class="booth-no">Booth 06</span>
+        <h3 class="booth-h"><span class="nul" data-true="STUB DESK">The Oracle Stub</span></h3>
+        <p>Feed your ticket back into the machine. It returns a different ticket. The difference between the two is the reading, and the reading is yours to interpret without help.</p>
+        <span class="booth-foot"><i>&#9670;</i> Turnstile hall</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ======== 04 PROGRAM ======== -->
+<section class="stn-sec sec-program" id="program" data-station="3" data-ch="sodium">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <span class="sec-no">04</span>
+      <h2 class="sec-h" data-tear>Order of the night</h2>
+      <p class="sec-sub">Nine hours and twelve minutes. Only one item on this list is guaranteed to start on time.</p>
+    </header>
+
+    <ol class="program">
+      <li class="prg reveal" data-ch="sodium" tabindex="0"><span class="prg-t">20:00</span><span class="prg-n">The gate opens</span><span class="prg-d">Masks issued. Stubs scanned once and never again.</span></li>
+      <li class="prg reveal" data-ch="sodium" tabindex="0"><span class="prg-t">21:20</span><span class="prg-n">First turn</span><span class="prg-d">The midway begins to rotate. It does not stop until 04:40.</span></li>
+      <li class="prg reveal" data-ch="carmine" tabindex="0"><span class="prg-t">22:45</span><span class="prg-n">Mass exchange</span><span class="prg-d">Every mask in the building changes hands inside four minutes.</span></li>
+      <li class="prg prg-key reveal" data-ch="mercury" tabindex="0"><span class="prg-t">00:00</span><span class="prg-n">The Null Hour</span><span class="prg-d">Eleven minutes of full dark. Guaranteed. Stand still.</span></li>
+      <li class="prg reveal" data-ch="mercury" tabindex="0"><span class="prg-t">00:11</span><span class="prg-n">Return of light</span><span class="prg-d">Sodium first, from the deep end outward. Roughly ninety seconds.</span></li>
+      <li class="prg reveal" data-ch="sodium" tabindex="0"><span class="prg-t">01:30</span><span class="prg-n">Second turn</span><span class="prg-d">The ring reverses. The booths pass in the opposite order.</span></li>
+      <li class="prg reveal" data-ch="carmine" tabindex="0"><span class="prg-t">03:00</span><span class="prg-n">Procession of the unclaimed</span><span class="prg-d">The prizes nobody won are carried the length of the tank and put down.</span></li>
+      <li class="prg reveal" data-ch="sodium" tabindex="0"><span class="prg-t">04:40</span><span class="prg-n">The lights are returned</span><span class="prg-d">Handed back to the building. The carousel stops mid-rotation and stays there.</span></li>
+      <li class="prg prg-end reveal" data-ch="mercury" tabindex="0"><span class="prg-t">05:12</span><span class="prg-n">Empty</span><span class="prg-d">The site is closed and does not reopen.</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ======== 05 SITES ======== -->
+<section class="stn-sec sec-sites" id="sites" data-station="4" data-ch="mercury">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <span class="sec-no">05</span>
+      <h2 class="sec-h" data-tear>Where it has been</h2>
+      <p class="sec-sub">Seven turns, seven buildings. None of them are still available to us.</p>
+    </header>
+
+    <ol class="sites">
+      <li class="site reveal"><span class="site-n">I</span><span class="site-y">2019</span><span class="site-p">Meridian Mall, Level 4</span><span class="site-s">Vacated retail deck &middot; 1,100 admitted</span></li>
+      <li class="site site-void reveal"><span class="site-n">II</span><span class="site-y">2020</span><span class="site-p">&mdash;</span><span class="site-s">Site demolished nine days before the gate. Stubs were never reissued.</span></li>
+      <li class="site reveal"><span class="site-n">III</span><span class="site-y">2021</span><span class="site-p">Warehouse 22, Tuas</span><span class="site-s">Cold store, decommissioned &middot; 900 admitted</span></li>
+      <li class="site reveal"><span class="site-n">IV</span><span class="site-y">2022</span><span class="site-p">The Old Terminus Hall</span><span class="site-s">Disused concourse &middot; 1,800 admitted</span></li>
+      <li class="site reveal"><span class="site-n">V</span><span class="site-y">2023</span><span class="site-p">Civic Plaza, Deck C</span><span class="site-s">Open air, rained on &middot; 2,400 admitted</span></li>
+      <li class="site reveal"><span class="site-n">VI</span><span class="site-y">2025</span><span class="site-p">Carpark 8B, roof</span><span class="site-s">Nine storeys up &middot; 1,500 admitted</span></li>
+      <li class="site site-now reveal"><span class="site-n">VII</span><span class="site-y">2026</span><span class="site-p">Natatorium 4, Kampong Bugis</span><span class="site-s">Drained since 2011 &middot; 2,000 to be admitted</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ======== 06 ACCESS ======== -->
+<section class="stn-sec sec-access" id="access" data-station="5" data-ch="carmine">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <span class="sec-no">06</span>
+      <h2 class="sec-h" data-tear>Entry</h2>
+      <p class="sec-sub">Two thousand stubs. Eighteen hundred are sold. Two hundred are not for sale.</p>
+    </header>
+
+    <div class="tiers">
+      <article class="tier reveal" data-ch="sodium" tabindex="0">
+        <header><h3>Stub</h3><p class="tier-p"><b>$48</b></p></header>
+        <ul>
+          <li>Entry from 20:00</li>
+          <li>One mask, issued at the gate</li>
+          <li>One prize number from Booth 03</li>
+          <li>Site address six hours before</li>
+        </ul>
+        <a class="cta cta-tier" href="#ballot">Take a stub</a>
+      </article>
+      <article class="tier tier-mid reveal d1" data-ch="gilt" tabindex="0">
+        <span class="tier-flag">Held</span>
+        <header><h3>Keyholder</h3><p class="tier-p"><b>$95</b></p></header>
+        <ul>
+          <li>Entry from 19:00, before the ring turns</li>
+          <li>Site address twenty-four hours before</li>
+          <li>The Deep End Carousel while the tank is still empty of people</li>
+          <li>A second mask, unissued and blank</li>
+        </ul>
+        <a class="cta cta-tier" href="#ballot">Take a stub</a>
+      </article>
+      <article class="tier tier-null reveal d2" data-ch="mercury" tabindex="0">
+        <span class="tier-flag">Ballot</span>
+        <header><h3><span class="nul" data-true="COMP LIST">Null</span></h3><p class="tier-p"><b>$0</b></p></header>
+        <ul>
+          <li>Two hundred admitted, allocated by the Oracle</li>
+          <li>Not purchasable at any price, at any point</li>
+          <li>You are told at 18:00 on the night, and not before</li>
+          <li>The same entry as a Stub in every other respect</li>
+        </ul>
+        <a class="cta cta-tier" href="#ballot">Request one</a>
+      </article>
+    </div>
+
+    <div class="ballot reveal d1" id="ballot">
+      <div class="ballot-copy">
+        <h3>Request a null stub</h3>
+        <p>One request per person. The Oracle draws at 17:00 on 14 November and results go out an hour later. There is no waiting list and no appeal.</p>
+      </div>
+      <form class="ballot-form" id="ballotForm" method="post" action="#ballot" novalidate>
+        <div class="fld">
+          <label for="bname">Name as it should read on the stub</label>
+          <input type="text" id="bname" name="bname" autocomplete="name" required maxlength="80" placeholder="&mdash;">
+          <span class="fld-err" id="err-bname"></span>
+        </div>
+        <div class="fld">
+          <label for="bmail">Where to send the result</label>
+          <input type="email" id="bmail" name="bmail" autocomplete="email" required maxlength="120" placeholder="&mdash;">
+          <span class="fld-err" id="err-bmail"></span>
+        </div>
+        <div class="fld fld-full">
+          <label for="bwhy">Why you should be admitted <span class="fld-opt">optional, and read</span></label>
+          <textarea id="bwhy" name="bwhy" rows="2" maxlength="240" placeholder="&mdash;"></textarea>
+        </div>
+        <button class="cta cta-lg" type="submit">Enter the ballot</button>
+        <p class="ballot-out" id="ballotOut" role="status" aria-live="polite"></p>
+      </form>
+      <noscript><p class="ballot-ns">Ballot requests are also taken in person at the gate desk from 18:00 on the night, while the two hundred last.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- ======== 07 RULES ======== -->
+<section class="stn-sec sec-rules" id="rules" data-station="6" data-ch="mercury">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <span class="sec-no">07</span>
+      <h2 class="sec-h" data-tear>Conditions of entry</h2>
+      <p class="sec-sub">Short, and all of it enforced.</p>
+    </header>
+
+    <ol class="rules">
+      <li class="rule reveal"><b>01</b><p><b>One night, one building.</b> The carnival does not return to a site. There is no second date and no rain date; the Fifth Turn ran through a storm on an open deck and finished on schedule.</p></li>
+      <li class="rule reveal"><b>02</b><p><b>The address arrives late.</b> Six hours before the gate for Stub holders, twenty-four for Keyholders. Travelling to a site before you are told where it is will not get you in any earlier.</p></li>
+      <li class="rule reveal"><b>03</b><p><b>Masks travel.</b> You are issued one and asked to exchange it at least once before 03:00. Removing a mask at the gate is not permitted; inside, it is entirely up to you.</p></li>
+      <li class="rule reveal"><b>04</b><p><b>Managed light.</b> Ours are the only lights in the building. Levels are held low and moved slowly, and there is no flash photography &mdash; a single flash is visible from the far end of the tank and undoes the room for everyone in it.</p></li>
+      <li class="rule reveal"><b>05</b><p><b>The Null Hour is real dark.</b> At 00:00 every light goes out for eleven minutes. Stand still and wait. Stewards carry shielded sodium lamps and will reach you.</p></li>
+      <li class="rule reveal"><b>06</b><p><b>18+, flat shoes, dry tank.</b> This is a decommissioned structure with a three point eight metre drop at the deep end, ramped and railed for the night. The pool has held no water since 2011.</p></li>
+    </ol>
+
+    <p class="rules-foot reveal">Access, capacity and stewarding for the Seventh Turn are held under the site&rsquo;s temporary event licence. Queries go to <a href="#ballot">the ballot desk</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span class="foot-mark">NULL&thinsp;CARNIVAL</span>
+    <span class="foot-mid">Edition VII &middot; The Seventh Turn &middot; Natatorium 4</span>
+    <span class="foot-end">One night. 14.11.2026.</span>
+  </div>
+</footer>
+
+<!-- ======== DRAWER ======== -->
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-in">
+    <button type="button" class="drawer-x" id="drawerX"><span class="vh">Close</span><span aria-hidden="true">&times;</span></button>
+    <nav aria-label="Stations">
+      <a href="#gate"><b>01</b> Gate</a>
+      <a href="#premise"><b>02</b> What it is</a>
+      <a href="#midway"><b>03</b> The midway</a>
+      <a href="#program"><b>04</b> Order of the night</a>
+      <a href="#sites"><b>05</b> Where it has been</a>
+      <a href="#access"><b>06</b> Entry</a>
+      <a href="#rules"><b>07</b> Conditions</a>
+    </nav>
+    <p class="drawer-note">14 November 2026 &middot; 20:00 &rarr; 05:12<br>Natatorium 4, Kampong Bugis</p>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script type="module" src="js/carnival.js"></script>
+</body>
+</html>

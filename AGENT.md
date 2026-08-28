@@ -38,6 +38,26 @@ It serves two audiences from two different pages, and they must not be conflated
 | `.env` | `GEMINI_API_KEY` for template imagery (nano-banana) — local to this machine, gitignored |
 | `~/.claude/projects/.../memory/` | Cross-session knowledge: build recipe, image-gen usage, verification traps, multi-machine sync notes |
 
+## Commit & push policy
+
+A **one-shot prompt targeted at the website-template collection** — "build me a
+[theme] showcase template", "add a new child site for X" — is pushed to `main`
+immediately by default once the build is verified in a real browser. No separate
+"should I push?" confirmation step for this specific case: build, verify, commit,
+push, report the result.
+
+This default is narrow on purpose:
+- It covers **new template creation** in `templates/<slug>/` plus its hub/sitemap
+  registration — the repeatable, low-risk, reviewable-after-the-fact unit of work
+  this repo exists to produce.
+- It does **not** cover edits to already-shipped templates, hub/homepage
+  restructuring, deleting or renaming templates, `middleware.js`/client-preview
+  gating, force-pushes, or anything the standard safety rules already require
+  confirmation for. Those still ask first.
+- If the user's prompt is exploratory ("what if we tried…", "sketch a few
+  directions") rather than a build instruction, treat it as the normal
+  ask-before-acting default — this rule is for the "just build it" case.
+
 ## Client delivery workflow (proposed)
 
 This repo builds and hosts the **showcase templates only**. Once a customer buys, the

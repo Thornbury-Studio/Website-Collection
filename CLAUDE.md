@@ -1,3 +1,17 @@
+# Start here
+
+New session in this repo? Read [AGENT.md](AGENT.md) first — one page, "why
+this exists, where things live." It links onward to [PRODUCT.md](PRODUCT.md)
+(personal-portfolio catalog/brand truth), [PATTERNS.md](PATTERNS.md) (code
+patterns that keep getting re-broken per template), and
+[VIDEO-POLICY.md](VIDEO-POLICY.md) (AI video credit policy). This file
+(CLAUDE.md) covers content-policy rules only, below.
+
+Also check `~/.claude/projects/.../memory/MEMORY.md` for cross-session
+knowledge: build recipe, image-gen usage, verification traps, per-client
+facts. It's not in this repo (user-global, not project-checked-in) but it's
+the other half of the baseline — read it too, not just this file.
+
 # Portfolio content policy
 
 For AI video generation tasks, see [VIDEO-POLICY.md](VIDEO-POLICY.md) — credit
