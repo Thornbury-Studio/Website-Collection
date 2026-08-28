@@ -119,14 +119,22 @@
         </p>
       </div>
 
-      <!-- vertical-video frame: a still from the show's own posts -->
+      <!-- vertical-video frame, running the show's standby slate -->
       <div class="hero-frame">
         <div class="phone">
           <div class="phone-screen">
-            <img src="img/cue-b-lg.webp" srcset="img/cue-b-sm.webp 400w, img/cue-b-lg.webp 760w"
-                 sizes="(max-width: 700px) 78vw, 340px"
-                 alt="Zane in a gym locker room, filming a training check-in on his phone."
-                 width="760" height="1350" decoding="async" fetchpriority="high">
+            <div class="slate">
+              <div class="slate-bars" aria-hidden="true"></div>
+              <div class="slate-mid">
+                <p class="slate-state" data-slate-state>Standby</p>
+                <p class="slate-mark">ZAN.E</p>
+                <p class="slate-meta">Sunday · 19:00–20:00 SGT</p>
+              </div>
+              <div class="slate-foot">
+                <p class="slate-label" data-slate-label>Next live in</p>
+                <p class="slate-count" data-slate-count>—</p>
+              </div>
+            </div>
             <div class="scan" aria-hidden="true"></div>
           </div>
           <div class="phone-hud" aria-hidden="true">
@@ -304,7 +312,7 @@
 
       <div class="why-grid">
         <div class="why-main reveal">
-          <ul class="reasons">
+          <ul class="reasons" role="list">
             <li>
               <span class="rs-no">A</span>
               <div>
@@ -346,23 +354,6 @@
               </div>
             </li>
           </ul>
-        </div>
-
-        <div class="why-side reveal d1">
-          <figure class="still">
-            <img src="img/cue-a-lg.webp" srcset="img/cue-a-sm.webp 400w, img/cue-a-lg.webp 619w"
-                 sizes="(max-width: 900px) 44vw, 260px"
-                 alt="Zane mid-sentence in a gym bathroom mirror, filming a training log."
-                 width="619" height="1100" loading="lazy" decoding="async">
-            <figcaption>Weekly log · mid-week</figcaption>
-          </figure>
-          <figure class="still still-lower">
-            <img src="img/cue-c-lg.webp" srcset="img/cue-c-sm.webp 400w, img/cue-c-lg.webp 551w"
-                 sizes="(max-width: 900px) 44vw, 260px"
-                 alt="Zane checking his arm in a mirror during a progress check-in."
-                 width="551" height="980" loading="lazy" decoding="async">
-            <figcaption>Check-in · progress</figcaption>
-          </figure>
         </div>
       </div>
     </div>

@@ -153,6 +153,10 @@
   var nextCount = document.querySelector('[data-next-count]');
   var upcoming = document.querySelector('[data-upcoming]');
   var cues = document.querySelectorAll('[data-cue]');
+  var slate = document.querySelector('.slate');
+  var slateState = document.querySelector('[data-slate-state]');
+  var slateLabel = document.querySelector('[data-slate-label]');
+  var slateCount = document.querySelector('[data-slate-count]');
 
   var upcomingPainted = false;
 
@@ -168,6 +172,8 @@
       if (nextDate) nextDate.textContent = 'Sunday';
       if (nextCount) nextCount.textContent = 'Live on Douyin, every week';
       if (abValue) abValue.textContent = 'Sunday 19:00 SGT';
+      if (slateLabel) slateLabel.textContent = 'Every';
+      if (slateCount) slateCount.textContent = 'Sunday 19:00';
       return;
     }
 
@@ -194,6 +200,10 @@
         abValue.textContent = (minsIn < 1 ? 'Just started' : minsIn + ' min in')
           + ' · ' + countdown(leftSec) + ' left';
       }
+      if (slate) slate.setAttribute('data-on', '');
+      if (slateState) slateState.textContent = 'On air';
+      if (slateLabel) slateLabel.textContent = 'Time remaining';
+      if (slateCount) slateCount.textContent = countdown(leftSec);
     } else {
       var toStart = secondsToNextStart(now);
       var soon = toStart <= 3600;
@@ -205,6 +215,10 @@
       if (stripSub) stripSub.textContent = longDate(broadcastDate(now, 0)) + ', 19:00 SGT';
       if (abLabel) abLabel.textContent = soon ? 'Starting soon' : 'Next live';
       if (abValue) abValue.textContent = countdown(toStart);
+      if (slate) slate.removeAttribute('data-on');
+      if (slateState) slateState.textContent = soon ? 'Starting soon' : 'Standby';
+      if (slateLabel) slateLabel.textContent = 'Next live in';
+      if (slateCount) slateCount.textContent = countdown(toStart);
     }
 
     // Next-broadcast card

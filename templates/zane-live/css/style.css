@@ -363,18 +363,83 @@ a { color: inherit; }
   background: #000;
   aspect-ratio: 9 / 16;
 }
-.phone-screen img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* ---- standby slate ----
+   What the frame is showing between broadcasts: a gallery slate, driven by the
+   same Singapore clock as the rest of the page. It goes red and reads ON AIR
+   during the hour. */
+.slate {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding-top: 34px;            /* clears the REC / timecode HUD row */
+  background: linear-gradient(180deg, #17171C 0%, #0D0D10 58%, #121216 100%);
 }
+.slate-bars {
+  height: 6.5%;
+  min-height: 11px;
+  background: linear-gradient(90deg,
+    #D6D3CC 0 14.28%, #CFC15C 14.28% 28.56%, #5EB6BB 28.56% 42.84%,
+    #529E5C 42.84% 57.12%, #AB629C 57.12% 71.40%, #C24A40 71.40% 85.68%,
+    #43589F 85.68% 100%);
+}
+
+.slate-mid {
+  align-self: center;
+  padding: 0 clamp(14px, 6%, 26px);
+  text-align: center;
+}
+.slate-state {
+  font: 500 10px/1 var(--mono);
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 14px;
+}
+.slate[data-on] .slate-state { color: var(--sig); }
+.slate-mark {
+  font-weight: 900;
+  font-stretch: 66%;
+  font-size: 42px;
+  line-height: .9;
+  letter-spacing: -.02em;
+  color: var(--bone);
+}
+.slate-meta {
+  margin-top: 12px;
+  font: 400 11px/1.5 var(--mono);
+  letter-spacing: .06em;
+  color: var(--dim);
+}
+
+.slate-foot {
+  margin: 0 clamp(14px, 6%, 22px) clamp(16px, 7%, 26px);
+  padding-top: 14px;
+  border-top: 1px solid rgba(244, 242, 238, .14);
+  text-align: center;
+}
+.slate-label {
+  font: 500 10px/1 var(--mono);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 8px;
+}
+.slate-count {
+  font: 500 19px/1 var(--mono);
+  letter-spacing: -.01em;
+  color: var(--bone);
+  font-variant-numeric: tabular-nums;
+}
+.slate[data-on] .slate-count { color: var(--sig); }
+/* Scanlines only. The heavy top/bottom scrim this used to carry was there to
+   sink a photograph behind the HUD; over the slate it only crushed the
+   countdown, so it is gone. */
 .scan {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(to bottom, rgba(11, 11, 12, .5), transparent 26%, transparent 62%, rgba(11, 11, 12, .78)),
-    repeating-linear-gradient(to bottom, rgba(0, 0, 0, .22) 0 1px, transparent 1px 3px);
+  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, .17) 0 1px, transparent 1px 3px);
 }
 .phone-hud {
   position: absolute;
@@ -691,31 +756,13 @@ a { color: inherit; }
 }
 .reasons p { color: var(--dim); font-size: 15px; max-width: 58ch; }
 
-.why-side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-.still { margin: 0; min-width: 0; }
-/* Square, unlike the hero's 9:16 phone frame: these read as log stills off a
-   check-in board rather than as the live feed, and two of them stack to about
-   the height of the reasons list beside them. */
-.still img {
-  width: 100%;
-  border: 1px solid var(--line-2);
-  border-radius: 4px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  object-position: center 42%;
-}
-.still figcaption {
-  margin-top: 9px;
-  font: 400 11px/1.4 var(--mono);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-
+/* Wide screens split each reason into letter · claim · explanation, echoing the
+   run sheet's cue · time · body so the two list sections read as one system. */
 @media (min-width: 900px) {
-  .why-grid { grid-template-columns: minmax(0, 1fr) 300px; align-items: start; }
-  .why-side { grid-template-columns: minmax(0, 1fr); gap: 26px; }
-  .still-lower { margin-top: 0; }
+  .reasons > li { grid-template-columns: 40px 300px minmax(0, 1fr); gap: 0 28px; align-items: baseline; }
+  .reasons > li > div { display: contents; }
+  .reasons h3 { margin-bottom: 0; }
+  .reasons p { max-width: 62ch; }
 }
 
 /* ---------------------------------------------------- next live --------- */
