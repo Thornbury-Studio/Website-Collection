@@ -7,8 +7,10 @@ A one-page site for a live fitness show broadcast from Singapore every Sunday
 
 The show is a *broadcast*, not a blog, so the page is dressed as a gallery: a
 condensed cut display face, timecode mono, signal red on near-black, scanlines,
-a REC-marked vertical video frame, and the hour laid out as a numbered run
-sheet. The one fact the page exists to deliver — **Sunday 19:00–20:00 SGT** —
+a REC-marked vertical video frame running a broadcast standby slate, and the
+hour laid out as a numbered run sheet. There is no photography anywhere on the
+page — the identity is type, colour and CSS. Stills will come later; see
+IMAGE-CREDITS.md. The one fact the page exists to deliver — **Sunday 19:00–20:00 SGT** —
 is the largest non-title element on the screen, and the Douyin CTA is repeated
 in the header, hero, schedule card, footer CTA and the persistent mobile bar.
 
@@ -50,6 +52,8 @@ and drives everything from it:
   **starting soon** (inside the hour before), or a live countdown;
 - the mobile action bar, which mirrors that state;
 - the run sheet's `[data-now]` cue highlight and its "On now" flag;
+- the hero's standby slate, which reads STANDBY / STARTING SOON / ON AIR and
+  counts down or shows time remaining;
 - the next-broadcast date and the next four Sundays, computed as real calendar
   dates so nothing on the page can go stale;
 - the run sheet's printed total, summed from the cues' own `data-start` /
