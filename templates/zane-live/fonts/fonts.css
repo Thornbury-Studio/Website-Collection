@@ -1,0 +1,25 @@
+/* Archivo carries a width axis (62%-125%) as well as weight, which is what the
+   condensed broadcast headlines are cut from. IBM Plex Mono handles timecodes,
+   cue numbers and every label that should read as machine output. Both OFL. */
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url('Archivo-var.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('IBMPlexMono-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('IBMPlexMono-500.woff2') format('woff2');
+}
