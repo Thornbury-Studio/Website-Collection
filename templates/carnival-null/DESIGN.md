@@ -73,6 +73,19 @@ inward and down into the tank at others.
   once when the display font lands so the fallback face never bakes in.
 - **Symbol storm** — 3000 `Points` glyphs off a procedural atlas, drifting, and
   gathered into orbit around the null.
+- **Searchlights** — seven rigs on the ring, each sweeping its own arc on its
+  own phase, hollow cones that are brightest at their edges the way a real
+  beam in haze is. All seven lean toward the null when the visitor holds one.
+- **Signage** — a named, bulb-edged board hung in the mouth of every arch,
+  buzzing on a slow tube flicker with a faster mains ripple over the top. Read
+  from across the ring they come out mirrored, which is the building's problem
+  and not ours.
+- **The tank lip reads itself out loud** — a ticker wrapped round the pool edge,
+  turning against the carousel: STAND STILL · THE LIGHTS ARE OURS · EXCHANGE
+  BEFORE 03:00.
+- **Shadows** — every mask over the deck throws one, computed from the same
+  `maskCentre()` the mask itself uses, so the two can never drift apart. The
+  higher a mask rides the wider and fainter its shadow.
 
 Rendering is hand-rolled end to end. The page's CSP forbids inline script, which
 forbids an import map, which puts every `examples/jsm` addon out of reach — so
@@ -101,6 +114,19 @@ and only the middle of the frame keeps its light — the ticket, lit, in an empt
 building. (Draining rather than inverting: inverting a night scene turns the
 page white under the copy.)
 
+The null also has weight. Masks are drawn out of the crowd toward it and swung
+around its rim, damped against their own scale so a mask the size of a door
+barely answers while the small ones come readily. Point at the carousel and the
+printed programme buckles — a real vertex displacement falling off with distance,
+not a filter.
+
+And the ring can be pushed. Hold the pointer out past the middle third and the
+turn keeps going that way, bounded to well under one station and unwinding when
+you let go. It is a nudge, not navigation: scroll still owns where you are. The
+push only answers a hand actually on the page — the idle drift wanders to the
+edges by design, and letting *that* push would turn the carnival away from its
+own composition while nobody is looking.
+
 On touch the null is a fixed band across the vertical centre-third and the
 content is scrolled *through* it, which is a better idea on a phone than a
 cursor was ever going to be.
@@ -115,6 +141,13 @@ lowpass, a tape-hiss bed, and one slow LFO fanned into every voice's detune for
 worn-tape flutter. The clock is re-zeroed on play so light and sound share
 downbeats, and the organ's bandpass opens as the visitor goes deeper.
 
+## Seven turns, seven rooms
+
+Each station carries its own air density, searchlight intensity, sweep rate and
+carousel speed, interpolated between stations the same way the camera path is.
+The Second Turn reverses the bulb chase, because the programme says the ring
+reverses at 01:30 and the building should agree with its own running order.
+
 ## Composition under load
 
 Every luminous material reads one shared `uExpo` uniform, which eases down over
@@ -122,16 +155,37 @@ text-dense stations so the room yields to the copy instead of fighting it. The
 line art — masks, bulbs, glyphs — reads a second, gentler `uExpoLine`, so the
 *drawing* keeps its presence where the *lighting* has to give way.
 
+## What the copy is made of
+
+The functional sections are objects from the night rather than styled panels.
+Entry is three stubs torn off a roll — notched flanks, a punched counterfoil, a
+serial down the edge, and a stamp struck on at an angle; the null stub's serial
+is blank, because it does not exist until the Oracle draws. The running order is
+the production copy off the clipboard: hole-fed left margin, boxed times, ruled
+rows, sheet number. The conditions of entry are a bill pasted to the tiles by the
+door, taped at both top corners and hanging very slightly out of true.
+
 ## Performance
 
 Fill rate, not draw calls, is the budget: the scene pass with additive overdraw
 is the frame. Mobile drops to `COARSE && SMALL`, DPR 1.5, MSAA off, half the
-masks and glyphs. A latching ladder samples 110 frames and steps down when the
+masks and glyphs, and the fixed chrome shrinks to a single low-contrast line so
+it never argues with the copy. A latching ladder samples 110 frames and steps down when the
 mean frame exceeds 26 ms — DPR first (it cuts the scene pass and the composite
 together), then MSAA, then instance counts, then DPR again, then bloom
 resolution last, since the whole bloom chain is about 3% of the frame. The render
 loop is gated on both `IntersectionObserver` and `visibilitychange`, and one
 frame is painted synchronously before the loop starts.
+
+Two placement rules earn their keep here, both learned the hard way. Nothing
+large and additive may sit inside the camera's own orbit (r 8–21) — the mask
+shoals live outside it, below the deck, or up in the roof space where the camera
+never goes. And anything that can still end up near the lens (masks, beams,
+haze) fades out by its distance to the camera, because a metre-wide additive
+quad on the glass is a white balloon, not a mask.
+
+`window.NC.layers` exposes every layer. Bisecting a blown-out frame by toggling
+`.visible` is the only reliable way to attribute one.
 
 ## Safety
 

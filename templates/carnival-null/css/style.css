@@ -317,8 +317,8 @@ main { position: relative; z-index: 5; }
 .stn-sec::before {
   content: ""; position: absolute; inset: -6vh 0; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(110% 66% at 50% 50%, rgba(5, 3, 9, 0.78) 0%, rgba(5, 3, 9, 0.50) 48%, rgba(5, 3, 9, 0) 100%),
-    linear-gradient(180deg, transparent, rgba(5, 3, 9, 0.34) 16%, rgba(5, 3, 9, 0.34) 84%, transparent);
+    radial-gradient(106% 62% at 50% 52%, rgba(5, 3, 9, 0.50) 0%, rgba(5, 3, 9, 0.24) 52%, rgba(5, 3, 9, 0) 100%),
+    linear-gradient(180deg, transparent, rgba(5, 3, 9, 0.16) 18%, rgba(5, 3, 9, 0.16) 82%, transparent);
 }
 .sec-gate::before { display: none; }
 .sec-head { position: relative; margin-bottom: clamp(34px, 5vw, 64px); }
@@ -527,10 +527,27 @@ main { position: relative; z-index: 5; }
 .booth-foot i { color: var(--acc); font-style: normal; font-size: 7px; }
 
 /* ── 04 program ────────────────────────────────────────────────── */
+/* the running order as it exists on the night: a punched sheet off the
+   production clipboard, ruled, stamped and hole-fed */
 .program {
-  border: 1px solid var(--rule-2);
-  background: linear-gradient(178deg, rgba(30, 19, 41, 0.72), rgba(10, 7, 17, 0.90));
-  padding: 4px clamp(14px, 1.8vw, 26px);
+  position: relative;
+  border: 1px solid var(--rule);
+  background: linear-gradient(178deg, rgba(30, 19, 41, 0.80), rgba(10, 7, 17, 0.94));
+  padding: 6px clamp(14px, 1.8vw, 26px) 6px 54px;
+}
+.program::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 42px;
+  border-right: 1px dashed var(--rule);
+  background-image: radial-gradient(circle 5px at 21px 17px, var(--pitch) 96%, transparent 100%);
+  background-size: 42px 38px;
+  pointer-events: none;
+}
+.program::after {
+  content: "SHEET 1/1 \2014  PRODUCTION COPY";
+  position: absolute; right: 14px; top: -9px;
+  padding: 3px 8px; background: var(--ink);
+  font: 400 8.5px/1 var(--f-mono); letter-spacing: 0.2em;
+  color: var(--faint); text-transform: uppercase;
 }
 .prg {
   display: grid; grid-template-columns: 120px minmax(0, 1fr) minmax(0, 1.25fr);
@@ -541,10 +558,12 @@ main { position: relative; z-index: 5; }
 }
 .prg:hover, .prg:focus-visible { background-color: rgba(224, 180, 87, 0.045); padding-left: 14px; }
 .prg-t {
-  font-family: var(--f-mono); font-size: 0.95rem; letter-spacing: 0.06em;
+  font-family: var(--f-mono); font-size: 0.9rem; letter-spacing: 0.06em;
   color: var(--acc); font-variant-numeric: tabular-nums;
-  transition: transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: 1px solid var(--rule); padding: 3px 7px; align-self: start;
+  transition: transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease;
 }
+.prg:hover .prg-t, .prg:focus-visible .prg-t { background: rgba(224, 180, 87, 0.10); }
 .prg:hover .prg-t, .prg:focus-visible .prg-t { transform: translateX(6px) skewX(-8deg); }
 .prg-n {
   font-family: var(--f-disp); font-weight: 700;
@@ -584,23 +603,67 @@ main { position: relative; z-index: 5; }
 .site-now .site-p { color: var(--bone); }
 
 /* ── 06 access ─────────────────────────────────────────────────── */
+/* Three stubs torn off a roll, not three cards: notched flanks, a
+   perforated counterfoil, a serial down the edge and a struck stamp. */
 .tiers {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px; background: var(--rule-2); border: 1px solid var(--rule-2);
+  gap: clamp(12px, 1.4vw, 22px);
 }
 .tier {
   position: relative; display: flex; flex-direction: column;
-  padding: clamp(24px, 2.4vw, 34px);
-  background: linear-gradient(178deg, rgba(30, 19, 41, 0.74), rgba(10, 7, 17, 0.9));
-  transition: background-color 0.5s ease; outline-offset: -3px;
+  padding: clamp(22px, 2.2vw, 30px) clamp(20px, 2vw, 28px) clamp(22px, 2.2vw, 30px) 46px;
+  background:
+    repeating-linear-gradient(90deg, rgba(244,234,218,0.018) 0 1px, transparent 1px 4px),
+    linear-gradient(172deg, rgba(38, 25, 52, 0.92), rgba(12, 8, 20, 0.96));
+  border: 1px solid var(--rule);
+  outline-offset: -3px;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s ease;
+  clip-path: polygon(
+    0 0, 100% 0,
+    100% calc(50% - 13px), calc(100% - 9px) 50%, 100% calc(50% + 13px),
+    100% 100%, 0 100%,
+    0 calc(50% + 13px), 9px 50%, 0 calc(50% - 13px));
 }
-.tier:hover, .tier:focus-visible { background-color: rgba(224, 180, 87, 0.05); }
-.tier > header { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+.tier:nth-child(1) { transform: rotate(-0.5deg); }
+.tier:nth-child(2) { transform: rotate(0.35deg); }
+.tier:nth-child(3) { transform: rotate(-0.2deg); }
+.tier:hover, .tier:focus-visible { border-color: var(--acc); transform: rotate(0deg) translateY(-4px); }
+/* the counterfoil: a punched, dashed tear line down the inside edge */
+.tier::before {
+  content: ""; position: absolute; left: 30px; top: 12px; bottom: 12px; width: 1px;
+  background-image:
+    linear-gradient(180deg, var(--rule) 0 6px, transparent 6px 12px);
+  background-size: 1px 12px;
+  pointer-events: none;
+}
+.tier::after {
+  content: ""; position: absolute; left: 26px; top: 12px; bottom: 12px; width: 9px;
+  background-image: radial-gradient(circle 2.6px at 4.5px 9px, var(--pitch) 96%, transparent 100%);
+  background-size: 9px 22px;
+  pointer-events: none;
+}
+.tier-serial {
+  position: absolute; left: 4px; bottom: 22px;
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font: 400 9px/1 var(--f-mono); letter-spacing: 0.22em;
+  color: var(--faint); text-transform: uppercase; pointer-events: none;
+}
+/* the stamp owns the top-right corner, so the fare drops below the name
+   where it reads like a printed fare rather than a price tag */
+.tier > header { display: flex; flex-direction: column; gap: 6px; padding-right: 86px; }
 .tier h3 {
   font-family: var(--f-disp); font-weight: 700; font-size: clamp(26px, 2.4vw, 38px);
   line-height: 1;
 }
-.tier-p b { font-family: var(--f-mono); font-size: 1.15rem; color: var(--acc); font-weight: 700; }
+.tier-p b {
+  font-family: var(--f-mono); font-size: 1.05rem; color: var(--acc); font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.tier-p::after {
+  content: " \2014  one night, one entry";
+  font: 400 9px/1 var(--f-mono); letter-spacing: 0.14em;
+  color: var(--faint); text-transform: uppercase;
+}
 .tier ul { margin: 22px 0 26px; display: grid; gap: 11px; }
 .tier li {
   position: relative; padding-left: 20px; color: var(--dim);
@@ -611,13 +674,24 @@ main { position: relative; z-index: 5; }
   font-size: 7px; color: var(--acc);
 }
 .tier .cta { margin-top: auto; align-self: flex-start; }
+/* struck, not printed: a stamp landed on the stub at an angle */
 .tier-flag {
-  position: absolute; top: 0; right: 0;
-  padding: 5px 11px; background: var(--acc); color: var(--pitch);
-  font: 700 9px/1 var(--f-mono); letter-spacing: 0.2em; text-transform: uppercase;
+  position: absolute; top: 14px; right: 12px;
+  padding: 5px 9px;
+  border: 2px solid var(--acc); color: var(--acc);
+  font: 700 9px/1 var(--f-mono); letter-spacing: 0.22em; text-transform: uppercase;
+  transform: rotate(-7deg); opacity: 0.85;
 }
-.tier-mid { background: linear-gradient(178deg, rgba(46, 32, 14, 0.62), rgba(10, 7, 17, 0.92)); }
-.tier-null { background: linear-gradient(178deg, rgba(12, 40, 33, 0.5), rgba(10, 7, 17, 0.94)); }
+.tier-mid {
+  background:
+    repeating-linear-gradient(90deg, rgba(244,234,218,0.018) 0 1px, transparent 1px 4px),
+    linear-gradient(172deg, rgba(54, 38, 16, 0.90), rgba(12, 8, 20, 0.96));
+}
+.tier-null {
+  background:
+    repeating-linear-gradient(90deg, rgba(244,234,218,0.018) 0 1px, transparent 1px 4px),
+    linear-gradient(172deg, rgba(14, 46, 38, 0.82), rgba(10, 7, 17, 0.96));
+}
 .tier-null h3 { color: var(--mercury); }
 
 .ballot {
@@ -660,14 +734,36 @@ main { position: relative; z-index: 5; }
 .ballot-ns { grid-column: 1 / -1; color: var(--dim); font-size: 0.88rem; }
 
 /* ── 07 rules ──────────────────────────────────────────────────── */
-.rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--rule-2); border: 1px solid var(--rule-2); }
+/* a bill pasted to the tiles by the door, taped at the corners and
+   already going soft at the edges */
+.rules {
+  position: relative;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px; background: var(--rule-2);
+  border: 1px solid var(--rule);
+  transform: rotate(-0.35deg);
+  box-shadow: 0 18px 44px rgba(5, 3, 9, 0.6);
+}
+.rules::before, .rules::after {
+  content: ""; position: absolute; top: -11px; width: 74px; height: 22px;
+  background: rgba(224, 180, 87, 0.14);
+  border-left: 1px solid rgba(224, 180, 87, 0.22);
+  border-right: 1px solid rgba(224, 180, 87, 0.22);
+  pointer-events: none;
+}
+.rules::before { left: 26px; transform: rotate(-4deg); }
+.rules::after { right: 26px; transform: rotate(3.2deg); }
 .rule {
   display: grid; grid-template-columns: 46px 1fr; gap: 16px;
   padding: 24px clamp(20px, 2.2vw, 30px);
-  background: linear-gradient(178deg, rgba(30, 19, 41, 0.7), rgba(10, 7, 17, 0.88));
+  background: linear-gradient(178deg, rgba(30, 19, 41, 0.80), rgba(10, 7, 17, 0.93));
   transition: background-color 0.4s ease;
 }
-.rule:hover { background-color: rgba(224, 180, 87, 0.04); }
+.rule:hover { background-color: rgba(224, 180, 87, 0.05); }
+.rule > b {
+  border: 1px solid var(--rule); align-self: start;
+  text-align: center; padding: 3px 0;
+}
 .rule > b {
   font: 400 11px/1.5 var(--f-mono); letter-spacing: 0.18em; color: var(--acc);
 }
@@ -768,8 +864,38 @@ main { position: relative; z-index: 5; }
   .cta-sm { display: none; }
   .ribbon { top: 54px; }
   .ribbon-row { font-size: 9px; letter-spacing: 0.2em; }
-  .hud { left: var(--gut); right: var(--gut); bottom: 14px; gap: 9px; font-size: 9.5px; }
-  .hud-count { margin-left: auto; }
+  /* the fixed chrome shrinks out of the way: one thin line, no dial,
+     and low enough contrast that the copy always wins */
+  .hud {
+    left: var(--gut); right: var(--gut); bottom: 8px;
+    gap: 8px; font-size: 9px; padding: 5px 9px;
+    background: rgba(5, 3, 9, 0.72);
+    border-color: var(--rule-2);
+    letter-spacing: 0.10em;
+  }
+  .turn-dial { display: none; }
+  .hud-sep { width: 9px; }
+  .hud-count { margin-left: auto; opacity: 0.72; }
+  .ribbon { padding: 4px 0; }
+  .ribbon-row { font-size: 8.5px; letter-spacing: 0.16em; gap: 1.4rem; padding-right: 1.4rem; }
+  .nullband {
+    height: 30vh;
+    border-top-color: rgba(111, 242, 196, 0.12);
+    border-bottom-color: rgba(111, 242, 196, 0.12);
+    background: linear-gradient(180deg,
+      rgba(111, 242, 196, 0.03), transparent 20%, transparent 80%, rgba(111, 242, 196, 0.03));
+  }
+  .nullband::before, .nullband::after { opacity: 0.3; width: 7px; height: 7px; }
+
+  /* the artifacts restack rather than shrink */
+  .tier { padding: 20px 18px 20px 42px; }
+  .tier-serial { font-size: 8px; bottom: 16px; }
+  .program { padding-left: 44px; }
+  .program::before { width: 34px; background-size: 34px 34px;
+    background-image: radial-gradient(circle 4px at 17px 15px, var(--pitch) 96%, transparent 100%); }
+  .program::after { right: 8px; font-size: 7.5px; letter-spacing: 0.14em; }
+  .rules { transform: none; }
+  .rules::before, .rules::after { width: 54px; }
 
   /* the gate is recomposed vertically: the plate goes tall and the
      wordmark stacks, so NULL still reads as a hole punched in a banner */

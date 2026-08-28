@@ -40,6 +40,7 @@
     ch: 0,                /* 0 sodium · 1 mercury · 2 carmine · 3 gilt */
     dim: 0,               /* how much the world should yield to copy  */
     lock: 0,              /* the ACCESS ritual: world nulls, ticket lit */
+    turnPush: 0,          /* the visitor leaning on the ring, in stations */
     booth: -1,
     sound: false,
     reduced: REDUCED,
@@ -683,6 +684,19 @@
     NCSTATE.px = NCSTATE.pxn * 2 - 1;
     NCSTATE.py = NCSTATE.pyn * 2 - 1;
 
+    /* Push the turn: hold the pointer out past the middle third and the
+       ring keeps going that way, bounded, and unwinds when you let go.
+       It is a nudge, not navigation — scroll still owns where you are. */
+    var edge = 0;
+    /* Only a hand on the page can push the ring. The idle drift wanders to
+       the edges by design, and letting that push would turn the carnival
+       away from its own composition while nobody is even looking. */
+    if (!REDUCED && !MOBILE && (now - lastInput) < 2600) {
+      var ax = Math.abs(NCSTATE.px);
+      if (ax > 0.46) edge = (NCSTATE.px < 0 ? -1 : 1) * (ax - 0.46) / 0.54;
+    }
+    NCSTATE.turnPush += (edge * NCSTATE.active * 0.40 - NCSTATE.turnPush) * 0.022;
+
     var wantNull = REDUCED ? 0 : NCSTATE.active;
     NCSTATE.nullAmt += (wantNull - NCSTATE.nullAmt) * 0.08;
     var baseR = MOBILE ? 150 : 98;
@@ -705,7 +719,8 @@
       var nm = (sections[si].getAttribute("id") || "gate").toUpperCase();
       if (nm !== lastStationTxt) { hudStation.textContent = nm; lastStationTxt = nm; }
     }
-    var deg = Math.round(sf * (360 / 7));
+    var deg = Math.round((sf + NCSTATE.turnPush) * (360 / 7));
+    deg = ((deg % 360) + 360) % 360;
     if (hudTurn) {
       var tt = ("00" + deg).slice(-3) + "°";
       if (tt !== lastTurnTxt) { hudTurn.textContent = tt; lastTurnTxt = tt; }
