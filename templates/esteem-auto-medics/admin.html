@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; font-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="robots" content="noindex, nofollow">
+<title>Staff console — Esteem Auto Medics</title>
+<meta name="description" content="Esteem Auto Medics staff console — job cards, stage updates and photo documentation for every vehicle on the floor.">
+<meta name="theme-color" content="#0B0B0C">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/Archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Archivo-Italic-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand" aria-label="Esteem Auto Medics — home">
+      <img src="img/logo-eam.webp" alt="Esteem Auto Medics" width="440" height="183">
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="track.html">Track my car</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <span class="chip chip--gold">Staff console</span>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ GATE ============ -->
+  <section class="gate" id="gate">
+    <form class="gate-card" id="gate-form">
+      <img src="img/logo-eam-full.webp" alt="Esteem Auto Medics" width="560" height="311">
+      <h1 class="display">Staff <em>console</em></h1>
+      <p>Job cards, stage updates and photo documentation for every vehicle on the floor. Staff sign-in only.</p>
+      <div class="gate-field">
+        <label for="gate-id">Staff ID</label>
+        <input type="text" id="gate-id" name="staff-id" autocomplete="username" placeholder="e.g. EAM-OPS-01">
+      </div>
+      <div class="gate-field">
+        <label for="gate-pin">PIN</label>
+        <input type="password" id="gate-pin" name="pin" autocomplete="current-password" placeholder="••••••">
+      </div>
+      <button class="btn btn--gold" type="submit">Open console</button>
+    </form>
+  </section>
+
+  <!-- ============ CONSOLE ============ -->
+  <section class="console" id="console">
+    <div class="wrap">
+      <div class="console-head">
+        <div>
+          <p class="eyebrow">Sin Ming AutoCare · Floor view</p>
+          <h2 class="display console-title">Job <em>cards</em></h2>
+        </div>
+        <div class="console-user">
+          <span class="avatar" aria-hidden="true">SC</span>
+          <span>Shawn Chen<br><span class="mono" id="console-date">—</span></span>
+        </div>
+      </div>
+
+      <div class="stat-row" id="stat-row">
+        <div class="stat"><span class="n" id="stat-total">0</span><span class="k">Cars on the floor</span></div>
+        <div class="stat"><span class="n" id="stat-ppf">0</span><span class="k">PPF jobs</span></div>
+        <div class="stat"><span class="n" id="stat-claims">0</span><span class="k">Open claims</span></div>
+        <div class="stat"><span class="n" id="stat-ready">0</span><span class="k">Ready for collection</span></div>
+      </div>
+
+      <div class="console-grid">
+        <div class="job-list" id="job-list" role="list"></div>
+
+        <div class="detail" id="detail">
+          <div class="detail-top">
+            <div class="detail-id">
+              <span class="job-plate" id="ad-plate">—</span>
+              <p class="job-meta"><span id="ad-vehicle">—</span><br><span class="mono" id="ad-ref">—</span></p>
+            </div>
+            <span class="stage-chip" id="ad-chip">—</span>
+          </div>
+
+          <div class="detail-facts">
+            <div class="fact"><span class="k">Owner</span><span class="v" id="ad-owner">—</span></div>
+            <div class="fact"><span class="k">Bay</span><span class="v" id="ad-bay">—</span></div>
+            <div class="fact"><span class="k">Est. ready</span><span class="v" id="ad-eta">—</span></div>
+            <div class="fact"><span class="k">Service</span><span class="v" id="ad-service">—</span></div>
+          </div>
+
+          <ol class="detail-stages" id="ad-stages"></ol>
+
+          <div class="detail-actions">
+            <button class="btn btn--gold btn--sm" type="button" id="ad-advance">Complete current stage</button>
+            <button class="btn btn--line btn--sm" type="button" id="ad-photos">Attach photo set</button>
+          </div>
+
+          <form class="detail-noteform" id="ad-noteform">
+            <label class="visually-hidden" for="ad-note">Add a customer-visible note</label>
+            <textarea id="ad-note" placeholder="Add a customer-visible note — the owner sees this on their tracking page…"></textarea>
+            <button class="btn btn--line btn--sm" type="submit">Post note to job card</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="console-foot">
+        <span>Changes here appear live on the customer tracking page.</span>
+        <button class="btn btn--line btn--sm" type="button" id="console-reset">Reset floor to morning state</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/ui.js"></script>
+<script src="js/coverage.js"></script>
+<script src="js/store.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
