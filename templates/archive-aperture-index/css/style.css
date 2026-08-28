@@ -1,0 +1,392 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   APERTURE INDEX — a field archive of last light.
+
+   The page is staged against one fixed WebGL canvas. Everything in CSS is a
+   dark inspection room built around it: corner marks, a measured type scale,
+   and a scrim that guarantees text stays legible wherever the instrument
+   happens to be floating. Colour is almost entirely absent on purpose — the
+   only warmth in the design is the light the visitor is carrying.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --void: #07080a;
+  --table: #0c0d10;
+  --table-2: #131519;
+  --hair: #23262c;
+  --hair-soft: #191c21;
+
+  --bone: #eceae4;          /* primary text */
+  --soft: #949aa3;          /* AA on --table */
+  --faint: #666c75;         /* labels, non-essential */
+  --paper: #d7d1c4;         /* aged print */
+
+  --lamp: #ffc98f;          /* tungsten — the inspection light */
+  --cold: #93aec4;          /* light-table glow */
+  --oxide: #bb5a3c;         /* status: ended */
+
+  --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  --maxw: 1440px;
+  --gut: clamp(20px, 5vw, 84px);
+  --col: min(53ch, 46vw);
+
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+img, svg { max-width: 100%; height: auto; display: block; }
+[hidden] { display: none !important; }
+
+body {
+  background: var(--table);
+  color: var(--bone);
+  font-family: var(--serif);
+  font-optical-sizing: auto;
+  font-weight: 300;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* scroll is held until the instrument is ready, so the first thing seen is
+   composed rather than a half-lit object sliding past */
+html.js body { overflow-y: hidden; }
+html.js.ready body, html.js.no-3d body { overflow-y: auto; }
+
+::selection { background: var(--lamp); color: #17120b; }
+
+.skip {
+  position: fixed; top: -100px; left: 12px; z-index: 90;
+  background: var(--bone); color: var(--void);
+  padding: 10px 16px; font: 500 13px/1 var(--mono); letter-spacing: .04em;
+}
+.skip:focus { top: 12px; }
+
+:where(a, button, input, select, [tabindex]):focus-visible {
+  outline: 1.5px solid var(--lamp); outline-offset: 3px;
+}
+
+/* ── the instrument ───────────────────────────────────────────────────── */
+#gl {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  display: block; z-index: 0;
+  opacity: 0; transition: opacity 1.5s var(--ease);
+}
+html.ready #gl { opacity: 1; }
+html.no-3d #gl { display: none; }
+
+/* the scrim: a fixed gradient that keeps type readable over the object.
+   Heavier on narrow screens, where the object and the text share the axis. */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 72% 42%, transparent 34%, rgba(7,8,10,.62) 78%),
+    linear-gradient(to bottom, rgba(7,8,10,.55) 0%, transparent 22%, transparent 62%, rgba(7,8,10,.72) 100%);
+}
+
+/* grain — one tiny turbulence tile, held very low so it reads as paper */
+.grain, body::before {
+  content: ""; position: fixed; inset: -50%; z-index: 2; pointer-events: none;
+  opacity: .17; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+.fallback { display: none; }
+html.no-3d .fallback {
+  display: grid; place-items: center; gap: 22px;
+  position: fixed; inset: 0; z-index: 1; padding: var(--gut);
+  text-align: center; color: var(--faint);
+}
+html.no-3d .fallback svg {
+  width: min(320px, 62vw); fill: none;
+  stroke: #2c3138; stroke-width: 1.25;
+}
+html.no-3d .fallback p { max-width: 34ch; font: 400 13px/1.7 var(--mono); }
+
+/* Sit above the content (z 4) but below the frame (z 6): type scrolling into
+   the edges dims out instead of colliding with the fixed readouts. */
+.veil { position: fixed; left: 0; right: 0; z-index: 5; pointer-events: none; }
+.veil-t { top: 0; height: 128px; background: linear-gradient(to bottom, rgba(7,8,10,.97) 0%, rgba(7,8,10,.86) 34%, rgba(7,8,10,.5) 62%, transparent 100%); }
+.veil-b { bottom: 0; height: 168px; background: linear-gradient(to top, rgba(7,8,10,.99) 0%, rgba(7,8,10,.95) 26%, rgba(7,8,10,.7) 56%, transparent 100%); }
+
+/* ── inspection frame ─────────────────────────────────────────────────── */
+.hud {
+  position: fixed; inset: clamp(14px, 2.1vw, 26px); z-index: 6;
+  pointer-events: none;
+  font: 400 10.5px/1 var(--mono); letter-spacing: .13em;
+  color: var(--faint); text-transform: uppercase;
+  opacity: 0; transition: opacity 1.4s var(--ease) .5s;
+}
+html.ready .hud, html.no-3d .hud { opacity: 1; }
+.hud-c { position: absolute; width: 13px; height: 13px; border: 0 solid var(--hair); }
+.hud-tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.hud-tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.hud-bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.hud-br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+.hud-row { position: absolute; left: 26px; right: 26px; display: flex; justify-content: space-between; gap: 18px; }
+.hud-top { top: 1px; justify-content: flex-end; }   /* the masthead owns the left */
+.hud-bot { bottom: 1px; }
+.hud-plate { display: inline-flex; gap: 10px; align-items: baseline; }
+.hud-plate b { color: var(--lamp); font-weight: 500; font-variant-numeric: tabular-nums; }
+.hud-plate em { font-style: normal; }
+.hud [data-hud="coord"], .hud [data-hud="time"] { font-variant-numeric: tabular-nums; }
+
+@media (max-width: 760px) {
+  .hud-top { top: 1px; }
+  .hud-plate em { display: none; }
+  .hud-row { left: 22px; right: 22px; }
+  .hud-bot [data-hud="time"] { display: none; }
+}
+
+/* ── masthead ─────────────────────────────────────────────────────────── */
+.mast {
+  position: fixed; z-index: 7; top: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: clamp(26px, 3.4vw, 42px) calc(var(--gut) + 14px);
+  mix-blend-mode: difference;
+}
+.mast .mark { font: 400 17px/1 var(--serif); letter-spacing: .01em; color: var(--bone); }
+.mast .mark i { font-style: italic; opacity: .62; }
+.mast nav { display: flex; gap: clamp(18px, 2.2vw, 34px); align-items: center; }
+.mast a {
+  color: var(--bone); text-decoration: none;
+  font: 400 11px/1 var(--mono); letter-spacing: .15em; text-transform: uppercase;
+  opacity: .68; transition: opacity .4s var(--ease);
+}
+.mast a:hover { opacity: 1; }
+.mast-cta { position: relative; }
+.mast-cta::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px;
+  height: 1px; background: currentColor; opacity: .5;
+}
+@media (max-width: 760px) { .mast nav a:not(.mast-cta) { display: none; } }
+
+/* ── plates ───────────────────────────────────────────────────────────── */
+main { position: relative; z-index: 4; }
+
+.plate {
+  position: relative;
+  min-height: 100svh;
+  padding: clamp(96px, 13vh, 168px) var(--gut);
+  display: flex; flex-direction: column; justify-content: center;
+  max-width: var(--maxw); margin-inline: auto;
+}
+
+/* Plates whose content approaches the viewport height are top-aligned: centred,
+   the overflow rides up underneath the fixed masthead and the plate label
+   collides with the wordmark. */
+.plate--recs, .plate--method, .plate--access { justify-content: flex-start; }
+/* The final plate is measured from the BOTTOM of the document, not the top:
+   at max scroll its content sits one footer-height above the fold, so any
+   trailing space here pushes the heading up under the masthead. */
+.plate--access { min-height: auto; padding-bottom: 0; }
+
+.col { width: var(--col); max-width: 100%; }
+.col--narrow { width: min(44ch, 42vw); max-width: 100%; }
+
+.tag {
+  font: 400 10.5px/1 var(--mono); letter-spacing: .17em; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 26px;
+  display: flex; align-items: center; gap: 12px;
+}
+.tag b { color: var(--lamp); font-weight: 500; }
+.tag::after { content: ""; flex: 1; height: 1px; background: var(--hair-soft); }
+
+h1, h2 { font-weight: 200; letter-spacing: -.018em; line-height: 1.04; }
+h1 { font-size: clamp(46px, 8.4vw, 116px); }
+h1 em { font-style: italic; font-weight: 200; }
+h2 { font-size: clamp(31px, 4.3vw, 60px); margin-bottom: 30px; }
+
+.prose p { color: var(--soft); font-size: clamp(15.5px, 1.32vw, 18.5px); margin-bottom: 1.15em; max-width: 46ch; }
+.prose .pull {
+  color: var(--paper); font-size: clamp(18px, 1.9vw, 25px); line-height: 1.42;
+  font-style: italic; font-weight: 200; margin-top: 1.5em;
+  padding-left: 22px; border-left: 1px solid var(--hair);
+}
+.sub { color: var(--faint); font: 400 12px/1.7 var(--mono); letter-spacing: .04em; margin-top: 18px; max-width: 40ch; }
+
+/* hero */
+.plate--hero { justify-content: space-between; }
+.hero-top { padding-top: clamp(30px, 5vh, 60px); }
+.eyebrow { font: 400 11px/1 var(--mono); letter-spacing: .19em; text-transform: uppercase; color: var(--faint); }
+.hero-bed { max-width: min(58ch, 92%); }
+.lede { color: var(--soft); font-size: clamp(16px, 1.5vw, 20px); margin-top: 28px; max-width: 40ch; }
+
+.cue {
+  margin-top: 40px; display: inline-flex; align-items: center; gap: 11px;
+  font: 400 10.5px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--faint);
+  opacity: 0; transition: opacity 1s var(--ease);
+}
+html.ready .cue { opacity: 1; }
+.cue.spent { opacity: 0 !important; }
+.cue-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lamp); box-shadow: 0 0 12px var(--lamp); animation: pulse 3.4s var(--ease) infinite; }
+@keyframes pulse { 0%,100% { opacity: .35; transform: scale(.82); } 50% { opacity: 1; transform: scale(1); } }
+.cue-touch { display: none; }
+html.touch .cue-desk { display: none; }
+html.touch .cue-touch { display: inline; }
+
+/* the load, dressed as the archive developing a plate rather than a spinner */
+.dev {
+  margin-top: 40px; display: flex; align-items: center; gap: 14px;
+  font: 400 10.5px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--faint);
+  transition: opacity .8s var(--ease);
+}
+html.ready .dev, .dev.done { opacity: 0; pointer-events: none; }
+.dev-bar { display: block; width: 108px; height: 1px; background: var(--hair); overflow: hidden; }
+.dev-bar i { display: block; width: 100%; height: 100%; background: var(--lamp); transform: scaleX(0); transform-origin: 0 50%; transition: transform .5s var(--ease); }
+.dev-n { font-variant-numeric: tabular-nums; }
+
+.scrollcue { position: absolute; left: var(--gut); bottom: clamp(26px, 4vh, 44px); width: 1px; height: 54px; background: var(--hair); overflow: hidden; }
+.scrollcue i { position: absolute; inset: 0; background: var(--lamp); transform: translateY(-100%); animation: drop 3s var(--ease) infinite; }
+@keyframes drop { 0% { transform: translateY(-100%); } 60%,100% { transform: translateY(100%); } }
+
+/* instrument specs */
+.plate--inst .specs { list-style: none; margin-top: clamp(52px, 8vh, 96px); display: grid; gap: clamp(28px, 4vh, 52px); width: min(40ch, 40vw); }
+.spec { position: relative; padding-left: 46px; }
+.spec-n { position: absolute; left: 0; top: 5px; font: 400 11px/1 var(--mono); color: var(--lamp); letter-spacing: .1em; }
+.spec h3 { font-weight: 300; font-size: clamp(19px, 1.9vw, 25px); letter-spacing: -.01em; margin-bottom: 9px; }
+.spec p { color: var(--soft); font-size: 15.5px; max-width: 38ch; }
+.spec.lit h3 { color: var(--lamp); }
+.spec::before {
+  content: ""; position: absolute; left: 13px; top: 9px; bottom: 3px; width: 1px;
+  background: var(--hair-soft); transition: background .6s var(--ease);
+}
+.spec.lit::before { background: var(--lamp); }
+
+/* categories */
+/* transparent cells with hairline separators: opaque panels punched hard
+   rectangles out of the scene and read as a collision under the masthead */
+.cats { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(52px, 8vh, 90px); border-block: 1px solid var(--hair-soft); }
+.cats li { padding: clamp(24px, 3vw, 40px) clamp(18px, 2vw, 28px); border-left: 1px solid var(--hair-soft); }
+.cats li:first-child { border-left: 0; padding-left: 0; }
+.cats b { display: block; font: 300 clamp(30px, 3.6vw, 50px)/1 var(--serif); color: var(--bone); font-variant-numeric: tabular-nums; }
+.cats h3 { margin: 14px 0 8px; font: 400 11px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--lamp); }
+.cats p { color: var(--faint); font-size: 14px; line-height: 1.5; }
+
+/* records */
+/* held to the left column: full-bleed rows ran straight across the instrument
+   and neither the record nor the object could be read */
+.recs { list-style: none; width: min(74ch, 58%); margin-top: clamp(44px, 6vh, 76px); border-top: 1px solid var(--hair-soft); }
+.rec {
+  width: 100%; display: grid; gap: 4px 22px; text-align: left;
+  grid-template-columns: 92px 110px minmax(0, 1fr) auto;
+  grid-template-areas: "id cat name status" ". . note geo";
+  align-items: baseline;
+  padding: clamp(19px, 2.4vh, 27px) 6px;
+  background: none; border: 0; border-bottom: 1px solid var(--hair-soft);
+  color: inherit; cursor: pointer; font: inherit;
+  transition: background .45s var(--ease), padding-left .45s var(--ease);
+}
+.rec:hover, .rec.on { background: rgba(255, 201, 143, .045); padding-left: 16px; }
+.rec-id { grid-area: id; font: 400 11px/1.5 var(--mono); color: var(--lamp); letter-spacing: .06em; }
+.rec-cat { grid-area: cat; font: 400 10.5px/1.5 var(--mono); color: var(--faint); letter-spacing: .13em; text-transform: uppercase; }
+.rec-name { grid-area: name; font-size: clamp(17px, 1.7vw, 22px); font-weight: 300; letter-spacing: -.008em; }
+.rec-geo { grid-area: geo; font: 400 10.5px/1.5 var(--mono); color: var(--faint); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rec-status { grid-area: status; justify-self: end; font: 400 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; padding: 5px 9px; border: 1px solid var(--hair); color: var(--faint); white-space: nowrap; }
+.rec-status[data-s="gone"] { color: var(--oxide); border-color: rgba(187, 90, 60, .4); }
+.rec-status[data-s="water"] { color: var(--cold); border-color: rgba(147, 174, 196, .35); }
+.rec-note { grid-area: note; color: var(--faint); font-size: 14.5px; line-height: 1.55; max-width: 52ch;
+  max-height: 0; opacity: 0; overflow: hidden; transition: max-height .55s var(--ease), opacity .45s var(--ease), margin-top .55s var(--ease); }
+.rec:hover .rec-note, .rec.on .rec-note { max-height: 5em; opacity: 1; margin-top: 7px; }
+
+/* method */
+.rules { list-style: none; margin-top: clamp(46px, 7vh, 84px); display: grid; gap: 0; width: min(58ch, 56vw); }
+.rules li { display: grid; grid-template-columns: 62px 1fr; gap: 20px; align-items: baseline; padding: clamp(15px, 1.9vh, 21px) 0; border-bottom: 1px solid var(--hair-soft); }
+.rules b { font: 400 11px/1.6 var(--mono); color: var(--lamp); letter-spacing: .1em; }
+.rules p { color: var(--soft); font-size: clamp(15.5px, 1.5vw, 19px); }
+
+/* access */
+.req { margin-top: clamp(34px, 5vh, 52px); display: grid; gap: 18px; max-width: 40ch; }
+.field { display: grid; gap: 8px; }
+.field label { font: 400 10.5px/1 var(--mono); letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
+.req input, .req select {
+  width: 100%; padding: 13px 14px; color: var(--bone);
+  background: var(--table-2); border: 1px solid var(--hair);
+  font: 300 15px/1.4 var(--serif); border-radius: 0;
+  transition: border-color .35s var(--ease);
+}
+.req select { font-family: var(--serif); appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--faint) 50%), linear-gradient(135deg, var(--faint) 50%, transparent 50%);
+  background-position: calc(100% - 19px) 21px, calc(100% - 14px) 21px;
+  background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; }
+.req input:focus, .req select:focus { border-color: var(--lamp); outline: none; }
+.req input.bad { border-color: var(--oxide); }
+.btn {
+  justify-self: start; margin-top: 6px; padding: 14px 30px; cursor: pointer;
+  background: var(--bone); color: var(--void); border: 1px solid var(--bone);
+  font: 500 11px/1 var(--mono); letter-spacing: .15em; text-transform: uppercase;
+  transition: background .4s var(--ease), color .4s var(--ease);
+}
+.btn:hover { background: transparent; color: var(--bone); }
+.req-note { font: 400 11.5px/1.65 var(--mono); color: var(--faint); letter-spacing: .02em; max-width: 38ch; }
+.req-note.ok { color: var(--lamp); }
+.req-note.bad { color: var(--oxide); }
+
+/* footer */
+.foot {
+  position: relative; z-index: 4;
+  display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  padding: 30px var(--gut) 38px; border-top: 1px solid var(--hair-soft);
+  max-width: var(--maxw); margin-inline: auto;
+  font: 400 10.5px/1.6 var(--mono); letter-spacing: .13em; text-transform: uppercase; color: var(--faint);
+}
+
+/* ── reveals ──────────────────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .95s var(--ease), transform .95s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+/* ── narrow: a deliberate vertical reinterpretation ───────────────────── */
+@media (max-width: 900px) {
+  :root { --col: 100%; }
+  .col--narrow { width: 100%; }
+  .plate--inst .specs { width: 100%; }
+  .rules { width: 100%; }
+  .recs { width: 100%; }
+  .cats { grid-template-columns: repeat(2, 1fr); }
+  .cats li:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .cats li:nth-child(n+3) { border-top: 1px solid var(--hair-soft); }
+  .rec { grid-template-columns: 84px 1fr; grid-template-areas: "id status" "cat name" ". geo" ". note"; gap: 5px 16px; }
+  .rec-status { justify-self: end; }
+}
+
+@media (max-width: 760px) {
+  /* the instrument holds the upper band; every plate opens below it, so the
+     object and the type never share the same pixels */
+  .plate { min-height: auto; padding-block: clamp(72px, 11vh, 104px); }
+  .plate--hero { min-height: 100svh; padding-top: 46svh; justify-content: flex-end; }
+  /* in flow, directly above the headline: pinned to the top it landed on the
+     instrument and ran off the right edge */
+  .plate--hero .hero-top { padding: 0; margin-bottom: 20px; }
+  .eyebrow { font-size: 10px; letter-spacing: .12em; }
+  /* every plate opens BELOW the instrument's band, and the scrim takes over
+     from there — otherwise headings land on the lit rim of the lens */
+  .plate--text, .plate--inst, .plate--cats, .plate--recs, .plate--method, .plate--access { padding-top: 31svh; }
+  body::after {
+    background:
+      linear-gradient(to bottom, rgba(7,8,10,.42) 0%, rgba(7,8,10,.16) 19%, rgba(7,8,10,.72) 34%, rgba(7,8,10,.93) 52%, rgba(7,8,10,.96) 100%);
+  }
+  h2 { margin-bottom: 22px; }
+  .cats { grid-template-columns: 1fr; }
+  .cats li { padding: 20px 0; border-left: 0; border-top: 1px solid var(--hair-soft); }
+  .cats li:first-child { border-top: 0; }
+  .rec { grid-template-columns: 1fr auto; grid-template-areas: "id status" "name name" "geo geo" "note note"; }
+  .rec-cat { display: none; }
+  .rec-note { max-height: none; opacity: 1; margin-top: 7px; }
+  .rules li { grid-template-columns: 42px 1fr; gap: 14px; }
+  .foot { flex-direction: column; gap: 9px; }
+  .foot-mid { order: 3; }
+}
+
+@media (max-width: 560px) {
+  .plate--hero { padding-top: 44svh; }
+  .lede { margin-top: 20px; }
+  .cue { margin-top: 26px; }
+  .scrollcue { display: none; }
+}
