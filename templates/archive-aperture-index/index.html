@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; worker-src 'self' blob:; child-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>Aperture Index — A field archive of last light</title>
+<meta name="description" content="Aperture Index is a photographic field archive. We record rooms, coastlines, objects and structures in the last hour of usable light before they are demolished, eroded, sold or renovated past recognition.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0c0e">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..500;1,6..72,200..400&family=Geist+Mono:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- the archive itself: one fixed canvas the whole page is staged against -->
+<canvas id="gl" aria-hidden="true"></canvas>
+
+<!-- shown only when WebGL is unavailable or the load watchdog fires -->
+<div class="fallback" aria-hidden="true">
+  <svg viewBox="0 0 260 170" role="img" aria-label="A field camera in outline, lit from one side.">
+    <rect x="18" y="52" width="224" height="98" rx="7"/>
+    <rect x="34" y="38" width="52" height="16" rx="4"/>
+    <circle cx="130" cy="101" r="40"/>
+    <circle cx="130" cy="101" r="26"/>
+    <circle cx="130" cy="101" r="11"/>
+    <circle cx="199" cy="72" r="9"/>
+    <circle cx="61" cy="72" r="7"/>
+    <path d="M18 92 L2 118 M242 92 L258 118"/>
+  </svg>
+  <p>The instrument could not be rendered on this device. The archive text below is complete.</p>
+</div>
+
+<!-- edge veils: keep the fixed readouts legible over scrolling type, and let
+     content fade out of the light at the frame edges rather than butting into it -->
+<i class="veil veil-t" aria-hidden="true"></i>
+<i class="veil veil-b" aria-hidden="true"></i>
+
+<!-- inspection frame: corner marks, plate counter, live readout -->
+<div class="hud" aria-hidden="true">
+  <i class="hud-c hud-tl"></i><i class="hud-c hud-tr"></i>
+  <i class="hud-c hud-bl"></i><i class="hud-c hud-br"></i>
+  <div class="hud-row hud-top">
+    <span class="hud-plate"><b data-hud="plate">00</b><em data-hud="name">THE WITNESS</em></span>
+  </div>
+  <div class="hud-row hud-bot">
+    <span data-hud="coord">1.3521° N&nbsp;&nbsp;103.8198° E</span>
+    <span data-hud="time">LIGHT FAILED 19:04</span>
+  </div>
+</div>
+
+<header class="mast">
+  <span class="mark">Aperture<i>Index</i></span>
+  <nav aria-label="Archive">
+    <a href="#p04">Records</a>
+    <a href="#p05">Method</a>
+    <a class="mast-cta" href="#p06">Access</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ── PLATE 00 · THE WITNESS ─────────────────────────────────────────── -->
+  <section class="plate plate--hero" id="p00" data-plate="00" data-name="THE WITNESS"
+           data-coord="1.3521° N  103.8198° E" data-time="LIGHT FAILED 19:04">
+    <div class="hero-top">
+      <p class="eyebrow">Field archive &middot; Singapore &amp; the strait</p>
+    </div>
+    <div class="hero-bed">
+      <h1>A field archive<br>of <em>last light</em>.</h1>
+      <p class="lede">We photograph what is about to stop existing &mdash; and we get one visit.</p>
+      <p class="cue" data-cue>
+        <span class="cue-dot"></span>
+        <span class="cue-desk">Move to inspect the instrument</span>
+        <span class="cue-touch">Drag to inspect the instrument</span>
+      </p>
+      <div class="dev" data-dev aria-hidden="true">
+        <span class="dev-bar"><i data-dev-bar></i></span>
+        <span class="dev-n" data-dev-n>Developing</span>
+      </div>
+    </div>
+    <div class="scrollcue" aria-hidden="true"><i></i></div>
+  </section>
+
+  <!-- ── PLATE 01 · THE PREMISE ─────────────────────────────────────────── -->
+  <section class="plate plate--text" id="p01" data-plate="01" data-name="THE PREMISE"
+           data-coord="1.2897° N  103.8501° E" data-time="LIGHT FAILED 18:41">
+    <div class="col">
+      <p class="tag"><b>Plate 01</b> The premise</p>
+      <h2>Everything in here is already gone.</h2>
+      <div class="prose reveal">
+        <p>Rooms with a demolition date. Shorelines under erosion review. Objects leaving public sight into private sale. Interiors that will be renovated past recognition before the year turns.</p>
+        <p>We arrive in the last hour of usable light and make one honest record. Nothing staged, nothing moved, nothing improved.</p>
+        <p class="pull">Afterwards, the place gets described from memory.<br>This is the part that isn&rsquo;t.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PLATE 02 · THE INSTRUMENT ──────────────────────────────────────── -->
+  <section class="plate plate--inst" id="p02" data-plate="02" data-name="THE INSTRUMENT"
+           data-coord="INSTRUMENT  NO. 01" data-time="IN SERVICE SINCE 2011">
+    <div class="col col--narrow">
+      <p class="tag"><b>Plate 02</b> The instrument</p>
+      <h2>One body. One lens.<br>No second visit.</h2>
+    </div>
+    <ol class="specs">
+      <li class="spec reveal" data-stage="lens">
+        <span class="spec-n">i</span>
+        <h3>50mm &fnof;/1.4</h3>
+        <p>Chosen because it argues least. What it sees is close to what a person standing in the room would have seen, which is the whole point of the record.</p>
+      </li>
+      <li class="spec reveal" data-stage="deck">
+        <span class="spec-n">ii</span>
+        <h3>Mechanical shutter</h3>
+        <p>No battery, no firmware, nothing that can decline to work inside a building with the power already cut. It has never once failed to open.</p>
+      </li>
+      <li class="spec reveal" data-stage="body">
+        <span class="spec-n">iii</span>
+        <h3>Brass through black</h3>
+        <p>Fifteen years of thumbs have worn the paint back to metal at every edge a hand finds. We don&rsquo;t refinish it. The wear is a record of its own.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ── PLATE 03 · SURVEY CATEGORIES ───────────────────────────────────── -->
+  <section class="plate plate--cats" id="p03" data-plate="03" data-name="THE SURVEY"
+           data-coord="910 RECORDS  ·  4 CATEGORIES" data-time="ARCHIVE OPEN">
+    <div class="col col--narrow">
+      <p class="tag"><b>Plate 03</b> The survey</p>
+      <h2>Four kinds of ending.</h2>
+    </div>
+    <ul class="cats">
+      <li class="reveal"><b>412</b><h3>Interiors</h3><p>Rooms with a scheduled end.</p></li>
+      <li class="reveal"><b>168</b><h3>Coastline</h3><p>Shorelines under erosion review.</p></li>
+      <li class="reveal"><b>233</b><h3>Objects</h3><p>Things leaving public sight.</p></li>
+      <li class="reveal"><b>97</b><h3>Structures</h3><p>Buildings past appeal.</p></li>
+    </ul>
+  </section>
+
+  <!-- ── PLATE 04 · RECORDS ─────────────────────────────────────────────── -->
+  <section class="plate plate--recs" id="p04" data-plate="04" data-name="THE RECORDS"
+           data-coord="SELECTED RECORDS" data-time="1996 — 2026">
+    <div class="col col--narrow">
+      <p class="tag"><b>Plate 04</b> Selected records</p>
+      <h2>Five that are finished.</h2>
+      <p class="sub">Light one to bring its inspection marks up around the instrument.</p>
+    </div>
+    <ul class="recs" data-recs>
+      <li>
+        <button type="button" class="rec" data-rec="0"
+                data-coord="1.3121° N  103.8452° E" data-time="LIGHT FAILED 18:52">
+          <span class="rec-id">AI&ndash;0412</span>
+          <span class="rec-cat">Interior</span>
+          <span class="rec-name">Stair hall, textile works</span>
+          <span class="rec-geo">1.3121&deg;&nbsp;N &nbsp;103.8452&deg;&nbsp;E</span>
+          <span class="rec-status" data-s="gone">Demolished</span>
+          <span class="rec-note">The banister had been polished by hand for sixty years. It was scrap by March.</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="rec" data-rec="1"
+                data-coord="1.2903° N  103.9612° E" data-time="LIGHT FAILED 19:14">
+          <span class="rec-id">AI&ndash;0388</span>
+          <span class="rec-cat">Coastline</span>
+          <span class="rec-name">Sea wall, east reclamation</span>
+          <span class="rec-geo">1.2903&deg;&nbsp;N &nbsp;103.9612&deg;&nbsp;E</span>
+          <span class="rec-status" data-s="water">Submerged</span>
+          <span class="rec-note">Surveyed twice. The second visit was made from a boat.</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="rec" data-rec="2"
+                data-coord="1.3044° N  103.8571° E" data-time="LIGHT FAILED 17:38">
+          <span class="rec-id">AI&ndash;0361</span>
+          <span class="rec-cat">Object</span>
+          <span class="rec-name">Printer&rsquo;s cabinet, third floor</span>
+          <span class="rec-geo">1.3044&deg;&nbsp;N &nbsp;103.8571&deg;&nbsp;E</span>
+          <span class="rec-status" data-s="sold">Sold</span>
+          <span class="rec-note">Ninety-one drawers, each labelled in a hand nobody could identify.</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="rec" data-rec="3"
+                data-coord="1.3899° N  103.7402° E" data-time="LIGHT FAILED 19:02">
+          <span class="rec-id">AI&ndash;0357</span>
+          <span class="rec-cat">Structure</span>
+          <span class="rec-name">Water tower, north quarry</span>
+          <span class="rec-geo">1.3899&deg;&nbsp;N &nbsp;103.7402&deg;&nbsp;E</span>
+          <span class="rec-status" data-s="gone">Cleared</span>
+          <span class="rec-note">Visible from four districts. Nobody objected in time.</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="rec" data-rec="4"
+                data-coord="1.2998° N  103.8402° E" data-time="LIGHT FAILED 18:20">
+          <span class="rec-id">AI&ndash;0344</span>
+          <span class="rec-cat">Interior</span>
+          <span class="rec-name">Projection room, single screen</span>
+          <span class="rec-geo">1.2998&deg;&nbsp;N &nbsp;103.8402&deg;&nbsp;E</span>
+          <span class="rec-status" data-s="soft">Renovated</span>
+          <span class="rec-note">The splice marks on the wall were the last of the building anyone had touched.</span>
+        </button>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── PLATE 05 · METHOD ──────────────────────────────────────────────── -->
+  <section class="plate plate--method" id="p05" data-plate="05" data-name="THE PROTOCOL"
+           data-coord="LAST-LIGHT PROTOCOL" data-time="SIX RULES">
+    <div class="col col--narrow">
+      <p class="tag"><b>Plate 05</b> Method</p>
+      <h2>The last-light protocol.</h2>
+    </div>
+    <ol class="rules">
+      <li class="reveal"><b>01</b><p>Arrive with ninety minutes of daylight remaining.</p></li>
+      <li class="reveal"><b>02</b><p>Walk the whole floor before the first frame is made.</p></li>
+      <li class="reveal"><b>03</b><p>One plate per aspect. No bracketing. No second chances.</p></li>
+      <li class="reveal"><b>04</b><p>Move nothing, improve nothing, remove no one.</p></li>
+      <li class="reveal"><b>05</b><p>Record the minute the light failed.</p></li>
+      <li class="reveal"><b>06</b><p>Leave before dark. The building is owed that much.</p></li>
+    </ol>
+  </section>
+
+  <!-- ── PLATE 06 · ACCESS ──────────────────────────────────────────────── -->
+  <section class="plate plate--access" id="p06" data-plate="06" data-name="ACCESS"
+           data-coord="ARCHIVE ACCESS" data-time="BY REQUEST">
+    <div class="col col--narrow">
+      <p class="tag"><b>Plate 06</b> Access</p>
+      <h2>The archive is open<br>by request.</h2>
+      <p class="prose">Access is granted to researchers, heritage bodies, and owners of the places recorded. Commissions are accepted where a site has a confirmed end date &mdash; the sooner before it, the better the record.</p>
+
+      <form class="req" data-req novalidate>
+        <div class="field">
+          <label for="req-mail">Email</label>
+          <input id="req-mail" name="email" type="email" autocomplete="email" required
+                 placeholder="you@institution.org" aria-describedby="req-note">
+        </div>
+        <div class="field">
+          <label for="req-kind">Request</label>
+          <select id="req-kind" name="kind">
+            <option>Archive access &mdash; research</option>
+            <option>Archive access &mdash; owner of a recorded site</option>
+            <option>Commission a survey</option>
+          </select>
+        </div>
+        <button class="btn" type="submit">Request access</button>
+        <p class="req-note" id="req-note" data-req-note role="status">Requests are answered in the order the sites are due to disappear.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span>Aperture Index</span>
+  <span class="foot-mid">A field archive of last light</span>
+  <span>1.3521&deg;&nbsp;N&nbsp; 103.8198&deg;&nbsp;E</span>
+</footer>
+
+<script src="js/app.js"></script>
+<script type="module" src="js/archive.js"></script>
+</body>
+</html>
