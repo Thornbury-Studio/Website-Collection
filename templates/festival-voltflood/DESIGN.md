@@ -42,6 +42,33 @@ fragments. Camera path is keyframed on scroll progress and recomputed
 absolutely every frame (home + f(p), never incremental). Text-dense scroll
 ranges dim the machine's master exposure so hierarchy survives the overload.
 
+## Signal touch (the central interaction)
+
+The machine is touchable, not just watchable. The pointer is projected onto
+the floor plane every frame and drives a real interference term in the floor
+shader — the waveform visibly ripples around wherever you point. Press and
+hold anywhere that isn't a control and the rig charges: the ripple swells,
+every beam abandons its choreography and swings to track your hand, and the
+HUD counts the charge. Release and the rig discharges — an expanding
+shockwave ring through the floor, beam flare, logotype-slab scatter, a
+"SURGE·DISCHARGE" phase flash, and a sub-drop impact if sound is on. On
+touch devices a quick tap (not a scroll) fires the discharge directly.
+Stage activation is structural, not just tonal: GRID runs the fan at
+double-time chase, FLOODROOM drops the beams into a slow synchronized low
+sway, DRAIN folds every beam onto one centre point.
+
+## Sound: OVERDRIVE
+
+The opt-in soundtrack is a hype, bass-boosted arrangement synthesized live
+with the Web Audio API — saturated gliding 808 sub (tanh waveshaper on the
+mix bus), phonk cowbell lead in A minor, punch kick with sidechain pump,
+backbeat claps, driven hats and an 8-bar filter riser — sharing the same
+132 BPM clock as the visuals, which is re-zeroed on play so audio and light
+hit the same downbeats. Synthesized rather than sampled deliberately: any
+"no copyright" remix of a real licensed track is still infringing, so the
+engine builds the genre's signatures from oscillators and noise, which is
+copyright-free by construction.
+
 ## Safety
 
 No seizure-risk strobing: all large-area pulses are eased and ≤ 2 Hz; glitch

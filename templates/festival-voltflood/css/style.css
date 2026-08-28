@@ -115,6 +115,9 @@ body.no3d #gl { display: none; }
   transition: transform 0.16s ease-out;
 }
 .beat-dot.tick { transform: scale(1); }
+body.charging .beat-dot { background: var(--alert); }
+body.charging .hv-fill { background: linear-gradient(90deg, var(--alert), var(--acid)); }
+body.charging .hud { color: var(--bone); }
 
 .edge-ticker {
   position: fixed; right: 10px; top: 50%; z-index: 40;
@@ -340,6 +343,14 @@ h2.glitching, .slab.glitching { animation: joltH 0.14s steps(2, end) 1; }
   display: flex; align-items: center; gap: 10px;
   white-space: nowrap;
 }
+.touch-cue {
+  display: none;
+  font-size: 10px; letter-spacing: 0.24em; color: var(--faint);
+  margin-top: 18px;
+}
+@media (pointer: coarse) {
+  .touch-cue { display: block; }
+}
 .cue-arrow { color: var(--acid); animation: cueDrop 2.2s ease-in-out infinite; }
 @keyframes cueDrop {
   0%, 100% { transform: translateY(-3px); }
@@ -523,7 +534,21 @@ h2.glitching, .slab.glitching { animation: joltH 0.14s steps(2, end) 1; }
   .wrap { padding: 0 18px; }
   .top { padding: 12px 18px; gap: 14px; }
   .sb-text { display: none; }
-  .hud { left: 12px; bottom: 12px; gap: 6px; }
+
+  /* composed vertical poster: machine owns the top, type anchors the base */
+  .hero { justify-content: flex-end; padding: 120px 0 96px; }
+  .hero::before {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 68%;
+    background: linear-gradient(180deg, transparent, rgba(6,6,8,0.62) 42%, rgba(6,6,8,0.88));
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; }
+  .sect::before {
+    background: linear-gradient(180deg, transparent, rgba(6,6,8,0.87) 9%, rgba(6,6,8,0.87) 91%, transparent);
+  }
+  .lede, .body-l, .body-m, .zone p { text-shadow: 0 1px 14px rgba(6, 6, 8, 0.95); }
+
+  .hud { left: 12px; bottom: 12px; gap: 6px; transition: opacity 0.35s; }
   .hv-track { width: 84px; }
   .hud-clock { font-size: 10px; }
   .logotype { font-size: clamp(64px, 20.5vw, 120px); }
