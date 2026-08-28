@@ -1,8 +1,14 @@
 /* Esteem Auto Medics — coverage map.
    One top-down car, drawn once, reused three ways:
-   - homepage: interactive PPF package comparison (which panels each tier wraps)
-   - services: static tier trio
+   - homepage: interactive coverage-level explainer (which panels each level wraps)
+   - services: static coverage trio
    - tracker/console: live job map (panels being worked on light up)
+
+   Coverage level is NOT the same thing as the vehicle category (Sedan /
+   SUV-MPV / Supercar). Category sets which price list a quote is drawn from;
+   coverage sets how much of the car is wrapped. Every coverage level is
+   available on every category, so the two are modelled separately.
+
    Panel keys are shared with store.js job `areas`. */
 
 (function () {
@@ -35,14 +41,31 @@
     { key: 'bumper-r',  d: 'M86,814 L434,814 C431,852 422,888 408,904 C390,926 330,934 260,934 C190,934 130,926 112,904 C98,888 89,852 86,814 Z' }
   ];
 
-  /* Which panels each placeholder package wraps. Final scope is confirmed with
-     the client — these three shapes exist so the comparison reads instantly. */
-  var TIERS = {
-    A: ['bumper-f', 'lamp-l', 'lamp-r', 'mirror-l', 'mirror-r'],
-    B: ['bumper-f', 'lamp-l', 'lamp-r', 'mirror-l', 'mirror-r', 'bonnet', 'fender-l', 'fender-r'],
-    C: ['bumper-f', 'lamp-l', 'lamp-r', 'mirror-l', 'mirror-r', 'bonnet', 'fender-l', 'fender-r',
-        'door-l', 'door-r', 'roof', 'quarter-l', 'quarter-r', 'boot', 'bumper-r']
+  /* Coverage levels — how much of the car gets wrapped. Indicative shapes so
+     the difference reads instantly; the exact panel list for any job is agreed
+     at the walk-around, and final scope is confirmed with the client. */
+  var COVERAGE = {
+    front: {
+      label: 'Front end',
+      blurb: 'The panels that take stone chips first.',
+      panels: ['bumper-f', 'lamp-l', 'lamp-r', 'mirror-l', 'mirror-r']
+    },
+    impact: {
+      label: 'High-impact',
+      blurb: 'Front end plus the panels that collect carpark damage.',
+      panels: ['bumper-f', 'lamp-l', 'lamp-r', 'mirror-l', 'mirror-r', 'bonnet',
+               'fender-l', 'fender-r', 'door-l', 'door-r']
+    },
+    full: {
+      label: 'Full body',
+      blurb: 'Every painted panel on the car.',
+      panels: ['bumper-f', 'lamp-l', 'lamp-r', 'mirror-l', 'mirror-r', 'bonnet',
+               'fender-l', 'fender-r', 'door-l', 'door-r', 'roof', 'quarter-l',
+               'quarter-r', 'boot', 'bumper-r']
+    }
   };
+
+  var COVERAGE_ORDER = ['front', 'impact', 'full'];
 
   var NS = 'http://www.w3.org/2000/svg';
 
@@ -99,9 +122,10 @@
     }
   }
 
-  function tierStates(tier) {
+  function coverageStates(level) {
     var states = {};
-    (TIERS[tier] || []).forEach(function (k) { states[k] = 'on'; });
+    var def = COVERAGE[level];
+    if (def) def.panels.forEach(function (k) { states[k] = 'on'; });
     return states;
   }
 
@@ -114,9 +138,10 @@
   window.EAMCoverage = {
     build: build,
     setStates: setStates,
-    tierStates: tierStates,
+    coverageStates: coverageStates,
     areaStates: areaStates,
-    tiers: TIERS,
+    coverage: COVERAGE,
+    order: COVERAGE_ORDER,
     panelCount: PANELS.filter(function (p) { return !p.glass; }).length
   };
 }());

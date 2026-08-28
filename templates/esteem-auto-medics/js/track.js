@@ -22,8 +22,9 @@
 
     text('jv-plate', job.plate);
     text('jv-vehicle', job.vehicle);
-    text('jv-ref', 'Job ' + job.id + ' · ' + job.serviceLabel + (job.pkg ? ' · Package ' + job.pkg : ''));
+    text('jv-ref', 'Job ' + job.id + ' · ' + job.serviceLabel + (job.coverage ? ' · ' + job.coverage : ''));
     text('jv-service', job.serviceLabel);
+    text('jv-category', job.category || '—');
     text('jv-bay', job.bay);
     text('jv-eta', job.eta);
     text('jv-owner', job.customer);

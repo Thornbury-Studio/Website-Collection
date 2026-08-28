@@ -28,7 +28,9 @@
       var name = document.getElementById('qf-name').value.trim();
       var phone = document.getElementById('qf-phone').value.trim();
       var vehicle = document.getElementById('qf-vehicle').value.trim();
+      var category = document.getElementById('qf-category').value;
       var service = document.getElementById('qf-service').value;
+      var coverage = document.getElementById('qf-coverage').value;
       var msg = document.getElementById('qf-msg').value.trim();
 
       nameField.classList.toggle('has-error', !name);
@@ -44,7 +46,9 @@
         'Phone: ' + phone
       ];
       if (vehicle) lines.push('Vehicle: ' + vehicle);
+      lines.push('Category: ' + category);
       lines.push('Looking at: ' + service);
+      if (coverage !== 'Not applicable') lines.push('PPF coverage: ' + coverage);
       if (msg) lines.push('Details: ' + msg);
 
       var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
