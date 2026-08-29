@@ -27,10 +27,27 @@ coverage tiers (front / mid / full), which was wrong. The three options are
 | SUV / MPV | Larger panels, taller doors |
 | Sports / Supercar | Complex aero, deep curves, delicate finishes |
 
-Each card carries a restrained technical side-profile drawn as an open
-contour plus two wheel arches — a spec-sheet line, not a filled icon. They are
-rendered at 98px because at 56px the three profiles collapsed into the same
-anonymous wedge and the categories stopped being legible at a glance.
+**Icon redesign (29 Aug 2026, second pass).** The first icon set (enlarged to
+98px so three near-identical wedges would at least be distinguishable) still
+read as generic — three copies of the same rounded arch with barely different
+roofline curvature. Redrawn from scratch with real proportional differences,
+each on a shared 120×46 grid so silhouettes compare fairly:
+
+- **Sedan/Hatchback** — a 26-unit hood into a 22-unit flat roof, fastback
+  backlight, one door-shutline tick.
+- **SUV/MPV** — a short 6-unit hood into the longest roof plateau (52 units)
+  and a near-vertical tailgate — reads instantly as boxy/tall against the
+  other two.
+- **Sports/Supercar** — a 49-unit hood (nearly double the sedan's) into the
+  shortest, lowest cabin, wheels pushed to the extreme ends for a short-
+  overhang stance, plus a front splitter lip and a rear spoiler — both drawn
+  as strokes that start *on* the main body path rather than floating beside
+  it, which is what stopped them reading as debris.
+
+That's what let the icons go back down to a **compact 72×28px** — the size
+the client actually preferred — without losing category legibility: the
+distinction now lives in hood length, roofline height and wheelbase, not in
+icon size.
 
 **Coverage is a separate, orthogonal choice** — front end, high-impact panels,
 or full body — and every coverage level is available on every category. The
@@ -140,6 +157,16 @@ dark via `mix-blend-mode: screen`.
   width for body; **IBM Plex Mono** 400/500 for the operational voice
   (plates, stages, labels, prices). All self-hosted.
 
+**Logo crop fixed (29 Aug 2026).** `logo-eam.webp` (header/nav) was cropped
+tight enough that the bottom of the "EAM" letterforms and the wrench glyph
+were clipped in the shipped file itself — not a CSS/container issue, the
+pixels were missing. Re-cropped from `src/card-eam-business.jpg` with a full
+margin below every letter's lowest point before the tagline begins; the
+tagline variant (`logo-eam-full.webp`, footer/gates) got the same treatment
+with margin below "QUALITY CARE, EVERY MILE" too. New aspect ratio is 2.08:1
+(was 2.4:1) — every `<img>` referencing either file had its `width`/`height`
+attrs updated to match, so there's no layout shift.
+
 ## Facts: confirmed vs deliberately unconfirmed
 
 Confirmed (business card + discovery plan + old brief): registered name,
@@ -243,6 +270,21 @@ Two verification notes worth keeping:
   briefly looked like the visualiser had tanked the page. Use a performance
   trace for real numbers; the flake tiling fix above came from reasoning about
   filter cost, not from that probe.
+
+### Fourth pass (29 Aug 2026) — logo crop, category icons redrawn
+
+**Header/footer logo was clipping the letterforms.** Not a CSS bug — the
+shipped `logo-eam.webp` was cropped tight enough that the bottom of "EAM" and
+the wrench glyph were cut off in the file itself. Re-cropped both logo assets
+from the source business card with real margin below every letter. Category
+icons redrawn per the note above the checklist, back down to a compact 72px.
+
+Re-verified: 5 pages × 9 widths at zero overflow, no JS errors, logo decodes
+at its new 880×422 intrinsic size on every page that references it, the
+sports-car splitter/spoiler render connected (not floating) at both card and
+zoomed scale, and the console→tracker cross-tab sync re-confirmed (advanced
+the sedan job from "Film cut & fitted" to "Curing & edge seal" in the console,
+confirmed it landed on the tracker in a separate tab).
 
 ## If the client engages: launch checklist
 
