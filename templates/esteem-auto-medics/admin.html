@@ -106,6 +106,15 @@
           <div class="detail-actions">
             <button class="btn btn--gold btn--sm" type="button" id="ad-advance">Complete current stage</button>
             <button class="btn btn--line btn--sm" type="button" id="ad-photos">Attach photo set</button>
+            <button class="btn btn--line btn--sm" type="button" id="ad-revert">Undo last stage</button>
+          </div>
+
+          <div class="confirm-band" id="ad-confirm" hidden>
+            <p id="ad-confirm-copy">Mark this stage complete?</p>
+            <div class="confirm-band-actions">
+              <button class="btn btn--gold btn--sm" type="button" id="ad-confirm-yes">Yes, mark complete</button>
+              <button class="btn btn--line btn--sm" type="button" id="ad-confirm-no">Cancel</button>
+            </div>
           </div>
 
           <form class="detail-noteform" id="ad-noteform">
