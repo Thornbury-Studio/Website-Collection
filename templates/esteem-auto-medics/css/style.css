@@ -426,10 +426,11 @@ h2.display { font-size: clamp(2rem, 4.6vw, 3.4rem); }
 .pkg-card:hover::before { transform: translateX(300%) rotate(8deg); }
 
 .pkg-tier { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-/* Sized so the three profiles are actually distinguishable — at 56px they
-   all collapsed into the same anonymous wedge. */
+/* Compact, per the client's steer — but the linework itself now carries the
+   distinction (hood length, roof height, wheelbase, splitter/spoiler) so a
+   small icon still reads as a specific car, not an anonymous wedge. */
 .pkg-icon {
-  width: 98px; height: 41px; flex: none;
+  width: 72px; height: 28px; flex: none;
   color: var(--gold);
 }
 .pkg-icon svg { width: 100%; height: 100%; display: block; }
