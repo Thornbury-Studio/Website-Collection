@@ -183,6 +183,11 @@ h2.display { font-size: clamp(2rem, 4.6vw, 3.4rem); }
   transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, border-color 0.16s ease;
 }
 .btn svg { width: 17px; height: 17px; flex: none; }
+.btn:disabled {
+  opacity: 0.4; cursor: not-allowed;
+  box-shadow: none; transform: none !important;
+}
+.btn--line:disabled:hover { border-color: var(--line-2); color: var(--ink); }
 @media (max-width: 460px) {
   .btn { white-space: normal; min-width: 0; }
 }
@@ -413,7 +418,6 @@ h2.display { font-size: clamp(2rem, 4.6vw, 3.4rem); }
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .pkg-card:hover { border-color: var(--gold-deep); transform: translateY(-3px); }
-.pkg-card.is-hi { border-color: var(--gold-deep); background: linear-gradient(180deg, rgba(217,164,65,0.07), var(--surface) 42%); }
 
 .pkg-card::before {
   content: ''; position: absolute; inset: -60% auto auto -30%;
@@ -820,10 +824,10 @@ h2.display { font-size: clamp(2rem, 4.6vw, 3.4rem); }
 .steps h3 { font-size: 0.98rem; font-weight: 640; margin-bottom: 3px; }
 .steps p { font-size: 0.88rem; color: var(--muted); }
 
-.film-layers { display: grid; gap: 8px; width: 100%; max-width: 420px; }
+.film-layers { display: grid; gap: 12px; width: 100%; max-width: 420px; margin-top: 28px; }
 .film-layer {
   border: 1px solid var(--line); border-radius: var(--rad);
-  padding: 12px 16px;
+  padding: 15px 18px;
   display: flex; justify-content: space-between; align-items: center; gap: 12px;
   font-size: 0.88rem; color: var(--ink-2);
   background: var(--surface);
@@ -1071,6 +1075,19 @@ h2.display { font-size: clamp(2rem, 4.6vw, 3.4rem); }
 .detail-stage .ds-tick { width: 15px; height: 15px; color: var(--gold); }
 
 .detail-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* Advancing a stage is customer-visible immediately, so it's confirmed here
+   inline rather than with a native confirm() — the rest of the console has
+   no browser dialogs, and one would look like it belongs to a different
+   product. */
+.confirm-band {
+  border: 1px solid var(--gold-deep); border-radius: var(--rad);
+  background: var(--gold-ghost);
+  padding: 14px 16px;
+  display: grid; gap: 12px;
+}
+.confirm-band p { font-size: 0.86rem; color: var(--ink-2); line-height: 1.5; }
+.confirm-band-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
 .detail-noteform { display: grid; gap: 10px; }
 .detail-noteform textarea {

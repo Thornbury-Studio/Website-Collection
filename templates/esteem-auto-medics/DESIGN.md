@@ -286,6 +286,43 @@ zoomed scale, and the console→tracker cross-tab sync re-confirmed (advanced
 the sedan job from "Film cut & fitted" to "Curing & edge seal" in the console,
 confirmed it landed on the tracker in a separate tab).
 
+### Fifth pass (29 Aug 2026) — remove false hierarchy, undo + confirm
+
+**The SUV/MPV card had a "most chosen" treatment left over from the old
+coverage-tier version** (`is-hi`: gold border, tinted background, filled
+button, gold "Category 02" chip) — a leftover recommendation with no actual
+basis now that the three cards are parallel vehicle categories, not tiers
+with a sensible default. Removed; the dead `.pkg-card.is-hi` rule is gone
+from the stylesheet too, not just unused.
+
+**Film-layers list on the services page was visually cramped** against the
+coverage map above it (zero margin between them) and internally (8px row gap,
+12px/16px padding). Given a 28px top margin and the row gap/padding both
+opened up (12px / 15px×18px).
+
+**Staff console gained two real workflow functions**, both in
+`js/store.js` + `js/admin.js` + `admin.html`:
+
+- **Undo last stage** (`EAMStore.revert`) — mirrors `advance`, floors at 0,
+  disabled with an explanatory `title` when there's nothing to undo. No
+  confirm step: it's the correction for a mis-click, and confirming a
+  correction is just friction.
+- **Inline confirm on "Complete current stage"** — advancing a stage is
+  customer-visible the instant it happens, so a click now opens a
+  `.confirm-band` naming the current and next stage by label before anything
+  changes; only "Yes, mark complete" calls `EAMStore.advance`. Built as
+  in-page UI, not `window.confirm()` — nothing else in this console uses a
+  native dialog, and one would look like it belonged to a different product.
+  The band auto-hides on every re-render (job switch, advance, revert,
+  cross-tab sync), so it can never point at stale state.
+
+Re-verified: 5 pages × 9 widths at zero overflow, no JS errors. Confirm/cancel/
+undo exercised through every state — cancel leaves the stage untouched,
+confirm advances and syncs to the tracker in a separate tab, undo reverts and
+floors correctly at "Checked in" with the button disabling itself. Checked at
+390px: both new buttons and the confirm band stack full-width with no
+overflow. Demo floor reset to its seeded state after stress-testing.
+
 ## If the client engages: launch checklist
 
 1. Confirm per-category PPF pricing, exact inclusions, film brand and warranty

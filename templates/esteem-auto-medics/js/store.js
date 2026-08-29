@@ -256,6 +256,21 @@
       return this.get(id);
     },
 
+    /* Undoes the last "complete current stage" action — corrects a
+       mis-click without leaving the customer's tracker on a stage they
+       never actually reached. Floors at 0 (can't undo past check-in). */
+    revert: function (id) {
+      var j = null;
+      for (var i = 0; i < jobs.length; i += 1) if (jobs[i].id === id) j = jobs[i];
+      if (!j) return null;
+      if (j.stageIndex > 0) {
+        j.stageIndex -= 1;
+        jobs = inflate(jobs.map(function (x) { return x; }));
+        persist(jobs);
+      }
+      return this.get(id);
+    },
+
     addNote: function (id, text) {
       if (!text) return;
       for (var i = 0; i < jobs.length; i += 1) {

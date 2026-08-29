@@ -114,6 +114,18 @@
     var advance = document.getElementById('ad-advance');
     advance.disabled = ready;
     advance.textContent = ready ? 'Job complete' : 'Complete: ' + job.stages[job.stageIndex].label;
+
+    var revert = document.getElementById('ad-revert');
+    revert.disabled = job.stageIndex === 0;
+    revert.title = job.stageIndex === 0
+      ? 'Already at the first stage — nothing to undo'
+      : 'Back out to "' + job.stages[job.stageIndex - 1].label + '"';
+
+    hideConfirm();
+  }
+
+  function hideConfirm() {
+    document.getElementById('ad-confirm').hidden = true;
   }
 
   function select(id) {
@@ -145,8 +157,27 @@
     var now = new Date();
     text('console-date', now.toLocaleDateString('en-SG', { weekday: 'short', day: 'numeric', month: 'short' }));
 
+    /* Advancing a stage is customer-visible the moment it happens, so it
+       gets a confirm step — a plain click doesn't fire it. Undo doesn't:
+       it's the correction for a mis-click, adding a second confirm there
+       would just be friction on the fix. */
     document.getElementById('ad-advance').addEventListener('click', function () {
+      var job = EAMStore.get(currentId);
+      if (!job || job.stageIndex >= job.stages.length - 1) return;
+      var next = job.stages[job.stageIndex + 1].label;
+      text('ad-confirm-copy', 'Mark "' + job.stages[job.stageIndex].label + '" complete? The tracker will show "' + next + '" to the customer right away.');
+      document.getElementById('ad-confirm').hidden = false;
+    });
+
+    document.getElementById('ad-confirm-yes').addEventListener('click', function () {
       if (currentId) EAMStore.advance(currentId);
+      hideConfirm();
+    });
+
+    document.getElementById('ad-confirm-no').addEventListener('click', hideConfirm);
+
+    document.getElementById('ad-revert').addEventListener('click', function () {
+      if (currentId) EAMStore.revert(currentId);
     });
 
     document.getElementById('ad-photos').addEventListener('click', function () {
