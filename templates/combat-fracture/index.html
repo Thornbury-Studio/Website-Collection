@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>FRACTURE — Fight Night 09: BREAKPOINT</title>
+<meta name="description" content="FRACTURE stages five-bout fight cards in rooms built for machines, not crowds. Fight Night 09 — BREAKPOINT: Adeyemi vs Marchetti for the heavyweight strap, 26 September, Turbine Hall D. The address arrives 24 hours out.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/combat-fracture/index.html">
+<meta name="theme-color" content="#0B0B0D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B0B0D'/%3E%3Cpath d='M16 3l-2.6 8.4 4.8 2.2-6.4 7.6 3.4 1.6L11 29l10.4-11.8-4.6-2.1L22.6 6z' fill='%23D22F2F'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FRACTURE">
+<meta property="og:title" content="FRACTURE 09 — BREAKPOINT">
+<meta property="og:description" content="Adeyemi vs Marchetti for the heavyweight strap. 26 September, Turbine Hall D. Doors 21:00. The address arrives 24 hours out.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/combat-fracture/index.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/combat-fracture/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/boot.js"></script>
+</head>
+<body id="top">
+
+<a class="skip" href="#sheet">Skip to the fight sheet</a>
+
+<!-- ══ CHROME ══ -->
+<header class="chrome" id="chrome">
+  <a class="wordmark" href="index.html">FRACTURE</a>
+  <p class="chrome-ev" aria-hidden="true">F09 &middot; BREAKPOINT</p>
+  <nav class="chrome-nav" aria-label="Site">
+    <button class="snd" id="snd" type="button" aria-pressed="false">SOUND <span id="snd-state">OFF</span></button>
+    <a class="chrome-sheet" href="#sheet">The Sheet</a>
+  </nav>
+</header>
+
+<!-- ══ THE WALK — scroll height only; canvas is injected behind ══ -->
+<div class="track" id="track" aria-hidden="true"></div>
+
+<!-- act panels: fixed, impact-driven, duplicated in full in the sheet below -->
+<div class="panels" id="panels" aria-hidden="true">
+
+  <section class="panel pan-hero" data-act="0">
+    <p class="ph-kicker">An underground fight-night promotion</p>
+    <p class="ph-mark">FRACTURE</p>
+    <p class="ph-ev"><span class="ph-no">09</span> BREAKPOINT</p>
+    <p class="ph-meta">26 SEP 2026 &middot; TURBINE HALL D &middot; DOORS 21:00 &middot; FIRST BELL 22:00</p>
+    <p class="ph-line">Eight nights, the wall held. Tonight it gives.</p>
+  </section>
+
+  <section class="panel pan-side pan-r" data-act="1">
+    <p class="p-tag">SECT 01 &middot; THE CARD</p>
+    <h2 class="p-head">Five bouts.<br>Nobody leaves clean.</h2>
+    <ol class="bouts">
+      <li class="bout bout-main">
+        <span class="b-div">HEAVYWEIGHT &middot; THE STRAP</span>
+        <span class="b-names">ADEYEMI <em>vs</em> MARCHETTI</span>
+        <span class="b-rec">14&ndash;2 (11 KO) &middot; 16&ndash;1 (9 KO)</span>
+      </li>
+      <li class="bout">
+        <span class="b-div">LIGHT HEAVY &middot; CO-MAIN</span>
+        <span class="b-names">PETROSSIAN <em>vs</em> HALVORSEN</span>
+        <span class="b-rec">11&ndash;0 &middot; 9&ndash;3</span>
+      </li>
+      <li class="bout">
+        <span class="b-div">MIDDLEWEIGHT</span>
+        <span class="b-names">MBEKI <em>vs</em> TSAREV</span>
+        <span class="b-rec">8&ndash;1 &middot; 10&ndash;4</span>
+      </li>
+      <li class="bout">
+        <span class="b-div">WELTERWEIGHT</span>
+        <span class="b-names">TRAN <em>vs</em> FERREIRA</span>
+        <span class="b-rec">7&ndash;2 &middot; 6&ndash;1</span>
+      </li>
+      <li class="bout">
+        <span class="b-div">LIGHTWEIGHT &middot; OPENER</span>
+        <span class="b-names">QURESHI <em>vs</em> KOWALCZYK</span>
+        <span class="b-rec">5&ndash;0 &middot; 4&ndash;1</span>
+      </li>
+    </ol>
+    <p class="p-foot">Order final at the first bell. Injuries reshuffle, never cancel.</p>
+  </section>
+
+  <section class="panel pan-side pan-l" data-act="2">
+    <p class="p-tag">SECT 02 &middot; TALE OF THE TAPE</p>
+    <h2 class="p-head">Breaker&thinsp;/&thinsp;The&nbsp;Slab</h2>
+    <dl class="tape">
+      <div class="t-row"><dt>AGE</dt><dd>34</dd><dd>31</dd></div>
+      <div class="t-row"><dt>HEIGHT</dt><dd>193&thinsp;CM</dd><dd>189&thinsp;CM</dd></div>
+      <div class="t-row"><dt>REACH</dt><dd>201&thinsp;CM</dd><dd>196&thinsp;CM</dd></div>
+      <div class="t-row"><dt>STANCE</dt><dd>SOUTHPAW</dd><dd>ORTHODOX</dd></div>
+      <div class="t-row"><dt>RECORD</dt><dd>14&ndash;2</dd><dd>16&ndash;1</dd></div>
+      <div class="t-row t-bars"><dt>KO RATE</dt>
+        <dd><i class="bar b79"></i>79%</dd><dd><i class="bar b56"></i>56%</dd></div>
+      <div class="t-row"><dt>AVG FIGHT</dt><dd>4:12</dd><dd>8:37</dd></div>
+    </dl>
+    <p class="p-foot">Adeyemi has never heard the fourth round. Marchetti has never needed to hurry.</p>
+  </section>
+
+  <section class="panel pan-side pan-r" data-act="3">
+    <p class="p-tag">SECT 03 &middot; THE PIT</p>
+    <h2 class="p-head">Turbine Hall&nbsp;D</h2>
+    <p class="p-copy">A decommissioned generator floor under the docklands. Twelve hundred standing. No seats worth keeping.</p>
+    <ul class="rules">
+      <li>FIVE ROUNDS &times; THREE MINUTES</li>
+      <li>HANDS TAPED TO THE WRIST, BARE PAST IT</li>
+      <li>CLINCH YES &middot; ELBOWS NO</li>
+      <li>TEN COUNT ON A KNOCKDOWN</li>
+      <li>THE DOCTOR&rsquo;S WORD IS FINAL</li>
+    </ul>
+  </section>
+
+  <section class="panel pan-side pan-l" data-act="4">
+    <p class="p-tag">SECT 04 &middot; TICKETS</p>
+    <h2 class="p-head">Pick your distance.</h2>
+    <ul class="tiers">
+      <li class="tier"><span class="ti-name">STANDING</span><span class="ti-note">The floor. The crowd decides where you end up.</span><span class="ti-price">$68</span></li>
+      <li class="tier"><span class="ti-name">GANTRY</span><span class="ti-note">The old crane walkway. Above it all, out of reach.</span><span class="ti-price">$120</span></li>
+      <li class="tier"><span class="ti-name">RINGSIDE</span><span class="ti-note">Rope distance. You will hear the tape.</span><span class="ti-price">$260</span></li>
+      <li class="tier"><span class="ti-name">APRON</span><span class="ti-note">Closer than the referee. Wear nothing you love.</span><span class="ti-price">$380</span></li>
+    </ul>
+    <p class="p-foot">Phones sealed at the door. Cash bar. 18+.</p>
+  </section>
+
+  <section class="panel pan-coda" data-act="5">
+    <p class="pc-line">The address arrives<br>24 hours out.</p>
+    <p class="pc-sub">Keep scrolling &mdash; the full sheet is under the rubble.</p>
+    <span class="pc-arrow"></span>
+  </section>
+
+</div>
+
+<!-- HUD -->
+<p class="hud-meter" id="hud-meter" aria-hidden="true">STRESS &#9617;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617; 000 &middot; SECT 00/05</p>
+<p class="cue" id="cue" aria-hidden="true"><span class="cue-fine">SCROLL &mdash; LOAD THE SURFACE &middot; CLICK &mdash; HIT IT</span><span class="cue-coarse">SCROLL &mdash; LOAD THE SURFACE &middot; TAP &mdash; HIT IT</span></p>
+<div class="ring" id="ring" aria-hidden="true"></div>
+
+<!-- ══ THE SHEET — the whole promotion, readable with nothing running ══ -->
+<main class="sheet" id="sheet">
+
+  <section class="mast">
+    <svg class="mast-crack" viewBox="0 0 900 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <g fill="none" stroke="#2A2830" stroke-width="1.5">
+        <path d="M450 200 L360 130 L300 138 L215 70 L180 78 L90 0"/>
+        <path d="M450 200 L520 120 L610 104 L660 30 L740 12"/>
+        <path d="M450 200 L560 240 L640 236 L735 300 L900 320"/>
+        <path d="M450 200 L400 300 L420 360 L350 430 L360 480"/>
+        <path d="M450 200 L330 250 L240 244 L150 310 L0 330"/>
+        <path d="M450 200 L500 330 L590 400 L600 480"/>
+        <path d="M360 130 L330 60"/><path d="M610 104 L640 60"/>
+        <path d="M400 300 L310 340"/><path d="M560 240 L580 170"/>
+      </g>
+      <g fill="none" stroke="#D22F2F" stroke-width="2">
+        <path d="M450 200 L430 152 L452 128"/><path d="M450 200 L478 232 L466 268"/>
+      </g>
+    </svg>
+    <p class="m-kicker">An underground fight-night promotion</p>
+    <h1 class="m-head">FRACTURE 09<span class="m-sub">BREAKPOINT</span></h1>
+    <p class="m-meta">26 SEP 2026 &middot; TURBINE HALL D &middot; DOORS 21:00 &middot; FIRST BELL 22:00</p>
+    <p class="m-line">Five bouts on a concrete floor, headlined by the two heaviest hands the promotion has ever booked in the same night. Eight cards in, the wall has held. This is the one where it gives.</p>
+    <a class="m-cta" href="#tix">Pick your distance</a>
+  </section>
+
+  <section class="s-card" id="card" aria-labelledby="card-h">
+    <h2 class="s-h" id="card-h"><span class="s-no">01</span>The Card</h2>
+    <ol class="fc-list">
+      <li class="fc fc-main">
+        <span class="fc-tag">MAIN EVENT &middot; HEAVYWEIGHT &middot; FOR THE FRACTURE STRAP</span>
+        <div class="fc-row">
+          <div class="fc-f"><strong>Yusuf &ldquo;Breaker&rdquo; Adeyemi</strong><span>14&ndash;2 &middot; 11 KO &middot; southpaw</span></div>
+          <span class="fc-vs">VS</span>
+          <div class="fc-f fc-b"><strong>Tomas &ldquo;The Slab&rdquo; Marchetti</strong><span>16&ndash;1 &middot; 9 KO &middot; orthodox</span></div>
+        </div>
+        <p class="fc-note">Three wins each under this roof, none past the fourth round between them. One strap, first defence or first taking &mdash; the ledger doesn&rsquo;t care which.</p>
+      </li>
+      <li class="fc">
+        <span class="fc-tag">CO-MAIN &middot; LIGHT HEAVYWEIGHT</span>
+        <div class="fc-row">
+          <div class="fc-f"><strong>Mara &ldquo;Hairline&rdquo; Petrossian</strong><span>11&ndash;0 &middot; 7 KO</span></div>
+          <span class="fc-vs">VS</span>
+          <div class="fc-f fc-b"><strong>Ingrid &ldquo;Whiteout&rdquo; Halvorsen</strong><span>9&ndash;3 &middot; 5 KO</span></div>
+        </div>
+      </li>
+      <li class="fc">
+        <span class="fc-tag">MIDDLEWEIGHT</span>
+        <div class="fc-row">
+          <div class="fc-f"><strong>Dane &ldquo;Aftershock&rdquo; Mbeki</strong><span>8&ndash;1 &middot; 6 KO</span></div>
+          <span class="fc-vs">VS</span>
+          <div class="fc-f fc-b"><strong>Ruslan &ldquo;Rebar&rdquo; Tsarev</strong><span>10&ndash;4 &middot; 8 KO</span></div>
+        </div>
+      </li>
+      <li class="fc">
+        <span class="fc-tag">WELTERWEIGHT</span>
+        <div class="fc-row">
+          <div class="fc-f"><strong>Quan &ldquo;Quickset&rdquo; Tran</strong><span>7&ndash;2 &middot; 3 KO</span></div>
+          <span class="fc-vs">VS</span>
+          <div class="fc-f fc-b"><strong>Marco &ldquo;Chisel&rdquo; Ferreira</strong><span>6&ndash;1 &middot; 4 KO</span></div>
+        </div>
+      </li>
+      <li class="fc">
+        <span class="fc-tag">LIGHTWEIGHT &middot; OPENER</span>
+        <div class="fc-row">
+          <div class="fc-f"><strong>Sana &ldquo;Splinter&rdquo; Qureshi</strong><span>5&ndash;0 &middot; 2 KO</span></div>
+          <span class="fc-vs">VS</span>
+          <div class="fc-f fc-b"><strong>Beth &ldquo;Ballast&rdquo; Kowalczyk</strong><span>4&ndash;1 &middot; 3 KO</span></div>
+        </div>
+      </li>
+    </ol>
+    <p class="s-foot">Order final at the first bell. Injuries reshuffle the card; they never cancel it.</p>
+  </section>
+
+  <section class="s-tape" id="tape" aria-labelledby="tape-h">
+    <h2 class="s-h" id="tape-h"><span class="s-no">02</span>Tale of the Tape</h2>
+    <div class="tp-wrap">
+      <div class="tp-names"><span>ADEYEMI</span><span class="tp-mid">MAIN EVENT</span><span>MARCHETTI</span></div>
+      <table class="tp-table">
+        <tbody>
+          <tr><td>34</td><th scope="row">AGE</th><td>31</td></tr>
+          <tr><td>193 cm</td><th scope="row">HEIGHT</th><td>189 cm</td></tr>
+          <tr><td>201 cm</td><th scope="row">REACH</th><td>196 cm</td></tr>
+          <tr><td>Southpaw</td><th scope="row">STANCE</th><td>Orthodox</td></tr>
+          <tr><td>14&ndash;2 (11 KO)</td><th scope="row">RECORD</th><td>16&ndash;1 (9 KO)</td></tr>
+          <tr><td>79%</td><th scope="row">KO RATE</th><td>56%</td></tr>
+          <tr><td>4:12</td><th scope="row">AVG FIGHT</th><td>8:37</td></tr>
+        </tbody>
+      </table>
+      <p class="tp-note">Adeyemi has never heard the fourth round. Marchetti has never needed to hurry. Somebody&rsquo;s pattern breaks at the first exchange.</p>
+    </div>
+  </section>
+
+  <section class="s-pit" id="pit" aria-labelledby="pit-h">
+    <h2 class="s-h" id="pit-h"><span class="s-no">03</span>The Pit</h2>
+    <div class="pit-cols">
+      <div class="pit-copy">
+        <h3>Turbine Hall D</h3>
+        <p>A decommissioned generator floor under the docklands &mdash; poured in 1961 to hold four hundred tonnes of spinning steel, which makes it roughly the only floor in the city rated for what happens on it now. Twelve hundred standing. One gantry. No seats worth keeping.</p>
+        <p>The hall runs its own light: four floodlights over the square, everything else dark. What the floods don&rsquo;t touch isn&rsquo;t part of the night.</p>
+      </div>
+      <div class="pit-rules">
+        <h3 class="pr-h">House rules</h3>
+        <ul class="pr-list">
+          <li><span class="pr-no">R1</span>Five rounds, three minutes each. No extra round. A draw stands as a draw and nobody goes home happy.</li>
+          <li><span class="pr-no">R2</span>Hands taped to the wrist, bare past it. Tape is inspected at the door of the square, not before.</li>
+          <li><span class="pr-no">R3</span>Clinch yes, elbows no. Throws end at the floor &mdash; nothing follows a fighter down.</li>
+          <li><span class="pr-no">R4</span>Ten count on any knockdown. The count is the referee&rsquo;s and the referee counts slow.</li>
+          <li><span class="pr-no">R5</span>The doctor&rsquo;s word ends any bout, any round, any argument.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-tix" id="tix" aria-labelledby="tix-h">
+    <h2 class="s-h" id="tix-h"><span class="s-no">04</span>Tickets</h2>
+    <ul class="tix-grid">
+      <li class="tx">
+        <span class="tx-name">STANDING</span>
+        <span class="tx-price">$68</span>
+        <p class="tx-note">The floor. The crowd decides where you end up, and the crowd moves when the card does.</p>
+      </li>
+      <li class="tx">
+        <span class="tx-name">GANTRY</span>
+        <span class="tx-price">$120</span>
+        <p class="tx-note">The old crane walkway, forty feet up. The whole square at once, out of reach of all of it.</p>
+      </li>
+      <li class="tx">
+        <span class="tx-name">RINGSIDE</span>
+        <span class="tx-price">$260</span>
+        <p class="tx-note">Rope distance. You will hear the tape, the corners, and everything the referee pretends not to.</p>
+      </li>
+      <li class="tx tx-hot">
+        <span class="tx-name">APRON</span>
+        <span class="tx-price">$380</span>
+        <p class="tx-note">Closer than the referee. Sixteen places a card. Wear nothing you love.</p>
+      </li>
+    </ul>
+    <p class="s-foot">Phones sealed at the door and returned at the exit. Cash bar. 18+, ID with the ticket, no exceptions the doorman hasn&rsquo;t already heard.</p>
+  </section>
+
+  <section class="s-promo" id="promotion" aria-labelledby="promo-h">
+    <h2 class="s-h" id="promo-h"><span class="s-no">05</span>The Promotion</h2>
+    <div class="promo-cols">
+      <div class="promo-copy">
+        <p>FRACTURE stages five-bout cards in rooms built to hold machines, not crowds &mdash; substations, foundries, turbine halls. No broadcast, no ranking body, no season. A card is announced; a room is not. The address goes out by message a day before the first bell, and the room goes back to being empty by morning.</p>
+        <p>Eight cards, eight rooms, one strap. The ledger below is the promotion&rsquo;s entire public record.</p>
+      </div>
+      <table class="ledger">
+        <thead><tr><th scope="col">CARD</th><th scope="col">ROOM</th><th scope="col">RESULT</th></tr></thead>
+        <tbody>
+          <tr><td>F01 &middot; HAIRLINE</td><td>London</td><td>Petrossian TKO 3</td></tr>
+          <tr><td>F02 &middot; LOADBEARING</td><td>Rotterdam</td><td>Marchetti KO 1</td></tr>
+          <tr><td>F03 &middot; SPALL</td><td>Hamburg</td><td>Adeyemi KO 2</td></tr>
+          <tr><td>F04 &middot; SHEAR</td><td>Marseille</td><td>Halvorsen UD 5</td></tr>
+          <tr><td>F05 &middot; KEYSTONE</td><td>Prague</td><td>Marchetti KO 4</td></tr>
+          <tr><td>F06 &middot; TENSION</td><td>Tallinn</td><td>Petrossian SUB 2</td></tr>
+          <tr><td>F07 &middot; COMPRESSION</td><td>Glasgow</td><td>Adeyemi TKO 1</td></tr>
+          <tr><td>F08 &middot; REBAR</td><td>Katowice</td><td>Tsarev KO 3</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="s-list" id="list">
+    <div class="list-card">
+      <p class="l-line">The address arrives 24 hours out.</p>
+      <form class="notify" id="notify" action="#" method="get">
+        <label class="n-label" for="n-tel">Get on the wall &mdash; one message per card, nothing else, ever</label>
+        <div class="n-row">
+          <input class="n-tel" id="n-tel" name="tel" type="tel" placeholder="+65 &middot;&middot;&middot;&middot; &middot;&middot;&middot;&middot;" autocomplete="tel" required>
+          <button class="n-go" type="submit">Send me the address</button>
+        </div>
+        <p class="n-done" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p class="foot-mark">FRACTURE</p>
+    <p class="foot-line">Stress finds the flaw.</p>
+    <nav class="foot-nav" aria-label="Sections">
+      <a href="#card">The Card</a>
+      <a href="#pit">The Pit</a>
+      <a href="#tix">Tickets</a>
+      <a href="#promotion">The Promotion</a>
+      <a href="#top" id="rewatch">Take the walk again</a>
+    </nav>
+    <p class="foot-ev">F09 &middot; BREAKPOINT &middot; 26 SEP 2026 &middot; DOORS 21:00</p>
+  </footer>
+
+</main>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
