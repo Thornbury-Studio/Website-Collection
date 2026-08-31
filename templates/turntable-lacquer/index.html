@@ -3,27 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
-<title>LACQUER 77 — a direct-drive deck built for the cut</title>
-<meta name="description" content="LACQUER is a turntable brand named for the lacquer master — the last physical object before a record becomes a record. Inspect the Model 77 in your browser: brushed platter, walnut plinth, nine-inch tonearm, and vinyl that catches light in its grooves.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>TAPE//LACQUER — warehouse tapes, run hot</title>
+<meta name="description" content="TAPE//LACQUER is an underground cassette label and illegal warehouse listening room. Side A runs hot: sourced boombox and cassette models in WebGL, neon warehouse footage, 118 BPM static. Grab a dub. Lose the master.">
 <meta name="robots" content="index, follow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/turntable-lacquer/index.html">
-<meta name="theme-color" content="#0E0C0A">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E0C0A'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23C67A3A' stroke-width='1.5'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23C67A3A'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#08060a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2308060a'/%3E%3Crect x='6' y='10' width='20' height='12' rx='2' fill='none' stroke='%23f2e94a' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='16' r='3' fill='%23ff3d2e'/%3E%3Ccircle cx='20' cy='16' r='3' fill='%234de8ff'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="LACQUER">
-<meta property="og:title" content="LACQUER 77 — a direct-drive deck built for the cut">
-<meta property="og:description" content="Named for the lacquer master disc. Turn the Model 77 over in your browser.">
+<meta property="og:site_name" content="TAPE//LACQUER">
+<meta property="og:title" content="TAPE//LACQUER — warehouse tapes, run hot">
+<meta property="og:description" content="Underground cassette label. Boombox in the room. Static on purpose.">
 <meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/turntable-lacquer/index.html">
-<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/turntable-lacquer/img/og.jpg">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="css/style.css">
-<link rel="preload" as="fetch" href="assets/lacquer.glb" crossorigin>
 <script type="importmap">
 {
   "imports": {
@@ -34,227 +31,170 @@
 </script>
 <script src="js/boot.js"></script>
 </head>
-<body id="top">
+<body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="mast">
-  <a class="wordmark" href="#top">
-    <span class="wordmark-main">LACQUER</span>
-    <span class="wordmark-sub"><em>Mastering</em> Works</span>
-  </a>
-  <nav class="mast-nav" aria-label="Sections">
-    <a href="#materials">Deck</a>
-    <a href="#spec">Specification</a>
-    <a href="#editions">Editions</a>
+<!-- fixed stage: warehouse video + WebGL -->
+<div class="stage" id="stage" aria-hidden="true">
+  <video class="stage-vid" src="assets/bg-warehouse.mp4" autoplay muted loop playsinline preload="metadata" poster="img/lacquer-hero.svg"></video>
+  <canvas id="gl"></canvas>
+  <div class="no3d-back">
+    <img src="img/lacquer-hero.svg" width="1200" height="700" alt="">
+  </div>
+</div>
+<div class="scanlines" aria-hidden="true"></div>
+
+<div class="hud" aria-hidden="true">
+  <div class="hud-static">
+    <span class="hs-label">STATIC</span>
+    <span class="hs-track"><i class="hs-fill" id="hs-fill"></i></span>
+    <span class="hs-read" id="hs-read">000%</span>
+  </div>
+  <div class="hud-tape">
+    <i class="beat-dot" id="beat-dot"></i>
+    <span id="hud-side">SIDE A</span>
+    <span class="hud-sep">/</span>
+    <span id="hud-bpm">118 BPM</span>
+    <span class="hud-sep">/</span>
+    <span id="hud-tape">TAPE 07</span>
+  </div>
+</div>
+<div class="edge-ticker" aria-hidden="true"><span>WAREHOUSE 14 · PASIR PANJANG · NO MASTERS · ONLY DUBS · RUN HOT · SIDE A · 118 BPM · TAPE//LACQUER —</span></div>
+
+<header class="top">
+  <a class="wordmark" href="index.html">TAPE<em>//</em>LACQUER</a>
+  <button class="burger" type="button" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+  <nav aria-label="Primary">
+    <a href="#rig">Rig</a>
+    <a href="#drops">Drops</a>
+    <a href="#warehouse">Warehouse</a>
+    <a href="#press">Press</a>
   </nav>
-  <a class="mast-cta" href="#enquiry">Register interest</a>
+  <a class="btn btn-burn" href="#press">Grab a dub</a>
 </header>
+<div class="scrim" hidden></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="#rig">Rig</a>
+  <a href="#drops">Drops</a>
+  <a href="#warehouse">Warehouse</a>
+  <a href="#press">Press</a>
+  <a href="#press" class="btn btn-burn">Grab a dub</a>
+</aside>
 
 <main id="main">
-  <section class="instrument" id="instrument" aria-labelledby="instrument-h">
-    <div class="inst-grid">
-      <div class="stage-wrap">
-        <div class="stage" id="stage">
-          <canvas id="gl" tabindex="0" role="img"
-                  aria-label="Interactive three-dimensional model of the LACQUER Model 77 turntable. Drag, or use arrow keys, to rotate it. Plus and minus move closer and further."></canvas>
-          <picture class="stage-still">
-            <img src="img/lacquer-hero.svg" width="1200" height="800"
-                 alt="The LACQUER Model 77 turntable: walnut plinth, brushed aluminium platter, tonearm, and acrylic dust cover.">
-          </picture>
-          <div class="inst-overlay" aria-hidden="true">
-            <i class="inst-corner inst-tl"></i><i class="inst-corner inst-tr"></i>
-            <i class="inst-corner inst-bl"></i><i class="inst-corner inst-br"></i>
-            <div class="inst-row inst-top">
-              <span class="inst-serial">CUT <b id="instSerial">LQ-77·014</b></span>
-            </div>
-            <div class="inst-row inst-bot">
-              <span id="instEv">33⅓ RPM · 0.00%</span>
-              <span id="instCal">WOW 0.08</span>
-            </div>
-          </div>
-          <p class="stage-note" id="stageNote"><span class="stage-bar" id="loadBar"></span>Loading the deck</p>
-          <p class="stage-hint" aria-hidden="true">Drag to inspect</p>
-        </div>
-        <div class="chips" role="group" aria-label="Bring a part of the deck into view">
-          <button type="button" class="chip" data-view="hero" aria-pressed="true">Whole</button>
-          <button type="button" class="chip" data-view="platter" aria-pressed="false">Platter</button>
-          <button type="button" class="chip" data-view="plinth" aria-pressed="false">Plinth</button>
-          <button type="button" class="chip" data-view="tonearm" aria-pressed="false">Tonearm</button>
-          <button type="button" class="chip" data-view="vinyl" aria-pressed="false">Vinyl</button>
-          <button type="button" class="chip" data-view="cover" aria-pressed="false">Cover</button>
-        </div>
+  <section class="hero" id="top" data-stage="a">
+    <div class="wrap hero-wrap">
+      <p class="kicker reveal"><span class="kdot"></span>UNDERGROUND LABEL · WAREHOUSE 14</p>
+      <h1 class="hero-title reveal">
+        <span class="ht-a">SIDE</span>
+        <span class="ht-b">A</span>
+        <span class="ht-slash">//</span>
+        <span class="ht-c">RUN</span>
+        <span class="ht-d">HOT</span>
+      </h1>
+      <p class="hero-lede reveal d1">We press nothing official. We run a boombox in a concrete room, dub tapes until the oxide flakes, and invite the people who still listen with their ribs. The lacquer is long gone. The static is the point.</p>
+      <div class="hero-row reveal d2">
+        <a class="btn btn-burn" href="#press">GRAB A DUB</a>
+        <a class="btn btn-ghost" href="#drops">READ THE DROPS</a>
       </div>
-
-      <div class="panels" id="materials">
-        <article class="panel" data-view="hero">
-          <p class="kicker">Model 77</p>
-          <h1 id="instrument-h"><span class="h1-mark">LACQUER</span>&nbsp;<span class="h1-accent">77</span></h1>
-          <p class="lead">A direct-drive turntable named for the lacquer master — the last object that is still <em class="lead-accent">physically cut</em> before a record becomes a record.</p>
-          <ul class="hero-meta">
-            <li>Brushed aluminium platter, 2.8 kg</li>
-            <li>Walnut veneer plinth, constrained-damp core</li>
-            <li>Nine-inch gimbal tonearm, adjustable VTA</li>
-            <li>±0.02% WRMS speed stability</li>
-          </ul>
-          <p class="scroll-cue" aria-hidden="true">Scroll — or pick a component</p>
-        </article>
-
-        <article class="panel" data-view="platter">
-          <p class="kicker">01 — Platter</p>
-          <h2>Mass before speed</h2>
-          <p>The platter is machined from a single aluminium blank, brushed on the lathe so the grain runs with the rotation, not across it. Mass is the first anti-vibration device — everything else is tuning.</p>
-          <p class="pull">2.8 kg rotating at 33⅓ — inertia is the filter.</p>
-          <dl class="micro">
-            <div><dt>Alloy</dt><dd>6061-T6</dd></div>
-            <div><dt>Finish</dt><dd>Longitudinal brush</dd></div>
-            <div><dt>Mat</dt><dd>Wool felt, 3 mm</dd></div>
-          </dl>
-        </article>
-
-        <article class="panel" data-view="plinth">
-          <p class="kicker">02 — Plinth</p>
-          <h2>What the motor sits on</h2>
-          <p>A constrained-layer core wrapped in quarter-sawn walnut veneer — stiff enough to refuse motor chatter, soft enough not to ring. The plinth is not furniture. It is the reference plane the stylus assumes.</p>
-          <p class="pull">Damping first. Decoration never.</p>
-          <dl class="micro">
-            <div><dt>Veneer</dt><dd>European walnut</dd></div>
-            <div><dt>Core</dt><dd>MDF + butyl constrained layer</dd></div>
-            <div><dt>Feet</dt><dd>Sorbothane, 12 dB at 80 Hz</dd></div>
-          </dl>
-        </article>
-
-        <article class="panel" data-view="tonearm">
-          <p class="kicker">03 — Tonearm</p>
-          <h2>Nine inches, gimbal bearing</h2>
-          <p>A medium-mass gimbal arm with adjustable VTA and azimuth. The cartridge is not included because your cut engineer already has an opinion — and that opinion is the point of a mastering deck.</p>
-          <p class="pull">Tracking force is a number, not a feeling.</p>
-          <dl class="micro">
-            <div><dt>Effective length</dt><dd>230 mm</dd></div>
-            <div><dt>Bearing</dt><dd>Gimbal, preloaded</dd></div>
-            <div><dt>VTA range</dt><dd>±4 mm</dd></div>
-          </dl>
-        </article>
-
-        <article class="panel" data-view="vinyl">
-          <p class="kicker">04 — Vinyl</p>
-          <h2>Grooves that catch light</h2>
-          <p>The lacquer is cut with a heated stylus into a blank that still smells of nitrocellulose. What you hear on vinyl is not a file — it is a geometry problem solved in microns.</p>
-          <p class="pull">74 µm pitch at the outer edge. Light knows.</p>
-          <dl class="micro">
-            <div><dt>Speed</dt><dd>33⅓ &amp; 45 RPM</dd></div>
-            <div><dt>Wow &amp; flutter</dt><dd>&lt; 0.08% WRMS</dd></div>
-            <div><dt>RIAA</dt><dd>Passive, ±0.3 dB</dd></div>
-          </dl>
-        </article>
-
-        <article class="panel" data-view="cover">
-          <p class="kicker">05 — Cover</p>
-          <h2>Dust is a frequency</h2>
-          <p>Four millimetres of cast acrylic, hinged at the rear, grounded so static does not ride the groove. Transmission is real — not a tinted plane pretending to be glass.</p>
-          <p class="pull">What you see through it is what is playing.</p>
-          <dl class="micro">
-            <div><dt>Material</dt><dd>Cast acrylic, 4 mm</dd></div>
-            <div><dt>IOR</dt><dd>1.49</dd></div>
-            <div><dt>Hinge</dt><dd>Left, damped</dd></div>
-          </dl>
-        </article>
-      </div>
+      <p class="touch-cue mono reveal d3" aria-hidden="true">TAP THE ROOM — THE RIG ANSWERS</p>
     </div>
+    <p class="scroll-cue mono" aria-hidden="true">SCROLL TO RAISE STATIC <span class="cue-arrow">▼</span> &nbsp;·&nbsp; HOLD CLICK TO BURN THE TAPE</p>
   </section>
 
-  <section class="spec" id="spec" aria-labelledby="spec-h">
+  <section class="sect sect-rig" id="rig" data-stage="a">
     <div class="wrap">
-      <p class="kicker">Specification</p>
-      <h2 id="spec-h" class="section-h">Everything the cut engineer asks for</h2>
-      <div class="spec-table">
-        <dl>
-          <div class="reveal"><dt>Drive</dt><dd>Direct-drive, quartz-locked</dd></div>
-          <div class="reveal"><dt>Speeds</dt><dd>33⅓ &amp; 45 RPM, pitch ±8%</dd></div>
-          <div class="reveal"><dt>Platter</dt><dd>6061-T6 aluminium, 312 mm, 2.8 kg</dd></div>
-          <div class="reveal"><dt>Wow &amp; flutter</dt><dd>&lt; 0.08% WRMS</dd></div>
-          <div class="reveal"><dt>Signal</dt><dd>Phono out, RIAA passive ±0.3 dB</dd></div>
-          <div class="reveal"><dt>Arm</dt><dd>9″ gimbal, VTA/azimuth adjustable</dd></div>
-          <div class="reveal"><dt>Plinth</dt><dd>Constrained-layer core, walnut veneer</dd></div>
-          <div class="reveal"><dt>Cover</dt><dd>Cast acrylic, hinged</dd></div>
-          <div class="reveal"><dt>Dimensions</dt><dd>480 × 380 × 145 mm</dd></div>
-          <div class="reveal"><dt>Mass</dt><dd>14.2 kg</dd></div>
-        </dl>
+      <p class="kicker reveal"><span class="kdot"></span>THE RIG</p>
+      <h2 class="slab reveal" data-glitch>ONE BOOMBOX.<br><span class="slab-burn">FOUR CHANNELS.</span><br>ZERO PERMISSION.</h2>
+      <div class="rig-grid">
+        <p class="body-l reveal d1">The hero is not a render we invented — it is Poly Haven&rsquo;s boombox and portable cassette player, loaded in your browser with a warehouse HDRI and a looped Pixabay room shot bleeding behind the canvas. We did not model geometry. We aimed lights at someone else&rsquo;s work and let the room get loud.</p>
+        <div class="stat-rail reveal d2">
+          <div class="stat"><span class="stat-n mono" data-count="118" data-suffix="BPM">0</span><span class="stat-l">master clock</span></div>
+          <div class="stat"><span class="stat-n mono" data-count="4" data-suffix="">0</span><span class="stat-l">deck channels hot</span></div>
+          <div class="stat"><span class="stat-n mono" data-count="96" data-suffix="dB">0</span><span class="stat-l">peak before clip</span></div>
+          <div class="stat"><span class="stat-n mono" id="stat-bodies" data-suffix="">0</span><span class="stat-l">bodies in warehouse 14</span></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="editions" id="editions" aria-labelledby="ed-h">
+  <section class="sect sect-drops" id="drops" data-stage="b">
     <div class="wrap">
-      <p class="kicker">Editions</p>
-      <h2 id="ed-h" class="section-h">Three finishes, one motor</h2>
-      <p class="section-lead">The drive and arm do not change between editions. What changes is the veneer, the platter finish, and how long you wait for the bench.</p>
-      <ul class="ed-list">
-        <li class="ed reveal">
-          <p class="ed-name">Walnut</p>
-          <p class="ed-price">S$3,200</p>
-          <p class="ed-desc">Natural walnut veneer, brushed natural platter. The finish the Model 77 was cut in.</p>
-          <ul class="ed-facts">
-            <li>European walnut</li>
-            <li>Felt mat included</li>
-            <li>Shipped in 4 weeks</li>
-          </ul>
-          <a class="ed-cta" href="#enquiry">Register for Walnut</a>
-        </li>
-        <li class="ed reveal is-mid">
-          <p class="ed-name">Obsidian</p>
-          <p class="ed-price">S$3,600</p>
-          <p class="ed-desc">Ebonised oak veneer, black anodised platter. For rooms that already have too much light.</p>
-          <ul class="ed-facts">
-            <li>Hard-anodised platter</li>
-            <li>Black felt mat</li>
-            <li>Shipped in 6 weeks</li>
-          </ul>
-          <a class="ed-cta" href="#enquiry">Register for Obsidian</a>
-        </li>
-        <li class="ed reveal">
-          <p class="ed-name">Cutting</p>
-          <p class="ed-price">S$5,400</p>
-          <p class="ed-desc">Hand-oiled walnut, matched cartridge at assembly, signed test lacquer included.</p>
-          <ul class="ed-facts">
-            <li>Numbered edition</li>
-            <li>Matched cartridge</li>
-            <li>Built to order, 14 weeks</li>
-          </ul>
-          <a class="ed-cta" href="#enquiry">Register for Cutting</a>
-        </li>
-      </ul>
+      <p class="kicker reveal"><span class="kdot"></span>DROPS</p>
+      <h2 class="slab reveal" data-glitch>MIXTAPE<br><span class="slab-static">CHAOS LOG.</span></h2>
+      <p class="body-m reveal d1">Every title is a dub of a dub. Hover a row — the deck flips channel colour.</p>
+      <ol class="drop-list">
+        <li class="drop reveal" data-ch="a"><span class="drop-n mono">01</span><span class="drop-title">OXIDE SUNSET</span><span class="drop-meta mono">SIDE A · 42 MIN</span></li>
+        <li class="drop reveal d1" data-ch="b"><span class="drop-n mono">02</span><span class="drop-title">CONCRETE HYMN</span><span class="drop-meta mono">LIVE WAREHOUSE</span></li>
+        <li class="drop reveal d2" data-ch="burn"><span class="drop-n mono">03</span><span class="drop-title">MAGNETIC SCARS</span><span class="drop-meta mono">BANNED MASTER</span></li>
+        <li class="drop reveal d3" data-ch="a"><span class="drop-n mono">04</span><span class="drop-title">PASIR PANJANG FEVER</span><span class="drop-meta mono">118 BPM LOCK</span></li>
+        <li class="drop reveal" data-ch="b"><span class="drop-n mono">05</span><span class="drop-title">LACQUER GHOST</span><span class="drop-meta mono">NO DIGITAL</span></li>
+        <li class="drop reveal d1" data-ch="burn"><span class="drop-n mono">06</span><span class="drop-title">STATIC COMMITTEE</span><span class="drop-meta mono">OPEN REEL</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="enquiry" id="enquiry" aria-labelledby="enq-h">
-    <div class="wrap enq-wrap">
-      <div class="enq-copy">
-        <p class="kicker">Register interest</p>
-        <h2 id="enq-h" class="section-h">Join the list for the next run</h2>
-        <p class="section-lead">Each run is small. We write once when your edition opens — not before, not after.</p>
+  <section class="sect sect-warehouse" id="warehouse" data-stage="burn">
+    <div class="wrap">
+      <p class="kicker reveal"><span class="kdot"></span>WAREHOUSE</p>
+      <h2 class="slab reveal" data-glitch>THREE NIGHTS.<br><span class="slab-burn">ONE ROOM.</span></h2>
+      <div class="night-grid">
+        <article class="night reveal" data-ch="a">
+          <header class="night-head">
+            <span class="night-tag mono">FRI · WAREHOUSE 14</span>
+            <h3 class="night-name">SIDE A</h3>
+            <span class="night-note mono">DOORS 22:00 · NO PHOTOS</span>
+          </header>
+          <p>Warm tape hiss, red par cans, one boombox on a pallet. Bring headphones or don&rsquo;t — the room is the mix.</p>
+        </article>
+        <article class="night reveal d1" data-ch="b">
+          <header class="night-head">
+            <span class="night-tag mono">SAT · WAREHOUSE 14</span>
+            <h3 class="night-name">SIDE B</h3>
+            <span class="night-note mono">DOORS 23:00 · DUB ONLY</span>
+          </header>
+          <p>Second-generation dubs traded at the door. If you hear a song you recognise, it is already too clean.</p>
+        </article>
+        <article class="night reveal d2" data-ch="burn">
+          <header class="night-head">
+            <span class="night-tag mono">SUN · WAREHOUSE 14</span>
+            <h3 class="night-name">BURN</h3>
+            <span class="night-note mono">DOORS 20:00 · TILL TAPE ENDS</span>
+          </header>
+          <p>We play the stacks until someone cuts the power. Last year the oxide caught light. We kept going.</p>
+        </article>
       </div>
-      <form class="enq-form" id="enqForm" novalidate>
+    </div>
+  </section>
+
+  <section class="sect sect-press" id="press" data-stage="burn">
+    <div class="wrap press-wrap">
+      <div class="press-copy">
+        <p class="kicker reveal"><span class="kdot"></span>PRESS</p>
+        <h2 class="slab reveal" data-glitch>GRAB A<br><span class="slab-static">DUB.</span></h2>
+        <p class="body-m reveal d1">We do not ship files. We write your name on a cassette and hand it through the crowd. List is short. Static is long.</p>
+      </div>
+      <form class="press-form reveal d2" id="pressForm" novalidate>
         <div class="field">
-          <label for="enq-name">Name</label>
-          <input id="enq-name" name="name" type="text" autocomplete="name" required>
-          <p class="field-err" id="err-name" hidden>Please tell us what to call you.</p>
+          <label for="press-name">Name</label>
+          <input id="press-name" name="name" type="text" autocomplete="name" required>
+          <p class="field-err" id="err-name" hidden>Need a name for the dub.</p>
         </div>
         <div class="field">
-          <label for="enq-email">Email</label>
-          <input id="enq-email" name="email" type="email" autocomplete="email" required>
-          <p class="field-err" id="err-email" hidden>That address does not look complete.</p>
+          <label for="press-email">Email</label>
+          <input id="press-email" name="email" type="email" autocomplete="email" required>
+          <p class="field-err" id="err-email" hidden>That address looks wrong.</p>
         </div>
         <div class="field">
-          <label for="enq-ed">Edition</label>
-          <select id="enq-ed" name="edition">
-            <option value="walnut">Walnut — S$3,200</option>
-            <option value="obsidian">Obsidian — S$3,600</option>
-            <option value="cutting">Cutting — S$5,400</option>
-            <option value="undecided">Not decided yet</option>
+          <label for="press-side">Side</label>
+          <select id="press-side" name="side">
+            <option value="a">Side A — run hot</option>
+            <option value="b">Side B — run weird</option>
+            <option value="burn">Burn — no rules</option>
           </select>
         </div>
-        <button class="enq-submit" type="submit">Register</button>
-        <p class="enq-done" id="enqDone" role="status" hidden>Registered. We will write when that edition opens.</p>
+        <button class="btn btn-burn btn-wide" type="submit">REQUEST DUB</button>
+        <p class="press-done" id="pressDone" role="status" hidden>Listed. Watch the door at Warehouse 14.</p>
       </form>
     </div>
   </section>
@@ -263,31 +203,23 @@
 <footer class="foot">
   <div class="wrap foot-grid">
     <div>
-      <p class="foot-mark">LACQUER</p>
-      <p class="foot-line">Mastering Works — Singapore</p>
+      <p class="foot-mark">TAPE//LACQUER</p>
+      <p class="foot-line mono">Warehouse 14 · Pasir Panjang</p>
     </div>
     <div class="foot-cols">
-      <div>
-        <p class="foot-h">Deck</p>
-        <a href="#materials">Components</a>
-        <a href="#spec">Specification</a>
-        <a href="#editions">Editions</a>
-      </div>
-      <div>
-        <p class="foot-h">Service</p>
-        <a href="#enquiry">Register interest</a>
-        <a href="#spec">Calibration</a>
-        <a href="#editions">Lead times</a>
-      </div>
+      <a href="#rig">Rig</a>
+      <a href="#drops">Drops</a>
+      <a href="#warehouse">Warehouse</a>
+      <a href="#press">Press</a>
     </div>
   </div>
   <div class="wrap foot-base">
-    <p>© 2026 LACQUER Mastering Works</p>
+    <p>© 2026 TAPE//LACQUER · CC0 models via Poly Haven · footage via Pixabay</p>
     <p><a href="../../index.html">More work by this studio</a></p>
   </div>
 </footer>
 
+<script src="js/app.js"></script>
 <script type="module" src="js/scene.js"></script>
-<script src="js/app.js" defer></script>
 </body>
 </html>
