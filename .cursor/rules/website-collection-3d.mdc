@@ -1,0 +1,25 @@
+---
+description: Website-Collection — 3D template dev preview and Cursor 3D visual-pass
+alwaysApply: true
+---
+
+# Website-Collection — 3D templates
+
+**Preview (required for WebGL/CSP/Draco):**
+
+```bash
+node templates/foundry-harlowe/src/serve.mjs
+```
+
+→ `http://localhost:8123` — or use `.claude/launch.json` in this repo.
+
+**Cursor skills for UI/chrome on 3D templates:**
+
+- `thornbury-visual-pass` — general UI gate
+- `thornbury-3d-visual-pass` — CSP, canvas, reference compare, perf smoke
+
+Read each template's `DESIGN.md` before editing. Lane split: DOM/CSS/chrome =
+Cursor; `scene.js` / GLB / `blender-src/` = unless task explicitly includes them.
+
+Nearest 3D references: `archive-aperture-index`, `camera-candela`, `carnival-null`,
+`combat-fracture` — inspect ≤4 per AGENT.md budget.
