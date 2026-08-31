@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Mirrors the production header in vercel.json exactly. The blob:/wasm
+     grants are what the Draco decoder needs; a local http.server sends no
+     CSP at all, so this tag is the only local check that catches them. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>CANDELA I — a full-manual rangefinder in four materials</title>
+<meta name="description" content="The CANDELA I is a full-manual rangefinder built from four materials, each doing exactly one job: brushed aluminium plates cut from one billet, six optical elements in four groups, a hand-wrapped grain body, and a single vulcanised shutter release. Turn it over in your browser.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/camera-candela/index.html">
+<meta name="theme-color" content="#0B0C0E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B0C0E'/%3E%3Ccircle cx='16' cy='17' r='7.5' fill='none' stroke='%23C08A4A' stroke-width='2'/%3E%3Ccircle cx='16' cy='17' r='2.6' fill='%23C08A4A'/%3E%3Crect x='9' y='6' width='14' height='3' rx='1.2' fill='%23C08A4A'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CANDELA">
+<meta property="og:title" content="CANDELA I — a full-manual rangefinder in four materials">
+<meta property="og:description" content="Metal, glass, leather, rubber. Each doing exactly one job. Turn the instrument over in your browser.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/camera-candela/index.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/camera-candela/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" as="fetch" href="assets/candela.glb" crossorigin>
+<script src="js/boot.js"></script>
+</head>
+<body id="top">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="mast">
+  <a class="wordmark" href="#top">
+    CANDELA
+    <span class="wordmark-sub">Optical Works</span>
+  </a>
+  <nav class="mast-nav" aria-label="Sections">
+    <a href="#materials">Materials</a>
+    <a href="#spec">Specification</a>
+    <a href="#editions">Editions</a>
+  </nav>
+  <a class="mast-cta" href="#enquiry">Register interest</a>
+</header>
+
+<main id="main">
+
+  <!-- ══ THE INSTRUMENT — sticky stage, scrolling captions ══════════════ -->
+  <section class="instrument" id="instrument" aria-labelledby="instrument-h">
+    <div class="inst-grid">
+
+      <div class="stage-wrap">
+        <div class="stage" id="stage">
+          <canvas id="gl" tabindex="0" role="img"
+                  aria-label="Interactive three-dimensional model of the CANDELA I rangefinder camera. Drag, or use the arrow keys, to rotate it. Plus and minus move closer and further."></canvas>
+
+          <!-- Shown until the model reports in, and permanently if it never
+               does (no JS, blocked CDN, no WebGL2). A real product shot, so
+               the fallback is never an empty rectangle. -->
+          <picture class="stage-still">
+            <source media="(max-width: 700px)" srcset="img/candela-hero-sm.webp">
+            <img src="img/candela-hero.webp" width="1400" height="963"
+                 alt="The CANDELA I rangefinder photographed three-quarter from the front: brushed aluminium top plate, black grained body wrap, and a black lens barrel with knurled focus and aperture rings.">
+          </picture>
+
+          <p class="stage-note" id="stageNote"><span class="stage-bar" id="loadBar"></span>Loading the instrument</p>
+          <p class="stage-hint" aria-hidden="true">Drag to inspect</p>
+        </div>
+
+        <div class="chips" role="group" aria-label="Bring a material into view">
+          <button type="button" class="chip" data-view="hero" aria-pressed="true">Whole</button>
+          <button type="button" class="chip" data-view="metal" aria-pressed="false">Metal</button>
+          <button type="button" class="chip" data-view="glass" aria-pressed="false">Glass</button>
+          <button type="button" class="chip" data-view="leather" aria-pressed="false">Leather</button>
+          <button type="button" class="chip" data-view="rubber" aria-pressed="false">Rubber</button>
+        </div>
+      </div>
+
+      <div class="panels" id="materials">
+        <article class="panel" data-view="hero">
+          <p class="kicker">Instrument No. 1</p>
+          <h1 id="instrument-h">CANDELA&nbsp;I</h1>
+          <p class="lead">A full-manual rangefinder. Four materials, each doing
+            exactly one job, and nothing on the body that does not move
+            something.</p>
+          <ul class="hero-meta">
+            <li>Brushed aluminium plates</li>
+            <li>Six elements in four groups</li>
+            <li>Mechanical shutter, no power required</li>
+            <li>640&nbsp;g with lens</li>
+          </ul>
+          <p class="scroll-cue" aria-hidden="true">Scroll — or pick a material</p>
+        </article>
+
+        <article class="panel" data-view="metal">
+          <p class="kicker">01 — Metal</p>
+          <h2>Cut from one billet</h2>
+          <p>The top and base plates each leave the mill as a single piece,
+            bead-blasted, then brushed along the long axis so the grain runs
+            with the body rather than across it.</p>
+          <p>Every edge is broken by a 0.4&nbsp;mm chamfer. That chamfer is not
+            decoration. It is the line of light that tells you, at arm's
+            length, whether a part was machined or moulded.</p>
+          <dl class="micro">
+            <div><dt>Alloy</dt><dd>6082-T6</dd></div>
+            <div><dt>Finish</dt><dd>Bead-blast, longitudinal brush</dd></div>
+            <div><dt>Chamfer</dt><dd>0.4 mm at 45°</dd></div>
+          </dl>
+        </article>
+
+        <article class="panel" data-view="glass">
+          <p class="kicker">02 — Glass</p>
+          <h2>Six elements, four groups</h2>
+          <p>Air-spaced and multi-coated, set 2&nbsp;mm back inside the barrel
+            so the front element is shaded by its own mount. The coating reads
+            faintly violet off-axis.</p>
+          <p>Focus runs 0.7&nbsp;m to infinity across 120 degrees of helicoid,
+            damped with a grease specified by viscosity rather than by feel —
+            because "feel" is not a number a second factory can hit.</p>
+          <dl class="micro">
+            <div><dt>Optical formula</dt><dd>6 elements / 4 groups</dd></div>
+            <div><dt>Aperture</dt><dd>f/1.8 – f/16, 11 blades</dd></div>
+            <div><dt>Close focus</dt><dd>0.7 m</dd></div>
+          </dl>
+        </article>
+
+        <article class="panel" data-view="leather">
+          <p class="kicker">03 — Leather</p>
+          <h2>The part you actually hold</h2>
+          <p>A full-grain wrap over the magnesium core, applied by hand and
+            rolled into the radius rather than stretched across it, so the
+            corners keep their grain instead of going glassy.</p>
+          <p>The pebble depth is a specification, not a finish: 0.35&nbsp;mm.
+            Deep enough to stay dry under a thumb, shallow enough not to hold
+            grit.</p>
+          <dl class="micro">
+            <div><dt>Hide</dt><dd>Full-grain, vegetable tanned</dd></div>
+            <div><dt>Pebble depth</dt><dd>0.35 mm</dd></div>
+            <div><dt>Application</dt><dd>Hand-rolled, no stretch</dd></div>
+          </dl>
+        </article>
+
+        <article class="panel" data-view="rubber">
+          <p class="kicker">04 — Rubber</p>
+          <h2>One soft component</h2>
+          <p>The shutter release is the only part of this camera designed to be
+            pressed, so it is the only part that is not hard: a 3.6&nbsp;mm
+            vulcanised dome on a threaded collar.</p>
+          <p>Forty shore A, with the release point set at 1.6&nbsp;N.
+            Everything else on the body resists you. This one gives.</p>
+          <dl class="micro">
+            <div><dt>Compound</dt><dd>Vulcanised, 40 shore A</dd></div>
+            <div><dt>Release point</dt><dd>1.6 N</dd></div>
+            <div><dt>Collar</dt><dd>Threaded, M10 × 0.5 cable</dd></div>
+          </dl>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SPECIFICATION ══════════════════════════════════════════════════ -->
+  <section class="spec" id="spec" aria-labelledby="spec-h">
+    <div class="wrap">
+      <p class="kicker">Specification</p>
+      <h2 id="spec-h" class="section-h">Everything that is true about it</h2>
+      <div class="spec-table">
+        <dl>
+          <div class="reveal"><dt>Format</dt><dd>35 mm film, 24 × 36 mm</dd></div>
+          <div class="reveal"><dt>Mount</dt><dd>CANDELA M, 44 mm flange distance</dd></div>
+          <div class="reveal"><dt>Shutter</dt><dd>Cloth focal-plane, mechanical. 1 s – 1/1000 s and B</dd></div>
+          <div class="reveal"><dt>Viewfinder</dt><dd>0.72× coupled rangefinder, 68 mm effective base</dd></div>
+          <div class="reveal"><dt>Frame lines</dt><dd>35 / 50 / 90 mm, parallax corrected</dd></div>
+          <div class="reveal"><dt>Metering</dt><dd>Centre-weighted TTL, ISO 6 – 6400</dd></div>
+          <div class="reveal"><dt>Body</dt><dd>Magnesium core, 6082-T6 aluminium plates</dd></div>
+          <div class="reveal"><dt>Power</dt><dd>Not required for shutter operation</dd></div>
+          <div class="reveal"><dt>Dimensions</dt><dd>139 × 80 × 39 mm</dd></div>
+          <div class="reveal"><dt>Mass</dt><dd>640 g with the 40 mm lens fitted</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EDITIONS ═══════════════════════════════════════════════════════ -->
+  <section class="editions" id="editions" aria-labelledby="ed-h">
+    <div class="wrap">
+      <p class="kicker">Editions</p>
+      <h2 id="ed-h" class="section-h">Three finishes, one mechanism</h2>
+      <p class="section-lead">The mechanism does not change between editions.
+        What changes is the plate finish, the wrap, and how long you wait.</p>
+
+      <ul class="ed-list">
+        <li class="ed reveal">
+          <p class="ed-name">Silver</p>
+          <p class="ed-price">S$4,800</p>
+          <p class="ed-desc">Natural brushed aluminium plates, black grain wrap.
+            The finish the instrument was designed in.</p>
+          <ul class="ed-facts">
+            <li>Brushed natural aluminium</li>
+            <li>40 mm f/1.8 included</li>
+            <li>Shipped in 6 weeks</li>
+          </ul>
+          <a class="ed-cta" href="#enquiry">Register for Silver</a>
+        </li>
+        <li class="ed reveal is-mid">
+          <p class="ed-name">Black Chrome</p>
+          <p class="ed-price">S$5,200</p>
+          <p class="ed-desc">Anodised plates over the same billet, deep charcoal
+            wrap. Wears to brass at the corners, which is the point.</p>
+          <ul class="ed-facts">
+            <li>Hard-anodised, 18 µm</li>
+            <li>40 mm f/1.8 included</li>
+            <li>Shipped in 10 weeks</li>
+          </ul>
+          <a class="ed-cta" href="#enquiry">Register for Black Chrome</a>
+        </li>
+        <li class="ed reveal">
+          <p class="ed-name">Atelier</p>
+          <p class="ed-price">S$7,400</p>
+          <p class="ed-desc">Hand-engraved top plate, individually numbered, with
+            a lens matched to the body at assembly rather than at random.</p>
+          <ul class="ed-facts">
+            <li>Engraved and numbered</li>
+            <li>Matched 40 mm f/1.8</li>
+            <li>Built to order, 20 weeks</li>
+          </ul>
+          <a class="ed-cta" href="#enquiry">Register for Atelier</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ ENQUIRY ════════════════════════════════════════════════════════ -->
+  <section class="enquiry" id="enquiry" aria-labelledby="enq-h">
+    <div class="wrap enq-wrap">
+      <div class="enq-copy">
+        <p class="kicker">Register interest</p>
+        <h2 id="enq-h" class="section-h">Join the list for the next run</h2>
+        <p class="section-lead">Each run is small and allocated in the order
+          registrations are received. We write once when your edition opens,
+          and not otherwise.</p>
+      </div>
+
+      <form class="enq-form" id="enqForm" novalidate>
+        <div class="field">
+          <label for="enq-name">Name</label>
+          <input id="enq-name" name="name" type="text" autocomplete="name" required>
+          <p class="field-err" id="err-name" hidden>Please tell us what to call you.</p>
+        </div>
+        <div class="field">
+          <label for="enq-email">Email</label>
+          <input id="enq-email" name="email" type="email" autocomplete="email" required>
+          <p class="field-err" id="err-email" hidden>That address does not look complete.</p>
+        </div>
+        <div class="field">
+          <label for="enq-ed">Edition</label>
+          <select id="enq-ed" name="edition">
+            <option value="silver">Silver — S$4,800</option>
+            <option value="black">Black Chrome — S$5,200</option>
+            <option value="atelier">Atelier — S$7,400</option>
+            <option value="undecided">Not decided yet</option>
+          </select>
+        </div>
+        <button class="enq-submit" type="submit">Register</button>
+        <p class="enq-done" id="enqDone" role="status" hidden>
+          Registered. We will write to you when that edition opens.
+        </p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-mark">CANDELA</p>
+      <p class="foot-line">Optical Works — Singapore</p>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <p class="foot-h">Instrument</p>
+        <a href="#materials">Materials</a>
+        <a href="#spec">Specification</a>
+        <a href="#editions">Editions</a>
+      </div>
+      <div>
+        <p class="foot-h">Service</p>
+        <a href="#enquiry">Register interest</a>
+        <a href="#spec">Calibration</a>
+        <a href="#editions">Lead times</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-base">
+    <p>© 2026 CANDELA Optical Works</p>
+    <p><a href="../../index.html">More work by this studio</a></p>
+  </div>
+</footer>
+
+<script type="module" src="js/scene.js"></script>
+<script src="js/app.js" defer></script>
+</body>
+</html>

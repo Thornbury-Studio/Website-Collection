@@ -195,6 +195,8 @@ function boot() {
       const k = 1 / Math.max(size.x, size.y, size.z);
       model.scale.setScalar(k);
       model.position.set(-centre.x * k, -centre.y * k, -centre.z * k);
+      // half-diagonal of the normalised box — the rotation-safe fit radius
+      fitRadius = 0.5 * size.length() * k;
 
       model.traverse((o) => {
         if (!o.isMesh) return;
@@ -231,12 +233,25 @@ function boot() {
           // elements flat. But thickness is a physical depth, not a dial:
           // the element is ~0.035 units through, and the first pass at 0.34
           // refracted the key panel into a white smear across the front.
-          m.transmission = CFG.transmission ? 1.0 : 0.0;
-          m.opacity = CFG.transmission ? 1.0 : 0.55;
-          m.transparent = !CFG.transmission;
-          m.thickness = 0.05;
-          m.attenuationDistance = 1.4;
-          m.attenuationColor = new THREE.Color(0.78, 0.88, 0.94);
+          if (CFG.transmission) {
+            m.transmission = 1.0;
+            m.opacity = 1.0;
+            m.transparent = false;
+            m.thickness = 0.05;
+            m.attenuationDistance = 1.4;
+            m.attenuationColor = new THREE.Color(0.78, 0.88, 0.94);
+          } else {
+            // Phones skip the transmission pass. Dropping to a translucent
+            // white made the front element a pale plastic cap — the exact
+            // flat-disc read this build exists to avoid. Opaque, near-black
+            // and very smooth reflects the studio instead, which is what a
+            // coated element looks like from the outside anyway.
+            m.transmission = 0;
+            m.transparent = false;
+            m.opacity = 1;
+            m.color.setRGB(0.014, 0.016, 0.020);
+            m.metalness = 0;
+          }
           m.ior = 1.517;
           m.roughness = 0.025;
           // coated optics are dark but never dead — the element has to keep
@@ -313,13 +328,20 @@ function boot() {
      Spherical, hand-rolled rather than OrbitControls: one less vendored
      file with a bare 'three' specifier to rewrite, and the idle drift and
      the chip fly-to need to share one spring anyway. */
+  /* `dist` is a ZOOM factor, not a distance: 1.0 means the model's bounding
+     sphere exactly fills the tighter of the two fields of view. Authoring in
+     absolute units broke the moment the stage stopped being landscape — the
+     desktop stage is a tall column and the object ran off both edges. */
   const VIEWS = {
-    hero:    { az: 0.62, pol: 1.26, dist: 2.10, ty: 0.01 },
-    metal:   { az: 0.52, pol: 0.68, dist: 1.86, ty: 0.08 },
-    glass:   { az: 0.06, pol: 1.44, dist: 1.58, ty: -0.02 },
-    leather: { az: 1.24, pol: 1.36, dist: 1.80, ty: -0.02 },
-    rubber:  { az: 0.88, pol: 0.62, dist: 1.44, ty: 0.10 },
+    hero:    { az: 0.62, pol: 1.26, dist: 1.00, ty: 0.01 },
+    metal:   { az: 0.52, pol: 0.68, dist: 0.86, ty: 0.08 },
+    // dead-on front leaves the element a black hole; a little off-axis is
+    // what catches the key panel in the coating
+    glass:   { az: 0.34, pol: 1.31, dist: 0.72, ty: -0.02 },
+    leather: { az: 1.24, pol: 1.36, dist: 0.84, ty: -0.02 },
+    rubber:  { az: 0.88, pol: 0.62, dist: 0.62, ty: 0.10 },
   };
+  const ZOOM_MIN = 0.52, ZOOM_MAX = 1.75;
   const cur = { ...VIEWS.hero };
   const aim = { ...VIEWS.hero };
   let idle = true;
@@ -333,6 +355,18 @@ function boot() {
     idleAt = performance.now() + 2600;
   }
   window.CANDELA_VIEW = applyView;
+
+  /* Radius of the model's bounding sphere, set once the GLB has been
+     normalised. Fitting the SPHERE rather than the current silhouette is
+     what makes the framing rotation-safe: the object is 1.0 wide and 0.59
+     tall, so whichever way it is turned it still cannot leave the frame. */
+  let fitRadius = 0.65;
+  function framedDist(zoom) {
+    const vHalf = (camera.fov * Math.PI) / 360;
+    const hHalf = Math.atan(Math.tan(vHalf) * camera.aspect);
+    const lim = Math.max(Math.min(vHalf, hHalf), 0.05);
+    return (fitRadius / Math.sin(lim)) * zoom;
+  }
 
   /* pointer drag = azimuth/polar; wheel and pinch = a limited dolly */
   let dragging = false, lastX = 0, lastY = 0, pinch = 0;
@@ -356,7 +390,7 @@ function boot() {
   canvas.addEventListener("pointercancel", onUp);
   canvas.addEventListener("wheel", (e) => {
     e.preventDefault();
-    aim.dist = clamp(aim.dist + e.deltaY * 0.0016, 1.32, 3.9);
+    aim.dist = clamp(aim.dist + e.deltaY * 0.0008, ZOOM_MIN, ZOOM_MAX);
     idle = false;
     idleAt = performance.now() + 3400;
   }, { passive: false });
@@ -368,7 +402,7 @@ function boot() {
     if (e.touches.length !== 2) return;
     const g = touchGap(e);
     if (pinch) {
-      aim.dist = clamp(aim.dist * (pinch / g), 1.32, 3.9);
+      aim.dist = clamp(aim.dist * (pinch / g), ZOOM_MIN, ZOOM_MAX);
       idleAt = performance.now() + 3400;
     }
     pinch = g;
@@ -388,8 +422,8 @@ function boot() {
     else if (e.key === "ArrowRight") aim.az -= step;
     else if (e.key === "ArrowUp") aim.pol = clamp(aim.pol - step * 0.7, 0.30, 2.06);
     else if (e.key === "ArrowDown") aim.pol = clamp(aim.pol + step * 0.7, 0.30, 2.06);
-    else if (e.key === "+" || e.key === "=") aim.dist = clamp(aim.dist - 0.18, 1.32, 3.9);
-    else if (e.key === "-") aim.dist = clamp(aim.dist + 0.18, 1.32, 3.9);
+    else if (e.key === "+" || e.key === "=") aim.dist = clamp(aim.dist - 0.09, ZOOM_MIN, ZOOM_MAX);
+    else if (e.key === "-") aim.dist = clamp(aim.dist + 0.09, ZOOM_MIN, ZOOM_MAX);
     else return;
     e.preventDefault();
     idle = false;
@@ -408,15 +442,24 @@ function boot() {
   addEventListener("resize", resize);
   resize();
 
+  /* Idle motion is an OSCILLATION about the authored azimuth, not a spin.
+     A continuous rotation means the composition somebody designed only
+     exists for one frame in every eighty; swinging a sixth of a radian
+     either side keeps the hero angle while still walking the specular
+     highlight across the plates, which is the only reason to move at all. */
+  let driftT = 0, driftAmt = 0, prev = 0;
+
   let raf = 0;
   function frame(now) {
     raf = requestAnimationFrame(frame);
     if (!ready) return;
+    const dt = Math.min((now - prev) / 1000 || 0, 0.05);
+    prev = now;
 
     if (!dragging && now > idleAt) idle = true;
-    // idle drift keeps the specular alive so a still viewer still sees the
-    // material move; reduced-motion holds the authored angle instead
-    if (idle && !reduced.matches) aim.az += 0.00118;
+    driftT += dt;
+    // ease the drift in and out rather than snapping it off under the hand
+    driftAmt += ((idle && !reduced.matches ? 1 : 0) - driftAmt) * Math.min(1, dt * 1.6);
 
     const k = reduced.matches ? 0.24 : 0.085;
     cur.az += (aim.az - cur.az) * k;
@@ -424,11 +467,15 @@ function boot() {
     cur.dist += (aim.dist - cur.dist) * k;
     cur.ty += (aim.ty - cur.ty) * k;
 
+    const az = cur.az + Math.sin(driftT * 0.42) * 0.17 * driftAmt;
+    const pol = cur.pol + Math.sin(driftT * 0.29) * 0.035 * driftAmt;
+
     target.set(0, cur.ty, 0);
+    const d = framedDist(cur.dist);
     camera.position.set(
-      target.x + cur.dist * Math.sin(cur.pol) * Math.sin(cur.az),
-      target.y + cur.dist * Math.cos(cur.pol),
-      target.z + cur.dist * Math.sin(cur.pol) * Math.cos(cur.az)
+      target.x + d * Math.sin(pol) * Math.sin(az),
+      target.y + d * Math.cos(pol),
+      target.z + d * Math.sin(pol) * Math.cos(az)
     );
     camera.lookAt(target);
     renderer.render(scene, camera);

@@ -25,7 +25,9 @@ for ob in scn.objects:
 body.select_set(True)
 bpy.context.view_layer.objects.active = body
 bpy.ops.object.bake(type='NORMAL', normal_space='TANGENT', margin=4)
-nrm_path = os.path.join(BASE, "assets", "leather_nrm.png")
+# build artifact, not a shipped asset — the GLB embeds its own WebP copy,
+# so a PNG left in assets/ is ~1.8MB deployed and served for nothing
+nrm_path = os.path.join(BASE, "renders", "leather_nrm.png")
 img.filepath_raw = nrm_path
 img.file_format = 'PNG'
 img.save()
