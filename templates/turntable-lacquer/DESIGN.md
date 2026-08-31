@@ -1,74 +1,42 @@
-# LACQUER — design notes
+# TAPE//LACQUER — design & asset log
 
-A product site for a fictional mastering turntable brand, built around a
-**sourced** glTF base — not primitive geometry authored in Blender on this
-machine.
+Slug folder: `turntable-lacquer` (hub card). Live concept: underground cassette label **TAPE//LACQUER**, not the prior LACQUER turntable catalogue.
 
-## Asset strategy
+## Direction
 
-Josh's brief priority order was followed:
+Chaotic warehouse listening room — fixed full-bleed **video + WebGL** stage (VOLTFLOOD-adjacent layout), overlapping HUD, scanlines, ticker. Scroll raises STATIC; hold-click burns the tape. **No sticky product-catalog chrome.**
 
-1. **No Blender MCP** in Cursor — not connected.
-2. **Sourced base geometry:** Poly by Google *Vintage Turntable Player*
-   (via get3dmodels.com mirror), **221 KB** GLB, CC Attribution.
-   Same lineage as the archive-aperture-index lesson — real topology beats
-   primitive builds.
-3. **Runtime material passes** on top: brushed aluminium (canvas stroke
-   roughness + anisotropy), walnut veneer (grain roughness map), vinyl
-   grooves (radial canvas pattern), felt mat, acrylic cover (transmission
-   + IOR 1.49).
+## 3D (sourced only — no procedural meshes)
 
-**Environment:** Poly Haven `studio_small_09` **1k HDR** (CC0), self-hosted
-as `assets/studio.hdr` (~1.6 MB). Loaded via `RGBELoader` → PMREM. No new
-CSP hosts.
+| Asset | Source | License | Path |
+|-------|--------|---------|------|
+| Boombox | [Poly Haven — boombox](https://polyhaven.com/a/boombox) | CC0 | `assets/models/boombox/` |
+| Portable cassette player | [Poly Haven — portable_cassette_player](https://polyhaven.com/a/portable_cassette_player) | CC0 | `assets/models/cassette/` |
+| Warehouse HDRI | [Poly Haven — empty_warehouse_01](https://polyhaven.com/a/empty_warehouse_01) | CC0 | `assets/warehouse.hdr` |
+| Studio HDRI (fallback) | [Poly Haven — studio_small_09](https://polyhaven.com/a/studio_small_09) | CC0 | `assets/studio.hdr` |
 
-## Material families
+Materials are **authored textures from glTF** — scene.js only applies environment map, no canvas-generated roughness maps.
 
-| family | treatment |
-|---|---|
-| **Platter / tonearm** | MeshPhysicalMaterial, metalness 0.92, brushed roughness map, anisotropy 0.42 |
-| **Plinth** | Walnut colour + procedural grain roughness |
-| **Vinyl** | Near-black, radial groove roughness map |
-| **Felt** | High roughness, low env response |
-| **Cover** | Transmission 1, thickness 0.06, IOR 1.49 (mobile: opaque fallback) |
+## Video
 
-Mesh → family mapping uses name heuristics + HSL from imported vertex
-colours (Poly models ship without descriptive material names).
+| Asset | Source | License | Path |
+|-------|--------|---------|------|
+| Warehouse loop | [Pixabay #40130](https://pixabay.com/videos/warehouse-industry-metal-40130/) | Pixabay License | `assets/bg-warehouse.mp4` |
 
-## Palette
+## Stack
 
-| token | hex | role |
-|---|---|---|
-| `--ink` | `#0E0C0A` | page ground |
-| `--chalk` | `#F0EBE3` | primary type |
-| `--muted` | `#A39A8E` | secondary |
-| `--lacquer` | `#C67A3A` | single accent |
+- Vanilla HTML/CSS/JS + Three.js 0.180 (jsDelivr + import map)
+- `js/app.js` — `TLSTATE` (scroll, pointer, 118 BPM, burn charge)
+- `js/scene.js` — loads glTF + HDRI, point static rain
+- CSP: self-hosted media + scripts; no new external hosts
 
-## Type
+## Fallbacks
 
-- **Fraunces** — display / wordmark
-- **IBM Plex Sans** — body, italic accents
-- **IBM Plex Mono** — kickers, readouts, chips
+- `no-3d` / `prefers-reduced-motion`: static SVG poster, video hidden, reduced motion on rig
+- `js/boot.js` — 14s watchdog → `no-3d`
 
-## CSP
+## Verify
 
-Mirrors `vercel.json` production header in `<meta http-equiv>`. Draco
-decoder vendored under `js/vendor/draco/` for parity with sibling templates
-(even though shipped GLB is uncompressed).
+`node templates/foundry-harlowe/src/serve.mjs` → `http://localhost:8123/templates/turntable-lacquer/`
 
-**Import map** in `index.html` resolves bare `three` specifiers for
-`RGBELoader` (addons import `from 'three'`).
-
-## Credits
-
-| Asset | Source | License |
-|---|---|---|
-| Turntable geometry | Poly by Google (via get3dmodels.com) | CC Attribution |
-| Studio HDRI | Poly Haven `studio_small_09` 1k | CC0 |
-
-## Open items
-
-- Hub card still uses SVG hero until a WebP still is captured from live render.
-- Poly base is low-poly with vertex colours — closer to Aperture's *structure*
-  lesson than its surface wear; next elevation is a higher-detail sourced model
-  or Blender detail pass when available.
+Breakpoints: 320, 390, 1440.

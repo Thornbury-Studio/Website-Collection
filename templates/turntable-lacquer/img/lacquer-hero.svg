@@ -1,8 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="LACQUER Model 77 turntable silhouette on a dark ground.">
-  <rect width="1200" height="800" fill="#0E0C0A"/>
-  <ellipse cx="600" cy="420" rx="280" ry="90" fill="#1A1612"/>
-  <ellipse cx="600" cy="400" rx="200" ry="200" fill="#2A2826" stroke="#3A342C" stroke-width="2"/>
-  <ellipse cx="600" cy="400" rx="60" ry="60" fill="#0E0C0A"/>
-  <rect x="720" y="320" width="180" height="12" rx="4" fill="#8A9098" transform="rotate(-22 720 320)"/>
-  <path d="M420 280 L420 180 L440 160 L460 180 L460 300 Z" fill="none" stroke="#C67A3A" stroke-width="2" opacity="0.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08060a"/>
+      <stop offset="0.5" stop-color="#1a1028"/>
+      <stop offset="1" stop-color="#08060a"/>
+    </linearGradient>
+    <radialGradient id="neon" cx="50%" cy="40%" r="60%">
+      <stop offset="0" stop-color="#ff3d2e" stop-opacity="0.35"/>
+      <stop offset="0.45" stop-color="#4de8ff" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#08060a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#g)"/>
+  <rect width="1200" height="700" fill="url(#neon)"/>
+  <g opacity="0.15" stroke="#f2e94a" stroke-width="1">
+    <path d="M0 120 H1200 M0 240 H1200 M0 360 H1200 M0 480 H1200 M0 600 H1200"/>
+    <path d="M120 0 V700 M360 0 V700 M600 0 V700 M840 0 V700 M1080 0 V700"/>
+  </g>
+  <text x="80" y="380" fill="#f2e94a" font-family="Arial Black, sans-serif" font-size="120" font-weight="900">SIDE A</text>
+  <text x="82" y="480" fill="#ff3d2e" font-family="Arial Black, sans-serif" font-size="88" font-weight="900">RUN HOT</text>
+  <rect x="720" y="220" width="340" height="200" rx="12" fill="#121018" stroke="#4de8ff" stroke-width="3"/>
+  <circle cx="820" cy="320" r="48" fill="none" stroke="#ece8e0" stroke-width="4"/>
+  <circle cx="980" cy="320" r="48" fill="none" stroke="#ece8e0" stroke-width="4"/>
+  <rect x="760" y="260" width="40" height="120" fill="#2a2438"/>
+  <rect x="1000" y="260" width="40" height="120" fill="#2a2438"/>
+  <text x="80" y="620" fill="#6e6878" font-family="monospace" font-size="22">TAPE//LACQUER · WAREHOUSE 14</text>
 </svg>
