@@ -81,6 +81,28 @@ aligned and grey.
   the strike point. **Do not declare `attribute mat4 instanceMatrix` in a
   ShaderMaterial on an InstancedMesh** — three injects it; declaring it again
   is a GLSL redefinition that kills the program.
+- **Surface system (31 Aug material pass — full recipe in PATTERNS.md,
+  "Instanced-debris surface shading"):** local-space seed-offset value noise
+  (world-space noise swims through flying debris) drives a screen-gradient
+  bump from the LOW octaves only (grit in the bump reads as hammered metal),
+  albedo speckle, and blotched roughness; a triplanar strain term adds
+  form-board streaks per local axis. Weathering is Patina-style in plain
+  GLSL: grime pools in noise cavities (darker, duller), facet edges wear
+  bright via `fwidth` of the flat normal, and a per-instance neighbour-density
+  AO attribute (spatial-hashed at each formation's target positions,
+  normalised per formation, re-uploaded on impact) buries interior debris.
+  The glass caste reflects a real environment — `PMREMGenerator.fromScene`
+  on a throwaway procedural hall (gradient dome, four hot floodlight strips,
+  one violet low panel), sampled via `textureCubeUV` with hand-computed
+  cubeUV defines. Zero texture files, zero new CSP hosts; measured cost is
+  noise-level (~0.2 ms/frame with a GPU sync at N = 1400, vs 26 ms ladder).
+- **Clock discipline (same pass):** decay envelopes (shock, flash, impact
+  heat, camera kick) run on TRUE elapsed time while physics keeps the 50 ms
+  dt clamp — with the clamp they decay ~20× slow in a throttled tab. The
+  settled/hold fast path reads the TARGET arrays and writes them back, so a
+  flight skipped entirely inside one rAF gap can never freeze stale
+  rotation/scale. The quality ladder samples the delivered rAF delta (GPU
+  included), skipping gaps over 250 ms.
 - Impact flight: per-instance stagger + duration, easeOutBack whip with
   in-flight jitter that decays to a hard stop; between impacts a settled
   bitmap short-circuits the per-instance loop, so holds cost almost nothing.
@@ -147,8 +169,9 @@ thumbnail, which are screenshots of the site itself.
 
 ## Open items
 
-- The glass caste could refract (screen-space distortion behind glass
-  fragments) if this template ever gets an elevation pass.
+- The glass caste now reflects (baked PMREM hall); refraction —
+  screen-space distortion behind glass fragments — is the remaining
+  elevation step if one is ever wanted.
 - The punch could leave persistent damage per formation (dented targets)
   instead of springing back — deliberate restraint for now, the spring reads
   better against the snap register.

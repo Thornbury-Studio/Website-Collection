@@ -92,7 +92,7 @@ const typeOf = i => (i < OFFSETS[1] ? 0 : i < OFFSETS[2] ? 1 : 2);
 const tintArr = new Float32Array(N * 3);
 const miscArr = new Float32Array(N * 2);   // seed, material id
 {
-  const cWarm = lin('#8B8883'), cCool = lin('#7C7D89'), cDark = lin('#5B5860');
+  const cWarm = lin('#87858A'), cCool = lin('#7B7D89'), cDark = lin('#5A585F');
   const glass = lin('#7B739F'), blood = lin('#B03030');
   const tmp = new THREE.Color();
   for (let i = 0; i < N; i++) {
@@ -109,10 +109,60 @@ const miscArr = new Float32Array(N * 2);   // seed, material id
   }
 }
 
+/* ── environment: baked once with PMREM from a tiny procedural
+   scene — the hall as the glass caste sees it: four hot floodlight
+   strips overhead, a bruise-violet wash low, darkness everywhere
+   else. No HDRI file, no new hosts. ───────────────────────────── */
+function bakeEnv() {
+  const pm = new THREE.PMREMGenerator(renderer);
+  const s = new THREE.Scene();
+  s.add(new THREE.Mesh(
+    new THREE.SphereGeometry(60, 16, 12),
+    new THREE.ShaderMaterial({
+      side: THREE.BackSide,
+      vertexShader: 'varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+      fragmentShader: /* glsl */`
+        varying vec3 vP;
+        void main() {
+          float t = clamp(vP.y / 60.0 + 0.5, 0.0, 1.0);
+          vec3 c = mix(vec3(0.006, 0.006, 0.008), vec3(0.09, 0.09, 0.10), pow(t, 1.7));
+          c += vec3(0.045, 0.035, 0.085) * pow(1.0 - t, 3.0);
+          gl_FragColor = vec4(c, 1.0);
+        }`,
+    })
+  ));
+  const strip = (c, x, z, ry) => {
+    const m = new THREE.Mesh(
+      new THREE.PlaneGeometry(16, 2.6),
+      new THREE.MeshBasicMaterial({ color: new THREE.Color(...c), side: THREE.DoubleSide }));
+    m.position.set(x, 26, z);
+    m.rotation.set(Math.PI / 2, ry, 0);
+    s.add(m);
+  };
+  strip([3.4, 3.2, 2.9], -14, -9, 0.4);
+  strip([3.4, 3.2, 2.9], 14, -9, -0.4);
+  strip([2.6, 2.5, 2.3], -12, 12, -0.3);
+  strip([2.6, 2.5, 2.3], 12, 12, 0.3);
+  const low = new THREE.Mesh(
+    new THREE.PlaneGeometry(50, 24),
+    new THREE.MeshBasicMaterial({ color: new THREE.Color(0.16, 0.13, 0.34), side: THREE.DoubleSide }));
+  low.position.set(0, -24, 0);
+  low.rotation.x = Math.PI / 2;
+  s.add(low);
+  const rt = pm.fromScene(s, 0.035);
+  pm.dispose();
+  s.traverse(o => { if (o.geometry) o.geometry.dispose(); if (o.material) o.material.dispose(); });
+  return rt.texture;
+}
+const envTex = bakeEnv();
+const envH = envTex.image.height;
+const envMip = Math.log2(envH) - 2;
+const fmt = v => String(v).includes('.') || String(v).includes('e') ? String(v) : v + '.0';
+
 /* ── shared fragment material ─────────────────────────────────── */
 const U = {
   uKeyDir: { value: new THREE.Vector3(0.3, 0.5, 0.82).normalize() },
-  uKeyCol: { value: lin('#FFF5E8').multiplyScalar(1.2) },
+  uKeyCol: { value: lin('#FAF7F0').multiplyScalar(1.2) },
   uFillDir: { value: new THREE.Vector3(-0.55, -0.35, 0.55).normalize() },
   uFillCol: { value: lin('#4F4670').multiplyScalar(0.8) },
   uAmb: { value: lin('#2A2933') },
@@ -121,41 +171,135 @@ const U = {
   uHit: { value: new THREE.Vector3(0, 0, 0) },
   uHitAmp: { value: 0 },
   uBlood: { value: lin('#D22F2F') },
+  uEnv: { value: envTex },
 };
 const shardMat = new THREE.ShaderMaterial({
   uniforms: U,
+  defines: {
+    ENVMAP_TYPE_CUBE_UV: '',
+    CUBEUV_TEXEL_WIDTH: fmt(1 / (3 * Math.max(Math.pow(2, envMip), 7 * 16))),
+    CUBEUV_TEXEL_HEIGHT: fmt(1 / envH),
+    CUBEUV_MAX_MIP: fmt(envMip),
+  },
   vertexShader: /* glsl */`
     /* instanceMatrix is injected by three for InstancedMesh */
     attribute vec3 aTint;
     attribute vec2 aMisc;
+    attribute float aAO;
     varying vec3 vN; varying vec3 vW; varying vec3 vTint; varying vec2 vMisc;
+    varying vec3 vLp; varying vec3 vLn; varying float vAO;
     void main() {
       vec4 wp = modelMatrix * instanceMatrix * vec4(position, 1.0);
       vW = wp.xyz;
       vN = normalize(mat3(modelMatrix) * mat3(instanceMatrix) * normal);
-      vTint = aTint; vMisc = aMisc;
+      vTint = aTint; vMisc = aMisc; vAO = aAO;
+      vLp = position; vLn = normal;      /* surface field rides the fragment */
       gl_Position = projectionMatrix * viewMatrix * wp;
     }`,
   fragmentShader: /* glsl */`
+    #include <cube_uv_reflection_fragment>
+    uniform sampler2D uEnv;
     uniform vec3 uKeyDir; uniform vec3 uKeyCol;
     uniform vec3 uFillDir; uniform vec3 uFillCol;
     uniform vec3 uAmb; uniform vec3 uCam; uniform float uExpo;
     uniform vec3 uHit; uniform float uHitAmp; uniform vec3 uBlood;
     varying vec3 vN; varying vec3 vW; varying vec3 vTint; varying vec2 vMisc;
+    varying vec3 vLp; varying vec3 vLn; varying float vAO;
+
+    float h31(vec3 p) {
+      p = fract(p * 0.1031);
+      p += dot(p, p.zyx + 31.32);
+      return fract((p.x + p.y) * p.z);
+    }
+    float n3(vec3 p) {
+      vec3 i = floor(p), f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(
+        mix(mix(h31(i),                    h31(i + vec3(1, 0, 0)), f.x),
+            mix(h31(i + vec3(0, 1, 0)),    h31(i + vec3(1, 1, 0)), f.x), f.y),
+        mix(mix(h31(i + vec3(0, 0, 1)),    h31(i + vec3(1, 0, 1)), f.x),
+            mix(h31(i + vec3(0, 1, 1)),    h31(i + vec3(1, 1, 1)), f.x), f.y), f.z);
+    }
+
     void main() {
       vec3 N = normalize(vN);
       if (!gl_FrontFacing) N = -N;
       vec3 V = normalize(uCam - vW);
-      float kd = max(dot(N, uKeyDir), 0.0);
-      float fd = max(dot(N, uFillDir), 0.0);
-      vec3 col = vTint * (uAmb + uKeyCol * kd + uFillCol * fd);
+
+      /* ── surface field: LOCAL space + per-instance seed, so the
+         pattern is glued to each fragment instead of swimming through
+         it while the field flies between formations ─────────────── */
+      vec3 lp = vLp + vMisc.x * 37.0;
+      vec3 an = normalize(vLn); an *= an;
+      vec3 w = an / (an.x + an.y + an.z + 1e-5);
+      /* form-board strain: an anisotropic streak per axis plane,
+         blended triplanar-style by the local normal */
+      float strain = w.x * n3(vec3(lp.y * 1.7, lp.z * 7.5, 3.1))
+                   + w.y * n3(vec3(lp.z * 7.5, lp.x * 1.7, 7.4))
+                   + w.z * n3(vec3(lp.x * 7.5, lp.y * 1.7, 5.2));
+      float hLow  = n3(lp * 2.4);
+      float hGrit = n3(lp * 12.0);
+      /* bump rides only the low frequencies — grit in the bump reads
+         as hammered metal; grit belongs to colour and roughness */
+      float hBump = hLow * 0.72 + strain * 0.28;
+      float hgt = hLow * 0.45 + strain * 0.25 + hGrit * 0.3;
+
       float glass = step(0.5, vMisc.y) * (1.0 - step(1.5, vMisc.y));
       float blood = step(1.5, vMisc.y);
-      float rim = pow(1.0 - max(dot(N, V), 0.0), 3.0);
-      col += rim * mix(vec3(0.55, 0.56, 0.64), vec3(0.55, 0.48, 0.9), glass) * (0.16 + glass * 0.5);
+      float conc = 1.0 - glass - blood;
+
+      /* bump: screen-space surface gradient of the height field,
+         damped with distance so the far field never sparkles */
+      float bumpK = (0.17 * conc + 0.05 * glass + 0.11 * blood)
+                  / (1.0 + 55.0 * length(fwidth(lp)));
+      vec3 dpx = dFdx(vW), dpy = dFdy(vW);
+      float dhx = dFdx(hBump), dhy = dFdy(hBump);
+      vec3 r1 = cross(dpy, N), r2 = cross(N, dpx);
+      float det = dot(dpx, r1);
+      N = normalize(N - (r1 * dhx + r2 * dhy) * (bumpK / max(abs(det), 1e-8)) * sign(det));
+
+      /* ── weathering: grime pools in the cavities of the height
+         field and dulls them; facet edges are worn bright (fwidth of
+         the flat geometric normal spikes exactly on facet borders);
+         per-instance neighbour-density AO buries interior debris ── */
+      vec3 Ng = normalize(vN);
+      if (!gl_FrontFacing) Ng = -Ng;
+      float cav = smoothstep(0.62, 0.2, hLow) * (0.45 + 0.55 * conc);
+      float edge = clamp(length(fwidth(Ng)) * 1.3, 0.0, 1.0);
+      float occ = vAO * (1.0 - cav * 0.25);
+
+      /* roughness: caste base, blotched, dull in cavities, worn at edges */
+      float rough = clamp(0.88 * conc + 0.16 * glass + 0.55 * blood
+                        + (hgt - 0.5) * 0.25 + cav * 0.2 - edge * 0.25, 0.05, 1.0);
+
+      /* albedo: speckled at low contrast, blood keeps the treatment */
+      vec3 alb = vTint * (0.88 + 0.24 * hgt);
+      alb = mix(alb, uBlood * (0.8 + 0.3 * hgt), blood * 0.85);
+      alb = mix(alb, alb * vec3(0.6, 0.58, 0.56), cav);
+      alb *= 1.0 - glass * 0.4;              /* glass answers with reflection */
+
+      float kd = max(dot(N, uKeyDir), 0.0);
+      float fd = max(dot(N, uFillDir), 0.0);
+      vec3 col = alb * (uAmb * occ + uKeyCol * kd * mix(1.0, occ, 0.35) + uFillCol * fd * occ);
+
+      float ndv = max(dot(N, V), 0.0);
+      float rim = pow(1.0 - ndv, 3.0);
+      col += rim * mix(vec3(0.55, 0.56, 0.64), vec3(0.55, 0.48, 0.9), glass) * (0.12 + glass * 0.3) * occ;
+
       vec3 H = normalize(uKeyDir + V);
-      col += pow(max(dot(N, H), 0.0), 46.0) * (0.3 + glass * 0.85);
-      col = mix(col, uBlood * (0.55 + 0.45 * kd), blood * 0.8);
+      float shin = mix(150.0, 9.0, rough);
+      float spec = pow(max(dot(N, H), 0.0), shin) * (1.0 - rough * 0.9);
+      col += spec * (0.2 + glass * 1.6 + edge * 0.5) * (1.0 - cav * 0.7) * uKeyCol * 0.7;
+
+      /* environment: the baked hall — floodlights live in the glass */
+      vec3 env = textureCubeUV(uEnv, reflect(-V, N), rough).rgb;
+      float fres = 0.04 + 0.96 * pow(1.0 - ndv, 5.0);
+      float envK = glass * (0.5 + fres) + conc * fres * 0.5 + blood * fres * 1.2;
+      col += env * envK * (1.0 - cav * 0.5) * occ;
+
+      /* worn edges catch the key light */
+      col += edge * uKeyCol * 0.09 * (0.4 + 0.6 * kd) * (conc + blood);
+
       float d = length(vW - uHit);
       col += uBlood * uHitAmp * exp(-d * 0.12) * 1.5;
       gl_FragColor = vec4(col * uExpo, 1.0);
@@ -173,6 +317,9 @@ for (let m = 0; m < 3; m++) {
   im.geometry = GEO[m].clone();
   im.geometry.setAttribute('aTint', new THREE.InstancedBufferAttribute(t, 3));
   im.geometry.setAttribute('aMisc', new THREE.InstancedBufferAttribute(mi, 2));
+  const aoAttr = new THREE.InstancedBufferAttribute(new Float32Array(COUNTS[m]).fill(1), 1);
+  aoAttr.setUsage(THREE.DynamicDrawUsage);
+  im.geometry.setAttribute('aAO', aoAttr);
   scene.add(im);
   meshes.push(im);
 }
@@ -500,19 +647,56 @@ function genRubble() {
   return F;
 }
 
+/* per-instance ambient occlusion: neighbour density in the formation's
+   TARGET positions, spatial-hashed, normalised per formation so buried
+   debris darkens and exposed debris stays lit whatever the layout */
+function computeAO(F) {
+  const inv = 1 / 2.6, r2 = 2.4 * 2.4;
+  const map = new Map();
+  const key = (x, y, z) => ((x + 512) << 20) | ((y + 512) << 10) | (z + 512);
+  for (let i = 0; i < N; i++) {
+    const k = key(Math.floor(F.pos[i * 3] * inv), Math.floor(F.pos[i * 3 + 1] * inv), Math.floor(F.pos[i * 3 + 2] * inv));
+    let b = map.get(k); if (!b) map.set(k, b = []);
+    b.push(i);
+  }
+  const cnt = new Float32Array(N);
+  let mn = 1e9, mx = 0;
+  for (let i = 0; i < N; i++) {
+    const x = F.pos[i * 3], y = F.pos[i * 3 + 1], z = F.pos[i * 3 + 2];
+    const cx = Math.floor(x * inv), cy = Math.floor(y * inv), cz = Math.floor(z * inv);
+    let n = 0;
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) for (let dz = -1; dz <= 1; dz++) {
+      const b = map.get(key(cx + dx, cy + dy, cz + dz));
+      if (!b) continue;
+      for (let j = 0; j < b.length; j++) {
+        const o = b[j]; if (o === i) continue;
+        const ax = F.pos[o * 3] - x, ay = F.pos[o * 3 + 1] - y, az = F.pos[o * 3 + 2] - z;
+        if (ax * ax + ay * ay + az * az < r2) n++;
+      }
+    }
+    cnt[i] = n;
+    if (n < mn) mn = n; if (n > mx) mx = n;
+  }
+  const ao = new Float32Array(N);
+  const span = Math.max(mx - mn, 1);
+  for (let i = 0; i < N; i++) ao[i] = 1 - ((cnt[i] - mn) / span) * 0.36;
+  F.ao = ao;
+  return F;
+}
+
 const forms = {
-  wall: genWall(),
-  vs: rasterForm(drawClash, 19),
-  fist: rasterForm(drawFist, 17, { tilt: -0.14 }),
-  cage: genCage(),
-  nine: rasterForm(drawText('09'), 21),
-  rubble: genRubble(),
+  wall: computeAO(genWall()),
+  vs: computeAO(rasterForm(drawClash, 19)),
+  fist: computeAO(rasterForm(drawFist, 17, { tilt: -0.14 })),
+  cage: computeAO(genCage()),
+  nine: computeAO(rasterForm(drawText('09'), 21)),
+  rubble: computeAO(genRubble()),
 };
 
 /* re-rasterise the type-based formation once the display font lands */
 if (document.fonts && document.fonts.ready) {
   document.fonts.ready.then(() => {
-    forms.nine = rasterForm(drawText('09'), 21);
+    forms.nine = computeAO(rasterForm(drawText('09'), 21));
     if (ACTS[act].form === 'nine') fire(act, { refresh: true });
   });
 }
@@ -583,6 +767,11 @@ function fire(newAct, o) {
   prevPos.set(curPos); prevRot.set(curRot); prevScl.set(curScl);
   home = forms[A.form];
   if (!opts.refresh) { off.fill(0); vel.fill(0); }   // punch state is baked into prev
+  for (let m = 0; m < 3; m++) {                      // occlusion follows the new layout
+    const at = meshes[m].geometry.getAttribute('aAO');
+    at.array.set(home.ao.subarray(OFFSETS[m], OFFSETS[m] + COUNTS[m]));
+    at.needsUpdate = true;
+  }
   let span = 0;
   for (let i = 0; i < N; i++) {
     delay[i] = RM.on ? 0 : rnd[i] * 0.16 + ((i * 7) % 100) / 100 * 0.1;
@@ -829,9 +1018,14 @@ function updateField(dt) {
       curScl[i] = sc;
       if (ti >= 1 && !activeOff) settled[i] = 1;
     } else {
+      // hold = flight over: read home directly and write it back to cur,
+      // so a flight skipped entirely (rAF gap longer than the flight span
+      // in a throttled tab) can never freeze stale rotation/scale
       px = home.pos[i3]; py = home.pos[i3 + 1]; pz = home.pos[i3 + 2];
-      QA.set(curRot[i4], curRot[i4 + 1], curRot[i4 + 2], curRot[i4 + 3]);
-      sc = curScl[i];
+      QA.set(home.rot[i4], home.rot[i4 + 1], home.rot[i4 + 2], home.rot[i4 + 3]);
+      sc = home.scl[i];
+      curRot[i4] = QA.x; curRot[i4 + 1] = QA.y; curRot[i4 + 2] = QA.z; curRot[i4 + 3] = QA.w;
+      curScl[i] = sc;
       if (!activeOff && !tremor) settled[i] = 1;
     }
 
@@ -856,7 +1050,7 @@ function updateField(dt) {
   for (const im of meshes) im.instanceMatrix.needsUpdate = true;
 }
 
-function updateCamera(dt) {
+function updateCamera(dt, dtReal) {
   const ct = Math.min(Math.max((NOW - t0) / 0.62, 0), 1);
   const e = RM.on ? softEase(ct) : snapEase(ct);
   const px = camFrom.pos.x + (camTo.pos.x - camFrom.pos.x) * e;
@@ -867,7 +1061,7 @@ function updateCamera(dt) {
   camera.position.set(px, py, pz);
   let roll = 0;
   if (kickEnv > 0.001) {
-    kickEnv *= Math.exp(-dt * 5.2);
+    kickEnv *= Math.exp(-dtReal * 5.2);
     const j = Math.sin(NOW * 47) * Math.sin(NOW * 89 + 2);
     camera.position.addScaledVector(kickDir, kickEnv * 1.15 * (0.55 + 0.45 * j));
     roll = kickEnv * 0.028 * j;
@@ -891,13 +1085,17 @@ function updateDust(dt) {
   p.needsUpdate = true;
 }
 
-function step(dt) {
+function step(dt, dtR) {
+  // decay envelopes run on TRUE elapsed time — with the clamped dt a
+  // throttled tab (~1 fps rAF) would hold the impact heat, shock and
+  // kick ~20x longer than designed. Physics keeps the clamp.
+  const dtReal = dtR === undefined ? dt : dtR;
   postU.uT.value = NOW;
-  postU.uShock.value *= Math.exp(-dt * 4.4);
-  postU.uFlash.value *= Math.exp(-dt * 9);
-  U.uHitAmp.value *= Math.exp(-dt * 3.2);
+  postU.uShock.value *= Math.exp(-dtReal * 4.4);
+  postU.uFlash.value *= Math.exp(-dtReal * 9);
+  U.uHitAmp.value *= Math.exp(-dtReal * 3.2);
   updateField(dt);
-  updateCamera(dt);
+  updateCamera(dt, dtReal);
   updateDust(dt);
 }
 function draw() {
@@ -924,14 +1122,17 @@ let rafId = 0;
 function loop(t) {
   rafId = requestAnimationFrame(loop);
   NOW = t / 1000;
-  const dt = Math.min(NOW - lastT, 0.05);
+  const dtReal = NOW - lastT;
+  const dt = Math.min(dtReal, 0.05);
   lastT = NOW;
   if (document.body.classList.contains('past') && scrollY > track.offsetHeight) return;
   const a = performance.now();
-  step(dt);
+  step(dt, dtReal);
   draw();
   frameMs = performance.now() - a;
-  ladder(frameMs);
+  // the ladder samples the DELIVERED frame time (vsync/GPU included),
+  // not just JS cost — but never a throttled-tab gap
+  if (dtReal < 0.25) ladder(dtReal * 1000);
 }
 
 /* ── resize ───────────────────────────────────────────────────── */
