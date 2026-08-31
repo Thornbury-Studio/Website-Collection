@@ -1,0 +1,23 @@
+<!doctype html>
+<!-- TEMPORARY verification harness — deleted before commit. Loads the GLB
+     through the real scene module so the check exercises shipping code. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CANDELA verify</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob:; object-src 'none'; base-uri 'self'">
+<style>
+  html,body{margin:0;height:100%;background:#0c0d10}
+  body{background:
+    radial-gradient(120% 90% at 62% 34%, #23262d 0%, #14161a 45%, #0a0b0d 100%)}
+  #stage{position:absolute;inset:0}
+  #gl{width:100%;height:100%;display:block}
+  #stageNote{position:absolute;left:12px;top:12px;color:#888;font:12px monospace}
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="gl" tabindex="0"></canvas><div id="stageNote">loading…</div></div>
+<div id="loadBar"></div>
+<script type="module" src="js/scene.js"></script>
+</body>
+</html>
