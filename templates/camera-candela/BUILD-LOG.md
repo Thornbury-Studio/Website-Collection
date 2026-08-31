@@ -44,3 +44,32 @@ button, matte high-roughness). The range is the point.
 
 Folder created, log started. Nothing modelled yet. Next: connect to Blender
 MCP, block out the body.
+
+### 2026-08-31 — steps 1–3 done: modelled + all four materials read ✅
+
+**Toolchain note:** the interactive Blender MCP server was down, so the whole
+build is driven headless: `blender.exe --background --python <script>`.
+Mid-session an msiexec update DELETED Blender 4.5 from this machine — steps 1–2
+ran on 4.5.3, everything from step 3 on runs on **Blender 5.2.1 LTS** at
+`C:\Program Files\Blender Foundation\Blender 5.2\blender.exe`, and
+`candela.blend` is now a 5.2 file. Stay on 5.2.
+
+- `blender-src/build.py` — full deterministic rebuild of the model (26 parts:
+  body stack, knurled dials, shutter button, hot shoe, VF/RF windows, lens
+  stack with 2 glass elements, lugs, badge; 0.45mm angle bevels everywhere).
+  Material-family map stored in `scene["candela_parts"]`.
+- `blender-src/materials.py` — the four families as Principled node setups +
+  built-in `studio.exr` world HDRI + Cycles check render.
+- `blender-src/fix1.py`, `fix2.py` — judged renders and fixed: leather sheen
+  (spec 0.30, rough 0.55–0.80), badge salmon→deep enamel, glass got a violet
+  AR-coat. **Trap worth keeping:** texture nodes with unplugged Vector sample
+  *Generated* (bbox-normalised) space — metric-tuned scales (700) gave
+  sub-pixel invisible grain; ~110 in normalised space = ~1.3mm pebbling.
+
+**Renders:** `renders/step3c-leather-grain.png` is the current state — brushed
+metal streaks, visible leatherette pebbling, coated glass dome, matte rubber
+button, deep red badge. All four families read.
+
+**Next:** step 4 hero-angle render (higher samples/res), then step 5 GLB
+export (bake leather normal to PNG — procedural nodes don't export — flat
+values for the rest, anisotropy via KHR extension, Draco if trivial).
