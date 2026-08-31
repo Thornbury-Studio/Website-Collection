@@ -73,3 +73,40 @@ button, deep red badge. All four families read.
 **Next:** step 4 hero-angle render (higher samples/res), then step 5 GLB
 export (bake leather normal to PNG — procedural nodes don't export — flat
 values for the rest, anisotropy via KHR extension, Draco if trivial).
+
+### 2026-08-31 — STAGE 1 COMPLETE ✅ — asset exported and verified
+
+**What's done (all five steps):** hero render (`blender-src/hero.py` +
+`hero2.py` — hero.py's framing was cropped, hero2.py is the good frame),
+then export (`blender-src/export_glb.py`): baked the leather bump to a
+1024 tangent normal map (`assets/leather_nrm.png`, also embedded in the
+GLB), flattened the other procedural chains to plain values, exported
+**`assets/candela.glb` — 2.19MB, Draco-compressed**, extensions:
+KHR_draco_mesh_compression, KHR_materials_transmission, KHR_materials_ior,
+KHR_materials_anisotropy, KHR_materials_clearcoat.
+`blender-src/verify_glb.py` reimported the GLB into an empty scene and
+Cycles-rendered it: all 26 meshes, grain, glass, knurls survive.
+
+**Renders to look at:** `renders/step4-hero.png` (the hero standard),
+`renders/step5-glb-reimport.png` (proof the GLB itself renders).
+
+**Blend files:** `candela.blend` = source of truth (procedural materials,
+pre-export). `candela-export.blend` = post-bake flattened state. Both are
+Blender 5.2 files — 4.5 no longer exists on this machine.
+
+**For Opus 5 — Stage 2 (the actual site):**
+1. Build `index.html` + `css/` + `js/` here — premium CANDELA brand site
+   around the 3D hero. Load `assets/candela.glb` with three.js.
+2. **Draco means DRACOLoader + its decoder must be vendored** — and see
+   memory `gltf-model-in-template-csp` for the four CSP grants that pass
+   locally and fail only on deploy. If vendoring the Draco decoder is
+   annoying, re-export without Draco (flip the flag in export_glb.py;
+   uncompressed will still be well under 5MB).
+3. Transmission glass needs `WebGLRenderer` with transmission support
+   (three r152+ handles KHR_materials_transmission natively via
+   GLTFLoader). Anisotropy needs r167+ for KHR_materials_anisotropy.
+4. Register in hub `index.html` + `sitemap.xml` (expect conflicts from the
+   other machine — fetch first). NOT the personal portfolio.
+5. No demo/AI disclaimers in site copy (CLAUDE.md).
+6. Write the real DESIGN.md once the site exists; this file stays as the
+   working log.
