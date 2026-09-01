@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Mirrors the production header in vercel.json exactly. Keep it that way: a
+     local static server sends no CSP at all, so every grant this page needs
+     passes locally whether or not the real policy allows it, and the only thing
+     that catches a missing one before deploy is this tag. The four that carry
+     the .glb are 'wasm-unsafe-eval' (Draco), worker-src + child-src blob: (its
+     decoder worker) and connect-src blob: (GLTFLoader FETCHES the blob URLs it
+     makes for embedded textures — img-src blob: is not enough). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>EPHEMERIS — Exhibit 01: The Armillary Sphere of 1771</title>
+<meta name="description" content="EPHEMERIS is a single-object exhibition. Each edition shows one instrument for one year, in the dark, read by one moving light. Exhibit 01 is Franciszek Słupski's armillary sphere, Kraków, 1771.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/exhibition-ephemeris/index.html">
+<meta name="theme-color" content="#07080a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2307080a'/%3E%3Ccircle cx='16' cy='16' r='8.5' fill='none' stroke='%23c69a4e' stroke-width='1.6'/%3E%3Cellipse cx='16' cy='16' rx='8.5' ry='3.2' fill='none' stroke='%23c69a4e' stroke-width='1.4' transform='rotate(-24 16 16)'/%3E%3Ccircle cx='16' cy='16' r='1.7' fill='%23c69a4e'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EPHEMERIS">
+<meta property="og:title" content="EPHEMERIS — Exhibit 01: The Armillary Sphere of 1771">
+<meta property="og:description" content="One instrument. One light. One year. A single-object exhibition, held in the dark.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/exhibition-ephemeris/index.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/exhibition-ephemeris/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<noscript><style>.gate,.stage-cue{display:none}</style></noscript>
+</head>
+<body id="top">
+<script>
+/* Runs before first paint. Marks scripting on, and folds the exhibit down to
+   the plain reading room if the 3D module never arrives — CDN blocked, old
+   browser, no GPU. The module sets window.__ephemeris the moment it has a
+   renderer; nothing else clears this watchdog. */
+document.documentElement.classList.add('js');
+addEventListener('click', function (e) {
+  if (window.__ephemeris) return;
+  var t = e.target && e.target.closest ? e.target.closest('#gate-skip') : null;
+  if (t) document.documentElement.classList.add('no-3d');
+});
+setTimeout(function () {
+  if (!window.__ephemeris) document.documentElement.classList.add('no-3d');
+}, 8000);
+</script>
+<a class="skip" href="#reading">Skip to the reading room</a>
+
+<!-- ══ THRESHOLD ══ -->
+<div class="gate" id="gate" role="dialog" aria-label="Entrance">
+  <p class="gate-kicker">A single-object exhibition</p>
+  <h1 class="gate-mark" aria-label="EPHEMERIS">EPHEMERI<span class="gate-s">S</span></h1>
+  <p class="gate-thesis">One instrument. One light. One year.</p>
+  <p class="gate-sub">Exhibit 01 is an armillary sphere of brass, iron and wood, made in Kraków in 1771. It is the only thing in the room.</p>
+  <button class="gate-enter" id="enter" type="button" disabled>
+    <span class="ge-wait">Darkening the room&hellip;</span>
+    <span class="ge-go">Enter the room</span>
+  </button>
+  <a class="gate-skip" href="#reading" id="gate-skip">or skip the light and read the notes</a>
+  <p class="gate-foot">Runs on your graphics hardware. Nothing is recorded.</p>
+</div>
+
+<!-- ══ CHROME ══ -->
+<header class="chrome" id="chrome">
+  <a class="wordmark" href="index.html">EPHEMERIS</a>
+  <p class="chrome-act" id="hud-act" aria-hidden="true">ACT&nbsp;<span id="hud-act-no">I</span>&thinsp;/&thinsp;V</p>
+  <a class="chrome-index" href="#reading">Notes</a>
+</header>
+
+<!-- ══ THE ROOM (scroll height; canvas is injected behind) ══ -->
+<div class="track" id="track" aria-hidden="true"></div>
+
+<!-- act-driven wall labels -->
+<aside class="labels" id="labels" aria-hidden="true">
+  <div class="label" data-act="0">
+    <p class="l-no">Act I</p>
+    <h2 class="l-title">The Object</h2>
+    <p class="l-meta">Armillary sphere &middot; 1771</p>
+    <p class="l-mat">Brass, iron, turned wood, glass</p>
+    <p class="l-note">Five hundred and ten millimetres tall. Everything else in this room has been taken away.</p>
+  </div>
+  <div class="label" data-act="1">
+    <p class="l-no">Act II</p>
+    <h2 class="l-title">The Horizon Ring</h2>
+    <p class="l-meta">Graduated band &middot; 360&deg;</p>
+    <p class="l-mat">Engraved brass, worn to the touch</p>
+    <p class="l-note">The widest ring is the horizon. It is the only part that was ever meant to stay still.</p>
+  </div>
+  <div class="label" data-act="2">
+    <p class="l-no">Act III</p>
+    <h2 class="l-title">Raking Light</h2>
+    <p class="l-meta">The lamp is yours</p>
+    <p class="l-mat">Engraving, at four degrees of incidence</p>
+    <p class="l-note">Move it across the brass. Marks cut two hundred and fifty years ago only exist at this angle.</p>
+  </div>
+  <div class="label" data-act="3">
+    <p class="l-no">Act IV</p>
+    <h2 class="l-title">The Mechanism</h2>
+    <p class="l-meta">Polar axis &middot; one turn</p>
+    <p class="l-mat">Nine rings, three legs, one inclination</p>
+    <p class="l-note">The sphere turns inside its own horizon while the light crosses the sky above it. That is the whole machine.</p>
+  </div>
+  <div class="label" data-act="4">
+    <p class="l-no">Act V</p>
+    <h2 class="l-title">Resting</h2>
+    <p class="l-meta">Kraków &middot; 1771&ndash;</p>
+    <p class="l-mat">Still keeping time it was never asked to keep</p>
+    <p class="l-note">An ephemeris is a table of where things will be. This one has been right for two hundred and fifty-five years.</p>
+  </div>
+</aside>
+
+<!-- HUD -->
+<p class="hud-sight" id="hud-sight" aria-hidden="true">LIGHT&nbsp;<span id="hud-pct">000</span></p>
+<p class="cue" id="cue" aria-hidden="true"><span class="cue-desktop">Scroll &mdash; the room moves</span><span class="cue-touch">Scroll &mdash; touch the brass to carry the lamp</span></p>
+<p class="lamp-cue" id="lamp-cue" aria-hidden="true">Move the lamp across the ring</p>
+
+<!-- ══ THE READING ROOM ══ -->
+<main class="reading" id="reading">
+
+  <section class="rm-mast">
+    <p class="rm-kicker">Ephemeris &middot; The Notes</p>
+    <h2 class="rm-head"><span>An exhibition that shows</span> <span>one thing at a time.</span></h2>
+    <p class="rm-state">EPHEMERIS holds a single object for a single year. There is no second gallery, no supporting display, no wall of context. The room is dark and the object is lit by one moving source, because most of what is worth seeing on an old instrument is only visible when the light is nearly parallel to its surface. Exhibit 01 opened in January and runs until the solstice.</p>
+  </section>
+
+  <section class="object" id="object" aria-labelledby="object-h">
+    <h3 class="sec-h" id="object-h"><span class="sec-no">I</span>The Object</h3>
+    <dl class="spec">
+      <div><dt>Instrument</dt><dd>Armillary sphere</dd></div>
+      <div><dt>Maker</dt><dd>Franciszek S&#322;upski</dd></div>
+      <div><dt>Made</dt><dd>Krak&oacute;w, 1771</dd></div>
+      <div><dt>Materials</dt><dd>Brass, iron, turned and painted wood, glass</dd></div>
+      <div><dt>Height</dt><dd>510&nbsp;mm</dd></div>
+      <div><dt>Collection</dt><dd>Jagiellonian University Museum, Collegium Maius</dd></div>
+      <div><dt>Inventory</dt><dd>4307; 307/V</dd></div>
+      <div><dt>Digitisation</dt><dd>Regional Digitalisation Lab, Ma&#322;opolska Institute of Culture</dd></div>
+    </dl>
+    <p class="object-body">S&#322;upski built the sphere as part of the doctoral thesis he defended at the Philosophy Department of the University of Krak&oacute;w. It is a teaching instrument: a nest of rings standing for the great circles of the sky, a small sun hung at the centre, and a graduated horizon band that the whole assembly turns inside. It was used to demonstrate celestial phenomena and to read off time and coordinates &mdash; work now done by a device in your pocket, which is why the object is here and not in service.</p>
+  </section>
+
+  <section class="acts" id="acts" aria-labelledby="acts-h">
+    <h3 class="sec-h" id="acts-h"><span class="sec-no">II</span>The Five Acts</h3>
+    <ol class="act-list">
+      <li class="act"><span class="a-no">I</span><div class="a-body"><h4>The Object</h4><p>The whole instrument, held at distance, emerging from an unlit room.</p></div></li>
+      <li class="act"><span class="a-no">II</span><div class="a-body"><h4>The Horizon Ring</h4><p>A slow approach to the graduated band, until the engraving is larger than the sphere.</p></div></li>
+      <li class="act"><span class="a-no">III</span><div class="a-body"><h4>Raking Light</h4><p>The lamp passes to the visitor. At four degrees of incidence, tool marks return.</p></div></li>
+      <li class="act"><span class="a-no">IV</span><div class="a-body"><h4>The Mechanism</h4><p>The pull-back. The sphere turns on its polar axis while the light crosses above it.</p></div></li>
+      <li class="act"><span class="a-no">V</span><div class="a-body"><h4>Resting</h4><p>The composition the object was photographed in, and will be left in.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="visit" id="visit" aria-labelledby="visit-h">
+    <h3 class="sec-h" id="visit-h"><span class="sec-no">III</span>Visit</h3>
+    <ul class="hours">
+      <li><span class="h-k">Room</span><span class="h-v">Lower gallery, entered from the stair</span></li>
+      <li><span class="h-k">Open</span><span class="h-v">Wednesday to Sunday, 11:00 &ndash; 19:00</span></li>
+      <li><span class="h-k">Closes</span><span class="h-v">21 June</span></li>
+      <li><span class="h-k">Admission</span><span class="h-v">Free, unticketed</span></li>
+      <li><span class="h-k">Light</span><span class="h-v">The gallery lamp is on a fifteen-minute cycle</span></li>
+    </ul>
+    <p class="visit-note">The room holds twelve people. When it is full the stair is held, which is usually a wait of a few minutes. There is a bench.</p>
+  </section>
+
+  <section class="next" id="next">
+    <div class="next-card">
+      <p class="next-line">Exhibit 02 has been chosen<br>and will not be announced.</p>
+      <form class="notify" id="notify" action="#" method="get">
+        <label class="n-label" for="n-mail">Word, on the morning it opens</label>
+        <div class="n-row">
+          <input class="n-mail" id="n-mail" name="email" type="email" placeholder="you@somewhere" autocomplete="email" required>
+          <button class="n-go" type="submit">Leave an address</button>
+        </div>
+        <p class="n-done" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p class="foot-mark">EPHEMERIS</p>
+    <p class="foot-line">Exhibit 01 &middot; One instrument, one light, one year</p>
+    <p class="foot-credit">Armillary sphere (1771), Jagiellonian University Museum Collegium Maius, digitised by the Regional Digitalisation Lab, Ma&#322;opolska Institute of Culture for Virtual Museums of Ma&#322;opolska. 3D model used under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY&nbsp;4.0</a>.</p>
+    <div class="foot-row">
+      <a href="#top" id="rewalk">Walk the room again</a>
+      <span>Lower gallery &middot; Wed&ndash;Sun</span>
+    </div>
+  </footer>
+
+</main>
+
+<!-- grain + vignette over the room -->
+<div class="finish" aria-hidden="true"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

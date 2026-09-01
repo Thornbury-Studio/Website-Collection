@@ -1,0 +1,371 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   EPHEMERIS — EXHIBIT 01
+   A dark room with one object in it. The page is two things at once: a WebGL
+   walk (when there is a GPU and the module arrives) and a plain reading room
+   (when there is not). Every `html.no-3d` / `html:not(.js)` rule below is the
+   second one taking over.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --ground: #07080a;
+  --ground-2: #0b0d11;
+  --bone: #e8e3d8;
+  --bone-dim: #a9a396;
+  --bone-faint: #6d6a63;
+  --brass: #c69a4e;
+  --brass-dim: #8a6c37;
+  --line: rgba(232, 227, 216, 0.13);
+  --line-soft: rgba(232, 227, 216, 0.07);
+  --serif: "Spectral", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --mast-h: 62px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--bone);
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(16px, 1.05vw, 18px);
+  line-height: 1.62;
+  /* deliberately no `overflow-x: hidden` — it MASKS real overflow, so
+     scrollWidth reports clean while copy is clipped. Nothing here bleeds. */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* the walk locks scroll until the visitor enters; every fallback unlocks it */
+html.js:not(.no-3d) body { overflow: hidden; }
+html.js.entered body, html.js.no-3d body { overflow: visible; }
+
+a { color: inherit; }
+
+.skip {
+  position: fixed; top: -100px; left: 12px; z-index: 90;
+  background: var(--bone); color: var(--ground);
+  padding: 10px 16px; font: 500 13px/1 var(--mono); text-decoration: none;
+}
+.skip:focus { top: 12px; }
+
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+
+/* ── the canvas ───────────────────────────────────────────────────────── */
+canvas.scene {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  z-index: 0; display: block;
+  transition: opacity 0.9s ease;
+}
+canvas.scene.dimmed { opacity: 0; }
+html.no-3d canvas.scene { display: none; }
+
+/* ── threshold ────────────────────────────────────────────────────────── */
+.gate {
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.5rem; padding: 8vh 6vw; text-align: center;
+  background: radial-gradient(120% 90% at 50% 44%, #101319 0%, var(--ground) 62%);
+}
+html.no-3d .gate { display: none; }
+.gate.leave { animation: gateOut 1.1s cubic-bezier(0.5, 0, 0.2, 1) forwards; pointer-events: none; }
+@keyframes gateOut { to { opacity: 0; transform: scale(1.035); visibility: hidden; } }
+
+.gate-kicker {
+  margin: 0 0 1.6rem; font: 400 11px/1 var(--mono);
+  letter-spacing: 0.34em; text-transform: uppercase; color: var(--brass);
+}
+.gate-mark {
+  margin: 0; font-family: var(--serif); font-weight: 300;
+  font-size: clamp(2.9rem, 11vw, 7.4rem); line-height: 0.94;
+  letter-spacing: 0.11em; text-indent: 0.11em; color: var(--bone);
+}
+.gate-s { color: var(--brass); }
+.gate-thesis {
+  margin: 1.5rem 0 0; font-size: clamp(1rem, 2.1vw, 1.32rem);
+  font-style: italic; color: var(--bone-dim);
+}
+.gate-sub {
+  margin: 1rem 0 0; max-width: 46ch; font-size: 0.95rem; color: var(--bone-faint);
+}
+.gate-enter {
+  margin-top: 2.6rem; padding: 0.85rem 2.2rem;
+  font: 500 12px/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ground); background: var(--brass);
+  border: 1px solid var(--brass); border-radius: 0; cursor: pointer;
+  transition: background 0.4s, color 0.4s, border-color 0.4s;
+}
+.gate-enter[disabled] { background: transparent; color: var(--bone-faint); border-color: var(--line); cursor: default; }
+.gate-enter[disabled] .ge-go { display: none; }
+.gate-enter:not([disabled]) .ge-wait { display: none; }
+.gate-enter:not([disabled]):hover { background: transparent; color: var(--brass); }
+.gate-skip {
+  margin-top: 1.4rem; font: 400 11px/1.6 var(--mono);
+  letter-spacing: 0.08em; color: var(--bone-faint);
+  text-decoration: none; border-bottom: 1px solid var(--line);
+}
+.gate-skip:hover { color: var(--bone); }
+.gate-foot {
+  position: absolute; bottom: 4vh; margin: 0;
+  font: 400 10px/1 var(--mono); letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(232, 227, 216, 0.24);
+}
+
+/* ── chrome ───────────────────────────────────────────────────────────── */
+.chrome {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+  height: var(--mast-h); padding: 0 clamp(16px, 3.4vw, 42px);
+  display: flex; align-items: center; justify-content: space-between;
+  opacity: 0; transition: opacity 0.9s ease 0.3s; pointer-events: none;
+}
+html.entered .chrome, html.no-3d .chrome, html:not(.js) .chrome { opacity: 1; pointer-events: auto; }
+.wordmark {
+  font: 400 13px/1 var(--mono); letter-spacing: 0.3em;
+  text-decoration: none; color: var(--bone);
+}
+.chrome-act {
+  margin: 0; font: 400 11px/1 var(--mono); letter-spacing: 0.22em;
+  color: var(--brass-dim);
+}
+html.no-3d .chrome-act, html:not(.js) .chrome-act { display: none; }
+.chrome-index {
+  font: 400 11px/1 var(--mono); letter-spacing: 0.18em;
+  text-transform: uppercase; text-decoration: none; color: var(--bone-dim);
+  border-bottom: 1px solid var(--line); padding-bottom: 3px;
+}
+.chrome-index:hover { color: var(--bone); }
+
+/* ── the scroll track (drives the camera; holds no content) ───────────── */
+.track { height: 1150vh; }
+html.no-3d .track, html:not(.js) .track { display: none; }
+
+/* ── wall labels ──────────────────────────────────────────────────────── */
+.labels {
+  position: fixed; z-index: 30; pointer-events: none;
+  left: clamp(16px, 3.4vw, 42px); bottom: clamp(28px, 7vh, 74px);
+  width: min(30rem, 42vw);
+}
+/* The object is lit and the labels are fixed over it, so at several acts the
+   copy lands on bright brass. A scrim under the label column keeps the wall
+   text readable without darkening the object itself. */
+.labels::before {
+  content: ""; position: fixed; z-index: -1; pointer-events: none;
+  left: 0; right: 0; bottom: 0; height: 62vh;
+  background: linear-gradient(to top, rgba(5, 6, 8, 0.92) 0%, rgba(5, 6, 8, 0.72) 26%, rgba(5, 6, 8, 0.28) 58%, transparent 100%);
+}
+html.no-3d .labels, html:not(.js) .labels { display: none; }
+.label {
+  position: absolute; bottom: 0; left: 0; width: 100%;
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.label.on { opacity: 1; transform: none; }
+.l-no {
+  margin: 0 0 0.7rem; font: 500 10px/1 var(--mono);
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--brass);
+}
+.l-title {
+  margin: 0; font-weight: 300; font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+  line-height: 1.08; letter-spacing: -0.005em;
+}
+.l-meta {
+  margin: 0.7rem 0 0; font: 400 11px/1.5 var(--mono);
+  letter-spacing: 0.12em; color: var(--bone-dim);
+}
+.l-mat {
+  margin: 0.15rem 0 0; font-size: 0.9rem; font-style: italic; color: var(--brass-dim);
+}
+.l-note {
+  margin: 0.9rem 0 0; max-width: 34ch; font-size: 0.92rem;
+  line-height: 1.55; color: var(--bone-faint);
+}
+
+/* ── HUD ──────────────────────────────────────────────────────────────── */
+.hud-sight {
+  position: fixed; z-index: 30; margin: 0;
+  right: clamp(16px, 3.4vw, 42px); bottom: clamp(28px, 7vh, 74px);
+  font: 400 10px/1 var(--mono); letter-spacing: 0.28em;
+  color: rgba(232, 227, 216, 0.3); pointer-events: none;
+  opacity: 0; transition: opacity 0.8s ease;
+}
+html.entered .hud-sight { opacity: 1; }
+html.no-3d .hud-sight { display: none; }
+
+.cue {
+  position: fixed; z-index: 30; margin: 0;
+  left: 50%; transform: translateX(-50%); bottom: clamp(20px, 4.4vh, 40px);
+  font: 400 10px/1 var(--mono); letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgba(232, 227, 216, 0.36); pointer-events: none;
+  opacity: 0; transition: opacity 0.9s ease;
+}
+html.entered .cue { opacity: 1; }
+html.entered.moved .cue { opacity: 0; }
+html.no-3d .cue { display: none; }
+.cue-touch { display: none; }
+@media (pointer: coarse) { .cue-desktop { display: none; } .cue-touch { display: inline; } }
+
+/* act III invitation — only up while the lamp is in the visitor's hand */
+.lamp-cue {
+  position: fixed; z-index: 31; margin: 0;
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  font: 500 11px/1 var(--mono); letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--brass); text-shadow: 0 0 24px rgba(7, 8, 10, 0.9);
+  pointer-events: none; opacity: 0; transition: opacity 1s ease;
+}
+.lamp-cue.on { opacity: 0.85; }
+html.no-3d .lamp-cue { display: none; }
+
+/* once the notes arrive, every fixed piece of the walk stands down — they are
+   position:fixed, so without this they hang over the reading room forever */
+html.reading-on .labels,
+html.reading-on .hud-sight,
+html.reading-on .cue,
+html.reading-on .lamp-cue,
+html.reading-on .finish { opacity: 0; pointer-events: none; }
+html.reading-on .labels,
+html.reading-on .finish { transition: opacity 0.6s ease; }
+html.reading-on .chrome-act { opacity: 0; }
+
+/* ── the reading room ─────────────────────────────────────────────────── */
+.reading {
+  position: relative; z-index: 20;
+  background: var(--ground);
+  padding: 0 clamp(16px, 3.4vw, 42px) 0;
+}
+/* under the walk the reading room slides up over the last act; in either
+   fallback it is simply the page, starting below the masthead */
+html.js:not(.no-3d) .reading { margin-top: -18vh; padding-top: 18vh; }
+html.no-3d .reading, html:not(.js) .reading { padding-top: calc(var(--mast-h) + 48px); }
+
+.rm-mast { max-width: 62rem; margin: 0 auto; padding: clamp(60px, 12vh, 150px) 0 clamp(40px, 8vh, 90px); }
+.rm-kicker {
+  margin: 0 0 1.8rem; font: 400 10px/1 var(--mono);
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass);
+}
+.rm-head {
+  margin: 0; font-weight: 300; font-size: clamp(1.9rem, 5.4vw, 4rem);
+  line-height: 1.08; letter-spacing: -0.015em;
+}
+.rm-head span { display: block; }
+.rm-head span:last-child { color: var(--bone-dim); }
+.rm-state {
+  margin: 2.4rem 0 0; max-width: 58ch; font-size: clamp(1rem, 1.35vw, 1.13rem);
+  color: var(--bone-dim);
+}
+
+.sec-h {
+  display: flex; align-items: baseline; gap: 1.1rem;
+  margin: 0 0 2.4rem; font-weight: 300; font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  padding-bottom: 1.1rem; border-bottom: 1px solid var(--line);
+}
+.sec-no {
+  font: 500 10px/1 var(--mono); letter-spacing: 0.28em; color: var(--brass);
+}
+
+.object, .acts, .visit, .next { max-width: 62rem; margin: 0 auto; padding: clamp(46px, 8vh, 96px) 0; }
+
+.spec { margin: 0 0 2.6rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0; }
+.spec > div { padding: 0.95rem 0; border-bottom: 1px solid var(--line-soft); }
+.spec dt {
+  font: 400 10px/1 var(--mono); letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--bone-faint);
+}
+.spec dd { margin: 0.5rem 0 0; font-size: 0.98rem; }
+.object-body { margin: 0; max-width: 58ch; color: var(--bone-dim); }
+
+.act-list { list-style: none; margin: 0; padding: 0; }
+.act {
+  display: grid; grid-template-columns: 3.6rem 1fr; gap: 1.4rem;
+  padding: 1.5rem 0; border-bottom: 1px solid var(--line-soft);
+}
+.a-no { font: 400 11px/1.5 var(--mono); letter-spacing: 0.22em; color: var(--brass); }
+.a-body h4 { margin: 0; font-weight: 400; font-size: 1.16rem; }
+.a-body p { margin: 0.4rem 0 0; font-size: 0.95rem; color: var(--bone-faint); max-width: 52ch; }
+
+.hours { list-style: none; margin: 0 0 1.8rem; padding: 0; }
+.hours li {
+  display: grid; grid-template-columns: 9rem 1fr; gap: 1.2rem;
+  padding: 0.85rem 0; border-bottom: 1px solid var(--line-soft);
+}
+.h-k { font: 400 10px/1.7 var(--mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--bone-faint); }
+.h-v { font-size: 0.98rem; }
+.visit-note { margin: 0; max-width: 52ch; font-size: 0.95rem; font-style: italic; color: var(--bone-faint); }
+
+.next-card {
+  border: 1px solid var(--line); padding: clamp(28px, 5vw, 56px);
+  background: var(--ground-2);
+}
+.next-line {
+  margin: 0 0 2.2rem; font-size: clamp(1.25rem, 3vw, 1.9rem);
+  font-weight: 300; line-height: 1.28;
+}
+.n-label {
+  display: block; margin-bottom: 0.9rem; font: 400 10px/1 var(--mono);
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--bone-faint);
+}
+.n-row { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.n-mail {
+  flex: 1 1 15rem; min-width: 0; padding: 0.8rem 1rem;
+  font-family: var(--mono); font-size: 0.85rem;
+  color: var(--bone); background: transparent; border: 1px solid var(--line);
+}
+.n-mail::placeholder { color: var(--bone-faint); }
+.n-mail:focus { border-color: var(--brass-dim); outline: none; }
+.n-go {
+  padding: 0.8rem 1.6rem; font: 500 11px/1 var(--mono);
+  letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+  color: var(--ground); background: var(--brass); border: 1px solid var(--brass);
+  transition: background 0.35s, color 0.35s;
+}
+.n-go:hover { background: transparent; color: var(--brass); }
+.n-done { margin: 1rem 0 0; min-height: 1.2em; font: 400 11px/1.4 var(--mono); color: var(--brass); }
+
+.foot {
+  max-width: 62rem; margin: 0 auto;
+  padding: clamp(50px, 9vh, 110px) 0 clamp(40px, 7vh, 80px);
+  border-top: 1px solid var(--line);
+}
+.foot-mark { margin: 0; font: 400 12px/1 var(--mono); letter-spacing: 0.34em; }
+.foot-line { margin: 0.9rem 0 0; font-size: 0.92rem; color: var(--bone-faint); }
+.foot-credit {
+  margin: 1.6rem 0 0; max-width: 62ch;
+  font: 400 10.5px/1.7 var(--mono); letter-spacing: 0.02em;
+  color: rgba(232, 227, 216, 0.34);
+}
+.foot-credit a { color: var(--brass-dim); }
+.foot-row {
+  display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;
+  margin-top: 2.4rem; font: 400 10px/1.6 var(--mono);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--bone-faint);
+}
+.foot-row a { text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.foot-row a:hover { color: var(--bone); }
+
+/* ── finish: grain + vignette, over everything but the reading room ───── */
+.finish {
+  position: fixed; inset: 0; z-index: 25; pointer-events: none;
+  background:
+    radial-gradient(135% 105% at 50% 48%, transparent 54%, rgba(4, 5, 7, 0.55) 100%);
+  mix-blend-mode: multiply;
+}
+html.no-3d .finish, html:not(.js) .finish { display: none; }
+
+/* ── narrow ───────────────────────────────────────────────────────────── */
+@media (max-width: 760px) {
+  :root { --mast-h: 54px; }
+  .labels { width: calc(100% - clamp(16px, 3.4vw, 42px) * 2); bottom: clamp(58px, 12vh, 96px); }
+  .l-note { max-width: none; }
+  .hud-sight { bottom: clamp(20px, 4.4vh, 34px); }
+  .act { grid-template-columns: 2.6rem 1fr; gap: 1rem; }
+  .hours li { grid-template-columns: 1fr; gap: 0.25rem; }
+  .spec { grid-template-columns: 1fr; }
+  .track { height: 980vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+  .label { transition-duration: 0.01s; }
+  .gate.leave { animation-duration: 0.01s; }
+}
