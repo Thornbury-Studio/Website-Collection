@@ -359,7 +359,20 @@
   }
   .section-header p { color: var(--muted); max-width: 360px; font-size: 0.94rem; line-height: 1.6; }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+  /* The section is 1180px wide with 24px padding = 1132px of content, so a
+     300px track basis + 28px gap can never fit four columns (4x300 + 3x28 =
+     1284). A 260px basis fits four at 1124 and five would need 1412, so the
+     desktop gallery lands on four and cannot overshoot. Collapse below is
+     still auto-fit: 3 columns from ~884px, 2 from ~596px, 1 under that. */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+  /* Explicit at desktop so four is deterministic rather than a consequence of
+     the container width, which is free to change. */
+  @media (min-width: 1180px) {
+    #gallery .grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  /* [hidden] loses to any class rule that sets display, and the filter below
+     hides cards with it — so pin it. */
+  .grid .card[hidden] { display: none !important; }
   /* A grid item's default min-width is auto, so a 480px screenshot sets the
      track's minimum and auto-fit collapses the whole gallery to one column. */
   .grid > .card { min-width: 0; }
@@ -727,6 +740,58 @@
 
   .card-body { padding: 24px 24px 26px; }
   .card .tag { display: inline-block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+  /* ---------- facet tag ----------
+     Deliberately a different element and a different class from .tag above.
+     .tag is the industry label ("Restaurant / Buffet") and is owned by the
+     card; .facet-tag is the cross-cutting capability facet the filter reads.
+     Outlined and neutral so the two never read as the same kind of label. */
+  .card .facet-tag {
+    display: inline-block; margin-left: 4px; margin-bottom: 10px;
+    padding: 2px 8px; border: 1px solid var(--border); border-radius: 999px;
+    font-size: 0.62rem; letter-spacing: 0.09em; text-transform: uppercase;
+    font-weight: 600; color: var(--muted); vertical-align: 2px;
+  }
+  .card .facet-tag + .facet-tag { margin-left: 2px; }
+  .card[data-facet~="flagship"] .facet-tag[data-f="flagship"] {
+    color: var(--accent); border-color: rgba(182, 147, 95, 0.42);
+  }
+
+  /* ---------- filter + sort controls ---------- */
+  .controls {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 16px 24px; margin: 0 0 30px;
+    padding-bottom: 20px; border-bottom: 1px solid var(--border);
+  }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font: inherit; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.02em;
+    color: var(--muted); background: transparent;
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 7px 15px; cursor: pointer;
+    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  .chip:hover { color: var(--text); border-color: rgba(182, 147, 95, 0.45); }
+  .chip[aria-pressed="true"] {
+    color: var(--bg); background: var(--accent); border-color: var(--accent);
+  }
+  .sorter { display: flex; align-items: center; gap: 10px; }
+  .sorter__l {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+  }
+  .sorter__s {
+    font: inherit; font-size: 0.82rem; color: var(--text);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 7px 12px; cursor: pointer;
+  }
+  .sorter__s:hover { border-color: rgba(182, 147, 95, 0.45); }
+  .filter-status {
+    margin: -14px 0 24px; font-size: 0.8rem; color: var(--muted);
+  }
+  .grid-empty { color: var(--muted); font-size: 0.92rem; padding: 30px 0 10px; }
+  @media (max-width: 620px) {
+    .controls { flex-direction: column; align-items: flex-start; }
+  }
   .card.locked .tag { color: var(--muted); }
   .card h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.22rem; margin-bottom: 8px; }
   .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 22px; }
@@ -1000,14 +1065,39 @@
     <p>Each template is a fully working, multi-page site. Click through and interact with it.</p>
   </div>
 
+  <!-- Filter + sort. Both read data-* attributes already on the cards, so
+       there is no JSON sidecar and nothing to keep in sync by hand. The
+       facets are cross-cutting and independent of each card's industry
+       tag (the .tag element), which they never touch. -->
+  <div class="controls reveal">
+    <div class="filters" role="group" aria-label="Filter templates by type">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="flagship" aria-pressed="false">Flagship</button>
+      <button class="chip" type="button" data-filter="ecommerce" aria-pressed="false">E&#8209;Commerce</button>
+      <button class="chip" type="button" data-filter="booking" aria-pressed="false">Booking</button>
+      <button class="chip" type="button" data-filter="standard" aria-pressed="false">Standard</button>
+      <button class="chip" type="button" data-filter="experimental" aria-pressed="false">Experimental</button>
+    </div>
+    <div class="sorter">
+      <label class="sorter__l" for="sortBy">Sort</label>
+      <select class="sorter__s" id="sortBy">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+        <option value="advanced">Most advanced</option>
+      </select>
+    </div>
+  </div>
+  <p class="filter-status" id="filterStatus" role="status" aria-live="polite"></p>
+
   <div class="grid">
-    <a class="card reveal" href="templates/business-corporate/index.html">
+    <a class="card reveal" href="templates/business-corporate/index.html" data-facet="standard" data-date="2026-08-02" data-tier="1">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/business-corporate-sm.webp" alt="The Meridian Partners homepage: a navy hero beside a photograph of three advisers mid-session." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Business / Corporate</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>Meridian Partners</h3>
         <p>An independent strategy office that argues with evidence &mdash; four case studies you can switch between, a four-stage engagement model, and published thinking.</p>
         <span class="card-foot">
@@ -1018,13 +1108,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/gym-service/index.html">
+    <a class="card reveal" href="templates/gym-service/index.html" data-facet="standard" data-date="2026-08-03" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/gym-service-sm.webp" alt="The FORGE homepage: a glowing low-poly form beside &lsquo;Forge your strongest self&rsquo;." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Fitness / Gym</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>FORGE</h3>
         <p>An animation-driven gym site — GSAP scroll effects, a Three.js WebGL hero, and synthesized sound.</p>
         <span class="card-foot">
@@ -1035,13 +1126,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/ecommerce-design-store/index.html">
+    <a class="card reveal" href="templates/ecommerce-design-store/index.html" data-facet="ecommerce" data-date="2026-08-03" data-tier="2">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/ecommerce-design-store-sm.webp" alt="The OBLIK storefront: an editorial product grid of design objects." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">E-Commerce / Design Store</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>OBLIK</h3>
         <p>A kinetic design-object store with product filters, color switching, quick views, and an interactive cart.</p>
         <span class="card-foot">
@@ -1052,13 +1144,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/pulse-ai-analytics/index.html">
+    <a class="card reveal" href="templates/pulse-ai-analytics/index.html" data-facet="standard" data-date="2026-08-03" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/pulse-ai-analytics-sm.webp" alt="The PULSE landing page: a dark starfield hero over a product dashboard." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">SaaS / AI Platform</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>PULSE</h3>
         <p>A cinematic AI-analytics landing page — a scroll-assembled particle dashboard, pinned feature panels, and a live product UI.</p>
         <span class="card-foot">
@@ -1069,13 +1162,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/restaurant-food/index.html">
+    <a class="card reveal" href="templates/restaurant-food/index.html" data-facet="booking" data-date="2026-08-04" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/restaurant-food-sm.webp" alt="The EMBER homepage: a wood-fire hero with drifting embers." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Restaurant / Food</span>
+        <span class="facet-tag" data-f="booking">Booking</span>
         <h3>EMBER</h3>
         <p>A wood-fire restaurant with a cursor-tracked menu, a scroll-driven heat gauge, and a booking flow that actually validates.</p>
         <span class="card-foot">
@@ -1086,13 +1180,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/entertainment-triggered/index.html">
+    <a class="card reveal" href="templates/entertainment-triggered/index.html" data-facet="flagship" data-date="2026-08-04" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/entertainment-triggered-sm.webp" alt="The TRIGGERED concept site: neon type over a glowing lava grid floor." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Entertainment / Redesign</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span>
         <h3>TRIGGERED</h3>
         <p>An unofficial redesign of a real Singapore game centre — a WebGL lava floor, and a calculator that finally makes peak pricing readable.</p>
         <span class="card-foot">
@@ -1103,13 +1198,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/chinese-restaurant/index.html">
+    <a class="card reveal" href="templates/chinese-restaurant/index.html" data-facet="standard" data-date="2026-08-05" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/chinese-restaurant-sm.webp" alt="The B&aacute;i H&egrave; menu: dish rows on the left, a round table filling with plates on the right." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Restaurant / Menu Tool</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>B&Aacute;I H&Egrave; 白鶴</h3>
         <p>A Chinese menu built as a control surface — tap a dish and it lands on a round table that reads the balance of your order back to you.</p>
         <span class="card-foot">
@@ -1120,13 +1216,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/sys-2026-wearable/index.html">
+    <a class="card reveal" href="templates/sys-2026-wearable/index.html" data-facet="flagship" data-date="2026-08-06" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/sys-2026-wearable-sm.webp" alt="The SYS-2026 launch page: a machined field terminal on a forearm behind the words &lsquo;When the network goes down, this doesn&rsquo;t.&rsquo;" width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Product / Hardware Launch</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span>
         <h3>SYS&#8209;2026</h3>
         <p>A wrist-terminal launch page told entirely through scroll &mdash; pinned hardware callouts, a working device screen you can drive with the dial, and a ledger of what&rsquo;s real.</p>
         <span class="card-foot">
@@ -1137,13 +1234,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/law-firm/index.html">
+    <a class="card reveal" href="templates/law-firm/index.html" data-facet="standard" data-date="2026-08-06" data-tier="2">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/law-firm-sm.webp" alt="The AMICUS attorney page: four portraits under the words &lsquo;Precise on paper. Warm in person.&rsquo;" width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Law Firm / Services</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>AMICUS</h3>
         <p>A warm, intake-first law firm &mdash; a 30-second contact flow, expandable case-study ledger, attorney profiles, and plain-English guides.</p>
         <span class="card-foot">
@@ -1154,13 +1252,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/western-grill/index.html">
+    <a class="card reveal" href="templates/western-grill/index.html" data-facet="ecommerce" data-date="2026-08-07" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/western-grill-sm.webp" alt="THE BRASS OX ordering page: ribeyes over open flame behind &lsquo;Everything here meets the fire&rsquo;, with a menu board and a kitchen ticket below." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Restaurant / Grill House</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>THE BRASS OX</h3>
         <p>An American chophouse ordering in three zones &mdash; a section rail, a photo-led board, and a kitchen ticket that stays on screen and prices every doneness and add-on as you go.</p>
         <span class="card-foot">
@@ -1171,13 +1270,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/japanese-restaurant/index.html">
+    <a class="card reveal" href="templates/japanese-restaurant/index.html" data-facet="ecommerce" data-date="2026-08-07" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/japanese-restaurant-sm.webp" alt="The KIYO ordering page: an izakaya spread behind &lsquo;Dinner, settled in three taps&rsquo;, menu cards below." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Restaurant / Online Ordering</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>KIYO 清</h3>
         <p>A mobile-first Japanese kitchen where the site is the ordering flow &mdash; 30 dishes, dietary filters, modifier drawers, and a guest checkout that validates like the real thing.</p>
         <span class="card-foot">
@@ -1188,13 +1288,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/kids-smallhours/index.html">
+    <a class="card reveal" href="templates/kids-smallhours/index.html" data-facet="ecommerce" data-date="2026-08-09" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/kids-smallhours-sm.webp" alt="The SMALL HOURS homepage: two children walk a sunlit garden path under a quiet serif wordmark." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">E-commerce / Childrenswear</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>SMALL HOURS</h3>
         <p>A premium kids' fashion brand built the quiet way &mdash; one enormous AI-shot garden campaign, twelve flat-lay pieces in four collections, age-based sizing and a bag that knows when delivery is free.</p>
         <span class="card-foot">
@@ -1205,13 +1306,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/streetwear-form01/index.html">
+    <a class="card reveal" href="templates/streetwear-form01/index.html" data-facet="ecommerce" data-date="2026-08-09" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/streetwear-form01-sm.webp" alt="The FORM/01 hero: a model in oversized grey techwear filling the screen, the giant word FORM/01 overlapping him." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">E-commerce / Streetwear</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>FORM/01</h3>
         <p>A monochrome techwear label with a broken product grid, full-screen takeovers, and a cart that speaks in mono.</p>
         <span class="card-foot">
@@ -1222,13 +1324,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/vintage-menswear/index.html">
+    <a class="card reveal" href="templates/vintage-menswear/index.html" data-facet="ecommerce" data-date="2026-08-09" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/vintage-menswear-sm.webp" alt="The MORROW &amp; FINCH cover: a man in a camel overcoat on a foggy 1930s street beside &lsquo;Made for Another Era&rsquo;." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">E-commerce / Heritage</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>MORROW &amp; FINCH</h3>
         <p>A working menswear shop dressed as a 1930s catalogue &mdash; ten AI-photographed plates in five departments, product pages, and an Order Book cart written like a ledger.</p>
         <span class="card-foot">
@@ -1239,13 +1342,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/gym-local/index.html">
+    <a class="card reveal" href="templates/gym-local/index.html" data-facet="standard" data-date="2026-08-08" data-tier="2">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/gym-local-sm.webp" alt="The HOYT'S homepage: &lsquo;Train where the town trains&rsquo; in huge poster type, &lsquo;town&rsquo; in red." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Fitness / Local Gym</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>HOYT&rsquo;S</h3>
         <p>A neighborhood boxing gym as a riso print &mdash; every photo run through a two-color duotone, and a 33-class weekly timetable that marks today's column from the visitor's own clock.</p>
         <span class="card-foot">
@@ -1256,13 +1360,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/buffet-longtable/index.html">
+    <a class="card reveal" href="templates/buffet-longtable/index.html" data-facet="standard" data-date="2026-08-08" data-tier="2">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/buffet-longtable-sm.webp" alt="The LONG TABLE homepage: &lsquo;One price. The whole spread.&rsquo; in large serif type over a three-price strip." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Restaurant / Buffet</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>LONG TABLE</h3>
         <p>An all-day buffet told as plainly as possible &mdash; one price, six stations, a seven-day rotation that defaults to today, and an open-now pill computed live from the posted hours.</p>
         <span class="card-foot">
@@ -1273,13 +1378,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/indian-restaurant/index.html">
+    <a class="card reveal" href="templates/indian-restaurant/index.html" data-facet="ecommerce" data-date="2026-08-08" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/indian-restaurant-sm.webp" alt="The KESAR homepage: a mixed grill in a gold arch frame beside &lsquo;The good table is a full table&rsquo;." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Restaurant / Online Ordering</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>KESAR केसर</h3>
         <p>A London curry house that orders for the whole table &mdash; set dawat feasts priced per head, a 30-dish menu book with inline spice and portion pickers, and a checkout in pounds.</p>
         <span class="card-foot">
@@ -1290,13 +1396,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/watch-atelier/index.html">
+    <a class="card reveal" href="templates/watch-atelier/index.html" data-facet="flagship" data-date="2026-08-06" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/watch-atelier-sm.webp" alt="The AUREL homepage: an art-deco gilt watch on dark slate beside the words &lsquo;One hundred years, one second at a time.&rsquo;" width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Luxury / Product Page</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span>
         <h3>AUREL</h3>
         <p>An old-money watch house &mdash; an AI-filmed light-sweep hero, scroll-driven chapters, and a seven-reference boutique with filters and quick-look.</p>
         <span class="card-foot">
@@ -1307,13 +1414,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/dental-care/index.html">
+    <a class="card reveal" href="templates/dental-care/index.html" data-facet="booking" data-date="2026-08-07" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/dental-care-sm.webp" alt="The Brightside Dental homepage: a cream hero with an illustrated arched window, a happy tooth, and a booking button." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Healthcare / Dental</span>
+        <span class="facet-tag" data-f="booking">Booking</span>
         <h3>BRIGHTSIDE</h3>
         <p>A warm family dental practice &mdash; a comfort menu for nervous patients, honest pricing, FAQ, and a booking flow that calls you back.</p>
         <span class="card-foot">
@@ -1324,13 +1432,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/powerbank-cupcake/index.html">
+    <a class="card reveal" href="templates/powerbank-cupcake/index.html" data-facet="standard" data-date="2026-08-07" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/powerbank-cupcake-sm.webp" alt="The CUPCAKE homepage: the word CUPCAKE filling the screen, half ultra-black sans, half pink italic serif." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Tech / Maximalist Type</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>CUPCAKE</h3>
         <p>A power bank sold through typography &mdash; clashing serif/sans posters, a nav battery that charges as you scroll, a flavor switcher that recolors the site, and the odd CC0 cupcake.</p>
         <span class="card-foot">
@@ -1341,13 +1450,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/fashion-overcast/index.html">
+    <a class="card reveal" href="templates/fashion-overcast/index.html" data-facet="ecommerce" data-date="2026-08-10" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/fashion-overcast-sm.webp" alt="The OVERCAST homepage: a wintry hero photograph behind the words &lsquo;The Grey Hours&rsquo; set in high-contrast serif." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Fashion / E-Commerce</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>OVERCAST</h3>
         <p>A clothing label sold on cloth rather than models &mdash; a three-page storefront with filters, a product page, and a bag that survives navigation.</p>
         <span class="card-foot">
@@ -1358,13 +1468,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/running-even/index.html">
+    <a class="card reveal" href="templates/running-even/index.html" data-facet="standard" data-date="2026-08-09" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/running-even-sm.webp" alt="The EVEN homepage: a runner in silver fog above a laminated pace-band strip of ten 5:40 splits." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Fitness / Running App</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>EVEN</h3>
         <p>A running app that keeps the feed quiet &mdash; the page reads as a ten-kilometre run with a live split rail, an evenness score, and a printable race-day pace-band builder.</p>
         <span class="card-foot">
@@ -1375,13 +1486,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/golf-aureon/index.html">
+    <a class="card reveal" href="templates/golf-aureon/index.html" data-facet="booking" data-date="2026-08-09" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/golf-aureon-sm.webp" alt="The AUREON member home: a greeting plate over a sunlit links course in warm vintage-film tones." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Members' Platform / Golf Club</span>
+        <span class="facet-tag" data-f="booking">Booking</span>
         <h3>AUREON</h3>
         <p>A private golf club's digital concierge across five member pages &mdash; a live tee sheet, a manifest that writes itself, engraved confirmation tags, and a desk that anticipates lunch, guests and your calendar before you ask.</p>
         <span class="card-foot">
@@ -1392,13 +1504,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/art-atelier8/index.html">
+    <a class="card reveal" href="templates/art-atelier8/index.html" data-facet="standard" data-date="2026-08-09" data-tier="2">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/art-atelier8-sm.webp" alt="The ATELIER № 8 frontispiece: one abstract painting centred on near-white, a catalogue caption beneath." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Members' Club / Art Gallery</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>ATELIER № 8</h3>
         <p>A private art club set as the catalogue of its current hang &mdash; one plate per screen under a lifting tissue leaf, provenance and price-on-application enquiries, a calendar of dinners, and membership as a registration of interest.</p>
         <span class="card-foot">
@@ -1409,13 +1522,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/fastfood-hotline/index.html">
+    <a class="card reveal" href="templates/fastfood-hotline/index.html" data-facet="ecommerce" data-date="2026-08-10" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/fastfood-hotline-sm.webp" alt="The HOTLINE homepage: the words &lsquo;Fried after dark&rsquo; in heavy condensed type beside a burger lit on black." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Fast Food / Late-Night Counter</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>HOTLINE</h3>
         <p>A late-night fried chicken counter built on one heat scale &mdash; a box builder that prices four picks against buying them apart, a live kitchen ticker, and a bag that keeps the same saving all the way to checkout.</p>
         <span class="card-foot">
@@ -1426,13 +1540,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/coastal-saltfield/index.html">
+    <a class="card reveal" href="templates/coastal-saltfield/index.html" data-facet="booking" data-date="2026-08-11" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/coastal-saltfield-sm.webp" alt="The SALTFIELD homepage: pale dunes under a soft sky above the words &lsquo;The sea keeps its own hours&rsquo; in a warm serif." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Hospitality / Coastal Inn</span>
+        <span class="facet-tag" data-f="booking">Booking</span>
         <h3>SALTFIELD</h3>
         <p>A six-room shore house told across seven pages &mdash; rooms priced night by night across three seasons, a hold that carries dates between pages, a hand-drawn property map, and a header that computes first and last light for the house's own coordinates.</p>
         <span class="card-foot">
@@ -1443,13 +1558,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/synth-oscilla/index.html">
+    <a class="card reveal" href="templates/synth-oscilla/index.html" data-facet="ecommerce" data-date="2026-08-11" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/synth-oscilla-sm.webp" alt="The OSCILLA homepage: the words &lsquo;Four instruments, one voice&rsquo; in white and amber beside four synthesizers on a bench." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Hardware / Electronic Instruments</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>OSCILLA</h3>
         <p>A synthesizer maker whose website is itself a working synthesizer &mdash; a real Web Audio voice with playable keys, a step sequencer and a live oscilloscope, plus a signal-path page where you hear each stage of the chain added one at a time.</p>
         <span class="card-foot">
@@ -1460,13 +1576,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/observatory-vela/index.html">
+    <a class="card reveal" href="templates/observatory-vela/index.html" data-facet="ecommerce booking" data-date="2026-08-11" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/observatory-vela-sm.webp" alt="The VELA homepage: the words &lsquo;Where the sky still gets properly dark&rsquo; over a starlit observatory dome, beside a panel of tonight&rsquo;s computed sunset and darkness times." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Culture / Observatory &amp; Planetarium</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span><span class="facet-tag" data-f="booking">Booking</span>
         <h3>VELA</h3>
         <p>An observatory whose site computes the real sky &mdash; a live star map drawn from a 223-star catalogue, twilight and moon phase worked out for its own latitude, and a programme that refuses to sell a telescope night on the 85 nights a year that never get dark. Carries a full red-light mode, the protocol observatories actually work under.</p>
         <span class="card-foot">
@@ -1477,13 +1594,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/soda-unstill/index.html">
+    <a class="card reveal" href="templates/soda-unstill/index.html" data-facet="ecommerce" data-date="2026-08-11" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/soda-unstill-sm.webp" alt="The UNSTILL homepage: the words &lsquo;Never still&rsquo; in huge type beside a cloud of coloured ink exploding through dark water, under a nav carrying a &lsquo;do not shake&rsquo; button." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">CPG / Drinks Brand</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>UNSTILL</h3>
         <p>A sparkling soda brand built around licensed slow-motion ink footage &mdash; four flavour themes re-ink the same two films live at zero extra bytes, a crate builder computes its own discounts, a physics lab runs real carbonation and pH chemistry, and a &lsquo;do not shake&rsquo; button that absolutely should not be held down.</p>
         <span class="card-foot">
@@ -1494,13 +1612,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/film-midwater/index.html">
+    <a class="card reveal" href="templates/film-midwater/index.html" data-facet="flagship booking" data-date="2026-08-11" data-tier="5">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/film-midwater-sm.webp" alt="The MIDWATER homepage: the word &lsquo;MIDWATER&rsquo; in thin tracked serif over a dark churning sea, framed by faint cyan instrument marks and a depth readout of zero metres." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Film / Documentary Release</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span><span class="facet-tag" data-f="booking">Booking</span>
         <h3>MIDWATER</h3>
         <p>A feature documentary whose site is the survey record of one descent &mdash; six stations of true 4K ocean under a WebGL-treated hero, an echo-sounder strip chart drawn by scroll, depth-derived pressure and light readouts, and an ocean ambience that audibly thickens as you sink.</p>
         <span class="card-foot">
@@ -1511,13 +1630,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/ski-colnoir/index.html">
+    <a class="card reveal" href="templates/ski-colnoir/index.html" data-facet="flagship" data-date="2026-08-11" data-tier="5">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/ski-colnoir-sm.webp" alt="The COL NOIR homepage: the words &lsquo;The mountain, reported honestly&rsquo; in heavy expanded type over a luminous ski piste, above a black avalanche-danger card reading a rating on the five-step scale." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Resort / Alpine Sports</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span>
         <h3>COL NOIR</h3>
         <p>A freeride mountain whose site is its daily avalanche bulletin &mdash; danger ratings, snowpack, wind and lift status all computed per date from one deterministic model, a WebGL contour massif you can turn by hand, wind you can hear at the model's own speed, and day passes priced by each day's forecast.</p>
         <span class="card-foot">
@@ -1528,13 +1648,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/foundry-harlowe/index.html">
+    <a class="card reveal" href="templates/foundry-harlowe/index.html" data-facet="flagship" data-date="2026-08-12" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/foundry-harlowe-sm.webp" alt="The HARLOWE homepage: the word &lsquo;HARLOWE&rsquo; in wide inscriptional capitals over dark bronze bells hanging in shadow, framed by a thin bronze hairline with a bronze &lsquo;Commission a bell&rsquo; button below." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Foundry / Heritage Craft</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span>
         <h3>HARLOWE</h3>
         <p>A bell foundry whose site walks one casting from loam mould to first strike &mdash; and where every bell can be struck: strikes are synthesized live from the five true-harmonic partials, and the commission tool computes each bell&rsquo;s diameter, weight and price from real founders&rsquo; physics as you name its note.</p>
         <span class="card-foot">
@@ -1545,13 +1666,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/spaces-noon/index.html">
+    <a class="card reveal" href="templates/spaces-noon/index.html" data-facet="flagship" data-date="2026-08-12" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/spaces-noon-sm.webp" alt="The NOON homepage: the words &lsquo;Buildings kept in the light.&rsquo; in a light serif over a bright stone arcade raked by sun, with a live solar readout in the header." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Property / Workspace Leasing</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span>
         <h3>NOON</h3>
         <p>A building house that leases daylight — four holdings surveyed by real solar geometry: a live sun clock, a draggable day dial that swings each floor plan&rsquo;s light wash by the computed sun, floors drawn as slabs and plans in code, and rents that are arithmetic, never aspiration.</p>
         <span class="card-foot">
@@ -1562,13 +1684,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/auto-karn/index.html">
+    <a class="card reveal" href="templates/auto-karn/index.html" data-facet="standard" data-date="2026-08-12" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/auto-karn-sm.webp" alt="The KARN homepage: the word &lsquo;KARN&rsquo; in colossal condensed type over a glowing blue road tunnel at speed, telemetry readouts counting metres to the surface." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Automotive / Marque World</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>KARN</h3>
         <p>An automotive world entered through a scroll-scrubbed 4K tunnel drive &mdash; five original machines generated as one design language, each ruling a sector of a closed proving peninsula, with every performance figure computed live from declared engineering and a garage-fed comparator feeding the booking manifest.</p>
         <span class="card-foot">
@@ -1579,13 +1702,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/moto-gyre/index.html">
+    <a class="card reveal" href="templates/moto-gyre/index.html" data-facet="standard" data-date="2026-08-19" data-tier="2">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/moto-gyre-sm.webp" alt="The GYRE homepage: a fully faired motorcycle with a glowing ring headlamp standing in a dark studio, beneath the words &lsquo;Only stable in motion&rsquo;." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Motorcycles / Marque Showcase</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>GYRE</h3>
         <p>A motorcycle marque built on one physical truth &mdash; a machine that stands still is falling. Five original machines named for riding dynamics share a garage with a gear-selector switcher, dyno curves computed live from declared torque points, motor signatures synthesized in the browser, and a bone-white teardown annotated like a workshop manual.</p>
         <span class="card-foot">
@@ -1596,13 +1720,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/carnival-null/index.html">
+    <a class="card reveal" href="templates/carnival-null/index.html" data-facet="flagship" data-date="2026-08-28" data-tier="5">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/carnival-null-sm.webp" alt="The NULL CARNIVAL hero: a painted oxblood banner ringed with fairground bulbs, the word NULL cut clean through it to the moving room behind, hung inside a monumental gilt arch with a mercury portal glowing in it and faceless masks drifting over a wet concrete deck." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Festival / Interactive Exhibition</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span>
         <h3>NULL CARNIVAL</h3>
         <p>A travelling night fair staged in a drained swimming complex, built as one room you turn rather than a page you scroll &mdash; a three.js midway of gilt arches on a ring, portals punched through their backs, bulb wire strung overhead and the programme printed on a carousel standing on the floor of the empty tank. The cursor is a hole you carry: inside it the world inverts and the copy gives up its real name.</p>
         <span class="card-foot">
@@ -1613,13 +1738,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/festival-voltflood/index.html">
+    <a class="card reveal" href="templates/festival-voltflood/index.html" data-facet="standard" data-date="2026-08-28" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/festival-voltflood-sm.webp" alt="The VOLT//FLOOD hero: the fractured logotype in bone white with acid and red glitch slices, floating over a WebGL rig of truss towers, beam fans and a chartreuse waveform floor." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Festival / Audiovisual Identity</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>VOLT//FLOOD</h3>
         <p>An interactive identity system for an underground audiovisual festival, built as one unstable machine: a three.js rig &mdash; waveform floor, stepped beam fans, kick-pulsed speaker walls, sliced logotype slabs, signal rain &mdash; hanging off a single 132&nbsp;BPM clock shared with the HUD, the DOM glitch cuts and an opt-in soundtrack synthesized live in the browser. Scroll raises the voltage, hovering a zone reconfigures the rig, and pressing anywhere charges a surge that discharges through the floor when you let go.</p>
         <span class="card-foot">
@@ -1630,13 +1756,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/combat-fracture/index.html">
+    <a class="card reveal" href="templates/combat-fracture/index.html" data-facet="flagship" data-date="2026-08-30" data-tier="5">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/combat-fracture-sm.webp" alt="The FRACTURE hero: the wordmark in floodlight white over a wall of bruised concrete debris shot through with blood-red marked fragments, above the line 09 BREAKPOINT." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Sports / Fight-Night Promotion</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span>
         <h3>FRACTURE</h3>
         <p>An underground fight-night promotion whose site is a fractured concrete surface that never glides &mdash; fourteen hundred instanced debris fragments hold jagged until scroll crosses a section threshold, then a shockwave snaps them into the next composition: two masses about to collide, a raised fist, the fight cage, the card numeral, the rubble. The camera kicks, chromatic aberration hits, and the pointer is a punch input that blows real craters in whatever the wall has become.</p>
         <span class="card-foot">
@@ -1647,13 +1774,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/camera-candela/index.html">
+    <a class="card reveal" href="templates/camera-candela/index.html" data-facet="flagship" data-date="2026-08-31" data-tier="5">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/camera-candela-sm.webp" alt="The CANDELA hero: the wordmark CANDELA I in warm white over a near-black ground, beside a brushed-aluminium rangefinder camera rendered in three dimensions with a black grained body and a red shutter mark." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Product / Optical Instrument</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span>
         <h3>CANDELA</h3>
         <p>A camera maker whose product page hands you the product. A modelled rangefinder loads as a real 3D asset and stays pinned beside the copy while you scroll &mdash; brushed aluminium that holds a moving specular streak, optical glass with genuine thickness and refraction, hand-wrapped grain, and one vulcanised shutter release. Drag it, or pick a material and let the camera fly to it: metal, glass, leather, rubber, each with the tolerance that makes it that material and not a shader pretending.</p>
         <span class="card-foot">
@@ -1664,13 +1792,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/turntable-lacquer/index.html">
+    <a class="card reveal" href="templates/turntable-lacquer/index.html" data-facet="standard" data-date="2026-08-31" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/turntable-lacquer-sm.webp" alt="TAPE//LACQUER: chaotic warehouse cassette label with SIDE A RUN HOT typography, neon scanlines, and a sourced Poly Haven boombox in WebGL over looped warehouse footage." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Music / Underground Label</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>TAPE//LACQUER</h3>
         <p>Not a product catalogue — an illegal warehouse listening room. Fixed video background (Pixabay), Poly Haven boombox and cassette glTFs in a chaotic WebGL stage, 118&nbsp;BPM HUD, scroll-driven static, hold-click burn. VOLTFLOOD energy without cloning the layout.</p>
         <span class="card-foot">
@@ -1681,13 +1810,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/logistics-northline/index.html">
+    <a class="card reveal" href="templates/logistics-northline/index.html" data-facet="standard" data-date="2026-08-28" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/logistics-northline-sm.webp" alt="The Northline Systems first viewport: the headline &lsquo;See the delay before it costs you&rsquo; above a dark command screen carrying a dot-matrix world map with lane arcs, vessels and an exceptions feed." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Enterprise / Logistics Intelligence</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>NORTHLINE SYSTEMS</h3>
         <p>A business-friendly 3D showcase for a fictional supply-chain intelligence platform: a living three.js network board &mdash; public-domain dot-matrix world, lane arcs, vessels, pulsing risk zones &mdash; wired two-way to an exception feed, plus designed consoles for exceptions, lane confidence and reroute planning. Light control-room chrome, computed figures from one catalogue, and a full static fallback when WebGL is absent.</p>
         <span class="card-foot">
@@ -1698,13 +1828,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/arcade-nightshift/index.html">
+    <a class="card reveal" href="templates/arcade-nightshift/index.html" data-facet="standard" data-date="2026-08-25" data-tier="2">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/arcade-nightshift-sm.webp" alt="The NIGHTSHIFT main floor at night: rows of charcoal arcade cabinets edged in amber light, players at the machines beneath a dark mezzanine." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Entertainment / Gaming Centre</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>NIGHTSHIFT</h3>
         <p>A late-night gaming centre with a dual identity: by day a premium venue of original machines &mdash; racing pods, a nine-pad rhythm wall, a corridor of strange cabinets &mdash; each with its own manufacture plate and service history. After close, a discoverable operations portal shows the same rooms empty on drifting camera clocks, with an event log whose anomalies stay politely unexplained.</p>
         <span class="card-foot">
@@ -1715,13 +1846,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/park-wonderyard/index.html">
+    <a class="card reveal" href="templates/park-wonderyard/index.html" data-facet="standard" data-date="2026-08-21" data-tier="2">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/park-wonderyard-sm.webp" alt="The WONDERYARD gate at morning: a huge timber arch crested with a wave of kinetic paddles, crowds streaming through beneath abstract-symbol flags." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Entertainment / Destination &amp; Theme Park</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>WONDERYARD</h3>
         <p>An original entertainment destination whose homepage is a walk through the park &mdash; six invented worlds with their own palettes, a wayfinding rail that tracks where you are, and a scroll that literally turns day into night before ending on the park&rsquo;s ritual: exactly one firework, every night. Departure-board attraction index, illustrated map with a night mode, and prices computed from the catalogue.</p>
         <span class="card-foot">
@@ -1732,13 +1864,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/cards-fathom/index.html">
+    <a class="card reveal" href="templates/cards-fathom/index.html" data-facet="standard" data-date="2026-08-20" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/cards-fathom-sm.webp" alt="A FATHOM specimen plate: a vast whale trailing curtains of aurora light through dark water." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Collectibles / Digital Card Universe</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>FATHOM</h3>
         <p>An original deep-sea creature-card universe presented as a naturalist&rsquo;s logbook &mdash; thirty-six plates across five depth zones with a luminescence-based rarity ladder, pointer-lit foil and holo materials, a nine-slot binder with embossed missing slots, and a free trawl that makes collecting itself the product.</p>
         <span class="card-foot">
@@ -1749,13 +1882,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/exhibition-parallax/index.html">
+    <a class="card reveal" href="templates/exhibition-parallax/index.html" data-facet="experimental" data-date="2026-08-27" data-tier="5">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/exhibition-parallax-sm.webp" alt="PARALLAX aligned through a storm of porcelain fragments: the word composes itself in bold ink type the instant the sightline is right." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Culture / Digital-Art Exhibition</span>
+        <span class="facet-tag" data-f="experimental">Experimental</span>
         <h3>PARALLAX</h3>
         <p>An international exhibition of objects that cannot exist, whose website is itself Exhibit 00 &mdash; a single WebGL walk through a porcelain void where thirteen hundred fragments keep reassembling: a word that only spells from one spot, a vessel pouring itself back together, nine doors larger inside, a surface swallowing itself, and an impossible triangle that closes only where you stand &mdash; move, and it was never joined.</p>
         <span class="card-foot">
@@ -1766,13 +1900,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/exhibition-ephemeris/index.html">
+    <a class="card reveal" href="templates/exhibition-ephemeris/index.html" data-facet="experimental" data-date="2026-09-02" data-tier="5">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/exhibition-ephemeris-sm.webp" alt="EPHEMERIS: a brass and iron armillary sphere of 1771 standing alone in an unlit room, lit from one side, beneath the words &lsquo;The Object&rsquo;." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Culture / Single-Object Exhibition</span>
+        <span class="facet-tag" data-f="experimental">Experimental</span>
         <h3>EPHEMERIS</h3>
         <p>A gallery that shows one instrument for one year, in the dark, read by one moving light &mdash; a real 1771 armillary sphere from the Collegium Maius, scanned at three hundred thousand triangles and walked in five acts: the whole object at distance, a slow fall onto its engraved horizon band, a lamp handed to the visitor at four degrees of incidence where marks cut two hundred and fifty years ago come back out of the brass, the mechanism turning, and the composition it is left in.</p>
         <span class="card-foot">
@@ -1783,13 +1918,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/horology-eon-v2/index.html">
+    <a class="card reveal" href="templates/horology-eon-v2/index.html" data-facet="flagship" data-date="2026-08-28" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/horology-eon-v2-sm.webp" alt="The Meantime instrument looming out of darkness behind the line &lsquo;Instruments for the other kinds of time&rsquo;, one cold light on its dial." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Horology / Independent Watchmaker</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span>
         <h3>EON ATELIER</h3>
         <p>An independent watchmaking house on Ushant whose first instrument keeps four registers and no hours &mdash; a cinematic descent through six photographic chambers hung in a WebGL night: the artifact revealed by the lamp your pointer carries, a tide basin holding today&rsquo;s real moon, a gnomon that reads your light, a mainspring counting your attended seconds, an orrery set to today&rsquo;s actual sky &mdash; and the papers waiting at the bottom of the dark.</p>
         <span class="card-foot">
@@ -1800,13 +1936,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/concours-nocturne/index.html">
+    <a class="card reveal" href="templates/concours-nocturne/index.html" data-facet="standard" data-date="2026-08-13" data-tier="2">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/concours-nocturne-sm.webp" alt="The NOCTURNE homepage: the word &lsquo;NOCTURNE&rsquo; in engraved serif caps beneath a machine materialising from total darkness, its lamps the only light." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Automotive / Collection &amp; Events</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>NOCTURNE</h3>
         <p>An invitational concours judged entirely after dark &mdash; the gallery is the judging field, lit only where your cursor stands. Ten real automobiles photographed at night, each with a scored judging card, gilt rosettes you pin to your picks, one sealed entry, and an invitation desk that answers in the house's own voice.</p>
         <span class="card-foot">
@@ -1817,13 +1954,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/dining-neap/index.html">
+    <a class="card reveal" href="templates/dining-neap/index.html" data-facet="booking" data-date="2026-08-13" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/dining-neap-sm.webp" alt="The NEAP homepage: the word &lsquo;NEAP&rsquo; in tracked serif caps over deep blue open water, above the line &lsquo;a tasting counter set to the tide&rsquo;." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Restaurant / Fine Dining</span>
+        <span class="facet-tag" data-f="booking">Booking</span>
         <h3>NEAP</h3>
         <p>A fourteen-seat tasting counter whose menu is written by the moon &mdash; real lunar arithmetic decides whether the Flood or the Still menu is served tonight, a computed tide clock maps the next twenty-eight nights, and the dishes themselves are pure typography. One 4K hero, a school of silver fish on film, and a reservations desk that answers in the house&rsquo;s own voice.</p>
         <span class="card-foot">
@@ -1834,13 +1972,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/cafe-loam/index.html">
+    <a class="card reveal" href="templates/cafe-loam/index.html" data-facet="ecommerce" data-date="2026-08-16" data-tier="3">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/cafe-loam-sm.webp" alt="The LOAM homepage: the words &lsquo;Good coffee, no theatre.&rsquo; over a warm photograph of espresso running into two white cups." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Caf&eacute; / Food &amp; Drink</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span>
         <h3>LOAM</h3>
         <p>A neighbourhood caf&eacute; and small roastery, built thumb-first. Every item on the board is photographed as one consistent shoot; tap anything to build a tray that follows you between pages, steps quantities, notes the counter and computes its own pickup time. A taste finder narrows sixteen items by milk, strength and temperature, and the kitchen honestly closes when the clock says so.</p>
         <span class="card-foot">
@@ -1851,13 +1990,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/linia-alva/index.html">
+    <a class="card reveal" href="templates/linia-alva/index.html" data-facet="flagship" data-date="2026-08-18" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/linia-alva-sm.webp" alt="The Linia Alva homepage: a red train curving over a snow-covered stone viaduct through winter forest." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Travel / Winter Railway</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span>
         <h3>LINIA ALVA</h3>
         <p>A slow-television transmission of one winter day on a fictional alpine railway, built entirely from real 4K footage, most of it one Graub&uuml;nden filmmaker&rsquo;s winter work, with no AI imagery anywhere. The page joins the broadcast at your real clock, a lower-third elevation profile rides the whole scroll, tunnels black the screen out and muffle the opt-in carriage audio, and the timetable and seat desk compute live against today.</p>
         <span class="card-foot">
@@ -1868,13 +2008,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/dessert-sejuk/index.html">
+    <a class="card reveal" href="templates/dessert-sejuk/index.html" data-facet="ecommerce booking" data-date="2026-08-16" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/dessert-sejuk-sm.webp" alt="The SEJUK&deg; homepage: dark palm-sugar syrup pouring from a steel jug onto a peak of pale green pandan shaved ice." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Dessert / Shaved Ice</span>
+        <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span><span class="facet-tag" data-f="booking">Booking</span>
         <h3>SEJUK&deg;</h3>
         <p>An equatorial ice house selling snow-fine shaved milk-ice in Singapore flavours, pickup only, because an ice lives fifteen minutes. The board sizes and stacks each peak in a sheet that prices itself live; a kopitiam chit follows you between pages, computes its own shave time, and generates pickup slots from each room&rsquo;s real hours minus the last-shave cutoff.</p>
         <span class="card-foot">
@@ -1885,13 +2026,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/zane-live/index.html">
+    <a class="card reveal" href="templates/zane-live/index.html" data-facet="standard" data-date="2026-08-28" data-tier="2">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/zane-live-sm.webp" alt="The Zan.e homepage: the condensed wordmark ZAN.E in bone white on near-black beside a phone-shaped frame showing a broadcast standby slate with colour bars and a live countdown, above a red-ruled SUNDAY 19:00 &ndash; 20:00 SGT slot." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Fitness / Live Show</span>
+        <span class="facet-tag" data-f="standard">Standard</span>
         <h3>ZAN.E</h3>
         <p>A live fitness show broadcast from Singapore every Sunday night, dressed as a broadcast gallery rather than a podcast page &mdash; condensed cut type on near-black, timecode mono, scanlines, and a REC-marked vertical video frame running a broadcast standby slate. The hour is laid out as a five-cue run sheet, and one Singapore clock drives everything on the page: the slate, an on-air/countdown strip, the mobile action bar, the cue that highlights while it is actually airing, and four real upcoming dates &mdash; so nothing on it can go stale. No photography anywhere &mdash; the identity is type, colour and CSS.</p>
         <span class="card-foot">
@@ -1902,13 +2044,14 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/archive-aperture-index/index.html">
+    <a class="card reveal" href="templates/archive-aperture-index/index.html" data-facet="experimental" data-date="2026-08-29" data-tier="4">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/archive-aperture-index-sm.webp" alt="The Aperture Index hero: a black rangefinder field camera with worn brass edges and a leather strap, floating over a dark light table, beside the serif line &lsquo;A field archive of last light&rsquo; and a mono coordinate readout." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Archive / 3D Artifact</span>
+        <span class="facet-tag" data-f="experimental">Experimental</span>
         <h3>APERTURE INDEX</h3>
         <p>A photographic field archive that records rooms, coastlines and objects in the last hour of light before they are demolished, eroded or sold &mdash; built around one real 3D artifact rather than photography. A de-branded vintage rangefinder is loaded as a Draco-compressed glTF with WebP textures and lit by a PMREM room, and the visitor carries the only useful light in it: the cursor is a raking inspection lamp that finds the leather grain, the brass wear and the glass, while scroll walks the camera through seven authored plates. Lighting a record re-dresses the contact sheets drifting around the instrument.</p>
         <span class="card-foot">
@@ -2712,6 +2855,85 @@
       activateView(el.dataset.view);
     });
   });
+
+  /* =====================================================================
+     Facet filter + sort.
+     State lives entirely in data-* attributes on the cards — data-facet
+     (one or two cross-cutting facets), data-date (the template's first
+     commit date, read out of git at build time) and data-tier (an internal
+     ordering key, never rendered). No JSON sidecar, no CMS.
+     ===================================================================== */
+  (function () {
+    const grid = document.querySelector('#gallery .grid');
+    const status = document.getElementById('filterStatus');
+    const sortEl = document.getElementById('sortBy');
+    const chips = Array.prototype.slice.call(document.querySelectorAll('.filters .chip'));
+    if (!grid || !status || !sortEl || !chips.length) return;
+
+    const all = Array.prototype.slice.call(grid.querySelectorAll('.card'));
+    // Only real template cards take part. The portfolio card is not a
+    // template — it carries no data-facet, stays pinned last, and shows
+    // only under "All".
+    const items = all.filter((c) => c.dataset.facet);
+    const pinned = all.filter((c) => !c.dataset.facet);
+
+    let empty = document.createElement('p');
+    empty.className = 'grid-empty';
+    empty.hidden = true;
+    empty.textContent = 'Nothing in the collection matches that yet.';
+    grid.parentNode.insertBefore(empty, grid.nextSibling);
+
+    let active = 'all';
+
+    const byDate = (a, b) => a.dataset.date.localeCompare(b.dataset.date);
+    const byHref = (a, b) => a.getAttribute('href').localeCompare(b.getAttribute('href'));
+    const COMPARE = {
+      // stable ties on href so a re-sort never shuffles equal-dated cards
+      newest:   (a, b) => byDate(b, a) || byHref(a, b),
+      oldest:   (a, b) => byDate(a, b) || byHref(a, b),
+      advanced: (a, b) => (+b.dataset.tier - +a.dataset.tier) || byDate(b, a) || byHref(a, b),
+    };
+
+    function apply() {
+      const ordered = items.slice().sort(COMPARE[sortEl.value] || COMPARE.newest);
+      const frag = document.createDocumentFragment();
+      let shown = 0;
+
+      ordered.forEach((c) => {
+        const match = active === 'all' || c.dataset.facet.split(' ').indexOf(active) !== -1;
+        c.hidden = !match;
+        if (match) {
+          shown++;
+          // A card filtered back in must be visible immediately. The reveal
+          // observer unobserves on first intersection, so anything that was
+          // never scrolled past would otherwise sit at opacity 0 and hold
+          // blank space in the middle of the results.
+          c.classList.add('in-view');
+        }
+        frag.appendChild(c);
+      });
+      pinned.forEach((p) => {
+        p.hidden = active !== 'all';
+        if (active === 'all') p.classList.add('in-view');
+        frag.appendChild(p);
+      });
+      grid.appendChild(frag);   // moves existing nodes; observers stay attached
+
+      empty.hidden = shown !== 0;
+      status.textContent = shown === 1 ? '1 template shown' : shown + ' templates shown';
+    }
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', function () {
+        active = chip.dataset.filter;
+        chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+        apply();
+      });
+    });
+    sortEl.addEventListener('change', apply);
+
+    apply();
+  })();
 
   // A real count, not a placeholder — read straight from the gallery grid
   // rather than hardcoded, so it can't drift out of sync as templates are
