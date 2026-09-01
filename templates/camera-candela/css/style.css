@@ -26,6 +26,8 @@
      to start below it AND give the height back, or the material chips fall
      past the fold (measured: 63px desktop, 108px once the nav wraps) */
   --mast-h: 64px;
+
+  --ease: cubic-bezier(.22, .61, .36, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -41,6 +43,19 @@ body {
   font: 400 clamp(15px, 1.02vw, 17px)/1.65 var(--sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* faint instrument-bench grain — one tile, held low */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .12;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
 
 img, picture, canvas, svg { max-width: 100%; }
@@ -89,28 +104,55 @@ h1, h2, h3 { font-family: var(--disp); font-weight: 600; line-height: 1.06; marg
   border-bottom: 1px solid var(--line);
 }
 .wordmark {
+  text-decoration: none;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.wordmark-main {
   font: 700 17px/1 var(--disp);
-  letter-spacing: .20em; text-decoration: none;
-  display: flex; flex-direction: column; gap: 4px;
+  letter-spacing: .22em;
 }
 .wordmark-sub {
   font: 400 9px/1 var(--mono);
-  letter-spacing: .20em; text-transform: uppercase; color: var(--muted);
+  letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+}
+.wordmark-sub em {
+  font-style: italic; font-family: var(--sans);
+  font-weight: 500; color: var(--chalk); letter-spacing: .12em;
 }
 .mast-nav { display: flex; gap: clamp(14px, 2vw, 30px); margin-left: auto; }
 .mast-nav a {
+  position: relative;
   font: 500 13px/1 var(--sans); text-decoration: none; color: var(--muted);
-  padding: 8px 0; transition: color .2s ease;
+  padding: 8px 0;
+  opacity: .78;
+  transition: color .4s var(--ease), opacity .4s var(--ease);
 }
-.mast-nav a:hover { color: var(--chalk); }
+.mast-nav a::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 4px;
+  height: 1px; background: var(--brass);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform .45s var(--ease);
+}
+.mast-nav a:hover,
+.mast-nav a:focus-visible {
+  color: var(--chalk); opacity: 1;
+}
+.mast-nav a:hover::after,
+.mast-nav a:focus-visible::after { transform: scaleX(1); }
 .mast-cta {
   font: 500 13px/1 var(--sans); text-decoration: none;
   border: 1px solid var(--line-hi); color: var(--chalk);
   padding: 10px 18px; border-radius: 999px;
-  transition: border-color .2s ease, color .2s ease, background .2s ease;
+  transition: border-color .4s var(--ease), color .4s var(--ease),
+              background .4s var(--ease), transform .35s var(--ease);
   white-space: nowrap;
 }
-.mast-cta:hover { border-color: var(--brass); color: var(--brass); }
+.mast-cta:hover {
+  border-color: var(--brass); color: var(--brass);
+  background: color-mix(in srgb, var(--brass) 8%, transparent);
+}
+.mast-cta:active { transform: scale(0.98); }
 
 /* ── the instrument: sticky stage, scrolling captions ────────────────── */
 .inst-grid {
@@ -144,6 +186,32 @@ h1, h2, h3 { font-family: var(--disp); font-weight: 600; line-height: 1.06; marg
 }
 .stage-still img { width: 100%; height: 100%; object-fit: contain; }
 .stage.is-live .stage-still { opacity: 0; }
+
+/* calibration frame — optical readouts, not field-archive coords */
+.inst-overlay {
+  position: absolute; inset: clamp(10px, 1.6vw, 18px); z-index: 3;
+  pointer-events: none;
+  font: 400 10px/1 var(--mono); letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted);
+  opacity: 0; transition: opacity .9s var(--ease) .25s;
+}
+.stage.is-live .inst-overlay { opacity: 1; }
+.inst-corner {
+  position: absolute; width: 12px; height: 12px;
+  border: 0 solid var(--line-hi);
+}
+.inst-tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.inst-tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.inst-bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.inst-br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+.inst-row {
+  position: absolute; left: 20px; right: 20px;
+  display: flex; justify-content: space-between; gap: 16px;
+  font-variant-numeric: tabular-nums;
+}
+.inst-top { top: 2px; justify-content: flex-end; }
+.inst-bot { bottom: 2px; }
+.inst-serial b { color: var(--brass); font-weight: 500; }
 
 .stage-note {
   position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%);
@@ -183,11 +251,24 @@ h1, h2, h3 { font-family: var(--disp); font-weight: 600; line-height: 1.06; marg
   background: transparent; color: var(--muted);
   border: 1px solid var(--line-hi); border-radius: 999px;
   padding: 9px 15px; cursor: pointer;
-  transition: color .2s ease, border-color .2s ease, background .2s ease;
+  transition: color .38s var(--ease), border-color .38s var(--ease),
+              background .38s var(--ease), transform .38s var(--ease),
+              box-shadow .38s var(--ease);
 }
-.chip:hover { color: var(--chalk); border-color: var(--muted); }
+.chip:hover {
+  color: var(--chalk); border-color: var(--muted);
+  transform: translateY(-1px);
+}
+.chip:active:not([aria-pressed="true"]) { transform: translateY(0) scale(0.97); }
 .chip[aria-pressed="true"] {
   color: #17120A; background: var(--brass); border-color: var(--brass);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass) 35%, transparent),
+              0 6px 18px rgba(0, 0, 0, .32);
+  transform: translateY(-1px);
+}
+.chip:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
 }
 
 /* captions */
@@ -197,15 +278,46 @@ h1, h2, h3 { font-family: var(--disp); font-weight: 600; line-height: 1.06; marg
   padding: 12vh var(--gut) 12vh 0;
   padding-left: var(--gut);
   border-left: 1px solid transparent;
+  transition: border-color .55s var(--ease);
 }
-.panel h1 { font-size: clamp(44px, 6.4vw, 96px); letter-spacing: -0.035em; margin: 0 0 22px; }
-.panel h2 { font-size: clamp(28px, 3.5vw, 46px); margin: 0 0 20px; }
+.panel.is-active {
+  border-left-color: color-mix(in srgb, var(--brass) 50%, transparent);
+}
+.panel h1 {
+  font-size: clamp(44px, 6.4vw, 96px);
+  letter-spacing: -0.035em; margin: 0 0 22px;
+  font-weight: 600;
+}
+.h1-mark { font-weight: 700; letter-spacing: -0.04em; }
+.h1-accent {
+  font-family: var(--sans);
+  font-style: italic; font-weight: 500;
+  letter-spacing: -0.02em;
+  color: color-mix(in srgb, var(--chalk) 88%, var(--brass));
+}
+.panel h2 { font-size: clamp(28px, 3.5vw, 46px); margin: 0 0 20px; font-weight: 600; }
 .panel p { color: var(--muted); max-width: 46ch; margin: 0 0 16px; }
 .panel .lead {
   color: var(--chalk); font-size: clamp(17px, 1.5vw, 22px); line-height: 1.5;
   max-width: 34ch;
 }
-.panel .kicker { transition: color .3s ease; }
+.lead-accent {
+  font-style: italic; font-weight: 500;
+  color: color-mix(in srgb, var(--chalk) 92%, var(--brass));
+}
+.panel p.pull {
+  color: var(--chalk);
+  font-family: var(--sans);
+  font-style: italic; font-weight: 400;
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.48;
+  max-width: 38ch;
+  margin-top: 10px;
+  padding-left: 18px;
+  border-left: 1px solid var(--brass-lo);
+}
+.panel .kicker { transition: color .45s var(--ease); }
+.panel.is-active .kicker { color: var(--chalk); }
 
 .hero-meta {
   list-style: none; margin: 26px 0 0; padding: 0;
@@ -354,6 +466,11 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   .ed:hover { transform: none; }
+  .chip:hover, .chip[aria-pressed="true"] { transform: none; }
+  .chip:active { transform: none; }
+  .mast-cta:active { transform: none; }
+  .panel { transition: none; }
+  .inst-overlay { transition: none; }
 }
 
 /* ── folded states: no JS, no WebGL2, blocked CDN ────────────────────── */
@@ -362,7 +479,9 @@ html.no-3d .stage-note,
 html:not(.js) .stage-hint,
 html.no-3d .stage-hint,
 html:not(.js) .chips,
-html.no-3d .chips { display: none; }
+html.no-3d .chips,
+html:not(.js) .inst-overlay,
+html.no-3d .inst-overlay { display: none; }
 
 html:not(.js) #gl,
 html.no-3d #gl { display: none; }
@@ -389,6 +508,8 @@ html.no-3d .panel { min-height: 0; padding-block: 7vh; }
      two-column grid has to become a plain block before the stage can stay
      pinned while the captions scroll past underneath it. */
   .inst-grid { display: block; }
+  .inst-row { left: 16px; right: 16px; }
+  .inst-bot span:last-child { display: none; }
   .stage-wrap {
     position: sticky; top: var(--mast-h); z-index: 3;
     height: 54svh; padding: 8px 0 12px;

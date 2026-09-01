@@ -139,10 +139,16 @@ because the colour is already the muted step.
 ## Type
 
 - **Sora** 600/700 — display. Squared, technical, reads as hardware.
-- **DM Sans** — body.
+- **DM Sans** — body; **italic** used for accent emphasis (wordmark sub-line,
+  hero numeral, lead stress, material pull-quotes) — CANDELA's equivalent of
+  a serif/italic pairing without importing a second display family.
 - **Roboto Mono** — kickers, spec values, chips, all instrument labels.
 
 None of the three is used elsewhere in the collection.
+
+Stage chrome carries **optical readouts** (serial lot, exposure/calibration
+lines, corner calibration marks) synced to the active material chip — diegetic
+instrument framing, not field-archive coordinates.
 
 ## Assets
 
