@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400;1,9..40,500&family=Roboto+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="css/style.css">
 <link rel="preload" as="fetch" href="assets/candela.glb" crossorigin>
 <script src="js/boot.js"></script>
@@ -37,8 +37,8 @@
 
 <header class="mast">
   <a class="wordmark" href="#top">
-    CANDELA
-    <span class="wordmark-sub">Optical Works</span>
+    <span class="wordmark-main">CANDELA</span>
+    <span class="wordmark-sub"><em>Optical</em> Works</span>
   </a>
   <nav class="mast-nav" aria-label="Sections">
     <a href="#materials">Materials</a>
@@ -68,6 +68,20 @@
                  alt="The CANDELA I rangefinder photographed three-quarter from the front: brushed aluminium top plate, black grained body wrap, and a black lens barrel with knurled focus and aperture rings.">
           </picture>
 
+          <div class="inst-overlay" aria-hidden="true">
+            <i class="inst-corner inst-tl"></i>
+            <i class="inst-corner inst-tr"></i>
+            <i class="inst-corner inst-bl"></i>
+            <i class="inst-corner inst-br"></i>
+            <div class="inst-row inst-top">
+              <span class="inst-serial">SN <b id="instSerial">CW-I·026</b></span>
+            </div>
+            <div class="inst-row inst-bot">
+              <span id="instEv">EV 11.8 · 1/125</span>
+              <span id="instCal">CAL 0.00°</span>
+            </div>
+          </div>
+
           <p class="stage-note" id="stageNote"><span class="stage-bar" id="loadBar"></span>Loading the instrument</p>
           <p class="stage-hint" aria-hidden="true">Drag to inspect</p>
         </div>
@@ -84,8 +98,8 @@
       <div class="panels" id="materials">
         <article class="panel" data-view="hero">
           <p class="kicker">Instrument No. 1</p>
-          <h1 id="instrument-h">CANDELA&nbsp;I</h1>
-          <p class="lead">A full-manual rangefinder. Four materials, each doing
+          <h1 id="instrument-h"><span class="h1-mark">CANDELA</span>&nbsp;<span class="h1-accent">I</span></h1>
+          <p class="lead">A full-manual rangefinder. <em class="lead-accent">Four materials</em>, each doing
             exactly one job, and nothing on the body that does not move
             something.</p>
           <ul class="hero-meta">
@@ -106,6 +120,7 @@
           <p>Every edge is broken by a 0.4&nbsp;mm chamfer. That chamfer is not
             decoration. It is the line of light that tells you, at arm's
             length, whether a part was machined or moulded.</p>
+          <p class="pull">The grain runs with the body — never across it.</p>
           <dl class="micro">
             <div><dt>Alloy</dt><dd>6082-T6</dd></div>
             <div><dt>Finish</dt><dd>Bead-blast, longitudinal brush</dd></div>
@@ -122,6 +137,7 @@
           <p>Focus runs 0.7&nbsp;m to infinity across 120 degrees of helicoid,
             damped with a grease specified by viscosity rather than by feel —
             because "feel" is not a number a second factory can hit.</p>
+          <p class="pull">"Feel" is not a number a second factory can hit.</p>
           <dl class="micro">
             <div><dt>Optical formula</dt><dd>6 elements / 4 groups</dd></div>
             <div><dt>Aperture</dt><dd>f/1.8 – f/16, 11 blades</dd></div>
@@ -138,6 +154,7 @@
           <p>The pebble depth is a specification, not a finish: 0.35&nbsp;mm.
             Deep enough to stay dry under a thumb, shallow enough not to hold
             grit.</p>
+          <p class="pull">0.35&nbsp;mm — deep enough to stay dry under a thumb.</p>
           <dl class="micro">
             <div><dt>Hide</dt><dd>Full-grain, vegetable tanned</dd></div>
             <div><dt>Pebble depth</dt><dd>0.35 mm</dd></div>
@@ -153,6 +170,7 @@
             vulcanised dome on a threaded collar.</p>
           <p>Forty shore A, with the release point set at 1.6&nbsp;N.
             Everything else on the body resists you. This one gives.</p>
+          <p class="pull">The only part on this camera designed to be pressed.</p>
           <dl class="micro">
             <div><dt>Compound</dt><dd>Vulcanised, 40 shore A</dd></div>
             <div><dt>Release point</dt><dd>1.6 N</dd></div>

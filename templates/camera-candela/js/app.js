@@ -6,6 +6,25 @@
 
   var chips = Array.prototype.slice.call(document.querySelectorAll(".chip"));
   var panels = Array.prototype.slice.call(document.querySelectorAll(".panel"));
+  var instSerial = document.getElementById("instSerial");
+  var instEv = document.getElementById("instEv");
+  var instCal = document.getElementById("instCal");
+
+  /* per-material optical readouts — DOM chrome only, not scene state */
+  var READOUTS = {
+    hero:   { serial: "CW-I·026", ev: "EV 11.8 · 1/125", cal: "CAL 0.00°" },
+    metal:  { serial: "BILLET A12", ev: "AL 6082-T6", cal: "CHAMFER 0.4" },
+    glass:  { serial: "COAT MC", ev: "f/1.8 – f/16", cal: "6E / 4G" },
+    leather:{ serial: "WRAP 03", ev: "GRAIN 0.35mm", cal: "HIDE VGT" },
+    rubber: { serial: "DOME M10", ev: "40 SHORE A", cal: "REL 1.6 N" }
+  };
+
+  function paintReadout(name) {
+    var r = READOUTS[name] || READOUTS.hero;
+    if (instSerial) instSerial.textContent = r.serial;
+    if (instEv) instEv.textContent = r.ev;
+    if (instCal) instCal.textContent = r.cal;
+  }
 
   /* ── material focus ────────────────────────────────────────────────────
      The chips and the scroll position are two inputs to one piece of state,
@@ -22,6 +41,7 @@
       p.classList.toggle("is-active", p.dataset.view === name);
     });
     if (typeof window.CANDELA_VIEW === "function") window.CANDELA_VIEW(name);
+    paintReadout(name);
     // a chip press should also bring its caption up; a scroll must not
     // fight the scroll that caused it
     if (!fromScroll) {
@@ -37,6 +57,11 @@
   chips.forEach(function (c) {
     c.addEventListener("click", function () { setView(c.dataset.view, false); });
   });
+
+  panels.forEach(function (p) {
+    p.classList.toggle("is-active", p.dataset.view === active);
+  });
+  paintReadout(active);
 
   /* scroll drives the same state — the caption crossing the middle of the
      viewport is what decides which material is being talked about */
