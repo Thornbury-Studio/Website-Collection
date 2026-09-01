@@ -29,6 +29,7 @@ It serves two audiences from two different pages, and they must not be conflated
 | `index.html` | Hub gallery — every shipped template, the sales catalog |
 | `sitemap.xml`, `robots.txt` | SEO for the hub |
 | `templates/<slug>/` | One child site each, fully self-contained: `index.html` + `css/` + `js/` + `img/`. No shared build, no bundler. |
+| `.claude/launch.json` | Local preview — `node templates/foundry-harlowe/src/serve.mjs` → `http://localhost:8123` |
 | `portfolio/` | Zane's personal curated subset — edit only on explicit request |
 | `variants/` | Alternate visual treatments of the hub itself (arcade material range: cabinet, phosphor, vector, etc.) |
 | `PRODUCT.md` | Product truth for the *personal portfolio* — catalog, audience, brand pin, banned claims |
@@ -57,6 +58,28 @@ This default is narrow on purpose:
 - If the user's prompt is exploratory ("what if we tried…", "sketch a few
   directions") rather than a build instruction, treat it as the normal
   ask-before-acting default — this rule is for the "just build it" case.
+
+## Context budget & exploration guardrail
+
+Default to **targeted designer-builder mode**, not broad architect mode. This repo
+has dozens of self-contained templates; scanning the whole collection or spawning
+multiple research agents can burn huge context before any useful build work starts.
+
+For new child-site work:
+- Read this file, `CLAUDE.md`, and only the smallest set of relevant project docs.
+- Inspect at most **4 existing templates** for implementation patterns unless blocked.
+  Prefer the newest/relevant examples over broad repo scans.
+- Do not spawn subagents/background agents by default. Use them only when the task
+  genuinely benefits from parallel implementation or a large independent audit.
+- For 3D work, inspect only the nearest relevant 3D templates first
+  (`carnival-null`, `festival-voltflood`, `horology-eon-v2`,
+  `logistics-northline`) and then stop exploring once the loader/pattern answer is
+  clear.
+- If token use grows before implementation, pause and narrow scope rather than
+  continuing to collect context.
+
+When in doubt, build a strong new template from a few verified patterns, then use
+real browser QA to iterate. Context is fuel, not the finished site.
 
 ## Client delivery workflow (proposed)
 

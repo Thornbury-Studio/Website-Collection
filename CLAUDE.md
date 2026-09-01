@@ -12,6 +12,16 @@ knowledge: build recipe, image-gen usage, verification traps, per-client
 facts. It's not in this repo (user-global, not project-checked-in) but it's
 the other half of the baseline — read it too, not just this file.
 
+# Default context discipline
+
+Use targeted designer-builder mode by default. This repo has dozens of
+self-contained templates, so do not broadly scan the whole collection or spawn
+background/subagents unless the user explicitly asks or the task truly needs
+parallel work. For new child sites, inspect at most 4 relevant existing
+templates before building; for 3D work, prefer `carnival-null`,
+`festival-voltflood`, `horology-eon-v2`, and `logistics-northline` first. If
+token use grows before implementation, pause and narrow scope.
+
 # Portfolio content policy
 
 For AI video generation tasks, see [VIDEO-POLICY.md](VIDEO-POLICY.md) — credit
