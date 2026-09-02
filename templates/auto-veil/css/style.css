@@ -1,0 +1,328 @@
+/* VEIL — Tesla product page: the film is the page. */
+
+:root {
+  --ink: #000;
+  --paper: #fff;
+  --mist: rgba(255, 255, 255, 0.72);
+  --dim: rgba(255, 255, 255, 0.48);
+  --font: "Inter Tight", "Segoe UI", system-ui, sans-serif;
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--ink);
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; scroll-snap-type: none; }
+}
+
+body {
+  font-family: var(--font);
+  background: var(--ink);
+  color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+ul { list-style: none; }
+video { display: block; }
+
+.skip {
+  position: absolute;
+  left: 16px;
+  top: -40px;
+  z-index: 90;
+  background: #fff;
+  color: #000;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+.skip:focus { top: 12px; }
+
+:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* ---------- nav ---------- */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 40;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  transition: background 0.35s;
+}
+.nav.on-paper {
+  background: rgba(244, 244, 244, 0.9);
+}
+.nav.on-paper .logo,
+.nav.on-paper .links a { color: #171a20; }
+.nav.on-paper .nav-cta { background: #000; color: #fff; }
+.nav.on-paper .burger i { background: #000; }
+.logo {
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  font-size: 14px;
+}
+.links { display: flex; gap: 4px; }
+.links a {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mist);
+}
+.links a:hover { color: #fff; }
+.nav-cta {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 4px;
+  background: #fff;
+  color: #000;
+}
+.burger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  position: relative;
+}
+.burger i {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  height: 1.5px;
+  background: #fff;
+}
+.burger i:first-child { top: 13px; }
+.burger i:last-child { top: 21px; }
+.nav.open .burger i:first-child { top: 17px; transform: rotate(45deg); }
+.nav.open .burger i:last-child { top: 17px; transform: rotate(-45deg); }
+
+.back {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 45;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+/* ---------- screens ---------- */
+
+.screen {
+  position: relative;
+  height: 100svh;
+  min-height: 640px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px 40px;
+}
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.08) 38%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+.veil-soft {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.62) 100%);
+}
+
+.copy {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-top: 18vh;
+}
+.bot {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+}
+.kicker {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--mist);
+  margin-bottom: 8px;
+}
+h1 {
+  font-size: clamp(36px, 4.6vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.line {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--mist);
+}
+.pills {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 256px;
+  max-width: calc(50vw - 28px);
+  min-height: 40px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity 0.2s, transform 0.25s var(--ease);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-light { background: #fff; color: #000; }
+.btn-dark { background: rgba(23, 26, 32, 0.72); color: #fff; backdrop-filter: blur(8px); }
+.btn-ink { background: #000; color: #fff; }
+.btn-line { border: 3px solid #000; color: #000; background: transparent; }
+
+.hud {
+  display: flex;
+  gap: clamp(28px, 6vw, 72px);
+  justify-content: center;
+}
+.hud li { text-align: center; }
+.hud b {
+  display: block;
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.hud span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--dim);
+}
+
+/* ---------- order (white invert, Tesla inventory) ---------- */
+
+.order {
+  min-height: 100svh;
+  scroll-snap-align: start;
+  background: #f4f4f4;
+  color: #171a20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 96px 24px 72px;
+}
+.order-inner { max-width: 560px; text-align: center; }
+.kicker.dark { color: #5c5e62; }
+.order h2 {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  margin: 8px 0 28px;
+}
+.models {
+  display: inline-flex;
+  border: 3px solid #000;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.models button {
+  min-width: 104px;
+  min-height: 40px;
+  padding: 0 18px;
+  font-weight: 500;
+  color: #171a20;
+}
+.models button.on { background: #000; color: #fff; }
+
+.quote { margin-bottom: 28px; }
+.from { font-size: 13px; color: #5c5e62; }
+.price {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.price span { font-size: 18px; margin-top: 10px; font-weight: 500; }
+.price b { font-size: clamp(48px, 7vw, 64px); font-weight: 600; letter-spacing: -0.04em; }
+.inc { margin-top: 6px; font-size: 14px; color: #5c5e62; }
+.fine { margin-top: 28px; font-size: 12px; color: #5c5e62; }
+.order .pills { justify-content: center; }
+.order .btn { max-width: 256px; }
+
+footer {
+  scroll-snap-align: start;
+  background: #000;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 32px;
+  font-size: 12px;
+}
+footer a { color: #fff; font-weight: 500; }
+footer nav { display: flex; gap: 18px; }
+
+@media (max-width: 720px) {
+  .nav { padding: 0 16px; }
+  .links {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 56px;
+    flex-direction: column;
+    background: #000;
+    padding: 8px 16px 16px;
+  }
+  .nav.open .links { display: flex; }
+  .links a { padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: #fff; }
+  .burger { display: block; }
+  .nav-cta { display: none; }
+  .copy { padding-top: 16vh; }
+  .pills { flex-direction: column; align-items: center; }
+  .btn { max-width: 100%; width: min(256px, 100%); }
+  .hud { gap: 20px; }
+  .models { width: 100%; }
+  .models button { flex: 1; min-width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover { transform: none; }
+}
