@@ -1,4 +1,5 @@
 .claude/
+.playwright-mcp/
 .DS_Store
 Thumbs.db
 .vercel
