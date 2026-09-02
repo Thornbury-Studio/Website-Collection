@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KELVIN — Stop lighting dinner like a lobby</title>
+<meta name="description" content="KELVIN is the lighting OS for restaurants and hotels. Cue scenes from the pass, hold 2200K through service, fail over without a blackout.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/lighting-kelvin/index.html">
+<meta name="theme-color" content="#120f0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23120f0c'/%3E%3Cpath d='M16 6v6' stroke='%23e8a04a' stroke-width='1.6' stroke-linecap='round'/%3E%3Cellipse cx='16' cy='20' rx='7' ry='8' fill='none' stroke='%23c4a574' stroke-width='1.6'/%3E%3Cpath d='M13 18c1.2 2 4.8 2 6 0' stroke='%23ffb020' stroke-width='1.4' fill='none'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KELVIN">
+<meta property="og:title" content="KELVIN — Stop lighting dinner like a lobby">
+<meta property="og:description" content="KELVIN is the lighting OS for restaurants and hotels. Cue scenes from the pass, hold 2200K through service, fail over without a blackout.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/lighting-kelvin/index.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KELVIN — Stop lighting dinner like a lobby">
+<meta name="twitter:description" content="KELVIN is the lighting OS for restaurants and hotels. Cue scenes from the pass, hold 2200K through service, fail over without a blackout.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "KELVIN",
+  "applicationCategory": "BusinessApplication",
+  "description": "Lighting control for restaurants, hotels, and late bars. Scene cues, colour temperature lock, and failover without a blackout.",
+  "url": "https://website-collection-zanezhijies-projects.vercel.app/templates/lighting-kelvin/index.html",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="wash" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo" aria-label="KELVIN home">
+      <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 4v7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        <ellipse cx="16" cy="21" rx="7.2" ry="8.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+        <path class="logo-coil" d="M13.2 19.2c1.3 2.2 4.3 2.2 5.6 0" fill="none" stroke="var(--filament)" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      KELVIN
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="#system">System</a>
+      <a href="#rooms">Rooms</a>
+      <a href="#spec">Spec</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm" href="#spec">Talk to a rigger</a>
+      <a class="btn btn-hot btn-sm" href="#spec">Get started</a>
+      <button class="burger" id="navBurger" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
+        <i></i><i></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<a href="../../index.html" class="back-link">&larr; Portfolio</a>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <p class="eyebrow reveal">Hospitality lighting OS</p>
+    <h1 class="reveal">Stop lighting dinner <em>like a lobby.</em></h1>
+    <p class="lede reveal">KELVIN holds colour temperature through service — 2200K at the table, never the 4000K of a hotel corridor. Cue from the pass. Fail over without a blackout.</p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-hot" href="#spec">Spec a room</a>
+      <a class="btn btn-ghost" href="#rooms">Cue a scene</a>
+    </div>
+    <ul class="hero-proof reveal" aria-label="What houses run">
+      <li>140 rooms on the mesh</li>
+      <li>Scenes in under 400&nbsp;ms</li>
+      <li>Battery last-look, 90 minutes</li>
+    </ul>
+  </div>
+
+  <div class="lamp-stage reveal" id="lampStage">
+    <div class="room" aria-hidden="true">
+      <div class="cord"></div>
+      <div class="shade">
+        <svg class="coil" viewBox="0 0 80 48" aria-hidden="true">
+          <path d="M12 24c8-14 16-14 24 0s16 14 24 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="cone"></div>
+      <div class="table">
+        <span class="glass g1"></span>
+        <span class="glass g2"></span>
+        <span class="plate"></span>
+      </div>
+    </div>
+
+    <div class="kelvin-panel">
+      <div class="kelvin-head">
+        <label for="kelvinSlider">Colour temperature</label>
+        <output id="kelvinReadout" for="kelvinSlider">2700K</output>
+      </div>
+      <input type="range" id="kelvinSlider" min="1800" max="5600" step="50" value="2700" aria-valuemin="1800" aria-valuemax="5600" aria-valuenow="2700" aria-valuetext="2700 kelvin">
+      <div class="kelvin-ticks" aria-hidden="true">
+        <span>Candle</span><span>Service</span><span>Neutral</span><span>Day</span>
+      </div>
+      <div class="scene-pills" role="group" aria-label="Cue a house scene">
+        <button type="button" data-k="1800">Close</button>
+        <button type="button" data-k="2200">Service</button>
+        <button type="button" class="on" data-k="2700">House</button>
+        <button type="button" data-k="4000">Turn</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ticker" aria-label="Houses on the mesh">
+  <div class="marquee-wrap">
+    <div class="marquee" id="houseTrack">
+      <div class="marquee-row">
+        <span>The Ember Room</span>
+        <b>140 rooms</b>
+        <span>Pavilion Nine</span>
+        <b>12 cities</b>
+        <span>Hotel Lumen</span>
+        <b>400 ms cues</b>
+        <span>Bar Copper</span>
+        <b>90 min last-look</b>
+        <span>Atlas Dining</span>
+        <span>Cove House</span>
+        <span>The Night Desk</span>
+        <span>Oriole</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="system" id="system">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <span class="eyebrow">The system</span>
+      <h2>A house is not one dimmer.</h2>
+      <p>Four layers, one temperature. The pass, the bar, the lobby, and the stair never share a scene unless you tell them to.</p>
+    </header>
+
+    <div class="bento">
+      <article class="tile tile-scene reveal">
+        <div class="split" aria-hidden="true">
+          <div class="split-pane warm">
+            <span class="k-tag">2200K</span>
+            <span class="split-caption">Service</span>
+          </div>
+          <div class="split-pane cold">
+            <span class="k-tag">4000K</span>
+            <span class="split-caption">The mistake</span>
+          </div>
+        </div>
+        <h3>Lock the temperature</h3>
+        <p>Dimmers drift. LEDs shift as they warm. KELVIN holds the kelvin you set, through a six-hour sitting, without a rigger walking the floor.</p>
+      </article>
+
+      <article class="tile tile-zones reveal">
+        <svg class="floorplan" viewBox="0 0 220 140" role="img" aria-label="Four lighting zones on a dining floor">
+          <rect class="z" data-z="pass" x="8" y="8" width="54" height="124" rx="4"/>
+          <rect class="z on" data-z="dining" x="70" y="8" width="90" height="84" rx="4"/>
+          <rect class="z" data-z="bar" x="168" y="8" width="44" height="84" rx="4"/>
+          <rect class="z" data-z="lobby" x="70" y="100" width="142" height="32" rx="4"/>
+          <text x="35" y="74" text-anchor="middle">Pass</text>
+          <text x="115" y="54" text-anchor="middle">Dining</text>
+          <text x="190" y="54" text-anchor="middle">Bar</text>
+          <text x="141" y="120" text-anchor="middle">Lobby</text>
+        </svg>
+        <h3>Zones that don’t leak</h3>
+        <p>Hover a room. The rest stay dark. Cues never cross a fire door unless you plot them to.</p>
+      </article>
+
+      <article class="tile tile-day reveal">
+        <ol class="dayline" aria-label="Circadian house schedule">
+          <li><span>06:00</span> Prep · 3500K</li>
+          <li class="now"><span>18:30</span> Service · 2200K</li>
+          <li><span>22:00</span> Bar · 2000K</li>
+          <li><span>00:30</span> Close · 1800K</li>
+        </ol>
+        <h3>The day has a plot</h3>
+        <p>A circadian strip the floor staff can read. No unmarked sliders on a wall.</p>
+      </article>
+
+      <article class="tile tile-cue reveal">
+        <ol class="cuelist">
+          <li><i>01</i> House to service <em>GO</em></li>
+          <li class="live"><i>02</i> Dining −12% <em>LIVE</em></li>
+          <li><i>03</i> Bar warm hold <em>—</em></li>
+          <li><i>04</i> Last look <em>—</em></li>
+        </ol>
+        <h3>Cue from the pass</h3>
+        <p>A handheld, a wall station, or the pass iPad. One GO. Four hundred milliseconds.</p>
+      </article>
+
+      <article class="tile tile-fail reveal">
+        <div class="battery" aria-hidden="true">
+          <span class="bat-fill"></span>
+        </div>
+        <p class="bat-read">91 min remaining</p>
+        <h3>Last-look battery</h3>
+        <p>Mains drop. Tables stay lit. Guests finish the course. Nobody notices the generator.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="spec" id="spec">
+  <div class="wrap spec-grid">
+    <header class="section-head reveal">
+      <span class="eyebrow">Spec a room</span>
+      <h2>Tell us the covers. We’ll plot the circuits.</h2>
+      <p>A working load sheet — not a brochure. Change the room and the house recommendation moves with it.</p>
+    </header>
+
+    <form class="calc reveal" id="roomCalc" novalidate>
+      <fieldset>
+        <legend>Covers</legend>
+        <div class="seg" role="radiogroup" aria-label="Covers">
+          <label><input type="radio" name="covers" value="40"> 40</label>
+          <label><input type="radio" name="covers" value="80" checked> 80</label>
+          <label><input type="radio" name="covers" value="120"> 120</label>
+          <label><input type="radio" name="covers" value="180"> 180</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Ceiling</legend>
+        <div class="seg" role="radiogroup" aria-label="Ceiling height">
+          <label><input type="radio" name="ceiling" value="2.8"> 2.8&nbsp;m</label>
+          <label><input type="radio" name="ceiling" value="3.4" checked> 3.4&nbsp;m</label>
+          <label><input type="radio" name="ceiling" value="4.2"> 4.2&nbsp;m</label>
+          <label><input type="radio" name="ceiling" value="6.0"> 6.0&nbsp;m</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Room</legend>
+        <div class="seg" role="radiogroup" aria-label="Room type">
+          <label><input type="radio" name="room" value="dining" checked> Dining</label>
+          <label><input type="radio" name="room" value="bar"> Bar</label>
+          <label><input type="radio" name="room" value="lobby"> Lobby</label>
+        </div>
+      </fieldset>
+    </form>
+
+    <aside class="sheet reveal" aria-live="polite">
+      <p class="sheet-kicker">Load sheet</p>
+      <dl>
+        <div><dt>Circuits</dt><dd id="outCircuits">7</dd></div>
+        <div><dt>Fixture draw</dt><dd id="outWatts">294 W</dd></div>
+        <div><dt>Recommended</dt><dd id="outPlan">House</dd></div>
+      </dl>
+      <p class="sheet-note" id="outNote">An 80-cover dining room at 3.4 m: seven circuits, House plan, colour lock included.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2>Priced on the rooms you run.</h2>
+      <p>Hardware is quoted per house. Software is a seat on the mesh. Annual billing holds two months.</p>
+    </header>
+
+    <div class="toggle-wrap reveal">
+      <span class="toggle-label on" id="labMonthly">Monthly</span>
+      <button class="toggle" id="billToggle" type="button" role="switch" aria-checked="false" aria-label="Toggle annual billing"><i></i></button>
+      <span class="toggle-label" id="labAnnual">Annual</span>
+      <span class="save-pill">2 months held</span>
+    </div>
+
+    <div class="plans">
+      <article class="plan reveal" data-plan="Studio">
+        <p class="plan-name">Studio</p>
+        <p class="plan-desc">One room. Owner on the pass. Colour lock and four scenes.</p>
+        <p class="plan-price"><span class="cur">$</span><span class="amount" data-m="180" data-a="150">180</span><span class="per">/ mo</span></p>
+        <p class="plan-billed" data-billed>Billed monthly</p>
+        <a class="btn btn-ghost" href="#spec">Start Studio</a>
+        <ul>
+          <li>Up to 4 circuits</li>
+          <li>Colour lock</li>
+          <li>Pass handheld</li>
+          <li>Email support</li>
+        </ul>
+      </article>
+      <article class="plan featured reveal" data-plan="House">
+        <span class="plan-flag">On this load sheet</span>
+        <p class="plan-name">House</p>
+        <p class="plan-desc">A full venue. Zones, circadian plot, last-look battery.</p>
+        <p class="plan-price"><span class="cur">$</span><span class="amount" data-m="420" data-a="350">420</span><span class="per">/ mo</span></p>
+        <p class="plan-billed" data-billed>Billed monthly</p>
+        <a class="btn btn-hot" href="#spec">Start House</a>
+        <ul>
+          <li>Up to 16 circuits</li>
+          <li>Four isolated zones</li>
+          <li>Cue stack + wall stations</li>
+          <li>90-minute last-look</li>
+          <li>Rigger on call</li>
+        </ul>
+      </article>
+      <article class="plan reveal" data-plan="Estate">
+        <p class="plan-name">Estate</p>
+        <p class="plan-desc">Several properties, one mesh. Custom fixtures, SSO, a named rigger.</p>
+        <p class="plan-price"><span class="cur">$</span><span class="amount" data-m="890" data-a="742">890</span><span class="per">/ mo</span></p>
+        <p class="plan-billed" data-billed>Billed monthly</p>
+        <a class="btn btn-ghost" href="#spec">Talk to a rigger</a>
+        <ul>
+          <li>Unlimited circuits</li>
+          <li>Multi-house mesh</li>
+          <li>Show control + DMX</li>
+          <li>Named rigger</li>
+          <li>99.9% uptime hold</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rooms" id="rooms">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <span class="eyebrow">On the mesh</span>
+      <h2>Rooms that keep their temperature.</h2>
+    </header>
+    <div class="room-cards">
+      <article class="room-card reveal">
+        <span class="k-chip">2180K</span>
+        <h3>The Ember Room</h3>
+        <p>Forty-two covers. Service locked at 2180K for eleven months. The bar is plotted separately after 22:00.</p>
+      </article>
+      <article class="room-card reveal">
+        <span class="k-chip">2650K</span>
+        <h3>Hotel Lumen, lobby</h3>
+        <p>A marble hall that used to read as an airport. House now holds 2650K from dusk; daylight only until 16:00.</p>
+      </article>
+      <article class="room-card reveal">
+        <span class="k-chip">1920K</span>
+        <h3>Bar Copper</h3>
+        <p>A late room. Close scene at 1920K, no white left in the spectrum. Last-look carried a storm outage last March.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 4v7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <ellipse cx="16" cy="21" rx="7.2" ry="8.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M13.2 19.2c1.3 2.2 4.3 2.2 5.6 0" fill="none" stroke="var(--filament)" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        KELVIN
+      </a>
+      <p>Lighting for rooms people stay in after dark.</p>
+      <form class="news" id="newsForm" novalidate>
+        <label class="sr" for="newsEmail">Email for house notes</label>
+        <input id="newsEmail" name="email" type="email" autocomplete="email" placeholder="Chef or GM email" required>
+        <button class="btn btn-hot btn-sm" type="submit">Write me</button>
+        <p class="news-msg" id="newsMsg" hidden>Held. We’ll write when the next house opens.</p>
+      </form>
+    </div>
+    <div>
+      <h4>System</h4>
+      <ul>
+        <li><a href="#system">Colour lock</a></li>
+        <li><a href="#system">Zones</a></li>
+        <li><a href="#rooms">Cue stack</a></li>
+        <li><a href="#spec">Load sheet</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>House</h4>
+      <ul>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#spec">Talk to a rigger</a></li>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#top">The mesh</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Desk</h4>
+      <ul class="social">
+        <li>
+          <a href="#top" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="0.8" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#top" aria-label="Are.na">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="12" r="3.2"/><circle cx="16" cy="12" r="3.2"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#top" aria-label="Vimeo">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8.5c4.5-1 7.2 6.4 8.6 9 1.2-4.2 3.4-12.6 7.4-11"/></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <p class="legal">© 2026 KELVIN Lighting. All rooms keep their temperature.</p>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
