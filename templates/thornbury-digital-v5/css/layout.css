@@ -22,7 +22,7 @@
     --bg-2: #0e0e0e;
     --chrome: #e1e1e1;
     --chrome-70: rgba(225, 225, 225, .7);
-    --chrome-45: rgba(225, 225, 225, .45);
+    --chrome-45: rgba(225, 225, 225, .56);   /* 5.1:1 on #080808 — .45 was 3.7:1 */
     --hair-2: rgba(225, 225, 225, .18);
     --hair-1: rgba(225, 225, 225, .1);
     --hair-0: rgba(225, 225, 225, .045);
@@ -431,7 +431,7 @@
     font-size: .56rem;
     letter-spacing: .12em;
     text-transform: uppercase;
-    color: rgba(225, 225, 225, .28);
+    color: var(--chrome-45);
   }
   @media (max-width: 700px) { .film-note { display: none; } }
 
@@ -622,7 +622,7 @@
   }
   .entry-link:hover .plate-media { filter: none; }
   .entry-link:hover .fig-plate { border-color: var(--chrome-70); }
-  .entry-body h3 {
+  .entry-body h2 {
     font-weight: 800;
     font-size: clamp(1.9rem, 4.4vw, 3.8rem);
     letter-spacing: -.04em;
@@ -693,7 +693,7 @@
     align-items: baseline;
     margin-top: 1rem;
   }
-  .cap h3 {
+  .cap h2 {
     font-weight: 800;
     font-size: clamp(1.4rem, 2.2vw, 2rem);
     letter-spacing: -.035em;
@@ -773,7 +773,7 @@
     color: transparent;
     -webkit-text-stroke: 1px var(--chrome-45);
   }
-  .principle h3 {
+  .principle h2 {
     font-weight: 800;
     font-size: 1.5rem;
     letter-spacing: -.03em;
@@ -794,7 +794,7 @@
     border-bottom: 1px solid var(--hair-1);
     align-items: baseline;
   }
-  .process h3 { font-weight: 800; font-size: 1.2rem; letter-spacing: -.03em; text-transform: uppercase; }
+  .process h2 { font-weight: 800; font-size: 1.2rem; letter-spacing: -.03em; text-transform: uppercase; }
   .process p { grid-column: 2; color: var(--chrome-70); font-size: .92rem; max-width: 46ch; }
   .process .dur { grid-row: 1 / span 2; }
   @media (max-width: 560px) {

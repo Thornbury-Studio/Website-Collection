@@ -147,6 +147,46 @@ pixel size into its corner labels and the hero meta line; the inline label is
 transparent plates with a hairline diagram per case, an outlined index numeral
 overlapping the top-left corner, and a glass metadata card inside.
 
+## Performance
+
+Measured with Chrome DevTools traces and rAF sampling, desktop at 1440 and a
+4x-CPU-throttled phone at 390.
+
+| | Before | After |
+|---|---|---|
+| Field cost per frame | 12 ms, every frame | ~6 ms, every other frame |
+| LCP (4x throttle, mobile) | 1,281 ms | 379 ms |
+| Long tasks on Work at load | one at 78 ms | none |
+| Page transfer | 4,544 kB | 2,918 kB |
+| Lighthouse accessibility | 93 | 100 |
+
+CLS was 0.00 throughout.
+
+**The field was quadratic in disguise.** `flush()` walked a `Map` of *every*
+bucket key ever created, decoding the key and testing `arr.length` for each,
+including thousands that were empty — so per-frame cost grew with the number of
+distinct (luminance, alpha, width) combinations the run had ever produced. It now
+records only the keys touched this frame in an `Int32Array` and walks that.
+Buckets are reusable `Float64Array`s with their own fill counts, because plain
+arrays reset with `length = 0` churned their backing store and left a 5% tail of
+18 ms frames. Euler runs one sub-step at the same `dt` instead of two, halving
+the `Math.sin` count with no visible change to the trajectory.
+
+**Then it stopped drawing when nobody can see it.** The field paints at 30 fps
+while physics stays at 60 — it is a slow ambient drift and the wipe is doubled to
+keep the trail the same length in wall-clock terms. It is switched off entirely
+while the hero film is opaque, driven from the handoff's `onUpdate`, and on Home
+that means it does no work at all until the first scroll.
+
+**Startup.** Seeding 2,600 particles and pouring the first frames costs ~23 ms,
+so the field starts in `requestIdleCallback` rather than on the critical path;
+that alone removed the only long task on Work. Still pages pour 54 frames four
+at a time instead of 84 twelve at a time, so no single task runs long.
+
+**What did not work.** Moving GSAP off the critical path required hiding the hero
+copy until it arrived, and an `opacity: 0` element does not count as painted —
+LCP went from 1.28 s to 3.33 s. The 47 kB library stays in the head, deliberately.
+
 ## Verification
 
 Playwright MCP against `http://localhost:8123/templates/thornbury-digital-v5/`

@@ -25,10 +25,14 @@ one copy, trims the duplicate frame at the turn, and concatenates: 448 frames,
 `loop` attribute runs forever seamlessly.
 
 It drops to 30 fps because a slow drift needs nothing more, and is H.264, audio
-stripped, faststart, CRF 22 with a 3000k cap. Two more filters: `hflip` sets the
-body's lit side against the layout, and `eq=saturation=0.2:contrast=1.1` pulls
-the residual blue out of the starfield, which keeps the page inside its
-obsidian/chrome/ember palette. `img/poster-hero.webp` is the frame at 6 s.
+stripped, faststart, CRF 25 with a 1900k cap — 2.73 MB where CRF 22 gave 4.50 MB.
+The two encodes are indistinguishable at 1:1 on the crater detail (38.6 dB PSNR),
+which is the only test worth trusting here; file size alone says nothing.
+
+Two more filters: `hflip` sets the body's lit side against the layout, and
+`eq=saturation=0.2:contrast=1.1` pulls the residual blue out of the starfield,
+which keeps the page inside its obsidian/chrome/ember palette.
+`img/poster-hero.webp` is the frame at 6 s.
 
 Seam check (PSNR against the neighbouring ordinary frame step, higher is closer):
 loop point 32.2 dB vs 32.8 dB, turnaround 35.4 dB vs 35.3 dB, unrelated frames

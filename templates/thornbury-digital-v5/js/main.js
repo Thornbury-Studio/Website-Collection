@@ -9,17 +9,26 @@
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   html.classList.add('js');
   if (reduced) html.classList.add('rm');
+
   var page = html.getAttribute('data-page') || 'home';
 
   document.querySelectorAll('.nav a').forEach(function (a) {
     if ((a.getAttribute('href') || '') === page + '.html') a.setAttribute('aria-current', 'page');
   });
 
-  /* Field: live on home and studio, still on work and contact (html[data-field]). */
+  /* Field: live on home and studio, still on work and contact (html[data-field]).
+     Seeding and the first draws cost ~20 ms, and the field is a background — it
+     is started off the critical path so it cannot lengthen the load task. */
   var canvas = document.getElementById('field');
   var anchors = { home: [0.5, 0.5], studio: [0.62, 0.48], work: [0.5, 0.45], contact: [0.68, 0.5] };
   var seeds = { home: 0, studio: 11, work: 23, contact: 37 };
-  if (canvas && window.TBField) {
+  var fieldWant = null;
+  function applyFieldGate() {
+    if (fieldWant === null || !window.__tb || !window.__tb.setActive) return;
+    window.__tb.setActive(fieldWant);
+  }
+  function startField() {
+    if (!canvas || !window.TBField) { html.classList.add('no-field'); return; }
     var mode = html.getAttribute('data-field') || 'live';
     var an = anchors[page] || anchors.home;
     try {
@@ -30,12 +39,13 @@
         ay: an[1]
       });
       if (!window.__tb) html.classList.add('no-field');
+      else applyFieldGate();
     } catch (err) {
       html.classList.add('no-field');
     }
-  } else {
-    html.classList.add('no-field');
   }
+  if (window.requestIdleCallback) requestIdleCallback(startField, { timeout: 1200 });
+  else setTimeout(startField, 200);
 
   /* Hero film: a stand-in plate. Reduced motion holds the poster frame. */
   var film = document.getElementById('heroFilm');
@@ -113,8 +123,12 @@
     });
   }
 
-  /* Motion. Every tween clears its inline styles when done, so no transform or
-     opacity is left behind to open a stacking context under the glass layers. */
+  /* Motion. GSAP stays on the critical path deliberately: moving it after first
+     paint meant the hero copy had to be hidden until it arrived, and an
+     opacity-0 element does not count as painted — LCP went from 1.28 s to 3.33 s
+     on a 4x-throttled phone. Every tween clears its inline styles when done, so
+     no transform or opacity is left behind to open a stacking context under the
+     glass layers. */
   var g = window.gsap;
   if (!g || reduced) return;
   var ST = window.ScrollTrigger;
@@ -124,13 +138,18 @@
   if (hero) {
     var tl = g.timeline({ defaults: { ease: 'power4.out', clearProps: 'all' } });
     var filmLayer = hero.querySelector('.hero-film');
+    function rise(sel, y, dur, at, stagger) {
+      var els = hero.querySelectorAll(sel);
+      if (els.length) tl.fromTo(els, { y: y, opacity: 0 },
+        { y: 0, opacity: 1, duration: dur, stagger: stagger || 0, clearProps: 'all' }, at);
+    }
     if (filmLayer) tl.from(filmLayer, { opacity: 0, duration: 1.8, ease: 'power2.out' }, 0);
-    tl.from(hero.querySelectorAll('.hero-copy .meta'), { y: 14, opacity: 0, duration: 0.9 }, 0.5);
-    tl.from(hero.querySelectorAll('.wordmark'), { y: 64, opacity: 0, duration: 1.5 }, 0.62);
-    tl.from(hero.querySelectorAll('.hero-line'), { y: 20, opacity: 0, duration: 1.1 }, 0.9);
-    tl.from(hero.querySelectorAll('.hero-act > *'), { y: 18, opacity: 0, duration: 1, stagger: 0.08 }, 1.05);
-    tl.from(hero.querySelectorAll('.hero-stats li'), { y: 16, opacity: 0, duration: 1, stagger: 0.08 }, 1.2);
-    tl.from(hero.querySelectorAll('.film-note'), { opacity: 0, duration: 0.9 }, 1.4);
+    rise('.hero-copy .meta', 14, 0.9, 0.5);
+    rise('.wordmark', 64, 1.5, 0.62);
+    rise('.hero-line', 20, 1.1, 0.9);
+    rise('.hero-act > *', 18, 1, 1.05, 0.08);
+    rise('.hero-stats li', 16, 1, 1.2, 0.08);
+    rise('.film-note', 0, 0.9, 1.4);
   }
 
   var head = document.querySelector('.page-head');
@@ -148,9 +167,21 @@
   if (stick && hero) {
     var hFilm = hero.querySelector('.hero-film');
     var hRest = hero.querySelectorAll('.hero-copy, .hero-stats, .film-note');
+    /* the field is invisible behind an opaque hero film — do not run it there */
+    function gateField(p) {
+      var want = p > 0.04;
+      if (want === fieldWant) return;
+      fieldWant = want;
+      applyFieldGate();
+    }
     var handoff = g.timeline({
-      scrollTrigger: { trigger: stick, start: 'top top', end: 'bottom bottom', scrub: 0.6 }
+      scrollTrigger: {
+        trigger: stick, start: 'top top', end: 'bottom bottom', scrub: 0.6,
+        onUpdate: function (self) { gateField(self.progress); },
+        onRefresh: function (self) { gateField(self.progress); }
+      }
     });
+    gateField(0);
     if (hFilm) handoff.to(hFilm, { autoAlpha: 0, scale: 1.12, ease: 'none', duration: 1 }, 0);
     if (hRest.length) handoff.to(hRest, { autoAlpha: 0, y: -40, ease: 'none', duration: 0.6 }, 0);
   }
