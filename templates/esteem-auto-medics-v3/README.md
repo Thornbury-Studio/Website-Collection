@@ -12,19 +12,20 @@ action per screen, and understated motion. Everything is a single self-contained
 live production site; operating hours, email and coating-product spec are intentionally
 absent because they are unconfirmed).
 
-## Media assets (all hotlinked, all verified free-for-commercial-use on their asset pages)
+## Media assets (self-hosted; Pexels license)
 
-All from Pexels (Pexels license — free to use, no attribution required; attributed anyway
-for the record). All are independent-creator uploads; shots with readable manufacturer
-badges or plates were rejected during selection.
+Hotlinking Pexels is blocked by the collection CSP (`img-src`/`default-src 'self'`).
+Masters live in `video/` and `img/`. Source downloads stay in `video/src/` (gitignored).
+All independent-creator uploads; shots with readable manufacturer badges or plates
+were rejected during selection.
 
-| Use | Asset | Creator |
-|---|---|---|
-| Hero video (black paint macro) | pexels.com/video/6159202 | Pavel Danilyuk |
-| "Road keeps score" video (night road POV) | pexels.com/video/33650283 | Kim Dodge |
-| Coating photo (booth spray application) | pexels.com/photo/30250199 | Mohammad Hammad |
-| Full-body gloss video (studio LED sweep) | pexels.com/video/6159204 | Pavel Danilyuk |
-| Supercar silhouette video (rim-lit, dark) | pexels.com/video/29498796 | Michael Pronin |
-| Accident repair photo (hood-up assessment) | pexels.com/photo/37809554 | Bulat843 |
-| Spray painting video (painter, respirator) | pexels.com/video/8469678 | Anastasia Shuraeva |
-| Servicing photo (underbody with work light) | pexels.com/photo/7019602 | cottonbro studio |
+| Use | File | Source | Creator |
+|---|---|---|---|
+| Hero video (black paint macro) | `video/hero.mp4` | pexels.com/video/6159202 | Pavel Danilyuk |
+| "Road keeps score" video (night road POV) | `video/road.mp4` | pexels.com/video/33650283 | Kim Dodge |
+| Coating photo (booth spray application) | `img/coating.webp` | pexels.com/photo/30250199 | Mohammad Hammad |
+| Full-body gloss video (studio LED sweep) | `video/gloss.mp4` | pexels.com/video/6159204 | Pavel Danilyuk |
+| Supercar silhouette video (rim-lit, dark) | `video/super.mp4` | pexels.com/video/29498796 | Michael Pronin |
+| Accident repair photo (hood-up assessment) | `img/repair.webp` | pexels.com/photo/37809554 | Bulat843 |
+| Spray painting video (painter, respirator) | `video/paint.mp4` | pexels.com/video/8469678 | Anastasia Shuraeva |
+| Servicing photo (underbody with work light) | `img/service.webp` | pexels.com/photo/7019602 | cottonbro studio |
