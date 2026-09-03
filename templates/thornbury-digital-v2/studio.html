@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-page="studio">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>Studio — Thornbury Digital</title>
+<meta name="description" content="Loud by design. Thornbury Digital is a Singapore studio that makes screens flinch — WebGL, motion, identity, campaign, commerce and systems, shipped in four strikes.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v2/studio.html">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050505'/%3E%3Cpath d='M6 7h20v6h-7v12h-6V13H6z' fill='%23CCFF00'/%3E%3Ccircle cx='25' cy='25' r='3' fill='%23FF0055'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thornbury Digital">
+<meta property="og:title" content="Studio — Thornbury Digital">
+<meta property="og:description" content="Loud by design. We make screens flinch.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v2/studio.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v2/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&amp;family=Instrument+Serif:ital@1&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js" crossorigin="anonymous">
+<script src="js/boot.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <p class="intro-w">Thornbury</p>
+  <div class="intro-line"></div>
+  <p class="intro-tag">Digital &middot; Ignition</p>
+</div>
+
+<div class="stage" id="stage" aria-hidden="true"></div>
+<div class="wipe" id="wipe" aria-hidden="true"><span class="wipe-label" id="wipeLabel"></span></div>
+<div class="cur" id="cur" aria-hidden="true"><span class="cur-ring"><span class="cur-label" id="curLabel"></span></span><span class="cur-dot"></span></div>
+
+<header class="top" id="top">
+  <a class="wm" href="index.html" data-mag=".18" data-cur="CORE" aria-label="Thornbury Digital — home"><span class="wm-t">Thornbury</span><span class="wm-d">Digital</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="work.html" data-mag=".3">Work</a>
+    <a href="studio.html" data-mag=".3" aria-current="page">Studio</a>
+    <a href="contact.html" data-mag=".3">Contact</a>
+  </nav>
+  <a class="btn btn-lime top-cta" href="contact.html" data-mag=".3" data-cur="SEND"><span class="mg-in">Start a project</span></a>
+</header>
+
+<main id="main" data-page="studio" tabindex="-1">
+
+  <section class="page-hero" aria-labelledby="h1">
+    <p class="kicker rv">02 <span class="sep">/</span> The studio</p>
+    <h1 class="k hero-h1 hero-h1--page" id="h1">Loud<br>by <em class="ser">design.</em></h1>
+  </section>
+
+  <section class="sec mani-sec" aria-label="Manifesto">
+    <p class="k mani mani-1">We make</p>
+    <p class="k mani mani-2">screens</p>
+    <p class="k mani mani-3">flinch.</p>
+  </section>
+
+  <section class="sec caps-sec" aria-labelledby="caps-h">
+    <header class="sec-head">
+      <p class="kicker rv">Capabilities</p>
+      <h2 class="k sec-h2" id="caps-h">What we<br>fire</h2>
+    </header>
+    <ul class="caps">
+      <li><span class="cap glass" data-mag=".2" data-burst=".2">WebGL</span></li>
+      <li><span class="cap glass" data-mag=".2" data-burst=".2">Motion</span></li>
+      <li><span class="cap glass" data-mag=".2" data-burst=".2">Identity</span></li>
+      <li><span class="cap glass" data-mag=".2" data-burst=".2">Campaign</span></li>
+      <li><span class="cap glass" data-mag=".2" data-burst=".2">Commerce</span></li>
+      <li><span class="cap glass" data-mag=".2" data-burst=".2">Systems</span></li>
+      <li><span class="cap glass" data-mag=".2" data-burst=".2">Sound</span></li>
+      <li><span class="cap glass" data-mag=".2" data-burst=".2">3D</span></li>
+    </ul>
+  </section>
+
+  <section class="sec proc-sec" aria-labelledby="proc-h">
+    <header class="sec-head">
+      <p class="kicker rv">The process</p>
+      <h2 class="k sec-h2" id="proc-h">Four<br>strikes</h2>
+    </header>
+    <ol class="proc">
+      <li class="proc-card glass rv" data-depth=".04"><div class="dist"><div class="proc-art art-2"></div></div><span class="proc-n">01</span><p class="proc-w">Strike</p><p class="proc-l">The first frame. Before scroll.</p></li>
+      <li class="proc-card glass rv" data-depth="-.03"><div class="dist"><div class="proc-art art-1"></div></div><span class="proc-n">02</span><p class="proc-w">Signal</p><p class="proc-l">Motion with intent, or none.</p></li>
+      <li class="proc-card glass rv" data-depth=".05"><div class="dist"><div class="proc-art art-4"></div></div><span class="proc-n">03</span><p class="proc-w">System</p><p class="proc-l">Built to ship. Built to stay fast.</p></li>
+      <li class="proc-card glass rv" data-depth="-.04"><div class="dist"><div class="proc-art art-6"></div></div><span class="proc-n">04</span><p class="proc-w">Ship</p><p class="proc-l">Then we hit again.</p></li>
+    </ol>
+  </section>
+
+  <section class="sec tx-sec" aria-labelledby="tx-h">
+    <h2 class="k sec-h2 tx-h" id="tx-h">Send<br><em class="ser">it.</em></h2>
+    <a class="btn btn-lime btn-xl" href="contact.html" data-mag=".3" data-cur="SEND">
+      <span class="mg-in">Start a project</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-grid">
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="index.html">Core</a>
+      <a href="work.html">Work</a>
+      <a href="studio.html" aria-current="page">Studio</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <p class="foot-loc">Singapore &middot; GMT+8</p>
+    <p class="foot-copy">&copy; 2026 Thornbury Digital</p>
+  </div>
+  <p class="foot-wm" aria-hidden="true">Thornbury</p>
+</footer>
+
+<div class="hud glass" id="hud" aria-hidden="true">
+  <div class="hud-row hud-row--shock"><span>Shock</span><span class="hud-bar"><i id="hudShock"></i></span></div>
+  <div class="hud-row"><span>Vel</span><span class="hud-bar"><i id="hudVel"></i></span></div>
+  <div class="hud-row hud-row--live"><span class="hud-tag">Core</span><i class="hud-dot"></i></div>
+</div>
+
+</body>
+</html>

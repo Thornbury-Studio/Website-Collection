@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-page="contact">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>Contact — Thornbury Digital</title>
+<meta name="description" content="Send it. Brief Thornbury Digital in three lines and we hit back within two working days. Singapore, GMT+8.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v2/contact.html">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050505'/%3E%3Cpath d='M6 7h20v6h-7v12h-6V13H6z' fill='%23CCFF00'/%3E%3Ccircle cx='25' cy='25' r='3' fill='%23FF0055'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thornbury Digital">
+<meta property="og:title" content="Contact — Thornbury Digital">
+<meta property="og:description" content="Send it. Three lines. We hit back within two working days.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v2/contact.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v2/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&amp;family=Instrument+Serif:ital@1&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js" crossorigin="anonymous">
+<script src="js/boot.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <p class="intro-w">Thornbury</p>
+  <div class="intro-line"></div>
+  <p class="intro-tag">Digital &middot; Ignition</p>
+</div>
+
+<div class="stage" id="stage" aria-hidden="true"></div>
+<div class="wipe" id="wipe" aria-hidden="true"><span class="wipe-label" id="wipeLabel"></span></div>
+<div class="cur" id="cur" aria-hidden="true"><span class="cur-ring"><span class="cur-label" id="curLabel"></span></span><span class="cur-dot"></span></div>
+
+<header class="top" id="top">
+  <a class="wm" href="index.html" data-mag=".18" data-cur="CORE" aria-label="Thornbury Digital — home"><span class="wm-t">Thornbury</span><span class="wm-d">Digital</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="work.html" data-mag=".3">Work</a>
+    <a href="studio.html" data-mag=".3">Studio</a>
+    <a href="contact.html" data-mag=".3" aria-current="page">Contact</a>
+  </nav>
+  <a class="btn btn-lime top-cta" href="contact.html" data-mag=".3" data-cur="SEND"><span class="mg-in">Start a project</span></a>
+</header>
+
+<main id="main" data-page="contact" tabindex="-1">
+
+  <section class="page-hero page-hero--tight" aria-labelledby="h1">
+    <p class="kicker rv">03 <span class="sep">/</span> Transmit</p>
+    <h1 class="k hero-h1 hero-h1--page" id="h1">Send<br><em class="ser">it.</em></h1>
+  </section>
+
+  <section class="sec tx-form-sec" aria-label="Brief us">
+    <div class="tx-grid">
+
+      <form class="tx glass rv" id="tx" action="contact.html" method="post" autocomplete="on">
+        <div class="fld">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" required autocomplete="name" placeholder="Who is sending">
+        </div>
+        <div class="fld">
+          <label for="f-mail">Email</label>
+          <input id="f-mail" name="email" type="email" required autocomplete="email" placeholder="Where we hit back">
+        </div>
+        <div class="fld">
+          <label for="f-brief">The brief</label>
+          <textarea id="f-brief" name="brief" rows="3" required placeholder="What needs to hit"></textarea>
+        </div>
+        <fieldset class="fld">
+          <legend>Budget (SGD)</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="budget" value="under-10k"><span>Under 10K</span></label>
+            <label class="chip"><input type="radio" name="budget" value="10-30k" checked><span>10 &ndash; 30K</span></label>
+            <label class="chip"><input type="radio" name="budget" value="30k-plus"><span>30K+</span></label>
+          </div>
+        </fieldset>
+        <div>
+          <button class="btn btn-lime btn-lg" type="submit" data-mag=".25" data-cur="SEND">
+            <span class="mg-in">Transmit</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <div class="tx-done glass" id="txDone" hidden tabindex="-1" role="status">
+        <p class="kicker">Signal received</p>
+        <p class="tx-done-h">Transmitted.</p>
+        <p class="tx-done-l">We hit back within two working days.</p>
+        <a class="btn" href="index.html" data-cur="CORE">Back to the core</a>
+      </div>
+
+      <aside class="tx-side">
+        <div>
+          <p class="kicker">Base</p>
+          <p class="tx-side-l">Singapore<br>GMT+8<br>Mon &ndash; Fri</p>
+        </div>
+        <div>
+          <p class="kicker">What to send</p>
+          <p class="tx-side-l">One line about the product.<br>One link.<br>One <em class="ser">deadline.</em></p>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-grid">
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="index.html">Core</a>
+      <a href="work.html">Work</a>
+      <a href="studio.html">Studio</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <p class="foot-loc">Singapore &middot; GMT+8</p>
+    <p class="foot-copy">&copy; 2026 Thornbury Digital</p>
+  </div>
+  <p class="foot-wm" aria-hidden="true">Thornbury</p>
+</footer>
+
+<div class="hud glass" id="hud" aria-hidden="true">
+  <div class="hud-row hud-row--shock"><span>Shock</span><span class="hud-bar"><i id="hudShock"></i></span></div>
+  <div class="hud-row"><span>Vel</span><span class="hud-bar"><i id="hudVel"></i></span></div>
+  <div class="hud-row hud-row--live"><span class="hud-tag">Core</span><i class="hud-dot"></i></div>
+</div>
+
+</body>
+</html>
