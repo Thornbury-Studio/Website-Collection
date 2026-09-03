@@ -38,7 +38,7 @@
 // requires also adding it to `matcher` below — the matcher decides which
 // requests reach this file at all; this list decides who's let through once
 // they do.
-const CLIENT_PREVIEW_SLUGS = ['professor-brawn', 'timestealer-cafe', 'gig-cafe', 'fancy-nails-paradise', 'cafe-bombom', 'threes-a-crowd', 'ae-unisex-salon', 'esteem-auto-medics'];
+const CLIENT_PREVIEW_SLUGS = ['professor-brawn', 'timestealer-cafe', 'gig-cafe', 'fancy-nails-paradise', 'cafe-bombom', 'threes-a-crowd', 'ae-unisex-salon', 'esteem-auto-medics-v3', 'esteem-auto-medics'];
 
 export const config = {
   // Both the bare path and everything beneath it — the bare form does not match
@@ -61,6 +61,8 @@ export const config = {
     '/templates/threes-a-crowd/:path*',
     '/templates/ae-unisex-salon',
     '/templates/ae-unisex-salon/:path*',
+    '/templates/esteem-auto-medics-v3',
+    '/templates/esteem-auto-medics-v3/:path*',
     '/templates/esteem-auto-medics',
     '/templates/esteem-auto-medics/:path*',
   ],

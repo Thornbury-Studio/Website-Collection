@@ -1,7 +1,10 @@
-# EAM v3 — design concept (internal)
+# EAM v3 — design concept (Client Preview)
 
-This is an internal design exploration ("version 3") for Esteem Auto Medics, not the
-production site — the live build lives in its own standalone repo. Where v2 was
+This is a design exploration ("version 3") for Esteem Auto Medics, not the
+production site — the live build lives in its own standalone repo. It is
+registered on the Website Collection hub under **Client Preview** (gated),
+next to the original PPF-first rebuild in `../esteem-auto-medics/`. It is
+not in the public catalog. Where v2 was
 typography-led with abstract CSS-only surfaces, v3 pushes real photography and video:
 a minimal, high-contrast direction with full-viewport media panels, one message and one
 action per screen, and understated motion. Everything is a single self-contained
