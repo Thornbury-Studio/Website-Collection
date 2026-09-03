@@ -14,6 +14,8 @@ const CLIENT_PREVIEW_SLUGS = {
   'cafe-bombom': '/templates/cafe-bombom/index.html',
   'threes-a-crowd': '/templates/threes-a-crowd/index.html',
   'ae-unisex-salon': '/templates/ae-unisex-salon/index.html',
+  'esteem-auto-medics': '/templates/esteem-auto-medics/index.html',
+  'esteem-auto-medics-v3': '/templates/esteem-auto-medics-v3/index.html',
 };
 
 module.exports = { CLIENT_PREVIEW_SLUGS };
