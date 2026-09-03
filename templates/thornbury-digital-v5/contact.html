@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" data-page="contact" data-field="still">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<title>Contact — Thornbury Digital</title>
+<meta name="description" content="Start a project with Thornbury Digital. Tell us what the site has to do; we reply within two working days.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v5/contact.html">
+<meta name="theme-color" content="#080808">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Cpath d='M7 8h18v4h-7v13h-4V12H7z' fill='%23e1e1e1'/%3E%3Crect x='23' y='23' width='4' height='4' fill='%23ff2a00'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thornbury Digital">
+<meta property="og:title" content="Contact — Thornbury Digital">
+<meta property="og:description" content="Tell us what the site has to do. We reply within two working days.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v5/contact.html">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="css/layout.css">
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+<script defer src="js/field.js"></script>
+<script defer src="js/main.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<canvas class="field" id="field" aria-hidden="true"></canvas>
+<div class="bar-glass" aria-hidden="true"></div>
+<header class="bar">
+  <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="work.html">Work</a>
+    <a href="studio.html">Studio</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <p class="bar-side">SGP · 01°17′N 103°51′E</p>
+</header>
+<div class="site">
+  <main id="main" tabindex="-1">
+    <header class="page-head wrap">
+      <p class="meta"><span class="q">04</span> — Contact</p>
+      <h1 class="display">Start a project</h1>
+      <p class="sub">Tell us what the site has to do. We reply within two working days.</p>
+    </header>
+
+    <section class="sec sec--solid" aria-label="Brief" style="padding-top: clamp(2.5rem, 7vh, 5rem)">
+      <div class="wrap">
+        <div class="contact">
+          <form class="form" id="brief" action="contact.html" method="post" novalidate>
+            <div class="f-row">
+              <div class="f">
+                <label class="meta" for="b-name">Name</label>
+                <input id="b-name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="f">
+                <label class="meta" for="b-email">Email</label>
+                <input id="b-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+              </div>
+            </div>
+            <div class="f-row">
+              <div class="f">
+                <label class="meta" for="b-company">Company</label>
+                <input id="b-company" name="company" type="text" autocomplete="organization">
+              </div>
+              <div class="f">
+                <label class="meta" for="b-budget">Budget</label>
+                <select id="b-budget" name="budget" required>
+                  <option value="" selected disabled>Choose a range</option>
+                  <option value="u10">Under S$10k</option>
+                  <option value="10-30">S$10k – 30k</option>
+                  <option value="30-60">S$30k – 60k</option>
+                  <option value="60+">S$60k and up</option>
+                </select>
+              </div>
+            </div>
+            <div class="f">
+              <label class="meta" for="b-msg">What the site has to do</label>
+              <textarea id="b-msg" name="message" rows="5" required></textarea>
+            </div>
+            <div class="f-foot">
+              <button class="btn" type="submit">Send the brief
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              </button>
+              <p class="meta">No newsletter. No follow-up sequence.</p>
+            </div>
+          </form>
+          <div class="note" id="brief-note" tabindex="-1" hidden>
+            <p class="meta"><span class="em">■</span> Received</p>
+            <p class="statement" style="margin-top:.8rem">Thank you. We will read it properly and reply within two working days.</p>
+          </div>
+
+          <aside class="aside">
+            <dl>
+              <div><dt class="meta">Email</dt><dd><a href="mailto:hello@thornbury.studio">hello@thornbury.studio</a></dd></div>
+              <div><dt class="meta">Studio</dt><dd>Tanjong Pagar, Singapore</dd></div>
+              <div><dt class="meta">Hours</dt><dd>Mon – Fri, 10:00 – 18:00 SGT</dd></div>
+              <div><dt class="meta">Currently</dt><dd>Taking two projects for Q1 2027</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap meta">
+      <p>Thornbury Digital · Singapore</p>
+      <p><a href="mailto:hello@thornbury.studio">hello@thornbury.studio</a></p>
+      <p>© 2026</p>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
