@@ -37,6 +37,13 @@
     html.classList.add('no-field');
   }
 
+  /* Hero film: a stand-in plate. Reduced motion holds the poster frame. */
+  var film = document.getElementById('heroFilm');
+  if (film && reduced) {
+    film.removeAttribute('autoplay');
+    film.pause();
+  }
+
   /* Blueprint coordinates: every plate reports its own rendered pixel size. */
   function pad(n) { return String(n).padStart(4, '0'); }
   function label() {

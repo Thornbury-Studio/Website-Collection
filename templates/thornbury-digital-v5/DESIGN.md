@@ -71,6 +71,33 @@ the *same stacking context*, and the canvas lives in the root context, so:
 - Every GSAP tween ends with `clearProps`, so no leftover `transform`/`opacity`
   opens a stacking context under a glass.
 
+## What is in the plates
+
+The plates are not empty frames. The hero holds a stand-in film — dark chrome
+rings turning through specular flares, Pixabay Content License, graded to sit on
+the obsidian ground — under the blueprint ruling, the reticle and the corner
+coordinates, labelled "Hero still — Higgsfield later". It is replaced by the
+Higgsfield film when that exists; nothing else about the plate changes.
+
+The five work plates each hold a capture of that case's own site, taken live from
+this collection:
+
+| Case | Site |
+|---|---|
+| Midwater | `templates/film-midwater/` |
+| Kiyo 清 | `templates/japanese-restaurant/` |
+| Aurel | `templates/watch-atelier/` |
+| Loam | `templates/cafe-loam/` |
+| Form/01 | `templates/streetwear-form01/` |
+
+Two things make a screenshot survive being framed this way. A two-stop `.scrim`
+darkens the top and bottom bands, because three of the five sites are light and
+the chrome corner labels would otherwise sit white-on-white. And the metadata
+card carries its own `rgba(8,8,8,.5)` base under the `overlay` blend, so the
+glass composites over a known ground instead of inverting on a bright plate.
+The blueprint ruling is redrawn as a `.grid` overlay above the media, so the
+frame still reads as a plate rather than a picture in a box.
+
 ## Layout DNA
 
 Massive Archivo (`wdth 92`, weight 800) at `clamp(3.4rem, 9.6vw, 11.5rem)` with
