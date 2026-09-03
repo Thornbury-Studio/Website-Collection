@@ -5,7 +5,7 @@
    Attractor    x' = sin y − b·x   y' = sin z − b·y   z' = sin x − b·z   b = 0.19
                 Euler, dt = 0.02 in two sub-steps, 60 steps per second.
    Strands      particles are seeded in strands of 24: a leader is settled onto the
-                attractor (400 warm steps), then each follower is placed two steps
+                attractor (240 warm steps), then each follower is placed two steps
                 behind the one before it. A strand therefore lies along one
                 trajectory and draws as one continuous string, not as dust.
    Segments     every particle draws the segment from its previous screen position
@@ -25,9 +25,10 @@
 
   var B = 0.19;
   var DT = 0.02;
-  var SUB = 2;
+  var SUB = 1;
   var EXT = 4.6;
   var STEP = 1 / 60;
+  var DRAW_STEP = 1 / 30;   /* the field is ambient: physics at 60, paint at 30 */
   var STRAND = 24;
   var LX = 0.6, LY = -0.8;
 
@@ -62,7 +63,7 @@
       var x = (hash(seed * 7.1 + s * 3.1 + 1) - 0.5) * 6;
       var y = (hash(seed * 7.3 + s * 3.3 + 2) - 0.5) * 6;
       var z = (hash(seed * 7.7 + s * 3.7 + 3) - 0.5) * 6;
-      for (var w = 0; w < 400; w++) {
+      for (var w = 0; w < 240; w++) {
         var vx = Math.sin(y) - B * x, vy = Math.sin(z) - B * y, vz = Math.sin(x) - B * z;
         x += vx * 0.03; y += vy * 0.03; z += vz * 0.03;
       }
@@ -81,8 +82,16 @@
     var W = 1, Hh = 1, dpr = 1, S = 1, wScale = 1;
     var rot = hash(seed + 0.5) * 6.283, tilt = 0.5;
     var rotP = 0, tiltP = 0, px = 0, py = 0, tx = 0, ty = 0;
-    var running = false, raf = 0, last = 0, acc = 0, frameNo = 0, painted = 0;
-    var buckets = new Map();
+    var running = false, raf = 0, last = 0, acc = 0, drawAcc = 0, frameNo = 0, painted = 0;
+    /* One reusable Float64Array per bucket with its own fill count. Plain arrays
+       plus length = 0 churn their backing store every frame, which showed up as a
+       5% tail of ~18 ms frames; these only ever grow. */
+    var KEYMAX = 2 * 16 * 20 * 16;
+    var bufs = new Array(KEYMAX);
+    var lens = new Int32Array(KEYMAX);
+    for (var bi = 0; bi < KEYMAX; bi++) bufs[bi] = null;
+    var activeKeys = new Int32Array(KEYMAX);
+    var activeN = 0;
     var warmLeft = 0;
 
     function integrate() {
@@ -116,14 +125,24 @@
 
     function put(k, lumQ, aQ, wQ, x0, y0, x1, y1) {
       var key = ((k * 16 + lumQ) * 20 + aQ) * 16 + wQ;
-      var arr = buckets.get(key);
-      if (!arr) { arr = []; buckets.set(key, arr); }
-      arr.push(x0, y0, x1, y1);
+      var arr = bufs[key];
+      var n = lens[key];
+      if (arr === null) { arr = bufs[key] = new Float64Array(256); }
+      else if (n + 4 > arr.length) {
+        var bigger = new Float64Array(arr.length * 2);
+        bigger.set(arr);
+        arr = bufs[key] = bigger;
+      }
+      if (n === 0) activeKeys[activeN++] = key;
+      arr[n] = x0; arr[n + 1] = y0; arr[n + 2] = x1; arr[n + 3] = y1;
+      lens[key] = n + 4;
     }
 
     function flush() {
-      buckets.forEach(function (arr, key) {
-        if (!arr.length) return;
+      for (var ai = 0; ai < activeN; ai++) {
+        var key = activeKeys[ai];
+        var arr = bufs[key];
+        var used = lens[key];
         var wQ = key % 16; var rest = (key - wQ) / 16;
         var aQ = rest % 20; rest = (rest - aQ) / 20;
         var lumQ = rest % 16; var k = (rest - lumQ) / 16;
@@ -139,13 +158,14 @@
         ctx.strokeStyle = c;
         ctx.lineWidth = wQ / 4;
         ctx.beginPath();
-        for (var i = 0; i < arr.length; i += 4) {
+        for (var i = 0; i < used; i += 4) {
           ctx.moveTo(arr[i], arr[i + 1]);
           ctx.lineTo(arr[i + 2], arr[i + 3]);
         }
         ctx.stroke();
-        arr.length = 0;
-      });
+        lens[key] = 0;
+      }
+      activeN = 0;
     }
 
     function drawFrame(wipe) {
@@ -206,25 +226,34 @@
       tiltP += (ty * 0.12 - tiltP) * e;
       px += (tx - px) * e;
       py += (ty - py) * e;
-      frameNo++;
-      drawFrame(frameNo % 7 === 0 ? 0.24 : 0.08);
+      /* Painting every other frame halves the cost and is invisible on a drift
+         this slow. Segments then span two sim steps, so the wipe is doubled to
+         keep the trail the same length in wall-clock terms. */
+      drawAcc += dt;
+      if (drawAcc >= DRAW_STEP) {
+        drawAcc = drawAcc > DRAW_STEP * 3 ? 0 : drawAcc - DRAW_STEP;
+        frameNo++;
+        drawFrame(frameNo % 5 === 0 ? 0.4 : 0.15);
+      }
       raf = requestAnimationFrame(frame);
     }
 
-    /* still pages: pour the strands in over a few frames, then leave them */
+    /* Still pages pour the strands in and then leave them. Four draws per rAF,
+       not twelve: the trail is at steady state well before 54 frames, and a
+       bigger batch put a 60 ms long task in the middle of page load. */
     function warm() {
-      var n = Math.min(warmLeft, 12);
+      var n = Math.min(warmLeft, 4);
       for (var f = 0; f < n; f++) {
         integrate();
         rot += 0.0008;
-        drawFrame(0.07);
+        drawFrame(0.13);
       }
       warmLeft -= n;
       if (warmLeft > 0) raf = requestAnimationFrame(warm);
     }
     function settle() {
       cancelAnimationFrame(raf);
-      warmLeft = 84;
+      warmLeft = 54;
       warm();
     }
 
@@ -258,8 +287,15 @@
     return {
       still: still,
       count: N,
+      /* the hero film covers the canvas completely until it starts dissolving;
+         simulating and drawing behind an opaque video is pure waste */
+      setActive: function (on) {
+        if (still) return;
+        if (on && !running) { running = true; last = 0; acc = 0; drawAcc = 0; raf = requestAnimationFrame(frame); }
+        else if (!on && running) { running = false; cancelAnimationFrame(raf); }
+      },
       frames: function () { return painted; },
-      redraw: function () { drawFrame(0.08); },
+      redraw: function () { drawFrame(0.15); },
       stop: function () {
         running = false;
         cancelAnimationFrame(raf);
