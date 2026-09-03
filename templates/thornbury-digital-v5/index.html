@@ -44,44 +44,47 @@
 <div class="site">
   <main id="main" tabindex="-1">
 
-    <section class="hero" aria-labelledby="h1">
-      <div class="plate plate--hero" data-dim="hero-dim">
-        <video class="plate-media" id="heroFilm" poster="img/poster-hero.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-          <source src="video/hero.mp4" type="video/mp4">
-        </video>
-        <i class="grid" aria-hidden="true"></i>
-        <i class="scrim" aria-hidden="true"></i>
-        <i class="corners" aria-hidden="true"></i>
-        <i class="axis-x" aria-hidden="true"></i>
-        <i class="axis-y" aria-hidden="true"></i>
-        <svg class="plate-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-          <g class="k">
-            <circle cx="200" cy="200" r="150" class="faint"/>
-            <circle cx="200" cy="200" r="92" class="faint" stroke-dasharray="2 6"/>
-            <circle cx="200" cy="200" r="34" pathLength="1" class="draw"/>
-            <path d="M200 150v-22M200 250v22M150 200h-22M250 200h22" pathLength="1" class="draw"/>
-            <path d="M118 118l14 14M282 118l-14 14M118 282l14-14M282 282l-14-14" class="faint"/>
-          </g>
-          <rect x="197" y="197" width="6" height="6" class="em"/>
-        </svg>
-        <span class="pc pc-tl">X <b>0000</b> · Y <b>0000</b></span>
-        <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
-        <span class="pc pc-tag">Hero still — Higgsfield later</span>
-      </div>
-      <div class="hero-copy">
-        <div>
-          <p class="meta"><span class="q">Fig. 00</span> — Hero plate · <b id="hero-dim">0000 × 0000</b> px</p>
-          <h1 id="h1" class="display">Websites worth a second look.</h1>
+    <div class="hero-stick">
+      <section class="hero" aria-labelledby="h1">
+        <div class="hero-film" data-dim="hero-dim">
+          <video class="plate-media" id="heroFilm" poster="img/poster-hero.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+            <source src="video/hero.mp4" type="video/mp4">
+          </video>
+          <i class="grid" aria-hidden="true"></i>
+          <i class="film-fade" aria-hidden="true"></i>
         </div>
-        <aside class="gpanel cta-panel" aria-label="Start a project">
-          <p class="meta"><span class="q">Start</span> <span class="em">■</span></p>
-          <p class="line">Two projects open for Q1 2027. Singapore, remote-friendly.</p>
-          <a class="btn" href="contact.html">Start a project
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-          </a>
-        </aside>
-      </div>
-    </section>
+        <div class="hero-frame" aria-hidden="true">
+          <i class="corners"></i>
+          <i class="axis-x"></i>
+          <i class="axis-y"></i>
+          <svg class="plate-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <g class="k">
+              <circle cx="200" cy="200" r="128" class="faint"/>
+              <circle cx="200" cy="200" r="78" class="faint" stroke-dasharray="2 6"/>
+              <circle cx="200" cy="200" r="28" pathLength="1" class="draw"/>
+              <path d="M200 156v-18M200 244v18M156 200h-18M244 200h18" pathLength="1" class="draw"/>
+            </g>
+            <rect x="197" y="197" width="6" height="6" class="em"/>
+          </svg>
+          <span class="pc pc-tl">X <b>0000</b> &middot; Y <b>0000</b></span>
+          <span class="pc pc-tr">X <b data-w>0000</b> &middot; Y <b data-h>0000</b></span>
+          <span class="pc pc-tag">Hero still &mdash; Higgsfield later</span>
+        </div>
+        <div class="hero-copy">
+          <div>
+            <p class="meta"><span class="q">Fig. 00</span> &mdash; Hero plate &middot; <b id="hero-dim">0000 &times; 0000</b> px</p>
+            <h1 id="h1" class="display">Websites worth a second look.</h1>
+          </div>
+          <aside class="gpanel cta-panel" aria-label="Start a project">
+            <p class="meta"><span class="q">Start</span> <span class="em">&#9632;</span></p>
+            <p class="line">Two projects open for Q1 2027. Singapore, remote-friendly.</p>
+            <a class="btn" href="contact.html">Start a project
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </a>
+          </aside>
+        </div>
+      </section>
+    </div>
 
     <section class="sec sec--solid" aria-labelledby="s1">
       <div class="wrap reveal">
@@ -97,114 +100,78 @@
           <p class="meta"><span class="q">02</span> — <span id="s2">Selected work</span></p>
           <a class="more" href="work.html">All five</a>
         </div>
-        <div class="cases">
-
-          <a class="case case-1" href="work.html#midwater">
-            <div class="plate plate--wide">
-              <img class="plate-media op-u" src="img/case-midwater.webp" width="1400" height="884" loading="lazy" decoding="async" alt="Midwater: a full-bleed aerial shot of dark churning ocean behind the wordmark MIDWATER in wide serif capitals, with a depth scale running down the left edge.">
-              <i class="grid" aria-hidden="true"></i>
-              <i class="scrim" aria-hidden="true"></i>
-              <i class="corners" aria-hidden="true"></i>
-              <span class="pc pc-tl">Fig. <b>01</b></span>
-              <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
-              <div class="gpanel card">
-                <p class="meta"><span>Sector</span><b>Film / WebGL</b></p>
-                <p class="meta"><span>Year</span><b>2025</b></p>
+        <ol class="index">
+          <li class="entry">
+            <a class="entry-link" href="work.html#midwater">
+              <div class="plate fig-plate">
+                <img class="plate-media" src="img/case-midwater.webp" width="1400" height="884" loading="lazy" decoding="async" alt="Midwater: a full-bleed aerial shot of dark churning ocean behind the wordmark MIDWATER in wide serif capitals.">
+                <i class="grid" aria-hidden="true"></i>
+                <i class="corners" aria-hidden="true"></i>
               </div>
-            </div>
-            <span class="idx" aria-hidden="true">01</span>
-            <div class="cap">
-              <h3>Midwater</h3>
-              <p>A film about the ocean between the light and the floor.</p>
-              <span class="meta">Film / WebGL</span>
-            </div>
-          </a>
-
-          <a class="case case-2" href="work.html#kiyo">
-            <div class="plate plate--tall">
-              <img class="plate-media" src="img/case-kiyo-tall.webp" width="1000" height="1268" loading="lazy" decoding="async" alt="Kiyo: an ordering page headed &lsquo;Dinner, settled in three taps.&rsquo; over a photograph of skewers and edamame, above a filterable menu grid of dishes with prices and add buttons.">
-              <i class="grid" aria-hidden="true"></i>
-              <i class="scrim" aria-hidden="true"></i>
-              <i class="corners" aria-hidden="true"></i>
-              <span class="pc pc-tl">Fig. <b>02</b></span>
-              <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
-              <div class="gpanel card">
-                <p class="meta"><span>Sector</span><b>Ordering</b></p>
-                <p class="meta"><span>Year</span><b>2025</b></p>
+              <div class="entry-body">
+                <p class="meta">Fig. <b>01</b> — Film / WebGL <span class="yr">· 2025</span></p>
+                <h3>Midwater</h3>
+                <span class="line">A film about the ocean between the light and the floor.</span>
               </div>
-            </div>
-            <span class="idx" aria-hidden="true">02</span>
-            <div class="cap">
-              <h3>Kiyo 清</h3>
-              <p>Dinner, settled in three taps.</p>
-              <span class="meta">Ordering / Mobile-first</span>
-            </div>
-          </a>
-
-          <a class="case case-3" href="work.html#aurel">
-            <div class="plate plate--tall">
-              <img class="plate-media op-c" src="img/case-aurel-tall.webp" width="1000" height="1268" loading="lazy" decoding="async" alt="Aurel: a gold tank watch on a dark leather strap filling the frame, with the line &lsquo;One hundred years, one second at a time.&rsquo; set across it in a light serif.">
-              <i class="grid" aria-hidden="true"></i>
-              <i class="scrim" aria-hidden="true"></i>
-              <i class="corners" aria-hidden="true"></i>
-              <span class="pc pc-tl">Fig. <b>03</b></span>
-              <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
-              <div class="gpanel card">
-                <p class="meta"><span>Sector</span><b>Horlogerie</b></p>
-                <p class="meta"><span>Year</span><b>2024</b></p>
+            </a>
+          </li>
+          <li class="entry">
+            <a class="entry-link" href="work.html#kiyo">
+              <div class="plate fig-plate">
+                <img class="plate-media" src="img/case-kiyo.webp" width="1400" height="884" loading="lazy" decoding="async" alt="Kiyo: an ordering page headed &lsquo;Dinner, settled in three taps.&rsquo; over a photograph of skewers, above a filterable menu grid.">
+                <i class="grid" aria-hidden="true"></i>
+                <i class="corners" aria-hidden="true"></i>
               </div>
-            </div>
-            <span class="idx" aria-hidden="true">03</span>
-            <div class="cap">
-              <h3>Aurel</h3>
-              <p>One hundred years, one second at a time.</p>
-              <span class="meta">Luxury / Horlogerie</span>
-            </div>
-          </a>
-
-          <a class="case case-4" href="work.html#loam">
-            <div class="plate">
-              <img class="plate-media" src="img/case-loam.webp" width="1400" height="884" loading="lazy" decoding="async" alt="Loam: a café home page with espresso pulling into a white cup behind the headline &lsquo;Good coffee, no theatre.&rsquo; and a dark bar showing today&rsquo;s opening hours.">
-              <i class="grid" aria-hidden="true"></i>
-              <i class="scrim" aria-hidden="true"></i>
-              <i class="corners" aria-hidden="true"></i>
-              <span class="pc pc-tl">Fig. <b>04</b></span>
-              <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
-              <div class="gpanel card">
-                <p class="meta"><span>Sector</span><b>Café</b></p>
-                <p class="meta"><span>Year</span><b>2024</b></p>
+              <div class="entry-body">
+                <p class="meta">Fig. <b>02</b> — Ordering / Mobile-first <span class="yr">· 2025</span></p>
+                <h3>Kiyo 清</h3>
+                <span class="line">Dinner, settled in three taps.</span>
               </div>
-            </div>
-            <span class="idx" aria-hidden="true">04</span>
-            <div class="cap">
-              <h3>Loam</h3>
-              <p>Good coffee, no theatre.</p>
-              <span class="meta">Café / Thumb-first</span>
-            </div>
-          </a>
-
-          <a class="case case-5" href="work.html#form01">
-            <div class="plate plate--std">
-              <img class="plate-media" src="img/case-form01.webp" width="1400" height="884" loading="lazy" decoding="async" alt="Form/01: a streetwear landing page on pale grey, a model in an oversized tee centred in frame, with the wordmark FORM/01 set enormous across the lower edge.">
-              <i class="grid" aria-hidden="true"></i>
-              <i class="scrim" aria-hidden="true"></i>
-              <i class="corners" aria-hidden="true"></i>
-              <span class="pc pc-tl">Fig. <b>05</b></span>
-              <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
-              <div class="gpanel card">
-                <p class="meta"><span>Sector</span><b>Streetwear</b></p>
-                <p class="meta"><span>Year</span><b>2026</b></p>
+            </a>
+          </li>
+          <li class="entry">
+            <a class="entry-link" href="work.html#aurel">
+              <div class="plate fig-plate">
+                <img class="plate-media" src="img/case-aurel.webp" width="1400" height="884" loading="lazy" decoding="async" alt="Aurel: a gold tank watch on a dark leather strap filling the frame under a light serif headline.">
+                <i class="grid" aria-hidden="true"></i>
+                <i class="corners" aria-hidden="true"></i>
               </div>
-            </div>
-            <span class="idx" aria-hidden="true">05</span>
-            <div class="cap">
-              <h3>Form/01</h3>
-              <p>Clothing for what's next.</p>
-              <span class="meta">Streetwear / Drop system</span>
-            </div>
-          </a>
-
-        </div>
+              <div class="entry-body">
+                <p class="meta">Fig. <b>03</b> — Luxury / Horlogerie <span class="yr">· 2024</span></p>
+                <h3>Aurel</h3>
+                <span class="line">One hundred years, one second at a time.</span>
+              </div>
+            </a>
+          </li>
+          <li class="entry">
+            <a class="entry-link" href="work.html#loam">
+              <div class="plate fig-plate">
+                <img class="plate-media" src="img/case-loam.webp" width="1400" height="884" loading="lazy" decoding="async" alt="Loam: a caf&eacute; home page with espresso pulling into a white cup behind the headline &lsquo;Good coffee, no theatre.&rsquo;">
+                <i class="grid" aria-hidden="true"></i>
+                <i class="corners" aria-hidden="true"></i>
+              </div>
+              <div class="entry-body">
+                <p class="meta">Fig. <b>04</b> — Café / Thumb-first <span class="yr">· 2024</span></p>
+                <h3>Loam</h3>
+                <span class="line">Good coffee, no theatre.</span>
+              </div>
+            </a>
+          </li>
+          <li class="entry">
+            <a class="entry-link" href="work.html#form01">
+              <div class="plate fig-plate">
+                <img class="plate-media" src="img/case-form01.webp" width="1400" height="884" loading="lazy" decoding="async" alt="Form/01: a streetwear landing page on pale grey, a model in an oversized tee, the wordmark FORM/01 set enormous across the lower edge.">
+                <i class="grid" aria-hidden="true"></i>
+                <i class="corners" aria-hidden="true"></i>
+              </div>
+              <div class="entry-body">
+                <p class="meta">Fig. <b>05</b> — Streetwear / Drop system <span class="yr">· 2026</span></p>
+                <h3>Form/01</h3>
+                <span class="line">Clothing for what&rsquo;s next.</span>
+              </div>
+            </a>
+          </li>
+        </ol>
       </div>
     </section>
 
