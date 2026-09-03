@@ -378,6 +378,52 @@
     transition: border-color .4s var(--ease), color .4s var(--ease);
   }
   .plate--hero { min-height: 54dvh; }
+
+  /* media inside a plate: film or a live site, under the technical overlays */
+  .plate-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--op, 50% 0%);
+  }
+  .plate--hero .plate-media { object-position: 50% 50%; }
+  .op-c { --op: 50% 50%; }
+  .op-u { --op: 50% 36%; }
+  /* blueprint ruling, redrawn over the media so the frame reads as a plate */
+  .plate > .grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: .55;
+    background-image:
+      linear-gradient(to right, var(--hair-1) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--hair-1) 1px, transparent 1px),
+      linear-gradient(to right, var(--hair-0) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--hair-0) 1px, transparent 1px);
+    background-size: 10% 10%, 10% 10%, 2.5% 2.5%, 2.5% 2.5%;
+  }
+  /* keeps chrome labels legible over a light screenshot as well as a dark one */
+  .plate > .scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, rgba(8, 8, 8, .92), rgba(8, 8, 8, .5) 9%, rgba(8, 8, 8, 0) 20%),
+      linear-gradient(to top, rgba(8, 8, 8, .88), rgba(8, 8, 8, .2) 24%, rgba(8, 8, 8, 0) 44%);
+  }
+  /* the hero film is already dark; it only needs the label bands, not a wash */
+  .plate--hero > .scrim {
+    background:
+      linear-gradient(to bottom, rgba(8, 8, 8, .5), rgba(8, 8, 8, 0) 12%),
+      linear-gradient(to top, rgba(8, 8, 8, .72), rgba(8, 8, 8, 0) 34%);
+  }
+  .plate--hero > .grid { opacity: .38; }
+  .plate::before, .plate::after, .corners, .plate-svg, .pc, .card { z-index: 2; }
   .plate::before, .plate::after, .corners::before, .corners::after {
     content: "";
     position: absolute;
@@ -444,6 +490,32 @@
   .pc-tr { top: .7rem; right: .8rem; }
   .pc-bl { bottom: .7rem; left: .8rem; }
   .pc-br { bottom: .7rem; right: .8rem; }
+  .pc-tag {
+    top: .7rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: var(--chrome-70);
+  }
+  .pc-tag::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    background: var(--ember);
+    flex-shrink: 0;
+  }
+  @media (max-width: 560px) {
+    .pc-tag { font-size: .54rem; letter-spacing: .08em; }
+    .pc-tl, .pc-tr { font-size: .54rem; }
+  }
+  /* three labels do not fit one narrow band — the plate size is still reported
+     in the meta line under the hero, so the corner coordinates go first */
+  @media (max-width: 720px) {
+    .plate--hero .pc-tl, .plate--hero .pc-tr { display: none; }
+    .plate--hero .pc-tag { left: .8rem; transform: none; }
+  }
 
   /* ---- cases ---- */
   .cases {
@@ -468,7 +540,7 @@
   @media (max-width: 640px) { .plate--wide { --ar: 16 / 10; } }
   .idx {
     position: absolute;
-    top: -.36em;
+    top: -.66em;
     left: -.03em;
     font-weight: 900;
     font-size: clamp(4rem, 9vw, 9rem);
@@ -479,8 +551,11 @@
     pointer-events: none;
     user-select: none;
   }
+  /* the metadata card sits over screenshots that may be light or dark; its own
+     dark base keeps the overlay blend operating over a known ground either way */
   .card {
     position: absolute;
+    background: rgba(8, 8, 8, .5);
     left: .8rem;
     bottom: .8rem;
     padding: .8rem .95rem .85rem;

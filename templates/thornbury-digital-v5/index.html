@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <title>Thornbury Digital — Websites worth a second look</title>
 <meta name="description" content="Thornbury is a design studio in Singapore. We design and build websites for companies that need to look like they mean it.">
 <meta name="robots" content="index, follow">
@@ -16,7 +16,8 @@
 <meta property="og:title" content="Thornbury Digital — Websites worth a second look">
 <meta property="og:description" content="A design studio in Singapore. Websites for companies that need to look like they mean it.">
 <meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v5/index.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v5/img/poster-hero.webp">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -44,7 +45,12 @@
   <main id="main" tabindex="-1">
 
     <section class="hero" aria-labelledby="h1">
-      <div class="plate plate--hero" role="img" aria-label="Hero still — Higgsfield later" data-dim="hero-dim">
+      <div class="plate plate--hero" data-dim="hero-dim">
+        <video class="plate-media" id="heroFilm" poster="img/poster-hero.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+          <source src="video/hero.mp4" type="video/mp4">
+        </video>
+        <i class="grid" aria-hidden="true"></i>
+        <i class="scrim" aria-hidden="true"></i>
         <i class="corners" aria-hidden="true"></i>
         <i class="axis-x" aria-hidden="true"></i>
         <i class="axis-y" aria-hidden="true"></i>
@@ -57,11 +63,10 @@
             <path d="M118 118l14 14M282 118l-14 14M118 282l14-14M282 282l-14-14" class="faint"/>
           </g>
           <rect x="197" y="197" width="6" height="6" class="em"/>
-          <text x="200" y="96" text-anchor="middle" class="big">Hero still — Higgsfield later</text>
-          <text x="200" y="116" text-anchor="middle">Placeholder · 2.39 : 1 · 24 fps</text>
         </svg>
         <span class="pc pc-tl">X <b>0000</b> · Y <b>0000</b></span>
-        <span class="pc pc-tr">X <b data-w>0000</b> · Y <b>0000</b></span>
+        <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
+        <span class="pc pc-tag">Hero still — Higgsfield later</span>
       </div>
       <div class="hero-copy">
         <div>
@@ -95,20 +100,11 @@
         <div class="cases">
 
           <a class="case case-1" href="work.html#midwater">
-            <div class="plate plate--wide" aria-hidden="true">
-              <i class="corners"></i>
-              <svg class="plate-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" focusable="false">
-                <g class="k">
-                  <path d="M60 150Q200 112 340 150" class="faint"/>
-                  <path d="M84 188Q200 160 316 188" class="faint"/>
-                  <path d="M106 224Q200 204 294 224" class="faint"/>
-                  <path d="M126 256Q200 244 274 256" class="faint"/>
-                  <path d="M40 318H360"/>
-                  <circle cx="200" cy="98" r="12" class="faint"/>
-                </g>
-                <rect x="197" y="95" width="6" height="6" class="em"/>
-                <text x="360" y="340" text-anchor="end">Depth 0 → 40 m</text>
-              </svg>
+            <div class="plate plate--wide">
+              <img class="plate-media op-u" src="img/case-midwater.webp" width="1400" height="884" loading="lazy" decoding="async" alt="Midwater: a full-bleed aerial shot of dark churning ocean behind the wordmark MIDWATER in wide serif capitals, with a depth scale running down the left edge.">
+              <i class="grid" aria-hidden="true"></i>
+              <i class="scrim" aria-hidden="true"></i>
+              <i class="corners" aria-hidden="true"></i>
               <span class="pc pc-tl">Fig. <b>01</b></span>
               <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
               <div class="gpanel card">
@@ -125,27 +121,15 @@
           </a>
 
           <a class="case case-2" href="work.html#kiyo">
-            <div class="plate plate--tall" aria-hidden="true">
-              <i class="corners"></i>
-              <svg class="plate-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" focusable="false">
-                <g class="k">
-                  <circle cx="104" cy="200" r="34"/>
-                  <circle cx="200" cy="200" r="34"/>
-                  <circle cx="296" cy="200" r="34"/>
-                  <path d="M104 156v-10M104 244v10M200 156v-10M200 244v10M296 156v-10M296 244v10" class="faint"/>
-                  <path d="M138 200h28M234 200h28" class="faint"/>
-                </g>
-                <rect x="101" y="197" width="6" height="6" class="cf"/>
-                <rect x="197" y="197" width="6" height="6" class="cf"/>
-                <rect x="293" y="197" width="6" height="6" class="em"/>
-                <text x="104" y="272" text-anchor="middle">Tap 01</text>
-                <text x="200" y="272" text-anchor="middle">Tap 02</text>
-                <text x="296" y="272" text-anchor="middle">Tap 03</text>
-              </svg>
+            <div class="plate plate--tall">
+              <img class="plate-media" src="img/case-kiyo-tall.webp" width="1000" height="1268" loading="lazy" decoding="async" alt="Kiyo: an ordering page headed &lsquo;Dinner, settled in three taps.&rsquo; over a photograph of skewers and edamame, above a filterable menu grid of dishes with prices and add buttons.">
+              <i class="grid" aria-hidden="true"></i>
+              <i class="scrim" aria-hidden="true"></i>
+              <i class="corners" aria-hidden="true"></i>
               <span class="pc pc-tl">Fig. <b>02</b></span>
               <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
               <div class="gpanel card">
-                <p class="meta"><span>Sector</span><b>Ordering / Mobile-first</b></p>
+                <p class="meta"><span>Sector</span><b>Ordering</b></p>
                 <p class="meta"><span>Year</span><b>2025</b></p>
               </div>
             </div>
@@ -158,22 +142,15 @@
           </a>
 
           <a class="case case-3" href="work.html#aurel">
-            <div class="plate plate--tall" aria-hidden="true">
-              <i class="corners"></i>
-              <svg class="plate-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" focusable="false">
-                <g class="k">
-                  <circle cx="200" cy="200" r="138" class="faint"/>
-                  <path d="M200 200L139 165M200 200L282 152"/>
-                </g>
-                <circle cx="200" cy="200" r="150" fill="none" stroke="currentColor" stroke-width="10" pathLength="60" stroke-dasharray=".16 .84" opacity=".55"/>
-                <circle cx="200" cy="200" r="150" fill="none" stroke="currentColor" stroke-width="20" pathLength="12" stroke-dasharray=".02 .98"/>
-                <rect x="197" y="197" width="6" height="6" class="em"/>
-                <text x="200" y="372" text-anchor="middle">Ø 300 · 60 / 12</text>
-              </svg>
+            <div class="plate plate--tall">
+              <img class="plate-media op-c" src="img/case-aurel-tall.webp" width="1000" height="1268" loading="lazy" decoding="async" alt="Aurel: a gold tank watch on a dark leather strap filling the frame, with the line &lsquo;One hundred years, one second at a time.&rsquo; set across it in a light serif.">
+              <i class="grid" aria-hidden="true"></i>
+              <i class="scrim" aria-hidden="true"></i>
+              <i class="corners" aria-hidden="true"></i>
               <span class="pc pc-tl">Fig. <b>03</b></span>
               <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
               <div class="gpanel card">
-                <p class="meta"><span>Sector</span><b>Luxury / Horlogerie</b></p>
+                <p class="meta"><span>Sector</span><b>Horlogerie</b></p>
                 <p class="meta"><span>Year</span><b>2024</b></p>
               </div>
             </div>
@@ -186,23 +163,15 @@
           </a>
 
           <a class="case case-4" href="work.html#loam">
-            <div class="plate" aria-hidden="true">
-              <i class="corners"></i>
-              <svg class="plate-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" focusable="false">
-                <g class="k">
-                  <circle cx="190" cy="200" r="118"/>
-                  <circle cx="190" cy="200" r="102" class="faint"/>
-                  <circle cx="190" cy="200" r="56" class="faint" stroke-dasharray="2 6"/>
-                  <path d="M308 168a34 34 0 0 1 0 64"/>
-                  <path d="M190 60v-14M190 340v14M50 200h-14M330 200h14" class="faint"/>
-                </g>
-                <rect x="187" y="197" width="6" height="6" class="em"/>
-                <text x="360" y="372" text-anchor="end">Plan · Ø 236</text>
-              </svg>
+            <div class="plate">
+              <img class="plate-media" src="img/case-loam.webp" width="1400" height="884" loading="lazy" decoding="async" alt="Loam: a café home page with espresso pulling into a white cup behind the headline &lsquo;Good coffee, no theatre.&rsquo; and a dark bar showing today&rsquo;s opening hours.">
+              <i class="grid" aria-hidden="true"></i>
+              <i class="scrim" aria-hidden="true"></i>
+              <i class="corners" aria-hidden="true"></i>
               <span class="pc pc-tl">Fig. <b>04</b></span>
               <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
               <div class="gpanel card">
-                <p class="meta"><span>Sector</span><b>Café / Thumb-first</b></p>
+                <p class="meta"><span>Sector</span><b>Café</b></p>
                 <p class="meta"><span>Year</span><b>2024</b></p>
               </div>
             </div>
@@ -215,21 +184,15 @@
           </a>
 
           <a class="case case-5" href="work.html#form01">
-            <div class="plate plate--std" aria-hidden="true">
-              <i class="corners"></i>
-              <svg class="plate-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" focusable="false">
-                <g class="k">
-                  <path d="M110 110h180M110 170h180M110 230h180M110 290h180M110 110v180M170 110v180M230 110v180M290 110v180" class="faint"/>
-                  <rect x="110" y="110" width="180" height="180"/>
-                </g>
-                <rect x="222" y="162" width="16" height="16" class="em"/>
-                <text x="110" y="92">A</text><text x="170" y="92">B</text><text x="230" y="92">C</text><text x="290" y="92">D</text>
-                <text x="290" y="326" text-anchor="end">Drop 01 · Cell C2</text>
-              </svg>
+            <div class="plate plate--std">
+              <img class="plate-media" src="img/case-form01.webp" width="1400" height="884" loading="lazy" decoding="async" alt="Form/01: a streetwear landing page on pale grey, a model in an oversized tee centred in frame, with the wordmark FORM/01 set enormous across the lower edge.">
+              <i class="grid" aria-hidden="true"></i>
+              <i class="scrim" aria-hidden="true"></i>
+              <i class="corners" aria-hidden="true"></i>
               <span class="pc pc-tl">Fig. <b>05</b></span>
               <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
               <div class="gpanel card">
-                <p class="meta"><span>Sector</span><b>Streetwear / Drop system</b></p>
+                <p class="meta"><span>Sector</span><b>Streetwear</b></p>
                 <p class="meta"><span>Year</span><b>2026</b></p>
               </div>
             </div>
