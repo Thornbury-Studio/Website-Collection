@@ -58,7 +58,7 @@ motion forces `still` everywhere.
 ## Glass under the anti-stacking rule
 
 Glass is `backdrop-filter: blur(16px)` + `mix-blend-mode: overlay`, and it is
-applied in exactly three places: the bar, the one hero CTA panel, the work
+applied in exactly three places: the bar, the one hero CTA button, the work
 metadata cards. `mix-blend-mode` only blends with what is painted below it in
 the *same stacking context*, and the canvas lives in the root context, so:
 
@@ -73,21 +73,38 @@ the *same stacking context*, and the canvas lives in the root context, so:
 
 ## The hero, and the handoff
 
-The hero is one object, full bleed: a cratered moon on a slow push-in, filling
-the frame, desaturated into the obsidian/chrome palette. A hook has to be a
-subject, not an effect — an abstract clip of moving highlights reads as a
-screensaver, and the eye leaves. The blueprint frame, reticle and corner
-coordinates sit over it, still labelled "Hero still — Higgsfield later"; the
-Higgsfield film replaces the source and nothing else changes.
+One object, full bleed, and almost nothing else. A cratered moon on a slow
+push-in, desaturated into the obsidian/chrome palette, with five pieces of type
+on it: a mono kicker, the wordmark, the positioning line, two buttons, and three
+figures along the bottom edge. No blueprint frame, no reticle, no coordinate
+readouts — that scaffolding read as an unfinished tool, not a studio. A hook is a
+subject plus restraint; everything that is not the subject is either a word you
+need or it is noise. The stand-in is still marked, but by one 9px line in the
+corner at 28% opacity.
 
-It does not cut off at the fold. `.hero-stick` is 165 dvh tall and the hero is
+**The film loops both ways.** The web encode is the strongest 7.5 seconds
+followed by the same 7.5 seconds reversed, concatenated into one 448-frame file
+(`split` → `reverse` → `concat` in a single ffmpeg pass), with the duplicate
+frame trimmed at the turn. A plain `loop` attribute then runs forever with no
+cut, because the last frame is one step from the first. Measured: the loop point
+reads 32.2 dB PSNR against 32.8 dB for an ordinary frame step, and the turnaround
+35.4 dB against 35.3 dB — both seams are indistinguishable from normal motion,
+where unrelated frames sit at 13.6 dB.
+
+**It does not cut off at the fold.** `.hero-stick` is 165 dvh tall and the hero is
 `position: sticky` inside it, which buys 65 dvh of scroll to hand over in. Across
 that range a scrubbed timeline dissolves the film to nothing and drifts it back
-12%, while the frame and copy leave sooner — so the moon gives way to the liquid
+12%, while the copy lifts and fades sooner — so the moon gives way to the liquid
 chrome field that was behind it all along. `autoAlpha` hides the spent hero
 rather than leaving a transparent layer over the page catching clicks. Without
 GSAP the hero simply un-pins and scrolls away, and the `.film-fade` gradient
 still keeps its bottom edge from ending on a hard line.
+
+Two things the lit subject broke, both the same bug in different clothes. The
+`overlay` glass on the secondary button brightened against the moon until it
+matched the solid primary and the hierarchy vanished — it needs a dark base under
+the blend. And `.btn--glass` was losing the cascade to `.btn`, which is declared
+later at equal specificity; `.btn.btn--glass` settles it.
 
 ## What is in the plates
 

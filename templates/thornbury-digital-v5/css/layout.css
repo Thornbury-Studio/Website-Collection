@@ -1,6 +1,6 @@
 /* Thornbury Digital v5 — css/layout.css
    Obsidian, chrome, one ember. Glass lives in exactly three places:
-   the bar, the one hero CTA panel, and the work-item metadata cards.
+   the bar, the one hero CTA button, and the work-item metadata cards.
    Each glass is a blur(16px) layer blended with `overlay` against the liquid
    behind it, under an unblended skin that carries the edge and the text. */
 @layer reset, base, layout, components, states;
@@ -310,11 +310,11 @@
     top: 0;
     z-index: 0;
     height: 100dvh;
-    padding: calc(var(--bar) + 1rem) var(--gutter) var(--gutter);
+    padding: calc(var(--bar) + 1.5rem) var(--gutter) var(--gutter);
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: 1fr auto;
-    gap: 1.5rem;
+    justify-items: center;
+    text-align: center;
     overflow: hidden;
   }
   /* everything after the hero rides over it */
@@ -326,8 +326,12 @@
     z-index: 0;
     overflow: hidden;
   }
-  .hero-film .plate-media { object-position: 50% 50%; }
-  .hero-film > .grid { opacity: .3; }
+  /* the body sits low in frame; nudging it lower still opens the sky the
+     centred type stands on */
+  .hero-film .plate-media {
+    object-position: 50% 100%;
+    transform: scale(1.16) translateY(4.5%);
+  }
   .film-fade {
     position: absolute;
     inset: 0;
@@ -335,61 +339,102 @@
     pointer-events: none;
     background:
       linear-gradient(to bottom,
-        rgba(8, 8, 8, .62) 0%,
-        rgba(8, 8, 8, .1) 14%,
-        rgba(8, 8, 8, 0) 42%,
-        rgba(8, 8, 8, .55) 82%,
-        rgba(8, 8, 8, .96) 100%),
-      linear-gradient(to right, rgba(8, 8, 8, .6), rgba(8, 8, 8, 0) 46%);
+        rgba(8, 8, 8, .84) 0%,
+        rgba(8, 8, 8, .66) 22%,
+        rgba(8, 8, 8, .34) 46%,
+        rgba(8, 8, 8, .04) 64%,
+        rgba(8, 8, 8, .34) 84%,
+        rgba(8, 8, 8, .94) 100%);
   }
-  /* narrow screens have no empty space beside the subject, so the copy needs
-     the film graded down under it rather than a clear left column */
   @media (max-width: 900px) {
     .film-fade {
       background: linear-gradient(to bottom,
-        rgba(8, 8, 8, .6) 0%,
-        rgba(8, 8, 8, .06) 16%,
-        rgba(8, 8, 8, .34) 44%,
-        rgba(8, 8, 8, .88) 72%,
-        rgba(8, 8, 8, .98) 100%);
+        rgba(8, 8, 8, .8) 0%,
+        rgba(8, 8, 8, .4) 16%,
+        rgba(8, 8, 8, .14) 36%,
+        rgba(8, 8, 8, .6) 70%,
+        rgba(8, 8, 8, .97) 100%);
     }
   }
-  .hero-frame {
-    position: absolute;
-    inset: calc(var(--bar) + 1rem) var(--gutter) var(--gutter);
-    z-index: 1;
-    pointer-events: none;
-    color: var(--chrome-45);
-    border: 1px solid var(--hair-1);
-  }
+
   .hero-copy {
     position: relative;
     z-index: 2;
-    grid-row: 2;
+    align-self: start;
+    margin-top: clamp(.5rem, 7vh, 5.5rem);
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    align-items: end;
-    gap: 1.6rem var(--gutter);
+    justify-items: center;
+    max-width: 48rem;
   }
-  .hero .meta { margin-bottom: 1.1rem; }
-  .hero h1 {
-    font-size: clamp(3rem, 8.6vw, 10.5rem);
-    max-width: 9ch;
-    margin-left: -.04em;
+  .wordmark {
+    font-weight: 800;
+    font-size: clamp(2.55rem, 11.5vw, 11.5rem);
+    letter-spacing: -.045em;
+    line-height: .88;
+    text-transform: uppercase;
+    font-variation-settings: "wdth" 92;
+    margin: .75rem 0 .85rem;
   }
-  @media (min-width: 900px) {
-    .hero-copy { grid-template-columns: 1fr auto; }
+  .hero-line {
+    font-size: clamp(1rem, 1.5vw, 1.35rem);
+    color: var(--chrome-70);
+    text-wrap: balance;
   }
+  .hero-act {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .7rem;
+    margin-top: clamp(1.6rem, 4vh, 2.6rem);
+  }
+  .hero-act .btn { justify-content: center; min-width: 11.5rem; }
+  /* the one glass CTA: a dark base under the overlay blend, or the blend
+     brightens it against a lit subject until it matches the solid button */
+  .btn.btn--glass {
+    background: rgba(8, 8, 8, .8);
+    color: var(--chrome);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+  .btn.btn--glass:hover { background: rgba(8, 8, 8, .92); }
 
-  .cta-panel {
-    padding: 1.15rem 1.25rem 1.25rem;
-    background: rgba(8, 8, 8, .5);
-    width: min(100%, 22rem);
-    display: grid;
-    gap: .85rem;
+  .hero-stats {
+    position: relative;
+    z-index: 2;
+    align-self: end;
+    display: flex;
+    justify-content: center;
+    gap: clamp(1.8rem, 6vw, 5rem);
   }
-  .cta-panel .meta { display: flex; justify-content: space-between; margin: 0; }
-  .cta-panel .line { font-size: .92rem; line-height: 1.45; color: var(--chrome-70); }
+  .hero-stats b {
+    display: block;
+    font-weight: 800;
+    font-size: clamp(1.35rem, 2.3vw, 2.1rem);
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+  .hero-stats span {
+    display: block;
+    margin-top: .4rem;
+    font-family: var(--mono);
+    font-size: .58rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--chrome-45);
+  }
+  .film-note {
+    position: absolute;
+    left: var(--gutter);
+    bottom: var(--gutter);
+    z-index: 2;
+    font-family: var(--mono);
+    font-size: .56rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(225, 225, 225, .28);
+  }
+  @media (max-width: 700px) { .film-note { display: none; } }
+
   .btn {
     display: inline-flex;
     align-items: center;
@@ -462,7 +507,7 @@
       linear-gradient(to top, rgba(8, 8, 8, .88), rgba(8, 8, 8, .2) 24%, rgba(8, 8, 8, 0) 44%);
   }
   .plate::before, .plate::after, .corners, .plate-svg, .pc, .card { z-index: 2; }
-  .plate::before, .plate::after, .hero-frame::before, .hero-frame::after,
+  .plate::before, .plate::after,
   .corners::before, .corners::after {
     content: "";
     position: absolute;
@@ -471,8 +516,8 @@
     border: 0 solid var(--chrome);
     pointer-events: none;
   }
-  .plate::before, .hero-frame::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
-  .plate::after, .hero-frame::after { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
+  .plate::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+  .plate::after { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
   .corners::before { top: -1px; right: -1px; border-top-width: 1px; border-right-width: 1px; }
   .corners::after { bottom: -1px; left: -1px; border-bottom-width: 1px; border-left-width: 1px; }
   .axis-x {
@@ -548,12 +593,6 @@
   @media (max-width: 560px) {
     .pc-tag { font-size: .54rem; letter-spacing: .08em; }
     .pc-tl, .pc-tr { font-size: .54rem; }
-  }
-  /* three labels do not fit one narrow band — the plate size is still reported
-     in the meta line under the hero, so the corner coordinates go first */
-  @media (max-width: 720px) {
-    .hero-frame .pc-tl, .hero-frame .pc-tr { display: none; }
-    .hero-frame .pc-tag { left: .8rem; transform: none; }
   }
 
   /* ---- home index: the plates are figures, the names carry the page ---- */
