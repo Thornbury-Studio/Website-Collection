@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work -- Thornbury</title>
+<meta name="description" content="Selected Thornbury work: the BASIN hero and its documented kills, the PARALLAX WebGL exhibition, a trust-first client build, and the public Lab programme.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="theme-color" content="#f1efe9">
+<meta property="og:title" content="Work -- Thornbury">
+<meta property="og:description" content="Selected Thornbury work: the BASIN hero and its documented kills, the PARALLAX WebGL exhibition, a trust-first client build, and the public Lab programme.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,380..600;1,9..144,380..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.webgpu.js",
+    "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.webgpu.js",
+    "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.tsl.js"
+  }
+}
+</script>
+</head>
+<body>
+<div class="site">
+<header class="nav">
+  <a href="index.html" class="nav-mark" aria-label="Thornbury -- home">Thornbury</a>
+  <nav class="nav-links" aria-label="Site">
+    <a href="work.html" aria-current="page">Work</a>
+    <a href="services.html">Services</a>
+    <a href="studio.html">Studio</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<div class="page">
+<main>
+<section class="sect page-head">
+  <div class="rv">
+    <p class="eyebrow">Work</p>
+    <h1 class="display-xxl">Shown, <em>not told.</em></h1>
+    <p class="lede">Four pieces that explain the studio better than adjectives would &mdash; including one we killed twice on the way to getting it right.</p>
+  </div>
+</section>
+
+<section class="sect case-hero">
+  <div class="rv"><h2 class="display-xxl case-hero-title">BASIN</h2></div>
+  <div class="rv" data-heavy>
+    <div class="case-hero-plate">
+      <img src="img/basin-plate2.jpg" alt="BASIN -- the strange-attractor hero under its shaft of light, mid-bloom" width="2440" height="1450">
+    </div>
+  </div>
+  <div class="rv">
+    <div class="case-hero-body">
+      <div>
+        <dl class="case-meta">
+          <dt>Year</dt><dd>2026</dd>
+          <dt>Kind</dt><dd>Hero system &mdash; this site</dd>
+          <dt>Stack</dt><dd>TSL / WebGPU, WebGL2 fallback</dd>
+          <dt>Measured</dt><dd>60 fps on-device, iPhone</dd>
+          <dt>Versions</dt><dd>Three. Two killed, in writing.</dd>
+        </dl>
+      </div>
+      <div>
+        <h3 class="h3">The making of a hero</h3>
+        <p>The object on our front page is a strange attractor &mdash; thousands of paths, one equation, disturbance that always heals. It is also the third version of itself. The first was killed for looking like something it wasn&rsquo;t; the second for reading like a research diagram instead of an object in a room. Each kill is documented, with the reasons, in the project&rsquo;s own design record. We publish our dead ends because the willingness to kill work is most of what quality is.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sect">
+  <div class="rv">
+    <article class="case case-wide">
+      <div class="case-wide-head">
+        <div>
+          <dl class="case-meta">
+            <dt>Year</dt><dd>2026</dd>
+            <dt>Kind</dt><dd>WebGL exhibition</dd>
+            <dt>Stack</dt><dd>Three.js, hand-authored shaders</dd>
+            <dt>Status</dt><dd>Flagship demonstration</dd>
+          </dl>
+        </div>
+        <div>
+          <h2 class="h3">PARALLAX &mdash; Exhibit 00</h2>
+          <p>A five-act exhibition that lives entirely in the browser: hand-placed beveled geometry, one porcelain material system with a strict scarcity of colour, and a camera that walks you from act to act like a visitor with a docent. Built as our own benchmark for what a six-figure web experience should feel like &mdash; then given a second, harder art-direction pass when the first version was judged not art-directed enough. The difference between those two versions is the studio&rsquo;s actual product.</p>
+        </div>
+      </div>
+      <div class="case-shots">
+        <div class="case-panel"><img src="img/px-hero.jpg" alt="PARALLAX, Exhibit 02 -- Nine Doors, Larger Inside" width="1440" height="900"></div>
+        <div class="case-panel"><img src="img/px-detail.jpg" alt="PARALLAX -- porcelain debris with scarce gold, mid-walk" width="1440" height="900"></div>
+        <div class="case-panel"><img src="img/px-catalogue.jpg" alt="PARALLAX -- the catalogue: works and artists, typeset" width="1440" height="900"></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sect">
+  <div class="rv">
+    <article class="case case-wide">
+      <div class="case-wide-head">
+        <div>
+          <dl class="case-meta">
+            <dt>Year</dt><dd>2026</dd>
+            <dt>Kind</dt><dd>Client site + operations tooling</dd>
+            <dt>Backend</dt><dd>Live &mdash; bookings, job tracking</dd>
+            <dt>Status</dt><dd>Launching 2026</dd>
+          </dl>
+        </div>
+        <div>
+          <h2 class="h3">Esteem Auto Medics</h2>
+          <p>A Singapore auto workshop whose customers arrive suspicious &mdash; of quotes, of upselling, of workshops in general. The public site is built around that fact: services in plain language, straight answers, no theatrics between a worried driver and a phone number. Behind it sits the part visitors never see: a working staff console, job tracker and accident-report flow on a live backend &mdash; because a trustworthy front needs a real operation underneath.</p>
+        </div>
+      </div>
+      <div class="tile-row">
+        <div class="case-panel"><img src="img/eam-pair.jpg" alt="Esteem Auto Medics -- desktop and mobile home pages" width="1600" height="850"></div>
+        <div class="case-panel"><img src="img/eam-services.jpg" alt="Esteem Auto Medics -- services page, with live job tracking in the navigation" width="1440" height="900"></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sect">
+  <div class="rv">
+    <article class="case case-wide">
+      <div class="case-wide-head">
+        <div>
+          <dl class="case-meta">
+            <dt>Since</dt><dd>2026, ongoing</dd>
+            <dt>Kind</dt><dd>Public R&amp;D programme</dd>
+            <dt>Published</dt><dd>WARP &middot; THE INTERVAL</dd>
+            <dt>Status</dt><dd>Open</dd>
+          </dl>
+        </div>
+        <div>
+          <h2 class="h3">The Lab</h2>
+          <p>Where techniques earn their place before client work is allowed to depend on them. WARP &mdash; playing on the left &mdash; is a playable loom: move your pointer and it strums; every thread is tuned so there are no wrong notes. THE INTERVAL turns scroll position into a film shutter over a real photographed sequence, its readout computed from the true frame rate rather than decoration. Small pieces, finished properly.</p>
+        </div>
+      </div>
+      <div class="tile-row">
+        <div class="media-frame" data-loop data-autoplay-inview="1">
+          <video src="img/warp-loop.mp4" poster="img/warp-poster.jpg" muted loop playsinline preload="none" aria-label="WARP -- the loom, strumming"></video>
+          <span class="media-hint">WARP &mdash; the loom, strumming</span>
+        </div>
+        <div class="case-panel"><img src="img/interval.jpg" alt="THE INTERVAL -- frame 15 of 29, a dancer mid-move with the interval readout" width="1440" height="900"></div>
+      </div>
+    </article>
+  </div>
+</section>
+</main>
+</div>
+<footer class="foot">
+  <div class="foot-inner">
+    <div>
+      <div class="foot-mark">Thornbury</div>
+      <p class="dim" style="max-width:38ch;font-size:0.9rem">A Singapore studio that designs, builds and runs websites it can prove &mdash; measured on real phones before anything ships.</p>
+      <p class="foot-note">&copy; 2026 Thornbury Studio, Singapore. Built to our own published standards; performance numbers available for every page.</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="studio.html">Studio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Direct</h4>
+      <ul>
+        <li><a href="mailto:hello@thornbury.studio">hello@thornbury.studio</a></li>
+        <li><a href="contact.html">What to send us</a></li>
+        <li><a href="studio.html#standards">Our standards</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</div>
+<script type="module" src="js/site.js"></script>
+</body>
+</html>
