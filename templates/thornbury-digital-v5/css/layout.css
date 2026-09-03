@@ -300,43 +300,90 @@
     .nav a[aria-current]::before { left: -.7rem; }
   }
 
-  /* ---- hero ---- */
+  /* ---- hero: a full-bleed film that dissolves into the field on scroll ----
+     .hero-stick is taller than the viewport, so the pinned hero has a scroll
+     range to hand over in. Without JS it simply un-pins and scrolls away, and
+     .film-fade still keeps the bottom edge from cutting. */
+  .hero-stick { height: 165dvh; }
   .hero {
-    position: relative;
-    min-height: 100dvh;
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    height: 100dvh;
     padding: calc(var(--bar) + 1rem) var(--gutter) var(--gutter);
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: 1fr auto;
     gap: 1.5rem;
+    overflow: hidden;
+  }
+  /* everything after the hero rides over it */
+  main > .sec, main > section, main > .mq-wrap { position: relative; z-index: 1; }
+
+  .hero-film {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .hero-film .plate-media { object-position: 50% 50%; }
+  .hero-film > .grid { opacity: .3; }
+  .film-fade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom,
+        rgba(8, 8, 8, .62) 0%,
+        rgba(8, 8, 8, .1) 14%,
+        rgba(8, 8, 8, 0) 42%,
+        rgba(8, 8, 8, .55) 82%,
+        rgba(8, 8, 8, .96) 100%),
+      linear-gradient(to right, rgba(8, 8, 8, .6), rgba(8, 8, 8, 0) 46%);
+  }
+  /* narrow screens have no empty space beside the subject, so the copy needs
+     the film graded down under it rather than a clear left column */
+  @media (max-width: 900px) {
+    .film-fade {
+      background: linear-gradient(to bottom,
+        rgba(8, 8, 8, .6) 0%,
+        rgba(8, 8, 8, .06) 16%,
+        rgba(8, 8, 8, .34) 44%,
+        rgba(8, 8, 8, .88) 72%,
+        rgba(8, 8, 8, .98) 100%);
+    }
+  }
+  .hero-frame {
+    position: absolute;
+    inset: calc(var(--bar) + 1rem) var(--gutter) var(--gutter);
+    z-index: 1;
+    pointer-events: none;
+    color: var(--chrome-45);
+    border: 1px solid var(--hair-1);
   }
   .hero-copy {
+    position: relative;
+    z-index: 2;
+    grid-row: 2;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     align-items: end;
-    gap: 2rem var(--gutter);
+    gap: 1.6rem var(--gutter);
   }
   .hero .meta { margin-bottom: 1.1rem; }
   .hero h1 {
-    font-size: clamp(3.4rem, 9.6vw, 11.5rem);
+    font-size: clamp(3rem, 8.6vw, 10.5rem);
     max-width: 9ch;
     margin-left: -.04em;
   }
   @media (min-width: 900px) {
-    .hero { grid-template-rows: 1fr; }
-    .hero-copy {
-      position: absolute;
-      left: var(--gutter);
-      right: var(--gutter);
-      bottom: var(--gutter);
-      grid-template-columns: 1fr auto;
-      pointer-events: none;
-    }
-    .hero-copy > * { pointer-events: auto; }
+    .hero-copy { grid-template-columns: 1fr auto; }
   }
 
   .cta-panel {
     padding: 1.15rem 1.25rem 1.25rem;
+    background: rgba(8, 8, 8, .5);
     width: min(100%, 22rem);
     display: grid;
     gap: .85rem;
@@ -377,7 +424,6 @@
     background-size: 10% 10%, 10% 10%, 2.5% 2.5%, 2.5% 2.5%;
     transition: border-color .4s var(--ease), color .4s var(--ease);
   }
-  .plate--hero { min-height: 54dvh; }
 
   /* media inside a plate: film or a live site, under the technical overlays */
   .plate-media {
@@ -389,7 +435,6 @@
     object-fit: cover;
     object-position: var(--op, 50% 0%);
   }
-  .plate--hero .plate-media { object-position: 50% 50%; }
   .op-c { --op: 50% 50%; }
   .op-u { --op: 50% 36%; }
   /* blueprint ruling, redrawn over the media so the frame reads as a plate */
@@ -416,15 +461,9 @@
       linear-gradient(to bottom, rgba(8, 8, 8, .92), rgba(8, 8, 8, .5) 9%, rgba(8, 8, 8, 0) 20%),
       linear-gradient(to top, rgba(8, 8, 8, .88), rgba(8, 8, 8, .2) 24%, rgba(8, 8, 8, 0) 44%);
   }
-  /* the hero film is already dark; it only needs the label bands, not a wash */
-  .plate--hero > .scrim {
-    background:
-      linear-gradient(to bottom, rgba(8, 8, 8, .5), rgba(8, 8, 8, 0) 12%),
-      linear-gradient(to top, rgba(8, 8, 8, .72), rgba(8, 8, 8, 0) 34%);
-  }
-  .plate--hero > .grid { opacity: .38; }
   .plate::before, .plate::after, .corners, .plate-svg, .pc, .card { z-index: 2; }
-  .plate::before, .plate::after, .corners::before, .corners::after {
+  .plate::before, .plate::after, .hero-frame::before, .hero-frame::after,
+  .corners::before, .corners::after {
     content: "";
     position: absolute;
     width: 16px;
@@ -432,8 +471,8 @@
     border: 0 solid var(--chrome);
     pointer-events: none;
   }
-  .plate::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
-  .plate::after { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
+  .plate::before, .hero-frame::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+  .plate::after, .hero-frame::after { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
   .corners::before { top: -1px; right: -1px; border-top-width: 1px; border-right-width: 1px; }
   .corners::after { bottom: -1px; left: -1px; border-bottom-width: 1px; border-left-width: 1px; }
   .axis-x {
@@ -513,37 +552,79 @@
   /* three labels do not fit one narrow band — the plate size is still reported
      in the meta line under the hero, so the corner coordinates go first */
   @media (max-width: 720px) {
-    .plate--hero .pc-tl, .plate--hero .pc-tr { display: none; }
-    .plate--hero .pc-tag { left: .8rem; transform: none; }
+    .hero-frame .pc-tl, .hero-frame .pc-tr { display: none; }
+    .hero-frame .pc-tag { left: .8rem; transform: none; }
   }
 
-  /* ---- cases ---- */
-  .cases {
+  /* ---- home index: the plates are figures, the names carry the page ---- */
+  .index { display: grid; }
+  .entry { border-top: 1px solid var(--hair-1); }
+  .entry:last-child { border-bottom: 1px solid var(--hair-1); }
+  .entry-link {
+    --fig: clamp(148px, 19vw, 260px);
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    column-gap: var(--gutter);
-    row-gap: clamp(4rem, 11vh, 9rem);
+    grid-template-columns: var(--fig) minmax(0, 1fr);
+    gap: clamp(1.1rem, 3vw, 3rem);
+    align-items: center;
+    padding: clamp(1.3rem, 4vh, 2.4rem) 0;
+    text-decoration: none;
+    color: inherit;
   }
+  .entry:nth-child(even) .entry-link { grid-template-columns: minmax(0, 1fr) var(--fig); }
+  .entry:nth-child(even) .fig-plate { grid-area: 1 / 2; }
+  .entry:nth-child(even) .entry-body { grid-area: 1 / 1; text-align: right; }
+  .entry:nth-child(even) .entry-body .line { margin-left: auto; }
+  .fig-plate { aspect-ratio: 16 / 10; }
+  .fig-plate > .grid { opacity: .32; }
+  /* the figures sit inside the monolith until you reach for one */
+  .fig-plate .plate-media {
+    filter: grayscale(.55) brightness(.7) contrast(1.08);
+    transition: filter .55s var(--ease);
+  }
+  .entry-link:hover .plate-media { filter: none; }
+  .entry-link:hover .fig-plate { border-color: var(--chrome-70); }
+  .entry-body h3 {
+    font-weight: 800;
+    font-size: clamp(1.9rem, 4.4vw, 3.8rem);
+    letter-spacing: -.04em;
+    line-height: .95;
+    text-transform: uppercase;
+    margin: .5rem 0 .45rem;
+  }
+  .entry-body .line {
+    display: block;
+    color: var(--chrome-70);
+    font-size: clamp(.9rem, 1vw, 1.05rem);
+    max-width: 46ch;
+  }
+  .entry-body .meta .yr { color: var(--chrome-45); }
+  @media (max-width: 760px) {
+    .entry-link, .entry:nth-child(even) .entry-link {
+      grid-template-columns: minmax(0, 1fr);
+      gap: .9rem;
+    }
+    .entry .fig-plate, .entry:nth-child(even) .fig-plate { grid-area: auto; width: var(--fig); }
+    .entry .entry-body, .entry:nth-child(even) .entry-body { grid-area: auto; text-align: left; }
+    .entry:nth-child(even) .entry-body .line { margin-left: 0; }
+  }
+
+  /* ---- cases (work page) ---- */
   .case {
     position: relative;
     display: block;
-    grid-column: 1 / -1;
     text-decoration: none;
     color: inherit;
     min-width: 0;
   }
-  .case .plate { aspect-ratio: var(--ar, 16 / 9); }
+  .case .plate { aspect-ratio: var(--ar, 16 / 10); }
   .case:hover .plate { border-color: var(--chrome-70); color: var(--chrome-70); }
-  .plate--wide { --ar: 21 / 9; }
-  .plate--tall { --ar: 4 / 5; }
   .plate--std { --ar: 16 / 10; }
-  @media (max-width: 640px) { .plate--wide { --ar: 16 / 10; } }
   .idx {
     position: absolute;
-    top: -.66em;
+    top: -.62em;
     left: -.03em;
     font-weight: 900;
-    font-size: clamp(4rem, 9vw, 9rem);
+    font-size: clamp(3rem, 5.5vw, 5.5rem);
     line-height: 1;
     letter-spacing: -.05em;
     color: transparent;
@@ -560,8 +641,8 @@
     bottom: .8rem;
     padding: .8rem .95rem .85rem;
     display: grid;
-    gap: .3rem;
-    min-width: 13rem;
+    gap: .28rem;
+    min-width: 0;
     max-width: calc(100% - 1.6rem);
   }
   .card .meta { display: flex; justify-content: space-between; gap: 1.2rem; }
@@ -587,23 +668,15 @@
     max-width: 44ch;
   }
   .cap .meta { grid-column: 2; grid-row: 1 / span 2; text-align: right; }
-  @media (min-width: 900px) {
-    .cases .case-1 { grid-column: 1 / -1; }
-    .cases .case-2 { grid-column: 1 / 7; }
-    .cases .case-3 { grid-column: 8 / -1; margin-top: clamp(4rem, 14vh, 10rem); }
-    .cases .case-4 { grid-column: 5 / -1; }
-    .cases .case-5 { grid-column: 1 / 8; }
-  }
 
-  /* ---- work grid ---- */
+  /* ---- work grid: a gallery, but the plates stay figures ---- */
   .wgrid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(4rem, 10vh, 7rem) var(--gutter);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(3rem, 8vh, 5rem) var(--gutter);
   }
-  .wgrid .case { grid-column: auto; }
-  .wgrid .case-1 { grid-column: 1 / -1; }
-  @media (max-width: 760px) { .wgrid { grid-template-columns: 1fr; } }
+  @media (max-width: 1000px) { .wgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .wgrid { grid-template-columns: 1fr; } }
   .work-end {
     display: flex;
     justify-content: space-between;

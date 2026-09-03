@@ -4,24 +4,27 @@ Everything is self-hosted. The collection CSP is `default-src 'self'`
 (`media-src 'self'` on this template's pages), so hotlinking a stock host would
 be blocked at load time.
 
-## Hero plate film
+## Hero film
 
-Stand-in footage occupying the hero plate until the Higgsfield film is made.
-Pixabay Content License: free for commercial use, no attribution required —
-credited here anyway. Downloaded 3 Sep 2026.
+Stand-in footage filling the hero until the Higgsfield film is made. Pixabay
+Content License: free for commercial use, no attribution required — credited
+here anyway. Downloaded 3 Sep 2026.
 
 | File | Source | Pixabay ID |
 |---|---|---|
-| `video/hero.mp4` | [Gyroscope, rings, chrome, abstract](https://pixabay.com/videos/gyroscope-rings-chrome-abstract-66978/) | 66978 |
+| `video/hero.mp4` | [Moon, Iapetus, space](https://pixabay.com/videos/moon-iapetus-moon-iapetus-space-132361/) | 132361 |
 
-The 1920×1080 master is kept at `video/src/hero.mp4` (gitignored under
-`templates/*/src/`). The web encode is H.264, audio stripped, faststart, CRF 21
-with a 3600k cap, and one grade pass: `curves=all='0/0 0.22/0.27 0.55/0.70 1/1'`
-lifts mids and highlights while pinning black at black, so the clip reads over
-the obsidian ground without the plate turning into a grey box;
-`eq=saturation=0.82` pulls the last warmth out toward chrome. Measured average
-luma runs 18–57 of 255 across the ten seconds. `img/poster-hero.webp` is the
-frame at 8.0 s, the brightest point of the loop.
+One body, filling the frame, on a slow push-in — the whole point of the shot is
+that a single object holds the eye. The 1920×1080 / 60 fps / 30 s master is kept
+at `video/src/hero.mp4` (gitignored by this directory's own `.gitignore`).
+
+The web encode takes the strongest 15 seconds (10 s → 25 s, where the body is
+largest), drops to 30 fps because a slow drift needs nothing more, and is H.264,
+audio stripped, faststart, CRF 22 with a 3000k cap. Two filters: `hflip` puts
+the moon on the right so the headline has clear space on the left, and
+`eq=saturation=0.2:contrast=1.1` pulls the residual blue out of the starfield,
+which keeps the page inside its obsidian/chrome/ember palette.
+`img/poster-hero.webp` is the frame at 6 s.
 
 ## Work plates
 
@@ -32,8 +35,8 @@ the scrollbar and re-encoded as WebP at quality 80.
 | File | Case | Captured from |
 |---|---|---|
 | `img/case-midwater.webp` | Midwater | `templates/film-midwater/` |
-| `img/case-kiyo.webp`, `img/case-kiyo-tall.webp` | Kiyo 清 | `templates/japanese-restaurant/` |
-| `img/case-aurel.webp`, `img/case-aurel-tall.webp` | Aurel | `templates/watch-atelier/` |
+| `img/case-kiyo.webp` | Kiyo 清 | `templates/japanese-restaurant/` |
+| `img/case-aurel.webp` | Aurel | `templates/watch-atelier/` |
 | `img/case-loam.webp` | Loam | `templates/cafe-loam/` |
 | `img/case-form01.webp` | Form/01 | `templates/streetwear-form01/` |
 

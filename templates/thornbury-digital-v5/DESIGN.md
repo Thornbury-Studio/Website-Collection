@@ -71,13 +71,25 @@ the *same stacking context*, and the canvas lives in the root context, so:
 - Every GSAP tween ends with `clearProps`, so no leftover `transform`/`opacity`
   opens a stacking context under a glass.
 
-## What is in the plates
+## The hero, and the handoff
 
-The plates are not empty frames. The hero holds a stand-in film — dark chrome
-rings turning through specular flares, Pixabay Content License, graded to sit on
-the obsidian ground — under the blueprint ruling, the reticle and the corner
-coordinates, labelled "Hero still — Higgsfield later". It is replaced by the
-Higgsfield film when that exists; nothing else about the plate changes.
+The hero is one object, full bleed: a cratered moon on a slow push-in, filling
+the frame, desaturated into the obsidian/chrome palette. A hook has to be a
+subject, not an effect — an abstract clip of moving highlights reads as a
+screensaver, and the eye leaves. The blueprint frame, reticle and corner
+coordinates sit over it, still labelled "Hero still — Higgsfield later"; the
+Higgsfield film replaces the source and nothing else changes.
+
+It does not cut off at the fold. `.hero-stick` is 165 dvh tall and the hero is
+`position: sticky` inside it, which buys 65 dvh of scroll to hand over in. Across
+that range a scrubbed timeline dissolves the film to nothing and drifts it back
+12%, while the frame and copy leave sooner — so the moon gives way to the liquid
+chrome field that was behind it all along. `autoAlpha` hides the spent hero
+rather than leaving a transparent layer over the page catching clicks. Without
+GSAP the hero simply un-pins and scrolls away, and the `.film-fade` gradient
+still keeps its bottom edge from ending on a hard line.
+
+## What is in the plates
 
 The five work plates each hold a capture of that case's own site, taken live from
 this collection:
@@ -89,6 +101,15 @@ this collection:
 | Aurel | `templates/watch-atelier/` |
 | Loam | `templates/cafe-loam/` |
 | Form/01 | `templates/streetwear-form01/` |
+
+On the home page they are **figures, not exhibits** — 148 px wide on a phone,
+260 px at 1440 — set in an alternating hairline index where the case name carries
+the row at up to 3.8 rem. A screenshot blown up to 800 px blocks the page and
+buries the field behind it; at 260 px it reads as a plate in a book, and the
+chrome field runs through the whole section. They rest at
+`grayscale(.55) brightness(.7)` so a light site sits back inside the monolith,
+and return to full colour on hover. The Work page keeps a proper gallery, three
+up at ~408 px, where the metadata cards still fit.
 
 Two things make a screenshot survive being framed this way. A two-stop `.scrim`
 darkens the top and bottom bands, because three of the five sites are light and
