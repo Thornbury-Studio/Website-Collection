@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio -- Thornbury</title>
+<meta name="description" content="A small Singapore studio where the person who scopes the work builds it. Our standards, published -- including the work we killed.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="theme-color" content="#f1efe9">
+<meta property="og:title" content="Studio -- Thornbury">
+<meta property="og:description" content="A small Singapore studio where the person who scopes the work builds it. Our standards, published -- including the work we killed.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,380..600;1,9..144,380..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.webgpu.js",
+    "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.webgpu.js",
+    "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.tsl.js"
+  }
+}
+</script>
+</head>
+<body>
+<div class="site">
+<header class="nav">
+  <a href="index.html" class="nav-mark" aria-label="Thornbury -- home">Thornbury</a>
+  <nav class="nav-links" aria-label="Site">
+    <a href="work.html">Work</a>
+    <a href="services.html">Services</a>
+    <a href="studio.html" aria-current="page">Studio</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<div class="page">
+<main>
+<section class="sect page-head">
+  <div class="rv">
+    <p class="eyebrow">The studio</p>
+    <h1 class="display">Small, <em>on purpose.</em></h1>
+    <p class="lede">Thornbury is a Singapore studio where design and engineering sit in the same head &mdash; the person who quotes your work is the person who builds it.</p>
+  </div>
+</section>
+
+<section class="sect">
+  <div class="rv">
+    <div class="cols">
+      <p class="eyebrow">Who</p>
+      <div>
+        <p>We are deliberately not an agency org-chart. There is no account manager between you and the maker, no production line where your site is the fourteenth ticket of the sprint. The studio stays small so that every piece that ships has been held, entirely, by someone who cares whether it is good.</p>
+        <p>The trade is honest: we take on less work than a big shop, and we turn down work we cannot make excellent. What we accept gets the same treatment our own site got &mdash; including the willingness to kill our own drafts. Our front-page hero is the third version of itself; the first two are documented, post-mortemed, and public. That discipline is the product.</p>
+        <figure class="media-figure">
+          <div class="media-still"><img src="img/vat-room.jpg" alt="A dye vat sunk into a dark stone floor, one shaft of pale light falling across still indigo water" width="1600" height="1200"></div>
+          <figcaption>The vat room &mdash; the front page&rsquo;s world, extended into a place. Made, not photographed; like everything here.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sect case-hero" aria-hidden="true">
+  <div class="rv" data-heavy>
+    <div class="case-hero-plate" style="height:clamp(300px, 52vh, 560px)">
+      <img src="img/vat-wide.jpg" alt="" width="2400" height="1018">
+    </div>
+  </div>
+</section>
+
+<section class="sect" id="standards">
+  <div class="rv">
+    <p class="eyebrow">The standards</p>
+    <div class="rows">
+      <div class="row"><span class="row-key">S-01</span><div><h3 class="h3">Real phones, real numbers</h3><p>No page is called done on an emulator&rsquo;s word. Every page we ship is measured on an actual device, and the number goes in the handover. This site holds 60 frames per second on a mid-range iPhone &mdash; measured, not estimated.</p></div></div>
+      <div class="row"><span class="row-key">S-02</span><div><h3 class="h3">Kill your darlings, in writing</h3><p>Work that isn&rsquo;t good enough dies, and the reasons are written down where the next project can find them. A studio that can&rsquo;t show you its dead ends is showing you marketing.</p></div></div>
+      <div class="row"><span class="row-key">S-03</span><div><h3 class="h3">Legibility beats spectacle</h3><p>No effect is allowed to fight the words. Visitors who prefer reduced motion get a site that respects that preference everywhere, automatically.</p></div></div>
+      <div class="row"><span class="row-key">S-04</span><div><h3 class="h3">Nothing hand-faked</h3><p>If a piece needs something we cannot make excellent ourselves, we license the real thing or design around it. No stock 3D pretending to be craft, no template pretending to be design.</p></div></div>
+      <div class="row"><span class="row-key">S-05</span><div><h3 class="h3">You keep the keys</h3><p>Source code, domains, analytics, accounts &mdash; yours from day one. If we ever part ways, you lose nothing but us.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sect">
+  <div class="rv">
+    <div class="cols">
+      <p class="eyebrow">The stack</p>
+      <div>
+        <p>Modern, boring where it should be, sharp where it counts: a structured component approach for the studio&rsquo;s client builds; custom real-time graphics written WebGPU-first in one shader language, with a verified WebGL2 fallback so the experience holds on every browser &mdash; including the ones that don&rsquo;t support the new thing yet. Performance budgets are set before design starts, and the site&rsquo;s own numbers are part of its definition of done.</p>
+        <p class="dim">The same stack, standards and evidence discipline apply whether the engagement is a four-page company site or a flagship build.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sect cta">
+  <div class="rv">
+    <h2 class="display-l">See the standards applied.</h2>
+    <p style="margin-top:1.4rem"><a class="tlink" href="work.html">The work</a>&nbsp;&nbsp;<span class="dim">or</span>&nbsp;&nbsp;<a class="tlink" href="contact.html">start a project</a></p>
+  </div>
+</section>
+</main>
+</div>
+<footer class="foot">
+  <div class="foot-inner">
+    <div>
+      <div class="foot-mark">Thornbury</div>
+      <p class="dim" style="max-width:38ch;font-size:0.9rem">A Singapore studio that designs, builds and runs websites it can prove &mdash; measured on real phones before anything ships.</p>
+      <p class="foot-note">&copy; 2026 Thornbury Studio, Singapore. Built to our own published standards; performance numbers available for every page.</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="studio.html">Studio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Direct</h4>
+      <ul>
+        <li><a href="mailto:hello@thornbury.studio">hello@thornbury.studio</a></li>
+        <li><a href="contact.html">What to send us</a></li>
+        <li><a href="studio.html#standards">Our standards</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</div>
+<script type="module" src="js/site.js"></script>
+</body>
+</html>
