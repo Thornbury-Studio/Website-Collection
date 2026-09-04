@@ -38,6 +38,34 @@ Seam check (PSNR against the neighbouring ordinary frame step, higher is closer)
 loop point 32.2 dB vs 32.8 dB, turnaround 35.4 dB vs 35.3 dB, unrelated frames
 13.6 dB.
 
+## Transition footage
+
+Sourced, not generated — the asset order in `VIDEO-POLICY.md` starts with real
+licensed footage, and both of these were found rather than made. Pixabay Content
+License: free for commercial use, no attribution required, credited here anyway.
+Downloaded 4 Sep 2026.
+
+| File | Source | Pixabay ID | Master |
+|---|---|---|---|
+| `video/ink.mp4` | [Transition, brush, black](https://pixabay.com/videos/transition-brush-black-white-23324/) | 23324 | 3840×2160, 30 fps, 5.03 s |
+| `video/warp.mp4` | [Ripples, waves, metallic](https://pixabay.com/videos/ripples-waves-metallic-60195/) | 60195 | 1920×1080, 24 fps, 25 s |
+
+Eighteen candidates were pulled as `_tiny` previews and read off one contact
+sheet before either of these was downloaded at size; the masters are kept under
+`video/src/`, which this directory's own `.gitignore` excludes.
+
+**`ink.mp4` is a matte, not a picture.** A luminance sweep of the master put the
+usable action at 0.7 s–3.4 s (mean Y 13 → 237), so the encode takes 0.60 s–3.50 s,
+speeds it up 2.4× to 1.27 s, converts to grey and stretches the levels
+(`clip((val-34)*1.62)`) so the first frame is black and the last is white end to
+end. It is drawn through an SVG `feColorMatrix type="luminanceToAlpha"` so its
+brightness becomes alpha — the ink strokes erase the previous page. 960×540 at
+CRF 25 is 87 kB, which is all a matte needs.
+
+**`warp.mp4` is a displacement source.** It is read at 36×20 and only its
+luminance gradient is used, so it is encoded grey at 384×216, CRF 27, 5 s: 155 kB.
+Nothing in it is ever shown.
+
 ## Work plates
 
 Each case plate is a capture of that case's own site, taken from this collection

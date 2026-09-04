@@ -952,8 +952,16 @@
     background-size: 4px 4px, 4px 4px;
     background-repeat: no-repeat;
   }
-  .devbg-sel { min-width: 0; flex: 0 1 auto; text-overflow: ellipsis; max-width: 10rem; }
+  .devbg-sel { min-width: 0; flex: 0 1 auto; text-overflow: ellipsis; max-width: 14rem; }
   .devbg-sel option { background: #101010; color: var(--chrome); }
+  .devbg-cost {
+    font-family: var(--mono);
+    font-size: .52rem;
+    letter-spacing: .04em;
+    text-transform: none;
+    color: var(--ember);
+    white-space: nowrap;
+  }
   .devbg-note {
     font-family: var(--mono);
     font-size: .52rem;
@@ -967,7 +975,8 @@
   }
   .devbg.is-hit { animation: devhit .5s var(--ease); }
   @keyframes devhit { from { opacity: .25; } to { opacity: 1; } }
-  @media (max-width: 1180px) { .devbg-note { display: none; } }
+  @media (max-width: 1500px) { .devbg-note { display: none; } }
+  @media (max-width: 1040px) { .devbg-cost { display: none; } }
   /* the readout hides on small screens; the dev control must not */
   html.devbg-on .bar-side { display: flex; }
   @media (max-width: 560px) { html.devbg-on .devbg-tag { display: none; } }
@@ -976,4 +985,18 @@
 @layer states {
   html.rm main { transition: none; }
   html.rm .bg-film-media { transition: none; }
+}
+
+@layer components {
+  /* transition-only clips: present so they decode, never seen */
+  .bg-clip {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
 }

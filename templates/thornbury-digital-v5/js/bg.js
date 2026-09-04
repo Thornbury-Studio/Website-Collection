@@ -7,7 +7,7 @@
    Anything unexpected — a cross-origin URL, a modified click, a failed fetch —
    falls straight back to a real navigation.
 
-   Four directions are implemented, plus the hard cut as a control. They differ
+   Seven directions are implemented, plus the hard cut as a control. They differ
    only in what happens to the background between the two pages:
 
      off         a real browser navigation. The control.
@@ -23,6 +23,16 @@
                  the material re-pouring itself.
      film        a looping video plate instead of the field. Built so it can be
                  judged, not recommended: see DESIGN.md.
+     law         the attractor constant b eases between pages. No reseed, no ghost,
+                 no transition layer: the strands stay the strands and the tangle
+                 reshapes into the next page's attractor. B's idea by A's means.
+     inkcut      pour's job with the shape filmed instead of computed — a real ink
+                 stroke keyed to alpha by luminance and used to erase the old frame.
+     refract     not a wipe at all. A filmed liquid-metal ripple displaces the
+                 frozen frame along its own luminance gradient, cell by cell.
+
+   Every direction carries its measured cost in `cost`, and the dev switcher shows
+   it, because a transition is only worth what you are willing to pay for it.
 
    The mode is chosen by js/dev-bg-switcher.js, which is temporary and dev-only.
    Without it this file runs whichever mode DEFAULT names below. */
@@ -66,6 +76,10 @@
     }
   };
   function preset(p) { return PAGES[p] || PAGES.home; }
+  /* mark a world spec so the field rebuilds it across frames rather than in one */
+  function chunked(w) {
+    return { b: w.b, seed: w.seed, ext: w.ext, vn: w.vn, density: w.density, chunked: true };
+  }
 
   function field() { return global.TBPage && global.TBPage.field(); }
   function reduced() { return !!(global.TBPage && global.TBPage.reduced); }
@@ -164,6 +178,181 @@
   }
 
   /* ---------------------------------------------------------------------------
+     Media used only by a transition. Nothing is fetched until its mode is
+     chosen, and nothing plays at rest.
+     ------------------------------------------------------------------------- */
+  var clips = {};
+  function clip(name, src) {
+    if (clips[name]) return clips[name];
+    var v = document.createElement('video');
+    v.muted = true; v.playsInline = true; v.preload = 'auto';
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+    v.src = src;
+    /* kept in the document, 1px and invisible: a detached <video> decodes fine in
+       Chromium but is not reliable everywhere, and drawImage needs real frames */
+    v.className = 'bg-clip';
+    v.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(v);
+    v.load();
+    clips[name] = v;
+    return v;
+  }
+  function playFrom(v, t) {
+    if (!v) return;
+    try { v.currentTime = t || 0; } catch (e) { /* not seekable yet */ }
+    var pl = v.play();
+    if (pl && pl.catch) pl.catch(function () { /* autoplay refused: the wipe still runs */ });
+  }
+
+  /* luminanceToAlpha turns a greyscale frame into a matte in one GPU draw, which
+     is the whole reason a filmed wipe costs about what a computed one does. */
+  var lumaOK = null;
+  function lumaFilter() {
+    if (document.getElementById('tb-luma')) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('width', '0');
+    svg.setAttribute('height', '0');
+    svg.style.position = 'absolute';
+    svg.style.width = svg.style.height = '0';
+    var f = document.createElementNS(NS, 'filter');
+    f.setAttribute('id', 'tb-luma');
+    f.setAttribute('color-interpolation-filters', 'sRGB');
+    var m = document.createElementNS(NS, 'feColorMatrix');
+    m.setAttribute('type', 'luminanceToAlpha');
+    f.appendChild(m);
+    svg.appendChild(f);
+    document.body.appendChild(svg);
+  }
+  function lumaKeyWorks() {
+    if (lumaOK !== null) return lumaOK;
+    lumaFilter();
+    try {
+      var c = document.createElement('canvas');
+      c.width = c.height = 2;
+      var x = c.getContext('2d');
+      x.fillStyle = '#fff';
+      x.fillRect(0, 0, 2, 2);
+      x.globalCompositeOperation = 'destination-out';
+      x.filter = 'url(#tb-luma)';
+      x.fillStyle = '#000';           /* luminance 0 must erase nothing */
+      x.fillRect(0, 0, 2, 2);
+      x.filter = 'none';
+      lumaOK = x.getImageData(0, 0, 1, 1).data[3] > 200;
+    } catch (e) { lumaOK = false; }
+    return lumaOK;
+  }
+
+  /* F — the wipe shape is a filmed brush stroke. The clip is graded to a matte
+     (black through white); its luminance becomes alpha and erases the frozen
+     frame. Falls back to a dissolve wherever the filter is not honoured. */
+  function inkWipe(ms) {
+    if (!gc || gc.hidden) return delay(0);
+    var v = clip('ink', 'video/ink.mp4');
+    if (!lumaKeyWorks()) return ghostFade(ms);
+    var w = gc.width, h = gc.height;
+    playFrom(v, 0);
+    return new Promise(function (done) {
+      var t0 = performance.now();
+      function step(t) {
+        var p = Math.min(1, (t - t0) / ms);
+        gctx.setTransform(1, 0, 0, 1, 0, 0);
+        gctx.globalCompositeOperation = 'destination-out';
+        if (v.readyState >= 2) {
+          gctx.filter = 'url(#tb-luma)';
+          gctx.drawImage(v, 0, 0, w, h);
+          gctx.filter = 'none';
+        }
+        /* the encoded white tops out just under 255, so the last quarter carries
+           a plain erase and the frame always finishes clean */
+        if (p > 0.72) {
+          var k = (p - 0.72) / 0.28;
+          gctx.fillStyle = 'rgba(0,0,0,' + (k * k * 0.5).toFixed(3) + ')';
+          gctx.fillRect(0, 0, w, h);
+        }
+        if (p < 1) requestAnimationFrame(step);
+        else { v.pause(); thaw(); done(); }
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  /* G — the frozen frame is not wiped, it is bent. A filmed ripple is read at
+     32x18 and its luminance gradient displaces the image cell by cell, so the
+     old page flows away through liquid metal. This is the expensive one: ~576
+     drawImage calls a frame while it runs. */
+  var buf = null, bctx = null, map = null, mctx = null;
+  var MAPX = 36, MAPY = 20;
+  function refractWarm() {
+    if (!canvas || !canvas.width) return;
+    if (!buf) { buf = document.createElement('canvas'); bctx = buf.getContext('2d'); }
+    if (buf.width !== canvas.width || buf.height !== canvas.height) {
+      buf.width = canvas.width; buf.height = canvas.height;
+    }
+    if (!map) {
+      map = document.createElement('canvas');
+      map.width = MAPX; map.height = MAPY;
+      mctx = map.getContext('2d', { willReadFrequently: true });
+      mctx.getImageData(0, 0, MAPX, MAPY);
+    }
+  }
+  function refract(ms) {
+    if (!gc || gc.hidden) return delay(0);
+    var v = clip('warp', 'video/warp.mp4');
+    var w = gc.width, h = gc.height;
+    refractWarm();
+    if (buf.width !== w || buf.height !== h) { buf.width = w; buf.height = h; }
+    bctx.setTransform(1, 0, 0, 1, 0, 0);
+    bctx.clearRect(0, 0, w, h);
+    bctx.drawImage(gc, 0, 0);
+    var CX = MAPX, CY = MAPY;
+    playFrom(v, Math.random() * 3);
+    var cw = w / CX, ch = h / CY;
+    /* cells overlap generously: the seam between two differently-displaced
+       cells is what makes a grid read as shards instead of as liquid */
+    var ov = Math.ceil(Math.max(cw, ch) * 0.38) + 2;
+    var amp = w * 0.10;
+    var lum = new Float32Array(CX * CY);
+    return new Promise(function (done) {
+      var t0 = performance.now();
+      function step(t) {
+        var p = Math.min(1, (t - t0) / ms);
+        var a = Math.sin(Math.PI * p) * amp;
+        var fade = p < 0.45 ? 1 : Math.max(0, 1 - (p - 0.45) / 0.55);
+        var i, j, o;
+        if (v.readyState >= 2) {
+          mctx.drawImage(v, 0, 0, CX, CY);
+          var d = mctx.getImageData(0, 0, CX, CY).data;
+          for (i = 0; i < CX * CY; i++) {
+            o = i * 4;
+            lum[i] = (d[o] * 0.3 + d[o + 1] * 0.59 + d[o + 2] * 0.11) / 255;
+          }
+        }
+        gctx.setTransform(1, 0, 0, 1, 0, 0);
+        gctx.globalCompositeOperation = 'source-over';
+        gctx.clearRect(0, 0, w, h);
+        gctx.globalAlpha = fade;
+        for (j = 0; j < CY; j++) {
+          for (i = 0; i < CX; i++) {
+            /* displace along the map's gradient — light bends toward the slope */
+            var gx = lum[j * CX + Math.min(CX - 1, i + 1)] - lum[j * CX + Math.max(0, i - 1)];
+            var gy = lum[Math.min(CY - 1, j + 1) * CX + i] - lum[Math.max(0, j - 1) * CX + i];
+            var sx = i * cw, sy = j * ch;
+            gctx.drawImage(buf,
+              sx - ov, sy - ov, cw + ov * 2, ch + ov * 2,
+              sx - ov + gx * a, sy - ov + gy * a, cw + ov * 2, ch + ov * 2);
+          }
+        }
+        gctx.globalAlpha = 1;
+        if (p < 1) requestAnimationFrame(step);
+        else { v.pause(); thaw(); done(); }
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  /* ---------------------------------------------------------------------------
      The film plate. Created only if the mode is ever selected, so nothing is
      downloaded for the other four.
      ------------------------------------------------------------------------- */
@@ -205,7 +394,7 @@
     var f = field();
     if (!f) return;
     if (reduced()) { html.setAttribute('data-field', 'still'); f.setStill(true); return; }
-    if (mode === 'continuum') {
+    if (mode === 'continuum' || mode === 'law') {
       html.setAttribute('data-field', 'live');
       f.setStill(false);
       return;
@@ -216,7 +405,17 @@
   }
 
   /* ---------------------------------------------------------------------------
-     The four directions.
+     The directions. Every one carries the cost it actually measured, because a
+     transition is only worth what you are willing to pay for it.
+
+     Method, desktop at 1440x900 (canvas 2138x1350 at dpr 1.5, 2600 particles):
+     rest is a paired on/off frame-time difference over five rounds - 6.06 ms
+     with the canvas idle, 8.25 ms with it running, i.e. ~0.25 s of extra main
+     thread per second, ~8 ms on each of 30 painted frames. Swap cost is total
+     PerformanceObserver longtask time across four navigations, median. Every
+     direction but REFRACT records exactly zero. None of them has been measured
+     on a real phone, and the labels say so rather than guessing.
+
      enter(page)          put the background into this page's resting state
      exit()               undo anything this mode added to the document
      run(from,to,commit)  perform the transition; call commit() to swap <main>
@@ -224,6 +423,7 @@
   var MODES = {
     off: {
       label: 'OFF — hard cut',
+      cost: '0 ms · swap: a full page load · phone: n/a',
       note: 'Real navigation. The control.',
       router: false,
       enter: function () {},
@@ -232,13 +432,19 @@
 
     continuum: {
       label: 'A · CONTINUUM',
+      cost: 'canvas on every page: ~0.25 s/s main thread · swap: no long task · phone: no on-device number',
       note: 'One world. The camera travels; nothing resets.',
       router: true,
       enter: function (page) {
         var f = field();
         if (!f) return;
-        fieldPolicy(page, 'continuum');
+        /* "one world" has to mean a defined one: entering the mode from another
+           that reseeded or moved the law would otherwise inherit its leftovers */
+        wake(f, 0);
+        f.world(PAGES.home.world);
         f.camera(preset(page).cam);
+        f.pour(3);
+        fieldPolicy(page, 'continuum');
       },
       exit: function () {},
       run: function (from, to, commit) {
@@ -252,6 +458,7 @@
 
     chapters: {
       label: 'B · CHAPTERS',
+      cost: 'free at rest, still pages stay still · swap: no long task · phone: no on-device number',
       note: 'A world per page, one material. Frozen frame dissolves over the new one.',
       router: true,
       enter: function (page) {
@@ -269,7 +476,7 @@
         var frozen = freeze();
         if (f) {
           wake(f, 0);
-          f.world(preset(to).world);
+          f.world(chunked(preset(to).world));
           f.camera(preset(to).cam);
           f.pour(3);
         }
@@ -281,6 +488,7 @@
 
     pour: {
       label: 'C · POUR',
+      cost: 'free at rest, no asset at all · swap: no long task · phone: no on-device number',
       note: 'Procedural tear, no asset. The frozen frame is pulled off the new one.',
       router: true,
       enter: function (page) { MODES.chapters.enter(page); },
@@ -290,7 +498,7 @@
         var frozen = freeze();
         if (f) {
           wake(f, 0);
-          f.world(preset(to).world);
+          f.world(chunked(preset(to).world));
           f.camera(preset(to).cam);
           f.pour(4);
         }
@@ -302,26 +510,111 @@
 
     film: {
       label: 'D · FILM',
-      note: 'Video plate. Not qualified — no on-device number. See DESIGN.md.',
+      cost: 'video decoding the whole time you read, 2.7 MB · swap: no long task · phone: no on-device number',
+      note: 'Video plate, decoding the whole time you read. Not qualified.',
       router: true,
       enter: function (page) {
         filmPlate();
         html.classList.add('has-bg-film');
-        var f = field();
-        if (f) f.setActive(false);
+        if (global.TBPage) global.TBPage.suspendField(true);
         filmTo(page);
       },
       exit: function () {
         html.classList.remove('has-bg-film');
+        if (global.TBPage) global.TBPage.suspendField(false);
         if (filmBox) { filmBox.remove(); filmBox = null; }
       },
       run: function (from, to, commit) {
         filmTo(to);
         setTimeout(commit, reduced() ? 0 : 380);
-        return delay(reduced() ? 120 : 900).then(function () {
-          var f = field();
-          if (f) f.setActive(false);   /* nothing is visible behind the plate */
-        });
+        return delay(reduced() ? 120 : 900);
+      }
+    },
+
+    /* E — B's per-page identity reached by A's means. b is continuous in the
+       vector field, so easing it while the integrator runs makes the existing
+       trajectories reshape into the next page's attractor. Nothing is reseeded,
+       nothing is frozen, and there is no transition layer at all: the only thing
+       that changes between pages is the law the strands are obeying. */
+    law: {
+      label: 'E · LAW',
+      cost: 'canvas on every page: ~0.25 s/s main thread · swap: no long task · phone: no on-device number',
+      note: 'The attractor constant b eases between pages. No reseed, no ghost — the tangle reshapes itself.',
+      router: true,
+      enter: function (page) {
+        var f = field();
+        if (!f) return;
+        /* one particle set, seeded once; only the law it obeys changes after this */
+        wake(f, 0);
+        f.world(PAGES.home.world);
+        f.camera(preset(page).cam);
+        f.lawTo(preset(page).world, 0);
+        f.pour(3);
+        fieldPolicy(page, 'law');
+      },
+      exit: function () {},
+      run: function (from, to, commit) {
+        var f = field();
+        var dur = reduced() ? 0 : 1.5;
+        if (f) {
+          f.camera(preset(to).cam, dur);
+          f.lawTo(preset(to).world, dur);
+        }
+        setTimeout(commit, dur ? 480 : 0);
+        return delay(dur * 1000).then(function () { fieldPolicy(to, 'law'); });
+      }
+    },
+
+    /* F — the same job as C, with the shape filmed instead of computed. */
+    inkcut: {
+      label: 'F · INKCUT',
+      cost: 'free at rest, 87 kB clip · swap: no long task · phone: no on-device number',
+      note: 'The wipe shape is a filmed ink stroke used as a luma matte, not a function. Direct comparison with C.',
+      router: true,
+      enter: function (page) {
+        clip('ink', 'video/ink.mp4');
+        MODES.chapters.enter(page);
+      },
+      exit: function () { thaw(); },
+      run: function (from, to, commit) {
+        var f = field();
+        var frozen = freeze();
+        if (f) {
+          wake(f, 0);
+          f.world(chunked(preset(to).world));
+          f.camera(preset(to).cam);
+          f.pour(4);
+        }
+        if (!frozen || reduced()) { commit(); thaw(); fieldPolicy(to, 'inkcut'); return delay(0); }
+        setTimeout(commit, 500);
+        return inkWipe(1200).then(function () { fieldPolicy(to, 'inkcut'); });
+      }
+    },
+
+    /* G — not a wipe at all: an image-space distortion. The expensive one. */
+    refract: {
+      label: 'G · REFRACT',
+      cost: 'free at rest, but 0.56 s of long tasks per swap (worst 159 ms), 155 kB · phone: no on-device number',
+      note: 'The frozen page bends away through a filmed liquid-metal ripple — a displacement field, not a wipe.',
+      router: true,
+      enter: function (page) {
+        clip('warp', 'video/warp.mp4');
+        refractWarm();
+        MODES.chapters.enter(page);
+      },
+      exit: function () { thaw(); },
+      run: function (from, to, commit) {
+        var f = field();
+        var frozen = freeze();
+        if (f) {
+          wake(f, 0);
+          f.world(chunked(preset(to).world));
+          f.camera(preset(to).cam);
+          f.pour(4);
+        }
+        if (!frozen || reduced()) { commit(); thaw(); fieldPolicy(to, 'refract'); return delay(0); }
+        setTimeout(commit, 440);
+        return refract(1150).then(function () { fieldPolicy(to, 'refract'); });
       }
     }
   };
@@ -485,7 +778,7 @@
   global.TBBg = {
     modes: function () {
       return Object.keys(MODES).map(function (k) {
-        return { id: k, label: MODES[k].label, note: MODES[k].note };
+        return { id: k, label: MODES[k].label, cost: MODES[k].cost, note: MODES[k].note };
       });
     },
     mode: function () { return current; },

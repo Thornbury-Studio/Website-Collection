@@ -204,15 +204,51 @@ opacity lives in a class and never on the element at rest: an element at
 `opacity < 1` is a stacking context, and the glass inside `<main>` can only blend
 with the canvas from the root one.
 
-**Four directions are built, plus the hard cut as a control.**
+**Seven directions are built, plus the hard cut as a control**, and every one
+carries the cost it measured. Rest is a paired canvas-on/canvas-off frame-time
+difference over five rounds at 1440×900 (canvas 2138×1350 at dpr 1.5, 2,600
+particles): 6.06 ms idle, 8.25 ms running, i.e. ~0.25 s of extra main thread per
+second, ~8 ms on each of 30 painted frames. Swap is total `PerformanceObserver`
+longtask time across four navigations, median of four.
 
-| | What it is | What it costs |
-|---|---|---|
-| `off` | A real browser navigation. The control. | — |
-| `continuum` | One world, never reseeded. The camera travels to the next page's viewpoint over 1.35 s and the key light moves with it. The strand you were watching is still there when you arrive. | The field must run on every page, including the two that were static: ~6 ms on 30 frames a second, ~18 % of one desktop core. |
-| `chapters` | A different world per page — its own `b`, density and seed — under one material and one motion law. The previous frame is frozen onto a ghost canvas and cross-dissolved over the new one across 1 s. | Only the reseed, and it happens under the ghost where nothing can see it. Still pages stay still. |
-| `pour` | The frozen frame is torn off by a procedural front: a per-band noise offset sweeping left to right behind a bright chrome edge. No asset, no continuity — the transition is the material re-pouring itself. | One second of coarse `fillRect` work on the ghost, then nothing. Still pages stay still. |
-| `film` | A looping video plate instead of the field, reframed per page. | Not measured on a real phone, so not a contender. See below. |
+| | What it is | Rest | Swap |
+|---|---|---|---|
+| `off` | A real browser navigation. The control. | — | a full page load |
+| `continuum` | One world, never reseeded. The camera travels to the next page's viewpoint over 1.35 s and the key light moves with it. | canvas on every page, ~0.25 s/s | no long task |
+| `chapters` | A different world per page — its own `b`, density and seed — frozen and cross-dissolved over the new one across 1 s. | free — still pages stay still | no long task |
+| `pour` | The frozen frame is torn off by a procedural front: a per-band noise offset behind a bright edge. No asset. | free | no long task |
+| `film` | A looping video plate instead of the field, reframed per page. | video decoding the whole time you read, 2.7 MB | no long task |
+| `law` | **b itself eases between pages.** No reseed, no ghost, no transition layer at all: the strands stay the strands and the tangle reshapes into the next page's attractor. | canvas on every page, ~0.25 s/s | no long task |
+| `inkcut` | The same job as `pour` with the shape **filmed instead of computed** — a real ink stroke used as a luma matte. | free, 87 kB clip | no long task |
+| `refract` | Not a wipe: an **image-space distortion**. A filmed liquid-metal ripple read at 36×20 displaces the frozen frame cell by cell along its luminance gradient. | free, 155 kB clip | **0.56 s of long tasks, worst 159 ms** |
+
+None of them has an on-device phone number, and every label says so rather than
+guessing.
+
+**E is B's idea reached by A's means.** `b` is continuous in the vector field, so
+easing it while the integrator runs reshapes the existing trajectories rather
+than replacing them — measured going 0.190 → 0.155 on a smoothstep over 1.5 s,
+with no ghost canvas ever created. It is the only direction that gives each page
+its own attractor without ever cutting.
+
+**F answers a question C raises.** Both erase the same frozen frame; one front is
+a sum of three sines, the other is a brush. The filmed one costs about what the
+computed one does because the key is an SVG `feColorMatrix
+type="luminanceToAlpha"` drawn straight into the ghost with `destination-out`,
+which is one GPU draw, not a pixel loop. It feature-detects by erasing with black
+— luminance 0 must erase nothing — and falls back to the plain dissolve if the
+filter is not honoured.
+
+**G is the expensive one and says so.** 720 `drawImage` calls a frame for 1.15 s
+is real work, and it is the only direction that produces a long task at all.
+Cells overlap by 38% because the seam between two differently-displaced cells is
+what makes a grid read as shards instead of as liquid.
+
+**What actually cost the most was not the effect.** Reseeding 2,600 particles in
+one frame measured 212 ms and dominated every per-page-world direction. It is now
+a job spread over six frames from inside the rAF loop, which is invisible under a
+ghost and took B, C and F to zero long tasks. The DOM swap itself was never the
+problem: teardown 3–6 ms, re-init 5–12 ms, `ScrollTrigger.refresh()` under 2 ms.
 
 The ghost is one frozen copy of the canvas laid over it, which is what lets the
 live field become the next page — reseed included — with nothing visible. The
@@ -242,11 +278,21 @@ already killed once in this project for mobile cost, and nothing here answers
 that: a desktop screenshot is not a phone. It should not be treated as a
 contender without a real on-device measurement.
 
+**All footage is sourced, none generated.** `video/ink.mp4` and `video/warp.mp4`
+were found on Pixabay under the Content License and graded for the job they do —
+a matte and a displacement source, neither of them shown as a picture. See
+`IMAGE-CREDITS.md` for the search, the encode and why each is as small as it is.
+
 ## The temporary switcher
 
 `js/dev-bg-switcher.js` replaces the coordinate readout in the bar with a
 dropdown that swaps direction live, with no reload. It is ember rather than
 chrome so it can never be mistaken for part of the design.
+
+Every option states its own price, in the dropdown and in the readout beside it:
+what it costs while you sit and read, what it costs to make one navigation, and
+whether it has ever been measured on a phone. None of them has, and the label
+says that rather than implying otherwise.
 
 It is inert unless the dev flag is on: a local hostname, or `?dev=1`, which
 appears in no link on the site and is remembered for that tab only. A normal

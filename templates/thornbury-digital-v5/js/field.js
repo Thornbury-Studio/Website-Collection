@@ -71,73 +71,106 @@
     var PX = new Float32Array(N), PY = new Float32Array(N);
     var valid = new Uint8Array(N);
 
-    /* ---- world: the attractor's own parameters ---- */
-    var B = 0.19, EXT = 4.6, VN = 1.3;
+    /* ---- world: the attractor's own parameters, and they are tweenable.
+       b is continuous in the vector field, so easing it while the integrator
+       runs reshapes the existing trajectories instead of replacing them. ---- */
+    var law = { b: 0.19, ext: 4.6, vn: 1.3 };
 
-    function seedWorld(seed, b) {
-      B = b;
-      var i = 0, s = 0;
-      while (i < NA) {
-        var x = (hash(seed * 7.1 + s * 3.1 + 1) - 0.5) * 6;
-        var y = (hash(seed * 7.3 + s * 3.3 + 2) - 0.5) * 6;
-        var z = (hash(seed * 7.7 + s * 3.7 + 3) - 0.5) * 6;
-        for (var w = 0; w < 240; w++) {
-          var vx = Math.sin(y) - B * x, vy = Math.sin(z) - B * y, vz = Math.sin(x) - B * z;
-          x += vx * 0.03; y += vy * 0.03; z += vz * 0.03;
-        }
-        var ember = hash(seed + s * 1.7 + 9) < 0.045 ? 1 : 0;
-        for (var k = 0; k < STRAND && i < NA; k++, i++) {
-          P[i * 3] = x; P[i * 3 + 1] = y; P[i * 3 + 2] = z;
-          kind[i] = ember;
-          for (var q = 0; q < 2; q++) {
-            vx = Math.sin(y) - B * x; vy = Math.sin(z) - B * y; vz = Math.sin(x) - B * z;
-            x += vx * DT; y += vy * DT; z += vz * DT;
-          }
-        }
-        s++;
+    /* Seeding is the one genuinely expensive thing here: 240 warm steps per
+       strand, ~108 strands, and doing it all in one frame cost a measured 212 ms.
+       It is therefore a job that can be spread over several frames — a transition
+       has a ghost over it anyway, so a half-built world is never seen. */
+    var seedQ = null;
+
+    function seedStrand(q) {
+      var B = q.b, seed = q.seed, s = q.s;
+      var x = (hash(seed * 7.1 + s * 3.1 + 1) - 0.5) * 6;
+      var y = (hash(seed * 7.3 + s * 3.3 + 2) - 0.5) * 6;
+      var z = (hash(seed * 7.7 + s * 3.7 + 3) - 0.5) * 6;
+      for (var w = 0; w < 240; w++) {
+        var vx = Math.sin(y) - B * x, vy = Math.sin(z) - B * y, vz = Math.sin(x) - B * z;
+        x += vx * 0.03; y += vy * 0.03; z += vz * 0.03;
       }
+      var ember = hash(seed + s * 1.7 + 9) < 0.045 ? 1 : 0;
+      for (var k = 0; k < STRAND && q.i < NA; k++, q.i++) {
+        var i = q.i;
+        P[i * 3] = x; P[i * 3 + 1] = y; P[i * 3 + 2] = z;
+        kind[i] = ember;
+        valid[i] = 0;                 /* its old screen position is meaningless now */
+        for (var qq = 0; qq < 2; qq++) {
+          vx = Math.sin(y) - B * x; vy = Math.sin(z) - B * y; vz = Math.sin(x) - B * z;
+          x += vx * DT; y += vy * DT; z += vz * DT;
+        }
+      }
+      q.s++;
+    }
+
+    function seedStep(strands) {
+      if (!seedQ) return;
+      var n = 0;
+      while (seedQ.i < NA && n < strands) { seedStrand(seedQ); n++; }
+      if (seedQ.i >= NA) seedQ = null;
+    }
+
+    function seedWorld(seed, b, chunked) {
+      law.b = b;
+      seedQ = { seed: seed, b: b, i: 0, s: 0 };
+      if (chunked) return;            /* the rAF loop finishes it */
+      seedStep(1e9);
       valid.fill(0);
     }
 
     /* ---- camera: every term here is tweenable, and a page is just a set of them ---- */
     var drift = hash((opts.seed || 0) + 0.5) * 6.283;
     var cam = { rot: 0, tilt: 0.5, ax: 0.5, ay: 0.5, zoom: 1, lx: 0.6, ly: -0.8 };
-    var camA = null, camB = null, camT = 0, camDur = 0;
-    var KEYS = ['rot', 'tilt', 'ax', 'ay', 'zoom', 'lx', 'ly'];
 
     function norml(o) {
       var m = Math.sqrt(o.lx * o.lx + o.ly * o.ly) || 1;
       o.lx /= m; o.ly /= m;
     }
-    function camSet(to) {
-      for (var i = 0; i < KEYS.length; i++) {
-        var k = KEYS[i];
-        if (to[k] != null) cam[k] = to[k];
-      }
-      norml(cam);
-      camA = camB = null;
+
+    /* one eased tween over a named set of an object's numeric keys */
+    function tweener(obj, keys, after) {
+      var A = null, B = null, t = 0, dur = 0;
+      function finish() { if (after) after(obj); }
+      return {
+        set: function (to) {
+          for (var i = 0; i < keys.length; i++) {
+            var k = keys[i];
+            if (to[k] != null) obj[k] = to[k];
+          }
+          A = B = null;
+          finish();
+        },
+        to: function (to, d) {
+          if (!d) { this.set(to); return; }
+          A = {}; B = {};
+          for (var i = 0; i < keys.length; i++) {
+            var k = keys[i];
+            A[k] = obj[k];
+            B[k] = to[k] == null ? obj[k] : to[k];
+          }
+          if (after) after(B);
+          t = 0; dur = d;
+        },
+        step: function (dt) {
+          if (!B) return;
+          t += dt;
+          var u = t >= dur ? 1 : smooth(t / dur);
+          for (var i = 0; i < keys.length; i++) {
+            var k = keys[i];
+            obj[k] = A[k] + (B[k] - A[k]) * u;
+          }
+          finish();
+          if (u === 1) { A = B = null; }
+        },
+        busy: function () { return !!B; }
+      };
     }
-    function camTween(to, dur) {
-      if (!dur) { camSet(to); return; }
-      camA = {}; camB = {};
-      for (var i = 0; i < KEYS.length; i++) {
-        var k = KEYS[i];
-        camA[k] = cam[k];
-        camB[k] = to[k] == null ? cam[k] : to[k];
-      }
-      norml(camB);
-      camT = 0; camDur = dur;
-    }
-    function camStep(dt) {
-      if (!camB) return;
-      camT += dt;
-      var u = camT >= camDur ? 1 : smooth(camT / camDur);
-      for (var i = 0; i < KEYS.length; i++) {
-        var k = KEYS[i];
-        cam[k] = camA[k] + (camB[k] - camA[k]) * u;
-      }
-      if (u === 1) { camA = camB = null; }
-    }
+
+    var camTw = tweener(cam, ['rot', 'tilt', 'ax', 'ay', 'zoom', 'lx', 'ly'], norml);
+    var lawTw = tweener(law, ['b', 'ext', 'vn'], null);
+    function tweensStep(dt) { camTw.step(dt); lawTw.step(dt); }
 
     var W = 1, Hh = 1, dpr = 1, S = 1, wScale = 1;
     var rot = drift, rotP = 0, tiltP = 0, px = 0, py = 0, tx = 0, ty = 0;
@@ -155,6 +188,7 @@
 
     function integrate() {
       var h = DT / SUB;
+      var B = law.b;
       for (var i = 0; i < NA; i++) {
         var x = P[i * 3], y = P[i * 3 + 1], z = P[i * 3 + 2], sp = 0;
         for (var s = 0; s < SUB; s++) {
@@ -232,6 +266,7 @@
       ctx.fillStyle = 'rgba(8,8,8,' + wipe + ')';
       ctx.fillRect(0, 0, W, Hh);
 
+      var EXT = law.ext, VN = law.vn;
       S = Math.min(W, Hh) * 0.10 * cam.zoom * (EXT0 / EXT);
       var cx = W * cam.ax + px * W * 0.03;
       var cy = Hh * cam.ay + py * Hh * 0.03;
@@ -240,7 +275,7 @@
       var LX = cam.lx, LY = cam.ly;
       /* a camera tween moves every particle at once; the stale-segment guard has
          to open up for it or the whole field strobes while the camera travels */
-      var maxSeg = camB ? 150 : 48;
+      var maxSeg = (camTw.busy() || lawTw.busy()) ? 150 : 48;
 
       ctx.globalCompositeOperation = 'lighter';
       ctx.lineCap = 'round';
@@ -280,11 +315,12 @@
       if (!running) return;
       var dt = last ? Math.min(0.05, (t - last) / 1000) : 0.016;
       last = t;
+      if (seedQ) seedStep(Math.ceil(NA / STRAND / 6));
       acc += dt;
       var steps = 0;
       while (acc >= STEP && steps < 3) { integrate(); acc -= STEP; steps++; }
       rot += dt * 0.06;
-      camStep(dt);
+      tweensStep(dt);
       var e = 1 - Math.exp(-dt * 2.4);
       rotP += (tx * 0.25 - rotP) * e;
       tiltP += (ty * 0.12 - tiltP) * e;
@@ -308,9 +344,10 @@
     function warm() {
       var n = Math.min(warmLeft, 4);
       for (var f = 0; f < n; f++) {
+        if (seedQ) seedStep(Math.ceil(NA / STRAND / 6));
         integrate();
         rot += 0.0008;
-        camStep(1 / 60);
+        tweensStep(1 / 60);
         drawFrame(0.13);
       }
       warmLeft -= n;
@@ -377,14 +414,18 @@
         if (on) settle(warmFrames);
         else run();
       },
-      camera: function (to, dur) { if (dur) camTween(to, dur); else camSet(to); },
+      camera: function (to, dur) { if (dur) camTw.to(to, dur); else camTw.set(to); },
+      /* Change the attractor's own constant instead of reseeding: the strands
+         stay the strands and the tangle reshapes into the next page's law. */
+      lawTo: function (spec, dur) {
+        lawTw.to({ b: spec.b, ext: spec.ext, vn: spec.vn }, dur);
+      },
       /* reseeding costs one frame; callers hide it behind the ghost */
       world: function (spec) {
-        if (spec.ext) EXT = spec.ext;
-        if (spec.vn) VN = spec.vn;
+        lawTw.set({ b: spec.b, ext: spec.ext, vn: spec.vn });
         var want = spec.density == null ? N : Math.max(STRAND, Math.round(N * spec.density));
         NA = Math.min(N, want);
-        seedWorld(spec.seed || 0, spec.b || 0.19);
+        seedWorld(spec.seed || 0, spec.b || 0.19, !!spec.chunked);
       },
       /* draw n frames right now — enough that a freshly seeded world is not an
          empty screen the instant a dissolve starts */
@@ -392,6 +433,7 @@
         for (var f = 0; f < n; f++) { integrate(); drawFrame(f === 0 ? 1 : 0.13); }
       },
       size: function () { return { w: canvas.width, h: canvas.height, dpr: dpr }; },
+      state: function () { return { b: law.b, ext: law.ext, vn: law.vn, zoom: cam.zoom, n: NA }; },
       frames: function () { return painted; },
       active: function () { return running; },
       redraw: function () { drawFrame(0.15); },

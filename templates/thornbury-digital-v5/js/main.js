@@ -19,10 +19,12 @@
   var fieldCbs = [];
   /* two independent reasons to run: the hero gate (nothing is visible behind an
      opaque film) and a hold from bg.js (a transition needs it live regardless) */
-  var fieldWant = null, fieldHold = false;
+  var fieldWant = null, fieldHold = false, fieldOff = false;
 
   function applyFieldGate() {
     if (!field || !field.setActive) return;
+    /* a mode that hides the canvas outright wins over every other reason to run */
+    if (fieldOff) { field.setActive(false); return; }
     if (fieldHold) { field.setActive(true); return; }
     if (fieldWant === null) return;
     field.setActive(fieldWant);
@@ -290,7 +292,9 @@
     field: function () { return field; },
     onField: function (cb) { if (field) cb(field); else fieldCbs.push(cb); },
     /* bg.js holds the field live across a transition, whatever the hero gate says */
-    holdField: function (on) { fieldHold = !!on; applyFieldGate(); }
+    holdField: function (on) { fieldHold = !!on; applyFieldGate(); },
+    /* ...and switches it off entirely for a mode that does not use the canvas */
+    suspendField: function (on) { fieldOff = !!on; applyFieldGate(); }
   };
 
   init(document.getElementById('main'), { intro: true });
