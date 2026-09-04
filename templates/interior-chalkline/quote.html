@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Start with your plan — CHALKLINE</title>
+  <meta name="description" content="Pick your flat type, tick the rooms on the plan, choose how far each one goes, and read the estimate with its working printed underneath. Then send it to CHALKLINE on WhatsApp as it is.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/interior-chalkline/quote.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CHALKLINE">
+  <meta property="og:title" content="Start with your plan — CHALKLINE">
+  <meta property="og:description" content="Tick the rooms. Watch the number. Read the working.">
+  <meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/interior-chalkline/quote.html">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/interior-chalkline/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F0EFEA">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F0EFEA'/><path d='M5 25L27 7' stroke='%232743C9' stroke-width='3.2' stroke-linecap='round'/><path d='M5 8h8M19 24h8' stroke='%2317191C' stroke-width='2.2'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Golos+Text:wght@400;500;600;700&family=Fragment+Mono:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="mark" href="index.html" aria-label="CHALKLINE, home"><span>CHALK</span><span class="mark__line" aria-hidden="true"></span><span>LINE</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="work.html">Work</a>
+      <a href="quote.html" aria-current="page">Start with your plan</a>
+      <a href="studio.html">Studio</a>
+    </nav>
+    <div class="top__tools">
+      <a class="btn btn--wa" aria-label="WhatsApp 8224 2558" href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%27d%20like%20to%20start%20with%20my%20plan.">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/></svg>
+        <span class="txt">WhatsApp</span><span>8224 2558</span>
+      </a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="work.html">Work</a>
+      <a href="quote.html" aria-current="page">Start with your plan</a>
+      <a href="studio.html">Studio</a>
+      <a href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%27d%20like%20to%20talk%20about%20renovating%20my%20flat.">WhatsApp 8224 2558</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="bay bay--tight">
+    <div class="wrap head">
+      <p class="label">Start with your plan</p>
+      <h1>Tick the rooms. Watch the number.</h1>
+      <p class="lede">Pick your flat, tick the rooms you want touched, and choose how far each one goes. The estimate rebuilds itself from the plan's own measurements and prints the working underneath. Then send it to us exactly as it is.</p>
+    </div>
+  </section>
+
+  <section class="wrap q bay bay--top0 est-bar--pad">
+
+    <div class="q__main">
+
+      <form id="pickForm" novalidate>
+        <section class="step">
+          <div class="step__head">
+            <span class="n">01</span>
+            <div>
+              <h2>Your flat</h2>
+              <p>The plans are typical for each type. We measure yours on the first visit and the number becomes fixed then.</p>
+            </div>
+          </div>
+          <div class="types">
+            <label class="type"><input type="radio" name="flat" value="hdb3"><span><b>3-room</b><small>HDB · about 70 m²</small></span></label>
+            <label class="type"><input type="radio" name="flat" value="hdb4" checked><span><b>4-room</b><small>HDB · about 92 m²</small></span></label>
+            <label class="type"><input type="radio" name="flat" value="hdb5"><span><b>5-room</b><small>HDB · about 108 m²</small></span></label>
+            <label class="type"><input type="radio" name="flat" value="condo"><span><b>3-bed condo</b><small>about 96 m²</small></span></label>
+          </div>
+        </section>
+
+        <section class="step">
+          <div class="step__head">
+            <span class="n">02</span>
+            <div>
+              <h2>Tick the rooms on the plan</h2>
+              <p>Click a room, or tick it in the list. Then choose how far it goes.</p>
+            </div>
+          </div>
+          <div class="pick">
+            <div class="pick__plan" id="pickPlan">
+              <!--PLAN:pick:hdb4-->
+<svg class="plan-svg plan-svg--pick" viewBox="-84 -84 1168 1088" role="img" aria-labelledby="pick-t" focusable="false"><title id="pick-t">4-room HDB floor plan</title><defs><clipPath id="pick-cp-liv"><path d="M0 0L440 0L440 600L0 600Z"/></clipPath><clipPath id="pick-cp-kit"><path d="M440 0L760 0L760 300L440 300Z"/></clipPath><clipPath id="pick-cp-sy"><path d="M760 0L1000 0L1000 300L760 300Z"/></clipPath><clipPath id="pick-cp-hs"><path d="M440 300L600 300L600 500L440 500Z"/></clipPath><clipPath id="pick-cp-cb"><path d="M600 300L760 300L760 500L600 500Z"/></clipPath><clipPath id="pick-cp-st"><path d="M760 300L1000 300L1000 440L760 440Z"/></clipPath><clipPath id="pick-cp-mb"><path d="M760 440L1000 440L1000 600L760 600Z"/></clipPath><clipPath id="pick-cp-cor"><path d="M440 500L760 500L760 600L440 600Z"/></clipPath><clipPath id="pick-cp-br3"><path d="M0 600L320 600L320 920L0 920Z"/></clipPath><clipPath id="pick-cp-br2"><path d="M320 600L620 600L620 920L320 920Z"/></clipPath><clipPath id="pick-cp-mbr"><path d="M620 600L1000 600L1000 920L620 920Z"/></clipPath></defs><g class="room room--living" data-room="liv" role="checkbox" aria-checked="false" tabindex="0" aria-label="Living &amp; dining"><path class="room__floor" d="M0 0L440 0L440 600L0 600Z"/><path class="room__edge" d="M0 0L440 0L440 600L0 600Z"/><text class="room__name" x="220" y="292" text-anchor="middle">LIVING &amp; DINING</text><text class="room__area" x="220" y="326" text-anchor="middle">26.4 m²</text></g><g class="room room--kitchen" data-room="kit" role="checkbox" aria-checked="false" tabindex="0" aria-label="Kitchen"><path class="room__floor" d="M440 0L760 0L760 300L440 300Z"/><path class="room__edge" d="M440 0L760 0L760 300L440 300Z"/><text class="room__name" x="600" y="142" text-anchor="middle">KITCHEN</text><text class="room__area" x="600" y="176" text-anchor="middle">9.6 m²</text></g><g class="room room--yard" data-room="sy" role="checkbox" aria-checked="false" tabindex="0" aria-label="Service yard"><path class="room__floor" d="M760 0L1000 0L1000 300L760 300Z"/><path class="room__edge" d="M760 0L1000 0L1000 300L760 300Z"/><text class="room__name" x="880" y="142" text-anchor="middle">SERVICE YARD</text><text class="room__area" x="880" y="176" text-anchor="middle">7.2 m²</text></g><g class="room room--hs" data-room="hs" role="checkbox" aria-checked="false" tabindex="0" aria-label="Household shelter"><path class="room__floor" d="M440 300L600 300L600 500L440 500Z"/><path class="room__edge" d="M440 300L600 300L600 500L440 500Z"/><text class="room__name room__name--sm" x="520" y="398" text-anchor="middle">HS</text><text class="room__area" x="520" y="422" text-anchor="middle">3.2 m²</text></g><g class="room room--bath" data-room="cb" role="checkbox" aria-checked="false" tabindex="0" aria-label="Common bath"><path class="room__floor" d="M600 300L760 300L760 500L600 500Z"/><path class="room__edge" d="M600 300L760 300L760 500L600 500Z"/><text class="room__name room__name--sm" x="680" y="398" text-anchor="middle">BATH</text><text class="room__area" x="680" y="422" text-anchor="middle">3.2 m²</text></g><g class="room room--store" data-room="st" role="checkbox" aria-checked="false" tabindex="0" aria-label="Store"><path class="room__floor" d="M760 300L1000 300L1000 440L760 440Z"/><path class="room__edge" d="M760 300L1000 300L1000 440L760 440Z"/><text class="room__name room__name--sm" x="880" y="368" text-anchor="middle">STORE</text><text class="room__area" x="880" y="392" text-anchor="middle">3.4 m²</text></g><g class="room room--bath" data-room="mb" role="checkbox" aria-checked="false" tabindex="0" aria-label="Master bath"><path class="room__floor" d="M760 440L1000 440L1000 600L760 600Z"/><path class="room__edge" d="M760 440L1000 440L1000 600L760 600Z"/><text class="room__name room__name--sm" x="880" y="518" text-anchor="middle">M. BATH</text><text class="room__area" x="880" y="542" text-anchor="middle">3.8 m²</text></g><g class="room room--entry" data-room="cor" role="checkbox" aria-checked="false" tabindex="0" aria-label="Entrance &amp; corridor"><path class="room__floor" d="M440 500L760 500L760 600L440 600Z"/><path class="room__edge" d="M440 500L760 500L760 600L440 600Z"/><text class="room__name room__name--sm" x="600" y="548" text-anchor="middle">CORR.</text></g><g class="room room--bed" data-room="br3" role="checkbox" aria-checked="false" tabindex="0" aria-label="Bedroom 3"><path class="room__floor" d="M0 600L320 600L320 920L0 920Z"/><path class="room__edge" d="M0 600L320 600L320 920L0 920Z"/><text class="room__name" x="160" y="752" text-anchor="middle">BEDROOM 3</text><text class="room__area" x="160" y="786" text-anchor="middle">10.2 m²</text></g><g class="room room--study" data-room="br2" role="checkbox" aria-checked="false" tabindex="0" aria-label="Bedroom 2"><path class="room__floor" d="M320 600L620 600L620 920L320 920Z"/><path class="room__edge" d="M320 600L620 600L620 920L320 920Z"/><text class="room__name" x="470" y="752" text-anchor="middle">BEDROOM 2</text><text class="room__area" x="470" y="786" text-anchor="middle">9.6 m²</text></g><g class="room room--bed" data-room="mbr" role="checkbox" aria-checked="false" tabindex="0" aria-label="Master bedroom"><path class="room__floor" d="M620 600L1000 600L1000 920L620 920Z"/><path class="room__edge" d="M620 600L1000 600L1000 920L620 920Z"/><text class="room__name" x="810" y="752" text-anchor="middle">MASTER BEDROOM</text><text class="room__area" x="810" y="786" text-anchor="middle">12.2 m²</text></g><g class="plan-walls"><path class="plan-wall" d="M0 0L440 0L440 600L0 600Z"/><path class="plan-wall" d="M440 0L760 0L760 300L440 300Z"/><path class="plan-wall" d="M760 0L1000 0L1000 300L760 300Z"/><path class="plan-wall" d="M440 300L600 300L600 500L440 500Z"/><path class="plan-wall" d="M600 300L760 300L760 500L600 500Z"/><path class="plan-wall" d="M760 300L1000 300L1000 440L760 440Z"/><path class="plan-wall" d="M760 440L1000 440L1000 600L760 600Z"/><path class="plan-wall" d="M440 500L760 500L760 600L440 600Z"/><path class="plan-wall" d="M0 600L320 600L320 920L0 920Z"/><path class="plan-wall" d="M320 600L620 600L620 920L320 920Z"/><path class="plan-wall" d="M620 600L1000 600L1000 920L620 920Z"/><path class="plan-wall plan-wall--ext" d="M0 0L1000 0L1000 920L0 920Z"/></g><g class="plan-open"><line class="plan-gap" x1="60" y1="0" x2="150" y2="0"/><line class="plan-leaf" x1="60" y1="0" x2="60" y2="90"/><path class="plan-swing" d="M60 90A90 90 0 0 1 150 0"/><line class="plan-gap" x1="440" y1="40" x2="440" y2="130"/><line class="plan-gap" x1="760" y1="80" x2="760" y2="220"/><line class="plan-gap" x1="480" y1="500" x2="560" y2="500"/><line class="plan-leaf" x1="480" y1="500" x2="480" y2="420"/><path class="plan-swing" d="M480 420A80 80 0 0 0 560 500"/><line class="plan-gap" x1="640" y1="500" x2="720" y2="500"/><line class="plan-leaf" x1="720" y1="500" x2="720" y2="420"/><path class="plan-swing" d="M720 420A80 80 0 0 1 640 500"/><line class="plan-gap" x1="760" y1="340" x2="760" y2="410"/><line class="plan-leaf" x1="760" y1="340" x2="830" y2="340"/><path class="plan-swing" d="M830 340A70 70 0 0 0 760 410"/><line class="plan-gap" x1="440" y1="510" x2="440" y2="590"/><line class="plan-gap" x1="230" y1="600" x2="310" y2="600"/><line class="plan-leaf" x1="310" y1="600" x2="310" y2="680"/><path class="plan-swing" d="M310 680A80 80 0 0 0 230 600"/><line class="plan-gap" x1="470" y1="600" x2="550" y2="600"/><line class="plan-leaf" x1="470" y1="600" x2="470" y2="680"/><path class="plan-swing" d="M470 680A80 80 0 0 1 550 600"/><line class="plan-gap" x1="660" y1="600" x2="740" y2="600"/><line class="plan-leaf" x1="660" y1="600" x2="660" y2="680"/><path class="plan-swing" d="M660 680A80 80 0 0 1 740 600"/><line class="plan-gap" x1="800" y1="600" x2="880" y2="600"/><line class="plan-leaf" x1="800" y1="600" x2="800" y2="520"/><path class="plan-swing" d="M800 520A80 80 0 0 0 880 600"/><line class="plan-gap plan-gap--ext" x1="0" y1="120" x2="0" y2="420"/><line class="plan-win" x1="-5" y1="120" x2="-5" y2="420"/><line class="plan-win" x1="0" y1="120" x2="0" y2="420"/><line class="plan-win" x1="5" y1="120" x2="5" y2="420"/><line class="plan-gap plan-gap--ext" x1="0" y1="680" x2="0" y2="860"/><line class="plan-win" x1="-5" y1="680" x2="-5" y2="860"/><line class="plan-win" x1="0" y1="680" x2="0" y2="860"/><line class="plan-win" x1="5" y1="680" x2="5" y2="860"/><line class="plan-gap plan-gap--ext" x1="380" y1="920" x2="560" y2="920"/><line class="plan-win" x1="380" y1="915" x2="560" y2="915"/><line class="plan-win" x1="380" y1="920" x2="560" y2="920"/><line class="plan-win" x1="380" y1="925" x2="560" y2="925"/><line class="plan-gap plan-gap--ext" x1="700" y1="920" x2="900" y2="920"/><line class="plan-win" x1="700" y1="915" x2="900" y2="915"/><line class="plan-win" x1="700" y1="920" x2="900" y2="920"/><line class="plan-win" x1="700" y1="925" x2="900" y2="925"/><line class="plan-gap plan-gap--ext" x1="1000" y1="60" x2="1000" y2="240"/><line class="plan-win" x1="995" y1="60" x2="995" y2="240"/><line class="plan-win" x1="1000" y1="60" x2="1000" y2="240"/><line class="plan-win" x1="1005" y1="60" x2="1005" y2="240"/><line class="plan-gap plan-gap--ext" x1="1000" y1="480" x2="1000" y2="560"/><line class="plan-win" x1="995" y1="480" x2="995" y2="560"/><line class="plan-win" x1="1000" y1="480" x2="1000" y2="560"/><line class="plan-win" x1="1005" y1="480" x2="1005" y2="560"/></g><g class="plan-dims" aria-hidden="true"><line x1="0" y1="-46" x2="1000" y2="-46"/><line x1="0" y1="-54" x2="0" y2="-38"/><line x1="1000" y1="-54" x2="1000" y2="-38"/><text x="500" y="-58" text-anchor="middle">10 m</text><line x1="-46" y1="0" x2="-46" y2="920"/><line x1="-54" y1="0" x2="-38" y2="0"/><line x1="-54" y1="920" x2="-38" y2="920"/><text transform="translate(-58 460) rotate(-90)" text-anchor="middle">9.2 m</text></g></svg>
+<!--/PLAN-->
+            </div>
+            <p class="pick__hint"><b>Light</b> paints and rewires. <b>Standard</b> overlays the floor and builds the carpentry. <b>Full</b> hacks to bare first, then does everything Standard does.</p>
+            <ul class="rooms" id="rooms">
+              <!--ROOMS:hdb4-->
+<li class="rm" data-room="liv"><input type="checkbox" id="r-liv" data-room="liv"><label for="r-liv">Living &amp; dining<small>26.4 m²</small></label><span class="amt" data-amt="liv">—</span><span class="scope" role="radiogroup" aria-label="Scope for Living &amp; dining"><label><input type="radio" name="s-liv" value="light"><span>Light</span></label><label><input type="radio" name="s-liv" value="standard" checked><span>Standard</span></label><label><input type="radio" name="s-liv" value="full"><span>Full</span></label></span></li>
+<li class="rm" data-room="kit"><input type="checkbox" id="r-kit" data-room="kit"><label for="r-kit">Kitchen<small>9.6 m²</small></label><span class="amt" data-amt="kit">—</span><span class="scope" role="radiogroup" aria-label="Scope for Kitchen"><label><input type="radio" name="s-kit" value="light"><span>Light</span></label><label><input type="radio" name="s-kit" value="standard" checked><span>Standard</span></label><label><input type="radio" name="s-kit" value="full"><span>Full</span></label></span></li>
+<li class="rm" data-room="sy"><input type="checkbox" id="r-sy" data-room="sy"><label for="r-sy">Service yard<small>7.2 m²</small></label><span class="amt" data-amt="sy">—</span><span class="scope" role="radiogroup" aria-label="Scope for Service yard"><label><input type="radio" name="s-sy" value="light"><span>Light</span></label><label><input type="radio" name="s-sy" value="standard" checked><span>Standard</span></label><label><input type="radio" name="s-sy" value="full" disabled><span>Full</span></label></span></li>
+<li class="rm" data-room="hs"><input type="checkbox" id="r-hs" data-room="hs"><label for="r-hs">Household shelter<small>3.2 m²</small></label><span class="amt" data-amt="hs">—</span><span class="scope" role="radiogroup" aria-label="Scope for Household shelter"><label><input type="radio" name="s-hs" value="light" checked><span>Light</span></label><label><input type="radio" name="s-hs" value="standard" disabled><span>Standard</span></label><label><input type="radio" name="s-hs" value="full" disabled><span>Full</span></label><span class="scope__note">Shelter walls stay as built; paint and floor only.</span></span></li>
+<li class="rm" data-room="cb"><input type="checkbox" id="r-cb" data-room="cb"><label for="r-cb">Common bath<small>3.2 m²</small></label><span class="amt" data-amt="cb">—</span><span class="scope" role="radiogroup" aria-label="Scope for Common bath"><label><input type="radio" name="s-cb" value="light"><span>Light</span></label><label><input type="radio" name="s-cb" value="standard" checked><span>Standard</span></label><label><input type="radio" name="s-cb" value="full"><span>Full</span></label></span></li>
+<li class="rm" data-room="st"><input type="checkbox" id="r-st" data-room="st"><label for="r-st">Store<small>3.4 m²</small></label><span class="amt" data-amt="st">—</span><span class="scope" role="radiogroup" aria-label="Scope for Store"><label><input type="radio" name="s-st" value="light"><span>Light</span></label><label><input type="radio" name="s-st" value="standard" checked><span>Standard</span></label><label><input type="radio" name="s-st" value="full" disabled><span>Full</span></label></span></li>
+<li class="rm" data-room="mb"><input type="checkbox" id="r-mb" data-room="mb"><label for="r-mb">Master bath<small>3.8 m²</small></label><span class="amt" data-amt="mb">—</span><span class="scope" role="radiogroup" aria-label="Scope for Master bath"><label><input type="radio" name="s-mb" value="light"><span>Light</span></label><label><input type="radio" name="s-mb" value="standard" checked><span>Standard</span></label><label><input type="radio" name="s-mb" value="full"><span>Full</span></label></span></li>
+<li class="rm" data-room="cor"><input type="checkbox" id="r-cor" data-room="cor"><label for="r-cor">Entrance &amp; corridor<small>3.2 m²</small></label><span class="amt" data-amt="cor">—</span><span class="scope" role="radiogroup" aria-label="Scope for Entrance &amp; corridor"><label><input type="radio" name="s-cor" value="light"><span>Light</span></label><label><input type="radio" name="s-cor" value="standard" checked><span>Standard</span></label><label><input type="radio" name="s-cor" value="full"><span>Full</span></label></span></li>
+<li class="rm" data-room="br3"><input type="checkbox" id="r-br3" data-room="br3"><label for="r-br3">Bedroom 3<small>10.2 m²</small></label><span class="amt" data-amt="br3">—</span><span class="scope" role="radiogroup" aria-label="Scope for Bedroom 3"><label><input type="radio" name="s-br3" value="light"><span>Light</span></label><label><input type="radio" name="s-br3" value="standard" checked><span>Standard</span></label><label><input type="radio" name="s-br3" value="full"><span>Full</span></label></span></li>
+<li class="rm" data-room="br2"><input type="checkbox" id="r-br2" data-room="br2"><label for="r-br2">Bedroom 2<small>9.6 m²</small></label><span class="amt" data-amt="br2">—</span><span class="scope" role="radiogroup" aria-label="Scope for Bedroom 2"><label><input type="radio" name="s-br2" value="light"><span>Light</span></label><label><input type="radio" name="s-br2" value="standard" checked><span>Standard</span></label><label><input type="radio" name="s-br2" value="full"><span>Full</span></label></span></li>
+<li class="rm" data-room="mbr"><input type="checkbox" id="r-mbr" data-room="mbr"><label for="r-mbr">Master bedroom<small>12.2 m²</small></label><span class="amt" data-amt="mbr">—</span><span class="scope" role="radiogroup" aria-label="Scope for Master bedroom"><label><input type="radio" name="s-mbr" value="light"><span>Light</span></label><label><input type="radio" name="s-mbr" value="standard" checked><span>Standard</span></label><label><input type="radio" name="s-mbr" value="full"><span>Full</span></label></span></li>
+<!--/ROOMS-->
+            </ul>
+          </div>
+        </section>
+      </form>
+
+      <section class="step">
+        <div class="step__head">
+          <span class="n">03</span>
+          <div>
+            <h2>Send it as it is</h2>
+            <p>Opens WhatsApp with the message below already written. Nothing is sent until you press send there.</p>
+          </div>
+        </div>
+        <form class="form" id="sendForm" novalidate>
+          <div class="grid-2">
+            <div class="field">
+              <label for="f-name">Your name</label>
+              <input id="f-name" name="name" required autocomplete="name" aria-errormessage="f-name-err">
+              <span class="err" id="f-name-err">We need a name to reply to.</span>
+            </div>
+            <div class="field">
+              <label for="f-keys">When do you get your keys? <small>optional</small></label>
+              <input id="f-keys" name="keys" placeholder="November, or already have them">
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="f-tenure">Resale or new?</label>
+              <select id="f-tenure" name="tenure">
+                <option value="">Not sure yet</option>
+                <option>resale, with an old renovation to hack</option>
+                <option>new BTO, bare unit</option>
+                <option>new condominium, developer finish</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-budget">Budget in mind <small>optional</small></label>
+              <select id="f-budget" name="budget">
+                <option value="">Rather not say yet</option>
+                <option>under S$40,000</option>
+                <option>S$40,000 to 60,000</option>
+                <option>S$60,000 to 90,000</option>
+                <option>over S$90,000</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-notes">Anything we should know? <small>optional</small></label>
+            <textarea id="f-notes" name="notes" placeholder="Two of us work from home. We cook a lot. The cat needs a wall."></textarea>
+          </div>
+          <div class="form__actions">
+            <button class="btn" type="submit" id="sendBtn">Send on WhatsApp</button>
+            <a class="btn btn--ghost" id="sendMail" href="mailto:hello@chalkline.sg?subject=Start%20with%20my%20plan">Email it instead</a>
+          </div>
+          <div class="preview">
+            <p class="label">The message, as it will arrive</p>
+            <pre id="msgPreview">Hi CHALKLINE, I’d like to start with my plan.</pre>
+          </div>
+        </form>
+        <noscript>
+          <p>Scripting is off in your browser, so this page can't compose the message or total the rooms. Tick what you want above, then <a href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%27d%20like%20to%20start%20with%20my%20plan.">WhatsApp us</a> with your flat type and the rooms, and we'll do the arithmetic with you.</p>
+        </noscript>
+      </section>
+
+    </div>
+
+    <aside class="q__side" id="estimate">
+      <div class="est">
+        <p class="label">Your estimate</p>
+        <div aria-live="polite">
+          <p class="est__empty" id="estEmpty">Tick a room to start.</p>
+          <p class="est__band" id="estBand" hidden></p>
+          <p class="est__meta" id="estMeta" hidden></p>
+        </div>
+        <div class="est__line" id="estLine" aria-hidden="true"></div>
+        <details id="estDetails" hidden>
+          <summary>Show the working</summary>
+          <div class="work" id="estWork"></div>
+        </details>
+        <p class="est__note">A band, not a price. Material grades and what we find under the old tiles move it a few percent either way. It becomes a fixed sum once we have drawn your flat.</p>
+        <div class="btn-row">
+          <a class="btn" id="sendWa" href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%27d%20like%20to%20start%20with%20my%20plan.">Send on WhatsApp</a>
+        </div>
+      </div>
+    </aside>
+
+  </section>
+
+</main>
+
+<div class="est-bar" id="estBar" hidden>
+  <div><small>Your estimate</small><b id="estBarBand"></b></div>
+  <a href="#estimate">See the working</a>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <a class="mark" href="index.html" aria-label="CHALKLINE, home"><span>CHALK</span><span class="mark__line" aria-hidden="true"></span><span>LINE</span></a>
+        <p>Interior design &amp; renovation<br>18 Tai Seng Avenue #05-11<br>Singapore 534061</p>
+        <p class="small">Four minutes from Tai Seng MRT (CC11), exit A.</p>
+      </div>
+      <div>
+        <h2>Site</h2>
+        <ul>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="quote.html">Start with your plan</a></li>
+          <li><a href="studio.html">Studio</a></li>
+          <li><a href="studio.html#process">How a job runs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Talk to us</h2>
+        <ul>
+          <li><a href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%27d%20like%20to%20talk%20about%20renovating%20my%20flat.">WhatsApp 8224 2558</a></li>
+          <li><a href="tel:+6582242558">Call 8224 2558</a></li>
+          <li><a href="mailto:hello@chalkline.sg">hello@chalkline.sg</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Showroom</h2>
+        <p>Tue–Sat 10.30–19.00<br>Sun &amp; Mon by appointment</p>
+        <p class="small">Bring your floor plan. If you don't have it yet, we'll draw it from your unit type.</p>
+      </div>
+    </div>
+    <div class="foot__bar">
+      <span>© <span data-year>2026</span> CHALKLINE Pte Ltd</span>
+      <span>Tai Seng, Singapore</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/plans.js" defer></script>
+<script src="js/estimate.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/quote.js" defer></script>
+</body>
+</html>
