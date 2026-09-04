@@ -1,7 +1,7 @@
 # Security Audit — Esteem Auto Medics (client-preview prototype)
 
 **Date:** 2026-08-30
-**Project:** `C:\School\Personal\Sides\Website-Collection\templates\esteem-auto-medics` (gated live preview: https://website-collection-zanezhijies-projects.vercel.app/templates/esteem-auto-medics — Client Preview gated, not publicly reachable without an unlock session)
+**Project:** `C:\School\Personal\Sides\Website-Collection\templates\esteem-auto-medics` (gated live preview: https://templates.thornburystudio.com/templates/esteem-auto-medics — Client Preview gated, not publicly reachable without an unlock session)
 
 > **This is an automated first-pass code review, not a substitute for the human
 > sign-off record in the Vibe-Code Guardrails tool's Tech Guardrails tab, and not

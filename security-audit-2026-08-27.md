@@ -1,7 +1,7 @@
 # Security Audit — Website Collection (session delta: PARALLAX + Lab + LOAM credit)
 
 **Date:** 2026-08-27
-**Project:** `C:\School\Personal\Sides\Website-Collection` ([production](https://website-collection-zanezhijies-projects.vercel.app), verified live against a fresh preview: `https://website-collection-7brglgxay-zanezhijies-projects.vercel.app`)
+**Project:** `C:\School\Personal\Sides\Website-Collection` ([production](https://templates.thornburystudio.com), verified live against a fresh preview: `https://website-collection-7brglgxay-zanezhijies-projects.vercel.app`)
 **Checklist source:** `C:\School\Personal\Company\SECURITY.md` (v9, read live for this run)
 
 > **This is an automated first-pass code review, not a substitute for the human

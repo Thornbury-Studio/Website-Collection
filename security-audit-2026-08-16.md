@@ -23,7 +23,7 @@ No blocker-severity gap remains open in the code as of this report — the one r
 
 ## Novel finding beyond the literal checklist — found and fixed this session
 
-**Arbitrary repo files were publicly servable on the live site.** This project has no build step, so Vercel deploys the whole git-tracked repo as static files by default. I confirmed this live: `https://website-collection-zanezhijies-projects.vercel.app/CLAUDE.md` returned the full file content. `AGENT.md`, `PATTERNS.md`, and `PRODUCT.md` were equally exposed. This became urgent the moment I added `db/supabase-setup.sql` — a file that, before I caught this, contained a real password hash and a one-time plaintext password in a comment. Judged blocker-equivalent per this skill's own guidance ("a data exposure... is blocker-equivalent"), even though it doesn't map to one literal checklist line.
+**Arbitrary repo files were publicly servable on the live site.** This project has no build step, so Vercel deploys the whole git-tracked repo as static files by default. I confirmed this live: `https://templates.thornburystudio.com/CLAUDE.md` returned the full file content. `AGENT.md`, `PATTERNS.md`, and `PRODUCT.md` were equally exposed. This became urgent the moment I added `db/supabase-setup.sql` — a file that, before I caught this, contained a real password hash and a one-time plaintext password in a comment. Judged blocker-equivalent per this skill's own guidance ("a data exposure... is blocker-equivalent"), even though it doesn't map to one literal checklist line.
 
 **Fixed:**
 1. Added [.vercelignore](.vercelignore) excluding `*.md`, `db/`, `.impeccable/` from future deployments.
