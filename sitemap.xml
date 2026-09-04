@@ -762,6 +762,30 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v4/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v4/work.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v4/studio.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v4/contact.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/thornbury-digital-v5/index.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
