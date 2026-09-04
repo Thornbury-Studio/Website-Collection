@@ -48,26 +48,36 @@
     sel.id = 'devbg';
     sel.setAttribute('aria-label', 'Temporary development control: background transition direction');
 
+    /* Every option carries its own measured cost, in the dropdown itself and in
+       the readout beside it, so no direction can be judged without its price. */
     var modes = bg.modes();
-    var notes = {};
+    var info = {};
     modes.forEach(function (m) {
-      notes[m.id] = m.note;
+      info[m.id] = m;
       var o = document.createElement('option');
       o.value = m.id;
-      o.textContent = m.label;
+      o.textContent = m.label + '  —  ' + String(m.cost || '').split(' · ')[0];
       sel.appendChild(o);
     });
-    sel.value = bg.mode();
-    sel.title = 'TEMPORARY dev control — not for production.\n' + notes[sel.value];
 
+    var price = document.createElement('span');
+    price.className = 'devbg-cost';
     var note = document.createElement('span');
     note.className = 'devbg-note';
-    note.textContent = notes[sel.value] || '';
+
+    function show(id) {
+      var m = info[id] || {};
+      price.textContent = m.cost || '';
+      note.textContent = m.note || '';
+      sel.title = 'TEMPORARY dev control — not for production.\n' +
+        (m.label || '') + '\nCost: ' + (m.cost || '') + '\n' + (m.note || '');
+    }
+    sel.value = bg.mode();
+    show(sel.value);
 
     sel.addEventListener('change', function () {
       bg.setMode(sel.value);
-      note.textContent = notes[sel.value] || '';
-      sel.title = 'TEMPORARY dev control — not for production.\n' + notes[sel.value];
+      show(sel.value);
       slot.classList.remove('is-hit');
       void slot.offsetWidth;
       slot.classList.add('is-hit');
@@ -76,12 +86,13 @@
     addEventListener('tb-bg-mode', function (e) {
       if (sel.value !== e.detail) {
         sel.value = e.detail;
-        note.textContent = notes[e.detail] || '';
+        show(e.detail);
       }
     });
 
     slot.appendChild(tag);
     slot.appendChild(sel);
+    slot.appendChild(price);
     slot.appendChild(note);
     document.documentElement.classList.add('devbg-on');
   }
