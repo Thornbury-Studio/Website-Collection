@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Book a Date at Gather House | Tampines</title>
+<meta name="description" content="Enquire to hire Gather House in Tampines. Tell us your name, date, party size, and occasion — we reply within one working day at hello@gatherhouse.sg.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/community-gather-house/contact.html">
+<meta name="theme-color" content="#f7f3ec">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f7f3ec'/%3E%3Crect x='8' y='10' width='16' height='14' fill='none' stroke='%233a2a1c' stroke-width='1.6'/%3E%3Cpath d='M8 14h16' stroke='%23c4853a' stroke-width='1.6'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gather House">
+<meta property="og:title" content="Contact — Gather House, Tampines">
+<meta property="og:description" content="Ask about a date for workshops, dinners, or private hire.">
+<meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/community-gather-house/contact.html">
+<meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/community-gather-house/img/hire-workshop.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — Gather House">
+<meta name="twitter:description" content="Enquire to book. We reply within one working day.">
+<meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/community-gather-house/img/hire-workshop.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Fraunces:opsz,wght@9..144,360;9..144,400;9..144,420&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header is-solid">
+  <div class="site-header__in">
+    <a class="wordmark" href="index.html">Gather House<span>Tampines · Singapore</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="hire.html">Venue hire</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="Menu">
+      <a href="index.html">Home</a>
+      <a href="hire.html">Venue hire</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow reveal">Contact</p>
+      <h1 class="reveal d1">Tell us when you’d like the room.</h1>
+      <p class="lede reveal d2">A short note is enough. We check the day book and reply within one working day — usually with a question about set-up before a hold.</p>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap form-layout">
+      <aside class="contact-aside reveal">
+        <p class="footer__label">Write or call</p>
+        <p><a href="mailto:hello@gatherhouse.sg">hello@gatherhouse.sg</a><br>
+        <a href="tel:+6560001240">+65 6000 1240</a></p>
+        <p style="margin-top:1.5rem" class="footer__label">Visit</p>
+        <p>18 Tampines Street 92, #01-12<br>Singapore 528891</p>
+        <p class="muted" style="margin-top:1.5rem;font-size:0.95rem">Hours for viewings: Tue–Sat, 11:00–18:00 by appointment. Evening hires run until 23:00.</p>
+      </aside>
+
+      <div class="reveal d1">
+        <form id="contactForm" novalidate>
+          <div class="form-grid form-grid--2">
+            <div class="field">
+              <label for="cName">Name</label>
+              <input id="cName" name="name" type="text" autocomplete="name" required>
+              <p class="field__err" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="cEmail">Email</label>
+              <input id="cEmail" name="email" type="email" autocomplete="email" required>
+              <p class="field__err" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="cDate">Preferred date</label>
+              <input id="cDate" name="date" type="date" required>
+              <p class="field__err" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="cSize">Party size</label>
+              <input id="cSize" name="size" type="number" min="1" max="80" inputmode="numeric" required>
+              <p class="field__err" role="alert"></p>
+            </div>
+          </div>
+          <div class="field" style="margin-top:1.1rem">
+            <label for="cMsg">Message</label>
+            <textarea id="cMsg" name="message" required placeholder="Occasion, package (half day / full day / evening), and anything we should know about set-up."></textarea>
+            <p class="field__err" role="alert"></p>
+          </div>
+          <p class="cta-row" style="margin-top:1.35rem">
+            <button class="btn btn-solid" type="submit">Send enquiry</button>
+          </p>
+        </form>
+        <div class="form-success" id="formSuccess" hidden></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <a class="footer__brand" href="index.html">Gather House</a>
+        <p style="margin-top:0.65rem">A neighbourhood room for workshops, dinners, and private hire in Tampines.</p>
+      </div>
+      <div>
+        <p class="footer__label">Visit</p>
+        <p>18 Tampines Street 92, #01-12<br>Singapore 528891</p>
+      </div>
+      <div>
+        <p class="footer__label">Contact</p>
+        <p><a href="mailto:hello@gatherhouse.sg">hello@gatherhouse.sg</a><br>
+        <a href="tel:+6560001240">+65 6000 1240</a></p>
+      </div>
+    </div>
+    <div class="footer__base">
+      <p>© <span data-year></span> Gather House</p>
+      <p>Warm wood · soft light · Tampines</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/ui.js"></script>
+<script src="js/contact.js"></script>
+</body>
+</html>
