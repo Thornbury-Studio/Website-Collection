@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Cost a survey — GRATICULE Land &amp; Hydrographic Survey</title>
+  <meta name="description" content="Work out an indicative survey fee from extent, tolerance and access, with the arithmetic shown, then send the brief to the office in Caernarfon.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/survey-graticule/contact.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Cost a survey — GRATICULE">
+  <meta property="og:description" content="An indicative fee from extent, tolerance and access — with the arithmetic printed underneath it.">
+  <meta name="theme-color" content="#ece7dc">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23ece7dc'/><g fill='none' stroke='%2396683c' stroke-width='1'><ellipse cx='8' cy='8.4' rx='6.6' ry='4'/><ellipse cx='8' cy='8.4' rx='4' ry='2.3'/></g><path d='M8 7.6l1.6 2.6H6.4z' fill='%23b32240'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="band">
+    <div class="wrap band__in">
+      <span class="band__set"><span>Enquiries</span><span>Reply within one working day</span></span>
+      <span class="band__set"><span>OSGB36 / ODN</span><span><b>Caernarfon</b></span></span>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <a class="mark" href="index.html">
+      <span class="mark__word">GRATICULE</span>
+      <span class="mark__sub">Land &amp; Hydrographic Survey</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="services.html">Services</a>
+      <a href="instruments.html">Instruments</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <div class="tools">
+      <button class="mode" id="modeBtn" type="button" aria-pressed="false">
+        <span class="mode__led" aria-hidden="true"></span>
+        <span class="mode__txt"></span>
+      </button>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="services.html">Services</a>
+      <a href="instruments.html">Instruments</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="bay--half bay">
+    <div class="wrap">
+      <div class="cols cols--sidebar">
+        <div>
+          <p class="label">Cost a survey</p>
+          <h1 style="font-size:clamp(2.4rem,5vw,4rem)">A number before you pick up the phone.</h1>
+        </div>
+        <div>
+          <p class="lede">Set the extent, the tolerance and the access, and this works out
+            the field days, the office days and an indicative fee &mdash; then prints the
+            arithmetic underneath so you can see which half is expensive. It is nearly always
+            the office half.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bay--half bay" style="padding-top:0">
+    <div class="wrap">
+      <div class="cols cols--2">
+
+        <form id="estForm" novalidate>
+          <p class="label">The brief</p>
+
+          <div class="field">
+            <label for="estType">Discipline</label>
+            <select id="estType" name="type">
+              <option value="topographic">Topographic survey</option>
+              <option value="building">Measured building survey</option>
+              <option value="scanning">Laser scan record</option>
+              <option value="hydrographic">Bathymetric survey</option>
+              <option value="uav">UAV photogrammetry</option>
+              <option value="setting">Setting out &amp; as-built</option>
+              <option value="monitoring">Structural monitoring</option>
+              <option value="utilities">Utility detection</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="estExtent">Extent &mdash; in <span id="estUnit">ha</span></label>
+            <input type="number" id="estExtent" name="extent" value="5" min="0.1" max="400" step="0.1" inputmode="decimal">
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="estAccuracy">Tolerance</label>
+              <select id="estAccuracy" name="accuracy">
+                <option value="standard">Standard &mdash; ±25 mm</option>
+                <option value="enhanced">Enhanced &mdash; ±10 mm</option>
+                <option value="precise">Precise &mdash; ±3 mm</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="estAccess">Access</label>
+              <select id="estAccess" name="access">
+                <option value="open">Open ground</option>
+                <option value="live">Live site or occupied</option>
+                <option value="tidal">Tidal or intertidal</option>
+                <option value="difficult">Steep or rope access</option>
+              </select>
+            </div>
+          </div>
+
+          <fieldset style="border:0;padding:0;margin:0 0 1.2rem">
+            <legend class="fieldset__legend" style="padding:0 0 .5rem">Deliverables beyond drawing &amp; report</legend>
+            <div class="grid-2">
+              <label style="display:flex;gap:.5rem;align-items:center;font-size:.9rem;padding:.25rem 0">
+                <input type="checkbox" id="extra-dtm" style="width:auto"> Levelled DTM surface</label>
+              <label style="display:flex;gap:.5rem;align-items:center;font-size:.9rem;padding:.25rem 0">
+                <input type="checkbox" id="extra-revit" style="width:auto"> Revit model</label>
+              <label style="display:flex;gap:.5rem;align-items:center;font-size:.9rem;padding:.25rem 0">
+                <input type="checkbox" id="extra-cloud" style="width:auto"> Published point cloud</label>
+              <label style="display:flex;gap:.5rem;align-items:center;font-size:.9rem;padding:.25rem 0">
+                <input type="checkbox" id="extra-pas" style="width:auto"> PAS 128 attribution</label>
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="est">
+          <p class="label" style="margin-bottom:.4rem">Indicative</p>
+          <h2 style="font-size:1.6rem;margin-bottom:0">Before a site visit.</h2>
+          <dl class="est__out" id="estOut"></dl>
+          <p class="est__work" id="estWork"></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="plate-bay bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+
+        <div>
+          <p class="label">Send the brief</p>
+          <h2>Tell us what the measurement has to decide.</h2>
+          <p>That one sentence is worth more than a specification, because it usually shows
+            that the cheapest survey will do &mdash; or that the one being asked for will
+            not.</p>
+
+          <div class="sent" id="sent" hidden></div>
+
+          <form id="enquiry" novalidate style="margin-top:1.6rem">
+            <div class="grid-2">
+              <div class="field">
+                <label for="f-name">Name</label>
+                <input type="text" id="f-name" name="name" autocomplete="name"
+                      >
+                <span class="field__err"></span>
+              </div>
+              <div class="field">
+                <label for="f-email">Email</label>
+                <input type="email" id="f-email" name="email" autocomplete="email"
+                      >
+                <span class="field__err"></span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-site">Site or grid reference <span style="text-transform:none">(optional)</span></label>
+              <input type="text" id="f-site" name="site" placeholder="e.g. AD 1833 0617, or the address"
+                    >
+              <span class="field__err"></span>
+            </div>
+            <div class="field">
+              <label for="f-message">What has to be decided</label>
+              <textarea id="f-message" name="message"
+                        placeholder="Two sentences is plenty. What the survey is for, roughly how big, and when you need it."
+                       ></textarea>
+              <span class="field__err"></span>
+            </div>
+            <button class="btn" type="submit">Send enquiry</button>
+            <p class="formnote" style="margin-top:1rem">
+              Enquiries are read by a surveyor, not a form inbox. If it is urgent, telephone
+              the office instead &mdash; someone will pick up between seven and six.</p>
+          </form>
+        </div>
+
+        <div id="office">
+          <p class="label">The office</p>
+          <h2>Doc Fictoria, Caernarfon.</h2>
+          <dl class="kv">
+            <div><dt>Address</dt>
+              <dd>Unit 4, Doc Fictoria<br>Caernarfon, Gwynedd LL55 1SQ</dd></div>
+            <div><dt>Telephone</dt>
+              <dd class="num">01286 555 0148</dd></div>
+            <div><dt>Email</dt>
+              <dd>survey@graticule.example</dd></div>
+            <div><dt>Office hours</dt>
+              <dd>Monday to Friday, 07:00&ndash;18:00</dd></div>
+            <div><dt>Field crews</dt>
+              <dd>On site from first light; messages picked up hourly</dd></div>
+            <div><dt>Coverage</dt>
+              <dd>Gwynedd, Ynys M&ocirc;n, Conwy, north Ceredigion</dd></div>
+            <div><dt>Position</dt>
+              <dd class="num">53.1401&deg; N, 4.2760&deg; W</dd></div>
+            <div><dt>Language</dt>
+              <dd>Cymraeg a Saesneg &mdash; Welsh and English</dd></div>
+          </dl>
+
+          <p style="margin-top:1.6rem">Step-free from the quay, accessible WC, one accessible
+            parking bay thirty metres from the door. If it is easier for you, we will come to
+            your office or meet on the site instead.</p>
+
+          <p class="btn-row" style="margin-top:1.4rem">
+            <a class="btn btn--ghost" href="about.html#access">Accessibility</a>
+            <a class="btn btn--ghost" href="about.html#legal">Terms &amp; privacy</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="bay--half bay">
+    <div class="wrap wrap--tight">
+      <h2>What happens next</h2>
+      <div class="flow flow--stack" style="margin-top:1.6rem">
+        <div class="stage">
+          <span class="stage__n">01 &middot; Same day</span>
+          <h3>A surveyor reads it</h3>
+          <p>Usually with one question about access, because that is the term that moves a
+            fee most.</p>
+        </div>
+        <div class="stage">
+          <span class="stage__n">02 &middot; Within a working day</span>
+          <h3>A fee proposal</h3>
+          <p>Field and office days shown separately, against a named standard and a stated
+            tolerance. Where a looser tolerance would do, both are quoted.</p>
+        </div>
+        <div class="stage">
+          <span class="stage__n">03 &middot; Before we price a large job</span>
+          <h3>A walk-over</h3>
+          <p>Free, and worth it. Half the surveys that come in over budget were priced from
+            a plan by someone who never stood on the site.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <span class="foot__mark">GRATICULE</span>
+        <p>Land &amp; Hydrographic Survey<br>Unit 4, Doc Fictoria<br>Caernarfon, Gwynedd LL55 1SQ</p>
+        <p class="num">53.1401&deg; N &middot; 4.2760&deg; W</p>
+      </div>
+      <div>
+        <h2>Survey</h2>
+        <ul>
+          <li><a href="services.html#topographic">Topographic</a></li>
+          <li><a href="services.html#building">Measured building</a></li>
+          <li><a href="services.html#hydrographic">Bathymetric</a></li>
+          <li><a href="services.html#setting-out">Setting out</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Practice</h2>
+        <ul>
+          <li><a href="instruments.html">Instruments</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="about.html#people">People</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Enquiries</h2>
+        <ul>
+          <li><a href="contact.html">Cost a survey</a></li>
+          <li><a href="contact.html#office">Office &amp; hours</a></li>
+          <li><a href="about.html#standards">Standards</a></li>
+          <li><a href="about.html#access">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__fine">
+      <p>&copy; <span data-year>2026</span> Graticule Survey Ltd, registered in England and
+        Wales. Regulated by RICS. All levels reduced to Ordnance Datum Newlyn unless a site
+        datum is agreed in writing.</p>
+      <p><a href="about.html#legal">Terms &amp; privacy</a> &middot;
+         <a href="about.html#access">Accessibility</a> &middot;
+         <a href="contact.html">Press</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/ui.js"></script>
+<script src="js/contact.js"></script>
+</body>
+</html>

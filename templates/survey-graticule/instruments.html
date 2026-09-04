@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Instruments — GRATICULE Land &amp; Hydrographic Survey</title>
+  <meta name="description" content="The instruments GRATICULE runs, their working tolerances at the ranges we actually use them, and the calibration regime behind the numbers.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/survey-graticule/instruments.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Instruments — GRATICULE">
+  <meta property="og:description" content="Working tolerances, not brochure figures. What we run, and what it holds on a real site.">
+  <meta name="theme-color" content="#ece7dc">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23ece7dc'/><g fill='none' stroke='%2396683c' stroke-width='1'><ellipse cx='8' cy='8.4' rx='6.6' ry='4'/><ellipse cx='8' cy='8.4' rx='4' ry='2.3'/></g><path d='M8 7.6l1.6 2.6H6.4z' fill='%23b32240'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="band">
+    <div class="wrap band__in">
+      <span class="band__set"><span>Instruments</span><span>Calibrated annually to UKAS</span></span>
+      <span class="band__set"><span>OSGB36 / ODN</span><span><b>Caernarfon</b></span></span>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <a class="mark" href="index.html">
+      <span class="mark__word">GRATICULE</span>
+      <span class="mark__sub">Land &amp; Hydrographic Survey</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="services.html">Services</a>
+      <a href="instruments.html" aria-current="page">Instruments</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="tools">
+      <button class="mode" id="modeBtn" type="button" aria-pressed="false">
+        <span class="mode__led" aria-hidden="true"></span>
+        <span class="mode__txt"></span>
+      </button>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="services.html">Services</a>
+      <a href="instruments.html">Instruments</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="bay--half bay">
+    <div class="wrap">
+      <div class="cols cols--sidebar">
+        <div>
+          <p class="label">Instruments</p>
+          <h1 style="font-size:clamp(2.4rem,5vw,4rem)">The figures on this page are the ones we hold on site.</h1>
+        </div>
+        <div>
+          <p class="lede">Every instrument has a brochure number achieved on a calibration
+            baseline in still air, and a working number achieved on a hillside in February.
+            These are the second kind, measured against our own check network at Doc Fictoria
+            and re-verified every quarter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bay--half bay" style="padding-top:0">
+    <div class="wrap">
+      <div class="table-scroll">
+        <table class="spec-table">
+          <caption>Instrument register &mdash; current fleet</caption>
+          <thead>
+            <tr>
+              <th scope="col">Instrument</th>
+              <th scope="col">Count</th>
+              <th scope="col">Working tolerance</th>
+              <th scope="col">Typical use</th>
+              <th scope="col">Calibration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Robotic total station, 1&Prime;</td>
+              <td class="num">4</td>
+              <td class="num">±1&ndash;3 mm at 200 m</td>
+              <td>Control, setting out, monitoring</td>
+              <td>Annual UKAS + quarterly two-peg</td>
+            </tr>
+            <tr>
+              <td>Digital level, invar staff</td>
+              <td class="num">3</td>
+              <td class="num">±0.7 mm per km double run</td>
+              <td>Precise levelling, settlement</td>
+              <td>Annual UKAS + monthly collimation</td>
+            </tr>
+            <tr>
+              <td>GNSS rover, network RTK</td>
+              <td class="num">6</td>
+              <td class="num">±8&ndash;15 mm plan, ±15&ndash;25 mm height</td>
+              <td>Topographic detail, control extension</td>
+              <td>Annual, plus daily check into known station</td>
+            </tr>
+            <tr id="scanning">
+              <td>Terrestrial laser scanner</td>
+              <td class="num">2</td>
+              <td class="num">±2&ndash;6 mm at 50 m</td>
+              <td>Measured building, retrofit, record</td>
+              <td>Annual UKAS + per-project target check</td>
+            </tr>
+            <tr>
+              <td>Survey UAV, RTK enabled</td>
+              <td class="num">2</td>
+              <td class="num">±25&ndash;35 mm to ground control</td>
+              <td>Volumes, faces, inaccessible ground</td>
+              <td>Camera calibration each mobilisation</td>
+            </tr>
+            <tr>
+              <td>Multibeam echosounder</td>
+              <td class="num">1</td>
+              <td class="num">±25&ndash;50 mm at 12 m depth</td>
+              <td>Berths, scour, channel bathymetry</td>
+              <td>Patch test each mobilisation</td>
+            </tr>
+            <tr>
+              <td>Single-beam echosounder</td>
+              <td class="num">2</td>
+              <td class="num">±30 mm + 0.1% of depth</td>
+              <td>Sections, reconnaissance, volumes</td>
+              <td>Bar check at start and end of survey</td>
+            </tr>
+            <tr>
+              <td>GPR, dual frequency</td>
+              <td class="num">2</td>
+              <td class="num">Depth ±15% of measured depth</td>
+              <td>PAS 128 utility detection</td>
+              <td>Annual, plus on-site velocity calibration</td>
+            </tr>
+            <tr>
+              <td>Tide gauge, pressure</td>
+              <td class="num">2</td>
+              <td class="num">±10 mm</td>
+              <td>Tidal reduction for hydrographic work</td>
+              <td>Levelled to ODN on every deployment</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="plate-bay bay">
+    <div class="wrap">
+      <div class="cols cols--sidebar">
+        <div class="reveal">
+          <p class="label">Comparison</p>
+          <h2>The same ground, seven different ways.</h2>
+          <p>Put on one logarithmic scale, the fleet spans nearly two orders of magnitude.
+            The point of the chart is not that the total station wins &mdash; it is that a
+            stockpile volume does not need it, and a bearing plate does.</p>
+          <p>Choosing one band tighter than the job requires typically doubles the field
+            time. Choosing one band looser than it requires means measuring it again.</p>
+        </div>
+        <div class="reveal reveal--d1">
+          <div class="ladder">
+            <div class="ladder__row">
+              <span class="ladder__name">Precise levelling</span>
+              <span class="ladder__bar"><i style="left:0%;width:15.1%"></i></span>
+              <span class="ladder__val">1&ndash;2 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">Total station</span>
+              <span class="ladder__bar"><i style="left:0%;width:23.9%"></i></span>
+              <span class="ladder__val">1&ndash;3 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">Laser scan @ 50 m</span>
+              <span class="ladder__bar"><i style="left:15.1%;width:23.9%"></i></span>
+              <span class="ladder__val">2&ndash;6 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">GNSS RTK, plan</span>
+              <span class="ladder__bar"><i style="left:45.2%;width:13.6%"></i></span>
+              <span class="ladder__val">8&ndash;15 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">GNSS RTK, height</span>
+              <span class="ladder__bar"><i style="left:58.8%;width:11.1%"></i></span>
+              <span class="ladder__val">15&ndash;25 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">UAV @ 60 m</span>
+              <span class="ladder__bar"><i style="left:65.1%;width:12.1%"></i></span>
+              <span class="ladder__val">20&ndash;35 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">Multibeam @ 12 m</span>
+              <span class="ladder__bar"><i style="left:69.9%;width:15.1%"></i></span>
+              <span class="ladder__val">25&ndash;50 mm</span>
+            </div>
+            <div class="ladder__scale">
+              <span></span>
+              <span class="ladder__ticks"><span>1 mm</span><span>3</span><span>10</span><span>30</span><span>100</span></span>
+              <span></span>
+            </div>
+          </div>
+          <p class="profile__note">Logarithmic scale. Figures are one sigma against site
+            control, over a full working day, in the weather this coast actually has.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bay">
+    <div class="wrap wrap--tight prose">
+      <p class="label">Calibration</p>
+      <h2>Why we publish residuals</h2>
+      <p>Every network we observe is adjusted by least squares, and the adjustment report
+        goes out with the drawing whether or not anyone asked for it. It contains the
+        residual on each observation, the standard error of each station, and the
+        chi-squared test on the whole network.</p>
+      <p>Most clients never open it. The ones who do are usually engineers checking whether
+        a settlement of four millimetres is real movement or is inside our noise, and that
+        is exactly the question the report exists to answer. A survey that cannot state its
+        own uncertainty cannot be used to decide anything marginal, and marginal decisions
+        are the expensive ones.</p>
+
+      <h3>The check network</h3>
+      <p>We maintain eleven stations around the harbour at Doc Fictoria, observed as a
+        closed network twice a year and levelled to a deep datum. Instruments are checked
+        into it before any monitoring contract and after any repair, transport incident or
+        drop. The comparison is what produces the working tolerances in the table above;
+        they are not copied from a specification sheet.</p>
+
+      <h3>What gets an instrument stood down</h3>
+      <ul>
+        <li>Two-peg test outside 3&Prime; on a total station.</li>
+        <li>Collimation drift on a digital level between monthly checks.</li>
+        <li>Any drop, however soft the ground, until it is re-checked.</li>
+        <li>Scanner target residuals above 4 mm on a controlled setup.</li>
+        <li>A patch test that will not resolve within tolerance on the multibeam.</li>
+      </ul>
+      <p class="note">An instrument stood down mid-contract is replaced from the fleet the
+        same day. That is most of the reason there are four total stations for seventeen
+        people.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <span class="foot__mark">GRATICULE</span>
+        <p>Land &amp; Hydrographic Survey<br>Unit 4, Doc Fictoria<br>Caernarfon, Gwynedd LL55 1SQ</p>
+        <p class="num">53.1401&deg; N &middot; 4.2760&deg; W</p>
+      </div>
+      <div>
+        <h2>Survey</h2>
+        <ul>
+          <li><a href="services.html#topographic">Topographic</a></li>
+          <li><a href="services.html#building">Measured building</a></li>
+          <li><a href="services.html#hydrographic">Bathymetric</a></li>
+          <li><a href="services.html#setting-out">Setting out</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Practice</h2>
+        <ul>
+          <li><a href="instruments.html">Instruments</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="about.html#people">People</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Enquiries</h2>
+        <ul>
+          <li><a href="contact.html">Cost a survey</a></li>
+          <li><a href="contact.html#office">Office &amp; hours</a></li>
+          <li><a href="about.html#standards">Standards</a></li>
+          <li><a href="about.html#access">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__fine">
+      <p>&copy; <span data-year>2026</span> Graticule Survey Ltd, registered in England and
+        Wales. Regulated by RICS. All levels reduced to Ordnance Datum Newlyn unless a site
+        datum is agreed in writing.</p>
+      <p><a href="about.html#legal">Terms &amp; privacy</a> &middot;
+         <a href="about.html#access">Accessibility</a> &middot;
+         <a href="contact.html">Press</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/ui.js"></script>
+</body>
+</html>
