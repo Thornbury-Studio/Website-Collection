@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Work — CHALKLINE</title>
+  <meta name="description" content="Every room CHALKLINE has finished, before and after, from the same camera. Filter by room and by flat type: 3-room, 4-room, 5-room HDB and condominium.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/interior-chalkline/work.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CHALKLINE">
+  <meta property="og:title" content="Work — CHALKLINE">
+  <meta property="og:description" content="Every room, before and after, from the same camera.">
+  <meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/interior-chalkline/work.html">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/interior-chalkline/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F0EFEA">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F0EFEA'/><path d='M5 25L27 7' stroke='%232743C9' stroke-width='3.2' stroke-linecap='round'/><path d='M5 8h8M19 24h8' stroke='%2317191C' stroke-width='2.2'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Golos+Text:wght@400;500;600;700&family=Fragment+Mono:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="mark" href="index.html" aria-label="CHALKLINE, home"><span>CHALK</span><span class="mark__line" aria-hidden="true"></span><span>LINE</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="work.html" aria-current="page">Work</a>
+      <a href="quote.html">Start with your plan</a>
+      <a href="studio.html">Studio</a>
+    </nav>
+    <div class="top__tools">
+      <a class="btn btn--wa" aria-label="WhatsApp 8224 2558" href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%20saw%20a%20room%20on%20your%20work%20page%20and%20want%20something%20like%20it.">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/></svg>
+        <span class="txt">WhatsApp</span><span>8224 2558</span>
+      </a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="work.html" aria-current="page">Work</a>
+      <a href="quote.html">Start with your plan</a>
+      <a href="studio.html">Studio</a>
+      <a href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%27d%20like%20to%20talk%20about%20renovating%20my%20flat.">WhatsApp 8224 2558</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="bay bay--tight">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">Work</p>
+        <h1>Every room, before and after.</h1>
+        <p class="lede">Drag the line. The room on the left is what we were handed; the room on the right is what we handed back. Same camera, same window, same wall.</p>
+      </div>
+
+      <div class="filters">
+        <fieldset>
+          <legend>Room</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="kind" value="all" checked><span>All rooms</span></label>
+            <label class="chip"><input type="radio" name="kind" value="living"><span>Living</span></label>
+            <label class="chip"><input type="radio" name="kind" value="kitchen"><span>Kitchen</span></label>
+            <label class="chip"><input type="radio" name="kind" value="bed"><span>Bedrooms</span></label>
+            <label class="chip"><input type="radio" name="kind" value="bath"><span>Bathrooms</span></label>
+            <label class="chip"><input type="radio" name="kind" value="entry"><span>Entrance</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Flat</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="flat" value="all" checked><span>All flats</span></label>
+            <label class="chip"><input type="radio" name="flat" value="hdb3"><span>3-room</span></label>
+            <label class="chip"><input type="radio" name="flat" value="hdb4"><span>4-room</span></label>
+            <label class="chip"><input type="radio" name="flat" value="hdb5"><span>5-room</span></label>
+            <label class="chip"><input type="radio" name="flat" value="condo"><span>Condominium</span></label>
+          </div>
+        </fieldset>
+      </div>
+      <p class="filter-status" id="filterStatus" aria-live="polite">12 pairs across 4 projects</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <!-- ============================ Tampines ============================ -->
+    <article class="project" id="tampines" data-flat="hdb4">
+      <div class="project__head">
+        <div class="reveal">
+          <p class="label">4-room resale · handed over March 2026</p>
+          <h2>Tampines Street 81</h2>
+          <p>A 1990s resale flat hacked to bare and rebuilt for a couple who wanted one long living room, a kitchen they could both stand in, and a second bedroom that works as a study now and a nursery later. Bedroom 3 kept its floor and got a wardrobe. The shelter was painted, as the rules allow, and nothing more.</p>
+          <ul class="project__spec">
+            <li><b>Flat</b>4-room HDB, resale</li>
+            <li><b>Area</b><span class="num"><!--EST:hdb4:liv=full,kit=full,mbr=full,mb=full,br2=standard,cb=full,cor=full,br3=standard,hs=light:area-->92 m²<!--/EST--></span></li>
+            <li><b>Contract sum</b><span class="num"><!--EST:hdb4:liv=full,kit=full,mbr=full,mb=full,br2=standard,cb=full,cor=full,br3=standard,hs=light:sum-->S$79,140<!--/EST--></span></li>
+            <li><b>On site</b><span class="num"><!--EST:hdb4:liv=full,kit=full,mbr=full,mb=full,br2=standard,cb=full,cor=full,br3=standard,hs=light:weeks-->11<!--/EST--> weeks</span></li>
+          </ul>
+        </div>
+        <div class="project__mini reveal d1">
+          <p class="label"><span>Rooms touched</span><b><!--EST:hdb4:liv=full,kit=full,mbr=full,mb=full,br2=standard,cb=full,cor=full,br3=standard,hs=light:rooms-->9<!--/EST--> of 11</b></p>
+          <!--PLAN:mini:hdb4:liv,kit,mbr,mb,br2,cb,cor,br3,hs-->
+<svg class="plan-svg plan-svg--mini" viewBox="-84 -84 1168 1088" role="img" aria-labelledby="mini-hdb4-t" focusable="false"><title id="mini-hdb4-t">4-room HDB floor plan</title><defs><clipPath id="mini-hdb4-cp-liv"><path d="M0 0L440 0L440 600L0 600Z"/></clipPath><clipPath id="mini-hdb4-cp-kit"><path d="M440 0L760 0L760 300L440 300Z"/></clipPath><clipPath id="mini-hdb4-cp-sy"><path d="M760 0L1000 0L1000 300L760 300Z"/></clipPath><clipPath id="mini-hdb4-cp-hs"><path d="M440 300L600 300L600 500L440 500Z"/></clipPath><clipPath id="mini-hdb4-cp-cb"><path d="M600 300L760 300L760 500L600 500Z"/></clipPath><clipPath id="mini-hdb4-cp-st"><path d="M760 300L1000 300L1000 440L760 440Z"/></clipPath><clipPath id="mini-hdb4-cp-mb"><path d="M760 440L1000 440L1000 600L760 600Z"/></clipPath><clipPath id="mini-hdb4-cp-cor"><path d="M440 500L760 500L760 600L440 600Z"/></clipPath><clipPath id="mini-hdb4-cp-br3"><path d="M0 600L320 600L320 920L0 920Z"/></clipPath><clipPath id="mini-hdb4-cp-br2"><path d="M320 600L620 600L620 920L320 920Z"/></clipPath><clipPath id="mini-hdb4-cp-mbr"><path d="M620 600L1000 600L1000 920L620 920Z"/></clipPath></defs><g class="room room--living is-scoped" data-room="liv"><path class="room__floor" d="M0 0L440 0L440 600L0 600Z"/><path class="room__edge" d="M0 0L440 0L440 600L0 600Z"/></g><g class="room room--kitchen is-scoped" data-room="kit"><path class="room__floor" d="M440 0L760 0L760 300L440 300Z"/><path class="room__edge" d="M440 0L760 0L760 300L440 300Z"/></g><g class="room room--yard" data-room="sy"><path class="room__floor" d="M760 0L1000 0L1000 300L760 300Z"/><path class="room__edge" d="M760 0L1000 0L1000 300L760 300Z"/></g><g class="room room--hs is-scoped" data-room="hs"><path class="room__floor" d="M440 300L600 300L600 500L440 500Z"/><path class="room__edge" d="M440 300L600 300L600 500L440 500Z"/></g><g class="room room--bath is-scoped" data-room="cb"><path class="room__floor" d="M600 300L760 300L760 500L600 500Z"/><path class="room__edge" d="M600 300L760 300L760 500L600 500Z"/></g><g class="room room--store" data-room="st"><path class="room__floor" d="M760 300L1000 300L1000 440L760 440Z"/><path class="room__edge" d="M760 300L1000 300L1000 440L760 440Z"/></g><g class="room room--bath is-scoped" data-room="mb"><path class="room__floor" d="M760 440L1000 440L1000 600L760 600Z"/><path class="room__edge" d="M760 440L1000 440L1000 600L760 600Z"/></g><g class="room room--entry is-scoped" data-room="cor"><path class="room__floor" d="M440 500L760 500L760 600L440 600Z"/><path class="room__edge" d="M440 500L760 500L760 600L440 600Z"/></g><g class="room room--bed is-scoped" data-room="br3"><path class="room__floor" d="M0 600L320 600L320 920L0 920Z"/><path class="room__edge" d="M0 600L320 600L320 920L0 920Z"/></g><g class="room room--study is-scoped" data-room="br2"><path class="room__floor" d="M320 600L620 600L620 920L320 920Z"/><path class="room__edge" d="M320 600L620 600L620 920L320 920Z"/></g><g class="room room--bed is-scoped" data-room="mbr"><path class="room__floor" d="M620 600L1000 600L1000 920L620 920Z"/><path class="room__edge" d="M620 600L1000 600L1000 920L620 920Z"/></g><g class="plan-walls"><path class="plan-wall" d="M0 0L440 0L440 600L0 600Z"/><path class="plan-wall" d="M440 0L760 0L760 300L440 300Z"/><path class="plan-wall" d="M760 0L1000 0L1000 300L760 300Z"/><path class="plan-wall" d="M440 300L600 300L600 500L440 500Z"/><path class="plan-wall" d="M600 300L760 300L760 500L600 500Z"/><path class="plan-wall" d="M760 300L1000 300L1000 440L760 440Z"/><path class="plan-wall" d="M760 440L1000 440L1000 600L760 600Z"/><path class="plan-wall" d="M440 500L760 500L760 600L440 600Z"/><path class="plan-wall" d="M0 600L320 600L320 920L0 920Z"/><path class="plan-wall" d="M320 600L620 600L620 920L320 920Z"/><path class="plan-wall" d="M620 600L1000 600L1000 920L620 920Z"/><path class="plan-wall plan-wall--ext" d="M0 0L1000 0L1000 920L0 920Z"/></g><g class="plan-open"><line class="plan-gap" x1="60" y1="0" x2="150" y2="0"/><line class="plan-leaf" x1="60" y1="0" x2="60" y2="90"/><path class="plan-swing" d="M60 90A90 90 0 0 1 150 0"/><line class="plan-gap" x1="440" y1="40" x2="440" y2="130"/><line class="plan-gap" x1="760" y1="80" x2="760" y2="220"/><line class="plan-gap" x1="480" y1="500" x2="560" y2="500"/><line class="plan-leaf" x1="480" y1="500" x2="480" y2="420"/><path class="plan-swing" d="M480 420A80 80 0 0 0 560 500"/><line class="plan-gap" x1="640" y1="500" x2="720" y2="500"/><line class="plan-leaf" x1="720" y1="500" x2="720" y2="420"/><path class="plan-swing" d="M720 420A80 80 0 0 1 640 500"/><line class="plan-gap" x1="760" y1="340" x2="760" y2="410"/><line class="plan-leaf" x1="760" y1="340" x2="830" y2="340"/><path class="plan-swing" d="M830 340A70 70 0 0 0 760 410"/><line class="plan-gap" x1="440" y1="510" x2="440" y2="590"/><line class="plan-gap" x1="230" y1="600" x2="310" y2="600"/><line class="plan-leaf" x1="310" y1="600" x2="310" y2="680"/><path class="plan-swing" d="M310 680A80 80 0 0 0 230 600"/><line class="plan-gap" x1="470" y1="600" x2="550" y2="600"/><line class="plan-leaf" x1="470" y1="600" x2="470" y2="680"/><path class="plan-swing" d="M470 680A80 80 0 0 1 550 600"/><line class="plan-gap" x1="660" y1="600" x2="740" y2="600"/><line class="plan-leaf" x1="660" y1="600" x2="660" y2="680"/><path class="plan-swing" d="M660 680A80 80 0 0 1 740 600"/><line class="plan-gap" x1="800" y1="600" x2="880" y2="600"/><line class="plan-leaf" x1="800" y1="600" x2="800" y2="520"/><path class="plan-swing" d="M800 520A80 80 0 0 0 880 600"/><line class="plan-gap plan-gap--ext" x1="0" y1="120" x2="0" y2="420"/><line class="plan-win" x1="-5" y1="120" x2="-5" y2="420"/><line class="plan-win" x1="0" y1="120" x2="0" y2="420"/><line class="plan-win" x1="5" y1="120" x2="5" y2="420"/><line class="plan-gap plan-gap--ext" x1="0" y1="680" x2="0" y2="860"/><line class="plan-win" x1="-5" y1="680" x2="-5" y2="860"/><line class="plan-win" x1="0" y1="680" x2="0" y2="860"/><line class="plan-win" x1="5" y1="680" x2="5" y2="860"/><line class="plan-gap plan-gap--ext" x1="380" y1="920" x2="560" y2="920"/><line class="plan-win" x1="380" y1="915" x2="560" y2="915"/><line class="plan-win" x1="380" y1="920" x2="560" y2="920"/><line class="plan-win" x1="380" y1="925" x2="560" y2="925"/><line class="plan-gap plan-gap--ext" x1="700" y1="920" x2="900" y2="920"/><line class="plan-win" x1="700" y1="915" x2="900" y2="915"/><line class="plan-win" x1="700" y1="920" x2="900" y2="920"/><line class="plan-win" x1="700" y1="925" x2="900" y2="925"/><line class="plan-gap plan-gap--ext" x1="1000" y1="60" x2="1000" y2="240"/><line class="plan-win" x1="995" y1="60" x2="995" y2="240"/><line class="plan-win" x1="1000" y1="60" x2="1000" y2="240"/><line class="plan-win" x1="1005" y1="60" x2="1005" y2="240"/><line class="plan-gap plan-gap--ext" x1="1000" y1="480" x2="1000" y2="560"/><line class="plan-win" x1="995" y1="480" x2="995" y2="560"/><line class="plan-win" x1="1000" y1="480" x2="1000" y2="560"/><line class="plan-win" x1="1005" y1="480" x2="1005" y2="560"/></g></svg>
+<!--/PLAN-->
+        </div>
+      </div>
+
+      <div class="pairs">
+        <figure class="pair pair--wide reveal" id="tampines-living" data-kind="living">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/a-living-800.webp" srcset="img/a-living-800.webp 800w, img/a-living-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="After: the living and dining room finished with light oak vinyl, a long walnut console, cove lighting and a round dining table by the kitchen." decoding="async">
+            <img class="pair__before" src="img/a-living-before-800.webp" srcset="img/a-living-before-800.webp 800w, img/a-living-before-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="Before: the same room with glossy beige tiles, yellowed walls, a fluorescent tube and an old ceiling fan." decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Living &amp; dining</b> · hacked and re-tiled, L-box cove, walnut console, fluted feature wall</span><span class="num">26.4 m² · full</span></figcaption>
+        </figure>
+
+        <figure class="pair reveal" id="tampines-kitchen" data-kind="kitchen">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/a-kitchen-800.webp" srcset="img/a-kitchen-800.webp 800w, img/a-kitchen-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="After: a galley kitchen with walnut lower cabinets, white uppers to the ceiling, an off-white quartz worktop and a matte black tap, with the service yard window at the end." loading="lazy" decoding="async">
+            <img class="pair__before" src="img/a-kitchen-before-800.webp" srcset="img/a-kitchen-before-800.webp 800w, img/a-kitchen-before-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="Before: the same kitchen with brown laminate cabinets, mosaic wall tiles and a stained tiled counter." loading="lazy" decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Kitchen</b> · hacked to bare, tiled to ceiling, quartz L-run</span><span class="num">9.6 m² · full</span></figcaption>
+        </figure>
+
+        <figure class="pair reveal d1" id="tampines-master" data-kind="bed">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/a-master-800.webp" srcset="img/a-master-800.webp 800w, img/a-master-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="After: the master bedroom with a platform bed against a walnut headboard wall, a fluted white wardrobe and sheer curtains." loading="lazy" decoding="async">
+            <img class="pair__before" src="img/a-master-before-800.webp" srcset="img/a-master-before-800.webp 800w, img/a-master-before-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="Before: the same bedroom with beige tiles, a brown sliding-door wardrobe and a fluorescent tube." loading="lazy" decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Master bedroom</b> · platform bed, headboard wall, fluted wardrobe</span><span class="num">12.2 m² · full</span></figcaption>
+        </figure>
+
+        <figure class="pair reveal" id="tampines-mbath" data-kind="bath">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/a-mbath-800.webp" srcset="img/a-mbath-800.webp 800w, img/a-mbath-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="After: the master bathroom with terrazzo-look walls, dark grey floor tiles, a frameless glass screen, a floating walnut vanity and a round mirror." loading="lazy" decoding="async">
+            <img class="pair__before" src="img/a-mbath-before-800.webp" srcset="img/a-mbath-before-800.webp 800w, img/a-mbath-before-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="Before: the same bathroom with small mosaic tiles, a pedestal basin, a shower curtain and exposed pipes." loading="lazy" decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Master bath</b> · hacked, waterproofed, re-tiled, re-plumbed</span><span class="num">3.8 m² · full</span></figcaption>
+        </figure>
+
+        <figure class="pair reveal d1" id="tampines-study" data-kind="bed">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/a-study-800.webp" srcset="img/a-study-800.webp 800w, img/a-study-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="After: the second bedroom as a study, with a walnut desk running under the window, white shelves above and a daybed." loading="lazy" decoding="async">
+            <img class="pair__before" src="img/a-study-before-800.webp" srcset="img/a-study-before-800.webp 800w, img/a-study-before-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="Before: the same room empty, with beige tiles, a broken blind and a fluorescent tube." loading="lazy" decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Bedroom 2, as a study</b> · desk along the window, shelves, daybed</span><span class="num">9.6 m² · standard</span></figcaption>
+        </figure>
+
+        <figure class="pair reveal" id="tampines-cbath" data-kind="bath">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/a-cbath-800.webp" srcset="img/a-cbath-800.webp 800w, img/a-cbath-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="After: the common bathroom with large off-white wall tiles, a compact walnut vanity, a glass screen and matte black fittings." loading="lazy" decoding="async">
+            <img class="pair__before" src="img/a-cbath-before-800.webp" srcset="img/a-cbath-before-800.webp 800w, img/a-cbath-before-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="Before: the same bathroom with green mosaic floor tiles, a pedestal basin and a squat toilet corner." loading="lazy" decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Common bath</b> · hacked, waterproofed, re-tiled, re-plumbed</span><span class="num">3.2 m² · full</span></figcaption>
+        </figure>
+
+        <figure class="pair reveal d1" id="tampines-entry" data-kind="entry">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/a-entry-800.webp" srcset="img/a-entry-800.webp 800w, img/a-entry-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="After: the entrance with a full-height fluted shoe cabinet, a walnut bench, a new timber main door and the living room beyond." loading="lazy" decoding="async">
+            <img class="pair__before" src="img/a-entry-before-800.webp" srcset="img/a-entry-before-800.webp 800w, img/a-entry-before-1600.webp 1600w" sizes="(min-width: 48rem) 50vw, 100vw" width="1600" height="893" alt="Before: the same entrance with the original dark timber door, a brown shoe cabinet and beige tiles." loading="lazy" decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Entrance</b> · re-tiled, shoe cabinet with bench, fire-rated main door</span><span class="num">3.2 m² · full</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="project__mats reveal">
+        <div><b>Floors</b>600 × 600 matte porcelain in the living and entrance; 5 mm SPC vinyl in the bedrooms</div>
+        <div><b>Carpentry</b>Laminate on marine plywood, soft-close, fluted fronts on the wardrobe and shoe cabinet</div>
+        <div><b>Worktop</b>20 mm quartz, off-white, mitred edge</div>
+        <div><b>Wet rooms</b>Terrazzo-look porcelain walls, dark grey floor, matte black fittings</div>
+        <div><b>Lighting</b>L-box cove in the living, 3000 K downlights everywhere else</div>
+      </div>
+      <p class="project__more"><a class="btn btn--ghost" href="quote.html?type=hdb4">Want this for a 4-room? Start with the plan</a></p>
+    </article>
+
+    <!-- ============================ Punggol ============================ -->
+    <article class="project" id="punggol" data-flat="hdb5">
+      <div class="project__head">
+        <div class="reveal">
+          <p class="label">5-room BTO · handed over June 2026</p>
+          <h2>Punggol Way</h2>
+          <p>Bare from HDB: screed floor, one bulb holder per room. No hacking anywhere, so the money went into carpentry: sage lowers with a quartz run, a glass slider so the kitchen can be closed when the wok is on, and a study built for two people who work from home.</p>
+          <ul class="project__spec">
+            <li><b>Flat</b>5-room HDB, new</li>
+            <li><b>Area</b><span class="num"><!--EST:hdb5:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,stu=standard,mb=standard,cb=standard,cor=standard,hs=light,sy=standard:area-->108.6 m²<!--/EST--></span></li>
+            <li><b>Contract sum</b><span class="num"><!--EST:hdb5:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,stu=standard,mb=standard,cb=standard,cor=standard,hs=light,sy=standard:sum-->S$60,290<!--/EST--></span></li>
+            <li><b>On site</b><span class="num"><!--EST:hdb5:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,stu=standard,mb=standard,cb=standard,cor=standard,hs=light,sy=standard:weeks-->8<!--/EST--> weeks</span></li>
+          </ul>
+        </div>
+        <div class="project__mini reveal d1">
+          <p class="label"><span>Rooms touched</span><b><!--EST:hdb5:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,stu=standard,mb=standard,cb=standard,cor=standard,hs=light,sy=standard:rooms-->11<!--/EST--> of 12</b></p>
+          <!--PLAN:mini:hdb5:liv,kit,mbr,br2,br3,stu,mb,cb,cor,hs,sy-->
+<svg class="plan-svg plan-svg--mini" viewBox="-84 -84 1348 1088" role="img" aria-labelledby="mini-hdb5-t" focusable="false"><title id="mini-hdb5-t">5-room HDB floor plan</title><defs><clipPath id="mini-hdb5-cp-liv"><path d="M0 0L500 0L500 600L0 600Z"/></clipPath><clipPath id="mini-hdb5-cp-kit"><path d="M500 0L840 0L840 300L500 300Z"/></clipPath><clipPath id="mini-hdb5-cp-sy"><path d="M840 0L1180 0L1180 300L840 300Z"/></clipPath><clipPath id="mini-hdb5-cp-hs"><path d="M500 300L660 300L660 500L500 500Z"/></clipPath><clipPath id="mini-hdb5-cp-cb"><path d="M660 300L820 300L820 500L660 500Z"/></clipPath><clipPath id="mini-hdb5-cp-st"><path d="M820 300L1000 300L1000 500L820 500Z"/></clipPath><clipPath id="mini-hdb5-cp-mb"><path d="M1000 300L1180 300L1180 600L1000 600Z"/></clipPath><clipPath id="mini-hdb5-cp-cor"><path d="M500 500L1000 500L1000 600L500 600Z"/></clipPath><clipPath id="mini-hdb5-cp-br3"><path d="M0 600L320 600L320 920L0 920Z"/></clipPath><clipPath id="mini-hdb5-cp-br2"><path d="M320 600L620 600L620 920L320 920Z"/></clipPath><clipPath id="mini-hdb5-cp-stu"><path d="M620 600L840 600L840 920L620 920Z"/></clipPath><clipPath id="mini-hdb5-cp-mbr"><path d="M840 600L1180 600L1180 920L840 920Z"/></clipPath></defs><g class="room room--living is-scoped" data-room="liv"><path class="room__floor" d="M0 0L500 0L500 600L0 600Z"/><path class="room__edge" d="M0 0L500 0L500 600L0 600Z"/></g><g class="room room--kitchen is-scoped" data-room="kit"><path class="room__floor" d="M500 0L840 0L840 300L500 300Z"/><path class="room__edge" d="M500 0L840 0L840 300L500 300Z"/></g><g class="room room--yard is-scoped" data-room="sy"><path class="room__floor" d="M840 0L1180 0L1180 300L840 300Z"/><path class="room__edge" d="M840 0L1180 0L1180 300L840 300Z"/></g><g class="room room--hs is-scoped" data-room="hs"><path class="room__floor" d="M500 300L660 300L660 500L500 500Z"/><path class="room__edge" d="M500 300L660 300L660 500L500 500Z"/></g><g class="room room--bath is-scoped" data-room="cb"><path class="room__floor" d="M660 300L820 300L820 500L660 500Z"/><path class="room__edge" d="M660 300L820 300L820 500L660 500Z"/></g><g class="room room--store" data-room="st"><path class="room__floor" d="M820 300L1000 300L1000 500L820 500Z"/><path class="room__edge" d="M820 300L1000 300L1000 500L820 500Z"/></g><g class="room room--bath is-scoped" data-room="mb"><path class="room__floor" d="M1000 300L1180 300L1180 600L1000 600Z"/><path class="room__edge" d="M1000 300L1180 300L1180 600L1000 600Z"/></g><g class="room room--entry is-scoped" data-room="cor"><path class="room__floor" d="M500 500L1000 500L1000 600L500 600Z"/><path class="room__edge" d="M500 500L1000 500L1000 600L500 600Z"/></g><g class="room room--bed is-scoped" data-room="br3"><path class="room__floor" d="M0 600L320 600L320 920L0 920Z"/><path class="room__edge" d="M0 600L320 600L320 920L0 920Z"/></g><g class="room room--bed is-scoped" data-room="br2"><path class="room__floor" d="M320 600L620 600L620 920L320 920Z"/><path class="room__edge" d="M320 600L620 600L620 920L320 920Z"/></g><g class="room room--study is-scoped" data-room="stu"><path class="room__floor" d="M620 600L840 600L840 920L620 920Z"/><path class="room__edge" d="M620 600L840 600L840 920L620 920Z"/></g><g class="room room--bed is-scoped" data-room="mbr"><path class="room__floor" d="M840 600L1180 600L1180 920L840 920Z"/><path class="room__edge" d="M840 600L1180 600L1180 920L840 920Z"/></g><g class="plan-walls"><path class="plan-wall" d="M0 0L500 0L500 600L0 600Z"/><path class="plan-wall" d="M500 0L840 0L840 300L500 300Z"/><path class="plan-wall" d="M840 0L1180 0L1180 300L840 300Z"/><path class="plan-wall" d="M500 300L660 300L660 500L500 500Z"/><path class="plan-wall" d="M660 300L820 300L820 500L660 500Z"/><path class="plan-wall" d="M820 300L1000 300L1000 500L820 500Z"/><path class="plan-wall" d="M1000 300L1180 300L1180 600L1000 600Z"/><path class="plan-wall" d="M500 500L1000 500L1000 600L500 600Z"/><path class="plan-wall" d="M0 600L320 600L320 920L0 920Z"/><path class="plan-wall" d="M320 600L620 600L620 920L320 920Z"/><path class="plan-wall" d="M620 600L840 600L840 920L620 920Z"/><path class="plan-wall" d="M840 600L1180 600L1180 920L840 920Z"/><path class="plan-wall plan-wall--ext" d="M0 0L1180 0L1180 920L0 920Z"/></g><g class="plan-open"><line class="plan-gap" x1="60" y1="0" x2="150" y2="0"/><line class="plan-leaf" x1="60" y1="0" x2="60" y2="90"/><path class="plan-swing" d="M60 90A90 90 0 0 1 150 0"/><line class="plan-gap" x1="500" y1="40" x2="500" y2="130"/><line class="plan-gap" x1="840" y1="80" x2="840" y2="220"/><line class="plan-gap" x1="540" y1="500" x2="620" y2="500"/><line class="plan-leaf" x1="540" y1="500" x2="540" y2="420"/><path class="plan-swing" d="M540 420A80 80 0 0 0 620 500"/><line class="plan-gap" x1="700" y1="500" x2="780" y2="500"/><line class="plan-leaf" x1="780" y1="500" x2="780" y2="420"/><path class="plan-swing" d="M780 420A80 80 0 0 1 700 500"/><line class="plan-gap" x1="870" y1="500" x2="950" y2="500"/><line class="plan-leaf" x1="870" y1="500" x2="870" y2="420"/><path class="plan-swing" d="M870 420A80 80 0 0 0 950 500"/><line class="plan-gap" x1="500" y1="510" x2="500" y2="590"/><line class="plan-gap" x1="230" y1="600" x2="310" y2="600"/><line class="plan-leaf" x1="310" y1="600" x2="310" y2="680"/><path class="plan-swing" d="M310 680A80 80 0 0 0 230 600"/><line class="plan-gap" x1="480" y1="600" x2="560" y2="600"/><line class="plan-leaf" x1="480" y1="600" x2="480" y2="680"/><path class="plan-swing" d="M480 680A80 80 0 0 1 560 600"/><line class="plan-gap" x1="680" y1="600" x2="760" y2="600"/><line class="plan-leaf" x1="680" y1="600" x2="680" y2="680"/><path class="plan-swing" d="M680 680A80 80 0 0 1 760 600"/><line class="plan-gap" x1="880" y1="600" x2="960" y2="600"/><line class="plan-leaf" x1="880" y1="600" x2="880" y2="680"/><path class="plan-swing" d="M880 680A80 80 0 0 1 960 600"/><line class="plan-gap" x1="1040" y1="600" x2="1120" y2="600"/><line class="plan-leaf" x1="1040" y1="600" x2="1040" y2="520"/><path class="plan-swing" d="M1040 520A80 80 0 0 0 1120 600"/><line class="plan-gap plan-gap--ext" x1="0" y1="120" x2="0" y2="460"/><line class="plan-win" x1="-5" y1="120" x2="-5" y2="460"/><line class="plan-win" x1="0" y1="120" x2="0" y2="460"/><line class="plan-win" x1="5" y1="120" x2="5" y2="460"/><line class="plan-gap plan-gap--ext" x1="0" y1="680" x2="0" y2="860"/><line class="plan-win" x1="-5" y1="680" x2="-5" y2="860"/><line class="plan-win" x1="0" y1="680" x2="0" y2="860"/><line class="plan-win" x1="5" y1="680" x2="5" y2="860"/><line class="plan-gap plan-gap--ext" x1="380" y1="920" x2="560" y2="920"/><line class="plan-win" x1="380" y1="915" x2="560" y2="915"/><line class="plan-win" x1="380" y1="920" x2="560" y2="920"/><line class="plan-win" x1="380" y1="925" x2="560" y2="925"/><line class="plan-gap plan-gap--ext" x1="660" y1="920" x2="800" y2="920"/><line class="plan-win" x1="660" y1="915" x2="800" y2="915"/><line class="plan-win" x1="660" y1="920" x2="800" y2="920"/><line class="plan-win" x1="660" y1="925" x2="800" y2="925"/><line class="plan-gap plan-gap--ext" x1="920" y1="920" x2="1120" y2="920"/><line class="plan-win" x1="920" y1="915" x2="1120" y2="915"/><line class="plan-win" x1="920" y1="920" x2="1120" y2="920"/><line class="plan-win" x1="920" y1="925" x2="1120" y2="925"/><line class="plan-gap plan-gap--ext" x1="1180" y1="60" x2="1180" y2="240"/><line class="plan-win" x1="1175" y1="60" x2="1175" y2="240"/><line class="plan-win" x1="1180" y1="60" x2="1180" y2="240"/><line class="plan-win" x1="1185" y1="60" x2="1185" y2="240"/><line class="plan-gap plan-gap--ext" x1="1180" y1="380" x2="1180" y2="460"/><line class="plan-win" x1="1175" y1="380" x2="1175" y2="460"/><line class="plan-win" x1="1180" y1="380" x2="1180" y2="460"/><line class="plan-win" x1="1185" y1="380" x2="1185" y2="460"/></g></svg>
+<!--/PLAN-->
+        </div>
+      </div>
+
+      <div class="pairs">
+        <figure class="pair pair--wide reveal" id="punggol-living" data-kind="living">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/b-living-800.webp" srcset="img/b-living-800.webp 800w, img/b-living-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="After: an open living and dining room with oak vinyl, a sage feature wall behind the console, a grey sofa and an oak table for six, with new HDB blocks in the window." loading="lazy" decoding="async">
+            <img class="pair__before" src="img/b-living-before-800.webp" srcset="img/b-living-before-800.webp 800w, img/b-living-before-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="Before: the same room as handed over, bare screed floor, plaster walls and one bulb holder." loading="lazy" decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Living &amp; dining</b> · vinyl overlay, L-box cove, sage wall, console</span><span class="num">30 m² · standard</span></figcaption>
+        </figure>
+
+        <figure class="pair pair--wide reveal" id="punggol-kitchen" data-kind="kitchen">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/b-kitchen-800.webp" srcset="img/b-kitchen-800.webp 800w, img/b-kitchen-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="After: a kitchen with pale sage lower cabinets, an off-white quartz worktop and a black-framed glass sliding door to the dining area." loading="lazy" decoding="async">
+            <img class="pair__before" src="img/b-kitchen-before-800.webp" srcset="img/b-kitchen-before-800.webp 800w, img/b-kitchen-before-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="Before: the same kitchen as handed over, bare white tiles, capped pipes and no cabinets." loading="lazy" decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Kitchen</b> · quartz L-run on sage carpentry, backsplash, glass slider</span><span class="num">10.2 m² · standard</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="project__mats reveal">
+        <div><b>Floors</b>5 mm SPC vinyl throughout the dry rooms; kitchen and yard tiles kept</div>
+        <div><b>Carpentry</b>Sage laminate lowers, white uppers, built-in desk for two in the study</div>
+        <div><b>Worktop</b>20 mm quartz, off-white</div>
+        <div><b>Doors</b>Black-framed glass slider between kitchen and dining</div>
+      </div>
+      <p class="project__more"><a class="btn btn--ghost" href="quote.html?type=hdb5">Want this for a 5-room? Start with the plan</a></p>
+    </article>
+
+    <!-- ============================ Tiong Bahru ============================ -->
+    <article class="project" id="tiongbahru" data-flat="hdb3">
+      <div class="project__head">
+        <div class="reveal">
+          <p class="label">3-room walk-up · handed over January 2026</p>
+          <h2>Tiong Bahru</h2>
+          <p>An old walk-up with a terrazzo floor worth keeping. We ground and sealed it in place of the vinyl line, hung shutters on the tall windows instead of curtains, and built the kitchen with open walnut shelves instead of upper cabinets so the small room keeps its light.</p>
+          <ul class="project__spec">
+            <li><b>Flat</b>3-room HDB, resale</li>
+            <li><b>Area</b><span class="num"><!--EST:hdb3:liv=standard,kit=full,mbr=standard,br2=standard,mb=full,cb=full,cor=standard,hs=light:area-->70.5 m²<!--/EST--></span></li>
+            <li><b>Contract sum</b><span class="num"><!--EST:hdb3:liv=standard,kit=full,mbr=standard,br2=standard,mb=full,cb=full,cor=standard,hs=light:sum-->S$62,880<!--/EST--></span></li>
+            <li><b>On site</b><span class="num"><!--EST:hdb3:liv=standard,kit=full,mbr=standard,br2=standard,mb=full,cb=full,cor=standard,hs=light:weeks-->10<!--/EST--> weeks</span></li>
+          </ul>
+        </div>
+        <div class="project__mini reveal d1">
+          <p class="label"><span>Rooms touched</span><b><!--EST:hdb3:liv=standard,kit=full,mbr=standard,br2=standard,mb=full,cb=full,cor=standard,hs=light:rooms-->8<!--/EST--> of 10</b></p>
+          <!--PLAN:mini:hdb3:liv,kit,mbr,br2,mb,cb,cor,hs-->
+<svg class="plan-svg plan-svg--mini" viewBox="-84 -84 1028 988" role="img" aria-labelledby="mini-hdb3-t" focusable="false"><title id="mini-hdb3-t">3-room HDB floor plan</title><defs><clipPath id="mini-hdb3-cp-liv"><path d="M0 0L380 0L380 540L0 540Z"/></clipPath><clipPath id="mini-hdb3-cp-kit"><path d="M380 0L660 0L660 280L380 280Z"/></clipPath><clipPath id="mini-hdb3-cp-sy"><path d="M660 0L860 0L860 280L660 280Z"/></clipPath><clipPath id="mini-hdb3-cp-hs"><path d="M380 280L540 280L540 460L380 460Z"/></clipPath><clipPath id="mini-hdb3-cp-cb"><path d="M540 280L700 280L700 460L540 460Z"/></clipPath><clipPath id="mini-hdb3-cp-st"><path d="M700 280L860 280L860 460L700 460Z"/></clipPath><clipPath id="mini-hdb3-cp-cor"><path d="M380 460L860 460L860 540L380 540Z"/></clipPath><clipPath id="mini-hdb3-cp-br2"><path d="M0 540L360 540L360 820L0 820Z"/></clipPath><clipPath id="mini-hdb3-cp-mbr"><path d="M360 540L700 540L700 820L360 820Z"/></clipPath><clipPath id="mini-hdb3-cp-mb"><path d="M700 540L860 540L860 820L700 820Z"/></clipPath></defs><g class="room room--living is-scoped" data-room="liv"><path class="room__floor" d="M0 0L380 0L380 540L0 540Z"/><path class="room__edge" d="M0 0L380 0L380 540L0 540Z"/></g><g class="room room--kitchen is-scoped" data-room="kit"><path class="room__floor" d="M380 0L660 0L660 280L380 280Z"/><path class="room__edge" d="M380 0L660 0L660 280L380 280Z"/></g><g class="room room--yard" data-room="sy"><path class="room__floor" d="M660 0L860 0L860 280L660 280Z"/><path class="room__edge" d="M660 0L860 0L860 280L660 280Z"/></g><g class="room room--hs is-scoped" data-room="hs"><path class="room__floor" d="M380 280L540 280L540 460L380 460Z"/><path class="room__edge" d="M380 280L540 280L540 460L380 460Z"/></g><g class="room room--bath is-scoped" data-room="cb"><path class="room__floor" d="M540 280L700 280L700 460L540 460Z"/><path class="room__edge" d="M540 280L700 280L700 460L540 460Z"/></g><g class="room room--store" data-room="st"><path class="room__floor" d="M700 280L860 280L860 460L700 460Z"/><path class="room__edge" d="M700 280L860 280L860 460L700 460Z"/></g><g class="room room--entry is-scoped" data-room="cor"><path class="room__floor" d="M380 460L860 460L860 540L380 540Z"/><path class="room__edge" d="M380 460L860 460L860 540L380 540Z"/></g><g class="room room--bed is-scoped" data-room="br2"><path class="room__floor" d="M0 540L360 540L360 820L0 820Z"/><path class="room__edge" d="M0 540L360 540L360 820L0 820Z"/></g><g class="room room--bed is-scoped" data-room="mbr"><path class="room__floor" d="M360 540L700 540L700 820L360 820Z"/><path class="room__edge" d="M360 540L700 540L700 820L360 820Z"/></g><g class="room room--bath is-scoped" data-room="mb"><path class="room__floor" d="M700 540L860 540L860 820L700 820Z"/><path class="room__edge" d="M700 540L860 540L860 820L700 820Z"/></g><g class="plan-walls"><path class="plan-wall" d="M0 0L380 0L380 540L0 540Z"/><path class="plan-wall" d="M380 0L660 0L660 280L380 280Z"/><path class="plan-wall" d="M660 0L860 0L860 280L660 280Z"/><path class="plan-wall" d="M380 280L540 280L540 460L380 460Z"/><path class="plan-wall" d="M540 280L700 280L700 460L540 460Z"/><path class="plan-wall" d="M700 280L860 280L860 460L700 460Z"/><path class="plan-wall" d="M380 460L860 460L860 540L380 540Z"/><path class="plan-wall" d="M0 540L360 540L360 820L0 820Z"/><path class="plan-wall" d="M360 540L700 540L700 820L360 820Z"/><path class="plan-wall" d="M700 540L860 540L860 820L700 820Z"/><path class="plan-wall plan-wall--ext" d="M0 0L860 0L860 820L0 820Z"/></g><g class="plan-open"><line class="plan-gap" x1="60" y1="0" x2="150" y2="0"/><line class="plan-leaf" x1="60" y1="0" x2="60" y2="90"/><path class="plan-swing" d="M60 90A90 90 0 0 1 150 0"/><line class="plan-gap" x1="380" y1="40" x2="380" y2="130"/><line class="plan-gap" x1="660" y1="80" x2="660" y2="200"/><line class="plan-gap" x1="420" y1="460" x2="500" y2="460"/><line class="plan-leaf" x1="420" y1="460" x2="420" y2="380"/><path class="plan-swing" d="M420 380A80 80 0 0 0 500 460"/><line class="plan-gap" x1="580" y1="460" x2="660" y2="460"/><line class="plan-leaf" x1="660" y1="460" x2="660" y2="380"/><path class="plan-swing" d="M660 380A80 80 0 0 1 580 460"/><line class="plan-gap" x1="740" y1="460" x2="820" y2="460"/><line class="plan-leaf" x1="740" y1="460" x2="740" y2="380"/><path class="plan-swing" d="M740 380A80 80 0 0 0 820 460"/><line class="plan-gap" x1="380" y1="468" x2="380" y2="532"/><line class="plan-gap" x1="250" y1="540" x2="330" y2="540"/><line class="plan-leaf" x1="330" y1="540" x2="330" y2="620"/><path class="plan-swing" d="M330 620A80 80 0 0 0 250 540"/><line class="plan-gap" x1="420" y1="540" x2="500" y2="540"/><line class="plan-leaf" x1="420" y1="540" x2="420" y2="620"/><path class="plan-swing" d="M420 620A80 80 0 0 1 500 540"/><line class="plan-gap" x1="700" y1="600" x2="700" y2="680"/><line class="plan-leaf" x1="700" y1="600" x2="780" y2="600"/><path class="plan-swing" d="M780 600A80 80 0 0 0 700 680"/><line class="plan-gap plan-gap--ext" x1="0" y1="120" x2="0" y2="400"/><line class="plan-win" x1="-5" y1="120" x2="-5" y2="400"/><line class="plan-win" x1="0" y1="120" x2="0" y2="400"/><line class="plan-win" x1="5" y1="120" x2="5" y2="400"/><line class="plan-gap plan-gap--ext" x1="0" y1="620" x2="0" y2="760"/><line class="plan-win" x1="-5" y1="620" x2="-5" y2="760"/><line class="plan-win" x1="0" y1="620" x2="0" y2="760"/><line class="plan-win" x1="5" y1="620" x2="5" y2="760"/><line class="plan-gap plan-gap--ext" x1="420" y1="820" x2="620" y2="820"/><line class="plan-win" x1="420" y1="815" x2="620" y2="815"/><line class="plan-win" x1="420" y1="820" x2="620" y2="820"/><line class="plan-win" x1="420" y1="825" x2="620" y2="825"/><line class="plan-gap plan-gap--ext" x1="740" y1="820" x2="820" y2="820"/><line class="plan-win" x1="740" y1="815" x2="820" y2="815"/><line class="plan-win" x1="740" y1="820" x2="820" y2="820"/><line class="plan-win" x1="740" y1="825" x2="820" y2="825"/><line class="plan-gap plan-gap--ext" x1="860" y1="60" x2="860" y2="220"/><line class="plan-win" x1="855" y1="60" x2="855" y2="220"/><line class="plan-win" x1="860" y1="60" x2="860" y2="220"/><line class="plan-win" x1="865" y1="60" x2="865" y2="220"/></g></svg>
+<!--/PLAN-->
+        </div>
+      </div>
+
+      <div class="pairs">
+        <figure class="pair pair--wide reveal" id="tiongbahru-living" data-kind="living">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/c-living-800.webp" srcset="img/c-living-800.webp 800w, img/c-living-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="After: a walk-up living room with the original terrazzo floor polished, a walnut bookshelf wall, a rattan chair and white shutters on tall windows." loading="lazy" decoding="async">
+            <img class="pair__before" src="img/c-living-before-800.webp" srcset="img/c-living-before-800.webp 800w, img/c-living-before-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="Before: the same room with stained terrazzo, peeling paint and bare timber windows." loading="lazy" decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Living</b> · terrazzo ground and sealed, shutters, bookshelf wall</span><span class="num">20.5 m² · standard</span></figcaption>
+        </figure>
+
+        <figure class="pair pair--wide reveal" id="tiongbahru-kitchen" data-kind="kitchen">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/c-kitchen-800.webp" srcset="img/c-kitchen-800.webp 800w, img/c-kitchen-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="After: a small kitchen with white lower cabinets, a walnut worktop, open walnut shelves and white square wall tiles." loading="lazy" decoding="async">
+            <img class="pair__before" src="img/c-kitchen-before-800.webp" srcset="img/c-kitchen-before-800.webp 800w, img/c-kitchen-before-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="Before: the same kitchen with a cracked concrete counter on brick, old cream tiles and a rusty sink." loading="lazy" decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Kitchen</b> · hacked to bare, re-tiled, walnut worktop, open shelves</span><span class="num">7.8 m² · full</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="project__mats reveal">
+        <div><b>Floors</b>Original terrazzo, diamond-ground and sealed</div>
+        <div><b>Carpentry</b>White laminate lowers, solid walnut worktop and shelves, walnut bookshelf wall</div>
+        <div><b>Windows</b>Timber frames stripped and repainted, louvred shutters</div>
+        <div><b>Wet rooms</b>Both bathrooms hacked, waterproofed and re-tiled</div>
+      </div>
+      <p class="project__more"><a class="btn btn--ghost" href="quote.html?type=hdb3">Want this for a 3-room? Start with the plan</a></p>
+    </article>
+
+    <!-- ============================ Bartley ============================ -->
+    <article class="project" id="bartley" data-flat="condo">
+      <div class="project__head">
+        <div class="reveal">
+          <p class="label">3-bedroom condominium · handed over May 2026</p>
+          <h2>Bartley Road</h2>
+          <p>Developer-standard tiles kept everywhere. The budget went into one long walnut wall with the television recessed into it, sheer curtains across the whole balcony opening, and wardrobes in all three bedrooms. The kitchen got carpentry and a quartz run on the existing floor.</p>
+          <ul class="project__spec">
+            <li><b>Flat</b>3-bedroom condominium</li>
+            <li><b>Area</b><span class="num"><!--EST:condo:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,mb=standard,cb=standard,cor=standard:area-->95.6 m²<!--/EST--></span></li>
+            <li><b>Contract sum</b><span class="num"><!--EST:condo:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,mb=standard,cb=standard,cor=standard:sum-->S$51,480<!--/EST--></span></li>
+            <li><b>On site</b><span class="num"><!--EST:condo:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,mb=standard,cb=standard,cor=standard:weeks-->7<!--/EST--> weeks</span></li>
+          </ul>
+        </div>
+        <div class="project__mini reveal d1">
+          <p class="label"><span>Rooms touched</span><b><!--EST:condo:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,mb=standard,cb=standard,cor=standard:rooms-->8<!--/EST--> of 11</b></p>
+          <!--PLAN:mini:condo:liv,kit,mbr,br2,br3,mb,cb,cor-->
+<svg class="plan-svg plan-svg--mini" viewBox="-84 -84 1368 1048" role="img" aria-labelledby="mini-condo-t" focusable="false"><title id="mini-condo-t">3-bedroom condominium floor plan</title><defs><clipPath id="mini-condo-cp-liv"><path d="M0 0L500 0L500 560L0 560Z"/></clipPath><clipPath id="mini-condo-cp-bal"><path d="M0 560L500 560L500 680L0 680Z"/></clipPath><clipPath id="mini-condo-cp-kit"><path d="M500 0L780 0L780 300L500 300Z"/></clipPath><clipPath id="mini-condo-cp-sy"><path d="M780 0L920 0L920 300L780 300Z"/></clipPath><clipPath id="mini-condo-cp-cb"><path d="M500 300L660 300L660 460L500 460Z"/></clipPath><clipPath id="mini-condo-cp-ut"><path d="M660 300L920 300L920 460L660 460Z"/></clipPath><clipPath id="mini-condo-cp-cor"><path d="M500 460L920 460L920 560L500 560Z"/></clipPath><clipPath id="mini-condo-cp-mb"><path d="M920 0L1200 0L1200 180L920 180Z"/></clipPath><clipPath id="mini-condo-cp-mbr"><path d="M920 180L1200 180L1200 560L920 560Z"/></clipPath><clipPath id="mini-condo-cp-br3"><path d="M500 560L820 560L820 880L500 880Z"/></clipPath><clipPath id="mini-condo-cp-br2"><path d="M820 560L1200 560L1200 880L820 880Z"/></clipPath></defs><g class="room room--living is-scoped" data-room="liv"><path class="room__floor" d="M0 0L500 0L500 560L0 560Z"/><path class="room__edge" d="M0 0L500 0L500 560L0 560Z"/></g><g class="room room--balcony" data-room="bal"><path class="room__floor" d="M0 560L500 560L500 680L0 680Z"/><path class="room__edge" d="M0 560L500 560L500 680L0 680Z"/></g><g class="room room--kitchen is-scoped" data-room="kit"><path class="room__floor" d="M500 0L780 0L780 300L500 300Z"/><path class="room__edge" d="M500 0L780 0L780 300L500 300Z"/></g><g class="room room--yard" data-room="sy"><path class="room__floor" d="M780 0L920 0L920 300L780 300Z"/><path class="room__edge" d="M780 0L920 0L920 300L780 300Z"/></g><g class="room room--bath is-scoped" data-room="cb"><path class="room__floor" d="M500 300L660 300L660 460L500 460Z"/><path class="room__edge" d="M500 300L660 300L660 460L500 460Z"/></g><g class="room room--utility" data-room="ut"><path class="room__floor" d="M660 300L920 300L920 460L660 460Z"/><path class="room__edge" d="M660 300L920 300L920 460L660 460Z"/></g><g class="room room--entry is-scoped" data-room="cor"><path class="room__floor" d="M500 460L920 460L920 560L500 560Z"/><path class="room__edge" d="M500 460L920 460L920 560L500 560Z"/></g><g class="room room--bath is-scoped" data-room="mb"><path class="room__floor" d="M920 0L1200 0L1200 180L920 180Z"/><path class="room__edge" d="M920 0L1200 0L1200 180L920 180Z"/></g><g class="room room--bed is-scoped" data-room="mbr"><path class="room__floor" d="M920 180L1200 180L1200 560L920 560Z"/><path class="room__edge" d="M920 180L1200 180L1200 560L920 560Z"/></g><g class="room room--bed is-scoped" data-room="br3"><path class="room__floor" d="M500 560L820 560L820 880L500 880Z"/><path class="room__edge" d="M500 560L820 560L820 880L500 880Z"/></g><g class="room room--bed is-scoped" data-room="br2"><path class="room__floor" d="M820 560L1200 560L1200 880L820 880Z"/><path class="room__edge" d="M820 560L1200 560L1200 880L820 880Z"/></g><g class="plan-walls"><path class="plan-wall" d="M0 0L500 0L500 560L0 560Z"/><path class="plan-wall" d="M0 560L500 560L500 680L0 680Z"/><path class="plan-wall" d="M500 0L780 0L780 300L500 300Z"/><path class="plan-wall" d="M780 0L920 0L920 300L780 300Z"/><path class="plan-wall" d="M500 300L660 300L660 460L500 460Z"/><path class="plan-wall" d="M660 300L920 300L920 460L660 460Z"/><path class="plan-wall" d="M500 460L920 460L920 560L500 560Z"/><path class="plan-wall" d="M920 0L1200 0L1200 180L920 180Z"/><path class="plan-wall" d="M920 180L1200 180L1200 560L920 560Z"/><path class="plan-wall" d="M500 560L820 560L820 880L500 880Z"/><path class="plan-wall" d="M820 560L1200 560L1200 880L820 880Z"/><path class="plan-wall plan-wall--ext" d="M0 0L1200 0L1200 880L500 880L500 680L0 680Z"/></g><g class="plan-open"><line class="plan-gap" x1="60" y1="0" x2="150" y2="0"/><line class="plan-leaf" x1="60" y1="0" x2="60" y2="90"/><path class="plan-swing" d="M60 90A90 90 0 0 1 150 0"/><line class="plan-gap" x1="500" y1="40" x2="500" y2="130"/><line class="plan-gap" x1="780" y1="80" x2="780" y2="220"/><line class="plan-gap" x1="540" y1="460" x2="620" y2="460"/><line class="plan-leaf" x1="540" y1="460" x2="540" y2="380"/><path class="plan-swing" d="M540 380A80 80 0 0 0 620 460"/><line class="plan-gap" x1="720" y1="460" x2="800" y2="460"/><line class="plan-leaf" x1="720" y1="460" x2="720" y2="380"/><path class="plan-swing" d="M720 380A80 80 0 0 0 800 460"/><line class="plan-gap" x1="500" y1="470" x2="500" y2="550"/><line class="plan-gap" x1="920" y1="470" x2="920" y2="550"/><line class="plan-leaf" x1="920" y1="470" x2="1000" y2="470"/><path class="plan-swing" d="M1000 470A80 80 0 0 0 920 550"/><line class="plan-gap" x1="1000" y1="180" x2="1080" y2="180"/><line class="plan-leaf" x1="1000" y1="180" x2="1000" y2="100"/><path class="plan-swing" d="M1000 100A80 80 0 0 0 1080 180"/><line class="plan-gap" x1="540" y1="560" x2="620" y2="560"/><line class="plan-leaf" x1="540" y1="560" x2="540" y2="640"/><path class="plan-swing" d="M540 640A80 80 0 0 1 620 560"/><line class="plan-gap" x1="860" y1="560" x2="940" y2="560"/><line class="plan-leaf" x1="860" y1="560" x2="860" y2="640"/><path class="plan-swing" d="M860 640A80 80 0 0 1 940 560"/><line class="plan-gap" x1="100" y1="560" x2="400" y2="560"/><line class="plan-glass" x1="100" y1="560" x2="400" y2="560"/><line class="plan-gap plan-gap--ext" x1="0" y1="100" x2="0" y2="460"/><line class="plan-win" x1="-5" y1="100" x2="-5" y2="460"/><line class="plan-win" x1="0" y1="100" x2="0" y2="460"/><line class="plan-win" x1="5" y1="100" x2="5" y2="460"/><line class="plan-gap plan-gap--ext" x1="40" y1="680" x2="460" y2="680"/><line class="plan-win" x1="40" y1="675" x2="460" y2="675"/><line class="plan-win" x1="40" y1="680" x2="460" y2="680"/><line class="plan-win" x1="40" y1="685" x2="460" y2="685"/><line class="plan-gap plan-gap--ext" x1="560" y1="880" x2="760" y2="880"/><line class="plan-win" x1="560" y1="875" x2="760" y2="875"/><line class="plan-win" x1="560" y1="880" x2="760" y2="880"/><line class="plan-win" x1="560" y1="885" x2="760" y2="885"/><line class="plan-gap plan-gap--ext" x1="900" y1="880" x2="1120" y2="880"/><line class="plan-win" x1="900" y1="875" x2="1120" y2="875"/><line class="plan-win" x1="900" y1="880" x2="1120" y2="880"/><line class="plan-win" x1="900" y1="885" x2="1120" y2="885"/><line class="plan-gap plan-gap--ext" x1="1200" y1="240" x2="1200" y2="440"/><line class="plan-win" x1="1195" y1="240" x2="1195" y2="440"/><line class="plan-win" x1="1200" y1="240" x2="1200" y2="440"/><line class="plan-win" x1="1205" y1="240" x2="1205" y2="440"/><line class="plan-gap plan-gap--ext" x1="800" y1="0" x2="900" y2="0"/><line class="plan-win" x1="800" y1="-5" x2="900" y2="-5"/><line class="plan-win" x1="800" y1="0" x2="900" y2="0"/><line class="plan-win" x1="800" y1="5" x2="900" y2="5"/><line class="plan-gap plan-gap--ext" x1="1080" y1="0" x2="1170" y2="0"/><line class="plan-win" x1="1080" y1="-5" x2="1170" y2="-5"/><line class="plan-win" x1="1080" y1="0" x2="1170" y2="0"/><line class="plan-win" x1="1080" y1="5" x2="1170" y2="5"/></g></svg>
+<!--/PLAN-->
+        </div>
+      </div>
+
+      <div class="pairs">
+        <figure class="pair pair--wide reveal" id="bartley-living" data-kind="living">
+          <div class="pair__frame">
+            <img class="pair__after" src="img/d-living-800.webp" srcset="img/d-living-800.webp 800w, img/d-living-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="After: a condominium living room with a long walnut feature wall and recessed television, a cream boucle sofa and sheer curtains across the balcony doors." loading="lazy" decoding="async">
+            <img class="pair__before" src="img/d-living-before-800.webp" srcset="img/d-living-before-800.webp 800w, img/d-living-before-1600.webp 1600w" sizes="(min-width: 84rem) 1344px, 100vw" width="1600" height="893" alt="Before: the same room in developer finish, cream tiles, white walls and a few downlights." loading="lazy" decoding="async">
+            <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+            <span class="pair__handle" aria-hidden="true"></span>
+            <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+          </div>
+          <figcaption><span><b>Living &amp; dining</b> · walnut wall with recessed TV, L-box cove, sheers</span><span class="num">28 m² · standard</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="project__mats reveal">
+        <div><b>Floors</b>Developer's stone-look porcelain, kept</div>
+        <div><b>Carpentry</b>Walnut veneer feature wall, wardrobes in three bedrooms, kitchen lowers and uppers</div>
+        <div><b>Worktop</b>20 mm quartz</div>
+        <div><b>Curtains</b>Motorised sheers across the balcony opening</div>
+      </div>
+      <p class="project__more"><a class="btn btn--ghost" href="quote.html?type=condo">Want this for a condominium? Start with the plan</a></p>
+    </article>
+
+    <p class="work-empty" id="workEmpty" hidden>Nothing matches that room and flat together yet. Try one filter at a time.</p>
+
+  </div>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <a class="mark" href="index.html" aria-label="CHALKLINE, home"><span>CHALK</span><span class="mark__line" aria-hidden="true"></span><span>LINE</span></a>
+        <p>Interior design &amp; renovation<br>18 Tai Seng Avenue #05-11<br>Singapore 534061</p>
+        <p class="small">Four minutes from Tai Seng MRT (CC11), exit A.</p>
+      </div>
+      <div>
+        <h2>Site</h2>
+        <ul>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="quote.html">Start with your plan</a></li>
+          <li><a href="studio.html">Studio</a></li>
+          <li><a href="studio.html#process">How a job runs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Talk to us</h2>
+        <ul>
+          <li><a href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%27d%20like%20to%20talk%20about%20renovating%20my%20flat.">WhatsApp 8224 2558</a></li>
+          <li><a href="tel:+6582242558">Call 8224 2558</a></li>
+          <li><a href="mailto:hello@chalkline.sg">hello@chalkline.sg</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Showroom</h2>
+        <p>Tue–Sat 10.30–19.00<br>Sun &amp; Mon by appointment</p>
+        <p class="small">Bring your floor plan. If you don't have it yet, we'll draw it from your unit type.</p>
+      </div>
+    </div>
+    <div class="foot__bar">
+      <span>© <span data-year>2026</span> CHALKLINE Pte Ltd</span>
+      <span>Tai Seng, Singapore</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/ui.js" defer></script>
+<script src="js/work.js" defer></script>
+</body>
+</html>

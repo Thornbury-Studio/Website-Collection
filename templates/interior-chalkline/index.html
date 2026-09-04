@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>CHALKLINE — Interior Design &amp; Renovation, Tai Seng</title>
+  <meta name="description" content="A design-and-build renovation studio in Tai Seng, Singapore. We draw your flat room by room, price every room in the open, and show you the last one we finished that looks like yours.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/interior-chalkline/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CHALKLINE">
+  <meta property="og:title" content="CHALKLINE — Renovation you can see before you sign">
+  <meta property="og:description" content="HDB and condominium renovation in Singapore, drawn room by room and priced in the open. Hover the plan.">
+  <meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/interior-chalkline/index.html">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/interior-chalkline/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CHALKLINE — Renovation you can see before you sign">
+  <meta name="twitter:description" content="HDB and condominium renovation in Singapore, drawn room by room and priced in the open.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/interior-chalkline/img/og.webp">
+  <meta name="theme-color" content="#F0EFEA">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F0EFEA'/><path d='M5 25L27 7' stroke='%232743C9' stroke-width='3.2' stroke-linecap='round'/><path d='M5 8h8M19 24h8' stroke='%2317191C' stroke-width='2.2'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Golos+Text:wght@400;500;600;700&family=Fragment+Mono:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="mark" href="index.html" aria-current="page" aria-label="CHALKLINE, home"><span>CHALK</span><span class="mark__line" aria-hidden="true"></span><span>LINE</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="work.html">Work</a>
+      <a href="quote.html">Start with your plan</a>
+      <a href="studio.html">Studio</a>
+    </nav>
+    <div class="top__tools">
+      <a class="btn btn--wa" aria-label="WhatsApp 8224 2558" href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%27d%20like%20to%20talk%20about%20renovating%20my%20flat.">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/></svg>
+        <span class="txt">WhatsApp</span><span>8224 2558</span>
+      </a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="work.html">Work</a>
+      <a href="quote.html">Start with your plan</a>
+      <a href="studio.html">Studio</a>
+      <a href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%27d%20like%20to%20talk%20about%20renovating%20my%20flat.">WhatsApp 8224 2558</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================ the plan ============================ -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+
+      <div class="hero__text">
+        <p class="label">Interior design &amp; renovation · Tai Seng, Singapore</p>
+        <h1>Renovation you can see before you sign.</h1>
+        <p class="lede">We draw your flat room by room, price every room in the open, and show you the last one we finished that looks like yours.</p>
+        <div class="btn-row">
+          <a class="btn" href="quote.html">Start with your plan</a>
+          <a class="btn btn--ghost" href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%27d%20like%20to%20talk%20about%20renovating%20my%20flat.">WhatsApp 8224 2558</a>
+        </div>
+        <ul class="facts">
+          <li>Every quote itemised by room</li>
+          <li>Fixed once drawn</li>
+          <li>Handover file in writing</li>
+        </ul>
+      </div>
+
+      <!-- The plan is baked from js/plans.js by tools/bake.mjs, so it is here
+           before any script runs, and every room already answers hover
+           through CSS. The sheet's figures come out of js/estimate.js the
+           same way: nothing on this page is typed twice. -->
+      <div class="plan-stage">
+        <p class="label"><span>Tampines Street 81 · 4-room resale</span><b><!--EST:hdb4:liv=full,kit=full,mbr=full,mb=full,br2=standard,cb=full,cor=full,br3=standard,hs=light:area-->92 m²<!--/EST--> · <!--EST:hdb4:liv=full,kit=full,mbr=full,mb=full,br2=standard,cb=full,cor=full,br3=standard,hs=light:weeks-->11<!--/EST--> weeks on site</b></p>
+        <div class="plan" id="heroPlan">
+          <!--PLAN:hero-->
+<svg class="plan-svg plan-svg--hero" viewBox="-84 -84 1168 1088" role="img" aria-labelledby="hero-t" focusable="false"><title id="hero-t">4-room HDB floor plan</title><defs><clipPath id="hero-cp-liv"><path d="M0 0L440 0L440 600L0 600Z"/></clipPath><clipPath id="hero-cp-kit"><path d="M440 0L760 0L760 300L440 300Z"/></clipPath><clipPath id="hero-cp-sy"><path d="M760 0L1000 0L1000 300L760 300Z"/></clipPath><clipPath id="hero-cp-hs"><path d="M440 300L600 300L600 500L440 500Z"/></clipPath><clipPath id="hero-cp-cb"><path d="M600 300L760 300L760 500L600 500Z"/></clipPath><clipPath id="hero-cp-st"><path d="M760 300L1000 300L1000 440L760 440Z"/></clipPath><clipPath id="hero-cp-mb"><path d="M760 440L1000 440L1000 600L760 600Z"/></clipPath><clipPath id="hero-cp-cor"><path d="M440 500L760 500L760 600L440 600Z"/></clipPath><clipPath id="hero-cp-br3"><path d="M0 600L320 600L320 920L0 920Z"/></clipPath><clipPath id="hero-cp-br2"><path d="M320 600L620 600L620 920L320 920Z"/></clipPath><clipPath id="hero-cp-mbr"><path d="M620 600L1000 600L1000 920L620 920Z"/></clipPath></defs><a class="room room--living is-scoped has-photo" data-room="liv" href="work.html#tampines-living" aria-label="Living &amp; dining, see the finished room"><path class="room__floor" d="M0 0L440 0L440 600L0 600Z"/><image class="room__photo" href="img/a-living-800.webp" x="0" y="0" width="440" height="600" preserveAspectRatio="xMidYMid slice" clip-path="url(#hero-cp-liv)" aria-hidden="true"/><path class="room__edge" d="M0 0L440 0L440 600L0 600Z"/><text class="room__name" x="220" y="292" text-anchor="middle">LIVING &amp; DINING</text><text class="room__area" x="220" y="326" text-anchor="middle">26.4 m²</text></a><a class="room room--kitchen is-scoped has-photo" data-room="kit" href="work.html#tampines-kitchen" aria-label="Kitchen, see the finished room"><path class="room__floor" d="M440 0L760 0L760 300L440 300Z"/><image class="room__photo" href="img/a-kitchen-800.webp" x="440" y="0" width="320" height="300" preserveAspectRatio="xMidYMid slice" clip-path="url(#hero-cp-kit)" aria-hidden="true"/><path class="room__edge" d="M440 0L760 0L760 300L440 300Z"/><text class="room__name" x="600" y="142" text-anchor="middle">KITCHEN</text><text class="room__area" x="600" y="176" text-anchor="middle">9.6 m²</text></a><g class="room room--yard" data-room="sy"><path class="room__floor" d="M760 0L1000 0L1000 300L760 300Z"/><path class="room__edge" d="M760 0L1000 0L1000 300L760 300Z"/><text class="room__name" x="880" y="142" text-anchor="middle">SERVICE YARD</text><text class="room__area" x="880" y="176" text-anchor="middle">7.2 m²</text></g><a class="room room--hs is-scoped" data-room="hs" href="work.html#tampines" aria-label="Household shelter, see the finished room"><path class="room__floor" d="M440 300L600 300L600 500L440 500Z"/><path class="room__edge" d="M440 300L600 300L600 500L440 500Z"/><text class="room__name room__name--sm" x="520" y="398" text-anchor="middle">HS</text><text class="room__area" x="520" y="422" text-anchor="middle">3.2 m²</text></a><a class="room room--bath is-scoped has-photo" data-room="cb" href="work.html#tampines-cbath" aria-label="Common bath, see the finished room"><path class="room__floor" d="M600 300L760 300L760 500L600 500Z"/><image class="room__photo" href="img/a-cbath-800.webp" x="600" y="300" width="160" height="200" preserveAspectRatio="xMidYMid slice" clip-path="url(#hero-cp-cb)" aria-hidden="true"/><path class="room__edge" d="M600 300L760 300L760 500L600 500Z"/><text class="room__name room__name--sm" x="680" y="398" text-anchor="middle">BATH</text><text class="room__area" x="680" y="422" text-anchor="middle">3.2 m²</text></a><g class="room room--store" data-room="st"><path class="room__floor" d="M760 300L1000 300L1000 440L760 440Z"/><path class="room__edge" d="M760 300L1000 300L1000 440L760 440Z"/><text class="room__name room__name--sm" x="880" y="368" text-anchor="middle">STORE</text><text class="room__area" x="880" y="392" text-anchor="middle">3.4 m²</text></g><a class="room room--bath is-scoped has-photo" data-room="mb" href="work.html#tampines-mbath" aria-label="Master bath, see the finished room"><path class="room__floor" d="M760 440L1000 440L1000 600L760 600Z"/><image class="room__photo" href="img/a-mbath-800.webp" x="760" y="440" width="240" height="160" preserveAspectRatio="xMidYMid slice" clip-path="url(#hero-cp-mb)" aria-hidden="true"/><path class="room__edge" d="M760 440L1000 440L1000 600L760 600Z"/><text class="room__name room__name--sm" x="880" y="518" text-anchor="middle">M. BATH</text><text class="room__area" x="880" y="542" text-anchor="middle">3.8 m²</text></a><a class="room room--entry is-scoped has-photo" data-room="cor" href="work.html#tampines-entry" aria-label="Entrance &amp; corridor, see the finished room"><path class="room__floor" d="M440 500L760 500L760 600L440 600Z"/><image class="room__photo" href="img/a-entry-800.webp" x="440" y="500" width="320" height="100" preserveAspectRatio="xMidYMid slice" clip-path="url(#hero-cp-cor)" aria-hidden="true"/><path class="room__edge" d="M440 500L760 500L760 600L440 600Z"/><text class="room__name room__name--sm" x="600" y="548" text-anchor="middle">CORR.</text></a><a class="room room--bed is-scoped" data-room="br3" href="work.html#tampines" aria-label="Bedroom 3, see the finished room"><path class="room__floor" d="M0 600L320 600L320 920L0 920Z"/><path class="room__edge" d="M0 600L320 600L320 920L0 920Z"/><text class="room__name" x="160" y="752" text-anchor="middle">BEDROOM 3</text><text class="room__area" x="160" y="786" text-anchor="middle">10.2 m²</text></a><a class="room room--study is-scoped has-photo" data-room="br2" href="work.html#tampines-study" aria-label="Bedroom 2, see the finished room"><path class="room__floor" d="M320 600L620 600L620 920L320 920Z"/><image class="room__photo" href="img/a-study-800.webp" x="320" y="600" width="300" height="320" preserveAspectRatio="xMidYMid slice" clip-path="url(#hero-cp-br2)" aria-hidden="true"/><path class="room__edge" d="M320 600L620 600L620 920L320 920Z"/><text class="room__name" x="470" y="752" text-anchor="middle">BEDROOM 2</text><text class="room__area" x="470" y="786" text-anchor="middle">9.6 m²</text></a><a class="room room--bed is-scoped has-photo" data-room="mbr" href="work.html#tampines-master" aria-label="Master bedroom, see the finished room"><path class="room__floor" d="M620 600L1000 600L1000 920L620 920Z"/><image class="room__photo" href="img/a-master-800.webp" x="620" y="600" width="380" height="320" preserveAspectRatio="xMidYMid slice" clip-path="url(#hero-cp-mbr)" aria-hidden="true"/><path class="room__edge" d="M620 600L1000 600L1000 920L620 920Z"/><text class="room__name" x="810" y="752" text-anchor="middle">MASTER BEDROOM</text><text class="room__area" x="810" y="786" text-anchor="middle">12.2 m²</text></a><g class="plan-walls"><path class="plan-wall" d="M0 0L440 0L440 600L0 600Z"/><path class="plan-wall" d="M440 0L760 0L760 300L440 300Z"/><path class="plan-wall" d="M760 0L1000 0L1000 300L760 300Z"/><path class="plan-wall" d="M440 300L600 300L600 500L440 500Z"/><path class="plan-wall" d="M600 300L760 300L760 500L600 500Z"/><path class="plan-wall" d="M760 300L1000 300L1000 440L760 440Z"/><path class="plan-wall" d="M760 440L1000 440L1000 600L760 600Z"/><path class="plan-wall" d="M440 500L760 500L760 600L440 600Z"/><path class="plan-wall" d="M0 600L320 600L320 920L0 920Z"/><path class="plan-wall" d="M320 600L620 600L620 920L320 920Z"/><path class="plan-wall" d="M620 600L1000 600L1000 920L620 920Z"/><path class="plan-wall plan-wall--ext" d="M0 0L1000 0L1000 920L0 920Z"/></g><g class="plan-open"><line class="plan-gap" x1="60" y1="0" x2="150" y2="0"/><line class="plan-leaf" x1="60" y1="0" x2="60" y2="90"/><path class="plan-swing" d="M60 90A90 90 0 0 1 150 0"/><line class="plan-gap" x1="440" y1="40" x2="440" y2="130"/><line class="plan-gap" x1="760" y1="80" x2="760" y2="220"/><line class="plan-gap" x1="480" y1="500" x2="560" y2="500"/><line class="plan-leaf" x1="480" y1="500" x2="480" y2="420"/><path class="plan-swing" d="M480 420A80 80 0 0 0 560 500"/><line class="plan-gap" x1="640" y1="500" x2="720" y2="500"/><line class="plan-leaf" x1="720" y1="500" x2="720" y2="420"/><path class="plan-swing" d="M720 420A80 80 0 0 1 640 500"/><line class="plan-gap" x1="760" y1="340" x2="760" y2="410"/><line class="plan-leaf" x1="760" y1="340" x2="830" y2="340"/><path class="plan-swing" d="M830 340A70 70 0 0 0 760 410"/><line class="plan-gap" x1="440" y1="510" x2="440" y2="590"/><line class="plan-gap" x1="230" y1="600" x2="310" y2="600"/><line class="plan-leaf" x1="310" y1="600" x2="310" y2="680"/><path class="plan-swing" d="M310 680A80 80 0 0 0 230 600"/><line class="plan-gap" x1="470" y1="600" x2="550" y2="600"/><line class="plan-leaf" x1="470" y1="600" x2="470" y2="680"/><path class="plan-swing" d="M470 680A80 80 0 0 1 550 600"/><line class="plan-gap" x1="660" y1="600" x2="740" y2="600"/><line class="plan-leaf" x1="660" y1="600" x2="660" y2="680"/><path class="plan-swing" d="M660 680A80 80 0 0 1 740 600"/><line class="plan-gap" x1="800" y1="600" x2="880" y2="600"/><line class="plan-leaf" x1="800" y1="600" x2="800" y2="520"/><path class="plan-swing" d="M800 520A80 80 0 0 0 880 600"/><line class="plan-gap plan-gap--ext" x1="0" y1="120" x2="0" y2="420"/><line class="plan-win" x1="-5" y1="120" x2="-5" y2="420"/><line class="plan-win" x1="0" y1="120" x2="0" y2="420"/><line class="plan-win" x1="5" y1="120" x2="5" y2="420"/><line class="plan-gap plan-gap--ext" x1="0" y1="680" x2="0" y2="860"/><line class="plan-win" x1="-5" y1="680" x2="-5" y2="860"/><line class="plan-win" x1="0" y1="680" x2="0" y2="860"/><line class="plan-win" x1="5" y1="680" x2="5" y2="860"/><line class="plan-gap plan-gap--ext" x1="380" y1="920" x2="560" y2="920"/><line class="plan-win" x1="380" y1="915" x2="560" y2="915"/><line class="plan-win" x1="380" y1="920" x2="560" y2="920"/><line class="plan-win" x1="380" y1="925" x2="560" y2="925"/><line class="plan-gap plan-gap--ext" x1="700" y1="920" x2="900" y2="920"/><line class="plan-win" x1="700" y1="915" x2="900" y2="915"/><line class="plan-win" x1="700" y1="920" x2="900" y2="920"/><line class="plan-win" x1="700" y1="925" x2="900" y2="925"/><line class="plan-gap plan-gap--ext" x1="1000" y1="60" x2="1000" y2="240"/><line class="plan-win" x1="995" y1="60" x2="995" y2="240"/><line class="plan-win" x1="1000" y1="60" x2="1000" y2="240"/><line class="plan-win" x1="1005" y1="60" x2="1005" y2="240"/><line class="plan-gap plan-gap--ext" x1="1000" y1="480" x2="1000" y2="560"/><line class="plan-win" x1="995" y1="480" x2="995" y2="560"/><line class="plan-win" x1="1000" y1="480" x2="1000" y2="560"/><line class="plan-win" x1="1005" y1="480" x2="1005" y2="560"/></g><g class="plan-dims" aria-hidden="true"><line x1="0" y1="-46" x2="1000" y2="-46"/><line x1="0" y1="-54" x2="0" y2="-38"/><line x1="1000" y1="-54" x2="1000" y2="-38"/><text x="500" y="-58" text-anchor="middle">10 m</text><line x1="-46" y1="0" x2="-46" y2="920"/><line x1="-54" y1="0" x2="-38" y2="0"/><line x1="-54" y1="920" x2="-38" y2="920"/><text transform="translate(-58 460) rotate(-90)" text-anchor="middle">9.2 m</text></g></svg>
+<!--/PLAN-->
+        </div>
+        <p class="pick__hint" id="planHint">Hover a room, or tap it, to see it finished. Tap it again to open the project.</p>
+
+        <table class="sheet">
+          <caption class="label">What each room cost, as it was built</caption>
+          <tbody>
+            <!--SHEET:hdb4:liv=full,kit=full,mbr=full,mb=full,br2=standard,cb=full,cor=full,br3=standard,hs=light-->
+<tr data-room="liv"><th scope="row">Living &amp; dining</th><td class="desc">Hacked and re-tiled, cove lighting, console, fluted feature wall</td><td class="amt">S$11,390</td></tr>
+<tr data-room="kit"><th scope="row">Kitchen</th><td class="desc">Hacked to bare, re-tiled floor to ceiling, quartz L-run, glass sliding door</td><td class="amt">S$18,590</td></tr>
+<tr data-room="sy" class="out"><th scope="row">Service yard</th><td class="desc">Not touched</td><td class="amt">—</td></tr>
+<tr data-room="hs"><th scope="row">Household shelter</th><td class="desc">Paint and vinyl; shelter walls stay as built</td><td class="amt">S$480</td></tr>
+<tr data-room="cb"><th scope="row">Common bath</th><td class="desc">Hacked, waterproofed, re-tiled, re-plumbed, vanity, glass screen</td><td class="amt">S$12,500</td></tr>
+<tr data-room="st" class="out"><th scope="row">Store</th><td class="desc">Not touched</td><td class="amt">—</td></tr>
+<tr data-room="mb"><th scope="row">Master bath</th><td class="desc">Hacked, waterproofed, re-tiled, re-plumbed, vanity, glass screen</td><td class="amt">S$13,110</td></tr>
+<tr data-room="cor"><th scope="row">Entrance &amp; corridor</th><td class="desc">Re-tiled, shoe cabinet, new fire-rated main door</td><td class="amt">S$4,160</td></tr>
+<tr data-room="br3"><th scope="row">Bedroom 3</th><td class="desc">Vinyl, full-height wardrobe, new door</td><td class="amt">S$5,130</td></tr>
+<tr data-room="br2"><th scope="row">Bedroom 2</th><td class="desc">Vinyl, built-in desk along the window, open shelves</td><td class="amt">S$4,720</td></tr>
+<tr data-room="mbr"><th scope="row">Master bedroom</th><td class="desc">Hacked, vinyl, wardrobe, platform bed with headboard</td><td class="amt">S$6,920</td></tr>
+<tr data-room="site"><th scope="row">Site</th><td class="desc">Protection, haulage with hacking debris, chemical wash, permit</td><td class="amt">S$2,140</td></tr>
+<!--/SHEET-->
+          </tbody>
+          <tfoot>
+            <tr><th scope="row">Contract sum</th><td class="desc">Fixed once the flat was drawn. No variation orders were raised.</td><td class="amt"><!--EST:hdb4:liv=full,kit=full,mbr=full,mb=full,br2=standard,cb=full,cor=full,br3=standard,hs=light:sum-->S$79,140<!--/EST--></td></tr>
+          </tfoot>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================ the argument ============================ -->
+  <section class="bay band--panel">
+    <div class="wrap argue">
+      <div class="argue__text reveal">
+        <p class="label">Three quotes on your table</p>
+        <h2>Ours is the one you can check.</h2>
+        <p>A renovation quote is a list of line items. Most of them arrive as a lump per room, so the only thing you can compare is the total, and the total tells you nothing about why.</p>
+        <p>Every line on a CHALKLINE quote carries its quantity and its rate. You can see that the kitchen is the expensive room because of eleven and a half feet of carpentry, not because of us. You can see what changes if you keep the floor. And when you change your mind, a change is a line, not a renegotiation.</p>
+        <p><a href="quote.html">Build one for your flat</a> and read the working under the number.</p>
+      </div>
+      <div class="reveal d1">
+        <p class="label">One room, as we would write it · 4-room kitchen, standard scope</p>
+        <!--LINES:hdb4:kit=standard-->
+<div class="quote-row"><dl><dt>Painting, walls and ceiling, ceiling and exposed wall</dt><dd>62 sq ft × S$2.2</dd><dd class="tot">S$140</dd></dl></div>
+<div class="quote-row"><dl><dt>Backsplash tiles, above the worktop</dt><dd>23.1 sq ft × S$16.5</dd><dd class="tot">S$380</dd></dl></div>
+<div class="quote-row"><dl><dt>Kitchen carpentry, top and bottom, soft-close, L-run</dt><dd>11.5 ft × S$320</dd><dd class="tot">S$3,680</dd></dl></div>
+<div class="quote-row"><dl><dt>Quartz worktop</dt><dd>11.5 ft × S$95</dd><dd class="tot">S$1,090</dd></dl></div>
+<div class="quote-row"><dl><dt>Kitchen plumbing</dt><dd>1 room × S$950</dd><dd class="tot">S$950</dd></dl></div>
+<div class="quote-row"><dl><dt>Electrical points</dt><dd>10 point × S$85</dd><dd class="tot">S$850</dd></dl></div>
+<div class="quote-row"><dl><dt>Downlights</dt><dd>4 no. × S$48</dd><dd class="tot">S$190</dd></dl></div>
+<div class="quote-total"><span>Kitchen, standard scope, 9.6 m²</span><span class="num">S$7,280</span></div>
+<!--/LINES-->
+        <p class="quote-foot">Rates are our current book rates. Quantities come from the plan: the carpentry run is the kitchen's long wall, plus the return.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ featured work ============================ -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="label">Work</p>
+        <h2>The same room, before and after.</h2>
+        <p class="lede">Drag the line. Same camera, same window, same wall.</p>
+      </div>
+
+      <div class="feat">
+
+        <div class="feat__row">
+          <figure class="pair reveal" data-kind="living">
+            <div class="pair__frame">
+              <img class="pair__after" src="img/a-living-800.webp" srcset="img/a-living-800.webp 800w, img/a-living-1600.webp 1600w" sizes="(min-width: 64rem) 55vw, 100vw" width="1600" height="893" alt="After: the living and dining room finished with light oak vinyl, a long walnut console, cove lighting and a round dining table by the kitchen." decoding="async">
+              <img class="pair__before" src="img/a-living-before-800.webp" srcset="img/a-living-before-800.webp 800w, img/a-living-before-1600.webp 1600w" sizes="(min-width: 64rem) 55vw, 100vw" width="1600" height="893" alt="Before: the same room with glossy beige tiles, yellowed walls, a fluorescent tube and an old ceiling fan." decoding="async">
+              <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+              <span class="pair__handle" aria-hidden="true"></span>
+              <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+            </div>
+            <figcaption><span><b>Living &amp; dining</b> · hacked, re-tiled, cove lighting, console</span><span class="num">26.4 m²</span></figcaption>
+          </figure>
+          <div class="feat__meta reveal d1">
+            <h3>Tampines Street 81</h3>
+            <p>A 1990s resale flat hacked to bare and rebuilt for a couple who wanted one long living room and a study that could become a nursery.</p>
+            <ul class="facts">
+              <li>4-room resale</li>
+              <li><!--EST:hdb4:liv=full,kit=full,mbr=full,mb=full,br2=standard,cb=full,cor=full,br3=standard,hs=light:area-->92 m²<!--/EST--></li>
+              <li><!--EST:hdb4:liv=full,kit=full,mbr=full,mb=full,br2=standard,cb=full,cor=full,br3=standard,hs=light:weeks-->11<!--/EST--> weeks</li>
+              <li><!--EST:hdb4:liv=full,kit=full,mbr=full,mb=full,br2=standard,cb=full,cor=full,br3=standard,hs=light:sum-->S$79,140<!--/EST--></li>
+            </ul>
+            <p><a href="work.html#tampines">See all seven rooms</a></p>
+          </div>
+        </div>
+
+        <div class="feat__row">
+          <figure class="pair reveal" data-kind="kitchen">
+            <div class="pair__frame">
+              <img class="pair__after" src="img/b-kitchen-800.webp" srcset="img/b-kitchen-800.webp 800w, img/b-kitchen-1600.webp 1600w" sizes="(min-width: 64rem) 55vw, 100vw" width="1600" height="893" alt="After: a kitchen with pale sage lower cabinets, an off-white quartz worktop and a black-framed glass sliding door to the dining area." loading="lazy" decoding="async">
+              <img class="pair__before" src="img/b-kitchen-before-800.webp" srcset="img/b-kitchen-before-800.webp 800w, img/b-kitchen-before-1600.webp 1600w" sizes="(min-width: 64rem) 55vw, 100vw" width="1600" height="893" alt="Before: the same kitchen as handed over, bare white tiles, capped pipes and no cabinets." loading="lazy" decoding="async">
+              <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+              <span class="pair__handle" aria-hidden="true"></span>
+              <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+            </div>
+            <figcaption><span><b>Kitchen</b> · quartz L-run, sage carpentry, glass slider</span><span class="num">10.2 m²</span></figcaption>
+          </figure>
+          <div class="feat__meta reveal d1">
+            <h3>Punggol Way</h3>
+            <p>Bare from HDB. Sage lowers, a glass slider between kitchen and dining, and a study for two people who work from home.</p>
+            <ul class="facts">
+              <li>5-room BTO</li>
+              <li><!--EST:hdb5:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,stu=standard,mb=standard,cb=standard,cor=standard,hs=light,sy=standard:area-->108.6 m²<!--/EST--></li>
+              <li><!--EST:hdb5:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,stu=standard,mb=standard,cb=standard,cor=standard,hs=light,sy=standard:weeks-->8<!--/EST--> weeks</li>
+              <li><!--EST:hdb5:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,stu=standard,mb=standard,cb=standard,cor=standard,hs=light,sy=standard:sum-->S$60,290<!--/EST--></li>
+            </ul>
+            <p><a href="work.html#punggol">See the flat</a></p>
+          </div>
+        </div>
+
+        <div class="feat__row">
+          <figure class="pair reveal" data-kind="living">
+            <div class="pair__frame">
+              <img class="pair__after" src="img/c-living-800.webp" srcset="img/c-living-800.webp 800w, img/c-living-1600.webp 1600w" sizes="(min-width: 64rem) 55vw, 100vw" width="1600" height="893" alt="After: a walk-up living room with the original terrazzo floor polished, a walnut bookshelf wall, a rattan chair and white shutters on tall windows." loading="lazy" decoding="async">
+              <img class="pair__before" src="img/c-living-before-800.webp" srcset="img/c-living-before-800.webp 800w, img/c-living-before-1600.webp 1600w" sizes="(min-width: 64rem) 55vw, 100vw" width="1600" height="893" alt="Before: the same room with stained terrazzo, peeling paint and bare timber windows." loading="lazy" decoding="async">
+              <span class="pair__tag pair__tag--b">Before</span><span class="pair__tag pair__tag--a">After</span>
+              <span class="pair__handle" aria-hidden="true"></span>
+              <input class="pair__scrub" type="range" min="0" max="100" value="50" aria-label="Slide between before and after">
+            </div>
+            <figcaption><span><b>Living</b> · terrazzo ground and sealed, shutters, bookshelf wall</span><span class="num">20.5 m²</span></figcaption>
+          </figure>
+          <div class="feat__meta reveal d1">
+            <h3>Tiong Bahru</h3>
+            <p>Original terrazzo, ground and sealed rather than covered. Shutters on the tall windows. A kitchen with open shelves instead of uppers.</p>
+            <ul class="facts">
+              <li>3-room walk-up</li>
+              <li><!--EST:hdb3:liv=standard,kit=full,mbr=standard,br2=standard,mb=full,cb=full,cor=standard,hs=light:area-->70.5 m²<!--/EST--></li>
+              <li><!--EST:hdb3:liv=standard,kit=full,mbr=standard,br2=standard,mb=full,cb=full,cor=standard,hs=light:weeks-->10<!--/EST--> weeks</li>
+              <li><!--EST:hdb3:liv=standard,kit=full,mbr=standard,br2=standard,mb=full,cb=full,cor=standard,hs=light:sum-->S$62,880<!--/EST--></li>
+            </ul>
+            <p><a href="work.html#tiongbahru">See the flat</a></p>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="btn-row reveal"><a class="btn btn--ghost" href="work.html">All work, filtered by room and flat</a></p>
+    </div>
+  </section>
+
+  <!-- ============================ how it runs ============================ -->
+  <section class="bay band--panel" id="process">
+    <div class="wrap process">
+      <div class="reveal">
+        <div class="head">
+          <p class="label">How a job runs</p>
+          <h2>Ten weeks for a standard 4-room. Thirteen when we hack.</h2>
+        </div>
+        <ol class="weeks">
+          <li><b>Wk 0</b>Permit in hand, protection up, chalk lines snapped</li>
+          <li class="wk--wet"><b>Wk 1</b>Hacking and haulage</li>
+          <li class="wk--wet"><b>Wk 2–3</b>Masonry, plumbing, waterproofing test</li>
+          <li><b>Wk 4</b>Electrical, ceiling and L-box</li>
+          <li><b>Wk 5–7</b>Carpentry made in our Kaki Bukit workshop; tiling on site</li>
+          <li><b>Wk 8</b>Carpentry installed</li>
+          <li><b>Wk 9</b>Paint, vinyl, fittings</li>
+          <li><b>Wk 10</b>Chemical wash, defects walk, handover file</li>
+        </ol>
+        <h3 class="h3--gap">How you pay</h3>
+        <div class="pay">
+          <div><b>10%</b><span>On confirmation</span></div>
+          <div><b>40%</b><span>Work starts on site</span></div>
+          <div><b>40%</b><span>Carpentry installed</span></div>
+          <div><b>10%</b><span>A week after move-in</span></div>
+        </div>
+      </div>
+      <div class="process__aside reveal d1">
+        <p>The weeks are a real schedule, not a promise. A 4-room BTO at standard scope runs ten weeks from permit to handover; a resale flat that needs hacking runs closer to thirteen, because wet rooms have to be waterproofed and flood-tested before a single tile goes down.</p>
+        <p>You are in one WhatsApp group with the three of us for the whole job, with photographs every working day. The last ten percent waits until you have lived in it for a week.</p>
+        <p><a href="studio.html#process">The full process, and what we won't do</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ start ============================ -->
+  <section class="bay band--dark">
+    <div class="wrap cta">
+      <div class="reveal">
+        <p class="label">Start with your plan</p>
+        <h2>Pick your flat. Tick the rooms. Watch the number.</h2>
+        <p class="lede">The estimate rebuilds itself from the plan's own measurements and prints the working underneath. Then send it to us as it is.</p>
+      </div>
+      <ul class="flats reveal d1">
+        <li><a href="quote.html?type=hdb3"><b>3-room HDB</b><span>about 70 m²</span><small>Every room, standard scope: <!--EST:hdb3:liv=standard,kit=standard,mbr=standard,br2=standard,mb=standard,cb=standard,cor=standard,hs=light,sy=standard:band-->S$43,000 – S$50,000<!--/EST--></small></a></li>
+        <li><a href="quote.html?type=hdb4"><b>4-room HDB</b><span>about 92 m²</span><small>Every room, standard scope: <!--EST:hdb4:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,mb=standard,cb=standard,cor=standard,hs=light,sy=standard:band-->S$50,000 – S$58,000<!--/EST--></small></a></li>
+        <li><a href="quote.html?type=hdb5"><b>5-room HDB</b><span>about 108 m²</span><small>Every room, standard scope: <!--EST:hdb5:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,stu=standard,mb=standard,cb=standard,cor=standard,hs=light,sy=standard:band-->S$56,000 – S$65,000<!--/EST--></small></a></li>
+        <li><a href="quote.html?type=condo"><b>3-bedroom condominium</b><span>about 96 m²</span><small>Every room, standard scope: <!--EST:condo:liv=standard,kit=standard,mbr=standard,br2=standard,br3=standard,mb=standard,cb=standard,cor=standard,bal=standard,sy=standard,ut=standard:band-->S$51,000 – S$59,500<!--/EST--></small></a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <a class="mark" href="index.html" aria-label="CHALKLINE, home"><span>CHALK</span><span class="mark__line" aria-hidden="true"></span><span>LINE</span></a>
+        <p>Interior design &amp; renovation<br>18 Tai Seng Avenue #05-11<br>Singapore 534061</p>
+        <p class="small">Four minutes from Tai Seng MRT (CC11), exit A.</p>
+      </div>
+      <div>
+        <h2>Site</h2>
+        <ul>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="quote.html">Start with your plan</a></li>
+          <li><a href="studio.html">Studio</a></li>
+          <li><a href="studio.html#process">How a job runs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Talk to us</h2>
+        <ul>
+          <li><a href="https://wa.me/6582242558?text=Hi%20CHALKLINE%2C%20I%27d%20like%20to%20talk%20about%20renovating%20my%20flat.">WhatsApp 8224 2558</a></li>
+          <li><a href="tel:+6582242558">Call 8224 2558</a></li>
+          <li><a href="mailto:hello@chalkline.sg">hello@chalkline.sg</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Showroom</h2>
+        <p>Tue–Sat 10.30–19.00<br>Sun &amp; Mon by appointment</p>
+        <p class="small">Bring your floor plan. If you don't have it yet, we'll draw it from your unit type.</p>
+      </div>
+    </div>
+    <div class="foot__bar">
+      <span>© <span data-year>2026</span> CHALKLINE Pte Ltd</span>
+      <span>Tai Seng, Singapore</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/ui.js" defer></script>
+<script src="js/hero.js" defer></script>
+</body>
+</html>
