@@ -1,0 +1,525 @@
+/* ==========================================================================
+   MARLOWE FENN — stop-motion animator & puppet fabricator
+
+   Two tones and nothing else. #0F0F0F ground, #CFCFCF ink, with two greys
+   between them for hierarchy. There is no accent colour anywhere in this
+   file, and no pure white either — the lightest value on the page is the
+   body text. Restraint is the whole idea: a portfolio that reaches for a
+   highlight hue is admitting the work underneath cannot hold attention.
+
+   THE ONE RULE THAT SHAPES EVERYTHING:
+
+   Narrative motion runs on steps(), not on a curve. Stop-motion is sampled
+   time — twelve or twenty-four discrete exposures a second, no motion blur,
+   no in-between. So every reveal, every stage transition and the loader all
+   advance in visible increments. `steps(4, end)` over 333ms is exactly 12fps.
+
+   The deliberate exception is anything the pointer drives — hover, focus,
+   button states. Stepped feedback under a cursor does not read as craft, it
+   reads as lag: the user believes the site is dropping frames rather than
+   quoting a medium. Those stay on a smooth curve. The distinction is the
+   whole reason the stepped motion elsewhere is legible as a choice.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Tokens
+   -------------------------------------------------------------------------- */
+
+:root {
+  --ink:      #0f0f0f;   /* ground */
+  --ink-2:    #151515;   /* raised panels */
+  --ink-3:    #1c1c1c;   /* inputs, sheet rows */
+  --paper:    #cfcfcf;   /* 12.2:1 on ink — primary */
+  --dim:      #909090;   /*  5.9:1 — secondary, measured */
+  --dimmer:   #6e6e6e;   /*  3.7:1 — large text and non-text only */
+  --rule:     #2a2a2a;
+  --rule-2:   #3a3a3a;
+
+  --display: 'Bricolage Grotesque', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --mono:    'Space Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --wrap: 74rem;
+  --wrap-tight: 48rem;
+  --gutter: clamp(1.15rem, 4.5vw, 3rem);
+  --bay: clamp(4.5rem, 11vw, 10rem);
+
+  /* 12fps and 24fps, expressed as duration/step pairs. */
+  --f12: steps(4, end);
+  --f24: steps(8, end);
+  --dur: 333ms;
+  /* Pointer affordances only — see the header note. */
+  --ease: cubic-bezier(.2, .6, .3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset
+   -------------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--ink);
+  /* No smooth scrolling: the exposure sheet reads scroll position as a
+     playhead, and an animated scroll would scrub it for the reader. */
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--display);
+  font-optical-sizing: auto;
+  font-variation-settings: 'wdth' 100;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: inherit; }
+
+h1, h2, h3 {
+  font-weight: 600;
+  line-height: .95;
+  letter-spacing: -.03em;
+  margin: 0 0 .5em;
+  font-variation-settings: 'wdth' 92;
+}
+
+h1 { font-size: clamp(3rem, 11vw, 9.5rem); }
+h2 { font-size: clamp(2.1rem, 5.5vw, 4.5rem); }
+h3 { font-size: clamp(1.15rem, 2vw, 1.6rem); line-height: 1.12; }
+p  { margin: 0 0 1.15em; }
+p:last-child { margin-bottom: 0; }
+
+.lede {
+  font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+  line-height: 1.45;
+  color: var(--paper);
+  max-width: 34ch;
+}
+
+.mono, .num {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin: 0 0 1.4rem;
+  display: block;
+}
+
+.wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
+.wrap--tight { max-width: var(--wrap-tight); }
+.bay { padding-block: var(--bay); }
+
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 300;
+  background: var(--paper); color: var(--ink);
+  padding: .7rem 1.1rem; font-family: var(--mono); font-size: .8rem;
+}
+.skip:focus { left: 0; }
+
+:where(a, button, input, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   3. The loader — first of the two authored motion moments
+   -------------------------------------------------------------------------- */
+
+/* Hidden by default and only shown once script says so. A loader that is
+   visible in the stylesheet is a black screen for anyone whose JS never
+   arrives, which is the one failure mode a loader must not have. */
+.leader { display: none; }
+
+/* Scroll is locked only while the leader is actually up, and the attribute
+   is set and cleared by the same function that shows and removes it — so
+   there is no path where the lock outlives the overlay. */
+html[data-loading], html[data-loading] body { overflow: hidden; }
+
+.js .leader {
+  display: grid;
+  position: fixed; inset: 0; z-index: 200;
+  place-items: center;
+  background: var(--ink);
+  cursor: grab;
+  touch-action: none;
+}
+.js .leader:active { cursor: grabbing; }
+.js .leader[data-done="1"] {
+  /* Lifts on twos, like everything else. */
+  animation: leader-out 333ms var(--f12) forwards;
+  pointer-events: none;
+}
+@keyframes leader-out { to { opacity: 0; visibility: hidden; } }
+
+.leader__in { display: grid; place-items: center; gap: 1.6rem; width: min(88vw, 30rem); }
+
+.leader__dial { position: relative; width: min(58vw, 16rem); aspect-ratio: 1; }
+.leader__dial svg { width: 100%; height: 100%; }
+.leader__count {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-family: var(--mono); font-size: clamp(3rem, 12vw, 5rem);
+  font-weight: 700; color: var(--paper); letter-spacing: -.04em;
+}
+.leader__hint {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--dimmer); text-align: center;
+  margin: 0;
+}
+.leader__bar { width: 100%; height: 1px; background: var(--rule); position: relative; }
+.leader__bar i {
+  position: absolute; inset: 0 auto 0 0; background: var(--paper);
+  width: 0%;
+}
+
+/* --------------------------------------------------------------------------
+   4. Chrome
+   -------------------------------------------------------------------------- */
+
+/* No backdrop and no blend mode. A fixed element with mix-blend-mode makes
+   its own stacking context and repaints on every scroll frame, and this page
+   already spends its scroll budget on a canvas. Over a page this dark the
+   effect would have been invisible anyway. */
+.top { position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+.top__in {
+  display: flex; align-items: baseline; gap: 1.5rem;
+  padding-block: 1.15rem;
+}
+.top__mark {
+  font-family: var(--mono); font-size: .74rem; letter-spacing: .2em;
+  text-transform: uppercase; text-decoration: none; margin-right: auto;
+  color: var(--paper);
+}
+.top nav { display: none; gap: 1.5rem; }
+.top nav a {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .16em;
+  text-transform: uppercase; text-decoration: none; color: var(--paper);
+  opacity: .62; transition: opacity 180ms var(--ease);
+}
+.top nav a:hover, .top nav a[aria-current="true"] { opacity: 1; }
+
+@media (min-width: 48rem) { .top nav { display: flex; } }
+
+/* Mobile keeps one link, not a hamburger. The site is a single scrolling
+   narrative, so a menu that jumps between five anchors of one page is a
+   drawer built to hide four links nobody needs — but burying the only
+   commercial action at the foot of a 9,000px page is worse. So: the wordmark
+   and Commissions, and everything else is reached by reading. */
+@media (max-width: 47.99rem) {
+  .top nav { display: flex; }
+  .top nav a { display: none; }
+  .top nav a[href="#commissions"] { display: block; opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   5. Hero
+   -------------------------------------------------------------------------- */
+
+.hero {
+  min-height: 100svh;
+  display: grid;
+  align-content: end;
+  padding-bottom: clamp(2.5rem, 6vw, 5rem);
+  padding-top: 7rem;
+}
+.hero h1 {
+  margin: 0;
+  font-variation-settings: 'wdth' 82;
+  text-transform: uppercase;
+}
+.hero__foot {
+  display: grid; gap: 1.8rem;
+  margin-top: clamp(1.8rem, 4vw, 3rem);
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+}
+@media (min-width: 54rem) {
+  .hero__foot { grid-template-columns: 1fr 1fr auto; align-items: start; gap: 2.5rem; }
+}
+.hero__role {
+  font-family: var(--mono); font-size: .78rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--dim); margin: 0;
+  line-height: 1.9;
+}
+.hero__role b { color: var(--paper); font-weight: 400; }
+
+/* The armature — first of three hand-placed props. It sits with the hero
+   because that is the object the whole practice is built on; it is not
+   repeated anywhere else. */
+.armature { width: clamp(5rem, 9vw, 8rem); justify-self: end; color: var(--dimmer); }
+.armature svg { width: 100%; height: auto; }
+@media (max-width: 54rem) { .armature { justify-self: start; } }
+
+/* --------------------------------------------------------------------------
+   6. The exposure sheet — the signature interaction
+   -------------------------------------------------------------------------- */
+
+.xs { position: relative; }
+/* The tall track is what gives the sticky stage something to scrub against.
+   300vh of scroll maps to 48 frames of animation. */
+.xs__track { height: 320vh; }
+.xs__stick {
+  position: sticky; top: 0; height: 100svh;
+  display: grid; align-content: center;
+  overflow: hidden;
+}
+
+.xs__grid { display: grid; gap: clamp(1.2rem, 3vw, 2.5rem); align-items: center; }
+@media (min-width: 56rem) {
+  .xs__grid { grid-template-columns: 1fr minmax(15rem, 20rem); }
+}
+
+.stage {
+  position: relative;
+  background: var(--ink-2);
+  border: 1px solid var(--rule);
+  aspect-ratio: 16 / 9;
+}
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stage__tag {
+  position: absolute; left: .8rem; top: .8rem; z-index: 2;
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--dimmer);
+}
+.stage__frame {
+  position: absolute; right: .8rem; top: .8rem; z-index: 2;
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .12em;
+  color: var(--paper);
+}
+
+/* -- the sheet itself ----------------------------------------------------- */
+
+.sheet {
+  border: 1px solid var(--rule);
+  background: var(--ink-2);
+  height: clamp(15rem, 42vh, 24rem);
+  position: relative;
+  overflow: hidden;
+}
+.sheet__head {
+  display: grid; grid-template-columns: 3.2rem 3.2rem 1fr;
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--dimmer);
+  border-bottom: 1px solid var(--rule);
+  padding: .5rem .7rem;
+  position: relative; z-index: 3; background: var(--ink-2);
+}
+.sheet__scroll { position: absolute; inset: 2rem 0 0; }
+.sheet__rows { position: absolute; left: 0; right: 0; top: 0; }
+.sheet__row {
+  display: grid; grid-template-columns: 3.2rem 3.2rem 1fr;
+  font-family: var(--mono); font-size: .66rem;
+  padding: 0 .7rem;
+  height: 1.5rem; align-items: center;
+  color: var(--dimmer);
+  border-bottom: 1px solid rgba(42, 42, 42, .6);
+}
+/* Every second frame is the start of a new drawing when shooting on twos.
+   The heavier rule is the real convention on a printed sheet. */
+.sheet__row[data-key="1"] { border-bottom-color: var(--rule-2); color: var(--dim); }
+.sheet__row[data-on="1"] { color: var(--paper); }
+.sheet__row span:nth-child(2) { color: inherit; }
+.sheet__row .act { letter-spacing: .06em; text-transform: uppercase; font-size: .6rem; }
+
+/* The playhead is a fixed bar; the rows move under it. That is the way a
+   real sheet is read — the head stays put and the paper advances. */
+.sheet__head-bar {
+  position: absolute; left: 0; right: 0; top: 50%; z-index: 2;
+  height: 1.5rem; margin-top: -.75rem;
+  border-top: 1px solid var(--paper);
+  border-bottom: 1px solid var(--paper);
+  pointer-events: none;
+}
+
+/* Stacked on a narrow screen, the stage and a 24rem sheet together overrun a
+   100svh sticky pane — and because the pane clips, the overrun is silent.
+   The sheet becomes a shorter window onto the same paper rather than the
+   whole thing: the playhead still centres, you simply see fewer rows either
+   side of it, which is what a smaller screen should cost. */
+@media (max-width: 56rem) {
+  .sheet { height: clamp(8.5rem, 24vh, 13rem); }
+  .xs__grid > div:last-child .xs__note { display: none; }
+}
+
+/* A viewport too short to hold the instrument at all — a phone in landscape —
+   stops pinning it and shows it as an ordinary block. The scrub is lost, but
+   nothing is cropped, and losing an enhancement beats hiding content. */
+@media (max-height: 34rem) {
+  .xs__track { height: auto; }
+  .xs__stick { position: static; height: auto; padding-block: var(--bay); }
+}
+
+.xs__controls {
+  display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
+  margin-top: 1rem;
+}
+.rate {
+  background: none; border: 1px solid var(--rule-2); color: var(--dim);
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; padding: .42rem .7rem; cursor: pointer;
+  transition: color 180ms var(--ease), border-color 180ms var(--ease);
+}
+.rate:hover { color: var(--paper); border-color: var(--dim); }
+.rate[aria-pressed="true"] { color: var(--ink); background: var(--paper); border-color: var(--paper); }
+.xs__note {
+  font-family: var(--mono); font-size: .62rem; line-height: 1.8;
+  color: var(--dimmer); margin: .9rem 0 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Work — an authored sequence, not a grid
+   -------------------------------------------------------------------------- */
+
+.piece {
+  display: grid; gap: 1.2rem 2.5rem;
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  border-top: 1px solid var(--rule);
+}
+@media (min-width: 56rem) {
+  .piece { grid-template-columns: 4.5rem 1fr minmax(0, 22rem); }
+}
+.piece__n {
+  font-family: var(--mono); font-size: .7rem; color: var(--dimmer);
+  letter-spacing: .1em;
+}
+.piece h3 { margin: 0 0 .35rem; font-variation-settings: 'wdth' 88; }
+.piece__meta {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--dim); margin: 0;
+}
+.piece p { color: var(--dim); margin: 0; }
+@media (min-width: 56rem) { .piece p { margin-top: .2rem; } }
+
+/* --------------------------------------------------------------------------
+   8. Workshop
+   -------------------------------------------------------------------------- */
+
+.beats { display: grid; gap: 0; margin-top: 2.5rem; }
+@media (min-width: 50rem) { .beats { grid-template-columns: repeat(2, 1fr); } }
+.beat {
+  padding: 1.8rem 0;
+  border-top: 1px solid var(--rule);
+}
+@media (min-width: 50rem) {
+  .beat { padding: 1.8rem 2.2rem 2rem 0; }
+  .beat:nth-child(even) { padding-right: 0; padding-left: 2.2rem; border-left: 1px solid var(--rule); }
+}
+.beat h3 { margin-bottom: .5rem; }
+.beat p { color: var(--dim); margin: 0; font-size: .95rem; }
+
+/* Prop two: tie-down calipers, in the workshop where a tool belongs. */
+.calipers { width: clamp(6rem, 12vw, 10rem); color: var(--dimmer); margin-bottom: 2rem; }
+
+.stock {
+  display: flex; flex-wrap: wrap; gap: .4rem 1.4rem;
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--dimmer);
+  margin-top: 2.2rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+}
+
+/* --------------------------------------------------------------------------
+   9. About + commissions
+   -------------------------------------------------------------------------- */
+
+.about p { color: var(--dim); font-size: clamp(1rem, 1.4vw, 1.15rem); }
+.about p + p { margin-top: 1.15em; }
+.about b { color: var(--paper); font-weight: 400; }
+
+/* Prop three: replacement mouth shapes, next to the copy about voice work. */
+.mouths { display: flex; gap: .55rem; margin: 2rem 0 0; color: var(--dimmer); }
+.mouths svg { width: clamp(2.1rem, 4.5vw, 3rem); height: auto; }
+
+.commission { display: grid; gap: 2.5rem; }
+@media (min-width: 54rem) { .commission { grid-template-columns: 1fr 1fr; } }
+
+.field { display: grid; gap: .45rem; margin-bottom: 1.1rem; }
+.field label {
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--dim);
+}
+.field input, .field textarea {
+  font-family: var(--mono); font-size: .85rem; color: var(--paper);
+  background: var(--ink-3); border: 1px solid var(--rule-2);
+  padding: .7rem .8rem; width: 100%; border-radius: 0;
+  transition: border-color 180ms var(--ease);
+}
+.field textarea { min-height: 7.5rem; resize: vertical; line-height: 1.6; }
+.field input:focus, .field textarea:focus { border-color: var(--paper); }
+.field input::placeholder, .field textarea::placeholder { color: var(--dimmer); }
+.field__err { font-family: var(--mono); font-size: .62rem; color: var(--paper); min-height: 1em; }
+.field--bad input, .field--bad textarea { border-color: var(--paper); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: .6rem;
+  background: var(--paper); color: var(--ink); border: 1px solid var(--paper);
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .16em;
+  text-transform: uppercase; padding: .8rem 1.3rem; cursor: pointer;
+  text-decoration: none;
+  transition: background-color 180ms var(--ease), color 180ms var(--ease);
+}
+.btn:hover { background: transparent; color: var(--paper); }
+
+.sent {
+  border: 1px solid var(--paper); padding: .9rem 1rem; margin-bottom: 1.2rem;
+  font-family: var(--mono); font-size: .74rem; line-height: 1.7;
+}
+
+.avail {
+  display: grid; gap: 0; margin: 0; border-top: 1px solid var(--rule);
+}
+.avail > div {
+  display: flex; justify-content: space-between; gap: 1.2rem;
+  padding: .7rem 0; border-bottom: 1px solid var(--rule);
+  font-family: var(--mono); font-size: .72rem;
+}
+.avail dt { color: var(--dim); letter-spacing: .1em; text-transform: uppercase; font-size: .62rem; }
+.avail dd { margin: 0; color: var(--paper); text-align: right; }
+
+/* --------------------------------------------------------------------------
+   10. Footer
+   -------------------------------------------------------------------------- */
+
+.foot {
+  border-top: 1px solid var(--rule);
+  padding-block: 3rem 2.2rem;
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
+  color: var(--dimmer);
+}
+.foot__in { display: grid; gap: 1.2rem; }
+@media (min-width: 50rem) { .foot__in { grid-template-columns: 1fr auto; align-items: end; } }
+.foot a { text-decoration: none; }
+.foot a:hover { color: var(--paper); }
+.foot__links { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+
+/* --------------------------------------------------------------------------
+   11. Reveals — stepped, because everything narrative here is
+   -------------------------------------------------------------------------- */
+
+.js .rev { opacity: 0; transform: translateY(1.1rem); }
+.js .rev.in {
+  opacity: 1; transform: none;
+  transition: opacity var(--dur) var(--f12), transform var(--dur) var(--f12);
+}
+.js .rev--d1.in { transition-delay: 83ms; }   /* one frame at 12fps */
+.js .rev--d2.in { transition-delay: 166ms; }  /* two */
+
+@media (prefers-reduced-motion: reduce) {
+  .js .rev { opacity: 1; transform: none; transition: none; }
+  .js .leader { display: none; }
+  .xs__track { height: auto; }
+  .xs__stick { position: static; height: auto; padding-block: var(--bay); }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}

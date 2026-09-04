@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Marlowe Fenn — Stop-Motion Animator &amp; Puppet Fabricator, Bristol</title>
+  <meta name="description" content="Stop-motion animation and puppet fabrication from a workshop in Bristol. Ball-and-socket armatures, replacement mouths, and everything shot a frame at a time.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/animator-fenn/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Marlowe Fenn">
+  <meta property="og:title" content="Marlowe Fenn — Stop-Motion Animator &amp; Puppet Fabricator">
+  <meta property="og:description" content="Twelve positions a second, held for two frames each. Short film, music video and title sequences, made a frame at a time in Bristol.">
+  <meta property="og:url" content="https://website-collection-zanezhijies-projects.vercel.app/templates/animator-fenn/index.html">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/animator-fenn/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Marlowe Fenn — Stop-Motion Animator &amp; Puppet Fabricator">
+  <meta name="twitter:description" content="Twelve positions a second, held for two frames each. Made a frame at a time in Bristol.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/animator-fenn/img/og.webp">
+  <meta name="theme-color" content="#0f0f0f">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230f0f0f'/><rect x='3' y='5' width='3' height='3' fill='%23cfcfcf'/><rect x='3' y='14' width='3' height='3' fill='%23cfcfcf'/><rect x='3' y='23' width='3' height='3' fill='%23cfcfcf'/><circle cx='19' cy='16' r='7' fill='%23cfcfcf'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..700&family=Space+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============================ the leader ============================ -->
+<!-- Hidden in CSS until script adds `.js`, so a failed script leaves the page
+     readable rather than behind a black rectangle. -->
+<div class="leader" id="leader" tabindex="-1" role="status" aria-label="Loading">
+  <div class="leader__in">
+    <div class="leader__dial">
+      <svg viewBox="0 0 120 120" fill="none" aria-hidden="true">
+        <circle cx="60" cy="60" r="56" stroke="#2a2a2a" stroke-width="1"/>
+        <circle cx="60" cy="60" r="42" stroke="#1c1c1c" stroke-width="1"/>
+        <path d="M60 4v14M60 102v14M4 60h14M102 60h14" stroke="#3a3a3a" stroke-width="1"/>
+        <g id="leaderSweep">
+          <path d="M60 60V6" stroke="#cfcfcf" stroke-width="1.5"/>
+        </g>
+      </svg>
+      <span class="leader__count mono" id="leaderCount">12</span>
+    </div>
+    <div class="leader__bar"><i id="leaderBar"></i></div>
+    <p class="leader__hint">Drag to advance</p>
+  </div>
+</div>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="top__mark" href="#top">Marlowe&nbsp;Fenn</a>
+    <nav aria-label="Sections">
+      <a href="#frames">Frames</a>
+      <a href="#work">Work</a>
+      <a href="#workshop">Workshop</a>
+      <a href="#about">About</a>
+      <a href="#commissions">Commissions</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================ hero ============================ -->
+  <section class="hero wrap" id="top">
+    <h1>Made a frame<br>at a time</h1>
+
+    <div class="hero__foot">
+      <p class="hero__role">
+        <b>Marlowe Fenn</b><br>
+        Stop-motion animator<br>
+        &amp; puppet fabricator
+      </p>
+      <p class="lede">Armatures machined on the bench, skins cast in the back room, and
+        twelve positions a second photographed one at a time. Nothing here was tweened.</p>
+
+      <!-- Prop one of three. The armature belongs with the hero because it is
+           the object the whole practice is built on; it appears once. -->
+      <div class="armature" aria-hidden="true">
+        <svg viewBox="0 0 120 200" fill="none" stroke="currentColor" stroke-width="1.6"
+             stroke-linecap="round">
+          <circle cx="60" cy="24" r="13"/>
+          <path d="M60 37v9"/>
+          <circle cx="60" cy="50" r="4.5"/>
+          <path d="M60 55v10"/>
+          <path d="M38 66h44"/>
+          <circle cx="38" cy="66" r="4"/><circle cx="82" cy="66" r="4"/>
+          <path d="M38 70l-8 20M82 70l8 20"/>
+          <circle cx="30" cy="93" r="3.6"/><circle cx="90" cy="93" r="3.6"/>
+          <path d="M30 97l-4 20M90 97l4 20"/>
+          <path d="M60 65v34"/>
+          <circle cx="60" cy="80" r="4"/>
+          <circle cx="60" cy="103" r="5"/>
+          <path d="M56 107l-8 28M64 107l8 28"/>
+          <circle cx="47" cy="139" r="3.6"/><circle cx="73" cy="139" r="3.6"/>
+          <path d="M47 143l-3 28M73 143l3 28"/>
+          <path d="M36 175h16M68 175h16"/>
+          <path d="M44 175v6M76 175v6"/>
+          <path d="M40 187h8M72 187h8"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== the exposure sheet ==================== -->
+  <!-- The signature moment: scroll is the playhead. See js/sheet.js — the
+       rows are generated from the same model that draws the stage. -->
+  <section class="xs" id="frames">
+    <div class="xs__track" id="xsTrack">
+      <div class="xs__stick">
+        <div class="wrap">
+          <p class="label">One &mdash; Twelve a second</p>
+
+          <div class="xs__grid">
+            <div>
+              <div class="stage">
+                <span class="stage__tag">Bouncing ball &middot; exercise 01</span>
+                <span class="stage__frame mono" id="stageFrame">FR 01 / DR 1</span>
+                <canvas id="stage" aria-hidden="true"></canvas>
+              </div>
+              <div class="xs__controls">
+                <button class="rate" id="rateTwos" type="button" aria-pressed="true">On twos</button>
+                <button class="rate" id="rateOnes" type="button" aria-pressed="false">On ones</button>
+                <button class="rate" id="rateOnion" type="button" aria-pressed="true">Onion skin</button>
+              </div>
+              <p class="xs__note">Scroll to run the sheet. On twos, each position is
+                photographed and held for two frames &mdash; twelve positions a second,
+                twenty-four frames of film. The hang at the top of each arc is not a
+                flourish; it is what happens when a ball spends more frames near its apex
+                than anywhere else.</p>
+            </div>
+
+            <div>
+              <div class="sheet">
+                <div class="sheet__head">
+                  <span>Fr</span><span>Dr</span><span>Action</span>
+                </div>
+                <div class="sheet__scroll" id="sheetScroll">
+                  <div class="sheet__rows" id="sheetRows"></div>
+                  <div class="sheet__head-bar" aria-hidden="true"></div>
+                </div>
+              </div>
+              <p class="xs__note">Exposure sheet &mdash; 48 frames, 2 seconds.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ work ============================ -->
+  <section class="bay" id="work">
+    <div class="wrap">
+      <p class="label rev">Two &mdash; Selected work</p>
+      <h2 class="rev">Four things<br>worth showing</h2>
+
+      <div class="piece rev">
+        <span class="piece__n">01</span>
+        <div>
+          <h3>Tin Ear</h3>
+          <p class="piece__meta">2025 &middot; Short film &middot; 11 min &middot; Director, fabricator, animator</p>
+        </div>
+        <p>A retired piano tuner loses the last frequency he can hear. Two puppets, one
+          room, and a set built at 1:6 so the upright piano could be played with real
+          hammers. 7,920 positions over fourteen months, shot on twos except the tuning
+          sequence, which went to ones so the hammer fall would not strobe.</p>
+      </div>
+
+      <div class="piece rev">
+        <span class="piece__n">02</span>
+        <div>
+          <h3>Nightjar</h3>
+          <p class="piece__meta">2025 &middot; Music video &middot; 3 min 40 &middot; Animation &amp; fabrication</p>
+        </div>
+        <p>A bird made of folded tin and brass wire crossing a moor at dusk. Shot in
+          camera against a rolling painted cyclorama rather than composited &mdash; the
+          band wanted the seams visible, and I agreed with them. 2,640 positions, six
+          weeks, one broken wing repaired on the eighteenth day.</p>
+      </div>
+
+      <div class="piece rev">
+        <span class="piece__n">03</span>
+        <div>
+          <h3>The Long Room</h3>
+          <p class="piece__meta">2024 &middot; Title sequence &middot; 68 sec &middot; Animation</p>
+        </div>
+        <p>Sixty-eight seconds of a library assembling itself, for a drama series that
+          needed its opening to feel handmade against an otherwise digital grade. 816
+          positions. Every book spine was a separate replacement part, which is a
+          sentence that sounds better than the fortnight it describes.</p>
+      </div>
+
+      <div class="piece rev">
+        <span class="piece__n">04</span>
+        <div>
+          <h3>Salt</h3>
+          <p class="piece__meta">2024 &middot; Exhibition loop &middot; 6 min 30 &middot; Director, fabricator</p>
+        </div>
+        <p>A commission for a coastal museum: a fisherman's hands mending a net, on a
+          loop, projected at half scale onto the gallery wall. Hands are the hardest
+          thing in this medium and I took it for exactly that reason. 4,680 positions,
+          and the loop point is still the join I am least happy with.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ workshop ============================ -->
+  <section class="bay" id="workshop">
+    <div class="wrap">
+      <p class="label rev">Three &mdash; The workshop</p>
+
+      <!-- Prop two: dividers, in the workshop, where a tool belongs. -->
+      <div class="calipers rev" aria-hidden="true">
+        <svg viewBox="0 0 160 90" fill="none" stroke="currentColor" stroke-width="1.6"
+             stroke-linecap="round">
+          <circle cx="80" cy="14" r="6"/>
+          <path d="M77 19 44 84M83 19l33 65"/>
+          <path d="M44 84l-3 4M116 84l3 4"/>
+          <path d="M58 52a34 34 0 0 0 44 0" stroke-dasharray="2 5"/>
+          <path d="M80 8V2"/>
+        </svg>
+      </div>
+
+      <h2 class="rev">Everything is<br>built here first</h2>
+      <p class="lede rev rev--d1">A puppet is a machine that has to survive being touched
+        four thousand times without changing shape. Most of the work is engineering, and
+        it happens before a single frame is exposed.</p>
+
+      <div class="beats">
+        <div class="beat rev">
+          <h3>Armatures</h3>
+          <p>Ball-and-socket, machined from brass and stainless on the bench, sized to the
+            character rather than bought in. A joint that creeps under its own weight will
+            waste a whole day's shooting, and you will not notice until the rushes.</p>
+        </div>
+        <div class="beat rev rev--d1">
+          <h3>Skins</h3>
+          <p>Silicone for anything that has to deform, foam latex where the volume matters
+            more than the surface. Cast in two-part moulds cut on the same bench, so a
+            replacement can be pulled overnight when one tears mid-shoot.</p>
+        </div>
+        <div class="beat rev">
+          <h3>Replacement mouths</h3>
+          <p>Printed in sets and numbered against the track, because a mouth animated on
+            an armature reads as rubber and a mouth swapped as a part reads as speech.
+            Between twenty and forty shapes for a speaking character.</p>
+        </div>
+        <div class="beat rev rev--d1">
+          <h3>The shoot</h3>
+          <p>Stills camera, frame capture software, and a rig that can be locked and
+            returned to. Nothing is shot that cannot be shot again the same way six weeks
+            later, because it usually has to be.</p>
+        </div>
+      </div>
+
+      <p class="stock rev">
+        <span>Brass rod</span><span>K&amp;S tube</span><span>Stainless ball stock</span>
+        <span>Platinum silicone</span><span>Foam latex</span><span>Epoxy putty</span>
+        <span>Aluminium wire</span><span>Rare-earth magnets</span><span>Tie-downs</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================ about ============================ -->
+  <section class="bay" id="about">
+    <div class="wrap wrap--tight about">
+      <p class="label rev">Four &mdash; About</p>
+      <h2 class="rev">Slowly, on purpose</h2>
+
+      <p class="rev">I trained as a model maker and came to animation sideways, through a
+        job building miniatures for other people to shoot. The first time I was left alone
+        with a camera and a puppet I did not go home, and that has been the arrangement
+        ever since.</p>
+
+      <p class="rev">The workshop is two rooms off a yard in <b>Bristol</b>, which is
+        where you end up if you do this for a living in Britain. One room is a bench and a
+        lathe; the other is a stage that has been blacked out so thoroughly that I have
+        walked into the wall in it. I work alone on the fabrication and bring in a second
+        animator for anything longer than about eight minutes.</p>
+
+      <p class="rev">People ask how long a minute takes. Shot on twos, a minute is seven
+        hundred and twenty separate positions, and a good day is between ninety and a
+        hundred and fifty of them. So: a week, if nothing goes wrong, and something always
+        goes wrong. That arithmetic is the reason the medium looks the way it does, and it
+        is also most of the reason I like it.</p>
+
+      <p class="rev">I do not composite motion blur back in. The strobe you can see on a
+        fast pan is the honest signature of a thing that was photographed rather than
+        calculated, and removing it removes the only evidence that anybody was there.</p>
+
+      <!-- Prop three: a set of replacement mouths, beside the copy about speech. -->
+      <div class="mouths rev" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4">
+          <rect x="1" y="1" width="38" height="38" stroke="#2a2a2a"/>
+          <ellipse cx="20" cy="22" rx="9" ry="6"/>
+        </svg>
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4">
+          <rect x="1" y="1" width="38" height="38" stroke="#2a2a2a"/>
+          <circle cx="20" cy="22" r="6"/>
+        </svg>
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4">
+          <rect x="1" y="1" width="38" height="38" stroke="#2a2a2a"/>
+          <path d="M11 22h18" stroke-linecap="round"/>
+        </svg>
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4">
+          <rect x="1" y="1" width="38" height="38" stroke="#2a2a2a"/>
+          <path d="M11 20h18M14 20v4M18 20v4M22 20v4M26 20v4" stroke-linecap="round"/>
+        </svg>
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4">
+          <rect x="1" y="1" width="38" height="38" stroke="#2a2a2a"/>
+          <ellipse cx="20" cy="21" rx="8" ry="5"/>
+          <path d="M17 24c2 3 5 3 6 0" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ commissions ============================ -->
+  <section class="bay" id="commissions">
+    <div class="wrap">
+      <p class="label rev">Five &mdash; Commissions</p>
+      <h2 class="rev">Tell me about<br>the piece</h2>
+
+      <div class="commission" style="margin-top:2.5rem">
+        <div class="rev">
+          <dl class="avail">
+            <div><dt>Booking from</dt><dd>March 2027</dd></div>
+            <div><dt>Takes on</dt><dd>Short film, music video, titles, exhibition</dd></div>
+            <div><dt>Does not take</dt><dd>Anything needing more than 90 sec in under a month</dd></div>
+            <div><dt>Crew</dt><dd>Solo for fabrication, plus one animator over 8 min</dd></div>
+            <div><dt>Based</dt><dd>Bristol, UK &mdash; will travel for the shoot</dd></div>
+            <div><dt>Rates</dt><dd>Per project, quoted against a shooting schedule</dd></div>
+          </dl>
+          <p class="xs__note" style="margin-top:1.4rem">The honest constraint is the
+            schedule, not the budget. If a deadline needs more positions than there are
+            days, no fee fixes it, and I would rather say so in the first email than in
+            the fourth week.</p>
+        </div>
+
+        <div class="rev rev--d1">
+          <p class="sent" id="sent" hidden></p>
+          <form id="commission" novalidate>
+            <div class="field">
+              <label for="c-name">Name</label>
+              <input type="text" id="c-name" name="name" autocomplete="name">
+              <span class="field__err"></span>
+            </div>
+            <div class="field">
+              <label for="c-email">Email</label>
+              <input type="email" id="c-email" name="email" autocomplete="email">
+              <span class="field__err"></span>
+            </div>
+            <div class="field">
+              <label for="c-brief">The piece</label>
+              <textarea id="c-brief" name="brief"
+                        placeholder="What it is, roughly how long, and when it has to exist."></textarea>
+              <span class="field__err"></span>
+            </div>
+            <button class="btn" type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <p style="margin:0">&copy; <span data-year>2026</span> Marlowe Fenn &middot; Bristol
+      &middot; Shot a frame at a time</p>
+    <p class="foot__links" style="margin:0">
+      <a href="#work">Work</a>
+      <a href="#workshop">Workshop</a>
+      <a href="#commissions">Commissions</a>
+      <a href="#top">Top</a>
+    </p>
+  </div>
+</footer>
+
+<script src="js/loader.js"></script>
+<script src="js/sheet.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
