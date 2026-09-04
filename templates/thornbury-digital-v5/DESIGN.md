@@ -19,13 +19,14 @@ are chrome at low alpha. There is no third hue anywhere in the stylesheet.
 ## The liquid metal audit (`js/field.js`)
 
 **Attractor.** Thomas, `x' = sin y − b·x`, `y' = sin z − b·y`, `z' = sin x − b·z`,
-`b = 0.19`. Euler with `dt = 0.02` in two sub-steps, 60 sim steps per second on
-a fixed-rate accumulator, so speed is identical at any frame rate.
+`b` per world (0.19 on Home). Euler with `dt = 0.02` in one sub-step, 60 sim
+steps per second on a fixed-rate accumulator, so speed is identical at any frame
+rate.
 
 **Why it is a ribbon, not dust.**
 
 1. *Strands.* 2,600 particles (900 on mobile) are seeded in strands of 24. A
-   leader is settled onto the attractor with 400 warm steps, then each follower
+   leader is settled onto the attractor with 240 warm steps, then each follower
    is placed two steps behind the previous one. A strand therefore lies along one
    trajectory and its segments overlap into one continuous string. Chaotic
    divergence is slow at this `b`, so strands stretch and fold rather than scatter.
@@ -51,9 +52,10 @@ a fixed-rate accumulator, so speed is identical at any frame rate.
    3 % parallax. DPR is capped at 1.5 (1.25 mobile) because fill rate is the cost.
 
 **Interaction law.** `html[data-field]` is `live` on Home and Studio (rAF loop) and
-`still` on Work and Contact: the still page pours 84 warm frames in over seven
-rAFs and then never touches the canvas again (re-pours on resize). Reduced
-motion forces `still` everywhere.
+`still` on Work and Contact: the still page pours 54 warm frames in four at a
+time and then never touches the canvas again (re-pours on resize). Reduced
+motion forces `still` everywhere. The `continuum` direction overrides this and
+runs everywhere — see *Moving between pages*.
 
 ## Glass under the anti-stacking rule
 
@@ -186,6 +188,74 @@ at a time instead of 84 twelve at a time, so no single task runs long.
 **What did not work.** Moving GSAP off the critical path required hiding the hero
 copy until it arrived, and an `opacity: 0` element does not count as painted —
 LCP went from 1.28 s to 3.33 s. The 47 kB library stays in the head, deliberately.
+
+## Moving between pages
+
+Navigation used to be a hard cut: the browser tore the canvas down, the next page
+built a new one from a different seed, and the background blinked. Every page is
+still a real HTML file, but same-directory links are now intercepted and only
+`<main>` is swapped (`js/bg.js`), so the canvas survives and the background can
+carry a thought across the navigation. Anything unexpected — a modified click, a
+cross-origin URL, a failed fetch — falls back to a real navigation.
+
+`<main>` fades and lifts on the way out and back in, identically in every
+direction, so the only thing being compared is what happens behind it. The
+opacity lives in a class and never on the element at rest: an element at
+`opacity < 1` is a stacking context, and the glass inside `<main>` can only blend
+with the canvas from the root one.
+
+**Four directions are built, plus the hard cut as a control.**
+
+| | What it is | What it costs |
+|---|---|---|
+| `off` | A real browser navigation. The control. | — |
+| `continuum` | One world, never reseeded. The camera travels to the next page's viewpoint over 1.35 s and the key light moves with it. The strand you were watching is still there when you arrive. | The field must run on every page, including the two that were static: ~6 ms on 30 frames a second, ~18 % of one desktop core. |
+| `chapters` | A different world per page — its own `b`, density and seed — under one material and one motion law. The previous frame is frozen onto a ghost canvas and cross-dissolved over the new one across 1 s. | Only the reseed, and it happens under the ghost where nothing can see it. Still pages stay still. |
+| `pour` | The frozen frame is torn off by a procedural front: a per-band noise offset sweeping left to right behind a bright chrome edge. No asset, no continuity — the transition is the material re-pouring itself. | One second of coarse `fillRect` work on the ghost, then nothing. Still pages stay still. |
+| `film` | A looping video plate instead of the field, reframed per page. | Not measured on a real phone, so not a contender. See below. |
+
+The ghost is one frozen copy of the canvas laid over it, which is what lets the
+live field become the next page — reseed included — with nothing visible. The
+tear needs no second buffer because the front only ever advances: the bright edge
+drawn at one frame's position is erased by the next frame's cut.
+
+**Camera and world per page.** `continuum` moves only the camera, so all four
+pages are the same tangle seen from four places: Home centred and wide, Work
+pushed in 1.42× and off-axis with the light swung to the left, Studio pulled back
+under a 1.18 rad tilt, Contact close and low. `chapters` and `pour` change the
+attractor itself — Home 0.190, Work 0.155 (large and restless), Studio 0.205
+(near the edge of chaos, orderly loops), Contact 0.130 at 60 % density (wide,
+slow, sparse). `b` sets size and speed as well as character, so each world
+carries the extent and velocity normal measured for it; the projection divides by
+extent so a looser attractor cannot outgrow the frame.
+
+**Reduced motion overrides every direction.** No mode is allowed to wake the
+field: `wake()` re-pours a still frame instead, `fieldPolicy` forces `still`, the
+content fade is skipped, the camera snaps, the tear is not drawn and the film
+plate does not autoplay. Verified: zero painted frames while idle and zero
+ScrollTriggers, in all four directions.
+
+**Direction D is built but not qualified.** It reuses the licensed moon loop that
+is already in the repo — no video was generated for it and no credits were spent.
+It is in the switcher so it can be judged by clicking, but this exact pattern was
+already killed once in this project for mobile cost, and nothing here answers
+that: a desktop screenshot is not a phone. It should not be treated as a
+contender without a real on-device measurement.
+
+## The temporary switcher
+
+`js/dev-bg-switcher.js` replaces the coordinate readout in the bar with a
+dropdown that swaps direction live, with no reload. It is ember rather than
+chrome so it can never be mistaken for part of the design.
+
+It is inert unless the dev flag is on: a local hostname, or `?dev=1`, which
+appears in no link on the site and is remembered for that tab only. A normal
+visit to the deployed site builds none of it and keeps the readout.
+
+**To remove it:** delete `js/dev-bg-switcher.js` and the four
+`<script defer src="js/dev-bg-switcher.js">` tags. Nothing else refers to it, and
+the bar markup was never touched. The shipped direction is whatever `DEFAULT`
+names at the top of `js/bg.js`.
 
 ## Verification
 
