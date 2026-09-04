@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>OUTAGE — When the signal drops, the run begins</title>
+<meta name="description" content="OUTAGE is a browser experience gallery set in the desert that appears when the net dies. Six modes. One Dry Run you can play right now.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/offline-outage/index.html">
+<meta name="theme-color" content="#0B0D10">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OUTAGE">
+<meta property="og:title" content="OUTAGE — When the signal drops, the run begins">
+<meta property="og:description" content="A cinematic browser gallery of offline-desert runs. Press Space. Keep moving.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/offline-outage/index.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/offline-outage/img/desert-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Ambient desert world -->
+<canvas id="world" class="world" aria-hidden="true"></canvas>
+
+<!-- Splash gate -->
+<div class="splash" id="splash" role="dialog" aria-modal="true" aria-labelledby="splash-title">
+  <p class="splash-kicker" id="splash-kick">CONNECTION LOST</p>
+  <h1 class="splash-title" id="splash-title"><span>NO</span> <span>SIGNAL</span></h1>
+  <p class="splash-line">The desert boots itself.</p>
+  <button class="splash-cta" id="splash-enter" type="button">
+    <span class="splash-pulse" aria-hidden="true"></span>
+    PRESS SPACE TO RUN
+  </button>
+</div>
+
+<header class="chrome" id="chrome">
+  <a class="wordmark" href="#top">OUTAGE</a>
+  <nav class="chrome-nav" aria-label="Primary">
+    <a href="#modes">Modes</a>
+    <a href="#play">Play</a>
+    <a href="#about">About</a>
+    <a class="nav-cta" href="#play">Dry Run</a>
+  </nav>
+  <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+
+<aside class="drawer" id="drawer" aria-label="Menu">
+  <a href="#modes">Modes</a>
+  <a href="#play">Play</a>
+  <a href="#about">About</a>
+  <a href="#faq">FAQ</a>
+  <a class="nav-cta" href="#play">Start Dry Run</a>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-copy">
+      <p class="kicker"><span class="kdot"></span>BROWSER EXPERIENCE GALLERY</p>
+      <h1 class="brand">OUTAGE</h1>
+      <p class="lede">The desert that appears when the net dies.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#play">Start Dry Run</a>
+        <a class="btn btn-ghost" href="#modes">Browse modes</a>
+      </div>
+    </div>
+    <div class="hero-hud" aria-hidden="true">
+      <span>LAT 24.1°N</span>
+      <span>PKT LOSS 100%</span>
+      <span>FPS LIVE</span>
+    </div>
+  </section>
+
+  <!-- MODES -->
+  <section class="section modes" id="modes">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <p class="sec-tag">SIX MODES</p>
+        <h2 class="sec-title">Pick a pressure.<br>Keep the horizon moving.</h2>
+        <p class="sec-lede">Each mode is a different weather for the same runner — heat, night, iron rain, strata, ghosts, and a bar that does not forgive.</p>
+      </header>
+
+      <div class="mode-list">
+        <article class="mode reveal" data-mode="dry">
+          <figure class="mode-media">
+            <img src="img/mode-dry.jpg" alt="Sun-bleached desert flats under a hard white sky." width="1200" height="750" loading="lazy" decoding="async">
+          </figure>
+          <div class="mode-copy">
+            <p class="mode-num">MODE 01</p>
+            <h3>DRY RUN</h3>
+            <p>Classic endless sprint across the flats. Jump the scrub. Don’t look back at the signal bars.</p>
+            <a class="mode-link" href="#play">Play this mode</a>
+          </div>
+        </article>
+
+        <article class="mode reveal" data-mode="night">
+          <figure class="mode-media">
+            <img src="img/mode-night.jpg" alt="Moonlit desert dunes with deep blue shadows." width="1200" height="750" loading="lazy" decoding="async">
+          </figure>
+          <div class="mode-copy">
+            <p class="mode-num">MODE 02</p>
+            <h3>NIGHT DRIFT</h3>
+            <p>Moonlight cactus field. Slower hazards, longer shadows, a horizon that almost feels kind.</p>
+            <span class="mode-chip">GALLERY</span>
+          </div>
+        </article>
+
+        <article class="mode reveal" data-mode="meteor">
+          <figure class="mode-media">
+            <img src="img/mode-meteor.jpg" alt="Night sky over arid ground with bright streaks." width="1200" height="750" loading="lazy" decoding="async">
+          </figure>
+          <div class="mode-copy">
+            <p class="mode-num">MODE 03</p>
+            <h3>METEOR WINDOW</h3>
+            <p>Sky-iron falls in timed windows. Read the glow, commit early, or eat dust.</p>
+            <span class="mode-chip">GALLERY</span>
+          </div>
+        </article>
+
+        <article class="mode reveal" data-mode="fossil">
+          <figure class="mode-media">
+            <img src="img/mode-fossil.jpg" alt="Layered sedimentary rock and dry strata in warm light." width="1200" height="750" loading="lazy" decoding="async">
+          </figure>
+          <div class="mode-copy">
+            <p class="mode-num">MODE 04</p>
+            <h3>FOSSIL LAYER</h3>
+            <p>Dig-run hybrid. Collect strata markers while the ground keeps inventing new shelves.</p>
+            <span class="mode-chip">GALLERY</span>
+          </div>
+        </article>
+
+        <article class="mode reveal" data-mode="packet">
+          <figure class="mode-media">
+            <img src="img/mode-packet.jpg" alt="Abstract signal noise over dark terrain." width="1200" height="750" loading="lazy" decoding="async">
+          </figure>
+          <div class="mode-copy">
+            <p class="mode-num">MODE 05</p>
+            <h3>PACKET STORM</h3>
+            <p>Wi-Fi ghosts as obstacles — half-rendered towers that only exist while you’re looking.</p>
+            <span class="mode-chip">GALLERY</span>
+          </div>
+        </article>
+
+        <article class="mode reveal" data-mode="zero">
+          <figure class="mode-media">
+            <img src="img/mode-zero.jpg" alt="Harsh desert light with almost no midtones." width="1200" height="750" loading="lazy" decoding="async">
+          </figure>
+          <div class="mode-copy">
+            <p class="mode-num">MODE 06</p>
+            <h3>ZERO BAR</h3>
+            <p>One hit. No HUD. The score is the distance you refuse to admit you need.</p>
+            <span class="mode-chip">GALLERY</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAY -->
+  <section class="section play" id="play">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <p class="sec-tag">LIVE · DRY RUN</p>
+        <h2 class="sec-title">Space to jump.<br>Don’t drop the packet.</h2>
+        <p class="sec-lede">An on-page endless run. Touch or click also jumps. High score stays on this device.</p>
+      </header>
+
+      <div class="stage reveal">
+        <div class="stage-bar">
+          <span class="stage-label">DRY RUN</span>
+          <span class="stage-score">SCORE <strong id="score">00000</strong></span>
+          <span class="stage-hi">HI <strong id="hi">00000</strong></span>
+        </div>
+        <canvas id="runner" width="960" height="320" aria-label="Dry Run game. Press Space or tap to jump."></canvas>
+        <div class="stage-hint" id="runner-hint">Press Space / tap to start</div>
+        <div class="stage-over" id="runner-over" hidden>
+          <p>SIGNAL RESTORED</p>
+          <button type="button" id="runner-retry">Run again</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <div class="about-media" aria-hidden="true">
+      <video class="about-video" autoplay muted loop playsinline poster="img/desert-poster.jpg">
+        <source src="video/desert.mp4" type="video/mp4">
+      </video>
+      <div class="about-veil"></div>
+    </div>
+    <div class="wrap about-copy reveal">
+      <p class="sec-tag">WHAT IS OUTAGE</p>
+      <h2 class="sec-title">A gallery that boots when everything else fails.</h2>
+      <p>OUTAGE is a set of browser-native desert runs — no install, no account, no app store. Open the link and the flats are already moving. Dry Run is playable here; the other modes live as cinematic plates in the gallery.</p>
+      <ul class="about-points">
+        <li>Original runner art — drawn for this site</li>
+        <li>Works on phone and desktop from one URL</li>
+        <li>Sound stays off until you ask for it</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq" id="faq">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <p class="sec-tag">FAQ</p>
+        <h2 class="sec-title">Straight answers.</h2>
+      </header>
+      <div class="faq-list reveal">
+        <details open>
+          <summary>Is OUTAGE free to play?</summary>
+          <p>Yes. Dry Run runs in the browser with no account and no download.</p>
+        </details>
+        <details>
+          <summary>Does it work on phones?</summary>
+          <p>Yes. Tap the stage to jump. The ambient desert scales down on smaller screens.</p>
+        </details>
+        <details>
+          <summary>Are the other modes playable yet?</summary>
+          <p>Night Drift through Zero Bar ship as gallery modes on this page. Dry Run is the live endless runner.</p>
+        </details>
+        <details>
+          <summary>Will there be sound?</summary>
+          <p>Optional and muted by default. The site is designed to read clean with audio off.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="wordmark" href="#top">OUTAGE</a>
+    <p>When the signal drops, the run begins.</p>
+    <a class="btn btn-sm" href="#play">Start Dry Run</a>
+  </div>
+</footer>
+
+<script src="js/world.js" defer></script>
+<script src="js/runner.js" defer></script>
+<script src="js/ui.js" defer></script>
+</body>
+</html>
