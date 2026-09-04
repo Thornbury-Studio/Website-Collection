@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>GRATICULE — Land &amp; Hydrographic Survey, Caernarfon</title>
+  <meta name="description" content="A chartered land and hydrographic survey practice on the edge of Eryri. Topographic and measured building survey, laser scanning, bathymetry, setting out and structural monitoring, delivered to ODN.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://website-collection-zanezhijies-projects.vercel.app/templates/survey-graticule/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GRATICULE — Land &amp; Hydrographic Survey">
+  <meta property="og:description" content="Everything you build starts from a measurement. Chartered survey for the coast and uplands of north-west Wales.">
+  <meta property="og:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/survey-graticule/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GRATICULE — Land &amp; Hydrographic Survey">
+  <meta name="twitter:description" content="Everything you build starts from a measurement. Chartered survey for the coast and uplands of north-west Wales.">
+  <meta name="twitter:image" content="https://website-collection-zanezhijies-projects.vercel.app/templates/survey-graticule/img/og.webp">
+  <meta name="theme-color" content="#ece7dc">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23ece7dc'/><g fill='none' stroke='%2396683c' stroke-width='1'><ellipse cx='8' cy='8.4' rx='6.6' ry='4'/><ellipse cx='8' cy='8.4' rx='4' ry='2.3'/></g><path d='M8 7.6l1.6 2.6H6.4z' fill='%23b32240'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="band">
+    <div class="wrap band__in">
+      <span class="band__set">
+        <span>Sheet <b>AD 148</b></span>
+        <span>Cwm Aderyn</span>
+        <span>1:10 000</span>
+      </span>
+      <span class="band__set">
+        <span>OSGB36 / ODN</span>
+        <span><b>Caernarfon</b></span>
+      </span>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <a class="mark" href="index.html" aria-current="page">
+      <span class="mark__word">GRATICULE</span>
+      <span class="mark__sub">Land &amp; Hydrographic Survey</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="services.html">Services</a>
+      <a href="instruments.html">Instruments</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="tools">
+      <button class="mode" id="modeBtn" type="button" aria-pressed="false">
+        <span class="mode__led" aria-hidden="true"></span>
+        <span class="mode__txt"></span>
+      </button>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="services.html">Services</a>
+      <a href="instruments.html">Instruments</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================ the sheet ============================ -->
+  <section class="sheet" id="sheet">
+    <div class="sheet__grid">
+
+      <div class="sheet__text">
+        <p class="label">Caernarfon &middot; Gwynedd &middot; Est. 2009</p>
+        <h1>Everything you build starts from a measurement.</h1>
+        <p class="lede">GRATICULE is a chartered survey practice working the coast and
+          uplands of north-west Wales. We establish where the ground actually is &mdash; to
+          the millimetre where that matters, and honestly about it where it doesn&rsquo;t
+          &mdash; and hand the design team something they can build on.</p>
+        <p class="btn-row">
+          <a class="btn" href="contact.html">Cost a survey</a>
+          <a class="btn btn--ghost" href="services.html">What we survey</a>
+        </p>
+        <p class="creds">
+          <span>RICS regulated</span>
+          <span>TSA member</span>
+          <span>17 staff</span>
+          <span>1,900+ jobs</span>
+        </p>
+      </div>
+
+      <!-- The map is computed, not drawn: see js/terrain.js. Every elevation
+           and grid reference the page quotes comes out of the same function
+           the contours do. -->
+      <div class="sheet__map">
+        <div class="rail">
+          <span>Sheet <b>AD 148</b></span>
+          <span>Cwm Aderyn &amp; Llyn Aderyn</span>
+          <span>Contour interval <b>10 m</b></span>
+          <span class="rail__sp">
+            <button class="toggle" id="reliefBtn" type="button" aria-pressed="true">
+              <i aria-hidden="true"></i> Relief
+            </button>
+          </span>
+        </div>
+
+        <div class="plot" id="plot">
+          <canvas aria-hidden="true"></canvas>
+
+          <svg aria-hidden="true" focusable="false" preserveAspectRatio="none">
+            <line id="sectionLine" x1="0" y1="0" x2="0" y2="0"
+                  stroke="var(--signal)" stroke-width="1.5" stroke-dasharray="7 4"></line>
+          </svg>
+
+          <button class="handle" id="stnA" type="button"
+                  aria-label="Section station A. Drag, or use the arrow keys to move it across the sheet.">
+            <span class="handle__tag" aria-hidden="true">A</span>
+          </button>
+          <button class="handle" id="stnB" type="button"
+                  aria-label="Section station B. Drag, or use the arrow keys to move it across the sheet.">
+            <span class="handle__tag" aria-hidden="true">B</span>
+          </button>
+
+          <div class="plot__cursor num" id="plotCursor" data-on="0" aria-hidden="true"></div>
+
+          <div class="plot__scale" aria-hidden="true">
+            <span class="plot__scale-bar"><i></i><i></i></span>
+            <span class="plot__scale-txt">0<em>250</em>500 m</span>
+          </div>
+
+          <div class="plot__north" aria-hidden="true">
+            <svg viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="1.4">
+              <path d="M12 38V4"/><path d="M12 2 7 12h10z" fill="currentColor" stroke="none"/>
+            </svg>
+            <span>GN</span>
+          </div>
+        </div>
+
+        <div class="rail rail--foot">
+          <span>Grid <b>AD</b> &middot; 250 m graticule</span>
+          <span>Levels to <b>ODN</b></span>
+          <span class="rail__hover">Hover the sheet for a reading</span>
+          <span class="rail__tap">Drag station A or B to cut a section</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------------------- the section -------------------------------- -->
+    <div class="profile">
+      <div class="profile__in">
+        <div class="profile__plot">
+          <div class="rail" style="border:0;padding-left:0;padding-top:0;color:var(--on-plate-mut)">
+            <span>Section <b id="sectionName" style="color:var(--on-plate)">Across the cwm</b></span>
+            <span class="rail__sp presets">
+              <button type="button" data-section="cwm" aria-pressed="true">Across the cwm</button>
+              <button type="button" data-section="ridge" aria-pressed="false">North ridge</button>
+              <button type="button" data-section="leat" aria-pressed="false">Llyn to the col</button>
+            </span>
+          </div>
+          <svg id="profile" viewBox="0 0 720 190" role="img"
+               aria-label="Ground profile along the section line drawn on the sheet above, with elevation in metres against chainage in metres.">
+            <g id="profGrid" stroke="var(--plate-rule)" stroke-width="1" fill="none"></g>
+            <path id="profArea" fill="var(--plate-cyan)" fill-opacity=".13"></path>
+            <path id="profLine" fill="none" stroke="var(--plate-cyan)" stroke-width="1.8"
+                  stroke-linejoin="round"></path>
+            <g id="profTicks" fill="var(--on-plate-mut)" font-family="'IBM Plex Mono', monospace"
+               font-size="9.5"></g>
+          </svg>
+          <p class="profile__note">
+            A <b id="refA">&mdash;</b> &nbsp;&rarr;&nbsp; B <b id="refB">&mdash;</b>
+            &nbsp;&middot;&nbsp; drag either station on the sheet, or focus it and use the arrow keys.
+          </p>
+        </div>
+
+        <div class="profile__stats" id="profileStats"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ capability index ============================ -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="cols cols--sidebar" style="margin-bottom:3rem">
+        <div class="reveal">
+          <p class="label">01 &mdash; What we do</p>
+          <h2>Eight things, done properly.</h2>
+        </div>
+        <div class="reveal reveal--d1">
+          <p class="lede">A survey practice that claims everything usually subcontracts most
+            of it. This is the list we hold in-house, with our own instruments and our own
+            people, and it is the list we will quote against.</p>
+        </div>
+      </div>
+
+      <div class="index-list">
+        <a class="item reveal" href="services.html#topographic">
+          <span class="item__n">01</span>
+          <span class="item__h"><h3>Topographic survey</h3><span class="item__go">&rarr;</span></span>
+          <p>Detail and levels across open ground, from a half-hectare infill plot to a
+            forty-hectare coastal realignment. Delivered as a survey-grade DWG with a
+            separate levelled surface, not a flat drawing with spot heights typed on.</p>
+          <span class="item__spec"><span>OS grid or site grid</span><span>1:200 to 1:1000</span><span>±15 mm typical</span></span>
+        </a>
+
+        <a class="item reveal" href="services.html#building">
+          <span class="item__n">02</span>
+          <span class="item__h"><h3>Measured building survey</h3><span class="item__go">&rarr;</span></span>
+          <p>Plans, sections and elevations of what is actually standing, including the
+            parts that are out of plumb. Historic fabric is scanned before it is drawn, so
+            the drawing can be checked against the cloud rather than against memory.</p>
+          <span class="item__spec"><span>Level 1 to Level 4</span><span>Revit or DWG</span><span>Listed-building experience</span></span>
+        </a>
+
+        <a class="item reveal" href="instruments.html#scanning">
+          <span class="item__n">03</span>
+          <span class="item__h"><h3>Terrestrial laser scanning</h3><span class="item__go">&rarr;</span></span>
+          <p>Registered point clouds for retrofit, clash detection and record. We publish
+            the registration report with the cloud, so you can see the residual on every
+            setup instead of taking the alignment on trust.</p>
+          <span class="item__spec"><span>E57 &amp; RCP</span><span>Registered &lt; 4 mm</span><span>Panoramic imagery</span></span>
+        </a>
+
+        <a class="item reveal" href="services.html#hydrographic">
+          <span class="item__n">04</span>
+          <span class="item__h"><h3>Bathymetric &amp; hydrographic survey</h3><span class="item__go">&rarr;</span></span>
+          <p>Single-beam and multibeam work in the estuaries and harbours along this coast,
+            tied to the same datum as the land survey so the two halves of a sea wall meet
+            in the middle. Tidal reduction from our own gauge, not an assumed curve.</p>
+          <span class="item__spec"><span>IHO Order 1a</span><span>Reduced to ODN &amp; CD</span><span>Vessel to 8 m</span></span>
+        </a>
+
+        <a class="item reveal" href="services.html#uav">
+          <span class="item__n">05</span>
+          <span class="item__h"><h3>UAV photogrammetry</h3><span class="item__go">&rarr;</span></span>
+          <p>Aerial capture where ground access is slow, unsafe or would take a week &mdash;
+            quarry faces, roofs, forestry tracks, active earthworks. Always flown against
+            ground control, because a flight without it is a picture, not a survey.</p>
+          <span class="item__spec"><span>CAA operational authorisation</span><span>Orthomosaic &amp; DSM</span><span>±25 mm to control</span></span>
+        </a>
+
+        <a class="item reveal" href="services.html#setting-out">
+          <span class="item__n">06</span>
+          <span class="item__h"><h3>Setting out &amp; as-built</h3><span class="item__go">&rarr;</span></span>
+          <p>Control networks, setting out to the design model, and the as-built check that
+            proves what went in. We keep the network adjusted for the life of the job, so
+            month eleven is measured from the same points as week one.</p>
+          <span class="item__spec"><span>Least-squares adjusted</span><span>Same-day as-builts</span><span>Deviation reporting</span></span>
+        </a>
+
+        <a class="item reveal" href="services.html#monitoring">
+          <span class="item__n">07</span>
+          <span class="item__h"><h3>Structural monitoring</h3><span class="item__go">&rarr;</span></span>
+          <p>Movement watched over months on retaining structures, quay walls and buildings
+            next to deep excavation, with agreed trigger levels and a named person who
+            phones when one is crossed rather than emailing a spreadsheet.</p>
+          <span class="item__spec"><span>Automated or periodic</span><span>Sub-millimetre precision</span><span>Amber &amp; red triggers</span></span>
+        </a>
+
+        <a class="item reveal" href="services.html#utilities">
+          <span class="item__n">08</span>
+          <span class="item__h"><h3>Utility detection to PAS&nbsp;128</h3><span class="item__go">&rarr;</span></span>
+          <p>Electromagnetic and GPR detection of what is already under the site, surveyed
+            in and stated at a quality level you can plan around. A drawing that quietly
+            mixes QL-B and QL-D is worse than no drawing.</p>
+          <span class="item__spec"><span>QL-D to QL-B2</span><span>GPR &amp; EML</span><span>Levelled &amp; attributed</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ accuracy ============================ -->
+  <section class="plate-bay bay">
+    <div class="wrap">
+      <div class="cols cols--sidebar">
+        <div class="reveal">
+          <p class="label">02 &mdash; Accuracy</p>
+          <h2>How close is close enough?</h2>
+          <p>Nobody needs every job at three millimetres, and paying for it when you
+            don&rsquo;t is the most common waste in this industry. The honest answer depends
+            on what the measurement is going to decide.</p>
+          <p>These are the working tolerances of the instruments we run, at the ranges we
+            actually run them &mdash; not the headline figure off the brochure.</p>
+          <p class="btn-row" style="margin-top:1.6rem">
+            <a class="btn" href="instruments.html">The instrument list</a>
+          </p>
+        </div>
+
+        <div class="reveal reveal--d1">
+          <div class="ladder">
+            <div class="ladder__row">
+              <span class="ladder__name">Precise levelling</span>
+              <span class="ladder__bar"><i style="left:0%;width:15.1%"></i></span>
+              <span class="ladder__val">1&ndash;2 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">Total station</span>
+              <span class="ladder__bar"><i style="left:0%;width:23.9%"></i></span>
+              <span class="ladder__val">1&ndash;3 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">Laser scan @ 50 m</span>
+              <span class="ladder__bar"><i style="left:15.1%;width:23.9%"></i></span>
+              <span class="ladder__val">2&ndash;6 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">GNSS RTK, plan</span>
+              <span class="ladder__bar"><i style="left:45.2%;width:13.6%"></i></span>
+              <span class="ladder__val">8&ndash;15 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">GNSS RTK, height</span>
+              <span class="ladder__bar"><i style="left:58.8%;width:11.1%"></i></span>
+              <span class="ladder__val">15&ndash;25 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">UAV @ 60 m</span>
+              <span class="ladder__bar"><i style="left:65.1%;width:12.1%"></i></span>
+              <span class="ladder__val">20&ndash;35 mm</span>
+            </div>
+            <div class="ladder__row">
+              <span class="ladder__name">Multibeam @ 12 m</span>
+              <span class="ladder__bar"><i style="left:69.9%;width:15.1%"></i></span>
+              <span class="ladder__val">25&ndash;50 mm</span>
+            </div>
+            <div class="ladder__scale">
+              <span></span>
+              <span class="ladder__ticks"><span>1 mm</span><span>3</span><span>10</span><span>30</span><span>100</span></span>
+              <span></span>
+            </div>
+          </div>
+          <p class="profile__note">Logarithmic scale. Figures are one sigma against site
+            control, over a full working day, in the weather this coast actually has.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ records ============================ -->
+  <section class="bay">
+    <div class="wrap">
+      <div class="cols cols--sidebar" style="margin-bottom:2.6rem">
+        <div class="reveal">
+          <p class="label">03 &mdash; Recent</p>
+          <h2>Three jobs off the shelf.</h2>
+        </div>
+        <div class="reveal reveal--d1">
+          <p class="lede">Every job leaves a sheet, a control schedule and an adjustment
+            report. These are three we can talk about.</p>
+        </div>
+      </div>
+
+      <div class="records reveal">
+        <a class="record" href="work.html#traeth-melynog">
+          <span class="record__no"><span>J&#8209;2418</span><span>2026&#8211;05</span></span>
+          <h3>Traeth Melynog realignment</h3>
+          <p>Forty-one hectares of saltmarsh and foreshore surveyed twice, eleven months
+            apart, so the county could argue about erosion from numbers instead of photographs.</p>
+          <span class="record__meta">
+            <span>Topographic + multibeam &middot; <b>41 ha</b></span>
+            <span>Tidal window <b>4 h 20 m</b></span>
+            <span>Deliverable <b>DWG, DTM, change surface</b></span>
+          </span>
+        </a>
+
+        <a class="record" href="work.html#capel-nant">
+          <span class="record__no"><span>J&#8209;2455</span><span>2026&#8211;06</span></span>
+          <h3>Capel Nant, Llanberis</h3>
+          <p>A Grade II* chapel with a slate roof nobody wanted to walk on. Scanned from
+            fourteen setups and a tethered UAV, drawn to Level 3, re-roofed off our sections.</p>
+          <span class="record__meta">
+            <span>Measured building &middot; <b>Level 3</b></span>
+            <span>Registration residual <b>3.1 mm</b></span>
+            <span>Deliverable <b>Revit, E57, elevations</b></span>
+          </span>
+        </a>
+
+        <a class="record" href="work.html#cwm-aderyn">
+          <span class="record__no"><span>J&#8209;2470</span><span>2026&#8211;08</span></span>
+          <h3>Cwm Aderyn access track</h3>
+          <p>Six kilometres of new track to a repowering site, set out across ground with no
+            mobile signal and a 22% ruling gradient. The sheet on this page is its survey.</p>
+          <span class="record__meta">
+            <span>Setting out + as-built &middot; <b>6.2 km</b></span>
+            <span>Control network <b>18 stations</b></span>
+            <span>Deliverable <b>As-built model, deviation report</b></span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ process ============================ -->
+  <section class="bay--half bay">
+    <div class="wrap">
+      <hr class="rule">
+      <div class="cols cols--sidebar">
+        <div class="reveal">
+          <p class="label">04 &mdash; How a job runs</p>
+          <h2>Six stages, and you hear from us at each one.</h2>
+        </div>
+        <div class="reveal reveal--d1">
+          <p class="lede">The order matters. Most survey disputes are really control
+            disputes, and control is established before anyone measures a single point of
+            detail.</p>
+        </div>
+      </div>
+
+      <div class="flow reveal">
+        <div class="stage">
+          <span class="stage__n">01</span>
+          <h3>Brief</h3>
+          <p>What the survey has to decide, who receives it, and in which software it has to open.</p>
+        </div>
+        <div class="stage">
+          <span class="stage__n">02</span>
+          <h3>Recon</h3>
+          <p>A walk-over before a price. Access, sightlines, tides, livestock, and what the site is hiding.</p>
+        </div>
+        <div class="stage">
+          <span class="stage__n">03</span>
+          <h3>Control</h3>
+          <p>A network observed and least-squares adjusted, with witness diagrams, before any detail.</p>
+        </div>
+        <div class="stage">
+          <span class="stage__n">04</span>
+          <h3>Field</h3>
+          <p>Detail, levels, scans and soundings, checked into the network as they are collected.</p>
+        </div>
+        <div class="stage">
+          <span class="stage__n">05</span>
+          <h3>Adjust</h3>
+          <p>Reduction, adjustment and a residual report. If something did not close, you are told.</p>
+        </div>
+        <div class="stage">
+          <span class="stage__n">06</span>
+          <h3>Deliver</h3>
+          <p>Drawing, model and report together, with the control schedule so the next firm can pick it up.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ archive + CTA ============================ -->
+  <section class="plate-bay bay">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div class="reveal">
+          <p class="label">05 &mdash; The archive</p>
+          <h2>Every job is a sheet, and we keep it.</h2>
+          <p>Nineteen hundred jobs since 2009 are held as adjusted networks with their raw
+            observations, not as flattened PDFs. When a client comes back seven years later
+            because a boundary is being argued or an extension is going in, we re-issue from
+            the original data on the original datum.</p>
+          <p>It also means a repeat visit is cheaper than a first one, sometimes by half:
+            the control is already there, already witnessed, and still adjusts.</p>
+        </div>
+        <div class="reveal reveal--d1">
+          <dl class="kv">
+            <div><dt>Held since</dt><dd>March 2009</dd></div>
+            <div><dt>Jobs archived</dt><dd class="num">1,912</dd></div>
+            <div><dt>Retention</dt><dd>Indefinite, with raw observations</dd></div>
+            <div><dt>Re-issue</dt><dd>Two working days, typical</dd></div>
+            <div><dt>Datum</dt><dd>OSGB36 / ODN, or your site grid</dd></div>
+          </dl>
+          <p class="btn-row" style="margin-top:1.8rem">
+            <a class="btn" href="contact.html">Cost a survey</a>
+            <a class="btn btn--ghost" href="work.html">See the work</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <span class="foot__mark">GRATICULE</span>
+        <p>Land &amp; Hydrographic Survey<br>Unit 4, Doc Fictoria<br>Caernarfon, Gwynedd LL55 1SQ</p>
+        <p class="num">53.1401&deg; N &middot; 4.2760&deg; W</p>
+      </div>
+      <div>
+        <h2>Survey</h2>
+        <ul>
+          <li><a href="services.html#topographic">Topographic</a></li>
+          <li><a href="services.html#building">Measured building</a></li>
+          <li><a href="services.html#hydrographic">Bathymetric</a></li>
+          <li><a href="services.html#setting-out">Setting out</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Practice</h2>
+        <ul>
+          <li><a href="instruments.html">Instruments</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="about.html#people">People</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Enquiries</h2>
+        <ul>
+          <li><a href="contact.html">Cost a survey</a></li>
+          <li><a href="contact.html#office">Office &amp; hours</a></li>
+          <li><a href="about.html#standards">Standards</a></li>
+          <li><a href="about.html#access">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__fine">
+      <p>&copy; <span data-year>2026</span> Graticule Survey Ltd, registered in England and
+        Wales. Regulated by RICS. All levels reduced to Ordnance Datum Newlyn unless a site
+        datum is agreed in writing.</p>
+      <p><a href="about.html#legal">Terms &amp; privacy</a> &middot;
+         <a href="about.html#access">Accessibility</a> &middot;
+         <a href="contact.html">Press</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/terrain.js"></script>
+<script src="js/sheet.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
