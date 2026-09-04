@@ -942,6 +942,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/offline-outage/index.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://website-collection-zanezhijies-projects.vercel.app/templates/property-bluehour/index.html</loc>
     <lastmod>2026-09-05</lastmod>
     <changefreq>monthly</changefreq>
