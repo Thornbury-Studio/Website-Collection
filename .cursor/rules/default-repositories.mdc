@@ -1,0 +1,21 @@
+---
+description: Default repositories — Thornbury-Studio Website Collection is canonical
+alwaysApply: true
+---
+
+# Default repositories
+
+When the user says “Website Collection”, “the collection”, “child website”, “template”, or “put it in the repo” without naming a remote:
+
+1. **Default / canonical repo:** [Thornbury-Studio/Website-Collection](https://github.com/Thornbury-Studio/Website-Collection)
+2. **Live hub:** https://thornbury-studio.github.io/Website-Collection/
+
+## Conventions for this collection
+
+- New sites go under `templates/<slug>/` as **static** `index.html` + `css/` + `js/` + `img/` (no Next.js build step unless the user explicitly asks).
+- Register the site with a card on root `index.html` and entries in `sitemap.xml`.
+- Prefer free-license media and document credits in the template’s `IMAGE-CREDITS.md`.
+
+## Not the default
+
+- Personal sandboxes named `website-collection` under individual GitHub users are not the company collection unless the user says so.
