@@ -22,6 +22,20 @@ It serves two audiences from two different pages, and they must not be conflated
   shopping for a site). New templates never auto-join this — see
   [[portfolio-vs-hub-curation]] in memory.
 
+## Where it deploys
+
+Production is **https://templates.thornburystudio.com** — the canonical host for
+the hub and every child site. Use it for `canonical`, `og:url`, `og:image`,
+`twitter:image` and sitemap entries in every new template. Do not use a
+`*.vercel.app` address: those are generated from the Vercel team slug and change
+whenever the project moves.
+
+The repo lives at `Thornbury-Studio/Website-Collection` on GitHub and deploys to
+the `website-collection` Vercel project. If a push ever stops producing a
+deployment, check the newest deployment's date against `git log` before assuming
+it worked — a broken Git link fails silently, with every deployment still
+reading `READY`. See the `vercel-github-org-split` memory.
+
 ## Where everything is
 
 | Path | What |
