@@ -1,0 +1,3 @@
+# EAM v2 — design concept (internal)
+
+This is an internal design exploration ("version 2") for Esteem Auto Medics, not the production site — the live build lives in its own standalone repo (`Company\Client\EAM Workshop\esteem-auto-medics\`); `../esteem-auto-medics/` here is the original PPF-first template snapshot this v2 sits beside. It takes a minimal, typography-led direction: huge confident headlines, generous negative space, alternating near-black and warm off-white bands with a brushed-gold accent, one clear action per screen, and abstract CSS-only surface treatments in place of photography. Everything is a single self-contained `index.html` using real client facts and pricing only.
