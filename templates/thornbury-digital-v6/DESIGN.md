@@ -29,15 +29,31 @@ one authored motion system, the light, and nothing competes with it.
 The page is the floor. Above it hangs a screen of vent blocks, the
 tropical-modernist answer to sun and rain, and the sun comes through it.
 
-- `js/sun.js` — NOAA solar position for 01°17′N 103°51′E. Verified against
-  the almanac for 6 Sep 2026: sunrise 06:59, solar noon 13:03, sunset 19:07
-  SGT; June and December noon altitudes 67.9° north and 65.3° south.
+**The day is eight authored moments, not a clock.** The first build computed
+the sun for every minute and let a rail scrub it continuously; that produced
+in-between arrangements nobody had looked at, and almost nobody found the
+rail. So `js/light.js` now holds eight fixed parameter sets — dawn, morning,
+late morning, noon, afternoon, golden hour, dusk, night — each rendered,
+screenshotted and kept (`?state=<key>` opens any of them). The room walks
+through them on an ambient loop: 14 s held, 2.6 s crossfade, the finished
+picture of one moment dissolving into the finished picture of the next (the
+shader evaluates both and mixes the pixels; it never invents a new layout).
+The loop starts at the moment nearest the real Singapore time, so the first
+frame is roughly the light outside, and the rail is still there for anyone
+who wants to hold a moment.
+
+- `js/sun.js` — NOAA solar position for 01°17′N 103°51′E, now used only to
+  read the real clock and pick the starting moment. Verified against the
+  almanac for 6 Sep 2026: sunrise 06:59, solar noon 13:03, sunset 19:07 SGT.
 - `js/light.js` — one fragment shader on two fixed canvases. `#wall` (z 0)
   paints the lit wall under the page; `#shade` (z 5, `mix-blend-mode:
   multiply`, pointer-events none) paints only the illumination factor over
   everything, so the type, the plates and the bar are shaded by the same
   screen as the wall behind them. Neither darkens twice: the wall carries
   the *colour* of the light, the shade carries the *darkness* of the screen.
+- Dawn and dusk are dark-wall moments with the block depth thinned to 0.05
+  cells so a 5–7° sun still gets through as amber slivers, and the lamp
+  already up; without that a low sun through a real block gives nothing.
 - The screen mixes three block types per cell from a hash, the way a real
   vent wall does: a circle in a square with quarter-circle corners, the petal
   block (a square void with four corner discs of material), and a plain
@@ -71,17 +87,40 @@ tropical-modernist answer to sun and rain, and the sun comes through it.
 - The entrance: on load the sun arrives from three hours earlier and settles
   on now over about half a second, so the first thing a visitor sees move is
   the concept.
-- `?at=HH:MM` loads the room at that hour, so a link can say "see it at
-  six". `TBLight.jump(minutes)` does the same from the console.
+- `?at=HH:MM` or `?state=golden` opens the room at that moment and holds it,
+  so a link can say "see it at six". `TBLight.go(i)` does the same from the
+  console; `TBLight.resume()` restarts the loop.
 
 ## The rail
 
-The one control that is the concept: a native `<input type="range">` over a
-24-hour line whose lit span is today's real sunrise-to-sunset, with the sun
-as the thumb. Dragging it re-lights the whole site live; "Back to now"
-appears once it has moved. Keyboard and screen-reader users get the same
-control with an `aria-valuetext` of the time and the sun's height. It sits in
-the hero, on the studio page and on the contact page.
+An optional layer, not the way most people meet the light: a native `<input
+type="range">` with eight stops, the daylight run drawn in ink, the sun as the
+thumb. Dragging it holds a moment and pauses the loop; "Back to the loop"
+resumes from the moment nearest now. Keyboard and screen-reader users get the
+same control with an `aria-valuetext` naming the moment. It sits in the hero,
+on the studio page and on the contact page.
+
+## The collection wall
+
+`collection.html` hangs every public site in the collection on one wall: 64
+plates, four across with every seventh at double width so the wall has a
+rhythm, one filter row by sector, every plate opening the real site. The home
+page carries the first eighteen as a six-across mosaic. The plates are fresh
+1200×750 captures, lazy-loaded, generated from `tools/collection.json` by
+`tools/build-collection.mjs`, so the wall is rebuilt in one command when the
+hub gains a template. The nine password-gated client previews on the hub are
+excluded: the wall is public, they are not.
+
+## The bar
+
+Transparent over the top of a page; once anything has scrolled under it, a
+frosted strip of the wall (74 % wall colour, 14 px backdrop blur) with a
+hairline, so no content ever reads through the navigation. The shade canvas
+still multiplies over it, so the strip stays in the room. Every inner page
+opens at `bar height + 84 px`, on every width, and the phone bar's real
+two-row height is what `--bar-h` says it is. The two big words that used to
+sit over photographs ("The room", "The screen") are heads above the pictures
+now; a word laid over a picture read as a collision, so it is not one.
 
 ## Palette
 

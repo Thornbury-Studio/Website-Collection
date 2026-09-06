@@ -35,6 +35,7 @@
   <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
   <nav class="nav" aria-label="Primary">
     <a href="work.html">Work</a>
+    <a href="collection.html">Collection</a>
     <a href="services.html">Services</a>
     <a href="studio.html">Studio</a>
     <a href="contact.html">Contact</a>
@@ -51,22 +52,25 @@
       <p class="text">Thornbury Digital is a design studio in Singapore. We design and build websites for companies that need to look like they mean it, and we do it in one room with the sun coming through a screen of ventilation blocks, which is why this site is lit the way it is.</p>
       <div class="aside">
         <p class="lab">Right now, in the room</p>
-        <p class="text">It is <b data-sun-time>—</b> and the sun is <b data-sun-alt>—</b> above the horizon, bearing <b data-sun-az>—</b>: <span data-sun-word>daylight</span>. That is the light on this page.</p>
+        <p class="text">It is <b data-sun-time>—</b> in Singapore. The room is showing <span data-sun-word>daylight</span>, one of the eight moments this site walks through.</p>
       </div>
     </div>
   </section>
 
   <section class="room" aria-labelledby="room-h">
+    <div class="sec-head reveal">
+      <p class="lab">The screen</p>
+      <h2 class="disp" id="room-h">Cast concrete with the middle cut out.</h2>
+    </div>
     <div class="room-media reveal">
       <picture>
         <source media="(max-width: 760px)" srcset="img/room-m.webp">
         <img src="img/room.webp" width="2400" height="1600" alt="A screen of white ventilation blocks in daylight: circles, quarter-circles and squares cut through concrete." loading="eager" decoding="async" fetchpriority="high">
       </picture>
-      <h2 class="disp room-word" id="room-h">The screen</h2>
     </div>
     <div class="wrap room-cap">
       <p class="lab"><b>Ventilation blocks</b> · The tropical-modernist answer to sun and rain</p>
-      <p>Cast concrete with the middle cut out, stacked into a wall that breathes. They shade a room without sealing it, and as the sun moves the pattern moves across the floor. Every page here is lit through one, by the real sun, at the real time.</p>
+      <p>Stacked into a wall that breathes, they shade a room without sealing it, and as the sun moves the pattern moves across the floor. Every page here is lit through one: eight moments of a Singapore day, each drawn and kept, on a slow loop.</p>
     </div>
   </section>
 
@@ -100,19 +104,19 @@
     <div class="wrap statement reveal">
       <p class="lab">The light</p>
       <h2 class="disp" id="sun-h">See it at <em>another hour.</em></h2>
-      <p class="text">The sun's height and bearing for 01°17′N 103°51′E are computed for this minute and drawn through the screen. Drag the rail and the whole site moves through the day: low and long in the morning, overhead at one, amber by six, a street lamp after seven.</p>
+      <p class="text">Eight moments of one day over 01°17′N 103°51′E, each drawn through the screen and kept: first light, a morning sun low from the east, a high one, noon overhead, the afternoon from the west, golden hour, dusk, and a street lamp at night. The room walks through them on its own; drag the rail to hold one.</p>
       <div class="aside">
         <div class="sunrail">
           <div class="sunrail-head">
             <p class="sunrail-read" aria-live="polite">Singapore</p>
-            <button class="sunrail-now" type="button" hidden>Back to now</button>
+            <button class="sunrail-now" type="button" hidden>Back to the loop</button>
           </div>
           <div class="sunrail-track">
-            <div class="sunrail-ticks" aria-hidden="true"><i class="hour-6"></i><i class="hour-12"></i><i class="hour-18"></i><span class="hour-0">00</span><span class="hour-6">06</span><span class="hour-12">12</span><span class="hour-18">18</span><span class="hour-24">24</span></div>
-            <label class="visually-hidden" for="sunRange">Time of day in Singapore</label>
-            <input type="range" id="sunRange" min="0" max="1439" step="1" value="720">
+            <div class="sunrail-ticks" aria-hidden="true"><i class="s0"></i><i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i><i class="s5"></i><i class="s6"></i><i class="s7"></i><span class="s0">Dawn</span><span class="s1">08:30</span><span class="s2">10:30</span><span class="s3">Noon</span><span class="s4">15:30</span><span class="s5">17:40</span><span class="s6">Dusk</span><span class="s7">Night</span></div>
+            <label class="visually-hidden" for="sunRange">Moment of the day in the room</label>
+            <input type="range" id="sunRange" min="0" max="7" step="1" value="3">
           </div>
-          <p class="sunrail-hint">Drag the sun.</p>
+          <p class="sunrail-hint">Drag the sun to hold a moment.</p>
         </div>
       </div>
     </div>
@@ -132,11 +136,12 @@
   <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
   <nav class="foot-nav" aria-label="Footer">
     <a href="work.html">Work</a>
+    <a href="collection.html">Collection</a>
     <a href="services.html">Services</a>
     <a href="studio.html">Studio</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <p class="foot-sun">This page is lit by the sun over Singapore. <b data-sun-time>—</b> · sun <b data-sun-alt>—</b> above the horizon, bearing <b data-sun-az>—</b>.</p>
+  <p class="foot-sun">Lit by the sun over Singapore, one day in eight moments. It is <b data-sun-time>—</b>; the room is at <b data-moment>—</b>.</p>
   <div class="foot-meta">
     <p class="lab">SGP · 01°17′N 103°51′E</p>
     <p class="lab"><a href="mailto:hello@thornbury.studio">hello@thornbury.studio</a></p>

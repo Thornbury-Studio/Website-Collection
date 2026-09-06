@@ -1,0 +1,1064 @@
+[
+  {
+    "slug": "animator-fenn",
+    "href": "templates/animator-fenn/index.html",
+    "title": "MARLOWE FENN",
+    "tag": "Portfolio / Stop‑Motion Animator",
+    "facet": "flagship",
+    "date": "2026-09-05",
+    "category": "portfolio",
+    "creator": "Mat",
+    "style": [
+      "dark",
+      "typography-led"
+    ],
+    "description": "A stop-motion animator's portfolio built around a scroll-driven exposure sheet.",
+    "thumb": "img/animator-fenn-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "offline-outage",
+    "href": "templates/offline-outage/index.html",
+    "title": "OUTAGE",
+    "tag": "Entertainment / Offline Dinosaur",
+    "facet": "flagship",
+    "date": "2026-09-05",
+    "category": "entertainment",
+    "creator": "YeeHao",
+    "style": [
+      "dark"
+    ],
+    "description": "An offline-dinosaur browser gallery with six mode plates and a playable endless runner.",
+    "thumb": "img/offline-outage-sm.jpg",
+    "section": "gallery"
+  },
+  {
+    "slug": "phones-kept",
+    "href": "templates/phones-kept/index.html",
+    "title": "KEPT",
+    "tag": "Retail / Certified Pre-Owned",
+    "facet": "ecommerce",
+    "date": "2026-09-05",
+    "category": "ecommerce",
+    "creator": "YeeHao",
+    "style": [
+      "minimal"
+    ],
+    "description": "A certified pre-owned phone shop with a grade guide and a live trade-in estimator.",
+    "thumb": "img/phones-kept-sm.jpg",
+    "section": "gallery"
+  },
+  {
+    "slug": "property-bluehour",
+    "href": "templates/property-bluehour/index.html",
+    "title": "MABEL SEOW",
+    "tag": "Real Estate / Individual Agent",
+    "facet": "flagship",
+    "date": "2026-09-05",
+    "category": "property",
+    "creator": "Jayden",
+    "style": [
+      "dark",
+      "photography-led"
+    ],
+    "description": "A personal-branding site for one property agent, set entirely at one hour after sunset.",
+    "thumb": "img/property-bluehour-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "community-gather-house",
+    "href": "templates/community-gather-house/index.html",
+    "title": "GATHER HOUSE",
+    "tag": "Venue / Community Space",
+    "facet": "booking",
+    "date": "2026-09-04",
+    "category": "property",
+    "creator": "YeeHao",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A neighbourhood room for workshops and private hire, with clear packages and a photo gallery.",
+    "thumb": "img/gather-house-sm.jpg",
+    "section": "gallery"
+  },
+  {
+    "slug": "crm-veridex",
+    "href": "templates/crm-veridex/index.html",
+    "title": "VERIDEX",
+    "tag": "SaaS / Automotive Data Hygiene",
+    "facet": "standard",
+    "date": "2026-09-04",
+    "category": "saas",
+    "creator": "YeeHao",
+    "style": [
+      "dark",
+      "data-technical"
+    ],
+    "description": "A customer-data-hygiene platform for automotive CRM, with a live cost-of-decay calculator.",
+    "thumb": "img/crm-veridex-sm.jpg",
+    "section": "gallery"
+  },
+  {
+    "slug": "interior-chalkline",
+    "href": "templates/interior-chalkline/index.html",
+    "title": "CHALKLINE",
+    "tag": "Interior Design / Renovation",
+    "facet": "flagship",
+    "date": "2026-09-04",
+    "category": "property",
+    "creator": "Zane",
+    "style": [
+      "photography-led",
+      "data-technical"
+    ],
+    "description": "A design-build studio whose interface is a floor plan you can quote a renovation from.",
+    "thumb": "img/interior-chalkline-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "survey-graticule",
+    "href": "templates/survey-graticule/index.html",
+    "title": "GRATICULE",
+    "tag": "Survey / Land & Hydrographic",
+    "facet": "flagship",
+    "date": "2026-09-04",
+    "category": "business",
+    "creator": "Mat",
+    "style": [
+      "data-technical"
+    ],
+    "description": "A survey practice whose hero is a live-computed contour sheet, not a photograph.",
+    "thumb": "img/survey-graticule-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "auto-veil",
+    "href": "templates/auto-veil/index.html",
+    "title": "VEIL",
+    "tag": "Automotive / Paint Protection",
+    "facet": "flagship",
+    "date": "2026-09-02",
+    "category": "automotive",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "photography-led"
+    ],
+    "description": "A Tesla-style product page for paint protection, told in three full-viewport film chapters.",
+    "thumb": "img/auto-veil-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "exhibition-ephemeris",
+    "href": "templates/exhibition-ephemeris/index.html",
+    "title": "EPHEMERIS",
+    "tag": "Culture / Single-Object Exhibition",
+    "facet": "experimental",
+    "date": "2026-09-02",
+    "category": "culture",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "3d-webgl"
+    ],
+    "description": "A single-object gallery showing one 18th-century instrument, lit by your own cursor.",
+    "thumb": "img/exhibition-ephemeris-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "lighting-kelvin",
+    "href": "templates/lighting-kelvin/index.html",
+    "title": "KELVIN",
+    "tag": "Hospitality / Lighting Control",
+    "facet": "standard",
+    "date": "2026-09-02",
+    "category": "product",
+    "creator": "Jayden",
+    "style": [
+      "dark",
+      "data-technical"
+    ],
+    "description": "A lighting OS for hospitality where dragging a kelvin slider retints the whole room.",
+    "thumb": "img/lighting-kelvin-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "camera-candela",
+    "href": "templates/camera-candela/index.html",
+    "title": "CANDELA",
+    "tag": "Product / Optical Instrument",
+    "facet": "flagship",
+    "date": "2026-08-31",
+    "category": "product",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "3d-webgl"
+    ],
+    "description": "A camera maker's product page that hands you a real, draggable 3D rangefinder.",
+    "thumb": "img/camera-candela-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "turntable-lacquer",
+    "href": "templates/turntable-lacquer/index.html",
+    "title": "TAPE//LACQUER",
+    "tag": "Music / Underground Label",
+    "facet": "standard",
+    "date": "2026-08-31",
+    "category": "entertainment",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "3d-webgl"
+    ],
+    "description": "An illegal-warehouse listening-room concept, staged as a chaotic 3D stage with live static.",
+    "thumb": "img/turntable-lacquer-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "combat-fracture",
+    "href": "templates/combat-fracture/index.html",
+    "title": "FRACTURE",
+    "tag": "Sports / Fight-Night Promotion",
+    "facet": "flagship",
+    "date": "2026-08-30",
+    "category": "entertainment",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "3d-webgl"
+    ],
+    "description": "A fight-night promotion site built from fractured concrete that shatters as you scroll.",
+    "thumb": "img/combat-fracture-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "archive-aperture-index",
+    "href": "templates/archive-aperture-index/index.html",
+    "title": "APERTURE INDEX",
+    "tag": "Archive / 3D Artifact",
+    "facet": "experimental",
+    "date": "2026-08-29",
+    "category": "culture",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "3d-webgl"
+    ],
+    "description": "A photographic archive built around one real 3D camera you inspect with a cursor light.",
+    "thumb": "img/archive-aperture-index-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "carnival-null",
+    "href": "templates/carnival-null/index.html",
+    "title": "NULL CARNIVAL",
+    "tag": "Festival / Interactive Exhibition",
+    "facet": "flagship",
+    "date": "2026-08-28",
+    "category": "entertainment",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "3d-webgl"
+    ],
+    "description": "A travelling night fair rendered as one turnable 3D room instead of a scrolling page.",
+    "thumb": "img/carnival-null-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "festival-voltflood",
+    "href": "templates/festival-voltflood/index.html",
+    "title": "VOLT//FLOOD",
+    "tag": "Festival / Audiovisual Identity",
+    "facet": "standard",
+    "date": "2026-08-28",
+    "category": "entertainment",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "3d-webgl"
+    ],
+    "description": "An audiovisual festival identity built as one unstable, beat-synced 3D machine.",
+    "thumb": "img/festival-voltflood-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "horology-eon-v2",
+    "href": "templates/horology-eon-v2/index.html",
+    "title": "EON ATELIER",
+    "tag": "Horology / Independent Watchmaker",
+    "facet": "flagship",
+    "date": "2026-08-28",
+    "category": "product",
+    "creator": "Zane",
+    "style": [
+      "photography-led",
+      "3d-webgl"
+    ],
+    "description": "An independent watchmaker's site staged as a cinematic descent through six chambers.",
+    "thumb": "img/horology-eon-v2-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "logistics-northline",
+    "href": "templates/logistics-northline/index.html",
+    "title": "NORTHLINE SYSTEMS",
+    "tag": "Enterprise / Logistics Intelligence",
+    "facet": "standard",
+    "date": "2026-08-28",
+    "category": "saas",
+    "creator": "Jayden",
+    "style": [
+      "3d-webgl",
+      "data-technical"
+    ],
+    "description": "A supply-chain intelligence platform shown as a living 3D network board.",
+    "thumb": "img/logistics-northline-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "zane-live",
+    "href": "templates/zane-live/index.html",
+    "title": "ZAN.E",
+    "tag": "Fitness / Live Show",
+    "facet": "standard",
+    "date": "2026-08-28",
+    "category": "fitness",
+    "creator": "Jayden",
+    "style": [
+      "dark",
+      "typography-led"
+    ],
+    "description": "A live weekly fitness show site built as a broadcast gallery, driven by one real clock.",
+    "thumb": "img/zane-live-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "exhibition-parallax",
+    "href": "templates/exhibition-parallax/index.html",
+    "title": "PARALLAX",
+    "tag": "Culture / Digital-Art Exhibition",
+    "facet": "experimental",
+    "date": "2026-08-27",
+    "category": "culture",
+    "creator": "Zane",
+    "style": [
+      "3d-webgl"
+    ],
+    "description": "An exhibition of impossible objects, staged as one continuously reassembling 3D walk.",
+    "thumb": "img/exhibition-parallax-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "arcade-nightshift",
+    "href": "templates/arcade-nightshift/index.html",
+    "title": "NIGHTSHIFT",
+    "tag": "Entertainment / Gaming Centre",
+    "facet": "standard",
+    "date": "2026-08-25",
+    "category": "entertainment",
+    "creator": "Jayden",
+    "style": [
+      "dark",
+      "photography-led"
+    ],
+    "description": "A late-night gaming centre with a hidden after-hours operations portal.",
+    "thumb": "img/arcade-nightshift-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "park-wonderyard",
+    "href": "templates/park-wonderyard/index.html",
+    "title": "WONDERYARD",
+    "tag": "Entertainment / Destination & Theme Park",
+    "facet": "standard",
+    "date": "2026-08-21",
+    "category": "entertainment",
+    "creator": "Jayden",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A theme-park homepage that walks you through six worlds and turns day into night.",
+    "thumb": "img/park-wonderyard-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "cards-fathom",
+    "href": "templates/cards-fathom/index.html",
+    "title": "FATHOM",
+    "tag": "Collectibles / Digital Card Universe",
+    "facet": "standard",
+    "date": "2026-08-20",
+    "category": "entertainment",
+    "creator": "Jayden",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A deep-sea creature-card universe presented as a collector's naturalist logbook.",
+    "thumb": "img/cards-fathom-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "moto-gyre",
+    "href": "templates/moto-gyre/index.html",
+    "title": "GYRE",
+    "tag": "Motorcycles / Marque Showcase",
+    "facet": "standard",
+    "date": "2026-08-19",
+    "category": "automotive",
+    "creator": "Jayden",
+    "style": [
+      "dark",
+      "typography-led"
+    ],
+    "description": "A motorcycle marque site built around five machines and live dyno curves.",
+    "thumb": "img/moto-gyre-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "linia-alva",
+    "href": "templates/linia-alva/index.html",
+    "title": "LINIA ALVA",
+    "tag": "Travel / Winter Railway",
+    "facet": "flagship",
+    "date": "2026-08-18",
+    "category": "hospitality",
+    "creator": "Zane",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A slow-television broadcast of one winter day on a fictional alpine railway.",
+    "thumb": "img/linia-alva-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "cafe-loam",
+    "href": "templates/cafe-loam/index.html",
+    "title": "LOAM",
+    "tag": "Café / Food & Drink",
+    "facet": "ecommerce",
+    "date": "2026-08-16",
+    "category": "restaurant",
+    "creator": "Jayden",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A neighbourhood café and roastery with a persistent order tray and a taste finder.",
+    "thumb": "img/cafe-loam-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "dessert-sejuk",
+    "href": "templates/dessert-sejuk/index.html",
+    "title": "SEJUK°",
+    "tag": "Dessert / Shaved Ice",
+    "facet": "ecommerce booking",
+    "date": "2026-08-16",
+    "category": "restaurant",
+    "creator": "Zane",
+    "style": [
+      "typography-led"
+    ],
+    "description": "A Singapore shaved-ice house with live pricing and pickup slots tied to real hours.",
+    "thumb": "img/dessert-sejuk-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "concours-nocturne",
+    "href": "templates/concours-nocturne/index.html",
+    "title": "NOCTURNE",
+    "tag": "Automotive / Collection & Events",
+    "facet": "standard",
+    "date": "2026-08-13",
+    "category": "automotive",
+    "creator": "Jayden",
+    "style": [
+      "dark",
+      "photography-led"
+    ],
+    "description": "A concours judged after dark, lit only where your cursor stands.",
+    "thumb": "img/concours-nocturne-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "dining-neap",
+    "href": "templates/dining-neap/index.html",
+    "title": "NEAP",
+    "tag": "Restaurant / Fine Dining",
+    "facet": "booking",
+    "date": "2026-08-13",
+    "category": "restaurant",
+    "creator": "Jayden",
+    "style": [
+      "typography-led"
+    ],
+    "description": "A tasting counter whose nightly menu is decided by real lunar arithmetic.",
+    "thumb": "img/dining-neap-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "auto-karn",
+    "href": "templates/auto-karn/index.html",
+    "title": "KARN",
+    "tag": "Automotive / Marque World",
+    "facet": "standard",
+    "date": "2026-08-12",
+    "category": "automotive",
+    "creator": "Jayden",
+    "style": [
+      "dark",
+      "typography-led"
+    ],
+    "description": "An automotive world of five original machines with live-computed performance figures.",
+    "thumb": "img/auto-karn-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "foundry-harlowe",
+    "href": "templates/foundry-harlowe/index.html",
+    "title": "HARLOWE",
+    "tag": "Foundry / Heritage Craft",
+    "facet": "flagship",
+    "date": "2026-08-12",
+    "category": "business",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "photography-led"
+    ],
+    "description": "A bell foundry site where every bell shown can actually be struck and priced live.",
+    "thumb": "img/foundry-harlowe-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "spaces-noon",
+    "href": "templates/spaces-noon/index.html",
+    "title": "NOON",
+    "tag": "Property / Workspace Leasing",
+    "facet": "flagship",
+    "date": "2026-08-12",
+    "category": "property",
+    "creator": "Zane",
+    "style": [
+      "data-technical",
+      "typography-led"
+    ],
+    "description": "A workspace-leasing site that models real daylight across four holdings.",
+    "thumb": "img/spaces-noon-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "coastal-saltfield",
+    "href": "templates/coastal-saltfield/index.html",
+    "title": "SALTFIELD",
+    "tag": "Hospitality / Coastal Inn",
+    "facet": "booking",
+    "date": "2026-08-11",
+    "category": "hospitality",
+    "creator": "Jayden",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A six-room shore house with seasonal night-by-night pricing and a hand-drawn property map.",
+    "thumb": "img/coastal-saltfield-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "film-midwater",
+    "href": "templates/film-midwater/index.html",
+    "title": "MIDWATER",
+    "tag": "Film / Documentary Release",
+    "facet": "flagship booking",
+    "date": "2026-08-11",
+    "category": "entertainment",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "photography-led"
+    ],
+    "description": "A documentary site staged as the survey record of one deep-sea descent.",
+    "thumb": "img/film-midwater-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "observatory-vela",
+    "href": "templates/observatory-vela/index.html",
+    "title": "VELA",
+    "tag": "Culture / Observatory & Planetarium",
+    "facet": "ecommerce booking",
+    "date": "2026-08-11",
+    "category": "culture",
+    "creator": "Zane",
+    "style": [
+      "data-technical"
+    ],
+    "description": "An observatory site that computes its own live star map, twilight and moon phase.",
+    "thumb": "img/observatory-vela-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "ski-colnoir",
+    "href": "templates/ski-colnoir/index.html",
+    "title": "COL NOIR",
+    "tag": "Resort / Alpine Sports",
+    "facet": "flagship",
+    "date": "2026-08-11",
+    "category": "hospitality",
+    "creator": "Zane",
+    "style": [
+      "photography-led",
+      "data-technical"
+    ],
+    "description": "A freeride mountain resort whose site is its own daily avalanche bulletin.",
+    "thumb": "img/ski-colnoir-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "soda-unstill",
+    "href": "templates/soda-unstill/index.html",
+    "title": "UNSTILL",
+    "tag": "CPG / Drinks Brand",
+    "facet": "ecommerce",
+    "date": "2026-08-11",
+    "category": "ecommerce",
+    "creator": "Zane",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A sparkling-soda brand built around slow-motion ink footage and a real carbonation lab.",
+    "thumb": "img/soda-unstill-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "synth-oscilla",
+    "href": "templates/synth-oscilla/index.html",
+    "title": "OSCILLA",
+    "tag": "Hardware / Electronic Instruments",
+    "facet": "ecommerce",
+    "date": "2026-08-11",
+    "category": "product",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "data-technical"
+    ],
+    "description": "A synthesizer maker whose site is itself a playable synth, keys and all.",
+    "thumb": "img/synth-oscilla-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "fashion-overcast",
+    "href": "templates/fashion-overcast/index.html",
+    "title": "OVERCAST",
+    "tag": "Fashion / E-Commerce",
+    "facet": "ecommerce",
+    "date": "2026-08-10",
+    "category": "ecommerce",
+    "creator": "Zane",
+    "style": [
+      "photography-led",
+      "typography-led"
+    ],
+    "description": "A clothing label sold on fabric, not models, with a bag that survives navigation.",
+    "thumb": "img/fashion-overcast-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "fastfood-hotline",
+    "href": "templates/fastfood-hotline/index.html",
+    "title": "HOTLINE",
+    "tag": "Fast Food / Late-Night Counter",
+    "facet": "ecommerce",
+    "date": "2026-08-10",
+    "category": "restaurant",
+    "creator": "Jayden",
+    "style": [
+      "dark",
+      "photography-led"
+    ],
+    "description": "A late-night fried chicken counter with a box builder that prices bundles against buying apart.",
+    "thumb": "img/fastfood-hotline-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "art-atelier8",
+    "href": "templates/art-atelier8/index.html",
+    "title": "ATELIER № 8",
+    "tag": "Members' Club / Art Gallery",
+    "facet": "standard",
+    "date": "2026-08-09",
+    "category": "culture",
+    "creator": "Jayden",
+    "style": [
+      "photography-led",
+      "typography-led"
+    ],
+    "description": "A private art club presented as the catalogue of its current show.",
+    "thumb": "img/art-atelier8-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "golf-aureon",
+    "href": "templates/golf-aureon/index.html",
+    "title": "AUREON",
+    "tag": "Members' Platform / Golf Club",
+    "facet": "booking",
+    "date": "2026-08-09",
+    "category": "hospitality",
+    "creator": "Jayden",
+    "style": [
+      "typography-led"
+    ],
+    "description": "A private golf club's digital concierge, with a live tee sheet and self-writing manifest.",
+    "thumb": "img/golf-aureon-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "kids-smallhours",
+    "href": "templates/kids-smallhours/index.html",
+    "title": "SMALL HOURS",
+    "tag": "E-commerce / Childrenswear",
+    "facet": "ecommerce",
+    "date": "2026-08-09",
+    "category": "ecommerce",
+    "creator": "Jayden",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A premium kids'-fashion brand with an AI-shot garden campaign and smart free-delivery logic.",
+    "thumb": "img/kids-smallhours-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "running-even",
+    "href": "templates/running-even/index.html",
+    "title": "EVEN",
+    "tag": "Fitness / Running App",
+    "facet": "standard",
+    "date": "2026-08-09",
+    "category": "fitness",
+    "creator": "Zane",
+    "style": [
+      "data-technical",
+      "minimal"
+    ],
+    "description": "A running-app site framed as one live 10K, with a printable pace-band builder.",
+    "thumb": "img/running-even-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "streetwear-form01",
+    "href": "templates/streetwear-form01/index.html",
+    "title": "FORM/01",
+    "tag": "E-commerce / Streetwear",
+    "facet": "ecommerce",
+    "date": "2026-08-09",
+    "category": "ecommerce",
+    "creator": "Jayden",
+    "style": [
+      "photography-led",
+      "typography-led"
+    ],
+    "description": "A monochrome techwear label with a broken product grid and full-screen takeovers.",
+    "thumb": "img/streetwear-form01-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "vintage-menswear",
+    "href": "templates/vintage-menswear/index.html",
+    "title": "MORROW & FINCH",
+    "tag": "E-commerce / Heritage",
+    "facet": "ecommerce",
+    "date": "2026-08-09",
+    "category": "ecommerce",
+    "creator": "Jayden",
+    "style": [
+      "photography-led",
+      "typography-led"
+    ],
+    "description": "A menswear shop dressed as a 1930s catalogue, with a ledger-style Order Book cart.",
+    "thumb": "img/vintage-menswear-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "buffet-longtable",
+    "href": "templates/buffet-longtable/index.html",
+    "title": "LONG TABLE",
+    "tag": "Restaurant / Buffet",
+    "facet": "standard",
+    "date": "2026-08-08",
+    "category": "restaurant",
+    "creator": "Jayden",
+    "style": [
+      "photography-led"
+    ],
+    "description": "An all-day buffet with a rotating weekly menu and a live open-now indicator.",
+    "thumb": "img/buffet-longtable-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "gym-local",
+    "href": "templates/gym-local/index.html",
+    "title": "HOYT’S",
+    "tag": "Fitness / Local Gym",
+    "facet": "standard",
+    "date": "2026-08-08",
+    "category": "fitness",
+    "creator": "Jayden",
+    "style": [
+      "photography-led",
+      "typography-led"
+    ],
+    "description": "A neighbourhood boxing gym in riso-print duotone, with a live weekly class timetable.",
+    "thumb": "img/gym-local-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "indian-restaurant",
+    "href": "templates/indian-restaurant/index.html",
+    "title": "KESAR केसर",
+    "tag": "Restaurant / Online Ordering",
+    "facet": "ecommerce",
+    "date": "2026-08-08",
+    "category": "restaurant",
+    "creator": "Zane",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A London curry house ordering for the table, with feast pricing per head.",
+    "thumb": "img/indian-restaurant-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "dental-care",
+    "href": "templates/dental-care/index.html",
+    "title": "BRIGHTSIDE",
+    "tag": "Healthcare / Dental",
+    "facet": "booking",
+    "date": "2026-08-07",
+    "category": "fitness",
+    "creator": "Jayden",
+    "style": [
+      "minimal"
+    ],
+    "description": "A warm family dental practice with honest pricing and an easy booking flow.",
+    "thumb": "img/dental-care-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "japanese-restaurant",
+    "href": "templates/japanese-restaurant/index.html",
+    "title": "KIYO 清",
+    "tag": "Restaurant / Online Ordering",
+    "facet": "ecommerce",
+    "date": "2026-08-07",
+    "category": "restaurant",
+    "creator": "Jayden",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A mobile-first Japanese kitchen where ordering, filters and checkout are the whole site.",
+    "thumb": "img/japanese-restaurant-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "powerbank-cupcake",
+    "href": "templates/powerbank-cupcake/index.html",
+    "title": "CUPCAKE",
+    "tag": "Tech / Maximalist Type",
+    "facet": "standard",
+    "date": "2026-08-07",
+    "category": "product",
+    "creator": "Jayden",
+    "style": [
+      "typography-led"
+    ],
+    "description": "A power bank sold through bold typography, with a battery nav that charges as you scroll.",
+    "thumb": "img/powerbank-cupcake-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "western-grill",
+    "href": "templates/western-grill/index.html",
+    "title": "THE BRASS OX",
+    "tag": "Restaurant / Grill House",
+    "facet": "ecommerce",
+    "date": "2026-08-07",
+    "category": "restaurant",
+    "creator": "Jayden",
+    "style": [
+      "photography-led"
+    ],
+    "description": "An American chophouse ordering flow that prices every doneness and add-on live.",
+    "thumb": "img/western-grill-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "law-firm",
+    "href": "templates/law-firm/index.html",
+    "title": "AMICUS",
+    "tag": "Law Firm / Services",
+    "facet": "standard",
+    "date": "2026-08-06",
+    "category": "business",
+    "creator": "Jayden",
+    "style": [
+      "typography-led"
+    ],
+    "description": "A warm, intake-first law firm built around a 30-second contact flow.",
+    "thumb": "img/law-firm-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "sys-2026-wearable",
+    "href": "templates/sys-2026-wearable/index.html",
+    "title": "SYS‑2026",
+    "tag": "Product / Hardware Launch",
+    "facet": "flagship",
+    "date": "2026-08-06",
+    "category": "product",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "data-technical"
+    ],
+    "description": "A wrist-terminal launch page with a working device screen you can drive yourself.",
+    "thumb": "img/sys-2026-wearable-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "watch-atelier",
+    "href": "templates/watch-atelier/index.html",
+    "title": "AUREL",
+    "tag": "Luxury / Product Page",
+    "facet": "flagship",
+    "date": "2026-08-06",
+    "category": "product",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "photography-led"
+    ],
+    "description": "An old-money watch house with a cinematic hero and a filterable boutique.",
+    "thumb": "img/watch-atelier-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "chinese-restaurant",
+    "href": "templates/chinese-restaurant/index.html",
+    "title": "BÁI HÈ 白鶴",
+    "tag": "Restaurant / Menu Tool",
+    "facet": "standard",
+    "date": "2026-08-05",
+    "category": "restaurant",
+    "creator": "Jayden",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A Chinese menu that plates each dish onto a round table as you order.",
+    "thumb": "img/chinese-restaurant-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "entertainment-triggered",
+    "href": "templates/entertainment-triggered/index.html",
+    "title": "TRIGGERED",
+    "tag": "Entertainment / Redesign",
+    "facet": "flagship",
+    "date": "2026-08-04",
+    "category": "entertainment",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "3d-webgl"
+    ],
+    "description": "An unofficial redesign of a Singapore game centre, with a WebGL lava floor.",
+    "thumb": "img/entertainment-triggered-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "restaurant-food",
+    "href": "templates/restaurant-food/index.html",
+    "title": "EMBER",
+    "tag": "Restaurant / Food",
+    "facet": "booking",
+    "date": "2026-08-04",
+    "category": "restaurant",
+    "creator": "Zane",
+    "style": [
+      "photography-led",
+      "3d-webgl"
+    ],
+    "description": "A wood-fire restaurant with a cursor-tracked menu and a real booking flow.",
+    "thumb": "img/restaurant-food-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "ecommerce-design-store",
+    "href": "templates/ecommerce-design-store/index.html",
+    "title": "OBLIK",
+    "tag": "E-Commerce / Design Store",
+    "facet": "ecommerce",
+    "date": "2026-08-03",
+    "category": "ecommerce",
+    "creator": "Jayden",
+    "style": [
+      "photography-led"
+    ],
+    "description": "A kinetic design-object store with live filters, colour switching and quick views.",
+    "thumb": "img/ecommerce-design-store-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "gym-service",
+    "href": "templates/gym-service/index.html",
+    "title": "FORGE",
+    "tag": "Fitness / Gym",
+    "facet": "standard",
+    "date": "2026-08-03",
+    "category": "fitness",
+    "creator": "Zane",
+    "style": [
+      "dark",
+      "3d-webgl"
+    ],
+    "description": "An animation-driven gym site with a WebGL hero and GSAP scroll effects.",
+    "thumb": "img/gym-service-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "pulse-ai-analytics",
+    "href": "templates/pulse-ai-analytics/index.html",
+    "title": "PULSE",
+    "tag": "SaaS / AI Platform",
+    "facet": "standard",
+    "date": "2026-08-03",
+    "category": "saas",
+    "creator": "Jayden",
+    "style": [
+      "dark",
+      "data-technical"
+    ],
+    "description": "A cinematic AI-analytics landing page built around a scroll-assembled particle dashboard.",
+    "thumb": "img/pulse-ai-analytics-sm.webp",
+    "section": "gallery"
+  },
+  {
+    "slug": "business-corporate",
+    "href": "templates/business-corporate/index.html",
+    "title": "Meridian Partners",
+    "tag": "Business / Corporate",
+    "facet": "standard",
+    "date": "2026-08-02",
+    "category": "business",
+    "creator": "Jayden",
+    "style": [
+      "minimal"
+    ],
+    "description": "A strategy consultancy built around switchable case studies and a clear engagement model.",
+    "thumb": "img/business-corporate-sm.webp",
+    "section": "gallery"
+  }
+]

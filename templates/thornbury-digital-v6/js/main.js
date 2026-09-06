@@ -69,58 +69,54 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  function fmtAlt(a) { return (a < 0 ? "−" : "") + Math.round(Math.abs(a)) + "°"; }
+  // ---------- the clock and the moment ----------
+  // The bar keeps the real Singapore time; the room shows one of eight
+  // authored moments, named wherever the copy asks for it.
+  function realClock() {
+    var c = Sun.sgt(new Date());
+    return pad(c.h) + ":" + pad(c.m);
+  }
   function renderClock(s) {
     var el = $("#barTime");
-    if (el) {
-      var t = clock(s.minutes);
-      el.innerHTML = "<b>" + t + " SGT</b> · sun " + fmtAlt(s.altitude) + (s.altitude < 0 ? " · below the horizon" : " above the horizon");
-    }
-    $$("[data-sun-alt]").forEach(function (e) { e.textContent = fmtAlt(s.altitude); });
-    $$("[data-sun-az]").forEach(function (e) { e.textContent = Math.round(s.azimuth) + "°"; });
-    $$("[data-sun-time]").forEach(function (e) { e.textContent = clock(s.minutes) + " SGT"; });
-    $$("[data-sun-word]").forEach(function (e) {
-      var w = s.altitude < -6 ? "night" : s.altitude < 0 ? "dusk" : s.altitude < 12 ? "a low sun" : s.altitude < 45 ? "morning light" : s.altitude < 80 ? "afternoon light" : "an overhead sun";
-      if (s.altitude >= 12 && s.altitude < 45 && s.azimuth > 180) w = "afternoon light";
-      if (s.altitude >= 45 && s.altitude < 80 && s.azimuth < 180) w = "morning light";
-      e.textContent = w;
-    });
+    if (el) el.innerHTML = "<b>" + realClock() + " SGT</b> · " + s.name.toLowerCase();
+    $$("[data-sun-time]").forEach(function (e) { e.textContent = realClock() + " SGT"; });
+    $$("[data-moment]").forEach(function (e) { e.textContent = s.name.toLowerCase(); });
+    $$("[data-sun-word]").forEach(function (e) { e.textContent = s.word; });
+    $$("[data-sun-alt]").forEach(function (e) { e.textContent = (s.altitude < 0 ? "−" : "") + Math.abs(s.altitude) + "°"; });
   }
-  document.addEventListener("tb:sun", function (e) { renderClock(e.detail); syncRails(e.detail); });
+  document.addEventListener("tb:state", function (e) { renderClock(e.detail); syncRails(e.detail); });
+  setInterval(function () { if (window.TBLight.state) { var s = window.TBLight.state(); if (s) renderClock(s); } }, 30000);
 
-  // ---------- the sun rail ----------
+  // ---------- the rail: eight stops, one moment each ----------
   function initRails(root) {
     $$(".sunrail", root).forEach(function (rail) {
       var input = $("input[type=range]", rail), now = $(".sunrail-now", rail), read = $(".sunrail-read", rail);
-      var day = Sun.day(new Date());
-      rail.style.setProperty("--rise", (day.rise / 24 * 100).toFixed(2) + "%");
-      rail.style.setProperty("--set", (day.set / 24 * 100).toFixed(2) + "%");
       if (!input) return;
+      input.max = String(window.TBLight.STATES.length - 1);
       input.addEventListener("input", function () {
-        window.TBLight.setMinutes(+input.value);
+        window.TBLight.go(+input.value);
         if (now) now.hidden = false;
         rail.setAttribute("data-moved", "1");
       });
       if (now) now.addEventListener("click", function () {
-        window.TBLight.setMinutes(null);
+        window.TBLight.resume();
         now.hidden = true;
         rail.removeAttribute("data-moved");
-        input.value = Math.round(window.TBLight.target());
       });
       var s = window.TBLight.state && window.TBLight.state();
-      if (s) { input.value = Math.round(s.minutes); paintRead(read, s, rail); }
+      if (s) { input.value = s.index; paintRead(read, s, rail); if (s.paused && now) { now.hidden = false; rail.setAttribute("data-moved", "1"); } }
     });
   }
   function paintRead(read, s, rail) {
     if (!read) return;
     var moved = rail.hasAttribute("data-moved");
-    read.innerHTML = clock(s.minutes) + " SGT <small>· " + (moved ? "where you left it" : "now") + " · sun " + fmtAlt(s.altitude) + "</small>";
+    read.innerHTML = s.name + " <small>· " + s.hour + (moved ? " · held" : " · the loop") + "</small>";
   }
   function syncRails(s) {
     $$(".sunrail").forEach(function (rail) {
       var input = $("input[type=range]", rail);
-      if (input && document.activeElement !== input) input.value = Math.round(s.minutes);
-      if (input) input.setAttribute("aria-valuetext", clock(s.minutes) + " Singapore time, sun " + fmtAlt(s.altitude));
+      if (input && document.activeElement !== input) input.value = s.index;
+      if (input) input.setAttribute("aria-valuetext", s.name + ", " + s.hour + " in Singapore");
       paintRead($(".sunrail-read", rail), s, rail);
     });
   }
@@ -156,6 +152,26 @@
     var s = window.TBLight.state && window.TBLight.state();
     if (s) { renderClock(s); syncRails(s); }
     if (window.TBLight.invalidate) window.TBLight.invalidate();
+    initWall(root);
+  }
+
+  // ---------- the collection wall: one filter row, plates hide by category ----------
+  function initWall(root) {
+    var wall = $(".wall-grid", root);
+    if (!wall) return;
+    var chips = $$(".wall-filter button", root);
+    var plates = $$(".plate", wall);
+    var count = $("[data-shown]", root);
+    function apply(cat) {
+      var n = 0;
+      plates.forEach(function (p) { var on = cat === "all" || p.getAttribute("data-cat") === cat; p.hidden = !on; if (on) n++; });
+      chips.forEach(function (c) { c.setAttribute("aria-pressed", c.getAttribute("data-cat") === cat ? "true" : "false"); });
+      if (count) count.textContent = n;
+      rescanReveals(); sweep();
+      if (window.TBLight.invalidate) window.TBLight.invalidate();
+    }
+    chips.forEach(function (c) { c.addEventListener("click", function () { apply(c.getAttribute("data-cat")); }); });
+    if (count) count.textContent = plates.filter(function (p) { return !p.hidden; }).length;
   }
 
   // ---------- router ----------
