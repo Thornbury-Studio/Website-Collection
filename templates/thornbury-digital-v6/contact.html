@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-page="contact" data-light="day">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<title>Contact — Thornbury Digital</title>
+<meta name="description" content="Start a project with Thornbury Digital, a design studio in Singapore. Tell us what exists now and what it needs to do.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/thornbury-digital-v6/contact.html">
+<meta name="theme-color" content="#ebe7df">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ebe7df'/%3E%3Ccircle cx='16' cy='16' r='7.5' fill='%2317150f'/%3E%3Ccircle cx='2' cy='2' r='4.5' fill='%2317150f'/%3E%3Ccircle cx='30' cy='2' r='4.5' fill='%2317150f'/%3E%3Ccircle cx='2' cy='30' r='4.5' fill='%2317150f'/%3E%3Ccircle cx='30' cy='30' r='4.5' fill='%2317150f'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thornbury Digital">
+<meta property="og:title" content="Contact — Thornbury Digital">
+<meta property="og:description" content="Tell us what exists now and what it needs to do.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/thornbury-digital-v6/contact.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/thornbury-digital-v6/img/og.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/thornbury-digital-v6/img/og.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&amp;family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&amp;display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script defer src="js/sun.js"></script>
+<script defer src="js/light.js"></script>
+<script defer src="js/main.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<canvas class="wall" id="wall" aria-hidden="true"></canvas>
+<canvas class="shade" id="shade" aria-hidden="true"></canvas>
+<header class="bar">
+  <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="work.html">Work</a>
+    <a href="services.html">Services</a>
+    <a href="studio.html">Studio</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <p class="bar-time" id="barTime" aria-live="off"><b>Singapore</b></p>
+</header>
+<div class="site">
+<main id="main" tabindex="-1">
+
+  <section class="sec page-head" aria-labelledby="h1">
+    <div class="wrap contact">
+      <div class="lead">
+        <p class="lab">Contact</p>
+        <h1 class="disp" id="h1">Start a <em>project.</em></h1>
+        <p class="lede">Tell us what exists now and what it needs to do. We measure it, draw for the words you have, and hand you every key at the end.</p>
+        <a class="email" href="mailto:hello@thornbury.studio">hello@thornbury.studio</a>
+      </div>
+      <form class="brief" action="contact.html" method="get" novalidate>
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+        </div>
+        <div class="field">
+          <label for="f-have">What exists now</label>
+          <select id="f-have" name="have">
+            <option>Nothing yet</option>
+            <option>A site that needs replacing</option>
+            <option>A brief and a deadline</option>
+            <option>A site that needs measuring first</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-brief">What it needs to do</label>
+          <textarea id="f-brief" name="brief" rows="5" required></textarea>
+        </div>
+        <button class="btn" type="submit">Compose the mail</button>
+        <p class="form-note">The button opens your mail app with what you typed, addressed to us. Nothing is stored on this page.</p>
+        <p class="form-sent lab" hidden tabindex="-1"><b>Your mail app should be open.</b> If it is not, write to hello@thornbury.studio directly.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="light-h">
+    <div class="wrap statement reveal">
+      <p class="lab">The light</p>
+      <h2 class="disp" id="light-h">It is <em><span data-sun-time>—</span></em> in the room.</h2>
+      <p class="text">The sun is <b data-sun-alt>—</b> above the horizon: <span data-sun-word>daylight</span>. If you would rather see the site at another hour, drag the rail.</p>
+      <div class="aside">
+        <div class="sunrail">
+          <div class="sunrail-head">
+            <p class="sunrail-read" aria-live="polite">Singapore</p>
+            <button class="sunrail-now" type="button" hidden>Back to now</button>
+          </div>
+          <div class="sunrail-track">
+            <div class="sunrail-ticks" aria-hidden="true"><i class="hour-6"></i><i class="hour-12"></i><i class="hour-18"></i><span class="hour-0">00</span><span class="hour-6">06</span><span class="hour-12">12</span><span class="hour-18">18</span><span class="hour-24">24</span></div>
+            <label class="visually-hidden" for="sunRange">Time of day in Singapore</label>
+            <input type="range" id="sunRange" min="0" max="1439" step="1" value="720">
+          </div>
+          <p class="sunrail-hint">Drag the sun.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer class="foot">
+  <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
+  <nav class="foot-nav" aria-label="Footer">
+    <a href="work.html">Work</a>
+    <a href="services.html">Services</a>
+    <a href="studio.html">Studio</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <p class="foot-sun">This page is lit by the sun over Singapore. <b data-sun-time>—</b> · sun <b data-sun-alt>—</b> above the horizon, bearing <b data-sun-az>—</b>.</p>
+  <div class="foot-meta">
+    <p class="lab">SGP · 01°17′N 103°51′E</p>
+    <p class="lab"><a href="mailto:hello@thornbury.studio">hello@thornbury.studio</a></p>
+  </div>
+</footer>
+</div>
+</body>
+</html>
