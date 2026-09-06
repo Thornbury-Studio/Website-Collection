@@ -278,3 +278,55 @@ to any layout density. Recompute when targets change; upload as a `DynamicDrawUs
 `combat-fracture` (FRACTURE) — full recipe, all six formations. Candidates the recipe was
 written for: `exhibition-parallax` (porcelain/lustre castes), `carnival-null` (deck & booth
 surfaces), `festival-voltflood` (truss/speaker metals).
+
+## Grid: state both tracks on every placed item
+
+An item with a **definite row but an auto column does not have to land in column
+1.** In THORNBURY v5's mobile studio list the heading was placed explicitly:
+
+```css
+.principle h2 { grid-column: 2; grid-row: 1; }   /* explicit */
+.principle .n { grid-row: 1; }                   /* row only — resolves to col 2 */
+```
+
+The outlined numeral resolved into column **2** and printed on top of its own
+heading. Every check passed while it was broken: no page overflow, no element
+past `clientWidth`, computed `font-size` correct, `position: static`. Only a
+screenshot showed it, and `getComputedStyle(el).gridColumnStart` is what proves
+it (`"2"`, not `"1"`).
+
+The rule: if a sibling in the same grid has an explicit placement, give **every**
+placed item both `grid-column` and `grid-row`. Auto-placement is fine when no
+item is placed; it is a coin-flip once one is.
+
+Worth adding to any layout audit: for each grid, dump
+`{el, gridColumnStart, gridRowStart}` for its children and assert no two share a
+cell. That catches a whole class of overprinting that geometry checks miss.
+
+### Stronger form of the rule: flag `auto` next to placed
+
+Asserting "no two grid children resolve into the same cell" catches collisions
+but not an item sitting in the *wrong* cell. The check that actually works:
+
+```js
+// for each display:grid element
+const kids = [...g.children].filter(c => {
+  const s = getComputedStyle(c);
+  return s.position !== 'absolute' && s.display !== 'contents';
+});
+const placed = kids.filter(c => getComputedStyle(c).gridColumnStart !== 'auto');
+if (placed.length && placed.length !== kids.length) {
+  // every kid still on `auto` here is a bug waiting to be seen
+}
+```
+
+In THORNBURY v5 this found three new blocks dropped into a numeral column *and*
+one bug that had shipped since the template was created: the contact form's
+sent-state note sat between `.form` (`1 / span 7`) and `.aside` (`9 / -1`) with
+no placement, so on submit it rendered 277px wide in the single leftover column.
+Every static layout check passed for months, because the element carries
+`hidden` until the exact moment it goes wrong.
+
+Two lessons worth carrying: **audit the states a page only reaches after an
+interaction** (submit the form, open the dialog, toggle the control), and when a
+grid mixes placed and unplaced children, place all of them.
