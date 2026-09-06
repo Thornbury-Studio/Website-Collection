@@ -18,27 +18,34 @@ The boss's verdict was blunt and correct. The whole light system was removed,
 not tuned.
 
 What replaced it is the simplest thing that is unmistakably intentional: real
-4K footage of sand ripples in raking light, graded into the palette the site
-already had — limewash, ink, amber — with the wordmark set in ink across it.
-Sand, shadow and sun is the palette in nature. The film is pinned while the
-page arrives over it and then the page is quiet: no canvas, no time, no
-modes. Everything below the fold is typography, plates and hairlines.
+footage of the desert, graded into the palette the site already had —
+limewash, ink, amber — with the wordmark set in ink across it. Sand, shadow
+and sun is the palette in nature. The film is pinned while the page arrives
+over it and then the page is quiet: a plaster surface with a grain, type,
+plates and hairlines, and a feedback layer that answers the hand.
 
 ## The film
 
-- `video/hero.mp4` — Pexels 8865227, a close-up of sand ripples, 4096×2160
-  master cropped to 16:9, 1920×1080, the strongest 8.5 s played forward then
-  back so the loop never cuts (426 frames, 17 s, 4.27 MB, H.264 CRF 25 with a
-  2600k cap). A portrait cut for phones (`hero-m.mp4`, 1080×1920, 2.13 MB),
-  not a smaller copy. Both checked at 1:1 against the graded source.
+Cut the way a travel film is cut: a throw of angles and subjects, not the
+same place seen closer and closer. Ten beats in 18.6 seconds — the ripples in
+macro, dunes from straight above, a low fast flight over a crest, a hand
+letting sand run, a camel caravan and its shadows from above, the camel's eye,
+a beetle digging, a lone figure with a long shadow, the crest, and the
+opening beat played backward into its own first frame so the loop never cuts.
+Every join is a 0.6 s crossfade. The animals are the point of the tagline —
+the things you notice on the second look — and every beat stays mid-to-light
+so the ink wordmark reads on all of them; the sunset silhouettes that a travel
+edit would reach for were left out for exactly that reason.
+
+- `video/hero.mp4` — 1920×1080, 18.6 s, 4.5 MB; `hero-m.mp4` — a portrait
+  cut with each beat re-framed around its subject, 900×1600, 3.0 MB. Sources,
+  trims, grade and rejections in `IMAGE-CREDITS.md`.
 - The still is the hero, the film is an upgrade to it: the `<picture>` paints
-  first (preloaded, `fetchpriority="high"`); `js/hero.js` attaches the
-  sources in `requestIdleCallback` and crosses the film in only on the
-  `playing` event. Reduced motion never fetches it.
-- The type is ink on sand. Contrast of `#17150f` on the sand's highlights is
-  about 7:1 and on its shadows higher; a 12–16 % gradient at the head and foot
-  of the frame keeps the kicker and the wordmark's baseline clean without
-  reading as a scrim.
+  first from the film's own first frame; `js/hero.js` attaches the sources in
+  `requestIdleCallback` and crosses the film in only on the `playing` event.
+  Reduced motion never fetches it.
+- The type is ink on sand; a 12–16 % gradient at the head and foot of the
+  frame keeps the kicker and the wordmark's baseline clean.
 
 ## The one scroll treatment
 
@@ -49,9 +56,28 @@ modes. Everything below the fold is typography, plates and hairlines.
 - **Plates drift.** Every plate image sits at scale 1.1 inside its clipped
   frame and translates ±5 % of its height as it crosses the viewport, so the
   work has depth as you pass it. One rAF handles the hero and the drift.
-- **Grain.** A fixed SVG noise layer at 5.5 % multiply over the whole page,
-  stepped six frames a second, so the limewash is a surface and not a fill.
-- Reduced motion keeps the still and the grain and drops the rest.
+- **Surface.** Two SVG noise layers over the limewash: a soft plaster mottle
+  at 7 % multiply under everything and a fine grain at 5.5 % over everything,
+  stepped six frames a second, so the wall is a material and not a fill.
+- Reduced motion keeps the still and the surface and drops the rest.
+
+## Feedback
+
+Everything that answers the hand, in `js/ui.js`:
+
+- A cursor label over every plate — "Open the site" in a pill that trails the
+  pointer — and a round arrow badge that rises on the plate's corner; the
+  title underlines in amber and its number turns amber. Fine pointers only.
+- Buttons, links and filter chips lean a few pixels toward the pointer; a
+  press scales them down; a chip pulses and a toast says how many are on the
+  wall.
+- A 2 px amber hairline across the top of the viewport fills with scroll.
+- The brief validates as you go: a field that is empty or an address that is
+  not one gets an amber rule and a hint under it on blur, a tick when it is
+  right, and the button reports what it is doing when the mail opens; a
+  toast counts what is missing and focus goes to the first gap.
+- A back-to-top control in the footer, hairline icons on the principles, the
+  factors, the facts and the footer, drawn as a sprite for this site.
 
 ## Palette
 

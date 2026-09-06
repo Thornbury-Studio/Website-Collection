@@ -14,7 +14,7 @@ const plate = (it, i, full) => {
   const href = "../" + it.slug + "/index.html";
   const alt = it.title + ": " + it.description;
   return `        <article class="plate reveal" data-cat="${esc(it.category || "other")}">
-          <a class="plate-media" href="${href}" target="_blank" rel="noopener" aria-label="Open ${esc(it.title)} in a new tab"><img src="img/wall/${it.slug}.webp" width="1200" height="750" alt="${esc(alt)}" loading="lazy" decoding="async"></a>
+          <a class="plate-media" href="${href}" target="_blank" rel="noopener" aria-label="Open ${esc(it.title)} in a new tab" data-cursor="Open the site"><img src="img/wall/${it.slug}.webp" width="1200" height="750" alt="${esc(alt)}" loading="lazy" decoding="async"><span class="plate-open" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="img/icons.svg#i-open"/></svg></span></a>
           <div class="plate-cap"><span class="n">${num}</span><h3><a href="${href}" target="_blank" rel="noopener">${esc(it.title)}</a></h3><p class="lab meta">${esc(it.tag)}</p></div>${full ? `
           <p class="plate-note">${esc(it.description)}</p>` : ""}
         </article>`;

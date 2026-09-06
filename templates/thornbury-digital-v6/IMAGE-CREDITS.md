@@ -6,40 +6,51 @@ nowhere on the pages.
 
 ## The film
 
-The hero, and the only spectacle on the site. Sourced, not generated, which is
-where `VIDEO-POLICY.md`'s asset order stops: excellent licensed footage exists
-and it is the palette in nature — sand, shadow and sun. Pexels License: free
-to use, no attribution required; credited here anyway. Downloaded 6 Sep 2026.
+The hero, and the only spectacle on the site: a short edit of the desert cut
+the way a travel film is cut — a throw of angles and subjects, not one place
+seen closer and closer — and built to loop. Ten beats in 18.6 seconds. Sourced,
+not generated, which is where `VIDEO-POLICY.md`'s asset order stops. Pexels
+License: free to use, no attribution required; credited here anyway.
+Downloaded 6 Sep 2026. Masters under `video/src/` (gitignored).
 
-| File | Source | Pexels ID | Master |
-|---|---|---|---|
-| `video/hero.mp4` | [Close-up shot of sand ripples](https://www.pexels.com/video/close-up-shot-of-sand-ripples-8865227/) | 8865227 | 4096×2160, 25 fps, 11.96 s |
-| `video/hero-m.mp4` | Same clip, portrait crop for phones | 8865227 | — |
-| `img/poster-hero.webp` | The frame at 3 s, 1920×1080 | 8865227 | — |
-| `img/poster-hero-m.webp` | The frame at 3 s, 1080×1920 | 8865227 | — |
+| Beat | Shot | Source | Pexels ID | Master | Used |
+|---|---|---|---|---|---|
+| 1 | ripples, macro | [Close-up shot of sand ripples](https://www.pexels.com/video/close-up-shot-of-sand-ripples-8865227/) | 8865227 | 4096×2160 | 0–2.6 s |
+| 2 | dunes from straight above | [Aerial view of sand dunes in the desert](https://www.pexels.com/video/aerial-view-of-sand-dunes-in-the-desert-17510703/) | 17510703 | 3840×2160 | 3–5.4 s |
+| 3 | a low fast flight over a crest | [Sand dune FPV](https://www.pexels.com/video/sand-dune-fpv-20081119/) | 20081119 | 1920×1080 | 4–6.6 s |
+| 4 | a hand letting sand run | [Person holding brown sand](https://www.pexels.com/video/person-holding-brown-sand-6877510/) | 6877510 | 1920×1080 | 3–5.4 s |
+| 5 | a camel caravan and its shadows, from above | [Drone footage of a walking camel in the desert](https://www.pexels.com/video/drone-footage-of-a-walking-camel-in-the-desert-4797157/) | 4797157 | 3840×2160 | 10–12.8 s |
+| 6 | the camel's eye | [Camel, close](https://www.pexels.com/video/27949199/) | 27949199 | 3840×2160 | 1–3.8 s |
+| 7 | a beetle digging | [Beetle digging in sand in desert](https://www.pexels.com/video/beetle-digging-in-sand-in-desert-9870360/) | 9870360 | 1920×1080 | 5–7.4 s |
+| 8 | a lone figure and a long shadow, from above | [A person walking on the desert](https://www.pexels.com/video/a-person-walking-on-the-desert-6573929/) | 6573929 | 1920×1080 | 3–5.4 s |
+| 9 | the crest | [Ripples in desert sand](https://www.pexels.com/video/ripples-in-desert-sand-8865223/) | 8865223 | 4096×2160 | 2–4.2 s, cropped to lose most of the sky |
+| 10 | beat 1 played backward | as beat 1 | 8865227 | — | 1.4 s, ending on the file's first frame |
 
-The master is kept under `video/src/` (gitignored by this directory's own
-`.gitignore`). Eighteen candidates were pulled as SD previews and read off one
-contact sheet; three were downloaded at full size. The dune-crest clip
-(16381940) was rejected because its shadow side runs blue-grey, and the long
-parallel ripples (8865816) because the corduroy read colder; the soft ripple
-field won on warmth and stillness.
+Every join is a 0.6 s crossfade (`xfade=fade`), and the file ends on the
+opening beat played backward to its own first frame, so the loop closes on a
+bounce a slow drift cannot show. One grade on all ten (`eq=contrast=1.05:
+saturation=.9:brightness=-.012` plus a small warm colour balance; the pale
+aerials and the crest get a touch more warmth). Every beat stays mid-to-light
+in tone so the ink wordmark reads on all of them, and none contains a face.
+Four sources are HD, which is native for the 1080p output. Landscape:
+1920×1080, 464 frames, 18.6 s, H.264 CRF 26 with a 2300k cap, 4.5 MB.
+Portrait (`hero-m.mp4`): each beat re-cropped 9:16 around its subject — the
+hand at x 420 of 1920, the eye at x 1112 of 3840 — 900×1600 so the HD beats
+are barely upscaled, CRF 27 with a 1500k cap, 3.0 MB. Posters are each file's
+own first frame, so the swap from still to film is invisible. The caravan and
+beetle passages were checked at 1:1 against the graded source.
 
-**Both encodes play forward then backward**, so the loop never cuts: the
-strongest 8.5 s (6.5 s for the phone) is split, one copy reversed with its
-duplicate frame trimmed, and the two concatenated in one ffmpeg pass. Grade:
-a 16:9 centre crop of the 4096-wide master, `eq=contrast=1.05:saturation=.9:
-brightness=-.012` and a small warm colour balance so the sand sits with the
-limewash. Landscape: 1920×1080, H.264 CRF 25 with a 2600k cap, 426 frames,
-17.0 s, 4.27 MB. Portrait: `crop=1215:2160:1440:0`, 1080×1920, CRF 26 with a
-1600k cap, 326 frames, 13.0 s, 2.13 MB. Both were checked at 1:1 against the
-same crop of the graded source before shipping; no macroblocking on the grain
-of the sand.
+Pulled and rejected at full size: 8865816 (long ripples, one more sand
+beat), 4996615 (sand blowing, grey with footprints), 33665977 (dunes at
+sunset, pink under any grade), 4747122 (a millipede on grey grit), 7321219 (a
+bridled camel with tourists behind it), 16381940 (a dune crest whose shadow
+side runs blue). Forty-five more were read off SD contact sheets and not
+downloaded, among them every sunset silhouette, which would have put the
+wordmark on a dark ground.
 
 The `<picture>` is what paints; `js/hero.js` attaches the film in
-`requestIdleCallback` and crosses it in only on the `playing` event, so a
-refused autoplay or a slow connection leaves a finished still. Reduced motion
-never fetches a byte.
+`requestIdleCallback` and crosses it in only on the `playing` event. Reduced
+motion never fetches a byte.
 
 ## Work plates
 
@@ -72,6 +83,14 @@ template's own entrance gate rather than its home (`exhibition-ephemeris`,
 
 `img/og.webp` (1200×630) and the hub's `img/thornbury-digital-v6-sm.webp`
 (480×300) are captures of this template's own home page.
+
+## Icons and texture
+
+`img/icons.svg` is a sprite of twenty hairline icons drawn for this site
+(measure, draw, fast, keys, camera, words, cart, language, calendar, open,
+up, mail, pin, clock, sector, built, made, check, no, filter), 1.5 px
+strokes on a 24-unit grid, referenced with `<use>`. The plaster mottle under
+the grain is an SVG turbulence filter, not a photograph: seamless, 0 bytes.
 
 ## Type
 
