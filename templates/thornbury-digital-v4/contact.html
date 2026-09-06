@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-page="contact">
+<html lang="en" data-page="contact" data-art="set">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -26,34 +26,95 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="weather" aria-hidden="true">
+  <div class="weather-set">
+    <div class="set-sheet">
+      <span class="set-crop set-crop-tl"></span>
+      <span class="set-crop set-crop-tr"></span>
+      <span class="set-crop set-crop-bl"></span>
+      <span class="set-crop set-crop-br"></span>
+      <div class="set-cols"></div>
+      <p class="set-slug"><span>Thornbury</span><span>04</span></p>
+      <span class="set-reg"></span>
+    </div>
+  </div>
+  <div class="weather-plate">
+    <div class="plate-mat">
+      <video id="artFilm" poster="img/poster-inset.webp" muted loop playsinline preload="none" width="1920" height="1080">
+        <source src="video/inset.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <div class="weather-grain">
+    <div class="grain-lamp"></div>
+    <div class="grain-shade"></div>
+    <svg viewBox="0 0 256 256" preserveAspectRatio="none">
+      <filter id="tb-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" stitchTiles="stitch"></feTurbulence>
+      </filter>
+      <rect width="256" height="256" filter="url(#tb-grain)"></rect>
+    </svg>
+    <span class="grain-punch"></span>
+  </div>
+  <div class="weather-edge">
+    <div class="edge-mass"></div>
+    <div class="edge-bloom"></div>
+  </div>
+  <div class="weather-folio">
+    <p class="folio-mark">04</p>
+  </div>
+</div>
 <div class="site">
   <header class="bar glass">
     <a class="mark" href="index.html">Thornbury</a>
     <nav class="nav" aria-label="Primary">
-      <a href="work.html">Work</a>
+      <span class="nav-pair">
+        <a href="work.html">Work</a>
+        <details class="dev">
+          <summary>Dev</summary>
+          <div class="dev-menu" role="listbox" aria-label="Art direction">
+            <button type="button" data-art="set">Set</button>
+            <button type="button" data-art="plate">Plate</button>
+            <button type="button" data-art="grain">Grain</button>
+            <button type="button" data-art="edge">Edge</button>
+            <button type="button" data-art="folio">Folio</button>
+          </div>
+        </details>
+      </span>
       <a href="studio.html">Studio</a>
       <a href="contact.html" aria-current="page">Contact</a>
     </nav>
   </header>
   <main id="main" class="page" tabindex="-1">
-    <h1>Start a project</h1>
-    <p class="lede">Tell us what you sell and when you need it.</p>
-    <form class="brief" id="brief" action="contact.html" method="post" autocomplete="on">
-      <div class="fld">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required autocomplete="name" maxlength="120" enterkeyhint="next">
+    <div class="contact-scene">
+      <p class="folio">Contact · Singapore</p>
+      <div class="contact-lead">
+        <h1>Tell us what you’re building.</h1>
+        <a class="mail" href="mailto:hello@thornbury.studio">hello@thornbury.studio</a>
+        <ul class="facts">
+          <li><span>Where</span> Singapore</li>
+          <li><span>Reply</span> One working day</li>
+        </ul>
       </div>
-      <div class="fld">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required autocomplete="email" inputmode="email" enterkeyhint="next">
+      <div class="contact-write">
+        <form class="brief" id="brief" action="contact.html" method="post" autocomplete="on">
+          <div class="fld">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required autocomplete="name" maxlength="120" enterkeyhint="next">
+          </div>
+          <div class="fld">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email" inputmode="email" enterkeyhint="next">
+          </div>
+          <div class="fld">
+            <label for="message">Project</label>
+            <textarea id="message" name="message" required maxlength="4000" enterkeyhint="send"></textarea>
+          </div>
+          <button class="send" type="submit">Send</button>
+        </form>
+        <p class="note" id="brief-note" hidden tabindex="-1">Sent. We’ll answer within one working day.</p>
       </div>
-      <div class="fld">
-        <label for="message">What you need</label>
-        <textarea id="message" name="message" required maxlength="4000" enterkeyhint="send"></textarea>
-      </div>
-      <button class="send" type="submit">Send</button>
-    </form>
-    <p class="note" id="brief-note" hidden tabindex="-1">Sent. We’ll answer within one working day.</p>
+    </div>
   </main>
   <footer class="foot">
     <p>Singapore</p>

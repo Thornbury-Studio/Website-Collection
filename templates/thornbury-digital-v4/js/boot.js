@@ -9,6 +9,15 @@
   if (window.matchMedia && matchMedia("(hover: none) and (pointer: coarse)").matches) {
     d.classList.add("touch");
   }
+  var page = d.getAttribute("data-page");
+  if (page && page !== "home") {
+    var art = "set";
+    try {
+      var saved = localStorage.getItem("tb-v4-art");
+      if (saved && /^(set|plate|grain|edge|folio)$/.test(saved)) art = saved;
+    } catch (err) {}
+    d.setAttribute("data-art", art);
+  }
   window.__tbFold = function () {
     d.classList.add("no-3d");
   };

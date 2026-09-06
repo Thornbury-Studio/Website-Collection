@@ -13,12 +13,25 @@ credited here anyway. Downloaded 3 Sep 2026. Audio stripped, faststart.
 | `video/hero.mp4` | Large stage, 1920×1080 web encode | [Aerial waves on rock](https://www.pexels.com/video/waves-rushing-to-the-shore-1409899/) | 1409899 |
 | `video/src/hero-stage-4k.mp4` | 4K master (gitignored) | Same clip | 1409899 |
 | `img/poster-hero.webp` | Stage poster, 1920×1080 | Same clip | 1409899 |
-| `video/inset.mp4` | Small plate in front, 1920×1080 web encode | [Calligraphy, dip pen on paper](https://www.pexels.com/video/person-writing-on-a-paper-7343476/) | 7343476 |
+| `video/inset.mp4` | Home inset plate, and Plate art-direction on Work / Studio / Contact | [Calligraphy, dip pen on paper](https://www.pexels.com/video/person-writing-on-a-paper-7343476/) | 7343476 |
 | `video/src/inset-4k.mp4` | 4K master (gitignored) | Same clip | 7343476 |
 | `img/poster-inset.webp` | Inset poster | Same clip | 7343476 |
 
 Masters kept under `video/src/` (gitignored). Replace either clip when a
 licensed or Higgsfield film exists.
+
+## Inner-page art
+
+Switchable from Dev on Work / Studio / Contact. Home is unchanged.
+Paper stays the reading surface — no full-bleed colour films.
+
+| Art | What it is |
+|---|---|
+| Set | Printed sheet: crop marks, 12-col live area, slug, registration |
+| Plate | Calligraphy film in a matted frame, sized to the empty field (`video/inset.mp4`) |
+| Grain | Paper as film stock — lamp, shade, fiber, one punch |
+| Edge | A dark mass in the empty field and a sculpted bloom |
+| Folio | One “04” at the scale of the empty field |
 
 ## Work plates
 
