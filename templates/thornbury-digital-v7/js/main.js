@@ -21,7 +21,12 @@
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function light(el) { el.classList.add("lit"); }
+  function light(el) {
+    el.classList.add("lit");
+    /* reflect state in the attribute so audits can read it off the DOM */
+    if (el.hasAttribute("data-strike")) el.setAttribute("data-strike", "on");
+    if (el.hasAttribute("data-ignite") && !el.getAttribute("data-ignite")) el.setAttribute("data-ignite", "on");
+  }
   function all(sel) { return Array.prototype.slice.call(d.querySelectorAll(sel)); }
 
   /* ---- load ignition: plate warms, sign strikes, furniture snaps on ---- */
@@ -49,27 +54,66 @@
     });
   }
 
-  /* ---- scroll strikes: sections switch on once, in view ---- */
+  /* ---- scroll strikes: geometric, event-driven, dead-context-proof ----
+     No IntersectionObserver. IO delivery is not guaranteed in every
+     embedded/webview context (a confirmed zero-delivery environment left
+     every strike dark), and painted-out content must never stay dark.
+     Instead: anything already on the first screen lights immediately, and
+     a direct rect check runs on scroll/resize (rAF-throttled, only while
+     something is still pending) — reliable at any scroll speed because it
+     reads geometry at the destination, not events along the way. The CSS
+     side carries an additional 6s absolute fallback that needs no JS. */
   var pending = all("[data-strike]");
-  if (reduced || !("IntersectionObserver" in window)) {
+
+  function viewH() { return window.innerHeight || d.documentElement.clientHeight; }
+  function inView(el) {
+    var r = el.getBoundingClientRect();
+    return r.top < viewH() * 0.94 && r.bottom > 0;
+  }
+
+  if (reduced) {
     pending.forEach(light);
+    pending = [];
   } else {
-    var burst = 0, lastBurst = 0;
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        io.unobserve(entry.target);
-        var now = performance.now();
-        if (now - lastBurst > 400) burst = 0;   /* new burst window */
-        lastBurst = now;
-        var el = entry.target;
-        setTimeout(function () { light(el); }, Math.min(burst++, 6) * 90);
-      });
-    /* threshold 0 + a -6% bottom inset: fires once any pixel crosses the line.
-       A ratio threshold here can permanently skip elements pinned at the page
-       bottom — they never reach 20% visible inside the inset viewport. */
-    }, { threshold: 0, rootMargin: "0px 0px -6% 0px" });
-    pending.forEach(function (el) { io.observe(el); });
+    var burst = 0, lastBurst = 0, sweepQueued = false;
+
+    var strikeNow = function (el) {
+      var now = performance.now();
+      if (now - lastBurst > 400) burst = 0;   /* new burst window */
+      lastBurst = now;
+      setTimeout(function () { light(el); }, Math.min(burst++, 6) * 90);
+    };
+
+    var sweep = function () {
+      sweepQueued = false;
+      var left = [];
+      for (var i = 0; i < pending.length; i++) {
+        if (inView(pending[i])) strikeNow(pending[i]);
+        else left.push(pending[i]);
+      }
+      pending = left;
+      if (!pending.length) {
+        window.removeEventListener("scroll", queueSweep);
+        window.removeEventListener("resize", queueSweep);
+      }
+    };
+
+    var queueSweep = function () {
+      if (sweepQueued) return;
+      sweepQueued = true;
+      if (window.requestAnimationFrame) window.requestAnimationFrame(sweep);
+      else setTimeout(sweep, 16);
+    };
+
+    /* first screen (and anchor-target loads): on now, no waiting */
+    pending = pending.filter(function (el) {
+      if (inView(el)) { light(el); return false; }
+      return true;
+    });
+
+    window.addEventListener("scroll", queueSweep, { passive: true });
+    window.addEventListener("resize", queueSweep);
+    window.addEventListener("pageshow", function (e) { if (e.persisted) sweep(); });
   }
 
   /* ---- the counter form: order taken, chit shown ---- */
