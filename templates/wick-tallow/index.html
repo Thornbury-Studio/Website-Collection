@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>WICK — Don&rsquo;t run</title>
+  <meta name="description" content="You are in Tallow Works with one lit match. Move fast and the flame dies. Fifty matches in the box. Don&rsquo;t run.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/wick-tallow/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="WICK">
+  <meta property="og:title" content="WICK — Don&rsquo;t run">
+  <meta property="og:description" content="A light-management game in a shuttered match factory. Motion spends the flame.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/wick-tallow/index.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/wick-tallow/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WICK — Don&rsquo;t run">
+  <meta name="twitter:description" content="A light-management game in a shuttered match factory. Motion spends the flame.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/wick-tallow/img/og.webp">
+  <meta name="theme-color" content="#100e0c">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;600&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Sofia+Sans+Extra+Condensed:wght@700;800;900&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-current="page" aria-label="WICK, home">W<i>I</i>CK</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="house.html">The House</a>
+    <a href="manual.html">Manual</a>
+    <a class="nav-cta" href="box.html">The Box</a>
+  </nav>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+<div class="drawer" id="drawer" hidden>
+  <a href="house.html">The House</a>
+  <a href="manual.html">Manual</a>
+  <a href="box.html">The Box</a>
+  <p class="label">Tallow Works &middot; closed 1974 &middot; still warm</p>
+</div>
+
+<main id="main">
+  <section class="hero">
+    <div class="plate" data-flame>
+      <img src="img/dip.webp" srcset="img/dip-960.webp 960w, img/dip.webp 1920w" sizes="100vw" alt="A long brick dipping hall at night, racks of wooden match splints and iron wax troughs lit by a single match." width="1920" height="1080" fetchpriority="high" decoding="async">
+    </div>
+    <div class="hero__copy">
+      <p class="kicker">Tallow Works &middot; 1974</p>
+      <h1>Don&rsquo;t run.</h1>
+      <p class="lede">The factory is dark. You have one lit match. Standing still lets you see the room. Moving fast spends the flame. The last box on the packing floor still holds fifty.</p>
+      <div class="actions">
+        <a class="btn" href="box.html">Wishlist the box</a>
+        <a class="btn btn--ghost" href="manual.html">Read the notice</a>
+      </div>
+      <p class="tally"><b>50</b> <span>matches in the box you found</span></p>
+    </div>
+  </section>
+
+  <section class="band band--tight">
+    <div class="wrap rule reveal">
+      <p class="kicker">The only rule</p>
+      <div>
+        <h2>Motion costs light.</h2>
+        <p>Tallow Works dipped its last batch in March 1974 and locked the doors with the racks still wet. You are inside with whatever is left in the box. There is no torch. There is no second floor of emergency lighting. If the match dies, you strike another, until the box is empty.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split" aria-labelledby="splint-h">
+    <div class="plate" data-flame>
+      <img src="img/splints.webp" srcset="img/splints-800.webp 800w, img/splints.webp 1600w" sizes="(min-width: 64rem) 58vw, 100vw" alt="Drying racks packed with thousands of unlabelled wooden match splints, the nearest rack catching match-light." width="1600" height="900" loading="lazy" decoding="async">
+    </div>
+    <div class="split__log">
+      <p class="kicker reveal">Found, packing floor</p>
+      <h2 id="splint-h" class="reveal">The wood is still waiting to be heads.</h2>
+      <p class="reveal">They left the splints in the racks. Phosphorus is in the vault. Wax is in the troughs. The strike strip on the wall still takes a head if you drag it slow. Drag it fast and it shrugs you off.</p>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="floors-h">
+    <div class="wrap">
+      <p class="kicker reveal">The house</p>
+      <h2 id="floors-h" class="reveal">Four floors. One match at a time.</h2>
+      <div class="floors">
+        <a class="floor-link reveal" href="house.html#dip">
+          <span class="num">01</span>
+          <h3>The Dip</h3>
+          <span class="go">Enter</span>
+          <p>Iron troughs of wax. The hall is longer than the flame.</p>
+        </a>
+        <a class="floor-link reveal" href="house.html#racks">
+          <span class="num">02</span>
+          <h3>The Racks</h3>
+          <span class="go">Enter</span>
+          <p>Thousands of unheaded splints. They sound like rain if you brush them.</p>
+        </a>
+        <a class="floor-link reveal" href="house.html#vault">
+          <span class="num">03</span>
+          <h3>The Strike</h3>
+          <span class="go">Enter</span>
+          <p>The phosphorus vault. The walls are stained the colour of a used matchbox.</p>
+        </a>
+        <a class="floor-link reveal" href="house.html#yard">
+          <span class="num">04</span>
+          <h3>The Yard</h3>
+          <span class="go">Enter</span>
+          <p>Monsoon on the corrugated roof. One window still taking the match.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="wrap">
+      <p class="kicker reveal">The Box</p>
+      <h2 class="reveal">Put your name on the sleeve.</h2>
+      <p class="lede reveal">WICK is coming to Steam, PlayStation and Xbox. The list is the only way we send a date.</p>
+      <a class="btn reveal" href="box.html">Open the box</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>WICK &middot; Tallow Works &middot; <span data-year>2026</span></p>
+  <p><a href="manual.html">Manual</a> &middot; <a href="box.html">Wishlist</a></p>
+</footer>
+<script src="js/site.js"></script>
+</body>
+</html>
