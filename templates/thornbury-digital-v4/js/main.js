@@ -1,23 +1,25 @@
 import { startField } from "./field.js";
 import { mountPieces, bindRail } from "./work.js";
+import { bindArt } from "./art.js";
 
 const html = document.documentElement;
 const page = html.dataset.page || "home";
 const reduced = html.classList.contains("rm");
 const stage = document.getElementById("field");
-const still = reduced || page === "work";
+const inner = page === "work" || page === "studio" || page === "contact";
 
 function fold() {
   if (window.__tbFold) window.__tbFold();
 }
 
 var field = null;
+var art = null;
 try {
-  if (stage) {
+  if (stage && page === "home") {
     field = startField(stage, {
       mode: stage.dataset.mode || "side",
       reduced: reduced,
-      still: still
+      still: reduced
     });
   }
   window.TB_READY = true;
@@ -25,6 +27,10 @@ try {
 } catch (err) {
   console.warn("[thornbury v4] field offline:", err && err.message);
   fold();
+}
+
+if (inner) {
+  art = bindArt({ reduced: reduced });
 }
 
 var films = [
@@ -63,15 +69,6 @@ if (films.length) {
   }
 }
 
-if (page === "studio" && field && field.kickAt && !reduced) {
-  document.querySelectorAll(".pillar").forEach(function (el) {
-    el.addEventListener("pointerenter", function () {
-      var r = el.getBoundingClientRect();
-      field.kickAt(r.left + r.width / 2, r.top + r.height / 2);
-    });
-  });
-}
-
 var rail = document.getElementById("pieces");
 mountPieces(rail, {
   home: page === "home"
@@ -81,11 +78,13 @@ bindRail(rail, {
     filmHold = true;
     setFilms();
     if (field && field.pause) field.pause();
+    if (art && art.setPlaying) art.setPlaying(false);
   },
   onRelease: function () {
     filmHold = false;
     setFilms();
     if (field && field.resume) field.resume();
+    if (art && art.setPlaying) art.setPlaying(true);
   }
 });
 
