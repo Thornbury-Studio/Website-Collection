@@ -40,17 +40,26 @@
   </header>
   <main id="main" tabindex="-1">
     <section class="hero" aria-labelledby="h1">
-      <div class="hero-stage has-media gate" aria-hidden="true">
+      <a class="hero-stage has-media site-frame" href="work.html" aria-label="Orris, a house of perfume. See selected work.">
         <video class="plate-media" id="stageFilm" poster="img/poster-hero.webp" muted loop playsinline preload="metadata" width="1920" height="1080">
           <source src="video/hero.mp4" type="video/mp4">
         </video>
-      </div>
+        <div class="site-ui" aria-hidden="true">
+          <div class="site-ui-bar">
+            <span class="site-ui-mark">Orris</span>
+            <span class="site-ui-links">The house · Notes · Visit</span>
+          </div>
+          <div class="site-ui-copy">
+            <p class="site-ui-kicker">Eau no. 04</p>
+            <p class="site-ui-title">Iris, wood, rain.</p>
+            <span class="site-ui-btn">Discover</span>
+          </div>
+        </div>
+      </a>
       <p class="folio">Singapore</p>
-      <div class="plate has-media gate" aria-hidden="true">
-        <video class="plate-media" id="insetFilm" poster="img/poster-inset.webp" muted loop playsinline preload="metadata" width="1920" height="1080">
-          <source src="video/inset.mp4" type="video/mp4">
-        </video>
-      </div>
+      <a class="plate has-media gate light" href="../ski-colnoir/" aria-label="Col Noir">
+        <img class="plate-media" src="img/case-colnoir.webp" alt="" width="1680" height="1060" draggable="false">
+      </a>
       <div class="hero-copy">
         <h1 id="h1">Thornbury</h1>
         <p class="line">Websites worth a second look.</p>
@@ -63,6 +72,27 @@
         <a href="work.html">All work</a>
       </div>
       <div class="rail" id="pieces" tabindex="0" role="region" aria-label="Selected work. Drag or use arrow keys to browse."></div>
+    </section>
+    <section class="close" aria-labelledby="close-h">
+      <p class="close-kicker">How it’s built</p>
+      <div class="close-grid" id="close-h">
+        <div>
+          <h2>Security</h2>
+          <p>Headers, dependency and secret scanning, and a written review pass before anything ships.</p>
+        </div>
+        <div>
+          <h2>Performance</h2>
+          <p>Every effect is built to be switched off. The page still works if the video never arrives.</p>
+        </div>
+        <div>
+          <h2>Ownership</h2>
+          <p>The repository, the hosting, the domain and the mailbox. You keep the keys.</p>
+        </div>
+      </div>
+      <div class="close-body">
+        <p class="close-line">Singapore. We write it down, then we hand you the site.</p>
+        <a href="studio.html">The studio</a>
+      </div>
     </section>
   </main>
   <footer class="foot">

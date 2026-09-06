@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests">
 <title>Work — Thornbury Digital</title>
-<meta name="description" content="Selected websites by Thornbury. Midwater, Kiyo, Aurel, Loam, Form/01.">
+<meta name="description" content="Selected websites by Thornbury. Live collection work.">
 <meta name="robots" content="index, follow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://templates.thornburystudio.com/templates/thornbury-digital-v4/work.html">
@@ -40,8 +40,8 @@
   </div>
   <div class="weather-plate">
     <div class="plate-mat">
-      <video id="artFilm" poster="img/poster-inset.webp" muted loop playsinline preload="none" width="1920" height="1080">
-        <source src="video/inset.mp4" type="video/mp4">
+      <video id="artFilm" poster="img/poster-plate.webp" muted loop playsinline preload="none" width="1920" height="1080">
+        <source src="video/plate.mp4" type="video/mp4">
       </video>
     </div>
   </div>
@@ -68,32 +68,31 @@
   <header class="bar glass">
     <a class="mark" href="index.html">Thornbury</a>
     <nav class="nav" aria-label="Primary">
-      <span class="nav-pair">
-        <a href="work.html" aria-current="page">Work</a>
-        <details class="dev">
-          <summary>Dev</summary>
-          <div class="dev-menu" role="listbox" aria-label="Art direction">
-            <button type="button" data-art="set">Set</button>
-            <button type="button" data-art="plate">Plate</button>
-            <button type="button" data-art="grain">Grain</button>
-            <button type="button" data-art="edge">Edge</button>
-            <button type="button" data-art="folio">Folio</button>
-          </div>
-        </details>
-      </span>
+      <a href="work.html" aria-current="page">Work</a>
       <a href="studio.html">Studio</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
-  <main id="main" class="page" tabindex="-1">
-    <h1>Work</h1>
-    <p class="lede">Five live sites. The rest waits.</p>
-    <div class="prices" aria-label="Starting prices">
-      <p class="chip glass"><b>From S$6,800</b><span>Sites</span></p>
-      <p class="chip glass"><b>From S$48,000</b><span>Flagship</span></p>
-      <p class="chip glass"><b>From S$1,500/mo</b><span>Retainer</span></p>
-    </div>
-    <div class="rail" id="pieces" tabindex="0" role="region" aria-label="Work. Drag or use arrow keys to browse."></div>
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="h1">
+      <a class="hero-stage has-media gate" href="../carnival-null/" aria-label="Null Carnival">
+        <img class="plate-media" src="img/case-null.webp" alt="" width="1680" height="1060" draggable="false">
+      </a>
+      <p class="folio">Work · Singapore</p>
+      <a class="plate has-media gate light" href="../dessert-sejuk/" aria-label="Sejuk">
+        <img class="plate-media" src="img/case-sejuk.webp" alt="" width="1680" height="1060" draggable="false">
+      </a>
+      <div class="hero-copy">
+        <h1 id="h1">Work</h1>
+        <p class="line">The collection, live.</p>
+      </div>
+    </section>
+    <section class="strip" aria-labelledby="work-strip">
+      <div class="strip-head">
+        <p id="work-strip">Also live</p>
+      </div>
+      <div class="rail" id="pieces" tabindex="0" role="region" aria-label="More work. Drag or use arrow keys to browse."></div>
+    </section>
   </main>
   <footer class="foot">
     <p>Singapore</p>

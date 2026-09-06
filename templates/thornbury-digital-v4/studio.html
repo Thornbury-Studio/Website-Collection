@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests">
 <title>Studio — Thornbury Digital</title>
-<meta name="description" content="Thornbury is a Singapore studio. We design and build websites.">
+<meta name="description" content="Thornbury is a Singapore studio. What we believe, how the work goes, and who is accountable — written down.">
 <meta name="robots" content="index, follow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://templates.thornburystudio.com/templates/thornbury-digital-v4/studio.html">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Thornbury Digital">
 <meta property="og:title" content="Studio — Thornbury Digital">
-<meta property="og:description" content="A Singapore studio. We design and build websites.">
+<meta property="og:description" content="A Singapore studio. We design and build websites, then hand you the keys.">
 <meta property="og:url" content="https://templates.thornburystudio.com/templates/thornbury-digital-v4/studio.html">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,8 +40,8 @@
   </div>
   <div class="weather-plate">
     <div class="plate-mat">
-      <video id="artFilm" poster="img/poster-inset.webp" muted loop playsinline preload="none" width="1920" height="1080">
-        <source src="video/inset.mp4" type="video/mp4">
+      <video id="artFilm" poster="img/poster-plate.webp" muted loop playsinline preload="none" width="1920" height="1080">
+        <source src="video/plate.mp4" type="video/mp4">
       </video>
     </div>
   </div>
@@ -68,46 +68,175 @@
   <header class="bar glass">
     <a class="mark" href="index.html">Thornbury</a>
     <nav class="nav" aria-label="Primary">
-      <span class="nav-pair">
-        <a href="work.html">Work</a>
-        <details class="dev">
-          <summary>Dev</summary>
-          <div class="dev-menu" role="listbox" aria-label="Art direction">
-            <button type="button" data-art="set">Set</button>
-            <button type="button" data-art="plate">Plate</button>
-            <button type="button" data-art="grain">Grain</button>
-            <button type="button" data-art="edge">Edge</button>
-            <button type="button" data-art="folio">Folio</button>
-          </div>
-        </details>
-      </span>
+      <a href="work.html">Work</a>
       <a href="studio.html" aria-current="page">Studio</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
   <main id="main" class="page" tabindex="-1">
-    <div class="studio-scene">
-      <p class="folio">Studio · Singapore</p>
-      <h1>Most agency sites are slow, generic — or beautiful. Rarely more than one.</h1>
-      <ul class="pillars">
-        <li class="pillar">
-          <p class="idx">01</p>
-          <h2>Security</h2>
-          <p>Headers, dependencies, secrets — checked before every deploy.</p>
+    <article class="studio-doc">
+      <p class="studio-kicker">Written Down · Version 1.0 · August 2026 · Singapore</p>
+      <div class="studio-head">
+        <div class="studio-open">
+          <h1 id="h1">The site is the work.</h1>
+          <div class="studio-read">
+            <p>Thornbury is new. We would rather you heard it from us.</p>
+            <p>A studio with thirty years behind it can point at the thirty years. We do not have that, and pretending otherwise would fail the first standard on this page. So we wrote down what we believe, what we refuse, and who is accountable when it goes wrong. This is that document.</p>
+          </div>
+        </div>
+        <figure class="studio-fig">
+          <a class="fig-frame has-media gate" href="../foundry-harlowe/" aria-label="Harlowe">
+            <img class="plate-media" src="img/case-harlowe.webp" alt="" width="1680" height="1060" draggable="false">
+          </a>
+          <figcaption>Harlowe</figcaption>
+        </figure>
+      </div>
+
+      <ol class="charter">
+        <li data-scroll data-scroll-speed="0.1">
+          <p class="n" aria-hidden="true">01</p>
+          <div>
+            <h2>Nothing here is inherited.</h2>
+            <p>Every standard in this studio had to be written, argued over and agreed on. None of it arrived with the furniture. That is slower than adopting a house style, and it is the reason we can tell you why any decision was made.</p>
+          </div>
         </li>
-        <li class="pillar">
-          <p class="idx">02</p>
-          <h2>Performance</h2>
-          <p>Every effect can be switched off; the page still works if motion never arrives.</p>
+        <li data-scroll data-scroll-speed="0.2">
+          <p class="n" aria-hidden="true">02</p>
+          <div>
+            <h2>We would rather be understood than admired.</h2>
+            <p>A website can be impressive for five seconds. After that it has to be read, used on a phone with one thumb, and understood by someone who is not thinking about design at all. When those two disagree, the second one wins — every time, and in writing.</p>
+          </div>
         </li>
-        <li class="pillar">
-          <p class="idx">03</p>
-          <h2>Ownership</h2>
-          <p>Repo, hosting, domain, mailbox — transferred.</p>
+        <li data-scroll data-scroll-speed="0.14">
+          <p class="n" aria-hidden="true">03</p>
+          <div>
+            <h2>The second look is the one that counts.</h2>
+            <p>Anything survives a glance. We build for the moment after it — an old phone, another developer reading the code, two years with nobody touching it. Every effect on this site can be switched off. Turn JavaScript off and the pages still work.</p>
+          </div>
         </li>
-      </ul>
+        <li data-scroll data-scroll-speed="0.22">
+          <p class="n" aria-hidden="true">04</p>
+          <div>
+            <h2>We say no in writing.</h2>
+            <p>We publish a service only once we are confident in it — two of ours are still unlisted for exactly that reason. That costs us enquiries. Pretending otherwise would cost more.</p>
+          </div>
+        </li>
+        <li data-scroll data-scroll-speed="0.1">
+          <p class="n" aria-hidden="true">05</p>
+          <div>
+            <h2>Failure is budgeted, not hidden.</h2>
+            <p>What we owe a client is not the pretence of never being wrong — it is that being wrong stays our problem, never theirs. On delivery you receive the repository, the hosting, the domain and the mailbox. If you walk away, nothing stays with us.</p>
+          </div>
+        </li>
+      </ol>
+
+      <section class="studio-band" aria-labelledby="order-h">
+        <p class="studio-kicker" id="order-h">How the work goes</p>
+        <ol class="order">
+          <li data-scroll data-scroll-speed="0.1">
+            <p class="n" aria-hidden="true">01</p>
+            <h2>We look before we draw</h2>
+            <p>The first deliverable is an audit, not a design. Sometimes it says you do not need us yet.</p>
+          </li>
+          <li data-scroll data-scroll-speed="0.2">
+            <p class="n" aria-hidden="true">02</p>
+            <h2>We decide in the open</h2>
+            <p>Decisions are written where you can read them, with the reasoning attached.</p>
+          </li>
+          <li data-scroll data-scroll-speed="0.14">
+            <p class="n" aria-hidden="true">03</p>
+            <h2>We build it to survive us</h2>
+            <p>Documented guardrails, a review pass, and nothing that relies on one person’s memory.</p>
+          </li>
+          <li data-scroll data-scroll-speed="0.22">
+            <p class="n" aria-hidden="true">04</p>
+            <h2>We hand over everything</h2>
+            <p>Repository, hosting, domain, mailbox — ownership transfers completely on delivery.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="studio-band" aria-labelledby="built-h">
+        <p class="studio-kicker" id="built-h">How it’s built</p>
+        <ul class="built">
+          <li data-scroll data-scroll-speed="0.1">
+            <h2>Security</h2>
+            <p>Headers, dependency and secret scanning, and a written review pass before anything ships. No unreviewed generated code reaches production.</p>
+          </li>
+          <li data-scroll data-scroll-speed="0.2">
+            <h2>Performance</h2>
+            <p>Every effect is built to be switched off. Compressed media, nothing blocking the first paint, and a page that stays usable if the video never arrives.</p>
+          </li>
+          <li data-scroll data-scroll-speed="0.14">
+            <h2>Ownership</h2>
+            <p>On delivery you get all of it — the repository, the hosting account, the domain and the mailbox. You own the site outright.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="studio-band" aria-labelledby="people-h">
+        <p class="studio-kicker" id="people-h">Who answers</p>
+        <div class="people">
+          <div data-scroll data-scroll-speed="0.1">
+            <h2>Zhang Zhijie</h2>
+            <p>Founder / CEO</p>
+          </div>
+          <div data-scroll data-scroll-speed="0.2">
+            <h2>Isaac</h2>
+            <p>Co-Founder / COO</p>
+          </div>
+          <p class="people-note" data-scroll data-scroll-speed="0.14">Accountability is the studio’s, not a job title’s. Behind the two of us, a founding team of around twenty — design, engineering, writing and research. Most are building their first company. None of them are a stock photograph of an office, which is why you will not find one on this page.</p>
+        </div>
+      </section>
+
+      <section class="studio-band" aria-labelledby="stack-h">
+        <p class="studio-kicker" id="stack-h">What sits behind the site</p>
+        <dl class="stack">
+          <div data-scroll data-scroll-speed="0.1">
+            <dt>Vercel</dt>
+            <dd>Hosting and delivery. The site is served from whichever machine is nearest the person opening it.</dd>
+          </div>
+          <div data-scroll data-scroll-speed="0.2">
+            <dt>Supabase</dt>
+            <dd>Data and accounts, for projects that need them — on an account that is yours.</dd>
+          </div>
+          <div data-scroll data-scroll-speed="0.14">
+            <dt>Resend</dt>
+            <dd>Enquiries and automated messages, sent from your own domain.</dd>
+          </div>
+          <div data-scroll data-scroll-speed="0.22">
+            <dt>OWASP ZAP</dt>
+            <dd>A public scanner for known issues, before launch and after changes.</dd>
+          </div>
+          <div data-scroll data-scroll-speed="0.1">
+            <dt>SonarCloud</dt>
+            <dd>Reads the code rather than the running site, and flags trouble before it ships.</dd>
+          </div>
+        </dl>
+        <p class="stack-note">Platforms we build on — not partners, sponsors or endorsements. Neither of the last two makes a site unbreakable. Nothing does.</p>
+      </section>
+
+      <dl class="studio-meta">
+        <div>
+          <dt>Where</dt>
+          <dd>Singapore</dd>
+        </div>
+        <div>
+          <dt>First look</dt>
+          <dd>Two weeks</dd>
+        </div>
+        <div>
+          <dt>Handover</dt>
+          <dd>Repo, domain, mailbox</dd>
+        </div>
+        <div>
+          <dt>Reply</dt>
+          <dd>One working day</dd>
+        </div>
+      </dl>
+      <p class="studio-sign">Written, dated and signed. It is a document, so it can be held against us.</p>
       <a class="cta glass" href="contact.html">Start a project</a>
-    </div>
+    </article>
   </main>
   <footer class="foot">
     <p>Singapore</p>

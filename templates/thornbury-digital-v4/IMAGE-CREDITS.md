@@ -3,44 +3,68 @@
 Credits live here, not on the child-site pages. Everything is self-hosted
 because the template CSP is `default-src 'self'` / `media-src 'self'`.
 
-## Hero films
+## Films
 
-Stand-ins until a Higgsfield still is made. Pexels License: free to use;
-credited here anyway. Downloaded 3 Sep 2026. Audio stripped, faststart.
+| File | Role | Source |
+|---|---|---|
+| `video/hero.mp4` | Home stage, Orris plate | [Pexels 6802240](https://www.pexels.com/video/female-hands-using-fragrance-atomizer-6802240/) — Artem Podrez, free license. 4K, trimmed to 8s at 1920×1080. |
+| `img/poster-hero.webp` | Stage poster | Frame from the same clip |
 
-| File | Role | Source | Pexels ID |
-|---|---|---|---|
-| `video/hero.mp4` | Large stage, 1920×1080 web encode | [Aerial waves on rock](https://www.pexels.com/video/waves-rushing-to-the-shore-1409899/) | 1409899 |
-| `video/src/hero-stage-4k.mp4` | 4K master (gitignored) | Same clip | 1409899 |
-| `img/poster-hero.webp` | Stage poster, 1920×1080 | Same clip | 1409899 |
-| `video/inset.mp4` | Home inset plate, and Plate art-direction on Work / Studio / Contact | [Calligraphy, dip pen on paper](https://www.pexels.com/video/person-writing-on-a-paper-7343476/) | 7343476 |
-| `video/src/inset-4k.mp4` | 4K master (gitignored) | Same clip | 7343476 |
-| `img/poster-inset.webp` | Inset poster | Same clip | 7343476 |
-
-Masters kept under `video/src/` (gitignored). Replace either clip when a
-licensed or Higgsfield film exists.
+The Orris header (wordmark, nav, “Iris, wood, rain.”) is invented chrome
+on that clip. It is not a live collection URL; the plate links to Work.
 
 ## Inner-page art
 
 Switchable from Dev on Work / Studio / Contact. Home is unchanged.
-Paper stays the reading surface — no full-bleed colour films.
+Default is Set.
 
 | Art | What it is |
 |---|---|
 | Set | Printed sheet: crop marks, 12-col live area, slug, registration |
-| Plate | Calligraphy film in a matted frame, sized to the empty field (`video/inset.mp4`) |
+| Plate | Form/01, filmed, in a matted frame (`video/plate.mp4`) |
 | Grain | Paper as film stock — lamp, shade, fiber, one punch |
 | Edge | A dark mass in the empty field and a sculpted bloom |
 | Folio | One “04” at the scale of the empty field |
 
 ## Work plates
 
-Captures of the live collection sites, 1400×884 WebP.
+Captures of live collection sites, 1680×1060 WebP, taken at `localhost:8123`.
 
 | File | Case | Captured from |
 |---|---|---|
+| `img/case-colnoir.webp` | Col Noir | `templates/ski-colnoir/` |
+| `img/case-null.webp` | Null Carnival | `templates/carnival-null/` |
+| `img/case-sejuk.webp` | Sejuk° | `templates/dessert-sejuk/` |
+| `img/case-harlowe.webp` | Harlowe | `templates/foundry-harlowe/` |
+| `img/case-gyre.webp` | Gyre | `templates/moto-gyre/` |
+| `img/case-northline.webp` | Northline | `templates/logistics-northline/` |
+| `img/case-voltflood.webp` | Volt//Flood | `templates/festival-voltflood/` |
+| `img/case-kelvin.webp` | Kelvin | `templates/lighting-kelvin/` |
+| `img/case-fracture.webp` | Fracture | `templates/combat-fracture/` |
+| `img/case-candela.webp` | Candela | `templates/camera-candela/` |
+| `img/case-aureon.webp` | Aureon | `templates/golf-aureon/` |
+| `img/case-oscilla.webp` | Oscilla | `templates/synth-oscilla/` |
+| `img/case-overcast.webp` | Overcast | `templates/fashion-overcast/` |
+| `img/case-saltfield.webp` | Saltfield | `templates/coastal-saltfield/` |
+| `img/case-nightshift.webp` | Nightshift | `templates/arcade-nightshift/` |
+| `img/case-wonderyard.webp` | Wonderyard | `templates/park-wonderyard/` |
+| `img/case-karn.webp` | Karn | `templates/auto-karn/` |
+| `img/case-fathom.webp` | Fathom | `templates/cards-fathom/` |
+| `img/case-vela.webp` | Vela | `templates/observatory-vela/` |
+| `img/case-unstill.webp` | Unstill | `templates/soda-unstill/` |
+| `img/case-even.webp` | Even | `templates/running-even/` |
+| `img/case-morrow.webp` | Morrow | `templates/vintage-menswear/` |
+| `img/case-kept.webp` | Kept | `templates/phones-kept/` |
+| `img/case-chalkline.webp` | Chalkline | `templates/interior-chalkline/` |
+| `img/case-eon.webp` | Eon | `templates/horology-eon-v2/` |
+| `img/case-nocturne.webp` | Nocturne | `templates/concours-nocturne/` |
+| `img/case-ephemeris.webp` | Ephemeris | `templates/exhibition-ephemeris/` |
+| `img/case-noon.webp` | Noon | `templates/spaces-noon/` |
+| `img/case-hotline.webp` | Hotline | `templates/fastfood-hotline/` |
 | `img/case-midwater.webp` | Midwater | `templates/film-midwater/` |
 | `img/case-kiyo.webp` | Kiyo 清 | `templates/japanese-restaurant/` |
 | `img/case-aurel.webp` | Aurel | `templates/watch-atelier/` |
 | `img/case-loam.webp` | Loam | `templates/cafe-loam/` |
 | `img/case-form01.webp` | Form/01 | `templates/streetwear-form01/` |
+
+Source PNGs live in `img/src-stills/` (gitignored).
