@@ -820,6 +820,7 @@
     color: var(--bg); background: var(--accent); border-color: var(--accent);
   }
   .sorter { display: flex; align-items: center; gap: 10px; }
+  .sorters { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
   .sorter__l {
     font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--muted); font-weight: 600;
@@ -836,6 +837,7 @@
   .grid-empty { color: var(--muted); font-size: 0.92rem; padding: 30px 0 10px; }
   @media (max-width: 620px) {
     .controls { flex-direction: column; align-items: flex-start; }
+    .sorters { width: 100%; }
   }
   .card.locked .tag { color: var(--muted); }
   .card h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.22rem; margin-bottom: 8px; }
@@ -1177,6 +1179,7 @@
       <button class="chip" type="button" data-filter="standard" aria-pressed="false">Standard</button>
       <button class="chip" type="button" data-filter="experimental" aria-pressed="false">Experimental</button>
     </div>
+    <div class="sorters">
     <div class="sorter">
       <label class="sorter__l" for="categoryBy">Category</label>
       <select class="sorter__s" id="categoryBy">
@@ -1196,6 +1199,18 @@
       </select>
     </div>
     <div class="sorter">
+      <label class="sorter__l" for="styleBy">Style</label>
+      <select class="sorter__s" id="styleBy">
+        <option value="all">All styles</option>
+        <option value="dark">Dark</option>
+        <option value="minimal">Minimal</option>
+        <option value="photography-led">Photography-led</option>
+        <option value="3d-webgl">3D / WebGL</option>
+        <option value="typography-led">Typography-led</option>
+        <option value="data-technical">Data / Technical</option>
+      </select>
+    </div>
+    <div class="sorter">
       <label class="sorter__l" for="creatorBy">Creator</label>
       <select class="sorter__s" id="creatorBy">
         <option value="all">All creators</option>
@@ -1212,11 +1227,12 @@
         <option value="advanced">Most advanced</option>
       </select>
     </div>
+    </div>
   </div>
   <p class="filter-status" id="filterStatus" role="status" aria-live="polite"></p>
 
   <div class="grid">
-    <a class="card reveal" href="templates/business-corporate/index.html" data-facet="standard" data-date="2026-08-02" data-tier="1" data-category="business" data-creator="Jayden">
+    <a class="card reveal" href="templates/business-corporate/index.html" data-facet="standard" data-date="2026-08-02" data-tier="1" data-category="business" data-creator="Jayden" data-style="minimal">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/business-corporate-sm.webp" alt="The Meridian Partners homepage: a navy hero beside a photograph of three advisers mid-session." width="480" height="300" loading="lazy" decoding="async">
@@ -1234,7 +1250,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/gym-service/index.html" data-facet="standard" data-date="2026-08-03" data-tier="4" data-category="fitness" data-creator="Zane">
+    <a class="card reveal" href="templates/gym-service/index.html" data-facet="standard" data-date="2026-08-03" data-tier="4" data-category="fitness" data-creator="Zane" data-style="dark 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/gym-service-sm.webp" alt="The FORGE homepage: a glowing low-poly form beside &lsquo;Forge your strongest self&rsquo;." width="480" height="300" loading="lazy" decoding="async">
@@ -1252,7 +1268,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/ecommerce-design-store/index.html" data-facet="ecommerce" data-date="2026-08-03" data-tier="2" data-category="ecommerce" data-creator="Jayden">
+    <a class="card reveal" href="templates/ecommerce-design-store/index.html" data-facet="ecommerce" data-date="2026-08-03" data-tier="2" data-category="ecommerce" data-creator="Jayden" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/ecommerce-design-store-sm.webp" alt="The OBLIK storefront: an editorial product grid of design objects." width="480" height="300" loading="lazy" decoding="async">
@@ -1270,7 +1286,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/pulse-ai-analytics/index.html" data-facet="standard" data-date="2026-08-03" data-tier="3" data-category="saas" data-creator="Jayden">
+    <a class="card reveal" href="templates/pulse-ai-analytics/index.html" data-facet="standard" data-date="2026-08-03" data-tier="3" data-category="saas" data-creator="Jayden" data-style="dark data-technical">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/pulse-ai-analytics-sm.webp" alt="The PULSE landing page: a dark starfield hero over a product dashboard." width="480" height="300" loading="lazy" decoding="async">
@@ -1288,7 +1304,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/restaurant-food/index.html" data-facet="booking" data-date="2026-08-04" data-tier="4" data-category="restaurant" data-creator="Zane">
+    <a class="card reveal" href="templates/restaurant-food/index.html" data-facet="booking" data-date="2026-08-04" data-tier="4" data-category="restaurant" data-creator="Zane" data-style="photography-led 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/restaurant-food-sm.webp" alt="The EMBER homepage: a wood-fire hero with drifting embers." width="480" height="300" loading="lazy" decoding="async">
@@ -1306,7 +1322,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/entertainment-triggered/index.html" data-facet="flagship" data-date="2026-08-04" data-tier="4" data-category="entertainment" data-creator="Zane">
+    <a class="card reveal" href="templates/entertainment-triggered/index.html" data-facet="flagship" data-date="2026-08-04" data-tier="4" data-category="entertainment" data-creator="Zane" data-style="dark 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/entertainment-triggered-sm.webp" alt="The TRIGGERED concept site: neon type over a glowing lava grid floor." width="480" height="300" loading="lazy" decoding="async">
@@ -1324,7 +1340,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/chinese-restaurant/index.html" data-facet="standard" data-date="2026-08-05" data-tier="3" data-category="restaurant" data-creator="Jayden">
+    <a class="card reveal" href="templates/chinese-restaurant/index.html" data-facet="standard" data-date="2026-08-05" data-tier="3" data-category="restaurant" data-creator="Jayden" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/chinese-restaurant-sm.webp" alt="The B&aacute;i H&egrave; menu: dish rows on the left, a round table filling with plates on the right." width="480" height="300" loading="lazy" decoding="async">
@@ -1342,7 +1358,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/sys-2026-wearable/index.html" data-facet="flagship" data-date="2026-08-06" data-tier="4" data-category="product" data-creator="Zane">
+    <a class="card reveal" href="templates/sys-2026-wearable/index.html" data-facet="flagship" data-date="2026-08-06" data-tier="4" data-category="product" data-creator="Zane" data-style="dark data-technical">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/sys-2026-wearable-sm.webp" alt="The SYS-2026 launch page: a machined field terminal on a forearm behind the words &lsquo;When the network goes down, this doesn&rsquo;t.&rsquo;" width="480" height="300" loading="lazy" decoding="async">
@@ -1360,7 +1376,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/law-firm/index.html" data-facet="standard" data-date="2026-08-06" data-tier="2" data-category="business" data-creator="Jayden">
+    <a class="card reveal" href="templates/law-firm/index.html" data-facet="standard" data-date="2026-08-06" data-tier="2" data-category="business" data-creator="Jayden" data-style="typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/law-firm-sm.webp" alt="The AMICUS attorney page: four portraits under the words &lsquo;Precise on paper. Warm in person.&rsquo;" width="480" height="300" loading="lazy" decoding="async">
@@ -1378,7 +1394,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/western-grill/index.html" data-facet="ecommerce" data-date="2026-08-07" data-tier="3" data-category="restaurant" data-creator="Jayden">
+    <a class="card reveal" href="templates/western-grill/index.html" data-facet="ecommerce" data-date="2026-08-07" data-tier="3" data-category="restaurant" data-creator="Jayden" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/western-grill-sm.webp" alt="THE BRASS OX ordering page: ribeyes over open flame behind &lsquo;Everything here meets the fire&rsquo;, with a menu board and a kitchen ticket below." width="480" height="300" loading="lazy" decoding="async">
@@ -1396,7 +1412,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/japanese-restaurant/index.html" data-facet="ecommerce" data-date="2026-08-07" data-tier="3" data-category="restaurant" data-creator="Jayden">
+    <a class="card reveal" href="templates/japanese-restaurant/index.html" data-facet="ecommerce" data-date="2026-08-07" data-tier="3" data-category="restaurant" data-creator="Jayden" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/japanese-restaurant-sm.webp" alt="The KIYO ordering page: an izakaya spread behind &lsquo;Dinner, settled in three taps&rsquo;, menu cards below." width="480" height="300" loading="lazy" decoding="async">
@@ -1414,7 +1430,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/kids-smallhours/index.html" data-facet="ecommerce" data-date="2026-08-09" data-tier="3" data-category="ecommerce" data-creator="Jayden">
+    <a class="card reveal" href="templates/kids-smallhours/index.html" data-facet="ecommerce" data-date="2026-08-09" data-tier="3" data-category="ecommerce" data-creator="Jayden" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/kids-smallhours-sm.webp" alt="The SMALL HOURS homepage: two children walk a sunlit garden path under a quiet serif wordmark." width="480" height="300" loading="lazy" decoding="async">
@@ -1432,7 +1448,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/streetwear-form01/index.html" data-facet="ecommerce" data-date="2026-08-09" data-tier="3" data-category="ecommerce" data-creator="Jayden">
+    <a class="card reveal" href="templates/streetwear-form01/index.html" data-facet="ecommerce" data-date="2026-08-09" data-tier="3" data-category="ecommerce" data-creator="Jayden" data-style="photography-led typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/streetwear-form01-sm.webp" alt="The FORM/01 hero: a model in oversized grey techwear filling the screen, the giant word FORM/01 overlapping him." width="480" height="300" loading="lazy" decoding="async">
@@ -1450,7 +1466,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/vintage-menswear/index.html" data-facet="ecommerce" data-date="2026-08-09" data-tier="3" data-category="ecommerce" data-creator="Jayden">
+    <a class="card reveal" href="templates/vintage-menswear/index.html" data-facet="ecommerce" data-date="2026-08-09" data-tier="3" data-category="ecommerce" data-creator="Jayden" data-style="photography-led typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/vintage-menswear-sm.webp" alt="The MORROW &amp; FINCH cover: a man in a camel overcoat on a foggy 1930s street beside &lsquo;Made for Another Era&rsquo;." width="480" height="300" loading="lazy" decoding="async">
@@ -1468,7 +1484,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/gym-local/index.html" data-facet="standard" data-date="2026-08-08" data-tier="2" data-category="fitness" data-creator="Jayden">
+    <a class="card reveal" href="templates/gym-local/index.html" data-facet="standard" data-date="2026-08-08" data-tier="2" data-category="fitness" data-creator="Jayden" data-style="photography-led typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/gym-local-sm.webp" alt="The HOYT'S homepage: &lsquo;Train where the town trains&rsquo; in huge poster type, &lsquo;town&rsquo; in red." width="480" height="300" loading="lazy" decoding="async">
@@ -1486,7 +1502,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/buffet-longtable/index.html" data-facet="standard" data-date="2026-08-08" data-tier="2" data-category="restaurant" data-creator="Jayden">
+    <a class="card reveal" href="templates/buffet-longtable/index.html" data-facet="standard" data-date="2026-08-08" data-tier="2" data-category="restaurant" data-creator="Jayden" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/buffet-longtable-sm.webp" alt="The LONG TABLE homepage: &lsquo;One price. The whole spread.&rsquo; in large serif type over a three-price strip." width="480" height="300" loading="lazy" decoding="async">
@@ -1504,7 +1520,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/indian-restaurant/index.html" data-facet="ecommerce" data-date="2026-08-08" data-tier="4" data-category="restaurant" data-creator="Zane">
+    <a class="card reveal" href="templates/indian-restaurant/index.html" data-facet="ecommerce" data-date="2026-08-08" data-tier="4" data-category="restaurant" data-creator="Zane" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/indian-restaurant-sm.webp" alt="The KESAR homepage: a mixed grill in a gold arch frame beside &lsquo;The good table is a full table&rsquo;." width="480" height="300" loading="lazy" decoding="async">
@@ -1522,7 +1538,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/watch-atelier/index.html" data-facet="flagship" data-date="2026-08-06" data-tier="4" data-category="product" data-creator="Zane">
+    <a class="card reveal" href="templates/watch-atelier/index.html" data-facet="flagship" data-date="2026-08-06" data-tier="4" data-category="product" data-creator="Zane" data-style="dark photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/watch-atelier-sm.webp" alt="The AUREL homepage: an art-deco gilt watch on dark slate beside the words &lsquo;One hundred years, one second at a time.&rsquo;" width="480" height="300" loading="lazy" decoding="async">
@@ -1540,7 +1556,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/dental-care/index.html" data-facet="booking" data-date="2026-08-07" data-tier="3" data-category="fitness" data-creator="Jayden">
+    <a class="card reveal" href="templates/dental-care/index.html" data-facet="booking" data-date="2026-08-07" data-tier="3" data-category="fitness" data-creator="Jayden" data-style="minimal">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/dental-care-sm.webp" alt="The Brightside Dental homepage: a cream hero with an illustrated arched window, a happy tooth, and a booking button." width="480" height="300" loading="lazy" decoding="async">
@@ -1558,7 +1574,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/powerbank-cupcake/index.html" data-facet="standard" data-date="2026-08-07" data-tier="3" data-category="product" data-creator="Jayden">
+    <a class="card reveal" href="templates/powerbank-cupcake/index.html" data-facet="standard" data-date="2026-08-07" data-tier="3" data-category="product" data-creator="Jayden" data-style="typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/powerbank-cupcake-sm.webp" alt="The CUPCAKE homepage: the word CUPCAKE filling the screen, half ultra-black sans, half pink italic serif." width="480" height="300" loading="lazy" decoding="async">
@@ -1576,7 +1592,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/fashion-overcast/index.html" data-facet="ecommerce" data-date="2026-08-10" data-tier="4" data-category="ecommerce" data-creator="Zane">
+    <a class="card reveal" href="templates/fashion-overcast/index.html" data-facet="ecommerce" data-date="2026-08-10" data-tier="4" data-category="ecommerce" data-creator="Zane" data-style="photography-led typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/fashion-overcast-sm.webp" alt="The OVERCAST homepage: a wintry hero photograph behind the words &lsquo;The Grey Hours&rsquo; set in high-contrast serif." width="480" height="300" loading="lazy" decoding="async">
@@ -1594,7 +1610,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/running-even/index.html" data-facet="standard" data-date="2026-08-09" data-tier="4" data-category="fitness" data-creator="Zane">
+    <a class="card reveal" href="templates/running-even/index.html" data-facet="standard" data-date="2026-08-09" data-tier="4" data-category="fitness" data-creator="Zane" data-style="data-technical minimal">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/running-even-sm.webp" alt="The EVEN homepage: a runner in silver fog above a laminated pace-band strip of ten 5:40 splits." width="480" height="300" loading="lazy" decoding="async">
@@ -1612,7 +1628,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/golf-aureon/index.html" data-facet="booking" data-date="2026-08-09" data-tier="3" data-category="hospitality" data-creator="Jayden">
+    <a class="card reveal" href="templates/golf-aureon/index.html" data-facet="booking" data-date="2026-08-09" data-tier="3" data-category="hospitality" data-creator="Jayden" data-style="typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/golf-aureon-sm.webp" alt="The AUREON member home: a greeting plate over a sunlit links course in warm vintage-film tones." width="480" height="300" loading="lazy" decoding="async">
@@ -1630,7 +1646,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/art-atelier8/index.html" data-facet="standard" data-date="2026-08-09" data-tier="2" data-category="culture" data-creator="Jayden">
+    <a class="card reveal" href="templates/art-atelier8/index.html" data-facet="standard" data-date="2026-08-09" data-tier="2" data-category="culture" data-creator="Jayden" data-style="photography-led typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/art-atelier8-sm.webp" alt="The ATELIER № 8 frontispiece: one abstract painting centred on near-white, a catalogue caption beneath." width="480" height="300" loading="lazy" decoding="async">
@@ -1648,7 +1664,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/fastfood-hotline/index.html" data-facet="ecommerce" data-date="2026-08-10" data-tier="3" data-category="restaurant" data-creator="Jayden">
+    <a class="card reveal" href="templates/fastfood-hotline/index.html" data-facet="ecommerce" data-date="2026-08-10" data-tier="3" data-category="restaurant" data-creator="Jayden" data-style="dark photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/fastfood-hotline-sm.webp" alt="The HOTLINE homepage: the words &lsquo;Fried after dark&rsquo; in heavy condensed type beside a burger lit on black." width="480" height="300" loading="lazy" decoding="async">
@@ -1666,7 +1682,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/coastal-saltfield/index.html" data-facet="booking" data-date="2026-08-11" data-tier="3" data-category="hospitality" data-creator="Jayden">
+    <a class="card reveal" href="templates/coastal-saltfield/index.html" data-facet="booking" data-date="2026-08-11" data-tier="3" data-category="hospitality" data-creator="Jayden" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/coastal-saltfield-sm.webp" alt="The SALTFIELD homepage: pale dunes under a soft sky above the words &lsquo;The sea keeps its own hours&rsquo; in a warm serif." width="480" height="300" loading="lazy" decoding="async">
@@ -1684,7 +1700,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/synth-oscilla/index.html" data-facet="ecommerce" data-date="2026-08-11" data-tier="4" data-category="product" data-creator="Zane">
+    <a class="card reveal" href="templates/synth-oscilla/index.html" data-facet="ecommerce" data-date="2026-08-11" data-tier="4" data-category="product" data-creator="Zane" data-style="dark data-technical">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/synth-oscilla-sm.webp" alt="The OSCILLA homepage: the words &lsquo;Four instruments, one voice&rsquo; in white and amber beside four synthesizers on a bench." width="480" height="300" loading="lazy" decoding="async">
@@ -1702,7 +1718,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/observatory-vela/index.html" data-facet="ecommerce booking" data-date="2026-08-11" data-tier="4" data-category="culture" data-creator="Zane">
+    <a class="card reveal" href="templates/observatory-vela/index.html" data-facet="ecommerce booking" data-date="2026-08-11" data-tier="4" data-category="culture" data-creator="Zane" data-style="data-technical">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/observatory-vela-sm.webp" alt="The VELA homepage: the words &lsquo;Where the sky still gets properly dark&rsquo; over a starlit observatory dome, beside a panel of tonight&rsquo;s computed sunset and darkness times." width="480" height="300" loading="lazy" decoding="async">
@@ -1720,7 +1736,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/soda-unstill/index.html" data-facet="ecommerce" data-date="2026-08-11" data-tier="4" data-category="ecommerce" data-creator="Zane">
+    <a class="card reveal" href="templates/soda-unstill/index.html" data-facet="ecommerce" data-date="2026-08-11" data-tier="4" data-category="ecommerce" data-creator="Zane" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/soda-unstill-sm.webp" alt="The UNSTILL homepage: the words &lsquo;Never still&rsquo; in huge type beside a cloud of coloured ink exploding through dark water, under a nav carrying a &lsquo;do not shake&rsquo; button." width="480" height="300" loading="lazy" decoding="async">
@@ -1738,7 +1754,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/film-midwater/index.html" data-facet="flagship booking" data-date="2026-08-11" data-tier="5" data-category="entertainment" data-creator="Zane">
+    <a class="card reveal" href="templates/film-midwater/index.html" data-facet="flagship booking" data-date="2026-08-11" data-tier="5" data-category="entertainment" data-creator="Zane" data-style="dark photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/film-midwater-sm.webp" alt="The MIDWATER homepage: the word &lsquo;MIDWATER&rsquo; in thin tracked serif over a dark churning sea, framed by faint cyan instrument marks and a depth readout of zero metres." width="480" height="300" loading="lazy" decoding="async">
@@ -1756,7 +1772,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/ski-colnoir/index.html" data-facet="flagship" data-date="2026-08-11" data-tier="5" data-category="hospitality" data-creator="Zane">
+    <a class="card reveal" href="templates/ski-colnoir/index.html" data-facet="flagship" data-date="2026-08-11" data-tier="5" data-category="hospitality" data-creator="Zane" data-style="photography-led data-technical">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/ski-colnoir-sm.webp" alt="The COL NOIR homepage: the words &lsquo;The mountain, reported honestly&rsquo; in heavy expanded type over a luminous ski piste, above a black avalanche-danger card reading a rating on the five-step scale." width="480" height="300" loading="lazy" decoding="async">
@@ -1774,7 +1790,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/foundry-harlowe/index.html" data-facet="flagship" data-date="2026-08-12" data-tier="4" data-category="business" data-creator="Zane">
+    <a class="card reveal" href="templates/foundry-harlowe/index.html" data-facet="flagship" data-date="2026-08-12" data-tier="4" data-category="business" data-creator="Zane" data-style="dark photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/foundry-harlowe-sm.webp" alt="The HARLOWE homepage: the word &lsquo;HARLOWE&rsquo; in wide inscriptional capitals over dark bronze bells hanging in shadow, framed by a thin bronze hairline with a bronze &lsquo;Commission a bell&rsquo; button below." width="480" height="300" loading="lazy" decoding="async">
@@ -1792,7 +1808,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/spaces-noon/index.html" data-facet="flagship" data-date="2026-08-12" data-tier="4" data-category="property" data-creator="Zane">
+    <a class="card reveal" href="templates/spaces-noon/index.html" data-facet="flagship" data-date="2026-08-12" data-tier="4" data-category="property" data-creator="Zane" data-style="data-technical typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/spaces-noon-sm.webp" alt="The NOON homepage: the words &lsquo;Buildings kept in the light.&rsquo; in a light serif over a bright stone arcade raked by sun, with a live solar readout in the header." width="480" height="300" loading="lazy" decoding="async">
@@ -1810,7 +1826,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/auto-karn/index.html" data-facet="standard" data-date="2026-08-12" data-tier="3" data-category="automotive" data-creator="Jayden">
+    <a class="card reveal" href="templates/auto-karn/index.html" data-facet="standard" data-date="2026-08-12" data-tier="3" data-category="automotive" data-creator="Jayden" data-style="dark typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/auto-karn-sm.webp" alt="The KARN homepage: the word &lsquo;KARN&rsquo; in colossal condensed type over a glowing blue road tunnel at speed, telemetry readouts counting metres to the surface." width="480" height="300" loading="lazy" decoding="async">
@@ -1828,7 +1844,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/moto-gyre/index.html" data-facet="standard" data-date="2026-08-19" data-tier="2" data-category="automotive" data-creator="Jayden">
+    <a class="card reveal" href="templates/moto-gyre/index.html" data-facet="standard" data-date="2026-08-19" data-tier="2" data-category="automotive" data-creator="Jayden" data-style="dark typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/moto-gyre-sm.webp" alt="The GYRE homepage: a fully faired motorcycle with a glowing ring headlamp standing in a dark studio, beneath the words &lsquo;Only stable in motion&rsquo;." width="480" height="300" loading="lazy" decoding="async">
@@ -1846,7 +1862,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/carnival-null/index.html" data-facet="flagship" data-date="2026-08-28" data-tier="5" data-category="entertainment" data-creator="Zane">
+    <a class="card reveal" href="templates/carnival-null/index.html" data-facet="flagship" data-date="2026-08-28" data-tier="5" data-category="entertainment" data-creator="Zane" data-style="dark 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/carnival-null-sm.webp" alt="The NULL CARNIVAL hero: a painted oxblood banner ringed with fairground bulbs, the word NULL cut clean through it to the moving room behind, hung inside a monumental gilt arch with a mercury portal glowing in it and faceless masks drifting over a wet concrete deck." width="480" height="300" loading="lazy" decoding="async">
@@ -1864,7 +1880,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/festival-voltflood/index.html" data-facet="standard" data-date="2026-08-28" data-tier="4" data-category="entertainment" data-creator="Zane">
+    <a class="card reveal" href="templates/festival-voltflood/index.html" data-facet="standard" data-date="2026-08-28" data-tier="4" data-category="entertainment" data-creator="Zane" data-style="dark 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/festival-voltflood-sm.webp" alt="The VOLT//FLOOD hero: the fractured logotype in bone white with acid and red glitch slices, floating over a WebGL rig of truss towers, beam fans and a chartreuse waveform floor." width="480" height="300" loading="lazy" decoding="async">
@@ -1882,7 +1898,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/combat-fracture/index.html" data-facet="flagship" data-date="2026-08-30" data-tier="5" data-category="entertainment" data-creator="Zane">
+    <a class="card reveal" href="templates/combat-fracture/index.html" data-facet="flagship" data-date="2026-08-30" data-tier="5" data-category="entertainment" data-creator="Zane" data-style="dark 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/combat-fracture-sm.webp" alt="The FRACTURE hero: the wordmark in floodlight white over a wall of bruised concrete debris shot through with blood-red marked fragments, above the line 09 BREAKPOINT." width="480" height="300" loading="lazy" decoding="async">
@@ -1900,7 +1916,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/camera-candela/index.html" data-facet="flagship" data-date="2026-08-31" data-tier="5" data-category="product" data-creator="Zane">
+    <a class="card reveal" href="templates/camera-candela/index.html" data-facet="flagship" data-date="2026-08-31" data-tier="5" data-category="product" data-creator="Zane" data-style="dark 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/camera-candela-sm.webp" alt="The CANDELA hero: the wordmark CANDELA I in warm white over a near-black ground, beside a brushed-aluminium rangefinder camera rendered in three dimensions with a black grained body and a red shutter mark." width="480" height="300" loading="lazy" decoding="async">
@@ -1918,7 +1934,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/turntable-lacquer/index.html" data-facet="standard" data-date="2026-08-31" data-tier="4" data-category="entertainment" data-creator="Zane">
+    <a class="card reveal" href="templates/turntable-lacquer/index.html" data-facet="standard" data-date="2026-08-31" data-tier="4" data-category="entertainment" data-creator="Zane" data-style="dark 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/turntable-lacquer-sm.webp" alt="TAPE//LACQUER: chaotic warehouse cassette label with SIDE A RUN HOT typography, neon scanlines, and a sourced Poly Haven boombox in WebGL over looped warehouse footage." width="480" height="300" loading="lazy" decoding="async">
@@ -1936,7 +1952,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/logistics-northline/index.html" data-facet="standard" data-date="2026-08-28" data-tier="3" data-category="saas" data-creator="Jayden">
+    <a class="card reveal" href="templates/logistics-northline/index.html" data-facet="standard" data-date="2026-08-28" data-tier="3" data-category="saas" data-creator="Jayden" data-style="3d-webgl data-technical">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/logistics-northline-sm.webp" alt="The Northline Systems first viewport: the headline &lsquo;See the delay before it costs you&rsquo; above a dark command screen carrying a dot-matrix world map with lane arcs, vessels and an exceptions feed." width="480" height="300" loading="lazy" decoding="async">
@@ -1954,7 +1970,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/arcade-nightshift/index.html" data-facet="standard" data-date="2026-08-25" data-tier="2" data-category="entertainment" data-creator="Jayden">
+    <a class="card reveal" href="templates/arcade-nightshift/index.html" data-facet="standard" data-date="2026-08-25" data-tier="2" data-category="entertainment" data-creator="Jayden" data-style="dark photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/arcade-nightshift-sm.webp" alt="The NIGHTSHIFT main floor at night: rows of charcoal arcade cabinets edged in amber light, players at the machines beneath a dark mezzanine." width="480" height="300" loading="lazy" decoding="async">
@@ -1972,7 +1988,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/park-wonderyard/index.html" data-facet="standard" data-date="2026-08-21" data-tier="2" data-category="entertainment" data-creator="Jayden">
+    <a class="card reveal" href="templates/park-wonderyard/index.html" data-facet="standard" data-date="2026-08-21" data-tier="2" data-category="entertainment" data-creator="Jayden" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/park-wonderyard-sm.webp" alt="The WONDERYARD gate at morning: a huge timber arch crested with a wave of kinetic paddles, crowds streaming through beneath abstract-symbol flags." width="480" height="300" loading="lazy" decoding="async">
@@ -1990,7 +2006,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/cards-fathom/index.html" data-facet="standard" data-date="2026-08-20" data-tier="3" data-category="entertainment" data-creator="Jayden">
+    <a class="card reveal" href="templates/cards-fathom/index.html" data-facet="standard" data-date="2026-08-20" data-tier="3" data-category="entertainment" data-creator="Jayden" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/cards-fathom-sm.webp" alt="A FATHOM specimen plate: a vast whale trailing curtains of aurora light through dark water." width="480" height="300" loading="lazy" decoding="async">
@@ -2008,7 +2024,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/exhibition-parallax/index.html" data-facet="experimental" data-date="2026-08-27" data-tier="5" data-category="culture" data-creator="Zane">
+    <a class="card reveal" href="templates/exhibition-parallax/index.html" data-facet="experimental" data-date="2026-08-27" data-tier="5" data-category="culture" data-creator="Zane" data-style="3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/exhibition-parallax-sm.webp" alt="PARALLAX aligned through a storm of porcelain fragments: the word composes itself in bold ink type the instant the sightline is right." width="480" height="300" loading="lazy" decoding="async">
@@ -2026,7 +2042,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/auto-veil/index.html" data-facet="flagship" data-date="2026-09-02" data-tier="4" data-category="automotive" data-creator="Zane">
+    <a class="card reveal" href="templates/auto-veil/index.html" data-facet="flagship" data-date="2026-09-02" data-tier="4" data-category="automotive" data-creator="Zane" data-style="dark photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/auto-veil-sm.webp" alt="VEIL: a white SUV crossing a desert floor under pale mountains, the word VEIL centred, Tesla-quiet type and two pills over native 4K film." width="480" height="300" loading="lazy" decoding="async">
@@ -2044,7 +2060,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/lighting-kelvin/index.html" data-facet="standard" data-date="2026-09-02" data-tier="3" data-category="product" data-creator="Jayden">
+    <a class="card reveal" href="templates/lighting-kelvin/index.html" data-facet="standard" data-date="2026-09-02" data-tier="3" data-category="product" data-creator="Jayden" data-style="dark data-technical">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/lighting-kelvin-sm.webp" alt="KELVIN: a warm near-black dining room under a hanging filament lamp, headline ‘Stop lighting dinner like a lobby,’ colour temperature at 2700K." width="480" height="300" loading="lazy" decoding="async">
@@ -2062,7 +2078,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/exhibition-ephemeris/index.html" data-facet="experimental" data-date="2026-09-02" data-tier="5" data-category="culture" data-creator="Zane">
+    <a class="card reveal" href="templates/exhibition-ephemeris/index.html" data-facet="experimental" data-date="2026-09-02" data-tier="5" data-category="culture" data-creator="Zane" data-style="dark 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/exhibition-ephemeris-sm.webp" alt="EPHEMERIS: a brass and iron armillary sphere of 1771 standing alone in an unlit room, lit from one side, beneath the words &lsquo;The Object&rsquo;." width="480" height="300" loading="lazy" decoding="async">
@@ -2080,7 +2096,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/horology-eon-v2/index.html" data-facet="flagship" data-date="2026-08-28" data-tier="4" data-category="product" data-creator="Zane">
+    <a class="card reveal" href="templates/horology-eon-v2/index.html" data-facet="flagship" data-date="2026-08-28" data-tier="4" data-category="product" data-creator="Zane" data-style="photography-led 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/horology-eon-v2-sm.webp" alt="The Meantime instrument looming out of darkness behind the line &lsquo;Instruments for the other kinds of time&rsquo;, one cold light on its dial." width="480" height="300" loading="lazy" decoding="async">
@@ -2098,7 +2114,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/concours-nocturne/index.html" data-facet="standard" data-date="2026-08-13" data-tier="2" data-category="automotive" data-creator="Jayden">
+    <a class="card reveal" href="templates/concours-nocturne/index.html" data-facet="standard" data-date="2026-08-13" data-tier="2" data-category="automotive" data-creator="Jayden" data-style="dark photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/concours-nocturne-sm.webp" alt="The NOCTURNE homepage: the word &lsquo;NOCTURNE&rsquo; in engraved serif caps beneath a machine materialising from total darkness, its lamps the only light." width="480" height="300" loading="lazy" decoding="async">
@@ -2116,7 +2132,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/dining-neap/index.html" data-facet="booking" data-date="2026-08-13" data-tier="3" data-category="restaurant" data-creator="Jayden">
+    <a class="card reveal" href="templates/dining-neap/index.html" data-facet="booking" data-date="2026-08-13" data-tier="3" data-category="restaurant" data-creator="Jayden" data-style="typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/dining-neap-sm.webp" alt="The NEAP homepage: the word &lsquo;NEAP&rsquo; in tracked serif caps over deep blue open water, above the line &lsquo;a tasting counter set to the tide&rsquo;." width="480" height="300" loading="lazy" decoding="async">
@@ -2134,7 +2150,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/cafe-loam/index.html" data-facet="ecommerce" data-date="2026-08-16" data-tier="3" data-category="restaurant" data-creator="Jayden">
+    <a class="card reveal" href="templates/cafe-loam/index.html" data-facet="ecommerce" data-date="2026-08-16" data-tier="3" data-category="restaurant" data-creator="Jayden" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/cafe-loam-sm.webp" alt="The LOAM homepage: the words &lsquo;Good coffee, no theatre.&rsquo; over a warm photograph of espresso running into two white cups." width="480" height="300" loading="lazy" decoding="async">
@@ -2152,7 +2168,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/linia-alva/index.html" data-facet="flagship" data-date="2026-08-18" data-tier="4" data-category="hospitality" data-creator="Zane">
+    <a class="card reveal" href="templates/linia-alva/index.html" data-facet="flagship" data-date="2026-08-18" data-tier="4" data-category="hospitality" data-creator="Zane" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/linia-alva-sm.webp" alt="The Linia Alva homepage: a red train curving over a snow-covered stone viaduct through winter forest." width="480" height="300" loading="lazy" decoding="async">
@@ -2170,7 +2186,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/dessert-sejuk/index.html" data-facet="ecommerce booking" data-date="2026-08-16" data-tier="4" data-category="restaurant" data-creator="Zane">
+    <a class="card reveal" href="templates/dessert-sejuk/index.html" data-facet="ecommerce booking" data-date="2026-08-16" data-tier="4" data-category="restaurant" data-creator="Zane" data-style="typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/dessert-sejuk-sm.webp" alt="The SEJUK&deg; homepage: dark palm-sugar syrup pouring from a steel jug onto a peak of pale green pandan shaved ice." width="480" height="300" loading="lazy" decoding="async">
@@ -2188,7 +2204,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/zane-live/index.html" data-facet="standard" data-date="2026-08-28" data-tier="2" data-category="fitness" data-creator="Jayden">
+    <a class="card reveal" href="templates/zane-live/index.html" data-facet="standard" data-date="2026-08-28" data-tier="2" data-category="fitness" data-creator="Jayden" data-style="dark typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/zane-live-sm.webp" alt="The Zan.e homepage: the condensed wordmark ZAN.E in bone white on near-black beside a phone-shaped frame showing a broadcast standby slate with colour bars and a live countdown, above a red-ruled SUNDAY 19:00 &ndash; 20:00 SGT slot." width="480" height="300" loading="lazy" decoding="async">
@@ -2206,7 +2222,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/archive-aperture-index/index.html" data-facet="experimental" data-date="2026-08-29" data-tier="4" data-category="culture" data-creator="Zane">
+    <a class="card reveal" href="templates/archive-aperture-index/index.html" data-facet="experimental" data-date="2026-08-29" data-tier="4" data-category="culture" data-creator="Zane" data-style="dark 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/archive-aperture-index-sm.webp" alt="The Aperture Index hero: a black rangefinder field camera with worn brass edges and a leather strap, floating over a dark light table, beside the serif line &lsquo;A field archive of last light&rsquo; and a mono coordinate readout." width="480" height="300" loading="lazy" decoding="async">
@@ -2224,7 +2240,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/thornbury-digital-v2/index.html" data-facet="experimental" data-date="2026-09-03" data-tier="5" data-category="business" data-creator="Zane">
+    <a class="card reveal" href="templates/thornbury-digital-v2/index.html" data-facet="experimental" data-date="2026-09-03" data-tier="5" data-category="business" data-creator="Zane" data-style="dark 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/thornbury-digital-v2-sm.webp" alt="Thornbury Digital v2: a black glass core cracked with acid-lime Voronoi edges and a magenta rim, floating over a void grid, with the headline &lsquo;Sites that hit back.&rsquo; overlapping it in white and lime italic." width="480" height="300" loading="lazy" decoding="async">
@@ -2242,7 +2258,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/thornbury-digital-v4/index.html" data-facet="experimental" data-date="2026-09-04" data-tier="5" data-category="business" data-creator="Zane">
+    <a class="card reveal" href="templates/thornbury-digital-v4/index.html" data-facet="experimental" data-date="2026-09-04" data-tier="5" data-category="business" data-creator="Zane" data-style="3d-webgl typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/thornbury-digital-v4-sm.webp" alt="Thornbury Digital v4: an aerial window of waves on rock, a small calligraphy plate hanging off its corner, the wordmark Thornbury lower-left on warm paper with the line &lsquo;Websites worth a second look.&rsquo;" width="480" height="300" loading="lazy" decoding="async">
@@ -2260,7 +2276,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/thornbury-digital-v5/index.html" data-facet="experimental" data-date="2026-09-03" data-tier="5" data-category="business" data-creator="Zane">
+    <a class="card reveal" href="templates/thornbury-digital-v5/index.html" data-facet="experimental" data-date="2026-09-03" data-tier="5" data-category="business" data-creator="Zane" data-style="dark typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/thornbury-digital-v5-sm.webp" alt="Thornbury Digital v5: a cratered moon filling a full-bleed frame on obsidian black, under the wordmark THORNBURY in massive white capitals, the line &lsquo;Websites worth a second look.&rsquo; and two centred buttons." width="480" height="300" loading="lazy" decoding="async">
@@ -2278,7 +2294,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/studio-basin/index.html" data-facet="experimental" data-date="2026-09-03" data-tier="5" data-category="business" data-creator="Zane">
+    <a class="card reveal" href="templates/studio-basin/index.html" data-facet="experimental" data-date="2026-09-03" data-tier="5" data-category="business" data-creator="Zane" data-style="dark 3d-webgl">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/studio-basin-sm.webp" alt="BASIN: a strange attractor of luminous indigo threads under a shaft of light, on porcelain-bone paper with the wordmark Thornbury lower-left and the line 'Chaos, held.'" width="480" height="300" loading="lazy" decoding="async">
@@ -2296,7 +2312,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/survey-graticule/index.html" data-facet="flagship" data-date="2026-09-04" data-tier="5" data-category="business" data-creator="Mat">
+    <a class="card reveal" href="templates/survey-graticule/index.html" data-facet="flagship" data-date="2026-09-04" data-tier="5" data-category="business" data-creator="Mat" data-style="data-technical">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/survey-graticule-sm.webp" alt="The GRATICULE homepage: the line 'Everything you build starts from a measurement' on drafting cream beside a live contour sheet of a Welsh cwm, with a crimson section line drawn between two stations." width="480" height="300" loading="lazy" decoding="async">
@@ -2314,7 +2330,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/offline-outage/index.html" data-facet="flagship" data-date="2026-09-05" data-tier="5" data-category="entertainment" data-creator="YeeHao">
+    <a class="card reveal" href="templates/offline-outage/index.html" data-facet="flagship" data-date="2026-09-05" data-tier="5" data-category="entertainment" data-creator="YeeHao" data-style="dark">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/offline-outage-sm.jpg" alt="OUTAGE offline-dinosaur site: large OUTAGE wordmark on a dark desert night with Start Dry Run." width="480" height="300" loading="lazy" decoding="async">
@@ -2332,7 +2348,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/phones-kept/index.html" data-facet="ecommerce" data-date="2026-09-05" data-tier="4" data-category="ecommerce" data-creator="YeeHao">
+    <a class="card reveal" href="templates/phones-kept/index.html" data-facet="ecommerce" data-date="2026-09-05" data-tier="4" data-category="ecommerce" data-creator="YeeHao" data-style="minimal">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/phones-kept-sm.jpg" alt="KEPT homepage: full-bleed phone desk video behind the wordmark KEPT and the headline Certified phones. Honest grades." width="480" height="300" loading="lazy" decoding="async">
@@ -2350,7 +2366,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/crm-veridex/index.html" data-facet="standard" data-date="2026-09-04" data-tier="4" data-category="saas" data-creator="YeeHao">
+    <a class="card reveal" href="templates/crm-veridex/index.html" data-facet="standard" data-date="2026-09-04" data-tier="4" data-category="saas" data-creator="YeeHao" data-style="dark data-technical">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/crm-veridex-sm.jpg" alt="VERIDEX homepage: full-bleed automotive showroom video behind the wordmark VERIDEX and the headline One customer. One clean record." width="480" height="300" loading="lazy" decoding="async">
@@ -2368,7 +2384,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/property-bluehour/index.html" data-facet="flagship" data-date="2026-09-05" data-tier="5" data-category="property" data-creator="Jayden">
+    <a class="card reveal" href="templates/property-bluehour/index.html" data-facet="flagship" data-date="2026-09-05" data-tier="5" data-category="property" data-creator="Jayden" data-style="dark photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/property-bluehour-sm.webp" alt="Mabel Seow&rsquo;s homepage: the line &lsquo;I show homes at the hour you&rsquo;ll live in them&rsquo; on a deep petrol ground, beside a portrait of the agent lit by a lamp at a window at dusk." width="480" height="300" loading="lazy" decoding="async">
@@ -2386,7 +2402,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/community-gather-house/index.html" data-facet="booking" data-date="2026-09-04" data-tier="3" data-category="property" data-creator="YeeHao">
+    <a class="card reveal" href="templates/community-gather-house/index.html" data-facet="booking" data-date="2026-09-04" data-tier="3" data-category="property" data-creator="YeeHao" data-style="photography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/gather-house-sm.jpg" alt="Gather House homepage: warm wood community venue with a full-bleed interior video and the wordmark Gather House over soft amber light." width="480" height="300" loading="lazy" decoding="async">
@@ -2404,7 +2420,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/interior-chalkline/index.html" data-facet="flagship" data-date="2026-09-04" data-tier="5" data-category="property" data-creator="Zane">
+    <a class="card reveal" href="templates/interior-chalkline/index.html" data-facet="flagship" data-date="2026-09-04" data-tier="5" data-category="property" data-creator="Zane" data-style="photography-led data-technical">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/interior-chalkline-sm.webp" alt="The CHALKLINE homepage: the line 'Renovation you can see before you sign' beside a measured 4-room HDB floor plan in ink, with the living room filled by the photograph of the finished room and a priced sheet of every room underneath." width="480" height="300" loading="lazy" decoding="async">
@@ -2422,7 +2438,7 @@
       </div>
     </a>
 
-    <a class="card reveal" href="templates/animator-fenn/index.html" data-facet="flagship" data-date="2026-09-05" data-tier="4" data-category="portfolio" data-creator="Mat">
+    <a class="card reveal" href="templates/animator-fenn/index.html" data-facet="flagship" data-date="2026-09-05" data-tier="4" data-category="portfolio" data-creator="Mat" data-style="dark typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
         <img src="img/animator-fenn-sm.webp" alt="The Marlowe Fenn homepage: the words &lsquo;Made a frame at a time&rsquo; in heavy condensed light-grey caps on near-black, beside a line-drawn ball-and-socket puppet armature." width="480" height="300" loading="lazy" decoding="async">
@@ -2440,7 +2456,7 @@
       </div>
     </a>
 
-    <a class="card locked reveal" href="portfolio/index.html" data-lock="portfolio" data-category="portfolio" data-creator="Zane">
+    <a class="card locked reveal" href="portfolio/index.html" data-lock="portfolio" data-category="portfolio" data-creator="Zane" data-style="dark typography-led">
       <div class="preview preview--shot">
 
         <div class="chrome"><i></i><i></i><i></i></div>
@@ -3263,6 +3279,7 @@
     const status = document.getElementById('filterStatus');
     const sortEl = document.getElementById('sortBy');
     const categoryEl = document.getElementById('categoryBy');
+    const styleEl = document.getElementById('styleBy');
     const creatorEl = document.getElementById('creatorBy');
     const chips = Array.prototype.slice.call(document.querySelectorAll('.filters .chip'));
     if (!grid || !status || !sortEl || !chips.length) return;
@@ -3297,10 +3314,12 @@
       let shown = 0;
 
       const category = categoryEl ? categoryEl.value : 'all';
+      const style = styleEl ? styleEl.value : 'all';
       const creator = creatorEl ? creatorEl.value : 'all';
       ordered.forEach((c) => {
         const match = (active === 'all' || c.dataset.facet.split(' ').indexOf(active) !== -1) &&
           (category === 'all' || c.dataset.category === category) &&
+          (style === 'all' || (c.dataset.style || '').split(' ').indexOf(style) !== -1) &&
           (creator === 'all' || c.dataset.creator === creator);
         c.hidden = !match;
         if (match) {
@@ -3315,8 +3334,9 @@
       });
       pinned.forEach((p) => {
         const catMatch = category === 'all' || p.dataset.category === category;
+        const styMatch = style === 'all' || (p.dataset.style || '').split(' ').indexOf(style) !== -1;
         const creMatch = creator === 'all' || p.dataset.creator === creator;
-        p.hidden = active !== 'all' || !catMatch || !creMatch;
+        p.hidden = active !== 'all' || !catMatch || !styMatch || !creMatch;
         if (!p.hidden) p.classList.add('in-view');
         frag.appendChild(p);
       });
@@ -3335,6 +3355,7 @@
     });
     sortEl.addEventListener('change', apply);
     if (categoryEl) categoryEl.addEventListener('change', apply);
+    if (styleEl) styleEl.addEventListener('change', apply);
     if (creatorEl) creatorEl.addEventListener('change', apply);
 
     apply();
