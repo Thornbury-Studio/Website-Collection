@@ -54,6 +54,19 @@ WebP at quality 82.
 | `img/case-loam.webp` | Loam | `templates/cafe-loam/` |
 | `img/case-form01.webp` | Form/01 | `templates/streetwear-form01/` |
 
+## The collection wall
+
+`img/wall/<slug>.webp` — one fresh 1200×750 capture of every public template
+on the hub (64 of them; the password-gated client previews are excluded on
+purpose and their captures deleted), taken 6 Sep 2026 at 1440×900 through
+headless Chrome and encoded as WebP at quality 78, 3.0 MB in all, every one
+lazy-loaded. `tools/collection.json` is the manifest read from the hub's cards
+(title, tag, category, description) and `tools/build-collection.mjs`
+regenerates the wall and the home mosaic from it. Two captures show a
+template's own entrance gate rather than its home (`exhibition-ephemeris`,
+`exhibition-parallax`), because those sites open on one by design; the
+`offline-outage` frame is its real hero.
+
 ## Social image and hub card
 
 `img/og.webp` (1200×630) and the hub's `img/thornbury-digital-v6-sm.webp`
