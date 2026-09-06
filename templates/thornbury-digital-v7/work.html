@@ -43,43 +43,78 @@
     <p class="kicker" data-ignite="kick"><span class="bulb" aria-hidden="true"></span>THE WALL</p>
     <h1 class="band-title wm-line" data-ignite="wm1">Tonight's orders.</h1>
     <p class="band-sub" data-ignite="sub">Real builds, live right now — click in and walk around. Nothing here is a picture of a website; it is the website.</p>
+    <p class="chip band-chip" data-ignite="fur"><span class="dot" aria-hidden="true"></span>4 ORDERS TONIGHT</p>
   </section>
 
   <section class="room" aria-label="Selected builds">
     <div class="room-inner">
-      <ul class="dock" role="list">
-        <li>
-          <a class="order" href="/templates/exhibition-parallax/" data-strike>
-            <span class="order-plate"><img src="img/work-parallax.webp" width="1400" height="875" alt="PARALLAX — a pale gallery page with an enormous wordmark: an international exhibition of digital art." loading="lazy"></span>
-            <span class="order-row"><span class="order-title">Parallax</span><span class="order-tag"><span class="dot" aria-hidden="true"></span>Live</span></span>
-            <span class="order-desc">An exhibition of objects that cannot exist — nine WebGL rooms you walk through, staged for an international digital-art show.</span>
+      <ol class="rail">
+        <li class="course">
+          <div class="course-head" data-strike>
+            <p class="course-top"><span class="ticket">No. 01</span><span class="order-tag"><span class="dot" aria-hidden="true"></span>Live</span></p>
+            <h2 class="course-title">Parallax</h2>
+            <p class="course-kick">An exhibition of objects that cannot exist.</p>
+          </div>
+          <a class="course-plate" href="/templates/exhibition-parallax/" data-strike aria-label="Walk into PARALLAX, the live exhibition site">
+            <img src="img/work-parallax.webp" width="1400" height="875" alt="PARALLAX — a pale gallery page with an enormous wordmark: an international exhibition of digital art." loading="lazy">
           </a>
-        </li>
-        <li>
-          <a class="order" href="/templates/studio-basin/" data-strike>
-            <span class="order-plate"><img src="img/work-basin.webp" width="1400" height="875" alt="BASIN — a dark hero where a luminous strange-attractor of light ribbons hangs under one shaft of light." loading="lazy"></span>
-            <span class="order-row"><span class="order-title">Basin</span><span class="order-tag"><span class="dot" aria-hidden="true"></span>Live</span></span>
-            <span class="order-desc">The studio's own hero system — a thousand ribbons of light held in orbit. Chaos, held. Runs at full frame rate on a phone.</span>
-          </a>
-        </li>
-        <li>
-          <div class="order" data-strike>
-            <span class="order-plate order-ghost">
-              <span class="order-ghost-line">In the kitchen</span>
-              <span class="order-ghost-sub">opens when the client says go</span>
-            </span>
-            <span class="order-row"><span class="order-title">Client build</span><span class="order-tag order-tag--build"><span class="dot" aria-hidden="true"></span>In build</span></span>
-            <span class="order-desc">A shopfront for an engineering &amp; maintenance firm — booking, records, the works. On the pass now; link goes live at handover.</span>
+          <div class="course-body" data-strike>
+            <p class="course-desc">Nine rooms of impossible matter, staged in WebGL — walk the floor, or skip the walk and read the catalogue. Exhibit 00 is the website itself.</p>
+            <p class="facts">Nine rooms · WebGL · walk or catalogue</p>
+            <a class="course-link" href="/templates/exhibition-parallax/">Walk the rooms</a>
           </div>
         </li>
-        <li>
-          <a class="order" href="/" data-strike>
-            <span class="order-plate"><img src="img/work-hub.webp" width="1400" height="875" alt="The Thornbury template shelf — a catalog page of many finished websites." loading="lazy"></span>
-            <span class="order-row"><span class="order-title">The shelf</span><span class="order-tag"><span class="dot" aria-hidden="true"></span>Live</span></span>
-            <span class="order-desc">Sixty-plus finished shopfronts, every trade from noodles to horology. Pick the one closest to your shop; we fit it to you.</span>
+
+        <li class="course course--flip">
+          <div class="course-head" data-strike>
+            <p class="course-top"><span class="ticket">No. 02</span><span class="order-tag"><span class="dot" aria-hidden="true"></span>Live</span></p>
+            <h2 class="course-title">Basin</h2>
+            <p class="course-kick">The studio's own hero, held in a bowl of light.</p>
+          </div>
+          <a class="course-plate" href="/templates/studio-basin/" data-strike aria-label="See BASIN running, the live studio site">
+            <img src="img/work-basin.webp" width="1400" height="875" alt="BASIN — a dark hero where a luminous strange-attractor of light ribbons hangs under one shaft of light." loading="lazy">
           </a>
+          <div class="course-body" data-strike>
+            <p class="course-desc">A strange attractor drawn as a thousand luminous ribbons — fully abstract, nothing borrowed, and measured at sixty frames a second on a real phone.</p>
+            <p class="facts">WebGPU-first · 60 fps on a real phone · fully abstract</p>
+            <a class="course-link" href="/templates/studio-basin/">See it run</a>
+          </div>
         </li>
-      </ul>
+
+        <li class="course">
+          <div class="course-head" data-strike>
+            <p class="course-top"><span class="ticket">No. 03</span><span class="order-tag order-tag--build"><span class="dot" aria-hidden="true"></span>In build</span></p>
+            <h2 class="course-title">Esteem Auto Medics</h2>
+            <p class="course-kick">A workshop's whole counter, wired.</p>
+          </div>
+          <div class="course-plate" data-strike>
+            <div class="order-ghost">
+              <span class="order-ghost-line">In the kitchen</span>
+              <span class="order-ghost-sub">opens at handover</span>
+            </div>
+          </div>
+          <div class="course-body" data-strike>
+            <p class="course-desc">Bookings, job tracking, accident reports — the machinery behind a Singapore motor workshop's front desk. In build now; the link goes live at handover.</p>
+            <p class="facts">Client build · Singapore · opens at handover</p>
+          </div>
+        </li>
+
+        <li class="course course--flip">
+          <div class="course-head" data-strike>
+            <p class="course-top"><span class="ticket">No. 04</span><span class="order-tag"><span class="dot" aria-hidden="true"></span>Live</span></p>
+            <h2 class="course-title">The shelf</h2>
+            <p class="course-kick">Sixty-plus shopfronts, ready to fit.</p>
+          </div>
+          <a class="course-plate" href="/" data-strike aria-label="Browse the shelf, the full template collection">
+            <img src="img/work-hub.webp" width="1400" height="875" alt="The Thornbury template shelf — a catalog page of many finished websites." loading="lazy">
+          </a>
+          <div class="course-body" data-strike>
+            <p class="course-desc">The whole collection, every trade from noodles to horology — pick the closest, we fit it to your shop. Every one is a working site, not a screenshot.</p>
+            <p class="facts">60+ templates · every trade · all live</p>
+            <a class="course-link" href="/">Browse the shelf</a>
+          </div>
+        </li>
+      </ol>
 
       <div class="counter-cta" data-strike>
         <p>Want yours on this wall?</p>
