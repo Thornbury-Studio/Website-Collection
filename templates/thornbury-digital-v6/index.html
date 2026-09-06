@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-page="home" data-light="day">
+<html lang="en" data-page="home">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -22,15 +22,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&amp;family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&amp;display=swap">
+<link rel="preload" as="image" href="img/poster-hero.webp" media="(min-width: 761px)" fetchpriority="high">
 <link rel="stylesheet" href="css/style.css">
-<script defer src="js/sun.js"></script>
-<script defer src="js/light.js"></script>
 <script defer src="js/main.js"></script>
+<script defer src="js/hero.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<canvas class="wall" id="wall" aria-hidden="true"></canvas>
-<canvas class="shade" id="shade" aria-hidden="true"></canvas>
 <header class="bar">
   <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
   <nav class="nav" aria-label="Primary">
@@ -45,30 +43,28 @@
 <div class="site">
 <main id="main" tabindex="-1">
 
+  <div class="hero-stick">
   <section class="hero" aria-labelledby="h1">
+    <div class="hero-film" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 760px)" srcset="img/poster-hero-m.webp">
+        <img src="img/poster-hero.webp" width="1920" height="1080" alt="" fetchpriority="high" decoding="async">
+      </picture>
+      <video muted loop playsinline preload="none" width="1920" height="1080" poster="">
+        <source data-src="video/hero-m.mp4" type="video/mp4" media="(max-width: 760px)">
+        <source data-src="video/hero.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="hero-top">
       <p class="lab">Thornbury Digital · <b>A design studio in Singapore</b></p>
       <p class="lede">We design and build websites for companies that need to look like they mean it.</p>
     </div>
     <div class="hero-word">
       <p class="line">Websites worth <em>a second look.</em></p>
-      <div class="rail-wrap">
-        <div class="sunrail">
-          <div class="sunrail-head">
-            <p class="sunrail-read" aria-live="polite">Singapore</p>
-            <button class="sunrail-now" type="button" hidden>Back to the loop</button>
-          </div>
-          <div class="sunrail-track">
-            <div class="sunrail-ticks" aria-hidden="true"><i class="s0"></i><i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i><i class="s5"></i><i class="s6"></i><i class="s7"></i><span class="s0">Dawn</span><span class="s1">08:30</span><span class="s2">10:30</span><span class="s3">Noon</span><span class="s4">15:30</span><span class="s5">17:40</span><span class="s6">Dusk</span><span class="s7">Night</span></div>
-            <label class="visually-hidden" for="sunRange">Moment of the day in the room</label>
-            <input type="range" id="sunRange" min="0" max="7" step="1" value="3">
-          </div>
-          <p class="sunrail-hint">Eight moments of one Singapore day, on a slow loop. Drag the sun to hold one.</p>
-        </div>
-      </div>
       <h1 class="disp fit" id="h1"><span>Thorn</span><span>bury</span></h1>
     </div>
   </section>
+  </div>
 
   <section class="sec" aria-labelledby="work-h">
     <div class="wrap">
@@ -202,23 +198,6 @@
     </div>
   </section>
 
-  <section class="room" aria-labelledby="room-h">
-    <div class="sec-head reveal">
-      <p class="lab">The room</p>
-      <h2 class="disp" id="room-h">Lit through a screen.</h2>
-      <a class="more" href="studio.html">The studio</a>
-    </div>
-    <div class="room-media reveal">
-      <picture>
-        <source media="(max-width: 760px)" srcset="img/room-m.webp">
-        <img src="img/room.webp" width="2400" height="1600" alt="A screen of white ventilation blocks in daylight: circles, quarter-circles and squares cut through concrete, the pattern every page here is lit through." loading="lazy" decoding="async">
-      </picture>
-    </div>
-    <div class="wrap room-cap">
-      <p class="lab"><b>Ventilation blocks</b> · The tropical-modernist answer to sun and rain</p>
-      <p>Every page of this site is lit through one: eight moments of a Singapore day, dawn to night, drawn as the light would land on the floor of the room, on a slow loop.</p>
-    </div>
-  </section>
 
   <section class="sec" aria-labelledby="start-h">
     <div class="wrap statement reveal">
@@ -239,7 +218,7 @@
     <a href="studio.html">Studio</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <p class="foot-sun">Lit by the sun over Singapore, one day in eight moments. It is <b data-sun-time>—</b>; the room is at <b data-moment>—</b>.</p>
+  <p class="foot-sun">A design studio in Singapore. We design and build websites for companies that need to look like they mean it. It is <b data-sun-time>—</b> here.</p>
   <div class="foot-meta">
     <p class="lab">SGP · 01°17′N 103°51′E</p>
     <p class="lab"><a href="mailto:hello@thornbury.studio">hello@thornbury.studio</a></p>
