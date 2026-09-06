@@ -463,6 +463,12 @@ a{ color: inherit; }
   html.js.lit-all [data-strike]{ opacity: 1; animation: none; }
 }
 
+/* Absolute visibility floor, no JS involved: the style engine alone lights
+   anything still unstruck 6s after it gets style. Kept at low specificity
+   so every real strike/ministrike animation replaces it on .lit. */
+@keyframes fallback-on{ to{ opacity: 1; } }
+[data-ignite], [data-strike]{ animation: fallback-on 0s linear 6s forwards; }
+
 html.js [data-ignite].lit, html.js [data-strike].lit,
 [data-ignite].lit, [data-strike].lit{ opacity: 1; }
 
