@@ -1,44 +1,45 @@
 # THORNBURY DIGITAL v6 — asset credits
 
 Everything is self-hosted; the template CSP is `default-src 'self'` with
-`img-src 'self' data:`. Provenance lives here and nowhere on the pages.
+`media-src 'self'` and `img-src 'self' data:`. Provenance lives here and
+nowhere on the pages.
 
-## The light
+## The film
 
-There is no hero footage. The light on every page is computed: `js/sun.js`
-gives the sun's altitude and azimuth over 01°17′N 103°51′E for the current
-minute (NOAA equations, no dependencies) and `js/light.js` draws it through a
-screen of ventilation blocks on two WebGL canvases. Nothing was generated and
-no credits were spent. `VIDEO-POLICY.md`'s asset order was walked and stopped
-at tier 2: licensed photography exists for the one place a picture earns its
-place, and the motion is web-native, so no video was needed.
-
-Searched and rejected before that decision (Adobe Stock free tier, 6 Sep
-2026): 77 results for sunlight and shadow on walls, mostly leaf shadows,
-one CG "empty concrete wall", one time-lapse of an English building. Nothing
-was a Singapore room, and a time-lapse can only show one day's light at one
-speed; the computed sun shows this minute's.
-
-## The room
-
-One photograph, used on the home page and the studio page as the physical
-source of the site's light language. Pexels License: free to use, no
-attribution required; credited here anyway. Downloaded 6 Sep 2026.
+The hero, and the only spectacle on the site. Sourced, not generated, which is
+where `VIDEO-POLICY.md`'s asset order stops: excellent licensed footage exists
+and it is the palette in nature — sand, shadow and sun. Pexels License: free
+to use, no attribution required; credited here anyway. Downloaded 6 Sep 2026.
 
 | File | Source | Pexels ID | Master |
 |---|---|---|---|
-| `img/room.webp` | [Intricate geometric pattern on concrete wall](https://www.pexels.com/photo/intricate-geometric-pattern-on-concrete-wall-38865958/) | 38865958 | 4665×4023 JPEG |
-| `img/room-m.webp` | Same photograph, portrait crop for phones | 38865958 | — |
+| `video/hero.mp4` | [Close-up shot of sand ripples](https://www.pexels.com/video/close-up-shot-of-sand-ripples-8865227/) | 8865227 | 4096×2160, 25 fps, 11.96 s |
+| `video/hero-m.mp4` | Same clip, portrait crop for phones | 8865227 | — |
+| `img/poster-hero.webp` | The frame at 3 s, 1920×1080 | 8865227 | — |
+| `img/poster-hero-m.webp` | The frame at 3 s, 1080×1920 | 8865227 | — |
 
-Grade: cropped to 3:2 (`crop=4665:3110:0:600`), scaled to 2400 wide,
-`eq=contrast=1.04:saturation=0.82:gamma=1.02` and a small colour balance
-toward the limewash (`colorbalance=rs=.02:gs=.005:bs=-.03:rm=.015:bm=-.02`)
-so the whites of the blocks sit in the page's own palette. WebP quality 84
-(189 kB) and, for the 900×1200 portrait crop, quality 82 (56 kB).
+The master is kept under `video/src/` (gitignored by this directory's own
+`.gitignore`). Eighteen candidates were pulled as SD previews and read off one
+contact sheet; three were downloaded at full size. The dune-crest clip
+(16381940) was rejected because its shadow side runs blue-grey, and the long
+parallel ripples (8865816) because the corduroy read colder; the soft ripple
+field won on warmth and stillness.
 
-Also downloaded at full size and not used: Pexels 39060508 (cooler, whiter
-blocks on a grey wall) and 38838381 (star-shaped cutouts, Tokyo). The
-warmer wall won because it is already the colour of the page.
+**Both encodes play forward then backward**, so the loop never cuts: the
+strongest 8.5 s (6.5 s for the phone) is split, one copy reversed with its
+duplicate frame trimmed, and the two concatenated in one ffmpeg pass. Grade:
+a 16:9 centre crop of the 4096-wide master, `eq=contrast=1.05:saturation=.9:
+brightness=-.012` and a small warm colour balance so the sand sits with the
+limewash. Landscape: 1920×1080, H.264 CRF 25 with a 2600k cap, 426 frames,
+17.0 s, 4.27 MB. Portrait: `crop=1215:2160:1440:0`, 1080×1920, CRF 26 with a
+1600k cap, 326 frames, 13.0 s, 2.13 MB. Both were checked at 1:1 against the
+same crop of the graded source before shipping; no macroblocking on the grain
+of the sand.
+
+The `<picture>` is what paints; `js/hero.js` attaches the film in
+`requestIdleCallback` and crosses it in only on the `playing` event, so a
+refused autoplay or a slow connection leaves a finished still. Reduced motion
+never fetches a byte.
 
 ## Work plates
 
@@ -70,9 +71,17 @@ template's own entrance gate rather than its home (`exhibition-ephemeris`,
 ## Social image and hub card
 
 `img/og.webp` (1200×630) and the hub's `img/thornbury-digital-v6-sm.webp`
-(480×300) are captures of this template's own home page at 17:05 SGT.
+(480×300) are captures of this template's own home page.
 
 ## Type
 
 Big Shoulders (Patric King, Open Font License) and Newsreader (Production
 Type, Open Font License), both served from Google Fonts.
+
+## Retired
+
+The first two rounds of this template lit the page with a computed sun through
+a screen of ventilation blocks (two WebGL canvases, no assets) and carried one
+Pexels photograph of such a screen (38865958). Both were removed on 6 Sep
+2026 when the light was judged to read as a fault rather than a design; the
+photograph is no longer in the tree.

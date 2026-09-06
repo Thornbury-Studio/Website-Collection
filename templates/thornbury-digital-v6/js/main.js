@@ -6,13 +6,11 @@
   "use strict";
   var doc = document.documentElement;
   doc.classList.add("js");
-  var Sun = window.TBSun;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function $(s, r) { return (r || document).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
   function pad(n) { return String(Math.floor(n)).padStart(2, "0"); }
-  function clock(minutes) { return pad(minutes / 60) + ":" + pad(minutes % 60); }
 
   // ---------- reveals ----------
   var io = null, seen = false;
@@ -69,57 +67,17 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // ---------- the clock and the moment ----------
-  // The bar keeps the real Singapore time; the room shows one of eight
-  // authored moments, named wherever the copy asks for it.
+  // ---------- the clock: Singapore time in the bar and the foot ----------
   function realClock() {
-    var c = Sun.sgt(new Date());
-    return pad(c.h) + ":" + pad(c.m);
+    var d = new Date(Date.now() + 8 * 3600000);
+    return pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes());
   }
-  function renderClock(s) {
+  function renderClock() {
     var el = $("#barTime");
-    if (el) el.innerHTML = "<b>" + realClock() + " SGT</b> · " + s.name.toLowerCase();
+    if (el) el.innerHTML = "<b>" + realClock() + " SGT</b> · Singapore";
     $$("[data-sun-time]").forEach(function (e) { e.textContent = realClock() + " SGT"; });
-    $$("[data-moment]").forEach(function (e) { e.textContent = s.name.toLowerCase(); });
-    $$("[data-sun-word]").forEach(function (e) { e.textContent = s.word; });
-    $$("[data-sun-alt]").forEach(function (e) { e.textContent = (s.altitude < 0 ? "−" : "") + Math.abs(s.altitude) + "°"; });
   }
-  document.addEventListener("tb:state", function (e) { renderClock(e.detail); syncRails(e.detail); });
-  setInterval(function () { if (window.TBLight.state) { var s = window.TBLight.state(); if (s) renderClock(s); } }, 30000);
-
-  // ---------- the rail: eight stops, one moment each ----------
-  function initRails(root) {
-    $$(".sunrail", root).forEach(function (rail) {
-      var input = $("input[type=range]", rail), now = $(".sunrail-now", rail), read = $(".sunrail-read", rail);
-      if (!input) return;
-      input.max = String(window.TBLight.STATES.length - 1);
-      input.addEventListener("input", function () {
-        window.TBLight.go(+input.value);
-        if (now) now.hidden = false;
-        rail.setAttribute("data-moved", "1");
-      });
-      if (now) now.addEventListener("click", function () {
-        window.TBLight.resume();
-        now.hidden = true;
-        rail.removeAttribute("data-moved");
-      });
-      var s = window.TBLight.state && window.TBLight.state();
-      if (s) { input.value = s.index; paintRead(read, s, rail); if (s.paused && now) { now.hidden = false; rail.setAttribute("data-moved", "1"); } }
-    });
-  }
-  function paintRead(read, s, rail) {
-    if (!read) return;
-    var moved = rail.hasAttribute("data-moved");
-    read.innerHTML = s.name + " <small>· " + s.hour + (moved ? " · held" : " · the loop") + "</small>";
-  }
-  function syncRails(s) {
-    $$(".sunrail").forEach(function (rail) {
-      var input = $("input[type=range]", rail);
-      if (input && document.activeElement !== input) input.value = s.index;
-      if (input) input.setAttribute("aria-valuetext", s.name + ", " + s.hour + " in Singapore");
-      paintRead($(".sunrail-read", rail), s, rail);
-    });
-  }
+  setInterval(renderClock, 20000);
 
   // ---------- contact form: composes a mail, nothing leaves the page ----------
   function initForm(root) {
@@ -140,7 +98,6 @@
   function initPage(root) {
     root = root || document;
     rescanReveals();
-    initRails(root);
     initForm(root);
     fitWords();
     var page = doc.getAttribute("data-page");
@@ -149,10 +106,9 @@
       var is = (page === "home" && href === "index.html") || href === page + ".html";
       if (is) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
-    var s = window.TBLight.state && window.TBLight.state();
-    if (s) { renderClock(s); syncRails(s); }
-    if (window.TBLight.invalidate) window.TBLight.invalidate();
+    renderClock();
     initWall(root);
+    document.dispatchEvent(new CustomEvent("tb:page", { detail: { root: root } }));
   }
 
   // ---------- the collection wall: one filter row, plates hide by category ----------
@@ -168,7 +124,6 @@
       chips.forEach(function (c) { c.setAttribute("aria-pressed", c.getAttribute("data-cat") === cat ? "true" : "false"); });
       if (count) count.textContent = n;
       rescanReveals(); sweep();
-      if (window.TBLight.invalidate) window.TBLight.invalidate();
     }
     chips.forEach(function (c) { c.addEventListener("click", function () { apply(c.getAttribute("data-cat")); }); });
     if (count) count.textContent = plates.filter(function (p) { return !p.hidden; }).length;
