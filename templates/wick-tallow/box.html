@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>The Box — WICK</title>
+  <meta name="description" content="Wishlist WICK on Steam, PlayStation and Xbox, or leave an address on the sleeve. Tallow Works still has fifty matches in the box.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/wick-tallow/box.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="WICK">
+  <meta property="og:title" content="The Box — WICK">
+  <meta property="og:description" content="Wishlist WICK. The list is the only way we send a date.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/wick-tallow/box.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/wick-tallow/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Box — WICK">
+  <meta name="twitter:description" content="Wishlist WICK. The list is the only way we send a date.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/wick-tallow/img/og.webp">
+  <meta name="theme-color" content="#100e0c">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;600&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Sofia+Sans+Extra+Condensed:wght@700;800;900&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="WICK, home">W<i>I</i>CK</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="house.html">The House</a>
+    <a href="manual.html">Manual</a>
+    <a class="nav-cta" href="box.html" aria-current="page">The Box</a>
+  </nav>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+<div class="drawer" id="drawer" hidden>
+  <a href="house.html">The House</a>
+  <a href="manual.html">Manual</a>
+  <a href="box.html">The Box</a>
+  <p class="label">Tallow Works &middot; closed 1974 &middot; still warm</p>
+</div>
+
+<main id="main">
+  <header class="page-hero wrap">
+    <p class="kicker">Packing floor &middot; last sleeve</p>
+    <h1>The Box</h1>
+  </header>
+
+  <section class="split" aria-labelledby="pack-h">
+    <div class="plate" data-flame>
+      <img src="img/packing.webp" srcset="img/packing-800.webp 800w, img/packing.webp 1600w" sizes="(min-width: 64rem) 58vw, 100vw" alt="A dark packing aisle of unlabelled cream matchboxes on timber pallets, lit by a single match." width="1600" height="900" decoding="async">
+    </div>
+    <div class="split__log">
+      <p class="kicker">Packing floor</p>
+      <h2 id="pack-h">The last sleeve is still on the pallet.</h2>
+      <p>Unlabelled cream board, fifty sticks, a phosphorus strip that still takes a head. Put your name on this one.</p>
+    </div>
+  </section>
+
+  <section class="wrap box-stage">
+    <div class="sleeve reveal" aria-hidden="true">
+      <div class="brand">WICK</div>
+      <p class="sub">Tallow Works &middot; safety matches &middot; strike on box</p>
+      <p class="n">50</p>
+    </div>
+
+    <div>
+      <p class="lede reveal">WICK ships on Steam, PlayStation 5 and Xbox Series. Wishlist it where you play, or leave an address on the sleeve and we will send the date once, when there is one.</p>
+      <div class="platforms reveal">
+        <a href="box.html#list">Steam</a>
+        <a href="box.html#list">PlayStation</a>
+        <a href="box.html#list">Xbox</a>
+      </div>
+
+      <form class="form reveal" id="box-form" method="post" action="#list" aria-labelledby="list">
+        <h2 id="list" class="kicker">The sleeve</h2>
+        <div class="field">
+          <label for="mail">Email</label>
+          <input id="mail" name="mail" type="email" autocomplete="email" required placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="where">Where you&rsquo;ll play</label>
+          <input id="where" name="where" type="text" maxlength="80" placeholder="Steam, a couch, a handheld">
+        </div>
+        <button class="btn" type="submit">Put my name on it</button>
+        <p class="form-note">One letter, when the box has a date. Nothing else.</p>
+      </form>
+      <p class="done" id="box-done" hidden tabindex="-1">You&rsquo;re on the sleeve. We&rsquo;ll write when the factory opens.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>WICK &middot; Tallow Works &middot; <span data-year>2026</span></p>
+  <p><a href="house.html">The House</a> &middot; <a href="manual.html">Manual</a></p>
+</footer>
+<script src="js/site.js"></script>
+</body>
+</html>
