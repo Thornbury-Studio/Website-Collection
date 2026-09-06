@@ -63,9 +63,18 @@ to leave no halos.
 - **Plates drift.** Every plate image sits at scale 1.1 inside its clipped
   frame and translates ±5 % of its height as it crosses the viewport, so the
   work has depth as you pass it. One rAF handles the hero and the drift.
-- **Surface.** Two SVG noise layers over the limewash: a soft plaster mottle
-  at 7 % multiply under everything and a fine grain at 5.5 % over everything,
-  stepped six frames a second, so the wall is a material and not a fill.
+- **The ground.** The background is sand: a low relief of dune swells and
+  long wavering wind ripples (`js/ground.js`), shaded by the same raking
+  light as the hero footage, drifting slower than the page on scroll so the
+  wall has depth. On a fine pointer, moving the cursor drags a soft furrow
+  through it — a finger through fine sand — which heals over about twenty
+  seconds. It is one 2D canvas whose backing store IS the simulation grid
+  (one cell per 8 css px, ~21k cells); the compositor pays for the upscale,
+  so a frame costs under a millisecond of script and nothing draws at rest.
+  Shading is ink and warm white at alphas of 26/255 or less over the CSS
+  wall colour, so text contrast is untouched. Touch devices and reduced
+  motion get the still relief. A faint SVG plaster mottle sits under it for
+  no-JS, and the fine grain at 5.5 % multiply runs over everything.
 - Reduced motion keeps the still and the surface and drops the rest.
 
 ## Feedback
