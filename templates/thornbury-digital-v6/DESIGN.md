@@ -27,19 +27,26 @@ plates and hairlines, and a feedback layer that answers the hand.
 ## The film
 
 Cut the way a travel film is cut: a throw of angles and subjects, not the
-same place seen closer and closer. Ten beats in 18.6 seconds — the ripples in
-macro, dunes from straight above, a low fast flight over a crest, a hand
-letting sand run, a camel caravan and its shadows from above, the camel's eye,
-a beetle digging, a lone figure with a long shadow, the crest, and the
-opening beat played backward into its own first frame so the loop never cuts.
-Every join is a 0.6 s crossfade. The animals are the point of the tagline —
-the things you notice on the second look — and every beat stays mid-to-light
-so the ink wordmark reads on all of them; the sunset silhouettes that a travel
-edit would reach for were left out for exactly that reason.
+same place seen closer and closer. Nine beats in 16 seconds — the ripples in
+macro, dunes from straight above, a hand letting sand fall, a camel caravan
+and its shadows from above, the camel's eye, a beetle digging, a lone figure
+among footprint trails, the crest, and the opening beat played backward into
+its own first frame so the loop never cuts. Every join is a 0.6 s crossfade.
+The animals are the point of the tagline — the things you notice on the
+second look — and every beat stays mid-to-light so the ink wordmark reads on
+all of them.
 
-- `video/hero.mp4` — 1920×1080, 18.6 s, 4.5 MB; `hero-m.mp4` — a portrait
-  cut with each beat re-framed around its subject, 900×1600, 3.0 MB. Sources,
-  trims, grade and rejections in `IMAGE-CREDITS.md`.
+Sharpness is enforced, not assumed: every candidate was measured (Sobel mean
+on the frame it contributes) and the soft ones replaced with true 4K masters
+— the round-four feedback named one soft aerial, and the meter agreed with
+the eye (13 against 74 for the caravan). The whole film gets a
+contrast-adaptive sharpen (`cas=0.6`) after scaling, strong enough to
+resolve individual grains of sand on the beetle beat at 1:1, gentle enough
+to leave no halos.
+
+- `video/hero.mp4` — 1920×1080, 16 s, 4.5 MB; `hero-m.mp4` — a portrait cut
+  with each beat re-framed around its subject, 900×1600, 2.6 MB. Sources,
+  Sobel numbers, trims, grade and rejections in `IMAGE-CREDITS.md`.
 - The still is the hero, the film is an upgrade to it: the `<picture>` paints
   first from the film's own first frame; `js/hero.js` attaches the sources in
   `requestIdleCallback` and crosses the film in only on the `playing` event.
