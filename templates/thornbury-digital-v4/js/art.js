@@ -1,5 +1,4 @@
-/* Inner-page art directions. Dev dropdown beside Work.
-   set | plate | grain | edge | folio — stored, applied on Work / Studio / Contact. */
+/* Inner-page art weather. Set is locked; Dev switcher is gone. */
 
 export var ARTS = [
   { id: "set", name: "Set" },

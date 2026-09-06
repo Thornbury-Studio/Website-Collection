@@ -1,6 +1,7 @@
 import { startField } from "./field.js";
 import { mountPieces, bindRail } from "./work.js";
 import { bindArt } from "./art.js";
+import { bindDrift } from "./drift.js";
 
 const html = document.documentElement;
 const page = html.dataset.page || "home";
@@ -32,10 +33,12 @@ try {
 if (inner) {
   art = bindArt({ reduced: reduced });
 }
+if (page === "studio" && !reduced) {
+  bindDrift(document.querySelector(".studio-doc"));
+}
 
 var films = [
-  document.getElementById("stageFilm"),
-  document.getElementById("insetFilm")
+  document.getElementById("stageFilm")
 ].filter(Boolean);
 var filmHold = false;
 var filmVisible = true;
@@ -59,19 +62,20 @@ if (films.length) {
       el.preload = "none";
     });
   } else {
-    var hero = document.querySelector(".hero") || films[0];
+    var watch = document.querySelector(".hero") || document.querySelector(".studio-fig") || films[0];
     var io = new IntersectionObserver(function (entries) {
       filmVisible = !!(entries[0] && entries[0].isIntersecting);
       setFilms();
     }, { threshold: 0.12 });
-    io.observe(hero);
+    io.observe(watch);
     setFilms();
   }
 }
 
 var rail = document.getElementById("pieces");
 mountPieces(rail, {
-  home: page === "home"
+  home: page === "home",
+  skip: page === "work" ? ["Null", "Sejuk"] : page === "home" ? ["Col Noir"] : []
 });
 bindRail(rail, {
   onHold: function () {
