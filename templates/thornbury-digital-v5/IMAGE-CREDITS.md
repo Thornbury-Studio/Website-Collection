@@ -6,9 +6,10 @@ be blocked at load time.
 
 ## Hero film
 
-Stand-in footage filling the hero until the Higgsfield film is made. Pixabay
-Content License: free for commercial use, no attribution required — credited
-here anyway. Downloaded 3 Sep 2026.
+The hero. Sourced rather than generated, which is where `VIDEO-POLICY.md`'s asset
+order says to stop: tier 1 is existing legally usable video, and this is exactly
+the shot the hero needs. Pixabay Content License: free for commercial use, no
+attribution required — credited here anyway. Downloaded 3 Sep 2026.
 
 | File | Source | Pixabay ID |
 |---|---|---|
@@ -32,7 +33,24 @@ which is the only test worth trusting here; file size alone says nothing.
 Two more filters: `hflip` sets the body's lit side against the layout, and
 `eq=saturation=0.2:contrast=1.1` pulls the residual blue out of the starfield,
 which keeps the page inside its obsidian/chrome/ember palette.
-`img/poster-hero.webp` is the frame at 6 s.
+`img/poster-hero.webp` is the frame at 6 s, and it is the hero's real first
+paint: the page ships a `<picture>` and `js/main.js` attaches the film only once
+the page is up.
+
+**The phone gets a portrait cut, not a smaller copy.** `video/hero-m.mp4` runs
+the same filter chain with `crop=540:1080:420:0` added after the `hflip` — the
+window was chosen by rendering three candidates (centre .42 / .50 / .58) and
+looking at them; .42 keeps the sky in the upper left, where the wordmark lands,
+and the lit limb sweeping down through the frame. 540×1080, CRF 24, 449 frames,
+0.90 MB against 2.73 MB, and no encoded column is off-screen on a portrait phone.
+`img/poster-hero-m.webp` is its frame at 6 s, 20 kB. Both seams survive the crop:
+loop point 40.3 dB against 40.1 dB for an ordinary frame step, turnaround 38.6 dB
+against 38.7 dB, unrelated frames 22.7 dB.
+
+| File | Size | Serves |
+|---|---|---|
+| `video/hero.mp4` · `img/poster-hero.webp` | 2.73 MB · 35 kB | above 760 px |
+| `video/hero-m.mp4` · `img/poster-hero-m.webp` | 0.90 MB · 20 kB | 760 px and below |
 
 Seam check (PSNR against the neighbouring ordinary frame step, higher is closer):
 loop point 32.2 dB vs 32.8 dB, turnaround 35.4 dB vs 35.3 dB, unrelated frames

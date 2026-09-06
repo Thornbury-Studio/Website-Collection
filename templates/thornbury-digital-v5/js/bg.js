@@ -7,8 +7,12 @@
    Anything unexpected — a cross-origin URL, a modified click, a failed fetch —
    falls straight back to a real navigation.
 
-   Seven directions are implemented, plus the hard cut as a control. They differ
-   only in what happens to the background between the two pages:
+   CONTINUUM is the shipped direction: the camera travels to the next page's
+   viewpoint while the world underneath it is never reseeded, so the strand you
+   were watching on one page is still there on the next. The six alternatives it
+   was chosen over are kept below with the costs they measured, because that
+   comparison is the reason this one ships. Nothing selects between them at run
+   time any more — DEFAULT is the site.
 
      off         a real browser navigation. The control.
      continuum   one world, never reseeded. The camera travels to the next page's
@@ -31,11 +35,8 @@
      refract     not a wipe at all. A filmed liquid-metal ripple displaces the
                  frozen frame along its own luminance gradient, cell by cell.
 
-   Every direction carries its measured cost in `cost`, and the dev switcher shows
-   it, because a transition is only worth what you are willing to pay for it.
-
-   The mode is chosen by js/dev-bg-switcher.js, which is temporary and dev-only.
-   Without it this file runs whichever mode DEFAULT names below. */
+   Every direction carries the cost it actually measured in `cost`, because a
+   transition is only worth what you are willing to pay for it. */
 (function (global) {
   'use strict';
 
@@ -55,6 +56,12 @@
       cam: { rot: 0.00, tilt: 0.50, ax: .50, ay: .50, zoom: 1.00, lx: 0.60, ly: -0.80 },
       world: { b: 0.190, seed: 0, ext: 4.6, vn: 1.30, density: 1.00 },
       film: { pos: '50% 100%', scale: 1.16, filter: 'saturate(.9) contrast(1.02)' }
+    },
+    services: {
+      field: 'still',
+      cam: { rot: 1.75, tilt: 0.62, ax: .44, ay: .54, zoom: 1.12, lx: -0.15, ly: -0.99 },
+      world: { b: 0.172, seed: 5, ext: 4.85, vn: 1.52, density: 0.96 },
+      film: { pos: '35% 55%', scale: 1.22, filter: 'saturate(.4) contrast(1.1) brightness(.76)' }
     },
     work: {
       field: 'still',
@@ -761,28 +768,15 @@
     if (current && MODES[current].exit) MODES[current].exit();
     current = id;
     html.setAttribute('data-bg', id);
-    if (remember !== false) {
-      try { sessionStorage.setItem('tb-bg', id); } catch (e) { /* private mode */ }
-    }
     if (global.TBPage) {
       global.TBPage.onField(function () { MODES[id].enter(page); });
     }
-    /* so a mode set from anywhere but the dropdown still shows up in it */
-    dispatchEvent(new CustomEvent('tb-bg-mode', { detail: id }));
   }
 
-  var stored = null;
-  try { stored = sessionStorage.getItem('tb-bg'); } catch (e) { /* private mode */ }
-  setMode(stored || DEFAULT, false);
+  setMode(DEFAULT, false);
 
   global.TBBg = {
-    modes: function () {
-      return Object.keys(MODES).map(function (k) {
-        return { id: k, label: MODES[k].label, cost: MODES[k].cost, note: MODES[k].note };
-      });
-    },
     mode: function () { return current; },
-    setMode: setMode,
     page: function () { return page; },
     presets: PAGES
   };

@@ -168,6 +168,10 @@
       };
     }
 
+    /* Extra yaw, in rad/s, handed in from outside and decaying on its own. It
+       is what lets scrolling be felt in the object rather than only behind it. */
+    var surge = 0;
+
     var camTw = tweener(cam, ['rot', 'tilt', 'ax', 'ay', 'zoom', 'lx', 'ly'], norml);
     var lawTw = tweener(law, ['b', 'ext', 'vn'], null);
     function tweensStep(dt) { camTw.step(dt); lawTw.step(dt); }
@@ -319,7 +323,9 @@
       acc += dt;
       var steps = 0;
       while (acc >= STEP && steps < 3) { integrate(); acc -= STEP; steps++; }
-      rot += dt * 0.06;
+      rot += dt * (0.06 + surge);
+      surge *= Math.exp(-dt * 1.9);
+      if (surge < 0.0015) surge = 0;
       tweensStep(dt);
       var e = 1 - Math.exp(-dt * 2.4);
       rotP += (tx * 0.25 - rotP) * e;
@@ -415,6 +421,12 @@
         else run();
       },
       camera: function (to, dur) { if (dur) camTw.to(to, dur); else camTw.set(to); },
+      /* a push on the world's rotation that fades out over about a third of a
+         second; capped so a fast flick cannot spin it */
+      impulse: function (v) {
+        if (still || !running) return;
+        surge = Math.min(0.30, surge + (v > 0 ? v : 0));
+      },
       /* Change the attractor's own constant instead of reseeding: the strands
          stay the strands and the tangle reshapes into the next page's law. */
       lawTo: function (spec, dur) {

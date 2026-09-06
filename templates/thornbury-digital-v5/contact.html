@@ -27,8 +27,6 @@
 <script defer src="js/field.js"></script>
 <script defer src="js/main.js"></script>
 <script defer src="js/bg.js"></script>
-<!-- TEMPORARY: development-only background switcher. Delete this tag and js/dev-bg-switcher.js before launch. -->
-<script defer src="js/dev-bg-switcher.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -38,15 +36,40 @@
   <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
   <nav class="nav" aria-label="Primary">
     <a href="work.html">Work</a>
+    <a href="services.html">Services</a>
     <a href="studio.html">Studio</a>
     <a href="contact.html">Contact</a>
   </nav>
   <p class="bar-side">SGP · 01°17′N 103°51′E</p>
+  <a class="menu-btn" id="menuBtn" href="#site-nav"><span>Menu</span><i aria-hidden="true"></i></a>
 </header>
+<dialog class="menu" id="menu" aria-label="Menu">
+  <div class="menu-in">
+    <div class="menu-top">
+      <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
+      <button class="menu-btn" type="button" data-close><span>Close</span><i aria-hidden="true"></i></button>
+    </div>
+    <div class="menu-say">
+      <p class="meta">Design studio · Singapore</p>
+      <p class="statement">Websites worth a second look.</p>
+    </div>
+    <nav class="menu-nav" aria-label="Pages">
+      <a href="work.html"><b>01</b><span>Work</span><small>Five cases</small></a>
+      <a href="services.html"><b>02</b><span>Services</span><small>What it costs</small></a>
+      <a href="studio.html"><b>03</b><span>Studio</span><small>Three people, one room</small></a>
+      <a href="contact.html"><b>04</b><span>Contact</span><small>Start a project</small></a>
+    </nav>
+    <p class="menu-foot meta">
+      <a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a>
+      <a href="tel:+6588056769">+65 8805 6769</a>
+      <span>SGP · 01°17′N 103°51′E</span>
+    </p>
+  </div>
+</dialog>
 <div class="site">
   <main id="main" tabindex="-1">
     <header class="page-head wrap">
-      <p class="meta"><span class="q">04</span> — Contact</p>
+      <p class="meta"><span class="q">05</span> — Contact</p>
       <h1 class="display">Start a project</h1>
       <p class="sub">Tell us what the site has to do. We reply within two working days.</p>
     </header>
@@ -99,10 +122,10 @@
 
           <aside class="aside">
             <dl>
-              <div><dt class="meta">Email</dt><dd><a href="mailto:hello@thornbury.studio">hello@thornbury.studio</a></dd></div>
-              <div><dt class="meta">Studio</dt><dd>Tanjong Pagar, Singapore</dd></div>
+              <div><dt class="meta">Email</dt><dd><a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a></dd></div>
+              <div><dt class="meta">Phone</dt><dd><a href="tel:+6588056769">+65 8805 6769</a></dd></div>
+              <div><dt class="meta">WhatsApp</dt><dd><a href="https://wa.me/6588056769" target="_blank" rel="noopener noreferrer">Open a chat</a></dd></div>
               <div><dt class="meta">Hours</dt><dd>Mon – Fri, 10:00 – 18:00 SGT</dd></div>
-              <div><dt class="meta">Currently</dt><dd>Taking two projects for Q1 2027</dd></div>
             </dl>
           </aside>
         </div>
@@ -111,10 +134,21 @@
   </main>
 
   <footer class="foot">
-    <div class="wrap meta">
-      <p>Thornbury Digital · Singapore</p>
-      <p><a href="mailto:hello@thornbury.studio">hello@thornbury.studio</a></p>
-      <p>© 2026</p>
+    <div class="wrap">
+      <nav class="foot-nav" id="site-nav" aria-label="Site">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="services.html">Services</a>
+        <a href="studio.html">Studio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="foot-meta meta">
+        <p>Thornbury Digital · Singapore</p>
+        <p><a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a></p>
+        <p><a href="tel:+6588056769">+65 8805 6769</a></p>
+        <p><button class="fx-btn" type="button" data-fx aria-pressed="true"><i aria-hidden="true"></i><span class="fx-word">Effects</span><span class="fx-state">On</span></button></p>
+        <p>© 2026</p>
+      </div>
     </div>
   </footer>
 </div>

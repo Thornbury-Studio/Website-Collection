@@ -8,9 +8,15 @@
   'use strict';
 
   var html = document.documentElement;
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* The visitor's own switch, thrown from the studio page's article 03 or from
+     any footer. It joins the OS preference at the same junction, so everything
+     that already respected reduced motion respects this too and no code has to
+     learn about it twice. */
+  var fxOff = false;
+  function reducedNow() { return prefersReduced || fxOff; }
   html.classList.add('js');
-  if (reduced) html.classList.add('rm');
+  if (prefersReduced) html.classList.add('rm');
 
   /* ---------- field ---------- */
 
@@ -34,12 +40,15 @@
     if (!canvas || !global.TBField) { html.classList.add('no-field'); return; }
     var mode = html.getAttribute('data-field') || 'live';
     var page = html.getAttribute('data-page') || 'home';
-    var anchors = { home: [0.5, 0.5], studio: [0.62, 0.48], work: [0.5, 0.45], contact: [0.68, 0.5] };
-    var seeds = { home: 0, studio: 11, work: 23, contact: 37 };
+    var anchors = {
+      home: [0.5, 0.5], work: [0.5, 0.45], services: [0.44, 0.54],
+      studio: [0.62, 0.48], contact: [0.68, 0.5]
+    };
+    var seeds = { home: 0, work: 23, services: 5, studio: 11, contact: 37 };
     var an = anchors[page] || anchors.home;
     try {
       field = global.TBField.start(canvas, {
-        still: mode === 'still' || reduced,
+        still: mode === 'still' || reducedNow(),
         seed: seeds[page] || 0,
         ax: an[0],
         ay: an[1]
@@ -68,7 +77,7 @@
   }
 
   function markNav(page) {
-    document.querySelectorAll('.nav a').forEach(function (a) {
+    document.querySelectorAll('.nav a, .menu-nav a, .foot-nav a').forEach(function (a) {
       if ((a.getAttribute('href') || '') === page + '.html' ||
           (page === 'home' && (a.getAttribute('href') || '') === 'index.html')) {
         a.setAttribute('aria-current', 'page');
@@ -78,21 +87,48 @@
     });
   }
 
-  /* Blueprint coordinates: every plate reports its own rendered pixel size. */
-  function pad(n) { return String(n).padStart(4, '0'); }
-  function labels(root) {
-    function label() {
-      root.querySelectorAll('.plate').forEach(function (p) {
-        var w = Math.round(p.clientWidth), h = Math.round(p.clientHeight);
-        p.querySelectorAll('[data-w]').forEach(function (el) { el.textContent = pad(w); });
-        p.querySelectorAll('[data-h]').forEach(function (el) { el.textContent = pad(h); });
-      });
+  /* The hero still is what paints; the film is attached only after the page is
+     up, so it can never delay first paint or LCP. A phone gets a portrait encode
+     cut for the crop it actually shows (540x1080, 0.9 MB against 2.7 MB), and it
+     is crossed in only once it is genuinely playing — so a slow connection, a
+     blocked autoplay or reduced motion all simply keep the still. */
+  function heroFilm(root) {
+    var v = root.querySelector('#heroFilm');
+    if (!v || reducedNow()) return;
+    var small = matchMedia('(max-width: 760px)').matches;
+    var src = (small && v.getAttribute('data-film-sm')) || v.getAttribute('data-film');
+    if (!src) return;
+    function attach() {
+      if (!v.isConnected) return;
+      v.addEventListener('playing', function () { v.classList.add('is-on'); }, { once: true });
+      v.src = src;
+      var p = v.play();
+      if (p && p.catch) p.catch(function () { /* autoplay refused: the still stands */ });
     }
-    var lt;
-    label();
-    on(global, 'resize', function () {
-      clearTimeout(lt);
-      lt = setTimeout(label, 120);
+    if (global.requestIdleCallback) requestIdleCallback(attach, { timeout: 2000 });
+    else setTimeout(attach, 400);
+  }
+
+  /* The mobile menu is a page of its own, so it is a real modal dialog: the
+     browser gives it the focus trap, Escape, and inert content behind it. The
+     markup lives outside <main>, which bg.js swaps, so it survives navigation.
+     Without dialog support the bar keeps its links instead. */
+  function menu() {
+    var dlg = document.getElementById('menu');
+    var btn = document.getElementById('menuBtn');
+    if (!dlg || !btn) return;
+    if (typeof dlg.showModal !== 'function') { html.classList.add('no-dialog'); return; }
+    btn.setAttribute('aria-haspopup', 'dialog');
+    btn.setAttribute('aria-expanded', 'false');
+    on(btn, 'click', function (e) {
+      e.preventDefault();
+      dlg.showModal();
+      btn.setAttribute('aria-expanded', 'true');
+    });
+    on(dlg, 'close', function () { btn.setAttribute('aria-expanded', 'false'); });
+    on(dlg, 'click', function (e) {
+      var el = e.target.closest && e.target.closest('[data-close], a[href]');
+      if (el) dlg.close();
     });
   }
 
@@ -149,6 +185,130 @@
     });
   }
 
+  /* ---------- the claims, demonstrated ----------
+     Three things the charter and the pillars assert are things a visitor can
+     check. Printing the instruction is weaker than doing it on the page, so
+     these three do it: the switch below actually throws, the policy block is
+     read out of this document's own head, and the stylesheet excerpt is fetched
+     from the file it is describing. Each degrades to the printed sentence that
+     is still there beside it. */
+
+  /* Effects: the same junction reduced motion uses, thrown by hand. Everything
+     is torn down and rebuilt through the path bg.js already uses for a page
+     swap, so there is no second code path to keep true. */
+  function paintFx() {
+    document.querySelectorAll('[data-fx]').forEach(function (b) {
+      b.setAttribute('aria-pressed', fxOff ? 'false' : 'true');
+      var st = b.querySelector('.fx-state');
+      if (st) st.textContent = fxOff ? 'Off' : 'On';
+    });
+  }
+
+  function setEffects(on) {
+    fxOff = !on;
+    html.classList.toggle('rm', reducedNow());
+    if (global.TBPage) global.TBPage.reduced = reducedNow();
+    var root = document.getElementById('main');
+    teardown();
+    if (field) {
+      field.setStill(reducedNow());
+      field.setActive(!reducedNow());
+    }
+    var v = root && root.querySelector('#heroFilm');
+    if (v && reducedNow()) {
+      v.pause();
+      v.classList.remove('is-on');
+      v.removeAttribute('src');
+      v.load();
+    }
+    if (root) init(root, { intro: false });
+    if (global.ScrollTrigger) global.ScrollTrigger.refresh();
+    paintFx();
+  }
+
+  function fxSwitch() {
+    var btns = document.querySelectorAll('[data-fx]');
+    if (!btns.length) return;
+    btns.forEach(function (b) {
+      on(b, 'click', function () { setEffects(fxOff); });
+    });
+    paintFx();
+  }
+
+  /* The policy block is this document's own Content-Security-Policy, split into
+     its directives at run time. If the header changes, the page changes. */
+  function cspBlock(root) {
+    var host = root.querySelector('[data-csp]');
+    if (!host) return;
+    var meta = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
+    if (!meta) return;
+    var content = meta.getAttribute('content') || '';
+    host.textContent = '';
+    content.split(';').forEach(function (d) {
+      d = d.trim();
+      if (!d) return;
+      var sp = d.indexOf(' ');
+      var row = document.createElement('div');
+      var dt = document.createElement('dt');
+      var dd = document.createElement('dd');
+      dt.textContent = sp < 0 ? d : d.slice(0, sp);
+      dd.textContent = sp < 0 ? '\u2014' : d.slice(sp + 1);
+      row.appendChild(dt);
+      row.appendChild(dd);
+      host.appendChild(row);
+    });
+    host.hidden = false;
+  }
+
+  /* The stylesheet excerpt is fetched from the stylesheet. The line count and
+     the byte count are measured off what comes back, not typed in. */
+  function cssBlock(root) {
+    var host = root.querySelector('[data-css]');
+    if (!host) return;
+    var pre = host.querySelector('pre');
+    var stat = host.querySelector('[data-css-stat]');
+    if (!pre || !stat) return;
+    var go = function () {
+      fetch('css/layout.css', { credentials: 'same-origin' })
+        .then(function (r) { return r.ok ? r.text() : null; })
+        .then(function (txt) {
+          if (!txt || !pre.isConnected) return;
+          var lines = txt.split('\n');
+          pre.textContent = lines.slice(0, 10).join('\n');
+          var kb = (new TextEncoder().encode(txt).length / 1024).toFixed(1);
+          stat.textContent = lines.length.toLocaleString('en') +
+            ' lines \u00b7 ' + kb + ' kB of source \u00b7 read from the file just now';
+          host.hidden = false;
+        })
+        .catch(function () { /* the sentence beside it still stands */ });
+    };
+    if (global.requestIdleCallback) requestIdleCallback(go, { timeout: 2500 });
+    else setTimeout(go, 500);
+  }
+
+  /* Scroll is felt in the object rather than only behind it: speed becomes a
+     push on the world's rotation, which decays on its own in about a third of a
+     second. Sampled once per frame, never per scroll event. */
+  function scrollFeel() {
+    var lastY = global.scrollY, lastT = 0, queued = false;
+    function sample() {
+      queued = false;
+      var y = global.scrollY, now = performance.now();
+      var dt = lastT ? Math.max(16, now - lastT) : 16;
+      var v = Math.abs(y - lastY) / dt;
+      lastY = y;
+      lastT = now;
+      if (field && field.impulse && v > 0.4) {
+        field.impulse(Math.min(0.3, (v - 0.4) * 0.16));
+      }
+    }
+    on(global, 'scroll', function () {
+      if (queued || reducedNow()) return;
+      queued = true;
+      requestAnimationFrame(sample);
+    }, { passive: true });
+  }
+
   /* Motion. GSAP stays on the critical path deliberately: moving it after first
      paint meant the hero copy had to be hidden until it arrived, and an
      opacity-0 element does not count as painted — LCP went from 1.28 s to 3.33 s
@@ -157,7 +317,7 @@
      glass layers. */
   function motion(root, intro) {
     var g = global.gsap;
-    if (!g || reduced) return;
+    if (!g || reducedNow()) return;
     var ST = global.ScrollTrigger;
     if (ST) g.registerPlugin(ST);
 
@@ -176,8 +336,6 @@
         rise('.wordmark', 64, 1.5, 0.62);
         rise('.hero-line', 20, 1.1, 0.9);
         rise('.hero-act > *', 18, 1, 1.05, 0.08);
-        rise('.hero-stats li', 16, 1, 1.2, 0.08);
-        rise('.film-note', 0, 0.9, 1.4);
       }
 
       var head = root.querySelector('.page-head');
@@ -194,7 +352,7 @@
       var stick = root.querySelector('.hero-stick');
       if (stick && hero) {
         var hFilm = hero.querySelector('.hero-film');
-        var hRest = hero.querySelectorAll('.hero-copy, .hero-stats, .film-note');
+        var hRest = hero.querySelectorAll('.hero-copy');
         var gate = function (p) {
           var want = p > 0.04;
           if (want === fieldWant) return;
@@ -264,15 +422,14 @@
     var page = html.getAttribute('data-page') || 'home';
     markNav(page);
 
-    /* Hero film: a stand-in plate. Reduced motion holds the poster frame. */
-    var film = root.querySelector('#heroFilm');
-    if (film && reduced) {
-      film.removeAttribute('autoplay');
-      film.pause();
-    }
     if (!root.querySelector('.hero-stick')) { fieldWant = true; applyFieldGate(); }
 
-    labels(root);
+    menu();
+    fxSwitch();
+    heroFilm(root);
+    cspBlock(root);
+    cssBlock(root);
+    scrollFeel();
     trueLoopMarquee(root.querySelector('#mq'), 22);
     briefForm(root);
     motion(root, opts.intro !== false);
@@ -288,7 +445,8 @@
   global.TBPage = {
     init: init,
     teardown: teardown,
-    reduced: reduced,
+    reduced: prefersReduced,
+    setEffects: setEffects,
     field: function () { return field; },
     onField: function (cb) { if (field) cb(field); else fieldCbs.push(cb); },
     /* bg.js holds the field live across a transition, whatever the hero gate says */

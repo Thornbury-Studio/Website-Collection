@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <title>Studio — Thornbury Digital</title>
-<meta name="description" content="Thornbury Digital is a small design studio in Singapore. Two designers, one engineer, one room in Tanjong Pagar. How we work and what we hold to.">
+<meta name="description" content="The people behind Thornbury Digital, what every build is held to, and the services that sit behind a Thornbury site.">
 <meta name="robots" content="index, follow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://templates.thornburystudio.com/templates/thornbury-digital-v5/studio.html">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Thornbury Digital">
 <meta property="og:title" content="Studio — Thornbury Digital">
-<meta property="og:description" content="A small design studio in Singapore. How we work and what we hold to.">
+<meta property="og:description" content="The people behind Thornbury Digital, and what every build is held to.">
 <meta property="og:url" content="https://templates.thornburystudio.com/templates/thornbury-digital-v5/studio.html">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,8 +27,6 @@
 <script defer src="js/field.js"></script>
 <script defer src="js/main.js"></script>
 <script defer src="js/bg.js"></script>
-<!-- TEMPORARY: development-only background switcher. Delete this tag and js/dev-bg-switcher.js before launch. -->
-<script defer src="js/dev-bg-switcher.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -38,70 +36,235 @@
   <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
   <nav class="nav" aria-label="Primary">
     <a href="work.html">Work</a>
+    <a href="services.html">Services</a>
     <a href="studio.html">Studio</a>
     <a href="contact.html">Contact</a>
   </nav>
   <p class="bar-side">SGP · 01°17′N 103°51′E</p>
+  <a class="menu-btn" id="menuBtn" href="#site-nav"><span>Menu</span><i aria-hidden="true"></i></a>
 </header>
+<dialog class="menu" id="menu" aria-label="Menu">
+  <div class="menu-in">
+    <div class="menu-top">
+      <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
+      <button class="menu-btn" type="button" data-close><span>Close</span><i aria-hidden="true"></i></button>
+    </div>
+    <div class="menu-say">
+      <p class="meta">Design studio · Singapore</p>
+      <p class="statement">Websites worth a second look.</p>
+    </div>
+    <nav class="menu-nav" aria-label="Pages">
+      <a href="work.html"><b>01</b><span>Work</span><small>Five cases</small></a>
+      <a href="services.html"><b>02</b><span>Services</span><small>What it costs</small></a>
+      <a href="studio.html"><b>03</b><span>Studio</span><small>Three people, one room</small></a>
+      <a href="contact.html"><b>04</b><span>Contact</span><small>Start a project</small></a>
+    </nav>
+    <p class="menu-foot meta">
+      <a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a>
+      <a href="tel:+6588056769">+65 8805 6769</a>
+      <span>SGP · 01°17′N 103°51′E</span>
+    </p>
+  </div>
+</dialog>
 <div class="site">
   <main id="main" tabindex="-1">
     <header class="page-head wrap">
-      <p class="meta"><span class="q">03</span> — Studio</p>
+      <p class="meta"><span class="q">04</span> — Studio</p>
       <h1 class="display">Studio</h1>
-      <p class="sub">A small studio in Singapore that builds the whole site, not a deck about it.</p>
+      <p class="sub">A studio in Singapore that builds the whole site, not a deck about it.</p>
     </header>
 
     <section class="sec sec--solid" aria-labelledby="p0" style="padding-top: clamp(2.5rem, 7vh, 5rem)">
       <div class="wrap reveal">
-        <p class="meta"><span class="q">I</span> — <span id="p0">What we hold to</span></p>
-        <div class="principles">
-          <article class="principle">
+        <p class="meta"><span class="q">I</span> — <span id="p0">The charter</span></p>
+        <ol class="charter">
+
+          <li>
             <p class="n" aria-hidden="true">01</p>
-            <h2>Turns</h2>
-            <p>Visuals and words take turns. Nothing competes for the same second on the screen.</p>
-          </article>
-          <article class="principle">
+            <h2>Nothing here is inherited.</h2>
+            <p>Every standard in this studio had to be written, argued over and agreed
+              on. None of it arrived with the furniture. That is slower than adopting
+              a house style, and it is the reason we can tell you why any decision was
+              made rather than that it is simply how things are done.</p>
+            <p class="practice"><b>Practice</b>The internal charter runs to fourteen
+              articles. This page is the part that concerns you.</p>
+          </li>
+
+          <li>
             <p class="n" aria-hidden="true">02</p>
-            <h2>Scale</h2>
-            <p>A small thing placed well beats a big thing placed anywhere. Most of our time goes to distance and alignment.</p>
-          </article>
-          <article class="principle">
+            <h2>We would rather be understood than admired.</h2>
+            <p>A website can be impressive for five seconds. After that it has to be
+              read, used on a phone with one thumb, and understood by someone who is
+              not thinking about design at all. When those two ambitions disagree, the
+              second one wins — every time, and in writing.</p>
+            <p class="practice"><b>Practice</b>Priority when something has to give:
+              usability, then information, then visual effect. Effects are cut first,
+              never the other two.</p>
+          </li>
+
+          <li>
             <p class="n" aria-hidden="true">03</p>
-            <h2>The second look</h2>
-            <p>A site earns its keep when someone scrolls back up. We build for the return, not the first glance.</p>
-          </article>
-        </div>
+            <h2>The second look is the one that counts.</h2>
+            <p>Anything survives a glance. We build for the moment after it — when the
+              site is opened on an old phone, when another developer reads the code,
+              when nobody has touched it for two years and it still has to work. That
+              moment is unglamorous and it is the one we design for.</p>
+            <p class="practice"><b>Practice</b>Every effect on this site can be switched
+              off. Turn JavaScript off and the pages still work.</p>
+            <div class="fx">
+              <button class="fx-btn" type="button" data-fx aria-pressed="true"><i aria-hidden="true"></i><span class="fx-word">Effects</span><span class="fx-state">On</span></button>
+              <p class="fx-hint">Not a setting to find later. This throws the switch now: the
+                field stops, the film unloads, every transition and scroll animation on the
+                site goes with them, and the page you are reading carries on working.</p>
+            </div>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">04</p>
+            <h2>We say no in writing.</h2>
+            <p>We publish a service only once we are confident in it — two of ours are
+              still unlisted for exactly that reason, marked so everywhere they appear.
+              That costs us enquiries. Pretending otherwise would cost more.</p>
+            <p class="practice"><b>Practice</b>Optimization and SEO are marked in
+              development on every page they appear on, including the one selling
+              them.</p>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">05</p>
+            <h2>Failure is budgeted, not hidden.</h2>
+            <p>We expect some things not to work; that is written into how this studio
+              operates, not buried halfway through. What we owe a client is not the
+              pretence of never being wrong — it is that being wrong stays our problem,
+              never theirs.</p>
+            <p class="practice"><b>Practice</b>On delivery you receive the repository,
+              the hosting, the domain and the mailbox. If you walk away, nothing stays
+              with us.</p>
+          </li>
+
+        </ol>
       </div>
     </section>
 
     <section class="sec sec--rule" aria-labelledby="p1">
       <div class="wrap reveal">
-        <p class="meta"><span class="q">II</span> — <span id="p1">How a project runs</span></p>
-        <ol class="process">
-          <li><span class="meta"><b>01</b></span><h2>Brief</h2><p>What the site has to do, who it is for, and what it must never look like.</p><span class="meta dur">1 week</span></li>
-          <li><span class="meta"><b>02</b></span><h2>Design</h2><p>Plates, type and pacing, decided in the browser at real sizes.</p><span class="meta dur">3 weeks</span></li>
-          <li><span class="meta"><b>03</b></span><h2>Build</h2><p>Hand-written front end. Fast, accessible, and yours to keep.</p><span class="meta dur">4 weeks</span></li>
-          <li><span class="meta"><b>04</b></span><h2>Second look</h2><p>We come back after launch with fresh eyes and fix what only real use shows.</p><span class="meta dur">1 week</span></li>
-        </ol>
+        <p class="meta"><span class="q">II</span> — <span id="p1">What we are not the studio for</span></p>
+        <ul class="nots">
+          <li><b>A logo on its own.</b> We draw one when it is going on a site we are building.</li>
+          <li><b>A rebuild that has to be live in ten days.</b> We will tell you what is actually possible in the time before you pay for any of it.</li>
+          <li><b>A site with nobody in the room who can decide.</b> We will ask, and the answer has to come from someone.</li>
+        </ul>
       </div>
     </section>
 
     <section class="sec sec--solid" aria-labelledby="p2">
       <div class="wrap reveal">
-        <p class="meta"><span class="q">III</span> — <span id="p2">The room</span></p>
-        <dl class="facts">
-          <div><dt class="meta">Founded</dt><dd>2021</dd></div>
-          <div><dt class="meta">Where</dt><dd>Tanjong Pagar, Singapore</dd></div>
-          <div><dt class="meta">People</dt><dd>Three</dd></div>
-          <div><dt class="meta">Open for</dt><dd>Two projects a quarter</dd></div>
+        <p class="meta"><span class="q">III</span> — <span id="p2">The people</span></p>
+        <ul class="people">
+          <li>
+            <h2>Zhang Zhijie</h2>
+            <p class="meta">Founder / CEO</p>
+          </li>
+          <li>
+            <h2>Isaac</h2>
+            <p class="meta">Co-Founder / COO</p>
+          </li>
+        </ul>
+        <div class="team">
+          <p class="statement">Around twenty people, most of them building their first company.</p>
+          <p class="sub">No stock photograph of a team stands in for them here. If a face ever
+            appears on this page, it will belong to someone who works here.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec--solid" aria-labelledby="p3">
+      <div class="wrap reveal">
+        <p class="meta"><span class="q">IV</span> — <span id="p3">What we build on</span></p>
+        <ul class="pillars">
+          <li>
+            <h2>Security</h2>
+            <p>Every page we ship names the handful of places it is allowed to load anything
+              from, and refuses the rest. It is written into the page itself, not bolted on
+              afterwards.</p>
+            <p class="check"><b>Check</b>Below is not a copy of the policy — it is the
+              policy, split into its directives out of this page’s own head as it loaded.
+              View source and compare it line for line.</p>
+            <dl class="csp" data-csp hidden></dl>
+          </li>
+          <li>
+            <h2>Performance</h2>
+            <p>Weight is a design decision. The heavy part of a page arrives after the page is
+              already usable, and a phone is never sent the file that was made for a desktop.</p>
+            <p class="check"><b>Check</b>Open the network panel and load the home page. It paints
+              on a 20 kB still; the film behind it is fetched afterwards, from a smaller cut made
+              for that screen.</p>
+          </li>
+          <li>
+            <h2>Ownership</h2>
+            <p>Owning a site should mean being able to read it. What we hand over is written
+              by hand and stays that way: no bundler output to reverse, no framework to learn
+              before you can change a heading, nothing generated that you would have to
+              regenerate.</p>
+            <p class="check"><b>Check</b>These are the opening lines of
+              <code>css/layout.css</code>, fetched from the file itself while you were reading.
+              Not a build artefact, not minified, not generated by anything.</p>
+            <div class="src" data-css hidden>
+              <pre></pre>
+              <p class="src-stat" data-css-stat></p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec sec--solid" aria-labelledby="p4">
+      <div class="wrap reveal">
+        <p class="meta"><span class="q">V</span> — <span id="p4">What sits behind the site</span></p>
+        <p class="sub">Five services do the work. Here is what each one is actually for.</p>
+        <dl class="stack">
+          <div>
+            <dt>Vercel</dt>
+            <dd>Where the site lives. It is served from whichever machine is nearest the person
+              opening it, rather than from one box in one country.</dd>
+          </div>
+          <div>
+            <dt>Supabase</dt>
+            <dd>Where the site remembers things. Bookings, orders, accounts, a menu you edit
+              yourself — anything that has to survive between visits sits here, on an account
+              that is yours.</dd>
+          </div>
+          <div>
+            <dt>Resend</dt>
+            <dd>The mail the site sends. The order confirmation, the copy of an enquiry, the
+              reset link — sent from your own domain rather than from a form service nobody
+              recognises.</dd>
+          </div>
+          <div>
+            <dt>OWASP ZAP</dt>
+            <dd>Checks the finished site for known issues before it goes live. It is a public,
+              open-source scanner: it looks for the well-understood ways a site gets broken into,
+              and we fix what it reports.</dd>
+          </div>
+          <div>
+            <dt>SonarCloud</dt>
+            <dd>Reads the code rather than the running site, and flags the patterns that are
+              known to cause trouble later, so they surface before launch instead of after it.</dd>
+          </div>
         </dl>
+        <div class="pull">
+          <p class="pull-line">Neither of the last two makes a site unbreakable. Nothing does,
+            and nobody can honestly promise it.</p>
+          <p class="pull-sub">What they mean is that the known problems have been looked for,
+            with public tools you are free to point at the site yourself.</p>
+        </div>
       </div>
     </section>
 
     <section class="sec sec--rule" aria-label="Next">
       <div class="wrap reveal">
         <div class="teaser">
-          <p class="statement" style="margin-top:0">If that sounds like the right room, say hello.</p>
+          <p class="statement" style="margin-top:0">If that sounds like the way you want it built, say hello.</p>
           <a class="more" href="contact.html">Start a project</a>
         </div>
       </div>
@@ -109,10 +272,21 @@
   </main>
 
   <footer class="foot">
-    <div class="wrap meta">
-      <p>Thornbury Digital · Singapore</p>
-      <p><a href="mailto:hello@thornbury.studio">hello@thornbury.studio</a></p>
-      <p>© 2026</p>
+    <div class="wrap">
+      <nav class="foot-nav" id="site-nav" aria-label="Site">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="services.html">Services</a>
+        <a href="studio.html">Studio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="foot-meta meta">
+        <p>Thornbury Digital · Singapore</p>
+        <p><a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a></p>
+        <p><a href="tel:+6588056769">+65 8805 6769</a></p>
+        <p><button class="fx-btn" type="button" data-fx aria-pressed="true"><i aria-hidden="true"></i><span class="fx-word">Effects</span><span class="fx-state">On</span></button></p>
+        <p>© 2026</p>
+      </div>
     </div>
   </footer>
 </div>

@@ -27,8 +27,6 @@
 <script defer src="js/field.js"></script>
 <script defer src="js/main.js"></script>
 <script defer src="js/bg.js"></script>
-<!-- TEMPORARY: development-only background switcher. Delete this tag and js/dev-bg-switcher.js before launch. -->
-<script defer src="js/dev-bg-switcher.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -38,15 +36,40 @@
   <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
   <nav class="nav" aria-label="Primary">
     <a href="work.html">Work</a>
+    <a href="services.html">Services</a>
     <a href="studio.html">Studio</a>
     <a href="contact.html">Contact</a>
   </nav>
   <p class="bar-side">SGP · 01°17′N 103°51′E</p>
+  <a class="menu-btn" id="menuBtn" href="#site-nav"><span>Menu</span><i aria-hidden="true"></i></a>
 </header>
+<dialog class="menu" id="menu" aria-label="Menu">
+  <div class="menu-in">
+    <div class="menu-top">
+      <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
+      <button class="menu-btn" type="button" data-close><span>Close</span><i aria-hidden="true"></i></button>
+    </div>
+    <div class="menu-say">
+      <p class="meta">Design studio · Singapore</p>
+      <p class="statement">Websites worth a second look.</p>
+    </div>
+    <nav class="menu-nav" aria-label="Pages">
+      <a href="work.html"><b>01</b><span>Work</span><small>Five cases</small></a>
+      <a href="services.html"><b>02</b><span>Services</span><small>What it costs</small></a>
+      <a href="studio.html"><b>03</b><span>Studio</span><small>Three people, one room</small></a>
+      <a href="contact.html"><b>04</b><span>Contact</span><small>Start a project</small></a>
+    </nav>
+    <p class="menu-foot meta">
+      <a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a>
+      <a href="tel:+6588056769">+65 8805 6769</a>
+      <span>SGP · 01°17′N 103°51′E</span>
+    </p>
+  </div>
+</dialog>
 <div class="site">
   <main id="main" tabindex="-1">
     <header class="page-head wrap">
-      <p class="meta"><span class="q">Fig. 01–05</span> — Selected work</p>
+      <p class="meta"><span class="q">02</span> — Selected work</p>
       <h1 class="display">Work</h1>
       <p class="sub">Five cases from three years. Each one built to be looked at twice.</p>
     </header>
@@ -61,7 +84,6 @@
             <i class="scrim" aria-hidden="true"></i>
             <i class="corners" aria-hidden="true"></i>
             <span class="pc pc-tl">Fig. <b>01</b></span>
-            <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
             <div class="gpanel card">
               <p class="meta"><span>Sector</span><b>Film / WebGL</b></p>
               <p class="meta"><span>Time</span><b>10 weeks</b></p>
@@ -83,7 +105,6 @@
             <i class="scrim" aria-hidden="true"></i>
             <i class="corners" aria-hidden="true"></i>
             <span class="pc pc-tl">Fig. <b>02</b></span>
-            <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
             <div class="gpanel card">
               <p class="meta"><span>Sector</span><b>Ordering / Mobile-first</b></p>
               <p class="meta"><span>Time</span><b>5 weeks</b></p>
@@ -105,7 +126,6 @@
             <i class="scrim" aria-hidden="true"></i>
             <i class="corners" aria-hidden="true"></i>
             <span class="pc pc-tl">Fig. <b>03</b></span>
-            <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
             <div class="gpanel card">
               <p class="meta"><span>Sector</span><b>Luxury / Horlogerie</b></p>
               <p class="meta"><span>Time</span><b>8 weeks</b></p>
@@ -127,7 +147,6 @@
             <i class="scrim" aria-hidden="true"></i>
             <i class="corners" aria-hidden="true"></i>
             <span class="pc pc-tl">Fig. <b>04</b></span>
-            <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
             <div class="gpanel card">
               <p class="meta"><span>Sector</span><b>Café / Thumb-first</b></p>
               <p class="meta"><span>Time</span><b>3 weeks</b></p>
@@ -149,7 +168,6 @@
             <i class="scrim" aria-hidden="true"></i>
             <i class="corners" aria-hidden="true"></i>
             <span class="pc pc-tl">Fig. <b>05</b></span>
-            <span class="pc pc-tr">X <b data-w>0000</b> · Y <b data-h>0000</b></span>
             <div class="gpanel card">
               <p class="meta"><span>Sector</span><b>Streetwear / Drop system</b></p>
               <p class="meta"><span>Time</span><b>6 weeks</b></p>
@@ -178,10 +196,21 @@
   </main>
 
   <footer class="foot">
-    <div class="wrap meta">
-      <p>Thornbury Digital · Singapore</p>
-      <p><a href="mailto:hello@thornbury.studio">hello@thornbury.studio</a></p>
-      <p>© 2026</p>
+    <div class="wrap">
+      <nav class="foot-nav" id="site-nav" aria-label="Site">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="services.html">Services</a>
+        <a href="studio.html">Studio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="foot-meta meta">
+        <p>Thornbury Digital · Singapore</p>
+        <p><a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a></p>
+        <p><a href="tel:+6588056769">+65 8805 6769</a></p>
+        <p><button class="fx-btn" type="button" data-fx aria-pressed="true"><i aria-hidden="true"></i><span class="fx-word">Effects</span><span class="fx-state">On</span></button></p>
+        <p>© 2026</p>
+      </div>
     </div>
   </footer>
 </div>
