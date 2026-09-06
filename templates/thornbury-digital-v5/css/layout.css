@@ -1575,3 +1575,63 @@
   .fx-hint, .pull-sub, .pull-line { max-width: none; }
   .foot-meta .fx-btn { min-height: 2.75rem; }
 }
+
+/* ============================================================================
+   The traced figure (js/figure.js). A full-bleed band between the people and
+   what we build on: the point cloud has no ground of its own, so the liquid
+   field stays visible through it and the figure reads as something the field
+   gathered rather than a picture laid on top of it.
+   ========================================================================== */
+
+@layer components {
+  .fig3d { position: relative; }
+  .fig3d-stage {
+    position: relative;
+    /* the field stays visible through the band, but stood down: two additive
+       point clouds competing at the same brightness reads as noise */
+    background: rgba(8, 8, 8, .72);
+    height: clamp(23rem, 64vh, 40rem);
+    border-top: 1px solid var(--hair-1);
+    border-bottom: 1px solid var(--hair-1);
+    overflow: hidden;
+  }
+  .fig3d-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s var(--ease);
+    /* the cloud dissolves into the band's edges instead of being cut by them */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  }
+  .fig3d.is-on .fig3d-canvas { opacity: 1; }
+  .fig3d-note {
+    position: absolute;
+    left: var(--gutter);
+    bottom: 1.5rem;
+    z-index: 1;
+    max-width: 32ch;
+    /* a sentence, so it drops the caps the mono labels use elsewhere */
+    text-transform: none;
+    letter-spacing: .03em;
+    font-size: .72rem;
+    line-height: 1.65;
+    color: var(--chrome-45);
+  }
+  .fig3d-note b { color: var(--chrome-70); font-weight: 500; }
+  html.rm .fig3d { display: none; }
+}
+
+@media (max-width: 760px) {
+  .fig3d-stage { height: clamp(20rem, 54vh, 28rem); }
+  /* under the stage rather than over the cloud: at this width there is no
+     corner of the frame the figure is not already standing in */
+  .fig3d-note {
+    position: static;
+    max-width: none;
+    margin: .95rem var(--gutter) 0;
+    font-size: .68rem;
+  }
+}

@@ -84,6 +84,39 @@ CRF 25 is 87 kB, which is all a matte needs.
 luminance gradient is used, so it is encoded grey at 384×216, CRF 27, 5 s: 155 kB.
 Nothing in it is ever shown.
 
+## The traced figure
+
+A real photograph, licensed, and never shown. `img/figure-src.webp` is the
+source the studio page's point cloud is traced from — the file is read into an
+offscreen canvas, its dark pixels become point positions, and the photograph
+itself is never drawn to the screen. The page says so in the figure's own note.
+
+| File | Source | Photographer | License |
+|---|---|---|---|
+| `img/figure-src.webp` | [Unsplash photo F_QttqcsqNo](https://unsplash.com/photos/F_QttqcsqNo) | [Reno Laithienne](https://unsplash.com/@renolaithienne) | Unsplash License |
+
+The Unsplash License is free for commercial and non-commercial use with no
+permission needed; attribution is appreciated rather than required, and is given
+here anyway, as it is for every other asset in this directory.
+
+**Chosen for what it does not show.** The subject is a full silhouette with her
+back to the camera: there is no face, and no individual is identifiable. That was
+a requirement rather than a preference, because the studio page states two lines
+above it that no stock photograph of a team stands in for anyone here and that a
+face on that page would belong to someone who works here. A traced figure with a
+readable face would have broken the second of those.
+
+One candidate was rejected on licensing: a black-and-white motion-blurred crowd
+that suited the technique well turned out to be served from `plus.unsplash.com`
+under the **Unsplash+** licence, which is paid. It was not downloaded.
+
+**Processing.** Downloaded at 1600×2401. Cropped to the figure alone
+(`crop=1056:1380:272:840`), which drops the thin cable line down the left of the
+frame and the solid black band along the bottom — both of which would otherwise
+have traced as points. Then greyscale, `eq=contrast=1.35`, and 560×732 at WebP
+quality 82: **6.3 kB**. The file only has to be legible as a threshold mask, so
+it is sized for the point stride rather than for viewing.
+
 ## Work plates
 
 Each case plate is a capture of that case's own site, taken from this collection

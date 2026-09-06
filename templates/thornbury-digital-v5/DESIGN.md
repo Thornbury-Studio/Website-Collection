@@ -485,6 +485,61 @@ form's track now: 751 px at 1440, full width on a phone. Nobody had submitted
 the form in a browser before; every layout check passed the whole time, because
 the element is `hidden` until the moment it breaks.
 
+## The traced figure
+
+A licensed photograph, sampled into points and drawn as `THREE.Points` — the
+classic Codrops / Mamboleoo technique: draw the image into an offscreen 2D
+canvas, walk its pixels on a stride, emit one point per pixel dark enough to be
+inside the silhouette. 14,351 points at stride 3, 8,067 at stride 4 on a phone,
+jittered inside their cells so the cloud does not read as a lattice, and 4.5 %
+of them ember — the same fraction the liquid field carries.
+
+**It is atmosphere, and the page says so.** The photograph is never drawn: the
+file is a lookup table for positions and nothing else reaches the screen but the
+points. The note under it reads *“Fig. — 14,351 points traced from a licensed
+photograph. Not a picture of anyone at this studio”*, with the count filled in at
+run time from the trace itself. The source was chosen for what it does not show
+— a full silhouette, back to camera, no face and no identifiable person —
+because the people section two paragraphs above promises exactly that. See
+`IMAGE-CREDITS.md`.
+
+**Where it sits, and why not closer.** It is a full-bleed band *after* the people
+section rather than inside it. Beside the copy it would read as an illustration
+of “around twenty people”, which it is not; one band down it reads as the
+transition into what we build on, which is what it is. The band has no ground of
+its own beyond a 72 % obsidian wash, so the liquid field stays visible through
+the cloud and the figure looks like something the field gathered rather than a
+picture laid over it. Two additive clouds at equal brightness read as noise,
+which is what the first attempt looked like.
+
+**One draw call, and the CPU does almost nothing.** Scatter, staggered assembly,
+idle drift and the pointer push all happen in the vertex shader from two
+attributes and four uniforms; per frame the CPU reads one bounding rect and
+writes four uniforms. Assembly is tied to the band's own travel through the
+viewport, so the figure gathers as you arrive and lets go as you leave. The
+pointer opens a local dimple with a bright rim — the first pass used a 0.85-unit
+radius against a 2.45-unit figure and punched a crater straight through it.
+
+**It is the first thing cut, exactly as article 02 says.** Nothing is fetched
+until the band is within 400 px of the viewport, and nothing is fetched at all
+without WebGL, under reduced motion, or with the effects switch off — verified:
+under `prefers-reduced-motion` the band computes `display: none` and the network
+log is empty. That matters because three.js is the heaviest thing on the site by
+a distance: **736 kB** uncompressed for the effect, of which 720 kB is three
+(`three.module.min.js` 339 kB + `three.core.min.js` 381 kB, the second pulled by
+a relative specifier so no import map is needed under this CSP). `figure.js` is
+10 kB and the photograph is 6 kB. None of it touches first paint on any page.
+
+**Disposal is the part that had to be right.** `<main>` is swapped on every
+navigation, so a context left behind would be a context leaked, and browsers
+allow about sixteen. Teardown disposes the geometry, the material and the
+renderer and then calls `forceContextLoss()`. Instrumented over five studio →
+work → studio round trips: contexts created 2, 3, 4, 5, 6 against contexts lost
+1, 2, 3, 4, 5 — exactly one alive at any moment, one canvas in the DOM
+throughout, and no “too many active WebGL contexts” warning. The WebGL support
+probe is now answered once per document and its context released immediately;
+before that it was a real context created on every page swap.
+
 ## Performance
 
 Measured with Chrome DevTools traces and rAF sampling, desktop at 1440 and a

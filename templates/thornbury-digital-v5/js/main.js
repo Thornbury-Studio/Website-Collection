@@ -286,6 +286,61 @@
     else setTimeout(go, 500);
   }
 
+  /* The traced figure. Three.js and the point cloud are a lot of weight for
+     something decorative, so nothing is fetched until the band is within a
+     screen of the viewport, and nothing is fetched at all without WebGL, or
+     under reduced motion, or with effects switched off — which is the priority
+     the charter's article 02 states out loud: effects are cut first. */
+  var figureHandle = null;
+
+  /* Answered once per document. The probe is a real context, so it is released
+     the moment it has answered rather than left for the collector — a page swap
+     runs this again, and the browser's context budget is small. */
+  var webglOK = null;
+  function hasWebGL() {
+    if (webglOK !== null) return webglOK;
+    webglOK = false;
+    try {
+      var c = document.createElement('canvas');
+      var gl = window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl'));
+      if (gl) {
+        webglOK = true;
+        var lose = gl.getExtension('WEBGL_lose_context');
+        if (lose) lose.loseContext();
+      }
+    } catch (e) { webglOK = false; }
+    return webglOK;
+  }
+
+  function figure(root) {
+    var host = root.querySelector('[data-figure]');
+    if (!host || reducedNow() || !hasWebGL()) return;
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      /* a dynamic import resolves against this script's own URL, not the
+         document's, so the specifier is relative to js/ and not to the page */
+      import('./figure.js').then(function (mod) {
+        if (!host.isConnected || reducedNow()) return;
+        /* the stage is the clipped box the canvas lives in; the caption is
+           outside it so a phone can put it underneath instead of on top */
+        figureHandle = mod.mount(host.querySelector('.fig3d-stage') || host, {
+          src: host.getAttribute('data-figure-src'),
+          onReady: function (n) {
+            var out = host.querySelector('[data-figure-count]');
+            if (out) out.textContent = n.toLocaleString('en');
+            host.classList.add('is-on');
+          }
+        });
+      }).catch(function () { /* the band stays empty; nothing else is affected */ });
+    }, { rootMargin: '400px 0px' });
+    io.observe(host);
+    offs.push(function () {
+      io.disconnect();
+      if (figureHandle) { figureHandle.destroy(); figureHandle = null; }
+    });
+  }
+
   /* Scroll is felt in the object rather than only behind it: speed becomes a
      push on the world's rotation, which decays on its own in about a third of a
      second. Sampled once per frame, never per scroll event. */
@@ -429,6 +484,7 @@
     heroFilm(root);
     cspBlock(root);
     cssBlock(root);
+    figure(root);
     scrollFeel();
     trueLoopMarquee(root.querySelector('#mq'), 22);
     briefForm(root);
