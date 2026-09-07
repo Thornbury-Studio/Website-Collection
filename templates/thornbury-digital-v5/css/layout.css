@@ -339,11 +339,12 @@
     z-index: 0;
     overflow: hidden;
   }
-  /* the body sits low in frame; nudging it lower still opens the sky the
-     centred type stands on */
+  /* the ferrofluid's spike field runs across the lower two thirds and the
+     top of the frame is already dark, which is where the centred type stands;
+     a hair of scale keeps the master's edge out of the crop */
   .hero-film .plate-media {
-    object-position: 50% 100%;
-    transform: scale(1.16) translateY(4.5%);
+    object-position: 50% 62%;
+    transform: scale(1.04);
   }
   /* The still is what paints for LCP. The film is attached by js/main.js after
      the page is up, and only crossed in once it is actually playing, so a phone
@@ -1327,6 +1328,8 @@
      blend with the canvas from the root one. */
   main { transition: opacity .3s var(--ease), transform .3s var(--ease); }
   html.bg-out main { opacity: 0; transform: translateY(-14px); }
+  /* once GSAP drives the plate, the CSS transition must not fight it */
+  html.js-nav main { transition: none; }
 
   /* the still/live dim is a page property, so it has to cross-fade too */
   .field { transition: opacity .6s var(--ease); }
@@ -1709,7 +1712,7 @@
     text-align: left;
     padding: calc(var(--bar) + 1.1rem) var(--gutter) calc(1rem + env(safe-area-inset-bottom));
   }
-  .hero-film .plate-media { object-position: 50% 46%; transform: none; }
+  .hero-film .plate-media { object-position: 50% 50%; transform: none; }
   .hero-copy {
     justify-items: start;
     max-width: none;
@@ -2121,6 +2124,122 @@
   /* under the stage rather than over the cloud: at this width there is no
      corner of the frame the figure is not already standing in */
   .fig3d-note {
+    position: static;
+    max-width: none;
+    margin: .95rem var(--gutter) 0;
+    font-size: .68rem;
+  }
+}
+
+/* ============================================================================
+   The second look (js/reveal.js). Two renders of one composition: the surface
+   is the picture; the structure sits over it and is masked to a round window
+   that follows the pointer, so it only exists where you are looking. Inside
+   the window the structure assembles — each leader line draws itself (a dash
+   the length of the line, offset to nothing, then to zero) and each label is
+   resolved by the rig's decoder. The stage keeps the image's own aspect, so
+   every position here is a percentage of the image.
+   ========================================================================== */
+
+@layer components {
+  .reveal {
+    position: relative;
+    background: var(--bg);
+    border-top: 1px solid var(--hair-1);
+    border-bottom: 1px solid var(--hair-1);
+    overflow: hidden;
+  }
+  .reveal-stage {
+    position: relative;
+    width: min(100%, 140vh);
+    aspect-ratio: 4096 / 2288;
+    margin-inline: auto;
+    overflow: hidden;
+    cursor: crosshair;
+  }
+  .reveal-stage:focus-visible { outline: 2px solid var(--ember); outline-offset: -2px; }
+  .reveal-surface, .reveal-wire {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .reveal-under {
+    position: absolute;
+    inset: 0;
+    visibility: hidden;
+    --rx: 50%;
+    --ry: 50%;
+    --rr: 0px;
+    -webkit-mask-image: radial-gradient(circle var(--rr) at var(--rx) var(--ry), #000 0, #000 calc(100% - 26px), transparent 100%);
+    mask-image: radial-gradient(circle var(--rr) at var(--rx) var(--ry), #000 0, #000 calc(100% - 26px), transparent 100%);
+  }
+  .reveal-stage.is-live .reveal-under { visibility: visible; }
+  .reveal-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .reveal-lines path {
+    fill: none;
+    stroke: var(--chrome);
+    stroke-opacity: .82;
+    stroke-width: 1;
+    stroke-dasharray: var(--len, 1000);
+    stroke-dashoffset: var(--len, 1000);
+    transition: stroke-dashoffset .62s var(--ease);
+    transition-delay: calc(var(--i) * 150ms);
+  }
+  .reveal-lines path.em { stroke: var(--ember); }
+  .reveal-stage.is-looking .reveal-lines path { stroke-dashoffset: 0; }
+  .reveal-dot {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: var(--chrome);
+    transform: scale(0);
+    transition: transform .3s var(--ease);
+    transition-delay: calc(var(--i) * 150ms);
+  }
+  .reveal-dot.em { background: var(--ember); }
+  .reveal-stage.is-looking .reveal-dot { transform: scale(1); }
+  .reveal-label {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    transform: translateY(calc(-100% - .45rem));
+    min-height: 1em;
+    font-family: var(--mono);
+    font-size: .62rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--chrome);
+    white-space: nowrap;
+    font-variant-ligatures: none;
+  }
+  .reveal-label.em { color: var(--ember); }
+  .reveal-note {
+    position: absolute;
+    left: var(--gutter);
+    top: 1.4rem;
+    z-index: 1;
+    max-width: 34ch;
+    text-transform: none;
+    letter-spacing: .03em;
+    font-size: .72rem;
+    line-height: 1.65;
+    color: var(--chrome-45);
+    pointer-events: none;
+  }
+  html.rm .reveal-under { display: none; }
+}
+
+@media (max-width: 760px) {
+  /* wider than the phone so the object is not a postage stamp; the edges of
+     the image are black, so the crop costs nothing */
+  .reveal-stage { width: 120%; margin-left: -10%; }
+  .reveal-label { font-size: .5rem; }
+  .reveal-note {
     position: static;
     max-width: none;
     margin: .95rem var(--gutter) 0;
