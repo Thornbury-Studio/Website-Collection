@@ -2273,83 +2273,118 @@
   .measured dd b { color: var(--chrome); font-weight: 700; font-size: 1.6rem; letter-spacing: -.03em; line-height: 1; display: block; margin-bottom: .4rem; }
   .case-next .statement { max-width: 20ch; }
 }
-
 /* ============================================================================
-   Who we are. The band is the section: the studio's own words on the left of
-   the stage, the figures on the right and behind, one glass ground under both.
-   Room is the point — it had been undersized for what it has to say.
+   Who we are. One stage. The claim opens in the flow; then the stage holds
+   for three screens of scroll while four beats arrive over the figures, each
+   tied to its form by a leader line — the second look's device — and the
+   form being read about is lit. Without motion, or on a phone, the beats are
+   a plain list under the figures.
    ========================================================================== */
 
 @layer components {
-  .sec--who { position: relative; z-index: 1; }
-  .who-stage { position: relative; }
-  /* the stage is the glass band; the canvas fills it; the copy sits over it */
-  /* the figures hold in view while the words scroll past them: the canvas is
-     sticky for the height of the section and the copy runs over it */
-  .who-canvas {
-    position: sticky;
-    top: var(--bar);
-    height: calc(100dvh - var(--bar));
-    border-top: 0;
-    border-bottom: 0;
-  }
-  .who-stage {
-    border-top: 1px solid var(--hair-1);
-    border-bottom: 1px solid var(--hair-1);
-  }
-  .who-grid {
-    position: relative;
-    z-index: 1;
-    margin-top: calc(var(--bar) - 100dvh);
-    padding: clamp(5rem, 12vh, 8rem) 0 clamp(6rem, 14vh, 9rem);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    column-gap: var(--gutter);
-    pointer-events: none;
-  }
-  .who-copy { grid-column: 1 / span 5; grid-row: 1; pointer-events: auto; }
+  .sec--who { position: relative; z-index: 1; border-top: 1px solid var(--hair-1); background: var(--bg); }
+  .who-head { padding: clamp(4rem, 12vh, 9rem) 0 clamp(3rem, 8vh, 5rem); }
   .who-claim {
     margin-top: 1.3rem;
     font-weight: 700;
-    font-size: clamp(1.9rem, 3.2vw, 3.4rem);
+    font-size: clamp(2rem, 5.2vw, 5.6rem);
     letter-spacing: -.035em;
-    line-height: 1;
+    line-height: .96;
     max-width: 14ch;
     text-wrap: balance;
   }
-  .who-body { margin-top: 1.1rem; color: var(--chrome-70); font-size: 1.02rem; line-height: 1.6; max-width: 44ch; text-wrap: pretty; }
-  .who-people { margin-top: 2rem; }
-  .who-people li { padding: .9rem 0 1rem; }
-  .who-people h3 {
-    grid-column: 1;
-    grid-row: 1;
-    font-weight: 800;
-    font-size: clamp(1.3rem, 1.8vw, 1.7rem);
-    letter-spacing: -.035em;
-    line-height: 1;
-    text-transform: uppercase;
+  .who-open {
+    margin-top: clamp(1.6rem, 4vh, 2.6rem);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--gutter);
+    row-gap: 1rem;
   }
-  .who-label { margin-top: 2rem; }
-  .who-team { margin-top: .8rem; font-weight: 700; font-size: clamp(1.15rem, 1.5vw, 1.45rem); letter-spacing: -.02em; line-height: 1.25; max-width: 30ch; text-wrap: balance; }
-  .who-note { margin-top: .8rem; font-family: var(--mono); font-size: .74rem; line-height: 1.6; color: var(--chrome-45); max-width: 48ch; }
-  .who-ahead { margin-top: .8rem; font-weight: 700; font-size: clamp(1.15rem, 1.5vw, 1.45rem); letter-spacing: -.02em; line-height: 1.25; max-width: 26ch; }
-  .who-stage .fig3d-note { left: auto; right: var(--gutter); top: auto; bottom: 1.4rem; max-width: 30ch; text-align: right; }
-  .who-key { padding: clamp(3rem, 8vh, 5rem) 0 clamp(2rem, 6vh, 4rem); }
-  .who-key .whowe { margin-top: 0; }
+  .who-open p { color: var(--chrome-70); font-size: 1.02rem; line-height: 1.6; text-wrap: pretty; }
+  .who-open p:first-child { grid-column: 1 / span 5; grid-row: 1; }
+  .who-open p:last-child { grid-column: 7 / span 5; grid-row: 1; }
+
+  /* the track gives the stage three screens to hold for */
+  .who-track { position: relative; height: 320vh; }
+  .who-stage {
+    position: sticky;
+    top: var(--bar);
+    height: calc(100dvh - var(--bar));
+    border-top: 1px solid var(--hair-1);
+    border-bottom: 1px solid var(--hair-1);
+    overflow: hidden;
+  }
+  .who-canvas { position: absolute; inset: 0; height: auto; border: 0; }
+  .who-leads { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  .who-leads path {
+    fill: none;
+    stroke: var(--chrome);
+    stroke-opacity: .55;
+    stroke-width: 1;
+    stroke-dasharray: var(--len, 2000);
+    stroke-dashoffset: var(--len, 2000);
+    transition: stroke-dashoffset .9s var(--ease);
+  }
+  .who-leads path.is-in { stroke-dashoffset: 0; }
+  .who-beats { position: absolute; inset: 0; pointer-events: none; }
+  .who-beat {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    transform: translate(-50%, 8px);
+    width: min(19rem, 22vw);
+    padding: .9rem 1rem 1rem;
+    background: rgba(8, 8, 8, .58);
+    border: 1px solid var(--hair-1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity .7s var(--ease), transform .7s var(--ease);
+    pointer-events: auto;
+  }
+  .who-beat.is-in { opacity: 1; transform: translate(-50%, 0); }
+  .who-line { margin-top: .55rem; color: var(--chrome); font-size: .95rem; line-height: 1.5; text-wrap: pretty; }
+  .who-line b { display: block; font-weight: 800; font-size: 1.25rem; letter-spacing: -.03em; line-height: 1.05; text-transform: uppercase; }
+  .who-line b + .meta { display: block; margin: .3rem 0 .7rem; }
+  .who-line b:first-child { margin-top: 0; }
+  .who-stage .fig3d-note { left: var(--gutter); right: auto; top: auto; bottom: 1.1rem; max-width: 26ch; text-align: left; }
+  .who-tail { padding: clamp(3rem, 8vh, 5rem) 0 clamp(2rem, 6vh, 4rem); }
+  .who-ahead {
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.2vw, 2.9rem);
+    letter-spacing: -.03em;
+    line-height: 1.06;
+    max-width: 22ch;
+    text-wrap: balance;
+    margin-bottom: clamp(2.4rem, 7vh, 4rem);
+  }
+  .who-tail .whowe { margin-top: 0; }
+
+  /* no motion: everything present, nothing held */
+  html.rm .who-track { height: auto; }
+  html.rm .who-stage { position: relative; height: auto; }
+  html.rm .who-canvas { display: none; }
+  html.rm .who-leads { display: none; }
+  html.rm .who-beats, html.rm .who-beat { position: static; transform: none; opacity: 1; width: auto; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 1.1rem 0; border-bottom: 1px solid var(--hair-1); }
+  html.rm .who-beats { padding: 1rem var(--gutter) 3rem; }
 }
 
 @media (max-width: 1080px) {
-  .who-copy { grid-column: 1 / span 7; }
+  .who-open p:first-child { grid-column: 1 / span 6; }
+  .who-open p:last-child { grid-column: 7 / span 6; }
+  .who-beat { width: min(17rem, 23vw); }
 }
 
 @media (max-width: 760px) {
-  /* the words first, the figures under them, the whole band still one surface */
-  .who-stage { display: flex; flex-direction: column-reverse; }
-  .who-canvas { position: relative; top: auto; height: 27rem; }
-  .who-grid { margin-top: 0; padding: 3.2rem 0 2rem; }
-  .who-copy { grid-column: 1 / -1; }
-  .who-claim { font-size: clamp(1.7rem, 8vw, 2.2rem); max-width: none; }
-  .who-body, .who-team, .who-ahead, .who-note { max-width: none; }
-  .who-stage .fig3d-note { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 1rem; max-width: none; text-align: left; }
-  .who-key { padding-top: 2.4rem; }
+  /* the figures, then the beats as a ruled list; nothing overlaid on a phone */
+  .who-open p:first-child, .who-open p:last-child { grid-column: 1 / -1; grid-row: auto; }
+  .who-track { height: auto; }
+  .who-stage { position: relative; top: auto; height: auto; display: flex; flex-direction: column; }
+  .who-canvas { position: relative; height: 24rem; order: 0; }
+  .who-stage .fig3d-note { order: 1; }
+  .who-beats { order: 2; }
+  .who-leads { display: none; }
+  .who-beats { position: static; padding: 1.4rem var(--gutter) 3.6rem; }
+  .who-beat { position: static; transform: none; opacity: 1; width: auto; background: none; border: 0; border-bottom: 1px solid var(--hair-1); padding: 1.1rem 0 1.2rem; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .who-stage .fig3d-note { position: static; transform: none; padding: .8rem var(--gutter) 0; max-width: none; text-align: left; }
 }

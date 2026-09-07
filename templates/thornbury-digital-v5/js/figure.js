@@ -65,6 +65,7 @@ var FIG_VERT = [
   'uniform float uSize;',
   'uniform float uDpr;',
   'uniform vec3 uLight;',
+  'uniform float uFocus;',
   'varying float vFade;',
   'varying float vEmber;',
   HASH,
@@ -94,7 +95,7 @@ var FIG_VERT = [
   '  float lam = max(dot(n, normalize(uLight)), 0.0);',
   '  float fres = pow(1.0 - abs(n.z), 2.2);',
   '  float lit = 0.17 + 0.60 * lam + 0.88 * fres;',
-  '  vFade = lead * (0.70 + 0.30 * aRand) * lit + push * 0.45;',
+  '  vFade = lead * (0.70 + 0.30 * aRand) * lit * (0.62 + 0.48 * uFocus) + push * 0.45;',
   '  vEmber = aEmber;',
   '}'
 ].join('\n');
@@ -189,8 +190,15 @@ var STAR_FRAG = [
 /* Read the packed surface description. There is deliberately no colour input: a
    pixel is either inside the cut-out or it is not, and if it is, all that is
    taken is where it sits and which way it faces. */
-function trace(packImg, stride, worldH, depthScale, thickness) {
+function trace(packImg, stride, worldH, depthScale, thickness, budget) {
   var w = packImg.naturalWidth, h = packImg.naturalHeight;
+  /* a budget wins over a stride: stride 1 with a probability that lands the
+     count near the budget, so every form reads at about the same density */
+  var keep = 1;
+  if (budget) {
+    stride = 1;
+    keep = Math.min(1, budget / Math.max(1, w * h * 0.55));
+  }
   var cv = document.createElement('canvas');
   cv.width = w; cv.height = h;
   var ctx = cv.getContext('2d', { willReadFrequently: true });
@@ -203,6 +211,7 @@ function trace(packImg, stride, worldH, depthScale, thickness) {
     for (var x = 0; x < w; x += stride) {
       var i = (y * w + x) * 4;
       if (px[i] === 0 && px[i + 1] === 0 && px[i + 2] === 0) continue;
+      if (keep < 1 && Math.random() > keep) continue;
       var nx = px[i] / 127.5 - 1, ny = px[i + 1] / 127.5 - 1;
       var nz = Math.sqrt(Math.max(0.0001, 1 - nx * nx - ny * ny));
       var dv = px[i + 2] / 255;
@@ -356,10 +365,17 @@ function stars(n, spanX, spanY, spanZ) {
    ensemble sits under the words instead of beside them. `delay` staggers the
    assembly so the forms gather one after another rather than all at once. */
 var INSTANCES = [
-  { src: 'img/team-pack.webp',   x: 1.10, y: 0.16, z: 0.00, s: 1.00, r: 0.00, delay: 0.00 },
-  { src: 'img/team-pack-2.webp', x: 0.30, y: 0.06, z: -0.95, s: 0.88, r: 0.30, delay: 0.16 },
-  { src: 'img/team-pack-3.webp', x: 1.75, y: 0.02, z: -0.55, s: 0.92, r: -0.28, delay: 0.30 },
-  { src: 'img/team-pack-4.webp', x: 0.62, y: -0.02, z: -1.55, s: 0.80, r: 0.12, delay: 0.44 }
+  /* x, y, z in world units; s = scale; r = turn; pts = the point budget the
+     tracer aims at, so a small pack is traced densely and a large one is not
+     — without this the new packs read as dust beside the first one, which
+     was the whole of the "only one figure is there" problem. `focus` is the
+     beat in the copy this form answers to. */
+  { src: 'img/team-pack.webp',   x: -1.35, y: -0.04, z: -1.40, s: 0.80, r:  0.10, pts: 28000, delay: 0.00, focus: 0 },
+  { src: 'img/team-pack-6.webp', x: -0.45, y: -0.02, z: -0.30, s: 0.94, r: -0.18, pts: 22000, delay: 0.10, focus: 1 },
+  { src: 'img/team-pack-2.webp', x: -1.15, y:  0.02, z: -1.85, s: 0.84, r:  0.30, pts: 14000, delay: 0.20, focus: 1 },
+  { src: 'img/team-pack-7.webp', x:  0.80, y: -0.02, z: -0.50, s: 0.94, r:  0.22, pts: 22000, delay: 0.30, focus: 2 },
+  { src: 'img/team-pack-3.webp', x:  1.30, y:  0.00, z: -1.95, s: 0.82, r: -0.20, pts: 10000, delay: 0.40, focus: 2 },
+  { src: 'img/team-pack-5.webp', x:  1.55, y: -0.04, z: -0.10, s: 0.98, r: -0.12, pts: 26000, delay: 0.50, focus: 3 }
 ];
 
 function loadImage(src) {
@@ -390,6 +406,7 @@ export function mount(host, opts) {
   /* the ground's drift: a base speed plus whatever the scroll has pushed into
      it, decaying with the same ~0.36 s half-life the field's yaw impulse uses */
   var flow = 0, flowBoost = 0, FLOW_BASE = 0.11;
+  var focusBeat = -1;   /* -1: nobody singled out */
 
   var packs = INSTANCES.slice();
   if (packSrc && packs[0].src !== packSrc) packs[0].src = packSrc;
@@ -401,7 +418,7 @@ export function mount(host, opts) {
     var traced = [];
     for (var k = 0; k < imgs.length; k++) {
       if (!imgs[k]) continue;   /* a missing pack drops its instance, never the band */
-      var fg = trace(imgs[k], small ? 3 : 2, 2.05 * packs[k].s, 1.05 * packs[k].s, small ? 0.05 : 0.06);
+      var fg = trace(imgs[k], 1, 2.05 * packs[k].s, 1.05 * packs[k].s, small ? 0.05 : 0.06, Math.round(packs[k].pts * (small ? 0.45 : 1)));
       if (fg.count) traced.push({ inst: packs[k], fig: fg });
     }
     if (!traced.length) { cleanup(); return; }
@@ -442,6 +459,7 @@ export function mount(host, opts) {
              phone's density, and the pair in front went white */
           uSize: { value: (small ? 1.55 : 2.2) * (0.86 + 0.14 * inst.s) }, uDpr: { value: 1 },
           uLight: { value: new THREE.Vector3(0.42, 0.50, 0.76) },
+          uFocus: { value: 0.85 },
           uChrome: { value: chrome }, uEmber: { value: ember }
         }
       });
@@ -513,6 +531,25 @@ export function mount(host, opts) {
     step(performance.now());
   }
 
+  /* Project each form's chest point to stage fractions, so the copy's leader
+     lines can be drawn to the figure rather than to a guess. Called after
+     every resize and once on build. */
+  function layout() {
+    if (!camera || typeof opts.onLayout !== 'function') return;
+    /* the renderer only refreshes the camera's inverse on render; before the
+       first frame it is identity and everything projects off the page */
+    camera.updateMatrixWorld(true);
+    camera.matrixWorldInverse.copy(camera.matrixWorld).invert();
+    var v = new THREE.Vector3(), out = [];
+    figs.forEach(function (f) {
+      v.set(f.inst.x, f.inst.y + 0.55 * f.inst.s, f.inst.z);
+      ensemble.localToWorld(v);
+      v.project(camera);
+      out.push({ focus: f.inst.focus, u: (v.x + 1) / 2, v: (1 - v.y) / 2, z: f.inst.z });
+    });
+    opts.onLayout(out);
+  }
+
   function resize() {
     if (!renderer) return;
     var w = host.clientWidth, h = host.clientHeight;
@@ -522,16 +559,20 @@ export function mount(host, opts) {
     renderer.setSize(w, h, false);
     figs.forEach(function (f) { f.mat.uniforms.uDpr.value = dpr; });
     starMat.uniforms.uDpr.value = dpr;
-    /* the copy has the left of the stage on a desktop; on a phone the words sit
-       above and the whole group comes back to the middle, a little smaller */
+    /* the ensemble holds the middle of the stage; on a phone it comes down a
+       little and smaller, and the words sit under it instead of over it */
     var phone = w < 761;
-    ensemble.position.x = phone ? -1.05 : 0;
-    ensemble.scale.setScalar(phone ? 0.78 : 1);
+    ensemble.position.x = 0;
+    ensemble.position.y = phone ? 0.05 : -0.18;
+    ensemble.scale.setScalar(phone ? 0.62 : 1);
+    ensemble.updateMatrixWorld(true);
     camera.aspect = w / h;
     camera.position.z = 1.32 / Math.tan((camera.fov * Math.PI / 180) / 2);
     camera.updateProjectionMatrix();
     waveMat.uniforms.uSpread.value = Math.max(3.2, 1.32 * camera.aspect * 2 + 1.6);
     groundMat.uniforms.uSpread.value = waveMat.uniforms.uSpread.value;
+    /* after the camera is placed, never before */
+    layout();
   }
 
   function onPointer(ev) {
@@ -585,6 +626,9 @@ export function mount(host, opts) {
       f.mat.uniforms.uTime.value = t;
       f.mat.uniforms.uAssemble.value = Math.max(0, Math.min(1, (assemble - d) / (1 - d)));
       f.mat.uniforms.uPointerOn.value = pointerOn;
+      /* the beat's form is lit; the others hold at a steady presence, never absent */
+      var fw = focusBeat < 0 ? 0.85 : (f.inst.focus === focusBeat ? 1.0 : 0.55);
+      f.mat.uniforms.uFocus.value += (fw - f.mat.uniforms.uFocus.value) * 0.06;
       /* the shader works in the instance's own space, so the pointer is moved into it */
       f.mat.uniforms.uPointer.value.set((pxWorld - ensemble.position.x) / ensemble.scale.x - f.inst.x, pyWorld / ensemble.scale.x - f.inst.y);
       f.pts.rotation.y = f.inst.r + Math.sin(t * 0.15 + i * 1.7) * 0.14;
@@ -625,6 +669,8 @@ export function mount(host, opts) {
   return {
     destroy: cleanup,
     /* the scroll's push, in floor units per second; decays on its own */
-    impulse: function (v) { flowBoost = Math.min(1.4, flowBoost + v); }
+    impulse: function (v) { flowBoost = Math.min(1.4, flowBoost + v); },
+    /* which beat of the copy is being read; -1 lights nobody in particular */
+    focus: function (i) { focusBeat = i; }
   };
 }

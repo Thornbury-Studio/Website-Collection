@@ -297,6 +297,7 @@
      under reduced motion, or with effects switched off — which is the priority
      the charter's article 02 states out loud: effects are cut first. */
   var figureHandle = null;
+  var whoLayout = null;   /* set by whoBeats; fed by the figure's own projection */
 
   /* Answered once per document. The probe is a real context, so it is released
      the moment it has answered rather than left for the collector — a page swap
@@ -331,6 +332,7 @@
            outside it so a phone can put it underneath instead of on top */
         figureHandle = mod.mount(host.querySelector('.fig3d-stage') || host, {
           packSrc: host.getAttribute('data-figure-pack'),
+          onLayout: function (anchors) { if (whoLayout) whoLayout(anchors); },
           onReady: function (n) {
             var out = host.querySelector('[data-figure-count]');
             if (out) out.textContent = n.toLocaleString('en');
@@ -344,6 +346,82 @@
       io.disconnect();
       if (figureHandle) { figureHandle.destroy(); figureHandle = null; }
     });
+  }
+
+  /* Who we are: four beats of the studio's own words arrive over the figures
+     as the stage holds, each tied to its form by a leader line, and the form
+     being read about is lit. The anchors come from the figure module's own
+     projection, so the lines land on the figures rather than on a guess. */
+  function whoBeats(root) {
+    var track = root.querySelector('[data-who]');
+    if (!track) return;
+    var stage = track.querySelector('.who-stage');
+    var svg = track.querySelector('.who-leads');
+    var beats = [].slice.call(track.querySelectorAll('.who-beat'));
+    var leads = [].slice.call(track.querySelectorAll('.who-leads path'));
+    var phone = matchMedia('(max-width: 760px)').matches;
+    var anchors = null, current = -1;
+
+    function draw() {
+      if (!anchors || !svg || phone) return;
+      var W = stage.clientWidth, H = stage.clientHeight;
+      if (!W || !H) return;
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      var s = stage.getBoundingClientRect();
+      /* each beat wants to stand above its own form; then they are spaced so
+         no two overlap, and kept inside the stage */
+      var gap = 24, bw = beats[0] ? beats[0].offsetWidth : 300;
+      var pad = Math.max(24, parseFloat(getComputedStyle(stage).getPropertyValue('--gutter')) || 40);
+      var want = beats.map(function (b, i) {
+        var mine = anchors.filter(function (x) { return x.focus === i; }).sort(function (p, q) { return q.z - p.z; });
+        return mine[0] ? { i: i, an: mine[0], cx: mine[0].u * W } : null;
+      }).filter(Boolean);
+      var lo = pad + bw / 2, hi = W - pad - bw / 2;
+      want.forEach(function (w) { w.cx = Math.max(lo, Math.min(hi, w.cx)); });
+      want.sort(function (p, q) { return p.cx - q.cx; });
+      var j;
+      for (j = 1; j < want.length; j++) want[j].cx = Math.max(want[j].cx, want[j - 1].cx + bw + gap);
+      for (j = want.length - 1; j >= 0; j--) want[j].cx = Math.min(want[j].cx, j === want.length - 1 ? hi : want[j + 1].cx - bw - gap);
+      want.forEach(function (w) { beats[w.i].style.setProperty('--x', w.cx.toFixed(1) + 'px'); });
+      want.forEach(function (w) {
+        var b = beats[w.i], an = w.an, i = w.i;
+        var r = b.getBoundingClientRect();
+        var x0 = r.left - s.left + r.width / 2, y0 = r.bottom - s.top + 4;
+        var x1 = an.u * W, y1 = an.v * H;
+        var ym = y0 + (y1 - y0) * 0.55;
+        var path = leads[i];
+        if (!path) return;
+        path.setAttribute('d', 'M' + x0.toFixed(1) + ' ' + y0.toFixed(1) + ' L' + x0.toFixed(1) + ' ' + ym.toFixed(1) + ' L' + x1.toFixed(1) + ' ' + y1.toFixed(1));
+        path.style.setProperty('--len', path.getTotalLength().toFixed(1));
+      });
+    }
+    function setProgress(p) {
+      var k = -1;
+      beats.forEach(function (b, i) {
+        var on = p >= 0.06 + i * 0.22;
+        b.classList.toggle('is-in', on);
+        if (leads[i]) leads[i].classList.toggle('is-in', on);
+        if (on) k = i;
+      });
+      if (k !== current) { current = k; if (figureHandle && figureHandle.focus) figureHandle.focus(k); }
+    }
+    whoLayout = function (a) { anchors = a; draw(); if (current >= 0) setProgress(0.06 + current * 0.22); };
+    offs.push(function () { whoLayout = null; });
+
+    if (reducedNow() || phone || !global.ScrollTrigger || !global.gsap) {
+      track.setAttribute('data-who-mode', 'list');
+      beats.forEach(function (b) { b.classList.add('is-in'); });
+      return;
+    }
+    track.setAttribute('data-who-mode', 'scroll');
+    global.gsap.registerPlugin(global.ScrollTrigger);
+    var st = global.ScrollTrigger.create({
+      trigger: track, start: 'top top', end: 'bottom bottom',
+      onUpdate: function (self) { setProgress(self.progress); },
+      onRefresh: function (self) { draw(); setProgress(self.progress); }
+    });
+    on(global, 'resize', draw);
+    offs.push(function () { st.kill(); });
   }
 
   /* The platform rig. Unlike the figure this one is not decorative — without it
@@ -540,6 +618,7 @@
     heroFilm(root);
     cspBlock(root);
     cssBlock(root);
+    whoBeats(root);
     figure(root);
     rig(root);
     reveal(root);
