@@ -1255,3 +1255,53 @@ wired to this machine, so a real fallback was built first — a live site from
 the Work page as the surface, its actual DOM drawn as a schematic underneath —
 and then retired the moment the studio's own pair arrived, because the brief
 named that pair. The Kiyo pair is not in the repository.
+
+## The hero backdrop, third time: the Moon, from NASA
+
+The ferrofluid was well made and did not land: an abstract macro reads as
+texture, not as a thing, and the first reaction was confusion. The brief came
+back asking for a real space subject with instant recognition and scale, from
+NASA's public-domain archives before any stock.
+
+**What was found.** NASA's image library and the Scientific Visualization
+Studio, searched for moon, 4K, libration. Four real candidates: Earth from the
+ISS (jsc2021m000138, genuine 4K) — grand, but a horizon rather than one
+object, and blue and white on a site that has no third hue; the 2016 Mercury
+transit in 4K — a sun that reads as a moon once it is grey; the Tour of the
+Moon 4K Redux (SVS 4619) — camera flyovers, which is surface again; and Moon
+Phase and Libration, 2026 (SVS 5587) — the whole disc, rendered from Lunar
+Reconnaissance Orbiter data at the Moon's true phase, libration and apparent
+size for every hour of the year, on black, in a plain unlabelled 4K cut.
+
+**Why it won.** It is the one clear object the brief asked for, it is real
+data rather than an artist's moon, it is monochrome by nature so the palette
+costs it nothing, and it is public domain with a credit line NASA asks for
+and gets. It is also what this site's hero was before any of this: a moon,
+low in frame, with the wordmark standing in the sky above it — now at 4K and
+from the source rather than a stock render.
+
+**The cut.** A 20 s byte-range pull around the September full moon instead of
+the 300 MB file; the fullest frame (highest mean luminance) taken as centre;
+48 frames either side — two days each way, so no terminator ever shows —
+played forward then backward: 190 frames at 24 fps, 7.9 s, seamless. The disc
+is composed low in the encode itself (540 px of black padded above the 4K
+frame, then cropped back to 16:9) so its top edge sits at a third of the
+frame; the CSS no longer has to push the picture around, and the only motion
+it adds is a 28 s push-in on the GPU. The portrait cut scales the frame to
+1400 wide and keeps the middle 1080 columns, so a phone gets the whole disc at
+about two thirds of its width with the type above it, not a crop of the
+surface. Three tiers, posters from each first frame, `?v=3` everywhere.
+
+| Tier | Size |
+|---|---|
+| 1080p, desktops | 1.36 MB |
+| 1440p, from 1800 px | 1.88 MB |
+| Portrait, phones | 0.73 MB |
+
+**Verified.** Playwright: at 1440 the hero plays `hero.mp4?v=3` at 1920×1080,
+at 1920 `hero-lg.mp4?v=3` at 2560×1440, at 390 `hero-m.mp4?v=3` at 1080×1920
+over `poster-hero-m.webp?v=3`; every tier reports 7.92 s and 190 frames; the
+push-in computes as the running animation; console clean; zero overflow. Seam:
+the loop point measures 40.1 dB PSNR against 44.2 dB for an ordinary frame
+step — one hour of libration apart either way, indistinguishable in motion.
+Posters: 59 kB landscape, 45 kB portrait. The hub card was re-captured.

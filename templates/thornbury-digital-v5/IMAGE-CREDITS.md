@@ -6,43 +6,48 @@ be blocked at load time.
 
 ## Hero film
 
-The backdrop behind the field. Sourced, not generated — `VIDEO-POLICY.md`'s
-asset order stops at tier 1 when real footage this good exists. Pexels
-License: free to use, no attribution required — credited here anyway.
-Downloaded 7 Sep 2026.
+The backdrop behind the field: the Moon, from NASA. Public domain, zero
+licensing risk, and real data — the disc is rendered from Lunar Reconnaissance
+Orbiter imagery and elevation, at the Moon's true phase, libration and apparent
+size for every hour of 2026. NASA asks for a credit line and gets one.
 
-| File | Source | Creator | Pexels ID |
-|---|---|---|---|
-| `video/hero.mp4` · `hero-lg.mp4` · `hero-m.mp4` | [Inky — ferrofluid in super slow motion](https://www.pexels.com/video/inky-16296848/) | [Film Composite](https://www.pexels.com/@film-composite-518472883/) | 16296848 |
+| File | Source | Credit |
+|---|---|---|
+| `video/hero.mp4` · `hero-lg.mp4` · `hero-m.mp4` | [Moon Phase and Libration, 2026](https://svs.gsfc.nasa.gov/5587) — plain (unlabelled) 4K, `phases_2026_plain_2160p30.mp4`, 3840×2160, 30 fps, hourly frames from 1 Jan 2026 00:00 UTC | NASA's Scientific Visualization Studio. Visualizer Ernie Wright (USRA); planetary scientist Noah Petro (NASA/GSFC); producer James Tralie (eMITS) |
 
-The 3840×2160 / 24 fps / 17.8 s master is kept at `video/src/ferro-master.mp4`
-(gitignored by this directory's own `.gitignore`). It replaced the moon (Pixabay
-132361, an HD master) on 7 Sep 2026: the brief asked for a genuinely 4K
-backdrop, and a ferrofluid is this site's own material — liquid metal, on
-black, catching one light.
+Downloaded 7 Sep 2026 as a 20 s byte-range pull around the September full
+moon (`src/moon2026-part.mp4`, gitignored) rather than the 300 MB whole.
 
-The web encodes **play forward then backward**, so the loop never cuts: one
-ffmpeg pass takes 8.0 s → 15.5 s of the master, splits it, reverses one copy,
-trims the duplicate frame at each end of the turn, and concatenates — 358
-frames, 14.9 s, with the last frame one ordinary step from the first. Grade:
-`eq=saturation=0.12:contrast=1.06` (the master's highlights run warm and the
-site is chrome), Lanczos scale, then `cas=0.5`. H.264 high profile, faststart,
-audio stripped, native 24 fps.
+**Why the Moon, and why this Moon.** The brief asked for a real space subject
+with instant recognition and scale, NASA archives first. Candidates read:
+Earth from the ISS (jsc2021m000138, real 4K) — grand, but a horizon, not one
+object, and blue and white in a site with no third hue; the Mercury transit
+(GSFC 2016, 4K) — a sun that reads as a moon once it is grey; the Tour of the
+Moon 4K Redux (SVS 4619) — flyovers, so surface again. The libration
+visualization is the one clear object: the whole disc, real, at true scale,
+and it is monochrome by nature, so the site's palette costs it nothing.
+
+**The cut.** The fullest frame in the pulled window (highest mean luminance)
+is taken as the centre and 48 frames either side — two days each way, so the
+terminator never shows — play forward then backward: 190 frames at 24 fps,
+7.9 s, the last frame one ordinary step from the first, so the plain `loop`
+attribute never cuts. The disc is composed low in the encode (`pad` 540 px
+of black above the 4K frame, then crop back to 16:9), so its top edge sits at
+a third of the frame and the centred type stands in the black above it; the
+only motion added is a 28 s CSS push-in. `eq=contrast=1.04`, Lanczos scale,
+`cas=0.35`, H.264 high, faststart, no audio.
 
 | File | Encode | Size | Serves |
 |---|---|---|---|
-| `video/hero.mp4` | 1920×1080, CRF 26, 2.6 Mbps cap | 4.67 MB | 761–1799 px |
-| `video/hero-lg.mp4` | 2560×1440, CRF 27, 4.5 Mbps cap | 6.92 MB | 1800 px and up |
-| `video/hero-m.mp4` | 1080×1920 portrait, `crop=1215:2160:1706:0`, CRF 26, 1.5 Mbps cap | 2.74 MB | 760 px and below |
+| `video/hero.mp4` | 1920×1080, CRF 23, 2.6 Mbps cap | 1.36 MB | 761–1799 px |
+| `video/hero-lg.mp4` | 2560×1440, CRF 24, 4.2 Mbps cap | 1.88 MB | 1800 px and up |
+| `video/hero-m.mp4` | 1080×1920 portrait — the frame scaled to 1400 wide, padded, the middle 1080 columns kept, so the whole disc shows at ~64 % of the width with the type above it | 0.73 MB | 760 px and below |
 
-A ferrofluid is all specular detail, so it costs about twice what the moon did
-at the same quality; the film is still attached after first paint, from
-`requestIdleCallback`, and the still is what the page ships. The portrait
-window was chosen from three renders (left / centre / right third): the right
-one keeps the brightest highlight in the top-right corner, away from the
-wordmark, with the spike field across the middle. Posters are each encode's
-first frame — `img/poster-hero.webp` (42 kB), `-lg` (58 kB), `-m` (36 kB).
-Every reference carries `?v=2` so no browser replays the moon from its cache.
+Posters are the first frame of the 1080p and portrait encodes (`img/poster-hero.webp`, `img/poster-hero-m.webp`); the 1440p tier shares the landscape poster.
+Every reference carries `?v=3` so no browser replays the ferrofluid or the
+earlier moon from its cache. The ferrofluid (Pexels 16296848, Film Composite)
+shipped for part of 7 Sep 2026 and was retired the same day: well made, but
+an abstract macro reads as texture, not as a thing, on first glance.
 
 ## The second look (Studio)
 
