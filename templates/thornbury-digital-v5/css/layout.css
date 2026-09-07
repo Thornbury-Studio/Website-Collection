@@ -2248,3 +2248,28 @@
     font-size: .68rem;
   }
 }
+
+/* ============================================================================
+   Case pages. One plate, then the build's own decisions as a ruled index in
+   the charter's shape, then what was measured, then the next case.
+   ========================================================================== */
+
+@layer components {
+  .case-plate { aspect-ratio: 16 / 10; }
+  .case-plate .plate-media { object-position: var(--op, 50% 0%); }
+  .case-open {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.4rem;
+  }
+  .case-open .more { min-height: 2.75rem; }
+  /* the decisions borrow the charter's three tracks; the "practice" line is the receipt */
+  .decisions .n { -webkit-text-stroke-color: var(--hair-2); }
+  .measured { margin-top: 1.8rem; }
+  .measured > div { align-items: start; }
+  .measured dd b { color: var(--chrome); font-weight: 700; font-size: 1.6rem; letter-spacing: -.03em; line-height: 1; display: block; margin-bottom: .4rem; }
+  .case-next .statement { max-width: 20ch; }
+}

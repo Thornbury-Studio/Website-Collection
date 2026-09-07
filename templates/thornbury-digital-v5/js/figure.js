@@ -32,10 +32,13 @@
    studio page's own world in js/bg.js — the site's own motion system in a
    different renderer, flattened into a shallow sheet and drifted sideways.
 
-   THE STARFIELD. A sparse slab behind both: the third layer the reference has,
-   and the thing that gives the other two somewhere to sit.
+   THE STARFIELD. A sparse slab behind both: the ambient layer the reference
+   has, and the thing that gives the other two somewhere to sit.
 
-   Three draw calls. Everything moves in vertex shaders, so the CPU per frame is
+   THE GROUND. A floor of particle trails under the figures, drifting and
+   swelling, its speed pushed by the scroll — see GROUND_VERT below.
+
+   Four draw calls. Everything moves in vertex shaders, so the CPU per frame is
    one bounding-rect read and a handful of uniform writes. Imported dynamically
    by js/main.js only when the band is near, WebGL exists and motion is wanted. */
 
@@ -266,6 +269,74 @@ function wave(strands, per, groundY, opts) {
   return { pos: pos, rnd: rnd, seq: seq, emb: emb, count: rnd.length };
 }
 
+/* THE GROUND. The population the reference has under its figures and this band
+   did not: a sheet of particles on the floor plane, drifting across the frame
+   under two crossing swells, each one drawn as a short trail from where it was
+   a beat ago to where it is — so length is velocity, which is the law the
+   liquid field on every page already obeys. The drift has a flow speed that
+   the scroll pushes, through the same impulse js/main.js gives the field, so
+   one gesture moves both objects. Dense where the figures stand, thinning into
+   the distance and at the edges; crests are brighter than troughs. */
+var GROUND_VERT = [
+  'attribute float aRand;',
+  'attribute float aEnd;',
+  'attribute float aEmber;',
+  'uniform float uTime;',
+  'uniform float uFlow;',
+  'uniform float uFlowVel;',
+  'uniform float uAssemble;',
+  'uniform float uSpread;',
+  'uniform vec2 uPointer;',
+  'uniform float uPointerOn;',
+  'varying float vFade;',
+  'varying float vEmber;',
+  'float lift(float x, float z, float t) {',
+  '  float y = sin(x * 1.9 + t * 0.62 + z * 1.4) * 0.036;',
+  '  y += sin(z * 3.1 - t * 0.41 + x * 0.7) * 0.020;',
+  '  y += sin(x * 4.3 - t * 0.9) * 0.008;',
+  '  return y;',
+  '}',
+  'void main() {',
+  '  float xh = position.x * uSpread + uFlow + aRand * uSpread;',
+  '  xh = mod(xh + uSpread * 0.5, uSpread) - uSpread * 0.5;',
+  '  float xt = xh - uFlowVel * 0.7;',
+  '  float z = position.z;',
+  '  float yh = position.y + lift(xh, z, uTime);',
+  '  float yt = position.y + lift(xt, z, uTime - 0.7);',
+  '  vec2 d = vec2(xh, yh) - uPointer;',
+  '  float push = smoothstep(0.55, 0.0, length(d)) * uPointerOn;',
+  '  yh += push * 0.07;',
+  '  vec3 p = mix(vec3(xt, yt, z), vec3(xh, yh, z), aEnd);',
+  '  gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);',
+  '  float edge = 1.0 - smoothstep(uSpread * 0.30, uSpread * 0.5, abs(xh));',
+  '  float crest = smoothstep(-0.03, 0.05, yh - position.y);',
+  '  float depth = 1.0 - smoothstep(0.6, 2.8, -z);',
+  '  vFade = edge * depth * (0.26 + 0.74 * crest) * (0.55 + 0.45 * aRand)',
+  '        * clamp(uAssemble, 0.0, 1.0) * (0.12 + 0.88 * aEnd) + push * 0.35 * aEnd;',
+  '  vEmber = aEmber;',
+  '}'
+].join('\n');
+
+/* A floor of particle pairs. More than half of them stand where the figures
+   stand; the rest recede. Each particle is two vertices — tail and head — so it
+   can be drawn as a trail. */
+function ground(n, groundY) {
+  var pos = [], rnd = [], end = [], emb = [];
+  for (var i = 0; i < n; i++) {
+    var near = Math.random() < 0.58;
+    var x = Math.random() - 0.5;
+    var z = near ? (Math.random() - 0.5) * 1.1 - 0.05 : -2.6 + Math.random() * 3.5;
+    var y = groundY + (Math.random() - 0.5) * 0.03;
+    var r = Math.random();
+    var e = Math.random() < 0.03 ? 1 : 0;
+    pos.push(x, y, z, x, y, z);
+    rnd.push(r, r);
+    end.push(0, 1);
+    emb.push(e, e);
+  }
+  return { pos: pos, rnd: rnd, end: end, emb: emb, count: n };
+}
+
 function stars(n, spanX, spanY, spanZ) {
   var pos = [], rnd = [];
   for (var i = 0; i < n; i++) {
@@ -287,10 +358,13 @@ export function mount(host, opts) {
   canvas.setAttribute('aria-hidden', 'true');
   host.insertBefore(canvas, host.firstChild);
 
-  var renderer, scene, camera, figPts, waveLines, starPts;
-  var figGeo, waveGeo, starGeo, figMat, waveMat, starMat;
-  var raf = 0, alive = true, visible = false, t0 = performance.now();
-  var pointerOn = 0, pointerTarget = 0, pxWorld = 0, pyWorld = 0, assemble = 0;
+  var renderer, scene, camera, figPts, waveLines, starPts, groundLines;
+  var figGeo, waveGeo, starGeo, groundGeo, figMat, waveMat, starMat, groundMat;
+  var raf = 0, alive = true, visible = false, t0 = performance.now(), last = 0;
+  var pointerOn = 0, pointerTarget = 0, pxWorld = 0, pyWorld = 0, pxT = 0, pyT = 0, assemble = 0;
+  /* the ground's drift: a base speed plus whatever the scroll has pushed into
+     it, decaying with the same ~0.36 s half-life the field's yaw impulse uses */
+  var flow = 0, flowBoost = 0, FLOW_BASE = 0.11;
 
   var img = new Image();
   img.decoding = 'async';
@@ -305,6 +379,7 @@ export function mount(host, opts) {
     if (!fig.count) { cleanup(); return; }
     var wv = wave(small ? 90 : 150, small ? 26 : 38, -1.00, { rise: 0.26, depth: 0.80 });
     var st = stars(small ? 260 : 520, 9, 3.2, 1.6);
+    var gd = ground(small ? 3200 : 8400, -1.02);
 
     try {
       renderer = new THREE.WebGLRenderer({
@@ -350,7 +425,7 @@ export function mount(host, opts) {
       uniforms: {
         uTime: { value: 0 }, uAssemble: { value: 0 }, uSpread: { value: 6 },
         uPointer: { value: pointer }, uPointerOn: { value: 0 },
-        uGain: { value: 0.58 },
+        uGain: { value: 0.46 },
         uChrome: { value: chrome }, uEmber: { value: ember }
       }
     });
@@ -372,6 +447,25 @@ export function mount(host, opts) {
     starPts = new THREE.Points(starGeo, starMat);
     scene.add(starPts);
 
+    groundGeo = new THREE.BufferGeometry();
+    groundGeo.setAttribute('position', new THREE.Float32BufferAttribute(gd.pos, 3));
+    groundGeo.setAttribute('aRand', new THREE.Float32BufferAttribute(gd.rnd, 1));
+    groundGeo.setAttribute('aEnd', new THREE.Float32BufferAttribute(gd.end, 1));
+    groundGeo.setAttribute('aEmber', new THREE.Float32BufferAttribute(gd.emb, 1));
+    groundMat = new THREE.ShaderMaterial({
+      vertexShader: GROUND_VERT, fragmentShader: FLAT_FRAG,
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      uniforms: {
+        uTime: { value: 0 }, uFlow: { value: 0 }, uFlowVel: { value: FLOW_BASE },
+        uAssemble: { value: 0 }, uSpread: { value: 6 },
+        uPointer: { value: pointer }, uPointerOn: { value: 0 },
+        uGain: { value: 1.15 },
+        uChrome: { value: chrome }, uEmber: { value: ember }
+      }
+    });
+    groundLines = new THREE.LineSegments(groundGeo, groundMat);
+    scene.add(groundLines);
+
     if (typeof opts.onReady === 'function') opts.onReady(fig.count);
     resize();
     addEventListener('resize', resize);
@@ -385,7 +479,7 @@ export function mount(host, opts) {
     if (!renderer) return;
     var w = host.clientWidth, h = host.clientHeight;
     if (!w || !h) return;
-    var dpr = Math.min(devicePixelRatio || 1, 1.6);
+    var dpr = Math.min(devicePixelRatio || 1, Math.min(innerWidth, innerHeight) < 700 ? 1.25 : 1.6);
     renderer.setPixelRatio(dpr);
     renderer.setSize(w, h, false);
     figMat.uniforms.uDpr.value = dpr;
@@ -394,6 +488,7 @@ export function mount(host, opts) {
     camera.position.z = 1.32 / Math.tan((camera.fov * Math.PI / 180) / 2);
     camera.updateProjectionMatrix();
     waveMat.uniforms.uSpread.value = Math.max(3.2, 1.32 * camera.aspect * 2 + 1.6);
+    groundMat.uniforms.uSpread.value = waveMat.uniforms.uSpread.value;
   }
 
   function onPointer(ev) {
@@ -402,8 +497,9 @@ export function mount(host, opts) {
     var nx = ((ev.clientX - r.left) / r.width) * 2 - 1;
     var ny = -(((ev.clientY - r.top) / r.height) * 2 - 1);
     var hh = Math.tan((camera.fov * Math.PI / 180) / 2) * camera.position.z;
-    pxWorld = nx * hh * camera.aspect;
-    pyWorld = ny * hh;
+    pxT = nx * hh * camera.aspect;
+    pyT = ny * hh;
+    if (!pointerTarget) { pxWorld = pxT; pyWorld = pyT; }
     pointerTarget = 1;
   }
   function onLeave() { pointerTarget = 0; }
@@ -413,7 +509,7 @@ export function mount(host, opts) {
     if (visible) run(); else stop();
   }, { threshold: 0 });
 
-  function run() { if (!raf && alive && renderer) { t0 = performance.now(); raf = requestAnimationFrame(step); } }
+  function run() { if (!raf && alive && renderer) { t0 = performance.now(); last = 0; raf = requestAnimationFrame(step); } }
   function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
 
   function step(now) {
@@ -425,7 +521,19 @@ export function mount(host, opts) {
     var off = Math.abs((r.top + r.height * 0.5) - vh * 0.5) / (vh * 0.5 + r.height * 0.5);
     var want = Math.max(0, Math.min(1, (1 - off) * 1.5));
     assemble += (want - assemble) * 0.06;
-    pointerOn += (pointerTarget - pointerOn) * 0.09;
+    pointerOn += (pointerTarget - pointerOn) * 0.12;
+    pxWorld += (pxT - pxWorld) * 0.16;
+    pyWorld += (pyT - pyWorld) * 0.16;
+    var dt = last ? Math.min(0.05, (now - last) / 1000) : 0.016;
+    last = now;
+    flowBoost *= Math.exp(-dt / 0.52);
+    var flowVel = FLOW_BASE + flowBoost;
+    flow += flowVel * dt;
+    groundMat.uniforms.uTime.value = t;
+    groundMat.uniforms.uFlow.value = flow;
+    groundMat.uniforms.uFlowVel.value = flowVel;
+    groundMat.uniforms.uAssemble.value = assemble;
+    groundMat.uniforms.uPointerOn.value = pointerOn;
 
     figMat.uniforms.uTime.value = t;
     figMat.uniforms.uAssemble.value = assemble;
@@ -451,18 +559,22 @@ export function mount(host, opts) {
     removeEventListener('resize', resize);
     host.removeEventListener('pointermove', onPointer);
     host.removeEventListener('pointerleave', onLeave);
-    [figGeo, waveGeo, starGeo].forEach(function (g) { if (g) g.dispose(); });
-    [figMat, waveMat, starMat].forEach(function (m) { if (m) m.dispose(); });
+    [figGeo, waveGeo, starGeo, groundGeo].forEach(function (g) { if (g) g.dispose(); });
+    [figMat, waveMat, starMat, groundMat].forEach(function (m) { if (m) m.dispose(); });
     if (renderer) {
       renderer.dispose();
       /* <main> is swapped on navigation, so the context has to go with it or a
          handful of visits exhausts the browser's WebGL context budget */
       if (renderer.forceContextLoss) renderer.forceContextLoss();
     }
-    renderer = scene = camera = figPts = waveLines = starPts = null;
-    figGeo = waveGeo = starGeo = figMat = waveMat = starMat = null;
+    renderer = scene = camera = figPts = waveLines = starPts = groundLines = null;
+    figGeo = waveGeo = starGeo = groundGeo = figMat = waveMat = starMat = groundMat = null;
     if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
   }
 
-  return { destroy: cleanup };
+  return {
+    destroy: cleanup,
+    /* the scroll's push, in floor units per second; decays on its own */
+    impulse: function (v) { flowBoost = Math.min(1.4, flowBoost + v); }
+  };
 }
