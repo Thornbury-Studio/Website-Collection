@@ -272,6 +272,9 @@
      the moment it has answered rather than left for the collector — a page swap
      runs this again, and the browser's context budget is small. */
   var webglOK = null;
+  /* the probe costs ~30 ms of context creation: paid once at idle, never in a transition */
+  if (global.requestIdleCallback) requestIdleCallback(function () { hasWebGL(); }, { timeout: 3000 });
+  else setTimeout(function () { hasWebGL(); }, 1500);
   function hasWebGL() {
     if (webglOK !== null) return webglOK;
     webglOK = false;
@@ -591,11 +594,18 @@
     scrollFeel();
     trueLoopMarquee(root.querySelector('#mq'), 22);
     briefForm(root);
-    motion(root, opts.intro !== false);
+    /* a routed arrival is faded in from nothing, so the scroll motion can be
+       set up one frame later, out of the frame that swapped the page */
+    if (opts.intro === false && global.requestAnimationFrame) {
+      var r = root;
+      requestAnimationFrame(function () { if (r.isConnected) motion(r, false); });
+    } else motion(root, opts.intro !== false);
   }
 
-  function teardown() {
-    if (ctxMotion) { ctxMotion.revert(); ctxMotion = null; }
+  function teardown(opts) {
+    /* a page on its way out of the document has nothing to revert to; a
+       switch thrown on a page that stays does */
+    if (ctxMotion) { if (opts && opts.discard) ctxMotion.kill(); else ctxMotion.revert(); ctxMotion = null; }
     for (var i = 0; i < offs.length; i++) offs[i]();
     offs.length = 0;
   }
