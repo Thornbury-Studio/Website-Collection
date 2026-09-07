@@ -62,8 +62,17 @@
     var still = !!opts.still;
     var coarse = matchMedia('(pointer: coarse)').matches;
     var mobile = Math.min(innerWidth, innerHeight) < 700 || coarse;
-    var N = mobile ? 900 : 2600;
-    var NA = N;
+    /* Hero is the money shot: more strands, like Basin's ribbon mass.
+       Inner pages sit behind solid bands — REST is the old count. */
+    var REST = mobile ? 900 : 2600;
+    var N = mobile ? 3200 : 9000;
+    var dens = 1;
+    var qual = opts.quality === 'hero' ? 'hero' : 'rest';
+    var NA = qual === 'hero' ? N : REST;
+    function applyNA() {
+      var cap = qual === 'hero' ? N : REST;
+      NA = Math.max(STRAND, Math.min(N, Math.round(cap * dens)));
+    }
 
     var P = new Float32Array(N * 3);
     var V = new Float32Array(N);
@@ -92,7 +101,7 @@
         x += vx * 0.03; y += vy * 0.03; z += vz * 0.03;
       }
       var ember = hash(seed + s * 1.7 + 9) < 0.045 ? 1 : 0;
-      for (var k = 0; k < STRAND && q.i < NA; k++, q.i++) {
+      for (var k = 0; k < STRAND && q.i < N; k++, q.i++) {
         var i = q.i;
         P[i * 3] = x; P[i * 3 + 1] = y; P[i * 3 + 2] = z;
         kind[i] = ember;
@@ -108,8 +117,8 @@
     function seedStep(strands) {
       if (!seedQ) return;
       var n = 0;
-      while (seedQ.i < NA && n < strands) { seedStrand(seedQ); n++; }
-      if (seedQ.i >= NA) seedQ = null;
+      while (seedQ.i < N && n < strands) { seedStrand(seedQ); n++; }
+      if (seedQ.i >= N) seedQ = null;
     }
 
     function seedWorld(seed, b, chunked) {
@@ -122,7 +131,7 @@
 
     /* ---- camera: every term here is tweenable, and a page is just a set of them ---- */
     var drift = hash((opts.seed || 0) + 0.5) * 6.283;
-    var cam = { rot: 0, tilt: 0.5, ax: 0.5, ay: 0.5, zoom: 1, lx: 0.6, ly: -0.8 };
+    var cam = { rot: 0, tilt: 0.5, ax: 0.5, ay: 0.5, zoom: opts.zoom != null ? opts.zoom : 1, lx: 0.6, ly: -0.80 };
 
     function norml(o) {
       var m = Math.sqrt(o.lx * o.lx + o.ly * o.ly) || 1;
@@ -295,7 +304,7 @@
         PX[i] = sx; PY[i] = sy;
         var dx = sx - x0, dy = sy - y0;
         var len = Math.sqrt(dx * dx + dy * dy);
-        if (len < 0.12 || len > maxSeg) continue;
+        if (len < 0.08 || len > maxSeg) continue;
         if ((x0 < -8 && sx < -8) || (x0 > W + 8 && sx > W + 8) ||
             (y0 < -8 && sy < -8) || (y0 > Hh + 8 && sy > Hh + 8)) continue;
         var spec = Math.abs((dx * LX + dy * LY) / len);
@@ -304,6 +313,9 @@
         var lum = 0.22 + 0.45 * d + 0.6 * spec;
         var A = (0.16 + 0.3 * sp) * (0.45 + 0.55 * d);
         var lw = (2.1 - 1.1 * sp) * (0.5 + 0.8 * d) * wScale;
+        /* Pulled-back projection shortens segments; keep ribbon weight so the
+           extra hero strands still pool like Basin, not dust. */
+        lw *= clamp(1 / cam.zoom, 1, 1.5);
         put(kind[i],
             Math.round(clamp(lum, 0, 1.3) / 1.3 * 12),
             Math.round(clamp(A, 0, 1) * 16),
@@ -319,7 +331,7 @@
       if (!running) return;
       var dt = last ? Math.min(0.05, (t - last) / 1000) : 0.016;
       last = t;
-      if (seedQ) seedStep(Math.ceil(NA / STRAND / 6));
+      if (seedQ) seedStep(Math.ceil(N / STRAND / 6));
       acc += dt;
       var steps = 0;
       while (acc >= STEP && steps < 3) { integrate(); acc -= STEP; steps++; }
@@ -339,7 +351,12 @@
       if (drawAcc >= DRAW_STEP) {
         drawAcc = drawAcc > DRAW_STEP * 3 ? 0 : drawAcc - DRAW_STEP;
         frameNo++;
-        drawFrame(frameNo % 5 === 0 ? 0.4 : 0.15);
+        /* Hero density keeps a longer trail so the extra strands read as
+           ribbon, not sparks. Covered pages keep the old wipe. */
+        var hero = NA > REST * 1.05;
+        drawFrame(hero
+          ? (frameNo % 7 === 0 ? 0.16 : 0.05)
+          : (frameNo % 5 === 0 ? 0.4 : 0.15));
       }
       raf = requestAnimationFrame(frame);
     }
@@ -350,7 +367,7 @@
     function warm() {
       var n = Math.min(warmLeft, 4);
       for (var f = 0; f < n; f++) {
-        if (seedQ) seedStep(Math.ceil(NA / STRAND / 6));
+        if (seedQ) seedStep(Math.ceil(N / STRAND / 6));
         integrate();
         rot += 0.0008;
         tweensStep(1 / 60);
@@ -435,9 +452,14 @@
       /* reseeding costs one frame; callers hide it behind the ghost */
       world: function (spec) {
         lawTw.set({ b: spec.b, ext: spec.ext, vn: spec.vn });
-        var want = spec.density == null ? N : Math.max(STRAND, Math.round(N * spec.density));
-        NA = Math.min(N, want);
+        dens = spec.density == null ? 1 : spec.density;
+        applyNA();
         seedWorld(spec.seed || 0, spec.b || 0.19, !!spec.chunked);
+      },
+      /* Hero spends the full budget; covered pages drop back to REST. */
+      quality: function (q) {
+        qual = q === 'hero' ? 'hero' : 'rest';
+        applyNA();
       },
       /* draw n frames right now — enough that a freshly seeded world is not an
          empty screen the instant a dissolve starts */

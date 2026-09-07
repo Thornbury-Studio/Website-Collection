@@ -68,7 +68,7 @@
 </dialog>
 <div class="site">
   <main id="main" tabindex="-1">
-    <header class="page-head wrap">
+    <header class="page-head page-head--book wrap">
       <p class="meta"><span class="q">04</span> — Studio</p>
       <h1 class="display">Studio</h1>
       <p class="sub">A studio in Singapore that builds the whole site, not a deck about it.</p>
@@ -80,60 +80,90 @@
         <ol class="charter">
 
           <li>
-            <p class="n" aria-hidden="true">01</p>
-            <h2>Nothing here is inherited.</h2>
-            <p>Every standard in this studio had to be written, argued over and agreed
+            <details class="fold" data-group="charter" open>
+              <summary>
+                <span class="n" aria-hidden="true">01</span>
+                <h2>Nothing here is inherited.</h2>
+              </summary>
+              <div class="fold-body">
+                <p>Every standard in this studio had to be written, argued over and agreed
               on. None of it arrived with the furniture. That is slower than adopting
               a house style, and it is the reason we can tell you why any decision was
               made rather than that it is simply how things are done.</p>
-            <p class="practice"><b>Practice</b>The internal charter runs to fourteen
+                <p class="practice"><b>Practice</b>The internal charter runs to fourteen
               articles. This page is the part that concerns you.</p>
+              </div>
+            </details>
           </li>
 
           <li>
-            <p class="n" aria-hidden="true">02</p>
-            <h2>We would rather be understood than admired.</h2>
-            <p>A website can be impressive for five seconds. After that it has to be
+            <details class="fold" data-group="charter" open>
+              <summary>
+                <span class="n" aria-hidden="true">02</span>
+                <h2>We would rather be understood than admired.</h2>
+              </summary>
+              <div class="fold-body">
+                <p>A website can be impressive for five seconds. After that it has to be
               read, used on a phone with one thumb, and understood by someone who is
               not thinking about design at all. When those two ambitions disagree, the
               second one wins — every time, and in writing.</p>
-            <p class="practice"><b>Practice</b>Priority when something has to give:
+                <p class="practice"><b>Practice</b>Priority when something has to give:
               usability, then information, then visual effect. Effects are cut first,
               never the other two.</p>
+              </div>
+            </details>
           </li>
 
           <li>
-            <p class="n" aria-hidden="true">03</p>
-            <h2>The second look is the one that counts.</h2>
-            <p>Anything survives a glance. We build for the moment after it — when the
+            <details class="fold" data-group="charter" open>
+              <summary>
+                <span class="n" aria-hidden="true">03</span>
+                <h2>The second look is the one that counts.</h2>
+              </summary>
+              <div class="fold-body">
+                <p>Anything survives a glance. We build for the moment after it — when the
               site is opened on an old phone, when another developer reads the code,
               when nobody has touched it for two years and it still has to work. That
               moment is unglamorous and it is the one we design for.</p>
-            <p class="practice"><b>Practice</b>Every effect on this site can be switched
+                <p class="practice"><b>Practice</b>Every effect on this site can be switched
               off. Turn JavaScript off and the pages still work.</p>
+              </div>
+            </details>
           </li>
 
           <li>
-            <p class="n" aria-hidden="true">04</p>
-            <h2>We say no in writing.</h2>
-            <p>We publish a service only once we are confident in it — two of ours are
+            <details class="fold" data-group="charter" open>
+              <summary>
+                <span class="n" aria-hidden="true">04</span>
+                <h2>We say no in writing.</h2>
+              </summary>
+              <div class="fold-body">
+                <p>We publish a service only once we are confident in it — two of ours are
               still unlisted for exactly that reason, marked so everywhere they appear.
               That costs us enquiries. Pretending otherwise would cost more.</p>
-            <p class="practice"><b>Practice</b>AEO / GEO and SEO are marked in
+                <p class="practice"><b>Practice</b>AEO / GEO and SEO are marked in
               development on every page they appear on, including the one selling
               them.</p>
+              </div>
+            </details>
           </li>
 
           <li>
-            <p class="n" aria-hidden="true">05</p>
-            <h2>Failure is budgeted, not hidden.</h2>
-            <p>We expect some things not to work; that is written into how this studio
+            <details class="fold" data-group="charter" open>
+              <summary>
+                <span class="n" aria-hidden="true">05</span>
+                <h2>Failure is budgeted, not hidden.</h2>
+              </summary>
+              <div class="fold-body">
+                <p>We expect some things not to work; that is written into how this studio
               operates, not buried halfway through. What we owe a client is not the
               pretence of never being wrong — it is that being wrong stays our problem,
               never theirs.</p>
-            <p class="practice"><b>Practice</b>On delivery you receive the repository,
+                <p class="practice"><b>Practice</b>On delivery you receive the repository,
               the hosting, the domain and the mailbox. If you walk away, nothing stays
               with us.</p>
+              </div>
+            </details>
           </li>
 
         </ol>
@@ -154,15 +184,15 @@
              record, not a line written for the page: the incident, the date,
              what caught it, and what changed. -->
         <div class="fx-row">
-          <div>
-            <p class="meta">Article 05, in practice</p>
+          <details class="fold" data-group="fx" open>
+            <summary class="meta">Article 05, in practice</summary>
             <p class="fx-say">On 26 August 2026 a content security policy change took our own site
               down for about seven hours. The build passed, the review passed and every page
               rendered — and nothing on them could be clicked. A person opening it in a browser
               found it; the tooling never did. Since then no change ships until someone has
               clicked through the live deploy, which is why every page here was checked in a real
               browser, and on a real phone, before this one.</p>
-          </div>
+          </details>
         </div>
       </div>
     </section>
@@ -204,9 +234,21 @@
       <div class="wrap reveal">
         <p class="meta"><span class="q">II</span> — <span id="p1">What we are not the studio for</span></p>
         <ul class="nots">
-          <li><b>A logo on its own.</b> We draw one when it is going on a site we are building.</li>
-          <li><b>A rebuild that has to be live in ten days.</b> We will tell you what is actually possible in the time before you pay for any of it.</li>
-          <li><b>A site with nobody in the room who can decide.</b> We will ask, and the answer has to come from someone.</li>
+          <li>
+            <details class="fold" data-group="nots" open>
+              <summary><b>A logo on its own.</b></summary> <p>We draw one when it is going on a site we are building.</p>
+            </details>
+          </li>
+          <li>
+            <details class="fold" data-group="nots" open>
+              <summary><b>A rebuild that has to be live in ten days.</b></summary> <p>We will tell you what is actually possible in the time before you pay for any of it.</p>
+            </details>
+          </li>
+          <li>
+            <details class="fold" data-group="nots" open>
+              <summary><b>A site with nobody in the room who can decide.</b></summary> <p>We will ask, and the answer has to come from someone.</p>
+            </details>
+          </li>
         </ul>
       </div>
     </section>
@@ -225,13 +267,16 @@
       <div class="wrap who-head reveal">
         <p class="meta"><span class="q">III</span> — <span id="p2">Who we are</span></p>
         <h2 class="who-claim">Thornbury is new. We would rather you heard it from us.</h2>
-        <div class="who-open">
-          <p>A studio with thirty years behind it can point at the thirty years. We do not
-            have that, and pretending otherwise would fail the first standard on this page.</p>
-          <p>So we did the other thing. We decided what this studio believes, what it refuses
-            to do, and who is accountable when it goes wrong — and we wrote it down. The
-            charter above is that document.</p>
-        </div>
+        <details class="fold fold--prose" data-group="who-open" open>
+          <summary>A studio with thirty years behind it can point at the thirty years.</summary>
+          <div class="who-open">
+            <p>A studio with thirty years behind it can point at the thirty years. We do not
+              have that, and pretending otherwise would fail the first standard on this page.</p>
+            <p>So we did the other thing. We decided what this studio believes, what it refuses
+              to do, and who is accountable when it goes wrong — and we wrote it down. The
+              charter above is that document.</p>
+          </div>
+        </details>
       </div>
 
       <div class="wrap who-lead reveal">
@@ -263,9 +308,9 @@
               <p class="who-line">Repository, hosting, domain, mailbox — ownership transfers completely on delivery.</p>
             </li>
           </ol>
-          <p class="fig3d-note meta">Fig. — <b data-figure-count>0</b> points, one scene at a time.
+          <p class="fig3d-note meta">Fig. — <b data-figure-count>0</b> points<span class="fig-credit">, one scene at a time.
             Shape and surface direction from licensed photographs; none of their colour is
-            used, no face is drawn, and nobody in them works here.</p>
+            used, no face is drawn, and nobody in them works here</span>.</p>
         </div>
       </div>
 
@@ -277,41 +322,53 @@
               <li><h3>Zhang Zhijie</h3><p class="meta">Founder / CEO</p></li>
               <li><h3>Isaac</h3><p class="meta">Co-Founder / COO</p></li>
             </ul>
-            <p class="meta who-sub">And behind the two of us</p>
-            <p>A founding team of around twenty — design, engineering, writing and research.
-              Most are building their first company. None of them are a stock photograph of
-              an office, which is why you will not find one on this page.</p>
+            <details class="fold" data-group="who-team" open>
+              <summary class="meta who-sub">And behind the two of us</summary>
+              <p>A founding team of around twenty — design, engineering, writing and research.
+                Most are building their first company. None of them are a stock photograph of
+                an office, which is why you will not find one on this page.</p>
+            </details>
           </div>
           <div class="who-team-col">
-            <p class="meta">Founding team, not headcount</p>
-            <p>We will name people here when they are ready to be named, and not before.</p>
-            <p class="meta who-sub">Where this goes</p>
-            <p><b>We are not trying to become a large agency.</b> We are trying to become a
-              studio whose work rewards being looked at closely, for the kind of client who
-              can tell the difference. That is a slower business and a smaller one, and we
-              would rather have it.</p>
+            <details class="fold" data-group="who-team" open>
+              <summary class="meta">Founding team, not headcount</summary>
+              <p>We will name people here when they are ready to be named, and not before.</p>
+              <p class="meta who-sub">Where this goes</p>
+              <p><b>We are not trying to become a large agency.</b> We are trying to become a
+                studio whose work rewards being looked at closely, for the kind of client who
+                can tell the difference. That is a slower business and a smaller one, and we
+                would rather have it.</p>
+            </details>
           </div>
         </div>
         <dl class="whowe">
           <div>
-            <dt>Where we are</dt>
-            <dd>Singapore. Anything you send us is governed by the Personal Data Protection
-              Act, the law our <a href="privacy.html">privacy policy</a> is written against.</dd>
+            <details class="fold" data-group="whowe" open>
+              <summary>Where we are</summary>
+              <p>Singapore. Anything you send us is governed by the Personal Data Protection
+                Act, the law our <a href="privacy.html">privacy policy</a> is written against.</p>
+            </details>
           </div>
           <div>
-            <dt>What we actually do</dt>
-            <dd>The whole site: design, writing, build, launch and handover, in one studio on
-              one timeline. Nothing subcontracted.</dd>
+            <details class="fold" data-group="whowe" open>
+              <summary>What we actually do</summary>
+              <p>The whole site: design, writing, build, launch and handover, in one studio on
+                one timeline. Nothing subcontracted.</p>
+            </details>
           </div>
           <div>
-            <dt>How we are structured</dt>
-            <dd>Two principals and a small team, most on their first company — which is why
-              the charter above exists in writing.</dd>
+            <details class="fold" data-group="whowe" open>
+              <summary>How we are structured</summary>
+              <p>Two principals and a small team, most on their first company — which is why
+                the charter above exists in writing.</p>
+            </details>
           </div>
           <div>
-            <dt>What we will not do</dt>
-            <dd>Publish a service before we are confident in it. Two are marked
-              <em>in development</em> wherever they appear, including the page that sells them.</dd>
+            <details class="fold" data-group="whowe" open>
+              <summary>What we will not do</summary>
+              <p>Publish a service before we are confident in it. Two are marked
+                <em>in development</em> wherever they appear, including the page that sells them.</p>
+            </details>
           </div>
         </dl>
       </div>
@@ -320,11 +377,13 @@
     <section class="sec sec--solid" aria-labelledby="p3">
       <div class="wrap reveal">
         <p class="meta"><span class="q">IV</span> — <span id="p3">A studio, or one freelancer</span></p>
-        <p class="sub">A good freelancer can do every line below, and plenty do it well. The
-          difference is not talent — it is what happens on the week they are ill, and on
-          the day they move on.</p>
 
-        <table class="vs">
+        <details class="fold fold--block" data-group="vs" open>
+          <summary>How the two compare on the things that decide a project.</summary>
+          <p class="sub">A good freelancer can do every line below, and plenty do it well. The
+            difference is not talent — it is what happens on the week they are ill, and on
+            the day they move on.</p>
+          <table class="vs">
           <caption class="vsr">How the two compare on the things that decide a project.</caption>
           <thead>
             <tr>
@@ -372,6 +431,7 @@
             </tr>
           </tbody>
         </table>
+        </details>
       </div>
     </section>
 
@@ -380,28 +440,36 @@
         <p class="meta"><span class="q">V</span> — <span id="p3b">Two promises, in plain words</span></p>
         <ul class="pillars">
           <li>
-            <h2>Speed</h2>
-            <p>The words arrive first. The film, the motion and the big picture load after
-              them, and a phone is never sent the desktop’s version.</p>
-            <p class="check"><b>Check</b>Open this site on a bad connection. The words are there
-              first.</p>
+            <details class="fold" data-group="pillars" open>
+              <summary><h2>Speed</h2></summary>
+              <div class="fold-body">
+                <p>The words arrive first. The film, the motion and the big picture load after
+                  them, and a phone is never sent the desktop’s version.</p>
+                <p class="check"><b>Check</b>Open this site on a bad connection. The words are there
+                  first.</p>
+              </div>
+            </details>
           </li>
           <li>
-            <h2>Ownership</h2>
-            <p>Domain, hosting, payment provider, business profile, analytics, mailbox: you
-              create every one of them and own it, and we work inside them on access you can
-              revoke. We never open a business-critical account in our own name to make setup
-              easier, so nothing of yours can be held hostage and nothing depends on one of us
-              being reachable. Two things stay ours — error monitoring and rate limiting —
-              because they are shared plumbing nobody outside the studio logs into.</p>
-            <ol class="handover">
-              <li><b>01</b><span>The repository — every file the site is made of</span></li>
-              <li><b>02</b><span>The hosting account, in your name</span></li>
-              <li><b>03</b><span>The domain, in your name</span></li>
-              <li><b>04</b><span>The mailbox on it</span></li>
-            </ol>
-            <p class="check"><b>Check</b>Ask any studio to put that list in writing before you
-              sign. The answer tells you most of what you need to know.</p>
+            <details class="fold" data-group="pillars" open>
+              <summary><h2>Ownership</h2></summary>
+              <div class="fold-body">
+                <p>Domain, hosting, payment provider, business profile, analytics, mailbox: you
+                  create every one of them and own it, and we work inside them on access you can
+                  revoke. We never open a business-critical account in our own name to make setup
+                  easier, so nothing of yours can be held hostage and nothing depends on one of us
+                  being reachable. Two things stay ours — error monitoring and rate limiting —
+                  because they are shared plumbing nobody outside the studio logs into.</p>
+                <ol class="handover">
+                  <li><b>01</b><span>The repository — every file the site is made of</span></li>
+                  <li><b>02</b><span>The hosting account, in your name</span></li>
+                  <li><b>03</b><span>The domain, in your name</span></li>
+                  <li><b>04</b><span>The mailbox on it</span></li>
+                </ol>
+                <p class="check"><b>Check</b>Ask any studio to put that list in writing before you
+                  sign. The answer tells you most of what you need to know.</p>
+              </div>
+            </details>
           </li>
         </ul>
 

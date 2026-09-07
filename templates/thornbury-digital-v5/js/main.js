@@ -23,17 +23,45 @@
   var canvas = document.getElementById('field');
   var field = null;
   var fieldCbs = [];
-  /* two independent reasons to run: the hero gate (nothing is visible behind an
-     opaque film) and a hold from bg.js (a transition needs it live regardless) */
-  var fieldWant = null, fieldHold = false, fieldOff = false;
+  /* two independent reasons to run: a page that wants the field live, and a
+     hold from bg.js (a transition needs it live regardless) */
+  var fieldWant = true, fieldHold = false, fieldOff = false;
+  var heroWatch = null;
+  var heroOff = null;
 
   function applyFieldGate() {
     if (!field || !field.setActive) return;
     /* a mode that hides the canvas outright wins over every other reason to run */
     if (fieldOff) { field.setActive(false); return; }
     if (fieldHold) { field.setActive(true); return; }
-    if (fieldWant === null) return;
     field.setActive(fieldWant);
+  }
+
+  /* First viewport spends the strand budget. Once the hero is covered, drop
+     back — inner pages and the work index sit on solid bands anyway. */
+  function watchHero(root) {
+    if (heroOff) { heroOff(); heroOff = null; }
+    var page = html.getAttribute('data-page') || 'home';
+    function setQual(on) {
+      if (field && field.quality) field.quality(on ? 'hero' : 'rest');
+    }
+    if (page !== 'home') { setQual(false); return; }
+    var hero = root && root.querySelector('.hero');
+    if (!hero) { setQual(true); return; }
+    function check() {
+      var r = hero.getBoundingClientRect();
+      setQual(r.bottom > innerHeight * 0.22);
+    }
+    check();
+    global.addEventListener('scroll', check, { passive: true });
+    if (typeof IntersectionObserver !== 'undefined') {
+      heroWatch = new IntersectionObserver(function () { check(); }, { threshold: [0, 0.22, 0.5, 1] });
+      heroWatch.observe(hero);
+    }
+    heroOff = function () {
+      global.removeEventListener('scroll', check);
+      if (heroWatch) { heroWatch.disconnect(); heroWatch = null; }
+    };
   }
 
   function startField() {
@@ -41,7 +69,7 @@
     var mode = html.getAttribute('data-field') || 'live';
     var page = html.getAttribute('data-page') || 'home';
     var anchors = {
-      home: [0.5, 0.5], work: [0.5, 0.45], services: [0.44, 0.54],
+      home: [0.5, 0.46], work: [0.5, 0.45], services: [0.44, 0.54],
       studio: [0.62, 0.48], contact: [0.68, 0.5]
     };
     var seeds = { home: 0, work: 23, services: 5, studio: 11, contact: 37 };
@@ -51,7 +79,9 @@
         still: mode === 'still' || reducedNow(),
         seed: seeds[page] || 0,
         ax: an[0],
-        ay: an[1]
+        ay: an[1],
+        zoom: page === 'home' ? 0.70 : undefined,
+        quality: page === 'home' ? 'hero' : 'rest'
       });
       if (!field) { html.classList.add('no-field'); return; }
       applyFieldGate();
@@ -61,9 +91,10 @@
       html.classList.add('no-field');
     }
   }
-  /* Seeding and the first draws cost ~20 ms, and the field is a background — it
-     is started off the critical path so it cannot lengthen the load task. */
-  if (global.requestIdleCallback) requestIdleCallback(startField, { timeout: 1200 });
+  /* The field is the first picture on Home, so it starts on the load path
+     there. Other pages keep it off the critical path. */
+  if ((html.getAttribute('data-page') || '') === 'home') startField();
+  else if (global.requestIdleCallback) requestIdleCallback(startField, { timeout: 1200 });
   else setTimeout(startField, 200);
 
   /* ---------- per-page wiring ---------- */
@@ -87,31 +118,6 @@
         a.removeAttribute('aria-current');
       }
     });
-  }
-
-  /* The hero still is what paints; the film is attached only after the page is
-     up, so it can never delay first paint or LCP. A phone gets a portrait encode
-     cut for the crop it actually shows (540x1080, 0.9 MB against 2.7 MB), and it
-     is crossed in only once it is genuinely playing — so a slow connection, a
-     blocked autoplay or reduced motion all simply keep the still. */
-  function heroFilm(root) {
-    var v = root.querySelector('#heroFilm');
-    if (!v || reducedNow()) return;
-    var small = matchMedia('(max-width: 760px)').matches;
-    var large = matchMedia('(min-width: 1800px)').matches;
-    var src = (small && v.getAttribute('data-film-sm')) ||
-              (large && v.getAttribute('data-film-lg')) ||
-              v.getAttribute('data-film');
-    if (!src) return;
-    function attach() {
-      if (!v.isConnected) return;
-      v.addEventListener('playing', function () { v.classList.add('is-on'); }, { once: true });
-      v.src = src;
-      var p = v.play();
-      if (p && p.catch) p.catch(function () { /* autoplay refused: the still stands */ });
-    }
-    if (global.requestIdleCallback) requestIdleCallback(attach, { timeout: 2000 });
-    else setTimeout(attach, 400);
   }
 
   /* The mobile menu is a page of its own, so it is a real modal dialog: the
@@ -218,13 +224,6 @@
     if (field) {
       field.setStill(reducedNow());
       field.setActive(!reducedNow());
-    }
-    var v = root && root.querySelector('#heroFilm');
-    if (v && reducedNow()) {
-      v.pause();
-      v.classList.remove('is-on');
-      v.removeAttribute('src');
-      v.load();
     }
     if (root) init(root, { intro: false });
     if (global.ScrollTrigger) global.ScrollTrigger.refresh();
@@ -518,17 +517,14 @@
       var hero = root.querySelector('.hero');
       if (hero && intro) {
         var tl = g.timeline({ defaults: { ease: 'power4.out', clearProps: 'all' } });
-        var filmLayer = hero.querySelector('.hero-film');
         var rise = function (sel, y, dur, at, stagger) {
           var els = hero.querySelectorAll(sel);
           if (els.length) tl.fromTo(els, { y: y, opacity: 0 },
             { y: 0, opacity: 1, duration: dur, stagger: stagger || 0, clearProps: 'all' }, at);
         };
-        if (filmLayer) tl.from(filmLayer, { opacity: 0, duration: 1.8, ease: 'power2.out' }, 0);
-        rise('.hero-copy .meta', 14, 0.9, 0.5);
-        rise('.wordmark', 64, 1.5, 0.62);
-        rise('.hero-line', 20, 1.1, 0.9);
-        rise('.hero-act > *', 18, 1, 1.05, 0.08);
+        rise('.hero-copy .meta', 14, 0.9, 0.15);
+        rise('.wordmark', 28, 1.2, 0.28);
+        rise('.hero-line', 16, 0.9, 0.48);
       }
 
       var head = root.querySelector('.page-head');
@@ -538,35 +534,8 @@
 
       if (!ST) return;
 
-      /* The handoff: across the pinned hero's own scroll range the film dissolves
-         and drifts back, so the moon gives way to the liquid field behind it
-         rather than being cut off at the section edge. autoAlpha hides it at the
-         end, so a spent hero never sits over the page catching clicks. */
-      var stick = root.querySelector('.hero-stick');
-      if (stick && hero) {
-        var hFilm = hero.querySelector('.hero-film');
-        var hRest = hero.querySelectorAll('.hero-copy');
-        var gate = function (p) {
-          var want = p > 0.04;
-          if (want === fieldWant) return;
-          fieldWant = want;
-          applyFieldGate();
-        };
-        var handoff = g.timeline({
-          scrollTrigger: {
-            trigger: stick, start: 'top top', end: 'bottom bottom', scrub: 0.6,
-            onUpdate: function (self) { gate(self.progress); },
-            onRefresh: function (self) { gate(self.progress); }
-          }
-        });
-        gate(0);
-        if (hFilm) handoff.to(hFilm, { autoAlpha: 0, scale: 1.12, ease: 'none', duration: 1 }, 0);
-        if (hRest.length) handoff.to(hRest, { autoAlpha: 0, y: -40, ease: 'none', duration: 0.6 }, 0);
-      } else {
-        /* no hero on this page: the gate has nothing to say, so let the field run */
-        fieldWant = true;
-        applyFieldGate();
-      }
+      fieldWant = true;
+      applyFieldGate();
 
       g.utils.toArray('.reveal').forEach(function (el) {
         g.from(el, {
@@ -608,6 +577,28 @@
     }, root);
   }
 
+  /* On a phone, long copy folds into native <details> so the page is a list of
+     claims you can open. Desktop keeps every panel open and hides the summary
+     chrome, so the layout does not change. Find-in-page still reaches the body. */
+  var foldMq = matchMedia('(max-width: 760px)');
+  function folds(root) {
+    if (!root) return;
+    var phone = foldMq.matches;
+    root.querySelectorAll('details.fold').forEach(function (el) {
+      var group = el.getAttribute('data-group');
+      if (phone) {
+        el.removeAttribute('open');
+        if (group) el.setAttribute('name', group);
+      } else {
+        el.setAttribute('open', '');
+        el.removeAttribute('name');
+      }
+    });
+  }
+  foldMq.addEventListener('change', function () {
+    folds(document.getElementById('main'));
+  });
+
   function init(root, opts) {
     opts = opts || {};
     root = root || document.getElementById('main');
@@ -615,14 +606,16 @@
     var page = html.getAttribute('data-page') || 'home';
     markNav(page);
 
-    if (!root.querySelector('.hero-stick')) { fieldWant = true; applyFieldGate(); }
+    fieldWant = true;
+    applyFieldGate();
+    watchHero(root);
 
     menu();
     fxSwitch();
-    heroFilm(root);
     cspBlock(root);
     cssBlock(root);
     whoBeats(root);
+    folds(root);
     figure(root);
     rig(root);
     reveal(root);
@@ -633,10 +626,10 @@
   }
 
   function teardown() {
+    if (heroOff) { heroOff(); heroOff = null; }
     if (ctxMotion) { ctxMotion.revert(); ctxMotion = null; }
     for (var i = 0; i < offs.length; i++) offs[i]();
     offs.length = 0;
-    fieldWant = null;
   }
 
   global.TBPage = {
@@ -646,7 +639,7 @@
     setEffects: setEffects,
     field: function () { return field; },
     onField: function (cb) { if (field) cb(field); else fieldCbs.push(cb); },
-    /* bg.js holds the field live across a transition, whatever the hero gate says */
+    /* bg.js holds the field live across a transition */
     holdField: function (on) { fieldHold = !!on; applyFieldGate(); },
     /* ...and switches it off entirely for a mode that does not use the canvas */
     suspendField: function (on) { fieldOff = !!on; applyFieldGate(); }
