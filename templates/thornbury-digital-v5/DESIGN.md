@@ -1549,3 +1549,38 @@ console clean, zero overflow, the harness's uncapped rAF at 127 fps
 through a change. The phone runs the same sequence under a 26 rem stage
 with the steps as a list, the one on stage marked.
 
+## The tableau turns, and a phone stops paying the desktop's packs
+
+**The cloud turns.** After the sequence landed, the stage was still a
+relief facing the camera. It now has a slow turntable (~0.06 rad/s, the
+same rate as the field), the pointer's own yaw and pitch on top of that,
+and a swing through each change so a scene never arrives from the angle
+the last one left on. Uniforms only; the homes stay where they were
+compiled.
+
+**A phone gets its own packs.** The tracer was reading the desktop
+photographs on a 390-wide stage and throwing most of the bytes away. Eight
+half-size `-sm` cuts now sit next to the desktop packs (587 KB together,
+against 1,384 KB). `figure.js` picks the tier from the shorter viewport
+edge. Five inner pages that had no `og:image` now share the hero still.
+
+**Verified, this build.** Playwright at 1440 / 390 / 320 on all six
+pages: zero overflow, console clean. The band mounts with 56,011 points
+at 72 fps on the desktop harness, 25,130 at 390 and 25,193 at 320 (the
+harness's uncapped rAF, 157 and 165). Home's field at those widths: 104 /
+164 / 163. Chrome at 390, device metrics, after the band had nine seconds
+to build: 25,000 points, 113 fps, the 26 rem canvas, step 02 marked, no
+overflow. Home at 390 served `hero-m.mp4` playing at 1080 × 1920.
+
+**On the phone.** The same iPhone 14 Pro Max (iOS 18.7 Safari, 430 × 721
+css px, dpr 3) opened the LAN probe three times against this build
+(13:03, 13:05, 13:08 UTC). Overflow 0 on all six pages; stylesheet,
+Archivo and JavaScript live; the band mounted with 25,430 / 25,078 /
+24,989 points. Frame rate was 31 fps on Home *and* on Studio with the
+band on — the same number, on a page that does not mount the band — so
+this is the handset sitting at a 30 Hz cap (Low Power, or the probe
+iframe), not the figure's cost. The earlier 08:26 run, before the ground
+and the sequence, had this phone at 60 fps on Home and 61 on Studio with
+the band not yet mounted. Hit targets, wordmark gutter and platform-mark
+rest are unchanged from that run.
+
