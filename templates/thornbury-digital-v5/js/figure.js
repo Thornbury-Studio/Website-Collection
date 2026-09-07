@@ -443,6 +443,7 @@ export function mount(host, opts) {
   /* the sequence */
   var cur = 0, nxt = -1, mix = 0, holdT = 0, pending = -1, sweep = 1, seed = 0, settled = false;
   var phone = false, xk = 1;
+  var yaw = 0, pitch = 0;   /* the pointer's turn of the tableau, eased */
 
   var srcs = [];
   SCENES.forEach(function (sc) { sc.forms.forEach(function (f) { if (srcs.indexOf(f.src) < 0) srcs.push(f.src); }); });
@@ -759,11 +760,20 @@ export function mount(host, opts) {
     mat.uniforms.uPointerOn.value = pointerOn;
     /* the shader works in the cloud's own space, so the pointer is moved into it */
     mat.uniforms.uPointer.value.set((pxWorld - ensemble.position.x) / ensemble.scale.x, (pyWorld - ensemble.position.y) / ensemble.scale.x);
-    /* a slow sway, and a turn through each change — the one thing a flat
-       picture cannot do */
-    var turn = nxt >= 0 ? Math.sin(Math.PI * mix) * 0.16 * sweep : 0;
-    cloud.rotation.y = Math.sin(t * 0.15) * 0.06 + turn;
-    cloud.rotation.x = Math.sin(t * 0.10) * 0.02;
+    /* the tableau is a volume, so it turns: a slow turntable that never stops,
+       the pointer's own turn on top of it (left of the stage looks from the
+       left), and a swing through each change — none of which a flat picture
+       can do. The forms are relief shells traced from one side, so the turn is
+       bounded where their edges would show. */
+    var hh = Math.tan((camera.fov * Math.PI / 180) / 2) * camera.position.z;
+    var yawT = pointerOn * Math.max(-1, Math.min(1, pxWorld / (hh * camera.aspect))) * 0.30;
+    var pitchT = pointerOn * Math.max(-1, Math.min(1, pyWorld / hh)) * -0.07;
+    yaw += (yawT - yaw) * 0.035;
+    pitch += (pitchT - pitch) * 0.035;
+    var turn = nxt >= 0 ? Math.sin(Math.PI * mix) * 0.18 * sweep : 0;
+    var table = Math.sin(t * 0.09) * 0.24;
+    cloud.rotation.y = Math.max(-0.5, Math.min(0.5, table + yaw)) + turn;
+    cloud.rotation.x = Math.sin(t * 0.10) * 0.02 + pitch;
 
     waveMat.uniforms.uTime.value = t;
     waveMat.uniforms.uAssemble.value = assemble;
