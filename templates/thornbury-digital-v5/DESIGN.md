@@ -1584,3 +1584,16 @@ and the sequence, had this phone at 60 fps on Home and 61 on Studio with
 the band not yet mounted. Hit targets, wordmark gutter and platform-mark
 rest are unchanged from that run.
 
+## The first viewport, back to the spread form
+
+Commit 4886863 made the field the first viewport in place of the Moon film
+— that direction stands — but it also pulled the camera back to .70 and
+spent 9,000 strands on the hero with a slower wipe, and the object came out
+compact and knotted instead of the dramatic, spread form the field had
+before. Reverted those two things only: the home camera is back at zoom
+1.00 / ay .50 and js/field.js is back to its pre-4886863 state (2,600
+strands on a desktop, 900 on a phone, the old wipe), so the object reads
+large and confident again. The hero markup, the type at the lower left and
+everything else in that commit are untouched. Playwright at 1440: console
+clean, the harness's uncapped rAF at 165 fps.
+
