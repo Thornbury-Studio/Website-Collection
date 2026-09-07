@@ -90,8 +90,8 @@ Nothing in it is ever shown.
 
 ## The Team band — a lit point cloud
 
-A real photograph, licensed, and never drawn. The band reads exactly one asset,
-`img/team-pack.webp`, which carries a surface normal in R and G and depth in B.
+Real photographs, licensed, and never drawn. Each form reads one asset, a
+`team-pack-*.webp` that carries a surface normal in R and G and depth in B.
 There is no albedo file any more: **none of the photograph’s colour reaches the
 page.** All that survives the build is where the subjects are and which way their
 surface faces, and every point is lit from those two facts alone. Faces, clothing
@@ -101,29 +101,24 @@ rather than as a photograph of people.
 
 | File | Source | Photographer | Licence |
 |---|---|---|---|
-| `img/team-pack.webp` | [Unsplash photo yM3blOV977Q](https://unsplash.com/photos/yM3blOV977Q) | [Vitaly Gariev](https://unsplash.com/@silverkblack) | **Unsplash License** — “Free to use under the Unsplash License”, read off the photo page before download |
-| `img/team-pack-2.webp` | [Pexels 7652461 — Women discussing while standing](https://www.pexels.com/photo/women-discussing-while-standing-7652461/) | [Thirdman](https://pexels.com/@thirdman/) | **Pexels License** — free to use, read off the photo page; downloaded 7 Sep 2026 |
-| `img/team-pack-3.webp` | [Pexels 13474407 — Woman walking beside a white wall](https://www.pexels.com/photo/woman-walking-beside-a-white-wall-13474407/) | credited on the photo page | **Pexels License**; downloaded 7 Sep 2026 |
-| `img/team-pack-5.webp` | [Pexels 4918523 — Man in blue jacket pointing up](https://www.pexels.com/photo/4918523/) | credited on the photo page | **Pexels License**; downloaded 7 Sep 2026 |
-| `img/team-pack-6.webp` | [Pexels 7217919 — Person walking with a box](https://www.pexels.com/photo/7217919/) | credited on the photo page | **Pexels License**; downloaded 7 Sep 2026 |
-| `img/team-pack-7.webp` | [Pexels 8114141 — Person photographing by a brick wall](https://www.pexels.com/photo/8114141/), cropped to the figure | credited on the photo page | **Pexels License**; downloaded 7 Sep 2026 |
+| `img/team-pack-8.webp` — 01, binoculars | [Pexels 9143802 — Man standing on sandy terrain using binoculars](https://www.pexels.com/photo/9143802/) | credited on the photo page | **Pexels License**; downloaded 7 Sep 2026 |
+| `img/team-pack-9.webp` — 02, at the board | [Pexels 7869061 — Man presenting business data on a whiteboard](https://www.pexels.com/photo/7869061/); the board and its stand, which the cut-out treated as background, are put back into the matte by polygon | credited on the photo page | **Pexels License**; downloaded 7 Sep 2026 |
+| `img/team-pack-10.webp` — 03, at the laptop | [Pexels 5301762 — Woman using a laptop on a standing desk](https://www.pexels.com/photo/5301762/); cut to the figure, the laptop on its stand and the desk top, the railing and lamp behind removed | credited on the photo page | **Pexels License**; downloaded 7 Sep 2026 |
+| `img/team-pack-11.webp` — 04, the handover | [Pexels 6818155 — A delivery man hands a package to a customer](https://www.pexels.com/photo/6818155/) | credited on the photo page | **Pexels License**; downloaded 7 Sep 2026 |
 
-**Several forms, not one pose (7 Sep 2026).** The band traces six photographs
-now — the group at the table, a pair in conversation, one person walking, one
-walking with a box, one behind a camera, one with a hand raised — each an
-instance placed at its own depth and turn in `js/figure.js`, and each traced
-to a point budget rather than a fixed stride, so a small pack reads as densely
-as a large one. A figure seen from behind (Pexels 7223491) was in for one
-pass and came out again: cropped and downscaled, it read as dust beside the
-rest. A woman holding a plant crate (7218686) was mated and dropped because
-the cut-out kept a noisy halo of the wall; neither is in the repository. The same three passes built the three new packs, with two
-things learned on the way: the relief constant is not portable between
-photographs (their depth ranges differ), so `K` is now fitted per pack to a
-mean in-plane normal of 0.62, where the first pack had been tuned by hand to
-0.654; and RMBG keeps furniture the subject touches (a whiteboard and a
-trolley came through on two candidates), so a pack is cropped to the figure
-or the photograph is dropped. Two candidates were dropped for that reason
-(Pexels 7413916 and 16695070) and are not in the repository either.
+**Four steps, not a crowd (7 Sep 2026).** The band now traces one photograph
+per step of the studio's process, each chosen because the prop is part of
+the silhouette — binoculars up, a board being pointed at, a laptop under two
+hands, a box between two people — since a figure alone reads as a person,
+not an action. Each is traced to a point budget counted against the pixels
+actually inside its matte (an earlier pass guessed the fraction and starved
+the small packs). Earlier packs are retired and no longer in the repository:
+the group at the table (Unsplash yM3blOV977Q, Vitaly Gariev, Unsplash
+License), the pair in conversation (Pexels 7652461, Thirdman), the walker
+(13474407), the walker with a box (7217919), the figure behind a camera
+(8114141), the raised hand (4918523) and the figure from behind (7223491);
+the plant-carrier (7218686) and two candidates that kept their furniture
+(7413916, 16695070) were never shipped.
 
 Licence checked on the photo page rather than assumed: Unsplash serves two, and
 only one of them is free. An earlier candidate was rejected for being served from
@@ -151,8 +146,8 @@ vertex shader, the key light stays fixed in the room while the form rotates unde
 it, and the fresnel term set louder than the lambert one is what makes a
 silhouette burn instead of a surface glowing evenly.
 
-**Sizes.** `team-pack.webp` 152 kB, lossless — a lossy normal map bands and the
-shading shows it. 900×490, 45.5% of its pixels inside the matte.
+**Sizes.** Packs are lossless webp (a lossy normal map bands and the shading
+shows it), downscaled to a longest side of 760 px: 120, 320, 231 and 324 kB.
 
 ## Vendor marks — Studio, “What sits behind the site”
 

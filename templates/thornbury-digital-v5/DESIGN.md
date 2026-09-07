@@ -1472,3 +1472,41 @@ override — `setViewportSize` was being ignored by the harness): list mode,
 four beats present, 48,445 points, zero overflow. The real-phone frame rate
 of this stage is still owed; the probe samples it.
 
+## Who we are, rebuilt again: four steps, one figure each
+
+Rejected once more, for a sharper reason than execution: a particle
+silhouette by itself says *a person*, never *what the person is doing*. So
+the stage stopped trying to convey generic activity through pose and now
+carries the studio's real four-step process from `about.ts`, one form per
+step, each captioned with its own step by the same leader-line device.
+
+**The forms.** Each was chosen because the prop is part of the silhouette
+— that, not the body, is what made the reference legible. *01 We look before
+we draw*: binoculars up (Pexels 9143802). *02 We decide in the open*: a
+presenter pointing at a whiteboard on its stand (7869061); the cut-out model
+treats the board as background, so the board and its posts are put back into
+the matte by polygon before the pack is built. *03 We build it to survive
+us*: a figure at a standing desk with both hands on the laptop (5301762),
+cut to the figure, the laptop and the desk top, the railing behind removed.
+*04 We hand over everything*: two figures with a box changing hands between
+them (6818155). All earlier packs are retired; nothing on the stage is
+uncaptioned.
+
+**Two things found on the way.** The tracer's point budget assumed 55 % of
+every pack lay inside its matte; the binoculars pack is 11 % inside, so it
+was getting a fifth of its points — the budget now counts the pixels that are
+actually inside. And a desktop stage is three times a phone's height, so the
+same points spread three times thinner and read as dust; the figure points
+now carry a gain (1.5 on a desktop, 1 on a phone, where the earlier pass had
+over-exposed) and a larger desktop point size, and the ensemble sits at .7 so
+four props have a lane each with nothing clipped at either edge. The captions
+keep their beats, leaders and focus; the step being read is lit, the others
+hold. The team narrative — principals, the founding team of around twenty,
+not headcount, where this goes — moved out of the stage into the flow below
+it, two columns, verbatim as before.
+
+**Measured.** Playwright at 1440: 131,870 points, four forms in a row with
+air between them, leaders landing on each, console clean, zero overflow, the
+harness's rAF at 60 fps with everything mounted. At 390 (device metrics
+override): list mode, 59,710 points, zero overflow.
+
