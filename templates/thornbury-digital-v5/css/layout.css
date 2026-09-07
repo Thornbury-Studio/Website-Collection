@@ -339,13 +339,15 @@
     z-index: 0;
     overflow: hidden;
   }
-  /* the ferrofluid's spike field runs across the lower two thirds and the
-     top of the frame is already dark, which is where the centred type stands;
-     a hair of scale keeps the master's edge out of the crop */
+  /* The disc is composed low in the encode itself — its top edge sits at a
+     third of the frame — so the centred type stands in the black above it and
+     nothing here has to push the picture around. The push-in is the only
+     motion added: twenty-eight seconds in, twenty-eight out, on the GPU. */
   .hero-film .plate-media {
-    object-position: 50% 62%;
-    transform: scale(1.04);
+    object-position: 50% 55%;
+    animation: hero-push 28s ease-in-out infinite alternate;
   }
+  @keyframes hero-push { from { transform: scale(1); } to { transform: scale(1.07); } }
   /* The still is what paints for LCP. The film is attached by js/main.js after
      the page is up, and only crossed in once it is actually playing, so a phone
      on a slow connection — or with reduced motion — simply keeps the still. */
@@ -1712,7 +1714,7 @@
     text-align: left;
     padding: calc(var(--bar) + 1.1rem) var(--gutter) calc(1rem + env(safe-area-inset-bottom));
   }
-  .hero-film .plate-media { object-position: 50% 50%; transform: none; }
+  .hero-film .plate-media { object-position: 50% 50%; }
   .hero-copy {
     justify-items: start;
     max-width: none;
