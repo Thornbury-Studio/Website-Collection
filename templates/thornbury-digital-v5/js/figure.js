@@ -445,9 +445,12 @@ export function mount(host, opts) {
   var phone = false, xk = 1;
   var yaw = 0, pitch = 0;   /* the pointer's turn of the tableau, eased */
 
+  /* a phone traces fewer points than a half-size pack holds, so it is handed
+     the half-size tier: a third of the bytes, nothing it could show lost */
+  var tier = Math.min(innerWidth, innerHeight) < 700 ? '-sm' : '';
   var srcs = [];
   SCENES.forEach(function (sc) { sc.forms.forEach(function (f) { if (srcs.indexOf(f.src) < 0) srcs.push(f.src); }); });
-  Promise.all(srcs.map(loadImage)).then(build);
+  Promise.all(srcs.map(function (s) { return loadImage(s.replace('.webp', tier + '.webp')); })).then(build);
 
   /* Trace every pack once, then lay each scene out: forms turned, scaled and
      placed on the CPU, so the shader only ever sees two homes per point. */
