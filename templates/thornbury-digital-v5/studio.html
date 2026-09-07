@@ -210,16 +210,16 @@
       </div>
     </section>
 
-    <!-- Who we are. One stage: the studio's own About text, verbatim, and the
-         figures share it. The claim and its two paragraphs open in the flow;
-         then the stage holds for three screens of scroll while four beats of
-         the story arrive one at a time, each one a caption tied by a leader
-         line to the form it answers to — the same device the second look
-         uses — and the form that beat is about is lit while the others hold.
-         By the end all four are present together. The figures are several
-         licensed photographs traced to shape and surface direction only: no
-         colour, no face, nobody who works here. Without JavaScript, under
-         reduced motion, or on a phone, the beats are a plain list. -->
+    <!-- Who we are. One stage. The claim and its two paragraphs open in the
+         flow; then the stage runs the studio's four-step process as a
+         sequence: one tableau of figures holds, then becomes the next — every
+         point travelling from its place in one scene to its place in the
+         other — and the row above captions whichever step is on stage, with
+         a leader line to the form it names and a hairline that fills over the
+         hold. Any step can be chosen from the row. The figures are licensed
+         photographs traced to shape and surface direction only: no colour,
+         no face, nobody who works here. Without JavaScript or motion the
+         steps are a plain list. -->
     <section class="sec--who" aria-labelledby="p2">
       <div class="wrap who-head reveal">
         <p class="meta"><span class="q">III</span> — <span id="p2">Who we are</span></p>
@@ -242,30 +242,27 @@
         <div class="who-stage fig3d" data-figure>
           <div class="fig3d-stage who-canvas"></div>
           <svg class="who-leads" viewBox="0 0 1000 1000" aria-hidden="true">
-            <path data-beat="0" d="M0 0" vector-effect="non-scaling-stroke"/>
-            <path data-beat="1" d="M0 0" vector-effect="non-scaling-stroke"/>
-            <path data-beat="2" d="M0 0" vector-effect="non-scaling-stroke"/>
-            <path data-beat="3" d="M0 0" vector-effect="non-scaling-stroke"/>
+            <path d="M0 0" vector-effect="non-scaling-stroke"/>
           </svg>
-          <ol class="who-beats">
-            <li class="who-beat" data-beat="0" style="--x: 14%; --y: 7%">
-              <p class="meta">01</p>
-              <p class="who-line"><b>We look before we draw</b>The first deliverable is an audit, not a design. Sometimes it says you do not need us yet.</p>
+          <ol class="who-beats" aria-label="How the work goes">
+            <li class="who-beat" data-beat="0">
+              <button type="button"><span class="meta">01</span><b>We look before we draw</b></button>
+              <p class="who-line">The first deliverable is an audit, not a design. Sometimes it says you do not need us yet.</p>
             </li>
-            <li class="who-beat" data-beat="1" style="--x: 38%; --y: 11%">
-              <p class="meta">02</p>
-              <p class="who-line"><b>We decide in the open</b>Decisions are written where you can read them, with the reasoning attached.</p>
+            <li class="who-beat" data-beat="1">
+              <button type="button"><span class="meta">02</span><b>We decide in the open</b></button>
+              <p class="who-line">Decisions are written where you can read them, with the reasoning attached.</p>
             </li>
-            <li class="who-beat" data-beat="2" style="--x: 62%; --y: 7%">
-              <p class="meta">03</p>
-              <p class="who-line"><b>We build it to survive us</b>Documented guardrails, a review pass, and nothing that relies on one person’s memory.</p>
+            <li class="who-beat" data-beat="2">
+              <button type="button"><span class="meta">03</span><b>We build it to survive us</b></button>
+              <p class="who-line">Documented guardrails, a review pass, and nothing that relies on one person’s memory.</p>
             </li>
-            <li class="who-beat" data-beat="3" style="--x: 86%; --y: 11%">
-              <p class="meta">04</p>
-              <p class="who-line"><b>We hand over everything</b>Repository, hosting, domain, mailbox — ownership transfers completely on delivery.</p>
+            <li class="who-beat" data-beat="3">
+              <button type="button"><span class="meta">04</span><b>We hand over everything</b></button>
+              <p class="who-line">Repository, hosting, domain, mailbox — ownership transfers completely on delivery.</p>
             </li>
           </ol>
-          <p class="fig3d-note meta">Fig. — <b data-figure-count>0</b> points, in four steps.
+          <p class="fig3d-note meta">Fig. — <b data-figure-count>0</b> points, one scene at a time.
             Shape and surface direction from licensed photographs; none of their colour is
             used, no face is drawn, and nobody in them works here.</p>
         </div>

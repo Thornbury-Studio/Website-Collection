@@ -1510,3 +1510,42 @@ air between them, leaders landing on each, console clean, zero overflow, the
 harness's rAF at 60 fps with everything mounted. At 390 (device metrics
 override): list mode, 59,710 points, zero overflow.
 
+## Who we are: one scene at a time
+
+The reference, looked at properly at last: its team is never five people
+frozen in one frame. It runs three pre-rendered particle artworks as a
+sequence — a picture holds, comes apart into a scatter, the next gathers out
+of the same cloud while it is still flying — so the team is the same light
+rearranging itself into the next thing they do. Zane's note was exactly
+that: they appear, then change to another activity. Four forms in a row was
+the wrong shape for it.
+
+**The sequence.** The stage is one screen in the flow. It holds a tableau
+for about five seconds, then becomes the next one: 01 binoculars up and a
+camera held up; 02 one at the board, two listening; 03 hands on the laptop,
+the review at the table behind; 04 the box changing hands, one already
+carrying it away. The row above the stage captions whichever step is on
+stage — its step lit, its sentence open, a leader line to the form it names
+and a hairline that fills over the hold — and any step can be chosen from
+the row; a choice made mid-change lands after it.
+
+**The change, and why it is not the reference's.** Theirs scatters pixels
+of a flat picture. Here every point has a home in the scene that is leaving
+and a home in the scene arriving, and it travels between them on its own
+arc — lifted, blown across the room in a sweep that runs left to right (and
+right to left the next time, so a scene never leaves the way the last one
+came), staggered by a hash and by where it stands so the change crosses the
+stage as a wave — glowing while it is in the air. Points a scene has no use
+for park below the floor, out of frame, and rise out of it when the next
+scene needs them. The whole cloud turns a little through each change, which
+a flat picture cannot do. One buffer write per change; nothing per frame
+but uniforms. The forms remain licensed photographs traced to shape and
+surface direction only: no colour, no face, nobody who works here.
+
+**Measured.** Playwright at 1440: 56,073 points in the cloud, the first
+change beginning about two seconds after the caption row settled, the
+leader redrawn to the arriving form, the chosen step landing on a click,
+console clean, zero overflow, the harness's uncapped rAF at 127 fps
+through a change. The phone runs the same sequence under a 26 rem stage
+with the steps as a list, the one on stage marked.
+
