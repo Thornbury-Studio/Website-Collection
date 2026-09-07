@@ -541,7 +541,6 @@
     font-size: clamp(.9rem, 1vw, 1.05rem);
     max-width: 46ch;
   }
-  .entry-body .meta .yr { color: var(--chrome-45); }
   @media (max-width: 760px) {
     .entry-link, .entry:nth-child(even) .entry-link {
       grid-template-columns: minmax(0, 1fr);
@@ -796,13 +795,16 @@
   /* brightness as well as opacity: three of these marks are pure white and three
      are strongly coloured, and opacity alone leaves the white ones reading as
      lit while the coloured ones go grey */
+  /* Stood down, not hidden. At .34 the second rail read as four smudges, and a
+     phone has no hover to bring a mark up before it is tapped: every mark has
+     to be legible at rest, in grey, with the chosen one the only one in colour. */
   .rig-tile .vmark {
-    opacity: .34;
-    filter: grayscale(1) brightness(.62);
+    opacity: .6;
+    filter: grayscale(1) brightness(.9);
     transition: opacity .35s var(--ease), filter .35s var(--ease);
   }
   .rig-tile:hover .vmark,
-  .rig-tile:focus-visible .vmark { opacity: .85; filter: grayscale(.35) brightness(.92); }
+  .rig-tile:focus-visible .vmark { opacity: .92; filter: grayscale(.3) brightness(.96); }
   .rig-tile[aria-pressed="true"] .vmark { opacity: 1; filter: none; }
   .rig-tile::after {
     content: "";
@@ -1472,13 +1474,6 @@
   .dev-tag--live { border-color: var(--hair-2); color: var(--chrome-70); }
   .dev-tag--live::before { background: var(--chrome-45); }
 
-  /* one service, two halves: the note belongs to the half that earned it */
-  .dev-half + .dev-half {
-    margin-top: 1.6rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--hair-1);
-  }
-  .dev-half-tag { margin-bottom: .7rem; }
   .devs h2 {
     margin-top: 1rem;
     font-weight: 800;
@@ -1515,16 +1510,20 @@
     max-width: 52ch;
   }
 
-  /* what moves the number — a ruled table, read down the left, priced on the right */
+  /* what moves the number — a ruled table, read down the left. The right-hand
+     figure column is the slot the service-charge chart drops into, and it only
+     exists on a row that carries a figure: six rows that all read "Quoted" were
+     a column of decoration, so the word is said once in the lead line instead. */
   .mods { border-top: 1px solid var(--hair-2); margin-top: 1.6rem; }
   .mods li {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
     gap: .3rem 1.5rem;
     align-items: baseline;
     padding: .95rem 0;
     border-bottom: 1px solid var(--hair-1);
   }
+  .mods li:has(.fig) { grid-template-columns: minmax(0, 1fr) auto; }
   .mods h2 { grid-column: 1; font-weight: 600; font-size: 1.02rem; letter-spacing: -.01em; }
   .mods p { grid-column: 1; color: var(--chrome-70); font-size: .92rem; max-width: 52ch; }
   .mods .fig {

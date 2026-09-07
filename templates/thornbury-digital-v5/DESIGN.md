@@ -1010,3 +1010,80 @@ skip link and the inline links a line-height constrains.
 are transfer sizes and layout geometry under device emulation at 390×844, not a
 handset. `serve.mjs` binds every interface, so the same build can be opened from
 a phone on the LAN.
+
+## The final walkthrough
+
+The night-before pass: the whole site read on a desktop and at phone width,
+with the hero and the field left exactly as they were. Six changes, four of
+them subtractions.
+
+**A promise nobody made is gone.** “We reply within two working days” — in the
+contact page's description, its Open Graph line, its subhead and its sent
+state — traced to `f8cbd19`, the creation commit, the same class as Tanjong
+Pagar and the office hours before it. The studio's own site states no reply
+time. The page now says what is true: a person reads it and replies.
+
+**The years on the home figures were invented.** Fig. 01–05 carried “· 2025”,
+“· 2024”, “· 2026”; every one of the five sites entered this repository in
+August 2026. The spans and their rule are gone; the meta line is figure and
+sector, nothing else — a plate reports nothing it does not know.
+
+**“All five” said eighteen.** The home index's link to Work still counted the
+original five cases.
+
+**Four services, two chips, on every page that counts them.** The studio page
+says “Four services. Two of them marked in development”, and its charter
+promised that both are marked “on every page they appear on, including the
+one selling them” — while the services page showed three entries and one chip,
+and the practice line named *Optimization*, a word that appeared on no page.
+Section IV now lists AEO / GEO and SEO as the two entries they already were in
+everything but markup, each behind its own bordered ember chip, with the
+“by enquiry” note staying on the AEO / GEO half that earned it. The practice
+line names them as the page names them. The contact form's service list is
+those four and “Not sure yet”; “Google Business Pack — in development” is gone
+from it, because it appeared nowhere else on this site and nowhere on the
+studio's own, and an option in a form is still a claim of a service.
+thornburystudio.com publishes exactly four — Design, Audit, Optimization
+(Soon), SEO (Soon) — which is the count this site now matches.
+
+**Six “Quoted”s were a column of decoration.** Section III's right-hand column
+read the same word six times, and the lead line already says every one of
+these is quoted against the site it goes into. The labels are gone and
+`.mods li` is one track; the figure column returns on its own (`li:has(.fig)`)
+for any row the coming chart gives a figure to, so the slot is still real — it
+is just not printed empty.
+
+**The rig's marks were smudges at rest.** At opacity .34 and brightness .62 the
+second rail — Resend, Sentry, ZAP, SonarQube Cloud — could not be read without
+hovering, and a phone has no hover. Rest is now .6, grey, brightness .9:
+legible, with the chosen mark the only thing in colour, which is the hierarchy
+the rig was built to have. The pull-quote under it said “None of the last
+two”, pointing at the foot of a list the rig no longer shows; it names ZAP and
+SonarCloud.
+
+**Verified.** Playwright at 1440×900 and 390×844, all five pages, after a
+scroll-through so every reveal has fired: console clean; `scrollWidth −
+clientWidth = 0` on all ten; four `.devs` entries with two development chips
+and two live; zero `.fig`, zero `.yr`; no “two working days” and no “Google
+Business” in rendered text; the contact sent-state at 751 px on the desktop
+and 343 px at phone width; the rig's resting marks computing to opacity .6 and
+`grayscale(1) brightness(.9)`; and no grid child left on `auto` beside a
+placed sibling in the two grids this pass touched.
+
+**A capture trap worth writing down.** Full-page Playwright captures of Work
+showed up to fourteen plates as empty blueprint grids. Every one of those
+images was `complete` with a natural width: the occluded Playwright window
+renders almost no frames during a scripted scroll, so lazy images never reach
+the intersection observer, while the ScrollTriggers — which listen to the
+scroll event — do fire and reveal an empty plate. A viewport-level capture at
+the plate's own scroll position shows the image. Judge plates from viewport
+captures, never from a full-page one.
+
+**Phone.** No handset is attached to the build machine and it has no adb. A
+LAN server with byte-range support (iOS Safari will not play the hero film
+without it, and `serve.mjs` sends none) and a probe page that measures all
+five pages on the device and posts the numbers back were stood up at
+`192.168.10.185:8130` for this pass. The first handset run — Android 10, Chrome 152, 406 × 760 CSS px, dpr 3, coarse
+pointer, on 4G — arrived before the directive was stripped and measured an
+unstyled page, which is how the trap above was found. A styled run is recorded
+below when it arrives.
