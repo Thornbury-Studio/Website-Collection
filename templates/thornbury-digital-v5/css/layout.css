@@ -2303,6 +2303,8 @@
   .who-open p { color: var(--chrome-70); font-size: 1.02rem; line-height: 1.6; text-wrap: pretty; }
   .who-open p:first-child { grid-column: 1 / span 5; grid-row: 1; }
   .who-open p:last-child { grid-column: 7 / span 5; grid-row: 1; }
+  .who-lead { padding: 0 0 1.4rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1.6rem; }
+  .who-lead-line { font-weight: 700; font-size: clamp(1.15rem, 1.8vw, 1.5rem); letter-spacing: -.02em; }
 
   /* the track gives the stage three screens to hold for */
   .who-track { position: relative; height: 320vh; }
@@ -2344,20 +2346,18 @@
   }
   .who-beat.is-in { opacity: 1; transform: translate(-50%, 0); }
   .who-line { margin-top: .55rem; color: var(--chrome); font-size: .95rem; line-height: 1.5; text-wrap: pretty; }
-  .who-line b { display: block; font-weight: 800; font-size: 1.25rem; letter-spacing: -.03em; line-height: 1.05; text-transform: uppercase; }
-  .who-line b + .meta { display: block; margin: .3rem 0 .7rem; }
-  .who-line b:first-child { margin-top: 0; }
-  .who-stage .fig3d-note { left: var(--gutter); right: auto; top: auto; bottom: 1.1rem; max-width: 26ch; text-align: left; }
+  .who-line b { display: block; font-weight: 800; font-size: 1.2rem; letter-spacing: -.03em; line-height: 1.05; margin-bottom: .45rem; text-wrap: balance; }
+  .who-stage .fig3d-note { left: var(--gutter); right: var(--gutter); top: auto; bottom: .7rem; max-width: none; text-align: center; text-wrap: balance; }
   .who-tail { padding: clamp(3rem, 8vh, 5rem) 0 clamp(2rem, 6vh, 4rem); }
-  .who-ahead {
-    font-weight: 700;
-    font-size: clamp(1.5rem, 3.2vw, 2.9rem);
-    letter-spacing: -.03em;
-    line-height: 1.06;
-    max-width: 22ch;
-    text-wrap: balance;
-    margin-bottom: clamp(2.4rem, 7vh, 4rem);
-  }
+  .who-team { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); row-gap: 2rem; margin-bottom: clamp(2.4rem, 7vh, 4rem); }
+  .who-team-col { grid-column: span 5; }
+  .who-team-col + .who-team-col { grid-column: 7 / span 5; }
+  .who-team-col p { color: var(--chrome-70); font-size: 1.02rem; line-height: 1.6; text-wrap: pretty; }
+  .who-team-col p.meta { color: var(--chrome-50); font-size: inherit; line-height: inherit; }
+  .who-team-col .who-sub { margin-top: 1.4rem; }
+  .who-team-col p + p:not(.meta) { margin-top: .6rem; }
+  .who-team-col b { color: var(--chrome); }
+  .who-people { margin: .5rem 0 0; }
   .who-tail .whowe { margin-top: 0; }
 
   /* no motion: everything present, nothing held */
@@ -2372,12 +2372,15 @@
 @media (max-width: 1080px) {
   .who-open p:first-child { grid-column: 1 / span 6; }
   .who-open p:last-child { grid-column: 7 / span 6; }
+  .who-team-col { grid-column: span 6; }
+  .who-team-col + .who-team-col { grid-column: 7 / span 6; }
   .who-beat { width: min(17rem, 23vw); }
 }
 
 @media (max-width: 760px) {
   /* the figures, then the beats as a ruled list; nothing overlaid on a phone */
   .who-open p:first-child, .who-open p:last-child { grid-column: 1 / -1; grid-row: auto; }
+  .who-team-col, .who-team-col + .who-team-col { grid-column: 1 / -1; }
   .who-track { height: auto; }
   .who-stage { position: relative; top: auto; height: auto; display: flex; flex-direction: column; }
   .who-canvas { position: relative; height: 24rem; order: 0; }

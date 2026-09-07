@@ -331,7 +331,6 @@
         /* the stage is the clipped box the canvas lives in; the caption is
            outside it so a phone can put it underneath instead of on top */
         figureHandle = mod.mount(host.querySelector('.fig3d-stage') || host, {
-          packSrc: host.getAttribute('data-figure-pack'),
           onLayout: function (anchors) { if (whoLayout) whoLayout(anchors); },
           onReady: function (n) {
             var out = host.querySelector('[data-figure-count]');

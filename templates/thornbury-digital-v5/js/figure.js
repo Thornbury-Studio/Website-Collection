@@ -19,7 +19,7 @@
    THE FIGURES. Several licensed photographs, one instance each, so the band
    shows several distinct forms rather than one pose. RMBG-1.4 cuts the subjects out, Depth Anything V2 estimates
    distance, and the depth field is smoothed and differentiated into a surface
-   normal — all at build time, all baked into `img/team-pack.webp` (normal.x and
+   normal — all at build time, all baked into the `img/team-pack-*.webp` packs (normal.x and
    normal.y in R and G, depth in B; z is recovered rather than stored). Shading
    is a lambert term for the rounding and a louder fresnel term for the edge, so
    silhouettes burn and interiors fall away, which is what makes a cloud read as
@@ -94,7 +94,7 @@ var FIG_VERT = [
   '  vec3 n = normalize(normalMatrix * aNrm);',
   '  float lam = max(dot(n, normalize(uLight)), 0.0);',
   '  float fres = pow(1.0 - abs(n.z), 2.2);',
-  '  float lit = 0.17 + 0.60 * lam + 0.88 * fres;',
+  '  float lit = 0.24 + 0.62 * lam + 0.88 * fres;',
   '  vFade = lead * (0.70 + 0.30 * aRand) * lit * (0.62 + 0.48 * uFocus) + push * 0.45;',
   '  vEmber = aEmber;',
   '}'
@@ -104,13 +104,16 @@ var FIG_FRAG = [
   'precision mediump float;',
   'uniform vec3 uChrome;',
   'uniform vec3 uEmber;',
+  'uniform float uGain;',
   'varying float vFade;',
   'varying float vEmber;',
   'void main() {',
   '  vec2 c = gl_PointCoord - 0.5;',
   '  float d = dot(c, c);',
   '  if (d > 0.25) discard;',
-  '  float a = smoothstep(0.25, 0.01, d) * clamp(vFade, 0.0, 1.8) * 0.95;',
+  /* the gain is the stage's: a desktop stage is three times a phone's height,
+     so the same points spread three times thinner and read as dust without it */
+  '  float a = smoothstep(0.25, 0.01, d) * clamp(vFade * uGain, 0.0, 1.8) * 0.95;',
   '  gl_FragColor = vec4(mix(uChrome, uEmber, vEmber) * a, a);',
   '}'
 ].join('\n');
@@ -194,16 +197,20 @@ function trace(packImg, stride, worldH, depthScale, thickness, budget) {
   var w = packImg.naturalWidth, h = packImg.naturalHeight;
   /* a budget wins over a stride: stride 1 with a probability that lands the
      count near the budget, so every form reads at about the same density */
-  var keep = 1;
-  if (budget) {
-    stride = 1;
-    keep = Math.min(1, budget / Math.max(1, w * h * 0.55));
-  }
   var cv = document.createElement('canvas');
   cv.width = w; cv.height = h;
   var ctx = cv.getContext('2d', { willReadFrequently: true });
   ctx.drawImage(packImg, 0, 0);
   var px = ctx.getImageData(0, 0, w, h).data;
+  var keep = 1;
+  if (budget) {
+    /* count what is actually inside the matte — packs run from a tenth of
+       the frame to two thirds of it, and guessing made the small ones dust */
+    stride = 1;
+    var inside = 0;
+    for (var q = 0; q < px.length; q += 4) if (px[q] || px[q + 1] || px[q + 2]) inside++;
+    keep = Math.min(1, budget / Math.max(1, inside));
+  }
 
   var scale = worldH / h;
   var pos = [], rnd = [], emb = [], dep = [], nrm = [];
@@ -365,17 +372,20 @@ function stars(n, spanX, spanY, spanZ) {
    ensemble sits under the words instead of beside them. `delay` staggers the
    assembly so the forms gather one after another rather than all at once. */
 var INSTANCES = [
-  /* x, y, z in world units; s = scale; r = turn; pts = the point budget the
-     tracer aims at, so a small pack is traced densely and a large one is not
-     — without this the new packs read as dust beside the first one, which
-     was the whole of the "only one figure is there" problem. `focus` is the
-     beat in the copy this form answers to. */
-  { src: 'img/team-pack.webp',   x: -1.35, y: -0.04, z: -1.40, s: 0.80, r:  0.10, pts: 28000, delay: 0.00, focus: 0 },
-  { src: 'img/team-pack-6.webp', x: -0.45, y: -0.02, z: -0.30, s: 0.94, r: -0.18, pts: 22000, delay: 0.10, focus: 1 },
-  { src: 'img/team-pack-2.webp', x: -1.15, y:  0.02, z: -1.85, s: 0.84, r:  0.30, pts: 14000, delay: 0.20, focus: 1 },
-  { src: 'img/team-pack-7.webp', x:  0.80, y: -0.02, z: -0.50, s: 0.94, r:  0.22, pts: 22000, delay: 0.30, focus: 2 },
-  { src: 'img/team-pack-3.webp', x:  1.30, y:  0.00, z: -1.95, s: 0.82, r: -0.20, pts: 10000, delay: 0.40, focus: 2 },
-  { src: 'img/team-pack-5.webp', x:  1.55, y: -0.04, z: -0.10, s: 0.98, r: -0.12, pts: 26000, delay: 0.50, focus: 3 }
+  /* Four steps of the studio's own process, left to right, each a form whose
+     prop is part of the silhouette — that is what makes it readable as an
+     action rather than a person. `focus` is the step the form belongs to.
+     x, y, z in world units; s = scale; r = turn; pts = the point budget the
+     tracer aims at. Forms whose photograph ends at the shin sit a little
+     lower, so the cut is inside the ground trail. */
+  /* 01 We look before we draw: binoculars up */
+  { src: 'img/team-pack-8.webp',  x: -2.45, y: -0.04, z:  0.10, s: 1.00, r:  0.18, pts: 24000, delay: 0.00, focus: 0 },
+  /* 02 We decide in the open: at the board, pointing at it */
+  { src: 'img/team-pack-9.webp',  x: -1.00, y: -0.20, z: -0.20, s: 0.78, r: -0.06, pts: 46000, delay: 0.12, focus: 1 },
+  /* 03 We build it to survive us: at the laptop, hands on it */
+  { src: 'img/team-pack-10.webp', x:  0.95, y: -0.10, z:  0.00, s: 0.92, r: -0.16, pts: 30000, delay: 0.24, focus: 2 },
+  /* 04 We hand over everything: the box changing hands */
+  { src: 'img/team-pack-11.webp', x:  2.30, y: -0.04, z: -0.30, s: 0.95, r: -0.20, pts: 32000, delay: 0.36, focus: 3 }
 ];
 
 function loadImage(src) {
@@ -390,8 +400,6 @@ function loadImage(src) {
 
 export function mount(host, opts) {
   opts = opts || {};
-  var packSrc = opts.packSrc || host.getAttribute('data-figure-pack');
-  if (!packSrc) return null;
 
   var canvas = document.createElement('canvas');
   canvas.className = 'fig3d-canvas';
@@ -408,8 +416,8 @@ export function mount(host, opts) {
   var flow = 0, flowBoost = 0, FLOW_BASE = 0.11;
   var focusBeat = -1;   /* -1: nobody singled out */
 
+  /* the forms are the module's own list; nothing on the page picks them */
   var packs = INSTANCES.slice();
-  if (packSrc && packs[0].src !== packSrc) packs[0].src = packSrc;
   Promise.all(packs.map(function (i) { return loadImage(i.src); })).then(build);
 
   function build(imgs) {
@@ -457,7 +465,8 @@ export function mount(host, opts) {
           uPointer: { value: new THREE.Vector2(999, 999) }, uPointerOn: { value: 0 },
           /* smaller points on a phone: the additive cloud over-exposes at a
              phone's density, and the pair in front went white */
-          uSize: { value: (small ? 1.55 : 2.2) * (0.86 + 0.14 * inst.s) }, uDpr: { value: 1 },
+          uSize: { value: (small ? 1.55 : 2.9) * (0.86 + 0.14 * inst.s) }, uDpr: { value: 1 },
+          uGain: { value: small ? 1.0 : 1.5 },
           uLight: { value: new THREE.Vector3(0.42, 0.50, 0.76) },
           uFocus: { value: 0.85 },
           uChrome: { value: chrome }, uEmber: { value: ember }
@@ -542,7 +551,7 @@ export function mount(host, opts) {
     camera.matrixWorldInverse.copy(camera.matrixWorld).invert();
     var v = new THREE.Vector3(), out = [];
     figs.forEach(function (f) {
-      v.set(f.inst.x, f.inst.y + 0.55 * f.inst.s, f.inst.z);
+      v.set(f.pts.position.x, f.inst.y + 0.55 * f.inst.s, f.inst.z);
       ensemble.localToWorld(v);
       v.project(camera);
       out.push({ focus: f.inst.focus, u: (v.x + 1) / 2, v: (1 - v.y) / 2, z: f.inst.z });
@@ -563,8 +572,9 @@ export function mount(host, opts) {
        little and smaller, and the words sit under it instead of over it */
     var phone = w < 761;
     ensemble.position.x = 0;
-    ensemble.position.y = phone ? 0.05 : -0.18;
-    ensemble.scale.setScalar(phone ? 0.62 : 1);
+    ensemble.position.y = phone ? 0.08 : -0.34;
+    ensemble.scale.setScalar(phone ? 0.47 : 0.70);
+    figs.forEach(function (f) { f.pts.position.x = f.inst.x * (phone ? 0.82 : 1); });
     ensemble.updateMatrixWorld(true);
     camera.aspect = w / h;
     camera.position.z = 1.32 / Math.tan((camera.fov * Math.PI / 180) / 2);
@@ -630,7 +640,7 @@ export function mount(host, opts) {
       var fw = focusBeat < 0 ? 0.85 : (f.inst.focus === focusBeat ? 1.0 : 0.55);
       f.mat.uniforms.uFocus.value += (fw - f.mat.uniforms.uFocus.value) * 0.06;
       /* the shader works in the instance's own space, so the pointer is moved into it */
-      f.mat.uniforms.uPointer.value.set((pxWorld - ensemble.position.x) / ensemble.scale.x - f.inst.x, pyWorld / ensemble.scale.x - f.inst.y);
+      f.mat.uniforms.uPointer.value.set((pxWorld - ensemble.position.x) / ensemble.scale.x - f.pts.position.x, pyWorld / ensemble.scale.x - f.inst.y);
       f.pts.rotation.y = f.inst.r + Math.sin(t * 0.15 + i * 1.7) * 0.14;
       f.pts.rotation.x = Math.sin(t * 0.10 + i * 0.9) * 0.028;
     });
