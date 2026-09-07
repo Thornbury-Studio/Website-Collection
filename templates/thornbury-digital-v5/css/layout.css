@@ -1,6 +1,6 @@
 /* Thornbury Digital v5 — css/layout.css
-   Obsidian, chrome, one ember. Glass lives in exactly three places:
-   the bar, the one hero CTA button, and the work-item metadata cards.
+   Obsidian, chrome, one ember. Glass lives in exactly two places:
+   the bar, and the work-item metadata cards.
    Each glass is a blur(16px) layer blended with `overlay` against the liquid
    behind it, under an unblended skin that carries the edge and the text. */
 @layer reset, base, layout, components, states;
@@ -196,6 +196,28 @@
     margin-left: -.04em;
   }
   .page-head .sub { grid-column: 9 / -1; padding-bottom: .8rem; margin: 0; }
+  .page-head--book h1 {
+    font-size: clamp(2.4rem, 5.4vw, 4.4rem);
+    grid-column: 1 / span 7;
+  }
+  .page-head--quiet {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: .85rem;
+    padding-bottom: clamp(1.4rem, 4vh, 2.4rem);
+  }
+  .page-head--quiet h1 {
+    grid-column: 1;
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    max-width: 18ch;
+  }
+  .page-head--quiet .sub {
+    grid-column: 1;
+    padding-bottom: 0;
+    max-width: 42ch;
+  }
 
   @media (max-width: 760px) {
     .page-head h1, .page-head .sub { grid-column: 1 / -1; }
@@ -313,104 +335,73 @@
     .nav a[aria-current]::before { left: -.7rem; }
   }
 
-  /* ---- hero: a full-bleed film that dissolves into the field on scroll ----
-     .hero-stick is taller than the viewport, so the pinned hero has a scroll
-     range to hand over in. Without JS it simply un-pins and scrolls away, and
-     .film-fade still keeps the bottom edge from cutting. */
-  .hero-stick { height: 165dvh; }
+  /* ---- hero: the field is the plate. Type is furniture on it. ----
+     svh, not dvh: mobile chrome collapsing must not re-frame the object. */
   .hero {
-    position: sticky;
-    top: 0;
-    z-index: 0;
-    height: 100dvh;
-    padding: calc(var(--bar) + 1.5rem) var(--gutter) var(--gutter);
-    display: grid;
-    grid-template-rows: 1fr auto;
-    justify-items: center;
-    text-align: center;
-    overflow: hidden;
+    position: relative;
+    height: calc(100svh - var(--bar));
+    min-height: 32rem;
+    margin-top: var(--bar);
+    padding: 0;
+    overflow: visible;
+    border-bottom: 1px solid var(--hair-2);
   }
-  /* everything after the hero rides over it */
-  main > .sec, main > section, main > .mq-wrap { position: relative; z-index: 1; }
-
-  .hero-film {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-  }
-  /* The disc is composed low in the encode itself — its top edge sits at a
-     third of the frame — so the centred type stands in the black above it and
-     nothing here has to push the picture around. The push-in is the only
-     motion added: twenty-eight seconds in, twenty-eight out, on the GPU. */
-  .hero-film .plate-media {
-    object-position: 50% 55%;
-    animation: hero-push 28s ease-in-out infinite alternate;
-  }
-  @keyframes hero-push { from { transform: scale(1); } to { transform: scale(1.07); } }
-  /* The still is what paints for LCP. The film is attached by js/main.js after
-     the page is up, and only crossed in once it is actually playing, so a phone
-     on a slow connection — or with reduced motion — simply keeps the still. */
-  .hero-film video.plate-media { opacity: 0; transition: opacity .9s var(--ease); }
-  .hero-film video.is-on { opacity: 1; }
-  .film-fade {
+  /* Light rest only — the field is the picture, pulled back in the plate. */
+  .hero::after {
+    content: "";
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
     background:
       linear-gradient(to bottom,
-        rgba(8, 8, 8, .84) 0%,
-        rgba(8, 8, 8, .66) 22%,
-        rgba(8, 8, 8, .34) 46%,
-        rgba(8, 8, 8, .04) 64%,
-        rgba(8, 8, 8, .34) 84%,
-        rgba(8, 8, 8, .94) 100%);
+        rgba(8, 8, 8, .28) 0%,
+        rgba(8, 8, 8, .08) 22%,
+        rgba(8, 8, 8, 0) 42%,
+        rgba(8, 8, 8, .1) 78%,
+        rgba(8, 8, 8, .52) 100%);
   }
-  @media (max-width: 900px) {
-    .film-fade {
-      background: linear-gradient(to bottom,
-        rgba(8, 8, 8, .8) 0%,
-        rgba(8, 8, 8, .4) 16%,
-        rgba(8, 8, 8, .14) 36%,
-        rgba(8, 8, 8, .6) 70%,
-        rgba(8, 8, 8, .97) 100%);
-    }
-  }
+  main > .sec, main > section, main > .mq-wrap { position: relative; z-index: 1; }
 
   .hero-copy {
-    position: relative;
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: clamp(5.5rem, 16vh, 10.5rem);
     z-index: 2;
-    align-self: start;
-    margin-top: clamp(.5rem, 7vh, 5.5rem);
+    max-width: none;
+    pointer-events: none;
     display: grid;
-    justify-items: center;
-    max-width: 48rem;
+    justify-items: start;
+    text-align: left;
+  }
+  @media (max-aspect-ratio: 4/5) {
+    .hero-copy {
+      top: clamp(1.2rem, 4vh, 2.2rem);
+      bottom: auto;
+    }
   }
   .wordmark {
     font-weight: 800;
-    font-size: clamp(2.55rem, 11.5vw, 11.5rem);
-    letter-spacing: -.045em;
-    line-height: .88;
+    font-size: clamp(2.2rem, 4.6vw, 4.6rem);
+    letter-spacing: -.04em;
+    line-height: .92;
     text-transform: uppercase;
     font-variation-settings: "wdth" 92;
-    margin: .75rem 0 .85rem;
+    margin: .55rem 0 .7rem;
+    max-width: 100%;
   }
   .hero-line {
     font-size: clamp(1rem, 1.5vw, 1.35rem);
     color: var(--chrome-70);
     text-wrap: balance;
+    max-width: 22ch;
   }
-  .hero-act {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: .7rem;
-    margin-top: clamp(1.6rem, 4vh, 2.6rem);
+  .after-work {
+    margin-top: clamp(2.2rem, 5vh, 3.4rem);
   }
-  .hero-act .btn { justify-content: center; min-width: 11.5rem; }
-  /* the one glass CTA: a dark base under the overlay blend, or the blend
-     brightens it against a lit subject until it matches the solid button */
+
+  /* the leftover glass button recipe, still used if a page wants one */
   .btn.btn--glass {
     background: rgba(8, 8, 8, .8);
     color: var(--chrome);
@@ -643,14 +634,16 @@
     padding: clamp(1.3rem, 3.5vh, 2rem) 0;
     border-bottom: 1px solid var(--hair-1);
   }
-  .whowe dt {
+  .whowe dt,
+  .whowe summary {
     font-family: var(--mono);
     font-size: .68rem;
     letter-spacing: .16em;
     text-transform: uppercase;
     color: var(--chrome);
   }
-  .whowe dd {
+  .whowe dd,
+  .whowe .fold > p {
     margin: .7rem 0 0;
     color: var(--chrome-70);
     font-size: 1rem;
@@ -1066,14 +1059,17 @@
   /* Three tracks, not two. The claim is a headline and the paragraph under it
      is the argument; setting them side by side lets the row use the measure the
      page actually has instead of running down its left edge. */
-  .charter li {
+  .charter li { border-bottom: 1px solid var(--hair-1); }
+  .charter .fold {
     display: grid;
     grid-template-columns: clamp(3rem, 5.2vw, 4.8rem) minmax(0, .9fr) minmax(0, 1.14fr);
     gap: 0 clamp(1.2rem, 3vw, 2.8rem);
     padding: clamp(1.8rem, 4.5vh, 2.8rem) 0;
-    border-bottom: 1px solid var(--hair-1);
     align-items: start;
   }
+  .charter .fold > summary,
+  .charter .fold-body { display: contents; }
+  .charter .fold > summary { cursor: default; pointer-events: none; list-style: none; }
   .charter .n {
     grid-column: 1;
     grid-row: 1 / span 3;
@@ -1095,7 +1091,7 @@
     max-width: 17ch;
     text-wrap: balance;
   }
-  .charter > li > p:not(.n):not(.practice) {
+  .charter .fold-body > p:not(.practice) {
     grid-column: 3;
     grid-row: 1;
     margin-top: 0;
@@ -1105,6 +1101,39 @@
     max-width: 56ch;
   }
   .charter .practice { grid-column: 3; grid-row: 2; }
+
+  /* Desktop: folds are invisible wrappers so the existing grids still hold.
+     The phone restyles them into a tap-to-open index. */
+  .pillars .fold,
+  .pillars .fold > summary,
+  .pillars .fold-body,
+  .mods .fold,
+  .mods .fold > summary,
+  .who-team .fold,
+  .whowe .fold { display: contents; }
+  .nots .fold { display: contents; }
+  .nots .fold > summary,
+  .nots .fold > p { display: inline; }
+  .nots .fold > p { margin: 0; }
+  .nots .fold > p::before { content: " "; }
+  .pillars .fold > summary,
+  .mods .fold > summary,
+  .who-team .fold > summary,
+  .whowe .fold > summary,
+  .nots .fold > summary {
+    cursor: default;
+    pointer-events: none;
+    list-style: none;
+  }
+  .fx-row .fold > summary {
+    cursor: default;
+    pointer-events: none;
+    list-style: none;
+  }
+  .fold--prose > summary,
+  .fold--block > summary { display: none; }
+  .fold > summary::-webkit-details-marker,
+  .fold > summary::marker { display: none; content: none; }
 
   /* the stack reads as a key: short mono names, plain-language descriptions */
   .stack { border-top: 1px solid var(--hair-2); margin-top: 1.6rem; }
@@ -1452,6 +1481,19 @@
     padding-top: 1rem;
   }
   .terms dd { margin-top: .55rem; font-size: 1.05rem; letter-spacing: -.01em; }
+  .rate--aside {
+    display: block;
+    padding: 1.35rem 0 0;
+    border-bottom: 0;
+  }
+  .rate--aside .rate-line {
+    color: var(--chrome-70);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
+  .rate--aside .rate-line b { color: var(--chrome); font-weight: 700; }
   .rates-note,
   .stack-note,
   .policy-note {
@@ -1690,9 +1732,9 @@
 /* Between the two: the third charter track needs room to be worth having, and
    the team band needs both of its columns to stay readable. */
 @media (max-width: 1080px) {
-  .charter li { grid-template-columns: clamp(3rem, 6vw, 5rem) minmax(0, 1fr); }
+  .charter .fold { grid-template-columns: clamp(3rem, 6vw, 5rem) minmax(0, 1fr); }
   .charter h2 { grid-column: 2; grid-row: 1; max-width: 26ch; }
-  .charter > li > p:not(.n):not(.practice) { grid-column: 2; grid-row: 2; margin-top: .95rem; max-width: 64ch; }
+  .charter .fold-body > p:not(.practice) { grid-column: 2; grid-row: 2; margin-top: .95rem; max-width: 64ch; }
   .charter .practice { grid-column: 2; grid-row: 3; }
   .team-band { grid-template-columns: minmax(0, 1fr); }
   .team-band .people, .team-band .team { grid-column: 1; }
@@ -1707,26 +1749,111 @@
   .menu-btn { display: inline-flex; }
   html.no-dialog .menu-btn { display: none; }
 
-  /* ---- hero: left, bottom-weighted, and the stats become a ruled rail ---- */
-  .hero-stick { height: 150dvh; }
+  .sec { padding-block: clamp(1.8rem, 6vh, 3.4rem); }
+  .page-head { padding: calc(var(--bar) + 1.6rem) 0 1.2rem; row-gap: .7rem; }
+  .page-head h1 { font-size: clamp(2.5rem, 13vw, 3.6rem); }
+  .page-head--book h1 { font-size: clamp(2.1rem, 8vw, 2.8rem); }
+  .page-head--quiet h1 { font-size: clamp(1.55rem, 7vw, 1.9rem); font-weight: 700; }
+  .page-head .sub { font-size: .98rem; }
+  .statement + .sub { display: none; }
+  .sec .wrap > .sub { display: none; }
+  .who-lead { display: none; }
+  .fig-credit { display: none; }
+  .rates-note { display: none; }
+  .reveal-note { display: none; }
+  .vmark-note { display: none; }
+
+  /* ---- folds: a claim, then the rest on tap ---- */
+  .fold > summary {
+    list-style: none;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    padding-right: 1.6rem;
+    min-height: 2.75rem;
+  }
+  .fold > summary::-webkit-details-marker,
+  .fold > summary::marker { display: none; content: none; }
+  .fold > summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 0.15em;
+    color: var(--ember);
+    font-family: var(--mono);
+    font-size: .9rem;
+    line-height: 1;
+  }
+  .fold[open] > summary::after { content: "\2212"; }
+  .fold > summary:focus-visible { outline: 2px solid var(--ember); outline-offset: 4px; }
+  .fold--prose { margin-top: 1.1rem; }
+  .fold--prose > summary {
+    display: block;
+    color: var(--chrome-70);
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: .4rem 1.6rem .4rem 0;
+  }
+  /* Opened: the body already has the first sentence, so the summary
+     collapses to the minus control instead of repeating it. */
+  .fold--prose[open] > summary {
+    color: transparent;
+    font-size: 0;
+    min-height: 1.4rem;
+    padding: .15rem 1.6rem .15rem 0;
+  }
+  .fold--block { margin-top: 1rem; border-top: 1px solid var(--hair-1); }
+  .fold--block > summary {
+    display: block;
+    padding: 1rem 1.6rem 1rem 0;
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--chrome-45);
+  }
+  .who-team .fold > summary,
+  .whowe .fold > summary,
+  .fx-row .fold > summary {
+    display: block;
+    padding: .85rem 1.6rem .85rem 0;
+  }
+  .who-team .fold > p,
+  .whowe .fold > p,
+  .fx-row .fold > .fx-say { padding-bottom: .4rem; }
+  .pillars .fold,
+  .mods .fold { display: block; }
+  .pillars .fold > summary,
+  .mods .fold > summary { display: block; padding: 0 1.6rem 0 0; }
+  .pillars .fold-body { padding-top: .7rem; }
+  .mods .fold > p { padding: .45rem 0 .2rem; }
+  .who-beat .who-line { display: none; }
+  .who-beat.is-on .who-line { display: block; }
+  .nots .fold { display: block; }
+  .nots .fold > summary { display: block; padding: .15rem 1.6rem .15rem 0; min-height: 2.4rem; }
+  .nots .fold > p { display: block; padding: .35rem 0 .15rem; }
+  .nots .fold > p::before { content: none; }
+  .fold--block .sub { margin-top: .85rem; }
+
+  /* ---- hero: type sits in the remaining dark; the field owns the crop ---- */
   .hero {
+    height: calc(100svh - var(--bar));
+    min-height: 28rem;
     justify-items: stretch;
     text-align: left;
-    padding: calc(var(--bar) + 1.1rem) var(--gutter) calc(1rem + env(safe-area-inset-bottom));
+    padding: 0;
   }
-  .hero-film .plate-media { object-position: 50% 50%; }
   .hero-copy {
-    justify-items: start;
+    top: clamp(1.1rem, 3.5vh, 2rem);
+    bottom: auto;
+    left: var(--gutter);
+    right: var(--gutter);
     max-width: none;
-    margin-top: clamp(.4rem, 4vh, 2rem);
+    margin-top: 0;
+    justify-items: start;
   }
-  /* Sized against the column it sits in, not against the viewport: a plain vw
-     figure ran the wordmark 6px past the gutter, and .hero clips its overflow,
-     so the last letter was being quietly shaved rather than reported. */
-  .wordmark { font-size: calc((100vw - 2 * var(--gutter)) * .157); margin: .5rem 0 .75rem; }
+  .wordmark { font-size: clamp(2.1rem, 9vw, 2.8rem); margin: .4rem 0 .55rem; }
   .hero-line { font-size: 1.02rem; max-width: 20ch; }
-  .hero-act { width: 100%; gap: .5rem; margin-top: 1.5rem; }
-  .hero-act .btn { flex: 1 1 100%; min-width: 0; }
 
   /* ---- home index: the plate takes the column, the name runs under it ---- */
   .entry-link, .entry:nth-child(even) .entry-link {
@@ -1750,12 +1877,27 @@
     max-width: none;
   }
 
-  /* ---- studio ---- */
-  .charter li { grid-template-columns: minmax(0, 1fr); }
-  .charter .n { grid-column: 1; grid-row: 1; font-size: 1.6rem; margin-bottom: .55rem; }
-  .charter h2 { grid-column: 1; grid-row: 2; max-width: none; font-size: clamp(1.45rem, 6.6vw, 2rem); }
-  .charter > li > p:not(.n):not(.practice) { grid-column: 1; grid-row: 3; max-width: none; }
-  .charter .practice { grid-column: 1; grid-row: 4; max-width: none; }
+  /* ---- studio: claims as a list, body behind a tap ---- */
+  .charter .fold {
+    display: block;
+    padding: .85rem 0 1rem;
+  }
+  .charter .fold > summary {
+    display: grid;
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    gap: 0 .75rem;
+    align-items: baseline;
+    cursor: pointer;
+    pointer-events: auto;
+    list-style: none;
+  }
+  .charter .fold > summary::-webkit-details-marker,
+  .charter .fold > summary::marker { display: none; content: none; }
+  .charter .n { grid-column: 1; grid-row: 1; font-size: 1.05rem; margin-bottom: 0; }
+  .charter h2 { grid-column: 2; grid-row: 1; max-width: none; font-size: clamp(1.2rem, 5.2vw, 1.5rem); line-height: 1.12; }
+  .charter .fold-body { display: block; padding: .85rem 0 0 2.95rem; }
+  .charter .fold-body > p:not(.practice) { grid-column: auto; margin-top: 0; max-width: none; font-size: .98rem; }
+  .charter .practice { margin-top: .85rem; max-width: none; }
 
   .people li { grid-template-columns: minmax(0, 1fr); }
   .people h2 { grid-column: 1; grid-row: 1; }
@@ -2293,6 +2435,8 @@
     max-width: 14ch;
     text-wrap: balance;
   }
+  .fold--prose { margin-top: clamp(1.6rem, 4vh, 2.6rem); }
+  .fold--prose .who-open { margin-top: 0; }
   .who-open {
     margin-top: clamp(1.6rem, 4vh, 2.6rem);
     display: grid;
@@ -2419,11 +2563,12 @@
   .who-stage { position: relative; top: auto; height: auto; min-height: 0; max-height: none; display: flex; flex-direction: column; }
   .who-canvas { position: relative; height: 26rem; order: 0; }
   .who-stage .fig3d-note { order: 1; }
-  .who-beats { order: 2; position: static; display: block; padding: 1.2rem var(--gutter) 3.4rem; }
+  .who-beats { order: 2; position: static; display: block; padding: .6rem var(--gutter) 1.6rem; }
   .who-leads { display: none; }
-  .who-beat { padding: 1.1rem 0 1.2rem; border-top: 0; border-bottom: 1px solid var(--hair-1); }
+  .who-beat { padding: .7rem 0 .75rem; border-top: 0; border-bottom: 1px solid var(--hair-1); }
   .who-beat::before { top: auto; bottom: -1px; }
-  .who-line { opacity: .55; transform: none; }
-  .who-beat.is-on .who-line { opacity: 1; }
+  .who-beat .who-line { display: none; opacity: 1; transform: none; }
+  .who-beat.is-on .who-line { display: block; margin-top: .45rem; }
+  .who-claim { font-size: clamp(1.45rem, 7.2vw, 2.05rem); max-width: none; }
   .who-stage .fig3d-note { position: static; transform: none; padding: .8rem var(--gutter) 0; max-width: none; text-align: left; }
 }

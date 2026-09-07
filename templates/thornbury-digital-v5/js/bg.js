@@ -53,7 +53,7 @@
   var PAGES = {
     home: {
       field: 'live',
-      cam: { rot: 0.00, tilt: 0.50, ax: .50, ay: .50, zoom: 1.00, lx: 0.60, ly: -0.80 },
+      cam: { rot: 0.00, tilt: 0.50, ax: .50, ay: .46, zoom: 0.70, lx: 0.60, ly: -0.80 },
       world: { b: 0.190, seed: 0, ext: 4.6, vn: 1.30, density: 1.00 },
       film: { pos: '50% 100%', scale: 1.16, filter: 'saturate(.9) contrast(1.02)' }
     },
@@ -404,11 +404,13 @@
     if (mode === 'continuum' || mode === 'law') {
       html.setAttribute('data-field', 'live');
       f.setStill(false);
+      if (f.quality) f.quality(page === 'home' ? 'hero' : 'rest');
       return;
     }
     var want = preset(page).field;
     html.setAttribute('data-field', want);
     f.setStill(want === 'still');
+    if (f.quality) f.quality(page === 'home' ? 'hero' : 'rest');
   }
 
   /* ---------------------------------------------------------------------------
