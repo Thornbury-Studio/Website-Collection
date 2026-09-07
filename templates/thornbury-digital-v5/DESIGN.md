@@ -1098,3 +1098,63 @@ carries no `allow="autoplay"`, iOS refused the play, and the still stood —
 the fallback this hero was built for, observed on a real handset rather than
 asserted. The Team band had not mounted within the probe's wait and is
 unmeasured here.
+
+## Refinement: glass under every band, the switch as a row, and a Privacy page
+
+Better, not bigger. Two clashes the boss could point at, a copy pass, and one
+page the site owed itself. The hero and the field are untouched.
+
+**Every band the field ran through is glass now.** The Team band had already
+solved this — `backdrop-filter: blur(26px) saturate(1.15) brightness(.72)`
+over `rgba(8,8,8,.62)` with `isolation: isolate` — and Speed / Ownership,
+the home index, the services inclusions, “what we are not the studio for”,
+every “Next” teaser and the whole Work grid were still sitting on the sharp
+strands. The treatment is `.sec--rule` itself now, so every non-solid band
+gets it and nothing has to opt in. The field is still there and still moving
+behind all of them; it is background. The only glass panels inside one of
+these bands are the work plates' metadata cards, which carry their own dark
+base and now blend with the blurred field rather than the sharp one — a known
+ground either way, and on a phone the card is solid anyway. The page-heads
+stay clear: the display heading over the strands is the one place a still
+page shows the object, and it is the one idea on that screen.
+
+**The switch is a row of the index, not a control in a sentence.** Article
+03's practice line still says every effect can be switched off; the switch
+itself has left the paragraph. It sits after the fifth article as its own
+ruled row — a mono label, one sentence, and a switch with a 46 × 22 px track
+that is the point of the row — and it throws the same junction it always did.
+The menu panel keeps its copy of the button. Measured: throw it and `html.rm`
+is on, both switches read Off, ScrollTriggers 7 → 0, the field inactive;
+throw it back and all of it returns.
+
+**Copy.** Where a paragraph could be one sentence without losing its fact, it
+is: the Approach sub, the Services subhead and rates note, the section IV
+sub, the “by enquiry” note, the Work subhead, the brief's first line, the
+team sentence, all four answers in the studio key, and both pillars with
+their checks. The charter articles are the studio's own words and were not
+touched.
+
+**Privacy.** `privacy.html`, linked from the © line of every footer and from
+the studio key's “Where we are”, and from nowhere in the navigation. Every
+line of it describes what this build actually does — checked, not asserted:
+no script on the site sets a cookie or touches storage (`grep` for
+`localStorage|sessionStorage|document.cookie` returns nothing); the only third
+parties a page contacts are the ones the CSP allows, so the page names Google
+Fonts and jsDelivr and says what they see; Resend, Vercel, the PDPA, the
+one-email retention and the access / correction / deletion route are the
+studio's own published policy (thornburystudio.com/privacy, dated 26 August
+2026). The page is dated the day it was written, because the date has to be
+the date the site last behaved differently. It routes like every other page
+(`data-page="privacy"`, still field; `bg.js` falls back to the home
+viewpoint for a page it has no preset for, which is fine for a page most
+visitors never open), and it is in the sitemap at a yearly cadence.
+
+**Small things found on the way.** The three footer links measured 13 px
+tall and now measure 44, like every other target on the site.
+
+**Verified.** Playwright at 1440 × 900 and 390 × 844 across all six pages:
+console clean; zero horizontal overflow; every `.sec--rule` computing the
+blur, the tint and `isolation: isolate`; the Privacy link present in all six
+footers; the router swapping studio → privacy with one `<main>`, the title
+and `data-page` following; the switch row throwing and restoring as above.
+A phone run on this build, over the same LAN probe, is recorded below when it arrives.
