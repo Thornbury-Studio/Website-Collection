@@ -26,8 +26,6 @@
   /* two independent reasons to run: a page that wants the field live, and a
      hold from bg.js (a transition needs it live regardless) */
   var fieldWant = true, fieldHold = false, fieldOff = false;
-  var heroWatch = null;
-  var heroOff = null;
 
   function applyFieldGate() {
     if (!field || !field.setActive) return;
@@ -37,39 +35,12 @@
     field.setActive(fieldWant);
   }
 
-  /* First viewport spends the strand budget. Once the hero is covered, drop
-     back — inner pages and the work index sit on solid bands anyway. */
-  function watchHero(root) {
-    if (heroOff) { heroOff(); heroOff = null; }
-    var page = html.getAttribute('data-page') || 'home';
-    function setQual(on) {
-      if (field && field.quality) field.quality(on ? 'hero' : 'rest');
-    }
-    if (page !== 'home') { setQual(false); return; }
-    var hero = root && root.querySelector('.hero');
-    if (!hero) { setQual(true); return; }
-    function check() {
-      var r = hero.getBoundingClientRect();
-      setQual(r.bottom > innerHeight * 0.22);
-    }
-    check();
-    global.addEventListener('scroll', check, { passive: true });
-    if (typeof IntersectionObserver !== 'undefined') {
-      heroWatch = new IntersectionObserver(function () { check(); }, { threshold: [0, 0.22, 0.5, 1] });
-      heroWatch.observe(hero);
-    }
-    heroOff = function () {
-      global.removeEventListener('scroll', check);
-      if (heroWatch) { heroWatch.disconnect(); heroWatch = null; }
-    };
-  }
-
   function startField() {
     if (!canvas || !global.TBField) { html.classList.add('no-field'); return; }
     var mode = html.getAttribute('data-field') || 'live';
     var page = html.getAttribute('data-page') || 'home';
     var anchors = {
-      home: [0.5, 0.46], work: [0.5, 0.45], services: [0.44, 0.54],
+      home: [0.5, 0.5], work: [0.5, 0.45], services: [0.44, 0.54],
       studio: [0.62, 0.48], contact: [0.68, 0.5]
     };
     var seeds = { home: 0, work: 23, services: 5, studio: 11, contact: 37 };
@@ -79,9 +50,7 @@
         still: mode === 'still' || reducedNow(),
         seed: seeds[page] || 0,
         ax: an[0],
-        ay: an[1],
-        zoom: page === 'home' ? 0.70 : undefined,
-        quality: page === 'home' ? 'hero' : 'rest'
+        ay: an[1]
       });
       if (!field) { html.classList.add('no-field'); return; }
       applyFieldGate();
@@ -525,6 +494,7 @@
         rise('.hero-copy .meta', 14, 0.9, 0.15);
         rise('.wordmark', 28, 1.2, 0.28);
         rise('.hero-line', 16, 0.9, 0.48);
+        rise('.hero-act > *', 14, 0.9, 0.6, 0.08);
       }
 
       var head = root.querySelector('.page-head');
@@ -608,7 +578,6 @@
 
     fieldWant = true;
     applyFieldGate();
-    watchHero(root);
 
     menu();
     fxSwitch();
@@ -626,7 +595,6 @@
   }
 
   function teardown() {
-    if (heroOff) { heroOff(); heroOff = null; }
     if (ctxMotion) { ctxMotion.revert(); ctxMotion = null; }
     for (var i = 0; i < offs.length; i++) offs[i]();
     offs.length = 0;

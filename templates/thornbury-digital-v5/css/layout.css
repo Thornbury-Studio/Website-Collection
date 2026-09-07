@@ -196,29 +196,6 @@
     margin-left: -.04em;
   }
   .page-head .sub { grid-column: 9 / -1; padding-bottom: .8rem; margin: 0; }
-  .page-head--book h1 {
-    font-size: clamp(2.4rem, 5.4vw, 4.4rem);
-    grid-column: 1 / span 7;
-  }
-  .page-head--quiet {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: .85rem;
-    padding-bottom: clamp(1.4rem, 4vh, 2.4rem);
-  }
-  .page-head--quiet h1 {
-    grid-column: 1;
-    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
-    font-weight: 700;
-    letter-spacing: -.03em;
-    line-height: 1.1;
-    max-width: 18ch;
-  }
-  .page-head--quiet .sub {
-    grid-column: 1;
-    padding-bottom: 0;
-    max-width: 42ch;
-  }
-
   @media (max-width: 760px) {
     .page-head h1, .page-head .sub { grid-column: 1 / -1; }
     .teaser { grid-template-columns: 1fr; align-items: start; }
@@ -397,11 +374,16 @@
     text-wrap: balance;
     max-width: 22ch;
   }
-  .after-work {
-    margin-top: clamp(2.2rem, 5vh, 3.4rem);
+  .hero-act {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .7rem;
+    margin-top: clamp(1.4rem, 3.5vh, 2.2rem);
+    pointer-events: auto;
   }
-
-  /* the leftover glass button recipe, still used if a page wants one */
+  .hero-act .btn { justify-content: center; min-width: 11.5rem; }
+  /* the one glass CTA: a dark base under the overlay blend, or the blend
+     brightens it against a lit subject until it matches the solid button */
   .btn.btn--glass {
     background: rgba(8, 8, 8, .8);
     color: var(--chrome);
@@ -1481,19 +1463,6 @@
     padding-top: 1rem;
   }
   .terms dd { margin-top: .55rem; font-size: 1.05rem; letter-spacing: -.01em; }
-  .rate--aside {
-    display: block;
-    padding: 1.35rem 0 0;
-    border-bottom: 0;
-  }
-  .rate--aside .rate-line {
-    color: var(--chrome-70);
-    font-size: 1.05rem;
-    line-height: 1.5;
-    max-width: 52ch;
-    text-wrap: pretty;
-  }
-  .rate--aside .rate-line b { color: var(--chrome); font-weight: 700; }
   .rates-note,
   .stack-note,
   .policy-note {
@@ -1752,16 +1721,7 @@
   .sec { padding-block: clamp(1.8rem, 6vh, 3.4rem); }
   .page-head { padding: calc(var(--bar) + 1.6rem) 0 1.2rem; row-gap: .7rem; }
   .page-head h1 { font-size: clamp(2.5rem, 13vw, 3.6rem); }
-  .page-head--book h1 { font-size: clamp(2.1rem, 8vw, 2.8rem); }
-  .page-head--quiet h1 { font-size: clamp(1.55rem, 7vw, 1.9rem); font-weight: 700; }
   .page-head .sub { font-size: .98rem; }
-  .statement + .sub { display: none; }
-  .sec .wrap > .sub { display: none; }
-  .who-lead { display: none; }
-  .fig-credit { display: none; }
-  .rates-note { display: none; }
-  .reveal-note { display: none; }
-  .vmark-note { display: none; }
 
   /* ---- folds: a claim, then the rest on tap ---- */
   .fold > summary {
@@ -1854,6 +1814,8 @@
   }
   .wordmark { font-size: clamp(2.1rem, 9vw, 2.8rem); margin: .4rem 0 .55rem; }
   .hero-line { font-size: 1.02rem; max-width: 20ch; }
+  .hero-act { width: 100%; gap: .5rem; margin-top: 1.3rem; }
+  .hero-act .btn { flex: 1 1 100%; min-width: 0; }
 
   /* ---- home index: the plate takes the column, the name runs under it ---- */
   .entry-link, .entry:nth-child(even) .entry-link {
