@@ -16,7 +16,8 @@
    smooth generic forms rather than as photographed people — and why nobody in
    the source is recognisable on the page.
 
-   THE FIGURES. RMBG-1.4 cuts the subjects out, Depth Anything V2 estimates
+   THE FIGURES. Several licensed photographs, one instance each, so the band
+   shows several distinct forms rather than one pose. RMBG-1.4 cuts the subjects out, Depth Anything V2 estimates
    distance, and the depth field is smoothed and differentiated into a surface
    normal — all at build time, all baked into `img/team-pack.webp` (normal.x and
    normal.y in R and G, depth in B; z is recovered rather than stored). Shading
@@ -348,6 +349,29 @@ function stars(n, spanX, spanY, spanZ) {
   return { pos: pos, rnd: rnd, count: n };
 }
 
+/* Several forms, not one pose. Each instance is its own licensed photograph
+   traced the same way — shape and surface direction only, no colour, no face —
+   placed in the room at its own depth and turn. x is in world units right of
+   the copy column; on a phone the whole group slides left and shrinks so the
+   ensemble sits under the words instead of beside them. `delay` staggers the
+   assembly so the forms gather one after another rather than all at once. */
+var INSTANCES = [
+  { src: 'img/team-pack.webp',   x: 1.10, y: 0.16, z: 0.00, s: 1.00, r: 0.00, delay: 0.00 },
+  { src: 'img/team-pack-2.webp', x: 0.30, y: 0.06, z: -0.95, s: 0.88, r: 0.30, delay: 0.16 },
+  { src: 'img/team-pack-3.webp', x: 1.75, y: 0.02, z: -0.55, s: 0.92, r: -0.28, delay: 0.30 },
+  { src: 'img/team-pack-4.webp', x: 0.62, y: -0.02, z: -1.55, s: 0.80, r: 0.12, delay: 0.44 }
+];
+
+function loadImage(src) {
+  return new Promise(function (res) {
+    var img = new Image();
+    img.decoding = 'async';
+    img.onload = function () { res(img); };
+    img.onerror = function () { res(null); };
+    img.src = src;
+  });
+}
+
 export function mount(host, opts) {
   opts = opts || {};
   var packSrc = opts.packSrc || host.getAttribute('data-figure-pack');
@@ -358,25 +382,30 @@ export function mount(host, opts) {
   canvas.setAttribute('aria-hidden', 'true');
   host.insertBefore(canvas, host.firstChild);
 
-  var renderer, scene, camera, figPts, waveLines, starPts, groundLines;
-  var figGeo, waveGeo, starGeo, groundGeo, figMat, waveMat, starMat, groundMat;
+  var renderer, scene, camera, waveLines, starPts, groundLines, ensemble;
+  var figs = [];   /* { pts, mat, geo, inst } per instance */
+  var waveGeo, starGeo, groundGeo, waveMat, starMat, groundMat;
   var raf = 0, alive = true, visible = false, t0 = performance.now(), last = 0;
   var pointerOn = 0, pointerTarget = 0, pxWorld = 0, pyWorld = 0, pxT = 0, pyT = 0, assemble = 0;
   /* the ground's drift: a base speed plus whatever the scroll has pushed into
      it, decaying with the same ~0.36 s half-life the field's yaw impulse uses */
   var flow = 0, flowBoost = 0, FLOW_BASE = 0.11;
 
-  var img = new Image();
-  img.decoding = 'async';
-  img.onload = build;
-  img.onerror = cleanup;
-  img.src = packSrc;
+  var packs = INSTANCES.slice();
+  if (packSrc && packs[0].src !== packSrc) packs[0].src = packSrc;
+  Promise.all(packs.map(function (i) { return loadImage(i.src); })).then(build);
 
-  function build() {
+  function build(imgs) {
     if (!alive) return;
     var small = Math.min(innerWidth, innerHeight) < 700;
-    var fig = trace(img, small ? 3 : 2, 2.05, 1.05, small ? 0.05 : 0.06);
-    if (!fig.count) { cleanup(); return; }
+    var traced = [];
+    for (var k = 0; k < imgs.length; k++) {
+      if (!imgs[k]) continue;   /* a missing pack drops its instance, never the band */
+      var fg = trace(imgs[k], small ? 3 : 2, 2.05 * packs[k].s, 1.05 * packs[k].s, small ? 0.05 : 0.06);
+      if (fg.count) traced.push({ inst: packs[k], fig: fg });
+    }
+    if (!traced.length) { cleanup(); return; }
+    var total = 0;
     var wv = wave(small ? 90 : 150, small ? 26 : 38, -1.00, { rise: 0.26, depth: 0.80 });
     var st = stars(small ? 260 : 520, 9, 3.2, 1.6);
     var gd = ground(small ? 3200 : 8400, -1.02);
@@ -393,26 +422,35 @@ export function mount(host, opts) {
     var chrome = new THREE.Color(0xe1e1e1), ember = new THREE.Color(0xff2a00);
     var pointer = new THREE.Vector2(999, 999);
 
-    figGeo = new THREE.BufferGeometry();
-    figGeo.setAttribute('position', new THREE.Float32BufferAttribute(fig.pos, 3));
-    figGeo.setAttribute('aRand', new THREE.Float32BufferAttribute(fig.rnd, 1));
-    figGeo.setAttribute('aEmber', new THREE.Float32BufferAttribute(fig.emb, 1));
-    figGeo.setAttribute('aDepth', new THREE.Float32BufferAttribute(fig.dep, 1));
-    figGeo.setAttribute('aNrm', new THREE.Float32BufferAttribute(fig.nrm, 3));
-    figMat = new THREE.ShaderMaterial({
-      vertexShader: FIG_VERT, fragmentShader: FIG_FRAG,
-      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-      uniforms: {
-        uTime: { value: 0 }, uAssemble: { value: 0 },
-        uPointer: { value: pointer }, uPointerOn: { value: 0 },
-        uSize: { value: small ? 2.0 : 2.2 }, uDpr: { value: 1 },
-        uLight: { value: new THREE.Vector3(0.42, 0.50, 0.76) },
-        uChrome: { value: chrome }, uEmber: { value: ember }
-      }
+    ensemble = new THREE.Group();
+    scene.add(ensemble);
+    traced.forEach(function (tr) {
+      var fig = tr.fig, inst = tr.inst;
+      var geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(fig.pos, 3));
+      geo.setAttribute('aRand', new THREE.Float32BufferAttribute(fig.rnd, 1));
+      geo.setAttribute('aEmber', new THREE.Float32BufferAttribute(fig.emb, 1));
+      geo.setAttribute('aDepth', new THREE.Float32BufferAttribute(fig.dep, 1));
+      geo.setAttribute('aNrm', new THREE.Float32BufferAttribute(fig.nrm, 3));
+      var mat = new THREE.ShaderMaterial({
+        vertexShader: FIG_VERT, fragmentShader: FIG_FRAG,
+        transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+        uniforms: {
+          uTime: { value: 0 }, uAssemble: { value: 0 },
+          uPointer: { value: new THREE.Vector2(999, 999) }, uPointerOn: { value: 0 },
+          /* smaller points on a phone: the additive cloud over-exposes at a
+             phone's density, and the pair in front went white */
+          uSize: { value: (small ? 1.55 : 2.2) * (0.86 + 0.14 * inst.s) }, uDpr: { value: 1 },
+          uLight: { value: new THREE.Vector3(0.42, 0.50, 0.76) },
+          uChrome: { value: chrome }, uEmber: { value: ember }
+        }
+      });
+      var pts = new THREE.Points(geo, mat);
+      pts.position.set(inst.x, inst.y, inst.z);
+      ensemble.add(pts);
+      figs.push({ pts: pts, mat: mat, geo: geo, inst: inst });
+      total += fig.count;
     });
-    figPts = new THREE.Points(figGeo, figMat);
-    figPts.position.y = 0.16;
-    scene.add(figPts);
 
     waveGeo = new THREE.BufferGeometry();
     waveGeo.setAttribute('position', new THREE.Float32BufferAttribute(wv.pos, 3));
@@ -466,7 +504,7 @@ export function mount(host, opts) {
     groundLines = new THREE.LineSegments(groundGeo, groundMat);
     scene.add(groundLines);
 
-    if (typeof opts.onReady === 'function') opts.onReady(fig.count);
+    if (typeof opts.onReady === 'function') opts.onReady(total);
     resize();
     addEventListener('resize', resize);
     host.addEventListener('pointermove', onPointer);
@@ -482,8 +520,13 @@ export function mount(host, opts) {
     var dpr = Math.min(devicePixelRatio || 1, Math.min(innerWidth, innerHeight) < 700 ? 1.25 : 1.6);
     renderer.setPixelRatio(dpr);
     renderer.setSize(w, h, false);
-    figMat.uniforms.uDpr.value = dpr;
+    figs.forEach(function (f) { f.mat.uniforms.uDpr.value = dpr; });
     starMat.uniforms.uDpr.value = dpr;
+    /* the copy has the left of the stage on a desktop; on a phone the words sit
+       above and the whole group comes back to the middle, a little smaller */
+    var phone = w < 761;
+    ensemble.position.x = phone ? -1.05 : 0;
+    ensemble.scale.setScalar(phone ? 0.78 : 1);
     camera.aspect = w / h;
     camera.position.z = 1.32 / Math.tan((camera.fov * Math.PI / 180) / 2);
     camera.updateProjectionMatrix();
@@ -518,8 +561,10 @@ export function mount(host, opts) {
     var t = (now - t0) / 1000;
     var r = host.getBoundingClientRect();
     var vh = innerHeight || 1;
-    var off = Math.abs((r.top + r.height * 0.5) - vh * 0.5) / (vh * 0.5 + r.height * 0.5);
-    var want = Math.max(0, Math.min(1, (1 - off) * 1.5));
+    /* assembled whenever a real share of the stage is on screen; the stage is
+       sticky for the length of the section, so this holds while the words scroll */
+    var seen = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0)) / Math.min(r.height || 1, vh);
+    var want = Math.max(0, Math.min(1, seen * 2.2));
     assemble += (want - assemble) * 0.06;
     pointerOn += (pointerTarget - pointerOn) * 0.12;
     pxWorld += (pxT - pxWorld) * 0.16;
@@ -535,18 +580,21 @@ export function mount(host, opts) {
     groundMat.uniforms.uAssemble.value = assemble;
     groundMat.uniforms.uPointerOn.value = pointerOn;
 
-    figMat.uniforms.uTime.value = t;
-    figMat.uniforms.uAssemble.value = assemble;
-    figMat.uniforms.uPointerOn.value = pointerOn;
-    figMat.uniforms.uPointer.value.set(pxWorld, pyWorld);
+    figs.forEach(function (f, i) {
+      var d = f.inst.delay;
+      f.mat.uniforms.uTime.value = t;
+      f.mat.uniforms.uAssemble.value = Math.max(0, Math.min(1, (assemble - d) / (1 - d)));
+      f.mat.uniforms.uPointerOn.value = pointerOn;
+      /* the shader works in the instance's own space, so the pointer is moved into it */
+      f.mat.uniforms.uPointer.value.set((pxWorld - ensemble.position.x) / ensemble.scale.x - f.inst.x, pyWorld / ensemble.scale.x - f.inst.y);
+      f.pts.rotation.y = f.inst.r + Math.sin(t * 0.15 + i * 1.7) * 0.14;
+      f.pts.rotation.x = Math.sin(t * 0.10 + i * 0.9) * 0.028;
+    });
     waveMat.uniforms.uTime.value = t;
     waveMat.uniforms.uAssemble.value = assemble;
     waveMat.uniforms.uPointerOn.value = pointerOn;
     starMat.uniforms.uTime.value = t;
     starMat.uniforms.uAssemble.value = assemble;
-
-    figPts.rotation.y = Math.sin(t * 0.15) * 0.16;
-    figPts.rotation.x = Math.sin(t * 0.10) * 0.030;
 
     renderer.render(scene, camera);
     if (visible) raf = requestAnimationFrame(step);
@@ -559,16 +607,18 @@ export function mount(host, opts) {
     removeEventListener('resize', resize);
     host.removeEventListener('pointermove', onPointer);
     host.removeEventListener('pointerleave', onLeave);
-    [figGeo, waveGeo, starGeo, groundGeo].forEach(function (g) { if (g) g.dispose(); });
-    [figMat, waveMat, starMat, groundMat].forEach(function (m) { if (m) m.dispose(); });
+    figs.forEach(function (f) { f.geo.dispose(); f.mat.dispose(); });
+    figs.length = 0;
+    [waveGeo, starGeo, groundGeo].forEach(function (g) { if (g) g.dispose(); });
+    [waveMat, starMat, groundMat].forEach(function (m) { if (m) m.dispose(); });
     if (renderer) {
       renderer.dispose();
       /* <main> is swapped on navigation, so the context has to go with it or a
          handful of visits exhausts the browser's WebGL context budget */
       if (renderer.forceContextLoss) renderer.forceContextLoss();
     }
-    renderer = scene = camera = figPts = waveLines = starPts = groundLines = null;
-    figGeo = waveGeo = starGeo = groundGeo = figMat = waveMat = starMat = groundMat = null;
+    renderer = scene = camera = ensemble = waveLines = starPts = groundLines = null;
+    waveGeo = starGeo = groundGeo = waveMat = starMat = groundMat = null;
     if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
   }
 

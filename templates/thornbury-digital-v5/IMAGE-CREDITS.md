@@ -102,6 +102,21 @@ rather than as a photograph of people.
 | File | Source | Photographer | Licence |
 |---|---|---|---|
 | `img/team-pack.webp` | [Unsplash photo yM3blOV977Q](https://unsplash.com/photos/yM3blOV977Q) | [Vitaly Gariev](https://unsplash.com/@silverkblack) | **Unsplash License** — “Free to use under the Unsplash License”, read off the photo page before download |
+| `img/team-pack-2.webp` | [Pexels 7652461 — Women discussing while standing](https://www.pexels.com/photo/women-discussing-while-standing-7652461/) | [Thirdman](https://pexels.com/@thirdman/) | **Pexels License** — free to use, read off the photo page; downloaded 7 Sep 2026 |
+| `img/team-pack-3.webp` | [Pexels 13474407 — Woman walking beside a white wall](https://www.pexels.com/photo/woman-walking-beside-a-white-wall-13474407/) | credited on the photo page | **Pexels License**; downloaded 7 Sep 2026 |
+| `img/team-pack-4.webp` | [Pexels 7223491 — Woman and man standing by table](https://www.pexels.com/photo/woman-and-man-standing-by-table-7223491/), cropped to the left-hand figure | credited on the photo page | **Pexels License**; downloaded 7 Sep 2026 |
+
+**Several forms, not one pose (7 Sep 2026).** The band traces four photographs
+now — the group at the table, a pair in conversation, one person walking, one
+seen from behind — each an instance placed at its own depth and turn in
+`js/figure.js`. The same three passes built the three new packs, with two
+things learned on the way: the relief constant is not portable between
+photographs (their depth ranges differ), so `K` is now fitted per pack to a
+mean in-plane normal of 0.62, where the first pack had been tuned by hand to
+0.654; and RMBG keeps furniture the subject touches (a whiteboard and a
+trolley came through on two candidates), so a pack is cropped to the figure
+or the photograph is dropped. Two candidates were dropped for that reason
+(Pexels 7413916 and 16695070) and are not in the repository.
 
 Licence checked on the photo page rather than assumed: Unsplash serves two, and
 only one of them is free. An earlier candidate was rejected for being served from

@@ -1380,3 +1380,50 @@ teaser; Work → case and case → next case both swapping through the router wi
 one `<main>` and no inline style left at rest; the Team band mounting with the
 ground drawn, 50,093 figure points, at 96 fps on the desktop harness.
 The band's cost on a real phone is measured by the LAN probe, which now scrolls the band into view, waits nine seconds for three.js to build, and samples the frame rate; no handset opened it inside the window this pass stayed open for, so the band's phone frame rate is still the one number this log owes; the last handset run (08:26 UTC, before the ground layer existed) had the page itself at 61 fps on Studio with the band not yet mounted.
+
+## Who we are: the band is the section
+
+The Team band was a cool effect sitting near a technical caption. It is the
+"who we are" section now, and the words and the figures share one stage.
+
+**The words are the studio's own.** From `about.ts` on the studio's real site,
+verbatim: the opening claim — *Thornbury is new. We would rather you heard it
+from us.* — and its two paragraphs; the two principals; *And behind the two of
+us*, the founding-team note (around twenty, most building their first company,
+none of them a stock photograph); its own footnote (founding team, not
+headcount; people named when they are ready and not before); and *Where this
+goes* — *We are not trying to become a large agency* — with its paragraph. The
+four answers in the key follow, unchanged. The one edit is a pointer: "This is
+that document" became "The charter above is that document", because on this
+page the charter sits above it.
+
+**Several forms, not one pose.** Four instances now, each its own licensed
+photograph traced the same way — shape and surface direction only, no colour,
+no face, nobody who works here: the group at the table (the original), a pair
+in conversation (Pexels 7652461), one person walking (13474407) and one seen
+from behind (7223491, cropped to that figure). Each has its own place in the
+room, its own depth and turn, its own idle sway, and a staggered assembly so
+the forms gather one after another. They read as the collective in motion,
+not as named people doing named jobs, which is how `about.ts` wants it. Two
+candidates were dropped because the cut-out kept the furniture they touched;
+the relief constant is now fitted per pack to a mean in-plane normal of .62,
+where the first pack had been tuned by hand, because it does not travel
+between photographs. 114,962 points on a desktop.
+
+**Room, and holding still.** The canvas is sticky for the height of the
+section, so the figures hold in view while the copy scrolls past them, and
+assembly is keyed to how much of the stage is on screen rather than to its
+centre, which a tall section never brings past the viewport's. The copy runs
+five of twelve tracks on the left; the ensemble sits to the right; on a phone
+the words come first and the ensemble, slid to the middle and smaller, sits
+beneath them. Points are smaller on a phone, because the additive cloud
+over-exposed at a phone's density.
+
+**Measured.** Playwright: at 1440 the band mounts with 114,962 points, the
+canvas pinned at the bar's height while the section scrolls, the copy column
+522 px wide, zero overflow, console clean, and the harness's uncapped rAF at
+130 fps; at 390 the copy runs full width, the figures fill a 27 rem stage
+under it, zero overflow. Playwright's localhost origin had been left at 33 %
+browser zoom by something earlier in the session, which made every element
+measure three times too wide and every capture black; the harness now uses
+127.0.0.1, a separate origin at default zoom — worth remembering.
