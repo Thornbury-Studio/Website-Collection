@@ -1597,3 +1597,59 @@ large and confident again. The hero markup, the type at the lower left and
 everything else in that commit are untouched. Playwright at 1440: console
 clean, the harness's uncapped rAF at 165 fps.
 
+## Three things at once: the pieces put back, the transition measured, the monolith
+
+**Put back.** Commit 4886863 did more than the hero. Restored: the home
+page's three teaser sections (Approach, What it costs, Studio) and the
+hero's two calls to action; the S$800 rate card on Services, which had been
+demoted to one line; the "05 — Contact" head on Contact and the standard
+head on Studio; and seven rules that hid copy outright on phones (the
+section subs, the process lead, the figure's provenance note, the rates,
+reveal and rig notes). The phone folds that commit added stay — they are a
+pattern, not a loss — and are reported as such.
+
+**The transition, measured at last.** A frame recorder that survives the
+swap, plus the CPU profiler and a trace, on the desktop harness at 1440:
+the felt lag was one frame of 164–273 ms at the moment a page swapped in.
+Inside it: the first layout of a page never seen before (about 70 ms —
+fonts shaped, styles resolved — landing in the first scroll read), a 33 ms
+WebGL probe, 31 ms reverting the outgoing page's tweens, and a second full
+layout for ScrollTrigger's refresh; then a blur filter that re-rastered the
+whole plate on every frame of the fade. Each has its own fix: pages are
+fetched and laid out once, hidden, at idle (on hover of their link, and for
+the four in the bar after load), so the swap finds them warm at ~10 ms; the
+probe runs at idle after load; a discarded page's context is killed, not
+reverted; the refresh runs after the plate has landed; the scroll motion is
+set up one frame after the swap, under the fade; and the blur is gone —
+opacity and transform only, both composited.
+
+| Transition, 1440 | worst frame before | after | frames over 50 ms before | after |
+|---|---|---|---|---|
+| Home → Work | 164 ms | 55–79 ms | 9 | 2–5 |
+| Home → Studio | 273 ms | 61–79 ms | 6 | 1–2 |
+| Home → Services | 73 ms | 49–73 ms | 6 | 0–2 |
+| back to Home | 61 ms | 43–61 ms | 1 | 0–3 |
+
+What remains is one frame of about 60 ms at the swap itself — the arriving
+page's style, layout and first paint in one task — and it is the same with
+or without the hero's object, because the object is paused the moment a
+page starts to leave and never compiles per visit.
+
+**The monolith.** The site is called LIQUID MONOLITH and until now nothing
+on it was one. js/monolith.js is it: a standing slab of chrome whose
+surface never sets — a signed distance field of a rounded block, displaced
+by warped noise that drifts down it, marched in a single fragment shader
+and shaded by reflecting a procedural room (dark floor, grey sky, a tall
+soft box above and in front for the long white sweep, one ember strip low
+on the camera's side, a cold rim behind). It stands in front of the field,
+so the strands pass behind it; it turns toward the pointer; the pointer's
+touch raises the surface where it points; scrolling away melts it. It is
+one canvas for the session, fixed over the hero's place and compiled once
+at idle after first load, and pages that are not Home fade it out and it
+stops drawing — the first build mounted it per visit and paid a 55–79 ms
+compile on every return to Home, which is exactly the lag the transition
+work had just removed. Rays that miss the object's bounding sphere do no
+marching, and the render scale governs itself by measured frame time (0.8
+down to 0.4 on a desktop). Harness at 1440: 63 fps with it on, 165 without;
+the phone tier at 0.55 scale and 36 steps.
+
