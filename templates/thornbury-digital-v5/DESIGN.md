@@ -1305,3 +1305,15 @@ push-in computes as the running animation; console clean; zero overflow. Seam:
 the loop point measures 40.1 dB PSNR against 44.2 dB for an ordinary frame
 step — one hour of libration apart either way, indistinguishable in motion.
 Posters: 59 kB landscape, 45 kB portrait. The hub card was re-captured.
+
+**On the phone.** An iPhone 14 Pro Max on the LAN (iOS 18.7 Safari, 430 × 721
+CSS px, dpr 3, coarse pointer) ran the probe against this build at 08:26 UTC
+on 7 Sep 2026: all six pages at zero horizontal overflow with the stylesheet
+and JavaScript live; the hero served `poster-hero-m.webp?v=3` first and then
+played `hero-m.mp4?v=3` at 1080 × 1920 — the probe's iframe now allows
+autoplay, so this is the film actually running on a handset; the field active
+at 60 fps on Home over the glass bands and 61 fps on Studio; the rig mounted
+with its marks resting at .6; the wordmark's right edge 30 px inside the
+gutter; no hit target under 44 px; Home in 319 ms and the other five pages in
+85–152 ms over Wi-Fi. The Team band did not mount inside the probe's wait, so
+its cost on a phone is still the one number this log does not have.
