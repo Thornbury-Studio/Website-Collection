@@ -152,7 +152,21 @@
   .wrap { width: var(--col); margin-inline: auto; }
   .sec { padding-block: clamp(4rem, 12vh, 9rem); }
   .sec--solid { background: rgba(8, 8, 8, .9); border-top: 1px solid var(--hair-1); }
-  .sec--rule { border-top: 1px solid var(--hair-1); }
+  /* Where the field runs behind reading text it goes behind glass: the Team
+     band's treatment, on every band that is not solid. The field is still there
+     and still moving, but it is background now — depth of field, not a scrim.
+     isolation gives the filter its own context so it composites against the
+     fixed canvas rather than the section's own paint. The only glass panels
+     inside one of these bands are the work plates' metadata cards, which carry
+     their own dark base and now blend with the band's paint — the blurred field
+     — instead of the sharp one; a known ground either way. */
+  .sec--rule {
+    border-top: 1px solid var(--hair-1);
+    background: rgba(8, 8, 8, .62);
+    -webkit-backdrop-filter: blur(26px) saturate(1.15) brightness(.72);
+    backdrop-filter: blur(26px) saturate(1.15) brightness(.72);
+    isolation: isolate;
+  }
   .sec-head {
     display: flex;
     justify-content: space-between;
@@ -640,6 +654,8 @@
     line-height: 1.6;
   }
   .whowe em { color: var(--ember); font-style: normal; }
+  .whowe a { color: var(--chrome); text-decoration: none; border-bottom: 1px solid var(--hair-2); }
+  .whowe a:hover { border-color: var(--ember); }
 
   /* ---- the comparison ----
      A real table, because it is one: three columns, six rows, and a row header
@@ -1086,7 +1102,6 @@
     max-width: 56ch;
   }
   .charter .practice { grid-column: 3; grid-row: 2; }
-  .charter .fx { grid-column: 3; grid-row: 3; }
 
   /* the stack reads as a key: short mono names, plain-language descriptions */
   .stack { border-top: 1px solid var(--hair-2); margin-top: 1.6rem; }
@@ -1285,7 +1300,7 @@
     align-items: center;
     min-height: 2.75rem;
   }
-  .foot-meta a { display: inline-flex; align-items: center; }
+  .foot-meta a { display: inline-flex; align-items: center; min-height: 2.75rem; }
   .foot a { text-decoration: none; }
   .foot a:hover { color: var(--chrome); }
 }
@@ -1297,6 +1312,7 @@
   }
   @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
     .gpanel::before, .bar-glass { background: rgba(14, 14, 14, .88); mix-blend-mode: normal; }
+    .sec--rule { background: rgba(8, 8, 8, .88); }
   }
 }
 
@@ -1432,7 +1448,8 @@
   }
   .terms dd { margin-top: .55rem; font-size: 1.05rem; letter-spacing: -.01em; }
   .rates-note,
-  .stack-note {
+  .stack-note,
+  .policy-note {
     margin-top: 1.7rem;
     color: var(--chrome-70);
     font-size: 1rem;
@@ -1672,8 +1689,6 @@
   .charter h2 { grid-column: 2; grid-row: 1; max-width: 26ch; }
   .charter > li > p:not(.n):not(.practice) { grid-column: 2; grid-row: 2; margin-top: .95rem; max-width: 64ch; }
   .charter .practice { grid-column: 2; grid-row: 3; }
-  .charter .fx { grid-column: 2; grid-row: 4; }
-  .charter .n { grid-row: 1 / span 4; }
   .team-band { grid-template-columns: minmax(0, 1fr); }
   .team-band .people, .team-band .team { grid-column: 1; }
   .team-band .people { grid-row: 1; }
@@ -1736,7 +1751,6 @@
   .charter h2 { grid-column: 1; grid-row: 2; max-width: none; font-size: clamp(1.45rem, 6.6vw, 2rem); }
   .charter > li > p:not(.n):not(.practice) { grid-column: 1; grid-row: 3; max-width: none; }
   .charter .practice { grid-column: 1; grid-row: 4; max-width: none; }
-  .charter .fx { grid-column: 1; grid-row: 5; }
 
   .people li { grid-template-columns: minmax(0, 1fr); }
   .people h2 { grid-column: 1; grid-row: 1; }
@@ -1804,7 +1818,8 @@
   }
   .terms dd { margin-top: 0; font-size: .98rem; text-align: right; }
   .rates-note,
-  .stack-note { font-size: .98rem; max-width: none; }
+  .stack-note,
+  .policy-note { font-size: .98rem; max-width: none; }
   .carries { grid-template-columns: 1fr; }
   .devs > li { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .devs h2 { margin-top: .85rem; font-size: clamp(1.6rem, 8vw, 2.2rem); }
@@ -1848,7 +1863,6 @@
 
 @layer components {
   /* ---- the effects switch ---- */
-  .fx { margin-top: 1.4rem; }
   .fx-btn {
     display: inline-flex;
     align-items: center;
@@ -1890,13 +1904,38 @@
   .fx-btn[aria-pressed="true"] i::after { transform: translateX(14px); }
   .fx-btn[aria-pressed="false"] i::after { background: var(--chrome-45); }
   .fx-state { color: var(--chrome); min-width: 2.2em; }
-  .fx-hint {
-    margin-top: .9rem;
-    font-family: var(--mono);
-    font-size: .74rem;
-    line-height: 1.6;
-    color: var(--chrome-45);
-    max-width: 58ch;
+
+  /* ---- the switch as its own row ----
+     It used to sit inside article 03's paragraph, where a control in the middle
+     of a sentence read as a developer's leftover. It is a row of the same index
+     now, after the last article: a label, one sentence, and a switch big enough
+     to be the point of the row. */
+  .fx-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem clamp(1.5rem, 4vw, 4rem);
+    align-items: center;
+    padding: clamp(1.5rem, 4vh, 2.2rem) 0;
+    border-bottom: 1px solid var(--hair-1);
+  }
+  .fx-row > div { grid-column: 1; grid-row: 1; }
+  .fx-row .fx-btn { grid-column: 2; grid-row: 1; }
+  .fx-say {
+    margin-top: .7rem;
+    color: var(--chrome-70);
+    font-size: 1.02rem;
+    line-height: 1.5;
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
+  .fx-btn--big { gap: .9rem; font-size: .72rem; }
+  .fx-btn--big i { width: 46px; height: 22px; }
+  .fx-btn--big i::after { width: 16px; height: 16px; top: 2px; left: 2px; }
+  .fx-btn--big[aria-pressed="true"] i::after { transform: translateX(24px); }
+  @media (max-width: 760px) {
+    .fx-row { grid-template-columns: minmax(0, 1fr); }
+    .fx-row > div { grid-column: 1; grid-row: 1; }
+    .fx-row .fx-btn { grid-column: 1; grid-row: 2; }
   }
 
   /* ---- the live policy ---- */
@@ -2013,7 +2052,7 @@
   .csp dt { grid-column: 1; grid-row: 1; }
   .csp dd { grid-column: 1; grid-row: 2; }
   .src pre { font-size: .64rem; padding: .8rem .85rem; }
-  .fx-hint, .pull-sub, .pull-line { max-width: none; }
+  .pull-sub, .pull-line { max-width: none; }
 }
 
 /* ============================================================================
