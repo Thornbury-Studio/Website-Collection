@@ -653,11 +653,15 @@
     var fine = fineGPU();
     /* sink about the part of the page that is on screen, not the page's middle */
     cur.style.transformOrigin = '50% ' + Math.round(scrollY + innerHeight * 0.5) + 'px';
+    /* opacity and transform only: both composite. The blur this used to
+       carry re-rastered the whole plate on every frame of the sink — measured
+       as a stream of 40 ms frames on a desktop — for a softness nobody sees
+       under a fade. */
+    void fine;
     return new Promise(function (res) {
-      g.fromTo(cur, { filter: 'blur(0px)' }, {
+      g.to(cur, {
         duration: EXIT_S, ease: 'power2.in', overwrite: true,
         opacity: 0, scale: 0.962, y: Math.round(innerHeight * 0.02),
-        filter: fine ? 'blur(10px)' : 'blur(0px)',
         onComplete: res
       });
     });
@@ -667,12 +671,14 @@
     var fresh = document.getElementById('main');
     var g = global.gsap;
     if (reduced() || !fresh || !g) return;
-    var fine = fineGPU();
     fresh.style.transformOrigin = '50% ' + Math.round(innerHeight * 0.5) + 'px';
     g.fromTo(fresh,
-      { opacity: 0, scale: 0.972, y: Math.round(innerHeight * 0.035), filter: fine ? 'blur(8px)' : 'blur(0px)' },
+      { opacity: 0, scale: 0.972, y: Math.round(innerHeight * 0.035) },
       { duration: ENTER_S, ease: 'power3.out', overwrite: true,
-        opacity: 1, scale: 1, y: 0, filter: 'blur(0px)', clearProps: 'all' });
+        opacity: 1, scale: 1, y: 0, clearProps: 'all',
+        /* ScrollTrigger's refresh is a full layout of the new page; it runs
+           once the plate has landed, not in the frame that swapped it */
+        onComplete: function () { if (global.ScrollTrigger) global.ScrollTrigger.refresh(); } });
   }
 
   /* ---------------------------------------------------------------------------
@@ -701,11 +707,62 @@
     return p;
   }
 
+  /* The first layout of a page that has never been on screen costs about
+     70 ms on a desktop — fonts shaped, styles resolved — and it used to land
+     in the frame that swapped the page in, which is the hitch people felt.
+     So a page is laid out once, hidden, while the browser is idle (on hover
+     of its link, or after load for the four in the bar), and the swap later
+     finds everything warm: the same page then lays out in about 10 ms. */
+  var warmed = new Set();
+  function prelayout(href) {
+    if (warmed.has(href)) return;
+    warmed.add(href);
+    load(href).then(function (doc) {
+      var next = doc.querySelector('main');
+      if (!next) return;
+      var run = function () {
+        var ghost = document.importNode(next, true);
+        ghost.id = '';
+        ghost.setAttribute('aria-hidden', 'true');
+        ghost.setAttribute('inert', '');
+        ghost.style.cssText = 'position:absolute;left:0;top:0;width:100%;visibility:hidden;pointer-events:none;';
+        document.body.appendChild(ghost);
+        void ghost.offsetHeight;
+        ghost.remove();
+      };
+      if (global.requestIdleCallback) requestIdleCallback(run, { timeout: 4000 }); else setTimeout(run, 600);
+    }).catch(function () { warmed.delete(href); });
+  }
+  function warmLinks() {
+    var links = document.querySelectorAll('.nav a[href], .foot-nav a[href]');
+    var hrefs = [];
+    links.forEach(function (a) {
+      var u; try { u = new URL(a.getAttribute('href'), location.href); } catch (e) { return; }
+      if (!routable(u) || u.pathname === location.pathname) return;
+      if (hrefs.indexOf(u.href) < 0) hrefs.push(u.href);
+    });
+    var i = 0;
+    (function next() {
+      if (i >= hrefs.length) return;
+      prelayout(hrefs[i++]);
+      if (global.requestIdleCallback) requestIdleCallback(next, { timeout: 5000 }); else setTimeout(next, 900);
+    })();
+  }
+  /* intent: a hovered or focused link is laid out at once, ahead of the click */
+  document.addEventListener('pointerover', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var u; try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (routable(u) && u.pathname !== location.pathname) prelayout(u.href);
+  }, { passive: true });
+  if (global.requestIdleCallback) requestIdleCallback(warmLinks, { timeout: 6000 }); else setTimeout(warmLinks, 2500);
+
   function commitDoc(doc, hash) {
     var next = doc.querySelector('main');
     var cur = document.getElementById('main');
     if (!next || !cur) return false;
-    if (global.TBPage) global.TBPage.teardown();
+    /* the old page is discarded, so its animations are killed, not reverted */
+    if (global.TBPage) global.TBPage.teardown({ discard: true });
     var fresh = document.importNode(next, true);
     cur.replaceWith(fresh);
     document.title = doc.title;
@@ -717,7 +774,8 @@
     scrollTo({ top: 0, left: 0, behavior: 'instant' });
     /* no intro on a routed arrival: the plate rising is the arrival */
     if (global.TBPage) global.TBPage.init(fresh, { intro: false });
-    if (global.ScrollTrigger) global.ScrollTrigger.refresh();
+    /* the refresh follows the arrival (see contentIn); without motion it runs here */
+    if (global.ScrollTrigger && (reduced() || !global.gsap)) global.ScrollTrigger.refresh();
     if (hash) {
       var t = document.getElementById(hash.slice(1));
       if (t) t.scrollIntoView({ behavior: 'instant', block: 'start' });
