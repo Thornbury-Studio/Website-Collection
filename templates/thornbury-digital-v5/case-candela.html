@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" data-page="case-candela" data-field="still">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<title>Candela — Work — Thornbury Digital</title>
+<meta name="description" content="Case: Candela. A rangefinder you can pick up and turn. What was decided, and what was measured, in the build’s own words.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/thornbury-digital-v5/case-candela.html">
+<meta name="theme-color" content="#080808">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Cpath d='M7 8h18v4h-7v13h-4V12H7z' fill='%23e1e1e1'/%3E%3Crect x='23' y='23' width='4' height='4' fill='%23ff2a00'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thornbury Digital">
+<meta property="og:title" content="Candela — Work — Thornbury Digital">
+<meta property="og:description" content="A rangefinder you can pick up and turn.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/thornbury-digital-v5/case-candela.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/thornbury-digital-v5/img/cases/camera-candela.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="css/layout.css">
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+<script defer src="js/field.js"></script>
+<script defer src="js/main.js"></script>
+<script defer src="js/bg.js"></script>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<canvas class="field" id="field" aria-hidden="true"></canvas>
+<div class="bar-glass" aria-hidden="true"></div>
+<header class="bar">
+  <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="work.html">Work</a>
+    <a href="services.html">Services</a>
+    <a href="studio.html">Studio</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <a class="menu-btn" id="menuBtn" href="#site-nav"><span>Menu</span><i aria-hidden="true"></i></a>
+</header>
+<dialog class="menu" id="menu" aria-label="Menu">
+  <div class="menu-in">
+    <div class="menu-top">
+      <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
+      <button class="menu-btn" type="button" data-close><span>Close</span><i aria-hidden="true"></i></button>
+    </div>
+    <div class="menu-say">
+      <p class="meta">Design studio · Singapore</p>
+      <p class="statement">Websites worth a second look.</p>
+    </div>
+    <nav class="menu-nav" aria-label="Pages">
+      <a href="work.html"><b>01</b><span>Work</span><small>Eighteen live sites</small></a>
+      <a href="services.html"><b>02</b><span>Services</span><small>What it costs</small></a>
+      <a href="studio.html"><b>03</b><span>Studio</span><small>How the studio works</small></a>
+      <a href="contact.html"><b>04</b><span>Contact</span><small>Start a project</small></a>
+    </nav>
+    <p class="menu-foot meta">
+      <a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a>
+      <a href="tel:+6588056769">+65 8805 6769</a>
+      <button class="fx-btn" type="button" data-fx aria-pressed="true"><i aria-hidden="true"></i><span class="fx-word">Effects</span><span class="fx-state">On</span></button>
+    </p>
+  </div>
+</dialog>
+<div class="site">
+  <main id="main" tabindex="-1">
+
+    <header class="page-head wrap">
+      <p class="meta"><span class="q">Fig. 10</span> — Case</p>
+      <h1 class="display">Candela</h1>
+      <p class="sub">A rangefinder you can pick up and turn.</p>
+    </header>
+
+    <!-- Every sentence on this page is taken from the build’s own design log;
+         the plate is a capture of the site as deployed in this collection. -->
+    <section class="sec sec--rule" aria-label="The site" style="padding-top: clamp(2.2rem, 6vh, 4rem)">
+      <div class="wrap reveal">
+        <div class="plate plate--std case-plate" style="--op: 50% 50%">
+          <img class="plate-media" src="img/cases/camera-candela.webp" width="1200" height="750" loading="eager" fetchpriority="high" decoding="async" alt="Candela: a black rangefinder camera rendered in 3D on a dark ground, beside the wordmark CANDELA and a four-point specification list.">
+          <i class="grid" aria-hidden="true"></i>
+          <i class="scrim" aria-hidden="true"></i>
+          <i class="corners" aria-hidden="true"></i>
+          <span class="pc pc-tl">Fig. <b>10</b></span>
+          <span class="pc pc-tr">Product / 3D viewer</span>
+        </div>
+        <div class="case-open">
+          <p class="meta">Deployed and open — nothing on this page is a mockup</p>
+          <a class="more" href="../camera-candela/index.html" target="_blank" rel="noopener">Open the live site</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec--solid" aria-labelledby="k0">
+      <div class="wrap reveal">
+        <p class="meta"><span class="q">I</span> — <span id="k0">What it is</span></p>
+        <p class="statement">A product site built around one modelled object. Nothing on it is described in a shader: the object was made, then shipped.</p>
+        <p class="sub">A full-manual rangefinder in 26 parts, modelled in Blender at real proportions, given four genuinely different materials, and lit in the browser by a studio rather than a light.</p>
+      </div>
+    </section>
+
+    <section class="sec sec--rule" aria-labelledby="k1">
+      <div class="wrap reveal">
+        <p class="meta"><span class="q">II</span> — <span id="k1">What was decided</span></p>
+        <ol class="charter decisions">
+          <li>
+            <p class="n" aria-hidden="true">01</p>
+            <h2>Model it, don’t shade it.</h2>
+            <p>Procedural geometry with computed colour has no manufacturing history in it. This object was built from primitives with booleans and bevels at its real proportions — 139 by 80 by 39 millimetres — and the knurls on the rings are a radial displacement, not a texture, because at the zoom the site allows a knurl texture reads as a sticker.</p>
+            <p class="practice"><b>Check</b>An angle-limited 0.45 mm bevel on every hard edge is what draws the thin bright line under the studio light. That line is the whole difference between “machined” and “a box with a phase”.</p>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">02</p>
+            <h2>Four materials in one frame is a pipeline.</h2>
+            <p>One convincing material can be luck. Brushed aluminium, glass with real transmission and an index of 1.517, leather with a procedural grain baked to a single normal map, and matte rubber — all in the same frame, under the same light.</p>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">03</p>
+            <h2>The brush is drawn at run time.</h2>
+            <p>Procedural node graphs do not survive a glTF export; the exporter flattens the brushed roughness to one number and the plate arrives as featureless chrome. So the brush is redrawn on load as literal strokes on a canvas — zero bytes, and each UV island gets its own stroke direction, which is what machined parts do.</p>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">04</p>
+            <h2>A studio, not an HDR.</h2>
+            <p>No environment file ships. The lighting is a procedural scene baked once: a gradient surround plus five emissive rectangles — key, overhead, cool fill, rim, floor bounce — which is what a product studio physically is. A long softbox draws the long specular streak down a brushed plate; a point light never will.</p>
+            <p class="practice"><b>Check</b>Panel energy is kept modest: a saturated surface cannot show a brush stroke.</p>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">05</p>
+            <h2>Fit the sphere, not the silhouette.</h2>
+            <p>Zoom is a factor of the object’s bounding sphere, so however it is turned it cannot leave the frame. Idle motion is an oscillation about the authored angle, never a spin — a continuous rotation means the composition somebody designed exists for one frame in eighty.</p>
+            <p class="practice"><b>Check</b>The canvas is focusable: arrow keys turn it, plus and minus dolly, so the object is reachable without a pointer.</p>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">06</p>
+            <h2>The budget was the texture, not the mesh.</h2>
+            <p>The first export was 2.19 MB, of which one leather normal map was 85 percent. Re-encoding it to WebP cut the file by a factor of three; the geometry itself, Draco-compressed, is about 320 kB.</p>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec sec--solid" aria-labelledby="k2">
+      <div class="wrap reveal">
+        <p class="meta"><span class="q">III</span> — <span id="k2">What was measured</span></p>
+        <dl class="whowe measured">
+          <div>
+            <dt>Parts</dt>
+            <dd><b>26</b>modelled from primitives, rebuilt deterministically by a script</dd>
+          </div>
+          <div>
+            <dt>Triangles</dt>
+            <dd><b>33k</b>in a 702 kB file, down from 2.19 MB</dd>
+          </div>
+          <div>
+            <dt>Text elements measured</dt>
+            <dd><b>126</b>against computed colour with ancestor opacity composited in; zero AA failures</dd>
+          </div>
+          <div>
+            <dt>Accent contrast</dt>
+            <dd><b>6.5:1</b>brass on ink; body 16.7:1, secondary 7.5:1</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="sec sec--rule" aria-label="Next case">
+      <div class="wrap reveal">
+        <div class="teaser case-next">
+          <div>
+            <p class="meta">Fig. 11 — Next</p>
+            <p class="statement">Ephemeris</p>
+          </div>
+          <a class="more" href="case-ephemeris.html">One instrument. One light. One year.</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <nav class="foot-nav" id="site-nav" aria-label="Site">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="services.html">Services</a>
+        <a href="studio.html">Studio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="foot-meta meta">
+        <p>Thornbury Digital · Singapore</p>
+        <p><a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a></p>
+        <p><a href="tel:+6588056769">+65 8805 6769</a></p>
+        <p>© 2026 · <a href="privacy.html">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

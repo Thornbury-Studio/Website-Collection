@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" data-page="case-ephemeris" data-field="still">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<title>Ephemeris — Work — Thornbury Digital</title>
+<meta name="description" content="Case: Ephemeris. One instrument. One light. One year. What was decided, and what was measured, in the build’s own words.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/thornbury-digital-v5/case-ephemeris.html">
+<meta name="theme-color" content="#080808">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Cpath d='M7 8h18v4h-7v13h-4V12H7z' fill='%23e1e1e1'/%3E%3Crect x='23' y='23' width='4' height='4' fill='%23ff2a00'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thornbury Digital">
+<meta property="og:title" content="Ephemeris — Work — Thornbury Digital">
+<meta property="og:description" content="One instrument. One light. One year.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/thornbury-digital-v5/case-ephemeris.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/thornbury-digital-v5/img/cases/exhibition-ephemeris.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="css/layout.css">
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+<script defer src="js/field.js"></script>
+<script defer src="js/main.js"></script>
+<script defer src="js/bg.js"></script>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<canvas class="field" id="field" aria-hidden="true"></canvas>
+<div class="bar-glass" aria-hidden="true"></div>
+<header class="bar">
+  <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="work.html">Work</a>
+    <a href="services.html">Services</a>
+    <a href="studio.html">Studio</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <a class="menu-btn" id="menuBtn" href="#site-nav"><span>Menu</span><i aria-hidden="true"></i></a>
+</header>
+<dialog class="menu" id="menu" aria-label="Menu">
+  <div class="menu-in">
+    <div class="menu-top">
+      <a class="mark" href="index.html">Thornbury <small>Digital</small></a>
+      <button class="menu-btn" type="button" data-close><span>Close</span><i aria-hidden="true"></i></button>
+    </div>
+    <div class="menu-say">
+      <p class="meta">Design studio · Singapore</p>
+      <p class="statement">Websites worth a second look.</p>
+    </div>
+    <nav class="menu-nav" aria-label="Pages">
+      <a href="work.html"><b>01</b><span>Work</span><small>Eighteen live sites</small></a>
+      <a href="services.html"><b>02</b><span>Services</span><small>What it costs</small></a>
+      <a href="studio.html"><b>03</b><span>Studio</span><small>How the studio works</small></a>
+      <a href="contact.html"><b>04</b><span>Contact</span><small>Start a project</small></a>
+    </nav>
+    <p class="menu-foot meta">
+      <a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a>
+      <a href="tel:+6588056769">+65 8805 6769</a>
+      <button class="fx-btn" type="button" data-fx aria-pressed="true"><i aria-hidden="true"></i><span class="fx-word">Effects</span><span class="fx-state">On</span></button>
+    </p>
+  </div>
+</dialog>
+<div class="site">
+  <main id="main" tabindex="-1">
+
+    <header class="page-head wrap">
+      <p class="meta"><span class="q">Fig. 11</span> — Case</p>
+      <h1 class="display">Ephemeris</h1>
+      <p class="sub">One instrument. One light. One year.</p>
+    </header>
+
+    <!-- Every sentence on this page is taken from the build’s own design log;
+         the plate is a capture of the site as deployed in this collection. -->
+    <section class="sec sec--rule" aria-label="The site" style="padding-top: clamp(2.2rem, 6vh, 4rem)">
+      <div class="wrap reveal">
+        <div class="plate plate--std case-plate" style="--op: 50% 50%">
+          <img class="plate-media" src="img/cases/exhibition-ephemeris.webp" width="1200" height="750" loading="eager" fetchpriority="high" decoding="async" alt="Ephemeris: the word EPHEMERIS in wide gold-flecked serif capitals on near-black, above the line ‘One instrument. One light. One year.’">
+          <i class="grid" aria-hidden="true"></i>
+          <i class="scrim" aria-hidden="true"></i>
+          <i class="corners" aria-hidden="true"></i>
+          <span class="pc pc-tl">Fig. <b>11</b></span>
+          <span class="pc pc-tr">Gallery / WebGL</span>
+        </div>
+        <div class="case-open">
+          <p class="meta">Deployed and open — nothing on this page is a mockup</p>
+          <a class="more" href="../exhibition-ephemeris/index.html" target="_blank" rel="noopener">Open the live site</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec--solid" aria-labelledby="k0">
+      <div class="wrap reveal">
+        <p class="meta"><span class="q">I</span> — <span id="k0">What it is</span></p>
+        <p class="statement">A gallery that shows exactly one object at a time. Exhibit 01 is a real armillary sphere made in Kraków in 1771, standing in an unlit room and read by one moving light.</p>
+        <p class="sub">Most of what is worth seeing on an old instrument is only visible when the light is nearly parallel to its surface. That conservation fact is the entire site.</p>
+      </div>
+    </section>
+
+    <section class="sec sec--rule" aria-labelledby="k1">
+      <div class="wrap reveal">
+        <p class="meta"><span class="q">II</span> — <span id="k1">What was decided</span></p>
+        <ol class="charter decisions">
+          <li>
+            <p class="n" aria-hidden="true">01</p>
+            <h2>A real object, and the licence is in the file.</h2>
+            <p>The scan is the Jagiellonian University Museum’s 1771 armillary sphere by Franciszek Słupski, digitised for Virtual Museums of Małopolska and published on Zenodo under CC BY 4.0. The badge was not the evidence: the licence, author and source are asserted inside the delivered file itself, and the attribution is carried in the page footer, which is what CC BY requires.</p>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">02</p>
+            <h2>The raking light is the exhibit.</h2>
+            <p>The engraving on the horizon band is invisible under ordinary light and comes back at four degrees of incidence. In the third act the lamp is handed to the visitor. The relief comes out of the scan’s own normal map, so the marks that appear are the marks that are there.</p>
+            <p class="practice"><b>Check</b>The lamp is held about four degrees above the band, so flat brass stays dark while a groove wall tilted into the light reaches full brightness — six times the contrast with the field still dark.</p>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">03</p>
+            <h2>Five acts, one scroll.</h2>
+            <p>About eleven and a half viewports: the object at distance, a fall onto the horizon ring from above its plane, the raking light, the pull-back with the instrument turning, and the composition it is left in. Each act holds at a plateau; the notes underneath are plain readable text and are the whole site without JavaScript.</p>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">04</p>
+            <h2>What the scan cannot do is not faked.</h2>
+            <p>It is one fused solid: there are no separable rings in the file. So the fourth act does not pretend to articulate them. What turns is the whole instrument about its vertical axis, as a museum turntable would, and the orbital motion the piece is about lives in the light, which runs a 23.4-degree inclined arc around it throughout.</p>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">05</p>
+            <h2>Springs, not lerps.</h2>
+            <p>The camera position, its target and the scroll position are each a critically damped spring integrated on real elapsed time. A lerp’s speed depends on frame rate and has no momentum, so it cannot arrive at a plateau with weight; a spring arrives asymptotically, which is what makes a hold feel like a hold rather than a freeze.</p>
+          </li>
+
+          <li>
+            <p class="n" aria-hidden="true">06</p>
+            <h2>One code path.</h2>
+            <p>The renderer selects a WebGPU backend where one exists and WebGL2 where it does not, and the shader graphs compile to both from the same source. No dust motes, no light particles, no debris: one lit object in a dark room does not need company.</p>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec sec--solid" aria-labelledby="k2">
+      <div class="wrap reveal">
+        <p class="meta"><span class="q">III</span> — <span id="k2">What was measured</span></p>
+        <dl class="whowe measured">
+          <div>
+            <dt>Triangles</dt>
+            <dd><b>309k</b>four 1K PBR maps, Draco geometry</dd>
+          </div>
+          <div>
+            <dt>File</dt>
+            <dd><b>5.90 → 2.26 MB</b>three texture maps re-encoded to WebP in place</dd>
+          </div>
+          <div>
+            <dt>The lamp’s arc</dt>
+            <dd><b>23.4°</b>inclined, running around the object throughout</dd>
+          </div>
+          <div>
+            <dt>The walk</dt>
+            <dd><b>~11.5</b>viewports, in five acts with holds</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="sec sec--rule" aria-label="Next case">
+      <div class="wrap reveal">
+        <div class="teaser case-next">
+          <div>
+            <p class="meta">Fig. 13 — Next</p>
+            <p class="statement">Chalkline</p>
+          </div>
+          <a class="more" href="case-chalkline.html">Renovation you can see before you sign.</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <nav class="foot-nav" id="site-nav" aria-label="Site">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="services.html">Services</a>
+        <a href="studio.html">Studio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="foot-meta meta">
+        <p>Thornbury Digital · Singapore</p>
+        <p><a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a></p>
+        <p><a href="tel:+6588056769">+65 8805 6769</a></p>
+        <p>© 2026 · <a href="privacy.html">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

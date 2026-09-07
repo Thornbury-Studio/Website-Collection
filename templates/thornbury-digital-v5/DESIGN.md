@@ -1317,3 +1317,66 @@ with its marks resting at .6; the wordmark's right edge 30 px inside the
 gutter; no hit target under 44 px; Home in 319 ms and the other five pages in
 85–152 ms over Wi-Fi. The Team band did not mount inside the probe's wait, so
 its cost on a phone is still the one number this log does not have.
+
+## One system, six cases, and the receipt
+
+The boss's correction: nothing is cut. Five effects stay, and the direction
+is to make them read as one synced system. Three things followed from that,
+plus the case pages and the studio's own security record.
+
+**The Team band has its ground.** The reference under this band carries three
+populations — the body fill, a flowing ground layer, a sparse ambient — and
+this one had the figures, a faint strand sheet and the starfield. It now has a
+fourth draw call, `GROUND_VERT` in `js/figure.js`: 8,400 particles on the
+floor plane (3,200 on a phone), more than half of them standing where the
+figures stand and the rest receding, drifting across the frame under two
+crossing swells, each drawn as a trail from where it was 0.7 s ago to where it
+is — so length is velocity, which is the law the liquid field on every page
+already obeys. Crests are brighter than troughs; the sheet thins into the
+distance and at the edges; the pointer lifts a dimple in it. The old strand
+sheet steps back to gain .46 and stays.
+
+**The scroll pushes both objects.** The field's yaw impulse — sampled once per
+frame, above 0.4 px/ms, decaying with a ~0.36 s half-life — now also pushes
+the ground's drift speed, through the same sample in `js/main.js`
+(`figureHandle.impulse`, at 2.4× the field's radians per second in floor
+units). A flick down the studio page turns the ground's trails into bright
+streaks that settle back on the same curve the field settles on. The band's
+pointer now eases with the second look's constants (.16 position, .12
+radius), so the lens on one and the dimple on the other move alike. Phones
+cap the band at pixel ratio 1.25.
+
+**Six cases open here.** Midwater, Loam, Null Carnival, Candela, Ephemeris
+and Chalkline each have a page — `case-<slug>.html` — with the site's plate, a
+line to open the live site (secondary, not the click), what it is, six
+decisions in the charter's own three-track shape with a mono *Check* line
+where the log gives a receipt, four measured figures, and the next case.
+Every sentence is taken from that build's own `DESIGN.md`; the four with no
+log (Kiyo, Aurel, Form/01 and the rest of the eighteen) keep their plates and
+open the real thing. Home's Midwater and Loam entries go to their cases. The
+router treats a case page as Work (`markNav`), the pages carry
+`data-page="case-…"` and a still field, and they are in the sitemap.
+
+**The security record, where it earns trust.** From the studio's own
+`SECURITY.md` (v9, 26 August 2026): a content security policy that omitted
+`script-src` fell back to `default-src` and blocked every inline script on
+the production site — the build passed, the review passed, the pages rendered,
+and nothing could be clicked for about seven hours until a person opened it
+in a browser. It is on the studio page as *Article 05, in practice*, the row
+after the switch, in plain words with the date; it is the reason the
+comparison table's *before anything goes live* row now ends with a person
+clicking through the live deploy. And Rule 2 — the client creates and owns
+every account (domain, hosting, payment provider, business profile,
+analytics, mailbox) and the studio takes delegated, revocable access, with
+error monitoring and rate limiting the two named exceptions because they are
+shared plumbing — is now the Ownership pillar's own paragraph, replacing the
+generic one.
+
+**Verified.** Playwright at 1440 and 390: all six case pages at zero
+overflow, console clean, six decisions and four measurements each, plate
+loaded, Work marked current in the bar and the footer; no grid child left on
+`auto` beside a placed sibling in the decisions, the measured key or the next
+teaser; Work → case and case → next case both swapping through the router with
+one `<main>` and no inline style left at rest; the Team band mounting with the
+ground drawn, 50,093 figure points, at 96 fps on the desktop harness.
+The band's cost on a real phone is measured by the LAN probe, which now scrolls the band into view, waits nine seconds for three.js to build, and samples the frame rate; the result is recorded below when a handset opens it.

@@ -148,6 +148,21 @@
           </div>
           <button class="fx-btn fx-btn--big" type="button" data-fx aria-pressed="true"><i aria-hidden="true"></i><span class="fx-word">Effects</span><span class="fx-state">On</span></button>
         </div>
+
+        <!-- Article 05, with the receipt. This is the studio's own security
+             record, not a line written for the page: the incident, the date,
+             what caught it, and what changed. -->
+        <div class="fx-row">
+          <div>
+            <p class="meta">Article 05, in practice</p>
+            <p class="fx-say">On 26 August 2026 a content security policy change took our own site
+              down for about seven hours. The build passed, the review passed and every page
+              rendered — and nothing on them could be clicked. A person opening it in a browser
+              found it; the tooling never did. Since then no change ships until someone has
+              clicked through the live deploy, which is why every page here was checked in a real
+              browser, and on a real phone, before this one.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -282,8 +297,9 @@
             <tr>
               <th scope="row">Before anything goes live</th>
               <td>Usually shipped straight from the machine it was built on.</td>
-              <td>A written review pass, plus a public security scanner and a code
-                analyser run over it.</td>
+              <td>A written review pass, a public security scanner, a code analyser —
+                and then a person clicking through the live deploy, because a build passing
+                has fooled us once.</td>
             </tr>
             <tr>
               <th scope="row">What you are quoted</th>
@@ -326,8 +342,12 @@
           </li>
           <li>
             <h2>Ownership</h2>
-            <p>On delivery you get all of it, outright. Walk away whenever you like, to any
-              developer you choose; nothing of yours stays in an account of ours.</p>
+            <p>Domain, hosting, payment provider, business profile, analytics, mailbox: you
+              create every one of them and own it, and we work inside them on access you can
+              revoke. We never open a business-critical account in our own name to make setup
+              easier, so nothing of yours can be held hostage and nothing depends on one of us
+              being reachable. Two things stay ours — error monitoring and rate limiting —
+              because they are shared plumbing nobody outside the studio logs into.</p>
             <ol class="handover">
               <li><b>01</b><span>The repository — every file the site is made of</span></li>
               <li><b>02</b><span>The hosting account, in your name</span></li>

@@ -77,6 +77,8 @@
   }
 
   function markNav(page) {
+    /* a case page belongs to Work */
+    if (page.indexOf('case') === 0) page = 'work';
     document.querySelectorAll('.nav a, .menu-nav a, .foot-nav a').forEach(function (a) {
       if ((a.getAttribute('href') || '') === page + '.html' ||
           (page === 'home' && (a.getAttribute('href') || '') === 'index.html')) {
@@ -404,8 +406,11 @@
       var v = Math.abs(y - lastY) / dt;
       lastY = y;
       lastT = now;
-      if (field && field.impulse && v > 0.4) {
-        field.impulse(Math.min(0.3, (v - 0.4) * 0.16));
+      if (v > 0.4) {
+        var push = Math.min(0.3, (v - 0.4) * 0.16);
+        if (field && field.impulse) field.impulse(push);
+        /* the same gesture pushes the Team band's floor: one system, two objects */
+        if (figureHandle && figureHandle.impulse) figureHandle.impulse(push * 2.4);
       }
     }
     on(global, 'scroll', function () {
