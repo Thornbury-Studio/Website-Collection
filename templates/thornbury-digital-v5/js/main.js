@@ -96,7 +96,10 @@
     var v = root.querySelector('#heroFilm');
     if (!v || reducedNow()) return;
     var small = matchMedia('(max-width: 760px)').matches;
-    var src = (small && v.getAttribute('data-film-sm')) || v.getAttribute('data-film');
+    var large = matchMedia('(min-width: 1800px)').matches;
+    var src = (small && v.getAttribute('data-film-sm')) ||
+              (large && v.getAttribute('data-film-lg')) ||
+              v.getAttribute('data-film');
     if (!src) return;
     function attach() {
       if (!v.isConnected) return;
@@ -366,6 +369,29 @@
     });
   }
 
+  /* The second look. Decorative in the same sense the figure is — the sentence
+     beside it carries the claim — so it waits for approach and never mounts
+     under reduced motion or with effects off. */
+  var revealHandle = null;
+
+  function reveal(root) {
+    var host = root.querySelector('[data-reveal] .reveal-stage');
+    if (!host || reducedNow()) return;
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      import('./reveal.js').then(function (mod) {
+        if (!host.isConnected || reducedNow()) return;
+        revealHandle = mod.mount(host);
+      }).catch(function () { /* the surface and the sentence stand */ });
+    }, { rootMargin: '300px 0px' });
+    io.observe(host);
+    offs.push(function () {
+      io.disconnect();
+      if (revealHandle) { revealHandle.destroy(); revealHandle = null; }
+    });
+  }
+
   /* Scroll is felt in the object rather than only behind it: speed becomes a
      push on the world's rotation, which decays on its own in about a third of a
      second. Sampled once per frame, never per scroll event. */
@@ -511,6 +537,7 @@
     cssBlock(root);
     figure(root);
     rig(root);
+    reveal(root);
     scrollFeel();
     trueLoopMarquee(root.querySelector('#mq'), 22);
     briefForm(root);

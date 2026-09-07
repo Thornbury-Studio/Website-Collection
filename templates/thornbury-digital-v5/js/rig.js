@@ -51,7 +51,7 @@ function sampleWord(word, boxW, boxH, dpr) {
   return pts;
 }
 
-function decoder(el, text, reduced) {
+export function decoder(el, text, reduced) {
   if (reduced) { el.textContent = text; return null; }
   var chars = text.split('');
   var frame = 0, raf = 0;

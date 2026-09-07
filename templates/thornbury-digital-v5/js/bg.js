@@ -627,18 +627,52 @@
   };
 
   /* ---------------------------------------------------------------------------
-     Content. <main> fades and lifts on the way out and back in; the difference
-     between the modes is only ever what is behind it. The opacity lives in a
-     class, not inline, so at rest <main> carries no opacity at all and does not
-     become a stacking context the glass would then fail to blend through.
+     Content. Two layers, two rates. The page's words are a plate sitting over
+     the liquid. On the way out the plate sinks: it recedes, softens and goes,
+     in half a second, while the camera underneath is still travelling on its
+     own 1.35 s. Once it has gone, the next plate rises out of the same depth
+     and lands before the camera does. Foreground fast and decisive, background
+     slow and continuous — the two rates are what make it read as layers
+     instead of a crossfade, and the plate is the only thing that ever moves on
+     its own: the new page arrives whole, with no intro of its own stacked on
+     top. Blur only where the GPU is generous (a pointer device above phone
+     width); on a phone the plate sinks without it. Every inline value is
+     cleared at the end, so at rest <main> carries no transform, opacity or
+     filter and is not a stacking context — the glass inside it can only blend
+     with the canvas from the root one. Without GSAP the old class-based fade
+     stands in.
      ------------------------------------------------------------------------- */
+  var EXIT_S = 0.5, ENTER_S = 0.78;
+  function fineGPU() { return matchMedia('(hover: hover) and (min-width: 761px)').matches; }
   function contentOut() {
-    if (reduced()) { return delay(0); }
-    html.classList.add('bg-out');
-    return delay(300);
+    var cur = document.getElementById('main');
+    if (reduced() || !cur) return delay(0);
+    var g = global.gsap;
+    if (!g) { html.classList.add('bg-out'); return delay(300); }
+    html.classList.add('js-nav');
+    var fine = fineGPU();
+    /* sink about the part of the page that is on screen, not the page's middle */
+    cur.style.transformOrigin = '50% ' + Math.round(scrollY + innerHeight * 0.5) + 'px';
+    return new Promise(function (res) {
+      g.fromTo(cur, { filter: 'blur(0px)' }, {
+        duration: EXIT_S, ease: 'power2.in', overwrite: true,
+        opacity: 0, scale: 0.962, y: Math.round(innerHeight * 0.02),
+        filter: fine ? 'blur(10px)' : 'blur(0px)',
+        onComplete: res
+      });
+    });
   }
   function contentIn() {
     html.classList.remove('bg-out');
+    var fresh = document.getElementById('main');
+    var g = global.gsap;
+    if (reduced() || !fresh || !g) return;
+    var fine = fineGPU();
+    fresh.style.transformOrigin = '50% ' + Math.round(innerHeight * 0.5) + 'px';
+    g.fromTo(fresh,
+      { opacity: 0, scale: 0.972, y: Math.round(innerHeight * 0.035), filter: fine ? 'blur(8px)' : 'blur(0px)' },
+      { duration: ENTER_S, ease: 'power3.out', overwrite: true,
+        opacity: 1, scale: 1, y: 0, filter: 'blur(0px)', clearProps: 'all' });
   }
 
   /* ---------------------------------------------------------------------------
@@ -681,7 +715,8 @@
     page = doc.documentElement.getAttribute('data-page') || 'home';
     html.setAttribute('data-page', page);
     scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    if (global.TBPage) global.TBPage.init(fresh, { intro: true });
+    /* no intro on a routed arrival: the plate rising is the arrival */
+    if (global.TBPage) global.TBPage.init(fresh, { intro: false });
     if (global.ScrollTrigger) global.ScrollTrigger.refresh();
     if (hash) {
       var t = document.getElementById(hash.slice(1));
@@ -704,17 +739,22 @@
       document.querySelectorAll('dialog[open]').forEach(function (d) { d.close(); });
       if (push) history.pushState({ tb: 1 }, '', u.href);
       if (global.TBPage) global.TBPage.holdField(true);
-      return contentOut().then(function () {
-        var committed = false;
-        return mode.run(from, to, function () {
-          if (committed) return;
-          committed = true;
-          commitDoc(doc, u.hash);
-          contentIn();
-        }).then(function () {
-          if (!committed) { commitDoc(doc, u.hash); contentIn(); }
+      /* The two layers start together. The background runs on the mode's own
+         clock and says when it is ready to commit; the plate says when it has
+         gone; the swap waits for both, so neither layer is ever cut short. */
+      var committed = false, plateGone = false, modeReady = false;
+      function tryCommit() {
+        if (committed || !plateGone || !modeReady) return;
+        committed = true;
+        commitDoc(doc, u.hash);
+        contentIn();
+      }
+      var out = contentOut().then(function () { plateGone = true; tryCommit(); });
+      return mode.run(from, to, function () { modeReady = true; tryCommit(); })
+        .then(function () { return out; })
+        .then(function () {
+          if (!committed) { committed = true; commitDoc(doc, u.hash); contentIn(); }
         });
-      });
     }).then(function () {
       if (global.TBPage) global.TBPage.holdField(false);
       busy = false;

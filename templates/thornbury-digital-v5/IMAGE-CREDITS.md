@@ -6,55 +6,54 @@ be blocked at load time.
 
 ## Hero film
 
-The hero. Sourced rather than generated, which is where `VIDEO-POLICY.md`'s asset
-order says to stop: tier 1 is existing legally usable video, and this is exactly
-the shot the hero needs. Pixabay Content License: free for commercial use, no
-attribution required — credited here anyway. Downloaded 3 Sep 2026.
+The backdrop behind the field. Sourced, not generated — `VIDEO-POLICY.md`'s
+asset order stops at tier 1 when real footage this good exists. Pexels
+License: free to use, no attribution required — credited here anyway.
+Downloaded 7 Sep 2026.
 
-| File | Source | Pixabay ID |
-|---|---|---|
-| `video/hero.mp4` | [Moon, Iapetus, space](https://pixabay.com/videos/moon-iapetus-moon-iapetus-space-132361/) | 132361 |
+| File | Source | Creator | Pexels ID |
+|---|---|---|---|
+| `video/hero.mp4` · `hero-lg.mp4` · `hero-m.mp4` | [Inky — ferrofluid in super slow motion](https://www.pexels.com/video/inky-16296848/) | [Film Composite](https://www.pexels.com/@film-composite-518472883/) | 16296848 |
 
-One body, filling the frame, on a slow push-in — the whole point of the shot is
-that a single object holds the eye. The 1920×1080 / 60 fps / 30 s master is kept
-at `video/src/hero.mp4` (gitignored by this directory's own `.gitignore`).
+The 3840×2160 / 24 fps / 17.8 s master is kept at `video/src/ferro-master.mp4`
+(gitignored by this directory's own `.gitignore`). It replaced the moon (Pixabay
+132361, an HD master) on 7 Sep 2026: the brief asked for a genuinely 4K
+backdrop, and a ferrofluid is this site's own material — liquid metal, on
+black, catching one light.
 
-The web encode **plays forward then backward**, so the loop never cuts. One
-ffmpeg pass takes the strongest 7.5 seconds (10 s → 17.5 s), splits it, reverses
-one copy, trims the duplicate frame at the turn, and concatenates: 448 frames,
-14.93 s, and the last frame is one ordinary step from the first, so the plain
-`loop` attribute runs forever seamlessly.
+The web encodes **play forward then backward**, so the loop never cuts: one
+ffmpeg pass takes 8.0 s → 15.5 s of the master, splits it, reverses one copy,
+trims the duplicate frame at each end of the turn, and concatenates — 358
+frames, 14.9 s, with the last frame one ordinary step from the first. Grade:
+`eq=saturation=0.12:contrast=1.06` (the master's highlights run warm and the
+site is chrome), Lanczos scale, then `cas=0.5`. H.264 high profile, faststart,
+audio stripped, native 24 fps.
 
-It drops to 30 fps because a slow drift needs nothing more, and is H.264, audio
-stripped, faststart, CRF 25 with a 1900k cap — 2.73 MB where CRF 22 gave 4.50 MB.
-The two encodes are indistinguishable at 1:1 on the crater detail (38.6 dB PSNR),
-which is the only test worth trusting here; file size alone says nothing.
+| File | Encode | Size | Serves |
+|---|---|---|---|
+| `video/hero.mp4` | 1920×1080, CRF 26, 2.6 Mbps cap | 4.67 MB | 761–1799 px |
+| `video/hero-lg.mp4` | 2560×1440, CRF 27, 4.5 Mbps cap | 6.92 MB | 1800 px and up |
+| `video/hero-m.mp4` | 1080×1920 portrait, `crop=1215:2160:1706:0`, CRF 26, 1.5 Mbps cap | 2.74 MB | 760 px and below |
 
-Two more filters: `hflip` sets the body's lit side against the layout, and
-`eq=saturation=0.2:contrast=1.1` pulls the residual blue out of the starfield,
-which keeps the page inside its obsidian/chrome/ember palette.
-`img/poster-hero.webp` is the frame at 6 s, and it is the hero's real first
-paint: the page ships a `<picture>` and `js/main.js` attaches the film only once
-the page is up.
+A ferrofluid is all specular detail, so it costs about twice what the moon did
+at the same quality; the film is still attached after first paint, from
+`requestIdleCallback`, and the still is what the page ships. The portrait
+window was chosen from three renders (left / centre / right third): the right
+one keeps the brightest highlight in the top-right corner, away from the
+wordmark, with the spike field across the middle. Posters are each encode's
+first frame — `img/poster-hero.webp` (42 kB), `-lg` (58 kB), `-m` (36 kB).
+Every reference carries `?v=2` so no browser replays the moon from its cache.
 
-**The phone gets a portrait cut, not a smaller copy.** `video/hero-m.mp4` runs
-the same filter chain with `crop=540:1080:420:0` added after the `hflip` — the
-window was chosen by rendering three candidates (centre .42 / .50 / .58) and
-looking at them; .42 keeps the sky in the upper left, where the wordmark lands,
-and the lit limb sweeping down through the frame. 540×1080, CRF 24, 449 frames,
-0.90 MB against 2.73 MB, and no encoded column is off-screen on a portrait phone.
-`img/poster-hero-m.webp` is its frame at 6 s, 20 kB. Both seams survive the crop:
-loop point 40.3 dB against 40.1 dB for an ordinary frame step, turnaround 38.6 dB
-against 38.7 dB, unrelated frames 22.7 dB.
+## The second look (Studio)
 
-| File | Size | Serves |
-|---|---|---|
-| `video/hero.mp4` · `img/poster-hero.webp` | 2.73 MB · 35 kB | above 760 px |
-| `video/hero-m.mp4` · `img/poster-hero-m.webp` | 0.90 MB · 20 kB | 760 px and below |
-
-Seam check (PSNR against the neighbouring ordinary frame step, higher is closer):
-loop point 32.2 dB vs 32.8 dB, turnaround 35.4 dB vs 35.3 dB, unrelated frames
-13.6 dB.
+Two renders of one composition, supplied by the studio on 7 Sep 2026 and
+upscaled 4× with Upscayl to 4096×2288: a photoreal black hole and its
+wireframe schematic. The schematic was generated with annotation labels and
+leader lines, which were stripped before upscaling on purpose — they are
+rebuilt on the page as live SVG lines and decoder-resolved text
+(`js/reveal.js`), not baked pixels. Served as `img/reveal-surface.webp` and
+`img/reveal-wire.webp` at 2560×1430 (75 kB / 295 kB) with 1280-wide variants
+for phones.
 
 ## Transition footage
 

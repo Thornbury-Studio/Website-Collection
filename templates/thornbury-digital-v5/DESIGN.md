@@ -1162,3 +1162,96 @@ stayed open for, so the handset numbers above are from the previous build; the
 glass bands and the switch row are measured only in Playwright at 390 px here,
 and the frame-rate cost of a full-viewport blur over the live field on a phone
 is the one number this pass still owes.
+
+## Three pieces: the layered transition, the second look, and a 4K backdrop
+
+The field is untouched. Three things around it changed.
+
+**The transition has two layers, at two rates.** Navigation used to be a
+300 ms class fade with 14 px of lift, run *before* the camera started to move:
+sequential, and it read as a cut. Now the page's words are a plate over the
+liquid, and the plate has its own motion: on the way out it sinks — recedes to
+.962, softens to 10 px of blur, drops 2 vh and goes — in half a second on
+`power2.in`, while the camera underneath starts its own 1.35 s travel at the
+same instant. Once the plate has gone, the next one rises out of the same
+depth over .78 s on `power3.out` and lands before the camera does. Foreground
+fast and decisive, background slow and continuous; the two rates are what
+make it read as layers instead of a crossfade, and nothing else moves: a
+routed arrival no longer stacks the page-head intro on top (`intro: false`
+after a swap), so the plate rising *is* the arrival. The swap itself waits for
+both layers — the mode says when the background is ready to commit, the
+plate says when it has gone — so neither is cut short. Blur only on a pointer
+device above phone width; a phone's plate sinks without it. Every inline
+value is cleared at the end, so at rest `<main>` is not a stacking context
+and the glass inside it still blends from the root. Without GSAP the old
+class fade stands in.
+
+Judged from scrubbed frames rather than a live window (the harness renders
+about one frame a second): exit at .12 / .25 / .38 / .5 s and enter at .08 /
+.2 / .4 / .78 s, driven through `gsap.globalTimeline.time()` with the timeline
+paused. The two layers do not fight, because only one plate moves at a time
+and the field's motion is continuous underneath it. Measured at rest after a
+navigation: `main` carries no `style` attribute, one `<main>`, `data-page`
+following. What this pass could not measure is the feel of the timing at 60
+fps; the numbers are the design, not a recording.
+
+**The second look, made literal.** A full-bleed band on Studio between the
+charter and “what we are not the studio for”: two renders of one composition
+— a black hole and its wireframe schematic, supplied by the studio at
+4096×2288 — with the schematic masked to a round window that follows the
+pointer (`js/reveal.js`, a radial-gradient mask driven by three custom
+properties, one rAF loop that lerps and then stops). Inside the window the
+structure assembles rather than appears: four leader lines draw themselves
+(each an SVG path with a dash the length of the line, offset to nothing,
+transitioned to zero, 150 ms apart) to anchors on the geometry, and the four
+labels — *Event Horizon (Rₛ)*, *Orbital Mesh Trace (w/ Force Vectors)*,
+*Einstein Ring Contour*, *Red Trace Filament Path* — resolve out of noise
+through the rig's own decoder, now exported from `js/rig.js` rather than
+built twice. The schematic had been generated with those labels baked in and
+they were stripped before upscaling on purpose; they are live elements now,
+positioned as percentages of the image, so the pair can be swapped for any
+other pair that shares a composition. The stage keeps the image's own aspect
+and never exceeds `140vh`, so the whole composition is always on screen; on a
+phone it runs 120 % wide, because the image's edges are black and a
+postage-stamp black hole is not the point. Leaving the band retracts the
+lines and blanks the labels, so re-entering assembles them again. Touch: a
+tap opens the window, a second tap closes it. Keyboard: the stage is
+focusable, focus opens the window at the centre, the arrow keys move it,
+Escape closes it. Under reduced motion or with effects off the module never
+mounts and the band is the surface and its sentence. The caption says what
+it is — article 03, made literal — and nothing more.
+
+Measured: the module mounts on approach (`is-live`), the window opens to
+253 px at 1440 and follows the pointer, all four `stroke-dashoffset`s reach 0
+and all four labels resolve to their full text, and leaving resets radius to
+0 and every label to empty. Phone width: the stage at 450 px in a 390 px
+viewport with zero page overflow.
+
+**The hero backdrop is a ferrofluid, in 4K.** The moon was an HD master and
+the brief asked for a genuinely 4K backdrop. Twenty-odd candidates from Pexels
+were read off contact sheets; the rendered loops (black ribbons, metallic
+cubes, floating spheres) were passed over for the same reason the computed
+backgrounds were killed on v6 — a visitor cannot attribute them to anything
+real — and the one that stayed is a real macro of ferrofluid in super slow
+motion (Pexels 16296848, Film Composite, 3840×2160): liquid metal on black
+under one light, which is this site's own material. Cut like the moon was —
+forward then reversed so the loop never cuts, 358 frames at 24 fps — graded
+to chrome and served in three tiers: 1080p (4.67 MB) for desktops, 1440p
+(6.92 MB) from 1800 px, and a 1080×1920 portrait crop (2.74 MB) for phones,
+the crop chosen from three renders so the brightest highlight sits top-right,
+away from the wordmark. A ferrofluid is all specular detail and costs about
+twice what the moon did; the still is still what the page ships, and the film
+is still attached from `requestIdleCallback`. Every reference carries `?v=2`.
+The hub card was re-captured from the new hero. Full encode in
+`IMAGE-CREDITS.md`.
+
+Verified: at 1440 the hero plays `hero.mp4?v=2` at 1920×1080, at 1920 it
+plays `hero-lg.mp4?v=2` at 2560×1440, at 390 it plays `hero-m.mp4?v=2` at
+1080×1920 over `poster-hero-m.webp?v=2`; console clean; zero overflow.
+
+**Decided against, and why.** A generated pair of my own for the reveal:
+Gemini's prepaid credits were exhausted mid-pass and no other generator is
+wired to this machine, so a real fallback was built first — a live site from
+the Work page as the surface, its actual DOM drawn as a schematic underneath —
+and then retired the moment the studio's own pair arrived, because the brief
+named that pair. The Kiyo pair is not in the repository.
