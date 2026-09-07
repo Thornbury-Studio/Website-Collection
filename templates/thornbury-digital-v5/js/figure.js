@@ -1,47 +1,43 @@
 /* Thornbury Digital v5 — js/figure.js
-   The Team band: three populations drawn from one photograph and one attractor.
+   The Who-we-are stage: one cloud of points that is, in turn, each step of the
+   studio's process; a wave and a ground under it, drawn from one attractor.
 
-   WHAT THE REFERENCE ACTUALLY DOES, because it changed this file. The look this
-   is aiming at is not a runtime effect at all — its "Our Team" canvas samples a
-   single 4400×2456 pre-rendered artwork of particle figures and shimmers it. Its
-   dimensionality was authored in 3D long before the browser saw it. A photograph
-   can never match that completely: a depth estimate gives a shell seen from one
-   side, not a body. What it can match is the register, and the register comes
-   from one decision — throw the photograph away.
+   WHAT THE REFERENCE ACTUALLY DOES, because it changed this file twice. Its
+   "Our Team" canvas draws one GPU point per pixel of three pre-rendered
+   artworks of particle figures and runs them as a sequence: a picture holds,
+   comes apart into a scatter, and the next one gathers out of the same cloud
+   while it is still flying — so the team is never five people frozen in one
+   frame, it is the same light rearranging itself into the next thing they do.
+   Its dimensionality was authored in 3D long before the browser saw it; the
+   browser only ever moves pixels of a flat picture.
 
-   So the albedo is not used. Nothing here samples the colour of the picture. All
-   that is kept is the shape of the subjects and the direction their surface
-   faces, and every point is lit from those two things. Faces, clothing, pattern
-   and identity all leave with the albedo, which is why the figures read as
-   smooth generic forms rather than as photographed people — and why nobody in
-   the source is recognisable on the page.
+   THIS STAGE keeps the sequence and drops the picture. Nothing here samples
+   the colour of a photograph. Each scene is a small tableau of licensed
+   photographs traced to shape and surface direction only — no colour, no
+   face, nobody who works here — and every point is lit from those two things
+   alone (a lambert term for the rounding, a louder fresnel for the edge, so a
+   silhouette burns and a cloud reads as a volume). And because the forms
+   carry depth, the change between scenes is not a scatter of pixels: every
+   point has a home in the scene that is leaving and a home in the scene that
+   is arriving, and it travels between them on its own arc, lifted and blown
+   across the room in a sweep that runs left to right, glowing while it is in
+   the air. Points a scene has no use for park below the floor and rise out of
+   it when the next scene needs them. The whole cloud turns a little as it
+   changes, which a flat picture cannot do.
 
-   THE FIGURES. Several licensed photographs, one instance each, so the band
-   shows several distinct forms rather than one pose. RMBG-1.4 cuts the subjects out, Depth Anything V2 estimates
-   distance, and the depth field is smoothed and differentiated into a surface
-   normal — all at build time, all baked into the `img/team-pack-*.webp` packs (normal.x and
-   normal.y in R and G, depth in B; z is recovered rather than stored). Shading
-   is a lambert term for the rounding and a louder fresnel term for the edge, so
-   silhouettes burn and interiors fall away, which is what makes a cloud read as
-   a volume rather than a sheet. Points are jittered along their own normal so
-   the cloud has thickness instead of being an infinitely thin shell, and the
-   normal goes through `normalMatrix`, so the key light stays fixed in the room
-   while the form turns under it.
+   THE SCENES are the four steps of the studio's process from its own About
+   text, in order: look before we draw; decide in the open; build it to
+   survive us; hand over everything. Each holds, then becomes the next; the
+   page captions the one on stage and can jump to any of them.
 
-   THE WAVE. Long line strips, not dots. The law is the Thomas attractor
-   js/field.js already integrates and the constants are read at run time from the
-   studio page's own world in js/bg.js — the site's own motion system in a
-   different renderer, flattened into a shallow sheet and drifted sideways.
-
-   THE STARFIELD. A sparse slab behind both: the ambient layer the reference
-   has, and the thing that gives the other two somewhere to sit.
-
-   THE GROUND. A floor of particle trails under the figures, drifting and
-   swelling, its speed pushed by the scroll — see GROUND_VERT below.
-
-   Four draw calls. Everything moves in vertex shaders, so the CPU per frame is
-   one bounding-rect read and a handful of uniform writes. Imported dynamically
-   by js/main.js only when the band is near, WebGL exists and motion is wanted. */
+   THE WAVE is long line strips on the Thomas attractor js/field.js already
+   integrates, with constants read from the studio page's own world in
+   js/bg.js. THE STARFIELD is a sparse slab behind. THE GROUND is a floor of
+   particle trails whose drift the scroll pushes, through the same impulse
+   js/main.js gives the field. Four draw calls; everything moves in vertex
+   shaders; a scene change writes one set of buffers, not one per frame.
+   Imported dynamically by js/main.js only when the stage is near, WebGL
+   exists and motion is wanted. */
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.min.js';
 
@@ -53,26 +49,53 @@ var HASH = [
   '}'
 ].join('\n');
 
+/* One point, two homes. `position` and aNrmA/aDepA/aParkA describe where it
+   sits in the scene on stage; aPosB and friends where it sits in the scene
+   arriving. uMix runs 0 → 1 across a change and the point flies a quadratic
+   arc between the two, lifted and blown in the sweep direction, staggered by
+   a hash and by where it stands, so the change crosses the room as a wave
+   rather than happening everywhere at once. */
 var FIG_VERT = [
+  'attribute vec3 aPosB;',
+  'attribute vec3 aNrmA;',
+  'attribute vec3 aNrmB;',
+  'attribute float aDepA;',
+  'attribute float aDepB;',
+  'attribute float aParkA;',
+  'attribute float aParkB;',
   'attribute float aRand;',
   'attribute float aEmber;',
-  'attribute float aDepth;',
-  'attribute vec3 aNrm;',
   'uniform float uTime;',
   'uniform float uAssemble;',
+  'uniform float uMix;',
+  'uniform float uSweep;',
+  'uniform float uSeed;',
   'uniform vec2 uPointer;',
   'uniform float uPointerOn;',
   'uniform float uSize;',
   'uniform float uDpr;',
   'uniform vec3 uLight;',
-  'uniform float uFocus;',
   'varying float vFade;',
   'varying float vEmber;',
   HASH,
   'void main() {',
-  '  vec3 home = position;',
-  '  vec3 h = hash31(aRand) - 0.5;',
-  '  vec3 scattered = home + h * vec3(4.6, 3.4, 3.0);',
+  '  vec3 A = position;',
+  '  vec3 B = aPosB;',
+  /* where the change reaches this point: a sweep across the room plus a
+     random share, so the wave has a ragged edge rather than a ruler's */
+  '  float across = clamp((A.x * uSweep + 3.4) / 6.8, 0.0, 1.0);',
+  '  float delay = (0.55 * aRand + 0.45 * across) * 0.5;',
+  '  float local = clamp((uMix - delay) / 0.5, 0.0, 1.0);',
+  '  float e = local * local * (3.0 - 2.0 * local);',
+  /* the arc: points parked in both scenes stay parked and never fly */
+  '  float still = aParkA * aParkB;',
+  '  vec3 h = hash31(aRand * 7.1 + uSeed) - 0.5;',
+  '  vec3 mid = mix(A, B, 0.5) + vec3(uSweep * (0.9 + 0.9 * h.x), 0.8 + 1.0 * abs(h.y), 0.6 * h.z) * (1.0 - still);',
+  '  vec3 home = mix(mix(A, mid, e), mix(mid, B, e), e);',
+  '  float flight = sin(3.14159 * e) * (1.0 - still);',
+  /* the first appearance: out of a scatter, as the band always assembled */
+  '  vec3 sc = hash31(aRand) - 0.5;',
+  '  vec3 scattered = home + sc * vec3(4.6, 3.4, 3.0);',
   '  float a = clamp(uAssemble, 0.0, 1.0);',
   '  float lead = clamp((a - aRand * 0.32) / 0.68, 0.0, 1.0);',
   '  lead = lead * lead * (3.0 - 2.0 * lead);',
@@ -86,17 +109,19 @@ var FIG_VERT = [
   '  p.z += push * 0.09;',
   '  vec4 mv = modelViewMatrix * vec4(p, 1.0);',
   '  gl_Position = projectionMatrix * mv;',
-  '  gl_PointSize = uSize * uDpr * (0.55 + 0.70 * aDepth) * (0.75 + 0.45 * aRand) * (2.6 / -mv.z);',
+  '  float park = mix(aParkA, aParkB, e);',
+  '  float dep = mix(aDepA, aDepB, e);',
+  '  gl_PointSize = uSize * uDpr * (0.55 + 0.70 * dep) * (0.75 + 0.45 * aRand) * (1.0 + 0.5 * flight) * mix(1.0, 0.5, park) * (2.6 / -mv.z);',
   /* No albedo anywhere in here. Which way the surface faces is the whole of the
      shading: lambert for the rounding, fresnel for the edge, and the fresnel is
      the louder of the two because a silhouette that burns is what separates a
-     volume from a sheet. */
-  '  vec3 n = normalize(normalMatrix * aNrm);',
+     volume from a sheet. A point in the air is lit by its travel instead. */
+  '  vec3 n = normalize(normalMatrix * normalize(mix(aNrmA, aNrmB, e) + vec3(1e-4)));',
   '  float lam = max(dot(n, normalize(uLight)), 0.0);',
   '  float fres = pow(1.0 - abs(n.z), 2.2);',
   '  float lit = 0.24 + 0.62 * lam + 0.88 * fres;',
-  '  vFade = lead * (0.70 + 0.30 * aRand) * lit * (0.62 + 0.48 * uFocus) + push * 0.45;',
-  '  vEmber = aEmber;',
+  '  vFade = (lead * (0.70 + 0.30 * aRand) * lit + flight * 0.55 + push * 0.45) * (1.0 - 0.92 * park);',
+  '  vEmber = max(aEmber, flight * 0.35);',
   '}'
 ].join('\n');
 
@@ -192,38 +217,31 @@ var STAR_FRAG = [
 
 /* Read the packed surface description. There is deliberately no colour input: a
    pixel is either inside the cut-out or it is not, and if it is, all that is
-   taken is where it sits and which way it faces. */
-function trace(packImg, stride, worldH, depthScale, thickness, budget) {
+   taken is where it sits and which way it faces. The budget is counted against
+   the pixels actually inside the matte, so a small pack is traced as densely as
+   a large one. */
+function trace(packImg, worldH, depthScale, thickness, budget) {
   var w = packImg.naturalWidth, h = packImg.naturalHeight;
-  /* a budget wins over a stride: stride 1 with a probability that lands the
-     count near the budget, so every form reads at about the same density */
   var cv = document.createElement('canvas');
   cv.width = w; cv.height = h;
   var ctx = cv.getContext('2d', { willReadFrequently: true });
   ctx.drawImage(packImg, 0, 0);
   var px = ctx.getImageData(0, 0, w, h).data;
-  var keep = 1;
-  if (budget) {
-    /* count what is actually inside the matte — packs run from a tenth of
-       the frame to two thirds of it, and guessing made the small ones dust */
-    stride = 1;
-    var inside = 0;
-    for (var q = 0; q < px.length; q += 4) if (px[q] || px[q + 1] || px[q + 2]) inside++;
-    keep = Math.min(1, budget / Math.max(1, inside));
-  }
+  var inside = 0;
+  for (var q = 0; q < px.length; q += 4) if (px[q] || px[q + 1] || px[q + 2]) inside++;
+  var keep = Math.min(1, budget / Math.max(1, inside));
 
   var scale = worldH / h;
-  var pos = [], rnd = [], emb = [], dep = [], nrm = [];
-  for (var y = 0; y < h; y += stride) {
-    for (var x = 0; x < w; x += stride) {
+  var pos = [], rnd = [], dep = [], nrm = [];
+  for (var y = 0; y < h; y++) {
+    for (var x = 0; x < w; x++) {
       var i = (y * w + x) * 4;
       if (px[i] === 0 && px[i + 1] === 0 && px[i + 2] === 0) continue;
       if (keep < 1 && Math.random() > keep) continue;
       var nx = px[i] / 127.5 - 1, ny = px[i + 1] / 127.5 - 1;
       var nz = Math.sqrt(Math.max(0.0001, 1 - nx * nx - ny * ny));
       var dv = px[i + 2] / 255;
-      var jx = (Math.random() - 0.5) * stride;
-      var jy = (Math.random() - 0.5) * stride;
+      var jx = Math.random() - 0.5, jy = Math.random() - 0.5;
       /* lifted off the surface along its own normal, so the cloud has thickness
          and the rim does not read as a cut edge */
       var t = (Math.random() - 0.5) * thickness;
@@ -233,10 +251,9 @@ function trace(packImg, stride, worldH, depthScale, thickness, budget) {
       rnd.push(Math.random());
       dep.push(dv);
       nrm.push(nx, ny, nz);
-      emb.push(Math.random() < 0.04 ? 1 : 0);
     }
   }
-  return { pos: pos, rnd: rnd, emb: emb, dep: dep, nrm: nrm, count: rnd.length };
+  return { pos: pos, rnd: rnd, dep: dep, nrm: nrm, count: rnd.length };
 }
 
 /* The site's own law, and the studio page's own constants. */
@@ -286,14 +303,13 @@ function wave(strands, per, groundY, opts) {
   return { pos: pos, rnd: rnd, seq: seq, emb: emb, count: rnd.length };
 }
 
-/* THE GROUND. The population the reference has under its figures and this band
-   did not: a sheet of particles on the floor plane, drifting across the frame
-   under two crossing swells, each one drawn as a short trail from where it was
-   a beat ago to where it is — so length is velocity, which is the law the
-   liquid field on every page already obeys. The drift has a flow speed that
-   the scroll pushes, through the same impulse js/main.js gives the field, so
-   one gesture moves both objects. Dense where the figures stand, thinning into
-   the distance and at the edges; crests are brighter than troughs. */
+/* THE GROUND. A sheet of particles on the floor plane, drifting across the
+   frame under two crossing swells, each one drawn as a short trail from where
+   it was a beat ago to where it is — so length is velocity, which is the law
+   the liquid field on every page already obeys. The drift has a flow speed
+   that the scroll pushes, through the same impulse js/main.js gives the field,
+   so one gesture moves both objects. Dense where the figures stand, thinning
+   into the distance and at the edges; crests are brighter than troughs. */
 var GROUND_VERT = [
   'attribute float aRand;',
   'attribute float aEnd;',
@@ -365,28 +381,38 @@ function stars(n, spanX, spanY, spanZ) {
   return { pos: pos, rnd: rnd, count: n };
 }
 
-/* Several forms, not one pose. Each instance is its own licensed photograph
-   traced the same way — shape and surface direction only, no colour, no face —
-   placed in the room at its own depth and turn. x is in world units right of
-   the copy column; on a phone the whole group slides left and shrinks so the
-   ensemble sits under the words instead of beside them. `delay` staggers the
-   assembly so the forms gather one after another rather than all at once. */
-var INSTANCES = [
-  /* Four steps of the studio's own process, left to right, each a form whose
-     prop is part of the silhouette — that is what makes it readable as an
-     action rather than a person. `focus` is the step the form belongs to.
-     x, y, z in world units; s = scale; r = turn; pts = the point budget the
-     tracer aims at. Forms whose photograph ends at the shin sit a little
-     lower, so the cut is inside the ground trail. */
-  /* 01 We look before we draw: binoculars up */
-  { src: 'img/team-pack-8.webp',  x: -2.45, y: -0.04, z:  0.10, s: 1.00, r:  0.18, pts: 24000, delay: 0.00, focus: 0 },
-  /* 02 We decide in the open: at the board, pointing at it */
-  { src: 'img/team-pack-9.webp',  x: -1.00, y: -0.20, z: -0.20, s: 0.78, r: -0.06, pts: 46000, delay: 0.12, focus: 1 },
-  /* 03 We build it to survive us: at the laptop, hands on it */
-  { src: 'img/team-pack-10.webp', x:  0.95, y: -0.10, z:  0.00, s: 0.92, r: -0.16, pts: 30000, delay: 0.24, focus: 2 },
-  /* 04 We hand over everything: the box changing hands */
-  { src: 'img/team-pack-11.webp', x:  2.30, y: -0.04, z: -0.30, s: 0.95, r: -0.20, pts: 32000, delay: 0.36, focus: 3 }
+/* THE SCENES. One per step of the studio's process, in order. Each is a small
+   tableau of forms whose prop is part of the silhouette — that is what makes
+   it read as an action rather than a person — placed in the room at its own
+   depth and turn. x, y, z in stage units; s = scale; r = turn; pts = the
+   point budget. `anchor` is the form the page's caption points at; `chest`
+   its height above its own centre, as a share of its scale. Forms whose
+   photograph ends at the shin sit a little lower, so the cut is in the ground. */
+var SCENES = [
+  { /* 01 We look before we draw: binoculars up, and a camera held up */
+    forms: [
+      { src: 'img/team-pack-8.webp',  x: -0.60, y: -0.04, z:  0.05, s: 1.00, r:  0.18, pts: 26000 },
+      { src: 'img/team-pack-7.webp',  x:  0.80, y: -0.02, z: -0.60, s: 0.92, r: -0.28, pts: 18000 }
+    ], anchor: 0, chest: 0.55 },
+  { /* 02 We decide in the open: one at the board, two listening */
+    forms: [
+      { src: 'img/team-pack-9.webp',  x: -0.40, y: -0.20, z: -0.20, s: 0.82, r: -0.06, pts: 42000 },
+      { src: 'img/team-pack-2.webp',  x:  1.60, y:  0.00, z: -0.65, s: 0.86, r:  0.35, pts: 14000 }
+    ], anchor: 0, chest: 0.45 },
+  { /* 03 We build it to survive us: hands on the laptop; the review at the table behind */
+    forms: [
+      { src: 'img/team-pack-10.webp', x: -0.90, y: -0.10, z:  0.00, s: 0.92, r: -0.16, pts: 28000 },
+      { src: 'img/team-pack.webp',    x:  1.35, y: -0.02, z: -1.30, s: 0.78, r:  0.08, pts: 22000 }
+    ], anchor: 0, chest: 0.55 },
+  { /* 04 We hand over everything: the box changing hands; one already carrying it away */
+    forms: [
+      { src: 'img/team-pack-11.webp', x: -0.55, y: -0.04, z: -0.15, s: 0.95, r: -0.15, pts: 30000 },
+      { src: 'img/team-pack-6.webp',  x:  1.60, y: -0.02, z: -0.80, s: 0.90, r: -0.35, pts: 16000 }
+    ], anchor: 0, chest: 0.55 }
 ];
+
+var HOLD_S = 4.8;     /* how long a scene is held once it has settled */
+var MORPH_S = 2.6;    /* how long the change to the next one takes */
 
 function loadImage(src) {
   return new Promise(function (res) {
@@ -406,31 +432,78 @@ export function mount(host, opts) {
   canvas.setAttribute('aria-hidden', 'true');
   host.insertBefore(canvas, host.firstChild);
 
-  var renderer, scene, camera, waveLines, starPts, groundLines, ensemble;
-  var figs = [];   /* { pts, mat, geo, inst } per instance */
+  var renderer, scene, camera, waveLines, starPts, groundLines, ensemble, cloud;
+  var geo, mat, N = 0, scenes = [];   /* compiled scenes: { pos, nrm, dep, park, count, anchor:[x,y,z] } */
   var waveGeo, starGeo, groundGeo, waveMat, starMat, groundMat;
   var raf = 0, alive = true, visible = false, t0 = performance.now(), last = 0;
   var pointerOn = 0, pointerTarget = 0, pxWorld = 0, pyWorld = 0, pxT = 0, pyT = 0, assemble = 0;
   /* the ground's drift: a base speed plus whatever the scroll has pushed into
      it, decaying with the same ~0.36 s half-life the field's yaw impulse uses */
   var flow = 0, flowBoost = 0, FLOW_BASE = 0.11;
-  var focusBeat = -1;   /* -1: nobody singled out */
+  /* the sequence */
+  var cur = 0, nxt = -1, mix = 0, holdT = 0, pending = -1, sweep = 1, seed = 0, settled = false;
+  var phone = false, xk = 1;
 
-  /* the forms are the module's own list; nothing on the page picks them */
-  var packs = INSTANCES.slice();
-  Promise.all(packs.map(function (i) { return loadImage(i.src); })).then(build);
+  var srcs = [];
+  SCENES.forEach(function (sc) { sc.forms.forEach(function (f) { if (srcs.indexOf(f.src) < 0) srcs.push(f.src); }); });
+  Promise.all(srcs.map(loadImage)).then(build);
+
+  /* Trace every pack once, then lay each scene out: forms turned, scaled and
+     placed on the CPU, so the shader only ever sees two homes per point. */
+  function compile(imgs, small) {
+    var traced = {};
+    srcs.forEach(function (s, i) { if (imgs[i]) traced[s] = imgs[i]; });
+    var out = [];
+    SCENES.forEach(function (sc) {
+      var pos = [], nrm = [], dep = [], anchor = null;
+      sc.forms.forEach(function (f, fi) {
+        var img = traced[f.src];
+        if (!img) return;   /* a missing pack drops its form, never the scene */
+        var fg = trace(img, 2.05 * f.s, 1.05 * f.s, small ? 0.05 : 0.06, Math.round(f.pts * (small ? 0.45 : 1)));
+        var c = Math.cos(f.r), s = Math.sin(f.r);
+        for (var i = 0; i < fg.count; i++) {
+          var x = fg.pos[i * 3], y = fg.pos[i * 3 + 1], z = fg.pos[i * 3 + 2];
+          pos.push(x * c + z * s + f.x, y + f.y, -x * s + z * c + f.z);
+          var nx = fg.nrm[i * 3], ny = fg.nrm[i * 3 + 1], nz = fg.nrm[i * 3 + 2];
+          nrm.push(nx * c + nz * s, ny, -nx * s + nz * c);
+          dep.push(fg.dep[i]);
+        }
+        if (fi === sc.anchor) anchor = [f.x, f.y + sc.chest * f.s, f.z];
+      });
+      out.push({ pos: pos, nrm: nrm, dep: dep, count: pos.length / 3, anchor: anchor || [0, 0.4, 0] });
+    });
+    return out;
+  }
+
+  /* Fill one home (A or B) of the shared buffers from a compiled scene. Points
+     the scene has no use for park below the floor, out of frame, and rise out
+     of it when a later scene needs them. */
+  function fill(target, sc) {
+    var P = target.pos.array, Nn = target.nrm.array, D = target.dep.array, K = target.park.array;
+    var i, n = sc.count;
+    for (i = 0; i < n; i++) {
+      P[i * 3] = sc.pos[i * 3] * xk; P[i * 3 + 1] = sc.pos[i * 3 + 1]; P[i * 3 + 2] = sc.pos[i * 3 + 2];
+      Nn[i * 3] = sc.nrm[i * 3]; Nn[i * 3 + 1] = sc.nrm[i * 3 + 1]; Nn[i * 3 + 2] = sc.nrm[i * 3 + 2];
+      D[i] = sc.dep[i]; K[i] = 0;
+    }
+    for (i = n; i < N; i++) {
+      var h = ((i * 2654435761) >>> 0) / 4294967296;
+      var g = ((i * 40503 + 7) >>> 0) % 1000 / 1000;
+      P[i * 3] = (h - 0.5) * 6.4; P[i * 3 + 1] = -2.8 - g * 0.5; P[i * 3 + 2] = (g - 0.5) * 2.4;
+      Nn[i * 3] = 0; Nn[i * 3 + 1] = 1; Nn[i * 3 + 2] = 0;
+      D[i] = 0.5; K[i] = 1;
+    }
+    target.pos.needsUpdate = target.nrm.needsUpdate = target.dep.needsUpdate = target.park.needsUpdate = true;
+  }
+  var A, B;   /* the two homes' attribute sets */
 
   function build(imgs) {
     if (!alive) return;
     var small = Math.min(innerWidth, innerHeight) < 700;
-    var traced = [];
-    for (var k = 0; k < imgs.length; k++) {
-      if (!imgs[k]) continue;   /* a missing pack drops its instance, never the band */
-      var fg = trace(imgs[k], 1, 2.05 * packs[k].s, 1.05 * packs[k].s, small ? 0.05 : 0.06, Math.round(packs[k].pts * (small ? 0.45 : 1)));
-      if (fg.count) traced.push({ inst: packs[k], fig: fg });
-    }
-    if (!traced.length) { cleanup(); return; }
-    var total = 0;
+    scenes = compile(imgs, small);
+    N = 0;
+    scenes.forEach(function (s) { N = Math.max(N, s.count); });
+    if (!N) { cleanup(); return; }
     var wv = wave(small ? 90 : 150, small ? 26 : 38, -1.00, { rise: 0.26, depth: 0.80 });
     var st = stars(small ? 260 : 520, 9, 3.2, 1.6);
     var gd = ground(small ? 3200 : 8400, -1.02);
@@ -449,35 +522,43 @@ export function mount(host, opts) {
 
     ensemble = new THREE.Group();
     scene.add(ensemble);
-    traced.forEach(function (tr) {
-      var fig = tr.fig, inst = tr.inst;
-      var geo = new THREE.BufferGeometry();
-      geo.setAttribute('position', new THREE.Float32BufferAttribute(fig.pos, 3));
-      geo.setAttribute('aRand', new THREE.Float32BufferAttribute(fig.rnd, 1));
-      geo.setAttribute('aEmber', new THREE.Float32BufferAttribute(fig.emb, 1));
-      geo.setAttribute('aDepth', new THREE.Float32BufferAttribute(fig.dep, 1));
-      geo.setAttribute('aNrm', new THREE.Float32BufferAttribute(fig.nrm, 3));
-      var mat = new THREE.ShaderMaterial({
-        vertexShader: FIG_VERT, fragmentShader: FIG_FRAG,
-        transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-        uniforms: {
-          uTime: { value: 0 }, uAssemble: { value: 0 },
-          uPointer: { value: new THREE.Vector2(999, 999) }, uPointerOn: { value: 0 },
-          /* smaller points on a phone: the additive cloud over-exposes at a
-             phone's density, and the pair in front went white */
-          uSize: { value: (small ? 1.55 : 2.9) * (0.86 + 0.14 * inst.s) }, uDpr: { value: 1 },
-          uGain: { value: small ? 1.0 : 1.5 },
-          uLight: { value: new THREE.Vector3(0.42, 0.50, 0.76) },
-          uFocus: { value: 0.85 },
-          uChrome: { value: chrome }, uEmber: { value: ember }
-        }
-      });
-      var pts = new THREE.Points(geo, mat);
-      pts.position.set(inst.x, inst.y, inst.z);
-      ensemble.add(pts);
-      figs.push({ pts: pts, mat: mat, geo: geo, inst: inst });
-      total += fig.count;
+
+    geo = new THREE.BufferGeometry();
+    var rnd = new Float32Array(N), emb = new Float32Array(N);
+    for (var i = 0; i < N; i++) { rnd[i] = Math.random(); emb[i] = Math.random() < 0.04 ? 1 : 0; }
+    A = { pos: new THREE.BufferAttribute(new Float32Array(N * 3), 3), nrm: new THREE.BufferAttribute(new Float32Array(N * 3), 3),
+          dep: new THREE.BufferAttribute(new Float32Array(N), 1), park: new THREE.BufferAttribute(new Float32Array(N), 1) };
+    B = { pos: new THREE.BufferAttribute(new Float32Array(N * 3), 3), nrm: new THREE.BufferAttribute(new Float32Array(N * 3), 3),
+          dep: new THREE.BufferAttribute(new Float32Array(N), 1), park: new THREE.BufferAttribute(new Float32Array(N), 1) };
+    [A.pos, A.nrm, A.dep, A.park, B.pos, B.nrm, B.dep, B.park].forEach(function (a) { a.setUsage(THREE.DynamicDrawUsage); });
+    geo.setAttribute('position', A.pos);
+    geo.setAttribute('aNrmA', A.nrm);
+    geo.setAttribute('aDepA', A.dep);
+    geo.setAttribute('aParkA', A.park);
+    geo.setAttribute('aPosB', B.pos);
+    geo.setAttribute('aNrmB', B.nrm);
+    geo.setAttribute('aDepB', B.dep);
+    geo.setAttribute('aParkB', B.park);
+    geo.setAttribute('aRand', new THREE.BufferAttribute(rnd, 1));
+    geo.setAttribute('aEmber', new THREE.BufferAttribute(emb, 1));
+    /* the cloud is never culled by a stale bound: it is the whole room */
+    geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(0, 0, 0), 12);
+    mat = new THREE.ShaderMaterial({
+      vertexShader: FIG_VERT, fragmentShader: FIG_FRAG,
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      uniforms: {
+        uTime: { value: 0 }, uAssemble: { value: 0 }, uMix: { value: 0 }, uSweep: { value: 1 }, uSeed: { value: 0 },
+        uPointer: { value: new THREE.Vector2(999, 999) }, uPointerOn: { value: 0 },
+        /* smaller points on a phone: the additive cloud over-exposes at a phone's density */
+        uSize: { value: small ? 1.55 : 2.9 }, uDpr: { value: 1 },
+        uGain: { value: small ? 1.0 : 1.5 },
+        uLight: { value: new THREE.Vector3(0.42, 0.50, 0.76) },
+        uChrome: { value: chrome }, uEmber: { value: ember }
+      }
     });
+    cloud = new THREE.Points(geo, mat);
+    cloud.frustumCulled = false;
+    ensemble.add(cloud);
 
     waveGeo = new THREE.BufferGeometry();
     waveGeo.setAttribute('position', new THREE.Float32BufferAttribute(wv.pos, 3));
@@ -531,32 +612,35 @@ export function mount(host, opts) {
     groundLines = new THREE.LineSegments(groundGeo, groundMat);
     scene.add(groundLines);
 
-    if (typeof opts.onReady === 'function') opts.onReady(total);
     resize();
+    fill(A, scenes[0]); fill(B, scenes[0]);
+    if (typeof opts.onReady === 'function') opts.onReady(N, scenes.map(function (s) { return s.count; }));
     addEventListener('resize', resize);
     host.addEventListener('pointermove', onPointer);
     host.addEventListener('pointerleave', onLeave);
     io.observe(host);
+    announce('hold');
     step(performance.now());
   }
 
-  /* Project each form's chest point to stage fractions, so the copy's leader
-     lines can be drawn to the figure rather than to a guess. Called after
-     every resize and once on build. */
-  function layout() {
-    if (!camera || typeof opts.onLayout !== 'function') return;
-    /* the renderer only refreshes the camera's inverse on render; before the
-       first frame it is identity and everything projects off the page */
+  /* Where each scene's caption should point: the anchor form's chest, projected
+     to stage fractions, so the leader lands on the figure rather than on a guess. */
+  function anchors() {
+    if (!camera) return [];
     camera.updateMatrixWorld(true);
     camera.matrixWorldInverse.copy(camera.matrixWorld).invert();
-    var v = new THREE.Vector3(), out = [];
-    figs.forEach(function (f) {
-      v.set(f.pts.position.x, f.inst.y + 0.55 * f.inst.s, f.inst.z);
+    var v = new THREE.Vector3();
+    return scenes.map(function (s, i) {
+      v.set(s.anchor[0] * xk, s.anchor[1], s.anchor[2]);
       ensemble.localToWorld(v);
       v.project(camera);
-      out.push({ focus: f.inst.focus, u: (v.x + 1) / 2, v: (1 - v.y) / 2, z: f.inst.z });
+      return { index: i, u: (v.x + 1) / 2, v: (1 - v.y) / 2 };
     });
-    opts.onLayout(out);
+  }
+  function announce(phase) {
+    if (typeof opts.onScene !== 'function') return;
+    var an = anchors();
+    opts.onScene({ index: phase === 'morph' ? nxt : cur, phase: phase, anchors: an, hold: HOLD_S, morph: MORPH_S });
   }
 
   function resize() {
@@ -566,23 +650,24 @@ export function mount(host, opts) {
     var dpr = Math.min(devicePixelRatio || 1, Math.min(innerWidth, innerHeight) < 700 ? 1.25 : 1.6);
     renderer.setPixelRatio(dpr);
     renderer.setSize(w, h, false);
-    figs.forEach(function (f) { f.mat.uniforms.uDpr.value = dpr; });
+    mat.uniforms.uDpr.value = dpr;
     starMat.uniforms.uDpr.value = dpr;
-    /* the ensemble holds the middle of the stage; on a phone it comes down a
-       little and smaller, and the words sit under it instead of over it */
-    var phone = w < 761;
+    /* the tableau holds the middle of the stage; on a phone it comes down a
+       little and smaller, and the forms close ranks */
+    var wasPhone = phone;
+    phone = w < 761;
+    xk = phone ? 0.8 : 1;
     ensemble.position.x = 0;
-    ensemble.position.y = phone ? 0.08 : -0.34;
-    ensemble.scale.setScalar(phone ? 0.47 : 0.70);
-    figs.forEach(function (f) { f.pts.position.x = f.inst.x * (phone ? 0.82 : 1); });
+    ensemble.position.y = phone ? 0.02 : -0.30;
+    ensemble.scale.setScalar(phone ? 0.55 : 0.86);
     ensemble.updateMatrixWorld(true);
     camera.aspect = w / h;
     camera.position.z = 1.32 / Math.tan((camera.fov * Math.PI / 180) / 2);
     camera.updateProjectionMatrix();
     waveMat.uniforms.uSpread.value = Math.max(3.2, 1.32 * camera.aspect * 2 + 1.6);
     groundMat.uniforms.uSpread.value = waveMat.uniforms.uSpread.value;
-    /* after the camera is placed, never before */
-    layout();
+    if (A && wasPhone !== phone) { fill(A, scenes[cur]); fill(B, scenes[nxt >= 0 ? nxt : cur]); }
+    if (typeof opts.onLayout === 'function') opts.onLayout(anchors());
   }
 
   function onPointer(ev) {
@@ -606,14 +691,37 @@ export function mount(host, opts) {
   function run() { if (!raf && alive && renderer) { t0 = performance.now(); last = 0; raf = requestAnimationFrame(step); } }
   function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
 
+  /* Begin the change to scene k: its homes go into B, the sweep direction
+     alternates so a scene never leaves the way the last one arrived. */
+  function advance(k) {
+    if (!scenes.length || k === cur || nxt >= 0) return;
+    nxt = k;
+    fill(B, scenes[k]);
+    sweep = -sweep;
+    seed = Math.random() * 100;
+    mat.uniforms.uSweep.value = sweep;
+    mat.uniforms.uSeed.value = seed;
+    mix = 0;
+    announce('morph');
+  }
+  /* The change is complete: B becomes A, and the scene holds. */
+  function settle() {
+    A.pos.array.set(B.pos.array); A.nrm.array.set(B.nrm.array); A.dep.array.set(B.dep.array); A.park.array.set(B.park.array);
+    A.pos.needsUpdate = A.nrm.needsUpdate = A.dep.needsUpdate = A.park.needsUpdate = true;
+    cur = nxt; nxt = -1; mix = 0; holdT = 0;
+    mat.uniforms.uMix.value = 0;
+    announce('hold');
+    if (pending >= 0 && pending !== cur) { var p = pending; pending = -1; advance(p); }
+    else pending = -1;
+  }
+
   function step(now) {
     raf = 0;
     if (!alive || !renderer) return;
     var t = (now - t0) / 1000;
     var r = host.getBoundingClientRect();
     var vh = innerHeight || 1;
-    /* assembled whenever a real share of the stage is on screen; the stage is
-       sticky for the length of the section, so this holds while the words scroll */
+    /* assembled whenever a real share of the stage is on screen */
     var seen = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0)) / Math.min(r.height || 1, vh);
     var want = Math.max(0, Math.min(1, seen * 2.2));
     assemble += (want - assemble) * 0.06;
@@ -625,25 +733,38 @@ export function mount(host, opts) {
     flowBoost *= Math.exp(-dt / 0.52);
     var flowVel = FLOW_BASE + flowBoost;
     flow += flowVel * dt;
+
+    /* the sequence: hold once assembled, then change; a change in flight
+       finishes before the next begins */
+    if (assemble > 0.98) settled = true;
+    if (settled) {
+      if (nxt >= 0) {
+        mix = Math.min(1, mix + dt / MORPH_S);
+        mat.uniforms.uMix.value = mix;
+        if (mix >= 1) settle();
+      } else if (seen > 0.35) {
+        holdT += dt;
+        if (holdT >= HOLD_S) advance((cur + 1) % scenes.length);
+      }
+    }
+
     groundMat.uniforms.uTime.value = t;
     groundMat.uniforms.uFlow.value = flow;
     groundMat.uniforms.uFlowVel.value = flowVel;
     groundMat.uniforms.uAssemble.value = assemble;
     groundMat.uniforms.uPointerOn.value = pointerOn;
 
-    figs.forEach(function (f, i) {
-      var d = f.inst.delay;
-      f.mat.uniforms.uTime.value = t;
-      f.mat.uniforms.uAssemble.value = Math.max(0, Math.min(1, (assemble - d) / (1 - d)));
-      f.mat.uniforms.uPointerOn.value = pointerOn;
-      /* the beat's form is lit; the others hold at a steady presence, never absent */
-      var fw = focusBeat < 0 ? 0.85 : (f.inst.focus === focusBeat ? 1.0 : 0.55);
-      f.mat.uniforms.uFocus.value += (fw - f.mat.uniforms.uFocus.value) * 0.06;
-      /* the shader works in the instance's own space, so the pointer is moved into it */
-      f.mat.uniforms.uPointer.value.set((pxWorld - ensemble.position.x) / ensemble.scale.x - f.pts.position.x, pyWorld / ensemble.scale.x - f.inst.y);
-      f.pts.rotation.y = f.inst.r + Math.sin(t * 0.15 + i * 1.7) * 0.14;
-      f.pts.rotation.x = Math.sin(t * 0.10 + i * 0.9) * 0.028;
-    });
+    mat.uniforms.uTime.value = t;
+    mat.uniforms.uAssemble.value = assemble;
+    mat.uniforms.uPointerOn.value = pointerOn;
+    /* the shader works in the cloud's own space, so the pointer is moved into it */
+    mat.uniforms.uPointer.value.set((pxWorld - ensemble.position.x) / ensemble.scale.x, (pyWorld - ensemble.position.y) / ensemble.scale.x);
+    /* a slow sway, and a turn through each change — the one thing a flat
+       picture cannot do */
+    var turn = nxt >= 0 ? Math.sin(Math.PI * mix) * 0.16 * sweep : 0;
+    cloud.rotation.y = Math.sin(t * 0.15) * 0.06 + turn;
+    cloud.rotation.x = Math.sin(t * 0.10) * 0.02;
+
     waveMat.uniforms.uTime.value = t;
     waveMat.uniforms.uAssemble.value = assemble;
     waveMat.uniforms.uPointerOn.value = pointerOn;
@@ -661,8 +782,8 @@ export function mount(host, opts) {
     removeEventListener('resize', resize);
     host.removeEventListener('pointermove', onPointer);
     host.removeEventListener('pointerleave', onLeave);
-    figs.forEach(function (f) { f.geo.dispose(); f.mat.dispose(); });
-    figs.length = 0;
+    if (geo) geo.dispose();
+    if (mat) mat.dispose();
     [waveGeo, starGeo, groundGeo].forEach(function (g) { if (g) g.dispose(); });
     [waveMat, starMat, groundMat].forEach(function (m) { if (m) m.dispose(); });
     if (renderer) {
@@ -671,8 +792,8 @@ export function mount(host, opts) {
          handful of visits exhausts the browser's WebGL context budget */
       if (renderer.forceContextLoss) renderer.forceContextLoss();
     }
-    renderer = scene = camera = ensemble = waveLines = starPts = groundLines = null;
-    waveGeo = starGeo = groundGeo = waveMat = starMat = groundMat = null;
+    renderer = scene = camera = ensemble = cloud = waveLines = starPts = groundLines = null;
+    geo = mat = waveGeo = starGeo = groundGeo = waveMat = starMat = groundMat = null;
     if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
   }
 
@@ -680,7 +801,15 @@ export function mount(host, opts) {
     destroy: cleanup,
     /* the scroll's push, in floor units per second; decays on its own */
     impulse: function (v) { flowBoost = Math.min(1.4, flowBoost + v); },
-    /* which beat of the copy is being read; -1 lights nobody in particular */
-    focus: function (i) { focusBeat = i; }
+    /* jump to a scene: now if the stage is holding, or as soon as the change
+       in flight has landed */
+    go: function (i) {
+      if (!scenes.length) return;
+      i = ((i % scenes.length) + scenes.length) % scenes.length;
+      if (nxt >= 0) { pending = i; return; }
+      if (i !== cur) advance(i);
+    },
+    scene: function () { return nxt >= 0 ? nxt : cur; },
+    count: function () { return scenes.length; }
   };
 }
