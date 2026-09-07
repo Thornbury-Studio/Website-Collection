@@ -1085,5 +1085,16 @@ without it, and `serve.mjs` sends none) and a probe page that measures all
 five pages on the device and posts the numbers back were stood up at
 `192.168.10.185:8130` for this pass. The first handset run — Android 10, Chrome 152, 406 × 760 CSS px, dpr 3, coarse
 pointer, on 4G — arrived before the directive was stripped and measured an
-unstyled page, which is how the trap above was found. A styled run is recorded
-below when it arrives.
+unstyled page, which is how the trap above was found. The styled run came from an iPhone
+on iOS 18.7 (Safari, 430 × 721 CSS px, dpr 3, coarse pointer, no hover) at
+05:42 UTC on 7 Sep 2026: all five pages at zero horizontal overflow with
+Archivo loaded and JavaScript running; the field active at 61 fps on Home and
+on Studio; the wordmark's right edge at 385 px in a 430 px viewport, 30 px
+inside the gutter; the rig mounted with its resting marks computing to opacity
+.6; no hit target under 44 px; page loads of 1,044 ms for Home (first, with the
+CDN fonts and GSAP) and 329–564 ms for the other four. The phone was served
+`poster-hero-m.webp` and never asked for `hero-m.mp4`: the probe's iframe
+carries no `allow="autoplay"`, iOS refused the play, and the still stood —
+the fallback this hero was built for, observed on a real handset rather than
+asserted. The Team band had not mounted within the probe's wait and is
+unmeasured here.
