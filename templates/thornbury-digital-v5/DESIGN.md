@@ -1427,3 +1427,48 @@ under it, zero overflow. Playwright's localhost origin had been left at 33 %
 browser zoom by something earlier in the session, which made every element
 measure three times too wide and every capture black; the harness now uses
 127.0.0.1, a separate origin at default zoom — worth remembering.
+
+## Who we are, rebuilt: one stage
+
+Two things were wrong with the last pass, both confirmed by looking at it.
+
+**Why only one figure was there.** Four packs were built; one was visible.
+Not a stagger and not a rendering fault: the three new packs had been cropped
+and downscaled to keep the harness's frame rate up, and the tracer walked
+every pack at a fixed stride of two, so a 257 px-wide pack yielded a tenth of
+the points the 900 px original did, on a body the same size in the room. They
+were being drawn — as dust. The tracer now aims at a point budget per form
+(stride one, thinned by probability to the budget), so every form reads at
+about the same density whatever the pack's pixel size; and two of the four
+had also been placed under the copy column or off the right edge.
+
+**The forms.** Six now, each a licensed photograph traced to shape and
+surface direction only — no colour, no face, nobody who works here — and
+each doing something you can name: the group at the table (the original), a
+pair in conversation, one walking, one walking with a box (Pexels 7217919),
+one behind a camera (8114141), one with a hand raised (4918523). The
+seen-from-behind figure came out; a plant-carrier was mated and dropped for
+a noisy halo. 108,026 points on a desktop, 48,445 on a phone.
+
+**The composition.** The claim and its two paragraphs open in the flow. Then
+the stage takes the full width and holds for three screens of scroll while
+four beats of the studio's own words arrive over the figures, one at a time
+— *Two principals*; *And behind the two of us*; *Founding team, not
+headcount*; *Where this goes* — each a caption tied to the form it answers
+to by a leader line that draws in, the same device the second look uses. The
+anchors are not guessed: the figure module projects each form's chest
+through its own camera after every resize and hands the stage fractions to
+the page, which stands each caption above its form, spaces them so none
+overlap, and draws the line. The form a beat is about is lit while the
+others hold at a steady presence, never absent; by the end all four beats
+and all six forms are there together. The closing sentence and the
+four-answer key follow in the flow. Without motion, or on a phone, the beats
+are a ruled list under the figures and everything is lit alike.
+
+**Measured.** Playwright at 1440: six forms mounted, four captions in a row
+with their leaders landing on the forms, first beat in at 12 % of the track
+and all four by 72 %, console clean, zero overflow. At 390 (device metrics
+override — `setViewportSize` was being ignored by the harness): list mode,
+four beats present, 48,445 points, zero overflow. The real-phone frame rate
+of this stage is still owed; the probe samples it.
+
