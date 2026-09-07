@@ -40,7 +40,6 @@
     <a href="studio.html">Studio</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <p class="bar-side">SGP · 01°17′N 103°51′E</p>
   <a class="menu-btn" id="menuBtn" href="#site-nav"><span>Menu</span><i aria-hidden="true"></i></a>
 </header>
 <dialog class="menu" id="menu" aria-label="Menu">
@@ -54,15 +53,15 @@
       <p class="statement">Websites worth a second look.</p>
     </div>
     <nav class="menu-nav" aria-label="Pages">
-      <a href="work.html"><b>01</b><span>Work</span><small>Five cases</small></a>
+      <a href="work.html"><b>01</b><span>Work</span><small>Eighteen live sites</small></a>
       <a href="services.html"><b>02</b><span>Services</span><small>What it costs</small></a>
-      <a href="studio.html"><b>03</b><span>Studio</span><small>Three people, one room</small></a>
+      <a href="studio.html"><b>03</b><span>Studio</span><small>How the studio works</small></a>
       <a href="contact.html"><b>04</b><span>Contact</span><small>Start a project</small></a>
     </nav>
     <p class="menu-foot meta">
       <a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a>
       <a href="tel:+6588056769">+65 8805 6769</a>
-      <span>SGP · 01°17′N 103°51′E</span>
+      <button class="fx-btn" type="button" data-fx aria-pressed="true"><i aria-hidden="true"></i><span class="fx-word">Effects</span><span class="fx-state">On</span></button>
     </p>
   </div>
 </dialog>
@@ -159,7 +158,9 @@
 
     <section class="sec sec--solid" aria-labelledby="p2">
       <div class="wrap reveal">
-        <p class="meta"><span class="q">III</span> — <span id="p2">The people</span></p>
+        <p class="meta"><span class="q">III</span> — <span id="p2">The team</span></p>
+
+        <div class="team-band">
         <ul class="people">
           <li>
             <h2>Zhang Zhijie</h2>
@@ -172,9 +173,42 @@
         </ul>
         <div class="team">
           <p class="statement">Around twenty people, most of them building their first company.</p>
-          <p class="sub">No stock photograph of a team stands in for them here. If a face ever
-            appears on this page, it will belong to someone who works here.</p>
+          <p class="sub">No stock photograph of a team stands in for them here. The figures
+            below are geometry lifted from a licensed photograph — no face is drawn, and
+            nobody in it works here. If a face ever appears on this page, it will belong to
+            someone who does.</p>
         </div>
+        </div>
+
+        <!-- Everything in this block is either a published fact from the studio's
+             own site or a term already stated elsewhere on this one. Nothing here
+             is a biography, because there are no published biographies to take. -->
+        <dl class="whowe">
+          <div>
+            <dt>Where we are</dt>
+            <dd>Singapore. Work with us and Singapore’s Personal Data Protection Act
+              governs anything you send us — which is the law our own privacy terms are
+              written against, not a badge in a footer.</dd>
+          </div>
+          <div>
+            <dt>What we actually do</dt>
+            <dd>The whole site. Design, writing, build, launch and the handover, in one
+              studio on one timeline — nothing subcontracted to a second party you would
+              then have to manage.</dd>
+          </div>
+          <div>
+            <dt>How we are structured</dt>
+            <dd>Two principals and a small team, most of them on their first company. That
+              is exactly why the charter above exists in writing: nothing here is inherited,
+              so all of it had to be decided and then recorded.</dd>
+          </div>
+          <div>
+            <dt>What we will not do</dt>
+            <dd>Publish a service before we are confident in it. Two are marked
+              <em>in development</em> everywhere they appear, including on the page that
+              sells them.</dd>
+          </div>
+        </dl>
       </div>
     </section>
 
@@ -182,88 +216,238 @@
          table for point positions and is never itself drawn; the note says so
          on the page. js/figure.js is fetched only when this band is close, and
          never under reduced motion or with effects switched off. -->
-    <div class="fig3d" data-figure data-figure-src="img/figure-src.webp">
+    <div class="fig3d" data-figure data-figure-pack="img/team-pack.webp">
       <div class="fig3d-stage"></div>
-      <p class="fig3d-note meta">Fig. — <b data-figure-count>0</b> points traced from a
-        licensed photograph. Not a picture of anyone at this studio.</p>
+      <p class="fig3d-note meta">Fig. — <b data-figure-count>0</b> points. Shape and
+        surface direction from a licensed photograph; none of its colour is used, and
+        nobody in it is drawn.</p>
     </div>
 
     <section class="sec sec--solid" aria-labelledby="p3">
       <div class="wrap reveal">
-        <p class="meta"><span class="q">IV</span> — <span id="p3">What we build on</span></p>
+        <p class="meta"><span class="q">IV</span> — <span id="p3">A studio, or one freelancer</span></p>
+        <p class="sub">A good freelancer can do every line below, and plenty do it well. The
+          difference is not talent — it is what happens on the week they are ill, and on
+          the day they move on.</p>
+
+        <table class="vs">
+          <caption class="vsr">How the two compare on the things that decide a project.</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="vsr">What you are comparing</span></th>
+              <th scope="col">One freelancer</th>
+              <th scope="col"><b>Thornbury</b></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">When something breaks at 2am</th>
+              <td>You message one person, and wait until they are free.</td>
+              <td>Monitoring tells us before you notice, and more than one person
+                can answer.</td>
+            </tr>
+            <tr>
+              <th scope="row">Before anything goes live</th>
+              <td>Usually shipped straight from the machine it was built on.</td>
+              <td>A written review pass, plus a public security scanner and a code
+                analyser run over it.</td>
+            </tr>
+            <tr>
+              <th scope="row">What you are quoted</th>
+              <td>A number per job, negotiated each time.</td>
+              <td>A published rate — S$500 or S$800, printed on the
+                <a href="services.html">Services</a> page.</td>
+            </tr>
+            <tr>
+              <th scope="row">If the relationship ends</th>
+              <td>Access often sits in accounts opened in their name.</td>
+              <td>Repository, hosting, domain and mailbox are transferred to you on
+                delivery. Walk away and nothing stays with us.</td>
+            </tr>
+            <tr>
+              <th scope="row">Scope of the work</th>
+              <td>Often the build, with design, copy or launch passed to someone else.</td>
+              <td>All of it, in one studio, on one timeline.</td>
+            </tr>
+            <tr>
+              <th scope="row">What is on offer</th>
+              <td>Whatever the one person happens to be strong at.</td>
+              <td>Four services. Two of them marked <em>in development</em> rather than
+                sold early.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec sec--rule" aria-labelledby="p3b">
+      <div class="wrap reveal">
+        <p class="meta"><span class="q">V</span> — <span id="p3b">Two promises, in plain words</span></p>
         <ul class="pillars">
           <li>
-            <h2>Security</h2>
-            <p>Every page we ship names the handful of places it is allowed to load anything
-              from, and refuses the rest. It is written into the page itself, not bolted on
-              afterwards.</p>
-            <p class="check"><b>Check</b>Below is not a copy of the policy — it is the
-              policy, split into its directives out of this page’s own head as it loaded.
-              View source and compare it line for line.</p>
-            <dl class="csp" data-csp hidden></dl>
-          </li>
-          <li>
-            <h2>Performance</h2>
-            <p>Weight is a design decision. The heavy part of a page arrives after the page is
-              already usable, and a phone is never sent the file that was made for a desktop.</p>
-            <p class="check"><b>Check</b>Open the network panel and load the home page. It paints
-              on a 20 kB still; the film behind it is fetched afterwards, from a smaller cut made
-              for that screen.</p>
+            <h2>Speed</h2>
+            <p>A page you can read before it has finished arriving. The heavy part — the
+              film, the motion, the big picture — loads after the words do, and a phone is
+              never sent the version that was made for a desktop.</p>
+            <p class="check"><b>Check</b>Open this site on a bad connection. The words are
+              there first, and nothing you need is hiding behind something still loading.</p>
           </li>
           <li>
             <h2>Ownership</h2>
-            <p>Owning a site should mean being able to read it. What we hand over is written
-              by hand and stays that way: no bundler output to reverse, no framework to learn
-              before you can change a heading, nothing generated that you would have to
-              regenerate.</p>
-            <p class="check"><b>Check</b>These are the opening lines of
-              <code>css/layout.css</code>, fetched from the file itself while you were reading.
-              Not a build artefact, not minified, not generated by anything.</p>
+            <p>On delivery you get all of it. You own the site outright and can walk away
+              with it whenever you like, to any developer you choose — there is nothing
+              of yours left sitting in an account of ours.</p>
+            <ol class="handover">
+              <li><b>01</b><span>The repository — every file the site is made of</span></li>
+              <li><b>02</b><span>The hosting account, in your name</span></li>
+              <li><b>03</b><span>The domain, in your name</span></li>
+              <li><b>04</b><span>The mailbox on it</span></li>
+            </ol>
+            <p class="check"><b>Check</b>Ask any studio to put that list in writing before
+              you sign anything. The answer tells you most of what you need to know.</p>
+          </li>
+        </ul>
+
+        <!-- The two live proofs from the earlier pass are kept, but folded away.
+             They are for whoever brings a developer to the meeting; nobody else
+             should have to scroll past a policy table to read the page. -->
+        <details class="bonnet">
+          <summary>For your developer — two things this page proves about itself</summary>
+          <div class="bonnet-in">
+            <p class="check"><b>One</b>Below is not a copy of this page’s content security
+              policy — it is the policy, split into its directives out of the page’s own
+              head as it loaded. View source and compare it line for line.</p>
+            <dl class="csp" data-csp hidden></dl>
+            <p class="check"><b>Two</b>These are the opening lines of
+              <code>css/layout.css</code>, fetched from the file itself while you were
+              reading. Not a build artefact, not minified, not generated by anything.</p>
             <div class="src" data-css hidden>
               <pre></pre>
               <p class="src-stat" data-css-stat></p>
             </div>
-          </li>
-        </ul>
+          </div>
+        </details>
       </div>
     </section>
 
+    <!-- The rig. Without JavaScript this is a plain description list of eight
+         platforms and it reads perfectly well; js/rig.js upgrades it into the
+         console below, moving the descriptions into one readout that the tiles
+         drive. Nothing here is required to understand the page. -->
     <section class="sec sec--solid" aria-labelledby="p4">
       <div class="wrap reveal">
-        <p class="meta"><span class="q">V</span> — <span id="p4">What sits behind the site</span></p>
-        <p class="sub">Five services do the work. Here is what each one is actually for.</p>
-        <dl class="stack">
-          <div>
+        <p class="meta"><span class="q">VI</span> — <span id="p4">What sits behind the site</span></p>
+        <p class="sub">We do the work. These are the platforms it runs on — chosen,
+          configured, and handed over with the site.</p>
+        <p class="vmark-note meta">Platforms we build on — not partners, sponsors or endorsements.</p>
+
+        <div class="rig" data-rig-root>
+          <ul class="rig-rail rig-rail--a" hidden>
+            <li>
+              <button class="rig-tile" type="button" data-rig="0" aria-pressed="true"
+                      aria-controls="rig-out">
+                <img class="vmark" src="img/marks/vercel.svg" alt="Vercel"
+                     width="2048" height="407" loading="lazy" decoding="async">
+              </button>
+            </li>
+            <li>
+              <button class="rig-tile" type="button" data-rig="1" aria-pressed="false"
+                      aria-controls="rig-out">
+                <img class="vmark" src="img/marks/cloudflare.svg" alt="Cloudflare"
+                     width="652" height="95" loading="lazy" decoding="async">
+              </button>
+            </li>
+            <li>
+              <button class="rig-tile" type="button" data-rig="2" aria-pressed="false"
+                      aria-controls="rig-out">
+                <img class="vmark" src="img/marks/supabase.svg" alt="Supabase"
+                     width="581" height="113" loading="lazy" decoding="async">
+              </button>
+            </li>
+            <li>
+              <button class="rig-tile" type="button" data-rig="3" aria-pressed="false"
+                      aria-controls="rig-out">
+                <img class="vmark" src="img/marks/upstash.svg" alt="Upstash"
+                     width="1631" height="472" loading="lazy" decoding="async">
+              </button>
+            </li>
+            <li>
+              <button class="rig-tile" type="button" data-rig="4" aria-pressed="false"
+                      aria-controls="rig-out">
+                <img class="vmark" src="img/marks/resend.svg" alt="Resend"
+                     width="1978" height="420" loading="lazy" decoding="async">
+              </button>
+            </li>
+            <li>
+              <button class="rig-tile" type="button" data-rig="5" aria-pressed="false"
+                      aria-controls="rig-out">
+                <img class="vmark" src="img/marks/sentry.svg" alt="Sentry"
+                     width="222" height="66" loading="lazy" decoding="async">
+              </button>
+            </li>
+            <li>
+              <button class="rig-tile" type="button" data-rig="6" aria-pressed="false"
+                      aria-controls="rig-out">
+                <img class="vmark vmark--lockup" src="img/marks/owasp-zap.svg" alt="ZAP by Checkmarx"
+                     width="271" height="90" loading="lazy" decoding="async">
+              </button>
+            </li>
+            <li>
+              <button class="rig-tile" type="button" data-rig="7" aria-pressed="false"
+                      aria-controls="rig-out">
+                <img class="vmark vmark--lockup" src="img/marks/sonarqube-cloud.svg" alt="SonarQube Cloud"
+                     width="232" height="77" loading="lazy" decoding="async">
+              </button>
+            </li>
+          </ul>
+
+          <div class="rig-out" id="rig-out" role="region" aria-live="polite" hidden>
+            <canvas class="rig-canvas" aria-hidden="true"></canvas>
+            <p class="rig-name" data-rig-name></p>
+            <p class="rig-line" data-rig-line></p>
+            <p class="rig-when meta" data-rig-when></p>
+          </div>
+
+          <ul class="rig-rail rig-rail--b" hidden></ul>
+
+          <dl class="stack" data-rig-list>
+          <div data-rig-row="0">
             <dt>Vercel</dt>
-            <dd>Where the site lives. It is served from whichever machine is nearest the person
-              opening it, rather than from one box in one country.</dd>
+            <dd>Where your site is published and served from. <span class="rig-when">Every visitor touches this</span></dd>
           </div>
-          <div>
+          <div data-rig-row="1">
+            <dt>Cloudflare</dt>
+            <dd>The domain, the DNS, and the shield in front of it. <span class="rig-when">Before the first byte</span></dd>
+          </div>
+          <div data-rig-row="2">
             <dt>Supabase</dt>
-            <dd>Where the site remembers things. Bookings, orders, accounts, a menu you edit
-              yourself — anything that has to survive between visits sits here, on an account
-              that is yours.</dd>
+            <dd>Where the site remembers things between visits. <span class="rig-when">Only if your site stores things</span></dd>
           </div>
-          <div>
+          <div data-rig-row="3">
+            <dt>Upstash</dt>
+            <dd>Stops one form being submitted ten thousand times. <span class="rig-when">When a form gets hammered</span></dd>
+          </div>
+          <div data-rig-row="4">
             <dt>Resend</dt>
-            <dd>The mail the site sends. The order confirmation, the copy of an enquiry, the
-              reset link — sent from your own domain rather than from a form service nobody
-              recognises.</dd>
+            <dd>Makes sure an enquiry actually reaches the inbox. <span class="rig-when">When someone gets in touch</span></dd>
           </div>
-          <div>
+          <div data-rig-row="5">
+            <dt>Sentry</dt>
+            <dd>Tells us a page broke before you have to. <span class="rig-when">The moment something breaks</span></dd>
+          </div>
+          <div data-rig-row="6">
             <dt>OWASP ZAP</dt>
-            <dd>Checks the finished site for known issues before it goes live. It is a public,
-              open-source scanner: it looks for the well-understood ways a site gets broken into,
-              and we fix what it reports.</dd>
+            <dd>Attacks the finished site before anyone else can. <span class="rig-when">Before launch, and after changes</span></dd>
           </div>
-          <div>
+          <div data-rig-row="7">
             <dt>SonarCloud</dt>
-            <dd>Reads the code rather than the running site, and flags the patterns that are
-              known to cause trouble later, so they surface before launch instead of after it.</dd>
+            <dd>Reads the code and flags what will hurt later. <span class="rig-when">Deepest — you never see it</span></dd>
           </div>
-        </dl>
+          </dl>
+        </div>
+
         <div class="pull">
-          <p class="pull-line">Neither of the last two makes a site unbreakable. Nothing does,
+          <p class="pull-line">None of the last two makes a site unbreakable. Nothing does,
             and nobody can honestly promise it.</p>
           <p class="pull-sub">What they mean is that the known problems have been looked for,
             with public tools you are free to point at the site yourself.</p>
@@ -294,7 +478,6 @@
         <p>Thornbury Digital · Singapore</p>
         <p><a href="mailto:contact@thornburystudio.com">contact@thornburystudio.com</a></p>
         <p><a href="tel:+6588056769">+65 8805 6769</a></p>
-        <p><button class="fx-btn" type="button" data-fx aria-pressed="true"><i aria-hidden="true"></i><span class="fx-word">Effects</span><span class="fx-state">On</span></button></p>
         <p>© 2026</p>
       </div>
     </div>
