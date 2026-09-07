@@ -1157,4 +1157,8 @@ console clean; zero horizontal overflow; every `.sec--rule` computing the
 blur, the tint and `isolation: isolate`; the Privacy link present in all six
 footers; the router swapping studio → privacy with one `<main>`, the title
 and `data-page` following; the switch row throwing and restoring as above.
-A phone run on this build, over the same LAN probe, is recorded below when it arrives.
+No phone opened the LAN probe against this build inside the window this pass
+stayed open for, so the handset numbers above are from the previous build; the
+glass bands and the switch row are measured only in Playwright at 390 px here,
+and the frame-rate cost of a full-viewport blur over the live field on a phone
+is the one number this pass still owes.
