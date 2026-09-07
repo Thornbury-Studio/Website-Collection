@@ -290,11 +290,13 @@ now says out loud that it prices the first of these and not the other two.
 charter. It is philosophy, and it was sitting on the page where somebody is
 working out what to pay.
 
-**Still carrying invented figures, outside this page:** `work.html` prices each
-case (“From S$48,000” down to “S$6,800”) and `contact.html` offers budget bands
-from “Under S$10k” to “S$60k and up”. Both predate the real rates and both now
-contradict them. They are left standing only because the case content is being
-replaced from the studio's real writeups in a separate pass.
+**The invented figures outside this page are gone too.** `work.html` used to
+price each case from “S$48,000” down to “S$6,800”, and `contact.html` offered
+budget bands from “Under S$10k” to “S$60k and up”. Both predated the real rates
+and both contradicted them. The eighteen-case rebuild below drops per-case
+pricing entirely — with a published rate on the next page there is nothing a
+per-case number could honestly say — and the budget select is now a list of the
+four real services.
 
 ## Facts, and what happened to the ones that were not
 
@@ -310,7 +312,8 @@ anything.
 | “Taking two projects for Q1 2027” | same commit; also ran as the hero figure “02 · Openings, Q1 2027” | removed, both places |
 | “2021 · Founded” | `63c3a4f`, a later v5 build commit; no source anywhere | removed |
 | “03 · People” / “Two designers, one engineer” | contradicted by the real headcount | replaced with prose |
-| “Mon – Fri, 10:00 – 18:00 SGT” | `f8cbd19`, same class | **still standing, unconfirmed** |
+| “Mon – Fri, 10:00 – 18:00 SGT” | `f8cbd19`, same class | removed with the contact rebuild — never confirmed, and the rule says an unconfirmed claim does not stand while we wait |
+| “SGP · 01°17′N 103°51′E” in the bar and the menu | `f8cbd19` | removed — a coordinate readout nobody asked for, on a page that has a real address in the footer |
 
 Deleting the last two hero figures took the whole `.hero-stats` rail with them,
 markup and CSS, because a rail ruled into thirds with one cell in it is not a
@@ -407,8 +410,8 @@ section sits on `sec--solid` ground so the field can never compete with it.
 ## Contact details
 
 `contact@thornburystudio.com`, `+65 8805 6769`, and WhatsApp on the same number.
-The address appears in the footer and the mobile menu of all five pages and in
-the contact page's aside; the phone appears in all three of those places; the
+The address appears in the footer and the mobile menu of all five pages and at
+the head of the contact page; the phone appears in all three of those places; the
 WhatsApp link (`https://wa.me/6588056769`, opened in a new tab with
 `rel="noopener noreferrer"`) appears once, on the contact page. `tel:`, `mailto:`
 and `wa.me` all fail `routable()` in `js/bg.js` — it requires a same-origin
@@ -485,40 +488,94 @@ form's track now: 751 px at 1440, full width on a phone. Nobody had submitted
 the form in a browser before; every layout check passed the whole time, because
 the element is `hidden` until the moment it breaks.
 
-## The traced figure
+## The Team band
 
-A licensed photograph, sampled into points and drawn as `THREE.Points` — the
-classic Codrops / Mamboleoo technique: draw the image into an offscreen 2D
-canvas, walk its pixels on a stride, emit one point per pixel dark enough to be
-inside the silhouette. 14,351 points at stride 3, 8,067 at stride 4 on a phone,
-jittered inside their cells so the cloud does not read as a lattice, and 4.5 %
-of them ember — the same fraction the liquid field carries.
+Four people from a licensed photograph, drawn as three populations of points and
+lines. The technique underneath is the classic Codrops / Mamboleoo one — draw the
+image into an offscreen 2D canvas, walk its pixels on a stride, emit points — but
+what is walked is not the photograph.
 
-**It is atmosphere, and the page says so.** The photograph is never drawn: the
-file is a lookup table for positions and nothing else reaches the screen but the
-points. The note under it reads *“Fig. — 14,351 points traced from a licensed
-photograph. Not a picture of anyone at this studio”*, with the count filled in at
-run time from the trace itself. The source was chosen for what it does not show
-— a full silhouette, back to camera, no face and no identifiable person —
-because the people section two paragraphs above promises exactly that. See
-`IMAGE-CREDITS.md`.
+**The reference, and what studying it settled.** The band is aimed at the “Our
+Team” canvas on horizonsymmetry.com. Reading it closely changed this file more
+than any amount of shader work would have: its canvas samples a single
+4400×2456 pre-rendered artwork of the particle figures, the wave and the
+starfield. Its dimensionality was authored in 3D long before a browser saw it.
+There is no `.glb`, no point-cloud file and no runtime trace — one
+`drawArrays(POINTS)` over an image. A photograph cannot match that completely: a
+monocular depth estimate gives a shell seen from one side, not a body. What it
+*can* match is the register, and the register came from one decision.
 
-**Where it sits, and why not closer.** It is a full-bleed band *after* the people
+**Throw the photograph away.** Nothing in `js/figure.js` samples colour. The
+build keeps only the shape of the subjects and the direction their surface faces
+— normal.x and normal.y in R and G, depth in B, all in one
+`img/team-pack.webp`; the albedo file that used to sit beside it is deleted.
+Every point is lit from the normal alone:
+
+```
+lit = 0.17 + 0.60 * lambert + 0.88 * fresnel
+```
+
+The fresnel term is deliberately the louder of the two. A silhouette that burns
+while the interior falls away is what separates a *volume* from a *sheet*, and
+it is the single thing that reads as three-dimensional at a glance. It also
+takes faces, clothing, pattern and identity off the page with the colour: nobody
+in the source photograph is recognisable, because none of them is drawn. The
+previous attempt shaded by photographic luminance and looked, in the boss's
+word, *messy* — a cluttered room rendered as dust, because brightness made a
+chair back as bright as a shoulder.
+
+**Thickness.** A depth shell is still infinitely thin. Each point is displaced
+along its own normal by a random offset (±0.03 world units, ±0.025 on a phone)
+before it is written, so the cloud has a skin with depth in it and the rim stops
+reading as a cut edge.
+
+**The normal goes through `normalMatrix`.** The key light stays fixed in the
+room while the form turns under it — which is the whole reason a rotation reads
+as a rotation and not as a slide.
+
+**The wave is lines, not dots.** Its law is the Thomas attractor `js/field.js`
+already integrates, and its constants are *read* at run time from the studio
+page's own world in `js/bg.js` — `TBBg.presets.studio.world`, b 0.205, ext 4.4,
+seed 11 — rather than copied, so there is one source of truth. Strands are
+seeded the way the field seeds them: a leader settled with 240 warm steps at
+`dt = 0.02`, then samples emitted as line-segment *pairs* so a strand is a
+continuous curve rather than a queue of dots. 150 strands of 38 on a desktop,
+90 of 26 on a phone, flattened into a shallow sheet at the base and drifted
+sideways in the vertex shader, wrapping, with both ends faded so the wrap is
+never seen.
+
+**What was reused and what was not.** The law and its constants, yes. The
+renderer, no, and it could not be: `field.js` draws to a 2D canvas through its
+own fixed full-viewport camera and exposes no way to hand positions to another
+scene. Sharing the generator is the honest half.
+
+**The starfield is the third population.** A sparse slab of 520 points behind
+both (260 on a phone), each twinkling out of phase so the slab never reads as a
+printed screen. The reference has this layer, and it is what gives the other two
+somewhere to sit.
+
+**Where it sits, and why not closer.** A full-bleed band *after* the team
 section rather than inside it. Beside the copy it would read as an illustration
 of “around twenty people”, which it is not; one band down it reads as the
-transition into what we build on, which is what it is. The band has no ground of
-its own beyond a 72 % obsidian wash, so the liquid field stays visible through
-the cloud and the figure looks like something the field gathered rather than a
-picture laid over it. Two additive clouds at equal brightness read as noise,
-which is what the first attempt looked like.
+transition into what we build on, which is what it is. The copy above it now
+says how the two facts sit together rather than leaving them adjacent: no stock
+photograph stands in for anyone, the figures below are geometry lifted from a
+licensed photograph, no face is drawn, and nobody in it works here.
 
-**One draw call, and the CPU does almost nothing.** Scatter, staggered assembly,
-idle drift and the pointer push all happen in the vertex shader from two
-attributes and four uniforms; per frame the CPU reads one bounding rect and
-writes four uniforms. Assembly is tied to the band's own travel through the
-viewport, so the figure gathers as you arrive and lets go as you leave. The
-pointer opens a local dimple with a bright rim — the first pass used a 0.85-unit
-radius against a 2.45-unit figure and punched a crater straight through it.
+**Three draw calls, and the CPU does almost nothing.** Scatter, staggered
+assembly, idle drift and the pointer push all happen in vertex shaders; per
+frame the CPU reads one bounding rect and writes a handful of uniforms.
+Assembly is tied to the band's own travel through the viewport, so the figures
+gather as you arrive and let go as you leave. The pointer opens a local dimple
+with a bright rim — an early pass used a 0.85-unit radius against a 2.45-unit
+figure and punched a crater straight through it; it is 0.34 now.
+
+**Closing the last twenty per cent would take real geometry.** The reference's
+smoothness is not a shader the browser is running — it is a 3D scene that was
+lit and rendered before export. Matching it fully means building the figures as
+geometry rather than deriving them from a photograph. The Blender MCP is
+connected and that is the route if it is wanted; it is a different job from this
+one, not a tuning pass on this one.
 
 **It is the first thing cut, exactly as article 02 says.** Nothing is fetched
 until the band is within 400 px of the viewport, and nothing is fetched at all
@@ -695,6 +752,237 @@ input to `setMode` at all and `DEFAULT` is simply the site. The six alternatives
 stay implemented in `js/bg.js` with the costs they measured, because that
 comparison is the argument for the one that ships; nothing selects between them
 at run time, and none of them costs anything while CONTINUUM is running.
+
+## The pass that took the empty right-hand half out
+
+Five separate notes, one cause: several rows on this site were built as a left
+column with nothing beside it, and the eye had to travel down the gutter to read
+them.
+
+**The charter runs on three tracks now**, not two. The outlined numeral, then
+the claim as a headline in its own column, then the argument and its practice
+line beside it. The claim used to sit on top of its own paragraph in a 62 ch
+measure with the right half of a 1440 px page blank; it is a headline and a body
+and they belong side by side. Below 1080 px it falls back to the two-track form
+it had, and below 760 px it stacks. The heading spans all three rows of its
+column so a short claim does not float away from a long argument.
+
+**Team is a two-track band.** The two named principals on the left in the same
+hairline index the work uses, the sentence about everyone else on the right.
+They are one thought; they were stacked.
+
+**The bar lost its coordinate readout** — `SGP · 01°17′N 103°51′E`, in the top
+right of all five pages and again in the menu. It was invented at build time
+(`f8cbd19`) and it is the kind of detail that reads as decoration pretending to
+be data, which is exactly what the work index was fixed for earlier in this log.
+Removing it left the bar as two elements under `justify-content: space-between`,
+which would have thrown the nav hard right, so the bar is a three-track grid
+now: `1fr auto 1fr`, the nav on the centre line whether or not anything sits
+beside it. The placements are scoped to `.bar`, because `.mark` and `.menu-btn`
+appear inside the menu panel too.
+
+**The footer is on one line.** Its five items were five different baselines: the
+links carried a 2.75 rem tap target and the plain text did not, so each sat where
+its own box put it. It is `align-items: center` with the tap target on every
+child — measured, all four items now share a centre line to the pixel.
+
+**The effects switch left the footer.** It is a claim the charter makes, not a
+site setting, and it had ended up as small print under everything. It lives in
+two places now: beside charter article 03, which is the article that promises
+it, and in the menu panel, one reach from any page. Article 03's placement is
+unchanged; the footer copy is simply gone.
+
+## The vendor row, and the line that makes it safe
+
+Studio's *What sits behind the site* names five real companies, and five real
+logos read as a claimed partnership unless something says otherwise. The
+disclaimer is not optional dressing: **“Platforms we build on — not partners,
+sponsors or endorsements.”** It sits directly under the section's own subhead,
+above the first row.
+
+The marks are the vendors' own published files, taken from the vendors' own brand
+pages, vendored under `img/marks/` and served same-origin — the CSP's
+`img-src 'self' data:` would block a hotlink anyway, and an SVG loaded through
+`<img>` cannot run script. Nothing is redrawn, recoloured, cropped or traced.
+Where a vendor publishes a dark-background variant, that is the one taken;
+choosing between a vendor's own variants is not modifying the mark. Full
+provenance, per file, is in `IMAGE-CREDITS.md`.
+
+The one judgement call is size. Three of the five are wordmarks and two are
+icon-plus-wordmark lockups whose lettering is roughly half the box height, so a
+single CSS height made ZAP and SonarQube Cloud illegible next to Resend.
+They are matched on the height of the *lettering* instead — 34 px against 21 px,
+uniform scale only — which puts all five on one optical line. The `dt` column
+widened from 10 rem to 11.5 rem to hold them.
+
+Two names to raise rather than change quietly: the row says **OWASP ZAP**, but
+the project's current official mark reads *ZAP by Checkmarx*, and **SonarCloud**
+is now published as *SonarQube Cloud*. The shipped artwork is current and the
+`alt` text names what the artwork actually says; the visible copy is left as
+briefed, because renaming a service on a client-facing page is a content call.
+
+**Sourcing note.** The brief pointed at `components/ui/platform-marks.tsx` in
+`Thornbury_Main_Site` as the component that already solved this. That repository
+is not on this machine, so the component could not be read. The *discipline* it
+describes — official marks, unmodified, served same-origin, not redrawn or
+recoloured — is what was followed, and it is written down here so the next pass
+can diff it against the real component.
+
+## Contact, rebuilt
+
+The old page was a form in seven columns with a contact rail in the last four,
+under a hero whose subhead sat on the far right at a different height: a lot of
+travel and two half-empty halves.
+
+**The three ways in come first, across the full measure.** Email, phone,
+WhatsApp, each as a large link with one line under it saying what it is for.
+Most people who open a contact page already know what they want to say; the form
+is for the ones who would rather write it down, and it now sits under a heading
+that says so.
+
+**The brief is a two-track row**: on the left, *three answers make the first
+reply useful* as a statement and then three numbered lines saying which three;
+on the right, the form. Every child of that grid is placed explicitly —
+`.brief-say` 1/5, `.form` 6/-1, `.note` 6/-1 on row 2 — because an auto-placed
+child beside placed siblings is exactly how `#brief-note` once shipped 277 px
+wide. Below 900 px all three take the full width in order.
+
+**Two facts changed, both of them for the same reason.** The budget select
+offered “Under S$10k” to “S$60k and up”, which contradicts the published rate on
+the page next door. It is now *What you need*, listing the four real services and
+nothing that is not on the Services page, with the two unlaunched ones marked
+*in development* in the option text itself. Beside it, the rate is stated in the
+copy rather than asked for: S$500 promotional and S$800 fixed, with a link to
+where they are set out. And **“Mon – Fri, 10:00 – 18:00 SGT” is gone** — it
+traced to the same creation commit as Tanjong Pagar and Q1 2027, nobody has
+confirmed it, and the standing rule is that an unconfirmed claim does not stay
+up while we wait for one. If those hours are real, they are one line to put back.
+
+The mobile menu also described the studio as “Three people, one room”, which the
+real headcount retired several passes ago. It says “How the studio works” now.
+
+## The Team band, second pass: glass
+
+The band sits on the site's persistent canvas, and the liquid field was drawing
+straight through the point cloud. Two line drawings at the same brightness fight
+wherever they cross, and no amount of tuning the cloud fixes a background that is
+also a line drawing.
+
+So the band became glass: `backdrop-filter: blur(26px) saturate(1.15)
+brightness(.72)` over a `rgba(8,8,8,.62)` ground. The field is still there and
+still moving — the band is not a black box cut into the page — but it is now
+*behind*, the way depth of field puts a room behind a subject. Two details make
+it work rather than half-work: `isolation: isolate`, so the filter composites
+against the fixed canvas instead of the section's own paint, and an
+`@supports not` fallback that raises the flat tint to 88% where the filter is
+unavailable, so the band is never accidentally transparent.
+
+## The team, expanded
+
+The brief said to source this from the studio's own site. **There is nothing to
+source.** thornburystudio.com has no About or Team page — its navigation is
+Design / Audit / Optimization / SEO, and the only other route is `/privacy`.
+There are no published biographies, no headcount, no founding date.
+
+So the section is built from facts that are already published somewhere real,
+and nothing else: the two principals and “around twenty” as already agreed, plus
+four answers under them — where we are, what we actually do, how we are
+structured, what we will not do. The first of those takes its substance from the
+studio's own privacy page, which states that this is a Singapore studio and that
+the PDPA governs what a client sends. That is a fact with a source, which is the
+only kind this page carries. If real biographies ever exist, they drop into the
+same block.
+
+## Security became a comparison, and Ownership learned to speak
+
+Two notes, one cause: both sections were written for someone who already knows
+what a content security policy is.
+
+**Security is now “A studio, or one freelancer.”** Six rows, a real `<table>`
+with a row header on every row, comparing the things that actually decide a
+project: who answers at 2am, what happens before a deploy, what you are quoted,
+what happens if it ends, the scope, and what is on offer. It opens by conceding
+the point — *a good freelancer can do every line below, and plenty do it well* —
+because a comparison that pretends otherwise is not worth reading. The
+difference it claims is structural, not about talent. On a phone the three
+columns become one stacked card per row, each answer labelled by a generated
+`::before`, because three columns of prose do not fit 390 px.
+
+**Ownership now says what a client gets, in the words the studio's own site
+uses**, followed by the four things by name: repository, hosting account,
+domain, mailbox. Its check is no longer a technical instruction but a usable
+one — *ask any studio to put that list in writing before you sign*. Performance
+became “Speed” and its check is *open this site on a bad connection*.
+
+**Neither live proof was thrown away.** The self-reading content security policy
+and the stylesheet fetched from itself both still run, folded into a
+`<details>` marked *for your developer*. They are excellent and they are for
+about one reader in fifty; that reader can open the drawer.
+
+## The rig
+
+Eight platforms, and the old shape was eight name/paragraph rows — a wall. The
+brief's own idea, built: marks only, four down each side, one readout between
+them, and nothing printed until you ask for it.
+
+**It upgrades from a plain list.** The markup ships as a `<dl>` of eight names
+and eight one-line descriptions, complete and readable with no JavaScript at
+all. `js/rig.js` hides that list, reveals the console, and moves half the tiles
+into the second rail. Charter article 03 is not decoration: the page loses
+nothing if this file never arrives.
+
+**Two effects, chosen to say two different things.** The platform name arrives
+as particles, sampled from the word itself the way the Team band samples a
+photograph — the same technique one dimension simpler, on a 2D canvas, so it
+costs no WebGL context and no library. The description *decodes*: each character
+cycles through a glyph set before it settles, left to right. One says “being
+assembled”, the other says “being read out”. Under reduced motion or with
+effects off, both are simply absent and the text is just there — verified by
+clicking a tile and reading the line 120 ms later, with no scramble in it.
+
+**Three details that were not optional.** Hover previews are suppressed for
+`pointerType === 'touch'`, or a tap would run the decode twice. Arrow keys move
+between tiles, because eight buttons in two rails is a control, not a list of
+links. And `destroy()` puts the markup back exactly as it shipped — tiles
+returned to the first rail, rails re-hidden, list revealed — because the effects
+switch tears this module down and mounts it again through the same path, and a
+mount that found four tiles against eight rows would refuse to run and leave the
+section showing neither the console nor the list. Verified across an off/on
+cycle: 4 and 4, list hidden, readout live, no errors.
+
+**Copy.** The lead line used to say *five services do the work*, which is wrong
+about who does the work. It now reads: **we** do the work, and these are the
+platforms it runs on. Every description is one line. Three platforms were added
+— Cloudflare, Upstash and Sentry — and the Sentry line is what makes the
+comparison table's 2am row true.
+
+## Work: eighteen sites, and no prices
+
+The page carried five cases with invented per-case pricing. It now carries
+eighteen, each a capture of a site that is actually deployed in this collection,
+and each plate is a link that opens it. That is the claim the studio's own site
+makes — *nothing above is a screenshot or a mockup* — and it is now literally
+checkable here.
+
+**Chosen, not scraped.** The collection's hub carries a `data-tier` on every
+card, which is what its “most advanced” sort runs on. The eleven non-Thornbury
+tier-5 sites all went in, plus the four remaining sites the real studio site
+already shows publicly, plus three tier-4 sites picked to fill categories the
+first fifteen left empty — SaaS, instruments, fitness. Thornbury's own six
+templates are excluded: a studio's work page is not the place to show the studio.
+
+**Per-case pricing is gone.** With a published rate one page away, a per-case
+number can only either contradict it or be invented. Each plate carries its
+sector and a *Live — open it* label that turns ember on hover.
+
+**The grid has a rhythm rather than a tile wall.** Twelve tracks and a nine-item
+unit that repeats exactly twice across eighteen: 7/5, then 4/4/4, then 5/7, then
+6/6. Four different row shapes, and no plate ever sits directly under one the
+same width. Two columns below 1000 px, one below 620.
+
+Each tagline is that site's own hero line, read off the capture — *Run yourself
+even*, *One customer. One clean record.*, *Renovation you can see before you
+sign.* — rather than a description written about it from outside.
 
 ## Verification
 

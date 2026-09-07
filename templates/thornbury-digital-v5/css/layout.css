@@ -233,9 +233,9 @@
     right: 0;
     height: var(--bar);
     z-index: 31;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
     padding-left: max(var(--gutter), env(safe-area-inset-left));
     padding-right: max(var(--gutter), env(safe-area-inset-right));
@@ -261,6 +261,11 @@
     letter-spacing: .16em;
     color: var(--chrome-45);
   }
+  /* scoped to the bar: the same two classes appear inside the menu panel, in a
+     flex row that would ignore these anyway */
+  .bar .mark { grid-column: 1; grid-row: 1; justify-self: start; }
+  .bar .nav { grid-column: 2; grid-row: 1; justify-self: center; }
+  .bar .menu-btn { grid-column: 3; grid-row: 1; justify-self: end; }
   .nav { display: flex; gap: clamp(1.2rem, 2.8vw, 2.4rem); }
   .nav a {
     position: relative;
@@ -286,14 +291,6 @@
     background: var(--ember);
     transform: translateY(-50%);
   }
-  .bar-side {
-    font-family: var(--mono);
-    font-size: .6rem;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--chrome-45);
-  }
-  @media (max-width: 760px) { .bar-side { display: none; } }
   @media (max-width: 480px) {
     .bar { padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); }
     .mark small { display: none; }
@@ -618,14 +615,312 @@
   }
   .cap .meta { grid-column: 2; grid-row: 1 / span 2; text-align: right; }
 
-  /* ---- work grid: a gallery, but the plates stay figures ---- */
+  /* ---- who we are: four answers, not four biographies ---- */
+  .whowe {
+    margin-top: clamp(2.4rem, 7vh, 4rem);
+    border-top: 1px solid var(--hair-2);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(1.8rem, 4.5vw, 4rem);
+  }
+  .whowe > div {
+    padding: clamp(1.3rem, 3.5vh, 2rem) 0;
+    border-bottom: 1px solid var(--hair-1);
+  }
+  .whowe dt {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--chrome);
+  }
+  .whowe dd {
+    margin: .7rem 0 0;
+    color: var(--chrome-70);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .whowe em { color: var(--ember); font-style: normal; }
+
+  /* ---- the comparison ----
+     A real table, because it is one: three columns, six rows, and a row header
+     on every row so a screen reader announces what is being compared before it
+     reads either answer. The studio column is the one that carries the hairline
+     and the brighter text — the page is allowed to have a position. */
+  .vs {
+    width: 100%;
+    margin-top: 1.8rem;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  .vsr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .vs th, .vs td {
+    padding: 1.05rem 1.2rem 1.1rem 0;
+    border-bottom: 1px solid var(--hair-1);
+    vertical-align: top;
+    font-weight: 400;
+  }
+  .vs thead th {
+    border-top: 1px solid var(--hair-2);
+    border-bottom-color: var(--hair-2);
+    font-family: var(--mono);
+    font-size: .66rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--chrome-45);
+    padding-bottom: .8rem;
+  }
+  .vs thead th b { color: var(--chrome); font-weight: 400; }
+  .vs tbody th {
+    width: 26%;
+    color: var(--chrome);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -.01em;
+    line-height: 1.35;
+  }
+  .vs td { width: 37%; color: var(--chrome-45); font-size: .97rem; line-height: 1.55; }
+  .vs td:last-child {
+    color: var(--chrome-70);
+    padding-left: 1.2rem;
+    border-left: 1px solid var(--hair-1);
+  }
+  .vs thead th:last-child { padding-left: 1.2rem; border-left: 1px solid var(--hair-1); }
+  .vs a { color: var(--chrome); text-decoration: none; border-bottom: 1px solid var(--hair-2); }
+  .vs a:hover { border-color: var(--ember); }
+  .vs em { color: var(--ember); font-style: normal; }
+
+  /* ---- the four things handed over ---- */
+  .handover {
+    margin-top: 1.1rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 1.4rem;
+    border-top: 1px solid var(--hair-1);
+  }
+  .handover li {
+    display: grid;
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    gap: 0 .5rem;
+    padding: .7rem 0;
+    border-bottom: 1px solid var(--hair-1);
+    color: var(--chrome-70);
+    font-size: .95rem;
+  }
+  .handover b {
+    grid-column: 1;
+    grid-row: 1;
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: .66rem;
+    letter-spacing: .14em;
+    color: var(--chrome-45);
+    padding-top: .2rem;
+  }
+  .handover span { grid-column: 2; grid-row: 1; }
+
+  /* ---- the developer's drawer ---- */
+  .bonnet { margin-top: clamp(2rem, 6vh, 3.2rem); border-top: 1px solid var(--hair-1); }
+  .bonnet summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.1rem 0;
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--chrome-45);
+    transition: color .25s;
+  }
+  .bonnet summary::-webkit-details-marker { display: none; }
+  .bonnet summary::before {
+    content: "+";
+    color: var(--ember);
+    font-size: .9rem;
+    line-height: 1;
+  }
+  .bonnet[open] summary::before { content: "\2212"; }
+  .bonnet summary:hover { color: var(--chrome); }
+  .bonnet-in { padding-bottom: 1.4rem; }
+  .bonnet-in .check { margin-top: 1.2rem; }
+
+  /* ---- the rig ----
+     Four marks, the readout, four marks. The readout is the middle of the band
+     in the literal sense the brief asked for, and it is the only place any
+     description is printed — eight of them stacked would be the wall this
+     section was built to stop being. */
+  .rig {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 0 clamp(1.4rem, 3.5vw, 3rem);
+    align-items: stretch;
+    border-top: 1px solid var(--hair-2);
+    border-bottom: 1px solid var(--hair-2);
+  }
+  .rig-rail { display: grid; align-content: start; }
+  .rig-rail--a { grid-column: 1; grid-row: 1; }
+  .rig-rail--b { grid-column: 3; grid-row: 1; }
+  .rig-rail li { display: grid; }
+  .rig-tile {
+    appearance: none;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--hair-1);
+    cursor: pointer;
+    padding: 1.5rem .4rem;
+    min-height: 4.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    transition: border-color .35s var(--ease);
+  }
+  .rig-rail--b .rig-tile { justify-content: flex-end; }
+  .rig-rail li:last-child .rig-tile { border-bottom: 0; }
+  /* the mark is stood down until it is asked about, and the ember rule is what
+     says which one the readout is currently showing */
+  /* brightness as well as opacity: three of these marks are pure white and three
+     are strongly coloured, and opacity alone leaves the white ones reading as
+     lit while the coloured ones go grey */
+  .rig-tile .vmark {
+    opacity: .34;
+    filter: grayscale(1) brightness(.62);
+    transition: opacity .35s var(--ease), filter .35s var(--ease);
+  }
+  .rig-tile:hover .vmark,
+  .rig-tile:focus-visible .vmark { opacity: .85; filter: grayscale(.35) brightness(.92); }
+  .rig-tile[aria-pressed="true"] .vmark { opacity: 1; filter: none; }
+  .rig-tile::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--ember);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .4s var(--ease);
+  }
+  .rig-rail--b .rig-tile::after { transform-origin: right center; }
+  .rig-tile[aria-pressed="true"]::after { transform: scaleX(1); }
+  .rig-tile:focus-visible { outline: 1px solid var(--ember); outline-offset: -2px; }
+
+  .rig-out {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    padding: clamp(1.8rem, 5vh, 3rem) clamp(1rem, 2.5vw, 2rem);
+    border-left: 1px solid var(--hair-1);
+    border-right: 1px solid var(--hair-1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 18.4rem;
+  }
+  /* the word is drawn as points on this canvas; .rig-name carries the same text
+     for anything that reads the page rather than looks at it */
+  .rig-canvas {
+    display: block;
+    width: 100%;
+    height: clamp(3.2rem, 7vw, 5rem);
+  }
+  .rig-name {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .rig-line {
+    margin-top: 1.3rem;
+    min-height: 3.1em;
+    color: var(--chrome-70);
+    font-size: clamp(1rem, 1.5vw, 1.18rem);
+    line-height: 1.5;
+    font-variant-ligatures: none;
+  }
+  .rig-out .rig-when {
+    margin-top: 1rem;
+    min-height: 1.6em;
+    color: var(--chrome-45);
+    font-family: var(--mono);
+    font-size: .66rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  /* the no-JS list keeps its own shape; the run-time note only reads as a label
+     once the console has taken it over */
+  .stack .rig-when { display: block; margin-top: .3rem; font-size: .82em; color: var(--chrome-45); }
+
+  @media (max-width: 900px) {
+    .whowe { grid-template-columns: minmax(0, 1fr); }
+    .handover { grid-template-columns: minmax(0, 1fr); }
+    .rig { grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 0; }
+    .rig-rail--a { grid-column: 1 / span 4; grid-row: 1; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .rig-rail--b { grid-column: 1 / span 4; grid-row: 2; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .rig-rail li { border-right: 1px solid var(--hair-1); }
+    .rig-rail li:last-child { border-right: 0; }
+    .rig-rail--a .rig-tile,
+    .rig-rail--b .rig-tile { justify-content: center; padding: 1.1rem .5rem; min-height: 4rem; }
+    .rig-rail--a li:last-child .rig-tile { border-bottom: 1px solid var(--hair-1); }
+    .rig-out {
+      grid-column: 1 / span 4;
+      grid-row: 3;
+      border-left: 0;
+      border-right: 0;
+      border-top: 1px solid var(--hair-2);
+      min-height: 0;
+      padding-inline: 0;
+    }
+  }
+
+  /* ---- work grid ----
+     Eighteen plates on a uniform three-up would read as a tile wall, so the
+     grid runs on twelve tracks and a nine-item unit that repeats exactly twice:
+     7/5, then 4/4/4, then 5/7, then 6/6. Four different row rhythms, no plate
+     ever sitting directly under one the same width. */
   .wgrid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: clamp(3rem, 8vh, 5rem) var(--gutter);
   }
-  @media (max-width: 1000px) { .wgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 620px) { .wgrid { grid-template-columns: 1fr; } }
+  .wgrid > * { grid-column: span 4; }
+  .wgrid > :nth-child(9n + 1) { grid-column: span 7; }
+  .wgrid > :nth-child(9n + 2) { grid-column: span 5; }
+  .wgrid > :nth-child(9n + 6) { grid-column: span 5; }
+  .wgrid > :nth-child(9n + 7) { grid-column: span 7; }
+  .wgrid > :nth-child(9n + 8),
+  .wgrid > :nth-child(9n + 9) { grid-column: span 6; }
+  @media (max-width: 1000px) {
+    .wgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .wgrid > *, .wgrid > :nth-child(9n + 1), .wgrid > :nth-child(9n + 2),
+    .wgrid > :nth-child(9n + 6), .wgrid > :nth-child(9n + 7),
+    .wgrid > :nth-child(9n + 8), .wgrid > :nth-child(9n + 9) { grid-column: span 1; }
+  }
+  @media (max-width: 620px) {
+    .wgrid { grid-template-columns: minmax(0, 1fr); }
+  }
+  /* the plate says it is the real site, and the whole card is the link */
+  .pc.live { color: var(--chrome-45); transition: color .35s var(--ease); }
+  .case:hover .pc.live, .case:focus-visible .pc.live { color: var(--ember); }
+  .case:focus-visible { outline: 2px solid var(--ember); outline-offset: 6px; }
+  .case .plate-media { transition: filter .5s var(--ease); filter: saturate(.82); }
+  .case:hover .plate-media { filter: saturate(1); }
   .work-end {
     display: flex;
     justify-content: space-between;
@@ -687,8 +982,19 @@
     text-transform: uppercase;
   }
   .people .meta { grid-column: 2; grid-row: 1; text-align: right; }
-  .team { margin-top: clamp(1.8rem, 5vh, 3rem); }
-  .team .sub { margin-top: 1.1rem; max-width: 46ch; }
+  /* names on the left, the sentence about everyone else on the right: the
+     section used to run down one column with the other half of the page blank */
+  .team-band {
+    display: grid;
+    grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+    gap: 0 clamp(1.8rem, 4.5vw, 4rem);
+    align-items: start;
+  }
+  .team-band .people { grid-column: 1; grid-row: 1; margin-top: 1.8rem; }
+  .team-band .people h2 { font-size: clamp(1.5rem, 2.6vw, 2.3rem); }
+  .team-band .team { grid-column: 2; grid-row: 1; }
+  .team { margin-top: 1.8rem; padding-top: clamp(1.3rem, 3.5vh, 2.2rem); }
+  .team .sub { margin-top: 1.1rem; max-width: 52ch; }
 
   /* a claim, and under it the thing you can go and do to check the claim */
   .pillars { border-top: 1px solid var(--hair-2); margin-top: 1.8rem; }
@@ -736,17 +1042,20 @@
      — these are sentences, and uppercase would shout them. The numeral is the
      outlined figure the work plates use, so the section reads as an index. */
   .charter { border-top: 1px solid var(--hair-2); margin-top: 1.8rem; }
+  /* Three tracks, not two. The claim is a headline and the paragraph under it
+     is the argument; setting them side by side lets the row use the measure the
+     page actually has instead of running down its left edge. */
   .charter li {
     display: grid;
-    grid-template-columns: clamp(3.4rem, 7vw, 6.5rem) minmax(0, 1fr);
-    gap: 0 clamp(1.2rem, 3vw, 2.6rem);
+    grid-template-columns: clamp(3rem, 5.2vw, 4.8rem) minmax(0, .9fr) minmax(0, 1.14fr);
+    gap: 0 clamp(1.2rem, 3vw, 2.8rem);
     padding: clamp(1.8rem, 4.5vh, 2.8rem) 0;
     border-bottom: 1px solid var(--hair-1);
     align-items: start;
   }
   .charter .n {
     grid-column: 1;
-    grid-row: 1 / span 4;
+    grid-row: 1 / span 3;
     font-weight: 900;
     font-size: clamp(2rem, 3.6vw, 3.2rem);
     line-height: .95;
@@ -757,35 +1066,58 @@
   }
   .charter h2 {
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 1 / span 3;
     font-weight: 800;
-    font-size: clamp(1.5rem, 2.9vw, 2.4rem);
+    font-size: clamp(1.5rem, 2.5vw, 2.15rem);
     letter-spacing: -.035em;
     line-height: 1.04;
-    max-width: 24ch;
+    max-width: 17ch;
     text-wrap: balance;
   }
   .charter > li > p:not(.n):not(.practice) {
-    grid-column: 2;
-    grid-row: 2;
-    margin-top: .95rem;
+    grid-column: 3;
+    grid-row: 1;
+    margin-top: 0;
     color: var(--chrome-70);
     font-size: 1.02rem;
-    max-width: 62ch;
+    line-height: 1.62;
+    max-width: 56ch;
   }
-  .charter .practice { grid-row: 3; }
-  .charter .fx { grid-column: 2; grid-row: 4; }
+  .charter .practice { grid-column: 3; grid-row: 2; }
+  .charter .fx { grid-column: 3; grid-row: 3; }
 
   /* the stack reads as a key: short mono names, plain-language descriptions */
   .stack { border-top: 1px solid var(--hair-2); margin-top: 1.6rem; }
   .stack > div {
     display: grid;
-    grid-template-columns: 10rem minmax(0, 1fr);
+    grid-template-columns: 11.5rem minmax(0, 1fr);
     gap: .3rem clamp(1.2rem, 3vw, 2.4rem);
     padding: 1.05rem 0;
     border-bottom: 1px solid var(--hair-1);
     align-items: baseline;
   }
+  .vmark-note {
+    margin-top: .7rem;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .05em;
+    text-transform: none;
+    color: var(--chrome-45);
+  }
+  .vmark {
+    display: block;
+    height: 21px;
+    width: auto;
+    max-width: 100%;
+    opacity: .82;
+    transition: opacity .35s var(--ease);
+  }
+  /* Two of the five are icon-plus-wordmark lockups whose type is roughly half
+     their box height. Matched on the height of the lettering rather than the
+     height of the file, so all five read at one size. Uniform scale only —
+     nothing here is redrawn, cropped or tinted. */
+  .vmark--lockup { height: 34px; }
+  .stack > div:hover .vmark { opacity: 1; }
   .stack dt {
     grid-column: 1;
     grid-row: 1;
@@ -811,10 +1143,79 @@
     column-gap: var(--gutter);
     row-gap: 3rem;
   }
-  .form { grid-column: 1 / span 7; }
-  .note { grid-column: 1 / span 7; }
-  .aside { grid-column: 9 / -1; }
-  @media (max-width: 760px) { .form, .note, .aside { grid-column: 1 / -1; } }
+  /* Every child is placed. An auto-placed one next to placed siblings is how
+     the note ended up 277px wide the last time this page was touched. */
+  .brief-say { grid-column: 1 / span 4; grid-row: 1; }
+  .form { grid-column: 6 / -1; grid-row: 1; }
+  .note { grid-column: 6 / -1; grid-row: 2; }
+  @media (max-width: 900px) {
+    .brief-say { grid-column: 1 / -1; grid-row: 1; }
+    .form { grid-column: 1 / -1; grid-row: 2; }
+    .note { grid-column: 1 / -1; grid-row: 3; }
+  }
+  /* a statement, not a display line: it shares its row with a form */
+  .brief-say .statement { font-size: clamp(1.25rem, 2vw, 1.75rem); max-width: 18ch; }
+  .brief-list { margin-top: 1.6rem; border-top: 1px solid var(--hair-1); }
+  .brief-list li {
+    display: grid;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    gap: 0 .6rem;
+    padding: .85rem 0;
+    border-bottom: 1px solid var(--hair-1);
+    color: var(--chrome-70);
+    font-size: .97rem;
+    line-height: 1.55;
+  }
+  .brief-list b {
+    grid-column: 1;
+    grid-row: 1;
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: .68rem;
+    letter-spacing: .14em;
+    color: var(--chrome-45);
+    padding-top: .22rem;
+  }
+  .brief-list span { grid-column: 2; grid-row: 1; }
+  .brief-rate {
+    margin-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: .76rem;
+    line-height: 1.68;
+    color: var(--chrome-45);
+  }
+  .brief-rate b { color: var(--chrome); font-weight: 500; }
+  .brief-rate a { color: var(--chrome-70); border-bottom: 1px solid var(--hair-2); text-decoration: none; }
+  .brief-rate a:hover { color: var(--chrome); border-color: var(--ember); }
+
+  /* The three ways in, across the whole measure rather than stacked in a
+     right-hand rail nobody reads first. */
+  .reach {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 var(--gutter);
+    margin-top: 1.8rem;
+    border-top: 1px solid var(--hair-2);
+  }
+  .reach li { padding: clamp(1.4rem, 3.5vh, 2.2rem) 0 0; }
+  .reach-big {
+    display: block;
+    margin-top: .7rem;
+    font-weight: 700;
+    font-size: clamp(1.05rem, 1.85vw, 1.5rem);
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    border-bottom: 1px solid transparent;
+    transition: border-color .35s var(--ease);
+  }
+  .reach-big:hover { border-bottom-color: var(--ember); }
+  .reach-sub { margin-top: .6rem; color: var(--chrome-45); font-size: .93rem; }
+  @media (max-width: 760px) {
+    .reach { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .reach li { border-bottom: 1px solid var(--hair-1); padding-bottom: 1.2rem; }
+  }
   .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--gutter); }
   @media (max-width: 560px) { .f-row { grid-template-columns: 1fr; } }
   .f { display: grid; gap: .3rem; padding-top: 1.3rem; }
@@ -845,10 +1246,6 @@
   .f-foot { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; margin-top: 2rem; }
   .note { padding-top: 1.3rem; }
   .note:focus { outline: none; }
-  .aside dl { display: grid; gap: 1.6rem; }
-  .aside dd { margin-top: .35rem; font-size: 1rem; }
-  .aside dd a { text-decoration: none; border-bottom: 1px solid var(--hair-2); }
-  .aside dd a:hover { border-color: var(--ember); }
 
   /* ---- footer ---- */
   .foot {
@@ -873,13 +1270,20 @@
   .foot-nav a[aria-current] { color: var(--chrome); }
   .foot-meta {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: .8rem 2rem;
+    gap: 0 2rem;
     border-top: 1px solid var(--hair-1);
-    padding-top: 1.1rem;
+    padding-top: .3rem;
   }
-  .foot-meta a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+  .foot-meta > * {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+  .foot-meta a { display: inline-flex; align-items: center; }
   .foot a { text-decoration: none; }
   .foot a:hover { color: var(--chrome); }
 }
@@ -1256,9 +1660,25 @@
   .menu-nav a[aria-current] small::before { content: "\25A0\00a0\00a0"; color: var(--ember); }
   .menu-say { padding-top: clamp(1.2rem, 5vh, 2.6rem); }
   .menu-say .statement { margin-top: .9rem; }
-  .menu-foot { display: flex; flex-direction: column; gap: .4rem; padding-top: 1.4rem; }
+  .menu-foot { display: flex; flex-direction: column; align-items: flex-start; gap: .4rem; padding-top: 1.4rem; }
+  .menu-foot .fx-btn { margin-top: .5rem; }
   .menu-foot a { text-decoration: none; }
   html.rm .menu[open] .menu-in { animation: none; }
+}
+
+/* Between the two: the third charter track needs room to be worth having, and
+   the team band needs both of its columns to stay readable. */
+@media (max-width: 1080px) {
+  .charter li { grid-template-columns: clamp(3rem, 6vw, 5rem) minmax(0, 1fr); }
+  .charter h2 { grid-column: 2; grid-row: 1; max-width: 26ch; }
+  .charter > li > p:not(.n):not(.practice) { grid-column: 2; grid-row: 2; margin-top: .95rem; max-width: 64ch; }
+  .charter .practice { grid-column: 2; grid-row: 3; }
+  .charter .fx { grid-column: 2; grid-row: 4; }
+  .charter .n { grid-row: 1 / span 4; }
+  .team-band { grid-template-columns: minmax(0, 1fr); }
+  .team-band .people, .team-band .team { grid-column: 1; }
+  .team-band .people { grid-row: 1; }
+  .team-band .team { grid-row: 2; }
 }
 
 @media (max-width: 760px) {
@@ -1330,6 +1750,29 @@
   .csp, .src { grid-column: 1; grid-row: 4; }
 
   .stack > div { grid-template-columns: minmax(0, 1fr); padding: 1rem 0 1.1rem; }
+  /* Three columns will not fit a phone, so each row becomes its own stacked
+     card: the thing being compared, then the two answers, each labelled. */
+  .vs, .vs tbody, .vs tr, .vs th, .vs td { display: block; width: auto; }
+  .vs thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .vs tbody tr { padding: 1.2rem 0 1.1rem; border-bottom: 1px solid var(--hair-1); }
+  .vs tbody tr:first-child { border-top: 1px solid var(--hair-2); }
+  .vs th, .vs td { border-bottom: 0; padding: 0; }
+  .vs tbody th { font-size: 1.05rem; }
+  .vs td { margin-top: .8rem; padding-left: 0; }
+  .vs td::before {
+    display: block;
+    margin-bottom: .25rem;
+    font-family: var(--mono);
+    font-size: .6rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--chrome-45);
+  }
+  .vs td:nth-of-type(1)::before { content: "One freelancer"; }
+  .vs td:nth-of-type(2)::before { content: "Thornbury"; color: var(--ember); }
+  .vs td:last-child { border-left: 0; padding-left: 0; }
+  .vmark { height: 19px; }
+  .vmark--lockup { height: 31px; }
   .stack dt { grid-column: 1; grid-row: 1; }
   .stack dd { grid-column: 1; grid-row: 2; margin-top: .45rem; max-width: none; }
 
@@ -1456,7 +1899,6 @@
     color: var(--chrome-45);
     max-width: 58ch;
   }
-  .foot-meta .fx-btn { min-height: 2.75rem; font-size: .66rem; letter-spacing: .12em; }
 
   /* ---- the live policy ---- */
   .csp {
@@ -1573,7 +2015,6 @@
   .csp dd { grid-column: 1; grid-row: 2; }
   .src pre { font-size: .64rem; padding: .8rem .85rem; }
   .fx-hint, .pull-sub, .pull-line { max-width: none; }
-  .foot-meta .fx-btn { min-height: 2.75rem; }
 }
 
 /* ============================================================================
@@ -1587,13 +2028,25 @@
   .fig3d { position: relative; }
   .fig3d-stage {
     position: relative;
-    /* the field stays visible through the band, but stood down: two additive
-       point clouds competing at the same brightness reads as noise */
-    background: rgba(8, 8, 8, .72);
+    /* Glass, not a scrim. The band sits on the site's persistent canvas, and two
+       line drawings at the same brightness fight wherever they cross. Blurring
+       what is behind separates them the way depth of field separates a subject
+       from a room — the field is still there and still moving, but it is now
+       background. The tint is the fallback for browsers without the filter, so
+       the band is never transparent by accident. */
+    background: rgba(8, 8, 8, .62);
+    -webkit-backdrop-filter: blur(26px) saturate(1.15) brightness(.72);
+    backdrop-filter: blur(26px) saturate(1.15) brightness(.72);
     height: clamp(23rem, 64vh, 40rem);
     border-top: 1px solid var(--hair-1);
     border-bottom: 1px solid var(--hair-1);
     overflow: hidden;
+    /* a backdrop-filter needs its own stacking context to composite against the
+       fixed canvas rather than against the section's own paint */
+    isolation: isolate;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .fig3d-stage { background: rgba(8, 8, 8, .88); }
   }
   .fig3d-canvas {
     position: absolute;
@@ -1603,14 +2056,15 @@
     opacity: 0;
     transition: opacity 1.2s var(--ease);
     /* the cloud dissolves into the band's edges instead of being cut by them */
-    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
-    mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 94%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 94%, transparent);
   }
   .fig3d.is-on .fig3d-canvas { opacity: 1; }
   .fig3d-note {
     position: absolute;
     left: var(--gutter);
-    bottom: 1.5rem;
+    /* top, not bottom: the flow layer occupies the foot of the band */
+    top: 1.4rem;
     z-index: 1;
     max-width: 32ch;
     /* a sentence, so it drops the caps the mono labels use elsewhere */

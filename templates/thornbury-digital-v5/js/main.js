@@ -325,7 +325,7 @@
         /* the stage is the clipped box the canvas lives in; the caption is
            outside it so a phone can put it underneath instead of on top */
         figureHandle = mod.mount(host.querySelector('.fig3d-stage') || host, {
-          src: host.getAttribute('data-figure-src'),
+          packSrc: host.getAttribute('data-figure-pack'),
           onReady: function (n) {
             var out = host.querySelector('[data-figure-count]');
             if (out) out.textContent = n.toLocaleString('en');
@@ -338,6 +338,31 @@
     offs.push(function () {
       io.disconnect();
       if (figureHandle) { figureHandle.destroy(); figureHandle = null; }
+    });
+  }
+
+  /* The platform rig. Unlike the figure this one is not decorative — without it
+     the section is still a readable list, but with it the section is the whole
+     point of that part of the page, so it loads on approach regardless of WebGL.
+     It is handed the reduced state rather than reading it, because the switch can
+     be thrown after the module is already mounted. */
+  var rigHandle = null;
+
+  function rig(root) {
+    var host = root.querySelector('[data-rig-root]');
+    if (!host) return;
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      import('./rig.js').then(function (mod) {
+        if (!host.isConnected) return;
+        rigHandle = mod.mount(host, { reduced: reducedNow() });
+      }).catch(function () { /* the plain list stays; nothing else is affected */ });
+    }, { rootMargin: '500px 0px' });
+    io.observe(host);
+    offs.push(function () {
+      io.disconnect();
+      if (rigHandle) { rigHandle.destroy(); rigHandle = null; }
     });
   }
 
@@ -485,6 +510,7 @@
     cspBlock(root);
     cssBlock(root);
     figure(root);
+    rig(root);
     scrollFeel();
     trueLoopMarquee(root.querySelector('#mq'), 22);
     briefForm(root);
