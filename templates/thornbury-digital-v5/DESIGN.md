@@ -1379,4 +1379,4 @@ loaded, Work marked current in the bar and the footer; no grid child left on
 teaser; Work → case and case → next case both swapping through the router with
 one `<main>` and no inline style left at rest; the Team band mounting with the
 ground drawn, 50,093 figure points, at 96 fps on the desktop harness.
-The band's cost on a real phone is measured by the LAN probe, which now scrolls the band into view, waits nine seconds for three.js to build, and samples the frame rate; the result is recorded below when a handset opens it.
+The band's cost on a real phone is measured by the LAN probe, which now scrolls the band into view, waits nine seconds for three.js to build, and samples the frame rate; no handset opened it inside the window this pass stayed open for, so the band's phone frame rate is still the one number this log owes; the last handset run (08:26 UTC, before the ground layer existed) had the page itself at 61 fps on Studio with the band not yet mounted.
