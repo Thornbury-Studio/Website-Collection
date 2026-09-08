@@ -1705,3 +1705,34 @@ nebula is opaque and stands in for the field; it fades with the hero, and
 the field is underneath as it always was. Harness at 1440: 58 fps with all
 of it on (54 before the bake), 80 at 390; routing check still six for six.
 
+## The hero is type
+
+The boss's read, and the right one: a space hero says astronomy or a tech
+startup, not a Singapore studio that designs, builds and hands over
+websites. Every object this week — the Moon film, the monolith, the Earth
+— was a beautiful thing standing next to the business. The Earth and its
+space are retired and out of the repository. The hero is now type over the
+liquid field, and the brief was to make it full rather than empty: the
+Locomotive reference is not sparse, it has several lines moving on several
+clocks at once, and that density is what makes restraint read as intent.
+
+**Four clocks, all the studio's own words.** The wordmark, at 11.6vw,
+decodes once on arrival; its width axis is the pointer's, narrowing to 82
+at the left of the screen and widening to 116 at the right, so the first
+screen answers the hand. The process line, lower right, cycles the four
+steps from the studio's About text every 3.4 s, each arrival decoding
+through glyphs. Under it the four facts — two principals, a founding team
+of around twenty, design, writing, build, launch and handover, the rate is
+on the page — arrive one after another every 1.1 s, hold, and go again. And
+along the foot a band that never stops: the four services with their two
+in-development marks, the two rates, and Singapore. Nothing here is new
+copy; every line already stands elsewhere on this site. The tagline and the
+two calls to action are unchanged. Without motion every line stands still
+and present.
+
+**Verified across routing, not just load.** Everything is bound in init and
+released in teardown, so a routed return rebuilds it. Home → Work → Home:
+the hero's state is null while away and rebuilt on return; the wordmark's
+width moved from 84.9 to 113.1 as the pointer crossed the stage; the step
+clock advanced afterwards. Console clean, zero overflow at 1440 and 390.
+

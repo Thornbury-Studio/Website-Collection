@@ -796,7 +796,7 @@
       var to = doc.documentElement.getAttribute('data-page') || 'home';
       document.querySelectorAll('dialog[open]').forEach(function (d) { d.close(); });
       if (push) history.pushState({ tb: 1 }, '', u.href);
-      if (global.TBPage) { global.TBPage.holdField(true); if (global.TBPage.pauseHero) global.TBPage.pauseHero(true); }
+      if (global.TBPage) global.TBPage.holdField(true);
       /* The two layers start together. The background runs on the mode's own
          clock and says when it is ready to commit; the plate says when it has
          gone; the swap waits for both, so neither layer is ever cut short. */
