@@ -1687,3 +1687,21 @@ the sun's x flipping from −0.68 to +0.61 as the pointer crossed the stage,
 proximity from 0.00 to 0.90 as it reached the planet. Six checks, six
 passes, console clean.
 
+## The space behind the planet, and in front of it
+
+Zane's note: the effect behind the Earth should be what you see in space,
+and it should happen behind *and* in front, so the hero reads as depth. In
+the planet's own scene now, all in the site's palette: a nebula far behind
+— three octaves of noise, grey haze with a few ember filaments, baked once
+to a small texture and drifted, because computing it per pixel per frame
+cost a third of the frame for a cloud that moves slower than the eye can
+tell; stars in three depths, three thousand far, six hundred mid, ninety
+nearer the camera than the planet so they cross in front of it; dust
+drifting past the lens; and a meteor every few seconds, some in front,
+some behind, its length in proportion to its distance. The camera leans
+with the pointer, so every depth shifts by its own amount — that parallax
+is what makes it space rather than a picture behind a ball. In the hero the
+nebula is opaque and stands in for the field; it fades with the hero, and
+the field is underneath as it always was. Harness at 1440: 58 fps with all
+of it on (54 before the bake), 80 at 390; routing check still six for six.
+
