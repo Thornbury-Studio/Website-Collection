@@ -1932,3 +1932,46 @@ be read top to bottom on their own. The phone gets its own numbers rather
 than inherited ones: a rule and 22 px above each claim, the claim at 22 px,
 the argument at 15.7 px, the note 15 px under it. The margin column is
 untouched.
+
+## The charter, on one plate
+
+Paced or not, five claim-and-paragraph blocks scrolled past are a list read
+in sequence — the boss's words: nobody should have to open "a long faq
+looking text that shows less value than what it means." The section had to
+become something taken in at a glance, then gone deeper on only where the
+reader chooses.
+
+The page already says what that means in its own language: the How-the-work-
+goes stage under it puts four short labels beside one display and swaps the
+display on a click. Outside the site the same structure is on Stripe's home
+page (six labels beside one shared area, chosen by the visitor, no
+auto-advance) and Apple's MacBook Pro page (chip tiers and Continuity
+features as a strip that swaps one area); the keyboard contract is the ARIA
+Authoring Practices Tabs pattern. But the charter is a set, not a sequence,
+so it does not copy the stage: no figure, no clock, no leader lines. It is a
+plate — the blueprint plate the work uses, corners, ruling, "Fig. — The
+charter" in the corner — and the five claims are composed on it together in
+the outlined-and-solid type the footer marquee and the work numerals already
+use: every claim visible at once, outlined in `--chrome-45` at
+`clamp(1.5rem, 2.7vw, 2.6rem)`, and the chosen one filled solid with its
+index in ember, while its article — "■ Article 0N", the argument, then the
+practice note under a hairline — is read in the panel beside it. Five claims
+in one look, one article at a time: 438 px tall at 1440 where the stacked
+form ran 1,280.
+
+**Built from the document, not instead of it.** The markup ships as the
+document form from the last round — five `<article>`s, claim, argument,
+note, ruled apart — and `js/main.js` (`charter`) builds the claims from
+those articles' own headings, marks the list a `tablist`, the claims `tab`s
+with a roving tabindex, the articles `tabpanel`s labelled by their claim,
+and hides all but the chosen one. Up/Down and Left/Right move and choose,
+Home and End go to the ends, the ends wrap; the panel is focusable in its own
+right. With the script gone the plate holds the document: checked with script
+execution disabled at 1440 and 390 — no claims built, five articles visible
+with their rules, the note in its margin column. The effects switch, which
+tears the page down and re-inits it in place, gets the document back first
+and rebuilds five tabs, not ten. On a phone the claims are listed solid
+rather than outlined — a one-pixel outline at 20 px is fuzz — the chosen one
+lit, and the article sits under the list with a rule between; list and
+article together fit one 844 px screen. Copy is string-identical to the
+previous markup in all fifteen pieces; nothing else on the page moved.

@@ -1109,23 +1109,30 @@
   }
   .pillars code { font-family: var(--mono); font-size: .95em; color: var(--chrome-70); }
 
-  /* ---- the charter: a document, not an index ----
-     Five articles as running text: the claim set bold and the argument
-     following it in the same line, no numerals and no rules between them,
-     with each article's practice note in the margin beside it, the way a
-     charter carries its commentary. The Questions page owns the numbered
-     ledger with the outlined figure; this reads as the thing it says it is. */
-  /* Pacing: five statements, not one wall. A rule runs the full width between
-     articles, and each claim stands on its own line at display size so the
-     five can be read top to bottom on their own; the argument sits under it,
-     smaller and a step dimmer. The margin column is unchanged. */
-  .charter { margin-top: 1.6rem; border-top: 1px solid var(--hair-2); border-bottom: 1px solid var(--hair-1); }
+  /* ---- the charter, on one plate ----
+     Five claims composed together on the site's own blueprint plate, in the
+     outlined-and-solid type the footer marquee and the work numerals use:
+     every claim is on the plate at once, outlined, and the one chosen fills
+     solid while its article — the argument, then the practice note — is read
+     in the panel beside it. A set, chosen, not a sequence played: the stage
+     under it runs four steps in order with a figure; this one holds still
+     and waits for a hand. The script builds the claims from the articles'
+     own headings, so without it the plate holds the document form — five
+     articles, ruled apart, claim then argument then note — and nothing is
+     lost; that form is what the first block of rules below describes. */
+  .charter { margin-top: 1.6rem; }
+  .charter-in {
+    position: relative;
+    z-index: 1;
+    padding: clamp(2rem, 4.5vw, 3.4rem) clamp(1.2rem, 3vw, 3rem) clamp(1.8rem, 4vh, 3rem);
+  }
+  .charter-claims { display: none; }
   .article {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     column-gap: var(--gutter);
     align-items: start;
-    padding: clamp(1.7rem, 4vh, 2.6rem) 0 clamp(1.8rem, 4.2vh, 2.8rem);
+    padding: clamp(1.4rem, 3.4vh, 2.2rem) 0 clamp(1.6rem, 3.8vh, 2.4rem);
   }
   .article + .article { border-top: 1px solid var(--hair-1); }
   .article-text {
@@ -1134,6 +1141,7 @@
     color: var(--chrome-70);
     text-wrap: pretty;
   }
+  .article-text .meta { margin-bottom: .9rem; }
   .article-text h2 {
     display: block;
     font-weight: 800;
@@ -1145,7 +1153,7 @@
     text-wrap: balance;
     font-variation-settings: "wdth" 92;
   }
-  .article-text p {
+  .article-text p:not(.meta) {
     display: block;
     margin-top: .8rem;
     font-weight: 500;
@@ -1167,6 +1175,76 @@
     line-height: 1.6;
     color: var(--chrome-45);
   }
+
+  /* the plate form, once the script has built the claims */
+  .charter.is-plate .charter-in {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+  }
+  .charter.is-plate .charter-claims { display: block; grid-column: 1; grid-row: 1; }
+  .charter.is-plate .charter-articles {
+    grid-column: 2;
+    grid-row: 1;
+    border-left: 1px solid var(--hair-1);
+    padding-left: clamp(1.2rem, 3vw, 2.6rem);
+    min-height: 100%;
+  }
+  .charter-claims button {
+    display: grid;
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    gap: 0 .6rem;
+    align-items: baseline;
+    width: 100%;
+    margin: 0;
+    padding: .45rem 0;
+    background: none;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 800;
+    font-size: clamp(1.5rem, 2.7vw, 2.6rem);
+    line-height: 1.02;
+    letter-spacing: -.035em;
+    font-variation-settings: "wdth" 92;
+    text-wrap: balance;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--chrome-45);
+    transition: color .45s var(--ease), -webkit-text-stroke-color .45s var(--ease);
+  }
+  .charter-claims button + button { margin-top: clamp(.4rem, 1vh, .8rem); }
+  .charter-claims button .meta {
+    -webkit-text-stroke: 0;
+    color: var(--chrome-45);
+    font-weight: 400;
+    transition: color .45s var(--ease);
+  }
+  .charter-claims button b { font-weight: inherit; }
+  .charter-claims button:hover { -webkit-text-stroke-color: var(--chrome-70); }
+  .charter-claims button[aria-selected="true"] { color: var(--chrome); -webkit-text-stroke-color: var(--chrome); cursor: default; }
+  .charter-claims button[aria-selected="true"] .meta { color: var(--ember); }
+  .charter-claims button:focus-visible { outline: 2px solid var(--ember); outline-offset: 4px; }
+  .charter.is-plate .article { display: block; padding: 0; opacity: 0; transform: translateY(8px); }
+  .charter.is-plate .article + .article { border-top: 0; }
+  .charter.is-plate .article.is-on { opacity: 1; transform: none; transition: opacity .5s var(--ease), transform .5s var(--ease); }
+  /* the claim is on the plate; the heading stays for the reader who is listening */
+  .charter.is-plate .article-text h2 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .charter.is-plate .article-text p:not(.meta) { margin-top: 0; max-width: 46ch; font-size: clamp(1rem, 1.15vw, 1.1rem); }
+  .charter.is-plate .article-note { margin-top: 1.3rem; max-width: 46ch; }
+  html.rm .charter-claims button,
+  html.rm .charter-claims button .meta,
+  html.rm .charter.is-plate .article.is-on { transition: none; }
 
   /* Desktop: folds are invisible wrappers so the existing grids still hold.
      The phone restyles them into a tap-to-open index. */
@@ -1789,6 +1867,8 @@
 @media (max-width: 1080px) {
   .article-text { grid-column: 1 / -1; max-width: 62ch; }
   .article-note { grid-column: 1 / -1; grid-row: 2; margin-top: 1rem; max-width: 62ch; }
+  .charter.is-plate .charter-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .charter-claims button { font-size: clamp(1.3rem, 2.4vw, 1.8rem); }
   .team-band { grid-template-columns: minmax(0, 1fr); }
   .team-band .people, .team-band .team { grid-column: 1; }
   .team-band .people { grid-row: 1; }
@@ -1927,16 +2007,39 @@
     max-width: none;
   }
 
-  /* ---- studio: the charter reads straight down, the note under each article.
-     The same breathing room as the desktop, set for the phone rather than
-     inherited: a rule and 1.4rem above each claim, the claim at its own size,
-     the argument a step down, the note under it. ---- */
+  /* ---- studio: the charter on a phone. The five claims listed, solid rather
+     than outlined (a one-pixel outline at this size is fuzz), the chosen one
+     lit; the article under the list with a rule between. Without the script
+     the document form stacks with its own spacing, not the desktop's. ---- */
   .charter { margin-top: 1.2rem; }
+  .charter-in { padding: 1.7rem 1rem 1.5rem; }
   .article { display: block; padding: 1.4rem 0 1.5rem; }
   .article-text { max-width: none; }
   .article-text h2 { font-size: clamp(1.3rem, 5.6vw, 1.6rem); line-height: 1.1; max-width: none; }
-  .article-text p { margin-top: .6rem; font-size: .98rem; line-height: 1.5; max-width: none; }
+  .article-text p:not(.meta) { margin-top: .6rem; font-size: .98rem; line-height: 1.5; max-width: none; }
   .article-note { margin-top: .95rem; max-width: none; padding-top: .65rem; }
+  .charter.is-plate .charter-in { display: block; }
+  .charter.is-plate .charter-articles {
+    border-left: 0;
+    padding-left: 0;
+    min-height: 0;
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--hair-1);
+  }
+  .charter-claims button {
+    grid-template-columns: 1.9rem minmax(0, 1fr);
+    min-height: 2.75rem;
+    padding: .55rem 0;
+    font-size: clamp(1.15rem, 5vw, 1.4rem);
+    color: var(--chrome-45);
+    -webkit-text-stroke: 0;
+  }
+  .charter-claims button + button { margin-top: 0; border-top: 1px solid var(--hair-0); }
+  .charter-claims button:hover { color: var(--chrome-70); }
+  .charter-claims button[aria-selected="true"] { color: var(--chrome); }
+  .charter.is-plate .article-text p:not(.meta) { max-width: none; font-size: .98rem; }
+  .charter.is-plate .article-note { max-width: none; margin-top: 1rem; }
 
   .people li { grid-template-columns: minmax(0, 1fr); }
   .people h2 { grid-column: 1; grid-row: 1; }

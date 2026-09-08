@@ -739,6 +739,102 @@
     offs.push(function () { if (raf) cancelAnimationFrame(raf); });
   }
 
+  /* The charter, on one plate. The five claims are composed together,
+     outlined, and the one chosen fills solid while its article is read in the
+     panel beside it. A tab list in the ARIA sense: the claims are tabs with a
+     roving tabindex, Up and Down (or Left and Right) move between them and
+     choose, Home and End go to the ends, and each panel is labelled by its
+     claim and focusable in its own right. The claims are built here from the
+     articles' own headings, so the markup ships as the document form — five
+     articles in full — and that is what stands with the script gone. The
+     teardown puts the document form back, so an effects toggle, which tears
+     down and re-inits the same page, rebuilds from a clean state. */
+  function charter(root) {
+    var host = root.querySelector('[data-charter]');
+    if (!host) return;
+    var list = host.querySelector('[data-charter-claims]');
+    var articles = [].slice.call(host.querySelectorAll('.article'));
+    if (!list || articles.length < 2) return;
+    var tabs = [];
+    articles.forEach(function (art, i) {
+      var h = art.querySelector('h2');
+      if (!h) return;
+      if (!art.id) art.id = 'charter-' + (i + 1);
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.id = art.id + '-claim';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-controls', art.id);
+      var n = document.createElement('span');
+      n.className = 'meta';
+      n.setAttribute('aria-hidden', 'true');
+      n.textContent = (i < 9 ? '0' : '') + (i + 1);
+      var t = document.createElement('b');
+      t.textContent = h.textContent;
+      b.appendChild(n);
+      b.appendChild(t);
+      list.appendChild(b);
+      art.setAttribute('role', 'tabpanel');
+      art.setAttribute('aria-labelledby', b.id);
+      art.setAttribute('tabindex', '0');
+      tabs.push(b);
+    });
+    if (tabs.length < 2) return;
+    list.setAttribute('role', 'tablist');
+    list.setAttribute('aria-label', 'The charter');
+    list.setAttribute('aria-orientation', 'vertical');
+    var cur = -1;
+    function select(i, focus) {
+      i = (i + tabs.length) % tabs.length;
+      if (i !== cur) {
+        tabs.forEach(function (b, k) {
+          var art = articles[k], on = k === i;
+          b.setAttribute('aria-selected', on ? 'true' : 'false');
+          b.setAttribute('tabindex', on ? '0' : '-1');
+          if (on) {
+            art.hidden = false;
+            void art.offsetWidth; /* commit the display change, so the fade runs */
+            art.classList.add('is-on');
+          } else {
+            art.classList.remove('is-on');
+            art.hidden = true;
+          }
+        });
+        cur = i;
+      }
+      if (focus) tabs[i].focus();
+    }
+    tabs.forEach(function (b, i) {
+      on(b, 'click', function () { select(i, false); });
+      on(b, 'keydown', function (e) {
+        var j = null;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') j = i + 1;
+        else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') j = i - 1;
+        else if (e.key === 'Home') j = 0;
+        else if (e.key === 'End') j = tabs.length - 1;
+        if (j === null) return;
+        e.preventDefault();
+        select(j, true);
+      });
+    });
+    host.classList.add('is-plate');
+    select(0, false);
+    offs.push(function () {
+      host.classList.remove('is-plate');
+      list.textContent = '';
+      list.removeAttribute('role');
+      list.removeAttribute('aria-label');
+      list.removeAttribute('aria-orientation');
+      articles.forEach(function (art) {
+        art.hidden = false;
+        art.classList.remove('is-on');
+        art.removeAttribute('role');
+        art.removeAttribute('aria-labelledby');
+        art.removeAttribute('tabindex');
+      });
+    });
+  }
+
   /* The questions page: an index that stays put and marks the question being
      read. The current one is the last item whose top has passed a reading
      line just under a quarter of the way down the screen, sampled once per
@@ -829,6 +925,7 @@
     cssBlock(root);
     whoBeats(root);
     folds(root);
+    charter(root);
     heroType(root);
     figure(root);
     rig(root);
