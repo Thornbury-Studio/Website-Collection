@@ -305,7 +305,7 @@ var METEOR_HEAD_VERT = [
   '  vec4 mv = modelViewMatrix * vec4(head, 1.0);',
   '  gl_Position = projectionMatrix * mv;',
   '  float far = (6.0 - aStart.z) / 6.0;',
-  '  gl_PointSize = (3.0 + 5.0 / max(far, 0.35)) * uDpr;',
+  '  gl_PointSize = (4.0 + 7.0 / max(far, 0.35)) * uDpr;',
   '  float alive = step(0.0, age) * step(age, life);',
   '  vFade = alive * sin(u * 3.14159) * uFade;',
   '}'
