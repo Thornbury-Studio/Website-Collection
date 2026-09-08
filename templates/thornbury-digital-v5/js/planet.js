@@ -288,6 +288,40 @@ var METEOR_VERT = [
   '  vFade = alive * env * (1.0 - 0.85 * aEnd) * uFade;',
   '}'
 ].join('\n');
+var METEOR_HEAD_VERT = [
+  'attribute vec3 aStart;',
+  'attribute vec3 aDir;',
+  'attribute float aLaunch;',
+  'attribute float aSpeed;',
+  'uniform float uTime;',
+  'uniform float uFade;',
+  'uniform float uDpr;',
+  'varying float vFade;',
+  'void main() {',
+  '  float age = uTime - aLaunch;',
+  '  float life = 1.4;',
+  '  float u = clamp(age / life, 0.0, 1.0);',
+  '  vec3 head = aStart + aDir * age * aSpeed;',
+  '  vec4 mv = modelViewMatrix * vec4(head, 1.0);',
+  '  gl_Position = projectionMatrix * mv;',
+  '  float far = (6.0 - aStart.z) / 6.0;',
+  '  gl_PointSize = (3.0 + 5.0 / max(far, 0.35)) * uDpr;',
+  '  float alive = step(0.0, age) * step(age, life);',
+  '  vFade = alive * sin(u * 3.14159) * uFade;',
+  '}'
+].join(String.fromCharCode(10));
+var METEOR_HEAD_FRAG = [
+  'precision mediump float;',
+  'uniform vec3 uChrome;',
+  'varying float vFade;',
+  'void main() {',
+  '  vec2 c = gl_PointCoord - 0.5;',
+  '  float d = dot(c, c);',
+  '  if (d > 0.25) discard;',
+  '  float a = (smoothstep(0.25, 0.0, d) * 0.5 + smoothstep(0.05, 0.0, d)) * clamp(vFade, 0.0, 1.0);',
+  '  gl_FragColor = vec4(uChrome * a, a);',
+  '}'
+].join(String.fromCharCode(10));
 var METEOR_FRAG = [
   'precision mediump float;',
   'uniform vec3 uChrome;',
@@ -495,6 +529,24 @@ export function mount(host, opts) {
   meteors.frustumCulled = false;
   meteors.renderOrder = 5;
   space.add(meteors);
+  /* the heads: one point per meteor, on the same clock */
+  var hGeo = new THREE.BufferGeometry();
+  var hStart = new Float32Array(METEORS * 3), hDir = new Float32Array(METEORS * 3), hLaunch = new Float32Array(METEORS), hSpeed = new Float32Array(METEORS);
+  for (var hi = 0; hi < METEORS; hi++) hLaunch[hi] = -100;
+  hGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(METEORS * 3), 3));
+  hGeo.setAttribute('aStart', new THREE.BufferAttribute(hStart, 3).setUsage(THREE.DynamicDrawUsage));
+  hGeo.setAttribute('aDir', new THREE.BufferAttribute(hDir, 3).setUsage(THREE.DynamicDrawUsage));
+  hGeo.setAttribute('aLaunch', new THREE.BufferAttribute(hLaunch, 1).setUsage(THREE.DynamicDrawUsage));
+  hGeo.setAttribute('aSpeed', new THREE.BufferAttribute(hSpeed, 1).setUsage(THREE.DynamicDrawUsage));
+  hGeo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 60);
+  var headMat = new THREE.ShaderMaterial({
+    vertexShader: METEOR_HEAD_VERT, fragmentShader: METEOR_HEAD_FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    uniforms: { uTime: { value: 0 }, uFade: { value: 0 }, uDpr: { value: 1 }, uChrome: { value: chrome } }
+  });
+  var meteorHeads = new THREE.Points(hGeo, headMat);
+  meteorHeads.frustumCulled = false;
+  meteorHeads.renderOrder = 6;
+  space.add(meteorHeads);
   var nextMeteor = 1.2, meteorSlot = 0, meteorsLaunched = 0, lastLaunch = -1;
   function launchMeteor(t) {
     var i = meteorSlot; meteorSlot = (meteorSlot + 1) % METEORS;
@@ -512,6 +564,10 @@ export function mount(host, opts) {
       mLaunch[j] = t; mSpeed[j] = speed;
     }
     mGeo.attributes.aStart.needsUpdate = mGeo.attributes.aDir.needsUpdate = mGeo.attributes.aLaunch.needsUpdate = mGeo.attributes.aSpeed.needsUpdate = true;
+    hStart[i * 3] = sx; hStart[i * 3 + 1] = sy; hStart[i * 3 + 2] = z;
+    hDir[i * 3] = dx; hDir[i * 3 + 1] = dy; hDir[i * 3 + 2] = 0;
+    hLaunch[i] = t; hSpeed[i] = speed;
+    hGeo.attributes.aStart.needsUpdate = hGeo.attributes.aDir.needsUpdate = hGeo.attributes.aLaunch.needsUpdate = hGeo.attributes.aSpeed.needsUpdate = true;
     nextMeteor = t + 1.6 + Math.random() * 3.6;
     meteorsLaunched++; lastLaunch = t;
   }
@@ -545,7 +601,7 @@ export function mount(host, opts) {
     var r = host.getBoundingClientRect();
     var dpr = Math.min(devicePixelRatio || 1, small ? 1.0 : 1.25);
     renderer.setPixelRatio(dpr);
-    starMat.uniforms.uDpr.value = dpr; dustMat.uniforms.uDpr.value = dpr;
+    starMat.uniforms.uDpr.value = dpr; dustMat.uniforms.uDpr.value = dpr; headMat.uniforms.uDpr.value = dpr;
     w = Math.max(1, r.width); h = Math.max(1, r.height);
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
@@ -611,6 +667,7 @@ export function mount(host, opts) {
     starMat.uniforms.uTime.value = t; starMat.uniforms.uFade.value = fade;
     dustMat.uniforms.uTime.value = t; dustMat.uniforms.uFade.value = fade;
     meteorMat.uniforms.uTime.value = t; meteorMat.uniforms.uFade.value = fade;
+    headMat.uniforms.uTime.value = t; headMat.uniforms.uFade.value = fade;
     threadLines.rotation.x = Math.sin(t * 0.05) * 0.12;
 
     planetMat.uniforms.uEye.value.copy(camera.position);
@@ -663,7 +720,7 @@ export function mount(host, opts) {
       planet.geometry.dispose(); halo.geometry.dispose(); thGeo.dispose();
       planetMat.dispose(); haloMat.dispose(); thMat.dispose();
       [farStars, midStars, nearStars, dust].forEach(function (o) { o.geometry.dispose(); });
-      nebula.geometry.dispose(); mGeo.dispose(); nebMat.dispose(); nebBakeMat.dispose(); nebRT.dispose(); starMat.dispose(); dustMat.dispose(); meteorMat.dispose();
+      nebula.geometry.dispose(); mGeo.dispose(); hGeo.dispose(); headMat.dispose(); nebMat.dispose(); nebBakeMat.dispose(); nebRT.dispose(); starMat.dispose(); dustMat.dispose(); meteorMat.dispose();
       renderer.dispose();
       if (renderer.forceContextLoss) renderer.forceContextLoss();
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
