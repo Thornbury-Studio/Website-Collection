@@ -195,6 +195,14 @@
     margin-left: -.04em;
   }
   .page-head .sub { grid-column: 9 / -1; padding-bottom: .8rem; margin: 0; }
+  /* Work is an index of pictures, so its head is tighter than the reading
+     pages': the first plate has to clear the fold on an ordinary laptop, and
+     at the old spacing the only thing under the title on the first screen was
+     the outlined numeral, floating in the gap above the picture it belongs to. */
+  html[data-page="work"] .page-head {
+    padding-top: calc(var(--bar) + clamp(2.2rem, 7vh, 4.4rem));
+    padding-bottom: clamp(1.4rem, 4vh, 2.6rem);
+  }
   @media (max-width: 760px) {
     .page-head h1, .page-head .sub { grid-column: 1 / -1; }
     .teaser { grid-template-columns: 1fr; align-items: start; }
@@ -383,13 +391,17 @@
     pointer-events: none;
   }
   .hero-rhythm-key { margin-bottom: .75rem; }
+  /* A step below the wordmark in every axis — size, weight, colour — so the
+     first screen has one headline. The line still cycles and still decodes;
+     it just no longer argues with the name for the first look. */
   .hero-step {
-    font-weight: 700;
-    font-size: clamp(1.4rem, 2.4vw, 2.4rem);
-    letter-spacing: -.035em;
-    line-height: 1.04;
-    min-height: 2.1em;
-    max-width: 14ch;
+    font-weight: 600;
+    font-size: clamp(1.2rem, 1.9vw, 1.9rem);
+    letter-spacing: -.03em;
+    line-height: 1.08;
+    min-height: 2.16em;
+    max-width: 16ch;
+    color: var(--chrome-70);
     font-variation-settings: "wdth" var(--wd2, 96);
   }
   .hero-facts {
@@ -412,49 +424,47 @@
     transition: opacity .5s var(--ease), transform .5s var(--ease);
   }
   .hero-facts li.is-on { opacity: 1; transform: none; }
-  /* the band: the offer, on a loop that never stops, along the hero's foot */
-  .hero-band {
-    position: absolute;
-    left: 0; right: 0; bottom: 0;
-    z-index: 2;
+  /* the band: the offer, on a loop that never stops. A ruled strip in the flow
+     of the Services page, between the head and the ledger, so every figure it
+     carries is printed in full directly under it. It ran along the home
+     hero's foot until 8 Sep 2026, a third clock on a screen that had two. */
+  .offer-band {
+    position: relative;
+    z-index: 1;
     border-top: 1px solid var(--hair-1);
-    padding: .8rem 0;
+    padding: .85rem 0;
     overflow: hidden;
     pointer-events: none;
     -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
     mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
   }
-  .hero-band-track { display: flex; width: max-content; animation: mq 60s linear infinite; }
-  .hero-band-row { display: flex; align-items: center; gap: 3rem; padding-right: 3rem; white-space: nowrap; }
-  .hero-band-row span {
+  .offer-band-track { display: flex; width: max-content; animation: mq 60s linear infinite; }
+  .offer-band-row { display: flex; align-items: center; gap: 3rem; padding-right: 3rem; white-space: nowrap; }
+  .offer-band-row span {
     font-family: var(--mono);
     font-size: .68rem;
     letter-spacing: .16em;
     text-transform: uppercase;
     color: var(--chrome-45);
   }
-  .hero-band-row span b { color: var(--chrome); font-weight: 500; }
-  .hero-band-row span em { font-style: normal; color: var(--ember); }
-  .hero-band-row i { width: 7px; height: 7px; background: var(--ember); flex-shrink: 0; }
-  html.rm .hero-band-track { animation: none; }
+  .offer-band-row span b { color: var(--chrome); font-weight: 500; }
+  .offer-band-row span em { font-style: normal; color: var(--ember); }
+  .offer-band-row i { width: 7px; height: 7px; background: var(--ember); flex-shrink: 0; }
+  html.rm .offer-band-track { animation: none; }
   html.rm .hero-facts li { opacity: 1; transform: none; }
+  /* one call to action. The second was a second button of equal weight,
+     which is two voices; the work is a plain link beside it now. */
   .hero-act {
     display: flex;
     flex-wrap: wrap;
-    gap: .7rem;
+    align-items: center;
+    gap: .7rem 1.6rem;
     margin-top: clamp(1.6rem, 4vh, 2.6rem);
     pointer-events: auto;
   }
   .hero-act .btn { justify-content: center; min-width: 10.5rem; padding: .8rem 1.1rem; }
-  /* the one glass CTA: a dark base under the overlay blend, or the blend
-     brightens it against a lit subject until it matches the solid button */
-  .btn.btn--glass {
-    background: rgba(8, 8, 8, .8);
-    color: var(--chrome);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-  }
-  .btn.btn--glass:hover { background: rgba(8, 8, 8, .92); }
+  .hero-act .more { color: var(--chrome-70); }
+  .hero-act .more:hover { color: var(--chrome); }
 
   .btn {
     display: inline-flex;
@@ -616,9 +626,12 @@
   .case .plate { aspect-ratio: var(--ar, 16 / 10); }
   .case:hover .plate { border-color: var(--chrome-70); color: var(--chrome-70); }
   .plate--std { --ar: 16 / 10; }
+  /* the numeral straddles the plate's top edge, more of it on the picture than
+     off: an outline over a light screenshot disappears, so it keeps a foot in
+     the dark, but it no longer floats in the gap above the plate */
   .idx {
     position: absolute;
-    top: -.62em;
+    top: -.36em;
     left: -.03em;
     font-weight: 900;
     font-size: clamp(3rem, 5.5vw, 5.5rem);
@@ -1879,10 +1892,11 @@
   .wordmark { font-size: clamp(2.5rem, 14.6vw, 3.9rem); margin: .4rem 0 .6rem; white-space: normal; }
   .hero-line { font-size: 1rem; max-width: 20ch; }
   .hero-rhythm { left: var(--gutter); right: var(--gutter); bottom: 4.4rem; }
-  .hero-step { font-size: clamp(1.25rem, 5.8vw, 1.65rem); max-width: 16ch; }
+  .hero-step { font-size: clamp(1.1rem, 5vw, 1.45rem); max-width: 16ch; }
   .hero-facts { display: none; }
-  .hero-act { width: 100%; gap: .55rem; margin-top: 1.4rem; }
+  .hero-act { width: 100%; gap: .55rem 1.2rem; margin-top: 1.4rem; }
   .hero-act .btn { flex: 0 1 auto; min-width: 0; padding: .7rem .95rem; font-size: .6rem; letter-spacing: .1em; }
+  .hero-act .more { font-size: .6rem; letter-spacing: .1em; }
 
   /* ---- home index: the plate takes the column, the name runs under it ---- */
   .entry-link, .entry:nth-child(even) .entry-link {
@@ -2021,7 +2035,7 @@
   .case .card::before { display: none; }
   .case .card::after { border: 0; background: none; box-shadow: none; }
   .case .card .meta { gap: 1rem; }
-  .idx { font-size: 3.4rem; top: -.55em; }
+  .idx { font-size: 3.4rem; top: -.32em; }
 }
 
 @media (max-width: 560px) {
@@ -2626,7 +2640,7 @@
    ========================================================================== */
 @layer components {
   .shelf-n, .sheet-out { display: none; }
-  .sec--sheet { padding-top: clamp(2.5rem, 7vh, 5rem); }
+  .sec--sheet { padding-top: clamp(2rem, 5vh, 3rem); }
 }
 /* Unlayered on purpose: the phone block above (760 px) is unlayered too, and
    an unlayered rule beats every layered one, so these have to sit beside it. */
@@ -2770,4 +2784,212 @@
     .case.is-lit .cap h2 { color: var(--chrome); }
     .case.is-lit .plate::before, .case.is-lit .plate::after,
     .case.is-lit .corners::before, .case.is-lit .corners::after { width: 14px; height: 14px; }
+}
+
+/* ============================================================================
+   Questions — the first conversation, written down.
+   Twelve questions in the order people ask them, answered open on the page
+   (nothing behind a tap on a desktop) beside an index that stays put and marks
+   the one being read. The two rates are stated once more at the top in the
+   Services ledger's own figure, and the comparison is the Studio page's table
+   with a third column. Every number on the page is the published one.
+   ========================================================================== */
+@layer components {
+  /* the two rates, side by side */
+  .tariff {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--gutter);
+    margin-top: 1.8rem;
+    border-top: 1px solid var(--hair-2);
+  }
+  .tariff-item {
+    padding: clamp(1.6rem, 4vh, 2.6rem) 0 clamp(1.5rem, 3.5vh, 2.2rem);
+    border-bottom: 1px solid var(--hair-1);
+  }
+  .tariff h2 {
+    margin-top: .9rem;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: .68rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--chrome-70);
+  }
+  .tariff-item--promo h2::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--ember);
+    margin-right: .6rem;
+    vertical-align: .12em;
+  }
+  .tariff .terms { padding-top: 1.3rem; gap: 1.2rem clamp(1.2rem, 2.5vw, 2.4rem); }
+  .tariff-note {
+    margin-top: 1.4rem;
+    color: var(--chrome-70);
+    font-size: .97rem;
+    line-height: 1.5;
+    max-width: 42ch;
+    text-wrap: pretty;
+  }
+  .tariff-both { margin-top: 2rem; }
+  .carries--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: .8rem; }
+
+  /* the comparison, with the agency between the freelancer and us */
+  .vs--three tbody th { width: 22%; }
+  .vs--three td { width: 26%; }
+
+  /* the twelve: an index that stays, and a ledger that scrolls past it */
+  .qa {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    column-gap: var(--gutter);
+    margin-top: 1.8rem;
+    align-items: start;
+  }
+  .qa-rail {
+    grid-column: 1;
+    grid-row: 1;
+    position: sticky;
+    top: calc(var(--bar) + 1.4rem);
+  }
+  .qa-rail ol { border-top: 1px solid var(--hair-2); }
+  .qa-rail a {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0 .6rem;
+    align-items: baseline;
+    padding: .58rem 0 .62rem;
+    border-bottom: 1px solid var(--hair-1);
+    text-decoration: none;
+    color: var(--chrome-45);
+    font-size: .9rem;
+    line-height: 1.35;
+    letter-spacing: -.005em;
+    transition: color .35s var(--ease);
+  }
+  .qa-rail a b {
+    grid-column: 1;
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: .62rem;
+    letter-spacing: .14em;
+    color: inherit;
+  }
+  .qa-rail a span { grid-column: 2; }
+  .qa-rail a:hover { color: var(--chrome-70); }
+  .qa-rail a[aria-current] { color: var(--chrome); }
+  .qa-rail a[aria-current] b { color: var(--ember); }
+  /* the mark the bar puts beside the page you are on, here on the line you are reading */
+  .qa-rail a::before {
+    content: "";
+    position: absolute;
+    left: -1rem;
+    top: 1.05em;
+    width: 5px;
+    height: 5px;
+    background: var(--ember);
+    opacity: 0;
+    transition: opacity .35s var(--ease);
+  }
+  .qa-rail a[aria-current]::before { opacity: 1; }
+
+  .qa-list { grid-column: 2; grid-row: 1; border-top: 1px solid var(--hair-2); }
+  .qa-item { border-bottom: 1px solid var(--hair-1); scroll-margin-top: calc(var(--bar) + 1.2rem); }
+  .qa-item .fold {
+    display: grid;
+    grid-template-columns: clamp(3rem, 5.2vw, 4.8rem) minmax(0, 1fr);
+    gap: 0 clamp(1.2rem, 3vw, 2.8rem);
+    padding: clamp(1.7rem, 4.2vh, 2.6rem) 0;
+    align-items: start;
+  }
+  .qa-item .fold > summary,
+  .qa-item .fold-body { display: contents; }
+  .qa-item .fold > summary { cursor: default; pointer-events: none; list-style: none; }
+  .qa-item .n {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    font-weight: 900;
+    font-size: clamp(2rem, 3.6vw, 3.2rem);
+    line-height: .95;
+    letter-spacing: -.05em;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--hair-2);
+    user-select: none;
+  }
+  .qa-item h2 {
+    grid-column: 2;
+    grid-row: 1;
+    font-weight: 800;
+    font-size: clamp(1.4rem, 2.2vw, 2rem);
+    letter-spacing: -.035em;
+    line-height: 1.06;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .qa-item .fold-body > p:not(.practice) {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 1rem;
+    color: var(--chrome-70);
+    font-size: 1.02rem;
+    line-height: 1.62;
+    max-width: 60ch;
+  }
+  .qa-item .fold-body a { color: var(--chrome); text-decoration: none; border-bottom: 1px solid var(--hair-2); }
+  .qa-item .fold-body a:hover { border-color: var(--ember); }
+  .qa-item .practice {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: .9rem;
+    font-family: var(--mono);
+    font-size: .78rem;
+    line-height: 1.6;
+    color: var(--chrome-45);
+    max-width: 62ch;
+  }
+  .qa-item .practice b {
+    color: var(--ember);
+    font-weight: 500;
+    font-size: .82em;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    margin-right: .7rem;
+  }
+
+  /* the close: two ways in, stacked against the statement */
+  .ask { display: grid; gap: 1rem; justify-items: end; }
+}
+
+/* Unlayered, beside the phone block: an unlayered rule beats every layered one. */
+@media (max-width: 760px) {
+  .tariff { grid-template-columns: minmax(0, 1fr); }
+  .tariff-item { padding: 1.4rem 0 1.5rem; }
+  .tariff-note { max-width: none; font-size: .95rem; }
+  .carries--4 { grid-template-columns: 1fr; }
+  .vs--three td:nth-of-type(1)::before { content: "One freelancer"; color: var(--chrome-45); }
+  .vs--three td:nth-of-type(2)::before { content: "An agency"; color: var(--chrome-45); }
+  .vs--three td:nth-of-type(3)::before { content: "Thornbury"; color: var(--ember); }
+  .qa { grid-template-columns: minmax(0, 1fr); margin-top: 1.2rem; }
+  .qa-rail { display: none; }
+  .qa-list { grid-column: 1; }
+  .qa-item .fold { display: block; padding: .85rem 0 1rem; }
+  .qa-item .fold > summary {
+    display: grid;
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    gap: 0 .75rem;
+    align-items: baseline;
+    cursor: pointer;
+    pointer-events: auto;
+    list-style: none;
+  }
+  .qa-item .n { grid-column: 1; grid-row: 1; font-size: 1.05rem; line-height: 1.2; }
+  .qa-item h2 { grid-column: 2; grid-row: 1; max-width: none; font-size: clamp(1.15rem, 5vw, 1.4rem); line-height: 1.15; }
+  .qa-item .fold-body { display: block; padding: .85rem 0 0 2.95rem; }
+  .qa-item .fold-body > p:not(.practice) { margin-top: 0; max-width: none; font-size: .98rem; }
+  .qa-item .practice { margin-top: .85rem; max-width: none; }
+  .ask { justify-items: start; }
 }

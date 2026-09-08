@@ -63,6 +63,14 @@
       world: { b: 0.172, seed: 5, ext: 4.85, vn: 1.52, density: 0.96 },
       film: { pos: '35% 55%', scale: 1.22, filter: 'saturate(.4) contrast(1.1) brightness(.76)' }
     },
+    /* the questions page reads like Services and sits beside it: same still
+       field, the camera a step further round, its own seed */
+    faq: {
+      field: 'still',
+      cam: { rot: 2.05, tilt: 0.58, ax: .46, ay: .52, zoom: 1.08, lx: -0.05, ly: -0.99 },
+      world: { b: 0.168, seed: 17, ext: 4.9, vn: 1.5, density: 0.9 },
+      film: { pos: '40% 50%', scale: 1.2, filter: 'saturate(.4) contrast(1.1) brightness(.74)' }
+    },
     work: {
       field: 'still',
       cam: { rot: 1.15, tilt: 0.86, ax: .34, ay: .46, zoom: 1.42, lx: -0.50, ly: -0.87 },

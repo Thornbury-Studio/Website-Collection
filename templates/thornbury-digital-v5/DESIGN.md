@@ -1766,3 +1766,70 @@ a 430×932 phone.
 position, and the eighteen that would all fire at once on the sheet, are
 replaced by one stagger across the shelf and one across the sheet — opacity
 and transform only.
+
+## The chrome around the field, and a page for the questions
+
+A review scored the build 47/100 and drew the line in the right place: the
+field is the asset, and the chrome around it was working against it. Four
+fixes, and the page the production site has that this one did not.
+
+**One call to action.** The hero had two full-weight buttons, which is two
+voices. "Start a project" keeps the button; "See the work" is the site's own
+`.more` link beside it, in `--chrome-70`, on the desktop and the phone alike.
+The glass-button variant went with it — nothing else used it.
+
+**The band belongs to Services.** The offer ticker ran along the hero's foot:
+a third clock on a screen that already had two, carrying numbers the home page
+does not print. It is now a ruled strip between the Services head and the
+ledger, where every figure it carries stands in full directly under it. Same
+markup, same `trueLoopMarquee`, wired from `init` so a routed arrival gets it
+(`#offer-band`, 26 s per copy; two rows cover 1440, half-track 1,548 px).
+
+**Nothing scrambles while the name is settling.** The first screen used to run
+three decodes inside its first four seconds — the wordmark, the first fact at
+1.1 s, the second process step at 3.4 s — and a reader who arrived mid-decode
+saw a line of glyphs where a sentence should be. The step line now holds its
+first sentence for 7 s and cycles every 5.2 s; the facts begin at 2.6 s, once
+the wordmark and the intro have landed, and arrive every 1.5 s. The line also
+stepped down in every axis (600 weight, `clamp(1.2rem, 1.9vw, 1.9rem)`,
+`--chrome-70`) so the first screen has one headline. Verified from the hero's
+own state: cycles 0 and one fact on until past the intro, four facts and the
+first step change by 7.8 s.
+
+**Work's first fold has a picture in it.** At 1440×900 the first plate started
+at 440 px under a 376 px head, and the outlined numeral sat at 391–470 —
+mostly in the 63 px gap above the picture it belongs to. The Work head is now
+tighter than the reading pages' (`html[data-page="work"] .page-head`, 331 px),
+the sheet's top padding is `clamp(2rem, 5vh, 3rem)`, and `.idx` sits at
+`-.36em` so more of it is on the plate than off — it keeps a foot in the dark
+because an outline over a light screenshot disappears. Plate 377–852 at
+1440×900 (whole plate inside the fold); 350–800 at 1366×768 (418 px of 451
+visible). The reviewer's "nothing but a number" was partly a harness artefact:
+in a hidden tab the ScrollTrigger reveal never fires and the clip-path never
+opens, so only the numerals paint — see the headless-verification memory.
+
+**Questions.** `faq.html` — "04 — Questions", in the nav, the menu and the
+footer of every page, with Studio, Contact and Privacy renumbered behind it.
+The direction: the first conversation, written down. Twelve questions in the
+order people ask them, answered open on the page — Stripe's and Vercel's
+pricing pages both answer their questions in full rather than behind an
+accordion, and that is the honest form for a page whose one rule is "numbers
+stated plainly" — beside an index that stays put and marks the one being read
+(the bar's own ember square, on the line you are on; the current item is the
+last whose top has passed a line 22 % down the screen, so a short answer
+scrolled to the top is still the one marked). The two rates are stated once
+more at the top in the Services ledger's own figure with the terms under each,
+and "In both" lists the four inclusions. The comparison is the Studio page's
+`table.vs` with a third column (`.vs--three`: 22 / 26 / 26 / 26 %), the
+Thornbury column carrying the hairline the way Linear's pricing table gives one
+column the position; the sixth row is where the studio is the weaker choice,
+kept on purpose. Five of the twelve carry an "In numbers" line in the charter's
+practice style. On a phone the index goes, the items are grouped folds (one
+open at a time, the existing `name` grouping), and the table stacks with
+"One freelancer / An agency / Thornbury" labels. A rail tap scrolls to the item
+and rewrites the hash in place, so Back leaves the page instead of replaying a
+jump through the router's popstate. Every price, period and inclusion was
+checked against thornburystudio.com/faq on 8 Sep 2026; nothing on the page is
+invented, and the copy has no straight quotes. Verified at 1440×900 and
+390×844: zero overflow, every grid child placed, console clean, routing in
+(Services → FAQ) and out (FAQ → Home) rebuilding and releasing the rail.
