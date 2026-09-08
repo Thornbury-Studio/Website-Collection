@@ -1796,6 +1796,25 @@ stepped down in every axis (600 weight, `clamp(1.2rem, 1.9vw, 1.9rem)`,
 own state: cycles 0 and one fact on until past the intro, four facts and the
 first step change by 7.8 s.
 
+**The facts that never resolved.** The first pass of this fix shipped with a
+fault that had been latent since the hero was built: the facts branch read
+each line's target back from the element on every cycle
+(`items[phase].textContent`) and never stopped the decode already running on
+it. The decoder counted frames, so under a slow or throttled frame rate a
+decode ran for many seconds; when the hold-and-reset cycle came round, the
+"target" it captured was the mid-scramble glyphs, and from then on the line
+could only resolve to garbage. The wordmark decodes once with a fixed string
+and the step stops its previous decode and targets a constant, which is why
+those two always recovered. Two changes: the decoder (`js/rig.js`) is clocked
+on wall time — 22.5 ms a character, 133–333 ms to settle, the old frame counts
+at 60 fps — so a line settles in under a second at any frame rate and a hidden
+tab that comes back resolves on its first frame; and the facts branch captures
+its four lines once and stops an item's previous decode before starting the
+next, the way the step does. Verified with a 36 s in-page sampler under
+headless Chrome's software GL (about 2–3 fps, the case that broke it): every
+fact reads as written on every pass through two full hold-and-reset cycles,
+and every decode — wordmark, step, fact — settles within one sample.
+
 **Work's first fold has a picture in it.** At 1440×900 the first plate started
 at 440 px under a 376 px head, and the outlined numeral sat at 391–470 —
 mostly in the 63 px gap above the picture it belongs to. The Work head is now
@@ -1808,8 +1827,12 @@ visible). The reviewer's "nothing but a number" was partly a harness artefact:
 in a hidden tab the ScrollTrigger reveal never fires and the clip-path never
 opens, so only the numerals paint — see the headless-verification memory.
 
-**Questions.** `faq.html` — "04 — Questions", in the nav, the menu and the
-footer of every page, with Studio, Contact and Privacy renumbered behind it.
+**Questions.** `faq.html` — "06 — Questions". The boss's call on where it
+sits: below the four pages, not among them. FAQ is the last entry in the bar,
+the menu and the footer of every page, and the phone menu now ends with the
+two secondary pages together — 05 FAQ, 06 Privacy — so the policy is
+reachable from the menu for the first time. Studio and Contact keep 04 and 05;
+Privacy is 07.
 The direction: the first conversation, written down. Twelve questions in the
 order people ask them, answered open on the page — Stripe's and Vercel's
 pricing pages both answer their questions in full rather than behind an

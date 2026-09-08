@@ -1706,13 +1706,15 @@
     -webkit-backdrop-filter: blur(22px);
     backdrop-filter: blur(22px);
     color: var(--chrome);
-    overflow: hidden;
+    /* six pages and a foot outgrow a short phone: the menu scrolls rather
+       than clipping Privacy or the effects switch off the bottom */
+    overflow: hidden auto;
   }
   .menu::backdrop { background: rgba(8, 8, 8, .8); }
   .menu-in {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100%;
     padding: 0 var(--gutter) calc(1.4rem + env(safe-area-inset-bottom));
   }
   /* the top row stands exactly where the bar was, so Close lands under the thumb
