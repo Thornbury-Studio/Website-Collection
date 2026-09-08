@@ -41,9 +41,9 @@
     var page = html.getAttribute('data-page') || 'home';
     var anchors = {
       home: [0.5, 0.5], work: [0.5, 0.45], services: [0.44, 0.54],
-      studio: [0.62, 0.48], contact: [0.68, 0.5]
+      faq: [0.46, 0.52], studio: [0.62, 0.48], contact: [0.68, 0.5]
     };
-    var seeds = { home: 0, work: 23, services: 5, studio: 11, contact: 37 };
+    var seeds = { home: 0, work: 23, services: 5, faq: 17, studio: 11, contact: 37 };
     var an = anchors[page] || anchors.home;
     try {
       field = global.TBField.start(canvas, {
@@ -290,49 +290,64 @@
     return webglOK;
   }
 
-  /* The hero's rhythm. Three clocks over the field: the wordmark decodes once
+  /* The hero's rhythm. Two clocks over the field: the wordmark decodes once
      on arrival; the process line cycles the four steps, decoding each; the
-     facts arrive one after another, hold, and go again; the band loops. The
-     pointer sets the process line's width axis; the wordmark stays still —
-     the studio's name is the one fixed thing on the page. Everything is bound in init and
+     facts arrive one after another, hold, and go again. The pointer sets the
+     process line's width axis; the wordmark stays still — the studio's name
+     is the one fixed thing on the page.
+
+     Nothing else scrambles while the name is settling. The first screen used
+     to have three decodes running inside its first four seconds — the
+     wordmark, the first fact at 1.1 s, the second step at 3.4 s — and a
+     reader who arrived mid-decode saw a line of glyphs where a sentence
+     should be. Now the facts begin once the wordmark and the intro have
+     landed, the step line holds its first sentence for seven seconds, and
+     both clocks run slower after that. Everything is bound in init and
      released in teardown, so a routed return rebuilds it — the failure mode
      the last pointer feature died of was listeners left on a swapped <main>,
-     and this one has none. */
+     and this one has none. (clearInterval clears a timeout too: the two
+     share one list, so the lead-in timers go out with the intervals.) */
   var heroNow = null;
   var HERO_STEPS = ['We look before we draw', 'We decide in the open', 'We build it to survive us', 'We hand over everything'];
+  var HERO_STEP_LEAD = 7000, HERO_STEP_EVERY = 5200, HERO_FACT_LEAD = 2600, HERO_FACT_EVERY = 1500;
   function heroType(root) {
     var hero = root.querySelector('.hero');
     if (!hero) return;
     var word = hero.querySelector('.wordmark');
     var step = hero.querySelector('[data-step]');
     var facts = hero.querySelector('[data-facts]');
-    var band = hero.querySelector('#hero-band');
     var state = { step: 0, cycles: 0, facts: 0, decodes: 0, wdth: 92, pointer: null, live: true };
     heroNow = function () { return state; };
-    if (band) trueLoopMarquee(band, 26);
     if (reducedNow()) {
       state.live = false;
       if (facts) [].forEach.call(facts.children, function (li) { li.classList.add('is-on'); });
       return;
     }
     var stops = [], timers = [];
+    /* a lead-in, then a beat: both ids go into the same list teardown clears */
+    function clock(lead, every, fn) {
+      timers.push(setTimeout(function () {
+        fn();
+        timers.push(setInterval(fn, every));
+      }, lead));
+    }
     import('./rig.js').then(function (mod) {
       if (!hero.isConnected || !heroNow) return;
       var dec = mod.decoder;
       if (word) { stops.push(dec(word, word.textContent, false)); state.decodes++; }
       var k = 0, stopStep = null;
       if (step) {
-        timers.push(setInterval(function () {
+        clock(HERO_STEP_LEAD, HERO_STEP_EVERY, function () {
           k = (k + 1) % HERO_STEPS.length;
           state.step = k; state.cycles++; state.decodes++;
           if (stopStep) stopStep();
           stopStep = dec(step, HERO_STEPS[k], false);
-        }, 3400));
+        });
         stops.push(function () { if (stopStep) stopStep(); });
       }
       if (facts) {
         var items = [].slice.call(facts.children), phase = 0;
-        timers.push(setInterval(function () {
+        clock(HERO_FACT_LEAD, HERO_FACT_EVERY, function () {
           if (phase < items.length) {
             items[phase].classList.add('is-on');
             stops.push(dec(items[phase], items[phase].textContent, false));
@@ -342,7 +357,7 @@
             phase = -1;
           }
           phase++;
-        }, 1100));
+        });
       }
     }).catch(function () { /* the lines stand still; nothing else is affected */ });
     /* the pointer's width, on the process line only: the wordmark is fixed */
@@ -715,6 +730,58 @@
     offs.push(function () { if (raf) cancelAnimationFrame(raf); });
   }
 
+  /* The questions page: an index that stays put and marks the question being
+     read. The current one is the last item whose top has passed a reading
+     line just under a quarter of the way down the screen, sampled once per
+     frame on scroll — high enough that a short answer scrolled to the top is
+     still the one marked, rather than the one that starts under it. A tap on
+     the index scrolls to the item and rewrites the hash in
+     place, so the back button still leaves the page rather than replaying a
+     jump; the router's popstate would otherwise re-fetch this page for every
+     hash it had pushed. On a phone the index is not shown and the items are
+     folds, one open at a time. */
+  function qaRail(root) {
+    var host = root.querySelector('[data-qa]');
+    if (!host) return;
+    var links = [].slice.call(host.querySelectorAll('.qa-rail a[href^="#"]'));
+    var items = [].slice.call(host.querySelectorAll('.qa-item[id]'));
+    if (!links.length || !items.length) return;
+    var byId = {};
+    links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+    var cur = null, raf = 0;
+    function mark(id) {
+      if (id === cur) return;
+      cur = id;
+      links.forEach(function (a) {
+        if (a === byId[id]) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }
+    function sample() {
+      raf = 0;
+      var line = innerHeight * 0.22, pick = items[0];
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].getBoundingClientRect().top <= line) pick = items[i]; else break;
+      }
+      mark(pick.id);
+    }
+    function queue() { if (!raf) raf = requestAnimationFrame(sample); }
+    links.forEach(function (a) {
+      on(a, 'click', function (e) {
+        var t = document.getElementById(a.getAttribute('href').slice(1));
+        if (!t) return;
+        e.preventDefault();
+        t.scrollIntoView({ behavior: reducedNow() ? 'instant' : 'smooth', block: 'start' });
+        try { history.replaceState(history.state, '', '#' + t.id); } catch (err) { /* file: URLs */ }
+        mark(t.id);
+      });
+    });
+    sample();
+    on(global, 'scroll', queue, { passive: true });
+    on(global, 'resize', queue, { passive: true });
+    offs.push(function () { if (raf) cancelAnimationFrame(raf); });
+  }
+
   /* On a phone, long copy folds into native <details> so the page is a list of
      claims you can open. Desktop keeps every panel open and hides the summary
      chrome, so the layout does not change. Find-in-page still reaches the body. */
@@ -759,9 +826,11 @@
     reveal(root);
     scrollFeel();
     trueLoopMarquee(root.querySelector('#mq'), 22);
+    trueLoopMarquee(root.querySelector('#offer-band'), 26);
     briefForm(root);
     shelf(root);
     sheet(root);
+    qaRail(root);
     /* a routed arrival is faded in from nothing, so the scroll motion can be
        set up one frame later, out of the frame that swapped the page */
     if (opts.intro === false && global.requestAnimationFrame) {
