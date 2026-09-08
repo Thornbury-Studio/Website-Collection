@@ -1918,3 +1918,17 @@ for string against the previous markup. Nothing else on the page moved —
 numerals I–V, the comparison teaser, the two fx rows, the pillars, the nots
 and the four who-beats all read as before, zero overflow at 1440, 1024 and
 390.
+
+**Pacing, the next day.** Rendered full width, the five runs of text were
+"too wordy" — one wall, even though each article is short. Two layout
+changes, no copy touched. A hairline now runs the full width of the row
+between articles (the earlier one was the margin note's own, a column wide,
+and never read as a break), with the list ruled top and bottom and each
+article padded `clamp(1.7rem, 4vh, 2.6rem)` above and a little more below.
+And the claim stands on its own line at display size — 800, `clamp(1.5rem,
+2.6vw, 2.4rem)`, 37 px at 1440 — with the argument as its own block under
+it, 500 at 18 px in `--chrome-70`, 13 px of air between; the five claims can
+be read top to bottom on their own. The phone gets its own numbers rather
+than inherited ones: a rule and 22 px above each claim, the claim at 22 px,
+the argument at 15.7 px, the note 15 px under it. The margin column is
+untouched.
