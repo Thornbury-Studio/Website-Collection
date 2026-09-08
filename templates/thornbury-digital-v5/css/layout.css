@@ -1115,34 +1115,45 @@
      with each article's practice note in the margin beside it, the way a
      charter carries its commentary. The Questions page owns the numbered
      ledger with the outlined figure; this reads as the thing it says it is. */
-  .charter { margin-top: 2rem; }
+  /* Pacing: five statements, not one wall. A rule runs the full width between
+     articles, and each claim stands on its own line at display size so the
+     five can be read top to bottom on their own; the argument sits under it,
+     smaller and a step dimmer. The margin column is unchanged. */
+  .charter { margin-top: 1.6rem; border-top: 1px solid var(--hair-2); border-bottom: 1px solid var(--hair-1); }
   .article {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     column-gap: var(--gutter);
     align-items: start;
+    padding: clamp(1.7rem, 4vh, 2.6rem) 0 clamp(1.8rem, 4.2vh, 2.8rem);
   }
-  .article + .article { margin-top: clamp(1.8rem, 4.2vh, 3rem); }
+  .article + .article { border-top: 1px solid var(--hair-1); }
   .article-text {
     grid-column: 1 / span 8;
     grid-row: 1;
-    font-size: clamp(1.25rem, 1.95vw, 1.95rem);
-    line-height: 1.32;
-    letter-spacing: -.022em;
     color: var(--chrome-70);
     text-wrap: pretty;
-    font-variation-settings: "wdth" 96;
   }
   .article-text h2 {
-    display: inline;
+    display: block;
     font-weight: 800;
-    font-size: inherit;
-    line-height: inherit;
-    letter-spacing: -.03em;
+    font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+    line-height: 1.04;
+    letter-spacing: -.035em;
     color: var(--chrome);
+    max-width: 22ch;
+    text-wrap: balance;
     font-variation-settings: "wdth" 92;
   }
-  .article-text p { display: inline; font-weight: 500; }
+  .article-text p {
+    display: block;
+    margin-top: .8rem;
+    font-weight: 500;
+    font-size: clamp(1.02rem, 1.25vw, 1.2rem);
+    line-height: 1.55;
+    letter-spacing: -.01em;
+    max-width: 58ch;
+  }
   .article-note {
     grid-column: 10 / -1;
     grid-row: 1;
@@ -1916,12 +1927,16 @@
     max-width: none;
   }
 
-  /* ---- studio: the charter reads straight down, the note under each article ---- */
-  .charter { margin-top: 1.4rem; }
-  .article { display: block; }
-  .article + .article { margin-top: 1.7rem; }
-  .article-text { font-size: clamp(1.08rem, 4.6vw, 1.3rem); line-height: 1.38; max-width: none; }
-  .article-note { margin-top: .85rem; max-width: none; padding-top: .65rem; }
+  /* ---- studio: the charter reads straight down, the note under each article.
+     The same breathing room as the desktop, set for the phone rather than
+     inherited: a rule and 1.4rem above each claim, the claim at its own size,
+     the argument a step down, the note under it. ---- */
+  .charter { margin-top: 1.2rem; }
+  .article { display: block; padding: 1.4rem 0 1.5rem; }
+  .article-text { max-width: none; }
+  .article-text h2 { font-size: clamp(1.3rem, 5.6vw, 1.6rem); line-height: 1.1; max-width: none; }
+  .article-text p { margin-top: .6rem; font-size: .98rem; line-height: 1.5; max-width: none; }
+  .article-note { margin-top: .95rem; max-width: none; padding-top: .65rem; }
 
   .people li { grid-template-columns: minmax(0, 1fr); }
   .people h2 { grid-column: 1; grid-row: 1; }
