@@ -293,7 +293,8 @@
   /* The hero's rhythm. Three clocks over the field: the wordmark decodes once
      on arrival; the process line cycles the four steps, decoding each; the
      facts arrive one after another, hold, and go again; the band loops. The
-     pointer sets the wordmark's width axis. Everything is bound in init and
+     pointer sets the process line's width axis; the wordmark stays still —
+     the studio's name is the one fixed thing on the page. Everything is bound in init and
      released in teardown, so a routed return rebuilds it — the failure mode
      the last pointer feature died of was listeners left on a swapped <main>,
      and this one has none. */
@@ -344,12 +345,11 @@
         }, 1100));
       }
     }).catch(function () { /* the lines stand still; nothing else is affected */ });
-    /* the pointer's width */
+    /* the pointer's width, on the process line only: the wordmark is fixed */
     var target = 92, cur = 92, raf = 0;
     function tick() {
       raf = 0;
       cur += (target - cur) * 0.14;
-      if (word) word.style.setProperty('--wd', cur.toFixed(1));
       if (step) step.style.setProperty('--wd2', (cur + 4).toFixed(1));
       state.wdth = +cur.toFixed(1);
       if (Math.abs(target - cur) > 0.05) raf = requestAnimationFrame(tick);

@@ -353,23 +353,25 @@
   }
   .wordmark {
     font-weight: 800;
-    font-size: clamp(3.6rem, 11.6vw, 12.6rem);
+    font-size: clamp(3.4rem, 10.8vw, 11.8rem);
     letter-spacing: -.05em;
     line-height: .86;
     text-transform: uppercase;
-    /* the width axis is the pointer's: js/main.js sets --wd from where it stands */
-    font-variation-settings: "wdth" var(--wd, 92);
-    margin: .5rem 0 .55rem -.04em;
+    /* fixed width: the studio's name is the one still thing on the page
+       while everything around it moves */
+    font-variation-settings: "wdth" 92;
+    margin: .55rem 0 .7rem -.04em;
     max-width: 100%;
     min-height: .86em;
     white-space: nowrap;
   }
   .hero-line {
-    font-size: clamp(1.1rem, 1.75vw, 1.7rem);
+    font-size: clamp(1.05rem, 1.55vw, 1.5rem);
     color: var(--chrome-70);
     text-wrap: balance;
     max-width: 22ch;
     letter-spacing: -.015em;
+    line-height: 1.3;
   }
   /* the rhythm: the process on one clock, the facts on another, lower right */
   .hero-rhythm {
@@ -380,18 +382,18 @@
     z-index: 2;
     pointer-events: none;
   }
-  .hero-rhythm-key { margin-bottom: .55rem; }
+  .hero-rhythm-key { margin-bottom: .75rem; }
   .hero-step {
     font-weight: 700;
-    font-size: clamp(1.5rem, 2.7vw, 2.7rem);
+    font-size: clamp(1.4rem, 2.4vw, 2.4rem);
     letter-spacing: -.035em;
-    line-height: 1.02;
-    min-height: 2.05em;
+    line-height: 1.04;
+    min-height: 2.1em;
     max-width: 14ch;
     font-variation-settings: "wdth" var(--wd2, 96);
   }
   .hero-facts {
-    margin: 1.4rem 0 0;
+    margin: 1.8rem 0 0;
     padding: 0;
     list-style: none;
     border-top: 1px solid var(--hair-1);
@@ -402,9 +404,9 @@
     letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--chrome-70);
-    padding: .5rem 0;
+    padding: .6rem 0;
     border-bottom: 1px solid var(--hair-1);
-    min-height: 1.9rem;
+    min-height: 2.05rem;
     opacity: 0;
     transform: translateY(4px);
     transition: opacity .5s var(--ease), transform .5s var(--ease);
@@ -416,20 +418,20 @@
     left: 0; right: 0; bottom: 0;
     z-index: 2;
     border-top: 1px solid var(--hair-1);
-    padding: .85rem 0;
+    padding: .8rem 0;
     overflow: hidden;
     pointer-events: none;
     -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
     mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
   }
   .hero-band-track { display: flex; width: max-content; animation: mq 60s linear infinite; }
-  .hero-band-row { display: flex; align-items: center; gap: 2.4rem; padding-right: 2.4rem; white-space: nowrap; }
+  .hero-band-row { display: flex; align-items: center; gap: 3rem; padding-right: 3rem; white-space: nowrap; }
   .hero-band-row span {
     font-family: var(--mono);
     font-size: .68rem;
     letter-spacing: .16em;
     text-transform: uppercase;
-    color: var(--chrome-50);
+    color: var(--chrome-45);
   }
   .hero-band-row span b { color: var(--chrome); font-weight: 500; }
   .hero-band-row span em { font-style: normal; color: var(--ember); }
@@ -440,10 +442,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: .7rem;
-    margin-top: clamp(1.4rem, 3.5vh, 2.2rem);
+    margin-top: clamp(1.6rem, 4vh, 2.6rem);
     pointer-events: auto;
   }
-  .hero-act .btn { justify-content: center; min-width: 11.5rem; }
+  .hero-act .btn { justify-content: center; min-width: 10.5rem; padding: .8rem 1.1rem; }
   /* the one glass CTA: a dark base under the overlay blend, or the blend
      brightens it against a lit subject until it matches the solid button */
   .btn.btn--glass {
@@ -1874,13 +1876,13 @@
     margin-top: 0;
     justify-items: start;
   }
-  .wordmark { font-size: clamp(2.6rem, 15.5vw, 4.2rem); margin: .4rem 0 .55rem; white-space: normal; }
-  .hero-line { font-size: 1.05rem; max-width: 20ch; }
+  .wordmark { font-size: clamp(2.5rem, 14.6vw, 3.9rem); margin: .4rem 0 .6rem; white-space: normal; }
+  .hero-line { font-size: 1rem; max-width: 20ch; }
   .hero-rhythm { left: var(--gutter); right: var(--gutter); bottom: 4.4rem; }
-  .hero-step { font-size: clamp(1.35rem, 6.4vw, 1.8rem); max-width: 16ch; }
+  .hero-step { font-size: clamp(1.25rem, 5.8vw, 1.65rem); max-width: 16ch; }
   .hero-facts { display: none; }
-  .hero-act { width: 100%; gap: .5rem; margin-top: 1.3rem; }
-  .hero-act .btn { flex: 1 1 100%; min-width: 0; }
+  .hero-act { width: 100%; gap: .55rem; margin-top: 1.4rem; }
+  .hero-act .btn { flex: 0 1 auto; min-width: 0; padding: .7rem .95rem; font-size: .6rem; letter-spacing: .1em; }
 
   /* ---- home index: the plate takes the column, the name runs under it ---- */
   .entry-link, .entry:nth-child(even) .entry-link {
