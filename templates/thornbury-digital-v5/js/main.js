@@ -347,10 +347,18 @@
       }
       if (facts) {
         var items = [].slice.call(facts.children), phase = 0;
+        /* The target is the line as written, captured once. It used to be
+           read back from the element on every cycle, so a decode still
+           running when its item came round again handed the glyphs over as
+           the target, and the line could never resolve. The previous decode
+           on an item is stopped before a new one starts, as the step's is. */
+        var lines = items.map(function (li) { return li.textContent; });
+        var factStops = items.map(function () { return null; });
         clock(HERO_FACT_LEAD, HERO_FACT_EVERY, function () {
           if (phase < items.length) {
+            if (factStops[phase]) factStops[phase]();
             items[phase].classList.add('is-on');
-            stops.push(dec(items[phase], items[phase].textContent, false));
+            factStops[phase] = dec(items[phase], lines[phase], false);
             state.facts++; state.decodes++;
           } else if (phase === items.length + 4) {
             items.forEach(function (li) { li.classList.remove('is-on'); });
@@ -358,6 +366,7 @@
           }
           phase++;
         });
+        stops.push(function () { factStops.forEach(function (s) { if (s) s(); }); });
       }
     }).catch(function () { /* the lines stand still; nothing else is affected */ });
     /* the pointer's width, on the process line only: the wordmark is fixed */

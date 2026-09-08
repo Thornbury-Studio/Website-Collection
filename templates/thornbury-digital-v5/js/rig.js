@@ -54,27 +54,33 @@ function sampleWord(word, boxW, boxH, dpr) {
 export function decoder(el, text, reduced) {
   if (reduced) { el.textContent = text; return null; }
   var chars = text.split('');
-  var frame = 0, raf = 0;
+  var raf = 0, t0 = 0;
   /* every character gets its own settle time, so the line resolves left to
-     right instead of snapping in one go */
-  var start = chars.map(function (_, i) { return i * 1.35; });
-  var end = start.map(function (s) { return s + 8 + Math.random() * 12; });
+     right instead of snapping in one go. Clocked on wall time, not frames:
+     counted in frames, a decode under a slow or throttled frame rate ran for
+     many seconds and could be restarted mid-scramble, and a hidden tab never
+     ticked at all. On time, a line settles in well under a second wherever it
+     runs, and a tab that comes back resolves on its first frame. The numbers
+     are the old frame counts at 60 fps — 1.35 frames a character, 8 to 20
+     frames to settle. */
+  var start = chars.map(function (_, i) { return i * 22.5; });
+  var end = start.map(function (s) { return s + 133 + Math.random() * 200; });
 
-  function tick() {
-    var out = '', done = 0;
+  function tick(now) {
+    if (!t0) t0 = now;
+    var t = now - t0, out = '', done = 0;
     for (var i = 0; i < chars.length; i++) {
       if (chars[i] === ' ') { out += ' '; done++; continue; }
-      if (frame >= end[i]) { out += chars[i]; done++; }
-      else if (frame >= start[i]) out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
+      if (t >= end[i]) { out += chars[i]; done++; }
+      else if (t >= start[i]) out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
       else out += '';
     }
     el.textContent = out;
-    frame++;
     if (done < chars.length) raf = requestAnimationFrame(tick);
     else raf = 0;
   }
   raf = requestAnimationFrame(tick);
-  return function () { if (raf) cancelAnimationFrame(raf); el.textContent = text; };
+  return function () { if (raf) cancelAnimationFrame(raf); raf = 0; el.textContent = text; };
 }
 
 export function mount(root, opts) {
