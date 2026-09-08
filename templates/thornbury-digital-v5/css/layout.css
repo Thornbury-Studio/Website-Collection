@@ -78,8 +78,8 @@
   }
   html.no-field .field { display: none; }
   html[data-field="still"] .field { opacity: .72; }
-  /* the monolith: fixed over the hero's place, above the field, under the page */
-  .mono {
+  /* the planet: fixed over the hero's place, above the field, under the page */
+  .planet {
     position: fixed;
     left: 0; right: 0;
     top: var(--bar);
@@ -90,8 +90,8 @@
     opacity: 0;
     transition: opacity .5s var(--ease);
   }
-  .mono.is-on { opacity: 1; }
-  .mono .hero-gl { display: block; width: 100%; height: 100%; }
+  .planet.is-on { opacity: 1; }
+  .planet .hero-gl { display: block; width: 100%; height: 100%; }
 
   /* No z-index and no isolation here: the glass layers below must be able
      to blend with the canvas, which only works inside the root stacking context. */

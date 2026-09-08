@@ -290,20 +290,22 @@
     return webglOK;
   }
 
-  /* The home hero's monolith: one canvas for the session, fixed over the
+  /* The home hero's planet: one canvas for the session, fixed over the
      hero's place, started once at idle after load and only when WebGL is
-     there and motion is wanted; every page tells it whether it is Home. */
+     there and motion is wanted; every page tells it whether it is Home. Its
+     pointer listeners live on the window, so routing away and back cannot
+     take them with the <main> it swaps. */
   var monolithHandle = null, monolithStarted = false;
   function startMonolith() {
     if (monolithStarted || reducedNow() || !hasWebGL()) return;
     monolithStarted = true;
     var fieldEl = document.getElementById('field');
     var host = document.createElement('div');
-    host.className = 'mono';
+    host.className = 'planet';
     host.setAttribute('aria-hidden', 'true');
     if (fieldEl && fieldEl.parentNode) fieldEl.parentNode.insertBefore(host, fieldEl.nextSibling);
     else document.body.insertBefore(host, document.body.firstChild);
-    import('./monolith.js').then(function (mod) {
+    import('./planet.js').then(function (mod) {
       monolithHandle = mod.mount(host, {});
       if (!monolithHandle) { host.remove(); return; }
       monolithHandle.page((html.getAttribute('data-page') || 'home') === 'home' && !reducedNow());
@@ -651,6 +653,8 @@
     holdField: function (on) { fieldHold = !!on; applyFieldGate(); },
     /* ...and stops the hero's object drawing while the page leaves */
     pauseHero: function (on) { if (monolithHandle) monolithHandle.pause(on); },
+    /* the verification harness and the phone probe read the hero's own state */
+    heroState: function () { return monolithHandle && monolithHandle.state ? monolithHandle.state() : null; },
     /* ...and switches it off entirely for a mode that does not use the canvas */
     suspendField: function (on) { fieldOff = !!on; applyFieldGate(); }
   };
