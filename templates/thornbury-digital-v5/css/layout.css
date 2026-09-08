@@ -2792,52 +2792,81 @@
    Questions — the first conversation, written down.
    Twelve questions in the order people ask them, answered open on the page
    (nothing behind a tap on a desktop) beside an index that stays put and marks
-   the one being read. The two rates are stated once more at the top in the
-   Services ledger's own figure, and the comparison is the Studio page's table
-   with a third column. Every number on the page is the published one.
+   the one being read. The rate is stated once, as a sentence — the answer to
+   the first question — with what both rates carry on one ruled strip; the
+   comparison is the Studio page's former table with a third column, and the
+   only one on the site now. Every number on the page is the published one.
    ========================================================================== */
 @layer components {
-  /* the two rates, side by side */
-  .tariff {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 var(--gutter);
-    margin-top: 1.8rem;
-    border-top: 1px solid var(--hair-2);
-  }
-  .tariff-item {
-    padding: clamp(1.6rem, 4vh, 2.6rem) 0 clamp(1.5rem, 3.5vh, 2.2rem);
-    border-bottom: 1px solid var(--hair-1);
-  }
-  .tariff h2 {
-    margin-top: .9rem;
-    font-family: var(--mono);
-    font-weight: 500;
-    font-size: .68rem;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--chrome-70);
-  }
-  .tariff-item--promo h2::before {
-    content: "";
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: var(--ember);
-    margin-right: .6rem;
-    vertical-align: .12em;
-  }
-  .tariff .terms { padding-top: 1.3rem; gap: 1.2rem clamp(1.2rem, 2.5vw, 2.4rem); }
-  .tariff-note {
+  /* the short answer: the rate as a sentence, the two figures inside it.
+     Services sets the figures as display type in a ledger; this is the same
+     two numbers in running prose, so the two pages read as two things. */
+  .answer {
     margin-top: 1.4rem;
+    font-weight: 600;
+    font-size: clamp(1.45rem, 2.6vw, 2.7rem);
+    line-height: 1.18;
+    letter-spacing: -.03em;
+    max-width: 30ch;
+    text-wrap: pretty;
+    font-variation-settings: "wdth" 96;
+  }
+  .answer b {
+    font-weight: 800;
+    color: var(--ember);
+    white-space: nowrap;
+    font-variation-settings: "wdth" 92;
+  }
+  .answer-sub {
+    margin-top: 1.2rem;
     color: var(--chrome-70);
-    font-size: .97rem;
+    font-size: clamp(.98rem, 1.15vw, 1.15rem);
     line-height: 1.5;
-    max-width: 42ch;
+    max-width: 48ch;
     text-wrap: pretty;
   }
-  .tariff-both { margin-top: 2rem; }
-  .carries--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: .8rem; }
+  /* what both carry: one ruled strip, four cells across, hairlines between */
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 2.2rem;
+    border-top: 1px solid var(--hair-2);
+    border-bottom: 1px solid var(--hair-1);
+  }
+  .strip li {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0 .6rem;
+    align-items: start;
+    padding: 1.05rem 1.3rem 1.15rem 0;
+  }
+  .strip li + li { border-left: 1px solid var(--hair-1); padding-left: 1.3rem; }
+  .strip b {
+    grid-column: 1;
+    grid-row: 1;
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: .66rem;
+    letter-spacing: .14em;
+    color: var(--chrome-45);
+    padding-top: .25rem;
+  }
+  .strip span { grid-column: 2; grid-row: 1; color: var(--chrome-70); font-size: .95rem; line-height: 1.5; }
+  @media (max-width: 1080px) {
+    .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .strip li:nth-child(-n + 2) { border-bottom: 1px solid var(--hair-1); }
+    .strip li:nth-child(3) { border-left: 0; padding-left: 0; }
+  }
+  .answer-foot {
+    margin-top: 1.2rem;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .05em;
+    color: var(--chrome-45);
+  }
+  .answer-foot a { color: var(--chrome-70); text-decoration: none; border-bottom: 1px solid var(--hair-2); }
+  .answer-foot a:hover { color: var(--chrome); border-color: var(--ember); }
+  #compare { scroll-margin-top: var(--bar); }
 
   /* the comparison, with the agency between the freelancer and us */
   .vs--three tbody th { width: 22%; }
@@ -2968,10 +2997,11 @@
 
 /* Unlayered, beside the phone block: an unlayered rule beats every layered one. */
 @media (max-width: 760px) {
-  .tariff { grid-template-columns: minmax(0, 1fr); }
-  .tariff-item { padding: 1.4rem 0 1.5rem; }
-  .tariff-note { max-width: none; font-size: .95rem; }
-  .carries--4 { grid-template-columns: 1fr; }
+  .answer { font-size: clamp(1.3rem, 6vw, 1.6rem); max-width: none; }
+  .answer-sub { max-width: none; }
+  .strip { grid-template-columns: minmax(0, 1fr); border-bottom: 0; }
+  .strip li, .strip li:nth-child(-n + 2) { padding: .85rem 0 .9rem; border-bottom: 1px solid var(--hair-1); }
+  .strip li + li { border-left: 0; padding-left: 0; }
   .vs--three td:nth-of-type(1)::before { content: "One freelancer"; color: var(--chrome-45); }
   .vs--three td:nth-of-type(2)::before { content: "An agency"; color: var(--chrome-45); }
   .vs--three td:nth-of-type(3)::before { content: "Thornbury"; color: var(--ember); }
