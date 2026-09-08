@@ -1856,3 +1856,31 @@ checked against thornburystudio.com/faq on 8 Sep 2026; nothing on the page is
 invented, and the copy has no straight quotes. Verified at 1440×900 and
 390×844: zero overflow, every grid child placed, console clean, routing in
 (Services → FAQ) and out (FAQ → Home) rebuilding and releasing the rail.
+
+## One comparison, and the rate said twice in two ways
+
+**Studio's table comes out.** Section IV, "A studio, or one freelancer" — the
+`fold--block` and the two-column `table.vs` inside it — is gone: the Questions
+page carries the same argument with an agency column added, and two tables
+making one pitch on two pages was one too many. In its place the page's own
+teaser pattern, one line and one link (`faq.html#compare`, which the router
+lands on the comparison with the section's `scroll-margin-top` clearing the
+bar). The sections under it are IV and V now. `table.vs`'s CSS stays — the
+Questions page's `.vs--three` is built on it.
+
+**The rate as a sentence.** The Questions page's first section was a pair of
+rate cards — figure, name, terms — which is the Services ledger with the
+class names changed, and it read as one block pasted onto two pages. The
+reference for the other form is Stripe's pricing page, which sets its
+headline rate as one large sentence with the figures inline and lists what is
+included underneath it, and Vercel's pricing FAQ, which answers "how much" in
+a paragraph rather than a card. So: the section is "The short answer", the
+two figures sit inside one sentence in the site's own type (`.answer`, 600 at
+`clamp(1.45rem, 2.6vw, 2.7rem)`, the two prices in ember at 800), the
+promotion's framing follows as a line of body copy, and the four things both
+rates carry run as one ruled strip (`.strip`: four cells with hairlines
+between; two by two under 1080 px; one column on a phone). Services keeps the
+ledger; the same numbers, byte for byte, in a shape that is a sentence rather
+than a card. Verified: every figure and period present on the page, S$500 ×7
+and S$800 ×4 across the recap, the table and the twelve; no straight quotes;
+zero overflow at 1440, 1024 and 390; Services' figures and terms unchanged.
