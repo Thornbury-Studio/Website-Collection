@@ -18,6 +18,11 @@
    closer: the rim burns brighter and the cities glow harder near the
    pointer. Without a pointer the sun drifts on its own.
 
+   THE SPACE. Behind and in front: a nebula far back, stars in three depths
+   (the nearest cross in front of the planet), dust past the lens, meteors
+   now and then, and a camera that leans with the pointer so each depth
+   shifts by its own amount. In the hero the nebula stands in for the field.
+
    THE THREADS. Strands on orbits around the planet, in the same chrome and
    the same scarce ember as the liquid field behind it, each with a head of
    light travelling along it — the field's law that brightness is velocity —
@@ -154,6 +159,142 @@ var THREAD_FRAG = [
   '}'
 ].join('\n');
 
+/* THE SPACE. What you see in space, in the site's palette, and in depth:
+   a nebula of haze far behind with ember filaments in it; stars in three
+   depths, some of them nearer the camera than the planet so they cross in
+   front of it; dust drifting past the lens; and now and then a meteor. The
+   camera itself leans with the pointer, so every depth shifts by a different
+   amount — that parallax is what makes the space read as space rather than
+   as a picture behind a ball. In the hero the nebula is opaque and stands in
+   for the liquid field; it fades with the hero, and the field is there
+   underneath as it always was. */
+var NEBULA_VERT = [
+  'varying vec2 vUv;',
+  'void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }'
+].join('\n');
+var NEBULA_FRAG = [
+  'precision mediump float;',
+  'uniform float uTime;',
+  'uniform float uFade;',
+  'uniform vec2 uPar;',
+  'uniform float uAspect;',
+  'uniform vec3 uEmber;',
+  'varying vec2 vUv;',
+  'float h2(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }',
+  'float n2(vec2 x) { vec2 i = floor(x), f = fract(x); f = f * f * (3.0 - 2.0 * f);',
+  '  return mix(mix(h2(i), h2(i + vec2(1, 0)), f.x), mix(h2(i + vec2(0, 1)), h2(i + vec2(1, 1)), f.x), f.y); }',
+  'float fbm(vec2 p) { float a = 0.5, s = 0.0; for (int i = 0; i < 3; i++) { s += a * n2(p); p = p * 2.02 + vec2(3.1, 1.7); a *= 0.5; } return s; }',
+  'void main() {',
+  '  vec2 p = (vUv - 0.5) * vec2(uAspect, 1.0) * 2.2 + uPar * 0.06;',
+  '  float t = uTime * 0.012;',
+  '  float n1 = fbm(p * 1.1 + vec2(t, -t * 0.6));',
+  '  float n2v = fbm(p * 2.4 - vec2(t * 0.7, t * 0.4) + 5.3);',
+  '  float haze = smoothstep(0.38, 0.85, n1) * 0.13;',
+  '  float veins = pow(smoothstep(0.60, 0.76, n2v), 2.4) * smoothstep(0.45, 0.72, n1);',
+  '  vec3 col = vec3(0.022, 0.022, 0.024) + vec3(0.55, 0.57, 0.62) * haze + uEmber * veins * 0.11;',
+  /* the room falls off toward its edges, so the type's corner stays dark */
+  '  float vig = 1.0 - smoothstep(0.55, 1.35, length((vUv - 0.5) * vec2(uAspect * 0.8, 1.15)));',
+  '  col *= 0.55 + 0.45 * vig;',
+  '  gl_FragColor = vec4(col * uFade, uFade);',
+  '}'
+].join('\n');
+
+var STAR_VERT = [
+  'attribute float aSize;',
+  'attribute float aRand;',
+  'attribute float aEmber;',
+  'uniform float uTime;',
+  'uniform float uFade;',
+  'uniform float uDpr;',
+  'varying float vFade;',
+  'varying float vEmber;',
+  'void main() {',
+  '  vec4 mv = modelViewMatrix * vec4(position, 1.0);',
+  '  gl_Position = projectionMatrix * mv;',
+  '  gl_PointSize = aSize * uDpr;',
+  '  float tw = 0.72 + 0.28 * sin(uTime * (0.6 + aRand * 1.4) + aRand * 40.0);',
+  '  vFade = tw * (0.45 + 0.55 * aRand) * uFade;',
+  '  vEmber = aEmber;',
+  '}'
+].join('\n');
+var STAR_FRAG = [
+  'precision mediump float;',
+  'uniform vec3 uChrome;',
+  'uniform vec3 uEmber;',
+  'varying float vFade;',
+  'varying float vEmber;',
+  'void main() {',
+  '  vec2 c = gl_PointCoord - 0.5;',
+  '  float d = dot(c, c);',
+  '  if (d > 0.25) discard;',
+  '  float a = (smoothstep(0.25, 0.0, d) * 0.55 + smoothstep(0.06, 0.0, d)) * clamp(vFade, 0.0, 1.0);',
+  '  gl_FragColor = vec4(mix(uChrome, uEmber, vEmber) * a, a);',
+  '}'
+].join('\n');
+
+/* dust: large, soft, slow, close to the lens */
+var DUST_VERT = [
+  'attribute float aSize;',
+  'attribute float aRand;',
+  'uniform float uTime;',
+  'uniform float uFade;',
+  'uniform float uDpr;',
+  'varying float vFade;',
+  'void main() {',
+  '  vec3 p = position;',
+  '  p.x += sin(uTime * 0.05 + aRand * 9.0) * 0.4 + uTime * 0.012 * (0.5 + aRand);',
+  '  p.y += cos(uTime * 0.04 + aRand * 7.0) * 0.3;',
+  '  p.x = mod(p.x + 6.0, 12.0) - 6.0;',
+  '  vec4 mv = modelViewMatrix * vec4(p, 1.0);',
+  '  gl_Position = projectionMatrix * mv;',
+  '  gl_PointSize = aSize * uDpr * clamp(8.0 / -mv.z, 0.5, 4.0);',
+  '  vFade = (0.025 + 0.035 * aRand) * uFade;',
+  '}'
+].join('\n');
+var DUST_FRAG = [
+  'precision mediump float;',
+  'uniform vec3 uChrome;',
+  'varying float vFade;',
+  'void main() {',
+  '  vec2 c = gl_PointCoord - 0.5;',
+  '  float d = dot(c, c);',
+  '  if (d > 0.25) discard;',
+  '  float a = pow(smoothstep(0.25, 0.0, d), 1.6) * vFade;',
+  '  gl_FragColor = vec4(uChrome * a, a);',
+  '}'
+].join('\n');
+
+/* meteors: a pool of streaks; each has a start, a direction, a launch time
+   and a speed, and the shader places its head and tail from the clock */
+var METEOR_VERT = [
+  'attribute vec3 aStart;',
+  'attribute vec3 aDir;',
+  'attribute float aLaunch;',
+  'attribute float aSpeed;',
+  'attribute float aEnd;',
+  'uniform float uTime;',
+  'uniform float uFade;',
+  'varying float vFade;',
+  'void main() {',
+  '  float age = uTime - aLaunch;',
+  '  float life = 1.4;',
+  '  float u = clamp(age / life, 0.0, 1.0);',
+  '  vec3 head = aStart + aDir * age * aSpeed;',
+  '  float far = (6.0 - aStart.z) / 6.0;',
+  '  vec3 p = head - aDir * (0.8 + 0.5 * u) * far * aEnd;',
+  '  gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);',
+  '  float alive = step(0.0, age) * step(age, life);',
+  '  float env = sin(u * 3.14159);',
+  '  vFade = alive * env * (1.0 - 0.85 * aEnd) * uFade;',
+  '}'
+].join('\n');
+var METEOR_FRAG = [
+  'precision mediump float;',
+  'uniform vec3 uChrome;',
+  'varying float vFade;',
+  'void main() { float a = clamp(vFade, 0.0, 1.0); gl_FragColor = vec4(uChrome * a, a); }'
+].join('\n');
+
 function hash(n) { var v = Math.sin(n * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); }
 
 /* strands on inclined, slightly wobbling orbits, as line-segment pairs */
@@ -254,6 +395,128 @@ export function mount(host, opts) {
   var threadLines = new THREE.LineSegments(thGeo, thMat);
   group.add(threadLines);
 
+  /* ---- the space ---- */
+  var space = new THREE.Group();
+  scene.add(space);
+  var NEB_Z = -30;
+  /* baked once: three octaves of noise per pixel per frame was a third of the
+     frame, for a cloud that moves slower than the eye can tell */
+  var nebBakeMat = new THREE.ShaderMaterial({
+    vertexShader: NEBULA_VERT, fragmentShader: NEBULA_FRAG, depthWrite: false, depthTest: false,
+    uniforms: { uTime: { value: 0 }, uFade: { value: 1 }, uPar: { value: new THREE.Vector2() }, uAspect: { value: 1.8 }, uEmber: { value: ember } }
+  });
+  var nebRT = new THREE.WebGLRenderTarget(small ? 512 : 1024, small ? 288 : 576, { depthBuffer: false, stencilBuffer: false });
+  var nebScene = new THREE.Scene();
+  var nebCam = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, 0, 1);
+  nebScene.add(new THREE.Mesh(new THREE.PlaneGeometry(1, 1), nebBakeMat));
+  function bakeNebula() {
+    renderer.setRenderTarget(nebRT);
+    renderer.render(nebScene, nebCam);
+    renderer.setRenderTarget(null);
+  }
+  var nebMat = new THREE.ShaderMaterial({
+    vertexShader: NEBULA_VERT,
+    fragmentShader: [
+      'precision mediump float;',
+      'uniform sampler2D uMap;',
+      'uniform float uFade;',
+      'uniform float uTime;',
+      'uniform vec2 uPar;',
+      'varying vec2 vUv;',
+      'void main() {',
+      '  vec2 uv = (vUv - 0.5) * 0.86 + 0.5 + uPar * 0.012 + vec2(uTime * 0.0008, -uTime * 0.0005);',
+      '  vec3 c = texture2D(uMap, uv).rgb;',
+      '  gl_FragColor = vec4(c * uFade, uFade);',
+      '}'
+    ].join(String.fromCharCode(10)),
+    transparent: true, depthWrite: false, depthTest: false,
+    uniforms: { uMap: { value: nebRT.texture }, uFade: { value: 0 }, uTime: { value: 0 }, uPar: { value: new THREE.Vector2() } }
+  });
+  var nebula = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), nebMat);
+  nebula.position.z = NEB_Z;
+  nebula.renderOrder = -3;
+  space.add(nebula);
+
+  function starField(n, zMin, zMax, spread, sizeMin, sizeMax, seed) {
+    var pos = [], size = [], rnd = [], emb = [];
+    for (var i = 0; i < n; i++) {
+      var z = zMin + hash(seed + i * 3.1) * (zMax - zMin);
+      /* the frustum's half-width at this depth (fov 36, aspect up to 1.9), with margin for the lean */
+      var s = (6 - z) * 0.325 * spread;
+      pos.push((hash(seed + i * 1.7) - 0.5) * s * 2 * 1.9, (hash(seed + i * 2.3) - 0.5) * s * 2 * 1.15, z);
+      size.push(sizeMin + hash(seed + i * 4.1) * (sizeMax - sizeMin));
+      rnd.push(hash(seed + i * 5.3));
+      emb.push(hash(seed + i * 6.7) < 0.03 ? 1 : 0);
+    }
+    var g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    g.setAttribute('aSize', new THREE.Float32BufferAttribute(size, 1));
+    g.setAttribute('aRand', new THREE.Float32BufferAttribute(rnd, 1));
+    g.setAttribute('aEmber', new THREE.Float32BufferAttribute(emb, 1));
+    return g;
+  }
+  var starMat = new THREE.ShaderMaterial({
+    vertexShader: STAR_VERT, fragmentShader: STAR_FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    uniforms: { uTime: { value: 0 }, uFade: { value: 0 }, uDpr: { value: 1 }, uChrome: { value: chrome }, uEmber: { value: ember } }
+  });
+  var farStars = new THREE.Points(starField(small ? 1100 : 3000, -26, -8, 1.15, 1.2, 3.2, 7), starMat);
+  farStars.renderOrder = -2;
+  var midStars = new THREE.Points(starField(small ? 260 : 600, -7, -1.6, 1.15, 1.4, 3.6, 19), starMat);
+  midStars.renderOrder = -1;
+  /* nearer than the planet: these cross in front of it */
+  var nearStars = new THREE.Points(starField(small ? 40 : 90, 1.2, 4.2, 1.1, 1.6, 3.4, 31), starMat);
+  nearStars.renderOrder = 3;
+  space.add(farStars); space.add(midStars); space.add(nearStars);
+
+  var dustMat = new THREE.ShaderMaterial({
+    vertexShader: DUST_VERT, fragmentShader: DUST_FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    uniforms: { uTime: { value: 0 }, uFade: { value: 0 }, uDpr: { value: 1 }, uChrome: { value: chrome } }
+  });
+  var dust = new THREE.Points(starField(small ? 18 : 36, 2.0, 4.6, 1.2, 10, 34, 43), dustMat);
+  dust.renderOrder = 4;
+  space.add(dust);
+
+  var METEORS = 7;
+  var mGeo = new THREE.BufferGeometry();
+  var mStart = new Float32Array(METEORS * 2 * 3), mDir = new Float32Array(METEORS * 2 * 3), mLaunch = new Float32Array(METEORS * 2), mSpeed = new Float32Array(METEORS * 2), mEnd = new Float32Array(METEORS * 2);
+  for (var mi = 0; mi < METEORS * 2; mi++) { mEnd[mi] = mi % 2; mLaunch[mi] = -100; }
+  mGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(METEORS * 2 * 3), 3));
+  mGeo.setAttribute('aStart', new THREE.BufferAttribute(mStart, 3).setUsage(THREE.DynamicDrawUsage));
+  mGeo.setAttribute('aDir', new THREE.BufferAttribute(mDir, 3).setUsage(THREE.DynamicDrawUsage));
+  mGeo.setAttribute('aLaunch', new THREE.BufferAttribute(mLaunch, 1).setUsage(THREE.DynamicDrawUsage));
+  mGeo.setAttribute('aSpeed', new THREE.BufferAttribute(mSpeed, 1).setUsage(THREE.DynamicDrawUsage));
+  mGeo.setAttribute('aEnd', new THREE.BufferAttribute(mEnd, 1));
+  mGeo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 60);
+  var meteorMat = new THREE.ShaderMaterial({
+    vertexShader: METEOR_VERT, fragmentShader: METEOR_FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    uniforms: { uTime: { value: 0 }, uFade: { value: 0 }, uChrome: { value: chrome } }
+  });
+  var meteors = new THREE.LineSegments(mGeo, meteorMat);
+  meteors.frustumCulled = false;
+  meteors.renderOrder = 5;
+  space.add(meteors);
+  var nextMeteor = 1.2, meteorSlot = 0, meteorsLaunched = 0, lastLaunch = -1;
+  function launchMeteor(t) {
+    var i = meteorSlot; meteorSlot = (meteorSlot + 1) % METEORS;
+    var front = Math.random() < 0.35;
+    var z = front ? 1.5 + Math.random() * 2.5 : -14 + Math.random() * 10;
+    var s = (6 - z) / 6;
+    var sx = (Math.random() - 0.5) * 2 * 0.55 * s * 1.9, sy = (0.15 + Math.random() * 0.45) * s * 2.3;
+    var ang = -0.9 + (Math.random() - 0.5) * 0.9;
+    var dx = Math.cos(ang), dy = Math.sin(ang);
+    var speed = (front ? 2.4 : 1.9) * (0.8 + Math.random() * 0.6) * s;
+    for (var k = 0; k < 2; k++) {
+      var j = i * 2 + k;
+      mStart[j * 3] = sx; mStart[j * 3 + 1] = sy; mStart[j * 3 + 2] = z;
+      mDir[j * 3] = dx; mDir[j * 3 + 1] = dy; mDir[j * 3 + 2] = 0;
+      mLaunch[j] = t; mSpeed[j] = speed;
+    }
+    mGeo.attributes.aStart.needsUpdate = mGeo.attributes.aDir.needsUpdate = mGeo.attributes.aLaunch.needsUpdate = mGeo.attributes.aSpeed.needsUpdate = true;
+    nextMeteor = t + 1.6 + Math.random() * 3.6;
+    meteorsLaunched++; lastLaunch = t;
+  }
+  var par = new THREE.Vector2(), parT = new THREE.Vector2();
+
   var texReady = false;
   loadTexture(opts.texture || ('img/earth-pack' + (small ? '-sm' : '') + '.webp')).then(function (tex) {
     tex.colorSpace = THREE.NoColorSpace;
@@ -269,6 +532,9 @@ export function mount(host, opts) {
 
   function place() {
     var aspect = w / h;
+    /* the nebula fills the frustum at its own depth, with margin for the lean */
+    var nh = 2 * (6 - NEB_Z) * Math.tan(camera.fov * Math.PI / 360) * 1.25;
+    nebula.scale.set(nh * aspect, nh, 1);
     small = Math.min(innerWidth, innerHeight) < 700;
     var half = 6 * Math.tan(camera.fov * Math.PI / 360);
     /* the planet stands right of centre on a desktop, under the type on a phone */
@@ -277,8 +543,9 @@ export function mount(host, opts) {
   }
   function resize() {
     var r = host.getBoundingClientRect();
-    var dpr = Math.min(devicePixelRatio || 1, small ? 1.5 : 1.25);
+    var dpr = Math.min(devicePixelRatio || 1, small ? 1.0 : 1.25);
     renderer.setPixelRatio(dpr);
+    starMat.uniforms.uDpr.value = dpr; dustMat.uniforms.uDpr.value = dpr;
     w = Math.max(1, r.width); h = Math.max(1, r.height);
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
@@ -296,6 +563,7 @@ export function mount(host, opts) {
     var nx = ((ev.clientX - r.left) / r.width) * 2 - 1;
     var ny = -(((ev.clientY - r.top) / r.height) * 2 - 1);
     sunTarget.set(nx * 1.5, ny * 1.1, 0.7).normalize();
+    parT.set(nx, ny);
     /* where the planet sits on the stage, in the same units */
     var half = 6 * Math.tan(camera.fov * Math.PI / 360);
     var px = group.position.x / (half * camera.aspect), py = group.position.y / half;
@@ -306,7 +574,7 @@ export function mount(host, opts) {
     pointerAt = performance.now();
     lastPointer = [nx, ny];
   }
-  function onLeave() { nearT = 0; pointerSeen = false; }
+  function onLeave() { nearT = 0; pointerSeen = false; parT.set(0, 0); }
 
   function run() { if (!raf && alive) { last = 0; raf = requestAnimationFrame(frame); } }
   function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
@@ -331,8 +599,22 @@ export function mount(host, opts) {
 
     planet.rotation.y += dt * 0.045;
     threadLines.rotation.y += dt * 0.02;
+    /* the lean: every depth shifts by its own amount, which is the parallax */
+    par.lerp(parT, Math.min(1, dt * 2.0));
+    camera.position.x = par.x * 0.32;
+    camera.position.y = par.y * 0.18;
+    camera.lookAt(0, 0, 0);
+    space.rotation.z = Math.sin(t * 0.02) * 0.03;
+    farStars.rotation.z += dt * 0.0025;
+    if (t > nextMeteor && fade > 0.5) launchMeteor(t);
+    nebMat.uniforms.uTime.value = t; nebMat.uniforms.uFade.value = fade; nebMat.uniforms.uPar.value.copy(par);
+    starMat.uniforms.uTime.value = t; starMat.uniforms.uFade.value = fade;
+    dustMat.uniforms.uTime.value = t; dustMat.uniforms.uFade.value = fade;
+    meteorMat.uniforms.uTime.value = t; meteorMat.uniforms.uFade.value = fade;
     threadLines.rotation.x = Math.sin(t * 0.05) * 0.12;
 
+    planetMat.uniforms.uEye.value.copy(camera.position);
+    haloMat.uniforms.uEye.value.copy(camera.position);
     planetMat.uniforms.uSun.value.copy(sunDir);
     planetMat.uniforms.uNear.value = near;
     planetMat.uniforms.uFade.value = fade;
@@ -351,6 +633,7 @@ export function mount(host, opts) {
   }
 
   resize();
+  bakeNebula();
   addEventListener('resize', resize);
   addEventListener('pointermove', onPointer, { passive: true });
   document.addEventListener('pointerleave', onLeave);
@@ -369,7 +652,8 @@ export function mount(host, opts) {
     /* for the verification harness and the phone probe: is it alive, and does it feel the pointer */
     state: function () {
       return { on: on, paused: !!opts.paused, drawing: !!raf, frames: frames, fade: +fade.toFixed(3), near: +near.toFixed(3),
-               sun: [+sunDir.x.toFixed(3), +sunDir.y.toFixed(3), +sunDir.z.toFixed(3)], pointer: lastPointer, texture: texReady };
+               sun: [+sunDir.x.toFixed(3), +sunDir.y.toFixed(3), +sunDir.z.toFixed(3)], pointer: lastPointer, texture: texReady,
+               meteors: meteorsLaunched, lastMeteorAge: lastLaunch < 0 ? null : +(((performance.now() - t0) / 1000) - lastLaunch).toFixed(2) };
     },
     destroy: function () {
       alive = false; stop();
@@ -378,6 +662,8 @@ export function mount(host, opts) {
       document.removeEventListener('pointerleave', onLeave);
       planet.geometry.dispose(); halo.geometry.dispose(); thGeo.dispose();
       planetMat.dispose(); haloMat.dispose(); thMat.dispose();
+      [farStars, midStars, nearStars, dust].forEach(function (o) { o.geometry.dispose(); });
+      nebula.geometry.dispose(); mGeo.dispose(); nebMat.dispose(); nebBakeMat.dispose(); nebRT.dispose(); starMat.dispose(); dustMat.dispose(); meteorMat.dispose();
       renderer.dispose();
       if (renderer.forceContextLoss) renderer.forceContextLoss();
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
