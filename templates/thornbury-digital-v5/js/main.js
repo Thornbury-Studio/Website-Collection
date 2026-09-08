@@ -595,6 +595,20 @@
         });
       });
 
+      if (foldMq.matches) {
+        var strip = root.querySelector('.index');
+        if (strip) g.from(strip.querySelectorAll('.entry'), {
+          x: 26, opacity: 0, duration: .9, stagger: .07, ease: 'power3.out', clearProps: 'all',
+          scrollTrigger: { trigger: strip, start: 'top 88%', once: true }
+        });
+        var grid = root.querySelector('.wgrid');
+        if (grid) g.from(grid.querySelectorAll('.case'), {
+          y: 10, opacity: 0, duration: .7, stagger: .035, ease: 'power3.out', clearProps: 'all',
+          scrollTrigger: { trigger: grid, start: 'top 92%', once: true }
+        });
+        return;
+      }
+
       g.utils.toArray('.entry').forEach(function (el) {
         var pl = el.querySelector('.fig-plate');
         if (pl) {
@@ -626,6 +640,79 @@
         }
       });
     }, root);
+  }
+
+  /* ---------- the shelf and the sheet (phones) ----------
+     Two phone layouts for the work, both laid out by CSS; the script only
+     reads where a finger is. The shelf (home index) reports which plate is in
+     front and how far along the rail you are. The sheet (work page) lights the
+     tile under a horizontal scrub and prints its name, sector and kind in the
+     readout above it; a tap is the link, as always. Both wire through on() so
+     a routed departure unhooks them, and both are set up again on arrival. */
+  function shelf(root) {
+    var strip = root.querySelector('.index');
+    var rule = root.querySelector('.shelf-n');
+    if (!strip || !rule || !foldMq.matches) return;
+    var entries = [].slice.call(strip.querySelectorAll('.entry'));
+    if (entries.length < 2) return;
+    var num = rule.querySelector('[data-shelf-n]'), rail = rule.querySelector('[data-shelf-rail]');
+    var raf = 0, cur = -1;
+    function sample() {
+      raf = 0;
+      var stride = entries[1].offsetLeft - entries[0].offsetLeft;
+      var max = strip.scrollWidth - strip.clientWidth;
+      var f = max > 0 ? Math.min(1, Math.max(0, strip.scrollLeft / max)) : 0;
+      var i = stride > 0 ? Math.round(strip.scrollLeft / stride) : 0;
+      i = Math.max(0, Math.min(entries.length - 1, i));
+      if (rail) rail.style.transform = 'translateX(' + (f * (entries.length - 1) * 100).toFixed(1) + '%)';
+      if (i !== cur) {
+        if (cur >= 0) entries[cur].classList.remove('is-front');
+        cur = i;
+        entries[i].classList.add('is-front');
+        if (num) num.textContent = (i + 1 < 10 ? '0' : '') + (i + 1);
+      }
+    }
+    sample();
+    on(strip, 'scroll', function () { if (!raf) raf = requestAnimationFrame(sample); }, { passive: true });
+    on(global, 'resize', function () { if (!raf) raf = requestAnimationFrame(sample); }, { passive: true });
+    offs.push(function () { if (raf) cancelAnimationFrame(raf); });
+  }
+
+  function sheet(root) {
+    var grid = root.querySelector('.wgrid');
+    var out = root.querySelector('[data-sheet-out]');
+    if (!grid || !out || !foldMq.matches) return;
+    var n = out.querySelector('[data-sheet-n]'), name = out.querySelector('[data-sheet-name]'), kind = out.querySelector('[data-sheet-kind]');
+    var cases = [].slice.call(grid.querySelectorAll('.case'));
+    var lit = null, raf = 0, px = 0, py = 0, active = false;
+    function light(el) {
+      if (el === lit) return;
+      if (lit) lit.classList.remove('is-lit');
+      lit = el;
+      if (!el) return;
+      el.classList.add('is-lit');
+      var i = cases.indexOf(el) + 1;
+      var h = el.querySelector('.cap h2'), s = el.querySelector('.card .meta b'), k = el.querySelector('.pc-tr');
+      if (n) n.textContent = (i < 10 ? '0' : '') + i;
+      if (name) name.textContent = h ? h.textContent : '';
+      if (kind) kind.textContent = (s ? s.textContent : '') + (k ? ' \u00b7 ' + k.textContent.split('\u2014')[0].trim() : '');
+    }
+    function sample() {
+      raf = 0;
+      var el = document.elementFromPoint(px, py);
+      el = el && el.closest ? el.closest('.case') : null;
+      if (el && grid.contains(el)) light(el);
+    }
+    on(grid, 'pointerdown', function (e) { active = true; px = e.clientX; py = e.clientY; sample(); }, { passive: true });
+    on(grid, 'pointermove', function (e) {
+      if (e.pointerType === 'touch' && !active) return;
+      px = e.clientX; py = e.clientY;
+      if (!raf) raf = requestAnimationFrame(sample);
+    }, { passive: true });
+    var end = function () { active = false; };
+    on(global, 'pointerup', end, { passive: true });
+    on(global, 'pointercancel', end, { passive: true });
+    offs.push(function () { if (raf) cancelAnimationFrame(raf); });
   }
 
   /* On a phone, long copy folds into native <details> so the page is a list of
@@ -673,6 +760,8 @@
     scrollFeel();
     trueLoopMarquee(root.querySelector('#mq'), 22);
     briefForm(root);
+    shelf(root);
+    sheet(root);
     /* a routed arrival is faded in from nothing, so the scroll motion can be
        set up one frame later, out of the frame that swapped the page */
     if (opts.intro === false && global.requestAnimationFrame) {

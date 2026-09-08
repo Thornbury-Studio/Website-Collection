@@ -1736,3 +1736,33 @@ the hero's state is null while away and rebuilt on return; the wordmark's
 width moved from 84.9 to 113.1 as the pointer crossed the stage; the step
 clock advanced afterwards. Console clean, zero overflow at 1440 and 390.
 
+
+## The work on a phone: the shelf and the sheet
+
+Two phone-only layouts (760 px and under), both laid out by CSS with the
+script only reading where a finger is. Desktop is untouched.
+
+**Home, Selected work — the shelf.** Five plates a column wide with the name
+run big under each was about 1,900 px of page: five screens of scrolling for
+five figures. The plates now sit side by side on one shelf, each about
+three-quarters of the screen wide so the next one shows its edge, snapping as
+you swipe (scroll-snap, the browser's own). The plate in front is lit; the
+others hold the grey the desktop index keeps them in until you reach for one.
+A count and a rail under the shelf say where you are. The section is 366 px
+tall on a 390-wide phone; the page went from 4,176 px to 2,682 px.
+
+**Work — the sheet.** Eighteen plates one under another ran past 7,000 px.
+They are now a contact sheet: three across, six down, sized to the screen that
+is left under the head, so all eighteen are on the glass at once. Each tile
+carries its number and name in a strip across its foot. Draw a finger across
+the sheet and the tile under it lights and its name, sector and kind print in
+the readout above; a tap opens it, as always. The page still scrolls
+vertically over the sheet (touch-action: pan-y) — the scrub is the horizontal
+gesture, the scroll the vertical one. The page went from 7,229 px to 1,386 px,
+and the sheet's foot sits inside the first screen on a 390×844, a 375×667 and
+a 430×932 phone.
+
+**Motion.** On a phone the five clip-path reveals stacked at one scroll
+position, and the eighteen that would all fire at once on the sheet, are
+replaced by one stagger across the shelf and one across the sheet — opacity
+and transform only.
