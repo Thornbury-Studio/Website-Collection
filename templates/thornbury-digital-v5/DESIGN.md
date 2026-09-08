@@ -1884,3 +1884,37 @@ ledger; the same numbers, byte for byte, in a shape that is a sentence rather
 than a card. Verified: every figure and period present on the page, S$500 ×7
 and S$800 ×4 across the recap, the table and the twelve; no straight quotes;
 zero overflow at 1440, 1024 and 390; Services' figures and terms unchanged.
+
+## The charter as a document
+
+The boss put the two pages side by side: Studio's charter and the Questions
+page were the same component — fold, outlined numeral, headline, body, a
+small-caps callout under it — and landing on either gave one impression.
+Questions owns that pattern now. The charter needed its own.
+
+The two forms five short principles can take are both real pages. Vitsoe's
+page for Dieter Rams's ten principles is the numbered form: a bold claim, a
+paragraph under it, an image, next number — which is what both of these
+sections were. The Holstee Manifesto is the other: one continuous block of
+running text, no numbers, the emphasis carried inside the flow and the
+opening line standing on its own. A charter is a document, so it takes the
+second form. Each article is one run of text — the claim in 800 chrome, the
+argument following it on the same line in 500 at `--chrome-70`, at
+`clamp(1.25rem, 1.95vw, 1.95rem)` over eight columns — with no numeral, no
+rule and nothing to open between articles. The five practice lines are the
+document's commentary and sit in the margin: a hairline, a running head
+("Article 01 · Practice", the label in ember), the note in mono, each aligned
+to the top of its article across columns ten to twelve. Under 1080 px the
+note drops beneath its article at the same measure; on a phone the whole
+thing reads straight down.
+
+The fold and `data-group="charter"` went with the numerals. Nothing here
+opens, so there is nothing to reach with a keyboard, and with JavaScript
+disabled the section renders as it does with it on — checked by loading the
+page with script execution disabled at 1440 and 390: five headings, every
+note visible, the wrap at full opacity. The copy is byte-identical: the five
+claims, the five arguments and the five practice lines were compared string
+for string against the previous markup. Nothing else on the page moved —
+numerals I–V, the comparison teaser, the two fx rows, the pillars, the nots
+and the four who-beats all read as before, zero overflow at 1440, 1024 and
+390.

@@ -1089,8 +1089,7 @@
     text-transform: uppercase;
   }
   .pillars p { grid-column: 2; grid-row: 1; color: var(--chrome-70); font-size: 1.02rem; max-width: 58ch; }
-  .pillars .check,
-  .charter .practice {
+  .pillars .check {
     grid-column: 2;
     grid-row: 2;
     margin-top: .9rem;
@@ -1100,8 +1099,7 @@
     color: var(--chrome-45);
     max-width: 62ch;
   }
-  .pillars .check b,
-  .charter .practice b {
+  .pillars .check b {
     color: var(--ember);
     font-weight: 500;
     font-size: .82em;
@@ -1111,55 +1109,53 @@
   }
   .pillars code { font-family: var(--mono); font-size: .95em; color: var(--chrome-70); }
 
-  /* Five numbered articles. The claim is set as a statement rather than in caps
-     — these are sentences, and uppercase would shout them. The numeral is the
-     outlined figure the work plates use, so the section reads as an index. */
-  .charter { border-top: 1px solid var(--hair-2); margin-top: 1.8rem; }
-  /* Three tracks, not two. The claim is a headline and the paragraph under it
-     is the argument; setting them side by side lets the row use the measure the
-     page actually has instead of running down its left edge. */
-  .charter li { border-bottom: 1px solid var(--hair-1); }
-  .charter .fold {
+  /* ---- the charter: a document, not an index ----
+     Five articles as running text: the claim set bold and the argument
+     following it in the same line, no numerals and no rules between them,
+     with each article's practice note in the margin beside it, the way a
+     charter carries its commentary. The Questions page owns the numbered
+     ledger with the outlined figure; this reads as the thing it says it is. */
+  .charter { margin-top: 2rem; }
+  .article {
     display: grid;
-    grid-template-columns: clamp(3rem, 5.2vw, 4.8rem) minmax(0, .9fr) minmax(0, 1.14fr);
-    gap: 0 clamp(1.2rem, 3vw, 2.8rem);
-    padding: clamp(1.8rem, 4.5vh, 2.8rem) 0;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--gutter);
     align-items: start;
   }
-  .charter .fold > summary,
-  .charter .fold-body { display: contents; }
-  .charter .fold > summary { cursor: default; pointer-events: none; list-style: none; }
-  .charter .n {
-    grid-column: 1;
-    grid-row: 1 / span 3;
-    font-weight: 900;
-    font-size: clamp(2rem, 3.6vw, 3.2rem);
-    line-height: .95;
-    letter-spacing: -.05em;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--hair-2);
-    user-select: none;
-  }
-  .charter h2 {
-    grid-column: 2;
-    grid-row: 1 / span 3;
-    font-weight: 800;
-    font-size: clamp(1.5rem, 2.5vw, 2.15rem);
-    letter-spacing: -.035em;
-    line-height: 1.04;
-    max-width: 17ch;
-    text-wrap: balance;
-  }
-  .charter .fold-body > p:not(.practice) {
-    grid-column: 3;
+  .article + .article { margin-top: clamp(1.8rem, 4.2vh, 3rem); }
+  .article-text {
+    grid-column: 1 / span 8;
     grid-row: 1;
-    margin-top: 0;
+    font-size: clamp(1.25rem, 1.95vw, 1.95rem);
+    line-height: 1.32;
+    letter-spacing: -.022em;
     color: var(--chrome-70);
-    font-size: 1.02rem;
-    line-height: 1.62;
-    max-width: 56ch;
+    text-wrap: pretty;
+    font-variation-settings: "wdth" 96;
   }
-  .charter .practice { grid-column: 3; grid-row: 2; }
+  .article-text h2 {
+    display: inline;
+    font-weight: 800;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: -.03em;
+    color: var(--chrome);
+    font-variation-settings: "wdth" 92;
+  }
+  .article-text p { display: inline; font-weight: 500; }
+  .article-note {
+    grid-column: 10 / -1;
+    grid-row: 1;
+    padding-top: .75rem;
+    border-top: 1px solid var(--hair-1);
+  }
+  .article-note .meta { margin-bottom: .55rem; }
+  .article-note p:not(.meta) {
+    font-family: var(--mono);
+    font-size: .76rem;
+    line-height: 1.6;
+    color: var(--chrome-45);
+  }
 
   /* Desktop: folds are invisible wrappers so the existing grids still hold.
      The phone restyles them into a tap-to-open index. */
@@ -1777,13 +1773,11 @@
   html.rm .menu[open] .menu-in { animation: none; }
 }
 
-/* Between the two: the third charter track needs room to be worth having, and
-   the team band needs both of its columns to stay readable. */
+/* Between the two: the charter's margin column needs room to be worth having,
+   and the team band needs both of its columns to stay readable. */
 @media (max-width: 1080px) {
-  .charter .fold { grid-template-columns: clamp(3rem, 6vw, 5rem) minmax(0, 1fr); }
-  .charter h2 { grid-column: 2; grid-row: 1; max-width: 26ch; }
-  .charter .fold-body > p:not(.practice) { grid-column: 2; grid-row: 2; margin-top: .95rem; max-width: 64ch; }
-  .charter .practice { grid-column: 2; grid-row: 3; }
+  .article-text { grid-column: 1 / -1; max-width: 62ch; }
+  .article-note { grid-column: 1 / -1; grid-row: 2; margin-top: 1rem; max-width: 62ch; }
   .team-band { grid-template-columns: minmax(0, 1fr); }
   .team-band .people, .team-band .team { grid-column: 1; }
   .team-band .people { grid-row: 1; }
@@ -1922,27 +1916,12 @@
     max-width: none;
   }
 
-  /* ---- studio: claims as a list, body behind a tap ---- */
-  .charter .fold {
-    display: block;
-    padding: .85rem 0 1rem;
-  }
-  .charter .fold > summary {
-    display: grid;
-    grid-template-columns: 2.2rem minmax(0, 1fr);
-    gap: 0 .75rem;
-    align-items: baseline;
-    cursor: pointer;
-    pointer-events: auto;
-    list-style: none;
-  }
-  .charter .fold > summary::-webkit-details-marker,
-  .charter .fold > summary::marker { display: none; content: none; }
-  .charter .n { grid-column: 1; grid-row: 1; font-size: 1.05rem; margin-bottom: 0; }
-  .charter h2 { grid-column: 2; grid-row: 1; max-width: none; font-size: clamp(1.2rem, 5.2vw, 1.5rem); line-height: 1.12; }
-  .charter .fold-body { display: block; padding: .85rem 0 0 2.95rem; }
-  .charter .fold-body > p:not(.practice) { grid-column: auto; margin-top: 0; max-width: none; font-size: .98rem; }
-  .charter .practice { margin-top: .85rem; max-width: none; }
+  /* ---- studio: the charter reads straight down, the note under each article ---- */
+  .charter { margin-top: 1.4rem; }
+  .article { display: block; }
+  .article + .article { margin-top: 1.7rem; }
+  .article-text { font-size: clamp(1.08rem, 4.6vw, 1.3rem); line-height: 1.38; max-width: none; }
+  .article-note { margin-top: .85rem; max-width: none; padding-top: .65rem; }
 
   .people li { grid-template-columns: minmax(0, 1fr); }
   .people h2 { grid-column: 1; grid-row: 1; }
