@@ -78,21 +78,6 @@
   }
   html.no-field .field { display: none; }
   html[data-field="still"] .field { opacity: .72; }
-  /* the planet: fixed over the hero's place, above the field, under the page */
-  .planet {
-    position: fixed;
-    left: 0; right: 0;
-    top: var(--bar);
-    height: calc(100svh - var(--bar));
-    min-height: 32rem;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity .5s var(--ease);
-  }
-  .planet.is-on { opacity: 1; }
-  .planet .hero-gl { display: block; width: 100%; height: 100%; }
-
   /* No z-index and no isolation here: the glass layers below must be able
      to blend with the canvas, which only works inside the root stacking context. */
   .site {
@@ -350,7 +335,7 @@
         rgba(8, 8, 8, .08) 22%,
         rgba(8, 8, 8, 0) 42%,
         rgba(8, 8, 8, .1) 78%,
-        rgba(8, 8, 8, .52) 100%);
+        rgba(8, 8, 8, .4) 100%);
   }
   main > .sec, main > section, main > .mq-wrap { position: relative; z-index: 1; }
 
@@ -358,7 +343,7 @@
     position: absolute;
     left: var(--gutter);
     right: var(--gutter);
-    bottom: clamp(5.5rem, 16vh, 10.5rem);
+    top: clamp(1.6rem, 5.5vh, 3.6rem);
     z-index: 2;
     max-width: none;
     pointer-events: none;
@@ -366,28 +351,91 @@
     justify-items: start;
     text-align: left;
   }
-  @media (max-aspect-ratio: 4/5) {
-    .hero-copy {
-      top: clamp(1.2rem, 4vh, 2.2rem);
-      bottom: auto;
-    }
-  }
   .wordmark {
     font-weight: 800;
-    font-size: clamp(2.2rem, 4.6vw, 4.6rem);
-    letter-spacing: -.04em;
-    line-height: .92;
+    font-size: clamp(3.6rem, 11.6vw, 12.6rem);
+    letter-spacing: -.05em;
+    line-height: .86;
     text-transform: uppercase;
-    font-variation-settings: "wdth" 92;
-    margin: .55rem 0 .7rem;
+    /* the width axis is the pointer's: js/main.js sets --wd from where it stands */
+    font-variation-settings: "wdth" var(--wd, 92);
+    margin: .5rem 0 .55rem -.04em;
     max-width: 100%;
+    min-height: .86em;
+    white-space: nowrap;
   }
   .hero-line {
-    font-size: clamp(1rem, 1.5vw, 1.35rem);
+    font-size: clamp(1.1rem, 1.75vw, 1.7rem);
     color: var(--chrome-70);
     text-wrap: balance;
     max-width: 22ch;
+    letter-spacing: -.015em;
   }
+  /* the rhythm: the process on one clock, the facts on another, lower right */
+  .hero-rhythm {
+    position: absolute;
+    left: 56%;
+    right: var(--gutter);
+    bottom: clamp(5.2rem, 14vh, 8.4rem);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .hero-rhythm-key { margin-bottom: .55rem; }
+  .hero-step {
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2.7vw, 2.7rem);
+    letter-spacing: -.035em;
+    line-height: 1.02;
+    min-height: 2.05em;
+    max-width: 14ch;
+    font-variation-settings: "wdth" var(--wd2, 96);
+  }
+  .hero-facts {
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--hair-1);
+  }
+  .hero-facts li {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--chrome-70);
+    padding: .5rem 0;
+    border-bottom: 1px solid var(--hair-1);
+    min-height: 1.9rem;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity .5s var(--ease), transform .5s var(--ease);
+  }
+  .hero-facts li.is-on { opacity: 1; transform: none; }
+  /* the band: the offer, on a loop that never stops, along the hero's foot */
+  .hero-band {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 2;
+    border-top: 1px solid var(--hair-1);
+    padding: .85rem 0;
+    overflow: hidden;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+  .hero-band-track { display: flex; width: max-content; animation: mq 60s linear infinite; }
+  .hero-band-row { display: flex; align-items: center; gap: 2.4rem; padding-right: 2.4rem; white-space: nowrap; }
+  .hero-band-row span {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--chrome-50);
+  }
+  .hero-band-row span b { color: var(--chrome); font-weight: 500; }
+  .hero-band-row span em { font-style: normal; color: var(--ember); }
+  .hero-band-row i { width: 7px; height: 7px; background: var(--ember); flex-shrink: 0; }
+  html.rm .hero-band-track { animation: none; }
+  html.rm .hero-facts li { opacity: 1; transform: none; }
   .hero-act {
     display: flex;
     flex-wrap: wrap;
@@ -1826,8 +1874,11 @@
     margin-top: 0;
     justify-items: start;
   }
-  .wordmark { font-size: clamp(2.1rem, 9vw, 2.8rem); margin: .4rem 0 .55rem; }
-  .hero-line { font-size: 1.02rem; max-width: 20ch; }
+  .wordmark { font-size: clamp(2.6rem, 15.5vw, 4.2rem); margin: .4rem 0 .55rem; white-space: normal; }
+  .hero-line { font-size: 1.05rem; max-width: 20ch; }
+  .hero-rhythm { left: var(--gutter); right: var(--gutter); bottom: 4.4rem; }
+  .hero-step { font-size: clamp(1.35rem, 6.4vw, 1.8rem); max-width: 16ch; }
+  .hero-facts { display: none; }
   .hero-act { width: 100%; gap: .5rem; margin-top: 1.3rem; }
   .hero-act .btn { flex: 1 1 100%; min-width: 0; }
 

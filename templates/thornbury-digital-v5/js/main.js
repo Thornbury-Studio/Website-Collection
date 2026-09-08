@@ -290,35 +290,82 @@
     return webglOK;
   }
 
-  /* The home hero's planet: one canvas for the session, fixed over the
-     hero's place, started once at idle after load and only when WebGL is
-     there and motion is wanted; every page tells it whether it is Home. Its
-     pointer listeners live on the window, so routing away and back cannot
-     take them with the <main> it swaps. */
-  var monolithHandle = null, monolithStarted = false;
-  function startMonolith() {
-    if (monolithStarted || reducedNow() || !hasWebGL()) return;
-    monolithStarted = true;
-    var fieldEl = document.getElementById('field');
-    var host = document.createElement('div');
-    host.className = 'planet';
-    host.setAttribute('aria-hidden', 'true');
-    if (fieldEl && fieldEl.parentNode) fieldEl.parentNode.insertBefore(host, fieldEl.nextSibling);
-    else document.body.insertBefore(host, document.body.firstChild);
-    import('./planet.js').then(function (mod) {
-      monolithHandle = mod.mount(host, {});
-      if (!monolithHandle) { host.remove(); return; }
-      monolithHandle.page((html.getAttribute('data-page') || 'home') === 'home' && !reducedNow());
-    }).catch(function () { host.remove(); /* the field alone stands */ });
-  }
-  function monolith(root) {
-    void root;
-    if (!monolithStarted) {
-      if (global.requestIdleCallback) requestIdleCallback(startMonolith, { timeout: 1500 });
-      else setTimeout(startMonolith, 300);
+  /* The hero's rhythm. Three clocks over the field: the wordmark decodes once
+     on arrival; the process line cycles the four steps, decoding each; the
+     facts arrive one after another, hold, and go again; the band loops. The
+     pointer sets the wordmark's width axis. Everything is bound in init and
+     released in teardown, so a routed return rebuilds it — the failure mode
+     the last pointer feature died of was listeners left on a swapped <main>,
+     and this one has none. */
+  var heroNow = null;
+  var HERO_STEPS = ['We look before we draw', 'We decide in the open', 'We build it to survive us', 'We hand over everything'];
+  function heroType(root) {
+    var hero = root.querySelector('.hero');
+    if (!hero) return;
+    var word = hero.querySelector('.wordmark');
+    var step = hero.querySelector('[data-step]');
+    var facts = hero.querySelector('[data-facts]');
+    var band = hero.querySelector('#hero-band');
+    var state = { step: 0, cycles: 0, facts: 0, decodes: 0, wdth: 92, pointer: null, live: true };
+    heroNow = function () { return state; };
+    if (band) trueLoopMarquee(band, 26);
+    if (reducedNow()) {
+      state.live = false;
+      if (facts) [].forEach.call(facts.children, function (li) { li.classList.add('is-on'); });
       return;
     }
-    if (monolithHandle) monolithHandle.page((html.getAttribute('data-page') || 'home') === 'home' && !reducedNow());
+    var stops = [], timers = [];
+    import('./rig.js').then(function (mod) {
+      if (!hero.isConnected || !heroNow) return;
+      var dec = mod.decoder;
+      if (word) { stops.push(dec(word, word.textContent, false)); state.decodes++; }
+      var k = 0, stopStep = null;
+      if (step) {
+        timers.push(setInterval(function () {
+          k = (k + 1) % HERO_STEPS.length;
+          state.step = k; state.cycles++; state.decodes++;
+          if (stopStep) stopStep();
+          stopStep = dec(step, HERO_STEPS[k], false);
+        }, 3400));
+        stops.push(function () { if (stopStep) stopStep(); });
+      }
+      if (facts) {
+        var items = [].slice.call(facts.children), phase = 0;
+        timers.push(setInterval(function () {
+          if (phase < items.length) {
+            items[phase].classList.add('is-on');
+            stops.push(dec(items[phase], items[phase].textContent, false));
+            state.facts++; state.decodes++;
+          } else if (phase === items.length + 4) {
+            items.forEach(function (li) { li.classList.remove('is-on'); });
+            phase = -1;
+          }
+          phase++;
+        }, 1100));
+      }
+    }).catch(function () { /* the lines stand still; nothing else is affected */ });
+    /* the pointer's width */
+    var target = 92, cur = 92, raf = 0;
+    function tick() {
+      raf = 0;
+      cur += (target - cur) * 0.14;
+      if (word) word.style.setProperty('--wd', cur.toFixed(1));
+      if (step) step.style.setProperty('--wd2', (cur + 4).toFixed(1));
+      state.wdth = +cur.toFixed(1);
+      if (Math.abs(target - cur) > 0.05) raf = requestAnimationFrame(tick);
+    }
+    on(global, 'pointermove', function (e) {
+      var nx = Math.max(0, Math.min(1, e.clientX / Math.max(1, innerWidth)));
+      target = 82 + nx * 34;
+      state.pointer = +nx.toFixed(3);
+      if (!raf) raf = requestAnimationFrame(tick);
+    }, { passive: true });
+    offs.push(function () {
+      timers.forEach(clearInterval);
+      stops.forEach(function (s) { if (s) s(); });
+      if (raf) cancelAnimationFrame(raf);
+      heroNow = null;
+    });
   }
 
   function figure(root) {
@@ -619,7 +666,7 @@
     cssBlock(root);
     whoBeats(root);
     folds(root);
-    monolith(root);
+    heroType(root);
     figure(root);
     rig(root);
     reveal(root);
@@ -651,10 +698,8 @@
     onField: function (cb) { if (field) cb(field); else fieldCbs.push(cb); },
     /* bg.js holds the field live across a transition */
     holdField: function (on) { fieldHold = !!on; applyFieldGate(); },
-    /* ...and stops the hero's object drawing while the page leaves */
-    pauseHero: function (on) { if (monolithHandle) monolithHandle.pause(on); },
     /* the verification harness and the phone probe read the hero's own state */
-    heroState: function () { return monolithHandle && monolithHandle.state ? monolithHandle.state() : null; },
+    heroState: function () { return heroNow ? heroNow() : null; },
     /* ...and switches it off entirely for a mode that does not use the canvas */
     suspendField: function (on) { fieldOff = !!on; applyFieldGate(); }
   };
