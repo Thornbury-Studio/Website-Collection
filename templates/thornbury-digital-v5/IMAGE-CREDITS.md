@@ -60,6 +60,26 @@ rebuilt on the page as live SVG lines and decoder-resolved text
 `img/reveal-wire.webp` at 2560×1430 (75 kB / 295 kB) with 1280-wide variants
 for phones.
 
+## The home hero — the Earth, from NASA
+
+Two NASA maps, both public domain, both real measurement rather than
+illustration — the same category and the same sourcing discipline as the
+Moon footage this site used before. Read off the source pages before
+download: NASA imagery is not copyrighted and may be used for any purpose
+with credit. Downloaded 7 Sep 2026.
+
+| File | Source | Credit | Master |
+|---|---|---|---|
+| `img/earth-pack.webp` (R channel) | [Blue Marble Next Generation, December, with topography and bathymetry](https://visibleearth.nasa.gov/images/73909/december-blue-marble-next-generation-w-topography-and-bathymetry) — `world.topo.bathy.200412.3x5400x2700.jpg` | NASA Earth Observatory / Reto Stöckli, NASA GSFC (MODIS, USGS, DMSP) | 5400×2700 |
+| `img/earth-pack.webp` (B channel) | [Black Marble 2016](https://earthobservatory.nasa.gov/features/NightLights) — `BlackMarble_2016_01deg.jpg` | NASA Earth Observatory / Joshua Stevens, Suomi NPP VIIRS (Miguel Román, NASA GSFC) | 3600×1800 |
+
+**Packed, not shown.** Neither map's colour reaches the page. At build time
+the day map becomes a luminance channel (red), a mask of the ocean derived
+from its blue (green), and the night map's city lights, lifted above the
+land's own faint glow (blue) — one 2048×1024 texture at 163 kB, and a
+1024×512 tier at 51 kB for phones. The sphere is drawn in the site's own
+palette: obsidian, chrome, and one ember, which is what the cities burn.
+
 ## Transition footage
 
 Sourced, not generated — the asset order in `VIDEO-POLICY.md` starts with real

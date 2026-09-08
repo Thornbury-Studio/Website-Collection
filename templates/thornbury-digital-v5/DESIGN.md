@@ -1653,3 +1653,37 @@ marching, and the render scale governs itself by measured frame time (0.8
 down to 0.4 on a desktop). Harness at 1440: 63 fps with it on, 165 without;
 the phone tier at 0.55 scale and 36 steps.
 
+## The planet, and the test that had to pass
+
+The monolith is gone, on the boss's direction: a real planet, from real
+data, in the site's own material. js/planet.js draws the Earth as a sphere
+— a three.js SphereGeometry under a shader of its own — from two NASA maps
+packed into one texture (IMAGE-CREDITS.md): the Blue Marble's luminance,
+an ocean mask, and the Black Marble's city lights. Nothing samples a
+photograph's colour; the sphere is obsidian and chrome, the oceans throw a
+chrome glint, and the night side's cities burn in the one ember.
+
+**The pointer is the sun.** Where the cursor stands, the day is: the
+terminator sweeps across the continents as it moves, the ocean glint
+follows it, and behind the terminator the cities come up in ember. Cursor
+proximity brings the light in: near the planet the rim burns brighter and
+the cities glow harder. Without a pointer the sun drifts on its own.
+
+**The threads.** Eighty-four strands on inclined, wobbling orbits, in the
+same chrome and the same scarce ember as the field, each with a head of
+light running along it — the field's law that brightness is velocity —
+and depth-tested against the sphere, so they pass behind the planet and
+come out the other side. The field's own strands run behind all of it.
+
+**The test that had to pass.** The last pointer feature on this site
+worked on load and died after routing away and back, because its
+listeners went with the <main> the router swaps. This one is one canvas
+for the session, fixed over the hero's place, its listeners on the window;
+pages that are not Home fade it out and it stops drawing. Verified against
+routing, not just load, through the hero's own state (TBPage.heroState):
+Home → Work → Home, Home → Studio → Home, Home → Contact → Home, and Home →
+Work → browser Back. After every return: on, drawing, frames advancing,
+the sun's x flipping from −0.68 to +0.61 as the pointer crossed the stage,
+proximity from 0.00 to 0.90 as it reached the planet. Six checks, six
+passes, console clean.
+
