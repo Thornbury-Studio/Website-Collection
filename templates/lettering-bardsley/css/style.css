@@ -1,0 +1,731 @@
+/* ==========================================================================
+   NELL BARDSLEY — lettering artist & type designer, Leith
+
+   Two tones and nothing between them but grey. #E6E3DC ground, #131211 ink.
+   There is no accent colour in this file, no pure white and no pure black —
+   the extremes of the page are a warm paper and a warm ink, because a
+   lettering portfolio that reaches for a highlight hue is admitting the
+   letters cannot hold attention on their own.
+
+   The polarity is deliberate. The obvious reading of a restrained two-tone
+   brief is a near-black page, and the collection already has one of those.
+   This trade's ground is paper, so the values are inverted and the same
+   discipline applies from the other side: ink on a sheet, at 15:1.
+
+   THE ONE RULE THAT SHAPES EVERYTHING:
+
+   Ink is laid, never faded. Every reveal on this page is a wipe — a
+   clip-path travelling in the direction the thing was written, left to right
+   for a line of text, top to bottom for anything that reads as a stem. No
+   element on this page animates from opacity zero, because a letter arriving
+   at 40% opacity is not a letter being written, it is a letter being
+   printed badly.
+
+   The deliberate exception is anything the pointer drives. Hover and focus
+   change colour and position, never coverage: a link that re-writes itself
+   under the cursor reads as a repaint bug rather than as craft. That
+   contrast is the only reason the wipes elsewhere are legible as a decision.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Tokens
+   -------------------------------------------------------------------------- */
+
+:root {
+  --paper:    #e6e3dc;   /* ground */
+  --paper-2:  #dcd8cf;   /* raised panels */
+  --paper-3:  #d1ccc1;   /* inputs, table stripes */
+  --ink:      #131211;   /* 15.0:1 on paper — primary */
+  --ink-2:    #57544e;   /*  6.0:1 — secondary, measured */
+  --ink-3:    #7b776f;   /*  3.5:1 — large text and non-text only */
+  --rule:     #c3bfb5;
+  --rule-2:   #b0aba0;
+
+  --display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --wrap: 76rem;
+  --gutter: clamp(1.15rem, 4.5vw, 3.25rem);
+  --bay: clamp(4.5rem, 11vw, 10rem);
+
+  /* The wipe. Fast off the mark and long in the settle, which is how a
+     loaded brush actually leaves a wall. */
+  --lay:  cubic-bezier(.22, .78, .24, 1);
+  --wipe-dur: 780ms;
+  /* Pointer affordances only — see the header note. */
+  --ease: cubic-bezier(.3, .7, .3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset
+   -------------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--paper);
+  /* No smooth scrolling: the instrument in THE HAND reads scroll position as
+     the pen, and an animated scroll would write the word for the reader. */
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--display);
+  font-optical-sizing: auto;
+  font-variation-settings: 'SOFT' 0, 'WONK' 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg, canvas { display: block; max-width: 100%; }
+h1, h2, h3, p, ul, ol, dl, dd, figure, table { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+.mono {
+  font-family: var(--mono);
+  font-size: .74rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--ink); color: var(--paper);
+  padding: .7rem 1rem; z-index: 200;
+  font-family: var(--mono); font-size: .78rem;
+}
+.skip:focus { left: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+::selection { background: var(--ink); color: var(--paper); }
+
+/* --------------------------------------------------------------------------
+   3. The wipe
+
+   Gated behind `.js`. Without script nothing is clipped and the document is
+   simply readable, which matters more than the reveal does.
+   -------------------------------------------------------------------------- */
+
+.js .wipe {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--wipe-dur) var(--lay);
+  transition-delay: var(--d, 0ms);
+}
+.js .wipe.in { clip-path: inset(0 0 0 0); }
+.js .wipe.done { clip-path: none; transition: none; }
+
+/* Things that read as a stem are written downward, not across. */
+.js .wipe--down { clip-path: inset(0 0 100% 0); }
+.js .wipe--down.in { clip-path: inset(0 0 0 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .wipe { clip-path: none; transition: none; }
+}
+
+/* --------------------------------------------------------------------------
+   4. The loader
+   -------------------------------------------------------------------------- */
+
+.load { display: none; }
+
+.js .load {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: var(--paper);
+  transition: opacity 420ms var(--ease);
+}
+.js .load[data-done] { opacity: 0; pointer-events: none; }
+
+.load__in { width: min(78vw, 42rem); text-align: center; }
+.load__c { width: 100%; height: min(34vh, 12rem); }
+
+.load__hint {
+  margin-top: 1.5rem;
+  color: var(--ink-2);
+  font-size: .68rem;
+}
+
+/* The document does not scroll behind the loader. */
+html[data-loading] body { overflow: hidden; }
+
+/* --------------------------------------------------------------------------
+   5. Header
+   -------------------------------------------------------------------------- */
+
+.top {
+  position: sticky; top: 0; z-index: 90;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  border-bottom: 1px solid var(--rule);
+}
+.top__in {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; min-height: 3.6rem;
+}
+.top__mark {
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: -.015em;
+  text-decoration: none;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
+}
+.top nav { display: flex; gap: clamp(.9rem, 2vw, 1.9rem); align-items: center; }
+.top nav a {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-2);
+  padding: .35rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 180ms var(--ease), border-color 180ms var(--ease);
+}
+.top nav a:hover,
+.top nav a[aria-current] { color: var(--ink); border-bottom-color: var(--ink); }
+.top__cta { color: var(--ink) !important; border-bottom-color: var(--rule-2) !important; }
+
+/* --------------------------------------------------------------------------
+   6. Hero
+   -------------------------------------------------------------------------- */
+
+.hero { padding-block: clamp(3.5rem, 9vw, 7.5rem) var(--bay); }
+
+.hero h1 {
+  font-size: clamp(3.1rem, 12.5vw, 10.5rem);
+  line-height: .88;
+  font-weight: 500;
+  letter-spacing: -.035em;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.hero__foot {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 26rem) 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.6rem;
+}
+.hero__role { font-size: .95rem; line-height: 1.5; }
+.hero__role b { font-weight: 600; }
+.hero__role .mono { display: inline-block; margin-top: .4rem; color: var(--ink-2); }
+.lede { font-size: clamp(1rem, 1.35vw, 1.14rem); color: var(--ink-2); }
+
+.hero__scroll {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  color: var(--ink-3);
+  font-size: .66rem;
+}
+
+/* ---- the three props ---------------------------------------------------
+   Three line-drawn objects a letterer owns: the nib, the mahlstick with the
+   gilder's tip and knife, and a worn quill. One each in the hero, the
+   signwriting section and About, and nowhere else on the page. They are the
+   only illustration here; spreading them evenly would turn them into
+   decoration, which is the opposite of the point.
+   ---------------------------------------------------------------------- */
+
+.prop { color: var(--ink-3); }
+.prop--nib { justify-self: end; width: clamp(46px, 6vw, 78px); }
+.prop--nib svg { width: 100%; height: auto; }
+.prop--stick { width: min(100%, 20rem); align-self: end; }
+.prop--quill { width: min(100%, 15rem); margin-top: 2.5rem; }
+
+/* --------------------------------------------------------------------------
+   7. Section furniture
+   -------------------------------------------------------------------------- */
+
+section { position: relative; }
+.hand, .faces, .glass, .about, .commission { padding-block: var(--bay); }
+.faces, .about { border-top: 1px solid var(--rule); }
+
+.movement {
+  display: flex; align-items: baseline; gap: .8rem;
+  color: var(--ink-3);
+  font-size: .68rem;
+  margin-bottom: 1.4rem;
+}
+.movement span {
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+}
+
+h2 {
+  font-size: clamp(2rem, 5.6vw, 4.1rem);
+  line-height: .98;
+  font-weight: 500;
+  letter-spacing: -.03em;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
+}
+.section-lede {
+  max-width: 40rem;
+  margin-top: 1.6rem;
+  color: var(--ink-2);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+}
+
+/* --------------------------------------------------------------------------
+   8. The instrument
+   -------------------------------------------------------------------------- */
+
+.rig { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+
+.rig__pin {
+  display: grid;
+  grid-template-columns: 1fr minmax(19rem, 24rem);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  align-items: stretch;
+}
+
+.rig__sheet {
+  position: relative;
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  min-height: 20rem;
+}
+/* Taken out of flow on purpose. A canvas sized `height: 100%` inside an
+   auto-height track is a feedback loop: the element's intrinsic size comes
+   from its own width/height attributes, the script sets those from the box
+   the element ended up in, and the two chase each other until the sheet is
+   half again as tall as the panel next to it. Absolute against the sheet,
+   the canvas contributes nothing to sizing and only ever reads it. */
+.rig__c { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.rig__scrub {
+  position: absolute; left: 1rem; bottom: .85rem;
+  color: var(--ink-3);
+  font-size: .62rem;
+  margin: 0;
+}
+
+.rig__panel {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  padding: clamp(1.1rem, 2.2vw, 1.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.rig__word label,
+.dial label { display: block; color: var(--ink-2); font-size: .66rem; margin-bottom: .5rem; }
+
+#handWord {
+  width: 100%;
+  background: var(--paper-3);
+  border: 1px solid var(--rule-2);
+  padding: .6rem .75rem;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
+  border-radius: 0;
+}
+#handWord:focus { border-color: var(--ink); }
+.rig__note {
+  margin-top: .55rem;
+  color: var(--ink-3);
+  font-size: .6rem;
+  letter-spacing: .04em;
+  text-transform: none;
+  line-height: 1.5;
+}
+.rig__note[data-warn] { color: var(--ink-2); }
+
+.dials { display: grid; gap: 1.1rem; }
+.dial output { display: block; margin-top: .45rem; color: var(--ink); font-size: .66rem; }
+
+/* Range inputs are styled here rather than left native because the native
+   control ships a system accent colour, and this page has no accent. */
+input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 1.1rem; background: transparent; margin: 0;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 1px; background: var(--rule-2);
+}
+input[type="range"]::-moz-range-track { height: 1px; background: var(--rule-2); }
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 2px; height: 1.1rem; margin-top: -.55rem;
+  background: var(--ink); border: 0; border-radius: 0;
+  transition: box-shadow 160ms var(--ease);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 2px; height: 1.1rem;
+  background: var(--ink); border: 0; border-radius: 0;
+}
+input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px var(--paper-3); }
+
+.rig__row { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: center; }
+
+.seg { display: flex; border: 1px solid var(--rule-2); }
+.seg__b {
+  background: transparent; border: 0; cursor: pointer;
+  padding: .42rem .7rem;
+  font-family: var(--mono); font-size: .62rem;
+  letter-spacing: .05em; text-transform: uppercase;
+  color: var(--ink-2);
+  transition: background 160ms var(--ease), color 160ms var(--ease);
+}
+.seg__b + .seg__b { border-left: 1px solid var(--rule-2); }
+.seg__b:hover { color: var(--ink); }
+.seg__b.is-on { background: var(--ink); color: var(--paper); }
+
+.tick {
+  display: inline-flex; align-items: center; gap: .45rem;
+  color: var(--ink-2); font-size: .62rem; cursor: pointer;
+  text-transform: uppercase;
+}
+.tick input { accent-color: var(--ink); width: .85rem; height: .85rem; }
+
+.ghost-b {
+  background: transparent;
+  border: 1px solid var(--rule-2);
+  padding: .42rem .7rem;
+  cursor: pointer;
+  font-size: .62rem;
+  color: var(--ink-2);
+  transition: border-color 160ms var(--ease), color 160ms var(--ease);
+}
+.ghost-b:hover { border-color: var(--ink); color: var(--ink); }
+
+.readout {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: .5rem;
+  border-top: 1px solid var(--rule);
+  padding-top: .9rem;
+  margin-top: auto;
+}
+.readout dt { color: var(--ink-3); font-size: .58rem; }
+.readout dd { margin: .25rem 0 0; font-size: .74rem; }
+
+.tenets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  border-top: 1px solid var(--rule);
+  padding-top: 1.6rem;
+  color: var(--ink-2);
+  font-size: .95rem;
+}
+.tenets b {
+  display: block;
+  font-family: var(--mono);
+  font-size: .95rem;
+  color: var(--ink);
+  margin-bottom: .4rem;
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   9. Releases
+   -------------------------------------------------------------------------- */
+
+.face-list { margin-top: clamp(2.5rem, 6vw, 4rem); }
+
+.face {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+  border-top: 1px solid var(--rule);
+  padding-block: clamp(1.8rem, 4vw, 2.8rem);
+}
+.face:last-child { border-bottom: 1px solid var(--rule); }
+.face__c { width: 100%; height: clamp(9rem, 14vw, 13rem); }
+.face__body { max-width: 38rem; }
+.face h3 {
+  font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+  font-weight: 500;
+  letter-spacing: -.025em;
+  line-height: 1;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
+}
+.face__meta { color: var(--ink-3); margin: .7rem 0 1rem; font-size: .66rem; }
+.face__body p:last-child { color: var(--ink-2); }
+
+/* --------------------------------------------------------------------------
+   10. Signwriting
+   -------------------------------------------------------------------------- */
+
+.glass__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: end;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+}
+.glass__text { max-width: 40rem; display: grid; gap: 1.1rem; color: var(--ink-2); }
+
+.jobs {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  font-size: .92rem;
+}
+.jobs caption {
+  text-align: left;
+  color: var(--ink-3);
+  font-size: .66rem;
+  padding-bottom: .8rem;
+}
+.jobs th, .jobs td {
+  text-align: left;
+  padding: .82rem .9rem .82rem 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.jobs thead th {
+  font-family: var(--mono);
+  font-size: .62rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--ink-3);
+  border-bottom-color: var(--rule-2);
+}
+.jobs tbody td:nth-child(2),
+.jobs tbody td:nth-child(3) { color: var(--ink-2); }
+.jobs tbody td:last-child { text-align: right; padding-right: 0; color: var(--ink-3); }
+
+/* --------------------------------------------------------------------------
+   11. About
+   -------------------------------------------------------------------------- */
+
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.about__text { max-width: 42rem; }
+.about__text h2 { margin-bottom: 1.6rem; }
+.about__text p + p { margin-top: 1.1rem; }
+.about__text p:not(.movement) { color: var(--ink-2); font-size: 1.02rem; }
+
+.facts { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.facts > div {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 1rem;
+  padding: .75rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.facts dt { color: var(--ink-3); font-size: .62rem; }
+.facts dd { margin: 0; font-size: .7rem; text-transform: none; letter-spacing: .02em; }
+
+/* --------------------------------------------------------------------------
+   12. Commissions
+   -------------------------------------------------------------------------- */
+
+.commission { background: var(--paper-2); border-top: 1px solid var(--rule); }
+.commission__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.commission h2 { margin-bottom: 1.4rem; }
+.commission > .wrap > div > p:not(.movement) { color: var(--ink-2); max-width: 30rem; }
+
+.avail { width: 100%; max-width: 24rem; margin-top: 2.5rem; border-collapse: collapse; }
+.avail caption { text-align: left; color: var(--ink-3); font-size: .62rem; padding-bottom: .7rem; }
+.avail th, .avail td {
+  text-align: left; padding: .6rem 0;
+  border-bottom: 1px solid var(--rule-2);
+  font-weight: 400; font-size: .68rem;
+  text-transform: none; letter-spacing: .03em;
+}
+.avail td { text-align: right; color: var(--ink-2); }
+
+.form { display: grid; gap: 1.1rem; }
+.field label {
+  display: block;
+  font-family: var(--mono);
+  font-size: .64rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: .45rem;
+}
+.field input, .field textarea, .field select {
+  width: 100%;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+  border-radius: 0;
+  padding: .65rem .75rem;
+  font-family: var(--display);
+  font-size: 1rem;
+  transition: border-color 160ms var(--ease);
+}
+.field textarea { resize: vertical; }
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--ink); }
+.field--bad input, .field--bad textarea { border-color: var(--ink); border-width: 2px; }
+.field__err {
+  margin-top: .4rem;
+  font-family: var(--mono);
+  font-size: .62rem;
+  text-transform: none;
+  letter-spacing: .02em;
+  color: var(--ink);
+  min-height: 0;
+}
+.field__err:empty { display: none; }
+
+.send {
+  justify-self: start;
+  background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink);
+  padding: .75rem 1.6rem;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: background 180ms var(--ease), color 180ms var(--ease);
+}
+.send:hover { background: transparent; color: var(--ink); }
+
+.sent {
+  border-top: 1px solid var(--rule-2);
+  padding-top: 1rem;
+  color: var(--ink-2);
+  font-size: .95rem;
+}
+
+/* --------------------------------------------------------------------------
+   13. Footer
+   -------------------------------------------------------------------------- */
+
+.foot { border-top: 1px solid var(--rule); padding-block: clamp(2.5rem, 6vw, 4rem); }
+.foot__in { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; align-items: baseline; }
+.foot__mark {
+  font-size: 1.6rem; font-weight: 500; letter-spacing: -.025em;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
+  margin-right: auto;
+}
+.foot .mono { color: var(--ink-3); font-size: .64rem; }
+
+/* --------------------------------------------------------------------------
+   14. Wide screens — pin the instrument
+
+   The pin is an enhancement, so it is switched ON at a width and height that
+   can actually hold it rather than switched off later. Below this, the rig is
+   an ordinary block that writes itself on arrival, which is a different
+   composition rather than a squeezed one.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 62rem) and (min-height: 40rem) {
+  .rig { height: 260vh; }
+  .rig__pin {
+    position: sticky; top: 3.6rem;
+    height: calc(100vh - 3.6rem);
+    max-height: 46rem;
+    padding-block: 1.5rem;
+    align-items: center;
+  }
+  /* The word is twelve letters wide, so its size is set by the sheet's WIDTH
+     and a taller sheet only adds emptiness above and below it. Capped and
+     centred instead, which also stops the sheet inheriting the panel's
+     height and turning into a near-square with a thin line of writing
+     stranded in the middle of it. */
+  .rig__sheet { height: clamp(16rem, 42vh, 22rem); }
+}
+
+/* --------------------------------------------------------------------------
+   15. Small screens — its own composition, not a squeeze
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 62rem) {
+  .hero__foot { grid-template-columns: minmax(0, 1fr) auto; }
+  .lede { grid-column: 1 / -1; grid-row: 2; }
+  .prop--nib { grid-row: 1; }
+
+  .rig__pin { grid-template-columns: 1fr; }
+  .rig__sheet { min-height: 0; height: clamp(13rem, 34vw, 20rem); }
+  .rig__scrub { display: none; }
+  .readout { margin-top: 0; }
+
+  .glass__grid { grid-template-columns: 1fr; }
+  .prop--stick { justify-self: end; width: min(70%, 18rem); }
+  .about__grid, .commission__grid { grid-template-columns: 1fr; }
+  .face { grid-template-columns: 1fr; }
+  .face__c { height: clamp(8rem, 26vw, 11rem); max-width: 15rem; }
+  .tenets { grid-template-columns: 1fr; gap: 1.1rem; }
+}
+
+@media (max-width: 46rem) {
+  /* Five anchors on one scrolling page do not justify a drawer, but burying
+     the only commercial action at the foot of a long document is worse. So
+     the nav keeps exactly one link, and it is the one that earns money. */
+  .top nav a { display: none; }
+  .top nav a.top__cta {
+    display: inline-block;
+    border: 1px solid var(--rule-2) !important;
+    padding: .38rem .7rem;
+  }
+
+  .hero h1 { letter-spacing: -.02em; }
+  .hero__foot { grid-template-columns: 1fr; }
+  .hero__role { display: flex; flex-wrap: wrap; gap: .3rem 1rem; align-items: baseline; }
+  .hero__role br { display: none; }
+  .prop--nib { justify-self: start; grid-row: auto; width: 44px; }
+  .lede { grid-row: auto; }
+
+  .dials { grid-template-columns: 1fr; }
+  .readout { grid-template-columns: repeat(3, 1fr); gap: .4rem; }
+  .readout dd { font-size: .66rem; }
+
+  /* A six-column job table does not fit a phone, so it stops being a table
+     and becomes stacked records with their own labels. */
+  .jobs, .jobs thead, .jobs tbody, .jobs tr, .jobs th, .jobs td { display: block; }
+  .jobs thead { display: none; }
+  .jobs tr { border-top: 1px solid var(--rule); padding-block: .9rem; position: relative; }
+  .jobs tr:first-child { border-top: 0; }
+  .jobs td { border: 0; padding: 0 0 .25rem; }
+  .jobs td:first-child { font-size: 1.05rem; }
+  .jobs tbody td:last-child {
+    position: absolute; top: .9rem; right: 0; text-align: right; padding: 0;
+  }
+
+  .facts > div { grid-template-columns: 6.5rem 1fr; }
+  .foot__in { display: grid; gap: .55rem; }
+  .foot__mark { margin: 0 0 .4rem; }
+}
+
+/* A viewport too short to hold the instrument at all — a phone in landscape —
+   never pins it. Losing an enhancement beats cropping content. */
+@media (max-height: 40rem) {
+  .rig { height: auto; }
+  .rig__pin { position: static; height: auto; max-height: none; }
+}
