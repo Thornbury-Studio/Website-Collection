@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Nell Bardsley — Lettering Artist &amp; Type Designer, Leith</title>
+  <meta name="description" content="Hand-lettered shopfront fascias, gilded glass and four retail typefaces, drawn from a first-floor room in Leith. A letter is the record of a tool.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/lettering-bardsley/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nell Bardsley">
+  <meta property="og:title" content="Nell Bardsley — Lettering Artist &amp; Type Designer">
+  <meta property="og:description" content="A letter is the record of a tool. Signwriting, gilded glass and four retail families, drawn in Leith.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/lettering-bardsley/index.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/lettering-bardsley/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nell Bardsley — Lettering Artist &amp; Type Designer">
+  <meta name="twitter:description" content="A letter is the record of a tool. Signwriting, gilded glass and four retail families, drawn in Leith.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/lettering-bardsley/img/og.webp">
+  <meta name="theme-color" content="#e6e3dc">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23e6e3dc'/><path d='M7 24 L20 7 L25 11 L12 28 Z' fill='%23131211'/><path d='M7 24 L12 28 L8 29 Z' fill='%23131211'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ======================== the loader ========================
+     The wordmark, written by the same engine the rest of the page uses.
+     Hidden in CSS until boot.js adds `.js`, so a failed script leaves a
+     readable page rather than a blank sheet. -->
+<div class="load" id="load" tabindex="-1" role="status" aria-label="Loading">
+  <div class="load__in">
+    <canvas class="load__c" id="loadCanvas" aria-hidden="true"></canvas>
+    <p class="load__hint mono"><span id="loadAngle">30</span>&deg; &middot; move to turn the nib</p>
+  </div>
+</div>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="top__mark" href="#top">Nell&nbsp;Bardsley</a>
+    <nav aria-label="Sections">
+      <a href="#hand">The hand</a>
+      <a href="#faces">Releases</a>
+      <a href="#glass">Signwriting</a>
+      <a href="#about">About</a>
+      <a class="top__cta" href="#commission">Commissions</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================ hero ============================ -->
+  <section class="hero wrap" id="top">
+    <h1 class="wipe">A letter is<br>the record<br>of a tool</h1>
+
+    <div class="hero__foot">
+      <p class="hero__role wipe">
+        <b>Nell Bardsley</b><br>
+        Lettering artist<br>
+        &amp; type designer<br>
+        <span class="mono">Leith, Edinburgh</span>
+      </p>
+
+      <p class="lede wipe">Shopfront fascias in one-shot enamel, gilded glass for
+        interiors, and four retail families drawn from the same hand. Scroll on and
+        the letters stop being a typeface: below this, a nib is dragged along a
+        skeleton and the shape is worked out live, in the browser.</p>
+
+      <!-- Prop one of three. The nib belongs in the hero because the whole
+           argument of the site is that it is the thing doing the drawing.
+           It appears once. -->
+      <div class="prop prop--nib" aria-hidden="true">
+        <svg viewBox="0 0 120 260" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M44 250h32l6-96c0-26 12-44 12-70 0-38-16-72-34-72S26 46 26 84c0 26 12 44 12 70z"/>
+          <path d="M44 250h32" stroke-width="4"/>
+          <path d="M57 24v92" />
+          <ellipse cx="57" cy="134" rx="11" ry="13"/>
+          <path d="M46 134h22"/>
+          <path d="M38 178h38M40 200h34"/>
+        </svg>
+      </div>
+    </div>
+
+    <p class="hero__scroll mono" aria-hidden="true">Scroll to write</p>
+  </section>
+
+  <!-- ============================ 01 · the hand ============================ -->
+  <section class="hand" id="hand">
+    <div class="wrap">
+      <p class="movement mono"><span>01</span> The hand</p>
+      <h2 class="wipe">Turn the nib.<br>You are turning<br>the typeface.</h2>
+      <p class="section-lede wipe">Nothing below is an outline. Each letter is stored
+        as the path the pen travelled &mdash; a skeleton &mdash; and the shape is worked
+        out by sweeping a straight edge along it. The edge is held at one angle
+        the whole way, which is why some strokes come out thick and some come out
+        as hairlines. Move the angle and the thicks and thins move with it.
+        Same skeleton. Different letter.</p>
+    </div>
+
+    <!-- The instrument. Pinned on desktop, where scroll is the pen; an
+         ordinary block on small screens, where it writes itself on arrival. -->
+    <div class="rig" id="rig">
+      <div class="rig__pin">
+        <div class="rig__sheet">
+          <canvas class="rig__c" id="handCanvas" role="img"
+                  aria-label="A word written by a broad-edge nib, redrawn live as the pen angle and nib width change."></canvas>
+          <p class="rig__scrub mono" id="handScrub" aria-hidden="true">Scroll writes it</p>
+        </div>
+
+        <div class="rig__panel">
+          <div class="rig__word">
+            <label class="mono" for="handWord">Write</label>
+            <input id="handWord" type="text" value="hamburgevons" maxlength="14"
+                   spellcheck="false" autocomplete="off" autocapitalize="off">
+            <p class="rig__note mono" id="handNote">The control word. Lowercase only &mdash; this nib is cut for minuscules.</p>
+          </div>
+
+          <div class="dials">
+            <div class="dial">
+              <label class="mono" for="handAngle">Pen angle</label>
+              <input id="handAngle" type="range" min="0" max="90" step="1" value="30">
+              <output class="mono" id="handAngleOut" for="handAngle">30&deg;</output>
+            </div>
+            <div class="dial">
+              <label class="mono" for="handNib">Nib width</label>
+              <input id="handNib" type="range" min="24" max="130" step="1" value="72">
+              <output class="mono" id="handNibOut" for="handNib">x-height 6.9 nibs</output>
+            </div>
+          </div>
+
+          <div class="rig__row">
+            <div class="seg" role="group" aria-label="Nib shape">
+              <button type="button" class="seg__b is-on" id="nibBroad" aria-pressed="true">Broad edge</button>
+              <button type="button" class="seg__b" id="nibRound" aria-pressed="false">Monoline</button>
+            </div>
+            <label class="tick mono"><input type="checkbox" id="handGuides"> Guides &amp; nib</label>
+            <button type="button" class="ghost-b mono" id="handAgain">Write again</button>
+          </div>
+
+          <dl class="readout mono">
+            <div><dt>Strokes</dt><dd id="roStrokes">&mdash;</dd></div>
+            <div><dt>Pen travel</dt><dd id="roTravel">&mdash;</dd></div>
+            <div><dt>Contrast</dt><dd id="roContrast">&mdash;</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <ul class="tenets wipe">
+        <li><b>0&deg;</b> is a flat nib. Verticals come out at full width, horizontals
+          vanish. It is the stress of a slab, and it is almost unwritable by hand.</li>
+        <li><b>30&deg;</b> is where a hand actually sits. Diagonal stress, a thin on the
+          top-left of every bowl. Every humanist face in the world is downstream of it.</li>
+        <li><b>90&deg;</b> reverses the contrast: horizontals go heavy, stems go thin. Fine
+          for a fascia, and wrong for a paragraph.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================ 02 · releases ============================ -->
+  <section class="faces" id="faces">
+    <div class="wrap">
+      <p class="movement mono"><span>02</span> Releases</p>
+      <h2 class="wipe">Four families,<br>one hand.</h2>
+      <p class="section-lede wipe">Each of these started as the same skeleton at a
+        different tool setting, which is why the diagnostic letter beside each one
+        is drawn by the engine above rather than set in the finished font. Licensing
+        is per-family, perpetual, with the web licence included.</p>
+
+      <ol class="face-list">
+        <li class="face wipe">
+          <canvas class="face__c" role="img" aria-label="A lowercase g drawn at a 22 degree pen angle with a narrow nib."
+                  data-letter="g" data-angle="22" data-nib="46"></canvas>
+          <div class="face__body">
+            <h3>Quoin</h3>
+            <p class="face__meta mono">2023 &middot; 6 styles &middot; display serif</p>
+            <p>A narrow nib held close to flat, so the contrast is severe and the
+              serifs come out as the natural end of a stroke rather than as a
+              bracket bolted on. Cut for headlines at 40&nbsp;pt and up. Below that
+              the thins close up and it stops being readable, which is a feature
+              of the drawing and not a fault of the printing.</p>
+          </div>
+        </li>
+
+        <li class="face wipe">
+          <canvas class="face__c" role="img" aria-label="A lowercase a drawn at a 30 degree pen angle with a medium nib."
+                  data-letter="a" data-angle="30" data-nib="76"></canvas>
+          <div class="face__body">
+            <h3>Gansey</h3>
+            <p class="face__meta mono">2021 &middot; 14 styles &middot; text family</p>
+            <p>The workhorse. Thirty degrees, medium nib, nothing clever &mdash;
+              a face for annual reports, timetables and the small print on the back
+              of a ticket. Fourteen styles because a text family that cannot set a
+              footnote and a running head from the same drawing is not finished.</p>
+          </div>
+        </li>
+
+        <li class="face wipe">
+          <canvas class="face__c" role="img" aria-label="A lowercase e drawn at an 80 degree pen angle with a wide nib."
+                  data-letter="e" data-angle="80" data-nib="96"></canvas>
+          <div class="face__body">
+            <h3>Mullion</h3>
+            <p class="face__meta mono">2024 &middot; 5 styles &middot; fascia display</p>
+            <p>Reverse contrast, pulled off a set of pre-war shopfronts on Great
+              Junction Street where the horizontals carry all the weight. It reads
+              at forty metres and it is unkind at ten point. Made for boards,
+              awnings and the top of a window.</p>
+          </div>
+        </li>
+
+        <li class="face wipe">
+          <canvas class="face__c" role="img" aria-label="An ampersand drawn with a round monoline nib."
+                  data-letter="&amp;" data-angle="45" data-nib="64" data-round="1"></canvas>
+          <div class="face__body">
+            <h3>Ligger</h3>
+            <p class="face__meta mono">2025 &middot; 2 styles &middot; brush script</p>
+            <p>A round nib rather than an edge, so there is no contrast at all and
+              every join has to be earned by the drawing instead. Two weights, 380
+              contextual alternates, and an ampersand that does most of the work on
+              its own.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================ 03 · signwriting ============================ -->
+  <section class="glass" id="glass">
+    <div class="wrap">
+      <p class="movement mono"><span>03</span> On the wall</p>
+      <h2 class="wipe">Enamel, gold,<br>and a steady arm.</h2>
+
+      <div class="glass__grid">
+        <div class="glass__text wipe">
+          <p>Fascias are painted in one-shot enamel with a sable quill, freehand,
+            off a full-size pounce pattern. Glass is gilded from the back: loose
+            leaf floated onto gelatine size, backed up, then the letter cut through
+            with a scalpel so the edge is glass-sharp rather than brush-sharp.
+            Neither can be undone, which is the reason both are still worth paying
+            for.</p>
+          <p>Lead time is six to ten weeks. I letter about twenty jobs a year and
+            turn down rather more, usually because the sign wanted was really a
+            vinyl cut and would be better and cheaper as one.</p>
+        </div>
+
+        <!-- Prop two of three: the mahlstick, and the gilder's tip and knife.
+             Placed here because this is the only section about work done
+             standing at a wall. -->
+        <div class="prop prop--stick" aria-hidden="true">
+          <svg viewBox="0 0 320 200" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <!-- the mahlstick: a rod with a padded ball that rests on the glass -->
+            <path d="M16 24 L252 128"/>
+            <path d="M16 24 l0 0"/>
+            <circle cx="266" cy="134" r="14"/>
+            <path d="M252 128 l14 6"/>
+            <!-- the gilder's knife: long straight blade, riveted handle -->
+            <path d="M22 96 h150 l22 5 -22 5 H22z"/>
+            <path d="M22 90 h44 v22 H22z"/>
+            <circle cx="34" cy="101" r="2.4"/>
+            <circle cx="54" cy="101" r="2.4"/>
+            <!-- the gilder's tip: a fan of hair set in card -->
+            <path d="M92 150 h26 v34 H92z"/>
+            <path d="M118 152 c26 4 46 10 66 16 -20 6 -40 12 -66 16" stroke-width="1"/>
+            <path d="M118 156 l58 11M118 163 l60 6M118 170 l58 6M118 177 l52 2" stroke-width=".8"/>
+          </svg>
+        </div>
+      </div>
+
+      <table class="jobs">
+        <caption class="mono">Recent lettering</caption>
+        <thead>
+          <tr><th scope="col">Job</th><th scope="col">Where</th><th scope="col">Work</th><th scope="col">Year</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Ovenstone &amp; Reid</td><td>Constitution Street</td><td>Fascia, 4.2&thinsp;m, one-shot enamel</td><td class="mono">2025</td></tr>
+          <tr><td>The Persevere</td><td>Bonnington</td><td>Gilded glass, two windows, 23&thinsp;ct</td><td class="mono">2025</td></tr>
+          <tr><td>Halkett Fishmongers</td><td>Newhaven</td><td>Fascia and stall riser, blocked</td><td class="mono">2024</td></tr>
+          <tr><td>Mearns Bindery</td><td>Canongate</td><td>Door glass, gilded and matted</td><td class="mono">2024</td></tr>
+          <tr><td>Somerville Removals</td><td>Seafield</td><td>Two lorries, hand-lettered</td><td class="mono">2023</td></tr>
+          <tr><td>Kirkgate Baths</td><td>Leith</td><td>Reinstated 1928 fascia, from photographs</td><td class="mono">2023</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================ 04 · about ============================ -->
+  <section class="about" id="about">
+    <div class="wrap about__grid">
+      <div class="about__text">
+        <p class="movement mono"><span>04</span> About</p>
+        <h2 class="wipe">First floor,<br>above a chandler&rsquo;s.</h2>
+        <p class="wipe">I trained as a signwriter before I ever drew a typeface, which
+          is the wrong way round according to most people and the right way round
+          according to me. Four years holding a quill against a wall teaches you
+          what a stroke is for. Six years since, drawing them at 2,000&nbsp;units to
+          the em, has mostly been an argument with what the brush already knew.</p>
+        <p class="wipe">The room has a north window, a plan chest of pounce patterns going
+          back to 1961 that came with the lease, and a wall of gouache that is
+          arranged by nothing at all. I teach a broad-nib evening class twice a
+          year and it fills in about an hour, which says something cheerful about
+          the state of things.</p>
+
+        <!-- Prop three of three: a sable quill, worn. In About because this is
+             the section about the person rather than the output. -->
+        <div class="prop prop--quill" aria-hidden="true">
+          <svg viewBox="0 0 260 90" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 45 h130"/>
+            <path d="M10 38 h130 v14 h-130z" stroke-width="1"/>
+            <path d="M140 32 h34 v26 h-34z"/>
+            <path d="M146 32 v26M154 32 v26M162 32 v26M170 32 v26" stroke-width="1"/>
+            <path d="M174 36 c22 2 40 6 58 9 -18 3 -36 7 -58 9z"/>
+            <path d="M22 38 v14M34 38 v14" stroke-width="1"/>
+          </svg>
+        </div>
+      </div>
+
+      <dl class="facts mono">
+        <div><dt>Trained</dt><dd>Signwriting, 4-year indenture</dd></div>
+        <div><dt>Studio</dt><dd>Leith, Edinburgh</dd></div>
+        <div><dt>Released</dt><dd>4 families, 27 styles</dd></div>
+        <div><dt>Teaches</dt><dd>Broad nib, twice a year</dd></div>
+        <div><dt>Lead time</dt><dd>6&ndash;10 weeks</dd></div>
+        <div><dt>Takes on</dt><dd>~20 lettering jobs a year</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============================ 05 · commissions ============================ -->
+  <section class="commission" id="commission">
+    <div class="wrap commission__grid">
+      <div>
+        <p class="movement mono"><span>05</span> Commissions</p>
+        <h2 class="wipe">Tell me what<br>it says.</h2>
+        <p class="wipe">Fascias, glass, vehicles, a mark for something, or a face
+          drawn from scratch. The useful first message is short: what the words
+          are, roughly how big, and when you need it up.</p>
+
+        <table class="avail mono">
+          <caption>Booking</caption>
+          <tbody>
+            <tr><th scope="row">Lettering</th><td>From March</td></tr>
+            <tr><th scope="row">Gilded glass</th><td>From May</td></tr>
+            <tr><th scope="row">Custom type</th><td>One slot, autumn</td></tr>
+            <tr><th scope="row">Teaching</th><td>Waitlist</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <form class="form" id="commissionForm" novalidate>
+        <div class="field">
+          <label for="c-name">Your name</label>
+          <input id="c-name" name="name" type="text" autocomplete="name">
+          <p class="field__err" id="e-name" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email" autocomplete="email">
+          <p class="field__err" id="e-email" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="c-kind">What kind of job</label>
+          <select id="c-kind" name="kind">
+            <option>Shopfront fascia</option>
+            <option>Gilded glass</option>
+            <option>Vehicle lettering</option>
+            <option>A wordmark</option>
+            <option>Custom typeface</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="c-brief">What does it say, and how big</label>
+          <textarea id="c-brief" name="brief" rows="4"></textarea>
+          <p class="field__err" id="e-brief" role="alert"></p>
+        </div>
+        <button class="send" type="submit">Send it over</button>
+        <p class="sent" id="sent" hidden></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <p class="foot__mark">Nell Bardsley</p>
+    <p class="mono">Lettering &amp; type &middot; Leith, Edinburgh</p>
+    <p class="mono">&copy; <span data-year>2026</span> Nell Bardsley. Typefaces licensed per family.</p>
+  </div>
+</footer>
+
+<script src="js/nib.js"></script>
+<script src="js/loader.js"></script>
+<script src="js/stage.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
