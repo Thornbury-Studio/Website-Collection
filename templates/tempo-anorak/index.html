@@ -100,33 +100,33 @@
     <div class="wrap">
       <div class="sec-head" style="margin-bottom:0">
         <p class="label reveal">The only question that actually matters</p>
-        <h2 id="dial-h" class="reveal" style="--t:.06s">What do I wear at <output id="tempOut" for="temp">11</output>&deg;C?</h2>
+        <h2 id="dial-h" class="reveal" style="--t:.06s">What do I wear at <output id="tempOut" for="temp">17</output>&deg;C?</h2>
       </div>
     </div>
 
     <div class="wrap">
-      <div class="dial-plate reveal" id="dialPlate" style="--w:54%;--t:.1s">
+      <div class="dial-plate reveal" id="dialPlate" style="--w:37.14%;--t:.1s">
         <img src="img/warm.webp" srcset="img/warm-900.webp 900w, img/warm.webp 1600w" sizes="100vw"
              alt="A runner in a singlet on a dry track, kicking up dust in hard sunlight."
              width="1600" height="900" loading="lazy" decoding="async">
         <img class="dial-cold" src="img/cold.webp" srcset="img/cold-900.webp 900w, img/cold.webp 1600w" sizes="100vw"
-             alt="A runner in a shell jacket and tights crossing deep snow below a pine forest."
+             alt="A runner in a hooded winter jacket and tights coming towards the camera along a snow-covered path through bare trees."
              width="1600" height="900" loading="lazy" decoding="async">
         <div class="dial-seam" aria-hidden="true"></div>
-        <p class="dial-read"><b id="condName">The good bit</b> <span id="condNote">Long sleeve, bare legs. Get this one wrong in either direction and you will be fine again within four minutes.</span></p>
+        <p class="dial-read"><b id="condName">Mild</b> <span id="condNote">Singlet weather, whatever the forecast says. Start slightly cold and you will be right within a mile.</span></p>
       </div>
 
       <div class="dial-grid">
         <div class="dial-controls">
           <label class="label" for="temp">Drag the temperature &mdash; the weather follows</label>
-          <input id="temp" type="range" min="-5" max="30" step="1" value="11"
+          <input id="temp" type="range" min="-5" max="30" step="1" value="17"
                  aria-label="Air temperature in degrees Celsius" aria-describedby="kitOut">
           <p class="dial-scale label"><span>&minus;5&deg;</span><span>13&deg;</span><span>30&deg;</span></p>
         </div>
         <div>
           <p class="label" style="margin-bottom:1rem">What we&rsquo;d put on</p>
           <ol class="kit-list" id="kitOut" aria-live="polite">
-            <li><a href="range.html#hard-frost"><span class="role">Top</span><span class="piece">Hard Frost</span><span class="price">&pound;95</span></a></li>
+            <li><a href="range.html#dew-point"><span class="role">Top</span><span class="piece">Dew Point</span><span class="price">&pound;52</span></a></li>
             <li><a href="range.html#dry-spell"><span class="role">Legs</span><span class="piece">Dry Spell</span><span class="price">&pound;68</span></a></li>
           </ol>
         </div>

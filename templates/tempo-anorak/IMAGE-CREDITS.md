@@ -7,19 +7,24 @@ identity, imagery, product names or prices are used.
 
 ## Photography — licensed Adobe Stock (free tier)
 
-Six photographs were searched, licensed and downloaded on **15 September 2026**
-through the Adobe Stock connector, free-tier assets only (licence state
+Eight photographs were searched, licensed and downloaded on **15 September
+2026** through the Adobe Stock connector, free-tier assets only (licence state
 `just_purchased`, no credit cost). Every asset was checked to be
 `isGenTech: false` — no AI-generated imagery is used anywhere on this
-template. Originals ran 5 447–7 952 px on the long edge; every export is
+template. Originals ran 2 957–7 952 px on the long edge; every export is
 downsampled from the full-resolution licensed file, never from a search
 thumbnail.
+
+Six were licensed in the first pass. Two more were added afterwards to close
+the two gaps the first pass left open — a garment-only studio shot, and a cold
+frame that agrees with the warm one.
 
 | File | Adobe Stock ID | Used as |
 |---|---|---|
 | `img/hero.webp`, `img/hero-700.webp` | 119340115 | Hero — a runner from directly overhead on asphalt |
-| `img/cold.webp`, `img/cold-900.webp` | 94696729 | Conditions wipe, cold half — snow and pines |
-| `img/shell.webp`, `img/shell-600.webp` | 94696729 | The same frame cut 4:5 for the Crosswind product page |
+| `img/cold.webp`, `img/cold-900.webp` | 134774006 | Conditions wipe, cold half — a runner on a snow path through bare trees |
+| `img/shell.webp`, `img/shell-600.webp` | 130239977 | The Crosswind product plate — a hooded windbreaker, studio |
+| `img/snow.webp`, `img/snow-900.webp` | 94696729 | Fabric page — snow and pines |
 | `img/warm.webp`, `img/warm-900.webp` | 135651719 | Conditions wipe, warm half — dust and hard sun (also `fabric.html`) |
 | `img/fabric.webp`, `img/fabric-1000.webp` | 1807110477 | The ultramarine plate — a polyester knit macro |
 | `img/field.webp`, `img/field-900.webp` | 217723500 | Field notes — a runner on a gravel climb |
@@ -28,10 +33,11 @@ thumbnail.
 | `img/favicon.svg` | — | Drawn, not licensed |
 | `../../img/tempo-anorak-sm.webp` | — | 960×600 homepage screenshot for the hub card |
 
-Two exports share one licence (94696729): `cold` is the 16:9 landscape half of
-the conditions wipe, `shell` is the same frame cut 4:5 and held tighter on the
-runner, because it is the only licensed frame in the set where somebody is
-actually wearing a shell.
+94696729 was the cold half of the conditions wipe in the first pass, and was
+also cropped 4:5 to stand in as the Crosswind product plate. Both jobs have
+since been done properly by frames chosen for them, so it now appears once, as
+the mid-page plate on `fabric.html`. It is licensed and it is in use; nothing
+was licensed and thrown away.
 
 ## The grade
 
@@ -53,6 +59,27 @@ rather than as two different photographs.
 pushed hard on contrast, and mapped through an ultramarine ramp
 (`lutrgb`), so the blue plate in the middle of the site is literally a picture
 of the cloth.
+
+The two halves of the conditions wipe are a matched pair by selection, not by
+grading: one male runner toward the camera at the same subject scale and
+camera height, in open landscape, in each of the two climates. 134774006
+replaced the original cold frame, which was a different person running away
+from the camera and read as a second photograph rather than a second morning.
+
+The cold runner's jacket is red in the original and is knocked down to a muted
+brick, the same treatment `detail` gets. Recolouring it to the brand's Signal
+blue was tried and rejected: every method that moved the jacket far enough —
+a red/blue channel swap, a hue rotation, a selective-colour push — took his
+face with it and turned the skin cyan.
+
+`shell` is the one plate where that recolour is safe, because it is a studio
+shot with nothing saturated in it but the garment. A red/blue channel swap
+turns the jacket ultramarine and leaves a neutral background exactly where it
+was, which is how a red windbreaker becomes the Signal colourway. Its white
+studio ground is then mapped onto `--paper`, and the frame is padded — not
+cropped — out to 4:5 in the same colour, so the jacket floats on the page
+instead of sitting in a white box. Sampled against the page ground either side
+of the divider, the plate reads `#F3F1ED` to the page's `#F2F1ED`.
 
 `detail` had red trainers in it. The accent on this site is one blue; a second
 loud colour in a supporting plate would have made it two, so the reds are cut
@@ -81,15 +108,21 @@ the garment, and a licensed athlete photograph is the honest way to show one.
 None. This template was briefed as stock-only and no image-generation tool was
 called at any point. No video was generated.
 
-## What was licensed and what was wanted
+## What was licensed and what is still missing
 
-All six intended plates were licensed without hitting a limit. Had the budget
-gone further, the set was short of two things it would have used:
+All eight plates were licensed without hitting a limit, including the two the
+first pass flagged as gaps — the garment-only studio shot and the matched cold
+frame. Both are now in place.
 
-- **A garment-only still** — a flat-lay or hanger shot of a shell — so the
-  product page could show the thing being sold rather than a person wearing
-  one like it. Free-tier stock has no apparel photography that could pass as a
-  fictional brand's own product.
-- **A second cold frame with a different runner**, so the conditions wipe could
-  hold the same subject on both sides of the seam and read as one person
-  changing clothes rather than two photographs meeting.
+What the set still does not have, and would want next:
+
+- **The other five garments as studio shots.** Only Crosswind has a product
+  plate, which is why it is the only piece with a page of its own. A
+  free-tier search turns up no singlet, tight, grid fleece or five-panel cap
+  clean enough to pass as one brand's own product photography, and a range
+  page that showed one garment and five gaps would be worse than the
+  typographic listing it has.
+- **A second colourway of the Crosswind.** Ink and Bone are selectable and
+  correct in the spec line, but the plate does not change with them. One more
+  studio frame of the same jacket, or the same frame recoloured a second time,
+  would close that.
