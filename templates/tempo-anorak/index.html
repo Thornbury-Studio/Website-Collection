@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<!--
+  ANORAK° — Garrow Mill, Ardsleigh.
+
+  Direction contract. The base is bone and ink; the accent is one ultramarine,
+  spent almost entirely on a single full-bleed plate that is a photograph of
+  the cloth itself. Photography sells; the product listing is typographic and
+  carries numbers instead of pack shots. The one authored moment is the
+  conditions wipe: drag a temperature and the weather moves across the
+  photograph, taking the kit list with it. Motion is one idea — things wipe —
+  used on the hero, on section reveals, and on the dial. No marquee, no scroll
+  mapping, no parallax.
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>ANORAK&deg; &mdash; running kit from Garrow Mill</title>
+  <meta name="description" content="Six pieces of running kit, made in small runs at Garrow Mill in West Yorkshire. Four fabrics, no seasons, no drops. Tell us the temperature and we will tell you what to wear.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/tempo-anorak/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ANORAK">
+  <meta property="og:title" content="ANORAK&deg; &mdash; we argue about seams">
+  <meta property="og:description" content="Six pieces of running kit, made in small runs at Garrow Mill. Four fabrics, no seasons, no drops.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/tempo-anorak/index.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/tempo-anorak/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ANORAK&deg; &mdash; we argue about seams">
+  <meta name="twitter:description" content="Six pieces of running kit, made in small runs at Garrow Mill. Four fabrics, no seasons, no drops.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/tempo-anorak/img/og.webp">
+  <meta name="theme-color" content="#F2F1ED">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Hanken+Grotesk:wght@300..800&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-current="page" aria-label="ANORAK, home">ANORAK<sup>&deg;</sup></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="range.html">Range</a>
+    <a href="fabric.html">Fabric</a>
+    <a href="#field">Field notes</a>
+  </nav>
+  <div class="bagwrap">
+    <button class="bag" id="bagBtn" type="button" aria-expanded="false" aria-controls="bagPanel">Bag (0)</button>
+    <div class="bagpanel" id="bagPanel" data-open="false">
+      <p class="label">Your bag</p>
+      <p>Empty. Pieces are held by size while the current run is on the cutting table.</p>
+      <p><a href="range.html">See the six pieces</a></p>
+    </div>
+  </div>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false">
+  <a href="range.html">Range</a>
+  <a href="fabric.html">Fabric</a>
+  <a href="#field">Field notes</a>
+  <p class="label">Garrow Mill &middot; Ardsleigh &middot; West Yorkshire</p>
+</div>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="label">anorak, noun &mdash; a person who cares far too much about something</p>
+      <h1><span>We</span><span>argue</span><span>about</span><span>seams.</span></h1>
+      <p class="lede">Running kit made in small runs at Garrow Mill in West Yorkshire. Six pieces, four fabrics, no seasons and no drops. Every one of them sat on the bench until the people testing it ran out of complaints.</p>
+      <div class="hero-actions">
+        <a class="btn" href="range.html">Shop the six pieces<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.5 3.5 14 8l-4.5 4.5"/></svg></a>
+        <a class="btn btn--ghost" href="fabric.html">What it&rsquo;s made of</a>
+      </div>
+      <p class="hero-spec label">
+        <span>Est. 2014</span><span>Cut in Ardsleigh</span><span>Ships worldwide</span>
+      </p>
+    </div>
+    <div class="hero-plate">
+      <img src="img/hero.webp" srcset="img/hero-700.webp 700w, img/hero.webp 1200w"
+           sizes="(max-width: 860px) 100vw, 52vw"
+           alt="A runner photographed from directly overhead, in black kit on grey asphalt, with a long shadow thrown across the road."
+           width="1200" height="1500" fetchpriority="high" decoding="async">
+    </div>
+  </section>
+
+  <div class="creed">
+    <div class="wrap">
+      <p class="reveal">No seasons. No drops. <b>If a piece is on this page it is because it works</b>, and it will still be here next spring in the same three colours.</p>
+    </div>
+  </div>
+
+  <!-- the one authored moment ------------------------------------------- -->
+  <section class="dial" id="conditions" aria-labelledby="dial-h">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:0">
+        <p class="label reveal">The only question that actually matters</p>
+        <h2 id="dial-h" class="reveal" style="--t:.06s">What do I wear at <output id="tempOut" for="temp">11</output>&deg;C?</h2>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="dial-plate reveal" id="dialPlate" style="--w:54%;--t:.1s">
+        <img src="img/warm.webp" srcset="img/warm-900.webp 900w, img/warm.webp 1600w" sizes="100vw"
+             alt="A runner in a singlet on a dry track, kicking up dust in hard sunlight."
+             width="1600" height="900" loading="lazy" decoding="async">
+        <img class="dial-cold" src="img/cold.webp" srcset="img/cold-900.webp 900w, img/cold.webp 1600w" sizes="100vw"
+             alt="A runner in a shell jacket and tights crossing deep snow below a pine forest."
+             width="1600" height="900" loading="lazy" decoding="async">
+        <div class="dial-seam" aria-hidden="true"></div>
+        <p class="dial-read"><b id="condName">The good bit</b> <span id="condNote">Long sleeve, bare legs. Get this one wrong in either direction and you will be fine again within four minutes.</span></p>
+      </div>
+
+      <div class="dial-grid">
+        <div class="dial-controls">
+          <label class="label" for="temp">Drag the temperature &mdash; the weather follows</label>
+          <input id="temp" type="range" min="-5" max="30" step="1" value="11"
+                 aria-label="Air temperature in degrees Celsius" aria-describedby="kitOut">
+          <p class="dial-scale label"><span>&minus;5&deg;</span><span>13&deg;</span><span>30&deg;</span></p>
+        </div>
+        <div>
+          <p class="label" style="margin-bottom:1rem">What we&rsquo;d put on</p>
+          <ol class="kit-list" id="kitOut" aria-live="polite">
+            <li><a href="range.html#hard-frost"><span class="role">Top</span><span class="piece">Hard Frost</span><span class="price">&pound;95</span></a></li>
+            <li><a href="range.html#dry-spell"><span class="role">Legs</span><span class="piece">Dry Spell</span><span class="price">&pound;68</span></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- the range ---------------------------------------------------------- -->
+  <section class="sec" aria-labelledby="range-h">
+    <div class="wrap">
+      <div class="sec-head sec-head--split">
+        <p class="label reveal">The range, entire</p>
+        <h2 id="range-h" class="reveal" style="--t:.06s">Six pieces. That is the shop.</h2>
+        <p class="lede reveal" style="--t:.12s">Most running brands carry two hundred SKUs and hope you find the four that suit you. We would rather cut four fabrics properly and stand behind six garments, in three colours, indefinitely.</p>
+      </div>
+
+      <div class="grid-pieces reveal" style="--t:.16s">
+
+        <a class="piece" href="crosswind.html">
+          <div class="piece-top"><h3>Crosswind</h3><span class="price">&pound;215</span></div>
+          <p>2.5-layer shell with a hood that stays on your head at 40 km/h, because we tested it in a wind tunnel we did not have to pay for.</p>
+          <p class="piece-spec label">
+            <span class="num">148 g</span>
+            <span class="ways" aria-label="Three colourways"><i class="way" data-way="ink"></i><i class="way" data-way="signal"></i><i class="way" data-way="bone"></i></span>
+            <span class="stock">In stock</span>
+          </p>
+        </a>
+
+        <a class="piece" href="range.html#half-light">
+          <div class="piece-top"><h3>Half Light</h3><span class="price">&pound;135</span></div>
+          <p>Winter tight in a 240 power knit, with retroreflective piping down the outside of the calf where a passing driver actually looks.</p>
+          <p class="piece-spec label">
+            <span class="num">265 g</span>
+            <span class="ways" aria-label="One colourway"><i class="way" data-way="ink"></i></span>
+            <span class="stock">In stock</span>
+          </p>
+        </a>
+
+        <a class="piece" href="range.html#hard-frost">
+          <div class="piece-top"><h3>Hard Frost</h3><span class="price">&pound;95</span></div>
+          <p>Grid-fleece long sleeve. Waffled inside so it holds warm air in the grid and lets sweat leave through the channels between.</p>
+          <p class="piece-spec label">
+            <span class="num">178 g</span>
+            <span class="ways" aria-label="Two colourways"><i class="way" data-way="ink"></i><i class="way" data-way="bone"></i></span>
+            <span class="stock">In stock</span>
+          </p>
+        </a>
+
+        <a class="piece" href="range.html#dew-point">
+          <div class="piece-top"><h3>Dew Point</h3><span class="price">&pound;52</span></div>
+          <p>A singlet that is mostly hole. Bonded hems, no side seam at all, and a back panel open enough to see the label through.</p>
+          <p class="piece-spec label">
+            <span class="num">68 g</span>
+            <span class="ways" aria-label="Two colourways"><i class="way" data-way="bone"></i><i class="way" data-way="signal"></i></span>
+            <span class="stock">In stock</span>
+          </p>
+        </a>
+
+        <a class="piece" href="range.html#dry-spell">
+          <div class="piece-top"><h3>Dry Spell</h3><span class="price">&pound;68</span></div>
+          <p>Five-inch split short in the shell&rsquo;s own 40-denier yarn, woven bare instead of laminated. Two zip pockets, both of which sit still.</p>
+          <p class="piece-spec label">
+            <span class="num">74 g</span>
+            <span class="ways" aria-label="Two colourways"><i class="way" data-way="ink"></i><i class="way" data-way="bone"></i></span>
+            <span class="stock">In stock</span>
+          </p>
+        </a>
+
+        <a class="piece" href="range.html#low-sun">
+          <div class="piece-top"><h3>Low Sun</h3><span class="price">&pound;38</span></div>
+          <p>Five-panel cap cut from the offcuts of everything above it. A brim short enough to see the ground and long enough to stop the glare.</p>
+          <p class="piece-spec label">
+            <span class="num">41 g</span>
+            <span class="ways" aria-label="Two colourways"><i class="way" data-way="ink"></i><i class="way" data-way="signal"></i></span>
+            <span class="stock">In stock</span>
+          </p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- the blue plate ------------------------------------------------------ -->
+  <section class="plate-blue" aria-labelledby="fabric-h">
+    <div class="wrap">
+      <div class="sec-head sec-head--split" style="margin-bottom:0">
+        <p class="label reveal">Fabric</p>
+        <h2 id="fabric-h" class="reveal" style="--t:.06s">We buy four cloths. That is the whole list.</h2>
+        <p class="lede reveal" style="--t:.12s">Two of them come from the same mill in Biella and one of them we waited fourteen months for. Every piece in the range is cut from one of these four, which is why the range is six pieces and not sixty.</p>
+      </div>
+
+      <ol class="cloths reveal" style="--t:.16s">
+        <li>
+          <span class="code">GR&#8209;118</span>
+          <span class="what">Grid fleece<em>118 g/m&sup2; &middot; 52% recycled</em></span>
+          <p>Knitted as a waffle so the pile sits in islands with channels between them. Warm air stays in the islands, sweat leaves through the channels. It is the only fleece we found that did not go slack after forty washes, and we washed nine of them forty times to find that out.</p>
+        </li>
+        <li>
+          <span class="code">AX&#8209;96</span>
+          <span class="what">2.5-layer laminate<em>96 g/m&sup2; laminated &middot; 128 g/m&sup2; bare</em></span>
+          <p>Rated to 20,000 mm of water, which is more rain than Yorkshire has ever managed. We did not buy it for that. We bought it for the 20,000 g of vapour it passes in a day, because the jacket you take off is the jacket that failed. The same 40-denier yarn, woven double and left unlaminated, is the short and the cap.</p>
+        </li>
+        <li>
+          <span class="code">MN&#8209;92</span>
+          <span class="what">Open mesh knit<em>92 g/m&sup2; &middot; single jersey</em></span>
+          <p>Mostly hole, held together by a knit structure fine enough to survive a race number pinned through it. It weighs almost nothing as a finished garment and you will spend the first mile checking you put it on.</p>
+        </li>
+        <li>
+          <span class="code">PW&#8209;240</span>
+          <span class="what">Power knit<em>240 g/m&sup2; &middot; four-way</em></span>
+          <p>Dense enough to be opaque when you crouch to tie a lace, which is a lower bar than the industry clears. Recovers to within two per cent of its cut length after a hundred hours on the leg.</p>
+        </li>
+      </ol>
+
+      <p style="margin-top:clamp(2rem,4vw,3rem)">
+        <a class="btn btn--bone" href="fabric.html">The full cloth notes<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.5 3.5 14 8l-4.5 4.5"/></svg></a>
+      </p>
+    </div>
+  </section>
+
+  <!-- field notes --------------------------------------------------------- -->
+  <section class="field" id="field" aria-labelledby="field-h">
+    <div class="field-plate">
+      <img src="img/field.webp" srcset="img/field-900.webp 900w, img/field.webp 1600w" sizes="100vw"
+           alt="A runner seen from behind on a gravel track climbing towards a grey mountain ridge."
+           width="1600" height="900" loading="lazy" decoding="async">
+    </div>
+    <div class="wrap">
+      <div class="field-body">
+        <div>
+          <p class="label reveal">Field notes</p>
+          <h2 id="field-h" class="reveal" style="--t:.06s">Fourteen people, asked to be unkind.</h2>
+        </div>
+        <div class="notes">
+          <div class="reveal">
+            <h3>The test group is not a focus group</h3>
+            <p>Fourteen runners across Yorkshire, the Cairngorms and one very unhelpful person in Singapore. They are paid, they keep the kit, and they are explicitly asked to write down what annoyed them rather than what they liked. Six pieces have shipped. Eleven have not.</p>
+          </div>
+          <div class="reveal" style="--t:.06s">
+            <h3>Why the seams moved</h3>
+            <p>The first Dew Point had a shoulder seam where every vest has a shoulder seam, and every tester with a hydration pack came back with the same red line across the same place. It took four rounds to move it forward by eleven millimetres. That is the entire reason this company exists.</p>
+          </div>
+          <div class="reveal" style="--t:.12s">
+            <h3>What we will not do</h3>
+            <p>No seasonal colours. No limited runs. No fabric we cannot name the mill for. If a piece here is replaced it will be because it was beaten, not because it is March.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- closing split ------------------------------------------------------- -->
+  <section class="sec" aria-labelledby="fit-h">
+    <div class="wrap">
+      <div class="split">
+        <img class="reveal" src="img/detail.webp" srcset="img/detail-600.webp 600w, img/detail.webp 1000w"
+             sizes="(max-width: 820px) 100vw, 44vw"
+             alt="A close view of a runner's legs and shoes mid-stride on a dirt track."
+             width="1000" height="1250" loading="lazy" decoding="async">
+        <div>
+          <p class="label reveal">Sizing</p>
+          <h2 id="fit-h" class="reveal" style="--t:.06s">Two fits, and we say which.</h2>
+          <p class="lede reveal" style="--t:.1s">Every piece is cut either <b>close</b> or <b>easy</b>, it says so on the page, and it does not change between colours. Sizes run 1 to 6 with the chest and waist measurement printed beside each one, in centimetres, because a letter is not a measurement.</p>
+          <p class="reveal" style="--t:.14s"><a class="btn btn--ghost" href="range.html#sizes">Size chart</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2>Anorak<sup style="color:var(--blue)">&deg;</sup></h2>
+        <p class="label">a person who cares far too much about something</p>
+      </div>
+      <div>
+        <p class="label">Shop</p>
+        <ul>
+          <li><a href="range.html">The six pieces</a></li>
+          <li><a href="range.html#sizes">Size chart</a></li>
+          <li><a href="crosswind.html">Crosswind shell</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">Company</p>
+        <ul>
+          <li><a href="fabric.html">Fabric</a></li>
+          <li><a href="#field">Field notes</a></li>
+          <li><a href="#conditions">What to wear</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">Garrow Mill</p>
+        <ul>
+          <li>Unit 4, Garrow Mill</li>
+          <li>Ardsleigh, West Yorkshire</li>
+          <li><a href="mailto:kit@anorak.cc">kit@anorak.cc</a></li>
+          <li><a href="tel:+441422900140">01422 900 140</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-base label">
+      <span>&copy; 2026 Anorak Kit Ltd</span>
+      <span>Prices in GBP, VAT included</span>
+      <span>Cut and sewn in West Yorkshire</span>
+    </p>
+  </div>
+</footer>
+
+<script src="js/site.js"></script>
+</body>
+</html>
