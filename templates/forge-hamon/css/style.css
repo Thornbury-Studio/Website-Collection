@@ -1,0 +1,717 @@
+/* ==========================================================================
+   HAMON — a forge at Cleave Ford
+   Two states, both real: FORGE (worked at night off the coal fire) and
+   BENCH (finished in flat north daylight). FORGE is the default.
+   ========================================================================== */
+
+:root {
+  /* FORGE ---------------------------------------------------------------- */
+  --ground: #0a0b0d;
+  --ground-2: #131519;
+  --ground-3: #1b1e23;
+  --ink: #e9edf0;
+  --ink-dim: #98a3ac;
+  --hamon: #dfe8ec;
+  --ember: #ff4b16;
+  --scale: #3a4148;
+  --quench: #5d8299;
+
+  --line: rgba(233, 237, 240, 0.12);
+  --line-2: rgba(233, 237, 240, 0.22);
+  --plate-dim: 1;
+  --curtain: var(--ground);
+
+  /* type ----------------------------------------------------------------- */
+  --display: "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif;
+  --voice: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --data: "DM Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  /* rhythm --------------------------------------------------------------- */
+  --gut: clamp(20px, 5vw, 64px);
+  --stage-y: clamp(72px, 11vh, 150px);
+  --measure: 60ch;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* heat: 0 = cold steel, 1 = welding heat. Set per stage by js/site.js. */
+  --heat: 0;
+
+  color-scheme: dark;
+}
+
+[data-theme="bench"] {
+  --ground: #cfcdc7;
+  --ground-2: #dad8d2;
+  --ground-3: #c2c0ba;
+  --ink: #14161a;
+  /* Daylight values are darker than a straight inversion would give: each one
+     below is set to clear 4.5:1 on the bench ground, ember included. */
+  --ink-dim: #3f454b;
+  --hamon: #4d565d;
+  --ember: #9c2700;
+  --scale: #9a988f;
+  --quench: #2f5165;
+
+  --line: rgba(20, 22, 26, 0.16);
+  --line-2: rgba(20, 22, 26, 0.3);
+  --plate-dim: 0.88;
+
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--voice);
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.075rem);
+  line-height: 1.68;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.5s linear, color 0.5s linear;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; }
+
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2.9rem, 9.4vw, 8.2rem); }
+h2 { font-size: clamp(2rem, 5.2vw, 4.1rem); }
+h3 { font-size: clamp(1.3rem, 2.1vw, 1.75rem); letter-spacing: -0.01em; }
+
+p { margin: 0 0 1.1em; max-width: var(--measure); }
+p:last-child { margin-bottom: 0; }
+
+::selection { background: var(--ember); color: #0a0b0d; }
+
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--ink); color: var(--ground);
+  padding: 12px 18px; font-family: var(--data); font-size: 12px;
+}
+.skip:focus { left: 0; }
+
+:where(a, button, input, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 3px;
+}
+
+/* The one shared label voice: everything measured, named or switched. */
+.label {
+  font-family: var(--data);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin: 0;
+}
+
+.wrap {
+  width: min(1320px, 100%);
+  margin-inline: auto;
+  padding-inline: var(--gut);
+}
+.wrap--narrow { width: min(880px, 100%); }
+
+/* ==========================================================================
+   The polish — the site's one motion signature
+   A curtain of the section's own ground retracts to the right, led by a 1px
+   hamon rule. Nothing fades, nothing changes colour on arrival.
+   ========================================================================== */
+
+.js-anim .reveal { position: relative; }
+
+.js-anim .reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--curtain);
+  transform-origin: 100% 50%;
+  transition: transform 0.85s var(--ease);
+  transition-delay: var(--d, 0s);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.js-anim .reveal::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 1px;
+  background: var(--hamon);
+  opacity: 0.85;
+  transition: left 0.85s var(--ease), opacity 0.3s linear 0.55s;
+  transition-delay: var(--d, 0s), calc(var(--d, 0s) + 0.55s);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.js-anim .reveal.in::after { transform: scaleX(0); }
+.js-anim .reveal.in::before { left: 100%; opacity: 0; }
+
+/* ==========================================================================
+   Topbar
+   ========================================================================== */
+
+.top {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; align-items: center; gap: 20px;
+  padding: 14px var(--gut);
+  background: color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter: blur(9px);
+  border-bottom: 1px solid var(--line);
+}
+
+.mark {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-decoration: none;
+  line-height: 1;
+  padding-bottom: 7px;
+  position: relative;
+  margin-right: auto;
+}
+/* The wordmark carries its own hamon: a shallow wave under the letters. */
+.mark svg { position: absolute; left: 0; bottom: 0; width: 100%; height: 6px; overflow: visible; }
+.mark svg path { fill: none; stroke: var(--hamon); stroke-width: 1; }
+
+.nav { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
+.nav a {
+  font-family: var(--data);
+  font-size: 12px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-dim);
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav a:hover { color: var(--ink); border-bottom-color: var(--hamon); }
+.nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--ember); }
+
+/* FORGE / BENCH — the shop at night and the shop in the morning. */
+.state {
+  display: inline-flex; align-items: stretch;
+  border: 1px solid var(--line-2);
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--data);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--ink-dim);
+  line-height: 1;
+}
+.state span { padding: 8px 9px; transition: background-color 0.25s, color 0.25s; }
+:root:not([data-theme="bench"]) .state .s-forge { background: var(--ember); color: #0a0b0d; }
+[data-theme="bench"] .state .s-bench { background: var(--quench); color: #ffffff; }
+.state:hover { border-color: var(--ink-dim); }
+
+.burger {
+  display: none;
+  width: 42px; height: 34px;
+  background: none; border: 1px solid var(--line-2);
+  cursor: pointer; position: relative; padding: 0;
+}
+.burger span, .burger::before, .burger::after {
+  content: ""; position: absolute; left: 10px; right: 10px; height: 1px;
+  background: var(--ink); transition: transform 0.25s, opacity 0.2s;
+}
+.burger span { top: 50%; }
+.burger::before { top: 11px; }
+.burger::after { bottom: 11px; }
+.burger[aria-expanded="true"]::before { transform: translateY(5px) rotate(45deg); }
+.burger[aria-expanded="true"]::after { transform: translateY(-5px) rotate(-45deg); }
+.burger[aria-expanded="true"] span { opacity: 0; }
+
+.drawer {
+  position: sticky; top: 61px; z-index: 39;
+  background: var(--ground-2);
+  border-bottom: 1px solid var(--line);
+  padding: 8px var(--gut) 20px;
+  display: none;
+}
+.drawer a {
+  display: block;
+  font-family: var(--data); font-size: 13px; letter-spacing: 0.13em;
+  text-transform: uppercase; text-decoration: none;
+  padding: 14px 0; border-bottom: 1px solid var(--line);
+}
+.drawer .label { padding-top: 16px; }
+
+/* ==========================================================================
+   The heat spine — desktop only. Carries the working temperature of whatever
+   stage you are in, and mixes ember -> quench with it.
+   ========================================================================== */
+
+.spine {
+  position: fixed;
+  left: 12px;
+  top: 0; bottom: 0;
+  width: 96px;
+  z-index: 30;
+  display: none;
+  pointer-events: none;
+  font-family: var(--data);
+}
+.spine-rail {
+  position: absolute; left: 10px; top: 18vh; bottom: 18vh;
+  width: 1px; background: var(--line);
+}
+.spine-rail i {
+  position: absolute; left: -6px; width: 13px; height: 1px;
+  background: color-mix(in oklab, var(--ember) calc(var(--heat) * 100%), var(--quench));
+  top: calc(var(--spine-p, 0) * 100%);
+  transition: top 0.35s linear, background-color 0.6s linear;
+}
+.spine-read {
+  position: absolute; left: 10px;
+  top: calc(18vh + var(--spine-p, 0) * (64vh));
+  transform: translateY(-50%);
+  padding-left: 12px;
+  transition: top 0.35s linear;
+  white-space: nowrap;
+}
+.spine-temp {
+  display: block;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+  color: color-mix(in oklab, var(--ember) calc(var(--heat) * 100%), var(--quench));
+  transition: color 0.6s linear;
+}
+.spine-name {
+  display: block;
+  font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-dim); margin-top: 3px;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  min-height: min(92svh, 860px);
+  display: grid;
+  align-items: end;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.hero-plate { position: absolute; inset: 0; }
+.hero-plate img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%;
+  filter: brightness(var(--plate-dim));
+}
+.hero-plate::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to top, var(--ground) 2%, color-mix(in srgb, var(--ground) 55%, transparent) 42%, transparent 78%),
+    linear-gradient(to right, color-mix(in srgb, var(--ground) 82%, transparent), transparent 62%);
+}
+
+.hero-copy {
+  position: relative;
+  padding: 0 var(--gut) clamp(40px, 7vh, 84px);
+  width: min(1320px, 100%);
+  margin-inline: auto;
+}
+.hero-copy h1 { margin: 14px 0 0; max-width: 13ch; }
+.hero-copy .lede {
+  margin-top: clamp(20px, 3vh, 34px);
+  font-size: clamp(1.02rem, 0.98rem + 0.4vw, 1.28rem);
+  max-width: 46ch;
+  color: var(--ink-dim);
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+/* The hamon drawn under the headline: the site's own proof, in one line. */
+.hero-rule { display: block; width: min(560px, 100%); height: 18px; margin-top: 18px; overflow: hidden; }
+.hero-rule path.base { fill: none; stroke: var(--line-2); stroke-width: 1; }
+.hero-rule path.line { fill: none; stroke: var(--hamon); stroke-width: 1.4; stroke-linecap: round; }
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  display: inline-block;
+  font-family: var(--data);
+  font-size: 11.5px; letter-spacing: 0.15em; text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 24px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--ground);
+  cursor: pointer;
+  transition: background-color 0.22s, color 0.22s, border-color 0.22s;
+}
+.btn:hover { background: transparent; color: var(--ink); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
+.btn--ghost:hover { border-color: var(--ink); background: transparent; color: var(--ink); }
+
+/* ==========================================================================
+   Stages — the seven-temperature walk from bar stock to edge
+   ========================================================================== */
+
+.stage { padding-block: var(--stage-y); border-bottom: 1px solid var(--line); }
+.stage--well { background: var(--ground-2); --curtain: var(--ground-2); }
+
+.stage-head { display: grid; gap: clamp(14px, 2vw, 22px); }
+.stage-temp {
+  font-family: var(--data);
+  font-size: clamp(0.82rem, 1.1vw, 0.98rem);
+  letter-spacing: 0.1em;
+  color: color-mix(in oklab, var(--ember) calc(var(--t, 0) * 100%), var(--quench));
+  display: flex; align-items: baseline; gap: 14px;
+}
+.stage-temp b { font-weight: 500; }
+.stage-temp em {
+  font-style: normal;
+  color: var(--ink-dim);
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+}
+
+.stage-body {
+  display: grid;
+  gap: clamp(24px, 4vw, 60px);
+  margin-top: clamp(26px, 4vh, 50px);
+}
+@media (min-width: 900px) {
+  .stage-body { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .stage-body--wide { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+}
+
+.prose { color: var(--ink-dim); }
+.prose strong { color: var(--ink); font-weight: 500; }
+
+/* Plates — photographs sit inside a hairline, captioned in data type. */
+.plate { position: relative; border: 1px solid var(--line); }
+.plate img { width: 100%; filter: brightness(var(--plate-dim)); }
+.plate figcaption {
+  font-family: var(--data); font-size: 10.5px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-dim);
+  padding: 11px 13px; border-top: 1px solid var(--line);
+}
+
+/* One plate on the home page runs the full width: the steel itself. The
+   material is the subject of that stage, so it gets the room. */
+.plate--bleed {
+  margin: clamp(32px, 5vh, 64px) 0 0;
+  border-inline: 0;
+}
+.plate--bleed img { aspect-ratio: 24 / 7; object-fit: cover; }
+.plate--bleed figcaption { padding-inline: var(--gut); }
+@media (min-width: 1000px) { .plate--bleed figcaption { padding-left: max(var(--gut), 128px); } }
+
+/* ==========================================================================
+   Spec lists — the craft's own numbers, everywhere
+   ========================================================================== */
+
+.specs { border-top: 1px solid var(--line); margin: 0; }
+.specs div {
+  display: flex; justify-content: space-between; gap: 20px;
+  border-bottom: 1px solid var(--line);
+  padding: 11px 0;
+  font-family: var(--data); font-size: 12.5px;
+}
+.specs dt { color: var(--ink-dim); letter-spacing: 0.08em; }
+.specs dd { margin: 0; text-align: right; color: var(--ink); }
+
+/* ==========================================================================
+   The fold table — the site's one authored moment
+   ========================================================================== */
+
+.fold {
+  border: 1px solid var(--line);
+  background: var(--ground-3);
+  --curtain: var(--ground-3);
+}
+.fold-head {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px;
+  padding: 16px 18px; border-bottom: 1px solid var(--line);
+}
+.fold-head .label { margin-right: auto; }
+
+.fold-canvas {
+  display: block; width: 100%; height: clamp(120px, 20vw, 190px);
+  background: #0a0b0d;
+}
+[data-theme="bench"] .fold-canvas { background: #b8b6b0; }
+
+.fold-read {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid var(--line);
+}
+.fold-read div { padding: 14px 16px; border-right: 1px solid var(--line); }
+.fold-read div:last-child { border-right: 0; }
+.fold-read dt {
+  font-family: var(--data); font-size: 9.5px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink-dim);
+}
+.fold-read dd {
+  margin: 6px 0 0;
+  font-family: var(--data); font-size: clamp(1.05rem, 2.4vw, 1.5rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+/* Past the etch limit the number is stated in the cold colour: it is a fact
+   about a finished surface, not about hot steel. */
+.fold-read dd.past { color: var(--quench); }
+
+.fold-ctl { display: flex; align-items: center; gap: 16px; padding: 16px 18px; }
+.fold-ctl input[type="range"] {
+  flex: 1 1 auto; min-width: 0;
+  accent-color: var(--ember);
+  height: 22px;
+}
+.fold-ctl button {
+  font-family: var(--data); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 11px 16px; cursor: pointer;
+  border: 1px solid var(--line-2); background: transparent; color: var(--ink);
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+.fold-ctl button:hover:not(:disabled) { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.fold-ctl button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.fold-note {
+  padding: 0 18px 18px;
+  font-size: 0.95rem; color: var(--ink-dim); max-width: none;
+}
+.fold-note b { color: var(--quench); font-weight: 500; }
+
+/* ==========================================================================
+   Temper scale — real oxide colours, used as an instrument, once
+   ========================================================================== */
+
+.temper { display: grid; grid-template-columns: repeat(7, 1fr); margin-top: 26px; }
+.temper div { border-right: 1px solid var(--ground); }
+.temper div:last-child { border-right: 0; }
+.temper i { display: block; height: 18px; }
+.temper span {
+  display: block;
+  font-family: var(--data); font-size: 9.5px; letter-spacing: 0.04em;
+  color: var(--ink-dim); padding-top: 7px;
+}
+.temper .keep span { color: var(--ink); }
+.temper .keep i { box-shadow: 0 0 0 1px var(--ink); }
+
+/* ==========================================================================
+   Index-page blade teasers / blades page
+   ========================================================================== */
+
+.blades { display: grid; gap: 1px; background: var(--line); border-block: 1px solid var(--line); }
+@media (min-width: 760px) { .blades { grid-template-columns: repeat(2, 1fr); } }
+
+.blade {
+  background: var(--ground);
+  --curtain: var(--ground);
+  padding: clamp(24px, 3.4vw, 40px);
+  text-decoration: none;
+  display: grid; align-content: start; gap: 14px;
+  transition: background-color 0.25s;
+}
+a.blade:hover { background: var(--ground-2); }
+.blade h3 { margin: 0; }
+.blade .sub { font-family: var(--data); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); }
+.blade p { color: var(--ink-dim); font-size: 0.97rem; }
+
+/* The section drawing: a blade's cross-section with leader-line callouts.
+   `overflow: hidden` is load-bearing, not tidiness — the callout labels sit
+   outside the drawn object, and with the SVG's default `overflow: visible`
+   any label wider than its viewBox paints over whatever is beside it (here,
+   the prose column). Callouts must be inside the viewBox; the box clips. */
+.section-dwg { width: 100%; max-width: 420px; height: auto; overflow: hidden; }
+.section-dwg .steel { fill: color-mix(in srgb, var(--ink) 12%, transparent); stroke: var(--ink); stroke-width: 1; }
+.section-dwg .hard { fill: color-mix(in srgb, var(--hamon) 62%, transparent); stroke: none; }
+.section-dwg .dim { stroke: var(--scale); stroke-width: 0.6; }
+.section-dwg text { font-family: var(--data); font-size: 7px; fill: var(--ink-dim); letter-spacing: 0.06em; }
+
+/* ==========================================================================
+   Length comparison — the four blades against one 300 mm scale
+   ========================================================================== */
+
+.lengths { margin-top: clamp(36px, 6vh, 64px); }
+
+/* The scale has to sit over exactly the track the bars are measured in, so it
+   is inset by the two fixed grid columns of .len rather than laid out by them. */
+.len-scale {
+  position: relative; height: 26px;
+  border-bottom: 1px solid var(--line);
+  margin: 0 76px 4px 110px;
+}
+.len-scale i {
+  position: absolute; bottom: 0; width: 1px; height: 7px;
+  background: var(--scale);
+  left: calc(var(--mm) / 300 * 100%);
+}
+.len-scale span {
+  position: absolute; bottom: 11px;
+  left: calc(var(--mm) / 300 * 100%);
+  transform: translateX(-50%);
+  font-family: var(--data); font-size: 9.5px; letter-spacing: 0.12em;
+  color: var(--ink-dim); white-space: nowrap;
+}
+.len-scale span:last-child { transform: translateX(-100%); }
+
+.len {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) 62px;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+.len span, .len b {
+  font-family: var(--data); font-size: 11.5px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-dim); font-weight: 400;
+}
+.len b { text-align: right; color: var(--ink); }
+.len i {
+  display: block; height: 3px;
+  width: calc(var(--mm) / 300 * 100%);
+  background: var(--hamon);
+}
+
+@media (max-width: 560px) {
+  .len { grid-template-columns: 74px minmax(0, 1fr) 52px; gap: 10px; }
+  .len span, .len b { font-size: 10px; letter-spacing: 0.06em; }
+  .len-scale { margin: 0 62px 4px 84px; }
+}
+
+/* ==========================================================================
+   Pull quote / the claim
+   ========================================================================== */
+
+.claim { padding-block: clamp(70px, 12vh, 150px); border-bottom: 1px solid var(--line); }
+.claim blockquote {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.7rem, 4.4vw, 3.4rem);
+  line-height: 1.12; letter-spacing: -0.015em;
+  max-width: 20ch;
+}
+.claim cite {
+  display: block; margin-top: 26px;
+  font-family: var(--data); font-style: normal;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-dim);
+}
+
+/* ==========================================================================
+   Commission spec builder
+   ========================================================================== */
+
+.build { display: grid; gap: clamp(28px, 4vw, 56px); margin-top: 40px; }
+@media (min-width: 940px) { .build { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
+
+.field { display: grid; gap: 9px; margin-bottom: 24px; }
+.field > span { font-family: var(--data); font-size: 10.5px; letter-spacing: 0.17em; text-transform: uppercase; color: var(--ink-dim); }
+.field select, .field input {
+  font-family: var(--data); font-size: 13px;
+  padding: 12px 13px;
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  border: 1px solid var(--line-2);
+  color: var(--ink);
+  border-radius: 0;
+  width: 100%;
+}
+.field select { appearance: none; background-image: none; cursor: pointer; }
+.field input[type="range"] {
+  padding: 0; border: 0; background: none; height: 26px; accent-color: var(--ember); cursor: pointer;
+}
+.field > span b { font-family: var(--data); font-weight: 500; color: var(--ink); font-size: 13px; }
+.field .hint { font-family: var(--voice); font-size: 0.86rem; letter-spacing: 0; text-transform: none; color: var(--ink-dim); }
+
+.sheet {
+  border: 1px solid var(--line-2);
+  background: var(--ground-2);
+  --curtain: var(--ground-2);
+}
+.sheet-head { padding: 15px 18px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; }
+.sheet pre {
+  margin: 0; padding: 18px;
+  font-family: var(--data); font-size: 12px; line-height: 1.85;
+  white-space: pre-wrap; word-break: break-word;
+  color: var(--ink);
+}
+.sheet-foot { padding: 16px 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.sheet-foot .said { font-family: var(--data); font-size: 11px; letter-spacing: 0.1em; color: var(--quench); }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.foot { padding-block: clamp(50px, 8vh, 96px); }
+.foot-grid { display: grid; gap: 34px; }
+@media (min-width: 780px) { .foot-grid { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); } }
+.foot a { color: var(--ink-dim); text-decoration: none; display: block; padding: 5px 0; font-family: var(--data); font-size: 12px; letter-spacing: 0.1em; }
+.foot a:hover { color: var(--ink); }
+.foot .mark { font-size: 1.3rem; margin: 0 0 16px; display: inline-block; }
+.foot-note { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 26px; }
+.foot-note p { font-family: var(--data); font-size: 10.5px; letter-spacing: 0.12em; color: var(--ink-dim); margin: 0; max-width: none; }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (min-width: 1000px) {
+  .spine { display: block; }
+  /* Room for the spine's readout: the rail sits at 12px and its widest label
+     runs to about 110px, so content never starts before 128px. */
+  .hero-copy, .wrap, .top, .drawer { padding-left: max(var(--gut), 128px); }
+}
+
+@media (max-width: 720px) {
+  .nav { display: none; }
+  .burger { display: block; }
+  .drawer[data-open="true"] { display: block; }
+  .fold-read { grid-template-columns: 1fr; }
+  .fold-read div { border-right: 0; border-bottom: 1px solid var(--line); }
+  .fold-read div:last-child { border-bottom: 0; }
+  .fold-ctl { flex-wrap: wrap; }
+  .fold-ctl button { flex: 1 1 auto; }
+  .temper { grid-template-columns: repeat(4, 1fr); row-gap: 14px; }
+  .hero { min-height: min(86svh, 720px); }
+  .specs div { font-size: 11.5px; }
+}
+
+/* ==========================================================================
+   Reduced motion — the wipe is removed outright, everything stays usable
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js-anim .reveal::before,
+  .js-anim .reveal::after { display: none; }
+  .spine-rail i, .spine-read { transition: none; }
+  body { transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

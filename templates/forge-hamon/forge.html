@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>The Forge &mdash; HAMON</title>
+  <meta name="description" content="A two-bay shop in the old fulling mill at Cleave Ford: who works there, what the trip hammer does, how to tell a real temper line from an etched one, and how to keep a carbon blade alive.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/forge-hamon/forge.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HAMON">
+  <meta property="og:title" content="The Forge &mdash; HAMON">
+  <meta property="og:description" content="A two-bay shop in the old fulling mill at Cleave Ford, and how to tell a real temper line from an etched one.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/forge-hamon/forge.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/forge-hamon/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Forge &mdash; HAMON">
+  <meta name="twitter:description" content="A two-bay shop in the old fulling mill at Cleave Ford, and how to tell a real temper line from an etched one.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/forge-hamon/img/og.webp">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="HAMON, home">HAMON<svg viewBox="0 0 100 6" aria-hidden="true" preserveAspectRatio="none"><path d="M0 4C8 1 14 5 22 3S36 1 44 4 58 6 66 3 82 1 100 4"/></svg></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="blades.html">Blades</a>
+    <a href="forge.html" aria-current="page">The Forge</a>
+    <a href="commission.html">Commission</a>
+  </nav>
+  <button class="state" id="state" type="button" aria-label="Shop state: forge, night. Switch."><span class="s-forge">FORGE</span><span class="s-bench">BENCH</span></button>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false">
+  <a href="blades.html">Blades</a>
+  <a href="forge.html">The Forge</a>
+  <a href="commission.html">Commission</a>
+  <p class="label">The Fulling Mill &middot; Cleave Ford &middot; since 2009</p>
+</div>
+
+<main id="main">
+
+  <section class="stage" aria-labelledby="h">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="label reveal">The Fulling Mill, Cleave Ford</p>
+        <h1 id="h" class="reveal" style="max-width:14ch">Two bays and a river.</h1>
+      </div>
+      <div class="stage-body stage-body--wide">
+        <div class="prose" data-stagger>
+          <p class="reveal">The mill stopped fulling cloth in 1911 and stood empty for most of a century. We took the two downstream bays in 2009 because the leat was intact and the main shaft still turned, which meant a trip hammer could be put back on it for the price of a bearing and a winter.</p>
+          <p class="reveal">The rest is unremarkable and deliberately so: a side-blast coal forge, a 112 kg anvil on an elm stump, a grinder, a heat-treating oven with a calibrated thermocouple, an oil tank, a water tank, and a bench under the north window where everything slow happens.</p>
+          <p class="reveal">Stone floors, because a dropped blade should chip the floor and not the other way round.</p>
+        </div>
+        <div class="reveal">
+          <dl class="specs">
+            <div><dt>Bays</dt><dd>Two, 42 m&sup2;</dd></div>
+            <div><dt>Trip hammer</dt><dd>Water, on the mill shaft</dd></div>
+            <div><dt>Anvil</dt><dd>112 kg, London pattern</dd></div>
+            <div><dt>Forge</dt><dd>Side blast, coal</dd></div>
+            <div><dt>Oven</dt><dd>&plusmn;5 &deg;C, calibrated yearly</dd></div>
+            <div><dt>People</dt><dd>Two</dd></div>
+            <div><dt>Since</dt><dd>2009</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage stage--well" aria-labelledby="h-two">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="label reveal">Who does what</p>
+        <h2 id="h-two" class="reveal">Two people, one blade at a time.</h2>
+      </div>
+      <div class="stage-body">
+        <div class="prose" data-stagger>
+          <p class="reveal"><strong>Ren Alder</strong> does everything hot: the welding, the forging, the normalising and the quench. Trained at a farrier's, which is an unfashionable place to learn and the reason nothing here cracks from being rushed.</p>
+          <p class="reveal"><strong>Ida Kell</strong> does everything cold: the grinding, the stones, the etch, the handles and the letters we write back. The bench under the window is hers and the shop is quiet when she is on it.</p>
+          <p class="reveal">Neither of us does the other's half. It is a small shop and that is exactly why the division matters &mdash; a blade that has been hardened and then polished by the same tired person at ten at night is a blade with an optimistic opinion of itself.</p>
+        </div>
+        <figure class="plate reveal">
+          <img src="img/anvil.webp" srcset="img/anvil-900.webp 900w, img/anvil.webp 1800w" sizes="(min-width: 900px) 46vw, 92vw"
+               alt="A knife blank at orange heat lying across the face of an anvil, held in a pair of tongs."
+               width="1800" height="1013" loading="lazy" decoding="async">
+          <figcaption>The hot half &middot; the blank comes off the hammer oversize</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" aria-labelledby="h-tell">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="label reveal">Worth knowing before you buy from anyone</p>
+        <h2 id="h-tell" class="reveal">How to tell a hamon from a picture of one.</h2>
+      </div>
+      <div class="stage-body stage-body--wide">
+        <div class="prose" data-stagger>
+          <p class="reveal">A lot of blades sold with a &ldquo;hamon&rdquo; do not have one. The line has been wiped on in acid resist and etched, or sandblasted, or printed. It is not always dishonest &mdash; some makers say plainly that it is decorative &mdash; but you should be able to check, and you can.</p>
+          <p class="reveal"><strong>A real line has depth.</strong> Tilt the blade under a single light. A hardened boundary changes how the steel reflects, so the line moves as the angle moves and there is structure above it &mdash; cloudy, uneven, with flecks. A drawn line sits flat on the surface and stays exactly where it is.</p>
+          <p class="reveal"><strong>A real line is untidy.</strong> Clay does not produce a neat repeating scallop. If every wave is identical, it was applied by something that repeats.</p>
+          <p class="reveal"><strong>A real line survives.</strong> Ask what happens if it is polished. An etched line comes off on a stone in a minute. A quench line comes back, because it is the steel and not a finish on it.</p>
+        </div>
+        <div class="reveal">
+          <dl class="specs">
+            <div><dt>Steel type</dt><dd>Shallow-hardening only</dd></div>
+            <div><dt>Stainless</dt><dd>Cannot hold a hamon</dd></div>
+            <div><dt>Tilt test</dt><dd>Line should move with the light</dd></div>
+            <div><dt>Repetition</dt><dd>Identical waves &rarr; applied</dd></div>
+            <div><dt>Polish test</dt><dd>It should come back</dd></div>
+            <div><dt>Our rate</dt><dd>1 in 9 cracks in the tank</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="claim">
+    <div class="wrap">
+      <blockquote class="reveal">We can tell you what it will weigh. We cannot tell you what the line will look like.</blockquote>
+      <cite>Ida Kell &middot; bench</cite>
+    </div>
+  </section>
+
+  <section class="stage stage--well" aria-labelledby="h-care">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="label reveal">After it arrives</p>
+        <h2 id="h-care" class="reveal">Carbon steel asks for one habit.</h2>
+      </div>
+      <div class="stage-body stage-body--wide">
+        <div class="prose" data-stagger>
+          <p class="reveal">Wipe it and put it away dry. That is the whole of it. Not the drying rack, not the sink, not tomorrow &mdash; dry, now, and back on the magnet or in the saya.</p>
+          <p class="reveal">It will change colour. Onions, tomatoes and stock will pull the steel through straw, grey and eventually a settled blue-black patina that protects it. That is the blade working, not the blade failing. The only thing to act on is orange: rust is orange, and orange comes off with a cork and a little scouring powder before it pits.</p>
+          <p class="reveal">Send it back whenever the edge stops feeling right. Resharpening is free for anything we made; you pay the postage home.</p>
+        </div>
+        <div class="reveal">
+          <dl class="specs">
+            <div><dt>After use</dt><dd>Wipe dry immediately</dd></div>
+            <div><dt>Dishwasher</dt><dd>Never</dd></div>
+            <div><dt>Storage</dt><dd>Magnet, saya or block</dd></div>
+            <div><dt>Patina</dt><dd>Expected, leave it</dd></div>
+            <div><dt>Rust</dt><dd>Cork and scouring powder</dd></div>
+            <div><dt>Stones</dt><dd>1000, then 3000</dd></div>
+            <div><dt>Resharpening</dt><dd>Free, for life</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" aria-labelledby="h-visit">
+    <div class="wrap wrap--narrow" style="margin-inline:0">
+      <div class="stage-head" data-stagger>
+        <p class="label reveal">Visiting</p>
+        <h2 id="h-visit" class="reveal">Fridays, if you write first.</h2>
+      </div>
+      <div class="prose" style="margin-top:28px" data-stagger>
+        <p class="reveal">The shop is open to visitors on Fridays between ten and four, by arrangement. There is nothing to buy in the room &mdash; everything made here is already spoken for &mdash; but you can hold the four shapes, see a blade in the tank if the timing falls right, and look at a line under a real light instead of a photograph.</p>
+        <p class="reveal">Come in closed shoes. The floor is stone and the scale is sharp.</p>
+      </div>
+      <p style="margin-top:30px">
+        <a class="btn" href="mailto:forge@hamonforge.example?subject=Visiting%20the%20forge">Arrange a Friday</a>
+        <a class="btn btn--ghost" href="commission.html">Write a specification</a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="mark" href="index.html" aria-label="HAMON, home">HAMON<svg viewBox="0 0 100 6" aria-hidden="true" preserveAspectRatio="none"><path d="M0 4C8 1 14 5 22 3S36 1 44 4 58 6 66 3 82 1 100 4"/></svg></a>
+        <p class="label" style="max-width:34ch;line-height:1.9">The Fulling Mill, Cleave Ford, Devon.<br>Open to visitors Fridays, 10&ndash;16, by arrangement.</p>
+      </div>
+      <nav aria-label="Footer">
+        <p class="label">Pages</p>
+        <a href="blades.html">Blades</a>
+        <a href="forge.html">The Forge</a>
+        <a href="commission.html">Commission</a>
+      </nav>
+      <div>
+        <p class="label">Contact</p>
+        <a href="mailto:forge@hamonforge.example">forge@hamonforge.example</a>
+        <a href="tel:+441632960411">+44 1632 960 411</a>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>&copy; 2026 Hamon</p>
+      <p>Ninety blades a year, and never more than a hundred and four</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/site.js"></script>
+</body>
+</html>

@@ -7,3 +7,7 @@ Thumbs.db
 templates/*/src/
 
 templates/horology-eon-v2/src-plates/
+
+# Full-resolution licensed Adobe Stock originals — graded and exported to
+# templates/forge-hamon/img/ by tools/grade.mjs; the originals stay local.
+templates/forge-hamon/tools/raw/
