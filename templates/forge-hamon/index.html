@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>HAMON &mdash; a forge at Cleave Ford</title>
+  <meta name="description" content="Hand-forged kitchen and collector knives, hardened at the edge only. One blade at a time, from bar stock to a visible temper line. Commissions from Cleave Ford.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/forge-hamon/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HAMON">
+  <meta property="og:title" content="HAMON &mdash; the line is the proof">
+  <meta property="og:description" content="A working forge at Cleave Ford. Differentially hardened kitchen and collector knives, one at a time.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/forge-hamon/index.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/forge-hamon/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HAMON &mdash; the line is the proof">
+  <meta name="twitter:description" content="A working forge at Cleave Ford. Differentially hardened kitchen and collector knives, one at a time.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/forge-hamon/img/og.webp">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-current="page" aria-label="HAMON, home">HAMON<svg viewBox="0 0 100 6" aria-hidden="true" preserveAspectRatio="none"><path d="M0 4C8 1 14 5 22 3S36 1 44 4 58 6 66 3 82 1 100 4"/></svg></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="blades.html">Blades</a>
+    <a href="forge.html">The Forge</a>
+    <a href="commission.html">Commission</a>
+  </nav>
+  <button class="state" id="state" type="button" aria-label="Shop state: forge, night. Switch."><span class="s-forge">FORGE</span><span class="s-bench">BENCH</span></button>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false">
+  <a href="blades.html">Blades</a>
+  <a href="forge.html">The Forge</a>
+  <a href="commission.html">Commission</a>
+  <p class="label">The Fulling Mill &middot; Cleave Ford &middot; since 2009</p>
+</div>
+
+<div class="spine" id="spine" aria-hidden="true">
+  <div class="spine-rail"><i></i></div>
+  <div class="spine-read">
+    <span class="spine-temp">20 &deg;C</span>
+    <span class="spine-name">Stock</span>
+  </div>
+</div>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="hero-plate">
+      <img src="img/hero.webp" srcset="img/hero-1000.webp 1000w, img/hero.webp 2000w" sizes="100vw"
+           alt="A finished kitchen knife lying on a dark stone bench, the edge catching a single low light."
+           width="2000" height="1125" fetchpriority="high" decoding="async">
+    </div>
+    <div class="hero-copy">
+      <p class="label">Cleave Ford &middot; differentially hardened</p>
+      <h1>The line is the proof.</h1>
+      <svg class="hero-rule" viewBox="0 0 560 18" aria-hidden="true" preserveAspectRatio="none">
+        <path class="base" d="M0 2H560"/>
+        <path class="line" d="M0 13C34 5 58 15 92 11S150 4 186 12 252 17 288 10 358 3 396 12 466 16 500 9 540 6 560 11"/>
+      </svg>
+      <p class="lede">A hamon is what a blade looks like when only its edge was hardened: hard steel where it cuts, softer steel behind it, and a visible boundary between the two that no amount of polishing invents. We put the line where the steel decides to put it.</p>
+      <div class="hero-actions">
+        <a class="btn" href="commission.html">Start a commission</a>
+        <a class="btn btn--ghost" href="blades.html">See the four blades</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 ------------------------------------------------------------- -->
+  <section class="stage" data-temp="20 &deg;C" data-stage="Stock" data-t="0" aria-labelledby="s-stock">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="stage-temp reveal" style="--t:0"><b>20 &deg;C</b> <em>Stock</em></p>
+        <h2 id="s-stock" class="reveal">It starts as a bar.</h2>
+      </div>
+      <div class="stage-body stage-body--wide">
+        <div class="prose" data-stagger>
+          <p class="reveal">Six millimetres by forty, cut to length on the bandsaw. Three steels come into this shop and no others, because three is the number we can know properly.</p>
+          <p class="reveal">All three are shallow-hardening: quenched fast, they harden only as deep as the quench reaches, which is the whole reason a temper line exists at all. Stainless will not do this. Neither will anything with enough alloy in it to harden through. The limitation is the feature.</p>
+        </div>
+        <div class="reveal">
+          <dl class="specs">
+            <div><dt>26C3</dt><dd>1.25 % C &middot; water</dd></div>
+            <div><dt>W2</dt><dd>1.05 % C, V &middot; water</dd></div>
+            <div><dt>1084</dt><dd>0.84 % C &middot; fast oil</dd></div>
+            <div><dt>Bar section</dt><dd>6.0 &times; 40 mm</dd></div>
+            <div><dt>Blades a year</dt><dd>about 90</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 ------------------------------------------------------------- -->
+  <section class="stage stage--well" data-temp="1250 &deg;C" data-stage="Fold weld" data-t="1" aria-labelledby="s-fold">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="stage-temp reveal" style="--t:1"><b>1250 &deg;C</b> <em>Fold weld</em></p>
+        <h2 id="s-fold" class="reveal">Seven bars become one.</h2>
+      </div>
+      <div class="stage-body">
+        <div class="prose" data-stagger>
+          <p class="reveal">Pattern-welded blades start as a stack &mdash; seven bars, alternating 1084 and 15N20, wired together and brought to welding heat until the boundaries close. Then it is drawn out, cut, folded back on itself and welded again.</p>
+          <p class="reveal">Every fold doubles the layer count and halves the layer. That sounds like it should keep getting better. It does not, and the table says where it stops.</p>
+          <figure class="plate reveal">
+            <img src="img/forge.webp" srcset="img/forge-900.webp 900w, img/forge.webp 1800w" sizes="(min-width: 900px) 46vw, 92vw"
+                 alt="A billet of steel buried at welding heat in a bed of coal, the coals around it glowing dull red."
+                 width="1800" height="1013" loading="lazy" decoding="async">
+            <figcaption>Welding heat &middot; the billet is buried, not watched</figcaption>
+          </figure>
+        </div>
+
+        <div class="fold reveal" id="fold">
+          <div class="fold-head">
+            <p class="label">The fold table</p>
+            <p class="label">7 bars &middot; 42 mm billet</p>
+          </div>
+          <canvas class="fold-canvas" id="foldCanvas" role="img" aria-label="A drawing of the billet's face: the layer pattern as it would etch at the current fold count."></canvas>
+          <dl class="fold-read">
+            <div><dt>Folds</dt><dd id="foldCount">3</dd></div>
+            <div><dt>Layers</dt><dd id="foldLayers">56</dd></div>
+            <div><dt>Each layer</dt><dd id="foldLayer">750 &micro;m</dd></div>
+          </dl>
+          <div class="fold-ctl">
+            <button type="button" id="foldStrike">Fold</button>
+            <label for="foldRange" class="label" style="position:absolute;left:-9999px">Fold count</label>
+            <input type="range" id="foldRange" min="0" max="14" step="1" value="3">
+            <button type="button" id="foldReset">Reset</button>
+          </div>
+          <p class="fold-note" id="foldNote">Drawn out, cut, folded back and welded again.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 ------------------------------------------------------------- -->
+  <section class="stage" data-temp="1100 &deg;C" data-stage="Forge" data-t=".88" aria-labelledby="s-forge">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="stage-temp reveal" style="--t:.88"><b>1100 &deg;C</b> <em>Forge</em></p>
+        <h2 id="s-forge" class="reveal">Drawn out under the hammer.</h2>
+      </div>
+      <div class="stage-body">
+        <figure class="plate reveal">
+          <img src="img/anvil.webp" srcset="img/anvil-900.webp 900w, img/anvil.webp 1800w" sizes="(min-width: 900px) 46vw, 92vw"
+               alt="A knife blank at orange heat lying across the face of an anvil, held in a pair of tongs."
+               width="1800" height="1013" loading="lazy" decoding="async">
+          <figcaption>Cleave Ford &middot; the blank comes off the hammer oversize</figcaption>
+        </figure>
+        <div class="prose" data-stagger>
+          <p class="reveal">The mill's trip hammer still runs off the shaft, and it does the heavy drawing &mdash; the tang, the taper, the rough profile. Everything after that is a hand hammer, because the last third of the shape decides how the blade will move in a hand and a machine cannot feel that.</p>
+          <p class="reveal"><strong>Forging stops below 850 &deg;C.</strong> Worked colder than that, high-carbon steel stops moving and starts tearing, and the tears do not show up until the quench, when the blade cracks and the week is gone.</p>
+          <p class="reveal">A blade leaves the anvil about 2 mm thicker and 8 mm longer than it will finish. The rest comes off on the grinder, cold and slowly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 ------------------------------------------------------------- -->
+  <section class="stage stage--well" data-temp="900 &deg;C" data-stage="Normalise" data-t=".72" aria-labelledby="s-norm">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="stage-temp reveal" style="--t:.72"><b>900 &deg;C</b> <em>Normalise</em></p>
+        <h2 id="s-norm" class="reveal">Three heats to forget the forging.</h2>
+      </div>
+      <div class="stage-body stage-body--wide">
+        <div class="prose" data-stagger>
+          <p class="reveal">Forging leaves the grain coarse and uneven &mdash; large where the steel sat hot, fine where the hammer worked it. A coarse-grained blade is a brittle blade, and no amount of careful hardening later will fix it.</p>
+          <p class="reveal">So the blade is brought up three times and allowed to cool still in air, each heat lower than the last. Each cycle refines what the one before it left. It is the least visible half-day in the whole process and the one that decides whether the knife survives being dropped.</p>
+        </div>
+        <div class="reveal">
+          <dl class="specs">
+            <div><dt>Cycle one</dt><dd>900 &deg;C, air</dd></div>
+            <div><dt>Cycle two</dt><dd>860 &deg;C, air</dd></div>
+            <div><dt>Cycle three</dt><dd>820 &deg;C, air</dd></div>
+            <div><dt>Then</dt><dd>anneal, 24 h in vermiculite</dd></div>
+            <div><dt>Grinding</dt><dd>annealed, before hardening</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 ------------------------------------------------------------- -->
+  <section class="stage" data-temp="795 &deg;C" data-stage="Harden" data-t=".63" aria-labelledby="s-hard">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="stage-temp reveal" style="--t:.63"><b>795 &deg;C &rarr; 28 &deg;C</b> <em>Harden</em></p>
+        <h2 id="s-hard" class="reveal">Clay, then water.</h2>
+      </div>
+      <div class="stage-body">
+        <div class="prose" data-stagger>
+          <p class="reveal">Furnace cement goes on the spine thick and on the edge barely at all, with fingers of clay &mdash; <em>ashi</em> &mdash; reaching down toward the edge. The clay is not decoration and it is not a mask. It is insulation: it decides how fast each part of the blade is allowed to lose heat.</p>
+          <p class="reveal">The blade goes into the water edge first at 795 &deg;C and comes out three seconds later. The bare edge cools past 400 &deg;C fast enough to trap the steel hard. The clayed spine does not, and stays soft enough to bend rather than snap.</p>
+          <p class="reveal"><strong>The boundary between those two rates is the hamon.</strong> We do not draw it. We decide where the clay goes, and the steel does the rest &mdash; which is why no two are the same, and why one in nine cracks in the tank and starts again as bar stock.</p>
+        </div>
+        <div class="reveal">
+          <svg class="section-dwg" viewBox="14 -12 152 92" role="img" aria-label="Cross-section of a finished blade: 2.9 millimetres at the spine, 48 millimetres tall, with the hardened zone shaded along the lower third and a wavy boundary above it.">
+            <path class="steel" d="M91 8H109C108 30 103 50 100 64C97 50 92 30 91 8Z"/>
+            <path class="hard" d="M100 64C97.6 52.4 94.6 40.5 93.1 33.6C94.4 30.6 96.1 36.2 98 32.2C99.8 28.4 101.6 35.4 103.4 31.6C104.6 29.1 105.8 33.4 106.9 33.6C105.4 40.5 102.4 52.4 100 64Z"/>
+            <path class="dim" d="M91 2H109M91 0V4M109 0V4"/>
+            <text x="100" y="-3" text-anchor="middle">2.9 mm</text>
+            <path class="dim" d="M120 8V64M117 8H123M117 64H123"/>
+            <text x="127" y="38" dominant-baseline="middle">48 mm</text>
+            <path class="dim" d="M84 46H62"/>
+            <text x="59" y="46" text-anchor="end" dominant-baseline="middle">hardened</text>
+            <path class="dim" d="M84 18H62"/>
+            <text x="59" y="18" text-anchor="end" dominant-baseline="middle">soft spine</text>
+          </svg>
+          <p class="label" style="margin-top:14px">Section at the heel &middot; Gyuto 210 &middot; thickness drawn at 5&times;</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 ------------------------------------------------------------- -->
+  <section class="stage stage--well" data-temp="200 &deg;C" data-stage="Temper" data-t=".15" aria-labelledby="s-temper">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="stage-temp reveal" style="--t:.15"><b>200 &deg;C</b> <em>Temper</em></p>
+        <h2 id="s-temper" class="reveal">Two hours at straw.</h2>
+      </div>
+      <div class="stage-body stage-body--wide">
+        <div class="prose" data-stagger>
+          <p class="reveal">Straight out of the water the edge is glass: hard, and useless. Tempering trades a little of that hardness back for the toughness that stops it chipping. Two cycles of one hour at 200 &deg;C, cooled to room temperature in between.</p>
+          <p class="reveal">The oven has a thermocouple, but the check is an offcut polished bright and heated alongside the blade. Steel grows an oxide film as it warms and the film's colour is a thermometer you can read across a workshop. <strong>We stop at the first swatch.</strong> Everything past it is a knife that has been made softer than it needed to be.</p>
+        </div>
+        <div class="reveal">
+          <div class="temper" role="img" aria-label="Temper oxide colours against temperature, from pale straw at 200 degrees to pale blue at 330. Hamon blades are tempered at 200.">
+            <div class="keep"><i style="background:#e2cf9b"></i><span>200&deg;</span></div>
+            <div><i style="background:#d9b25c"></i><span>230&deg;</span></div>
+            <div><i style="background:#b4763c"></i><span>255&deg;</span></div>
+            <div><i style="background:#8a5f7d"></i><span>270&deg;</span></div>
+            <div><i style="background:#55588f"></i><span>290&deg;</span></div>
+            <div><i style="background:#3a6f9e"></i><span>310&deg;</span></div>
+            <div><i style="background:#7f9aa8"></i><span>330&deg;</span></div>
+          </div>
+          <p class="label" style="margin-top:14px">Oxide film on polished carbon steel &middot; we stop at 200 &deg;C</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 ------------------------------------------------------------- -->
+  <section class="stage" data-temp="20 &deg;C" data-stage="Edge" data-t="0" aria-labelledby="s-edge">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="stage-temp reveal" style="--t:0"><b>20 &deg;C</b> <em>Edge</em></p>
+        <h2 id="s-edge" class="reveal">Polished until the line shows.</h2>
+      </div>
+      <div class="stage-body">
+        <div class="prose" data-stagger>
+          <p class="reveal">Hardened steel and soft steel take a polish differently, and that is the only reason you can see a hamon at all. The blade goes up through the stones &mdash; 400, 1000, 3000, then natural stone and finger-stones along the edge &mdash; until the two structures refuse to reflect the same way.</p>
+          <p class="reveal">A short etch brings it up. It is a reveal, not a treatment: the boundary was formed in the quench tank months earlier and everything after is just making it visible.</p>
+        </div>
+        <div class="prose" data-stagger>
+          <p class="reveal">The edge goes on last, at about 15 degrees a side, finished on a strop. It arrives sharp enough that the first thing we tell you is where to keep it.</p>
+          <p class="reveal">Every blade leaves with the offcut it was tempered against, so you can see the colour we stopped at.</p>
+        </div>
+      </div>
+    </div>
+    <figure class="plate plate--bleed reveal">
+      <img src="img/grain.webp" srcset="img/grain-900.webp 900w, img/grain.webp 1800w" sizes="100vw"
+           alt="Macro view of a forged blade: fine layered grain running the length of the steel above a rough forge-scale flat."
+           width="1800" height="1013" loading="lazy" decoding="async">
+      <figcaption>Grain &middot; 1084 and 15N20, five folds, after the etch</figcaption>
+    </figure>
+  </section>
+
+  <section class="claim">
+    <div class="wrap">
+      <blockquote class="reveal">A hamon a polish can remove was never a hamon.</blockquote>
+      <cite>Ren Alder &middot; forge</cite>
+    </div>
+  </section>
+
+  <section class="stage" aria-labelledby="s-blades">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="label reveal">Four shapes, made repeatedly</p>
+        <h2 id="s-blades" class="reveal">The blades.</h2>
+      </div>
+    </div>
+    <div class="blades" data-stagger style="margin-top:40px">
+      <a class="blade reveal" href="blades.html#gyuto">
+        <span class="sub">210 mm &middot; 26C3</span>
+        <h3>Gyuto</h3>
+        <p>The one that gets used every day. Flat enough through the middle to push-cut, curved enough at the tip to rock.</p>
+        <span class="label">&pound;520 &middot; 22 weeks</span>
+      </a>
+      <a class="blade reveal" href="blades.html#petty">
+        <span class="sub">135 mm &middot; W2</span>
+        <h3>Petty</h3>
+        <p>Small, light, and the blade where the hamon is most active &mdash; there is no room on it to hide anything.</p>
+        <span class="label">&pound;340 &middot; 22 weeks</span>
+      </a>
+      <a class="blade reveal" href="blades.html#bunka">
+        <span class="sub">175 mm &middot; San mai</span>
+        <h3>Bunka</h3>
+        <p>A hard core in a soft jacket. The jacket takes the knocks and hides the line; a fair trade if the knife travels.</p>
+        <span class="label">&pound;610 &middot; 22 weeks</span>
+      </a>
+      <a class="blade reveal" href="blades.html#sujihiki">
+        <span class="sub">270 mm &middot; 1084</span>
+        <h3>Sujihiki</h3>
+        <p>Long, thin and tough. Made in the toughest of the three steels because a slicer that long will be levered eventually.</p>
+        <span class="label">&pound;590 &middot; 22 weeks</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="stage" aria-labelledby="s-cta">
+    <div class="wrap wrap--narrow" style="margin-inline:0">
+      <div class="stage-head" data-stagger>
+        <p class="label reveal">Commissions</p>
+        <h2 id="s-cta" class="reveal">Tell us what you cut.</h2>
+      </div>
+      <div class="prose" data-stagger style="margin-top:28px">
+        <p class="reveal">A commission starts as a written specification, not a deposit. Set the steel, the length, the grind and the handle, read the numbers it produces, and send it to us. We will tell you where we disagree before anyone pays anything.</p>
+      </div>
+      <p style="margin-top:30px"><a class="btn" href="commission.html">Write a specification</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="mark" href="index.html" aria-label="HAMON, home">HAMON<svg viewBox="0 0 100 6" aria-hidden="true" preserveAspectRatio="none"><path d="M0 4C8 1 14 5 22 3S36 1 44 4 58 6 66 3 82 1 100 4"/></svg></a>
+        <p class="label" style="max-width:34ch;line-height:1.9">The Fulling Mill, Cleave Ford, Devon.<br>Open to visitors Fridays, 10&ndash;16, by arrangement.</p>
+      </div>
+      <nav aria-label="Footer">
+        <p class="label">Pages</p>
+        <a href="blades.html">Blades</a>
+        <a href="forge.html">The Forge</a>
+        <a href="commission.html">Commission</a>
+      </nav>
+      <div>
+        <p class="label">Contact</p>
+        <a href="mailto:forge@hamonforge.example">forge@hamonforge.example</a>
+        <a href="tel:+441632960411">+44 1632 960 411</a>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>&copy; 2026 Hamon</p>
+      <p>Ninety blades a year, and never more than a hundred and four</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/site.js"></script>
+</body>
+</html>

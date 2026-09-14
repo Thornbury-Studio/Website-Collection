@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Commission &mdash; HAMON</title>
+  <meta name="description" content="Set the shape, length, steel, grind and handle and the specification writes itself: geometry, hardness, weight and guide price, computed from the same numbers we work to.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/forge-hamon/commission.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HAMON">
+  <meta property="og:title" content="Commission &mdash; HAMON">
+  <meta property="og:description" content="A commission starts as a written specification, not a deposit.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/forge-hamon/commission.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/forge-hamon/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Commission &mdash; HAMON">
+  <meta name="twitter:description" content="A commission starts as a written specification, not a deposit.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/forge-hamon/img/og.webp">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="HAMON, home">HAMON<svg viewBox="0 0 100 6" aria-hidden="true" preserveAspectRatio="none"><path d="M0 4C8 1 14 5 22 3S36 1 44 4 58 6 66 3 82 1 100 4"/></svg></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="blades.html">Blades</a>
+    <a href="forge.html">The Forge</a>
+    <a href="commission.html" aria-current="page">Commission</a>
+  </nav>
+  <button class="state" id="state" type="button" aria-label="Shop state: forge, night. Switch."><span class="s-forge">FORGE</span><span class="s-bench">BENCH</span></button>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false">
+  <a href="blades.html">Blades</a>
+  <a href="forge.html">The Forge</a>
+  <a href="commission.html">Commission</a>
+  <p class="label">The Fulling Mill &middot; Cleave Ford &middot; since 2009</p>
+</div>
+
+<main id="main">
+
+  <section class="stage" aria-labelledby="h">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="label reveal">Commissions &middot; 22 weeks &middot; deposit on agreement</p>
+        <h1 id="h" class="reveal" style="max-width:13ch">Write it down first.</h1>
+      </div>
+      <div class="prose" style="margin-top:30px;max-width:64ch" data-stagger>
+        <p class="reveal">Every commission here starts as a written specification, because almost every disagreement between a maker and a customer is really a disagreement about a number that nobody wrote down. Set the five things below and the sheet fills itself in: geometry, hardness, weight and a guide price, worked out from the same figures we work to at the anvil.</p>
+        <p class="reveal">Send it, and we will write back with where we disagree. Nobody pays anything until we both have the same sheet.</p>
+      </div>
+
+      <div class="build" id="build">
+        <div>
+          <label class="field" for="fShape">
+            <span>Shape</span>
+            <select id="fShape">
+              <option value="gyuto" selected>Gyuto &mdash; general, board work</option>
+              <option value="petty">Petty &mdash; small, in the hand</option>
+              <option value="bunka">Bunka &mdash; k-tip, san mai only</option>
+              <option value="sujihiki">Sujihiki &mdash; long slicer</option>
+            </select>
+          </label>
+
+          <label class="field" for="fLength">
+            <span>Edge length &mdash; <b id="fLengthOut">210</b> mm</span>
+            <input type="range" id="fLength" min="120" max="300" step="5" value="210">
+            <span class="hint" id="lengthHint">Standard for this shape is 210 mm.</span>
+          </label>
+
+          <label class="field" for="fSteel">
+            <span>Steel</span>
+            <select id="fSteel">
+              <option value="26c3" selected>26C3 &mdash; brightest line</option>
+              <option value="w2">W2 &mdash; most active line</option>
+              <option value="1084">1084 &mdash; toughest, quiet line</option>
+              <option value="sanmai">San mai &mdash; 26C3 core, mild jacket</option>
+              <option value="pw">Pattern-welded &mdash; 1084 / 15N20, five folds</option>
+            </select>
+            <span class="hint" id="advice">A bright, busy hamon. The steel we reach for when the line is the point.</span>
+          </label>
+
+          <label class="field" for="fGrind">
+            <span>Grind</span>
+            <select id="fGrind">
+              <option value="flat" selected>Full flat, distal taper</option>
+              <option value="convex">Convex</option>
+              <option value="chisel">Single bevel, right-handed</option>
+            </select>
+          </label>
+
+          <label class="field" for="fHandle">
+            <span>Handle</span>
+            <select id="fHandle">
+              <option value="oak" selected>Oak octagon, horn ferrule</option>
+              <option value="walnut">Walnut octagon</option>
+              <option value="bog">Bog oak octagon</option>
+              <option value="ash">Ash octagon</option>
+            </select>
+          </label>
+
+          <label class="field" for="fName">
+            <span>Who it is for</span>
+            <input type="text" id="fName" maxlength="60" placeholder="A name, or what they cook" autocomplete="off">
+            <span class="hint">Goes on the sheet, not on the blade.</span>
+          </label>
+        </div>
+
+        <div class="sheet reveal">
+          <div class="sheet-head">
+            <p class="label">Specification</p>
+            <p class="label">Rev. A</p>
+          </div>
+          <pre id="sheet">&nbsp;</pre>
+          <div class="sheet-foot">
+            <a class="btn" id="mailto" href="mailto:forge@hamonforge.example">Send this to the forge</a>
+            <button class="btn btn--ghost" id="copy" type="button">Copy</button>
+            <span class="said" id="said" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage stage--well" aria-labelledby="h-how">
+    <div class="wrap">
+      <div class="stage-head" data-stagger>
+        <p class="label reveal">What happens next</p>
+        <h2 id="h-how" class="reveal">Five steps, twenty-two weeks.</h2>
+      </div>
+      <div class="stage-body stage-body--wide">
+        <div class="prose" data-stagger>
+          <p class="reveal"><strong>Week 0.</strong> You send the sheet. We write back within a week, usually to argue about one number &mdash; most often the length, occasionally the steel. Once the sheet is agreed we ask for a third as a deposit and you go on the book.</p>
+          <p class="reveal"><strong>Weeks 1&ndash;16.</strong> Waiting. We make in batches of six because the forge is lit either way, and yours is made when its steel comes round.</p>
+          <p class="reveal"><strong>Weeks 17&ndash;20.</strong> Forging, normalising, grinding, clay, quench. If it cracks in the tank we tell you the same day and start again; that costs you nothing but time, and it happens to about one blade in nine.</p>
+          <p class="reveal"><strong>Weeks 21&ndash;22.</strong> Stones, etch, handle, edge. We send photographs of the line before it ships, because that is the part we could not promise you at the start.</p>
+          <p class="reveal">The balance is due when the photographs go out. If the line is not what you hoped, say so then and we will keep the blade.</p>
+        </div>
+        <div class="reveal">
+          <dl class="specs">
+            <div><dt>Lead time</dt><dd>22 weeks</dd></div>
+            <div><dt>Deposit</dt><dd>One third, on agreement</dd></div>
+            <div><dt>Balance</dt><dd>Before it ships</dd></div>
+            <div><dt>Batch size</dt><dd>Six</dd></div>
+            <div><dt>Cracked in the tank</dt><dd>Remade, no charge</dd></div>
+            <div><dt>If you refuse it</dt><dd>We keep the blade</dd></div>
+            <div><dt>Resharpening</dt><dd>Free, for life</dd></div>
+            <div><dt>Shipping</dt><dd>UK and EU, insured</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" aria-labelledby="h-no">
+    <div class="wrap wrap--narrow" style="margin-inline:0">
+      <div class="stage-head" data-stagger>
+        <p class="label reveal">Before you send it</p>
+        <h2 id="h-no" class="reveal">Two things worth reading twice.</h2>
+      </div>
+      <div class="prose" style="margin-top:28px" data-stagger>
+        <p class="reveal">The guide price on the sheet is a guide. It moves with the handle timber and with how badly the grind fights us, and we will give you a firm number in the reply. It has never moved by more than about eight per cent.</p>
+        <p class="reveal">And the line itself is not specifiable. We can promise you the steel, the hardness, the geometry and the weight to the gram. We cannot promise you where the hamon will run, how active it will be, or that it will look like the one in the photograph above. That is the part the steel decides, and it is the reason this is worth doing at all.</p>
+      </div>
+      <p style="margin-top:30px"><a class="btn btn--ghost" href="forge.html">How to tell a hamon from a picture of one</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="mark" href="index.html" aria-label="HAMON, home">HAMON<svg viewBox="0 0 100 6" aria-hidden="true" preserveAspectRatio="none"><path d="M0 4C8 1 14 5 22 3S36 1 44 4 58 6 66 3 82 1 100 4"/></svg></a>
+        <p class="label" style="max-width:34ch;line-height:1.9">The Fulling Mill, Cleave Ford, Devon.<br>Open to visitors Fridays, 10&ndash;16, by arrangement.</p>
+      </div>
+      <nav aria-label="Footer">
+        <p class="label">Pages</p>
+        <a href="blades.html">Blades</a>
+        <a href="forge.html">The Forge</a>
+        <a href="commission.html">Commission</a>
+      </nav>
+      <div>
+        <p class="label">Contact</p>
+        <a href="mailto:forge@hamonforge.example">forge@hamonforge.example</a>
+        <a href="tel:+441632960411">+44 1632 960 411</a>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>&copy; 2026 Hamon</p>
+      <p>Ninety blades a year, and never more than a hundred and four</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/site.js"></script>
+</body>
+</html>
