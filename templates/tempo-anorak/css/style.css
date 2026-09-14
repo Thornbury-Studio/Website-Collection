@@ -611,8 +611,11 @@ a.piece:hover { background: var(--paper-2); }
 .pdp { display: grid; grid-template-columns: minmax(0, 52fr) minmax(0, 48fr); border-bottom: var(--hair); }
 @media (max-width: 880px) { .pdp { grid-template-columns: 1fr; } }
 
-.pdp-plate { background: var(--paper-2); overflow: hidden; }
-.pdp-plate img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/5; }
+/* The Crosswind plate is a studio shot whose background has been graded to
+   --paper, so the well must match or the join shows. */
+.pdp-plate { background: var(--paper); overflow: hidden; border-right: var(--hair); }
+.pdp-plate img { width: 100%; height: 100%; object-fit: contain; aspect-ratio: 4/5; }
+@media (max-width: 880px) { .pdp-plate { border-right: 0; border-bottom: var(--hair); } }
 
 .pdp-body {
   padding: clamp(2.4rem, 5vw, 5rem) var(--gut) clamp(2.4rem, 5vw, 4rem) clamp(2rem, 4vw, 4rem);
@@ -667,19 +670,20 @@ a.piece:hover { background: var(--paper-2); }
 
 /* --- motion ------------------------------------------------------------- */
 
+/* Rise and fade, not a clip. A clipped element has a zero-area intersection
+   rectangle, which makes it invisible to IntersectionObserver — see the note
+   in js/site.js. The wipe lives where it needs no observer: the hero below,
+   and the conditions plate. */
 .js-anim .reveal {
-  clip-path: inset(0 0 100% 0);
-  transform: translateY(14px);
-  opacity: .001;
+  opacity: 0;
+  transform: translateY(16px);
 }
 .js-anim .reveal.in {
-  clip-path: inset(0 0 0 0);
-  transform: none;
   opacity: 1;
+  transform: none;
   transition:
-    clip-path .8s var(--ease) var(--t, 0s),
-    transform .8s var(--ease) var(--t, 0s),
-    opacity .45s linear var(--t, 0s);
+    opacity .55s var(--ease) var(--t, 0s),
+    transform .7s var(--ease) var(--t, 0s);
 }
 
 .js-anim .hero-plate img {
@@ -695,7 +699,7 @@ a.piece:hover { background: var(--paper-2); }
     transition-duration: .001ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal { clip-path: none !important; transform: none !important; opacity: 1 !important; }
+  .reveal { transform: none !important; opacity: 1 !important; }
   .hero-plate img { clip-path: none !important; }
 }
 

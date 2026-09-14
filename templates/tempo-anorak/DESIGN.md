@@ -37,6 +37,18 @@ the number climbs, with an ultramarine seam and a hi-vis handle marking the
 join. The band name, the note and the kit list underneath change with it, and
 every piece in the list links into the shop.
 
+The two halves are a matched pair, and that is the whole trick. Both are one
+male runner coming toward the camera at the same subject scale and camera
+height in open landscape; one is in a jacket and tights on snow, the other in
+a singlet and shorts in heat. Read across the seam they are the same person
+dressed for two different mornings, not two photographs meeting in the middle.
+
+The subjects sit at 0.16–0.32 and 0.42–0.55 across the frame, which is
+measured rather than eyeballed, and the page opens at 17 °C so the seam lands
+in the clear ground between them and both runners are whole. Drag either way
+and the seam crosses a runner only while that runner is being taken away,
+which is what a wipe is for.
+
 It is a native `<input type="range">`, restyled — so it works with a pointer, a
 finger, arrow keys and a screen reader without any of that being reimplemented.
 The six bands are contiguous by construction in `js/site.js`, so they cannot
@@ -44,10 +56,11 @@ develop a gap or an overlap later. Reduced motion keeps the control and drops
 the easing; the wipe is direct manipulation, not an animation, so it still
 works when motion is off.
 
-Supporting motion, one idea used three ways: **things wipe.** The hero
-photograph wipes up on load, sections wipe up as they arrive, the plate wipes
-sideways under the pointer. Nothing fades in, nothing floats, nothing bounces.
-No marquee, no scroll mapping, no parallax.
+Supporting motion: the hero photograph wipes up on load, and sections rise as
+they arrive. The wipe is kept to the two places that need no scroll detection
+to be correct — a load animation and a control the visitor is holding — for
+the reason in the traps section below. Nothing floats, nothing bounces. No
+marquee, no scroll mapping, no parallax.
 
 ## Materials
 
@@ -83,7 +96,7 @@ EVEN is also running-adjacent, so the separation is deliberate and total:
 | Palette | cool silver-fog monochrome | warm-neutral bone + one ultramarine |
 | Type | Schibsted Grotesk + Spline Sans Mono | Archivo (wide) + Hanken Grotesk + Martian Mono |
 | Signature | scroll mapped to distance on a fixed rail | temperature dragged across a photographic plate |
-| Imagery | one generated silver-fog world | six licensed photographs, graded cool |
+| Imagery | one generated silver-fog world | eight licensed photographs, graded cool |
 
 The one shared instinct — mono for anything measured — is a correctness rule,
 not a style: a number that is not in a tabular mono is a number you cannot
@@ -96,9 +109,12 @@ compare.
 2. `range.html` — the six at length, each with a spec table; the size chart.
 3. `fabric.html` — the four cloths, their mills, and the list of what was
    turned down, which says more about the bar than the list of what was kept.
-4. `crosswind.html` — a real product page: colourway and size, a live spec
-   line, and a reserve link that composes a message and hands it to a mail
-   client. There is no backend and the page does not pretend there is one.
+4. `crosswind.html` — a real product page: the garment itself on the page
+   ground rather than somebody wearing one like it, colourway and size, a live
+   spec line, and a reserve link that composes a message and hands it to a
+   mail client. There is no backend and the page does not pretend there is
+   one. The plate is the Signal colourway, so Signal is the option selected
+   when the page opens; the photograph and the control agree.
 
 ## Numbers are computed, not typed
 
@@ -112,13 +128,40 @@ table cannot drift away from the fabric page.
 
 - **`clip-path` breaks `IntersectionObserver`.** A reveal whose hidden state is
   `clip-path: inset(0 0 100% 0)` has an intersection rectangle of zero area, so
-  the observer reports `isIntersecting: false` wherever the element sits and
-  nothing ever appears. Reveals here use a rect-versus-viewport check on a
-  rAF-throttled scroll listener instead. If a future template wipes rather than
-  fades, it needs the same treatment.
+  the observer reports `isIntersecting: false` wherever the element sits —
+  measured at ratio 0 with the element parked in the middle of the viewport —
+  and nothing ever appears. The fix is to stop clipping the observed element,
+  not to stop using the observer: the hidden state here is opacity and a
+  translate.
+
+  The intermediate attempt is worth recording because it looked reasonable and
+  was worse. Driving reveals from a scroll listener keeps the wipe, but scroll
+  events are coalesced, and anchor jumps, scroll restoration and find-in-page
+  can all move the page without one — and every miss leaves a paragraph
+  invisible forever. A `requestAnimationFrame` ticker has the same class of
+  problem wherever frames are throttled. The observer is the only one of the
+  three that depends on neither events nor frames, so the hidden state has to
+  be something it can see.
 - **Tight display leading plus a comma.** At `line-height: .86` the comma
   ending one line landed inside the cap height of the next. `.9` is the
   tightest leading that survives real punctuation at every width.
+
+## Verifying this one
+
+Two notes for whoever picks this up next.
+
+The reveal mechanism cannot be trusted to a headless or automated browser that
+starves the rendering pipeline: scroll events arrive coalesced and
+`IntersectionObserver` callbacks lag by seconds, which looks exactly like a
+broken page. The test that actually settles it is to render the whole document
+in one very tall window with motion on, render it again with
+`--force-prefers-reduced-motion` (where JavaScript reveals everything
+immediately), and compare the two. They came back at 56.5 dB PSNR, which means
+every reveal fired.
+
+Screenshotting a URL with a `#fragment` in headless Chrome returns a blank
+plate whether or not the page is working. It is a capture artefact, not a bug
+in the page.
 
 ## What this is not
 

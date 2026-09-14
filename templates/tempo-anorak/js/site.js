@@ -3,7 +3,7 @@
 
    Four things happen here:
      1. the header (drawer, bag panel)
-     2. reveals — a wipe up, once, never re-run
+     2. reveals — a rise, once, never re-run
      3. the conditions dial, which is the site's one authored moment
      4. the numbers, which are computed from cloth data rather than typed, so
         a spec table and a fabric page cannot drift apart
@@ -50,49 +50,34 @@
 
   /* -- 2. reveals ------------------------------------------------------ */
 
-  /* Deliberately NOT IntersectionObserver. The hidden state of a reveal is a
-     `clip-path: inset(0 0 100% 0)`, and a clipped element has an intersection
-     rectangle of zero area — so the observer reports isIntersecting: false no
-     matter where the element sits on screen, and nothing ever appears. A
-     rect-versus-viewport check is immune to that, costs one rAF per scroll,
-     and drops each element from the list the moment it has arrived. */
-  var pending = [].slice.call(document.querySelectorAll('.reveal'));
+  /* The hidden state here is opacity and a translate, never a clip, and that
+     is load-bearing: an element hidden with `clip-path: inset(0 0 100% 0)`
+     has an intersection rectangle of zero area, so IntersectionObserver
+     reports isIntersecting false wherever it sits on screen and the content
+     never appears. Verified in Chrome — ratio 0 with the element parked in
+     the middle of the viewport.
 
-  if (!animates) {
-    for (var i = 0; i < pending.length; i++) pending[i].classList.add('in');
-    pending.length = 0;
+     Driving the reveal off scroll events instead is worse, not better: scroll
+     events are coalesced, and anchor jumps, scroll restoration and
+     find-in-page can all move the page without one. A missed event means a
+     paragraph that is invisible forever. The observer is the only mechanism
+     here that depends on neither.
+
+     The site still wipes — on the hero, which is a load animation that needs
+     no observer, and on the conditions plate, which is direct manipulation. */
+  var reveals = document.querySelectorAll('.reveal');
+
+  if (!animates || !('IntersectionObserver' in window)) {
+    for (var i = 0; i < reveals.length; i++) reveals[i].classList.add('in');
   } else {
-    var queued = false;
-
-    function sweep() {
-      queued = false;
-      var line = (window.innerHeight || 0) * 0.92;
-      for (var k = pending.length - 1; k >= 0; k--) {
-        var el = pending[k];
-        var box = el.getBoundingClientRect();
-        if (box.top < line && box.bottom > 0) {
-          el.classList.add('in');
-          pending.splice(k, 1);
-        }
+    var io = new IntersectionObserver(function (entries) {
+      for (var e = 0; e < entries.length; e++) {
+        if (!entries[e].isIntersecting) continue;
+        entries[e].target.classList.add('in');
+        io.unobserve(entries[e].target);
       }
-      if (!pending.length) {
-        window.removeEventListener('scroll', request);
-        window.removeEventListener('resize', request);
-      }
-    }
-
-    function request() {
-      if (queued) return;
-      queued = true;
-      window.requestAnimationFrame(sweep);
-    }
-
-    window.addEventListener('scroll', request, { passive: true });
-    window.addEventListener('resize', request);
-    sweep();
-    /* A hash landing scrolls after layout, and webfonts move everything again. */
-    window.addEventListener('load', request);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(request);
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.03 });
+    for (var j = 0; j < reveals.length; j++) io.observe(reveals[j]);
   }
 
   /* -- 3. the conditions dial ------------------------------------------ */

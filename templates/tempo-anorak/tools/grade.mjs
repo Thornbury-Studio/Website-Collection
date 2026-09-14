@@ -34,6 +34,22 @@ const SHARP = 'unsharp=5:5:0.40:5:5:0.0';
 
 /* gray -> ultramarine ramp. At val 200 this lands near #2E44E0, which is the
  * --blue token plus a little air; at val 60 it is a deep navy. */
+/* Red-to-Signal. Swapping the red and blue channels turns a red garment
+ * ultramarine and leaves anything neutral — a white studio background —
+ * exactly where it was. Only safe on a frame with no other saturated colour
+ * in it, which is why it is used on the studio shot and not on the field
+ * plates, where it would turn skin cyan. */
+const RED_TO_SIGNAL = 'colorchannelmixer=rr=0:rg=0:rb=1:gr=0:gg=1:gb=0:br=1:bg=0:bb=0';
+
+/* Drops the studio white onto the page ground so the garment floats on the
+ * paper instead of sitting in a white box. Only the top of the range moves,
+ * and the jacket is blue by this point, so its red channel is nowhere near
+ * the threshold. */
+const TO_PAPER = "lutrgb=" +
+  "r='if(gt(val,205),min(205+(val-205)*0.82,242),val)':" +
+  "g='if(gt(val,205),min(205+(val-205)*0.80,241),val)':" +
+  "b='if(gt(val,205),min(205+(val-205)*0.71,237),val)'";
+
 const BLUE_RAMP = "lutrgb=r='clip(val*0.22-6,0,255)':g='clip(val*0.30+4,0,255)':b='clip(val*0.55+130,0,255)'";
 
 const PLATES = {
@@ -53,9 +69,27 @@ const PLATES = {
     sizes: [1200, 700],
     q: 58,
   },
-  /* Snow, pines, a runner going away. The cold half of the wipe. */
+  /* The cold half of the wipe. Chosen to agree with `warm`: one male runner,
+   * coming toward the camera, at the same subject scale, in open landscape.
+   * The two sit at opposite ends of the frame — cold at about 28% across,
+   * warm at about 60% — so the seam has clear ground between them at the
+   * temperature the page opens on.
+   *
+   * His jacket is red in the original. It is knocked down rather than
+   * recoloured: a channel swap would have made it Signal blue and his face
+   * cyan along with it. */
   cold: {
     src: '7360x4912',
+    from: 'cold2',
+    crop: 'crop=7360:4140:0:500',
+    grade: 'selectivecolor=reds=0 0.18 0.22 0.16:yellows=0 0 -0.25 0.02,eq=contrast=1.09:brightness=-0.012:saturation=0.68:gamma=0.98,colorbalance=rs=-0.05:bs=0.09:bm=0.04:bh=0.02',
+    sizes: [1600, 900],
+  },
+  /* Snow and pines, a runner going away. Was the cold half until a better
+   * match turned up; it earns its licence on the fabric page instead. */
+  snow: {
+    src: '7360x4912',
+    from: 'cold',
     crop: 'crop=7360:4140:0:300',
     grade: 'eq=contrast=1.09:brightness=-0.012:saturation=0.68:gamma=0.98,colorbalance=rs=-0.05:bs=0.09:bm=0.04:bh=0.02',
     sizes: [1600, 900],
@@ -76,13 +110,16 @@ const PLATES = {
     grade: `format=gray,eq=contrast=2.0:brightness=-0.02:gamma=0.95,${BLUE_RAMP}`,
     sizes: [1800, 1000],
   },
-  /* The same frame as `cold`, cut 4:5 and held tighter on the runner: the
-   * Crosswind page needs a portrait plate of somebody actually wearing a
-   * shell, and this is the only licensed frame in the set where one appears. */
+  /* The product itself. A studio shot of a hooded windbreaker, recoloured
+   * from red to Signal and padded out to 4:5 on the page ground, so the
+   * Crosswind page shows the garment rather than a person wearing one like
+   * it. Nothing is cropped off the jacket — the frame is widened around it. */
   shell: {
-    src: '7360x4912 (same source as cold)',
-    crop: 'crop=3930:4912:1715:0',
-    grade: 'eq=contrast=1.09:brightness=-0.012:saturation=0.68:gamma=0.98,colorbalance=rs=-0.05:bs=0.09:bm=0.04:bh=0.02',
+    src: '2957x4436',
+    from: 'garment',
+    crop: 'crop=2957:4436:0:0',
+    grade: `${RED_TO_SIGNAL},eq=contrast=1.04:saturation=0.94,${TO_PAPER},pad=3549:4436:296:0:color=0xF2F1ED`,
+    sharp: 'unsharp=5:5:0.25:5:5:0',
     sizes: [1000, 600],
   },
   /* Gravel, mountains, a runner from behind. The field plate. */
@@ -117,7 +154,7 @@ function ff(args) {
 }
 
 for (const [name, p] of Object.entries(PLATES)) {
-  const src = join(raw, `${name}.jpg`);
+  const src = join(raw, `${p.from || name}.jpg`);
   if (!existsSync(src)) { console.log('missing', src); continue; }
   for (const w of p.sizes) {
     const suffix = w === p.sizes[0] ? '' : `-${w}`;
