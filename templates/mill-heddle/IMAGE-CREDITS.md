@@ -82,9 +82,8 @@ was called at any point. No video was generated.
 
 ## What is drawn and what is photographed
 
-The cloth is photographed. The draft is drawn: the draft written out beside
-each cloth on `cloths.html` and the drafting room are both painted by
-`js/weave.js` from the same data, and each draft was
+The cloth is photographed. The draft is drawn, in the drafting room only:
+its presets are painted by `js/weave.js`, and each draft was
 written to produce the structure in the photograph it sits beside — the
 Ettrick threading is a broken twill because the tweed is, Hound is four-and-
 four because the photograph is, Hopsack has two treadles because a basket

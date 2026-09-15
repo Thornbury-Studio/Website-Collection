@@ -291,13 +291,10 @@ select { appearance: none; -webkit-appearance: none; padding-right: 2.2rem; back
 .plain-head h1 { font-size: clamp(2.4rem, 4.2vw, 4.2rem); margin-bottom: 1.2rem; }
 .plain-head .lede { color: var(--ink-2); }
 
-.length { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(1.5rem, 3.5vw, 3.5rem); padding-block: clamp(2.5rem, 5vw, 4.5rem); border-top: var(--hair); scroll-margin-top: calc(var(--head) + .5rem); }
-.length-plate { grid-column: 1; grid-row: 1; }
+.length { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(1.5rem, 3.5vw, 3.5rem); align-items: start; padding-block: clamp(2.5rem, 5vw, 4.5rem); border-top: var(--hair); scroll-margin-top: calc(var(--head) + .5rem); }
+.length-plate { grid-column: 1; grid-row: 1; position: sticky; top: calc(var(--head) + 1.5rem); }
 .length-plate .swatch { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border: var(--hair); background: var(--cloth-2); }
-.length-body { grid-column: 2; grid-row: 1 / span 2; }
-.length-draft { grid-column: 1; grid-row: 2; display: grid; grid-template-columns: minmax(0, 1fr) 14em; gap: 1.25rem; align-items: start; }
-.length-draft .notation { width: 100%; aspect-ratio: 5 / 2; }
-.length-draft .label { color: var(--ink-3); }
+.length-body { grid-column: 2; grid-row: 1; }
 .length-body .label { margin-bottom: .7rem; }
 .length-body h2 { margin-bottom: 1rem; }
 .length-body > p { color: var(--ink-2); margin-bottom: 1.5rem; }
@@ -420,9 +417,8 @@ select { appearance: none; -webkit-appearance: none; padding-right: 2.2rem; back
   .hero { grid-template-columns: 1fr; min-height: 0; padding-top: clamp(2.5rem, 8vw, 4rem); gap: 2.5rem; }
   .hero-plate img { aspect-ratio: 4 / 3; }
   .length { grid-template-columns: 1fr; }
-  .length-plate { grid-column: 1; grid-row: 1; }
+  .length-plate { grid-column: 1; grid-row: 1; position: static; }
   .length-body { grid-column: 1; grid-row: 2; }
-  .length-draft { grid-column: 1; grid-row: 3; }
 }
 
 @media (max-width: 899px) {
@@ -432,7 +428,6 @@ select { appearance: none; -webkit-appearance: none; padding-right: 2.2rem; back
 @media (max-width: 880px) {
   .order-grid { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .length-draft { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {

@@ -5,14 +5,16 @@ sells it by the metre. Eight cloths, one yarn, a drafting room. Not a
 lookbook, not a shop with a cart: a mill's front room.
 
 The cloth is photographed — fourteen licensed plates, see
-[IMAGE-CREDITS.md](IMAGE-CREDITS.md) — and the draft is drawn. Two things
-were built and then taken out the same day at the client's request, and
-both are recorded here so nobody rebuilds them: the first pass painted every
-cloth from its draft instead of photographing it, and the home page carried
-a sticky "loom" column that wove a rendered cloth as the page scrolled. Both
-read as a diagram of a mill rather than a mill. The photographs replaced the
-painted cloths; the loom column was removed outright and the home page
-recomposed at full width.
+[IMAGE-CREDITS.md](IMAGE-CREDITS.md). Three things were built and then taken
+out the same day at the client's request, and are recorded here so nobody
+rebuilds them: the first pass painted every cloth from its draft instead of
+photographing it; the home page carried a sticky "loom" column that wove a
+rendered cloth as the page scrolled; and the range page printed each cloth's
+draft in weaving notation beside the photograph. All three read as a diagram
+of a mill rather than a mill. The photographs replaced the painted cloths,
+the loom column and the notation were removed outright, and the home page
+was recomposed at full width. The drafting room is now the only page that
+draws anything.
 
 ## DNA (extracted, not copied)
 
@@ -45,19 +47,14 @@ was then written to produce the structure in its photograph.
 
 ## The one idea: the cloth is photographed, the draft is drawn
 
-Every draft on the site is painted by `js/weave.js` — the threading, the
-tie-up, the treadling and the drawdown — from the same data the drafting
-room edits, and every one of them was written to match the photograph it
-sits beside. The photograph says what the cloth is; the draft says why. This
-is what lets the site do two things a lookbook cannot:
+Every draft in the drafting room is painted by `js/weave.js` — the
+threading, the tie-up, the treadling and the drawdown — and every preset was
+written to match the photograph of the cloth it
+sits beside. The photograph says what the cloth is; the draft says why, but
+only in the drafting room — the range itself is photographs, numbers and
+prices. What the site does that a lookbook cannot:
 
-1. **The range, with its drafts** — eight photographed cards on the home
-   page, and the range at length with the draft written out beside each
-   cloth in the notation a weaver would recognise (`WEAVE.renderNotation`,
-   ink squares on a ruled grid; no rendered cloth anywhere on the site
-   except inside the drafting room).
-
-2. **The drafting room** (`js/draft.js`). The four grids as buttons, forty
+1. **The drafting room** (`js/draft.js`). The four grids as buttons, forty
    ends by forty picks, the cloth painted underneath on every press. Presets
    from the range, a shade card, the tools a weaver reaches for (straight
    draw, mirror, treadle as drawn in, twill and tabby tie-ups), floats
@@ -97,8 +94,8 @@ shows everything at once.
 1. `index.html` — a split hero (the statement beside a 4:5 plate of bolts on
    the bench), the range as four-up photographed cards, the mill in four
    plates, ordering with the enquiry form, footer with a fringe.
-2. `cloths.html` — the eight at length: the photograph, the draft written
-   out, a spec table, order and open-the-draft links.
+2. `cloths.html` — the eight at length: the photograph (sticky beside the
+   text on a wide screen), a spec table, order and open-the-draft links.
 3. `draft.html` — the drafting room.
 
 ## Mobile is its own composition
