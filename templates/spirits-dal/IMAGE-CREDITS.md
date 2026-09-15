@@ -4,7 +4,7 @@ Free-license photography from Unsplash (https://unsplash.com/license).
 
 | File | Source | Notes |
 |------|--------|-------|
-| `hero-bottle.svg` | Original SVG bottle mark | Age gate + hero cutout |
+| `hero-bottle.png` | Generated product still (DAL) | Age gate + hero bottle behind type |
 | `og.jpg` / `product-aged.jpg` | [Unsplash — spirits](https://unsplash.com/photos/1618885472179-5e474019f2a9) | OG / aged product |
 | `line-soju.jpg` | [Unsplash — wine pour](https://unsplash.com/photos/1510812431401-41d2bd2722f3) | Classic line |
 | `line-makgeolli.jpg` | [Unsplash — cocktails](https://unsplash.com/photos/1551538827-9c037cb4f32a) | Craft line |
