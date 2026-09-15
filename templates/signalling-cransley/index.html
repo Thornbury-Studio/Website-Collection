@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!--
+  CRANSLEY SIGNAL WORKS — mechanical signalling engineers, Ludlow.
+
+  Direction contract. The page is a signal box. The ground is diagram black with
+  white line-work; every colour on the page is a real lever-plate colour (red
+  stop, yellow distant, black points, blue facing point lock, brown gate gear,
+  white spare) and nothing else is allowed in. The proposition and the mechanism
+  are the same object: an 18-lever frame with working tappet interlocking sits
+  directly under the headline, and a pull that would signal a train over an
+  unset road is refused by the frame, not by a message. One idea of motion:
+  things throw — levers swing on a pivot, arms rise, points slide. No parallax,
+  no marquee, no scroll mapping.
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Cransley Signal Works &mdash; mechanical signalling engineers</title>
+  <meta name="description" content="We overhaul mechanical railway signalling: lever frames, tappet interlocking, semaphore arms, block instruments and gate gear. Work Cransley Junction's 18-lever frame in your browser and see what the locking will not let you do.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/signalling-cransley/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Cransley Signal Works">
+  <meta property="og:title" content="Cransley Signal Works &mdash; the frame says no">
+  <meta property="og:description" content="Mechanical signalling engineers. Lever frames, tappet locking, semaphore arms, block instruments, gate gear. Try to signal a train onto an unset road.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/signalling-cransley/index.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/signalling-cransley/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cransley Signal Works &mdash; the frame says no">
+  <meta name="twitter:description" content="Mechanical signalling engineers. Work an 18-lever frame with real tappet interlocking.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/signalling-cransley/img/og.webp">
+  <meta name="theme-color" content="#0B0E10">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Rokkitt:wght@500;700;800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#frame">Skip to the frame</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-current="page">
+    <span class="mark-name">Cransley</span>
+    <span class="mark-sub">Signal Works &middot; Ludlow</span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="#frame">The frame</a>
+    <a href="#works">Work we take</a>
+    <a href="workshop.html">Workshop</a>
+    <a href="#docket">Survey</a>
+  </nav>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false">
+  <a href="#frame">The frame</a>
+  <a href="#works">Work we take</a>
+  <a href="workshop.html">Workshop</a>
+  <a href="#book">Job book</a>
+  <a href="#docket">Survey</a>
+  <p class="drawer-foot">Cransley Signal Works, Temeside Yard, Ludlow, Shropshire SY8</p>
+</div>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-grid">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Mechanical signalling engineers &middot; est. 1994</p>
+      <h1>The frame<br>says no.</h1>
+      <div class="hero-side">
+        <p class="stand">We overhaul mechanical signalling for railways that still work theirs &mdash; lever frames, tappet locking, semaphore arms, block instruments, gate gear.</p>
+        <p class="stand-2">Below is Cransley Junction, eighteen levers, locked exactly as it leaves our shop. Try to signal a train onto a road that is not set. The frame will stop you and tell you which lever is holding it.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#frame">Work the frame</a>
+          <a class="btn btn-ghost" href="#docket">Request a survey</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PANEL: diagram + frame + register ============ -->
+  <section class="panel" id="frame" aria-labelledby="panel-h">
+    <div class="panel-head">
+      <h2 id="panel-h">Cransley Junction</h2>
+      <p class="panel-meta">18-lever tappet frame &middot; 1897 &middot; overhauled here, 2024</p>
+    </div>
+
+    <!-- --------- track diagram --------- -->
+    <div class="diagram-wrap">
+      <p class="scroll-hint" aria-hidden="true">Diagram scrolls &rarr;</p>
+      <div class="diagram-scroll">
+        <svg class="diagram" id="diagram" viewBox="0 0 1200 268" role="img" aria-labelledby="dg-t dg-d" preserveAspectRatio="xMidYMid meet">
+          <title id="dg-t">Track diagram of Cransley Junction</title>
+          <desc id="dg-d">A double-track through station with a down loop, a goods yard off the up main, and a level crossing at the country end. Signal arms, ground discs, point ends and gates move with the levers below.</desc>
+
+          <!-- road for the level crossing -->
+          <rect class="road" x="132" y="0" width="38" height="268"></rect>
+          <text class="dg-lbl" x="151" y="14" text-anchor="middle">B4368</text>
+
+          <!-- ---- running lines ---- -->
+          <!-- down loop -->
+          <path class="rail" d="M 360 44 H 880"></path>
+          <!-- down main -->
+          <path class="rail" d="M 24 100 H 1176"></path>
+          <!-- up main -->
+          <path class="rail" d="M 24 176 H 1176"></path>
+          <!-- yard road -->
+          <path class="rail rail-sid" d="M 852 230 H 1150"></path>
+
+          <!-- ---- No.5 points: down main / down loop (facing) ---- -->
+          <g id="pt-5">
+            <path class="leg leg-n" d="M 300 100 H 372"></path>
+            <path class="leg leg-r" d="M 300 100 L 352 44 H 372"></path>
+          </g>
+          <!-- ---- No.8 points: loop exit (trailing) ---- -->
+          <g id="pt-8">
+            <path class="leg leg-n" d="M 868 100 H 940"></path>
+            <path class="leg leg-r" d="M 880 44 L 932 100 H 940"></path>
+          </g>
+          <!-- ---- No.11 points: up yard (trailing) ---- -->
+          <g id="pt-11">
+            <path class="leg leg-n" d="M 790 176 H 872"></path>
+            <path class="leg leg-r" d="M 790 176 L 846 230 H 866"></path>
+          </g>
+
+          <!-- ---- platforms ---- -->
+          <rect class="plat" x="430" y="52" width="280" height="14"></rect>
+          <text class="dg-lbl" x="570" y="63" text-anchor="middle">LOOP PLATFORM</text>
+          <rect class="plat" x="430" y="110" width="280" height="14"></rect>
+          <text class="dg-lbl" x="570" y="121" text-anchor="middle">DOWN PLATFORM</text>
+          <rect class="plat" x="430" y="150" width="280" height="14"></rect>
+          <text class="dg-lbl" x="570" y="161" text-anchor="middle">UP PLATFORM</text>
+
+          <!-- ---- line names ---- -->
+          <text class="dg-name" x="30" y="92">DOWN MAIN</text>
+          <text class="dg-name" x="30" y="196">UP MAIN</text>
+          <text class="dg-name" x="1146" y="252" text-anchor="end">GOODS YARD</text>
+          <text class="dg-name" x="366" y="36">DOWN LOOP</text>
+
+          <!-- ---- direction arrows ---- -->
+          <path class="arrowhead" d="M 1160 96 l 12 4 l -12 4 z"></path>
+          <path class="arrowhead" d="M 40 172 l -12 4 l 12 4 z"></path>
+
+          <!-- ---- level crossing gates (16) ---- -->
+          <g id="gates">
+            <g transform="translate(132,100)"><g class="gate" id="gate-a"><rect x="0" y="-3" width="38" height="6" rx="1"></rect></g></g>
+            <g transform="translate(170,176)"><g class="gate" id="gate-b"><rect x="-38" y="-3" width="38" height="6" rx="1"></rect></g></g>
+            <circle class="bolt" id="gate-bolt" cx="151" cy="138" r="5"></circle>
+            <text class="dg-lbl" x="151" y="258" text-anchor="middle">GATES 16&middot;17</text>
+          </g>
+
+          <!-- ================= SIGNALS ================= -->
+          <!-- 1 down distant -->
+          <g class="sig sig-down" id="sig-1" transform="translate(72,100)">
+            <line class="post" x1="0" y1="0" x2="0" y2="-40"></line>
+            <g transform="translate(0,-36)"><g class="arm arm-dist">
+              <path class="blade" d="M 0 -4 H -28 l 7 4 l -7 4 H 0 Z"></path>
+              <path class="chev" d="M -22 -3 l 7 3 l -7 3 Z"></path>
+            </g></g>
+            <circle class="lens" cx="-7" cy="-28" r="3.4"></circle>
+            <text class="dg-num" x="0" y="14" text-anchor="middle">1</text>
+          </g>
+          <!-- 2 / 3 bracket: down home main + down home loop -->
+          <g class="sig sig-down" id="sig-2" transform="translate(244,100)">
+            <line class="post" x1="0" y1="0" x2="0" y2="-46"></line>
+            <g transform="translate(0,-42)"><g class="arm">
+              <rect class="blade" x="-28" y="-4" width="28" height="8" rx="1"></rect>
+              <rect class="band" x="-24" y="-4" width="4" height="8"></rect>
+            </g></g>
+            <circle class="lens" cx="-7" cy="-34" r="3.4"></circle>
+            <text class="dg-num" x="0" y="14" text-anchor="middle">2</text>
+          </g>
+          <g class="sig sig-down" id="sig-3" transform="translate(276,100)">
+            <line class="post" x1="0" y1="0" x2="0" y2="-32"></line>
+            <line class="post post-doll" x1="-32" y1="-32" x2="0" y2="-32"></line>
+            <g transform="translate(0,-28)"><g class="arm">
+              <rect class="blade" x="-22" y="-3.5" width="22" height="7" rx="1"></rect>
+              <rect class="band" x="-19" y="-3.5" width="3.4" height="7"></rect>
+            </g></g>
+            <circle class="lens" cx="-6" cy="-21" r="3"></circle>
+            <text class="dg-num" x="6" y="14" text-anchor="start">3</text>
+          </g>
+          <!-- 7 down loop starter (on the loop) -->
+          <g class="sig sig-down" id="sig-7" transform="translate(826,44)">
+            <line class="post" x1="0" y1="0" x2="0" y2="-30"></line>
+            <g transform="translate(0,-26)"><g class="arm">
+              <rect class="blade" x="-24" y="-3.5" width="24" height="7" rx="1"></rect>
+              <rect class="band" x="-20" y="-3.5" width="3.4" height="7"></rect>
+            </g></g>
+            <circle class="lens" cx="-6" cy="-19" r="3"></circle>
+            <text class="dg-num" x="0" y="16" text-anchor="middle">7</text>
+          </g>
+          <!-- 6 down starter -->
+          <g class="sig sig-down" id="sig-6" transform="translate(1010,100)">
+            <line class="post" x1="0" y1="0" x2="0" y2="-40"></line>
+            <g transform="translate(0,-36)"><g class="arm">
+              <rect class="blade" x="-26" y="-4" width="26" height="8" rx="1"></rect>
+              <rect class="band" x="-22" y="-4" width="4" height="8"></rect>
+            </g></g>
+            <circle class="lens" cx="-7" cy="-28" r="3.4"></circle>
+            <text class="dg-num" x="0" y="14" text-anchor="middle">6</text>
+          </g>
+          <!-- 13 up home -->
+          <g class="sig sig-up" id="sig-13" transform="translate(1092,176)">
+            <line class="post" x1="0" y1="0" x2="0" y2="40"></line>
+            <g transform="translate(0,36)"><g class="arm">
+              <rect class="blade" x="0" y="-4" width="26" height="8" rx="1"></rect>
+              <rect class="band" x="18" y="-4" width="4" height="8"></rect>
+            </g></g>
+            <circle class="lens" cx="7" cy="28" r="3.4"></circle>
+            <text class="dg-num" x="0" y="-8" text-anchor="middle">13</text>
+          </g>
+          <!-- 14 up starter -->
+          <g class="sig sig-up" id="sig-14" transform="translate(340,176)">
+            <line class="post" x1="0" y1="0" x2="0" y2="40"></line>
+            <g transform="translate(0,36)"><g class="arm">
+              <rect class="blade" x="0" y="-4" width="26" height="8" rx="1"></rect>
+              <rect class="band" x="18" y="-4" width="4" height="8"></rect>
+            </g></g>
+            <circle class="lens" cx="7" cy="28" r="3.4"></circle>
+            <text class="dg-num" x="0" y="-8" text-anchor="middle">14</text>
+          </g>
+          <!-- 15 up distant -->
+          <g class="sig sig-up" id="sig-15" transform="translate(1152,176)">
+            <line class="post" x1="0" y1="0" x2="0" y2="40"></line>
+            <g transform="translate(0,36)"><g class="arm arm-dist">
+              <path class="blade" d="M 0 -4 H 28 l -7 4 l 7 4 H 0 Z"></path>
+              <path class="chev" d="M 22 -3 l -7 3 l 7 3 Z"></path>
+            </g></g>
+            <circle class="lens" cx="7" cy="28" r="3.4"></circle>
+            <text class="dg-num" x="0" y="-8" text-anchor="middle">15</text>
+          </g>
+          <!-- 10 ground disc: yard to up main -->
+          <g class="disc" id="sig-10" transform="translate(898,206)">
+            <circle class="disc-face" cx="0" cy="0" r="9"></circle>
+            <g class="disc-bar"><rect x="-8" y="-2" width="16" height="4" rx="1"></rect></g>
+            <text class="dg-num" x="0" y="24" text-anchor="middle">10</text>
+          </g>
+          <!-- 12 ground disc: up main to yard -->
+          <g class="disc" id="sig-12" transform="translate(744,200)">
+            <circle class="disc-face" cx="0" cy="0" r="9"></circle>
+            <g class="disc-bar"><rect x="-8" y="-2" width="16" height="4" rx="1"></rect></g>
+            <text class="dg-num" x="0" y="24" text-anchor="middle">12</text>
+          </g>
+
+          <!-- point numbers -->
+          <text class="dg-num" x="336" y="120" text-anchor="middle">5&middot;4</text>
+          <text class="dg-num" x="906" y="120" text-anchor="middle">8</text>
+          <text class="dg-num" x="820" y="200" text-anchor="middle">11</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- --------- tasks --------- -->
+    <div class="tasks" id="tasks">
+      <p class="tasks-lead">Three movements to set. Order matters; the locking will insist on it.</p>
+      <ol class="task-list">
+        <li class="task" data-task="a"><span class="tick" aria-hidden="true"></span><span class="task-t">09:18 down stopper &mdash; accept into the loop</span><span class="task-s">Not set</span></li>
+        <li class="task" data-task="b"><span class="tick" aria-hidden="true"></span><span class="task-t">Send it forward from the loop to the section</span><span class="task-s">Not set</span></li>
+        <li class="task" data-task="c"><span class="tick" aria-hidden="true"></span><span class="task-t">Yard pilot &mdash; off the up main into the yard</span><span class="task-s">Not set</span></li>
+      </ol>
+    </div>
+
+    <!-- --------- frame + register --------- -->
+    <div class="floor">
+      <div class="frame-col">
+        <div class="frame-head">
+          <h3>The lever frame</h3>
+          <button class="restore" id="restore" type="button">Put the frame back</button>
+        </div>
+        <p class="frame-hint" id="frameHint">Pull a lever. Plate colours are the standard: <b class="k-stop">red</b> stop signal, <b class="k-dist">yellow</b> distant, <b class="k-pts">black</b> points, <b class="k-fpl">blue</b> facing point lock, <b class="k-gate">brown</b> gate gear, <b class="k-spare">white</b> spare.</p>
+        <div class="frame-scroll">
+          <div class="frame" id="leverFrame" role="group" aria-label="Eighteen lever frame"></div>
+        </div>
+        <div class="plate-detail" id="plateDetail" aria-live="polite">
+          <p class="pd-empty">Select a lever to read its plate.</p>
+        </div>
+      </div>
+
+      <div class="register-col">
+        <div class="register" id="register">
+          <div class="reg-head">
+            <h3>Train register</h3>
+            <p>Cransley Junction &middot; sheet 41</p>
+          </div>
+          <div class="reg-cols"><span>Time</span><span>No.</span><span>Entry</span></div>
+          <ol class="reg-body" id="regBody"></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORKS ============ -->
+  <section class="works" id="works" aria-labelledby="works-h">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Schedule of works</p>
+      <h2 id="works-h">What comes through the door</h2>
+    </div>
+    <ol class="sched">
+      <li class="sched-row" data-c="pts">
+        <span class="sched-n">01</span>
+        <h3>Frame overhaul</h3>
+        <p>Strip to the quadrant plate. Catch rods, catch blocks, handles, bearings. We re-bush rather than re-line where the casting allows it, and we return the frame with the same maker's plate it arrived with.</p>
+        <span class="sched-note">6&ndash;16 weeks</span>
+      </li>
+      <li class="sched-row" data-c="fpl">
+        <span class="sched-n">02</span>
+        <h3>Tappet locking</h3>
+        <p>New tappets cut to a locking table we draw with you and test on the bench before it goes near a box. If the table is wrong the frame will be wrong, quietly, for thirty years. We prove every lock both ways.</p>
+        <span class="sched-note">Bench-proved</span>
+      </li>
+      <li class="sched-row" data-c="stop">
+        <span class="sched-n">03</span>
+        <h3>Semaphore arms &amp; spectacles</h3>
+        <p>Arm blades in steel or fibre to your railway's pattern, spectacle plates re-glazed with proper signal glass, lamp cases re-tinned. Paint to a matched sample, not to a chart.</p>
+        <span class="sched-note">Arms from stock</span>
+      </li>
+      <li class="sched-row" data-c="dist">
+        <span class="sched-n">04</span>
+        <h3>Block instruments</h3>
+        <p>Needle instruments, plungers, bells and repeaters. Coils rewound, contacts dressed, cases re-polished. We return them calibrated against the shop standard and bell-tested on the circuit you will actually run.</p>
+        <span class="sched-note">By arrangement</span>
+      </li>
+      <li class="sched-row" data-c="gate">
+        <span class="sched-n">05</span>
+        <h3>Gate &amp; barrier gear</h3>
+        <p>Wheel-worked gates, stay bars, wicket locks, gate stops. Barrier machines where a railway has gone that way. The gate is the part the public touches, so it is the part we test hardest.</p>
+        <span class="sched-note">Site work</span>
+      </li>
+      <li class="sched-row" data-c="spare">
+        <span class="sched-n">06</span>
+        <h3>Survey &amp; testing</h3>
+        <p>A day in the box, a locking table on paper, a written report on what is worn, what is wrong and what will fail first. Many railways stop here, fix two things themselves, and call us back in a decade.</p>
+        <span class="sched-note">One day, fixed fee</span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ RULE ============ -->
+  <section class="rule" aria-label="How we work">
+    <blockquote>
+      <p>A frame that can be forced is not an interlocking. It is furniture.</p>
+      <cite>Works standing order No. 1, pinned inside the shop door since 1994</cite>
+    </blockquote>
+  </section>
+
+  <!-- ============ JOB BOOK ============ -->
+  <section class="book" id="book" aria-labelledby="book-h">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Job book</p>
+      <h2 id="book-h">Frames that have been on our floor</h2>
+    </div>
+    <div class="book-scroll">
+      <table class="jobs">
+        <caption class="sr-only">Signalling work completed by Cransley Signal Works</caption>
+        <thead>
+          <tr><th scope="col">Box</th><th scope="col">Line</th><th scope="col">Frame</th><th scope="col" class="num">Levers</th><th scope="col">Work</th><th scope="col" class="num">Year</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cransley Junction</td><td>Teme Valley</td><td>Tappet, 1897</td><td class="num">18</td><td>Full overhaul, new locking</td><td class="num">2024</td></tr>
+          <tr><td>Bircher Halt</td><td>Teme Valley</td><td>Ground frame</td><td class="num">4</td><td>Re-bush, gate stops</td><td class="num">2024</td></tr>
+          <tr><td>Aldhelm Road</td><td>Marches Light Rly</td><td>Tappet, 1911</td><td class="num">26</td><td>Locking table redrawn</td><td class="num">2023</td></tr>
+          <tr><td>Nantwood Sidings</td><td>Marches Light Rly</td><td>Tumbler, 1889</td><td class="num">12</td><td>Frame rescue, re-erection</td><td class="num">2023</td></tr>
+          <tr><td>Peverel Wharf</td><td>Severnmouth Dock</td><td>Tappet, 1923</td><td class="num">31</td><td>Discs, arms, block shelf</td><td class="num">2022</td></tr>
+          <tr><td>Hollowgate</td><td>Clee Hill Steam</td><td>Tappet, 1904</td><td class="num">20</td><td>Overhaul and gate gear</td><td class="num">2022</td></tr>
+          <tr><td>Thornbury East</td><td>Vale &amp; Coast</td><td>Tappet, 1930</td><td class="num">44</td><td>Survey, partial re-lock</td><td class="num">2021</td></tr>
+          <tr><td>Warleigh Ford</td><td>Vale &amp; Coast</td><td>Ground frame</td><td class="num">5</td><td>New frame to old pattern</td><td class="num">2021</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="book-foot">Ninety-one frames since 1994. Four of them twice, which we do not mind saying.</p>
+  </section>
+
+  <!-- ============ DOCKET / CONTACT ============ -->
+  <section class="docket" id="docket" aria-labelledby="docket-h">
+    <div class="docket-grid">
+      <div class="docket-say">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Survey request</p>
+        <h2 id="docket-h">Tell us what the frame is doing</h2>
+        <p>Most boxes ring us because a lever has gone heavy, a lock has started to slip, or an inspector has asked a question nobody in the ringing chamber can answer. Any of those is a good reason.</p>
+        <dl class="docket-facts">
+          <div><dt>Works</dt><dd>Temeside Yard, Ludlow, Shropshire SY8</dd></div>
+          <div><dt>Telephone</dt><dd>01584 555 0147</dd></div>
+          <div><dt>Shop hours</dt><dd>Mon&ndash;Thu 07:30&ndash;16:30, Fri to 13:00</dd></div>
+          <div><dt>Site work</dt><dd>England &amp; Wales, and we have crossed the water twice</dd></div>
+        </dl>
+      </div>
+      <form class="docket-form" id="docketForm" novalidate>
+        <div class="fgrid">
+          <p class="field"><label for="f-box">Signal box</label><input id="f-box" name="box" type="text" autocomplete="off" required></p>
+          <p class="field"><label for="f-line">Railway</label><input id="f-line" name="line" type="text" autocomplete="organization" required></p>
+          <p class="field field-half"><label for="f-levers">Levers</label><input id="f-levers" name="levers" type="text" inputmode="numeric" autocomplete="off"></p>
+          <p class="field field-half"><label for="f-frame">Frame type</label>
+            <select id="f-frame" name="frame">
+              <option>Tappet</option><option>Tumbler</option><option>Ground frame</option><option>Not sure</option>
+            </select>
+          </p>
+          <p class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></p>
+          <p class="field"><label for="f-note">What is it doing?</label><textarea id="f-note" name="note" rows="4"></textarea></p>
+        </div>
+        <button class="btn btn-primary" type="submit">Raise a docket</button>
+        <p class="form-note" id="formNote" role="status" data-state="idle">No obligation. We will tell you if it is a half-day job you can do yourselves.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-grid">
+    <div class="foot-plate">
+      <svg viewBox="0 0 220 96" role="img" aria-label="Cast maker's plate: Cransley Signal Works, Ludlow">
+        <rect class="pl-body" x="2" y="2" width="216" height="92" rx="6"></rect>
+        <rect class="pl-inner" x="10" y="10" width="200" height="76" rx="3"></rect>
+        <text class="pl-a" x="110" y="38" text-anchor="middle">CRANSLEY</text>
+        <text class="pl-b" x="110" y="56" text-anchor="middle">SIGNAL WORKS</text>
+        <text class="pl-c" x="110" y="74" text-anchor="middle">LUDLOW &middot; SALOP</text>
+      </svg>
+    </div>
+    <div class="foot-col">
+      <h4>Works</h4>
+      <p>Temeside Yard<br>Ludlow, Shropshire SY8<br>01584 555 0147</p>
+    </div>
+    <div class="foot-col">
+      <h4>Pages</h4>
+      <p><a href="#frame">The frame</a><br><a href="#works">Work we take</a><br><a href="workshop.html">Workshop</a><br><a href="#book">Job book</a></p>
+    </div>
+    <div class="foot-col">
+      <h4>Standing order</h4>
+      <p class="foot-quote">Prove every lock both ways, and write down what you proved.</p>
+    </div>
+  </div>
+  <p class="foot-bar"><span>&copy; 2026 Cransley Signal Works</span><span>Registered in England</span><span>Lever plate colours to the standard</span></p>
+</footer>
+
+<script src="js/frame.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
