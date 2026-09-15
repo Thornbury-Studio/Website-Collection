@@ -3,8 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<base href="/templates/vexor/">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<script>
+(function () {
+  var path = location.pathname;
+  var pages = { compare:1, contact:1, models:1, model:1, technology:1, ownership:1, locations:1, ride:1, index:1 };
+  if (/\/[^/]+\.html?$/i.test(path)) {
+    path = path.replace(/[^/]+$/, "");
+  } else if (!/\/$/.test(path)) {
+    var parts = path.split("/");
+    var last = parts[parts.length - 1];
+    if (pages[last]) {
+      parts[parts.length - 1] = "";
+      path = parts.join("/");
+    } else {
+      path += "/";
+    }
+  }
+  document.write('<base href="' + path + '">');
+})();
+</script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'">
 <title>Ownership — VEXOR</title>
 <meta name="description" content="VEXOR ownership — service intervals, warranty matrix, parts, and FAQ.">
 <link rel="canonical" href="https://templates.thornburystudio.com/templates/vexor/ownership.html">
