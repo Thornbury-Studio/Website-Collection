@@ -9,9 +9,10 @@
 
    The cloth follows from those by one rule: at end i, pick j, the warp is on
    top if the shaft carrying end i is among the shafts lifted by the treadle
-   pressed at pick j. That rule is `raised()` below, and every cloth on the
-   site — the loom beside the home page, the cards, the range at length, the
-   drafting room — is painted by it. Nothing here is a photograph. */
+   pressed at pick j. That rule is `raised()` below, and every draft on the
+   site — the loom beside the home page, the drafts written out on the range
+   page, the drafting room — is painted by it. The cloth itself is
+   photographed; the draft is drawn. */
 (function (root, doc) {
   'use strict';
 
@@ -27,7 +28,7 @@
     { id: 'weld',    name: 'Weld',    hex: '#D3AE3C' },
     { id: 'woad',    name: 'Woad',    hex: '#2F4571' },
     { id: 'moss',    name: 'Moss',    hex: '#5E6C3B' },
-    { id: 'heather', name: 'Heather', hex: '#7C5B74' },
+    { id: 'camel',   name: 'Camel',   hex: '#C4A265' },
     { id: 'slate',   name: 'Slate',   hex: '#7D8185' }
   ];
   var HEX = {};
@@ -57,9 +58,11 @@
     return t;
   }
   var TABBY = [[0, 2], [1, 3]];
-  var POINT8 = [0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1];
-  var CABIN = ['woad', 'ecru', 'woad', 'ecru', 'woad', 'ecru', 'woad', 'ecru', 'ecru', 'woad', 'ecru', 'woad', 'ecru', 'woad', 'ecru', 'woad'];
-  var GLEN = ['madder*2', 'slate*4', 'ecru*4', 'slate*4', 'ecru*4', 'slate*2', 'ecru*2', 'slate*2', 'ecru*2', 'slate*2', 'ecru*2', 'slate*2', 'ecru*2'];
+  var HERRING16 = [0, 1, 2, 3, 0, 1, 2, 3, 1, 0, 3, 2, 1, 0, 3, 2];
+  var CHEVRON24 = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 1, 0, 3, 2, 1, 0, 3, 2, 1, 0, 3, 2];
+  var GLEN  = ['madder*2', 'walnut*4', 'ecru*4', 'walnut*4', 'ecru*4', 'walnut*2', 'ecru*2', 'walnut*2', 'ecru*2', 'walnut*2', 'ecru*2', 'walnut*2', 'ecru*2'];
+  var CHECK = ['slate*20', 'madder*2', 'ecru*2', 'peat*4', 'ecru*2', 'madder*2'];
+  var PLAID = ['ecru*10', 'woad*10', 'walnut*2', 'woad*10', 'ecru*10', 'peat*2', 'ecru*4', 'walnut*2', 'ecru*4', 'peat*2'];
 
   /* --- the range ---------------------------------------------------------
      Threading, treadling and colour are given as repeats; the renderers tile
@@ -68,74 +71,50 @@
     {
       id: 'kirkbrae', name: 'Kirkbrae Twill', structure: '2/2 twill',
       shafts: 4, threading: [0, 1, 2, 3], tieup: twill22(4), treadling: [0, 1, 2, 3],
-      warp: ['walnut'], weft: ['oat'],
-      weight: 410, sett: 22, picks: 20, price: 68, lead: '3 to 4 weeks',
-      use: 'Jacketing, trousers, a coat if you are patient',
-      finish: 'Milled and raised',
-      note: 'The mill’s working cloth. Walnut warp, oat weft: the diagonal reads at arm’s length and goes at three metres, which is the right distance for a jacket to be plain.'
+      warp: ['camel'], weft: ['oat'],
+      weight: 410, sett: 22, picks: 20, price: 68, lead: '3 to 4 weeks'
     },
     {
       id: 'ettrick', name: 'Ettrick Herringbone', structure: 'Broken 2/2 twill, 16-end repeat',
-      shafts: 4, threading: [0, 1, 2, 3, 0, 1, 2, 3, 1, 0, 3, 2, 1, 0, 3, 2], tieup: twill22(4), treadling: [0, 1, 2, 3],
+      shafts: 4, threading: HERRING16.slice(), tieup: twill22(4), treadling: [0, 1, 2, 3],
       warp: ['peat'], weft: ['ecru'],
-      weight: 460, sett: 22, picks: 20, price: 74, lead: '3 to 4 weeks',
-      use: 'Overcoats, jackets, a bag that will outlast the jacket',
-      finish: 'Milled and clear cut',
-      note: 'Eight ends up, eight ends down, and a break where they meet so the chevrons do not come to a point. Peat on ecru. The back of the cloth is the same cloth the other way round.'
+      weight: 460, sett: 22, picks: 20, price: 74, lead: '3 to 4 weeks'
     },
     {
       id: 'hound', name: 'Hound', structure: '2/2 twill, four and four colour-and-weave',
       shafts: 4, threading: [0, 1, 2, 3], tieup: twill22(4), treadling: [0, 1, 2, 3],
       warp: runs(['peat*4', 'ecru*4']), weft: runs(['peat*4', 'ecru*4']),
-      weight: 400, sett: 22, picks: 20, price: 72, lead: '3 to 4 weeks',
-      use: 'Jacketing, skirts, one good chair',
-      finish: 'Milled and raised',
-      note: 'The tooth is not printed and not embroidered. It is what a 2/2 twill does when you give it four dark ends, four light ends, and the same again in the weft. Change either count and it stops being a hound.'
+      weight: 400, sett: 22, picks: 20, price: 72, lead: '3 to 4 weeks'
     },
     {
-      id: 'shepherd', name: 'Shepherd Check', structure: '2/2 twill, six and six colour-and-weave',
-      shafts: 4, threading: [0, 1, 2, 3], tieup: twill22(4), treadling: [0, 1, 2, 3],
-      warp: runs(['woad*6', 'ecru*6']), weft: runs(['woad*6', 'ecru*6']),
-      weight: 420, sett: 22, picks: 20, price: 72, lead: '3 to 4 weeks',
-      use: 'Throws, jackets, the lining of a better coat',
-      finish: 'Milled and raised',
-      note: 'The same structure as Hound with two more threads in every block, which is enough to turn teeth into a check. Woad and ecru, because that is what the hills wore before anyone thought to sell it.'
+      id: 'check', name: 'Kirkbrae Check', structure: 'Herringbone ground, madder and peat overcheck',
+      shafts: 4, threading: HERRING16.slice(), tieup: twill22(4), treadling: [0, 1, 2, 3],
+      warp: runs(CHECK), weft: runs(CHECK),
+      weight: 440, sett: 20, picks: 18, price: 66, lead: '3 to 4 weeks'
     },
     {
       id: 'glen', name: 'Glen', structure: '2/2 twill, four-and-four with two-and-two, madder overcheck',
       shafts: 4, threading: [0, 1, 2, 3], tieup: twill22(4), treadling: [0, 1, 2, 3],
       warp: runs(GLEN), weft: runs(GLEN),
-      weight: 400, sett: 24, picks: 22, price: 78, lead: '4 to 5 weeks',
-      use: 'Suiting, a waistcoat, trousers that get remarked on',
-      finish: 'Clear cut',
-      note: 'Two blocks of four-and-four, four blocks of two-and-two, then a pair of madder ends to close the repeat. Thirty-four ends across and thirty-four picks down, and it never looks the same twice.'
+      weight: 400, sett: 24, picks: 22, price: 78, lead: '4 to 5 weeks'
     },
     {
-      id: 'logcabin', name: 'Log Cabin', structure: 'Plain weave, colour-and-weave',
-      shafts: 4, threading: [0, 1, 2, 3], tieup: TABBY, treadling: [0, 1],
-      warp: CABIN.slice(), weft: CABIN.slice(),
-      weight: 300, sett: 18, picks: 17, price: 58, lead: '3 weeks',
-      use: 'Curtains, scarves, a shirt-weight cloth for people who iron',
-      finish: 'Scoured and pressed',
-      note: 'Plain weave, dark and light alternating, with the order swapped every eight ends and every eight picks. Nothing in the structure changes. The blocks are a colour trick, and it is the oldest trick there is.'
+      id: 'minchmoor', name: 'Minchmoor Plaid', structure: '2/2 twill, 56-end colour order, brushed',
+      shafts: 4, threading: [0, 1, 2, 3], tieup: twill22(4), treadling: [0, 1, 2, 3],
+      warp: runs(PLAID), weft: runs(PLAID),
+      weight: 340, sett: 18, picks: 17, price: 58, lead: '3 weeks'
     },
     {
-      id: 'rosepath', name: 'Rosepath', structure: 'Rosepath, treadled as drawn in',
-      shafts: 4, threading: [0, 1, 2, 3, 0, 3, 2, 1], tieup: twill22(4), treadling: [0, 1, 2, 3, 0, 3, 2, 1],
-      warp: ['ecru'], weft: ['madder'],
-      weight: 520, sett: 18, picks: 16, price: 64, lead: '3 to 4 weeks',
-      use: 'Blankets, a bedcover, the back of a sofa',
-      finish: 'Milled and raised, fringed on request',
-      note: 'An eight-end threading that turns back on itself. Treadled in the order it is threaded — the mill says as drawn in — it gives the small rose that Scandinavian looms have been giving for three hundred years.'
+      id: 'yarrow', name: 'Yarrow Chevron', structure: 'Broken 2/2 twill, 24-end repeat',
+      shafts: 4, threading: CHEVRON24.slice(), tieup: twill22(4), treadling: [0, 1, 2, 3],
+      warp: ['woad'], weft: ['ecru'],
+      weight: 480, sett: 18, picks: 16, price: 70, lead: '3 to 4 weeks'
     },
     {
-      id: 'yarrow', name: 'Yarrow Diamond', structure: '8-shaft point twill',
-      shafts: 8, threading: POINT8.slice(), tieup: twill22(8), treadling: POINT8.slice(),
-      warp: ['moss'], weft: ['oat'],
-      weight: 480, sett: 20, picks: 18, price: 70, lead: '4 weeks',
-      use: 'Blankets, upholstery, a coat with a lining that means it',
-      finish: 'Milled and raised',
-      note: 'Fourteen ends to the point on eight shafts, treadled to the same point. Every pick lifts four and drops four; the diamonds are a 2/2 twill folded into itself.'
+      id: 'hopsack', name: 'Hopsack', structure: '2/2 basket weave',
+      shafts: 4, threading: [0, 1, 2, 3], tieup: [[0, 1], [2, 3]], treadling: [0, 0, 1, 1],
+      warp: ['slate'], weft: ['ecru'],
+      weight: 540, sett: 16, picks: 15, price: 70, lead: '4 weeks'
     }
   ];
   var BY_ID = {};

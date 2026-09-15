@@ -19,3 +19,7 @@ templates/tempo-anorak/tools/raw/
 # Full-resolution licensed Adobe Stock originals (ProRes masters, JPEGs) — graded and
 # exported to templates/redout-circuit/img/ and video/ by tools/grade.mjs; the originals stay local.
 templates/redout-circuit/tools/raw/
+
+# Full-resolution licensed Adobe Stock originals — cropped, graded and exported to
+# templates/mill-heddle/img/ by tools/grade.py; the originals stay local.
+templates/mill-heddle/tools/raw/
