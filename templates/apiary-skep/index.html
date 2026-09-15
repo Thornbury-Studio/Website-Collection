@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SKEP — Apiary &amp; queen rearing, Welsh Marches</title>
+<meta name="description" content="Eleven out-apiaries on the Welsh Marches. Single-origin seasonal honey, over-wintered nucs and mated queens. Run our colony through its year and see what a swarm in May costs you in August.">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/apiary-skep/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SKEP — The colony year, run it yourself">
+<meta property="og:description" content="Single-origin seasonal honey, over-wintered nucs and mated queens from eleven out-apiaries on the Welsh Marches.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/apiary-skep/index.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/apiary-skep/img/og.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/apiary-skep/img/og.webp">
+<meta name="theme-color" content="#1c1713">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ==========================================================================
+     Drawn scenery. Every landscape on this site is an inline SVG symbol, not a
+     photograph: it costs nothing to load, carries no licence, and can be tinted
+     from the same tokens as the charts. Each aperture clips one of these to the
+     skep outline — the pinned reference's silhouette-as-window, with the shape
+     changed to the one that belongs to the trade.
+     ========================================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="skep-clip" clipPathUnits="objectBoundingBox">
+      <path d="M0.145 0.94 C0.145 0.5 0.24 0.128 0.5 0.128 C0.76 0.128 0.855 0.5 0.855 0.94 Z"/>
+    </clipPath>
+
+    <!-- coil courses + entrance, drawn OVER whatever the window shows -->
+    <g id="skep-lines">
+      <path d="M58 470 C58 250 96 64 200 64 C304 64 342 250 342 470 Z"
+            fill="none" stroke="currentColor" stroke-width="2.4"/>
+      <g stroke="currentColor" stroke-width="1.5" opacity="0.85">
+        <path d="M73 398h254"/><path d="M66 434h268"/><path d="M83 362h234"/>
+        <path d="M94 326h212"/><path d="M106 290h188"/><path d="M119 254h162"/>
+        <path d="M133 218h134"/><path d="M149 182h102"/><path d="M167 146h66"/>
+        <path d="M185 110h30"/>
+      </g>
+      <path d="M181 470 a19 26 0 0 1 38 0 z" fill="currentColor"/>
+    </g>
+
+    <!-- WINTER: bare hedge, low sun, the cluster holding -->
+    <g id="scene-winter">
+      <rect x="0" y="0" width="400" height="500" fill="#2f3a41"/>
+      <circle cx="292" cy="150" r="34" fill="#4a545a"/>
+      <path d="M0 330 C70 300 140 320 200 306 C268 290 340 312 400 298 V500 H0 Z" fill="#39434a"/>
+      <path d="M0 378 C80 358 150 376 220 362 C290 348 350 366 400 356 V500 H0 Z" fill="#434c52"/>
+      <g stroke="#283137" stroke-width="3" stroke-linecap="round" fill="none">
+        <path d="M54 392 V318M54 348 l-20-22M54 336 l19-20M54 362 l-16-14"/>
+        <path d="M128 386 V300M128 334 l-22-24M128 320 l20-21M128 352 l-17-15"/>
+        <path d="M212 380 V294M212 328 l-21-23M212 314 l19-20M212 346 l-16-14"/>
+        <path d="M300 386 V308M300 340 l-20-22M300 326 l19-20"/>
+        <path d="M366 392 V322M366 352 l-18-20M366 338 l17-18"/>
+      </g>
+      <path d="M0 452 C90 440 170 456 250 446 C320 438 360 450 400 444 V500 H0 Z" fill="#4e565b"/>
+    </g>
+
+    <!-- SPRING: willow catkins and blackthorn, the first real forage -->
+    <g id="scene-spring">
+      <rect x="0" y="0" width="400" height="500" fill="#c9d2cd"/>
+      <circle cx="108" cy="128" r="40" fill="#dde4df"/>
+      <path d="M0 322 C80 296 150 316 214 302 C282 288 344 306 400 294 V500 H0 Z" fill="#8fa38c"/>
+      <path d="M0 372 C86 350 156 368 226 354 C292 342 352 358 400 350 V500 H0 Z" fill="#7b9078"/>
+      <g fill="#e8eee9">
+        <circle cx="72" cy="300" r="20"/><circle cx="104" cy="288" r="26"/><circle cx="140" cy="300" r="19"/>
+        <circle cx="258" cy="296" r="17"/><circle cx="286" cy="286" r="23"/><circle cx="316" cy="298" r="16"/>
+      </g>
+      <g stroke="#5d6f5c" stroke-width="3.2" stroke-linecap="round" fill="none">
+        <path d="M104 372 V300"/><path d="M286 372 V296"/>
+      </g>
+      <g fill="#b9b06a">
+        <ellipse cx="86" cy="276" rx="4.5" ry="9"/><ellipse cx="118" cy="266" rx="4.5" ry="9"/>
+        <ellipse cx="100" cy="256" rx="4.5" ry="9"/><ellipse cx="272" cy="268" rx="4.5" ry="9"/>
+        <ellipse cx="300" cy="274" rx="4.5" ry="9"/>
+      </g>
+      <path d="M0 428 C96 414 176 430 256 420 C324 412 362 424 400 418 V500 H0 Z" fill="#6b8069"/>
+    </g>
+
+    <!-- THE FLOW: clover ley under lime, the fortnight the year turns on -->
+    <g id="scene-flow">
+      <rect x="0" y="0" width="400" height="500" fill="#dfe3d2"/>
+      <circle cx="300" cy="118" r="46" fill="#eef1e4"/>
+      <path d="M0 300 C74 274 148 292 212 278 C280 264 344 282 400 270 V500 H0 Z" fill="#6f8a54"/>
+      <g fill="#55713f">
+        <ellipse cx="96" cy="258" rx="54" ry="44"/><ellipse cx="150" cy="276" rx="40" ry="32"/>
+        <ellipse cx="46" cy="280" rx="38" ry="30"/>
+      </g>
+      <path d="M96 330 V262" stroke="#42552f" stroke-width="5" stroke-linecap="round"/>
+      <path d="M0 360 C90 340 160 356 232 344 C296 334 352 348 400 340 V500 H0 Z" fill="#7d9a5e"/>
+      <path d="M0 424 C96 408 176 424 256 414 C324 406 362 418 400 412 V500 H0 Z" fill="#8caa69"/>
+      <g fill="#f2f4ea">
+        <circle cx="52" cy="438" r="5"/><circle cx="118" cy="446" r="5"/><circle cx="186" cy="434" r="5"/>
+        <circle cx="252" cy="444" r="5"/><circle cx="318" cy="436" r="5"/><circle cx="366" cy="448" r="5"/>
+        <circle cx="86" cy="466" r="5"/><circle cx="154" cy="470" r="5"/><circle cx="222" cy="462" r="5"/>
+        <circle cx="290" cy="470" r="5"/><circle cx="352" cy="464" r="5"/>
+      </g>
+    </g>
+
+    <!-- HARVEST: ivy on the wall, the last flow before the cluster forms -->
+    <g id="scene-harvest">
+      <rect x="0" y="0" width="400" height="500" fill="#cfc7ad"/>
+      <circle cx="118" cy="136" r="38" fill="#ded7c0"/>
+      <path d="M0 316 C78 292 150 310 216 296 C284 282 346 298 400 288 V500 H0 Z" fill="#8a7f5c"/>
+      <path d="M0 372 C88 352 158 368 228 356 C294 344 352 360 400 352 V500 H0 Z" fill="#6f6a4b"/>
+      <g fill="#4f5b3a">
+        <ellipse cx="300" cy="286" rx="46" ry="38"/><ellipse cx="248" cy="302" rx="34" ry="27"/>
+        <ellipse cx="346" cy="304" rx="32" ry="26"/>
+      </g>
+      <g fill="#3f4a2e">
+        <circle cx="286" cy="272" r="7"/><circle cx="314" cy="280" r="7"/><circle cx="300" cy="296" r="7"/>
+        <circle cx="262" cy="292" r="6"/><circle cx="338" cy="296" r="6"/>
+      </g>
+      <path d="M0 432 C96 418 176 434 256 424 C324 416 362 428 400 422 V500 H0 Z" fill="#5d5a40"/>
+    </g>
+  </defs>
+</svg>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="mark" href="index.html">
+      <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+          <path d="M6.5 25.5c0-9.5 3.5-19 9.5-19s9.5 9.5 9.5 19z"/>
+          <path d="M9.2 19.5h13.6M8 25.5h16M10.8 13.5h10.4"/>
+        </g>
+      </svg>
+      SKEP
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#year">The colony year</a>
+      <a href="honey.html">Honey</a>
+      <a href="#bees">Bees &amp; queens</a>
+      <a href="visit.html">Visit</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ====================================================================
+       hero
+       ==================================================================== -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">Welsh Marches &middot; eleven out-apiaries &middot; since 2009</span>
+        <h1>Skep</h1>
+        <p class="lede">We keep bees for the honey the hedge gives us, and sell what the year leaves over.</p>
+        <p class="sub">Single-origin seasonal honey pressed from one flow at a time, over-wintered nucleus colonies, and mated queens raised from our own stock. Nothing blended, nothing bought in.</p>
+        <div class="btn-row">
+          <a class="btn btn--key" href="#year"><span>Run the colony year</span></a>
+          <a class="btn" href="honey.html"><span>This year&rsquo;s honey</span></a>
+        </div>
+      </div>
+      <div class="aperture hero-aperture">
+        <svg viewBox="0 0 400 500" role="img" aria-label="A straw skep seen as a window onto a clover ley in full flow, with a lime tree behind it.">
+          <g clip-path="url(#skep-clip)"><use href="#scene-flow"/></g>
+          <g color="#f2ebdd" opacity="0.92"><use href="#skep-lines"/></g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       THE INSTRUMENT
+       ==================================================================== -->
+  <section class="instrument on-char" id="year">
+    <div class="wrap">
+
+      <div class="instrument-head">
+        <div>
+          <span class="eyebrow">The instrument</span>
+          <h2>The colony year</h2>
+        </div>
+        <p>This is one of our colonies, modelled day by day: the queen&rsquo;s laying, the twenty-one days in the cell, two different lifespans, and what the hedge is giving on any given morning. Drag through the year. Then make something go wrong and watch where it surfaces &mdash; which is rarely where it happened.</p>
+      </div>
+
+      <div class="rig">
+
+        <!-- the hive -->
+        <div class="hive">
+          <svg id="hiveSvg" viewBox="0 0 360 440" role="img"
+               aria-label="A cut-away skep showing the honey arch above and the brood nest below, both changing size through the year.">
+            <defs>
+              <clipPath id="hive-body">
+                <path d="M52 410 C52 208 88 40 180 40 C272 40 308 208 308 410 Z"/>
+              </clipPath>
+            </defs>
+
+            <!-- the box -->
+            <rect x="0" y="0" width="360" height="440" fill="none"/>
+            <g clip-path="url(#hive-body)">
+              <rect x="0" y="0" width="360" height="440" fill="#221c16"/>
+
+              <!-- honey arch: fills from the crown downward -->
+              <rect id="honeyFill" x="0" y="40" width="360" height="0" fill="#c8860d" opacity="0.92"/>
+
+              <!-- brood nest: a sphere on the comb face, as it actually sits -->
+              <ellipse id="broodFill" cx="180" cy="286" rx="0" ry="0" fill="#a8762f"/>
+
+              <!-- the bees themselves, placed by script -->
+              <g id="beeField" fill="#e3ae42" opacity="0.5"></g>
+
+              <!-- comb faces drawn over the contents -->
+              <g stroke="#0f0c09" stroke-width="7" opacity="0.5">
+                <path d="M92 0V440"/><path d="M136 0V440"/><path d="M180 0V440"/>
+                <path d="M224 0V440"/><path d="M268 0V440"/>
+              </g>
+            </g>
+
+            <g color="#f2ebdd" opacity="0.55">
+              <path d="M52 410 C52 208 88 40 180 40 C272 40 308 208 308 410 Z"
+                    fill="none" stroke="currentColor" stroke-width="2.2"/>
+              <path d="M163 410 a17 23 0 0 1 34 0 z" fill="currentColor"/>
+            </g>
+          </svg>
+
+          <p class="hive-caption">
+            <span>Cut-away &middot; one colony</span>
+            <span id="hiveState">Clustered</span>
+          </p>
+        </div>
+
+        <!-- readouts, scale, charts, events -->
+        <div>
+
+          <div class="readouts">
+            <div class="readout">
+              <span class="k">Colony</span>
+              <span class="v" id="rdPop">15,500</span>
+            </div>
+            <div class="readout">
+              <span class="k">Out working</span>
+              <span class="v" id="rdFly">0</span>
+            </div>
+            <div class="readout">
+              <span class="k">Brood</span>
+              <span class="v" id="rdBrood">0</span>
+            </div>
+            <div class="readout readout--honey">
+              <span class="k">In the hive</span>
+              <span class="v" id="rdStores">16.5<u>kg</u></span>
+            </div>
+          </div>
+
+          <!-- population ribbon -->
+          <svg class="chart" id="popChart" viewBox="0 0 700 190" preserveAspectRatio="none"
+               role="img" aria-label="Population through the year: a low cluster in winter, a steep climb from April, a peak in early July and a long decline into the autumn cluster.">
+            <g id="popGrid"></g>
+            <path id="popArea" fill="#e3ae42" opacity="0.16"></path>
+            <path id="popLine" fill="none" stroke="#e3ae42" stroke-width="2.4"></path>
+            <path id="flyLine" fill="none" stroke="#f2ebdd" stroke-width="1.5" opacity="0.5" stroke-dasharray="4 4"></path>
+            <line id="playhead" x1="0" y1="0" x2="0" y2="190" stroke="#f2ebdd" stroke-width="1.5"></line>
+          </svg>
+          <p class="chart-label">
+            <span>Bees in the box</span>
+            <span>Dashed: bees actually out working</span>
+          </p>
+
+          <!-- the scale and the scrubber. On a phone this dock leaves the flow
+               and pins to the bottom of the viewport — see style.css. -->
+          <div class="scrub-dock" id="scrubDock">
+            <div class="scale">
+              <div class="scale-months" id="monthScale" aria-hidden="true"></div>
+            </div>
+            <div class="scrub-row">
+              <span class="daystamp" id="dayStamp">1 Jan</span>
+              <label class="skip" for="dayRange">Day of the year</label>
+              <input type="range" id="dayRange" min="0" max="364" value="0" step="1"
+                     aria-label="Day of the year" aria-valuetext="1 January">
+            </div>
+          </div>
+          <div class="scrub-spacer" id="scrubSpacer"></div>
+
+          <!-- forage -->
+          <div class="forage" id="forage">
+            <span class="eyebrow">What the hedge is giving</span>
+          </div>
+
+          <!-- events -->
+          <div class="events">
+            <span class="eyebrow">Make something go wrong</span>
+            <ul class="event-list">
+              <li><button type="button" class="event" id="evSwarm"   aria-pressed="false">Let it swarm &mdash; 16 May</button></li>
+              <li><button type="button" class="event" id="evSplit"   aria-pressed="false">Take a split first &mdash; 1 May</button></li>
+              <li><button type="button" class="event" id="evWet"     aria-pressed="false">A wet June</button></li>
+              <li><button type="button" class="event" id="evNoTreat" aria-pressed="false">Skip the varroa treatment</button></li>
+            </ul>
+
+            <div class="verdict" id="verdict">
+              <div class="verdict--crop">
+                <span class="k">Crop off the hive</span>
+                <span class="v" id="vCrop">23.1<u>kg</u></span>
+              </div>
+              <div>
+                <span class="k">Peak colony</span>
+                <span class="v" id="vPeak">62,186</span>
+              </div>
+              <div>
+                <span class="k">Going into winter</span>
+                <span class="v" id="vCluster">9,302</span>
+              </div>
+              <p class="verdict-note" id="vNote" aria-live="polite"></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       the seasons — stacked full-bleed chapters
+       ==================================================================== -->
+
+  <section class="chapter chapter--dark on-char">
+    <div class="wrap chapter-inner">
+      <div class="chapter-copy rev">
+        <span class="eyebrow">December to February</span>
+        <h2>Winter</h2>
+        <p class="season-note">Nothing is asleep. The cluster is a muscle, shivering, eating through what we left it.</p>
+        <p>There is no brood for most of it, so the colony cannot replace a single bee it loses. What is in the box in December is what has to reach March. We do not open hives; we heft them from behind, and the ones that feel light get fondant and a note in the book.</p>
+        <div class="plate">
+          <div><span class="k">Cluster core</span><span class="v">34&deg;C</span></div>
+          <div><span class="k">Stores left on</span><span class="v">17&ndash;20kg</span></div>
+          <div><span class="k">Hives opened</span><span class="v">0</span></div>
+        </div>
+      </div>
+      <div class="aperture rev">
+        <svg viewBox="0 0 400 500" role="img" aria-label="A skep as a window onto a bare winter hedgerow under a low sun.">
+          <g clip-path="url(#skep-clip)"><use href="#scene-winter"/></g>
+          <g color="#f2ebdd" opacity="0.9"><use href="#skep-lines"/></g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="wrap chapter-inner">
+      <div class="aperture rev">
+        <svg viewBox="0 0 400 500" role="img" aria-label="A skep as a window onto blackthorn blossom and willow catkins in early spring.">
+          <g clip-path="url(#skep-clip)"><use href="#scene-spring"/></g>
+          <g color="#171310" opacity="0.88"><use href="#skep-lines"/></g>
+        </svg>
+      </div>
+      <div class="chapter-copy rev">
+        <span class="eyebrow">March to May</span>
+        <h2>Spring</h2>
+        <p class="season-note">The colony is now in a race with its own mortality, and it starts the race behind.</p>
+        <p>Every bee alive in March was born the previous autumn and is running out of time. The queen has to replace them faster than they die, on willow and blackthorn alone, in weather that can shut the hedge for a fortnight. This is where the year is won: a colony that is not strong by the third week of May cannot take the flow when it comes.</p>
+        <div class="plate">
+          <div><span class="k">Lowest of the year</span><span class="v" id="pSpringLow">7,143</span></div>
+          <div><span class="k">On</span><span class="v" id="pSpringLowDay">29 Mar</span></div>
+          <div><span class="k">Egg to bee</span><span class="v">21 days</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="wrap chapter-inner">
+      <div class="chapter-copy rev">
+        <span class="eyebrow">June to July</span>
+        <h2>The flow</h2>
+        <p class="season-note">A fortnight of lime, and a colony that was ready for it.</p>
+        <p>The main flow is not long. Clover carries the middle of it and lime finishes it, and between them is the June gap &mdash; a fortnight when the rape is over, the clover has not started, and a heavy colony can starve with supers on. The bees working it were laid in May. That is the whole of the argument for not letting them swarm.</p>
+        <div class="plate">
+          <div><span class="k">Peak colony</span><span class="v" id="pPeak">62,186</span></div>
+          <div><span class="k">Best day&rsquo;s take</span><span class="v" id="pBestDay">3.3<u>kg</u></span></div>
+          <div><span class="k">Supers on</span><span class="v">3&ndash;4</span></div>
+        </div>
+      </div>
+      <div class="aperture rev">
+        <svg viewBox="0 0 400 500" role="img" aria-label="A skep as a window onto a white clover ley beneath a lime tree in full flower.">
+          <g clip-path="url(#skep-clip)"><use href="#scene-flow"/></g>
+          <g color="#171310" opacity="0.88"><use href="#skep-lines"/></g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--dark on-char">
+    <div class="wrap chapter-inner">
+      <div class="aperture rev">
+        <svg viewBox="0 0 400 500" role="img" aria-label="A skep as a window onto ivy in flower on a stone wall in late autumn.">
+          <g clip-path="url(#skep-clip)"><use href="#scene-harvest"/></g>
+          <g color="#f2ebdd" opacity="0.9"><use href="#skep-lines"/></g>
+        </svg>
+      </div>
+      <div class="chapter-copy rev">
+        <span class="eyebrow">August to November</span>
+        <h2>Harvest</h2>
+        <p class="season-note">We take the crop, and then we stop thinking about honey and start thinking about March.</p>
+        <p>The balsam finishes, the crop comes off, and the only thing that matters afterwards is the September brood. Those bees never forage. They carry fat reserves, live five months instead of six weeks, and they are the colony that opens next spring. Treat late and you lose them; treat on time and you have not lost anything yet.</p>
+        <div class="plate">
+          <div><span class="k">Crop this year</span><span class="v" id="pCrop">23.1<u>kg</u></span></div>
+          <div><span class="k">Winter bee lives</span><span class="v">~165 days</span></div>
+          <div><span class="k">Summer bee lives</span><span class="v">~38 days</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       what we sell
+       ==================================================================== -->
+  <section class="section" id="bees">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">What leaves the yard</span>
+          <h2>Honey, bees, and a day at the hive</h2>
+        </div>
+        <p>We sell three things and we run out of all of them. Honey goes by the flow it came from; bees go out as full nucleus colonies, never as packages; queens are raised here and mated here.</p>
+      </div>
+
+      <div class="offers">
+        <a class="offer" href="honey.html">
+          <h3>Single-origin honey</h3>
+          <p>Extracted flow by flow and never blended &mdash; blackthorn, rape, hawthorn, clover, lime, balsam, ivy. Each one tastes of the fortnight it came from.</p>
+          <span class="price">340g jar &middot; from &pound;8.50</span>
+        </a>
+        <a class="offer" href="visit.html">
+          <h3>Over-wintered nucs</h3>
+          <p>Six frames of brood, bees and stores on our own comb, with a laying queen already through a winter. Collected from the yard in April and May.</p>
+          <span class="price">6-frame nucleus &middot; &pound;235</span>
+        </a>
+        <a class="offer" href="visit.html">
+          <h3>Mated queens</h3>
+          <p>Raised from our calmest, most frugal stock and open-mated over the hill. Marked, clipped on request, posted or collected from June.</p>
+          <span class="price">Mated queen &middot; &pound;48</span>
+        </a>
+        <a class="offer" href="visit.html">
+          <h3>A day at the hive</h3>
+          <p>Six people, one apiary, a full day in a suit with your hands in a colony. For people thinking about keeping bees and for beekeepers in their second year who want to stop guessing.</p>
+          <span class="price">Full day &middot; &pound;110</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3>Skep</h3>
+        <p>Cwm Aled, Llanfair Waterdine<br>Knighton, Powys LD7 1TU</p>
+      </div>
+      <div>
+        <h3>The yard</h3>
+        <p>Open Saturdays 9&ndash;1, March to October.<br>Otherwise by arrangement &mdash; we are usually out at the apiaries.</p>
+      </div>
+      <div>
+        <h3>Find us</h3>
+        <a href="honey.html">This year&rsquo;s honey</a>
+        <a href="#year">The colony year</a>
+        <a href="visit.html">Visit &amp; courses</a>
+      </div>
+      <div>
+        <h3>Get in touch</h3>
+        <a href="mailto:hives@skep.example">hives@skep.example</a>
+        <a href="tel:+441547520118">01547 520118</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Skep Apiaries</span>
+      <span>Bees on the Welsh Marches since 2009</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/colony.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

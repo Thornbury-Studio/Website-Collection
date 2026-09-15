@@ -1,0 +1,992 @@
+/* ==========================================================================
+   SKEP — apiary & queen rearing, Welsh Marches
+   Raw wax ground, smoker char, one propolis accent.
+   AMBER IS DATA, NEVER BRAND: it appears only where honey is being measured.
+   See DESIGN.md for the reference DNA behind every decision in this file.
+   ========================================================================== */
+
+/* --- tokens --------------------------------------------------------------- */
+
+:root {
+  /* ground — raw wax, warm, never cream and never white */
+  --wax:     #f2ebdd;
+  --wax-2:   #e8dfcb;   /* raised band */
+  --wax-3:   #dcd1b6;   /* inset well, data plates */
+  --char:    #1c1713;   /* the dark band — winter, and the instrument ground */
+  --char-2:  #29221b;
+
+  /* ink */
+  --ink:      #171310;  /* 15.6:1 on wax */
+  --ink-dim:  #5f5648;  /*  5.6:1 on wax */
+  --ink-wax:  #f2ebdd;  /* 14.1:1 on char */
+  --ink-wax-dim: #a99c87; /* 5.9:1 on char */
+
+  /* THE QUANTITY. Honey. Fills and strokes only — never a button, never a
+     heading. --amber-ink is the one text-safe tone, for figures on wax. */
+  --amber:      #c8860d;
+  --amber-lite: #e3ae42;
+  --amber-ink:  #8a5a06;  /* 5.9:1 on wax */
+
+  /* brood — the other quantity, deliberately duller than honey */
+  --ochre:     #9a6b2f;
+  --brood:     #a8762f;
+
+  /* the one reserved accent: a single CTA per page, and the lost-colony state */
+  --propolis: #8c3a1e;   /* 7.0:1 on wax */
+  --propolis-lite: #b9552f;
+
+  /* hairlines */
+  --rule:      #c3b79c;
+  --rule-soft: rgba(23, 19, 16, 0.13);
+  --rule-char: rgba(242, 235, 221, 0.15);
+
+  /* type */
+  --display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --voice:   'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --data:    'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* measure & rhythm */
+  --gut:  clamp(1.15rem, 3.1vw, 2.6rem);
+  --band: clamp(4rem, 9.5vh, 8rem);
+  --max:  1380px;
+
+  /* motion — one curve, one duration */
+  --t:    0.62s;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- reset ---------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--wax);
+  color: var(--ink);
+  font-family: var(--voice);
+  font-size: clamp(1rem, 0.38vw + 0.93rem, 1.1rem);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img, svg { max-width: 100%; }
+[hidden] { display: none !important; }
+
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.04;
+  margin: 0;
+  font-variation-settings: 'SOFT' 28, 'WONK' 1;
+  letter-spacing: -0.012em;
+}
+
+p { margin: 0 0 1.05em; }
+a { color: inherit; }
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--char);
+  color: var(--ink-wax);
+  padding: 0.8rem 1.2rem;
+  z-index: 200;
+  font-family: var(--data);
+  font-size: 0.82rem;
+}
+.skip:focus { left: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--propolis);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gut);
+}
+
+/* the eyebrow that sits over every section title */
+.eyebrow {
+  font-family: var(--data);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin: 0 0 1.1rem;
+  display: block;
+}
+.on-char .eyebrow { color: var(--ink-wax-dim); }
+
+/* ==========================================================================
+   header
+   ========================================================================== */
+
+.site-head {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--wax) 88%, transparent);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.site-head .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 62px;
+}
+
+.mark {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.22rem;
+  letter-spacing: 0.3em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+}
+.mark svg { width: 22px; height: 22px; display: block; }
+
+.nav {
+  display: flex;
+  gap: clamp(0.9rem, 2.2vw, 2rem);
+  align-items: center;
+}
+.nav a {
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-dim);
+  padding: 0.3rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+.nav a:hover, .nav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--propolis);
+}
+
+/* ==========================================================================
+   chapters — the pinned reference's move: a full-bleed band, a skep used as
+   an aperture onto the season behind it, one letterspaced wordmark.
+   ========================================================================== */
+
+.chapter {
+  position: relative;
+  padding-block: clamp(3.5rem, 8vh, 6.5rem);
+  border-top: 1px solid var(--rule-soft);
+  overflow: hidden;
+}
+.chapter--dark {
+  background: var(--char);
+  color: var(--ink-wax);
+  border-top-color: transparent;
+}
+
+.chapter-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.6rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.aperture {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-width: 460px;
+  margin-inline: auto;
+  display: block;
+}
+.aperture svg { width: 100%; height: 100%; display: block; }
+
+.chapter-copy h2 {
+  font-size: clamp(2.6rem, 7.5vw, 5.4rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 0.4em;
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
+}
+.chapter-copy .season-note {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.6vw, 1.32rem);
+  line-height: 1.5;
+  color: var(--ink-dim);
+  max-width: 34ch;
+}
+.chapter--dark .chapter-copy .season-note { color: var(--ink-wax-dim); }
+
+.chapter-copy p:not(.season-note) { max-width: 44ch; }
+
+/* a figure read straight off the model, set as a plate */
+.plate {
+  margin-top: 1.6rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+}
+.chapter--dark .plate { border-top-color: var(--rule-char); }
+
+.plate div { min-width: 0; }
+.plate dt, .plate .k {
+  font-family: var(--data);
+  font-size: 0.68rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.chapter--dark .plate dt, .chapter--dark .plate .k { color: var(--ink-wax-dim); }
+.plate dd, .plate .v {
+  margin: 0;
+  font-family: var(--data);
+  font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  background: var(--char);
+  color: var(--ink-wax);
+  padding-block: clamp(3rem, 7vh, 5.5rem) clamp(3.5rem, 9vh, 7rem);
+  overflow: hidden;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1.8rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.hero .eyebrow { color: var(--ink-wax-dim); }
+
+.hero h1 {
+  font-size: clamp(3.4rem, 13vw, 8.5rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0 0 0.3em;
+  font-variation-settings: 'SOFT' 70, 'WONK' 1;
+}
+
+.hero .lede {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.45;
+  color: var(--ink-wax);
+  max-width: 30ch;
+  margin-bottom: 1.4rem;
+}
+
+.hero .sub {
+  color: var(--ink-wax-dim);
+  max-width: 42ch;
+  font-size: 0.98rem;
+}
+
+.hero-aperture { max-width: 520px; }
+
+/* ==========================================================================
+   buttons
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--data);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background var(--t) var(--ease), color var(--t) var(--ease);
+}
+.btn:hover { background: currentColor; }
+.btn:hover span { color: var(--wax); }
+.chapter--dark .btn:hover span, .hero .btn:hover span { color: var(--char); }
+
+/* the single reserved accent — one per page */
+.btn--key {
+  background: var(--propolis);
+  border-color: var(--propolis);
+  color: var(--wax);
+}
+.btn--key:hover { background: var(--propolis-lite); border-color: var(--propolis-lite); }
+.btn--key:hover span { color: var(--wax); }
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.8rem;
+}
+
+/* ==========================================================================
+   THE INSTRUMENT — the colony year
+   ========================================================================== */
+
+.instrument {
+  background: var(--char);
+  color: var(--ink-wax);
+  padding-block: clamp(3rem, 8vh, 6rem);
+}
+
+.instrument-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.4rem, 4vw, 4rem);
+  align-items: end;
+  margin-bottom: clamp(2rem, 5vh, 3.4rem);
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--rule-char);
+}
+.instrument-head h2 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  letter-spacing: 0.02em;
+}
+.instrument-head p {
+  color: var(--ink-wax-dim);
+  margin: 0;
+  max-width: 48ch;
+  font-size: 0.96rem;
+}
+
+.rig {
+  display: grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.4rem);
+  align-items: start;
+}
+
+/* --- the hive itself --- */
+
+.hive {
+  position: relative;
+}
+.hive svg { width: 100%; height: auto; display: block; }
+
+.hive-caption {
+  font-family: var(--data);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-wax-dim);
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--rule-char);
+  padding-top: 0.7rem;
+}
+
+/* --- readouts --- */
+
+.readouts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule-char);
+  border: 1px solid var(--rule-char);
+  margin-bottom: 1.6rem;
+}
+.readout {
+  background: var(--char);
+  padding: 0.95rem 1rem 1.05rem;
+  min-width: 0;
+}
+.readout .k {
+  font-family: var(--data);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-wax-dim);
+  display: block;
+  margin-bottom: 0.45rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.readout .v {
+  font-family: var(--data);
+  font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  display: block;
+  line-height: 1.1;
+}
+.readout .v u {
+  text-decoration: none;
+  font-size: 0.62em;
+  color: var(--ink-wax-dim);
+  margin-left: 0.15em;
+}
+/* honey readouts carry the quantity colour; nothing else does */
+.readout--honey .v { color: var(--amber-lite); }
+
+/* --- the day scale + scrubber --- */
+
+.scale {
+  margin-bottom: 0.4rem;
+}
+.scale-months {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  font-family: var(--data);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-wax-dim);
+  border-bottom: 1px solid var(--rule-char);
+  padding-bottom: 0.4rem;
+}
+.scale-months span {
+  text-align: center;
+  min-width: 0;
+  overflow: hidden;
+}
+.scale-months span.is-now { color: var(--amber-lite); }
+
+.scrub-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.9rem;
+}
+
+.daystamp {
+  font-family: var(--data);
+  font-size: clamp(1rem, 1.8vw, 1.22rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  min-width: 7.2ch;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+  cursor: grab;
+  margin: 0;
+  height: 30px;
+}
+input[type="range"]:active { cursor: grabbing; }
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--rule-char);
+}
+input[type="range"]::-moz-range-track {
+  height: 2px;
+  background: var(--rule-char);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 22px;
+  margin-top: -10px;
+  background: var(--amber-lite);
+  border: none;
+  border-radius: 1px;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 22px;
+  background: var(--amber-lite);
+  border: none;
+  border-radius: 1px;
+}
+
+/* --- charts --- */
+
+.chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 1.4rem;
+}
+.chart-label {
+  font-family: var(--data);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-wax-dim);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--rule-char);
+  padding-top: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+/* --- forage bands: one bar, one bloom, no gradient (Aicher) --- */
+
+.forage { margin-top: 1.8rem; }
+.forage-row {
+  display: grid;
+  grid-template-columns: minmax(96px, 150px) minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.28rem 0;
+  font-family: var(--data);
+  font-size: 0.7rem;
+  color: var(--ink-wax-dim);
+  transition: color var(--t) var(--ease);
+}
+.forage-row.is-open { color: var(--ink-wax); }
+.forage-row .bar {
+  position: relative;
+  height: 9px;
+  background: rgba(242, 235, 221, 0.07);
+}
+.forage-row .bar i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--amber);
+  opacity: 0.42;
+  transition: opacity var(--t) var(--ease);
+}
+.forage-row.is-open .bar i { opacity: 1; }
+.forage-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- events --- */
+
+.events {
+  margin-top: 2rem;
+  border-top: 1px solid var(--rule-char);
+  padding-top: 1.5rem;
+}
+.event-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+}
+.event {
+  font-family: var(--data);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  padding: 0.62rem 1rem;
+  border: 1px solid var(--rule-char);
+  background: transparent;
+  color: var(--ink-wax-dim);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: color var(--t) var(--ease), border-color var(--t) var(--ease), background var(--t) var(--ease);
+  text-align: left;
+}
+.event::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border: 1px solid currentColor;
+  flex: none;
+}
+.event:hover { color: var(--ink-wax); border-color: var(--ink-wax-dim); }
+.event[aria-pressed="true"] {
+  color: var(--char);
+  background: var(--amber-lite);
+  border-color: var(--amber-lite);
+}
+.event[aria-pressed="true"]::before { background: var(--char); }
+.event[disabled] { opacity: 0.35; cursor: not-allowed; }
+
+/* --- the verdict --- */
+
+.verdict {
+  margin-top: 1.8rem;
+  border: 1px solid var(--rule-char);
+  padding: clamp(1.1rem, 2.6vw, 1.7rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 1.3rem;
+  align-items: start;
+}
+.verdict .k {
+  font-family: var(--data);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-wax-dim);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.verdict .v {
+  font-family: var(--data);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  display: block;
+  line-height: 1.05;
+}
+.verdict .v u { text-decoration: none; font-size: 0.55em; color: var(--ink-wax-dim); margin-left: 0.15em; }
+.verdict--crop .v { color: var(--amber-lite); }
+.verdict-note {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--rule-char);
+  padding-top: 1rem;
+  margin: 0;
+  color: var(--ink-wax-dim);
+  font-size: 0.92rem;
+  max-width: 70ch;
+}
+.verdict-note strong { color: var(--ink-wax); font-weight: 500; }
+.verdict.is-lost { border-color: var(--propolis-lite); }
+.verdict.is-lost .verdict-note strong { color: var(--propolis-lite); }
+
+/* ==========================================================================
+   plain sections
+   ========================================================================== */
+
+.section {
+  padding-block: clamp(3.2rem, 8vh, 6rem);
+  border-top: 1px solid var(--rule-soft);
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.2rem, 4vw, 4rem);
+  align-items: end;
+  margin-bottom: clamp(1.8rem, 4.5vh, 3rem);
+}
+.section-head h2 {
+  font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+}
+.section-head p { margin: 0; color: var(--ink-dim); max-width: 50ch; }
+
+/* offer cards */
+.offers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.offer {
+  background: var(--wax);
+  padding: clamp(1.3rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  text-decoration: none;
+  transition: background var(--t) var(--ease);
+  min-width: 0;
+}
+a.offer:hover { background: var(--wax-2); }
+.offer h3 { font-size: 1.32rem; }
+.offer p { margin: 0; color: var(--ink-dim); font-size: 0.95rem; }
+.offer .price {
+  font-family: var(--data);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: var(--amber-ink);
+  margin-top: auto;
+  padding-top: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- tables (honey.html / visit.html) --- */
+
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.93rem;
+  min-width: 520px;
+}
+th, td {
+  text-align: left;
+  padding: 0.85rem 1rem 0.85rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+  vertical-align: top;
+}
+th {
+  font-family: var(--data);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  font-weight: 400;
+  border-bottom-color: var(--rule);
+}
+td.num {
+  font-family: var(--data);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+td .jar {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 0.55rem;
+  vertical-align: baseline;
+  background: var(--amber);
+}
+
+/* --- form (visit.html) --- */
+
+.field { margin-bottom: 1.2rem; }
+.field label {
+  font-family: var(--data);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  display: block;
+  margin-bottom: 0.45rem;
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  font-family: var(--voice);
+  font-size: 1rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--rule);
+  background: var(--wax);
+  color: var(--ink);
+  border-radius: 0;
+}
+.field textarea { min-height: 120px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--ink);
+  outline: 2px solid var(--propolis);
+  outline-offset: 1px;
+}
+.form-note {
+  font-size: 0.86rem;
+  color: var(--ink-dim);
+  margin-top: 1rem;
+}
+/* PATTERNS.md, "state both tracks on every placed item": this grid mixes
+   children that are present from the start with one that only appears after
+   submit. Every child below carries BOTH grid-column and grid-row — an item
+   with a definite row and an auto column does not have to land in column 1,
+   and the sent-state note is exactly the element a static layout check never
+   sees, because it carries `hidden` until the moment it goes wrong. */
+.ask-form {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 1.2rem;
+  align-items: start;
+}
+.ask-form .form-sent { grid-column: 1 / -1;  grid-row: 1; }
+.ask-form .f-name    { grid-column: 1 / span 6;  grid-row: 2; }
+.ask-form .f-email   { grid-column: 7 / span 6;  grid-row: 2; }
+.ask-form .f-about   { grid-column: 1 / span 6;  grid-row: 3; }
+.ask-form .f-date    { grid-column: 7 / span 6;  grid-row: 3; }
+.ask-form .f-note    { grid-column: 1 / -1;      grid-row: 4; }
+.ask-form .f-submit  { grid-column: 1 / -1;      grid-row: 5; }
+
+.f-submit { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem; }
+.f-submit .form-note { margin-top: 0; max-width: 42ch; }
+.f-submit button[disabled] { opacity: 0.5; cursor: default; }
+
+@media (max-width: 720px) {
+  /* one column, but still every child placed on both tracks */
+  .ask-form { grid-template-columns: minmax(0, 1fr); }
+  .ask-form .form-sent { grid-column: 1; grid-row: 1; }
+  .ask-form .f-name    { grid-column: 1; grid-row: 2; }
+  .ask-form .f-email   { grid-column: 1; grid-row: 3; }
+  .ask-form .f-about   { grid-column: 1; grid-row: 4; }
+  .ask-form .f-date    { grid-column: 1; grid-row: 5; }
+  .ask-form .f-note    { grid-column: 1; grid-row: 6; }
+  .ask-form .f-submit  { grid-column: 1; grid-row: 7; }
+}
+
+.form-sent {
+  border: 1px solid var(--propolis);
+  padding: 1rem 1.2rem;
+  font-family: var(--data);
+  font-size: 0.85rem;
+  color: var(--propolis);
+  margin-bottom: 1.4rem;
+}
+
+/* ==========================================================================
+   footer
+   ========================================================================== */
+
+.site-foot {
+  background: var(--char);
+  color: var(--ink-wax-dim);
+  padding-block: clamp(2.5rem, 6vh, 4rem);
+  font-size: 0.9rem;
+}
+.foot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: clamp(1.4rem, 3vw, 2.5rem);
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--rule-char);
+}
+.foot-grid h3 {
+  font-family: var(--data);
+  font-size: 0.66rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: var(--ink-wax-dim);
+  font-weight: 400;
+  margin-bottom: 0.9rem;
+}
+.foot-grid a { color: var(--ink-wax); text-decoration: none; display: block; padding: 0.16rem 0; }
+.foot-grid a:hover { text-decoration: underline; }
+.foot-grid p { color: var(--ink-wax-dim); margin: 0; }
+.foot-base {
+  padding-top: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  font-family: var(--data);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   reveal — inert without JS, so the failure mode is "everything is present"
+   ========================================================================== */
+
+.js-anim .rev {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+.js-anim .rev.is-in { opacity: 1; transform: none; }
+.no-motion .rev { opacity: 1 !important; transform: none !important; }
+
+/* ==========================================================================
+   MOBILE — its own composition, not the desktop one made narrow.
+
+   Three things genuinely change rather than shrink:
+   1. The scrubber leaves the flow and pins to the bottom of the viewport as a
+      control bar while the instrument is on screen, so the thumb is on it and
+      the hive is not covered by the hand reading it.
+   2. The chapter wordmark moves BELOW its aperture instead of beside it —
+      overlaid display type on a 4:5 window at 380px is unreadable.
+   3. Readouts drop from one row of four to two rows of two, and the hive
+      turns from a tall cross-section into a wide one.
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .rig { grid-template-columns: minmax(0, 1fr); }
+  .hero-inner,
+  .chapter-inner,
+  .instrument-head,
+  .section-head { grid-template-columns: minmax(0, 1fr); }
+
+  .hero-inner { gap: 2rem; }
+  .hero-aperture, .aperture { max-width: 340px; }
+
+  .chapter-inner { gap: 1.4rem; }
+  /* the wordmark goes under the window on a narrow screen */
+  .chapter-inner .aperture { order: -1; }
+
+  .instrument-head { align-items: start; }
+  .readouts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 620px) {
+  /* Four long labels and a wordmark cannot share 375px: on one row the nav
+     wraps to two lines and prints over the mark. The header becomes two rows
+     instead — mark, then the nav as a single non-wrapping strip that scrolls
+     sideways if it has to. */
+  .site-head .wrap {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    min-height: 0;
+    padding-block: 0.5rem 0;
+  }
+  .nav {
+    gap: 1.15rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 0.45rem;
+    margin-top: 0.4rem;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { font-size: 0.79rem; white-space: nowrap; flex: none; }
+  .mark { font-size: 1.1rem; }
+
+  .aperture, .hero-aperture { max-width: 280px; }
+  .forage-row { grid-template-columns: minmax(78px, 110px) minmax(0, 1fr); font-size: 0.64rem; }
+  .event { font-size: 0.7rem; padding: 0.55rem 0.8rem; }
+  .plate { gap: 1.1rem; }
+  .foot-base { font-size: 0.64rem; }
+}
+
+/* the pinned control bar. Only on touch-sized screens, only while the
+   instrument is in view (JS adds .scrub-live), and it reserves its own space
+   at the foot of the instrument so nothing is ever hidden underneath it. */
+@media (max-width: 900px) {
+  .scrub-dock.is-pinned {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    background: color-mix(in srgb, var(--char) 94%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid var(--rule-char);
+    padding: 0.55rem var(--gut) calc(0.55rem + env(safe-area-inset-bottom));
+    margin: 0;
+  }
+  .scrub-dock.is-pinned .scale-months { display: none; }
+  .scrub-dock.is-pinned .scrub-row { margin-top: 0; }
+  .scrub-spacer { display: none; }
+  .scrub-spacer.is-on { display: block; height: 74px; }
+}
