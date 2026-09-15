@@ -104,6 +104,14 @@
   var DISCS   = [10, 12];
   var POINTS  = [5, 8, 11];
 
+  /* what each lever physically works on the diagram */
+  var WORKS = {
+    1: ['#sig-1'], 2: ['#sig-2'], 3: ['#sig-3'], 4: ['#pt-5'], 5: ['#pt-5'],
+    6: ['#sig-6'], 7: ['#sig-7'], 8: ['#pt-8'], 10: ['#sig-10'], 11: ['#pt-11'],
+    12: ['#sig-12'], 13: ['#sig-13'], 14: ['#sig-14'], 15: ['#sig-15'],
+    16: ['#gates'], 17: ['#gates']
+  };
+
   var TASKS = [
     { id: 'a', need: [17, 4, 5, 3], note: 'Down stopper accepted into the loop.' },
     { id: 'b', need: [8, 7],        note: 'Loop to down main, section given.' },
@@ -194,8 +202,11 @@
         '<span class="lever-state">Normal</span>';
 
       b.addEventListener('click', function () { pull(l.n); });
-      b.addEventListener('mouseenter', function () { showPlate(l); });
-      b.addEventListener('focus', function () { showPlate(l); });
+      b.addEventListener('mouseenter', function () { preview(l); });
+      b.addEventListener('focus', function () { preview(l); });
+      b.addEventListener('mouseleave', clearPreview);
+      b.addEventListener('blur', clearPreview);
+      b.addEventListener('keydown', onFrameKey);
 
       frameEl.appendChild(b);
       buttons[l.n] = b;
@@ -203,8 +214,144 @@
 
     document.querySelectorAll('.task').forEach(function (t) { taskEls[t.dataset.task] = t; });
 
+    wireDiagram();
     log('—', '', 'Box opened. Frame standing normal, gates across the railway.');
     syncDiagram();
+    drawDiagram();
+  }
+
+  /* ------------------------------------------------------------------
+     Preview — hover or focus a lever and the diagram shows what it
+     works, while the frame shows what is holding it and what it holds.
+     This is the interlocking made visible before you touch anything.
+     ------------------------------------------------------------------ */
+  function preview(l) {
+    clearPreview();
+
+    (WORKS[l.n] || []).forEach(function (sel) {
+      var g = diagram.querySelector(sel);
+      if (g) g.classList.add('hl');
+    });
+
+    var b = buttons[l.n];
+    if (b) b.classList.add('is-src');
+
+    /* what would hold this lever if you tried it right now */
+    var block = blockedBy(l, !l.rev);
+    if (block !== null && block > 0) {
+      if (b) b.classList.add('is-held');
+      if (buttons[block]) buttons[block].classList.add('is-holder');
+    }
+
+    /* what this lever affects once it is over */
+    LEVERS.forEach(function (m) {
+      if (m.n === l.n) return;
+      var touches = m.bothWays.indexOf(l.n) !== -1 ||
+        m.req.some(function (c) { return parseInt(c, 10) === l.n; }) ||
+        l.bothWays.indexOf(m.n) !== -1 ||
+        l.req.some(function (c) { return parseInt(c, 10) === m.n; });
+      if (touches && m.n !== block) buttons[m.n].classList.add('is-affected');
+    });
+
+    showPlate(l, block !== null && block > 0 ? block : undefined, true);
+  }
+
+  function clearPreview() {
+    diagram.querySelectorAll('.hl').forEach(function (g) { g.classList.remove('hl'); });
+    Object.keys(buttons).forEach(function (n) {
+      buttons[n].classList.remove('is-src', 'is-held', 'is-holder', 'is-affected');
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     The diagram is a control surface too: hover or click a signal,
+     a point end or the gates and it reaches back into the frame.
+     ------------------------------------------------------------------ */
+  function wireDiagram() {
+    diagram.querySelectorAll('[data-lever]').forEach(function (g) {
+      var n = parseInt(g.dataset.lever, 10);
+      var hit = g.querySelector('.hit');
+      if (!hit) return;
+      hit.setAttribute('role', 'button');
+      hit.setAttribute('tabindex', '-1');
+      hit.setAttribute('aria-hidden', 'true');
+      hit.addEventListener('mouseenter', function () { preview(byN[n]); });
+      hit.addEventListener('mouseleave', clearPreview);
+      hit.addEventListener('click', function () {
+        pull(n);
+        if (buttons[n]) buttons[n].focus({ preventScroll: true });
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Draw-in — the panel lights up line by line the first time it is seen
+     ------------------------------------------------------------------ */
+  function drawDiagram() {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+
+    var lines = diagram.querySelectorAll('.rail, .leg');
+    var i = 0;
+    lines.forEach(function (p) {
+      var len;
+      try { len = p.getTotalLength(); } catch (e) { len = 0; }
+      if (!len) return;
+      p.style.setProperty('--len', len);
+      p.style.strokeDasharray = len;
+      p.style.setProperty('--d', (i++) * 90);
+    });
+
+    /* everything that is not a running line fades up after the lines land,
+       staggered left to right so the panel reads as filling in */
+    var furniture = diagram.querySelectorAll(
+      '.sig, .disc, #gates, .plat, .dg-lbl, .dg-name, .dg-num, .arrowhead, .road');
+    furniture.forEach(function (el) {
+      var x = 0;
+      try { x = el.getBBox().x; } catch (e) { x = 0; }
+      el.style.setProperty('--d', Math.max(0, Math.round(x * 0.55)));
+    });
+
+    diagram.dataset.draw = 'pending';
+
+    /* measured, not observed — see the note in site.js */
+    var started = false;
+    function start() {
+      if (started) return;
+      started = true;
+      window.removeEventListener('scroll', check);
+      diagram.dataset.draw = 'run';
+      /* once drawn, drop the dash so nothing interferes with state changes */
+      window.setTimeout(function () {
+        lines.forEach(function (p) { p.style.strokeDasharray = ''; });
+        diagram.dataset.draw = 'done';
+      }, 2600);
+    }
+    function check() {
+      var h = window.innerHeight || 800;
+      var r = diagram.getBoundingClientRect();
+      if (r.top < h * 0.9 && r.bottom > 0) start();
+    }
+
+    check();
+    window.addEventListener('scroll', check, { passive: true });
+    window.setTimeout(check, 400);
+    window.setTimeout(start, 4000);   /* never leave the panel dark */
+  }
+
+  /* ------------------------------------------------------------------
+     Keyboard: the frame behaves like a frame, not eighteen tab stops
+     ------------------------------------------------------------------ */
+  function onFrameKey(e) {
+    var n = parseInt(e.currentTarget.dataset.n, 10);
+    var to = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = n + 1;
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = n - 1;
+    else if (e.key === 'Home') to = 1;
+    else if (e.key === 'End') to = LEVERS.length;
+    if (to === null) return;
+    to = Math.min(LEVERS.length, Math.max(1, to));
+    if (buttons[to]) { e.preventDefault(); buttons[to].focus(); }
   }
 
   /* ------------------------------------------------------------------
@@ -238,9 +385,15 @@
     b.setAttribute('aria-label', 'Lever number ' + n + ', ' + l.fn + '. ' + (toReverse ? 'Reverse.' : 'Normal.'));
     b.querySelector('.lever-state').textContent = toReverse ? 'Reverse' : 'Normal';
 
+    /* the catch handle squeezes before the lever moves */
+    b.classList.remove('throwing');
+    void b.offsetWidth;
+    b.classList.add('throwing');
+    window.setTimeout(function () { b.classList.remove('throwing'); }, 420);
+
     log(time(), n, (toReverse ? 'Pulled — ' : 'Put back — ') + (l.short || l.fn.toLowerCase()) + '.');
     syncDiagram();
-    showPlate(l);
+    preview(l);
     checkTasks();
   }
 
@@ -269,12 +422,30 @@
       gates.classList.toggle('across', byN[16].rev);
       gates.classList.toggle('bolted', byN[17].rev);
     }
+    syncState();
+  }
+
+  /* live readout in the sticky panel head — what the box is showing */
+  function syncState() {
+    var el = document.getElementById('panelState');
+    if (!el) return;
+    var rev = LEVERS.filter(function (l) { return l.rev; }).map(function (l) { return l.n; });
+    var lamp = el.querySelector('.ps-lamp');
+    var text = el.querySelector('.ps-t');
+    if (!rev.length) {
+      lamp.dataset.lit = 'false';
+      text.textContent = 'Frame normal';
+    } else {
+      var off = rev.filter(function (n) { return SIGNALS.indexOf(n) !== -1 || DISCS.indexOf(n) !== -1; });
+      lamp.dataset.lit = off.length ? 'true' : 'false';
+      text.textContent = 'Reverse ' + rev.join(' · ') + (off.length ? '  ·  ' + off.length + ' off' : '');
+    }
   }
 
   /* ------------------------------------------------------------------
      Plate detail strip
      ------------------------------------------------------------------ */
-  function showPlate(l, block) {
+  function showPlate(l, block, live) {
     var released = l.req.filter(function (c) { return c !== 'never'; });
     var lockLine;
 
@@ -296,15 +467,24 @@
       if (l.bothWays.length) lockLine += ' Holds No. ' + l.bothWays.join(', ') + ' in either position.';
     }
 
+    var banner;
+    if (l.req.indexOf('never') !== -1) {
+      banner = '';
+    } else if (typeof block === 'number' && block > 0) {
+      banner = '<span class="pd-held">Held by No. ' + block + '</span>';
+    } else if (live) {
+      banner = '<span class="pd-held pd-free">' + (l.rev ? 'Free to put back' : 'Free to pull') + '</span>';
+    } else {
+      banner = '';
+    }
+
     detail.innerHTML =
       '<div class="pd-head">' +
         '<span class="pd-n">No. ' + l.n + '</span>' +
         '<span class="pd-fn">' + l.fn + '</span>' +
         '<span class="pd-state" data-s="' + (l.rev ? 'reverse' : 'normal') + '">' +
           (l.rev ? 'Reverse' : 'Normal') + '</span>' +
-        (typeof block === 'number' && block > 0
-          ? '<span class="pd-state" data-s="normal" style="border-color:var(--stop);color:var(--stop)">Locked by ' + block + '</span>'
-          : '') +
+        banner +
       '</div>' +
       '<p class="pd-body">' + l.desc + '</p>' +
       '<p class="pd-lock">' + lockLine + '</p>';
@@ -367,6 +547,50 @@
       log(time(), '', 'Frame put back. All levers normal.');
     });
   }
+
+  /* ------------------------------------------------------------------
+     Block instrument — the other half of the job. The frame protects the
+     junction; the block protects the section between boxes.
+     ------------------------------------------------------------------ */
+  (function blockInstrument() {
+    var box = document.querySelector('.block-inst');
+    if (!box) return;
+    var needleTitle = document.getElementById('bi-t');
+    var codeEl = document.getElementById('biCode');
+    var btns = box.querySelectorAll('.bi-b');
+
+    var STATES = {
+      blocked: {
+        label: 'line blocked',
+        code: '3&ndash;1 offered and accepted before a stopping passenger train is given the section.',
+        entry: 'Block set to line blocked.'
+      },
+      clear: {
+        label: 'line clear',
+        code: 'Line clear given. Two beats when the train enters the section.',
+        entry: 'Line clear given to Bircher, 3&ndash;1.'
+      },
+      train: {
+        label: 'train on line',
+        code: 'Train on line. 2&ndash;1 when it is complete and clear of the section.',
+        entry: 'Train entering section, 2. Block at train on line.'
+      }
+    };
+
+    box.dataset.block = 'blocked';
+
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.dataset.block;
+        if (box.dataset.block === k) return;
+        box.dataset.block = k;
+        btns.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+        codeEl.innerHTML = STATES[k].code;
+        if (needleTitle) needleTitle.textContent = 'Block indicator, currently showing ' + STATES[k].label;
+        log(time(), '', STATES[k].entry);
+      });
+    });
+  }());
 
   build();
 }());

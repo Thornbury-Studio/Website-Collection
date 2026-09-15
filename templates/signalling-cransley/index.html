@@ -69,18 +69,37 @@
 <main id="main">
 
   <!-- ============ HERO ============ -->
-  <section class="hero">
+  <section class="hero" id="hero">
+    <!-- ghosted line-work: the same drawing language as the panel, run at 6% -->
+    <svg class="hero-ghost" viewBox="0 0 1200 420" aria-hidden="true" focusable="false" preserveAspectRatio="xMaxYMid slice">
+      <path d="M -40 120 H 1240"></path>
+      <path d="M -40 232 H 1240"></path>
+      <path d="M 640 232 L 760 120 H 1240"></path>
+      <path d="M -40 344 H 1240"></path>
+      <path d="M 300 344 L 420 232"></path>
+      <circle cx="760" cy="120" r="4"></circle>
+      <circle cx="640" cy="232" r="4"></circle>
+      <circle cx="300" cy="344" r="4"></circle>
+    </svg>
+
     <div class="hero-grid">
-      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Mechanical signalling engineers &middot; est. 1994</p>
-      <h1>The frame<br>says no.</h1>
+      <p class="eyebrow" style="--i:0"><span class="dot" aria-hidden="true"></span>Mechanical signalling engineers &middot; est. 1994</p>
+      <h1 class="hero-h1">
+        <span class="ln" style="--i:1"><span class="ln-i">The frame</span></span>
+        <span class="ln" style="--i:2"><span class="ln-i">says no.</span></span>
+      </h1>
       <div class="hero-side">
-        <p class="stand">We overhaul mechanical signalling for railways that still work theirs &mdash; lever frames, tappet locking, semaphore arms, block instruments, gate gear.</p>
-        <p class="stand-2">Below is Cransley Junction, eighteen levers, locked exactly as it leaves our shop. Try to signal a train onto a road that is not set. The frame will stop you and tell you which lever is holding it.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#frame">Work the frame</a>
+        <p class="stand" style="--i:3">We overhaul mechanical signalling for railways that still work theirs &mdash; lever frames, tappet locking, semaphore arms, block instruments, gate gear.</p>
+        <p class="stand-2" style="--i:4">Below is Cransley Junction, eighteen levers, locked exactly as it leaves our shop. Try to signal a train onto a road that is not set. The frame will stop you and tell you which lever is holding it.</p>
+        <div class="cta-row" style="--i:5">
+          <a class="btn btn-primary btn-lever" href="#frame"><span class="btn-t">Work the frame</span><span class="btn-lv" aria-hidden="true"></span></a>
           <a class="btn btn-ghost" href="#docket">Request a survey</a>
         </div>
       </div>
+      <p class="hero-note" style="--i:6">
+        <span class="hn-brk" aria-hidden="true"></span>
+        <span class="hn-t">Cransley Junction <b>&middot;</b> 18 levers <b>&middot;</b> tappet locking <b>&middot;</b> 1897</span>
+      </p>
     </div>
   </section>
 
@@ -89,6 +108,7 @@
     <div class="panel-head">
       <h2 id="panel-h">Cransley Junction</h2>
       <p class="panel-meta">18-lever tappet frame &middot; 1897 &middot; overhauled here, 2024</p>
+      <p class="panel-state" id="panelState" aria-live="polite"><span class="ps-lamp" data-lit="false" aria-hidden="true"></span><span class="ps-t">Frame normal</span></p>
     </div>
 
     <!-- --------- track diagram --------- -->
@@ -114,17 +134,20 @@
           <path class="rail rail-sid" d="M 852 230 H 1150"></path>
 
           <!-- ---- No.5 points: down main / down loop (facing) ---- -->
-          <g id="pt-5">
+          <g id="pt-5" data-lever="5">
+            <rect class="hit" x="294" y="36" width="86" height="72"></rect>
             <path class="leg leg-n" d="M 300 100 H 372"></path>
             <path class="leg leg-r" d="M 300 100 L 352 44 H 372"></path>
           </g>
           <!-- ---- No.8 points: loop exit (trailing) ---- -->
-          <g id="pt-8">
+          <g id="pt-8" data-lever="8">
+            <rect class="hit" x="862" y="36" width="86" height="72"></rect>
             <path class="leg leg-n" d="M 868 100 H 940"></path>
             <path class="leg leg-r" d="M 880 44 L 932 100 H 940"></path>
           </g>
           <!-- ---- No.11 points: up yard (trailing) ---- -->
-          <g id="pt-11">
+          <g id="pt-11" data-lever="11">
+            <rect class="hit" x="784" y="168" width="96" height="70"></rect>
             <path class="leg leg-n" d="M 790 176 H 872"></path>
             <path class="leg leg-r" d="M 790 176 L 846 230 H 866"></path>
           </g>
@@ -148,7 +171,8 @@
           <path class="arrowhead" d="M 40 172 l -12 4 l 12 4 z"></path>
 
           <!-- ---- level crossing gates (16) ---- -->
-          <g id="gates">
+          <g id="gates" data-lever="16">
+            <rect class="hit" x="126" y="52" width="50" height="176"></rect>
             <g transform="translate(132,100)"><g class="gate" id="gate-a"><rect x="0" y="-3" width="38" height="6" rx="1"></rect></g></g>
             <g transform="translate(170,176)"><g class="gate" id="gate-b"><rect x="-38" y="-3" width="38" height="6" rx="1"></rect></g></g>
             <circle class="bolt" id="gate-bolt" cx="151" cy="138" r="5"></circle>
@@ -157,7 +181,8 @@
 
           <!-- ================= SIGNALS ================= -->
           <!-- 1 down distant -->
-          <g class="sig sig-down" id="sig-1" transform="translate(72,100)">
+          <g class="sig sig-down" id="sig-1" data-lever="1" transform="translate(72,100)">
+            <rect class="hit" x="-34" y="-50" width="44" height="62"></rect>
             <line class="post" x1="0" y1="0" x2="0" y2="-40"></line>
             <g transform="translate(0,-36)"><g class="arm arm-dist">
               <path class="blade" d="M 0 -4 H -28 l 7 4 l -7 4 H 0 Z"></path>
@@ -167,7 +192,8 @@
             <text class="dg-num" x="0" y="14" text-anchor="middle">1</text>
           </g>
           <!-- 2 / 3 bracket: down home main + down home loop -->
-          <g class="sig sig-down" id="sig-2" transform="translate(244,100)">
+          <g class="sig sig-down" id="sig-2" data-lever="2" transform="translate(244,100)">
+            <rect class="hit" x="-32" y="-56" width="42" height="68"></rect>
             <line class="post" x1="0" y1="0" x2="0" y2="-46"></line>
             <g transform="translate(0,-42)"><g class="arm">
               <rect class="blade" x="-28" y="-4" width="28" height="8" rx="1"></rect>
@@ -176,7 +202,8 @@
             <circle class="lens" cx="-7" cy="-34" r="3.4"></circle>
             <text class="dg-num" x="0" y="14" text-anchor="middle">2</text>
           </g>
-          <g class="sig sig-down" id="sig-3" transform="translate(276,100)">
+          <g class="sig sig-down" id="sig-3" data-lever="3" transform="translate(276,100)">
+            <rect class="hit" x="-26" y="-42" width="36" height="54"></rect>
             <line class="post" x1="0" y1="0" x2="0" y2="-32"></line>
             <line class="post post-doll" x1="-32" y1="-32" x2="0" y2="-32"></line>
             <g transform="translate(0,-28)"><g class="arm">
@@ -187,7 +214,8 @@
             <text class="dg-num" x="6" y="14" text-anchor="start">3</text>
           </g>
           <!-- 7 down loop starter (on the loop) -->
-          <g class="sig sig-down" id="sig-7" transform="translate(826,44)">
+          <g class="sig sig-down" id="sig-7" data-lever="7" transform="translate(826,44)">
+            <rect class="hit" x="-30" y="-42" width="40" height="54"></rect>
             <line class="post" x1="0" y1="0" x2="0" y2="-30"></line>
             <g transform="translate(0,-26)"><g class="arm">
               <rect class="blade" x="-24" y="-3.5" width="24" height="7" rx="1"></rect>
@@ -197,7 +225,8 @@
             <text class="dg-num" x="0" y="16" text-anchor="middle">7</text>
           </g>
           <!-- 6 down starter -->
-          <g class="sig sig-down" id="sig-6" transform="translate(1010,100)">
+          <g class="sig sig-down" id="sig-6" data-lever="6" transform="translate(1010,100)">
+            <rect class="hit" x="-32" y="-50" width="42" height="62"></rect>
             <line class="post" x1="0" y1="0" x2="0" y2="-40"></line>
             <g transform="translate(0,-36)"><g class="arm">
               <rect class="blade" x="-26" y="-4" width="26" height="8" rx="1"></rect>
@@ -207,7 +236,8 @@
             <text class="dg-num" x="0" y="14" text-anchor="middle">6</text>
           </g>
           <!-- 13 up home -->
-          <g class="sig sig-up" id="sig-13" transform="translate(1092,176)">
+          <g class="sig sig-up" id="sig-13" data-lever="13" transform="translate(1092,176)">
+            <rect class="hit" x="-10" y="-12" width="42" height="62"></rect>
             <line class="post" x1="0" y1="0" x2="0" y2="40"></line>
             <g transform="translate(0,36)"><g class="arm">
               <rect class="blade" x="0" y="-4" width="26" height="8" rx="1"></rect>
@@ -217,7 +247,8 @@
             <text class="dg-num" x="0" y="-8" text-anchor="middle">13</text>
           </g>
           <!-- 14 up starter -->
-          <g class="sig sig-up" id="sig-14" transform="translate(340,176)">
+          <g class="sig sig-up" id="sig-14" data-lever="14" transform="translate(340,176)">
+            <rect class="hit" x="-10" y="-12" width="42" height="62"></rect>
             <line class="post" x1="0" y1="0" x2="0" y2="40"></line>
             <g transform="translate(0,36)"><g class="arm">
               <rect class="blade" x="0" y="-4" width="26" height="8" rx="1"></rect>
@@ -227,7 +258,8 @@
             <text class="dg-num" x="0" y="-8" text-anchor="middle">14</text>
           </g>
           <!-- 15 up distant -->
-          <g class="sig sig-up" id="sig-15" transform="translate(1152,176)">
+          <g class="sig sig-up" id="sig-15" data-lever="15" transform="translate(1152,176)">
+            <rect class="hit" x="-10" y="-12" width="44" height="62"></rect>
             <line class="post" x1="0" y1="0" x2="0" y2="40"></line>
             <g transform="translate(0,36)"><g class="arm arm-dist">
               <path class="blade" d="M 0 -4 H 28 l -7 4 l 7 4 H 0 Z"></path>
@@ -237,13 +269,15 @@
             <text class="dg-num" x="0" y="-8" text-anchor="middle">15</text>
           </g>
           <!-- 10 ground disc: yard to up main -->
-          <g class="disc" id="sig-10" transform="translate(898,206)">
+          <g class="disc" id="sig-10" data-lever="10" transform="translate(898,206)">
+            <rect class="hit" x="-15" y="-15" width="30" height="30"></rect>
             <circle class="disc-face" cx="0" cy="0" r="9"></circle>
             <g class="disc-bar"><rect x="-8" y="-2" width="16" height="4" rx="1"></rect></g>
             <text class="dg-num" x="0" y="24" text-anchor="middle">10</text>
           </g>
           <!-- 12 ground disc: up main to yard -->
-          <g class="disc" id="sig-12" transform="translate(744,200)">
+          <g class="disc" id="sig-12" data-lever="12" transform="translate(744,200)">
+            <rect class="hit" x="-15" y="-15" width="30" height="30"></rect>
             <circle class="disc-face" cx="0" cy="0" r="9"></circle>
             <g class="disc-bar"><rect x="-8" y="-2" width="16" height="4" rx="1"></rect></g>
             <text class="dg-num" x="0" y="24" text-anchor="middle">12</text>
@@ -291,6 +325,36 @@
           </div>
           <div class="reg-cols"><span>Time</span><span>No.</span><span>Entry</span></div>
           <ol class="reg-body" id="regBody"></ol>
+        </div>
+
+        <!-- block instrument: the other half of a signalman's job -->
+        <div class="block-inst">
+          <div class="bi-head">
+            <h3>Block instrument</h3>
+            <p>Cransley &mdash; Bircher &middot; down line</p>
+          </div>
+          <div class="bi-dial">
+            <svg viewBox="0 0 160 92" role="img" aria-labelledby="bi-t">
+              <title id="bi-t">Block indicator, currently showing line blocked</title>
+              <path class="bi-arc" d="M 22 80 A 58 58 0 0 1 138 80"></path>
+              <text class="bi-lbl" x="20" y="92" text-anchor="start">BLOCKED</text>
+              <text class="bi-lbl" x="80" y="16" text-anchor="middle">LINE CLEAR</text>
+              <text class="bi-lbl" x="140" y="92" text-anchor="end">TRAIN ON</text>
+              <g transform="translate(80,80)">
+                <g class="bi-needle" id="biNeedle">
+                  <line x1="0" y1="0" x2="0" y2="-54"></line>
+                  <circle cx="0" cy="-54" r="3.2"></circle>
+                </g>
+              </g>
+              <circle class="bi-hub" cx="80" cy="80" r="5"></circle>
+            </svg>
+          </div>
+          <div class="bi-btns" role="group" aria-label="Block state">
+            <button class="bi-b" type="button" data-block="blocked" aria-pressed="true">Blocked</button>
+            <button class="bi-b" type="button" data-block="clear" aria-pressed="false">Line clear</button>
+            <button class="bi-b" type="button" data-block="train" aria-pressed="false">Train on line</button>
+          </div>
+          <p class="bi-code" id="biCode">3&ndash;1 offered and accepted before a stopping passenger train is given the section.</p>
         </div>
       </div>
     </div>
@@ -374,7 +438,23 @@
         </tbody>
       </table>
     </div>
-    <p class="book-foot">Ninety-one frames since 1994. Four of them twice, which we do not mind saying.</p>
+    <div class="book-stats">
+      <div class="stat">
+        <span class="stat-n" data-count="91">91</span>
+        <span class="stat-l">Frames on the floor</span>
+        <span class="stat-s">Since the shop opened in 1994. Four of them twice, which we do not mind saying.</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n" data-count="2">2</span>
+        <span class="stat-l">Times the old table was right</span>
+        <span class="stat-s">And we were wrong. Both are written up and pinned in the drawing office.</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n" data-count="0">0</span>
+        <span class="stat-l">Test sheets signed unearned</span>
+        <span class="stat-s">We will come back on a Tuesday in February rather than sign one.</span>
+      </div>
+    </div>
   </section>
 
   <!-- ============ DOCKET / CONTACT ============ -->

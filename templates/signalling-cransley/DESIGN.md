@@ -71,3 +71,44 @@ One idea: things throw. Levers swing on a bottom pivot, semaphore arms rise
 45 degrees, ground discs rotate, gates swing across the road, point legs
 brighten. A refused pull judders and flashes the plate. No parallax, no
 marquee, no scroll mapping. Everything honours `prefers-reduced-motion`.
+
+## Craft layer
+
+Depth and texture come from the material the subject is made of, never from
+generic glass or gradient:
+
+- **Printed-diagram halftone** and a 3px scanline over the panel; a routed
+  metal edge (lit top bevel over a dark rebate) on every inset surface.
+- **Lamp glow** behind each spectacle plate — red on, green off, yellow for
+  the distants — and a faint bloom along the set road.
+- **Enamel gloss**: a fired plate gets a specular sweep over the top 46% and
+  a shadowed rolled edge. The throw squeezes the catch handle before the
+  lever swings.
+- The **train register stays ruled where nothing is written**, so an empty
+  sheet still reads as a sheet.
+
+### Entrances are additive, never subtractive
+
+Every reveal is a keyframe animation with `backwards` fill on an element that
+is **visible by default**. Nothing on this page starts at `opacity: 0` waiting
+for a callback to rescue it — a dropped observer callback or a stalled
+animation clock (background tabs, some embedded views) would otherwise leave
+content invisible for good. For the same reason the reveals are driven by a
+measured `getBoundingClientRect` sweep on scroll rather than
+`IntersectionObserver`, with a three-second failsafe. Geometry does not miss.
+
+### Interlocking made visible before you touch it
+
+Hover or focus a lever and three things happen at once: the diagram
+highlights what that lever physically works, the lever that would refuse the
+pull pulses red, and everything the lever affects is underlined in signal
+yellow. The diagram is a control surface in the other direction too — every
+signal, point end and the gates carry a hit target, so you can work the frame
+from the drawing. Arrow keys walk the frame the way a signalman does.
+
+### Block instrument
+
+A second, real instrument beside the register: three-position needle for
+line blocked / line clear / train on line, each position logging the proper
+bell code to the register. The frame protects the junction; the block
+protects the section.
