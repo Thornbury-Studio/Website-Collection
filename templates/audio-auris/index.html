@@ -3,184 +3,241 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
-<title>AURIS — Spatial Sound for Everyday Life</title>
-<meta name="description" content="AURIS is spatial audio you wear — cinema-scale sound that stays with you from studio to street.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self' mailto:">
+<title>AURIS One — AO-01 Spatial Headphones</title>
+<meta name="description" content="AURIS One (AO-01): 12 balanced-armature drivers, 5 Hz–40 kHz, 4.2 ms wireless, CNC 6061-T6 housing.">
 <meta name="robots" content="index, follow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://templates.thornburystudio.com/templates/audio-auris/index.html">
-<meta name="theme-color" content="#040814">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23040814'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%2367e8f9' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%2367e8f9'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='10' fill='%23ff4d00' text-anchor='middle'%3EAO%3C/text%3E%3C/svg%3E">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AURIS">
-<meta property="og:title" content="AURIS — Spatial Sound for Everyday Life">
-<meta property="og:description" content="Cinema-scale spatial audio you wear from studio to street.">
+<meta property="og:title" content="AURIS One — AO-01 Spatial Headphones">
+<meta property="og:description" content="12 drivers. 5 Hz–40 kHz. 4.2 ms. CNC 6061-T6.">
 <meta property="og:url" content="https://templates.thornburystudio.com/templates/audio-auris/index.html">
-<meta property="og:image" content="https://templates.thornburystudio.com/img/audio-auris-sm.svg">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/audio-auris/img/ao-front.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AURIS — Spatial Sound for Everyday Life">
-<meta name="twitter:description" content="Cinema-scale spatial audio you wear from studio to street.">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/audio-auris/img/ao-front.jpg">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": "AURIS",
-  "description": "Spatial audio headphones for everyday life.",
+  "name": "AURIS One",
+  "sku": "AO-01",
+  "description": "Spatial headphones — 12 balanced-armature drivers, 5 Hz to 40 kHz, 4.2 ms wireless latency.",
   "brand": { "@type": "Brand", "name": "AURIS" },
-  "url": "https://templates.thornburystudio.com/templates/audio-auris/index.html"
+  "url": "https://templates.thornburystudio.com/templates/audio-auris/index.html",
+  "image": [
+    "https://templates.thornburystudio.com/templates/audio-auris/img/ao-front.jpg",
+    "https://templates.thornburystudio.com/templates/audio-auris/img/ao-macro.jpg"
+  ],
+  "offers": { "@type": "Offer", "price": "429", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" }
 }
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <a class="skip" href="#rail">Skip to experience</a>
-
-<div class="atmosphere" aria-hidden="true">
-  <div class="atmosphere__glow atmosphere__glow--a"></div>
-  <div class="atmosphere__glow atmosphere__glow--b"></div>
-  <div class="atmosphere__grid"></div>
-  <div class="atmosphere__particles" id="particles"></div>
-</div>
+<div class="grid-bg" aria-hidden="true"></div>
 
 <header class="chrome">
-  <a class="chrome__mark" href="#panel-1" aria-label="AURIS home">AURIS</a>
-  <nav class="chrome__dots" aria-label="Sections" id="dots">
-    <button type="button" class="dot is-active" data-go="0" aria-label="Intro" aria-current="true"></button>
-    <button type="button" class="dot" data-go="1" aria-label="Product"></button>
-    <button type="button" class="dot" data-go="2" aria-label="People"></button>
-    <button type="button" class="dot" data-go="3" aria-label="Features"></button>
+  <a class="chrome__mark" href="#panel-1" data-go="0">auris</a>
+  <nav class="chrome__nav" aria-label="Primary">
+    <a href="#panel-2" data-go="1" data-nav="1">product<span>ao-01</span></a>
+    <a href="#panel-3" data-go="2" data-nav="2">specs<span>lab</span></a>
+    <a href="#panel-4" data-go="3" data-nav="3">engine<span>order</span></a>
+    <a class="chrome__buy" href="#order" data-go="3">buy — $429</a>
   </nav>
-  <p class="chrome__hint" id="hint"><span>Scroll sideways</span> <kbd>←</kbd><kbd>→</kbd></p>
+  <p class="chrome__hint">scroll x <kbd>←</kbd><kbd>→</kbd></p>
 </header>
 
 <div class="rail" id="rail" tabindex="0" aria-label="AURIS horizontal experience">
   <div class="track" id="track">
 
-    <!-- PANEL 1 — Hero -->
     <section class="panel" id="panel-1" data-panel="0" aria-label="Intro">
-      <div class="layer layer--word" data-depth="0.12">
-        <div class="panel__copy panel__copy--hero">
-          <p class="eyebrow">Spatial audio · 2026</p>
-          <h1 class="brand-hero">AURIS</h1>
-          <p class="lede">Sound that fills the room — without leaving your head.</p>
-          <a class="cta cta--orb" href="#panel-2" data-go="1" aria-label="Start">
-            <span>Start</span>
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
-          </a>
+      <div class="panel__scroll">
+        <div class="intro">
+          <div class="intro__copy layer" data-depth="0.12">
+            <p class="mono-tag">AO-01 · spatial headphones · rev.b</p>
+            <h1 class="brand-hero">AURIS</h1>
+            <p class="lede">twelve drivers. sealed field. machined housing.</p>
+            <table class="spec-mini" aria-label="Key specs">
+              <tr><th>latency</th><td>4.2 ms</td></tr>
+              <tr><th>band</th><td>5 Hz – 40 kHz</td></tr>
+              <tr><th>drivers</th><td>12 × BA</td></tr>
+            </table>
+            <a class="cta cta--solid" href="#panel-2" data-go="1">inspect product →</a>
+          </div>
+          <figure class="intro__shot layer" data-depth="0.35">
+            <img src="img/ao-front.jpg" alt="AURIS One black over-ear headphones" width="900" height="900" decoding="async">
+          </figure>
         </div>
-      </div>
-      <div class="layer layer--human" data-depth="0.4">
-        <div class="human human--silhouette" aria-hidden="true">
-          <div class="human__body"></div>
-          <div class="human__rim"></div>
-        </div>
-      </div>
-      <div class="layer layer--glass" data-depth="0.78">
-        <div class="glass glass--plate glass--a" aria-hidden="true"></div>
-        <div class="glass glass--plate glass--b" aria-hidden="true"></div>
-        <div class="glass glass--plate glass--c" aria-hidden="true"></div>
       </div>
     </section>
 
-    <!-- PANEL 2 — Product -->
-    <section class="panel" id="panel-2" data-panel="1" aria-label="Product">
-      <div class="layer layer--word" data-depth="0.14">
-        <div class="panel__copy panel__copy--side">
-          <h2>Wear the room.</h2>
-          <p>Twelve drivers. One field. Music, calls, and film rendered as if the space were built around you.</p>
-          <a class="cta cta--pill" href="#panel-3" data-go="2">Explore now</a>
-        </div>
-      </div>
-      <div class="layer layer--human" data-depth="0.42">
-        <div class="product" aria-hidden="true">
-          <div class="product__cup product__cup--l"></div>
-          <div class="product__band"></div>
-          <div class="product__cup product__cup--r"></div>
-          <div class="product__glow"></div>
-        </div>
-      </div>
-      <div class="layer layer--glass" data-depth="0.82">
-        <div class="glass glass--chip glass--eq" aria-hidden="true">
-          <span class="glass__label">Field EQ</span>
-          <div class="eq" id="eq">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    <section class="panel panel--product" id="panel-2" data-panel="1" aria-label="Product">
+      <div class="panel__scroll">
+        <div class="product-stage">
+          <div class="viewer layer" data-depth="0.28" id="viewer">
+            <div class="viewer__frame" id="viewerFrame">
+              <img class="viewer__img" id="viewerImg" src="img/ao-front.jpg" alt="AURIS One front product photograph" width="1800" height="1200" decoding="async">
+              <button type="button" class="hotspot" data-hotspot="latency" aria-expanded="false"><i></i><span>latency</span></button>
+              <button type="button" class="hotspot" data-hotspot="band" aria-expanded="false"><i></i><span>band</span></button>
+              <button type="button" class="hotspot" data-hotspot="housing" aria-expanded="false"><i></i><span>housing</span></button>
+              <aside class="hotspot-card" id="hotspotCard" hidden>
+                <p class="hotspot-card__k" id="hotspotKey"></p>
+                <p class="hotspot-card__v" id="hotspotVal"></p>
+                <p class="hotspot-card__d" id="hotspotDesc"></p>
+                <button type="button" class="hotspot-card__x" id="hotspotClose" aria-label="Close detail">×</button>
+              </aside>
+            </div>
+            <div class="viewer__controls" role="toolbar" aria-label="Product view">
+              <div class="seg" role="group" aria-label="Angle">
+                <button type="button" class="seg__btn is-active" data-angle="front">front</button>
+                <button type="button" class="seg__btn" data-angle="macro">macro</button>
+                <button type="button" class="seg__btn" data-angle="side">side</button>
+                <button type="button" class="seg__btn" data-angle="detail">detail</button>
+                <button type="button" class="seg__btn" data-angle="studio">studio</button>
+              </div>
+              <div class="seg" role="group" aria-label="Lighting">
+                <button type="button" class="seg__btn is-active" data-light="studio">studio</button>
+                <button type="button" class="seg__btn" data-light="detail">detail</button>
+              </div>
+              <label class="tilt-label">tilt
+                <input type="range" id="tilt" min="-18" max="18" value="-6" aria-label="Tilt product">
+              </label>
+            </div>
+          </div>
+
+          <div class="panel__copy panel__copy--product layer" data-depth="0.1">
+            <p class="mono-tag">// audio architecture 01</p>
+            <h2>wear the<br>room.</h2>
+            <p class="spec-line">12 balanced-armature · LC3plus + aptX Adaptive · field collapses on doff in 180&nbsp;ms.</p>
+            <div class="field-demo" id="fieldDemo">
+              <p class="mono-tag">// field demo</p>
+              <button type="button" class="cta cta--ghost" id="fieldToggle" aria-pressed="false">play spatial field</button>
+              <div class="field-meter" aria-hidden="true"><i id="fieldMeter"></i></div>
+              <p class="buy-meta" id="fieldStatus">idle · generated stereo tone (not a music sample)</p>
+            </div>
+            <div class="buy-row">
+              <a class="cta cta--solid" href="#order" data-go="3">pre-order — $429</a>
+              <span class="buy-meta">ships 3–5 days · lighting: <span id="lightLabel">studio</span></span>
+            </div>
           </div>
         </div>
-        <div class="glass glass--chip glass--meta" aria-hidden="true">
-          <span>Latency</span>
-          <strong>4.2 ms</strong>
-        </div>
       </div>
     </section>
 
-    <!-- PANEL 3 — Human + UI -->
-    <section class="panel" id="panel-3" data-panel="2" aria-label="People">
-      <div class="layer layer--word" data-depth="0.1">
-        <div class="panel__copy panel__copy--behind">
-          <h2>Smart sound<br>for modern days</h2>
-        </div>
-      </div>
-      <div class="layer layer--human" data-depth="0.48">
-        <div class="portrait" aria-hidden="true">
-          <div class="portrait__face"></div>
-          <div class="portrait__hair"></div>
-          <div class="portrait__glow"></div>
-        </div>
-      </div>
-      <div class="layer layer--glass" data-depth="0.9">
-        <div class="glass glass--dash">
-          <div class="dash__head">
-            <span>Performance</span>
-            <span class="dash__live">Live</span>
+    <section class="panel panel--specs" id="panel-3" data-panel="2" aria-label="Specs">
+      <div class="panel__scroll">
+        <div class="specs">
+          <div class="specs__col layer" data-depth="0.12">
+            <header class="specs__head">
+              <p class="mono-tag">// lab sheet 02</p>
+              <h2>measured.<br>not marketed.</h2>
+            </header>
+            <div class="specs__tools">
+              <button type="button" class="cta cta--ghost" id="copySku">copy sku AO-01</button>
+              <span class="buy-meta" id="copyStatus" aria-live="polite"></span>
+            </div>
+            <table class="spec-sheet" id="specSheet">
+              <tbody>
+                <tr tabindex="0"><th>model</th><td>AO-01</td></tr>
+                <tr tabindex="0"><th>driver array</th><td>12 × balanced armature</td></tr>
+                <tr tabindex="0"><th>freq. response</th><td class="accent">5 Hz – 40 kHz (±2 dB)</td></tr>
+                <tr tabindex="0"><th>wireless latency</th><td class="accent">4.2 ms (LC3plus)</td></tr>
+                <tr tabindex="0"><th>THD+N @ 1 kHz</th><td>0.02%</td></tr>
+                <tr tabindex="0"><th>max SPL</th><td>118 dB</td></tr>
+                <tr tabindex="0"><th>codecs</th><td>LC3plus · aptX Adaptive · LDAC 990</td></tr>
+                <tr tabindex="0"><th>battery</th><td>42 h · USB-C PD · 10 min → 6 h</td></tr>
+                <tr tabindex="0"><th>mass</th><td>312 g</td></tr>
+                <tr tabindex="0"><th>materials</th><td>6061-T6 aluminum · protein leather · stainless yoke</td></tr>
+              </tbody>
+            </table>
           </div>
-          <svg class="dash__chart" viewBox="0 0 220 80" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="lineGlow" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#38bdf8"/>
-                <stop offset="100%" stop-color="#a5f3fc"/>
-              </linearGradient>
-            </defs>
-            <path class="dash__grid" d="M0 20h220M0 40h220M0 60h220" />
-            <path class="dash__line" d="M0 62 C30 58, 40 28, 70 34 S110 70, 140 42 S180 18, 220 28" />
-          </svg>
+          <figure class="specs__photo layer" data-depth="0.4">
+            <img src="img/ao-wearer.jpg" alt="Listener wearing over-ear headphones" width="900" height="1200" loading="lazy" decoding="async">
+            <figcaption>field lock · everyday wear</figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- PANEL 4 — Features -->
-    <section class="panel" id="panel-4" data-panel="3" aria-label="Features">
-      <div class="layer layer--word" data-depth="0.16">
-        <div class="panel__copy panel__copy--feat">
-          <h2>Secure listening,<br>made simple.</h2>
-          <p>Private mode, encrypted pairing, and a field that collapses the moment you take them off.</p>
-          <a class="cta cta--pill" href="#panel-1" data-go="0">Back to start</a>
+    <section class="panel panel--engine" id="panel-4" data-panel="3" aria-label="Audio Engine">
+      <div class="panel__scroll">
+        <div class="engine">
+          <header class="engine__head layer" data-depth="0.1">
+            <p class="mono-tag">// spatial immersion engine</p>
+            <h2>system, not soft features.</h2>
+          </header>
+          <div class="bento layer" data-depth="0.2">
+            <article class="bento__cell bento__cell--tall">
+              <h3>01 · private mode</h3>
+              <p>AES-256 pairing. radio mute within 180&nbsp;ms of doff. no residual stream.</p>
+            </article>
+            <article class="bento__cell">
+              <h3>02 · charge</h3>
+              <p>42 h · USB-C PD · 10′ = 6 h</p>
+            </article>
+            <article class="bento__cell">
+              <h3>03 · codecs</h3>
+              <p>LC3plus · aptX Ad. · LDAC 990</p>
+            </article>
+            <article class="bento__cell bento__cell--wide">
+              <h3>04 · adaptive field</h3>
+              <p>6-mic beamform + IMU head-track @ 120&nbsp;Hz. room lock while you turn.</p>
+            </article>
+          </div>
+
+          <form class="order layer" data-depth="0.08" id="order" novalidate>
+            <p class="mono-tag">// waitlist reserve</p>
+            <div class="order__grid">
+              <label>email
+                <input type="email" name="email" id="orderEmail" required placeholder="you@studio.com" autocomplete="email">
+              </label>
+              <label>qty
+                <input type="number" name="qty" id="orderQty" min="1" max="4" value="1" required>
+              </label>
+              <label>lighting pref.
+                <select name="light" id="orderLight">
+                  <option value="studio">studio</option>
+                  <option value="detail">detail</option>
+                </select>
+              </label>
+              <button type="submit" class="cta cta--solid order__submit">reserve — $429</button>
+            </div>
+            <p class="buy-meta" id="orderStatus" aria-live="polite">opens your mail client with the reserve details · nothing is charged here</p>
+            <div class="order__success" id="orderSuccess" hidden>
+              <p class="mono-tag">// reserved locally</p>
+              <p id="orderSuccessMsg"></p>
+              <button type="button" class="cta cta--ghost" id="orderReset">new reserve</button>
+            </div>
+          </form>
         </div>
-      </div>
-      <div class="layer layer--human" data-depth="0.36">
-        <div class="human human--soft" aria-hidden="true">
-          <div class="human__body"></div>
-        </div>
-      </div>
-      <div class="layer layer--glass" data-depth="0.72">
-        <div class="glass glass--pill" style="--x:18%; --y:28%">Key features</div>
-        <div class="glass glass--pill" style="--x:62%; --y:22%">Secure system</div>
-        <div class="glass glass--pill" style="--x:40%; --y:58%">Adaptive field</div>
-        <div class="glass glass--pill" style="--x:70%; --y:68%">All-day charge</div>
       </div>
     </section>
 
   </div>
 </div>
 
-<footer class="dock" aria-hidden="false">
-  <div class="dock__progress" aria-hidden="true"><i id="progress"></i></div>
-  <p class="dock__label"><span id="panelLabel">01 / 04</span> · AURIS</p>
+<footer class="dock">
+  <div class="dock__bar">
+    <div class="dock__progress" aria-hidden="true"><i id="progress"></i></div>
+    <nav class="dock__steps" aria-label="Panels" id="dots">
+      <button type="button" class="step is-active" data-go="0" aria-current="true"><span>01</span> intro</button>
+      <button type="button" class="step" data-go="1"><span>02</span> product</button>
+      <button type="button" class="step" data-go="2"><span>03</span> specs</button>
+      <button type="button" class="step" data-go="3"><span>04</span> engine</button>
+    </nav>
+    <p class="dock__label"><span id="panelLabel">01 / 04</span></p>
+  </div>
 </footer>
 
 <script src="js/main.js"></script>
