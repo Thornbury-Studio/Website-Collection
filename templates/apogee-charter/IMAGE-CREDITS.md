@@ -11,7 +11,7 @@ livery or marketing is used or implied.
 
 ## Footage — licensed Adobe Stock (free tier)
 
-Five clips were searched, licensed and downloaded on **15 September 2026**
+Six clips were searched, licensed and downloaded on **15–16 September 2026**
 through the Adobe Stock connector, free-tier assets only (licence state
 `just_purchased`, no credit cost). Every asset was checked to be
 `isGenTech: false` — no AI-generated footage or imagery is used anywhere on
@@ -21,15 +21,16 @@ master, never from a preview.
 | File | Adobe Stock ID | Master | Used as |
 |---|---|---|---|
 | `video/wing.mp4`, `img/wing-poster.webp` | 470419800 | 3840×2160 ProRes | The climb, middle — a private-jet wing in cloud. The master was shot on descent; it is played backwards, so the wing rises out of it |
-| `video/deck.mp4`, `img/deck-poster.webp` | 589794660 | 3840×2160 ProRes | The climb, top — a cloud deck from far above |
+| `video/deck.mp4`, `img/deck-poster.webp` | 589794660 | 3840×2160 ProRes | The climb, upper middle — the top of the weather, cumulus from above |
+| `video/apex.mp4`, `img/apex-poster.webp` | 939422575 | 3840×2160 HEVC | The climb, top — the cloud deck far below and the horizon, from the flight levels. Holds at forty-five thousand |
 | `video/cabin.mp4`, `img/cabin-poster.webp` | 301279898 | 3840×2160 H.264 | Home — the cabin, a slow pan along cream leather and the windows |
 | `video/host.mp4`, `img/host-poster.webp` | 846924700 | 2160×3840 H.264 | Home — the host, walking the cabin toward the camera (portrait) |
-| `video/apron.mp4`, `img/apron-poster.webp` | 175646036 | 4096×2304 MJPEG | Request page hero — a jet on the apron, waiting |
+| `video/apron.mp4`, `img/apron-poster.webp` | 175646036 | 4096×2304 MJPEG | Home hero — a jet on the apron, waiting; the first frame of the climb, which lifts away from it |
 
 Exports are H.264 at 1920×1080 (1080×1920 for the portrait clip), crf 23–24.
-Sky and cabin footage is low-entropy and encodes small: the five clips
-together weigh under 13 MB, and only the two climb layers load on the home
-page's first screen.
+Sky and cabin footage is low-entropy and encodes small: the six clips
+together weigh under 19 MB, and only the climb's layers load on the home
+page's first screen, the apron first.
 
 ## Photography — licensed Adobe Stock (free tier)
 
@@ -38,7 +39,7 @@ long edge; every export is downsampled from the licensed file.
 
 | File | Adobe Stock ID | Used as |
 |---|---|---|
-| `img/apron.webp`, `-1400`, `-800` | 165963897 | Home hero, and the ground layer the climb lifts away from — a large-cabin jet on the apron, stairs down |
+| `img/apron.webp`, `-1400`, `-800` | 165963897 | Request page hero — a large-cabin jet on the apron, stairs down |
 | `img/approach.webp`, `-1400`, `-800` | 631923686 | Fleet page hero — a business jet on final approach |
 | `img/night.webp`, `-1400`, `-800` | 921816819 | Programme page hero — a wing over a snowy runway at night |
 | `img/stairs.webp`, `-1200`, `-800` | 330061589 | Licensed and graded; not placed — see below |
@@ -48,7 +49,7 @@ long edge; every export is downsampled from the licensed file.
 | `img/table.webp`, `-1200`, `-800` | 479398762 | Licensed and graded; not placed — see below |
 | `img/shade.webp`, `-1400`, `-800` | 482312066 | Home — discretion: the host bringing the shade down |
 | `img/service.webp`, `-1400`, `-800` | 346134202 | Request page — the panoramic band: the host laying a table |
-| `img/og.webp` | 165963897 | 1.91:1 crop of the apron plate |
+| `img/og.webp` | 175646036 | 1.91:1 crop of the apron clip's first frame |
 | `img/favicon.svg` | — | Drawn, not licensed |
 | `../../img/apogee-charter-sm.webp` | — | 960×600 homepage screenshot for the hub card |
 
