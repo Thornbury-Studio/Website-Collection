@@ -1,0 +1,39 @@
+/* YORIMICHI — home page only: Nunito for every piece of type.
+   Loaded by index.html after style.css; the inner pages keep Antonio/Onest.
+   Nunito is a wide, rounded face where Antonio was a condensed one, so the
+   display sizes come down to keep the same line breaks and nothing wider
+   than its column. */
+
+:root {
+  --font-display: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+}
+
+body { font-weight: 500; }
+
+.display, .h1, .h2, .h3 { font-weight: 800; letter-spacing: -.01em; line-height: 1; }
+.h1 { font-size: clamp(40px, 7.2vw, 104px); }
+.hero__title { font-weight: 900; }
+.h2 { font-size: clamp(30px, 4.2vw, 56px); }
+.h3 { font-size: clamp(20px, 2vw, 26px); }
+.tcard__body .h3 { font-size: 21px; }
+.film__title { font-size: clamp(36px, 5.4vw, 80px); }
+
+.kicker, .nav a, .btn, .more, .chip, .strip__item .more, .chapter__cap, .facet-tag { letter-spacing: .1em; }
+.mark { font-weight: 800; font-size: 20px; letter-spacing: .06em; }
+.mark small { font-weight: 600; letter-spacing: .14em; }
+
+.hero__index button { font-weight: 700; font-size: 13px; letter-spacing: .04em; }
+.hero__index button[aria-current="true"] { font-size: 22px; font-weight: 800; }
+
+.how__item .n { font-weight: 800; font-size: 34px; }
+.stat b { font-weight: 800; font-size: 32px; letter-spacing: -.01em; }
+.tbl td.date { font-weight: 800; font-size: 17px; letter-spacing: 0; }
+.review blockquote { font-weight: 500; }
+.drawer a { font-weight: 800; font-size: clamp(32px, 9vw, 50px); }
+.play__label, .foot h4 { letter-spacing: .1em; }
+
+@media (max-width: 640px) {
+  .hero__title { font-size: clamp(34px, 9.6vw, 104px); }
+  .tcard__body .h3 { font-size: 17px; }
+}
