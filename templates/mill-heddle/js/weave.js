@@ -10,9 +10,8 @@
    The cloth follows from those by one rule: at end i, pick j, the warp is on
    top if the shaft carrying end i is among the shafts lifted by the treadle
    pressed at pick j. That rule is `raised()` below, and every draft on the
-   site — the loom beside the home page, the drafts written out on the range
-   page, the drafting room — is painted by it. The cloth itself is
-   photographed; the draft is drawn. */
+   site — the drafts written out on the range page, and the drafting room —
+   is painted by it. The cloth itself is photographed; the draft is drawn. */
 (function (root, doc) {
   'use strict';
 
