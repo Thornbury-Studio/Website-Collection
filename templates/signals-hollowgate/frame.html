@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<!--
+  HOLLOWGATE — the frame in full.
+
+  The index page lets you work the frame; this page is the paperwork behind it.
+  Two documents on paper (the roll of levers and the locking table) and one
+  drawing on the dark ground explaining the piece of steel that does the work.
+  The locking table is printed from js/frame.js, not typed here, so the page
+  cannot drift out of agreement with the mechanism on the homepage.
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>The frame and its locking &mdash; Hollowgate Junction Signal Box Trust</title>
+  <meta name="description" content="The roll of levers at Hollowgate Junction, the original tappet locking that governs it, and the full locking table for all sixteen working levers.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/signals-hollowgate/frame.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hollowgate Junction Signal Box Trust">
+  <meta property="og:title" content="The frame and its locking">
+  <meta property="og:description" content="Sixteen levers, the tappet locking behind them, and the table that proves it.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/signals-hollowgate/frame.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/signals-hollowgate/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The frame and its locking">
+  <meta name="twitter:description" content="Sixteen levers, the tappet locking behind them, and the table that proves it.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/signals-hollowgate/img/og.webp">
+  <meta name="theme-color" content="#0F1416">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@100..900&family=Spline+Sans+Mono:wght@300..700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html">
+    <svg viewBox="0 0 24 32" aria-hidden="true" focusable="false">
+      <rect x="4" y="2" width="3" height="28" fill="#767F79"/>
+      <rect x="6" y="5" width="16" height="6" fill="#C3242E"/>
+      <rect x="16" y="6.5" width="4" height="3" fill="#E8E2D2"/>
+    </svg>
+    <span><b>Hollowgate</b><i>Junction Signal Box Trust</i></span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html">The box</a>
+    <a href="frame.html" aria-current="page">The frame</a>
+    <a href="visit.html">Visit</a>
+    <a href="visit.html#enquiry">Enquire</a>
+  </nav>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+    <i></i><i></i><i></i>
+  </button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false">
+  <a href="index.html">The box</a>
+  <a href="frame.html">The frame</a>
+  <a href="visit.html">Visit</a>
+  <a href="visit.html#enquiry">Enquire</a>
+  <p class="label">Hollowgate Junction &middot; Thrushmoor &middot; West Riding</p>
+</div>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="label hero-eyebrow">Frame No. 21 &middot; C&amp;TR pattern of 1897</p>
+      <h1>Thirty-two spaces, sixteen levers, one argument.</h1>
+      <p class="lede">The frame was supplied with thirty-two levers for a junction that was busier than it ever became. Sixteen are connected today; the rest stand white, and the numbering has never been closed up, because renumbering a frame means re-cutting the locking.</p>
+    </div>
+  </section>
+
+  <!-- ===================== the roll ===================== -->
+  <section class="section section--paper">
+    <div class="wrap">
+      <div class="head">
+        <div class="rule"></div>
+        <div class="head-row">
+          <div>
+            <span class="sec-no">&sect; 01 &mdash; THE ROLL OF LEVERS</span>
+            <h2>What each lever works.</h2>
+          </div>
+          <p class="lede">Every lever carries an enamelled plate at eye level with its number, its colour and its job. This is that set of plates, read left to right along the frame.</p>
+        </div>
+      </div>
+
+      <div class="roll-scroll">
+        <table class="roll">
+          <thead>
+            <tr><th>N&deg;</th><th>Plate</th><th>What it does</th></tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td class="n"><span class="sw" style="background:#C3242E"></span>1</td>
+          <td><b>Down Home</b><br><span class="rl-col">Red / stop signal</span></td>
+          <td>Protects the junction against a Down train running in from Thrushmoor Bank.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#E3A82A"></span>2</td>
+          <td><b>Down Distant</b><br><span class="rl-col">Amber / distant signal</span></td>
+          <td>Cannot be cleared until every stop signal in advance of it is already off. Last off, first back.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#F4F1E6"></span>3</td>
+          <td><b>Spare</b><br><span class="rl-col">White / spare</span></td>
+          <td>Left in the frame when the Down Goods Loop was lifted in 1962. The numbering was never closed up.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#23292B"></span>4</td>
+          <td><b>Points 4 &mdash; Quarry Branch junction</b><br><span class="rl-col">Black / points</span></td>
+          <td>Normal for the Down Main, reverse for the Quarry Branch. Facing points, so they carry a lock.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#3A7AB8"></span>5</td>
+          <td><b>Facing point lock on 4</b><br><span class="rl-col">Blue / facing point lock</span></td>
+          <td>Drives a bolt through the stretcher bar so the blades cannot creep under a train. Reverse to bolt, whichever way 4 is lying.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#23292B"></span>6</td>
+          <td><b>Points 6 &mdash; crossover</b><br><span class="rl-col">Black / points</span></td>
+          <td>Down Main to Up Main, used for engine movements and for the Sunday engineer possessions.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#C3242E"></span>7</td>
+          <td><b>Down Main Starting</b><br><span class="rl-col">Red / stop signal</span></td>
+          <td>Sends a Down train on towards Calderfoot over the main leg of 4.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#C3242E"></span>8</td>
+          <td><b>Quarry Branch Starting</b><br><span class="rl-col">Red / stop signal</span></td>
+          <td>Sends a Down train up the branch over the reverse leg of 4. Cannot stand off at the same time as 7.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#C3242E"></span>9</td>
+          <td><b>Up Home</b><br><span class="rl-col">Red / stop signal</span></td>
+          <td>Reads in from Calderfoot. Opposed to 1, so the two can never be off together.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#E3A82A"></span>10</td>
+          <td><b>Up Distant</b><br><span class="rl-col">Amber / distant signal</span></td>
+          <td>The Up counterpart of 2, and bound by the same rule about the signals in advance of it.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#F4F1E6"></span>11</td>
+          <td><b>Spare</b><br><span class="rl-col">White / spare</span></td>
+          <td>Was the Up Goods Loop home until 1962. Nothing is connected to it now.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#C3242E"></span>12</td>
+          <td><b>Up Starting</b><br><span class="rl-col">Red / stop signal</span></td>
+          <td>Sends an Up train away towards Thrushmoor Bank, clear of the crossover.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#7C5533"></span>13</td>
+          <td><b>Gate lock &mdash; Hollowgate Lane</b><br><span class="rl-col">Brown / gate lever</span></td>
+          <td>Bolts the gates where they stand. Every running signal in the frame waits on this lever.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#7C5533"></span>14</td>
+          <td><b>Gate stop lock</b><br><span class="rl-col">Brown / gate lever</span></td>
+          <td>Frees the gate wheel so the gates can be swung off the railway and across the road.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#23292B"></span>15</td>
+          <td><b>Points 15 &mdash; goods shed siding</b><br><span class="rl-col">Black / points</span></td>
+          <td>Trailing points off the Up Main into the goods shed. Locked by 12 while an Up train is signalled away.</td>
+        </tr>
+        <tr>
+          <td class="n"><span class="sw" style="background:#F4F1E6"></span>16</td>
+          <td><b>Spare</b><br><span class="rl-col">White / spare</span></td>
+          <td>Cut out when the water column was removed. Painted white and left standing.</td>
+        </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== the tappet ===================== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <div class="rule"></div>
+        <div class="head-row">
+          <div>
+            <span class="sec-no">&sect; 02 &mdash; THE LOCKING</span>
+            <h2>A notch, a bar, and a piece of steel that says no.</h2>
+          </div>
+          <p class="lede">Nothing in the tray under the frame is electrical, and nothing in it is clever. It is a set of flat bars that can only slide when the notches line up.</p>
+        </div>
+      </div>
+
+      <figure class="tappet reveal">
+          <svg viewBox="0 0 760 286" role="img" aria-labelledby="tappetTitle">
+            <title id="tappetTitle">Two states of a tappet lock. On the left, lever 4 stands normal, its tappet notch is in line with the locking bar, and the bar can slide, so lever 7 is free. On the right, lever 4 has been pulled, the notch has moved out of line, and the bar has run up against solid steel, so lever 7 is locked.</title>
+
+            <!-- left: free -->
+            <text class="tp-text" x="177" y="18" text-anchor="middle">4 NORMAL</text>
+            <rect class="tp-tappet" x="160" y="26" width="34" height="72"/>
+            <rect class="tp-tappet" x="160" y="124" width="34" height="84"/>
+            <rect class="tp-bar" x="36" y="98" width="250" height="24"/>
+            <rect class="tp-dog" x="164" y="100" width="26" height="20"/>
+            <polygon class="tp-dog" points="294,110 316,110 316,104 330,113 316,122 316,116 294,116"/>
+            <text class="tp-text" x="36" y="88">LOCKING BAR &mdash; TO LEVER 7</text>
+            <text class="tp-text" x="177" y="230" text-anchor="middle">TAPPET</text>
+            <text class="tp-text" x="36" y="252" style="fill:#E3A82A">7 FREE TO PULL</text>
+            <line class="tp-lead" x1="177" y1="212" x2="177" y2="222"/>
+
+            <!-- right: locked -->
+            <text class="tp-text" x="557" y="18" text-anchor="middle">4 REVERSE</text>
+            <rect class="tp-tappet" x="540" y="26" width="34" height="98"/>
+            <rect class="tp-tappet" x="540" y="150" width="34" height="58"/>
+            <rect class="tp-bar" x="416" y="98" width="102" height="24"/>
+            <rect class="tp-dog tp-dog--stuck" x="518" y="96" width="22" height="28"/>
+            <text class="tp-text" x="416" y="88">LOCKING BAR &mdash; TO LEVER 7</text>
+            <text class="tp-text" x="557" y="230" text-anchor="middle">TAPPET, PULLED DOWN</text>
+            <text class="tp-text" x="416" y="252" style="fill:#E44B54">7 LOCKED</text>
+            <line class="tp-lead" x1="557" y1="212" x2="557" y2="222"/>
+
+            <line class="tp-lead" x1="370" y1="20" x2="370" y2="266"/>
+          </svg>
+        <figcaption>Each lever drives a flat steel tappet down through the tray. The locking bars that serve other levers run across them. A bar can only slide if every tappet it crosses is showing it a notch &mdash; and a lever can only move if the bars around its own tappet have somewhere to go.</figcaption>
+      </figure>
+
+      <div class="two" style="margin-top: clamp(1.8rem, 3.5vw, 2.8rem)">
+        <div>
+          <p>The consequence is the whole of railway safety as it was understood in 1897, and it is still the reason a mechanical box is trusted: the signalman is not asked to remember which combinations are dangerous. The combinations that are dangerous simply cannot be made. A wrong route is not an error that gets caught. It is a movement that does not happen.</p>
+          <p>It also explains the one thing visitors find strangest. You cannot put a lever back whenever you like. If lever 2 is off, then 7 is trapped reverse, because 2 was only allowed off on the strength of 7 being off first. The frame unwinds in the reverse of the order it was wound up, and it will wait all day.</p>
+          <dl class="facts">
+            <div><dt>Locking tray</dt><dd>Original, 1897. Re-bushed 2009.</dd></div>
+            <div><dt>Bars</dt><dd>24 locking bars, 61 dogs</dd></div>
+            <div><dt>Lever pitch</dt><dd>5&frac12; inches</dd></div>
+            <div><dt>Pull</dt><dd>40&ndash;70 lb at the catch handle</dd></div>
+          </dl>
+          <p class="label" style="margin-top:1.4rem">Proved against the table below on every open day since 2004.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== the locking table ===================== -->
+  <section class="section section--paper">
+    <div class="wrap">
+      <div class="head">
+        <div class="rule"></div>
+        <div class="head-row">
+          <div>
+            <span class="sec-no">&sect; 03 &mdash; THE LOCKING TABLE</span>
+            <h2>The same relationship, written down twice.</h2>
+          </div>
+          <p class="lede">Read a row across. <b>Holds</b> is what this lever pins where it stands the moment it is pulled &mdash; and, read the other way, what has to be standing that way before it will move at all. <b>Both</b> is a bolt, which holds in either direction and is not held back. <b>Held by</b> is whoever is sitting on this lever now.</p>
+        </div>
+      </div>
+
+      <div class="ltable-scroll">
+        <table class="ltable">
+          <thead>
+            <tr><th>N&deg;</th><th>Works</th><th>Holds</th><th>Held by</th></tr>
+          </thead>
+          <tbody data-locking-table></tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:1.6rem; color:#3D4440; max-width:64ch; font-size:.93rem">
+        A frame is only as good as this document, which is why we draw one for every box we overhaul and then prove it lever by lever before we sign it off. An undocumented frame is not a safe frame, however well it is greased.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== overhaul ===================== -->
+  <section class="section section--box">
+    <div class="wrap">
+      <div class="two">
+        <div>
+          <span class="sec-no">&sect; 04 &mdash; FOR OTHER BOXES</span>
+          <h2>We will come and look at yours.</h2>
+          <p class="lede" style="margin-top:1.1rem">Eleven frames since 2011, from a six-lever ground frame in Shropshire to a forty-four-lever box in Caithness. Survey first, always &mdash; we have never yet quoted for a frame we had not knelt under.</p>
+          <a class="go" href="visit.html#enquiry" style="margin-top:1.6rem">Ask about a survey
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <dl class="facts">
+          <div><dt>Survey</dt><dd>Two days on site, drawings and a condition report</dd></div>
+          <div><dt>Strip and re-bush</dt><dd>In our shop at Thrushmoor, six to fourteen weeks</dd></div>
+          <div><dt>Locking</dt><dd>Re-cut to a table we draw and prove with you</dd></div>
+          <div><dt>Handover</dt><dd>Two days training for your own duty staff</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3>Hollowgate Junction Signal Box Trust</h3>
+        <address>
+          Box No. 21, Hollowgate Lane<br>
+          Thrushmoor, West Riding HG7 4QB<br>
+          <a href="tel:+441134960021">0113 496 0021</a><br>
+          <a href="mailto:box@hollowgatejunction.org.uk">box@hollowgatejunction.org.uk</a>
+        </address>
+      </div>
+      <div>
+        <h3>Pages</h3>
+        <ul>
+          <li><a href="index.html">The box</a></li>
+          <li><a href="frame.html">The frame and its locking</a></li>
+          <li><a href="visit.html">Visit</a></li>
+          <li><a href="visit.html#enquiry">Enquiries and bookings</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Open</h3>
+        <ul>
+          <li>Second Saturday, 10.00&ndash;16.00</li>
+          <li>Groups by arrangement</li>
+          <li>Closed January</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; <span data-year>2026</span> Hollowgate Junction Signal Box Trust</span>
+      <span>Registered charity 1104772</span>
+      <span>Grade II listed &middot; list entry 1241067</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/frame.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
