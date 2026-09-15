@@ -20,17 +20,17 @@
   /* —— 1. Scroll-driven reel —— */
   var STAGES = [
     {
-      meta: "01 — Capture",
+      meta: "On camera",
       title: "Lens-true plates, held still long enough to believe.",
       body: "We start on location and in camera — dense stills and motion that carry specular truth into every generative pass."
     },
     {
-      meta: "02 — Synthesize",
+      meta: "In volume",
       title: "Volumes grown from sparse views.",
       body: "Spatial reconstruction fills the set between frames — camera moves that feel surveyed, not hallucinated."
     },
     {
-      meta: "03 — Deliver",
+      meta: "In the cut",
       title: "A finished cut, graded for the room.",
       body: "Realtime preview loops keep creative decisions in the session. What leaves the studio is already cinema."
     }
@@ -90,9 +90,9 @@
   var previewImgs = document.querySelectorAll(".preview-img");
   var previewStatus = document.getElementById("previewStatus");
   var STATUS = {
-    video: "Target: Camera_Path_Vector.mov",
-    spatial: "Target: Gaussian_Point_Cloud.ply",
-    live: "Target: Socket_Stream_v4"
+    video: "Generative video plate",
+    spatial: "Spatial volume plate",
+    live: "Realtime preview plate"
   };
 
   function placePill(btn) {
@@ -184,9 +184,9 @@
       if (playBtn) playBtn.classList.remove("is-playing");
       if (previewStatus) {
         var prev = previewStatus.textContent;
-        previewStatus.textContent = "Complete — ready for grade";
+        previewStatus.textContent = "Ready for grade";
         setTimeout(function () {
-          if (previewStatus && previewStatus.textContent === "Complete — ready for grade") {
+          if (previewStatus && previewStatus.textContent === "Ready for grade") {
             var active = document.querySelector(".mode-btn.is-active");
             var mode = active ? active.getAttribute("data-mode") : "video";
             previewStatus.textContent = STATUS[mode] || prev;
@@ -208,5 +208,24 @@
       playStart = performance.now();
       playRaf = requestAnimationFrame(tick);
     });
+  }
+
+  /* —— 4. Hero mute loop —— */
+  var heroMedia = document.querySelector(".hero-media");
+  var heroVideo = document.querySelector(".hero-video");
+  if (heroMedia && heroVideo) {
+    function markVideoReady() {
+      heroMedia.classList.add("is-video-ready");
+    }
+    heroVideo.addEventListener("playing", markVideoReady);
+    heroVideo.addEventListener("loadeddata", function () {
+      var playPromise = heroVideo.play();
+      if (playPromise && playPromise.catch) {
+        playPromise.catch(function () {
+          /* Autoplay blocked — keep poster fallback visible */
+        });
+      }
+    });
+    if (heroVideo.readyState >= 2) markVideoReady();
   }
 })();

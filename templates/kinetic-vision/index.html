@@ -8,7 +8,7 @@
 <meta name="robots" content="index, follow">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="canonical" href="https://templates.thornburystudio.com/templates/kinetic-vision/">
+<link rel="canonical" href="https://thornbury-studio.github.io/Website-Collection/templates/kinetic-vision/">
 <meta name="theme-color" content="#08090A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2308090A'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23CCFF00'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%2308090A'/%3E%3C/svg%3E">
 
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="KINETIC">
 <meta property="og:title" content="KINETIC — Cinematic Vision Studio">
 <meta property="og:description" content="High-fidelity generative film, spatial capture, and realtime preview — built as a brand film you can scroll.">
-<meta property="og:url" content="https://templates.thornburystudio.com/templates/kinetic-vision/">
-<meta property="og:image" content="https://templates.thornburystudio.com/templates/kinetic-vision/img/poster-hero.webp">
+<meta property="og:url" content="https://thornbury-studio.github.io/Website-Collection/templates/kinetic-vision/">
+<meta property="og:image" content="https://thornbury-studio.github.io/Website-Collection/templates/kinetic-vision/img/poster-hero.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="KINETIC — Cinematic Vision Studio">
 <meta name="twitter:description" content="High-fidelity generative film, spatial capture, and realtime preview.">
-<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/kinetic-vision/img/poster-hero.webp">
+<meta name="twitter:image" content="https://thornbury-studio.github.io/Website-Collection/templates/kinetic-vision/img/poster-hero.webp">
 
 <script type="application/ld+json">
 {
@@ -29,7 +29,7 @@
   "@type": "ProfessionalService",
   "name": "KINETIC",
   "description": "Cinematic vision studio for generative film, spatial capture, and realtime preview pipelines.",
-  "url": "https://templates.thornburystudio.com/templates/kinetic-vision/",
+  "url": "https://thornbury-studio.github.io/Website-Collection/templates/kinetic-vision/",
   "areaServed": "Worldwide"
 }
 </script>
@@ -78,7 +78,10 @@
   <!-- HERO -->
   <section class="hero" id="top">
     <div class="hero-media" aria-hidden="true">
-      <img class="hero-img kenburns" src="img/poster-hero.webp" alt="" width="1920" height="1080" fetchpriority="high">
+      <video class="hero-video" muted playsinline loop autoplay preload="metadata" poster="img/poster-hero.webp">
+        <source src="video/hero.mp4" type="video/mp4">
+      </video>
+      <img class="hero-img kenburns hero-fallback" src="img/poster-hero.webp" alt="" width="1920" height="1080" fetchpriority="high">
       <div class="hero-scrim"></div>
     </div>
     <div class="hero-copy">
@@ -103,7 +106,7 @@
         <div class="reel-scrim"></div>
       </div>
       <div class="reel-copy">
-        <p class="meta-label" id="reelMeta">01 — Capture</p>
+        <p class="meta-label" id="reelMeta">On camera</p>
         <h2 class="reel-title" id="reelTitle">Lens-true plates, held still long enough to believe.</h2>
         <p class="reel-body" id="reelBody">We start on location and in camera — dense stills and motion that carry specular truth into every generative pass.</p>
       </div>
@@ -140,7 +143,7 @@
           <button type="button" class="play-btn" id="playBtn" aria-label="Play preview">
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M8 5.14v13.72L19 12 8 5.14z"/></svg>
           </button>
-          <p class="preview-status" id="previewStatus">Target: Camera_Path_Vector.mov</p>
+          <p class="preview-status" id="previewStatus">Generative video plate</p>
         </div>
         <div class="timeline" aria-hidden="true">
           <span class="tc" id="tcIn">00:00:00:00</span>
@@ -161,17 +164,17 @@
     </div>
     <div class="specs-row">
       <article class="spec">
-        <p class="spec-id">01</p>
+        <p class="spec-id">Temporal</p>
         <h3>Temporal upscaling</h3>
         <p>Multi-frame synthesis that keeps specular grit and micro-texture when you push resolution.</p>
       </article>
       <article class="spec">
-        <p class="spec-id">02</p>
+        <p class="spec-id">Spatial</p>
         <h3>Spatial conversion</h3>
         <p>Sparse monocular views into volumetric plates ready for lighting and camera moves.</p>
       </article>
       <article class="spec">
-        <p class="spec-id">03</p>
+        <p class="spec-id">Live</p>
         <h3>Live grade loops</h3>
         <p>Realtime preview so creative calls happen in the room, not in overnight renders.</p>
       </article>
