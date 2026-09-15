@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+<title>Contact — VEXOR</title>
+<meta name="description" content="Contact VEXOR Singapore — sales, service, and ownership questions.">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/vexor/contact.html">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<header class="top">
+  <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true"></span>VEXOR</a>
+  <nav aria-label="Primary">
+    <a href="models.html">Models</a>
+    <a href="compare.html" class="compare-link">Compare <span class="compare-badge" data-compare-count hidden>0</span></a>
+    <a href="technology.html">Technology</a>
+    <a href="ownership.html">Ownership</a>
+    <a href="ride.html" class="nav-cta">Book a ride</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="contact.html">Contact</a>
+  <a href="locations.html">Locations</a>
+  <a href="ride.html">Book a ride</a>
+</aside>
+
+<main id="main" class="page-pad sec">
+  <div class="wrap form-grid">
+    <div>
+      <span class="label">Contact</span>
+      <h1 class="reveal" style="margin-top:10px">Talk to the hall</h1>
+      <p class="lede muted reveal d1">Sales, service bookings, parts, and ownership questions. For demonstration rides use the ride form — it routes faster.</p>
+      <p class="muted reveal d2" style="margin-top:20px">
+        <a href="mailto:ride@vexor.sg">ride@vexor.sg</a><br>
+        +65 6248 9100 · Kallang<br>
+        +65 6261 4400 · Jurong
+      </p>
+      <p class="cta-row reveal d2"><a class="btn btn-ghost" href="locations.html">View locations</a></p>
+    </div>
+    <div>
+      <div id="contact-form-wrap">
+        <form id="contact-form" novalidate>
+          <div class="field">
+            <label class="label" for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+            <div class="error" data-error-for="name"></div>
+          </div>
+          <div class="field">
+            <label class="label" for="f-phone">Mobile</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
+            <div class="error" data-error-for="phone"></div>
+          </div>
+          <div class="field">
+            <label class="label" for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+            <div class="error" data-error-for="email"></div>
+          </div>
+          <div class="field">
+            <label class="label" for="f-message">Message</label>
+            <textarea id="f-message" name="message" required></textarea>
+            <div class="error" data-error-for="message"></div>
+          </div>
+          <button class="btn btn-signal" type="submit">Send message</button>
+        </form>
+      </div>
+      <div class="success-panel" id="contact-success" hidden>
+        <span class="label">Message ready</span>
+        <h2>Thanks — here is your copy</h2>
+        <pre id="success-summary" class="muted" style="white-space:pre-wrap;font-family:inherit;margin:12px 0 20px"></pre>
+        <a class="btn btn-signal" id="wa-link" href="#" rel="noopener" target="_blank">Continue on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <div><div class="foot-brand">VEXOR</div><p class="muted">Singapore motorcycle marque.</p></div>
+  <div><span class="label">Explore</span><ul><li><a href="models.html">Models</a></li><li><a href="ride.html">Book a ride</a></li></ul></div>
+  <div><span class="label">Contact</span><ul><li><a href="locations.html">Locations</a></li><li><a href="mailto:ride@vexor.sg">ride@vexor.sg</a></li></ul></div>
+</footer>
+</div>
+<script src="js/models-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/forms.js"></script>
+</body>
+</html>

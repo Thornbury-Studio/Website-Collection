@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+<title>Models — VEXOR</title>
+<meta name="description" content="Filter and sort the VEXOR catalogue — Naked, Adventure, Sport, Touring, Electric, Heritage. Prices in SGD.">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/vexor/models.html">
+<meta property="og:title" content="Models — VEXOR">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/vexor/img/og.jpg">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<header class="top">
+  <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true"></span>VEXOR</a>
+  <nav aria-label="Primary">
+    <a href="models.html" aria-current="page">Models</a>
+    <a href="compare.html" class="compare-link">Compare <span class="compare-badge" data-compare-count hidden>0</span></a>
+    <a href="technology.html">Technology</a>
+    <a href="ownership.html">Ownership</a>
+    <a href="ride.html" class="nav-cta">Book a ride</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="models.html">Models</a>
+  <a href="compare.html">Compare</a>
+  <a href="technology.html">Technology</a>
+  <a href="ownership.html">Ownership</a>
+  <a href="locations.html">Locations</a>
+  <a href="contact.html">Contact</a>
+  <a href="ride.html">Book a ride</a>
+</aside>
+
+<main id="main" class="page-pad sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Catalogue</span>
+      <h1 class="reveal">All machines</h1>
+      <p class="muted reveal d1" id="result-count">6 machines</p>
+    </div>
+
+    <div class="filters" role="search">
+      <div class="filter-field">
+        <label class="label" for="f-q">Search</label>
+        <input id="f-q" type="search" placeholder="Name or class" autocomplete="off">
+      </div>
+      <div class="filter-field">
+        <label class="label" for="f-class">Class</label>
+        <select id="f-class"><option value="all">All</option></select>
+      </div>
+      <div class="filter-field">
+        <label class="label" for="f-price">Max price (SGD)</label>
+        <select id="f-price">
+          <option value="">Any</option>
+          <option value="18000">≤ 18,000</option>
+          <option value="22000">≤ 22,000</option>
+          <option value="28000">≤ 28,000</option>
+          <option value="35000">≤ 35,000</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label class="label" for="f-power">Min power (kW)</label>
+        <select id="f-power">
+          <option value="">Any</option>
+          <option value="50">≥ 50</option>
+          <option value="80">≥ 80</option>
+          <option value="100">≥ 100</option>
+          <option value="130">≥ 130</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label class="label" for="f-sort">Sort</label>
+        <select id="f-sort">
+          <option value="name">Name</option>
+          <option value="price">Price</option>
+          <option value="power">Power</option>
+          <option value="weight">Weight</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label class="label" for="f-avail">Availability</label>
+        <select id="f-avail">
+          <option value="all">All</option>
+          <option value="in">In stock</option>
+        </select>
+      </div>
+      <div class="filter-field" style="align-self:end">
+        <button class="btn btn-ghost" type="button" id="f-clear" style="width:100%">Clear</button>
+      </div>
+    </div>
+
+    <div class="catalogue" id="catalogue"></div>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <div><div class="foot-brand">VEXOR</div><p class="muted">Singapore motorcycle marque.</p></div>
+  <div><span class="label">Explore</span><ul><li><a href="models.html">Models</a></li><li><a href="compare.html">Compare</a></li><li><a href="ride.html">Book a ride</a></li></ul></div>
+  <div><span class="label">Contact</span><ul><li><a href="contact.html">Contact</a></li><li><a href="mailto:ride@vexor.sg">ride@vexor.sg</a></li></ul></div>
+</footer>
+</div>
+<div class="sticky-cta"><a class="btn btn-signal" href="ride.html">Book a ride</a><a class="btn btn-ghost" href="compare.html">Compare</a></div>
+<script src="js/models-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/models.js"></script>
+</body>
+</html>

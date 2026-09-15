@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+<title>Model — VEXOR</title>
+<meta name="description" content="VEXOR model detail — gallery, specs, colour, finance calculator, compare.">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/vexor/model.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/vexor/img/og.jpg">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<header class="top">
+  <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true"></span>VEXOR</a>
+  <nav aria-label="Primary">
+    <a href="models.html">Models</a>
+    <a href="compare.html" class="compare-link">Compare <span class="compare-badge" data-compare-count hidden>0</span></a>
+    <a href="technology.html">Technology</a>
+    <a href="ownership.html">Ownership</a>
+    <a href="ride.html" class="nav-cta">Book a ride</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="models.html">Models</a>
+  <a href="compare.html">Compare</a>
+  <a href="technology.html">Technology</a>
+  <a href="ownership.html">Ownership</a>
+  <a href="ride.html">Book a ride</a>
+</aside>
+
+<main id="main" class="wrap model-hero">
+  <div>
+    <div class="gallery-main">
+      <img id="gallery-main" src="img/model-line.png" alt="" width="1400" height="875">
+      <div class="gallery-nav">
+        <button type="button" id="gal-prev" aria-label="Previous image">‹</button>
+        <button type="button" id="gal-next" aria-label="Next image">›</button>
+      </div>
+    </div>
+    <div class="gallery-thumbs" id="gallery-thumbs"></div>
+  </div>
+  <div>
+    <div class="label" id="m-class">Naked</div>
+    <h1 id="m-name" style="margin-top:8px">LINE</h1>
+    <p class="lede" id="m-line" style="margin-top:12px"></p>
+    <p class="muted" id="m-layout" style="margin-top:8px"></p>
+    <p style="margin-top:16px;font-size:1.4rem;font-variation-settings:'wdth' 115,'wght' 750" id="m-price"></p>
+    <p class="muted" id="m-story" style="margin-top:16px"></p>
+    <ul class="muted" id="hl" style="margin:16px 0 8px 1.1em"></ul>
+
+    <div class="label" style="margin-top:20px">Colour</div>
+    <div class="swatches" id="swatches"></div>
+    <span class="label color-name" id="color-name"></span>
+
+    <div class="cta-row">
+      <a class="btn btn-signal" id="ride-link" href="ride.html">Book this ride</a>
+      <button class="btn btn-ghost" type="button" id="compare-btn">Add to compare</button>
+      <button class="btn btn-ghost" type="button" id="spec-dl">Download spec</button>
+    </div>
+
+    <div class="spec-grid" id="specs"></div>
+
+    <div class="finance">
+      <span class="label">Finance estimate</span>
+      <p class="muted" style="margin-top:8px;font-size:0.95rem">Reducing-balance estimate for planning only. Final terms set by your lender.</p>
+      <div class="finance-grid">
+        <div class="field">
+          <label class="label" for="fin-price">Price (SGD)</label>
+          <input id="fin-price" data-fin-price type="number" min="0" step="100">
+        </div>
+        <div class="field">
+          <label class="label" for="fin-down">Down payment %</label>
+          <input id="fin-down" data-fin-down type="number" min="0" max="80" value="20">
+        </div>
+        <div class="field">
+          <label class="label" for="fin-months">Tenure (months)</label>
+          <input id="fin-months" data-fin-months type="number" min="12" max="60" step="6" value="36">
+        </div>
+        <div class="field">
+          <label class="label" for="fin-rate">Interest % / year</label>
+          <input id="fin-rate" data-fin-rate type="number" min="0" max="12" step="0.1" value="2.8">
+        </div>
+      </div>
+      <div class="finance-out">
+        <div><span class="label">Monthly</span><strong data-fin-monthly>—</strong></div>
+        <div><span class="label">Total payable</span><strong data-fin-total>—</strong></div>
+        <div><span class="label">Interest</span><strong data-fin-interest>—</strong></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<section class="sec wrap">
+  <div class="sec-head"><span class="label">Related</span><h2>Also consider</h2></div>
+  <div class="related" id="related"></div>
+</section>
+
+<footer class="site-foot wrap">
+  <div><div class="foot-brand">VEXOR</div><p class="muted">Singapore motorcycle marque.</p></div>
+  <div><span class="label">Explore</span><ul><li><a href="models.html">Models</a></li><li><a href="compare.html">Compare</a></li></ul></div>
+  <div><span class="label">Contact</span><ul><li><a href="ride.html">Book a ride</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+</footer>
+</div>
+<div class="sticky-cta"><a class="btn btn-signal" href="ride.html">Book a ride</a><a class="btn btn-ghost" href="compare.html">Compare</a></div>
+<script src="js/models-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/model.js"></script>
+</body>
+</html>
