@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="628" viewBox="0 0 1200 628">
+  <rect width="1200" height="628" fill="#1C1F22"/>
+  <rect x="0" y="0" width="12" height="628" fill="#A67C3D"/>
+  <text x="80" y="280" font-family="Georgia,serif" font-size="64" fill="#E8E4DC">Copper Ridge</text>
+  <text x="80" y="350" font-family="Arial Narrow,Arial,sans-serif" font-size="28" letter-spacing="4" fill="#A67C3D">CARTRIDGE CO. · MISSOULA, MT</text>
+  <text x="80" y="480" font-family="Arial,sans-serif" font-size="22" fill="#9AA19A">Ammunition by caliber, in stock today.</text>
+</svg>
