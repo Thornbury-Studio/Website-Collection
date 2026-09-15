@@ -84,6 +84,13 @@ h1, h2, h3, .display {
   letter-spacing: -.012em;
   margin: 0;
   text-wrap: balance;
+  /* A display heading must never paint outside its own box. A wordmark with
+     no space in it has no break opportunity, so in a grid track narrower than
+     the rendered text it does not wrap — it overflows, silently, on top of
+     whatever sits in the next column. This makes the worst case an ugly wrap
+     inside the box instead of a clean-looking overlap outside it. The sizing
+     rules below are what stop it reaching the worst case. */
+  overflow-wrap: break-word;
 }
 
 h1 {
@@ -656,9 +663,23 @@ a.piece:hover { background: var(--paper-2); }
 @media (max-width: 880px) { .foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .foot-grid { grid-template-columns: 1fr; } }
 
+/* Every footer column is a size container, so the wordmark can be measured
+   against the box it actually lives in. */
+.foot-grid > * { container-type: inline-size; }
+
+/* "ANORAK°" renders 5.68em wide and has no break opportunity in it. The old
+   8vw sized it off the viewport while its container is only about a quarter
+   of the viewport, so from 1200px up it ran 85-155px past its own column and
+   dropped the blue degree mark on top of the Shop list. 4vw fits the 4-column
+   track across the whole desktop range; the container-query version below
+   fits it at a constant 88% of whatever the column turns out to be, which is
+   the version that survives someone changing the grid ratio. */
 .foot h2 {
-  font-size: clamp(2.4rem, 8vw, 5rem);
+  font-size: clamp(2.1rem, 4vw, 3.8rem);
   line-height: .84; margin-bottom: 1rem;
+}
+@supports (container-type: inline-size) {
+  .foot h2 { font-size: clamp(2.1rem, 15.5cqi, 3.8rem); }
 }
 .foot ul { list-style: none; margin: .8rem 0 0; padding: 0; display: grid; gap: .5rem; }
 .foot a { text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .18s var(--ease); }
