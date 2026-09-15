@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
-  <title>Shipping &amp; Restrictions — Copper Ridge Cartridge Co.</title>
-  <meta name="description" content="Ground hazmat shipping, hazmat fee, signature requirements, and state restrictions for Copper Ridge Cartridge Co.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/shipping.html">
+  <title>Caliber Guides — Copper Ridge Cartridge Co.</title>
+  <meta name="description" content="Short caliber notes from Copper Ridge: 9mm FMJ vs JHP, .223 vs 5.56, 12ga loads, and .22 LR.">
+  <link rel="canonical" href="https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/guides.html">
   <meta name="theme-color" content="#F4F4F2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +15,7 @@
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-  <a class="skip" href="#policy">Skip to policy</a>
+  <a class="skip" href="#guides">Skip to guides</a>
 
   <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle" hidden>
     <div class="age-card">
@@ -45,14 +44,12 @@
     </a>
     <nav class="desktop-nav" aria-label="Main">
       <a href="shop.html">Shop</a>
-      <a href="guides.html">Guides</a>
-      <a href="shipping.html" aria-current="page">Shipping</a>
+      <a href="guides.html" aria-current="page">Guides</a>
+      <a href="shipping.html">Shipping</a>
     </nav>
     <div class="header-actions">
       <a class="account-link" href="account.html">Sign in</a>
-      <button class="cart-btn" type="button" data-cart-open aria-label="Open cart">
-        Cart <span class="cart-count">0</span>
-      </button>
+      <button class="cart-btn" type="button" data-cart-open aria-label="Open cart">Cart <span class="cart-count">0</span></button>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
     </div>
   </header>
@@ -64,42 +61,44 @@
     <a href="account.html">Sign in</a>
   </div>
 
-  <article class="policy" id="policy">
-    <p class="kicker">Policy</p>
-    <h1>Shipping &amp; restrictions</h1>
-    <p>Copper Ridge ships ammunition, primers, and powder by ground hazmat from Missoula, Montana. We sell to adults 21 and older. Card payment is authorized at fulfillment.</p>
+  <article class="policy" id="guides">
+    <p class="kicker">Counter notes</p>
+    <h1>Caliber guides</h1>
+    <p>Short answers we give at the desk. Not ballistic gospel — just what people ask before they buy a box.</p>
 
-    <h2>Ground hazmat</h2>
-    <p>Loaded ammunition and primers are limited-quantity ground only. We do not offer air, overnight, or PO Box delivery on hazmat lines. Expect 5–8 business days to most Lower 48 addresses after the order leaves the floor.</p>
-
-    <h2>Fees</h2>
-    <p>Cart totals show three lines: goods, a flat hazmat handling fee when any ammo/primer/powder SKU is present, and ground shipping by weight class. Ground is free over $200 in goods.</p>
-
-    <h2>Signature &amp; ID</h2>
-    <p>Every ammunition order requires an adult signature. Checkout includes a 21+ / signature confirmation. The carrier may ask for government ID that matches the ship-to name.</p>
-
-    <h2>Destinations we do not serve</h2>
-    <p>We cannot ship ammunition, primers, or powder to:</p>
-    <ul class="state-list">
-      <li>AK</li>
-      <li>HI</li>
-    </ul>
-    <p>Individual SKUs list additional blocked states on the product page. Changing state at checkout removes restricted lines from the cart automatically.</p>
-
-    <h2>Returns</h2>
-    <p>Unopened factory-sealed ammunition may be returned within 14 days for store credit. We do not accept opened boxes, mixed lots, or powder canisters once shipped.</p>
-
-    <h2>Contact</h2>
-    <p>Shipping desk: <a href="tel:+14065550198">(406) 555-0198</a> · Mon–Sat 8:00–18:00 Mountain Time<br>
-    418 Railroad Street, Suite B, Missoula, MT 59802</p>
-
-    <p style="margin-top:36px"><a class="btn btn-brass" href="shop.html">Back to catalog</a></p>
+    <div class="guide-list">
+      <section class="guide-card" id="9mm">
+        <h2>9mm — FMJ vs JHP</h2>
+        <p>FMJ for range and training. JHP for defensive loads. We stock both; JHP has state blocks. If you just need rounds downrange, buy the house 115gr FMJ or the case.</p>
+        <p><a href="shop.html?q=9mm">Shop 9mm</a> · <a href="product.html#cr-9mm-115-fmj">House FMJ box</a></p>
+      </section>
+      <section class="guide-card" id="223">
+        <h2>.223 Rem vs 5.56 NATO</h2>
+        <p>Most modern AR-pattern rifles marked 5.56 can shoot .223. Do not assume a .223-only chamber is happy with full-pressure 5.56. Green tip (M855-style) is restricted in some states on our list.</p>
+        <p><a href="shop.html?q=.223">Shop .223 / 5.56</a></p>
+      </section>
+      <section class="guide-card" id="12ga">
+        <h2>12 gauge — target, buck, slug</h2>
+        <p>#7.5 target for clays. 00 buck for defensive sleeves (state checks apply). Rifled slugs for deer where shotgun-only rules apply. Hull type matters if you reload.</p>
+        <p><a href="shop.html?dept=shotgun">Shop shotgun</a></p>
+      </section>
+      <section class="guide-card" id="22lr">
+        <h2>.22 LR — plinking vs match</h2>
+        <p>Mini-Mags and Super Extra for volume. Tenex when the lot matters. Rimfire duds happen — buy a little extra for a match day.</p>
+        <p><a href="shop.html?dept=rimfire">Shop rimfire</a></p>
+      </section>
+      <section class="guide-card" id="reloading">
+        <h2>Reloading aisle</h2>
+        <p>Primers and powder ship hazmat ground, not with each other in the same carton on our floor. Dies and brass are standard ground. Read the SKU page before you add both to one cart.</p>
+        <p><a href="shop.html?dept=reloading">Shop reloading</a> · <a href="shipping.html">Shipping rules</a></p>
+      </section>
+    </div>
   </article>
 
   <footer class="site-footer">
     <div class="footer-legal">
       <span>© <span id="year">2026</span> Copper Ridge Cartridge Co.</span>
-      <span>Must be 21+ to purchase ammunition</span>
+      <a href="shop.html">Shop</a>
     </div>
   </footer>
 

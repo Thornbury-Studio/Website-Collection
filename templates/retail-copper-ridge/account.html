@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
-  <title>Shipping &amp; Restrictions — Copper Ridge Cartridge Co.</title>
-  <meta name="description" content="Ground hazmat shipping, hazmat fee, signature requirements, and state restrictions for Copper Ridge Cartridge Co.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/shipping.html">
+  <title>Sign in — Copper Ridge Cartridge Co.</title>
+  <meta name="description" content="Customer account sign-in for Copper Ridge Cartridge Co.">
+  <link rel="canonical" href="https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/account.html">
   <meta name="theme-color" content="#F4F4F2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +15,7 @@
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-  <a class="skip" href="#policy">Skip to policy</a>
+  <a class="skip" href="#account">Skip to sign in</a>
 
   <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle" hidden>
     <div class="age-card">
@@ -46,13 +45,11 @@
     <nav class="desktop-nav" aria-label="Main">
       <a href="shop.html">Shop</a>
       <a href="guides.html">Guides</a>
-      <a href="shipping.html" aria-current="page">Shipping</a>
+      <a href="shipping.html">Shipping</a>
     </nav>
     <div class="header-actions">
-      <a class="account-link" href="account.html">Sign in</a>
-      <button class="cart-btn" type="button" data-cart-open aria-label="Open cart">
-        Cart <span class="cart-count">0</span>
-      </button>
+      <a class="account-link" href="account.html" aria-current="page">Sign in</a>
+      <button class="cart-btn" type="button" data-cart-open aria-label="Open cart">Cart <span class="cart-count">0</span></button>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
     </div>
   </header>
@@ -64,42 +61,23 @@
     <a href="account.html">Sign in</a>
   </div>
 
-  <article class="policy" id="policy">
-    <p class="kicker">Policy</p>
-    <h1>Shipping &amp; restrictions</h1>
-    <p>Copper Ridge ships ammunition, primers, and powder by ground hazmat from Missoula, Montana. We sell to adults 21 and older. Card payment is authorized at fulfillment.</p>
-
-    <h2>Ground hazmat</h2>
-    <p>Loaded ammunition and primers are limited-quantity ground only. We do not offer air, overnight, or PO Box delivery on hazmat lines. Expect 5–8 business days to most Lower 48 addresses after the order leaves the floor.</p>
-
-    <h2>Fees</h2>
-    <p>Cart totals show three lines: goods, a flat hazmat handling fee when any ammo/primer/powder SKU is present, and ground shipping by weight class. Ground is free over $200 in goods.</p>
-
-    <h2>Signature &amp; ID</h2>
-    <p>Every ammunition order requires an adult signature. Checkout includes a 21+ / signature confirmation. The carrier may ask for government ID that matches the ship-to name.</p>
-
-    <h2>Destinations we do not serve</h2>
-    <p>We cannot ship ammunition, primers, or powder to:</p>
-    <ul class="state-list">
-      <li>AK</li>
-      <li>HI</li>
-    </ul>
-    <p>Individual SKUs list additional blocked states on the product page. Changing state at checkout removes restricted lines from the cart automatically.</p>
-
-    <h2>Returns</h2>
-    <p>Unopened factory-sealed ammunition may be returned within 14 days for store credit. We do not accept opened boxes, mixed lots, or powder canisters once shipped.</p>
-
-    <h2>Contact</h2>
-    <p>Shipping desk: <a href="tel:+14065550198">(406) 555-0198</a> · Mon–Sat 8:00–18:00 Mountain Time<br>
-    418 Railroad Street, Suite B, Missoula, MT 59802</p>
-
-    <p style="margin-top:36px"><a class="btn btn-brass" href="shop.html">Back to catalog</a></p>
-  </article>
+  <main>
+    <div class="account-box" id="account">
+      <h1>Sign in</h1>
+      <p>Order history and saved addresses for returning customers.</p>
+      <form id="accountForm" onsubmit="return false;">
+        <label>Email<input type="email" id="acctEmail" autocomplete="email" required></label>
+        <label>Password<input type="password" id="acctPass" autocomplete="current-password" required></label>
+        <button class="btn btn-brass" type="button" id="acctSubmit">Sign in</button>
+      </form>
+      <p class="account-note" id="acctNote">Accounts are not live on this site build. Browse the catalog without signing in — cart works in this browser.</p>
+      <p style="margin-top:16px"><a href="shop.html">Continue to shop →</a></p>
+    </div>
+  </main>
 
   <footer class="site-footer">
     <div class="footer-legal">
       <span>© <span id="year">2026</span> Copper Ridge Cartridge Co.</span>
-      <span>Must be 21+ to purchase ammunition</span>
     </div>
   </footer>
 
@@ -125,5 +103,6 @@
   <script src="js/shipping-rules.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/account.js"></script>
 </body>
 </html>

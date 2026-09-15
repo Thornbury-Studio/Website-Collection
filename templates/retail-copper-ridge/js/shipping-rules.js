@@ -2,21 +2,22 @@
 
 window.CR_SHIP = {
   freeGroundOver: 20000, /* cents */
+  hazmatFee: 1999, /* flat hazmat handling when any hazmat SKU is in cart */
   rates: {
     1: 1299,
     2: 1699,
     3: 2499,
     4: 4999
   },
-  /* States where we refuse ammo / primers / powder in this showcase */
   blockedAmmo: ['AK', 'HI'],
-  /* States with extra product-level restrictions (defensive JHPs, green tip, etc.) */
   strictStates: ['CA', 'NY', 'DC', 'MA', 'NJ', 'CT', 'HI', 'IL'],
   noHazmatAir: true,
   copy: {
     ground: 'Ammunition and primers ship ground only (hazmat). Signature required on delivery. Adult ID may be requested.',
+    hazmat: 'Hazmat handling fee applies to ammunition, primers, and powder lines.',
     blocked: 'We cannot ship ammunition, primers, or powder to this destination.',
-    productBlocked: 'This SKU cannot ship to the selected state under our current compliance list.'
+    productBlocked: 'This SKU cannot ship to the selected state under our current compliance list.',
+    purged: 'Restricted SKUs were removed for the selected state.'
   }
 };
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Order receipt — Copper Ridge Cartridge Co.</title>
+  <meta name="description" content="Order confirmation from Copper Ridge Cartridge Co.">
+  <link rel="canonical" href="https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/order.html">
+  <meta name="theme-color" content="#F4F4F2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Source+Sans+3:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <div class="trust-strip">
+    <strong>Est. 1998</strong>
+    <span>Missoula, MT</span>
+    <a href="tel:+14065550198">(406) 555-0198</a>
+    <span>Ground hazmat only</span>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="index.html">
+      <span class="brand-name">Copper Ridge</span>
+      <span class="brand-est">Cartridge Co. · Missoula, MT</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main">
+      <a href="shop.html">Shop</a>
+      <a href="guides.html">Guides</a>
+      <a href="shipping.html">Shipping</a>
+    </nav>
+    <div class="header-actions">
+      <a class="account-link" href="account.html">Sign in</a>
+      <a class="cart-btn" href="shop.html">Back to shop</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="receipt-box" id="receiptRoot">
+      <h1>Order receipt</h1>
+      <p id="receiptEmpty">No recent order in this browser. Place an order from the cart, then open this page.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-legal">
+      <span>© <span id="year">2026</span> Copper Ridge Cartridge Co.</span>
+    </div>
+  </footer>
+
+  <script src="js/catalog-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/order.js"></script>
+</body>
+</html>

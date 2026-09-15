@@ -8,28 +8,26 @@
   <meta name="description" content="Copper Ridge Cartridge Co. in Missoula, MT. Handgun, rifle, shotgun, and rimfire ammunition with ground shipping across the Lower 48.">
   <meta name="robots" content="index, follow">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <link rel="canonical" href="https://templates.thornburystudio.com/templates/retail-copper-ridge/index.html">
-  <base href="/templates/retail-copper-ridge/">
-  <meta name="theme-color" content="#E8E4DC">
+  <link rel="canonical" href="https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/index.html">
+  <meta name="theme-color" content="#F4F4F2">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Copper Ridge Cartridge Co.">
   <meta property="og:title" content="Copper Ridge Cartridge Co. — Ammunition by Caliber">
   <meta property="og:description" content="US ammunition catalog: shop by caliber, check your state, ship ground hazmat.">
-  <meta property="og:url" content="https://templates.thornburystudio.com/templates/retail-copper-ridge/index.html">
-  <meta property="og:image" content="https://templates.thornburystudio.com/templates/retail-copper-ridge/img/og-copper-ridge.svg">
+  <meta property="og:url" content="https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/index.html">
+  <meta property="og:image" content="https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/img/og-copper-ridge.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="628">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/retail-copper-ridge/img/og-copper-ridge.svg">
+  <meta name="twitter:image" content="https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/img/og-copper-ridge.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Source+Sans+3:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-  <a class="skip" href="#shop">Skip to catalog</a>
-  <div class="progress" id="progress" aria-hidden="true"></div>
+  <a class="skip" href="#finder">Skip to search</a>
 
   <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle" hidden>
     <div class="age-card">
@@ -43,21 +41,12 @@
     </div>
   </div>
 
-  <div class="announcement" aria-label="Store announcement">
-    <div class="ticker" id="tickerTrack">
-      <div class="ticker-row">
-        <span>Ground hazmat shipping · Lower 48</span><i>●</i>
-        <span>Signature required on ammo orders</span><i>●</i>
-        <span>Free ground over $200</span><i>●</i>
-        <span>Missoula warehouse · Est. 1998</span><i>●</i>
-      </div>
-      <div class="ticker-row" aria-hidden="true">
-        <span>Ground hazmat shipping · Lower 48</span><i>●</i>
-        <span>Signature required on ammo orders</span><i>●</i>
-        <span>Free ground over $200</span><i>●</i>
-        <span>Missoula warehouse · Est. 1998</span><i>●</i>
-      </div>
-    </div>
+  <div class="trust-strip">
+    <strong>Est. 1998</strong>
+    <span>Missoula, MT</span>
+    <a href="tel:+14065550198">(406) 555-0198</a>
+    <span>Mon–Sat 8–18 MT</span>
+    <span>Ground hazmat only</span>
   </div>
 
   <header class="site-header" id="siteHeader">
@@ -66,12 +55,13 @@
       <span class="brand-est">Cartridge Co. · Missoula, MT</span>
     </a>
     <nav class="desktop-nav" aria-label="Main">
-      <a href="#shop">Shop</a>
-      <a href="#finder">Calibers</a>
+      <a href="shop.html">Shop</a>
+      <a href="guides.html">Guides</a>
       <a href="#warehouse">Warehouse</a>
       <a href="shipping.html">Shipping</a>
     </nav>
     <div class="header-actions">
+      <a class="account-link" href="account.html">Sign in</a>
       <button class="cart-btn" type="button" data-cart-open aria-label="Open cart">
         Cart <span class="cart-count">0</span>
       </button>
@@ -80,33 +70,34 @@
   </header>
 
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <a href="#shop">Shop</a>
-    <a href="#finder">Calibers</a>
+    <a href="shop.html">Shop</a>
+    <a href="guides.html">Guides</a>
     <a href="#warehouse">Warehouse</a>
     <a href="shipping.html">Shipping</a>
+    <a href="account.html">Sign in</a>
   </div>
 
   <main>
     <section class="hero" id="top" aria-label="Copper Ridge hero">
-      <div class="hero-media" role="img" aria-label="Brass cartridges and factory ammunition boxes on a warehouse bench"></div>
+      <div class="hero-media" role="img" aria-label="Missoula distribution warehouse aisle with pallet racking"></div>
       <div class="hero-copy">
         <p class="hero-kicker">Copper Ridge Cartridge Co.</p>
-        <h1>Ammunition by caliber, in stock today.</h1>
-        <p class="hero-sub">Handgun, rifle, shotgun, and rimfire from our Missoula warehouse. Adults 21+. Ground shipping only.</p>
+        <h1>Ammunition by caliber.</h1>
+        <p class="hero-sub">In stock · Missoula · Ground hazmat. Adults 21+.</p>
         <div class="hero-ctas">
-          <a class="btn btn-brass" href="#shop">Shop calibers</a>
-          <a class="btn btn-ghost" href="shipping.html" style="border-color:rgba(232,228,220,.35);color:#F2EEE6">Check your state</a>
+          <a class="btn btn-brass" href="shop.html">Shop catalog</a>
+          <a class="btn btn-ghost hero-ghost" href="shipping.html">Check your state</a>
         </div>
       </div>
     </section>
 
     <section class="section finder" id="finder">
       <p class="kicker reveal">Caliber finder</p>
-      <h2 class="reveal" style="margin:0 0 18px;font-family:var(--serif)">Search the warehouse.</h2>
+      <h2 class="reveal" style="margin:0 0 18px;font-family:var(--sans);font-weight:700">Search the warehouse.</h2>
       <div class="finder-row reveal">
-        <label class="visually-hidden" for="finderInput" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Search calibers</label>
+        <label class="visually-hidden" for="finderInput">Search calibers</label>
         <input class="finder-input" id="finderInput" type="search" placeholder="Try 9mm, .223, 12ga, primers…" autocomplete="off">
-        <a class="btn btn-dark" href="#shop">View results</a>
+        <a class="btn btn-dark" id="finderGo" href="shop.html">View results</a>
       </div>
       <div class="quick-calibers reveal" aria-label="Quick calibers">
         <button class="chip" type="button" data-caliber="9mm">9mm</button>
@@ -118,55 +109,29 @@
       </div>
     </section>
 
-    <section class="section" id="shop">
-      <div class="section-head reveal">
-        <div>
-          <p class="kicker">Catalog</p>
-          <h2>Shop ammunition.</h2>
-        </div>
-        <p class="section-note">Prices include the box. Hazmat SKUs ship ground with signature. State rules apply at checkout.</p>
-      </div>
-
-      <div class="filters reveal" id="deptFilters" role="group" aria-label="Filter by department"></div>
-
-      <div class="filter-meta reveal">
-        <span id="resultCount">0 SKUs</span>
-        <label><input type="checkbox" id="inStockOnly"> In stock only</label>
-        <div class="use-filters" role="group" aria-label="Filter by use">
-          <button class="chip" type="button" data-use="target">Target</button>
-          <button class="chip" type="button" data-use="hunting">Hunting</button>
-          <button class="chip" type="button" data-use="defense">Defense</button>
-          <button class="chip" type="button" data-use="match">Match</button>
-          <button class="chip" type="button" data-use="reloading">Reloading</button>
-        </div>
-      </div>
-
-      <div class="product-grid" id="productGrid"></div>
-    </section>
-
     <section class="section" id="use" aria-labelledby="useTitle">
       <div class="section-head reveal">
         <div>
           <p class="kicker">Shop by use</p>
-          <h2 id="useTitle">What are you loading for?</h2>
+          <h2 id="useTitle">Pick a lane.</h2>
         </div>
       </div>
       <div class="use-strip reveal">
-        <a class="use-tile" href="index.html?use=target#shop">
+        <a class="use-tile" href="shop.html?use=target">
           <h3>Target</h3>
-          <p>FMJ and target loads for the range.</p>
+          <p>FMJ and range loads.</p>
         </a>
-        <a class="use-tile" href="index.html?use=hunting#shop">
+        <a class="use-tile" href="shop.html?use=hunting">
           <h3>Hunting</h3>
-          <p>Soft points, Fusion, Power-Point, and slugs.</p>
+          <p>Soft points, Fusion, slugs.</p>
         </a>
-        <a class="use-tile" href="index.html?use=defense#shop">
+        <a class="use-tile" href="shop.html?use=defense">
           <h3>Defense</h3>
-          <p>JHP and buck — check your state first.</p>
+          <p>JHP and buck — check state.</p>
         </a>
-        <a class="use-tile" href="index.html?use=match#shop">
+        <a class="use-tile" href="shop.html?use=match">
           <h3>Match</h3>
-          <p>ELD-M, Scenar, and Tenex-grade rimfire.</p>
+          <p>ELD-M, Scenar, Tenex.</p>
         </a>
       </div>
     </section>
@@ -175,9 +140,8 @@
       <div class="warehouse reveal">
         <div>
           <p class="kicker">The warehouse</p>
-          <h2 style="margin:0 0 14px;font-family:var(--serif)">Built around the pallet, not the slogan.</h2>
-          <p>Copper Ridge pulls orders from a single floor in Missoula. We stock the calibers people actually shoot — 9mm cases, .223 bricks, AA targets, Mini-Mags — and a short reloading aisle for primers, powder, and dies.</p>
-          <p>No firearms. No FFL transfers. Just cartridges, components, and honest ship rules.</p>
+          <h2 style="margin:0 0 14px;font-family:var(--sans);font-weight:700">One floor in Missoula.</h2>
+          <p>We stock the calibers people shoot — 9mm cases, .223 bricks, AA targets, Mini-Mags — plus a short reloading aisle. No firearms. No FFL transfers.</p>
         </div>
         <address>
           <strong>Copper Ridge Cartridge Co.</strong>
@@ -192,7 +156,7 @@
     <section class="section ship-teaser">
       <p class="kicker">How we ship</p>
       <h2 style="margin:0 0 12px">Ground only. Signature on the door.</h2>
-      <p>Ammunition, primers, and powder travel hazmat ground. We do not ship to Alaska or Hawaii. Some defensive and green-tip SKUs are blocked in additional states — those flags appear on the product page and again at checkout.</p>
+      <p>Ammo, primers, and powder travel hazmat ground with a flat handling fee. No AK or HI. Restricted SKUs drop at checkout when your state blocks them.</p>
       <a class="btn btn-brass" href="shipping.html">Read shipping policy</a>
     </section>
   </main>
@@ -205,11 +169,12 @@
       </div>
       <div>
         <h3>Catalog</h3>
-        <p><a href="index.html?dept=handgun#shop">Handgun</a><br>
-        <a href="index.html?dept=rifle#shop">Rifle</a><br>
-        <a href="index.html?dept=shotgun#shop">Shotgun</a><br>
-        <a href="index.html?dept=rimfire#shop">Rimfire</a><br>
-        <a href="index.html?dept=reloading#shop">Reloading</a></p>
+        <p><a href="shop.html?dept=handgun">Handgun</a><br>
+        <a href="shop.html?dept=rifle">Rifle</a><br>
+        <a href="shop.html?dept=shotgun">Shotgun</a><br>
+        <a href="shop.html?dept=rimfire">Rimfire</a><br>
+        <a href="shop.html?dept=reloading">Reloading</a><br>
+        <a href="guides.html">Caliber guides</a></p>
       </div>
       <div>
         <h3>Help</h3>
@@ -224,7 +189,7 @@
   </footer>
 
   <div class="veil" id="cartVeil" hidden data-cart-close></div>
-  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true" hidden>
     <header class="cart-head">
       <h2 id="cartTitle">Cart</h2>
       <button class="btn btn-ghost" type="button" data-cart-close style="padding:6px 10px">Close</button>
@@ -232,21 +197,11 @@
     <ul class="cart-lines" id="cartLines"></ul>
     <p class="cart-empty" id="cartEmpty">Your cart is empty. Open the catalog.</p>
     <div class="cart-tail" id="cartTail" hidden>
-      <div class="cart-sums" id="cartSums">
-        <div><span>Goods</span><strong id="sumGoods">$0.00</strong></div>
-        <div><span>Ground shipping</span><strong id="sumShip">$0.00</strong></div>
-        <div class="total"><span>Total</span><strong id="sumTotal">$0.00</strong></div>
-      </div>
+      <div class="cart-sums" id="cartSums"></div>
       <p class="ship-note" id="shipNote"></p>
       <p class="ship-error" id="shipError" hidden></p>
       <p class="order-success" id="orderSuccess" hidden></p>
-      <form class="checkout-form" id="checkoutForm" onsubmit="return false;">
-        <label>Full name<input id="shipName" name="name" autocomplete="name" required></label>
-        <div class="form-row">
-          <label>ZIP<input id="shipZip" name="zip" inputmode="numeric" autocomplete="postal-code" required></label>
-          <label>State<select id="shipState" name="state" required></select></label>
-        </div>
-      </form>
+      <form class="checkout-form" id="checkoutForm" onsubmit="return false;"></form>
       <button class="btn btn-brass" type="button" id="placeOrder">Place order</button>
     </div>
   </aside>
@@ -254,7 +209,6 @@
   <script src="js/catalog-data.js"></script>
   <script src="js/shipping-rules.js"></script>
   <script src="js/cart.js"></script>
-  <script src="js/shop.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
