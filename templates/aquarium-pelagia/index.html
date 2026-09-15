@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<!--
+  PELAGIA — Singapore's open-ocean aquarium.
+
+  Direction contract. Abyss blue and ice-cyan light; every photograph taken
+  through glass or under water, full-bleed; the interface sits on it as glass
+  panels. The home page is a floating dashboard over a photograph: a lone
+  silhouette at the 36-metre window, a plan strip overlapping its foot, then
+  a glass deck of circular hall icons, image-and-text rows and a rating —
+  the reference's composition, with an aquarium's facts in it. Every number
+  is real to the business: timed-entry prices, a daily feeding timetable,
+  five halls, four bookable experiences, an address and its hours.
+-->
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>PELAGIA &mdash; Singapore&rsquo;s open-ocean aquarium</title>
+  <meta name="description" content="A 36-metre window, five halls and forty thousand animals at Marina Coastal Drive. Open every day 10:00–19:00, Fridays and Saturdays until 22:00. Timed-entry tickets from S$42, feeds and talks daily, shark dives and sleepovers.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/aquarium-pelagia/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PELAGIA">
+  <meta property="og:title" content="PELAGIA &mdash; Singapore&rsquo;s open-ocean aquarium">
+  <meta property="og:description" content="A 36-metre window, five halls and forty thousand animals. Open every day from 10:00; Fridays and Saturdays until 22:00. Tickets from S$42.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/index.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PELAGIA &mdash; Singapore&rsquo;s open-ocean aquarium">
+  <meta name="twitter:description" content="A 36-metre window, five halls and forty thousand animals. Tickets from S$42.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/img/og.webp">
+  <meta name="theme-color" content="#050B18">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Rethink+Sans:wght@400..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="Pelagia, home">
+    <span class="mark__ring"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/><path d="M4 20c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/></svg></span>
+    Pelagia <small>Aquarium</small>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="halls.html">The halls</a>
+    <a href="whats-on.html">What&rsquo;s on</a>
+    <a href="tickets.html">Tickets</a>
+    <a href="visit.html">Visit</a>
+  </nav>
+  <div class="top__actions">
+    <a class="btn btn--sm top__book" href="tickets.html">Book tickets</a>
+    <button class="burger icon-btn" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+<nav class="drawer" id="drawer" data-open="false" aria-label="Menu">
+  <a href="index.html" aria-current="page">Home <span>01</span></a>
+  <a href="halls.html">The halls <span>02</span></a>
+  <a href="whats-on.html">What&rsquo;s on <span>03</span></a>
+  <a href="tickets.html">Tickets <span>04</span></a>
+  <a href="visit.html">Visit <span>05</span></a>
+  <div class="drawer__foot">
+    <strong data-today-hours>Today 10:00&ndash;19:00</strong>
+    <span>2 Marina Coastal Drive &middot; Marina South Pier MRT, 8 min</span>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ===== hero: the silhouette at the window, with live water ===== -->
+  <section class="hero" aria-label="Welcome">
+    <picture>
+      <source media="(max-width: 700px)" srcset="img/hero-window-tall.webp 900w, img/hero-window-tall-1400.webp 1400w" sizes="100vw">
+      <img class="hero__photo" id="heroPhoto" src="img/hero-window.webp" srcset="img/hero-window.webp 1920w, img/hero-window-2560.webp 2560w" sizes="100vw" alt="A visitor in silhouette at the 36-metre Open Ocean window as a whale shark passes" width="1920" height="1080" fetchpriority="high">
+    </picture>
+    <canvas class="hero__water" id="water" aria-hidden="true"></canvas>
+    <div class="hero__copy">
+      <div class="wrap">
+        <span class="kicker">Singapore&rsquo;s open-ocean aquarium &middot; Marina Coastal Drive</span>
+        <h1 class="h1">The ocean, <br>at eye level.</h1>
+        <p class="lede">A 36-metre window, five halls and forty thousand animals. Open every day from ten; Fridays and Saturdays until ten at night.</p>
+        <div class="hero__cta">
+          <a class="btn" href="tickets.html">Book timed entry <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--ghost" href="#today">Today&rsquo;s feeds &amp; talks</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== plan strip ===== -->
+  <div class="plan wrap">
+    <div class="glass plan__grid" id="plan">
+      <div class="plan__cell"><span>Today</span><b id="planHours">10:00 &ndash; 19:00</b><p id="planStatus"><i class="pulse"></i>Open now</p></div>
+      <div class="plan__cell"><span>Next on</span><b id="planNext">13:00 <small>Open Ocean dive feed</small></b><p id="planNextWhere">The 36-metre window</p></div>
+      <div class="plan__cell"><span>Tickets online</span><b>S$42 <small>adult</small></b><p>S$30 child &middot; S$32 senior &middot; S$4 less than the gate</p></div>
+      <div class="plan__cell"><a class="btn" href="tickets.html">Book a time slot</a></div>
+    </div>
+  </div>
+
+  <!-- ===== the glass deck ===== -->
+  <section class="section" aria-labelledby="deckTitle">
+    <div class="wrap">
+      <div class="glass deck reveal">
+        <figure class="deck__photo">
+          <img src="img/card-jelly-window.webp" alt="A child at the porthole at the end of the Jellies hall" width="720" height="960" loading="lazy">
+          <figcaption><strong>The Jellies, 12:00</strong>Twenty minutes on why a moon jelly is 96% water, and what the other 4% does.</figcaption>
+        </figure>
+        <div class="deck__main">
+          <div>
+            <span class="kicker">Five halls, one building</span>
+            <h2 class="h2" id="deckTitle" style="margin-top:8px">From the Straits to the open ocean, in a single afternoon</h2>
+          </div>
+          <div class="rings" id="hallRings"></div>
+          <div class="deck__row">
+            <img src="img/thumb-window.webp" alt="" width="120" height="120" loading="lazy">
+            <div>
+              <h3>The 36-metre window</h3>
+              <p>Seven and a half million litres behind 700 mm of acrylic, twelve metres tall. Two whale sharks, a reef manta and two thousand jacks pass every few minutes. The dive feed is at 13:00, every day.</p>
+            </div>
+          </div>
+          <div class="deck__foot">
+            <div class="rings rings--4" id="xRings"></div>
+          </div>
+          <div class="deck__foot">
+            <div class="rating"><span class="stars" aria-hidden="true" id="deckStars"></span><b>4.8</b>from 12,400 reviews</div>
+            <a class="more" href="halls.html">See all five halls <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== today's timetable ===== -->
+  <section class="section section--tight" id="today" aria-labelledby="todayTitle">
+    <div class="wrap">
+      <div class="section__head section__head--split reveal">
+        <div>
+          <span class="kicker">Feeds &amp; talks</span>
+          <h2 class="h2" id="todayTitle">Today, <span id="todayName">Wednesday</span></h2>
+        </div>
+        <div class="chips" id="todayChips" role="group" aria-label="Filter by hall">
+          <button class="chip" type="button" data-hall="" aria-pressed="true">All halls</button>
+        </div>
+      </div>
+      <div class="glass today reveal">
+        <div class="today__list" id="todayList"></div>
+      </div>
+      <p class="results" style="margin-top:16px">Every feed and talk is included in the ticket. Times hold to the minute; the animals are less punctual. <a class="more" href="whats-on.html">The full week and the experiences</a></p>
+    </div>
+  </section>
+
+  <!-- ===== halls ===== -->
+  <section class="section section--tight" aria-labelledby="hallsTitle">
+    <div class="wrap">
+      <div class="section__head section__head--split reveal">
+        <div>
+          <span class="kicker">The halls</span>
+          <h2 class="h2" id="hallsTitle">Five rooms, one ocean</h2>
+        </div>
+        <a class="more" href="halls.html">Walk through them <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="halls" id="hallCards"></div>
+    </div>
+  </section>
+
+  <!-- ===== after dark band ===== -->
+  <section class="band" aria-labelledby="darkTitle">
+    <video autoplay muted loop playsinline preload="metadata" poster="img/loop-jellies-poster.webp" aria-hidden="true">
+      <source src="video/loop-jellies.mp4" type="video/mp4">
+    </video>
+    <div class="wrap">
+      <div class="glass band__card reveal">
+        <span class="kicker">After Dark &middot; Fridays &amp; Saturdays</span>
+        <h2 class="h2" id="darkTitle">The Jellies with the lights down</h2>
+        <p class="muted">From seven until ten the building empties of pushchairs, the Jellies go to their night lighting with a live set in the hall at 19:30, and the Open Ocean is fed at 20:30. Adults and over-twelves; the bar on the mezzanine opens at seven.</p>
+        <div class="band__facts">
+          <div><span>Evening ticket</span><b>S$36</b></div>
+          <div><span>Doors</span><b>19:00 &ndash; 22:00</b></div>
+        </div>
+        <div><a class="btn" href="tickets.html?slot=19:00">Book an evening <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== experiences ===== -->
+  <section class="section" id="experiences" aria-labelledby="xTitle">
+    <div class="wrap">
+      <div class="section__head section__head--split reveal">
+        <div>
+          <span class="kicker">Experiences</span>
+          <h2 class="h2" id="xTitle">Closer than the glass</h2>
+        </div>
+        <a class="more" href="whats-on.html#experiences">Dates and booking <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="xgrid" id="xGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== tickets ===== -->
+  <section class="section section--tight" aria-labelledby="ticketsTitle">
+    <div class="wrap">
+      <div class="section__head section__head--center reveal">
+        <span class="kicker">Tickets</span>
+        <h2 class="h2" id="ticketsTitle">Timed entry, S$4 less online</h2>
+        <p class="lede" style="text-align:center">Pick an hour, arrive any time in it, stay until we close. Under-threes are free; a family of four is S$128.</p>
+      </div>
+      <div class="tgrid">
+        <div class="glass tcard reveal">
+          <h3>Day ticket</h3>
+          <div class="price">S$42<small>adult, online</small></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Child 3&ndash;12 S$30 &middot; Senior 60+ S$32</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Every feed and talk on the day</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Hourly entry slots from 10:00 to 17:00</li>
+          </ul>
+          <a class="btn btn--ghost" href="tickets.html">Choose a slot</a>
+        </div>
+        <div class="glass tcard tcard--hi reveal">
+          <span class="tcard__tag">Best value</span>
+          <h3>Annual pass</h3>
+          <div class="price">S$118<small>adult, 12 months</small></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Pays for itself on the third visit</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No time slot &mdash; walk in at the pass gate</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>10% off experiences and the caf&eacute; &middot; Child S$78</li>
+          </ul>
+          <a class="btn" href="tickets.html#annual">Get a pass</a>
+        </div>
+        <div class="glass tcard reveal">
+          <h3>After Dark</h3>
+          <div class="price">S$36<small>Fri &amp; Sat, 19:00&ndash;22:00</small></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>The Jellies with music at 19:30</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Night feed at the window, 20:30</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Over-twelves &middot; mezzanine bar from 19:00</li>
+          </ul>
+          <a class="btn btn--ghost" href="tickets.html?slot=19:00">Book an evening</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== reviews ===== -->
+  <section class="section section--tight" id="reviews" aria-labelledby="revTitle">
+    <div class="wrap">
+      <div class="section__head section__head--center reveal">
+        <span class="kicker">From this year&rsquo;s visitors</span>
+        <h2 class="h2" id="revTitle">4.8 from 12,400 reviews</h2>
+      </div>
+      <div class="reviews" id="reviewGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== visit ===== -->
+  <section class="section" aria-labelledby="visitTitle">
+    <div class="wrap visit">
+      <div class="reveal">
+        <span class="kicker">Plan a visit</span>
+        <h2 class="h2" id="visitTitle" style="margin:10px 0 16px">Eight minutes from Marina South Pier</h2>
+        <p class="lede">Out of exit B, along the waterfront and you will see the building. Allow three hours for the five halls, four if you are here for a feed. Pushchairs and wheelchairs go everywhere the visitors go; the tunnel has a lift at each end.</p>
+        <p style="margin-top:22px"><a class="btn btn--ghost" href="visit.html">Getting here, parking &amp; access <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></p>
+      </div>
+      <div class="glass info reveal" style="padding:26px">
+        <div>
+          <h3>Opening hours</h3>
+          <ul class="hours" id="hoursList"></ul>
+          <p class="muted" style="font-size:13px;margin-top:10px">Last entry an hour before closing. Open every day of the year.</p>
+        </div>
+        <div>
+          <h3>Address</h3>
+          <p>Pelagia Aquarium<br>2 Marina Coastal Drive<br>Singapore 018990</p>
+        </div>
+        <div>
+          <h3>Ask us</h3>
+          <p><a href="tel:+6566902288">+65 6690 2288</a> &middot; <a href="mailto:hello@pelagia.sg">hello@pelagia.sg</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="mark" href="index.html"><span class="mark__ring"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/><path d="M4 20c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/></svg></span>Pelagia <small>Aquarium</small></a>
+        <p>Pelagia Aquarium Pte. Ltd. &middot; Singapore&rsquo;s open-ocean aquarium at Marina Coastal Drive, open every day since March 2019. A member of the World Association of Zoos and Aquariums.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="tickets.html">Tickets &amp; passes</a></li>
+          <li><a href="whats-on.html">What&rsquo;s on today</a></li>
+          <li><a href="halls.html">The five halls</a></li>
+          <li><a href="visit.html">Getting here &amp; access</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Experiences</h4>
+        <ul>
+          <li><a href="whats-on.html#shark-dive">Shark Dive</a></li>
+          <li><a href="whats-on.html#sleepover">Sleep with the Sharks</a></li>
+          <li><a href="whats-on.html#backstage">Behind the Glass</a></li>
+          <li><a href="whats-on.html#ray-feed">Ray Bay Feed</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>2 Marina Coastal Drive</li>
+          <li>Singapore 018990</li>
+          <li><a href="tel:+6566902288">+65 6690 2288</a></li>
+          <li><a href="mailto:hello@pelagia.sg">hello@pelagia.sg</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>&copy; 2026 Pelagia Aquarium Pte. Ltd. &middot; UEN 201908231R</span>
+      <span>Prices in Singapore dollars. Online tickets are S$4 less than the gate.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/home.js"></script>
+<script src="js/water.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>What&rsquo;s on &mdash; PELAGIA</title>
+  <meta name="description" content="The daily feeds and talks at Pelagia Aquarium, After Dark on Fridays and Saturdays, and the four bookable experiences: Shark Dive S$280, Sleep with the Sharks S$180, Behind the Glass S$68, Ray Bay Feed S$28, with dates.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/aquarium-pelagia/whats-on.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PELAGIA">
+  <meta property="og:title" content="What&rsquo;s on &mdash; PELAGIA">
+  <meta property="og:description" content="The daily feeds and talks at Pelagia Aquarium, After Dark on Fridays and Saturdays, and the four bookable experiences: Shark Dive S$280, Sleep with the Sharks S$180, Behind the Glass S$68, Ray Bay Feed S$28, with dates.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/whats-on.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/img/og.webp">
+  <meta name="theme-color" content="#050B18">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Rethink+Sans:wght@400..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="Pelagia, home">
+    <span class="mark__ring"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/><path d="M4 20c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/></svg></span>
+    Pelagia <small>Aquarium</small>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="halls.html">The halls</a>
+    <a href="whats-on.html" aria-current="page">What&rsquo;s on</a>
+    <a href="tickets.html">Tickets</a>
+    <a href="visit.html">Visit</a>
+  </nav>
+  <div class="top__actions">
+    <a class="btn btn--sm top__book" href="tickets.html">Book tickets</a>
+    <button class="burger icon-btn" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+<nav class="drawer" id="drawer" data-open="false" aria-label="Menu">
+  <a href="index.html">Home <span>01</span></a>
+  <a href="halls.html">The halls <span>02</span></a>
+  <a href="whats-on.html" aria-current="page">What&rsquo;s on <span>03</span></a>
+  <a href="tickets.html">Tickets <span>04</span></a>
+  <a href="visit.html">Visit <span>05</span></a>
+  <div class="drawer__foot">
+    <strong data-today-hours>Today 10:00&ndash;19:00</strong>
+    <span>2 Marina Coastal Drive &middot; Marina South Pier MRT, 8 min</span>
+  </div>
+</nav>
+
+<main id="main">
+
+  <section class="phero" aria-label="What&rsquo;s on">
+    <img src="img/head-nettles.webp" srcset="img/head-nettles.webp 1600w, img/head-nettles-2560.webp 2560w" sizes="100vw" alt="" width="1600" height="1067" fetchpriority="high">
+    <div class="wrap phero__inner">
+      <span class="kicker">Feeds, talks, nights and dives</span>
+      <h1 class="h1">What&rsquo;s on</h1>
+      <p class="lede">Twelve feeds and talks every day, two more on Friday and Saturday nights, and four things you can book that take you past the glass.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="schedule" aria-labelledby="schTitle">
+    <div class="wrap">
+      <div class="section__head section__head--split reveal">
+        <div>
+          <span class="kicker">The timetable</span>
+          <h2 class="h2" id="schTitle">Every day</h2>
+        </div>
+        <div class="chips" id="dayChips" role="group" aria-label="Day type">
+          <button class="chip" type="button" data-day="daily" aria-pressed="true">Sunday to Thursday</button>
+          <button class="chip" type="button" data-day="late" aria-pressed="false">Friday &amp; Saturday</button>
+        </div>
+      </div>
+      <div class="glass filters reveal" style="margin-bottom:18px">
+        <div class="field">
+          <label for="schHall">Hall</label>
+          <select id="schHall"><option value="">All halls</option></select>
+        </div>
+        <div class="field">
+          <label for="schWhen">Time of day</label>
+          <select id="schWhen">
+            <option value="">Any time</option>
+            <option value="am">Morning, before 13:00</option>
+            <option value="pm">Afternoon, 13:00 on</option>
+            <option value="eve">Evening, After Dark</option>
+          </select>
+        </div>
+      </div>
+      <p class="results" id="schCount"></p>
+      <div class="glass today reveal"><div class="today__list" id="schList"></div></div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="oceanTitle">
+    <video autoplay muted loop playsinline preload="metadata" poster="img/loop-shark-poster.webp" aria-hidden="true">
+      <source src="video/loop-shark.mp4" type="video/mp4">
+    </video>
+    <div class="wrap">
+      <div class="glass band__card reveal">
+        <span class="kicker">Every day at 13:00</span>
+        <h2 class="h2" id="oceanTitle">The Open Ocean dive feed</h2>
+        <p class="muted">Two aquarists go in with the food and a microphone. Thirty minutes in front of the 36-metre window, with the sharks fed by hand from a pole and the whale sharks by bucket at the surface. Be at the window by ten to one; the gallery holds four hundred and fills.</p>
+        <div class="band__facts">
+          <div><span>Where</span><b>The window</b></div>
+          <div><span>How long</span><b>30 min</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experiences" aria-labelledby="expTitle">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="kicker">Experiences</span>
+        <h2 class="h2" id="expTitle">Past the glass</h2>
+        <p class="lede">Four things a ticket does not include. Each is small on purpose; book the date before you book the flight.</p>
+      </div>
+      <div id="xList" style="display:grid;gap:20px"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="mark" href="index.html"><span class="mark__ring"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/><path d="M4 20c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/></svg></span>Pelagia <small>Aquarium</small></a>
+        <p>Pelagia Aquarium Pte. Ltd. &middot; Singapore&rsquo;s open-ocean aquarium at Marina Coastal Drive, open every day since March 2019. A member of the World Association of Zoos and Aquariums.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="tickets.html">Tickets &amp; passes</a></li>
+          <li><a href="whats-on.html">What&rsquo;s on today</a></li>
+          <li><a href="halls.html">The five halls</a></li>
+          <li><a href="visit.html">Getting here &amp; access</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Experiences</h4>
+        <ul>
+          <li><a href="whats-on.html#shark-dive">Shark Dive</a></li>
+          <li><a href="whats-on.html#sleepover">Sleep with the Sharks</a></li>
+          <li><a href="whats-on.html#backstage">Behind the Glass</a></li>
+          <li><a href="whats-on.html#ray-feed">Ray Bay Feed</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>2 Marina Coastal Drive</li>
+          <li>Singapore 018990</li>
+          <li><a href="tel:+6566902288">+65 6690 2288</a></li>
+          <li><a href="mailto:hello@pelagia.sg">hello@pelagia.sg</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>&copy; 2026 Pelagia Aquarium Pte. Ltd. &middot; UEN 201908231R</span>
+      <span>Prices in Singapore dollars. Online tickets are S$4 less than the gate.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/whatson.js"></script>
+</body>
+</html>
