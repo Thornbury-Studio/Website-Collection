@@ -29,12 +29,16 @@
         "Cornering ABS as standard"
       ],
       colors: [
-        { name: "Signal Red", hex: "#E11D2E" },
-        { name: "Asphalt", hex: "#2A2E34" },
-        { name: "Bone", hex: "#E8E4DC" }
+        { name: "Signal Red", hex: "#E11D2E", img: "img/model-line.png" },
+        { name: "Asphalt", hex: "#2A2E34", img: "img/model-line-asphalt.png" },
+        { name: "Bone", hex: "#E8E4DC", img: "img/model-line-bone.png" }
       ],
       heroImg: "img/model-line.png",
-      gallery: ["img/model-line.png"],
+      gallery: [
+        { src: "img/model-line.png", label: "Front ¾" },
+        { src: "img/model-line-side.png", label: "Side" },
+        { src: "img/model-line-detail.png", label: "Detail" }
+      ],
       alt: "VEXOR LINE naked motorcycle in dark studio, signal-red accents on asphalt ground"
     },
     {
@@ -63,12 +67,16 @@
         "TFT with phone nav mirror"
       ],
       colors: [
-        { name: "Trail Grey", hex: "#6B7078" },
-        { name: "Ink", hex: "#121418" },
-        { name: "Signal Red", hex: "#E11D2E" }
+        { name: "Trail Grey", hex: "#6B7078", img: "img/model-hold.png" },
+        { name: "Ink", hex: "#121418", img: "img/model-hold-ink.png" },
+        { name: "Signal Red", hex: "#E11D2E", img: "img/model-hold-signal.png" }
       ],
       heroImg: "img/model-hold.png",
-      gallery: ["img/model-hold.png"],
+      gallery: [
+        { src: "img/model-hold.png", label: "Front ¾" },
+        { src: "img/model-hold-side.png", label: "Side" },
+        { src: "img/model-hold-detail.png", label: "Detail" }
+      ],
       alt: "VEXOR HOLD adventure motorcycle with tall screen and spoked wheels in dark studio"
     },
     {
@@ -97,12 +105,16 @@
         "Quickshifter up / down"
       ],
       colors: [
-        { name: "Race White", hex: "#F4F2EC" },
-        { name: "Ink", hex: "#0C0D0F" },
-        { name: "Signal Red", hex: "#E11D2E" }
+        { name: "Race White", hex: "#F4F2EC", img: "img/model-arc.png" },
+        { name: "Ink", hex: "#0C0D0F", img: "img/model-arc-ink.png" },
+        { name: "Signal Red", hex: "#E11D2E", img: "img/model-arc-signal.png" }
       ],
       heroImg: "img/model-arc.png",
-      gallery: ["img/model-arc.png"],
+      gallery: [
+        { src: "img/model-arc.png", label: "Front ¾" },
+        { src: "img/model-arc-side.png", label: "Side" },
+        { src: "img/model-arc-detail.png", label: "Detail" }
+      ],
       alt: "VEXOR ARC fully faired sport motorcycle with winglets in dark studio light"
     },
     {
@@ -131,12 +143,16 @@
         "Shaft drive, low maintenance"
       ],
       colors: [
-        { name: "Midnight", hex: "#1A1C22" },
-        { name: "Steel Blue", hex: "#4A5568" },
-        { name: "Bone", hex: "#E8E4DC" }
+        { name: "Midnight", hex: "#1A1C22", img: "img/model-span.png" },
+        { name: "Steel Blue", hex: "#4A5568", img: "img/model-span-steel.png" },
+        { name: "Bone", hex: "#E8E4DC", img: "img/model-span-bone.png" }
       ],
       heroImg: "img/model-span.png",
-      gallery: ["img/model-span.png"],
+      gallery: [
+        { src: "img/model-span.png", label: "Front ¾" },
+        { src: "img/model-span-side.png", label: "Side" },
+        { src: "img/model-span-detail.png", label: "Detail" }
+      ],
       alt: "VEXOR SPAN touring motorcycle with tall screen and soft luggage in dark studio"
     },
     {
@@ -166,12 +182,16 @@
         "Regen levels selectable on bar"
       ],
       colors: [
-        { name: "Volt White", hex: "#F2F0EA" },
-        { name: "Ink", hex: "#0C0D0F" },
-        { name: "Signal Red", hex: "#E11D2E" }
+        { name: "Volt White", hex: "#F2F0EA", img: "img/model-volt.png" },
+        { name: "Ink", hex: "#0C0D0F", img: "img/model-volt-ink.png" },
+        { name: "Signal Red", hex: "#E11D2E", img: "img/model-volt-signal.png" }
       ],
       heroImg: "img/model-volt.png",
-      gallery: ["img/model-volt.png"],
+      gallery: [
+        { src: "img/model-volt.png", label: "Front ¾" },
+        { src: "img/model-volt-side.png", label: "Side" },
+        { src: "img/model-volt-detail.png", label: "Detail" }
+      ],
       alt: "VEXOR VOLT electric motorcycle with clean fairing and belt drive in dark studio"
     },
     {
@@ -200,12 +220,16 @@
         "Dual-channel ABS"
       ],
       colors: [
-        { name: "British Green", hex: "#1F3D2F" },
-        { name: "Bone", hex: "#E8E4DC" },
-        { name: "Ink", hex: "#0C0D0F" }
+        { name: "British Green", hex: "#1F3D2F", img: "img/model-trace.png" },
+        { name: "Bone", hex: "#E8E4DC", img: "img/model-trace-bone.png" },
+        { name: "Ink", hex: "#0C0D0F", img: "img/model-trace-ink.png" }
       ],
       heroImg: "img/model-trace.png",
-      gallery: ["img/model-trace.png"],
+      gallery: [
+        { src: "img/model-trace.png", label: "Front ¾" },
+        { src: "img/model-trace-side.png", label: "Side" },
+        { src: "img/model-trace-detail.png", label: "Detail" }
+      ],
       alt: "VEXOR TRACE heritage motorcycle with round headlamp and low seat in dark studio"
     }
   ];
@@ -250,12 +274,19 @@
     return Object.keys(map);
   }
 
+  function gallerySrcs(m) {
+    return (m.gallery || []).map(function (g) {
+      return typeof g === "string" ? g : g.src;
+    });
+  }
+
   global.VEXOR = {
     MODELS: MODELS,
     LOCATIONS: LOCATIONS,
     byId: byId,
     powerToWeight: powerToWeight,
     formatSGD: formatSGD,
-    classes: classes
+    classes: classes,
+    gallerySrcs: gallerySrcs
   };
 })(typeof window !== "undefined" ? window : globalThis);
