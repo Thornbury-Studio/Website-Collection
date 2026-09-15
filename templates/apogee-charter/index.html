@@ -4,7 +4,8 @@
 
   Direction contract. Bone and ink, and one section that earns a colour:
   the climb, where the page scrolls from the apron to forty-five thousand
-  feet and the ground turns into the sky above the weather. Bricolage
+  feet and the ground turns into the sky above the weather. The hero is
+  its first frame, not a separate picture. Bricolage
   Grotesque at its largest optical size, set tight and low; Instrument Sans
   for everything that is said rather than shown. Motion is about weight and
   quiet — plates lag the scroll, the big lines lean a degree with velocity
@@ -35,6 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&display=swap">
+  <link rel="preload" as="image" href="img/apron-poster.webp" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/boot.js"></script>
 </head>
@@ -60,28 +62,12 @@
 
 <main id="main">
 
-  <section class="hero" aria-label="Apogee">
-    <figure class="plate plate--cover para" data-para="0.35">
-      <img src="img/apron-1400.webp" srcset="img/apron-800.webp 800w, img/apron-1400.webp 1400w, img/apron.webp 2400w" sizes="100vw" width="2400" height="1600" alt="A large-cabin jet on the apron with its stairs down, a car parked at the wing." decoding="async" fetchpriority="high">
-    </figure>
-    <div class="hero-top">
-      <span class="small">Apogee &mdash; private jet charter</span>
-      <span class="small">Farnborough &middot; Geneva &middot; Dubai &middot; Singapore</span>
-    </div>
-    <div class="hero-inner">
-      <h1 class="giant lean wipe">The hour<br>is yours.</h1>
-      <div class="hero-copy">
-        <p class="lede reveal d1">Fourteen aircraft. One cabin standard. A host on every flight. Ours, not brokered &mdash; you say when, and we say nothing to anyone.</p>
-        <div class="reveal d2"><a class="btn btn--solid" href="request.html">Request a flight<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- The climb: scroll is altitude. -->
-  <section class="climb" id="climb" aria-label="The climb, from the apron to forty-five thousand feet">
+  <!-- The hero is the first frame of the climb: one pinned scene that goes
+       from the apron to forty-five thousand feet. Scroll is altitude. -->
+  <section class="climb" id="climb" aria-label="Apogee. The climb, from the apron to forty-five thousand feet">
     <div class="climb-stick" id="climb-stick">
       <figure class="climb-layer climb-layer--ground" id="layer-ground">
-        <img src="img/apron-1400.webp" srcset="img/apron-800.webp 800w, img/apron-1400.webp 1400w, img/apron.webp 2400w" sizes="100vw" width="2400" height="1600" alt="" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="auto" poster="img/apron-poster.webp" data-src="video/apron.mp4" aria-hidden="true"></video>
       </figure>
       <figure class="climb-layer climb-layer--wing" id="layer-wing">
         <video muted playsinline loop preload="metadata" poster="img/wing-poster.webp" data-src="video/wing.mp4" aria-hidden="true"></video>
@@ -89,8 +75,34 @@
       <figure class="climb-layer climb-layer--deck" id="layer-deck">
         <video muted playsinline loop preload="metadata" poster="img/deck-poster.webp" data-src="video/deck.mp4" aria-hidden="true"></video>
       </figure>
+      <figure class="climb-layer climb-layer--apex" id="layer-apex">
+        <video muted playsinline loop preload="metadata" poster="img/apex-poster.webp" data-src="video/apex.mp4" aria-hidden="true"></video>
+      </figure>
       <div class="climb-veil" aria-hidden="true"></div>
-      <div class="climb-ui">
+      <div class="climb-scrim" id="climb-scrim" aria-hidden="true"></div>
+
+      <!-- The apex: the mark, drawn at full width once the aircraft is there. -->
+      <div class="climb-apex" id="climb-apex" aria-hidden="true">
+        <svg viewBox="0 0 1000 400" preserveAspectRatio="none"><path d="M-10 400Q500-200 1010 400" pathLength="1"/></svg>
+        <i></i>
+      </div>
+
+      <div class="hero-ui" id="hero-ui">
+        <div class="hero-top">
+          <span class="small">Apogee &mdash; private jet charter</span>
+          <span class="small">Farnborough &middot; Geneva &middot; Dubai &middot; Singapore</span>
+        </div>
+        <div class="hero-inner">
+          <h1 class="giant lean wipe">The hour<br>is yours.</h1>
+          <div class="hero-copy">
+            <p class="lede reveal d1">Fourteen aircraft. One cabin standard. A host on every flight. Ours, not brokered &mdash; you say when, and we say nothing to anyone.</p>
+            <div class="reveal d2"><a class="btn btn--solid" href="request.html">Request a flight<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a></div>
+          </div>
+        </div>
+        <p class="hero-cue reveal d3"><span class="small">Scroll to climb</span><i></i></p>
+      </div>
+
+      <div class="climb-ui" id="climb-ui">
         <div class="climb-head">
           <span class="small">The climb</span>
           <span class="small">Farnborough to Nice &middot; Challenger 350</span>
