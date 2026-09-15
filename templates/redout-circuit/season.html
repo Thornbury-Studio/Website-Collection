@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Season 04 &mdash; calendar, standings and lap comparison &mdash; REDOUT</title>
+  <meta name="description" content="Eight rounds of the REDOUT Circuit, Rotterdam to Tokyo. Every result, the full championship standings after five rounds, and a lap-comparison tool: pick two pilots, scrub the lap, watch the gap open and close gate by gate.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/redout-circuit/season.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="REDOUT">
+  <meta property="og:title" content="REDOUT &mdash; Season 04">
+  <meta property="og:description" content="Eight rounds, sixteen pilots, every split. Calendar, standings and a gate-by-gate lap comparison.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/redout-circuit/season.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/redout-circuit/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="REDOUT &mdash; Season 04">
+  <meta name="twitter:description" content="Eight rounds, sixteen pilots, every split. Calendar, standings and a gate-by-gate lap comparison.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/redout-circuit/img/og.webp">
+  <meta name="theme-color" content="#0A0A0B">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:ital,wdth,wght@0,50..150,100..900;1,50..150,100..900&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body class="page-season">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top is-solid" id="top">
+  <a class="mark" href="index.html" aria-label="REDOUT, home"><i aria-hidden="true"></i>REDOUT</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="season.html" aria-current="page">Season</a>
+    <a href="pilots.html">Pilots</a>
+    <a href="tickets.html">Tickets</a>
+  </nav>
+  <a class="chip" href="tickets.html"><span>Next</span><b data-next-code>R06 Lisbon</b><b data-countdown>03 Oct</b></a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+<div class="drawer" id="drawer" data-open="false">
+  <a href="season.html">Season</a>
+  <a href="pilots.html">Pilots</a>
+  <a href="tickets.html">Tickets</a>
+  <a class="chip" href="tickets.html"><span>Next</span><b data-next-code>R06 Lisbon</b><b data-countdown>03 Oct</b></a>
+</div>
+
+<div class="veil" aria-hidden="true"></div>
+
+<main id="main">
+
+  <section class="hero" aria-labelledby="season-title">
+    <video muted playsinline loop preload="metadata" poster="img/posts-poster.webp" data-src="video/posts.mp4" aria-hidden="true"></video>
+    <div class="hero-inner">
+      <p class="kicker reveal">Rotterdam to Tokyo &middot; April to December</p>
+      <h1 class="sec-title kinetic reveal d1" id="season-title">Season 04</h1>
+      <p class="lede reveal d2">Eight rounds in eight buildings that were never meant for this: a gasworks, a grain silo, a drydock, a cold store. Every round is one night, three heats and a final, and every gate is timed to the thousandth.</p>
+      <p class="hero-meta reveal d3"><span><b>8</b> rounds</span><span><b data-rounds-run>5</b> run</span><span>Next <b data-next-code>R06 Lisbon</b></span><span><b data-countdown>03 Oct</b></span></p>
+    </div>
+  </section>
+
+  <div class="hazard" aria-hidden="true"></div>
+
+  <section class="section wrap" id="calendar-section" aria-labelledby="cal-title">
+    <div class="head">
+      <div>
+        <p class="kicker reveal">The calendar</p>
+        <h2 class="sec-title reveal d1" id="cal-title">Eight rounds</h2>
+      </div>
+      <p class="lede reveal d2 w-44">Doors at six, qualifying at seven, the final at ten. Times print in the venue&rsquo;s own clock; the small line under each is yours.</p>
+    </div>
+    <div class="calendar reveal d2" id="calendar"></div>
+  </section>
+
+  <section class="wrap pb-xl" aria-label="Race morning">
+    <figure class="plate plate--band plate--caption reveal">
+      <img src="img/paddock-1200.webp" srcset="img/paddock-800.webp 800w, img/paddock-1200.webp 1200w, img/paddock.webp 2000w" sizes="(min-width: 900px) calc(100vw - 2 * var(--gutter)), 100vw" width="2000" height="1329" alt="A red racing frame on a trestle table, and behind it three pilots in goggles with their backs to the camera." loading="lazy" decoding="async">
+      <figcaption><span class="kicker kicker--white">Race morning</span><span>Three heats and a final. The frames go back on the bench between every one.</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="section wrap pt-0" id="standings" aria-labelledby="st-title">
+    <div class="head">
+      <div>
+        <p class="kicker reveal" data-standings-kicker>After five rounds of eight</p>
+        <h2 class="sec-title reveal d1" id="st-title">Standings</h2>
+      </div>
+      <p class="lede reveal d2 w-44">Twenty-five for a win, down to one for fifteenth. Nothing for a DNF. Ties go to wins, then podiums, then best finish.</p>
+    </div>
+    <div class="table reveal d2" id="standings-full" role="table" aria-label="Championship standings, all sixteen pilots">
+      <div class="row row--head" role="row"><span>Pos</span><span>No.</span><span>Pilot</span><span class="team">Team &middot; form</span><span class="r">Pts</span><span class="r">Gap</span></div>
+    </div>
+  </section>
+
+  <section class="compare section" id="compare" aria-labelledby="cmp-title">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="kicker reveal">Lap comparison</p>
+          <h2 class="sec-title reveal d1" id="cmp-title">Two laps,<br>one line</h2>
+        </div>
+        <p class="lede reveal d2 w-44">Pick two pilots and a round. Drag the lap. The gap is real: it is the difference between the times each of them took to reach the same point on the course.</p>
+      </div>
+      <div class="compare-grid reveal" id="compare-tool">
+        <div>
+          <div class="compare-map" id="compare-map" aria-label="Course map with both pilots' positions" role="img"></div>
+          <div class="compare-readout" aria-live="polite">
+            <div id="read-a"><b class="a">0.000</b><span id="label-a">Pilot A</span></div>
+            <div id="read-b"><b>0.000</b><span id="label-b">Pilot B</span></div>
+            <div class="gapv" id="read-gap"><b>+0.000</b><span>Gap</span></div>
+          </div>
+        </div>
+        <div class="compare-controls">
+          <div class="select-row">
+            <div class="field"><label for="pilot-a">Pilot A &middot; red</label><div class="sel"><select id="pilot-a"></select></div></div>
+            <div class="field"><label for="pilot-b">Pilot B &middot; white</label><div class="sel"><select id="pilot-b"></select></div></div>
+          </div>
+          <div class="field"><label for="round-sel">Round</label><div class="sel"><select id="round-sel"></select></div></div>
+          <div class="scrub">
+            <label class="field" for="scrub"><span class="scrub-label">Lap time &middot; <b id="read-t" class="kicker--white">0.000</b> s</span></label>
+            <input type="range" id="scrub" min="0" max="1000" value="0" step="1" aria-label="Scrub through the lap">
+            <div class="marks" aria-hidden="true"><span>Tone</span><span>Gate 06</span><span>Line</span></div>
+          </div>
+          <div class="cta-row">
+            <button class="btn btn--paper" type="button" id="play">Play the lap</button>
+          </div>
+          <ol class="split-table" id="split-table" aria-label="Cumulative split at every gate"></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-mark" aria-hidden="true">Redout</p>
+    <div class="foot-grid">
+      <div>
+        <h4>REDOUT Circuit</h4>
+        <p class="w-36">The professional first-person-view racing league. Sixteen pilots, eight rounds, one championship. Head office at Gasworks Hall, Rotterdam.</p>
+      </div>
+      <div>
+        <h4>League</h4>
+        <ul><li><a href="season.html">Season</a></li><li><a href="season.html#standings">Standings</a></li><li><a href="pilots.html">Pilots</a></li><li><a href="tickets.html">Tickets</a></li></ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul><li><a href="mailto:tickets@redoutcircuit.com">tickets@redoutcircuit.com</a></li><li><a href="mailto:press@redoutcircuit.com">press@redoutcircuit.com</a></li><li><a href="mailto:pilots@redoutcircuit.com">pilots@redoutcircuit.com</a></li></ul>
+      </div>
+      <div>
+        <h4>Next</h4>
+        <ul><li data-next-line>R06 Lisbon &middot; 03 October</li><li><a class="chip chip--inline" href="tickets.html"><span>Tickets</span><b data-countdown>03 Oct</b></a></li></ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>&copy; 2026 REDOUT Circuit BV &middot; Season 04</span>
+      <span>Redout, noun &mdash; blood forced into the head under negative G. The opposite of a blackout.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

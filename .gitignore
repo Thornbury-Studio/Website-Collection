@@ -15,3 +15,7 @@ templates/forge-hamon/tools/raw/
 # Full-resolution licensed Adobe Stock originals — graded and exported to
 # templates/tempo-anorak/img/ by tools/grade.mjs; the originals stay local.
 templates/tempo-anorak/tools/raw/
+
+# Full-resolution licensed Adobe Stock originals (ProRes masters, JPEGs) — graded and
+# exported to templates/redout-circuit/img/ and video/ by tools/grade.mjs; the originals stay local.
+templates/redout-circuit/tools/raw/
