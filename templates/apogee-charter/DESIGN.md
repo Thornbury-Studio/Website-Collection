@@ -8,14 +8,21 @@ the fleet (`fleet.html`), the programme (`programme.html`) and the request
 
 The business sells altitude and quiet, so the site has one colour and
 earns it. Everything is bone and ink — until the climb, the section on the
-home page where scrolling is altitude: the page goes from the apron to
-forty-five thousand feet, the ground turns into the sky above the weather,
-bone becomes the near-black of the stratosphere, and the type crosses from
-ink to bone at the tropopause. The altitude counts, the outside air falls
-to −57 °C on the ISA lapse, the cabin altitude and Mach rise, and five lines
-of copy arrive at the heights they are about. The footage under it is a
-private-jet wing rising out of cloud (a descent master, reversed) and then
-a cloud deck from far above. Nothing else on the site is coloured.
+home page where scrolling is altitude. The hero is its first frame, not a
+separate picture: a jet on the apron, waiting, in footage, with the
+headline over it. The first scroll lifts the headline away and the apron
+with it, the altitude counter rises out of the bone where the ground was,
+and the page goes from the apron to forty-five thousand feet — the ground
+turns into the sky above the weather, bone becomes the near-black of the
+stratosphere, and the type crosses from ink to bone at the tropopause.
+The outside air falls to −57 °C on the ISA lapse, the cabin altitude and
+Mach rise, and five lines of copy arrive at the heights they are about.
+The footage under it is a private-jet wing rising out of cloud (a descent
+master, reversed), the top of the weather from above, and then the apex:
+the cloud deck far below and the horizon, which holds. At the top the mark
+is drawn across the full width — the arc, and the dot lit at its highest
+point — the wordmark at the scale of the thing it means. Nothing else on
+the site is coloured.
 
 The references were principles, not surfaces. The Lando Norris site's
 lesson was a single authored, pinned, cinematic sequence with bold type set
@@ -44,7 +51,7 @@ talking. No mono, no serif.
 
 | Effect | About | Where |
 |---|---|---|
-| The climb | Altitude. Scroll is height; the sky, the type colour, the readouts and the footage all derive from one progress number | Home |
+| The climb | Altitude. Scroll is height; the hero's exit, the sky, the type colour, the readouts, the four layers of footage and the mark at the apex all derive from one progress number | Home |
 | Lean | Weight. The big lines skew up to 1.6° with scroll velocity and ease back | Every giant / h2 |
 | Lag | Weight. Plates translate at a fraction of the scroll, so the page feels heavier than the type on it | Every `.para` plate |
 | Wipe | Arrival. Headlines are revealed by a clip that opens downward over 1.3 s; plates open from a letterboxed crop | Everywhere |
@@ -53,9 +60,9 @@ talking. No mono, no serif.
 | Hours | The programme's truth. Any leg, in hours off your year and money at that type's rate | Programme |
 | Buttons | Invert on hover over 0.35 s; scale 0.985 on press. Links draw their underline from the left | Everywhere |
 
-Under `prefers-reduced-motion` the climb arrives at altitude as one still
-composition with every line showing, footage shows its posters, reveals
-are instant, and nothing leans or lags.
+Under `prefers-reduced-motion` the hero is one screen on the apron and the
+climb is one screen at altitude with every line showing; footage shows its
+posters, reveals are instant, and nothing leans or lags.
 
 ## Data
 
