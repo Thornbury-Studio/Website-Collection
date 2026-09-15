@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>The drafting room &mdash; HEDDLE</title>
+  <meta name="description" content="Draw a weave draft — threading, tie-up, treadling, colour — and read the cloth as you draw it. Send it to the mill and we sample thirty centimetres and quote.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/mill-heddle/draft.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HEDDLE">
+  <meta property="og:title" content="The drafting room &mdash; HEDDLE">
+  <meta property="og:description" content="Draw a weave draft and read the cloth as you draw it. Send it to the mill for a sample.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/mill-heddle/draft.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/mill-heddle/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The drafting room &mdash; HEDDLE">
+  <meta name="twitter:description" content="Draw a weave draft and read the cloth as you draw it. Send it to the mill for a sample.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/mill-heddle/img/og.webp">
+  <meta name="theme-color" content="#ECE6D8">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Sometype+Mono:ital,wght@0,400..700;1,400&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="HEDDLE, home"><span class="tie" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Heddle</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#range">Range</a>
+    <a href="draft.html" aria-current="page">Drafting room</a>
+    <a href="index.html#mill">The mill</a>
+    <a href="index.html#order">Ordering</a>
+  </nav>
+  <p class="top-note label">Woollen cloth by the metre &middot; Selkirk</p>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false">
+  <a href="index.html#range">Range</a>
+  <a href="cloths.html">The range at length</a>
+  <a href="draft.html">Drafting room</a>
+  <a href="index.html#mill">The mill</a>
+  <a href="index.html#order">Ordering</a>
+  <p class="label">Kirkbrae Mill &middot; Ettrick Road &middot; Selkirk</p>
+</div>
+
+<main id="main" class="plain">
+  <header class="plain-head">
+    <p class="label">The drafting room</p>
+    <h1>Draw the cloth before we weave it.</h1>
+    <p class="lede">This is the tool the mill plans a cloth on, with the yarn we actually stock. Press a cell and the cloth underneath changes. When it is right, send it: we sett it for our lambswool, weave thirty centimetres, post the sample and quote for the length.</p>
+  </header>
+
+  <section class="howto" aria-label="How to read a draft">
+    <div><span class="n">1 &middot; Top</span><h3>Threading</h3><p>One column per warp end, one row per shaft. The filled square says which shaft carries that end. Every end is on exactly one shaft.</p></div>
+    <div><span class="n">2 &middot; Top right</span><h3>Tie-up</h3><p>One column per treadle. The filled squares are the shafts that treadle lifts when it is pressed.</p></div>
+    <div><span class="n">3 &middot; Right</span><h3>Treadling</h3><p>One row per pick, top to bottom. The filled square is the treadle pressed for that pick; press two for a combined lift.</p></div>
+    <div><span class="n">4 &middot; Below</span><h3>The cloth</h3><p>Where a lifted shaft carries an end, you see warp. Everywhere else, weft. The colour strips along the edges are the yarn order.</p></div>
+  </section>
+
+  <div class="room-grid">
+    <section aria-label="The draft">
+      <p class="label pan-hint">Forty ends across. Drag the draft sideways for the tie-up and the treadling.</p>
+      <div class="draft-scroll">
+      <div class="draft-layout" id="draftLayout">
+        <div class="cells cells--strip-h warp-strip" id="warpStrip" role="group" aria-label="Warp colour order"></div>
+        <div class="cells threading" id="threading" role="group" aria-label="Threading"></div>
+        <div class="cells tieup" id="tieup" role="group" aria-label="Tie-up"></div>
+        <canvas class="drawdown" id="drawdown" role="img" aria-label="The cloth this draft weaves"></canvas>
+        <div class="cells treadling" id="treadling" role="group" aria-label="Treadling"></div>
+        <div class="cells cells--strip-v weft-strip" id="weftStrip" role="group" aria-label="Weft colour order"></div>
+      </div>
+      </div>
+    </section>
+
+    <aside class="bench" aria-label="Tools and readouts">
+      <div class="bench-block">
+        <label class="label" for="preset">Start from</label>
+        <select id="preset">
+          <option value="kirkbrae">Kirkbrae Twill</option>
+          <option value="ettrick">Ettrick Herringbone</option>
+          <option value="hound">Hound</option>
+          <option value="shepherd">Shepherd Check</option>
+          <option value="glen">Glen</option>
+          <option value="logcabin">Log Cabin</option>
+          <option value="rosepath">Rosepath</option>
+          <option value="yarrow">Yarrow Diamond</option>
+          <option value="blank">A blank draft</option>
+          <option value="custom">Your own code</option>
+        </select>
+      </div>
+
+      <fieldset class="bench-block">
+        <legend class="label">Shafts</legend>
+        <div class="radios">
+          <label><input type="radio" name="shafts" value="4" checked> Four</label>
+          <label><input type="radio" name="shafts" value="8"> Eight</label>
+        </div>
+      </fieldset>
+
+      <div class="bench-block tools">
+        <p class="label">Tools</p>
+        <button class="tool" type="button" data-tool="straight">Straight draw</button>
+        <button class="tool" type="button" data-tool="mirror">Mirror the threading</button>
+        <button class="tool" type="button" data-tool="asdrawn">Treadle as drawn in</button>
+        <button class="tool" type="button" data-tool="twill">2/2 twill tie-up</button>
+        <button class="tool" type="button" data-tool="tabby">Tabby</button>
+        <button class="tool" type="button" data-tool="clear">Clear the lifts</button>
+      </div>
+
+      <fieldset class="bench-block">
+        <legend class="label">Shade card &middot; pick one, then press the colour strips</legend>
+        <div class="shades-grid" id="shadeList"></div>
+        <div class="row">
+          <button class="tool" type="button" data-tool="warp-all">Whole warp</button>
+          <button class="tool" type="button" data-tool="weft-all">Whole weft</button>
+        </div>
+      </fieldset>
+
+      <div class="bench-block">
+        <label class="label" for="sett">Sett, ends per cm</label>
+        <input id="sett" type="number" min="8" max="32" step="1" value="22" inputmode="numeric">
+        <dl class="reads">
+          <div><dt>Ends in a 150 cm warp</dt><dd id="readEnds">3,300</dd></div>
+          <div><dt>Finished weight</dt><dd id="readWeight">&ndash;</dd></div>
+          <div><dt>Longest float</dt><dd id="readFloat">&ndash;</dd></div>
+          <div><dt>Threading repeats</dt><dd id="readRepeat">&ndash;</dd></div>
+        </dl>
+        <p class="label warn" id="floatWarn" hidden>Floats over five snag. We would sett this closer, or ask you for a tabby.</p>
+      </div>
+
+      <div class="bench-block">
+        <label class="label" for="code">Draft code</label>
+        <textarea id="code" rows="3" spellcheck="false"></textarea>
+        <div class="row">
+          <button class="tool" type="button" id="copyCode">Copy</button>
+          <button class="tool" type="button" id="loadCode">Load this code</button>
+        </div>
+        <p class="label" id="codeNote"></p>
+      </div>
+
+      <div class="bench-block send">
+        <a class="btn" id="sendDraft" href="mailto:cloth@heddle.scot">Send this draft to the mill<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.5 3.5 14 8l-4.5 4.5"/></svg></a>
+        <p class="label">Opens your mail client with the code, the sett and the weight written in. We reply within two working days with a date for the sample.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="foot plain">
+  <div class="foot-grid">
+    <div>
+      <p class="foot-mark"><span class="tie" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Heddle</p>
+      <p class="label">Woollen cloth woven to a draft</p>
+    </div>
+    <div>
+      <p class="label">Cloth</p>
+      <ul>
+        <li><a href="index.html#range">The range</a></li>
+        <li><a href="cloths.html">The range at length</a></li>
+        <li><a href="draft.html">Drafting room</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">Mill</p>
+      <ul>
+        <li><a href="index.html#mill">How it is made</a></li>
+        <li><a href="index.html#order">Ordering</a></li>
+        <li><a href="index.html#order">Swatch card</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">Kirkbrae Mill</p>
+      <ul>
+        <li>Ettrick Road, Selkirk TD7 5AE</li>
+        <li><a href="mailto:cloth@heddle.scot">cloth@heddle.scot</a></li>
+        <li><a href="tel:+441750720344">01750 720 344</a></li>
+        <li>Mon&ndash;Fri 8&ndash;5 &middot; mill shop Saturdays 10&ndash;2</li>
+      </ul>
+    </div>
+  </div>
+  <p class="label foot-cut">Kirkbrae Mill, on the Ettrick Water since the looms were water.</p>
+  <div class="fringe" aria-hidden="true"></div>
+</footer>
+
+<script src="js/weave.js"></script>
+<script src="js/site.js"></script>
+<script src="js/draft.js"></script>
+</body>
+</html>

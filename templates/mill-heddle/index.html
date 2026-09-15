@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<!--
+  HEDDLE — Kirkbrae Mill, Selkirk.
+
+  Direction contract. Undyed-cloth ground, walnut ink, one madder red spent
+  on the fell line and the things that are pressed. There is no photography
+  anywhere on the site: every cloth is painted from its own weave draft by
+  js/weave.js, at the sett the mill weaves it, so a swatch is a construction
+  and not a picture of one. The one authored moment is the loom beside the
+  page — the page is the cloth, scroll winds it onto the beam, and whatever
+  cloth the visitor is looking at is the cloth being woven. No marquee, no
+  parallax, no timers; motion is direct manipulation, or it is not there.
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>HEDDLE &mdash; woollen cloth woven to a draft, Selkirk</title>
+  <meta name="description" content="A two-loom woollen mill on the Ettrick Water. Eight cloths by the metre, each drawn from its own weave draft, and a drafting room where you can draw your own and send it for a sample.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/mill-heddle/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HEDDLE">
+  <meta property="og:title" content="HEDDLE &mdash; every cloth here is a drawing first">
+  <meta property="og:description" content="A two-loom woollen mill on the Ettrick Water. Eight cloths by the metre, each drawn from its own weave draft.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/mill-heddle/index.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/mill-heddle/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HEDDLE &mdash; every cloth here is a drawing first">
+  <meta name="twitter:description" content="A two-loom woollen mill on the Ettrick Water. Eight cloths by the metre, each drawn from its own weave draft.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/mill-heddle/img/og.webp">
+  <meta name="theme-color" content="#ECE6D8">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Sometype+Mono:ital,wght@0,400..700;1,400&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-current="page" aria-label="HEDDLE, home"><span class="tie" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Heddle</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="#range">Range</a>
+    <a href="draft.html">Drafting room</a>
+    <a href="#mill">The mill</a>
+    <a href="#order">Ordering</a>
+  </nav>
+  <p class="top-note label">Woollen cloth by the metre &middot; Selkirk</p>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false">
+  <a href="#range">Range</a>
+  <a href="cloths.html">The range at length</a>
+  <a href="draft.html">Drafting room</a>
+  <a href="#mill">The mill</a>
+  <a href="#order">Ordering</a>
+  <p class="label">Kirkbrae Mill &middot; Ettrick Road &middot; Selkirk</p>
+</div>
+
+<!-- The loom on a phone: a band under the header, the fell at the right. -->
+<div class="band" id="band">
+  <canvas id="loomBand" class="loom-canvas" role="img" aria-label="The loom, weaving Kirkbrae Twill"></canvas>
+  <p class="band-read label"><span class="loom-name">Kirkbrae Twill</span> &middot; pick <span class="loom-pick">0</span></p>
+</div>
+
+<div class="shell">
+
+  <!-- The loom on a wide screen: a column beside the page. -->
+  <aside class="loom" id="loom" aria-label="The loom">
+    <div class="loom-head">
+      <p class="label">On the loom</p>
+      <p class="loom-title loom-name">Kirkbrae Twill</p>
+      <p class="label loom-structure">2/2 twill</p>
+    </div>
+    <canvas id="loomColumn" class="loom-canvas" role="img" aria-label="The loom, weaving Kirkbrae Twill: threading across the top, tie-up top right, treadling down the right, and the cloth below the fell"></canvas>
+    <div class="loom-foot">
+      <p class="label"><span class="loom-pick">0</span> picks on the beam &middot; <span class="loom-ends">48</span> of 3,300 ends shown</p>
+      <p class="label loom-legend"><span>Threading</span><span>Tie-up</span><span>Treadling</span><span>Cloth</span></p>
+      <a class="label loom-edit" id="loomEdit" href="draft.html?cloth=kirkbrae">Open this draft in the drafting room</a>
+    </div>
+  </aside>
+
+  <div class="page">
+  <main id="main">
+
+    <section class="hero" data-draft="kirkbrae">
+      <p class="label hero-kicker">Kirkbrae Mill &middot; Selkirk &middot; woollen cloth woven to order</p>
+      <h1>Every cloth here is a drawing first.</h1>
+      <p class="lede">Heddle is a two-loom woollen mill on the Ettrick Water. Each cloth we weave begins as a draft: which shaft carries each end, which shafts each treadle lifts, and the order the treadles are pressed. The loom <span class="w-beside">beside</span><span class="w-above">above</span> this page is reading the same drafts. Scroll, and it weaves. Point at a cloth, and it re&#8209;threads.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#range">See the eight cloths<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.5 3.5 14 8l-4.5 4.5"/></svg></a>
+        <a class="btn btn--ghost" href="draft.html">Open the drafting room</a>
+      </div>
+      <p class="hero-spec label">150 cm finished width &middot; 2/16 Nm lambswool &middot; minimum two metres &middot; from &pound;58 a metre</p>
+    </section>
+
+    <section class="range" id="range" data-draft="hound">
+      <div class="sec-head reveal">
+        <p class="label">The range</p>
+        <h2>Eight cloths, one warp beam.</h2>
+        <p>Nothing on this page is photographed. Each card is drawn from its own draft at the sett we weave it, which is why the loom can be weaving any of them the moment you look at it.</p>
+      </div>
+
+      <div class="cards">
+        <a class="cloth-card reveal" href="cloths.html#kirkbrae" data-cloth="kirkbrae">
+          <canvas class="swatch" data-cloth="kirkbrae" data-cell="6" aria-hidden="true"></canvas>
+          <div class="card-body">
+            <div class="card-head"><h3>Kirkbrae Twill</h3><span class="price">&pound;68<small>/m</small></span></div>
+            <p class="label">2/2 twill &middot; 410 g/m&sup2; &middot; 22 ends/cm</p>
+            <p class="note">The mill&rsquo;s working cloth. Walnut warp, oat weft: the diagonal reads at arm&rsquo;s length and goes at three metres.</p>
+          </div>
+        </a>
+        <a class="cloth-card reveal" href="cloths.html#ettrick" data-cloth="ettrick">
+          <canvas class="swatch" data-cloth="ettrick" data-cell="6" aria-hidden="true"></canvas>
+          <div class="card-body">
+            <div class="card-head"><h3>Ettrick Herringbone</h3><span class="price">&pound;74<small>/m</small></span></div>
+            <p class="label">Broken twill &middot; 460 g/m&sup2; &middot; 22 ends/cm</p>
+            <p class="note">Eight ends up, eight down, and a break where they meet so the chevrons never come to a point.</p>
+          </div>
+        </a>
+        <a class="cloth-card reveal" href="cloths.html#hound" data-cloth="hound">
+          <canvas class="swatch" data-cloth="hound" data-cell="6" aria-hidden="true"></canvas>
+          <div class="card-body">
+            <div class="card-head"><h3>Hound</h3><span class="price">&pound;72<small>/m</small></span></div>
+            <p class="label">2/2 twill, four and four &middot; 400 g/m&sup2;</p>
+            <p class="note">Not printed, not embroidered. Four dark ends, four light, the same in the weft, and a twill does the rest.</p>
+          </div>
+        </a>
+        <a class="cloth-card reveal" href="cloths.html#shepherd" data-cloth="shepherd">
+          <canvas class="swatch" data-cloth="shepherd" data-cell="6" aria-hidden="true"></canvas>
+          <div class="card-body">
+            <div class="card-head"><h3>Shepherd Check</h3><span class="price">&pound;72<small>/m</small></span></div>
+            <p class="label">2/2 twill, six and six &middot; 420 g/m&sup2;</p>
+            <p class="note">Hound with two more threads in every block, which is enough to turn teeth into a check. Woad and ecru.</p>
+          </div>
+        </a>
+        <a class="cloth-card reveal" href="cloths.html#glen" data-cloth="glen">
+          <canvas class="swatch" data-cloth="glen" data-cell="6" aria-hidden="true"></canvas>
+          <div class="card-body">
+            <div class="card-head"><h3>Glen</h3><span class="price">&pound;78<small>/m</small></span></div>
+            <p class="label">2/2 twill, 34-end colour order &middot; 400 g/m&sup2;</p>
+            <p class="note">Four-and-four, two-and-two, then a pair of madder ends to close the repeat. It never looks the same twice.</p>
+          </div>
+        </a>
+        <a class="cloth-card reveal" href="cloths.html#logcabin" data-cloth="logcabin">
+          <canvas class="swatch" data-cloth="logcabin" data-cell="6" aria-hidden="true"></canvas>
+          <div class="card-body">
+            <div class="card-head"><h3>Log Cabin</h3><span class="price">&pound;58<small>/m</small></span></div>
+            <p class="label">Plain weave, colour-and-weave &middot; 300 g/m&sup2;</p>
+            <p class="note">Nothing in the structure changes. The blocks are a colour trick, and it is the oldest trick there is.</p>
+          </div>
+        </a>
+        <a class="cloth-card reveal" href="cloths.html#rosepath" data-cloth="rosepath">
+          <canvas class="swatch" data-cloth="rosepath" data-cell="6" aria-hidden="true"></canvas>
+          <div class="card-body">
+            <div class="card-head"><h3>Rosepath</h3><span class="price">&pound;64<small>/m</small></span></div>
+            <p class="label">Rosepath, as drawn in &middot; 520 g/m&sup2; &middot; blanket</p>
+            <p class="note">An eight-end threading that turns back on itself, treadled in the order it is threaded. Madder on ecru.</p>
+          </div>
+        </a>
+        <a class="cloth-card reveal" href="cloths.html#yarrow" data-cloth="yarrow">
+          <canvas class="swatch" data-cloth="yarrow" data-cell="6" aria-hidden="true"></canvas>
+          <div class="card-body">
+            <div class="card-head"><h3>Yarrow Diamond</h3><span class="price">&pound;70<small>/m</small></span></div>
+            <p class="label">8-shaft point twill &middot; 480 g/m&sup2; &middot; blanket</p>
+            <p class="note">Fourteen ends to the point on eight shafts. A 2/2 twill folded into itself, in moss and oat.</p>
+          </div>
+        </a>
+      </div>
+
+      <p class="range-foot reveal"><a href="cloths.html">The range at length, with every draft written out<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.5 3.5 14 8l-4.5 4.5"/></svg></a></p>
+    </section>
+
+    <section class="mill" id="mill" data-draft="ettrick">
+      <div class="sec-head reveal">
+        <p class="label">The mill</p>
+        <h2>Four days of decisions before the first pick.</h2>
+      </div>
+      <ol class="ledger">
+        <li class="reveal">
+          <span class="n" aria-hidden="true">01</span>
+          <h3>Warping</h3>
+          <p>Every warp is wound on the vertical mill, 3,300 ends over forty metres, in the colour order the draft asks for. A day, if nobody telephones.</p>
+        </li>
+        <li class="reveal">
+          <span class="n" aria-hidden="true">02</span>
+          <h3>Threading</h3>
+          <p>Each end goes through one heddle on one shaft, by hand, in the order of the top row of the draft. Get one wrong and the cloth carries the mistake for forty metres, so we do not get one wrong.</p>
+        </li>
+        <li class="reveal">
+          <span class="n" aria-hidden="true">03</span>
+          <h3>Weaving</h3>
+          <p>Two dobby looms, eight shafts each, a 160 cm reed. The dobby reads the treadling from a chain of pegged bars. You are reading it off the same draft, down the right-hand side.</p>
+        </li>
+        <li class="reveal">
+          <span class="n" aria-hidden="true">04</span>
+          <h3>Finishing</h3>
+          <p>Off the loom the cloth is greige and open. It is scoured, milled until the weave closes, tentered to width and cropped. It leaves the mill a tenth narrower and considerably better.</p>
+        </li>
+      </ol>
+      <dl class="facts reveal">
+        <div><dt>Ends in a warp</dt><dd>3,300</dd></div>
+        <div><dt>Metres on a beam</dt><dd>40</dd></div>
+        <div><dt>Shafts</dt><dd>8</dd></div>
+        <div><dt>Reed</dt><dd>160 cm</dd></div>
+        <div><dt>Finished width</dt><dd>150 cm</dd></div>
+      </dl>
+      <p class="mill-note reveal">A real loom cannot re-thread itself in half a second. The one <span class="w-beside">beside</span><span class="w-above">above</span> this page can, which is the only liberty it takes: every pick it has woven while you read is exactly the pick the draft called for.</p>
+    </section>
+
+    <section class="order" id="order" data-draft="glen">
+      <div class="sec-head reveal">
+        <p class="label">Ordering</p>
+        <h2>By the metre, or to your draft.</h2>
+      </div>
+      <div class="order-grid">
+        <div class="order-copy reveal">
+          <h3>By the metre</h3>
+          <p>Any cloth in the range, cut from the beam if it is on one and woven to order if it is not. Minimum two metres. Three to five weeks for a length woven to order; a week if it is on the beam.</p>
+          <h3>To a draft</h3>
+          <p>Bring us a draft from the <a href="draft.html">drafting room</a>. The code at the foot of that page is enough. We sett it for our yarn, weave thirty centimetres, post you the sample and quote for the length.</p>
+          <h3>Swatches</h3>
+          <p>A card of the eight cloths, cut from the real lengths, is &pound;12 by post and comes off your first order.</p>
+        </div>
+
+        <form class="enquiry reveal" id="enquiry" action="#order" method="get" novalidate>
+          <div class="field">
+            <label class="label" for="fName">Name</label>
+            <input id="fName" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label class="label" for="fEmail">Email</label>
+            <input id="fEmail" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="fCloth">Cloth</label>
+              <select id="fCloth" name="cloth">
+                <option value="kirkbrae">Kirkbrae Twill</option>
+                <option value="ettrick">Ettrick Herringbone</option>
+                <option value="hound">Hound</option>
+                <option value="shepherd">Shepherd Check</option>
+                <option value="glen">Glen</option>
+                <option value="logcabin">Log Cabin</option>
+                <option value="rosepath">Rosepath</option>
+                <option value="yarrow">Yarrow Diamond</option>
+                <option value="own">To my own draft</option>
+                <option value="swatches">The swatch card</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label" for="fMetres">Metres</label>
+              <input id="fMetres" name="metres" type="number" min="2" step="0.5" value="3" inputmode="decimal">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="fFor">For</label>
+            <select id="fFor" name="for">
+              <option value="tailoring">Tailoring</option>
+              <option value="upholstery">Upholstery</option>
+              <option value="blanket">A blanket or throw</option>
+              <option value="curtains">Curtains</option>
+              <option value="unsure">I am not sure yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="label" for="fMsg">Anything else</label>
+            <textarea id="fMsg" name="message" rows="4"></textarea>
+          </div>
+          <p class="label sampler" id="samplerNote">The loom is weaving while you read; what it has woven goes with the enquiry.</p>
+          <button class="btn" type="submit">Send the enquiry<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.5 3.5 14 8l-4.5 4.5"/></svg></button>
+          <p class="label form-note" id="enquiryNote" hidden></p>
+          <p class="label">Or write to <a href="mailto:cloth@heddle.scot">cloth@heddle.scot</a>.</p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot" data-draft="rosepath">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-mark"><span class="tie" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Heddle</p>
+        <p class="label">Woollen cloth woven to a draft</p>
+      </div>
+      <div>
+        <p class="label">Cloth</p>
+        <ul>
+          <li><a href="#range">The range</a></li>
+          <li><a href="cloths.html">The range at length</a></li>
+          <li><a href="draft.html">Drafting room</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">Mill</p>
+        <ul>
+          <li><a href="#mill">How it is made</a></li>
+          <li><a href="#order">Ordering</a></li>
+          <li><a href="#order">Swatch card</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">Kirkbrae Mill</p>
+        <ul>
+          <li>Ettrick Road, Selkirk TD7 5AE</li>
+          <li><a href="mailto:cloth@heddle.scot">cloth@heddle.scot</a></li>
+          <li><a href="tel:+441750720344">01750 720 344</a></li>
+          <li>Mon&ndash;Fri 8&ndash;5 &middot; mill shop Saturdays 10&ndash;2</li>
+        </ul>
+      </div>
+    </div>
+    <p class="label foot-cut">Cut from the loom at pick <span class="loom-pick">0</span>.</p>
+    <div class="fringe" aria-hidden="true"></div>
+  </footer>
+  </div>
+</div>
+
+<script src="js/weave.js"></script>
+<script src="js/loom.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
