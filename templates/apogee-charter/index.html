@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<!--
+  APOGEE — private jet charter.
+
+  Direction contract. Bone and ink, and one section that earns a colour:
+  the climb, where the page scrolls from the apron to forty-five thousand
+  feet and the ground turns into the sky above the weather. Bricolage
+  Grotesque at its largest optical size, set tight and low; Instrument Sans
+  for everything that is said rather than shown. Motion is about weight and
+  quiet — plates lag the scroll, the big lines lean a degree with velocity
+  and settle, nothing bounces, nothing glows. No serif, no gold, no jet at
+  sunset. The photographs are graded to the same temperature as the page.
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Apogee &mdash; private jet charter</title>
+  <meta name="description" content="Apogee is a private jet charter with its own fleet of fourteen aircraft, one cabin standard and a host on every flight. Bases at Farnborough, Geneva, Dubai and Singapore. Hours bought a year at a time, or one flight at a time.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/apogee-charter/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Apogee">
+  <meta property="og:title" content="Apogee &mdash; the hour is yours">
+  <meta property="og:description" content="Private jet charter. Fourteen aircraft, one cabin standard, a host on every flight. Farnborough, Geneva, Dubai, Singapore.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/apogee-charter/index.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/apogee-charter/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apogee &mdash; the hour is yours">
+  <meta name="twitter:description" content="Private jet charter. Fourteen aircraft, one cabin standard, a host on every flight.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/apogee-charter/img/og.webp">
+  <meta name="theme-color" content="#ECE9E2">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body class="home">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <a class="mark" href="index.html" aria-current="page" aria-label="Apogee, home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 20c2-9 7-14 10-14s8 5 10 14"/><circle cx="12" cy="6" r="2"/></svg>Apogee</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="fleet.html">Fleet</a>
+    <a href="programme.html">Programme</a>
+    <a href="request.html">Request</a>
+  </nav>
+  <a class="btn" href="request.html">Request a flight</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+<div class="drawer" id="drawer" data-open="false">
+  <a href="fleet.html">Fleet</a>
+  <a href="programme.html">Programme</a>
+  <a href="request.html">Request</a>
+  <a class="btn btn--solid" href="request.html">Request a flight</a>
+</div>
+
+<main id="main">
+
+  <section class="hero" aria-label="Apogee">
+    <figure class="plate plate--cover para" data-para="0.35">
+      <img src="img/apron-1400.webp" srcset="img/apron-800.webp 800w, img/apron-1400.webp 1400w, img/apron.webp 2400w" sizes="100vw" width="2400" height="1600" alt="A large-cabin jet on the apron with its stairs down, a car parked at the wing." decoding="async" fetchpriority="high">
+    </figure>
+    <div class="hero-top">
+      <span class="small">Apogee &mdash; private jet charter</span>
+      <span class="small">Farnborough &middot; Geneva &middot; Dubai &middot; Singapore</span>
+    </div>
+    <div class="hero-inner">
+      <h1 class="giant lean wipe">The hour<br>is yours.</h1>
+      <div class="hero-copy">
+        <p class="lede reveal d1">Fourteen aircraft. One cabin standard. A host on every flight. Ours, not brokered &mdash; you say when, and we say nothing to anyone.</p>
+        <div class="reveal d2"><a class="btn btn--solid" href="request.html">Request a flight<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The climb: scroll is altitude. -->
+  <section class="climb" id="climb" aria-label="The climb, from the apron to forty-five thousand feet">
+    <div class="climb-stick" id="climb-stick">
+      <figure class="climb-layer climb-layer--ground" id="layer-ground">
+        <img src="img/apron-1400.webp" srcset="img/apron-800.webp 800w, img/apron-1400.webp 1400w, img/apron.webp 2400w" sizes="100vw" width="2400" height="1600" alt="" loading="lazy" decoding="async">
+      </figure>
+      <figure class="climb-layer climb-layer--wing" id="layer-wing">
+        <video muted playsinline loop preload="metadata" poster="img/wing-poster.webp" data-src="video/wing.mp4" aria-hidden="true"></video>
+      </figure>
+      <figure class="climb-layer climb-layer--deck" id="layer-deck">
+        <video muted playsinline loop preload="metadata" poster="img/deck-poster.webp" data-src="video/deck.mp4" aria-hidden="true"></video>
+      </figure>
+      <div class="climb-veil" aria-hidden="true"></div>
+      <div class="climb-ui">
+        <div class="climb-head">
+          <span class="small">The climb</span>
+          <span class="small">Farnborough to Nice &middot; Challenger 350</span>
+        </div>
+        <div class="climb-alt" aria-live="off">
+          <b class="num" id="alt">0<small>ft</small></b>
+        </div>
+        <div class="climb-foot">
+          <div class="climb-lines" id="climb-lines" aria-live="polite">
+            <p class="climb-line" data-at="0">Wheels up at the minute you said. Not the slot you were given.</p>
+            <p class="climb-line" data-at="8000">Eight thousand. The seatbelt sign goes off. Nobody announces it.</p>
+            <p class="climb-line" data-at="20000">Twenty. Above the weather, and above every airliner in the hold below you.</p>
+            <p class="climb-line" data-at="34000">Thirty-four. The cabin is at five thousand feet. You are not.</p>
+            <p class="climb-line" data-at="44000">Forty-five thousand. Apogee. Nothing up here but us.</p>
+          </div>
+          <ul class="climb-data">
+            <li><b id="oat">+15&deg;C</b><span>Outside</span></li>
+            <li><b id="cab">0 ft</b><span>Cabin altitude</span></li>
+            <li><b id="mach">0.00</b><span>Mach</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="climb-bar" id="climb-bar" aria-hidden="true"><i></i></div>
+    </div>
+  </section>
+
+  <!-- The cabin -->
+  <section class="cabin dark section" id="cabin" aria-labelledby="cabin-title">
+    <div class="wrap grid">
+      <div class="cabin-copy">
+        <p class="small mute reveal">The cabin</p>
+        <h2 class="h2 lean wipe" id="cabin-title">One cabin. Fourteen aircraft.</h2>
+        <p class="lede reveal d1 measure">Every aircraft in the fleet is ours and fitted the same way: the same seats, the same linen, the same coffee, the same host who knew your name before you reached the stairs. Take the small one to Ibiza for lunch and the big one to Tokyo and you will not notice the difference until you look out of the window.</p>
+        <ul class="facts reveal d2">
+          <li class="fact"><b data-fleet-count>14</b><span>Aircraft, all ours</span></li>
+          <li class="fact"><b>4</b><span>Bases, three continents</span></li>
+          <li class="fact"><b>1</b><span>Cabin standard</span></li>
+        </ul>
+      </div>
+      <figure class="plate cabin-plate plate-in para" data-para="0.12">
+        <video muted playsinline loop preload="metadata" poster="img/cabin-poster.webp" data-src="video/cabin.mp4" aria-hidden="true"></video>
+        <figcaption class="plate-cap">Challenger 350 &middot; forward cabin</figcaption>
+      </figure>
+    </div>
+    <div class="wrap host">
+      <figure class="plate host-plate plate-in para" data-para="0.1">
+        <video muted playsinline loop preload="metadata" poster="img/host-poster.webp" data-src="video/host.mp4" aria-hidden="true"></video>
+      </figure>
+      <div class="host-copy">
+        <p class="small mute reveal">The host</p>
+        <h3 class="h2 lean wipe" id="host-title">Somebody who knew<br>you were coming.</h3>
+        <p class="lede reveal d1 measure">Fourteen weeks at our own school in Geneva before a first sector. They write the menu for your flight, not a flight. They remember how you take your coffee, and they do not talk unless you do.</p>
+        <ul class="facts reveal d2">
+          <li class="fact"><b>14</b><span>Weeks of training</span></li>
+          <li class="fact"><b>1 : 6</b><span>Host to guests</span></li>
+          <li class="fact"><b>0</b><span>Cabin announcements</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- The fleet in four lines -->
+  <section class="section wrap" id="fleet" aria-labelledby="fleet-title">
+    <div class="head">
+      <p class="small mute reveal">The fleet</p>
+      <h2 class="h2 lean wipe" id="fleet-title">Four sizes. One standard.</h2>
+      <p class="lede reveal d1">Light for lunch, mid for the Gulf, super-mid for New York, long for anywhere. The line under each is its range against the longest.</p>
+    </div>
+    <div class="fleet-rows reveal" id="fleet-rows"></div>
+    <p class="reveal d1 mt-lg"><a class="link" href="fleet.html">Every aircraft, and where it can go<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a></p>
+  </section>
+
+  <!-- The programme -->
+  <section class="section wrap bg-2" id="programme" aria-labelledby="prog-title">
+    <div class="head">
+      <p class="small mute reveal">The programme</p>
+      <h2 class="h2 lean wipe" id="prog-title">Hours, not flights.</h2>
+      <p class="lede reveal d1">You buy hours, a year at a time, at a rate we hold for the term. Fly any aircraft in the fleet on them. Twenty-four hours&rsquo; notice, anywhere it is based, and it is on the apron.</p>
+    </div>
+    <ul class="tiers reveal" id="tiers"></ul>
+    <ul class="terms reveal d1" id="terms"></ul>
+    <p class="reveal d2 mt-lg"><a class="link" href="programme.html">How the programme works, and what a leg costs in hours<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a></p>
+  </section>
+
+  <!-- Discretion -->
+  <section class="quiet" id="discretion" aria-labelledby="quiet-title">
+    <figure class="plate plate--cover para" data-para="0.3">
+      <img src="img/shade-1400.webp" srcset="img/shade-800.webp 800w, img/shade-1400.webp 1400w, img/shade.webp 2400w" sizes="100vw" width="2400" height="1600" alt="A cabin host, in profile, lowering a window shade with one hand." loading="lazy" decoding="async">
+    </figure>
+    <div class="quiet-inner">
+      <p class="small reveal">Discretion</p>
+      <h2 class="h2 lean wipe" id="quiet-title">Nobody will know you flew.</h2>
+      <ul class="quiet-list reveal d1">
+        <li>No lounge, no terminal, no queue. The car drives to the stairs.</li>
+        <li>No manifest published, no names in our marketing, ever &mdash; including yours.</li>
+        <li>No photography on our aprons, and none by our crew.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Request -->
+  <section class="dark section wrap" aria-labelledby="band-title">
+    <div class="band">
+      <h2 class="h2 lean wipe" id="band-title">Tell us when.</h2>
+      <div class="band-copy">
+        <p class="lede reveal d1 measure-s">A route, a date, a number of seats. Someone who can say yes replies within the hour, day or night.</p>
+        <p class="reveal d2"><a class="btn btn--solid" href="request.html">Request a flight<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a></p>
+        <p class="small mute reveal d3">Or call <a href="tel:+442079460110">+44 20 7946 0110</a>, any hour</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-mark" aria-hidden="true">Apogee</p>
+    <div class="foot-grid">
+      <div>
+        <h4>Apogee</h4>
+        <p class="measure-s">Private jet charter. Fourteen aircraft, one cabin standard, a host on every flight. Head office at Farnborough Airport, Hampshire.</p>
+      </div>
+      <div>
+        <h4>Fly</h4>
+        <ul><li><a href="fleet.html">The fleet</a></li><li><a href="fleet.html#route">Where it can go</a></li><li><a href="programme.html">The programme</a></li><li><a href="request.html">Request a flight</a></li></ul>
+      </div>
+      <div>
+        <h4>Bases</h4>
+        <ul><li>Farnborough</li><li>Geneva</li><li>Dubai &middot; Al Maktoum</li><li>Singapore &middot; Seletar</li></ul>
+      </div>
+      <div>
+        <h4>Any hour</h4>
+        <ul><li><a href="tel:+442079460110">+44 20 7946 0110</a></li><li><a href="mailto:fly@apogeecharter.com">fly@apogeecharter.com</a></li><li><a href="mailto:press@apogeecharter.com">press@apogeecharter.com</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>&copy; 2026 Apogee Charter Ltd</span>
+      <span>Apogee, noun &mdash; the highest point of an orbit</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
