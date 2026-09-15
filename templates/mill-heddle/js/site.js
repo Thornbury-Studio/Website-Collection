@@ -2,13 +2,11 @@
 
      1. the header (drawer)
      2. reveals — a rise, once, never re-run
-     3. the draft written out beside each cloth on the range page
-     4. the enquiry, which composes a message and hands it to a mail client
+     3. the enquiry, which composes a message and hands it to a mail client
 */
 (function (root, doc) {
   'use strict';
 
-  var W = root.WEAVE;
   var html = doc.documentElement;
   var animates = html.classList.contains('js-anim');
 
@@ -54,33 +52,7 @@
     for (var j = 0; j < reveals.length; j++) io.observe(reveals[j]);
   }
 
-  if (!W) return;
-
-  /* -- 3. the drafts ---------------------------------------------------- */
-
-  var draftCache = {};
-  function draftFor(id) {
-    if (!draftCache[id] && W.BY_ID[id]) draftCache[id] = W.fromCloth(W.BY_ID[id]);
-    return draftCache[id];
-  }
-
-  var notations = doc.querySelectorAll('canvas.notation[data-cloth]');
-  function paintAll() {
-    for (var k = 0; k < notations.length; k++) {
-      var d = draftFor(notations[k].getAttribute('data-cloth'));
-      if (d) W.renderNotation(notations[k], d, { ends: parseInt(notations[k].getAttribute('data-ends'), 10) || 32 });
-    }
-  }
-  if (notations.length) {
-    paintAll();
-    var repaintTimer;
-    root.addEventListener('resize', function () {
-      clearTimeout(repaintTimer);
-      repaintTimer = setTimeout(paintAll, 120);
-    });
-  }
-
-  /* -- 4. the enquiry -------------------------------------------------- */
+  /* -- 3. the enquiry -------------------------------------------------- */
 
   var form = doc.getElementById('enquiry');
   if (form) {
