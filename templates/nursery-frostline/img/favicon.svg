@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Dryas octopetala: the species name means eight petals, and it grows wild
+       on the bank above the nursery. Eight petals, drawn, on herbarium buff. -->
+  <rect width="64" height="64" fill="#ede8dc"/>
+  <g transform="translate(32 32)" fill="none" stroke="#2e4e5c" stroke-width="3.1" stroke-linejoin="round">
+    <g id="p"><path d="M0 -7 C5 -13 5 -21 0 -26 C-5 -21 -5 -13 0 -7Z"/></g>
+    <use href="#p" transform="rotate(45)"/>
+    <use href="#p" transform="rotate(90)"/>
+    <use href="#p" transform="rotate(135)"/>
+    <use href="#p" transform="rotate(180)"/>
+    <use href="#p" transform="rotate(225)"/>
+    <use href="#p" transform="rotate(270)"/>
+    <use href="#p" transform="rotate(315)"/>
+  </g>
+  <circle cx="32" cy="32" r="4.4" fill="#a33a22"/>
+</svg>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order sheet — FROSTLINE</title>
+<meta name="description" content="Compose an order sheet for bare-root and field-lifted stock. Nothing is charged from this page: we reply with a lifting date and a carriage figure.">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/nursery-frostline/order.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Order sheet — FROSTLINE">
+<meta property="og:description" content="Compose an order sheet for bare-root and field-lifted stock. Nothing is charged from this page.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/nursery-frostline/order.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/nursery-frostline/img/og.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/nursery-frostline/img/og.webp">
+<meta name="theme-color" content="#ede8dc">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;1,400;1,500&family=Archivo:wght@600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/boot.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="rail" aria-hidden="true"><i></i></div>
+
+<header class="mast">
+  <div class="shell mast-in">
+    <a class="wordmark" href="index.html">Frost<i>line</i></a>
+    <span class="mast-site">54.65&deg;N &middot; 412 m &middot; NNE, open</span>
+    <nav class="mast-nav" aria-label="Main">
+      <a href="index.html">The gate</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="field.html">The field</a>
+      <a href="order.html" aria-current="page">Order</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="band band--tight">
+    <div class="shell drift">
+      <div class="brk" style="grid-column:1 / span 6; grid-row:1">
+        <span class="eyebrow">Order sheet</span>
+        <h1 class="t-chapter">Write the list. We lift when the window opens.</h1>
+      </div>
+      <div class="brk" style="grid-column:8 / -1; grid-row:1">
+        <p>There is no basket and no card field on this site. You compose a sheet here, send it
+        or copy it, and we reply with a lifting date and a carriage figure. Payment happens on
+        despatch, by transfer or over the phone.</p>
+        <p class="dim" style="margin-bottom:0">If you are not sure what will live on your site,
+        run <a class="tx-link" href="index.html#gate">the gate</a> first.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="shell">
+      <form class="form-grid" id="orderForm" novalidate>
+
+        <div class="form-main">
+          <fieldset style="border:0;padding:0;margin:0 0 2.2rem">
+            <legend class="eyebrow" style="margin-bottom:1rem">Where it goes</legend>
+
+            <div class="field">
+              <label for="fName">Name</label>
+              <input id="fName" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="fTown">Town</label>
+              <input id="fTown" name="town" type="text" autocomplete="address-level2" required>
+            </div>
+            <div class="field">
+              <label for="fPost">Postcode</label>
+              <input id="fPost" name="postcode" type="text" autocomplete="postal-code"
+                     inputmode="text" required>
+            </div>
+            <div class="field">
+              <label for="fWin">Preferred lifting window</label>
+              <select id="fWin" name="window">
+                <option>Earliest available</option>
+                <option>November&ndash;December</option>
+                <option>January&ndash;February</option>
+                <option>March</option>
+                <option>April&ndash;June (container only)</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset style="border:0;padding:0;margin:0">
+            <legend class="eyebrow" style="margin-bottom:1rem">Stock</legend>
+            <div id="stockPick"></div>
+          </fieldset>
+
+          <div class="field" style="margin-top:2.2rem">
+            <label for="fNotes">Site notes &mdash; aspect, drainage, what has died there before</label>
+            <textarea id="fNotes" name="notes"></textarea>
+          </div>
+        </div>
+
+        <div class="form-aside">
+          <span class="label" style="display:block;margin-bottom:0.8rem">The sheet</span>
+          <pre class="sheet-out" id="sheetOut" aria-live="polite" aria-label="Composed order sheet"></pre>
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1.1rem">
+            <button class="btn" type="button" id="sheetSend">Send sheet</button>
+            <button class="btn btn--quiet" type="button" id="sheetCopy">Copy sheet</button>
+          </div>
+          <p class="dim" style="font-size:0.88rem;margin-top:1.1rem">Send opens your own mail
+          client with the sheet already written. Nothing leaves this page on its own.</p>
+        </div>
+
+        <div class="form-note">
+          <hr class="rule" style="margin:2.5rem 0 1.5rem">
+          <div class="drift" style="gap:var(--gut)">
+            <div style="grid-column:1 / span 6; grid-row:1">
+              <span class="label" style="display:block;margin-bottom:0.5rem">Carriage</span>
+              <p class="dim" style="font-size:0.94rem;margin:0">Quoted by weight when we lift,
+              not estimated now. Bare-root goes by next-day courier in a damp-packed box; a
+              sixteen-plant order is usually one box.</p>
+            </div>
+            <div style="grid-column:7 / -1; grid-row:1">
+              <span class="label" style="display:block;margin-bottom:0.5rem">If it dies</span>
+              <p class="dim" style="font-size:0.94rem;margin:0">Tell us within the first growing
+              season and we replace it once, free, provided it went into ground the gate said it
+              would live in. That condition is the whole point of the gate.</p>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell foot-grid">
+    <div class="foot-a">
+      <span class="label">Frostline</span>
+      <address>
+        Harrowgill Bank<br>
+        Upper Teesdale, Co. Durham<br>
+        DL12 0XX<br>
+        <a href="tel:+441833000000">01833 000 000</a>
+      </address>
+    </div>
+    <div class="foot-b">
+      <span class="label">Open</span>
+      <ul>
+        <li class="dim">Fri &amp; Sat, 10&ndash;4</li>
+        <li class="dim">March to June</li>
+        <li class="dim">Sept to November</li>
+        <li class="dim">Closed in hard frost</li>
+      </ul>
+    </div>
+    <div class="foot-c">
+      <span class="label">Pages</span>
+      <ul>
+        <li><a href="index.html">The gate</a></li>
+        <li><a href="catalogue.html">Catalogue</a></li>
+        <li><a href="field.html">The field</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="shell foot-base">
+    <span>&copy; 2026 Frostline</span>
+    <span>Bare-root lifting Nov&ndash;Mar</span>
+  </div>
+</footer>
+
+<script src="js/catalogue.js"></script>
+<script src="js/site.js"></script>
+<script>
+/* Stock picker, built from the shared array so the order sheet can never
+   list a plant the catalogue does not carry, or the wrong price for one. */
+(function () {
+  var host = document.getElementById('stockPick');
+  if (!host || !window.FROSTLINE) return;
+  var F = window.FROSTLINE;
+
+  F.stock.slice()
+    .sort(function (a, b) { return F.binomial(a).localeCompare(F.binomial(b)); })
+    .forEach(function (p) {
+      var key = p.genus + '-' + p.species;
+      var row = document.createElement('div');
+      row.className = 'pick';
+      row.innerHTML =
+        '<input type="checkbox" id="c-' + key + '" name="plant" value="' + key + '">' +
+        '<label for="c-' + key + '">' +
+          '<em class="bi">' + F.binomial(p) + '</em>' +
+          '<span class="pick-meta">' + p.rhs + ' &middot; ' + p.h + '&times;' + p.w +
+          ' cm &middot; &pound;' + p.price.toFixed(2) + ' &middot; ' + p.lift + '</span>' +
+        '</label>' +
+        '<input type="number" name="qty-' + key + '" value="1" min="1" max="99" step="1" ' +
+          'aria-label="Quantity of ' + F.binomial(p) + '">';
+      host.appendChild(row);
+    });
+})();
+</script>
+</body>
+</html>
