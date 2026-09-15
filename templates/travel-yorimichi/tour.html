@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Tour &mdash; YORIMICHI</title>
+  <meta name="description" content="Day-by-day itinerary, departure dates, prices and what is included for this small-group Japan tour from Singapore.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/travel-yorimichi/tour.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YORIMICHI">
+  <meta property="og:title" content="Tour &mdash; YORIMICHI">
+  <meta property="og:description" content="Day-by-day itinerary, departure dates, prices and what is included for this small-group Japan tour from Singapore.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/travel-yorimichi/tour.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/travel-yorimichi/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/travel-yorimichi/img/og.webp">
+  <meta name="theme-color" content="#0B0F1A">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@300..700&family=Onest:wght@300..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="Yorimichi, home"><i></i>Yorimichi <small>Japan</small></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="tours.html" aria-current="page">Tours</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="index.html#reviews">Reviews</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="top__actions">
+    <button class="icon-btn" id="searchBtn" type="button" aria-expanded="false" aria-controls="search" aria-label="Search tours">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+    </button>
+    <button class="burger icon-btn" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+<div class="search" id="search" hidden>
+  <form action="tours.html" method="get">
+    <input type="search" name="q" placeholder="Search tours &mdash; Kyoto, winter, ryokan, sakura&hellip;" aria-label="Search tours" autocomplete="off">
+    <button class="btn btn--sm" type="submit">Search</button>
+  </form>
+</div>
+<nav class="drawer" id="drawer" data-open="false" aria-label="Menu">
+  <a href="index.html">Home <span>01</span></a>
+  <a href="about.html">About <span>02</span></a>
+  <a href="tours.html" aria-current="page">Tours <span>03</span></a>
+  <a href="gallery.html">Gallery <span>04</span></a>
+  <a href="index.html#reviews">Reviews <span>05</span></a>
+  <a href="contact.html">Contact <span>06</span></a>
+  <div class="drawer__foot">
+    <strong>+65 6221 4870</strong>
+    <span>24 Duxton Hill #02-04 &middot; Mon&ndash;Fri 10&ndash;7, Sat 10&ndash;4</span>
+  </div>
+</nav>
+
+<main id="main">
+  <section class="phero" aria-label="Tour">
+    <img id="tHero" src="img/tour-golden-route-wide.webp" alt="" width="1600" height="1067" fetchpriority="high">
+    <div class="wrap phero__inner">
+      <span class="kicker" id="tShort">Tokyo &middot; Hakone &middot; Kyoto &middot; Osaka</span>
+      <h1 class="h1" id="tName">The Golden Route</h1>
+      <p class="lede" id="tTagline">The classic first Japan trip, done at a walking pace.</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="facts" id="tFacts"></div>
+  </div>
+
+  <section class="section" aria-label="Tour details">
+    <div class="wrap detail">
+      <div class="detail__main">
+        <div class="block reveal">
+          <h2 class="h2">Highlights</h2>
+          <ul class="hl" id="tHighlights"></ul>
+        </div>
+        <div class="block reveal">
+          <h2 class="h2">Day by day</h2>
+          <div class="days" id="tDays"></div>
+        </div>
+        <div class="block reveal">
+          <h2 class="h2">What&rsquo;s in the price</h2>
+          <div class="incl">
+            <div class="incl--yes"><h3>Included</h3><ul id="tIncluded"></ul></div>
+            <div class="incl--no"><h3>Not included</h3><ul id="tExcluded"></ul></div>
+          </div>
+        </div>
+        <div class="block reveal">
+          <h2 class="h2">On this tour</h2>
+          <div class="tgal" id="tGallery"></div>
+        </div>
+      </div>
+
+      <aside class="detail__side">
+        <form class="book" id="book" novalidate>
+          <div class="book__head">
+            <h2 class="h3">Book a seat</h2>
+            <span class="book__from">from <b id="bFrom">S$5,980</b></span>
+          </div>
+          <div class="field">
+            <label for="bDate">Departure</label>
+            <select id="bDate" name="date"></select>
+          </div>
+          <div class="book__row">
+            <div class="field">
+              <label for="bPax">Travellers</label>
+              <select id="bPax" name="pax">
+                <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option>
+                <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="bRoom">Rooms</label>
+              <select id="bRoom" name="room">
+                <option value="twin">Twin-share</option>
+                <option value="single">Single rooms</option>
+              </select>
+            </div>
+          </div>
+          <label class="check"><input type="checkbox" id="bNight" name="night" value="220"><span>Add a night before the tour <small>S$220 a person, breakfast included, at the first hotel</small></span></label>
+          <label class="check"><input type="checkbox" id="bIns" name="ins" value="68"><span>Add travel insurance <small>S$68 a person, the cover the tour requires</small></span></label>
+          <div class="total" aria-live="polite">
+            <div class="total__line"><span id="tlPax">2 travellers &times; S$5,980</span><span id="tlBase">S$11,960</span></div>
+            <div class="total__line" id="tlSingleRow" hidden><span>Single supplement</span><span id="tlSingle">S$0</span></div>
+            <div class="total__line" id="tlExtraRow" hidden><span>Extras</span><span id="tlExtra">S$0</span></div>
+            <div class="total__sum"><span>Total</span><b id="tlTotal">S$11,960</b></div>
+            <div class="total__line"><span>Deposit today</span><span id="tlDeposit">S$1,000</span></div>
+          </div>
+          <div class="field">
+            <label for="bName">Lead traveller</label>
+            <input type="text" id="bName" name="name" autocomplete="name" placeholder="Full name as on passport" required>
+          </div>
+          <div class="field">
+            <label for="bEmail">Email</label>
+            <input type="email" id="bEmail" name="email" autocomplete="email" placeholder="you@example.com" required>
+          </div>
+          <button class="btn" type="submit" id="bSubmit">Reserve these seats</button>
+          <p class="book__note">Reserving holds the seats for 72 hours while we send the booking form and the deposit invoice. Nothing is charged on this page. Balance due 60 days before departure.</p>
+        </form>
+        <div class="book book__done" id="bookDone" hidden>
+          <span class="kicker">Seats held</span>
+          <span class="ref" id="bRef">YM-26-0000</span>
+          <p id="bDoneText"></p>
+          <p class="book__note">We have emailed the booking form and deposit invoice. Call +65 6221 4870 if it has not arrived within the hour.</p>
+        </div>
+
+        <div class="block" style="margin-top:32px">
+          <h2 class="kicker" style="display:block;margin-bottom:12px">All departures</h2>
+          <div class="deps" id="tDeps"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--tight similar" aria-labelledby="simTitle">
+    <div class="wrap">
+      <div class="section__head section__head--split reveal">
+        <div>
+          <span class="kicker">You might also look at</span>
+          <h2 class="h2" id="simTitle">Similar tours</h2>
+        </div>
+        <a class="more" href="tours.html">All eight tours <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="tgrid" id="tSimilar"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="mark" href="index.html"><i></i>Yorimichi <small>Japan</small></a>
+        <p>Yorimichi Travel Pte. Ltd. &middot; Small-group escorted tours to Japan, departing Singapore since 2014. STB Travel Agent Licence No. TA03457.</p>
+      </div>
+      <div>
+        <h4>Tours</h4>
+        <ul>
+          <li><a href="tour.html?t=golden-route">The Golden Route</a></li>
+          <li><a href="tour.html?t=kyoto-autumn">Kyoto in Autumn</a></li>
+          <li><a href="tour.html?t=sakura">Sakura Season</a></li>
+          <li><a href="tour.html?t=snow-country">Snow Country</a></li>
+          <li><a href="tours.html">All eight tours</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="index.html#reviews">Reviews</a></li>
+          <li><a href="contact.html">Contact &amp; office</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Office</h4>
+        <ul>
+          <li>24 Duxton Hill #02-04</li>
+          <li>Singapore 089607</li>
+          <li><a href="tel:+6562214870">+65 6221 4870</a></li>
+          <li><a href="mailto:hello@yorimichi.sg">hello@yorimichi.sg</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>&copy; 2026 Yorimichi Travel Pte. Ltd. &middot; UEN 201412876K &middot; TA03457</span>
+      <span>Prices in Singapore dollars, per person twin-share, including return flights from Singapore.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/tours-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/tour.js"></script>
+</body>
+</html>

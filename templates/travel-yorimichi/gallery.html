@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Gallery &mdash; YORIMICHI</title>
+  <meta name="description" content="Eighteen photographs from the road: Kyoto before dawn, Shibuya from above, Shirakawa-go under snow, Miyajima at high tide. Filter by region.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/travel-yorimichi/gallery.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YORIMICHI">
+  <meta property="og:title" content="Gallery &mdash; YORIMICHI">
+  <meta property="og:description" content="Eighteen photographs from the road, filterable by region.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/travel-yorimichi/gallery.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/travel-yorimichi/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/travel-yorimichi/img/og.webp">
+  <meta name="theme-color" content="#0B0F1A">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@300..700&family=Onest:wght@300..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="Yorimichi, home"><i></i>Yorimichi <small>Japan</small></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="tours.html">Tours</a>
+    <a href="gallery.html" aria-current="page">Gallery</a>
+    <a href="index.html#reviews">Reviews</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="top__actions">
+    <button class="icon-btn" id="searchBtn" type="button" aria-expanded="false" aria-controls="search" aria-label="Search tours">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+    </button>
+    <button class="burger icon-btn" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+<div class="search" id="search" hidden>
+  <form action="tours.html" method="get">
+    <input type="search" name="q" placeholder="Search tours &mdash; Kyoto, winter, ryokan, sakura&hellip;" aria-label="Search tours" autocomplete="off">
+    <button class="btn btn--sm" type="submit">Search</button>
+  </form>
+</div>
+<nav class="drawer" id="drawer" data-open="false" aria-label="Menu">
+  <a href="index.html">Home <span>01</span></a>
+  <a href="about.html">About <span>02</span></a>
+  <a href="tours.html">Tours <span>03</span></a>
+  <a href="gallery.html" aria-current="page">Gallery <span>04</span></a>
+  <a href="index.html#reviews">Reviews <span>05</span></a>
+  <a href="contact.html">Contact <span>06</span></a>
+  <div class="drawer__foot">
+    <strong>+65 6221 4870</strong>
+    <span>24 Duxton Hill #02-04 &middot; Mon&ndash;Fri 10&ndash;7, Sat 10&ndash;4</span>
+  </div>
+</nav>
+
+<main id="main">
+  <section class="phero" aria-label="Gallery">
+    <img src="img/plate-toji-pagoda.webp" alt="" width="1600" height="1067" fetchpriority="high">
+    <div class="wrap phero__inner">
+      <span class="kicker">Eighteen photographs &middot; five regions</span>
+      <h1 class="h1">From the road</h1>
+      <p class="lede">The mornings we plan the tours around. Most of these were taken before eight o&rsquo;clock, which is the point.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight" aria-label="Photographs">
+    <div class="wrap">
+      <div class="filters" id="gfilters" role="group" aria-label="Filter by region">
+        <button class="chip" type="button" data-region="" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-region="kanto" aria-pressed="false">Kanto</button>
+        <button class="chip" type="button" data-region="kansai" aria-pressed="false">Kansai</button>
+        <button class="chip" type="button" data-region="chubu" aria-pressed="false">Chubu</button>
+        <button class="chip" type="button" data-region="tohoku" aria-pressed="false">Tohoku</button>
+        <button class="chip" type="button" data-region="chugoku" aria-pressed="false">Chugoku</button>
+      </div>
+      <p class="results" id="gcount" aria-live="polite"></p>
+      <div class="ggrid" id="ggrid"></div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="ctaTitle">
+    <div class="wrap cta__grid">
+      <div class="reveal">
+        <span class="kicker">See it yourself</span>
+        <h2 class="h2" id="ctaTitle">Pick the season,<br>we&rsquo;ll pick the hour</h2>
+        <p class="lede" style="margin-top:14px">Every photograph here is on an itinerary. Eight tours, fixed dates, twelve seats each.</p>
+        <p style="margin-top:22px"><a class="btn" href="tours.html">The eight tours
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></p>
+      </div>
+      <ul class="cta__list reveal">
+        <li><span>Autumn</span><span>Kyoto in Autumn &middot; Fuji &amp; the Five Lakes &middot; Hiroshima</span></li>
+        <li><span>Winter</span><span>Snow Country &middot; Onsen &amp; Ryokan Retreat &middot; Tokyo After Dark</span></li>
+        <li><span>Spring</span><span>Sakura Season &middot; The Golden Route &middot; Hiroshima</span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="mark" href="index.html"><i></i>Yorimichi <small>Japan</small></a>
+        <p>Yorimichi Travel Pte. Ltd. &middot; Small-group escorted tours to Japan, departing Singapore since 2014. STB Travel Agent Licence No. TA03457.</p>
+      </div>
+      <div>
+        <h4>Tours</h4>
+        <ul>
+          <li><a href="tour.html?t=golden-route">The Golden Route</a></li>
+          <li><a href="tour.html?t=kyoto-autumn">Kyoto in Autumn</a></li>
+          <li><a href="tour.html?t=sakura">Sakura Season</a></li>
+          <li><a href="tour.html?t=snow-country">Snow Country</a></li>
+          <li><a href="tours.html">All eight tours</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="index.html#reviews">Reviews</a></li>
+          <li><a href="contact.html">Contact &amp; office</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Office</h4>
+        <ul>
+          <li>24 Duxton Hill #02-04</li>
+          <li>Singapore 089607</li>
+          <li><a href="tel:+6562214870">+65 6221 4870</a></li>
+          <li><a href="mailto:hello@yorimichi.sg">hello@yorimichi.sg</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>&copy; 2026 Yorimichi Travel Pte. Ltd. &middot; UEN 201412876K &middot; TA03457</span>
+      <span>Prices in Singapore dollars, per person twin-share, including return flights from Singapore.</span>
+    </div>
+  </div>
+</footer>
+
+<dialog class="lightbox" id="lightbox" aria-label="Photograph">
+  <img id="lbImg" alt="" width="1600" height="1067">
+  <div class="lightbox__bar">
+    <p id="lbCap"></p>
+    <div class="lightbox__nav">
+      <button class="icon-btn" type="button" id="lbPrev" aria-label="Previous photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></button>
+      <button class="icon-btn" type="button" id="lbNext" aria-label="Next photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
+      <button class="btn btn--ghost btn--sm" type="button" id="lbClose">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/tours-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/gallery.js"></script>
+</body>
+</html>
