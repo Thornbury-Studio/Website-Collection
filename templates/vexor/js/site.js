@@ -54,24 +54,29 @@
 
   function initNav() {
     var burger = qs(".burger");
+    var menuBtn = qs(".menu-trigger");
     var drawer = qs(".drawer");
     var scrim = qs(".scrim");
     var top = qs(".top");
-    if (!burger || !drawer) return;
+    if (!drawer) return;
 
     function close() {
       document.body.classList.remove("nav-open");
-      burger.setAttribute("aria-expanded", "false");
+      if (burger) burger.setAttribute("aria-expanded", "false");
+      if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
     }
     function open() {
       document.body.classList.add("nav-open");
-      burger.setAttribute("aria-expanded", "true");
+      if (burger) burger.setAttribute("aria-expanded", "true");
+      if (menuBtn) menuBtn.setAttribute("aria-expanded", "true");
     }
-
-    burger.addEventListener("click", function () {
+    function toggle() {
       if (document.body.classList.contains("nav-open")) close();
       else open();
-    });
+    }
+
+    if (burger) burger.addEventListener("click", toggle);
+    if (menuBtn) menuBtn.addEventListener("click", toggle);
     if (scrim) scrim.addEventListener("click", close);
     drawer.querySelectorAll("a").forEach(function (a) {
       a.addEventListener("click", close);
