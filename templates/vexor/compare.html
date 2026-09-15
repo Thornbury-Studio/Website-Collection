@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<title>Compare — VEXOR</title>
+<meta name="description" content="Compare up to three VEXOR machines side by side — price, power, weight, and more.">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/vexor/compare.html">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<header class="top">
+  <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true"></span>VEXOR</a>
+  <nav aria-label="Primary">
+    <a href="models.html">Models</a>
+    <a href="compare.html" class="compare-link" aria-current="page">Compare <span class="compare-badge" data-compare-count hidden>0</span></a>
+    <a href="technology.html">Technology</a>
+    <a href="ownership.html">Ownership</a>
+    <a href="ride.html" class="nav-cta">Book a ride</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="models.html">Models</a>
+  <a href="compare.html">Compare</a>
+  <a href="ride.html">Book a ride</a>
+</aside>
+
+<main id="main" class="page-pad sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Compare · up to 3</span>
+      <h1 class="reveal">Side by side</h1>
+      <p class="muted measure reveal d1">Add machines from any model page. Best value in each row highlights in signal red.</p>
+    </div>
+
+    <div id="compare-empty" class="empty-state" hidden>
+      Nothing in the tray yet. Open the <a href="models.html">catalogue</a> and tap Add to compare.
+    </div>
+
+    <div class="compare-table-wrap" id="compare-table-wrap" hidden>
+      <table class="compare-table" id="compare-table"></table>
+    </div>
+
+    <div class="compare-actions" id="compare-actions" hidden>
+      <a class="btn btn-signal" id="book-selected" href="ride.html">Book selected</a>
+      <button class="btn btn-ghost" type="button" id="clear-compare">Clear tray</button>
+      <a class="btn btn-ghost" href="models.html">Add more</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <div><div class="foot-brand">VEXOR</div><p class="muted">Singapore motorcycle marque.</p></div>
+  <div><span class="label">Explore</span><ul><li><a href="models.html">Models</a></li><li><a href="technology.html">Technology</a></li></ul></div>
+  <div><span class="label">Contact</span><ul><li><a href="ride.html">Book a ride</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+</footer>
+</div>
+<div class="sticky-cta"><a class="btn btn-signal" href="ride.html">Book a ride</a><a class="btn btn-ghost" href="models.html">Models</a></div>
+<script src="js/models-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/compare.js"></script>
+</body>
+</html>

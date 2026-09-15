@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+<title>Book a ride — VEXOR</title>
+<meta name="description" content="Book a VEXOR demonstration ride in Kallang or Jurong. Choose your machine, date, and centre.">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/vexor/ride.html">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<header class="top">
+  <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true"></span>VEXOR</a>
+  <nav aria-label="Primary">
+    <a href="models.html">Models</a>
+    <a href="compare.html" class="compare-link">Compare <span class="compare-badge" data-compare-count hidden>0</span></a>
+    <a href="technology.html">Technology</a>
+    <a href="ownership.html">Ownership</a>
+    <a href="ride.html" class="nav-cta" aria-current="page">Book a ride</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+</header>
+<div class="scrim"></div>
+<aside class="drawer" aria-label="Menu">
+  <a href="models.html">Models</a>
+  <a href="locations.html">Locations</a>
+  <a href="ride.html">Book a ride</a>
+</aside>
+
+<main id="main" class="page-pad sec">
+  <div class="wrap form-grid">
+    <div>
+      <span class="label">Demonstrations · Tue–Sun</span>
+      <h1 class="reveal" style="margin-top:10px">The ride is the argument</h1>
+      <p class="lede muted reveal d1">Thirty minutes on a marked route. Bring your licence. Loan helmets available; bring your own if you prefer.</p>
+      <div class="loc-cards reveal d2" style="margin-top:28px">
+        <article class="loc-card">
+          <span class="label">Kallang</span>
+          <p class="muted" style="margin-top:8px">12 Kallang Junction<br>Singapore 339266<br>+65 6248 9100</p>
+        </article>
+        <article class="loc-card">
+          <span class="label">Jurong</span>
+          <p class="muted" style="margin-top:8px">8 Boon Lay Way<br>Singapore 609964<br>+65 6261 4400</p>
+        </article>
+      </div>
+    </div>
+
+    <div>
+      <div id="ride-form-wrap">
+        <form id="ride-form" novalidate>
+          <div class="field">
+            <label class="label" for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+            <div class="error" data-error-for="name"></div>
+          </div>
+          <div class="field">
+            <label class="label" for="f-phone">Mobile</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+65 9xxx xxxx" required>
+            <div class="error" data-error-for="phone"></div>
+          </div>
+          <div class="field">
+            <label class="label" for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+            <div class="error" data-error-for="email"></div>
+          </div>
+          <div class="field">
+            <label class="label" for="f-model">Model</label>
+            <select id="f-model" name="model"></select>
+          </div>
+          <div class="field">
+            <label class="label" for="f-centre">Centre</label>
+            <select id="f-centre" name="centre"></select>
+          </div>
+          <div class="field">
+            <label class="label" for="f-date">Date</label>
+            <input id="f-date" name="date" type="date" required>
+            <div class="error" data-error-for="date"></div>
+          </div>
+          <div class="field">
+            <label class="label" for="f-slot">Time slot</label>
+            <select id="f-slot" name="slot">
+              <option>10:30</option>
+              <option>12:00</option>
+              <option>14:00</option>
+              <option>16:30</option>
+              <option>18:00</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="label" for="f-notes">Notes</label>
+            <textarea id="f-notes" name="notes" placeholder="Licence class, helmet size, trade-in…"></textarea>
+          </div>
+          <button class="btn btn-signal" type="submit">Confirm request</button>
+        </form>
+      </div>
+
+      <div class="success-panel" id="ride-success" hidden>
+        <span class="label">Request ready</span>
+        <h2>We have your ride details</h2>
+        <pre id="success-summary" class="muted" style="white-space:pre-wrap;font-family:inherit;margin:12px 0 20px"></pre>
+        <a class="btn btn-signal" id="wa-link" href="#" rel="noopener" target="_blank">Continue on WhatsApp</a>
+        <a class="btn btn-ghost" href="models.html" style="margin-left:8px">Back to models</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <div><div class="foot-brand">VEXOR</div><p class="muted">Singapore motorcycle marque.</p></div>
+  <div><span class="label">Explore</span><ul><li><a href="models.html">Models</a></li><li><a href="locations.html">Locations</a></li></ul></div>
+  <div><span class="label">Contact</span><ul><li><a href="contact.html">Contact</a></li><li><a href="mailto:ride@vexor.sg">ride@vexor.sg</a></li></ul></div>
+</footer>
+</div>
+<script src="js/models-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/forms.js"></script>
+</body>
+</html>
