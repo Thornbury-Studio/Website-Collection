@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<!--
+  REDOUT — the professional FPV racing league.
+
+  Direction contract. Black, paper and one red; the red belongs to the brand
+  and to the physiology it is named after, so every frame of footage is
+  graded to grey steel and the only red on the page is the league's own.
+  The hero is a wall of three pilot feeds, portrait, playing at once, with
+  the wordmark straddling the seam between the footage and the paper. One
+  display face across its whole width axis — expanded for the name,
+  compressed for the numbers, pulled toward compressed by scroll velocity on
+  the kinetic lines. The signature moment is the start gantry: five lights, a
+  random hold, lights out, and the page tells you where you would sit on the
+  grid. Hard scrolling floods the edge of the screen red. Buttons move when
+  pressed. Nothing glows.
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>REDOUT &mdash; the professional FPV racing league</title>
+  <meta name="description" content="Sixteen pilots, eight rounds, a hundred and forty kilometres an hour through a gate the width of a doorway. REDOUT is professional first-person-view drone racing: real gates, real crashes, real prize money. Next round: Lisbon, 3 October.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/redout-circuit/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="REDOUT">
+  <meta property="og:title" content="REDOUT &mdash; blood to the head, eyes on the gate">
+  <meta property="og:description" content="Professional FPV drone racing. Sixteen pilots, eight rounds, twelve gates a lap. Next round: Lisbon, 3 October.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/redout-circuit/index.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/redout-circuit/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="REDOUT &mdash; blood to the head, eyes on the gate">
+  <meta name="twitter:description" content="Professional FPV drone racing. Sixteen pilots, eight rounds, twelve gates a lap. Next round: Lisbon, 3 October.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/redout-circuit/img/og.webp">
+  <meta name="theme-color" content="#0A0A0B">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:ital,wdth,wght@0,50..150,100..900;1,50..150,100..900&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body class="home">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <a class="mark" href="index.html" aria-current="page" aria-label="REDOUT, home"><i aria-hidden="true"></i>REDOUT</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="season.html">Season</a>
+    <a href="pilots.html">Pilots</a>
+    <a href="tickets.html">Tickets</a>
+  </nav>
+  <a class="chip" href="tickets.html" id="chip"><span>Next</span><b data-next-code>R06 Lisbon</b><b data-countdown>03 Oct</b></a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+<div class="drawer" id="drawer" data-open="false">
+  <a href="season.html">Season</a>
+  <a href="pilots.html">Pilots</a>
+  <a href="tickets.html">Tickets</a>
+  <a class="chip" href="tickets.html"><span>Next</span><b data-next-code>R06 Lisbon</b><b data-countdown>03 Oct</b></a>
+</div>
+
+<div class="veil" aria-hidden="true"></div>
+
+<main id="main">
+
+  <!-- The wall: three pilot feeds, portrait, at once. -->
+  <section class="wall" aria-label="Live pilot feeds">
+    <div class="feeds">
+      <figure class="feed">
+        <video muted playsinline loop preload="metadata" poster="img/wall-a-poster.webp" data-src="video/wall-a.mp4" aria-hidden="true"></video>
+        <figcaption><i aria-hidden="true"></i>Feed 01 &middot; <b>#7 Cardoso</b></figcaption>
+      </figure>
+      <figure class="feed">
+        <video muted playsinline loop preload="metadata" poster="img/wall-b-poster.webp" data-src="video/wall-b.mp4" aria-hidden="true"></video>
+        <figcaption><i aria-hidden="true"></i>Feed 02 &middot; <b>#1 Aakre</b></figcaption>
+      </figure>
+      <figure class="feed">
+        <video muted playsinline loop preload="metadata" poster="img/wall-c-poster.webp" data-src="video/wall-c.mp4" aria-hidden="true"></video>
+        <figcaption><i aria-hidden="true"></i>Feed 03 &middot; <b>#34 Kobayashi</b></figcaption>
+      </figure>
+    </div>
+    <p class="wall-live"><span class="live">Season 04</span><span data-last-result>R05 Turin &middot; Aakre wins</span></p>
+    <p class="wall-scroll" aria-hidden="true">Scroll<i></i></p>
+    <div class="wall-mark"><h1 id="mark">Redout</h1><span class="mark-paper" aria-hidden="true">Redout</span></div>
+  </section>
+
+  <!-- Under the wall -->
+  <section class="intro wrap">
+    <h2 class="statement lines reveal-lines" id="statement">
+      <span class="line"><span class="kinetic">Blood to the head.</span></span>
+      <span class="line"><span class="kinetic">Eyes on the gate.</span></span>
+    </h2>
+    <div class="grid12 mt-xl">
+      <div class="intro-statement reveal">
+        <p class="kicker">The professional FPV racing league</p>
+        <p class="lede mt-md w-58">Sixteen pilots. Eight rounds. A hundred and forty kilometres an hour through a gate the width of a doorway, in the dark, on a video feed that arrives a tenth of a second late. Real races, real gates, real crashes, real prize money.</p>
+      </div>
+      <div class="intro-copy reveal d1">
+        <div class="cta-row">
+          <a class="btn btn--big" href="tickets.html">Tickets for Lisbon<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
+          <a class="arrow-link" href="#sport">How a race works<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M3 9l5 5 5-5"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <ul class="facts reveal d2" id="facts">
+      <li class="fact"><b>16</b><span>Pilots on the grid</span></li>
+      <li class="fact"><b>8</b><span>Rounds, three continents</span></li>
+      <li class="fact"><b>&euro;240K</b><span>Season prize pool</span></li>
+      <li class="fact"><b data-dnf-rate>&mdash;</b><span>Of starts end in a DNF</span></li>
+    </ul>
+  </section>
+
+  <div class="hazard" aria-hidden="true"></div>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker">
+      <div class="ticker-row">
+        <span>R06 Lisbon &middot; 03 Oct</span><span>Cement Hall</span><span>16 pilots</span><span>12 gates</span><span>632 m a lap</span><span>140 km/h</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- The sport: one plate, four numbers -->
+  <section class="sport" id="sport" aria-labelledby="sport-title">
+    <picture>
+      <img src="img/sport-1400.webp" srcset="img/sport-800.webp 800w, img/sport-1400.webp 1400w, img/sport.webp 2400w" sizes="100vw" width="2400" height="1590" alt="A racing quad lifting off a dirt track inside the cloud of dust its own props have thrown up." loading="lazy" decoding="async">
+    </picture>
+    <div class="sport-inner">
+      <div class="sport-head">
+        <h2 class="sec-title reveal" id="sport-title">The sport</h2>
+        <p class="lede reveal d1">A racing quad weighs less than a bag of sugar and pulls more G than a fighter. The pilot sees what the quad sees, through goggles, from a camera the size of a coin. The course is twelve gates. The race is three laps through them, faster than anyone else, without touching anything.</p>
+      </div>
+      <ul class="stats" id="stats">
+        <li class="stat reveal"><b class="num" data-count="140" data-unit="km/h">0<small>km/h</small></b><span>Through the split gate</span></li>
+        <li class="stat reveal d1"><b class="num" data-count="1.5" data-dp="1" data-unit="m">0<small>m</small></b><span>Gate aperture</span></li>
+        <li class="stat reveal d2"><b class="num" data-fastest data-dp="3" data-unit="s">0<small>s</small></b><span data-fastest-label>Fastest lap this season</span></li>
+        <li class="stat reveal d3"><b class="num" data-reaction data-dp="3" data-unit="s">0<small>s</small></b><span data-reaction-label>Quickest off the tone</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Twelve gates, armed as you scroll -->
+  <section class="gates" id="gates" aria-labelledby="gates-title">
+    <div class="gates-sticky">
+      <div class="gates-head">
+        <div>
+          <p class="kicker" data-gates-kicker>Turin &middot; Foundry Shed &middot; 12 gates</p>
+          <h2 class="sec-title sec-title--sm" id="gates-title">One lap,<br>gate by gate</h2>
+        </div>
+        <div class="gates-readout">
+          <b class="num" id="gates-time"><em>0</em>.000</b>
+          <span id="gates-label">Gate 0 of 12</span>
+        </div>
+      </div>
+      <div class="gates-row" id="gates-row" aria-hidden="true">
+        <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid meet" id="gates-svg"></svg>
+      </div>
+      <div class="gates-foot">
+        <div>
+          <p data-gates-copy>Every gate carries a timing loop. The split you see is the split the pilot sees, in the goggles, a fifth of a second after it happened.</p>
+          <div class="gates-bar" aria-hidden="true"><i id="gates-bar"></i></div>
+        </div>
+        <a class="arrow-link" href="season.html#compare">Compare two laps<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- The start: the signature -->
+  <section class="react section" id="start" aria-labelledby="react-title">
+    <div class="wrap grid12">
+      <div class="react-copy">
+        <p class="kicker reveal">The start</p>
+        <h2 class="sec-title reveal d1" id="react-title"><span data-react-mean>0.19</span><br>seconds</h2>
+        <p class="lede reveal d2">A race starts on a tone, not a flag. Five lights come on, one a second. A random hold. Lights out. The grid is off the line in a fifth of a second. Arm the gantry and find out where you would sit on it.</p>
+        <ol class="react-grid reveal d3" id="react-grid" aria-label="Reaction times, quickest first"></ol>
+      </div>
+      <div class="gantry-wrap reveal d1">
+        <div class="gantry" id="gantry" tabindex="0" role="group" aria-label="Start gantry. Arm it, then react when the lights go out.">
+          <div class="lights" aria-hidden="true">
+            <i class="light"></i><i class="light"></i><i class="light"></i><i class="light"></i><i class="light"></i>
+          </div>
+          <div class="gantry-state" aria-live="polite" id="gantry-state">
+            <b class="big" id="gantry-big">Arm</b>
+            <span class="sub" id="gantry-sub">Five lights. A hold. Lights out. React.</span>
+          </div>
+          <div class="gantry-actions">
+            <button class="btn btn--paper btn--big" type="button" id="arm">Arm the gantry</button>
+          </div>
+          <div class="gantry-foot">
+            <span>Space or tap to arm &middot; tap when the lights go out</span>
+            <span id="gantry-best">Best today &mdash;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hazard hazard--dark" aria-hidden="true"></div>
+
+  <!-- Standings, top eight -->
+  <section class="section wrap" id="standings" aria-labelledby="standings-title">
+    <div class="head">
+      <div>
+        <p class="kicker reveal" data-standings-kicker>After five rounds</p>
+        <h2 class="sec-title reveal d1" id="standings-title">Standings</h2>
+      </div>
+      <a class="arrow-link reveal d2" href="season.html#standings">All sixteen<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
+    </div>
+    <div class="table reveal d2" id="standings-table" role="table" aria-label="Championship standings, top eight">
+      <div class="row row--head" role="row"><span>Pos</span><span>No.</span><span>Pilot</span><span class="team">Team</span><span class="r">Pts</span><span class="r">Gap</span></div>
+    </div>
+  </section>
+
+  <!-- Rounds -->
+  <section class="section--tight pb-xl" id="rounds" aria-labelledby="rounds-title">
+    <div class="wrap head">
+      <div>
+        <p class="kicker reveal">Season 04</p>
+        <h2 class="sec-title reveal d1" id="rounds-title">Eight rounds</h2>
+      </div>
+      <a class="arrow-link reveal d2" href="season.html">The calendar<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
+    </div>
+    <ul class="rounds-strip" id="rounds-strip" aria-label="Rounds"></ul>
+  </section>
+
+  <!-- The pit -->
+  <section class="pit section" id="pit" aria-labelledby="pit-title">
+    <div class="wrap">
+      <div class="pit-grid">
+        <figure class="pit-video reveal">
+          <video muted playsinline loop preload="metadata" poster="img/pit-poster.webp" data-src="video/pit.mp4" aria-hidden="true"></video>
+          <figcaption>Pit lane &middot; between heats</figcaption>
+        </figure>
+        <div class="pit-copy">
+          <p class="kicker reveal">The machine</p>
+          <h2 class="sec-title reveal d1" id="pit-title">Built<br>to break</h2>
+          <p class="lede reveal d2">Five-inch props, a carbon plate under a millimetre thick, four motors at thirty thousand a minute and a battery that gives everything up in ninety seconds. A quad costs less than the goggles. That is the point. Every pilot rebuilds between heats, at a bench in the pit lane, with the crowd on the rail.</p>
+          <a class="arrow-link reveal d3" href="tickets.html">Stand in the pit lane<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+      <ul class="specs reveal">
+        <li class="spec"><b>604<small>g</small></b><span>All-up weight, battery in</span></li>
+        <li class="spec"><b>30<small>k rpm</small></b><span>Motor speed, full throttle</span></li>
+        <li class="spec"><b>90<small>s</small></b><span>Battery, flat out</span></li>
+      </ul>
+    </div>
+    <div class="wrap mt-lg">
+      <figure class="plate plate--band reveal">
+        <img src="img/parts-900.webp" srcset="img/parts-900.webp 900w, img/parts.webp 1600w" sizes="(min-width: 900px) calc(100vw - 2 * var(--gutter)), 100vw" width="1600" height="1065" alt="Props, a bare motor, a screwdriver set and side cutters on a cutting mat, next to a carbon racing frame." loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <!-- Pilots -->
+  <section class="section wrap" id="pilots" aria-labelledby="pilots-title">
+    <div class="head">
+      <div>
+        <p class="kicker reveal">The grid</p>
+        <h2 class="sec-title reveal d1" id="pilots-title">Sixteen pilots</h2>
+      </div>
+      <a class="arrow-link reveal d2" href="pilots.html">Every pilot<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
+    </div>
+    <ul class="pilot-cards reveal d2" id="pilot-cards" aria-label="The top four in the standings"></ul>
+  </section>
+
+  <!-- Tickets -->
+  <section class="tix section" id="tickets" aria-labelledby="tix-title">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="kicker reveal" data-next-line>Round 06 &middot; Lisbon &middot; Cement Hall &middot; 03 October</p>
+          <h2 class="sec-title reveal d1" id="tix-title">Be at the rail</h2>
+        </div>
+        <p class="lede reveal d2 w-40">Doors at six. Qualifying at seven. The final under the lights at ten, with the pit lane open until they sweep the carbon off the floor.</p>
+      </div>
+      <ul class="tiers reveal" id="tiers"></ul>
+      <div class="tix-foot reveal d1">
+        <p data-pass-line>A season pass is eight rounds of pit lane for less than six of them bought one at a time.</p>
+        <a class="btn btn--big" href="tickets.html">Hold seats<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-mark" aria-hidden="true">Redout</p>
+    <div class="foot-grid">
+      <div>
+        <h4>REDOUT Circuit</h4>
+        <p class="w-36">The professional first-person-view racing league. Sixteen pilots, eight rounds, one championship. Head office at Gasworks Hall, Rotterdam.</p>
+      </div>
+      <div>
+        <h4>League</h4>
+        <ul><li><a href="season.html">Season</a></li><li><a href="season.html#standings">Standings</a></li><li><a href="pilots.html">Pilots</a></li><li><a href="tickets.html">Tickets</a></li></ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul><li><a href="mailto:tickets@redoutcircuit.com">tickets@redoutcircuit.com</a></li><li><a href="mailto:press@redoutcircuit.com">press@redoutcircuit.com</a></li><li><a href="mailto:pilots@redoutcircuit.com">pilots@redoutcircuit.com</a></li></ul>
+      </div>
+      <div>
+        <h4>Next</h4>
+        <ul><li data-next-line>R06 Lisbon &middot; 03 October</li><li><a class="chip chip--inline" href="tickets.html"><span>Tickets</span><b data-countdown>03 Oct</b></a></li></ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>&copy; 2026 REDOUT Circuit BV &middot; Season 04</span>
+      <span>Redout, noun &mdash; blood forced into the head under negative G. The opposite of a blackout.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
