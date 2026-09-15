@@ -1,0 +1,41 @@
+---
+description: New Collection sites — Kinetic quality floor, not Kinetic clone
+alwaysApply: true
+---
+
+# New-site quality floor (not a Kinetic clone)
+
+Meet the **Kinetic quality floor**. Do **not** clone Kinetic’s layout, palette, or copy unless the brief is that brand. New sites (restaurant, clinic, shop, full business, etc.) use the **client’s own visual world** at the same polish level.
+
+## Quality floor = effect, not skin
+
+- Brand-first first viewport; full-bleed or dominant real media when the brief is visual.
+- Ban AI chrome: `01 — Capture`, `MODULE // 01`, `TARGET: file.mov`, fake latency / BUFFER HUD stickers, and similar lab overlays.
+- Accent: at most one strong accent focus per section. Palette follows the **client brief**, not Kinetic’s `#CCFF00` by default.
+
+## Typography
+
+- Ban as brand face: Inter, Roboto, Poppins, Arial, bare system-ui.
+- Prefer distinctive + readable pairs (e.g. Syne, Space Grotesk, Instrument Sans, Manrope, Fraunces; mono only for meta — IBM Plex Mono / Spline Sans Mono).
+- Body must stay readable on mobile.
+
+## Media / video
+
+- Prefer real photography or licensed/stock video.
+- If generating, follow `VIDEO-POLICY.md` (plan → generate once → inspect → keep).
+- Document credits in each template’s `IMAGE-CREDITS.md`.
+
+## Full business sites (when the brief is business)
+
+- Include WhatsApp (`wa.me`), Instagram, and email; hours/map when relevant.
+- Static Collection shape unless asked otherwise: `templates/<slug>/` + hub card + sitemap.
+- Child-site copy stays client-facing (see `CLAUDE.md` disclosure rules).
+
+## Host for new work
+
+- Public base: `https://thornbury-studio.github.io/Website-Collection/`
+- Child: `https://thornbury-studio.github.io/Website-Collection/templates/<slug>/` for `canonical`, `og:url`, `og:image`, and sitemap `<loc>`.
+
+## Ship gate
+
+- Do not push Collection changes until the user says they like it or explicitly asks to push.
