@@ -16,6 +16,7 @@
   var md = document.querySelector('meta[name="description"]');
   if (md) md.setAttribute('content', t.name + ': ' + t.short + '. ' + t.days + ' days, ' + t.nights + ' nights, from ' + Y.money(t.priceFrom) + ' per person including flights from Singapore. ' + t.tagline);
   $('tHero').src = t.wide;
+  $('tHero').srcset = t.wide + ' 1600w, ' + t.wide.replace('.webp', '-2560.webp') + ' 2560w';
   $('tHero').alt = t.alt;
   $('tShort').textContent = t.short;
   $('tName').textContent = t.name;

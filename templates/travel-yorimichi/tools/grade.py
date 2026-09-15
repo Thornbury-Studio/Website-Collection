@@ -137,6 +137,20 @@ for name, (src, ratio, width, anchor) in SUPPORT.items():
 export('thumb-travellers', '356015840.jpg', 1, 640, q=72, cx=0.5, cy=0.5)
 export('thumb-kyoto-lane', '281660858.jpg', 4 / 5, 640, q=72, cx=0.5, cy=0.5)
 
+# ---- high-density variants for anything that fills the viewport -----------
+# A 1440 px viewport on a 2x screen needs ~2 900 device pixels; the 1 600/1 920
+# exports above go soft there. These 2 560 px files are offered through
+# srcset so only screens that can show the detail download it.
+for name, (src, wide, tall) in HERO.items():
+    export(name + '-2560', src, 16 / 9, 2560, q=72, **wide)
+    export(name + '-tall-1400', src, 4 / 5, 1400, q=70, **tall)
+for name, (src, card, wide) in TOURS.items():
+    export('tour-' + name + '-wide-2560', src, 3 / 2, 2560, q=72, **wide)
+for name in ('plate-torii-umbrella', 'plate-travellers', 'plate-toji-pagoda', 'plate-kyoto-lane'):
+    src, ratio, width, anchor = SUPPORT[name]
+    export(name + '-2560', src, ratio, 2560, q=72, **anchor)
+export('plate-milkyway-2560', '249311815.jpg', 21 / 9, 2560, q=72, cx=0.5, cy=0.45)
+
 # ---- og image, 1.91:1 from the Kyoto hero ---------------------------------
 export('og', '241334776.jpg', 1.91, 1200, q=76, cx=0.5, cy=0.5)
 
