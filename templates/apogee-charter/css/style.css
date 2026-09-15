@@ -179,7 +179,7 @@ input, select { font: inherit; color: inherit; }
 .plate-cap { position: absolute; left: 20px; bottom: 18px; color: var(--bone); font: 500 11px/1.5 var(--text); letter-spacing: .14em; text-transform: uppercase; }
 .para { will-change: transform; transform: translate3d(0, var(--py, 0px), 0); }
 
-/* ---------- hero ---------- */
+/* ---------- hero (inner pages; the home's hero is the climb's first frame) ---------- */
 .hero { position: relative; background: var(--ink); color: var(--bone); min-height: 100svh; display: grid; align-items: end; overflow: hidden; isolation: isolate; }
 .hero .plate--cover { position: absolute; inset: 0; z-index: 0; }
 .hero .plate--cover img, .hero .plate--cover video { object-position: 50% 45%; transform: scale(1.06) translate3d(0, var(--py, 0px), 0); }
@@ -191,20 +191,38 @@ input, select { font: inherit; color: inherit; }
 .hero-top { position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); top: calc(var(--top-h) + 22px); display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 .hero-top .small { color: rgba(247,245,240,.78); }
 
-/* ---------- the climb ---------- */
-.climb { position: relative; height: 560vh; background: var(--bone); color: var(--ink); }
+/* ---------- the climb (the hero is its first frame) ---------- */
+.climb { position: relative; height: 640vh; background: var(--bone); color: var(--ink); }
 .climb-stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--sky, var(--bone)); color: var(--sky-ink, var(--ink)); isolation: isolate; }
 .climb-layer { position: absolute; inset: -6% 0; z-index: 0; opacity: 0; will-change: opacity, transform; }
 .climb-layer video, .climb-layer img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .climb-layer--deck { inset: -8% 0; }
-.climb-layer--ground { inset: 0; opacity: 1; transform-origin: 50% 80%; }
-.no-anim .climb-layer--ground { display: none; }
-.bg-2 { background: var(--bone-2); }
-.mt-lg { margin-top: 32px; }
-.climb-veil { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to top, var(--sky, var(--bone)) 0%, transparent 40%, transparent 70%, var(--sky, var(--bone)) 100%); opacity: .7; }
-.climb-ui { position: absolute; inset: 0; z-index: 2; padding: calc(var(--top-h) + 20px) var(--gutter) clamp(28px, 4vw, 56px); display: grid; grid-template-rows: auto 1fr auto; }
+.climb-layer--apex { inset: -4% 0; }
+.climb-layer--apex video { object-position: 50% 12%; }
+.climb-layer--ground { inset: 0; opacity: 1; transform-origin: 50% 78%; }
+.climb-layer--ground video { object-position: 50% 45%; }
+.climb-veil { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to top, var(--sky, var(--bone)) 0%, transparent 46%, transparent 70%, var(--sky, var(--bone)) 100%); opacity: .78; }
+/* The hero's scrim: dark at the foot for the headline, a little at the top for the header. Leaves with the hero. */
+.climb-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to top, rgba(22,23,27,.82) 0%, rgba(22,23,27,.3) 42%, rgba(22,23,27,.1) 70%, rgba(22,23,27,.5) 100%); opacity: var(--hero, 1); }
+/* The mark, drawn across the width at the apex: an arc, and a dot at its highest point. */
+.climb-apex { position: absolute; z-index: 2; left: 0; right: 0; top: calc(var(--top-h) + 4vh); height: 46vh; pointer-events: none; opacity: var(--apex, 0); }
+.climb-apex svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.climb-apex path { fill: none; stroke: currentColor; stroke-width: 2; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: var(--arc, 1); opacity: .9; }
+.hero-ui.is-gone, .climb-ui.is-gone { visibility: hidden; }
+.climb-apex i { position: absolute; left: 50%; top: 25%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 6px rgba(247,245,240,.12), 0 0 28px 6px rgba(247,245,240,.35); opacity: var(--dot, 0); transform: scale(calc(.4 + var(--dot, 0) * .6)); }
+.hero-ui { position: absolute; inset: 0; z-index: 3; color: var(--bone); display: grid; align-items: end; opacity: var(--hero, 1); transform: translate3d(0, calc((1 - var(--hero, 1)) * -9vh), 0); pointer-events: none; }
+.hero-ui > * { pointer-events: auto; }
+.hero-ui .hero-inner { padding-bottom: clamp(56px, 8vh, 96px); }
+.hero-cue { position: absolute; right: var(--gutter); bottom: clamp(22px, 3.2vh, 40px); display: flex; align-items: center; gap: 12px; margin: 0; }
+.hero-cue .small { color: rgba(247,245,240,.72); }
+.hero-cue i { position: relative; display: block; width: 1px; height: 36px; background: rgba(247,245,240,.3); overflow: hidden; }
+.hero-cue i::after { content: ''; position: absolute; left: 0; top: -100%; width: 100%; height: 100%; background: var(--bone); animation: cue 1.8s var(--ease) infinite; }
+@keyframes cue { 0% { transform: translateY(0); } 100% { transform: translateY(200%); } }
+.climb-ui { position: absolute; inset: 0; z-index: 2; padding: calc(var(--top-h) + 20px) var(--gutter) clamp(28px, 4vw, 56px); display: grid; grid-template-rows: auto 1fr auto; opacity: var(--ui, 0); transform: translate3d(0, calc((1 - var(--ui, 0)) * 7vh), 0); pointer-events: none; }
+.climb-ui > * { pointer-events: auto; }
 .climb-head { display: flex; justify-content: space-between; align-items: start; gap: 20px; }
 .climb-head .small { opacity: .8; }
+.climb-head .small:first-child { white-space: nowrap; }
 .climb-alt { align-self: end; }
 .climb-alt .num { font-size: clamp(88px, 17vw, 300px); line-height: .82; font-weight: 800; display: block; white-space: nowrap; }
 .climb-alt .num small { font-size: .22em; font-weight: 500; letter-spacing: 0; margin-left: .18em; vertical-align: .16em; font-variation-settings: 'opsz' 40; }
@@ -215,11 +233,21 @@ input, select { font: inherit; color: inherit; }
 .climb-data { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; border-top: 1px solid currentColor; padding-top: 16px; justify-items: start; }
 .climb-data b { display: block; font: 600 clamp(20px, 2vw, 32px)/1 var(--display); font-variation-settings: 'opsz' 96; letter-spacing: -.02em; white-space: nowrap; }
 .climb-data span { display: block; margin-top: 8px; font: 500 11px/1.4 var(--text); letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
-.climb-bar { position: absolute; right: var(--gutter); top: 50%; transform: translateY(-50%); width: 1px; height: 38vh; background: currentColor; opacity: .3; z-index: 2; }
-.climb-bar i { position: absolute; left: -3px; top: 0; width: 7px; height: 7px; border-radius: 50%; background: currentColor; transform: translateY(calc(var(--p, 0) * 38vh)); }
+.climb-bar { position: absolute; right: var(--gutter); top: 50%; transform: translateY(-50%); width: 1px; height: 38vh; background: currentColor; opacity: calc(var(--ui, 0) * .3); z-index: 2; }
+.climb-bar i { position: absolute; left: -3px; top: 0; width: 7px; height: 7px; border-radius: 50%; background: currentColor; transform: translateY(calc((1 - var(--p, 0)) * 38vh)); }
+/* Without motion: the hero as one screen on the apron, then the top of the climb as one screen at altitude. */
 .no-anim .climb { height: auto; }
-.no-anim .climb-stick { position: relative; height: auto; min-height: 90vh; }
-.no-anim .climb-layer { opacity: 1; }
+.no-anim .climb-stick { position: relative; height: auto; }
+.no-anim .climb-layer { opacity: 1; inset: auto 0; }
+.no-anim .climb-layer--ground { top: 0; height: 100svh; transform: none; }
+.no-anim .climb-layer--wing, .no-anim .climb-layer--deck, .no-anim .hero-cue { display: none; }
+.no-anim .climb-veil { top: 100svh; }
+.no-anim .climb-layer--apex { top: 100svh; bottom: 0; }
+.no-anim .climb-scrim { height: 100svh; opacity: 1; }
+.no-anim .hero-ui { position: relative; height: 100svh; opacity: 1; transform: none; }
+.no-anim .climb-ui { position: relative; min-height: 90vh; opacity: 1; transform: none; }
+.no-anim .climb-apex { display: none; }
+.no-anim .hero-ui, .no-anim .climb-ui { visibility: visible; }
 .no-anim .climb-line { position: static; opacity: 1; transform: none; }
 
 /* ---------- the cabin ---------- */
@@ -397,6 +425,9 @@ input, select { font: inherit; color: inherit; }
 @media (max-width: 720px) {
   .hero { min-height: 0; height: min(calc(100vw * 1.5), 820px); }
   .hero-inner .hero-copy { grid-column: 1 / -1; }
+  .hero-ui .hero-inner { padding-bottom: 64px; }
+  .hero-cue .small { display: none; }
+  .climb-apex { top: calc(var(--top-h) + 8vh); height: 30vh; }
   .hero--inner { height: min(calc(100vw * 1.25), 720px); }
   .quiet { min-height: 0; height: calc(100vw * 1.4); }
   .foot-grid { grid-template-columns: 1fr; }
@@ -412,5 +443,6 @@ input, select { font: inherit; color: inherit; }
 /* ---------- motion preference ---------- */
 @media (prefers-reduced-motion: reduce) {
   .lean, .btn, .link::after, .link svg, .nav a::after, .frow, .frow::before, .tier, .climb-line { transition: none; transform: none; }
+  .hero-cue i::after { animation: none; }
   .para, .hero .plate--cover img, .hero .plate--cover video, .quiet .plate--cover img { transform: none; }
 }

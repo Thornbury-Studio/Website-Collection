@@ -32,7 +32,7 @@
     var onInk = !!dark;
     if (dark && dark.classList.contains('climb-stick')) onInk = dark.dataset.ink === '1';
     top.classList.toggle('on-ink', onInk);
-    if (window.scrollY <= 12) top.classList.toggle('on-ink', !!doc.querySelector('.hero'));
+    if (window.scrollY <= 12) top.classList.toggle('on-ink', !!doc.querySelector('.hero, .climb-stick'));
   }
   var burger = $('#burger'), drawer = $('#drawer');
   if (burger && drawer) {
@@ -147,14 +147,18 @@
   $$('video[data-src]').forEach(wireVideo);
 
   /* ------------------------------------------------------------------ */
-  /* The climb                                                           */
+  /* The climb. The hero is its first frame: one pinned scene, scroll is  */
+  /* altitude, and everything on it derives from one progress number.    */
   /* ------------------------------------------------------------------ */
   var climb = $('#climb');
   if (climb) {
     var stick = $('#climb-stick'), altEl = $('#alt'), oatEl = $('#oat'), cabEl = $('#cab'), machEl = $('#mach');
-    var wing = $('#layer-wing'), deck = $('#layer-deck'), ground = $('#layer-ground'), bar = $('#climb-bar');
+    var wing = $('#layer-wing'), deck = $('#layer-deck'), apex = $('#layer-apex'), ground = $('#layer-ground'), bar = $('#climb-bar');
+    var heroUi = $('#hero-ui'), climbUi = $('#climb-ui');
     var lines = $$('.climb-line', climb);
     var TOP = 45000;
+    /* The first stretch of scroll is the hero leaving; the climb proper starts at HERO_END. */
+    var HERO_END = 0.08;
     /* Sky stops: bone on the ground, haze, the blue at twenty, the deep of the tropopause, the near-black of the top. */
     var SKY = [[0, [236, 233, 226]], [0.16, [205, 214, 224]], [0.4, [122, 151, 189]], [0.68, [36, 57, 94]], [1, [9, 14, 30]]];
     function sky(p) {
@@ -166,38 +170,58 @@
       }
       return SKY[SKY.length - 1][1];
     }
-    var lastLine = -1, lastInk = null;
+    var lastLine = -1, lastInk = null, heroGone = null, uiGone = null;
     function setClimb(p) {
+      /* p is the page's progress through the section; q is the climb's, zero until the hero has gone. */
+      var q = clamp((p - HERO_END) / (1 - HERO_END), 0, 1);
+      var hero = 1 - smooth(p / HERO_END);
+      var ui = smooth((p - HERO_END * 0.95) / (HERO_END * 0.9));
       /* The profile: quick off the ground, slower up top, like the real thing. */
-      var alt = Math.round(TOP * (1 - Math.pow(1 - p, 1.7)) / 10) * 10;
-      var c = sky(p);
+      var alt = Math.round(TOP * (1 - Math.pow(1 - q, 1.7)) / 10) * 10;
+      var c = sky(q);
       stick.style.setProperty('--sky', 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')');
-      /* Ink stays ink until the sky is dark enough to need bone; the crossing is steep so nothing is grey on grey. */
-      var inkT = smooth((p - 0.3) / 0.16);
+      stick.style.setProperty('--hero', hero.toFixed(3));
+      stick.style.setProperty('--ui', ui.toFixed(3));
+      var hg = hero < 0.02, ug = ui < 0.02;
+      if (hg !== heroGone) { heroUi.classList.toggle('is-gone', hg); heroGone = hg; }
+      if (ug !== uiGone) { climbUi.classList.toggle('is-gone', ug); uiGone = ug; }
+      /* Ink stays ink until the sky is dark enough to need bone; the crossing is steep so nothing is grey on grey.
+         The header reads bone while the hero's scrim is still up. */
+      var inkT = smooth((q - 0.3) / 0.16);
       var ink = [Math.round(lerp(22, 247, inkT)), Math.round(lerp(23, 245, inkT)), Math.round(lerp(27, 240, inkT))];
       stick.style.setProperty('--sky-ink', 'rgb(' + ink[0] + ',' + ink[1] + ',' + ink[2] + ')');
-      var onInk = inkT > 0.5 ? '1' : '0';
+      var onInk = (inkT > 0.5 || hero > 0.4) ? '1' : '0';
       if (onInk !== lastInk) { stick.dataset.ink = onInk; lastInk = onInk; }
       altEl.innerHTML = D.fmtNum(alt) + '<small>ft</small>';
       var oat = D.isa(alt);
       oatEl.textContent = (oat > 0 ? '+' : '−') + Math.abs(oat).toFixed(0) + '°C';
       cabEl.textContent = D.fmtNum(Math.round(Math.min(5000, alt * 0.118) / 10) * 10) + ' ft';
-      machEl.textContent = (0.02 + 0.78 * smooth(p * 1.15)).toFixed(2);
-      /* Layers: the wing comes up out of cloud through the middle of the climb; the deck is the top. */
-      if (ground) {
-        ground.style.opacity = (1 - smooth(p / 0.13)).toFixed(3);
-        ground.style.transform = 'translate3d(0,' + (p * 120).toFixed(1) + 'px,0) scale(' + (1 + p * 0.5).toFixed(3) + ')';
+      machEl.textContent = (0.02 + 0.78 * smooth(q * 1.15)).toFixed(2);
+      /* Layers: the apron lifts away under the hero, the wing comes up out of cloud through the middle,
+         the deck is the top of the weather, and the apex — the deck far below and the horizon — holds. */
+      if (anim) {
+        var lift = smooth((p - HERO_END * 0.35) / 0.09);
+        ground.style.opacity = (1 - lift).toFixed(3);
+        ground.style.transform = 'translate3d(0,' + (lift * 90 + p * 40).toFixed(1) + 'px,0) scale(' + (1 + lift * 0.42 + p * 0.1).toFixed(3) + ')';
+        var wingO = smooth((q - 0.08) / 0.14) * (1 - smooth((q - 0.46) / 0.16));
+        var deckO = smooth((q - 0.42) / 0.16) * (1 - smooth((q - 0.8) / 0.12));
+        var apexO = smooth((q - 0.74) / 0.16);
+        wing.style.opacity = wingO.toFixed(3);
+        wing.style.transform = 'translate3d(0,' + ((0.5 - q) * 60).toFixed(1) + 'px,0) scale(' + (1.08 - q * 0.06).toFixed(3) + ')';
+        deck.style.opacity = deckO.toFixed(3);
+        deck.style.transform = 'translate3d(0,' + ((0.7 - q) * 90).toFixed(1) + 'px,0) scale(' + (1.02 + q * 0.06).toFixed(3) + ')';
+        apex.style.opacity = apexO.toFixed(3);
+        apex.style.transform = 'translate3d(0,' + ((1 - q) * 70).toFixed(1) + 'px,0) scale(' + (1.1 - q * 0.1).toFixed(3) + ')';
       }
-      var wingO = smooth((p - 0.12) / 0.14) * (1 - smooth((p - 0.5) / 0.16));
-      var deckO = smooth((p - 0.46) / 0.16) * (1 - smooth((p - 0.9) / 0.1));
-      wing.style.opacity = wingO.toFixed(3);
-      wing.style.transform = 'translate3d(0,' + ((0.5 - p) * 60).toFixed(1) + 'px,0) scale(' + (1.08 - p * 0.06).toFixed(3) + ')';
-      deck.style.opacity = deckO.toFixed(3);
-      deck.style.transform = 'translate3d(0,' + ((0.7 - p) * 90).toFixed(1) + 'px,0) scale(' + (1.02 + p * 0.06).toFixed(3) + ')';
+      /* The mark: the arc draws across once the aircraft is nearly there; the dot lights at the top. */
+      var arc = smooth((q - 0.84) / 0.13);
+      stick.style.setProperty('--apex', (arc > 0 ? 1 : 0));
+      stick.style.setProperty('--arc', (1 - arc).toFixed(4));
+      stick.style.setProperty('--dot', smooth((q - 0.96) / 0.04).toFixed(3));
       var idx = 0;
       lines.forEach(function (l, i) { if (alt >= parseInt(l.dataset.at, 10)) idx = i; });
       if (idx !== lastLine) { lines.forEach(function (l, i) { l.classList.toggle('on', i === idx); }); lastLine = idx; }
-      if (bar) bar.style.setProperty('--p', p.toFixed(4));
+      if (bar) bar.style.setProperty('--p', q.toFixed(4));
     }
     if (anim) {
       var ticking = false;

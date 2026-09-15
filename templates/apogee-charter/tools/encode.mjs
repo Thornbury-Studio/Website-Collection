@@ -1,10 +1,10 @@
-/* APOGEE — cut, grade and encode the five licensed clips.
+/* APOGEE — cut, grade and encode the six licensed clips.
  *
  * Same quiet grade as the photographs (tools/grade.mjs): colour to two
  * thirds, blacks lifted a touch, a little blue in the shadows. The wing
  * clip was shot on descent, into cloud; it is played backwards here, so
- * the aircraft climbs out of it. Masters are ProRes at 3840×2160 and
- * 4096×2304, and one portrait master at 2160×3840; they live in tools/raw/
+ * the aircraft climbs out of it. Masters are ProRes or HEVC at 3840×2160
+ * and 4096×2304, and one portrait master at 2160×3840; they live in tools/raw/
  * on the build machine and are not shipped.
  *
  *   node tools/encode.mjs            # everything
@@ -29,6 +29,8 @@ const CLIPS = {
   wing:  { src: '470419800.mov', ss: 0, t: 10, w: 1920, h: 1080, crf: 23, sat: 0.62, reverse: true, poster: 0 },
   /* The climb, top: a cloud deck from far above, drifting. */
   deck:  { src: '589794660.mov', ss: 2, t: 12, w: 1920, h: 1080, crf: 23, sat: 0.62, poster: 0 },
+  /* The climb, apex: the cloud deck far below and the horizon, from forty thousand feet. Holds at the top. */
+  apex:  { src: '939422575.mov', ss: 0, t: 10, w: 1920, h: 1080, crf: 23, sat: 0.7, poster: 0 },
   /* The cabin: a slow pan along cream leather and the windows. */
   cabin: { src: '301279898.mov', ss: 0, t: 12, w: 1920, h: 1080, crf: 23, sat: 0.72, poster: 0 },
   /* The host, walking the cabin toward the camera. Portrait. */
