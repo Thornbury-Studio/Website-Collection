@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Sign in — Copper Ridge Cartridge Co.</title>
+  <meta name="description" content="Customer account sign-in for Copper Ridge Cartridge Co.">
+  <link rel="canonical" href="https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/account.html">
+  <meta name="theme-color" content="#F4F4F2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Source+Sans+3:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip" href="#account">Skip to sign in</a>
+
+  <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle" hidden>
+    <div class="age-card">
+      <h2 id="ageTitle">Age verification</h2>
+      <p>You must be 21 or older to browse Copper Ridge Cartridge Co.</p>
+      <div class="age-actions">
+        <button class="btn btn-brass" type="button" id="ageEnter">I am 21 or older</button>
+        <button class="btn btn-ghost" type="button" id="ageLeave">Leave</button>
+      </div>
+      <p class="age-deny" id="ageDeny" hidden>Access restricted.</p>
+    </div>
+  </div>
+
+  <div class="trust-strip">
+    <strong>Est. 1998</strong>
+    <span>Missoula, MT</span>
+    <a href="tel:+14065550198">(406) 555-0198</a>
+    <span>Mon–Sat 8–18 MT</span>
+    <span>Ground hazmat only</span>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="index.html">
+      <span class="brand-name">Copper Ridge</span>
+      <span class="brand-est">Cartridge Co. · Missoula, MT</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main">
+      <a href="shop.html">Shop</a>
+      <a href="guides.html">Guides</a>
+      <a href="shipping.html">Shipping</a>
+    </nav>
+    <div class="header-actions">
+      <a class="account-link" href="account.html" aria-current="page">Sign in</a>
+      <button class="cart-btn" type="button" data-cart-open aria-label="Open cart">Cart <span class="cart-count">0</span></button>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="shop.html">Shop</a>
+    <a href="guides.html">Guides</a>
+    <a href="shipping.html">Shipping</a>
+    <a href="account.html">Sign in</a>
+  </div>
+
+  <main>
+    <div class="account-box" id="account">
+      <h1>Sign in</h1>
+      <p>Order history and saved addresses for returning customers.</p>
+      <form id="accountForm" onsubmit="return false;">
+        <label>Email<input type="email" id="acctEmail" autocomplete="email" required></label>
+        <label>Password<input type="password" id="acctPass" autocomplete="current-password" required></label>
+        <button class="btn btn-brass" type="button" id="acctSubmit">Sign in</button>
+      </form>
+      <p class="account-note" id="acctNote">Accounts are not live on this site build. Browse the catalog without signing in — cart works in this browser.</p>
+      <p style="margin-top:16px"><a href="shop.html">Continue to shop →</a></p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-legal">
+      <span>© <span id="year">2026</span> Copper Ridge Cartridge Co.</span>
+    </div>
+  </footer>
+
+  <div class="veil" id="cartVeil" hidden data-cart-close></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true" hidden>
+    <header class="cart-head">
+      <h2 id="cartTitle">Cart</h2>
+      <button class="btn btn-ghost" type="button" data-cart-close style="padding:6px 10px">Close</button>
+    </header>
+    <ul class="cart-lines" id="cartLines"></ul>
+    <p class="cart-empty" id="cartEmpty">Your cart is empty.</p>
+    <div class="cart-tail" id="cartTail" hidden>
+      <div class="cart-sums" id="cartSums"></div>
+      <p class="ship-note" id="shipNote"></p>
+      <p class="ship-error" id="shipError" hidden></p>
+      <p class="order-success" id="orderSuccess" hidden></p>
+      <form class="checkout-form" id="checkoutForm" onsubmit="return false;"></form>
+      <button class="btn btn-brass" type="button" id="placeOrder">Place order</button>
+    </div>
+  </aside>
+
+  <script src="js/catalog-data.js"></script>
+  <script src="js/shipping-rules.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/account.js"></script>
+</body>
+</html>

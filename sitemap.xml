@@ -1230,19 +1230,37 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://templates.thornburystudio.com/templates/retail-copper-ridge/index.html</loc>
+    <loc>https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/index.html</loc>
     <lastmod>2026-09-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://templates.thornburystudio.com/templates/retail-copper-ridge/product.html</loc>
+    <loc>https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/shop.html</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/guides.html</loc>
     <lastmod>2026-09-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://templates.thornburystudio.com/templates/retail-copper-ridge/shipping.html</loc>
+    <loc>https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/account.html</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/product.html</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thornbury-studio.github.io/Website-Collection/templates/retail-copper-ridge/shipping.html</loc>
     <lastmod>2026-09-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

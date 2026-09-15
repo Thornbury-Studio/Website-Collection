@@ -1,4 +1,4 @@
-/* Shop grid + filters on index.html */
+/* Shop grid + filters — shop.html (also works if #productGrid exists) */
 
 (function () {
   'use strict';
@@ -11,13 +11,33 @@
     dept: 'all',
     use: 'all',
     query: '',
-    inStockOnly: false
+    inStockOnly: false,
+    sort: 'featured'
   };
 
   function stockLabel(s) {
     if (s === 'low') return { cls: 'low', text: 'Low stock' };
     if (s === 'out') return { cls: 'out', text: 'Out of stock' };
-    return null;
+    return { cls: 'in', text: 'In stock' };
+  }
+
+  function sortItems(items) {
+    var list = items.slice();
+    if (state.sort === 'price-asc') {
+      list.sort(function (a, b) { return a.price - b.price; });
+    } else if (state.sort === 'price-desc') {
+      list.sort(function (a, b) { return b.price - a.price; });
+    } else if (state.sort === 'caliber') {
+      list.sort(function (a, b) {
+        return a.caliber.localeCompare(b.caliber) || a.name.localeCompare(b.name);
+      });
+    } else if (state.sort === 'stock') {
+      var rank = { in: 0, low: 1, out: 2 };
+      list.sort(function (a, b) {
+        return (rank[a.stock] || 9) - (rank[b.stock] || 9) || a.name.localeCompare(b.name);
+      });
+    }
+    return list;
   }
 
   function render() {
@@ -33,6 +53,8 @@
       return true;
     });
 
+    items = sortItems(items);
+
     var countEl = document.getElementById('resultCount');
     if (countEl) countEl.textContent = items.length + (items.length === 1 ? ' SKU' : ' SKUs');
 
@@ -41,24 +63,31 @@
       return;
     }
 
+    var listMode = window.matchMedia('(max-width: 640px)').matches;
+    grid.classList.toggle('is-list', listMode);
+
     grid.innerHTML = items.map(function (p) {
       var badge = stockLabel(p.stock);
-      var badgeHtml = badge
-        ? '<span class="badge ' + badge.cls + '">' + window.CR.esc(badge.text) + '</span>'
-        : '';
       var grain = p.grain ? p.grain + 'gr · ' : '';
       var per = p.qty > 1 && p.pricePerRound < 500
-        ? '<span class="per-round">' + window.CR.money(p.pricePerRound) + '/rnd</span>'
+        ? '<span class="per-round">' + window.CR.money(p.pricePerRound) + '/rd</span>'
         : '';
+      var ground = p.hazmat ? '<span class="chip-mini">Ground only</span>' : '<span class="chip-mini muted">Standard</span>';
+      var stockChip = '<span class="chip-mini ' + badge.cls + '">' + window.CR.esc(badge.text) +
+        (p.stockQty != null && p.stock !== 'out' ? ' · ' + p.stockQty : '') + '</span>';
       return (
         '<a class="product-card reveal visible" href="product.html#' + encodeURIComponent(p.id) + '">' +
-          '<div class="product-visual">' + badgeHtml +
-            '<img src="' + window.CR.esc(p.img) + '" alt="' + window.CR.esc(p.name) + '" width="640" height="480" loading="lazy" decoding="async">' +
+          '<div class="product-visual">' +
+            '<img src="' + window.CR.esc(p.img) + '" alt="' + window.CR.esc(p.name) + '" width="700" height="700" loading="lazy" decoding="async">' +
           '</div>' +
           '<div class="product-info">' +
-            '<span class="product-brand">' + window.CR.esc(p.brand) + '</span>' +
+            '<div class="product-top">' +
+              '<span class="product-brand">' + window.CR.esc(p.brand) + '</span>' +
+              '<span class="product-sku">' + window.CR.esc(p.sku) + '</span>' +
+            '</div>' +
             '<h3>' + window.CR.esc(p.name) + '</h3>' +
             '<div class="product-specs"><span>' + window.CR.esc(p.caliber) + '</span><span>' + grain + window.CR.esc(p.bulletType) + '</span><span>' + p.qty + ' ct</span></div>' +
+            '<div class="product-chips">' + stockChip + ground + '</div>' +
             '<div class="product-foot"><strong>' + window.CR.money(p.price) + '</strong>' + per + '</div>' +
           '</div>' +
         '</a>'
@@ -82,7 +111,6 @@
     render();
   }
 
-  /* Dept filter buttons */
   var filterHost = document.getElementById('deptFilters');
   if (filterHost) {
     var counts = { all: window.CR_CATALOG.length };
@@ -112,23 +140,25 @@
   document.querySelectorAll('.chip[data-caliber]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var cal = btn.getAttribute('data-caliber');
-      var input = document.getElementById('finderInput');
+      var input = document.getElementById('finderInput') || document.getElementById('shopSearch');
       if (input) {
         input.value = cal;
         state.query = cal;
       }
-      document.getElementById('shop') && document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
+      var shop = document.getElementById('shop');
+      if (shop) shop.scrollIntoView({ behavior: 'smooth' });
       render();
     });
   });
 
-  var finder = document.getElementById('finderInput');
-  if (finder) {
-    finder.addEventListener('input', function () {
-      state.query = finder.value;
+  ['finderInput', 'shopSearch'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', function () {
+      state.query = el.value;
       render();
     });
-  }
+  });
 
   var stockToggle = document.getElementById('inStockOnly');
   if (stockToggle) {
@@ -138,9 +168,20 @@
     });
   }
 
-  /* URL hash / query */
+  var sortEl = document.getElementById('sortSelect');
+  if (sortEl) {
+    sortEl.addEventListener('change', function () {
+      state.sort = sortEl.value;
+      render();
+    });
+  }
+
+  window.addEventListener('resize', function () {
+    if (grid) render();
+  });
+
   var params = new URLSearchParams(location.search);
-  var deptParam = params.get('dept') || (location.hash.match(/dept-([\w-]+)/) || [])[1];
+  var deptParam = params.get('dept');
   if (deptParam && ['handgun', 'rifle', 'shotgun', 'rimfire', 'reloading'].indexOf(deptParam) !== -1) {
     setDept(deptParam);
   } else {
@@ -149,6 +190,14 @@
 
   var useParam = params.get('use');
   if (useParam) setUse(useParam);
+
+  var qParam = params.get('q');
+  if (qParam) {
+    state.query = qParam;
+    var search = document.getElementById('shopSearch') || document.getElementById('finderInput');
+    if (search) search.value = qParam;
+    render();
+  }
 
   window.CR_SHOP = { render: render, setDept: setDept, setUse: setUse };
 })();

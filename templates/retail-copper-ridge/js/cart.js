@@ -56,6 +56,12 @@
     return ship.rates[cls] || ship.rates[2];
   }
 
+  function hazmatFee(items) {
+    var ship = global.CR_SHIP;
+    if (!ship || !ship.hazmatFee) return 0;
+    return hasHazmat(items) ? ship.hazmatFee : 0;
+  }
+
   function hasHazmat(items) {
     return items.some(function (l) {
       var p = catalogById(l.id);
@@ -118,6 +124,28 @@
     return { ok: true };
   }
 
+  function purgeBlockedForState(state) {
+    state = String(state || '').toUpperCase();
+    if (!state) return { removed: [], items: loadCart() };
+    var ship = global.CR_SHIP;
+    var removed = [];
+    var kept = loadCart().filter(function (l) {
+      var p = catalogById(l.id);
+      if (!p) return true;
+      if (p.hazmat && ship && ship.blockedAmmo.indexOf(state) !== -1) {
+        removed.push(l.name);
+        return false;
+      }
+      if (p.restrictions && p.restrictions.indexOf(state) !== -1) {
+        removed.push(l.name);
+        return false;
+      }
+      return true;
+    });
+    saveCart(kept);
+    return { removed: removed, items: kept };
+  }
+
   global.CR = {
     esc: esc,
     money: money,
@@ -130,8 +158,10 @@
     cartCount: cartCount,
     cartGoods: cartGoods,
     shippingCost: shippingCost,
+    hazmatFee: hazmatFee,
     hasHazmat: hasHazmat,
     canShipToState: canShipToState,
+    purgeBlockedForState: purgeBlockedForState,
     catalogById: catalogById,
     AGE_KEY: AGE_KEY,
     LS_KEY: LS_KEY
