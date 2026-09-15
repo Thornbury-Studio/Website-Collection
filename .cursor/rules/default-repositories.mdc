@@ -14,7 +14,6 @@ When the user says “Website Collection”, “the collection”, “child webs
 
 - New sites go under `templates/<slug>/` as **static** `index.html` + `css/` + `js/` + `img/` (no Next.js build step unless the user explicitly asks).
 - Register the site with a card on root `index.html` and entries in `sitemap.xml`.
-- For **new** templates, `canonical` / `og:url` / `og:image` / sitemap `<loc>` use the live hub host: `https://thornbury-studio.github.io/Website-Collection/` (child paths under `templates/<slug>/`).
 - Prefer free-license media and document credits in the template’s `IMAGE-CREDITS.md`.
 
 ## Not the default
