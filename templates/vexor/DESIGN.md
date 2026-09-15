@@ -33,4 +33,4 @@ Thesis: a motorcycle is judged by the **line you hold** — commitment through a
 
 Visual: dark asphalt ground, bone type, single signal-red accent. Full-bleed photography. No purple, no cream-serif, no floating promo chips on hero media.
 
-Motion (3 only): hero reveal, catalogue filter transition, compare/spec reveal.
+Motion (quiet luxury): slow hero fade + long Ken Burns, soft scroll cue, restrained card lift, gallery crossfade, spec count-up. Accent is champagne, not racing red — Ghost-showroom feeling translated for a motorcycle marque.

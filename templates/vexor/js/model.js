@@ -177,6 +177,10 @@
   document.addEventListener("DOMContentLoaded", function () {
     var m = VEXOR.byId(idFromUrl()) || VEXOR.MODELS[0];
     document.title = m.name + " — VEXOR";
+    var sn = document.getElementById("subnav-model");
+    if (sn) sn.textContent = m.name;
+    var sr = document.getElementById("subnav-ride");
+    if (sr) sr.href = "ride.html?model=" + m.id;
     $("#m-name").textContent = m.name;
     $("#m-class").textContent = m.class + " · " + m.year;
     $("#m-line").textContent = m.line;
