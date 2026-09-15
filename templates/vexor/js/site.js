@@ -44,6 +44,11 @@
     qsa("[data-compare-count]").forEach(function (el) {
       el.textContent = String(n);
       el.hidden = n === 0;
+      if (n > 0) {
+        el.classList.remove("badge-pop");
+        void el.offsetWidth;
+        el.classList.add("badge-pop");
+      }
     });
   }
 
@@ -51,6 +56,7 @@
     var burger = qs(".burger");
     var drawer = qs(".drawer");
     var scrim = qs(".scrim");
+    var top = qs(".top");
     if (!burger || !drawer) return;
 
     function close() {
@@ -73,6 +79,14 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") close();
     });
+
+    if (top) {
+      var onScroll = function () {
+        top.classList.toggle("is-scrolled", window.scrollY > 24);
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    }
   }
 
   function initReveals() {
@@ -103,6 +117,20 @@
     requestAnimationFrame(function () {
       hero.classList.add("hero-in");
     });
+
+    var media = qs(".hero-media img", hero);
+    if (!media || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    hero.addEventListener("mousemove", function (e) {
+      var r = hero.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      media.style.transform = "scale(1.06) translate(" + (x * -18) + "px," + (y * -12) + "px)";
+    });
+    hero.addEventListener("mouseleave", function () {
+      media.style.transform = "";
+    });
   }
 
   function financeMonthly(price, downPct, months, annualRate) {
@@ -112,6 +140,14 @@
     if (r === 0) return principal / months;
     var factor = Math.pow(1 + r, months);
     return (principal * r * factor) / (factor - 1);
+  }
+
+  function popText(el, text) {
+    if (!el) return;
+    el.textContent = text;
+    el.classList.remove("fin-pop");
+    void el.offsetWidth;
+    el.classList.add("fin-pop");
   }
 
   function bindFinance(root) {
@@ -134,9 +170,9 @@
       var total = monthly * months;
       var principal = price * (1 - down / 100);
       var interest = Math.max(0, total - principal);
-      outMonthly.textContent = "S$" + Math.round(monthly).toLocaleString("en-SG");
-      if (outTotal) outTotal.textContent = "S$" + Math.round(total).toLocaleString("en-SG");
-      if (outInterest) outInterest.textContent = "S$" + Math.round(interest).toLocaleString("en-SG");
+      popText(outMonthly, "S$" + Math.round(monthly).toLocaleString("en-SG"));
+      if (outTotal) popText(outTotal, "S$" + Math.round(total).toLocaleString("en-SG"));
+      if (outInterest) popText(outInterest, "S$" + Math.round(interest).toLocaleString("en-SG"));
     }
 
     [priceEl, downEl, monthsEl, rateEl].forEach(function (el) {
