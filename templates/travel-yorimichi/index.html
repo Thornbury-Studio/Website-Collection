@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<!--
+  YORIMICHI — small-group Japan tours, departing Singapore.
+
+  Direction contract. Night indigo and one vermilion, photography full-bleed.
+  The home page is a cinematic tour-operator landing: a five-slide hero with a
+  numbered index and a three-column strip at its foot, a row of portrait tour
+  cards, and a night-sky film band with two chaptered clips. Every number on
+  the page is a real fact a customer can act on: eight named tours, fixed
+  departure dates, per-person prices in S$ with flights included, an office
+  address and its opening hours. Motion is one reveal on entry; the slider
+  and the film only move when asked.
+-->
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>YORIMICHI &mdash; Small-group Japan tours from Singapore</title>
+  <meta name="description" content="Eight escorted Japan tours of twelve travellers or fewer, departing Singapore with flights included. Kyoto in autumn, Snow Country, Sakura Season, the Golden Route. Fixed dates, full prices, STB-licensed since 2014.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/travel-yorimichi/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YORIMICHI">
+  <meta property="og:title" content="YORIMICHI &mdash; Small-group Japan tours from Singapore">
+  <meta property="og:description" content="Eight escorted Japan tours of twelve or fewer, flights from Changi included. Fixed dates, full prices, STB-licensed since 2014.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/travel-yorimichi/index.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/travel-yorimichi/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="YORIMICHI &mdash; Small-group Japan tours from Singapore">
+  <meta name="twitter:description" content="Eight escorted Japan tours of twelve or fewer, flights from Changi included.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/travel-yorimichi/img/og.webp">
+  <meta name="theme-color" content="#0B0F1A">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@300..700&family=Onest:wght@300..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="Yorimichi, home"><i></i>Yorimichi <small>Japan</small></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="about.html">About</a>
+    <a href="tours.html">Tours</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="top__actions">
+    <button class="icon-btn" id="searchBtn" type="button" aria-expanded="false" aria-controls="search" aria-label="Search tours">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+    </button>
+    <button class="burger icon-btn" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+<div class="search" id="search" hidden>
+  <form action="tours.html" method="get">
+    <input type="search" name="q" placeholder="Search tours &mdash; Kyoto, winter, ryokan, sakura&hellip;" aria-label="Search tours" autocomplete="off">
+    <button class="btn btn--sm" type="submit">Search</button>
+  </form>
+</div>
+<nav class="drawer" id="drawer" data-open="false" aria-label="Menu">
+  <a href="index.html" aria-current="page">Home <span>01</span></a>
+  <a href="about.html">About <span>02</span></a>
+  <a href="tours.html">Tours <span>03</span></a>
+  <a href="gallery.html">Gallery <span>04</span></a>
+  <a href="#reviews">Reviews <span>05</span></a>
+  <a href="contact.html">Contact <span>06</span></a>
+  <div class="drawer__foot">
+    <strong>+65 6221 4870</strong>
+    <span>24 Duxton Hill #02-04 &middot; Mon&ndash;Fri 10&ndash;7, Sat 10&ndash;4</span>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ===== hero slider ===== -->
+  <section class="hero" aria-label="Featured destinations">
+    <div class="hero__stage" id="heroStage">
+
+      <div class="slide" data-slide="0" aria-hidden="false">
+        <picture>
+          <source media="(max-width: 700px)" srcset="img/hero-kyoto-tall.webp">
+          <img src="img/hero-kyoto.webp" alt="The Senbon Torii at Fushimi Inari, Kyoto, before dawn" width="1920" height="1080" fetchpriority="high">
+        </picture>
+      </div>
+      <div class="slide" data-slide="1" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 700px)" srcset="img/hero-tokyo-tall.webp">
+          <img src="img/hero-tokyo.webp" alt="Shibuya, Tokyo, from above at night" width="1920" height="1080" loading="lazy">
+        </picture>
+      </div>
+      <div class="slide" data-slide="2" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 700px)" srcset="img/hero-miyajima-tall.webp">
+          <img src="img/hero-miyajima.webp" alt="The floating torii of Itsukushima Shrine, Miyajima, in evening light" width="1920" height="1080" loading="lazy">
+        </picture>
+      </div>
+      <div class="slide" data-slide="3" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 700px)" srcset="img/hero-shirakawa-tall.webp">
+          <img src="img/hero-shirakawa.webp" alt="Shirakawa-go's thatched farmhouses lit at dusk under snow" width="1920" height="1080" loading="lazy">
+        </picture>
+      </div>
+      <div class="slide" data-slide="4" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 700px)" srcset="img/hero-fuji-tall.webp">
+          <img src="img/hero-fuji.webp" alt="Chureito Pagoda with Mount Fuji behind it at dusk" width="1920" height="1080" loading="lazy">
+        </picture>
+      </div>
+
+      <div class="hero__copy">
+        <p class="kicker">Small-group Japan tours &middot; departing Singapore</p>
+        <h1 class="h1 hero__title" id="heroTitle" aria-live="polite">
+          <span>Visit</span><span id="heroPlace">Kyoto</span>
+        </h1>
+        <div class="hero__meta">
+          <a class="btn" id="heroCta" href="tour.html?t=kyoto-autumn">See the tour
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+          <p id="heroFacts"><strong>Kyoto in Autumn</strong> &middot; 7 days &middot; from S$4,860 with flights</p>
+        </div>
+      </div>
+
+      <div class="hero__index" role="tablist" aria-label="Slides">
+        <button type="button" role="tab" data-go="0" aria-current="true" aria-label="Slide 1, Kyoto">01</button>
+        <button type="button" role="tab" data-go="1" aria-current="false" aria-label="Slide 2, Tokyo">02</button>
+        <button type="button" role="tab" data-go="2" aria-current="false" aria-label="Slide 3, Miyajima">03</button>
+        <button type="button" role="tab" data-go="3" aria-current="false" aria-label="Slide 4, Shirakawa-go">04</button>
+        <button type="button" role="tab" data-go="4" aria-current="false" aria-label="Slide 5, Mount Fuji">05</button>
+      </div>
+      <div class="hero__arrows">
+        <button class="icon-btn" type="button" id="heroPrev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="icon-btn" type="button" id="heroNext" aria-label="Next slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="hero__strip">
+      <div class="strip">
+        <div class="strip__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.4c.5-.1 1-.2 1.5-.2 2.8 0 4.5 1.9 4.5 4.8"/></svg>
+          <div>
+            <p><strong>Twelve travellers, at most.</strong> One tour leader, one table at dinner, no headsets, no flag on a stick.</p>
+            <a class="more" href="about.html">How we travel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="strip__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16.5l19-9.5-3 12-6.5-4.5"/><path d="M12 14.5v6l3-3"/></svg>
+          <div>
+            <p><strong>Flights from Changi included.</strong> Every price is the whole price: flights, rail, hotels, breakfasts, entries.</p>
+            <a class="more" href="tours.html">The eight tours <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="strip__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l8 3v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10v-6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+          <div>
+            <p><strong>STB-licensed since 2014.</strong> Travel Agent Licence TA03457, 4,200 travellers, and a Duxton Hill office you can walk into.</p>
+            <a class="more" href="contact.html">Find the office <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== popular tours ===== -->
+  <section class="section" id="popular" aria-labelledby="popularTitle">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="kicker kicker--plain">Departing October 2026 &ndash; May 2027</span>
+        <h2 class="h2" id="popularTitle">Popular tours</h2>
+      </div>
+      <div class="tgrid">
+        <a class="tcard reveal" href="tour.html?t=golden-route">
+          <div class="tcard__media">
+            <span class="tcard__tag">10 days</span>
+            <img src="img/tour-golden-route-card.webp" alt="A woman in a floral kimono walking up the lane below Yasaka Pagoda in Kyoto" width="720" height="960" loading="lazy">
+          </div>
+          <div class="tcard__body">
+            <h3 class="h3">The Golden Route</h3>
+            <p>Tokyo &middot; Hakone &middot; Kyoto &middot; Osaka</p><p><strong>10 days &middot; from S$5,980</strong></p>
+          </div>
+        </a>
+        <a class="tcard reveal" href="tour.html?t=kyoto-autumn">
+          <div class="tcard__media">
+            <span class="tcard__tag tcard__tag--shu">3 seats &middot; 16 Nov</span>
+            <img src="img/tour-kyoto-autumn-card.webp" alt="A woman in kimono under a red paper umbrella beneath scarlet maples in Kyoto" width="720" height="960" loading="lazy">
+          </div>
+          <div class="tcard__body">
+            <h3 class="h3">Kyoto in Autumn</h3>
+            <p>Kyoto &middot; Nara &middot; Arashiyama &middot; Uji</p><p><strong>7 days &middot; from S$4,860</strong></p>
+          </div>
+        </a>
+        <a class="tcard reveal" href="tour.html?t=snow-country">
+          <div class="tcard__media">
+            <span class="tcard__tag">8 days</span>
+            <img src="img/tour-snow-country-card.webp" alt="Japanese macaques bathing in a hot spring at Jigokudani as snow falls" width="720" height="960" loading="lazy">
+          </div>
+          <div class="tcard__body">
+            <h3 class="h3">Snow Country</h3>
+            <p>Nagano &middot; Takayama &middot; Shirakawa-go</p><p><strong>8 days &middot; from S$5,420</strong></p>
+          </div>
+        </a>
+        <a class="tcard reveal" href="tour.html?t=sakura">
+          <div class="tcard__media">
+            <span class="tcard__tag">9 days &middot; Mar 2027</span>
+            <img src="img/tour-sakura-card.webp" alt="Osaka Castle above cherry blossom at dusk" width="720" height="960" loading="lazy">
+          </div>
+          <div class="tcard__body">
+            <h3 class="h3">Sakura Season</h3>
+            <p>Osaka &middot; Kyoto &middot; Nara &middot; Tokyo</p><p><strong>9 days &middot; from S$6,240</strong></p>
+          </div>
+        </a>
+      </div>
+      <div class="tgrid__foot reveal">
+        <a class="btn btn--ghost" href="tours.html">All eight tours
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== film band ===== -->
+  <section class="film" aria-labelledby="filmTitle">
+    <img class="film__bg" src="img/plate-milkyway.webp" alt="" width="1920" height="823" loading="lazy">
+    <div class="film__grid">
+      <div class="reveal">
+        <span class="kicker">The film</span>
+        <h2 class="h2 film__title" id="filmTitle">Go the<br>scenic<br>way round</h2>
+        <button class="play" type="button" id="filmPlay" data-chapter="0">
+          <span class="play__ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+          <span class="play__label">Watch the film<small>Two chapters &middot; 0:17</small></span>
+        </button>
+        <p class="film__note">Yorimichi means the detour &mdash; the way round that turns out to be the point. Two mornings from the road: Fushimi Inari before the crowds, and Fuji from Kawaguchiko at first light.</p>
+      </div>
+      <div class="film__chapters reveal">
+        <button class="chapter" type="button" data-chapter="0" aria-label="Play chapter one, Fushimi Inari at first light">
+          <span class="chapter__thumb">
+            <img src="img/film-fushimi-poster.webp" alt="" width="1280" height="720" loading="lazy">
+            <span class="chapter__play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+          </span>
+          <span class="chapter__cap"><strong>01</strong>Fushimi Inari, first light</span>
+        </button>
+        <button class="chapter" type="button" data-chapter="1" aria-label="Play chapter two, Fuji from Kawaguchiko">
+          <span class="chapter__thumb">
+            <img src="img/film-fuji-poster.webp" alt="" width="1280" height="720" loading="lazy">
+            <span class="chapter__play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+          </span>
+          <span class="chapter__cap"><strong>02</strong>Fuji from Kawaguchiko</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== how we travel ===== -->
+  <section class="section" aria-labelledby="howTitle">
+    <div class="wrap">
+      <div class="section__head section__head--left reveal">
+        <span class="kicker">How we travel</span>
+        <h2 class="h2" id="howTitle">Small groups, early starts,<br>free afternoons</h2>
+      </div>
+      <div class="how">
+        <div class="how__item reveal">
+          <span class="n">01</span>
+          <h3>Twelve, at most</h3>
+          <p>Small enough for one table at dinner and one row at the sushi counter. Your tour leader is with you from Changi to Changi; in Kyoto and Hiroshima a licensed local guide joins for the day.</p>
+        </div>
+        <div class="how__item reveal">
+          <span class="n">02</span>
+          <h3>Everything in the price</h3>
+          <p>Return flights, every train including reserved Shinkansen seats, every hotel and ryokan, every breakfast, every entry on the itinerary. The only extras are lunches, your insurance, and whatever you buy in Nishiki market.</p>
+        </div>
+        <div class="how__item reveal">
+          <span class="n">03</span>
+          <h3>Early starts, free afternoons</h3>
+          <p>We reach the headline temples when the gates open and leave as the coaches arrive. Most afternoons are yours, with a list from the guide and a phone number that answers.</p>
+        </div>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><b>2014</b><span>The year we started, two people and a spreadsheet</span></div>
+        <div class="stat"><b>4,200</b><span>Travellers so far, on 340 departures</span></div>
+        <div class="stat"><b>12</b><span>Maximum group size, without exception</span></div>
+        <div class="stat"><b>96%</b><span>Would travel with us again, from last year&rsquo;s surveys</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== next departures ===== -->
+  <section class="section section--tight" id="departures" aria-labelledby="depTitle">
+    <div class="wrap">
+      <div class="section__head section__head--split reveal">
+        <div>
+          <span class="kicker">Fixed dates</span>
+          <h2 class="h2" id="depTitle">Next departures</h2>
+        </div>
+        <div class="chips" id="depChips" role="group" aria-label="Filter departures">
+          <button class="chip" type="button" data-range="soon" aria-pressed="true">Next 90 days</button>
+          <button class="chip" type="button" data-range="2027" aria-pressed="false">2027</button>
+          <button class="chip" type="button" data-range="all" aria-pressed="false">All dates</button>
+        </div>
+      </div>
+      <div class="table-wrap reveal">
+        <table class="tbl" id="depTable">
+          <thead>
+            <tr><th scope="col">Departs</th><th scope="col">Tour</th><th scope="col">Length</th><th scope="col">Per person</th><th scope="col">Availability</th><th scope="col"><span class="visually-hidden">Book</span></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="results" id="depNote">All prices per person, twin-share, including return flights from Singapore. A S$500 deposit holds a seat; the balance is due 60 days before departure.</p>
+    </div>
+  </section>
+
+  <!-- ===== reviews ===== -->
+  <section class="section" id="reviews" aria-labelledby="revTitle">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="kicker kicker--plain">From last year&rsquo;s travellers</span>
+        <h2 class="h2" id="revTitle">Reviews</h2>
+      </div>
+      <div class="reviews" id="reviewGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== gallery peek ===== -->
+  <section class="section section--tight" aria-labelledby="peekTitle">
+    <div class="wrap">
+      <div class="section__head section__head--split reveal">
+        <div>
+          <span class="kicker">From the road</span>
+          <h2 class="h2" id="peekTitle">Gallery</h2>
+        </div>
+        <a class="more" href="gallery.html">All eighteen photographs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="peek reveal">
+        <a href="gallery.html"><figure><img src="img/plate-torii-umbrella.webp" alt="A woman with a red paper umbrella walking through the Senbon Torii at Fushimi Inari" loading="lazy" width="1600" height="1067"><figcaption>Fushimi Inari, Kyoto</figcaption></figure></a>
+        <a href="gallery.html"><figure><img src="img/plate-shirakawa.webp" alt="Shirakawa-go under snow at blue hour" loading="lazy" width="1600" height="1067"><figcaption>Shirakawa-go</figcaption></figure></a>
+        <a href="gallery.html"><figure><img src="img/plate-nara-deer.webp" alt="Deer among fallen maple leaves in Nara Park" loading="lazy" width="1600" height="1067"><figcaption>Nara Park</figcaption></figure></a>
+        <a href="gallery.html"><figure><img src="img/plate-toji-pagoda.webp" alt="To-ji pagoda reflected in a pond among autumn maples" loading="lazy" width="1600" height="1067"><figcaption>To-ji, Kyoto</figcaption></figure></a>
+        <a href="gallery.html"><figure><img src="img/plate-kyoto-lane.webp" alt="A traveller walking the Ninenzaka lane toward Yasaka Pagoda at dawn" loading="lazy" width="1600" height="1067"><figcaption>Ninenzaka, Kyoto</figcaption></figure></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta" aria-labelledby="ctaTitle">
+    <div class="wrap cta__grid">
+      <div class="reveal">
+        <span class="kicker">Talk to a planner</span>
+        <h2 class="h2" id="ctaTitle">Not sure which<br>tour is yours?</h2>
+        <p class="lede" style="margin-top:14px">Twenty minutes on the phone, or come to the office. We will tell you which departure fits your dates, your walking pace and the season you want &mdash; and we will tell you if it is not the right year for it.</p>
+        <p style="margin-top:22px"><a class="btn" href="contact.html">Send an enquiry
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></p>
+      </div>
+      <ul class="cta__list reveal">
+        <li><span>Office</span><span>24 Duxton Hill #02-04<br>Singapore 089607</span></li>
+        <li><span>Hours</span><span>Mon&ndash;Fri 10:00&ndash;19:00<br>Sat 10:00&ndash;16:00 &middot; Sun &amp; PH closed</span></li>
+        <li><span>Phone</span><span><a href="tel:+6562214870">+65 6221 4870</a></span></li>
+        <li><span>WhatsApp</span><span><a href="https://wa.me/6581234870">+65 8123 4870</a></span></li>
+        <li><span>Email</span><span><a href="mailto:hello@yorimichi.sg">hello@yorimichi.sg</a></span></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="mark" href="index.html"><i></i>Yorimichi <small>Japan</small></a>
+        <p>Yorimichi Travel Pte. Ltd. &middot; Small-group escorted tours to Japan, departing Singapore since 2014. STB Travel Agent Licence No. TA03457.</p>
+      </div>
+      <div>
+        <h4>Tours</h4>
+        <ul>
+          <li><a href="tour.html?t=golden-route">The Golden Route</a></li>
+          <li><a href="tour.html?t=kyoto-autumn">Kyoto in Autumn</a></li>
+          <li><a href="tour.html?t=sakura">Sakura Season</a></li>
+          <li><a href="tour.html?t=snow-country">Snow Country</a></li>
+          <li><a href="tours.html">All eight tours</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="index.html#reviews">Reviews</a></li>
+          <li><a href="contact.html">Contact &amp; office</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Office</h4>
+        <ul>
+          <li>24 Duxton Hill #02-04</li>
+          <li>Singapore 089607</li>
+          <li><a href="tel:+6562214870">+65 6221 4870</a></li>
+          <li><a href="mailto:hello@yorimichi.sg">hello@yorimichi.sg</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>&copy; 2026 Yorimichi Travel Pte. Ltd. &middot; UEN 201412876K &middot; TA03457</span>
+      <span>Prices in Singapore dollars, per person twin-share, including return flights from Singapore.</span>
+    </div>
+  </div>
+</footer>
+
+<dialog class="vmodal" id="filmModal" aria-label="The Yorimichi film">
+  <div class="vmodal__frame">
+    <video id="filmVideo" controls playsinline preload="none" poster="img/film-fushimi-poster.webp" width="1280" height="720">
+      <source src="video/film-fushimi.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="vmodal__bar">
+    <div class="chips" role="group" aria-label="Chapters">
+      <button class="chip" type="button" data-chapter="0" aria-pressed="true">01 Fushimi Inari</button>
+      <button class="chip" type="button" data-chapter="1" aria-pressed="false">02 Fuji, Kawaguchiko</button>
+    </div>
+    <button class="btn btn--ghost btn--sm" type="button" id="filmClose">Close</button>
+  </div>
+</dialog>
+
+<script src="js/tours-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
