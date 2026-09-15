@@ -82,8 +82,7 @@ p:last-child { margin-bottom: 0; }
   margin: 0 auto 1.5rem;
   filter: drop-shadow(0 0 40px rgba(225, 6, 0, 0.35));
 }
-.age-gate__bottle svg,
-.hero-bottle svg {
+.age-gate__bottle img {
   width: 100%;
   height: auto;
   display: block;
@@ -227,13 +226,13 @@ p:last-child { margin-bottom: 0; }
 .hero-type {
   position: absolute;
   inset: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   pointer-events: none;
-  z-index: 0;
   font-weight: 800;
   font-size: clamp(2.8rem, 11vw, 7.5rem);
   line-height: 0.92;
@@ -245,23 +244,25 @@ p:last-child { margin-bottom: 0; }
 .hero-bottle {
   position: relative;
   z-index: 1;
-  width: min(52vw, 280px);
-  filter: drop-shadow(0 20px 50px rgba(0,0,0,0.6));
+  width: min(58vw, 320px);
+  filter: drop-shadow(0 24px 60px rgba(225, 6, 0, 0.28));
 }
 .hero-bottle::before {
   content: "";
   position: absolute;
-  left: 50%; top: 42%;
-  width: 70%; height: 70%;
+  left: 50%; top: 48%;
+  width: 85%; height: 75%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(225, 6, 0, 0.45) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(225, 6, 0, 0.4) 0%, transparent 68%);
   z-index: -1;
   pointer-events: none;
 }
-.hero-bottle svg {
+.hero-bottle img {
   width: 100%;
   height: auto;
+  display: block;
+  mix-blend-mode: lighten;
 }
 
 /* white band */
