@@ -3,13 +3,14 @@
   HEDDLE — Kirkbrae Mill, Selkirk.
 
   Direction contract. Undyed-cloth ground, walnut ink, one madder red spent
-  on the fell line and the things that are pressed. There is no photography
-  anywhere on the site: every cloth is painted from its own weave draft by
-  js/weave.js, at the sett the mill weaves it, so a swatch is a construction
-  and not a picture of one. The one authored moment is the loom beside the
-  page — the page is the cloth, scroll winds it onto the beam, and whatever
-  cloth the visitor is looking at is the cloth being woven. No marquee, no
-  parallax, no timers; motion is direct manipulation, or it is not there.
+  on the fell line and the things that are pressed. The cloth is photographed
+  — fourteen licensed plates, graded as little as possible — and the draft is
+  drawn: js/weave.js paints every threading, tie-up, treadling and drawdown on
+  the site from the same data the drafting room edits. The one authored
+  moment is the loom beside the page — the page is the cloth, scroll winds it
+  onto the beam, and whatever cloth the visitor is looking at is the cloth
+  being woven. No marquee, no parallax, no timers; motion is direct
+  manipulation, or it is not there.
 -->
 <html lang="en-GB">
 <head>
@@ -17,18 +18,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
   <title>HEDDLE &mdash; woollen cloth woven to a draft, Selkirk</title>
-  <meta name="description" content="A two-loom woollen mill on the Ettrick Water. Eight cloths by the metre, each drawn from its own weave draft, and a drafting room where you can draw your own and send it for a sample.">
+  <meta name="description" content="A two-loom woollen mill on the Ettrick Water. Eight woollen cloths by the metre, each woven from its own draft, and a drafting room where you can draw your own and send it for a sample.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://templates.thornburystudio.com/templates/mill-heddle/index.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="HEDDLE">
   <meta property="og:title" content="HEDDLE &mdash; every cloth here is a drawing first">
-  <meta property="og:description" content="A two-loom woollen mill on the Ettrick Water. Eight cloths by the metre, each drawn from its own weave draft.">
+  <meta property="og:description" content="A two-loom woollen mill on the Ettrick Water. Eight woollen cloths by the metre, each woven from its own draft.">
   <meta property="og:url" content="https://templates.thornburystudio.com/templates/mill-heddle/index.html">
   <meta property="og:image" content="https://templates.thornburystudio.com/templates/mill-heddle/img/og.webp">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="HEDDLE &mdash; every cloth here is a drawing first">
-  <meta name="twitter:description" content="A two-loom woollen mill on the Ettrick Water. Eight cloths by the metre, each drawn from its own weave draft.">
+  <meta name="twitter:description" content="A two-loom woollen mill on the Ettrick Water. Eight woollen cloths by the metre, each woven from its own draft.">
   <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/mill-heddle/img/og.webp">
   <meta name="theme-color" content="#ECE6D8">
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
@@ -97,78 +98,82 @@
         <a class="btn btn--ghost" href="draft.html">Open the drafting room</a>
       </div>
       <p class="hero-spec label">150 cm finished width &middot; 2/16 Nm lambswool &middot; minimum two metres &middot; from &pound;58 a metre</p>
+      <figure class="hero-plate">
+        <img src="img/hero-900.webp" srcset="img/hero-900.webp 900w, img/hero.webp 1600w" sizes="(min-width: 1040px) 58vw, 100vw" width="1600" height="900" alt="Three bolts of woollen cloth rolled on a bench: a grey twill, a camel and a walnut brown." decoding="async">
+        <figcaption class="label">Cut from the beam this week: a grey twill, Kirkbrae Twill in camel, and a walnut twill woven to order.</figcaption>
+      </figure>
     </section>
 
     <section class="range" id="range" data-draft="hound">
       <div class="sec-head reveal">
         <p class="label">The range</p>
         <h2>Eight cloths, one warp beam.</h2>
-        <p>Nothing on this page is photographed. Each card is drawn from its own draft at the sett we weave it, which is why the loom can be weaving any of them the moment you look at it.</p>
+        <p>Each cloth is shown as it comes off the loom, and each has a draft, written out on the <a href="cloths.html">range page</a>. Point at a card and the loom re-threads to it; every one of them is woven to order on the same two looms.</p>
       </div>
 
       <div class="cards">
         <a class="cloth-card reveal" href="cloths.html#kirkbrae" data-cloth="kirkbrae">
-          <canvas class="swatch" data-cloth="kirkbrae" data-cell="6" aria-hidden="true"></canvas>
+          <img class="swatch" src="img/cloth-kirkbrae-700.webp" srcset="img/cloth-kirkbrae-700.webp 700w, img/cloth-kirkbrae.webp 1400w" sizes="(min-width: 1040px) 28vw, (min-width: 641px) 46vw, 112px" width="700" height="467" alt="A folded camel scarf with a fringed end, woven in Kirkbrae Twill." loading="lazy" decoding="async">
           <div class="card-body">
             <div class="card-head"><h3>Kirkbrae Twill</h3><span class="price">&pound;68<small>/m</small></span></div>
             <p class="label">2/2 twill &middot; 410 g/m&sup2; &middot; 22 ends/cm</p>
-            <p class="note">The mill&rsquo;s working cloth. Walnut warp, oat weft: the diagonal reads at arm&rsquo;s length and goes at three metres.</p>
+            <p class="note">The mill&rsquo;s working cloth, in camel. The diagonal reads at arm&rsquo;s length and goes at three metres, which is the right distance for a coat to be plain.</p>
           </div>
         </a>
         <a class="cloth-card reveal" href="cloths.html#ettrick" data-cloth="ettrick">
-          <canvas class="swatch" data-cloth="ettrick" data-cell="6" aria-hidden="true"></canvas>
+          <img class="swatch" src="img/cloth-ettrick-700.webp" srcset="img/cloth-ettrick-700.webp 700w, img/cloth-ettrick.webp 1400w" sizes="(min-width: 1040px) 28vw, (min-width: 641px) 46vw, 112px" width="700" height="467" alt="A close view of grey herringbone tweed." loading="lazy" decoding="async">
           <div class="card-body">
             <div class="card-head"><h3>Ettrick Herringbone</h3><span class="price">&pound;74<small>/m</small></span></div>
             <p class="label">Broken twill &middot; 460 g/m&sup2; &middot; 22 ends/cm</p>
-            <p class="note">Eight ends up, eight down, and a break where they meet so the chevrons never come to a point.</p>
+            <p class="note">Eight ends up, eight down, and a break where they meet so the chevrons never come to a point. Peat on ecru.</p>
           </div>
         </a>
         <a class="cloth-card reveal" href="cloths.html#hound" data-cloth="hound">
-          <canvas class="swatch" data-cloth="hound" data-cell="6" aria-hidden="true"></canvas>
+          <img class="swatch" src="img/cloth-hound-700.webp" srcset="img/cloth-hound-700.webp 700w, img/cloth-hound.webp 1400w" sizes="(min-width: 1040px) 28vw, (min-width: 641px) 46vw, 112px" width="700" height="467" alt="Black and white houndstooth cloth." loading="lazy" decoding="async">
           <div class="card-body">
             <div class="card-head"><h3>Hound</h3><span class="price">&pound;72<small>/m</small></span></div>
             <p class="label">2/2 twill, four and four &middot; 400 g/m&sup2;</p>
             <p class="note">Not printed, not embroidered. Four dark ends, four light, the same in the weft, and a twill does the rest.</p>
           </div>
         </a>
-        <a class="cloth-card reveal" href="cloths.html#shepherd" data-cloth="shepherd">
-          <canvas class="swatch" data-cloth="shepherd" data-cell="6" aria-hidden="true"></canvas>
+        <a class="cloth-card reveal" href="cloths.html#check" data-cloth="check">
+          <img class="swatch" src="img/cloth-check-700.webp" srcset="img/cloth-check-700.webp 700w, img/cloth-check.webp 1400w" sizes="(min-width: 1040px) 28vw, (min-width: 641px) 46vw, 112px" width="700" height="467" alt="Grey herringbone cloth with a red, black and cream overcheck." loading="lazy" decoding="async">
           <div class="card-body">
-            <div class="card-head"><h3>Shepherd Check</h3><span class="price">&pound;72<small>/m</small></span></div>
-            <p class="label">2/2 twill, six and six &middot; 420 g/m&sup2;</p>
-            <p class="note">Hound with two more threads in every block, which is enough to turn teeth into a check. Woad and ecru.</p>
+            <div class="card-head"><h3>Kirkbrae Check</h3><span class="price">&pound;66<small>/m</small></span></div>
+            <p class="label">Herringbone, overchecked &middot; 440 g/m&sup2;</p>
+            <p class="note">The herringbone ground with a madder and peat overcheck drawn across it every twenty ends. A blanket, or a scarf with opinions.</p>
           </div>
         </a>
         <a class="cloth-card reveal" href="cloths.html#glen" data-cloth="glen">
-          <canvas class="swatch" data-cloth="glen" data-cell="6" aria-hidden="true"></canvas>
+          <img class="swatch" src="img/cloth-glen-700.webp" srcset="img/cloth-glen-700.webp 700w, img/cloth-glen.webp 1400w" sizes="(min-width: 1040px) 28vw, (min-width: 641px) 46vw, 112px" width="700" height="467" alt="Brown and ecru glen check with a rust overcheck." loading="lazy" decoding="async">
           <div class="card-body">
             <div class="card-head"><h3>Glen</h3><span class="price">&pound;78<small>/m</small></span></div>
             <p class="label">2/2 twill, 34-end colour order &middot; 400 g/m&sup2;</p>
             <p class="note">Four-and-four, two-and-two, then a pair of madder ends to close the repeat. It never looks the same twice.</p>
           </div>
         </a>
-        <a class="cloth-card reveal" href="cloths.html#logcabin" data-cloth="logcabin">
-          <canvas class="swatch" data-cloth="logcabin" data-cell="6" aria-hidden="true"></canvas>
+        <a class="cloth-card reveal" href="cloths.html#minchmoor" data-cloth="minchmoor">
+          <img class="swatch" src="img/cloth-minchmoor-700.webp" srcset="img/cloth-minchmoor-700.webp 700w, img/cloth-minchmoor.webp 1400w" sizes="(min-width: 1040px) 28vw, (min-width: 641px) 46vw, 112px" width="700" height="467" alt="Blue, brown and ecru plaid flannel, draped." loading="lazy" decoding="async">
           <div class="card-body">
-            <div class="card-head"><h3>Log Cabin</h3><span class="price">&pound;58<small>/m</small></span></div>
-            <p class="label">Plain weave, colour-and-weave &middot; 300 g/m&sup2;</p>
-            <p class="note">Nothing in the structure changes. The blocks are a colour trick, and it is the oldest trick there is.</p>
-          </div>
-        </a>
-        <a class="cloth-card reveal" href="cloths.html#rosepath" data-cloth="rosepath">
-          <canvas class="swatch" data-cloth="rosepath" data-cell="6" aria-hidden="true"></canvas>
-          <div class="card-body">
-            <div class="card-head"><h3>Rosepath</h3><span class="price">&pound;64<small>/m</small></span></div>
-            <p class="label">Rosepath, as drawn in &middot; 520 g/m&sup2; &middot; blanket</p>
-            <p class="note">An eight-end threading that turns back on itself, treadled in the order it is threaded. Madder on ecru.</p>
+            <div class="card-head"><h3>Minchmoor Plaid</h3><span class="price">&pound;58<small>/m</small></span></div>
+            <p class="label">2/2 twill, brushed &middot; 340 g/m&sup2; &middot; shirt weight</p>
+            <p class="note">A fifty-six-end plaid in woad, walnut and ecru, brushed on both faces. The lightest cloth we make, and the one that gets worn out.</p>
           </div>
         </a>
         <a class="cloth-card reveal" href="cloths.html#yarrow" data-cloth="yarrow">
-          <canvas class="swatch" data-cloth="yarrow" data-cell="6" aria-hidden="true"></canvas>
+          <img class="swatch" src="img/cloth-yarrow-700.webp" srcset="img/cloth-yarrow-700.webp 700w, img/cloth-yarrow.webp 1400w" sizes="(min-width: 1040px) 28vw, (min-width: 641px) 46vw, 112px" width="700" height="467" alt="A blue and white chevron woollen throw, folded." loading="lazy" decoding="async">
           <div class="card-body">
-            <div class="card-head"><h3>Yarrow Diamond</h3><span class="price">&pound;70<small>/m</small></span></div>
-            <p class="label">8-shaft point twill &middot; 480 g/m&sup2; &middot; blanket</p>
-            <p class="note">Fourteen ends to the point on eight shafts. A 2/2 twill folded into itself, in moss and oat.</p>
+            <div class="card-head"><h3>Yarrow Chevron</h3><span class="price">&pound;70<small>/m</small></span></div>
+            <p class="label">Broken twill, 24-end &middot; 480 g/m&sup2; &middot; blanket</p>
+            <p class="note">Twelve ends up, twelve down, woad on ecru, at blanket weight. The chevrons are a hand wide.</p>
+          </div>
+        </a>
+        <a class="cloth-card reveal" href="cloths.html#hopsack" data-cloth="hopsack">
+          <img class="swatch" src="img/cloth-hopsack-700.webp" srcset="img/cloth-hopsack-700.webp 700w, img/cloth-hopsack.webp 1400w" sizes="(min-width: 1040px) 28vw, (min-width: 641px) 46vw, 112px" width="700" height="467" alt="A close view of grey basket-weave upholstery cloth." loading="lazy" decoding="async">
+          <div class="card-body">
+            <div class="card-head"><h3>Hopsack</h3><span class="price">&pound;70<small>/m</small></span></div>
+            <p class="label">2/2 basket weave &middot; 540 g/m&sup2; &middot; upholstery</p>
+            <p class="note">Two ends and two picks at a time, so the cloth is a small basket. Slate warp, ecru weft, and the heaviest thing on the beam.</p>
           </div>
         </a>
       </div>
@@ -183,21 +188,25 @@
       </div>
       <ol class="ledger">
         <li class="reveal">
+          <img class="ledger-plate" src="img/mill-warping-700.webp" srcset="img/mill-warping-700.webp 700w, img/mill-warping.webp 1400w" sizes="(min-width: 1040px) 28vw, 100vw" width="700" height="467" alt="Cones of yarn on the creel of a warping machine." loading="lazy" decoding="async">
           <span class="n" aria-hidden="true">01</span>
           <h3>Warping</h3>
-          <p>Every warp is wound on the vertical mill, 3,300 ends over forty metres, in the colour order the draft asks for. A day, if nobody telephones.</p>
+          <p>Every warp is wound from the creel onto the beam, 3,300 ends over forty metres, in the colour order the draft asks for. A day, if nobody telephones.</p>
         </li>
         <li class="reveal">
+          <img class="ledger-plate" src="img/mill-threading-700.webp" srcset="img/mill-threading-700.webp 700w, img/mill-threading.webp 1400w" sizes="(min-width: 1040px) 28vw, 100vw" width="700" height="467" alt="Warp ends tied off in bundles on the front of an old wooden loom." loading="lazy" decoding="async">
           <span class="n" aria-hidden="true">02</span>
           <h3>Threading</h3>
           <p>Each end goes through one heddle on one shaft, by hand, in the order of the top row of the draft. Get one wrong and the cloth carries the mistake for forty metres, so we do not get one wrong.</p>
         </li>
         <li class="reveal">
+          <img class="ledger-plate" src="img/mill-weaving-700.webp" srcset="img/mill-weaving-700.webp 700w, img/mill-weaving.webp 1400w" sizes="(min-width: 1040px) 28vw, 100vw" width="700" height="467" alt="A blue warp stretched through the heddles of a loom, lit from the side." loading="lazy" decoding="async">
           <span class="n" aria-hidden="true">03</span>
           <h3>Weaving</h3>
           <p>Two dobby looms, eight shafts each, a 160 cm reed. The dobby reads the treadling from a chain of pegged bars. You are reading it off the same draft, down the right-hand side.</p>
         </li>
         <li class="reveal">
+          <img class="ledger-plate" src="img/mill-finishing-700.webp" srcset="img/mill-finishing-700.webp 700w, img/mill-finishing.webp 1400w" sizes="(min-width: 1040px) 28vw, 100vw" width="700" height="467" alt="A stack of finished woollen blankets, folded, on a grey shelf." loading="lazy" decoding="async">
           <span class="n" aria-hidden="true">04</span>
           <h3>Finishing</h3>
           <p>Off the loom the cloth is greige and open. It is scoured, milled until the weave closes, tentered to width and cropped. It leaves the mill a tenth narrower and considerably better.</p>
@@ -220,6 +229,7 @@
       </div>
       <div class="order-grid">
         <div class="order-copy reveal">
+          <img class="order-plate" src="img/order-600.webp" srcset="img/order-600.webp 600w, img/order.webp 1000w" sizes="(min-width: 1040px) 24vw, (min-width: 881px) 40vw, 100vw" width="1000" height="667" alt="Two folded woollen blankets, a red tartan on a camel check, with fringed ends." loading="lazy" decoding="async">
           <h3>By the metre</h3>
           <p>Any cloth in the range, cut from the beam if it is on one and woven to order if it is not. Minimum two metres. Three to five weeks for a length woven to order; a week if it is on the beam.</p>
           <h3>To a draft</h3>
@@ -244,11 +254,11 @@
                 <option value="kirkbrae">Kirkbrae Twill</option>
                 <option value="ettrick">Ettrick Herringbone</option>
                 <option value="hound">Hound</option>
-                <option value="shepherd">Shepherd Check</option>
+                <option value="check">Kirkbrae Check</option>
                 <option value="glen">Glen</option>
-                <option value="logcabin">Log Cabin</option>
-                <option value="rosepath">Rosepath</option>
-                <option value="yarrow">Yarrow Diamond</option>
+                <option value="minchmoor">Minchmoor Plaid</option>
+                <option value="yarrow">Yarrow Chevron</option>
+                <option value="hopsack">Hopsack</option>
                 <option value="own">To my own draft</option>
                 <option value="swatches">The swatch card</option>
               </select>
@@ -282,7 +292,7 @@
 
   </main>
 
-  <footer class="foot" data-draft="rosepath">
+  <footer class="foot" data-draft="yarrow">
     <div class="foot-grid">
       <div>
         <p class="foot-mark"><span class="tie" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Heddle</p>
