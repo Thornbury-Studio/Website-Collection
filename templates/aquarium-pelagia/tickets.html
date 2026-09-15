@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Tickets &amp; passes &mdash; PELAGIA</title>
+  <meta name="description" content="Timed-entry tickets to Pelagia Aquarium: adult S$42, child S$30, senior S$32, family S$128, After Dark S$36. Choose a date and an hour, add the Ray Bay feed or a Behind the Glass tour, and see the total. Annual passes from S$78.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/aquarium-pelagia/tickets.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PELAGIA">
+  <meta property="og:title" content="Tickets &amp; passes &mdash; PELAGIA">
+  <meta property="og:description" content="Timed-entry tickets to Pelagia Aquarium: adult S$42, child S$30, senior S$32, family S$128, After Dark S$36. Choose a date and an hour, add the Ray Bay feed or a Behind the Glass tour, and see the total. Annual passes from S$78.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/tickets.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/img/og.webp">
+  <meta name="theme-color" content="#050B18">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Rethink+Sans:wght@400..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="Pelagia, home">
+    <span class="mark__ring"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/><path d="M4 20c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/></svg></span>
+    Pelagia <small>Aquarium</small>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="halls.html">The halls</a>
+    <a href="whats-on.html">What&rsquo;s on</a>
+    <a href="tickets.html" aria-current="page">Tickets</a>
+    <a href="visit.html">Visit</a>
+  </nav>
+  <div class="top__actions">
+    <a class="btn btn--sm top__book" href="tickets.html">Book tickets</a>
+    <button class="burger icon-btn" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+<nav class="drawer" id="drawer" data-open="false" aria-label="Menu">
+  <a href="index.html">Home <span>01</span></a>
+  <a href="halls.html">The halls <span>02</span></a>
+  <a href="whats-on.html">What&rsquo;s on <span>03</span></a>
+  <a href="tickets.html" aria-current="page">Tickets <span>04</span></a>
+  <a href="visit.html">Visit <span>05</span></a>
+  <div class="drawer__foot">
+    <strong data-today-hours>Today 10:00&ndash;19:00</strong>
+    <span>2 Marina Coastal Drive &middot; Marina South Pier MRT, 8 min</span>
+  </div>
+</nav>
+
+<main id="main">
+
+  <section class="phero" aria-label="Tickets">
+    <img src="img/head-tunnel.webp" srcset="img/head-tunnel.webp 1600w, img/head-tunnel-2560.webp 2560w" sizes="100vw" alt="" width="1600" height="1067" fetchpriority="high">
+    <div class="wrap phero__inner">
+      <span class="kicker">Timed entry &middot; S$4 less than the gate</span>
+      <h1 class="h1">Pick an hour, <br>stay all day</h1>
+      <p class="lede">Choose the hour you will arrive and come in any time inside it. Once you are in, you are in until we close. Every feed and talk is included.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight" aria-label="Ticket builder">
+    <div class="wrap builder">
+      <form class="glass builder__form" id="builder" novalidate>
+        <div>
+          <span class="kicker">Step 1</span>
+          <h2 class="h3" style="margin-top:6px">When are you coming?</h2>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="bDate">Date</label>
+            <select id="bDate" name="date"></select>
+          </div>
+          <div class="field">
+            <label>Hours that day</label>
+            <p id="bDayHours" style="padding:11px 0;font-size:15px">10:00 &ndash; 19:00</p>
+          </div>
+        </div>
+        <div class="field">
+          <label>Entry slot</label>
+          <div class="slots" id="bSlots" role="group" aria-label="Entry slot"></div>
+          <p class="muted" style="font-size:13px" id="bSlotNote">Arrive any time in your hour. Last entry is an hour before closing.</p>
+        </div>
+
+        <div>
+          <span class="kicker">Step 2</span>
+          <h2 class="h3" style="margin-top:6px">Who is coming?</h2>
+        </div>
+        <div class="qty" id="bQty"></div>
+
+        <div>
+          <span class="kicker">Step 3</span>
+          <h2 class="h3" style="margin-top:6px">Add an experience</h2>
+        </div>
+        <div id="bAddons"></div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="bName">Lead name</label>
+            <input type="text" id="bName" name="name" autocomplete="name" placeholder="As on your ID" required>
+          </div>
+          <div class="field">
+            <label for="bEmail">Email for the tickets</label>
+            <input type="email" id="bEmail" name="email" autocomplete="email" placeholder="you@example.com" required>
+          </div>
+        </div>
+      </form>
+
+      <aside>
+        <div class="glass summary" id="summary">
+          <span class="kicker">Your visit</span>
+          <h2 id="sumHead">Wednesday 16 Sep &middot; 13:00</h2>
+          <div id="sumLines"></div>
+          <div class="summary__total"><span>Total</span><b id="sumTotal">S$0</b></div>
+          <p class="summary__line"><span>You save online</span><span class="saving" id="sumSave">S$0</span></p>
+          <button class="btn" type="submit" form="builder" id="bSubmit">Pay and get the tickets</button>
+          <p class="summary__note">Tickets arrive by email within a minute and work from your phone at the gate. Change the date or slot free of charge up to 24 hours before. Nothing is charged on this page.</p>
+        </div>
+        <div class="glass summary summary__done" id="summaryDone" hidden>
+          <span class="kicker">Booked</span>
+          <span class="ref" id="sumRef">PA-260916-0000</span>
+          <p id="sumDoneText"></p>
+          <p class="summary__note">Show the email at the gate, or the code at the pass gate if you have an annual pass. See you at the window.</p>
+        </div>
+        <div class="glass glass--soft summary" id="annual" style="margin-top:18px">
+          <span class="kicker">Or for the year</span>
+          <h2>Annual pass</h2>
+          <div class="summary__line"><span>Adult, 12 months</span><b>S$118</b></div>
+          <div class="summary__line"><span>Child 3&ndash;12, 12 months</span><b>S$78</b></div>
+          <div class="summary__line"><span>Senior 60+, 12 months</span><b>S$88</b></div>
+          <p class="summary__note">Walk in at the pass gate without a slot, 10% off experiences and the caf&eacute;, and four guest tickets at S$32 a year. Buy one at the desk on your first visit and we take that day&rsquo;s ticket off the price.</p>
+          <a class="btn btn--ghost" href="visit.html#faq">How the pass works</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--tight" aria-labelledby="gTitle">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="kicker">Groups &amp; schools</span>
+        <h2 class="h2" id="gTitle">Ten or more</h2>
+      </div>
+      <div class="tgrid">
+        <div class="glass glass--soft tcard reveal">
+          <h3>Schools</h3>
+          <div class="price">S$18<small>per pupil, weekdays</small></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>One free adult for every eight pupils</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>A 40-minute session with an educator, MOE-aligned</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Lunch room and bag store</li>
+          </ul>
+          <a class="btn btn--ghost" href="visit.html#enquiry">Enquire for a class</a>
+        </div>
+        <div class="glass glass--soft tcard reveal">
+          <h3>Groups of ten or more</h3>
+          <div class="price">S$36<small>per adult, any day</small></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Child S$26 &middot; Senior S$28</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>One invoice, one entry, no slot</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Coach drop-off at the north door</li>
+          </ul>
+          <a class="btn btn--ghost" href="visit.html#enquiry">Book a group</a>
+        </div>
+        <div class="glass glass--soft tcard reveal">
+          <h3>Hire the window</h3>
+          <div class="price">S$6,800<small>evening, up to 120 guests</small></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>The Open Ocean gallery from 19:30 to 23:00</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Night feed at 20:30 for your guests</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Catering from the mezzanine kitchen</li>
+          </ul>
+          <a class="btn btn--ghost" href="visit.html#enquiry">Ask about a date</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="mark" href="index.html"><span class="mark__ring"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/><path d="M4 20c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/></svg></span>Pelagia <small>Aquarium</small></a>
+        <p>Pelagia Aquarium Pte. Ltd. &middot; Singapore&rsquo;s open-ocean aquarium at Marina Coastal Drive, open every day since March 2019. A member of the World Association of Zoos and Aquariums.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="tickets.html">Tickets &amp; passes</a></li>
+          <li><a href="whats-on.html">What&rsquo;s on today</a></li>
+          <li><a href="halls.html">The five halls</a></li>
+          <li><a href="visit.html">Getting here &amp; access</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Experiences</h4>
+        <ul>
+          <li><a href="whats-on.html#shark-dive">Shark Dive</a></li>
+          <li><a href="whats-on.html#sleepover">Sleep with the Sharks</a></li>
+          <li><a href="whats-on.html#backstage">Behind the Glass</a></li>
+          <li><a href="whats-on.html#ray-feed">Ray Bay Feed</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>2 Marina Coastal Drive</li>
+          <li>Singapore 018990</li>
+          <li><a href="tel:+6566902288">+65 6690 2288</a></li>
+          <li><a href="mailto:hello@pelagia.sg">hello@pelagia.sg</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>&copy; 2026 Pelagia Aquarium Pte. Ltd. &middot; UEN 201908231R</span>
+      <span>Prices in Singapore dollars. Online tickets are S$4 less than the gate.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/tickets.js"></script>
+</body>
+</html>

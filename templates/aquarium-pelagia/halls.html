@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>The five halls &mdash; PELAGIA</title>
+  <meta name="description" content="Open Ocean, the Jellies, Reef Edge, Seagrass & Mangrove and Penguin Cove: the five halls of Pelagia Aquarium, with what lives in each and when it is fed. A gallery of twenty-two photographs from the halls.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/aquarium-pelagia/halls.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PELAGIA">
+  <meta property="og:title" content="The five halls &mdash; PELAGIA">
+  <meta property="og:description" content="Open Ocean, the Jellies, Reef Edge, Seagrass & Mangrove and Penguin Cove: the five halls of Pelagia Aquarium, with what lives in each and when it is fed. A gallery of twenty-two photographs from the halls.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/halls.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/aquarium-pelagia/img/og.webp">
+  <meta name="theme-color" content="#050B18">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Rethink+Sans:wght@400..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="Pelagia, home">
+    <span class="mark__ring"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/><path d="M4 20c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/></svg></span>
+    Pelagia <small>Aquarium</small>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="halls.html" aria-current="page">The halls</a>
+    <a href="whats-on.html">What&rsquo;s on</a>
+    <a href="tickets.html">Tickets</a>
+    <a href="visit.html">Visit</a>
+  </nav>
+  <div class="top__actions">
+    <a class="btn btn--sm top__book" href="tickets.html">Book tickets</a>
+    <button class="burger icon-btn" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+<nav class="drawer" id="drawer" data-open="false" aria-label="Menu">
+  <a href="index.html">Home <span>01</span></a>
+  <a href="halls.html" aria-current="page">The halls <span>02</span></a>
+  <a href="whats-on.html">What&rsquo;s on <span>03</span></a>
+  <a href="tickets.html">Tickets <span>04</span></a>
+  <a href="visit.html">Visit <span>05</span></a>
+  <div class="drawer__foot">
+    <strong data-today-hours>Today 10:00&ndash;19:00</strong>
+    <span>2 Marina Coastal Drive &middot; Marina South Pier MRT, 8 min</span>
+  </div>
+</nav>
+
+<main id="main">
+
+  <section class="phero" aria-label="The halls">
+    <img src="img/head-manta.webp" srcset="img/head-manta.webp 1600w, img/head-manta-2560.webp 2560w" sizes="100vw" alt="" width="1600" height="1067" fetchpriority="high">
+    <div class="wrap phero__inner">
+      <span class="kicker">Five halls &middot; about three hours</span>
+      <h1 class="h1">The halls</h1>
+      <p class="lede">The building is one long descent from the Straits to the open ocean. Start in the seagrass at the top and finish at the 36-metre window, or go straight to the feed you came for.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight" aria-label="Hall by hall">
+    <div class="wrap" id="hallSections"></div>
+  </section>
+
+  <section class="section section--tight" id="gallery" aria-labelledby="galTitle">
+    <div class="wrap">
+      <div class="section__head section__head--split reveal">
+        <div>
+          <span class="kicker">Gallery</span>
+          <h2 class="h2" id="galTitle">From the halls</h2>
+        </div>
+        <div class="chips" id="galChips" role="group" aria-label="Filter by hall">
+          <button class="chip" type="button" data-hall="" aria-pressed="true">All</button>
+        </div>
+      </div>
+      <p class="results" id="galCount"></p>
+      <div class="ggrid" id="galGrid"></div>
+    </div>
+  </section>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Photograph">
+    <img id="lbImg" alt="" width="1600" height="1067">
+    <div class="lightbox__bar">
+      <p id="lbCap"></p>
+      <div class="lightbox__nav">
+        <button class="icon-btn" type="button" id="lbPrev" aria-label="Previous photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></button>
+        <button class="icon-btn" type="button" id="lbNext" aria-label="Next photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
+        <button class="btn btn--ghost btn--sm" type="button" id="lbClose">Close</button>
+      </div>
+    </div>
+  </dialog>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="mark" href="index.html"><span class="mark__ring"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/><path d="M4 20c3-4 6-4 9 0s6 4 9 0 4-3 6-1"/></svg></span>Pelagia <small>Aquarium</small></a>
+        <p>Pelagia Aquarium Pte. Ltd. &middot; Singapore&rsquo;s open-ocean aquarium at Marina Coastal Drive, open every day since March 2019. A member of the World Association of Zoos and Aquariums.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="tickets.html">Tickets &amp; passes</a></li>
+          <li><a href="whats-on.html">What&rsquo;s on today</a></li>
+          <li><a href="halls.html">The five halls</a></li>
+          <li><a href="visit.html">Getting here &amp; access</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Experiences</h4>
+        <ul>
+          <li><a href="whats-on.html#shark-dive">Shark Dive</a></li>
+          <li><a href="whats-on.html#sleepover">Sleep with the Sharks</a></li>
+          <li><a href="whats-on.html#backstage">Behind the Glass</a></li>
+          <li><a href="whats-on.html#ray-feed">Ray Bay Feed</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>2 Marina Coastal Drive</li>
+          <li>Singapore 018990</li>
+          <li><a href="tel:+6566902288">+65 6690 2288</a></li>
+          <li><a href="mailto:hello@pelagia.sg">hello@pelagia.sg</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>&copy; 2026 Pelagia Aquarium Pte. Ltd. &middot; UEN 201908231R</span>
+      <span>Prices in Singapore dollars. Online tickets are S$4 less than the gate.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/halls.js"></script>
+</body>
+</html>
