@@ -142,6 +142,24 @@ table cannot drift away from the fabric page.
   problem wherever frames are throttled. The observer is the only one of the
   three that depends on neither events nor frames, so the hidden state has to
   be something it can see.
+- **A display heading in a `minmax(0, …)` track will overflow, not wrap.**
+  The footer wordmark was sized `clamp(2.4rem, 8vw, 5rem)` — off the viewport —
+  while its column is about a quarter of the viewport. "ANORAK°" has no space
+  in it, so there is no break opportunity: it did not wrap, it painted 85 px
+  past its own column at 1440 and 155 px at 1200, and dropped the blue degree
+  mark on top of the Shop list. Two rules now, because either alone is a
+  half-fix: every display heading carries `overflow-wrap: break-word` so the
+  worst case is an ugly wrap inside the box rather than a silent overlap
+  outside it, and the wordmark is sized in `cqi` against its own column so it
+  fills a constant 88% of whatever that column turns out to be — which is the
+  part that survives somebody changing the grid ratio.
+
+- **The two dial plates must not be lazy.** The cold frame is the clipped top
+  layer of the wipe, so if it arrives after the warm one the visitor sees the
+  warm photograph occupying the cold half — a wrong state rather than a blank
+  one. They are a matched pair one viewport below the hero; deferring them
+  bought nothing and cost correctness.
+
 - **Tight display leading plus a comma.** At `line-height: .86` the comma
   ending one line landed inside the cap height of the next. `.9` is the
   tightest leading that survives real punctuation at every width.
@@ -162,6 +180,15 @@ every reveal fired.
 Screenshotting a URL with a `#fragment` in headless Chrome returns a blank
 plate whether or not the page is working. It is a capture artefact, not a bug
 in the page.
+
+Layout faults of the overflow kind do not show up in a box-model check, because
+the box is the right size — it is the *text* that leaves it. Measure the
+painted extent instead: a `Range` over an element's contents, its
+`getClientRects()` compared against the element's own border box. That scan,
+run over four pages at ten widths from 880 to 2400, is what proved the footer
+fix and found nothing else. Note that a `<sup>` sits above its parent's content
+box, so a containment test that requires full enclosure will flag it as
+escaping its own column; that one is an artefact.
 
 ## What this is not
 
