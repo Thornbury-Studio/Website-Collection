@@ -1,9 +1,12 @@
-# Image credits — HOLDFAST
+# Image credits — holdfast
 
-No third-party stock photography is used in this template.
+Section photographs generated for this template (AI stills), self-hosted as PNG under `img/`.
 
-- `img/favicon.svg` — original mark (HOLDFAST)
-- `img/og-holdfast.svg` — original Open Graph artwork
-- Hub thumb `img/repair-holdfast-sm.svg` (repo root) — original SVG preview
-
-The hero house elevation is inline SVG drawn for this template.
+| File | Subject |
+|---|---|
+| `img/hero-aircon.png` | Indoor split aircon in living room |
+| `img/field-aircon.png` | Condensate drip from indoor unit |
+| `img/service-aircon.png` | Technician servicing wall-mounted unit |
+| `img/timing-aircon.png` | Outdoor condensers on corridor wall |
+| `img/book-tech.png` | Technician ready for home dispatch |
+| `img/favicon.svg` | Original mark |
