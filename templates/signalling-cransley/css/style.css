@@ -436,7 +436,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   text-transform: uppercase; letter-spacing: -0.02em; max-width: 18ch;
 }
 .works { padding: clamp(3rem, 7vw, 5.5rem) var(--gut); }
-.sched { list-style: none; margin: 0 auto; padding: 0; max-width: var(--maxw); border-top: 1px solid var(--line); }
+.sched { list-style: none; margin: 0 auto; padding: 0; max-width: var(--maxw); }
 .sched-row {
   display: grid;
   grid-template-columns: 78px minmax(0, 260px) minmax(0, 1fr) 140px;
@@ -470,7 +470,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
   background: var(--panel-2);
   padding: clamp(3rem, 8vw, 6rem) var(--gut);
 }
-.rule blockquote { max-width: 24ch; margin: 0 auto; text-align: center; }
+/* note: `ch` here would resolve against the inherited 16px font, not the
+   display size on the <p>, which collapses this to a ~190px column */
+.rule blockquote { max-width: min(880px, 92%); margin: 0 auto; text-align: center; }
 .rule p {
   font-family: var(--slab); font-weight: 700;
   font-size: clamp(1.8rem, 5.4vw, 3.6rem); line-height: 1.02;
@@ -569,9 +571,17 @@ button, input, select, textarea { font: inherit; color: inherit; }
   text-transform: uppercase; color: var(--muted-2);
 }
 
-/* ============================= REVEAL ============================= */
-.reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.3,1); }
-.reveal.in { opacity: 1; transform: none; }
+/* ============================= REVEAL =============================
+   Content is visible by DEFAULT and the entrance is additive: `.in`
+   plays a keyframe animation with `backwards` fill, so the element is
+   only hidden while its own animation is pending. Nothing here can
+   leave content stranded at opacity 0 if a callback is dropped or the
+   animation clock never ticks. */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+.reveal.in { animation: riseIn .7s cubic-bezier(.2, .7, .3, 1) backwards; }
 
 /* ==========================================================================
    MOBILE — the frame is not a shrunk frame. It becomes a vertical
@@ -591,6 +601,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .hero-grid { grid-template-columns: 1fr; }
   .hero h1 { grid-column: 1; grid-row: 2; }
   .hero-side { grid-column: 1; grid-row: 3; padding-bottom: 0; }
+  .hero-note { grid-column: 1; grid-row: 4; }
   .task-list { grid-template-columns: 1fr; }
   .docket-grid { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
@@ -819,8 +830,312 @@ body.doc .skip { background: var(--ink); color: var(--paper); }
   .doc-cta { flex-direction: column; align-items: flex-start; }
 }
 
+/* ==========================================================================
+   CRAFT LAYER
+   Depth and texture come from the material the subject is actually made of:
+   printed diagram halftone, routed panel edges, enamel gloss on the plates,
+   and lamp glow behind the signal spectacles. No glass, no blur, no gradients
+   that are not a lit surface.
+   ========================================================================== */
+
+/* ---- printed-diagram halftone + panel scanline ---- */
+.panel { position: relative; }
+.panel::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(rgba(233, 237, 239, .14) .5px, transparent .6px),
+    repeating-linear-gradient(180deg, rgba(0, 0, 0, .10) 0 1px, transparent 1px 3px);
+  background-size: 4px 4px, 100% 3px;
+}
+.panel > * { position: relative; z-index: 1; }
+
+/* routed metal edge — a lit top bevel over a dark rebate */
+.diagram-scroll, .frame, .plate-detail, .task, .register, .docket-form {
+  box-shadow:
+    inset 0 1px 0 rgba(233, 237, 239, .055),
+    inset 0 -1px 0 rgba(0, 0, 0, .55),
+    0 1px 0 rgba(233, 237, 239, .025);
+}
+
+/* ============================= HERO ============================= */
+.hero { position: relative; overflow: hidden; }
+.hero-ghost {
+  position: absolute; right: 0; top: 50%; transform: translateY(-46%);
+  width: 78%; max-width: none; height: auto; z-index: 0;
+  pointer-events: none;
+}
+.hero-ghost path { fill: none; stroke: var(--chalk); stroke-width: 2; }
+.hero-ghost circle { fill: none; stroke: var(--dist); stroke-width: 2; }
+.hero-ghost { opacity: .07; }
+.hero-grid { position: relative; z-index: 1; }
+
+/* line-mask entrance — each headline line rises out of its own slot.
+   Additive, like every other entrance here: with no `.ready` the
+   headline simply sits where it belongs. */
+@keyframes lineUp { from { transform: translateY(112%); } to { transform: none; } }
+.hero-h1 { margin: 0; }
+.hero-h1 .ln { display: block; overflow: hidden; padding-bottom: .04em; }
+.hero-h1 .ln-i { display: block; }
+.hero.ready .hero-h1 .ln-i {
+  animation: lineUp 1s cubic-bezier(.16, 1, .3, 1) backwards;
+  animation-delay: calc(var(--i) * .085s);
+}
+.hero.ready .eyebrow, .hero.ready .stand, .hero.ready .stand-2,
+.hero.ready .cta-row, .hero.ready .hero-note {
+  animation: riseIn .8s cubic-bezier(.16, 1, .3, 1) backwards;
+  animation-delay: calc(var(--i) * .085s);
+}
+.hero.ready .hero-ghost { animation: ghostIn 1.6s ease .5s backwards; }
+@keyframes ghostIn { from { opacity: 0; } to { opacity: .07; } }
+
+/* the primary CTA carries a lever that throws on hover */
+.btn-lever { position: relative; display: inline-flex; align-items: center; gap: .7rem; overflow: hidden; }
+.btn-lv {
+  width: 4px; height: 17px; border-radius: 2px; flex: none;
+  background: linear-gradient(90deg, #3B4248, #6E7C84 45%, #2B3136);
+  transform-origin: 50% 100%; transform: rotate(11deg);
+  transition: transform .4s cubic-bezier(.34, 1.5, .5, 1);
+}
+.btn-lever:hover .btn-lv, .btn-lever:focus-visible .btn-lv { transform: rotate(-34deg); }
+
+/* ============================= PANEL HEAD ============================= */
+.panel-head { position: sticky; top: 58px; z-index: 12; background: #0C1013; }
+.panel-state {
+  margin-left: auto; min-width: 0;
+  display: flex; align-items: center; gap: .5rem;
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted);
+}
+.ps-t { min-width: 0; overflow-wrap: anywhere; }
+.ps-lamp {
+  width: 8px; height: 8px; border-radius: 50%; flex: none;
+  background: var(--line-2); transition: background .3s, box-shadow .3s;
+}
+.ps-lamp[data-lit="true"] { background: var(--clear); box-shadow: 0 0 7px rgba(62, 156, 115, .85); }
+
+/* ============================= DIAGRAM ============================= */
+.diagram .hit { fill: transparent; pointer-events: all; cursor: pointer; }
+
+/* lamps: a spectacle plate is lit glass, so it gets a real bloom */
+.diagram .lens { filter: drop-shadow(0 0 2.5px rgba(192, 52, 44, .85)); }
+.diagram .sig-down.off .lens, .diagram .sig-up.off .lens,
+.diagram .disc.off .disc-face { filter: drop-shadow(0 0 5px rgba(62, 156, 115, .9)); }
+.diagram #sig-1 .lens, .diagram #sig-15 .lens { filter: drop-shadow(0 0 3px rgba(224, 168, 30, .8)); }
+
+/* the set road is a lit road */
+.diagram .leg.set { filter: drop-shadow(0 0 2px rgba(233, 237, 239, .4)); }
+
+/* --- draw-in: the panel lights up line by line --- */
+.diagram .rail, .diagram .leg { transition: stroke .3s, opacity .3s, filter .3s; }
+.diagram[data-draw="pending"] .rail,
+.diagram[data-draw="pending"] .leg { opacity: 0; }
+.diagram[data-draw="pending"] .sig,
+.diagram[data-draw="pending"] .disc,
+.diagram[data-draw="pending"] #gates,
+.diagram[data-draw="pending"] .plat,
+.diagram[data-draw="pending"] .dg-lbl,
+.diagram[data-draw="pending"] .dg-name,
+.diagram[data-draw="pending"] .dg-num,
+.diagram[data-draw="pending"] .arrowhead,
+.diagram[data-draw="pending"] .road { opacity: 0; }
+.diagram[data-draw="run"] .rail,
+.diagram[data-draw="run"] .leg {
+  opacity: 1;
+  animation: drawline 1.05s cubic-bezier(.4, 0, .15, 1) backwards;
+  animation-delay: calc(var(--d, 0) * 1ms);
+}
+@keyframes drawline { from { stroke-dashoffset: var(--len, 0); } to { stroke-dashoffset: 0; } }
+.diagram[data-draw="run"] .sig,
+.diagram[data-draw="run"] .disc,
+.diagram[data-draw="run"] #gates,
+.diagram[data-draw="run"] .plat,
+.diagram[data-draw="run"] .dg-lbl,
+.diagram[data-draw="run"] .dg-name,
+.diagram[data-draw="run"] .dg-num,
+.diagram[data-draw="run"] .arrowhead,
+.diagram[data-draw="run"] .road {
+  animation: fitup .55s ease backwards;
+  animation-delay: calc(700ms + var(--d, 0) * 1ms);
+}
+@keyframes fitup { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+/* --- cross-highlight: hovering a lever lights what it works --- */
+.diagram .hl .post, .diagram .hl .disc-face { stroke: var(--dist); }
+.diagram .hl .blade, .diagram .hl .disc-bar rect { filter: drop-shadow(0 0 5px rgba(224, 168, 30, .95)); }
+.diagram .hl .leg { stroke: var(--dist); opacity: 1; }
+.diagram .hl .gate rect { fill: var(--dist); stroke: #F2C64C; }
+.diagram .hl .dg-num { fill: var(--dist); }
+.diagram .hl-ring {
+  animation: ringpulse 1.1s ease-in-out infinite;
+  transform-box: fill-box; transform-origin: center;
+}
+@keyframes ringpulse { 0%, 100% { opacity: .25; } 50% { opacity: .8; } }
+.diagram .hitbox {
+  fill: none; stroke: var(--dist); stroke-width: 1; stroke-dasharray: 3 3;
+  opacity: 0; transition: opacity .2s; pointer-events: none;
+}
+.diagram .hl .hitbox { opacity: .55; animation: ringpulse 1.2s ease-in-out infinite; }
+
+/* ============================= THE FRAME ============================= */
+/* the quadrant the levers sweep, worn where the handles pass */
+.frame { position: relative; }
+.frame::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 62px; height: 46px;
+  background: radial-gradient(120% 100% at 50% 100%, rgba(233, 237, 239, .05), transparent 70%);
+  pointer-events: none;
+}
+
+/* enamel: a fired plate has a specular sweep and a rolled edge */
+.plate { position: relative; overflow: hidden; }
+.plate::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 46%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .3), rgba(255, 255, 255, .02));
+  pointer-events: none;
+}
+.pnum { position: relative; z-index: 1; text-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
+.lever:active .plate { transform: translateY(1px); }
+
+/* the throw has weight: the catch squeezes, then the lever swings and settles */
+.lever-arm { box-shadow: 2px 3px 6px rgba(0, 0, 0, .55); }
+.lever.throwing .lever-arm .grip { animation: catchgrip .34s ease; }
+@keyframes catchgrip { 0%, 100% { transform: scaleY(1); } 35% { transform: scaleY(.9); } }
+
+/* --- interlocking made visible before you touch it --- */
+.lever-plate-wrap { position: relative; }
+.lever.is-holder .plate {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 0 0 2px var(--stop);
+  animation: holderpulse 1.1s ease-in-out infinite;
+}
+@keyframes holderpulse {
+  0%, 100% { box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 0 0 2px var(--stop); }
+  50%      { box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 0 0 2px var(--stop), 0 0 10px rgba(192, 52, 44, .7); }
+}
+.lever.is-affected .plate { box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 0 var(--dist); }
+.lever.is-held::after {
+  content: ''; position: absolute; left: 50%; bottom: 8px; width: 120%; height: 2px;
+  margin-left: -60%; background: var(--stop); transform: rotate(-8deg);
+  box-shadow: 0 0 6px rgba(192, 52, 44, .8);
+}
+.lever.is-src .plate { box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 0 0 2px var(--dist); }
+
+/* the readout gains a held banner */
+.pd-held {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--stop);
+  border: 1px solid var(--stop); padding: .15rem .45rem;
+}
+.pd-free { color: var(--clear); border-color: var(--clear); }
+
+/* ---- hero technical annotation ---- */
+.hero-grid { grid-template-rows: auto auto auto; }
+.hero-note {
+  grid-column: 1; grid-row: 3;
+  display: flex; align-items: center; gap: .85rem; flex-wrap: wrap;
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--muted-2);
+  margin-top: .3rem;
+}
+/* a flex item defaults to min-width:auto and will not shrink below its
+   text, which pushes the whole grid column wide enough to clip the page */
+.hn-t { min-width: 0; }
+.hn-brk {
+  width: 58px; height: 9px; flex: none;
+  border: 1px solid var(--line-2); border-top: 0;
+}
+.hero-note b { color: var(--dist); font-weight: 400; }
+
+/* ---- register: a real sheet stays ruled where nothing is written ---- */
+.register { min-height: 300px; }
+.reg-body {
+  background-image: repeating-linear-gradient(180deg, transparent 0 27px, var(--paper-rule) 27px 28px);
+  background-position: 0 0;
+}
+.reg-body li { background-color: var(--paper); }
+.reg-body li.refused { background-color: #E0CFC4; }
+.reg-body li.done-row { background-color: #D6E0D2; }
+
+/* ---- block instrument ---- */
+.block-inst {
+  margin-top: 1rem; border: 1px solid var(--line); background: var(--steel);
+  padding: .9rem 1rem 1rem;
+  box-shadow:
+    inset 0 1px 0 rgba(233, 237, 239, .055),
+    inset 0 -1px 0 rgba(0, 0, 0, .55);
+}
+.bi-head h3 { font-family: var(--slab); font-size: 1.05rem; text-transform: uppercase; }
+.bi-head p { font-family: var(--mono); font-size: .6rem; letter-spacing: .11em; text-transform: uppercase; color: var(--muted-2); margin-top: .2rem; }
+.bi-dial { margin: .6rem 0 .2rem; }
+.bi-dial svg { width: 100%; max-width: 190px; margin: 0 auto; height: auto; overflow: visible; }
+.bi-arc { fill: none; stroke: var(--line-2); stroke-width: 1; stroke-dasharray: 2 4; }
+.bi-lbl { font-family: var(--mono); font-size: 7px; letter-spacing: .1em; fill: var(--muted-2); }
+.bi-needle { transform-origin: 0 0; transform: rotate(-52deg); transition: transform .8s cubic-bezier(.3, 1.35, .45, 1); }
+.bi-needle line { stroke: var(--stop); stroke-width: 2.4; stroke-linecap: round; }
+.bi-needle circle { fill: var(--stop); }
+.block-inst[data-block="clear"] .bi-needle { transform: rotate(0deg); }
+.block-inst[data-block="clear"] .bi-needle line { stroke: var(--clear); }
+.block-inst[data-block="clear"] .bi-needle circle { fill: var(--clear); }
+.block-inst[data-block="train"] .bi-needle { transform: rotate(52deg); }
+.block-inst[data-block="train"] .bi-needle line { stroke: var(--dist); }
+.block-inst[data-block="train"] .bi-needle circle { fill: var(--dist); }
+.bi-hub { fill: var(--line-2); stroke: var(--steel-2); stroke-width: 2; }
+.bi-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: .5rem; }
+.bi-b {
+  background: var(--panel); border: 1px solid var(--line-2); color: var(--muted);
+  font-family: var(--mono); font-size: .56rem; letter-spacing: .08em; text-transform: uppercase;
+  padding: .42rem .2rem; cursor: pointer; transition: color .2s, border-color .2s, background .2s;
+}
+.bi-b:hover { color: var(--chalk); border-color: var(--muted); }
+.bi-b[aria-pressed="true"] { background: var(--steel-2); color: var(--chalk); border-color: var(--chalk); }
+.bi-code { font-size: .74rem; color: var(--muted-2); line-height: 1.45; margin-top: .6rem; }
+
+/* ---- staggered section entrances (same additive rule as .reveal) ---- */
+.reveal.in { animation-delay: calc(var(--i, 0) * 55ms); }
+.sched-row.in { animation: riseIn .7s cubic-bezier(.16, 1, .3, 1) backwards; animation-delay: calc(var(--i, 0) * 70ms); }
+.jobs tbody tr.in { animation: riseIn .5s ease backwards; animation-delay: calc(var(--i, 0) * 45ms); }
+.task.in { animation: riseIn .55s cubic-bezier(.16, 1, .3, 1) backwards; animation-delay: calc(var(--i, 0) * 90ms); }
+
+/* a rule that draws itself under each section heading */
+@keyframes drawrule { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.sec-head::after {
+  content: ''; display: block; height: 1px; background: var(--line-2);
+  transform-origin: 0 50%;
+}
+.sec-head.in::after { animation: drawrule 1.1s cubic-bezier(.16, 1, .3, 1) .15s backwards; }
+
+/* ---- job book becomes a counted stat strip ---- */
+.book-stats {
+  max-width: var(--maxw); margin: 1.6rem auto 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2.4rem);
+  border-top: 1px solid var(--line); padding-top: 1.2rem;
+}
+.stat { display: grid; gap: .3rem; }
+.stat-n {
+  font-family: var(--slab); font-weight: 800; font-size: clamp(2.4rem, 6vw, 4.2rem);
+  line-height: .9; letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
+}
+.stat-l { font-family: var(--mono); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-2); }
+.stat-s { font-size: .86rem; color: var(--muted); line-height: 1.5; max-width: 30ch; }
+
+@media (max-width: 860px) {
+  .panel-head { position: static; }
+  .panel-state { margin-left: 0; }
+  .book-stats { grid-template-columns: 1fr; gap: 1.4rem; }
+  .hero-ghost { width: 130%; opacity: .05; }
+  @keyframes ghostIn { from { opacity: 0; } to { opacity: .05; } }
+  /* the single-column hero stacks headline, prose, then the annotation;
+     this must sit after the base .hero-note rule to beat it */
+  .hero-note { grid-column: 1; grid-row: 4; }
+  .bi-b { padding: .62rem .2rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
-  .reveal { opacity: 1; transform: none; }
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; animation-iteration-count: 1 !important; }
+  .reveal.in, .sched-row.in, .task.in, .jobs tbody tr.in,
+  .hero.ready .hero-h1 .ln-i, .hero.ready .eyebrow, .hero.ready .stand,
+  .hero.ready .stand-2, .hero.ready .cta-row, .hero.ready .hero-note,
+  .hero.ready .hero-ghost, .sec-head.in::after { animation: none !important; }
+  .diagram[data-draw="pending"] * { opacity: 1 !important; }
 }
