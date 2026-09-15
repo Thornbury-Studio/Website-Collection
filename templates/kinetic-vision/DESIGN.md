@@ -32,8 +32,8 @@ Banned as brand face: Inter, Roboto, Arial, bare system-ui.
 4. **Deliver** — finished film still / screening energy; warm highlight on
    cool void.
 
-Motion: CSS Ken Burns + scroll stage crossfade. Optional muted loop later;
-stills ship first per VIDEO-POLICY.
+Motion: mute autoplay `video/hero.mp4` (8s kenburns from poster) with still
+fallback; CSS Ken Burns only when video unavailable; scroll stage crossfade.
 
 ## Layout rules
 
@@ -44,6 +44,7 @@ stills ship first per VIDEO-POLICY.
 
 ## Interactions
 
-1. Scroll-driven reel stage transitions (Capture → Synthesize → Deliver)
+1. Scroll-driven reel stage transitions (On camera → In volume → In the cut)
 2. Mode pill (Video / Spatial / Live) + ~200ms crossfade
 3. Play + timeline with clear complete state
+4. Hero mute loop with poster fallback
