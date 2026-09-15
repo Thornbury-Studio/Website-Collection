@@ -23,3 +23,7 @@ templates/redout-circuit/tools/raw/
 # Full-resolution licensed Adobe Stock originals — cropped, graded and exported to
 # templates/mill-heddle/img/ by tools/grade.py; the originals stay local.
 templates/mill-heddle/tools/raw/
+
+# Full-resolution licensed Adobe Stock originals (ProRes/H.264 masters, JPEGs) — graded and
+# exported to templates/travel-yorimichi/img/ and video/ by tools/grade.py; the originals stay local.
+templates/travel-yorimichi/tools/raw/

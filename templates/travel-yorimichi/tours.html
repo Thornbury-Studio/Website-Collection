@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>The eight tours &mdash; YORIMICHI</title>
+  <meta name="description" content="Eight small-group Japan tours from Singapore: the Golden Route, Kyoto in Autumn, Sakura Season, Snow Country, Onsen &amp; Ryokan Retreat, Tokyo After Dark, Hiroshima &amp; the Inland Sea, Fuji &amp; the Five Lakes. Filter by season, region and length.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/travel-yorimichi/tours.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YORIMICHI">
+  <meta property="og:title" content="The eight tours &mdash; YORIMICHI">
+  <meta property="og:description" content="Eight small-group Japan tours from Singapore, flights included. Filter by season, region and length.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/travel-yorimichi/tours.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/travel-yorimichi/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/travel-yorimichi/img/og.webp">
+  <meta name="theme-color" content="#0B0F1A">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@300..700&family=Onest:wght@300..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="mark" href="index.html" aria-label="Yorimichi, home"><i></i>Yorimichi <small>Japan</small></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="tours.html" aria-current="page">Tours</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="index.html#reviews">Reviews</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="top__actions">
+    <button class="icon-btn" id="searchBtn" type="button" aria-expanded="false" aria-controls="search" aria-label="Search tours">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+    </button>
+    <button class="burger icon-btn" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+<div class="search" id="search" hidden>
+  <form action="tours.html" method="get">
+    <input type="search" name="q" placeholder="Search tours &mdash; Kyoto, winter, ryokan, sakura&hellip;" aria-label="Search tours" autocomplete="off">
+    <button class="btn btn--sm" type="submit">Search</button>
+  </form>
+</div>
+<nav class="drawer" id="drawer" data-open="false" aria-label="Menu">
+  <a href="index.html">Home <span>01</span></a>
+  <a href="about.html">About <span>02</span></a>
+  <a href="tours.html" aria-current="page">Tours <span>03</span></a>
+  <a href="gallery.html">Gallery <span>04</span></a>
+  <a href="index.html#reviews">Reviews <span>05</span></a>
+  <a href="contact.html">Contact <span>06</span></a>
+  <div class="drawer__foot">
+    <strong>+65 6221 4870</strong>
+    <span>24 Duxton Hill #02-04 &middot; Mon&ndash;Fri 10&ndash;7, Sat 10&ndash;4</span>
+  </div>
+</nav>
+
+<main id="main">
+  <section class="phero" aria-label="Tours">
+    <img src="img/plate-torii-umbrella.webp" alt="" width="1600" height="1067" fetchpriority="high">
+    <div class="wrap phero__inner">
+      <span class="kicker">Eight tours &middot; twelve travellers at most</span>
+      <h1 class="h1">The tours</h1>
+      <p class="lede">Every price is per person, twin-share, and includes the return flight from Singapore, every train, every hotel and every breakfast. Pick a season first; the rest follows.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight" aria-label="Tour list">
+    <div class="wrap">
+      <form class="filters" id="filters" action="tours.html" method="get">
+        <div class="field field--grow">
+          <label for="fq">Search</label>
+          <input type="search" id="fq" name="q" placeholder="Kyoto, ryokan, snow, sakura&hellip;" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="fseason">Season</label>
+          <select id="fseason" name="season">
+            <option value="">Any season</option>
+            <option value="autumn">Autumn (Oct&ndash;Nov)</option>
+            <option value="winter">Winter (Dec&ndash;Feb)</option>
+            <option value="spring">Spring (Mar&ndash;May)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fregion">Region</label>
+          <select id="fregion" name="region">
+            <option value="">Anywhere</option>
+            <option value="kanto">Kanto (Tokyo, Fuji)</option>
+            <option value="kansai">Kansai (Kyoto, Osaka)</option>
+            <option value="chubu">Chubu (the Alps)</option>
+            <option value="tohoku">Tohoku (the north)</option>
+            <option value="chugoku">Chugoku (Hiroshima)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="flength">Length</label>
+          <select id="flength" name="length">
+            <option value="">Any length</option>
+            <option value="short">Up to 6 days</option>
+            <option value="mid">7 to 9 days</option>
+            <option value="long">10 days and over</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fsort">Sort by</label>
+          <select id="fsort" name="sort">
+            <option value="next">Next departure</option>
+            <option value="price">Price, low to high</option>
+            <option value="days">Length, short to long</option>
+          </select>
+        </div>
+        <div class="field field--btn">
+          <button class="btn btn--ghost btn--sm" type="reset" id="fclear">Clear</button>
+        </div>
+      </form>
+      <p class="results" id="results" aria-live="polite"></p>
+      <div class="trows" id="trows"></div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="ctaTitle">
+    <div class="wrap cta__grid">
+      <div class="reveal">
+        <span class="kicker">Private departures</span>
+        <h2 class="h2" id="ctaTitle">Six of you<br>or more?</h2>
+        <p class="lede" style="margin-top:14px">Any of the eight tours runs privately for a group of six or more on dates of your choosing, at the published price plus S$380 a person. Families, offices, a wedding party &mdash; ask.</p>
+        <p style="margin-top:22px"><a class="btn" href="contact.html">Ask about a private date
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></p>
+      </div>
+      <ul class="cta__list reveal">
+        <li><span>Deposit</span><span>S$500 a person holds a seat. Balance due 60 days before departure.</span></li>
+        <li><span>Changes</span><span>Move to another departure free up to 90 days out; S$150 a person after that.</span></li>
+        <li><span>Insurance</span><span>Required. We arrange cover from S$68 a person if you have none.</span></li>
+        <li><span>Rooms</span><span>Twin-share by default; single rooms at the listed supplement; triples on request.</span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="mark" href="index.html"><i></i>Yorimichi <small>Japan</small></a>
+        <p>Yorimichi Travel Pte. Ltd. &middot; Small-group escorted tours to Japan, departing Singapore since 2014. STB Travel Agent Licence No. TA03457.</p>
+      </div>
+      <div>
+        <h4>Tours</h4>
+        <ul>
+          <li><a href="tour.html?t=golden-route">The Golden Route</a></li>
+          <li><a href="tour.html?t=kyoto-autumn">Kyoto in Autumn</a></li>
+          <li><a href="tour.html?t=sakura">Sakura Season</a></li>
+          <li><a href="tour.html?t=snow-country">Snow Country</a></li>
+          <li><a href="tours.html">All eight tours</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="index.html#reviews">Reviews</a></li>
+          <li><a href="contact.html">Contact &amp; office</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Office</h4>
+        <ul>
+          <li>24 Duxton Hill #02-04</li>
+          <li>Singapore 089607</li>
+          <li><a href="tel:+6562214870">+65 6221 4870</a></li>
+          <li><a href="mailto:hello@yorimichi.sg">hello@yorimichi.sg</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>&copy; 2026 Yorimichi Travel Pte. Ltd. &middot; UEN 201412876K &middot; TA03457</span>
+      <span>Prices in Singapore dollars, per person twin-share, including return flights from Singapore.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/tours-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/tours.js"></script>
+</body>
+</html>
