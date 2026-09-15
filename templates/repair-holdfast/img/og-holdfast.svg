@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 628" fill="none">
+  <rect width="1200" height="628" fill="#C5CCD6"/>
+  <rect y="592" width="1200" height="36" fill="#1A1F26"/>
+  <rect y="592" width="1200" height="36" fill="url(#s)"/>
+  <defs>
+    <pattern id="s" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+      <rect width="14" height="28" fill="#D97706"/>
+    </pattern>
+  </defs>
+  <text x="72" y="210" font-family="Arial Black, Helvetica, sans-serif" font-size="120" font-weight="800" letter-spacing="6" fill="#1A1F26">HOLDFAST</text>
+  <text x="76" y="290" font-family="Arial, Helvetica, sans-serif" font-size="42" fill="#1B4F72">Know before you call.</text>
+  <text x="76" y="360" font-family="Consolas, monospace" font-size="24" fill="#4A5564">TRIAGE · TRADE · PRICE BAND · DISPATCH</text>
+  <rect x="820" y="120" width="280" height="200" fill="#E8EDF3" stroke="#1A1F26" stroke-width="6"/>
+  <path d="M790 120 L960 40 L1130 120 Z" fill="#2A3340"/>
+  <text x="870" y="240" font-family="Consolas, monospace" font-size="28" fill="#D97706">HF-EPL</text>
+</svg>
