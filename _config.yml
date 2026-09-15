@@ -1,0 +1,11 @@
+# Static HTML collection — not a Jekyll site.
+# Keep the default GitHub Pages Jekyll builder from choking on design docs.
+exclude:
+  - "**/*.md"
+  - "**/tools"
+  - "**/blender-src"
+  - "**/src"
+  - ".claude"
+  - ".cursor"
+  - ".github"
+  - "node_modules"
