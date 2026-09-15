@@ -37,7 +37,7 @@ available and were dropped rather than faked.
 | `img/mill-threading.webp`, `-700` | 415208523 | The mill, 02 — warp ends tied off on an old loom |
 | `img/mill-weaving.webp`, `-700` | 634321794 | The mill, 03 — a blue warp through the heddles |
 | `img/mill-finishing.webp`, `-700` | 480915499 | The mill, 04 — a stack of finished blankets |
-| `img/hero.webp`, `-900` | 182899738 | Hero plate — three bolts of cloth on a bench |
+| `img/hero.webp`, `-600` | 182899738 | Hero plate, 4:5 — three bolts of cloth on a bench |
 | `img/order.webp`, `-600` | 615231335 | Ordering — two folded blankets, fringed |
 | `img/og.webp` | — | 1200×630 screenshot of the home page |
 | `img/favicon.svg` | — | Drawn, not licensed |
@@ -82,9 +82,9 @@ was called at any point. No video was generated.
 
 ## What is drawn and what is photographed
 
-The cloth is photographed. The draft is drawn: the loom beside the home page,
-the draft written out beside each cloth on `cloths.html`, and the drafting
-room are all painted by `js/weave.js` from the same data, and each draft was
+The cloth is photographed. The draft is drawn: the draft written out beside
+each cloth on `cloths.html` and the drafting room are both painted by
+`js/weave.js` from the same data, and each draft was
 written to produce the structure in the photograph it sits beside — the
 Ettrick threading is a broken twill because the tweed is, Hound is four-and-
 four because the photograph is, Hopsack has two treadles because a basket
