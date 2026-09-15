@@ -2,12 +2,17 @@
 
 A two-loom woollen mill on the Ettrick Water that weaves cloth to order and
 sells it by the metre. Eight cloths, one yarn, a drafting room. Not a
-lookbook, not a shop with a cart: a mill's front room, with the loom running.
+lookbook, not a shop with a cart: a mill's front room.
 
 The cloth is photographed — fourteen licensed plates, see
-[IMAGE-CREDITS.md](IMAGE-CREDITS.md) — and the draft is drawn. The first
-build had no photography and painted every cloth from its draft; it read as
-a diagram of a mill rather than a mill, and was reworked the same day.
+[IMAGE-CREDITS.md](IMAGE-CREDITS.md) — and the draft is drawn. Two things
+were built and then taken out the same day at the client's request, and
+both are recorded here so nobody rebuilds them: the first pass painted every
+cloth from its draft instead of photographing it, and the home page carried
+a sticky "loom" column that wove a rendered cloth as the page scrolled. Both
+read as a diagram of a mill rather than a mill. The photographs replaced the
+painted cloths; the loom column was removed outright and the home page
+recomposed at full width.
 
 ## DNA (extracted, not copied)
 
@@ -19,8 +24,8 @@ a diagram of a mill rather than a mill, and was reworked the same day.
 | Anni Albers, *On Weaving* plates | Monochrome structure diagrams with generous margins; the structure explained before the cloth is shown. | The book's typography. |
 
 What is authored here: the mill, its name, the eight cloths and their names,
-the wordmark, the type pairing, the palette, every line of copy, the loom
-beside the page, the drafting room, and the draft code.
+the wordmark, the type pairing, the palette, every line of copy, the
+drafting room, and the draft code.
 
 ## The company
 
@@ -44,25 +49,15 @@ Every draft on the site is painted by `js/weave.js` — the threading, the
 tie-up, the treadling and the drawdown — from the same data the drafting
 room edits, and every one of them was written to match the photograph it
 sits beside. The photograph says what the cloth is; the draft says why. This
-is what lets the site do three things a lookbook cannot:
+is what lets the site do two things a lookbook cannot:
 
-1. **The loom beside the page** (`js/loom.js`). The page is the cloth.
-   Scrolling winds it onto the beam, one pixel of page to one pixel of cloth,
-   ten pixels to a pick on a wide screen and four on a phone. Scroll up and
-   it unweaves. Each section names a cloth and each card under the reading
-   line names one, so the loom re-threads as the visitor reads — but every
-   pick already woven stays as it was, and by the foot of the page the beam
-   holds a *sampler* of everything they looked at, in the order they looked.
-   The enquiry form sends that sampler with the message.
-
-   A real loom cannot re-thread itself in half a second. The copy says so,
-   in the mill section, because it is the one liberty the site takes.
-
-2. **The range, with its drafts** — eight photographed cards on the home
+1. **The range, with its drafts** — eight photographed cards on the home
    page, and the range at length with the draft written out beside each
-   cloth in the notation a weaver would recognise.
+   cloth in the notation a weaver would recognise (`WEAVE.renderNotation`,
+   ink squares on a ruled grid; no rendered cloth anywhere on the site
+   except inside the drafting room).
 
-3. **The drafting room** (`js/draft.js`). The four grids as buttons, forty
+2. **The drafting room** (`js/draft.js`). The four grids as buttons, forty
    ends by forty picks, the cloth painted underneath on every press. Presets
    from the range, a shade card, the tools a weaver reaches for (straight
    draw, mirror, treadle as drawn in, twill and tabby tie-ups), floats
@@ -94,57 +89,49 @@ for everything read, so display and text are the same drawing at two optical
 sizes; **Sometype Mono** for anything counted — picks, ends, grams, pounds,
 the draft code. Not Archivo, not Inter, not a serif.
 
-Motion is one idea: the loom, which is direct manipulation and works with
-motion off. Section reveals rise once. The re-threading wave on the notation
-is the only easing on the site and is skipped under reduced motion.
+Motion: section reveals rise once, and nothing else moves. Reduced motion
+shows everything at once.
 
 ## Pages
 
-1. `index.html` — the loom beside the page; hero with a plate of bolts on the
-   bench, the range as photographed cards, the mill in four plates, ordering
-   with the enquiry form, footer with the pick count and a fringe.
+1. `index.html` — a split hero (the statement beside a 4:5 plate of bolts on
+   the bench), the range as four-up photographed cards, the mill in four
+   plates, ordering with the enquiry form, footer with a fringe.
 2. `cloths.html` — the eight at length: the photograph, the draft written
    out, a spec table, order and open-the-draft links.
 3. `draft.html` — the drafting room.
 
 ## Mobile is its own composition
 
-Below 1040 px the loom column is put away and the loom becomes a band across
-the top of the page, sticky under the header, with the fell at the right-hand
-edge — the same ring buffer drawn through a rotated transform. The notation is
-left off (a phone is a poor place to read a threading; the drafting room still
-has it). Cards become rows — a square of cloth beside its name — so the range
-reads as a shade card, and the band above weaves whichever cloth is under the
-reading line as the list goes by. The drafting room keeps its forty ends at a
+Below 1040 px the hero stacks — statement first, then the photograph at 4:3
+so it does not run a whole screen tall. The range goes from four across to
+three, to two, and under 640 px the cards become rows — a square of cloth
+beside its name — so the range reads as a shade card. The mill ledger goes
+from four across to two to one. The drafting room keeps its forty ends at a
 cell a finger can press and pans sideways, with a hint saying so.
 
 ## Traps found while building this
 
-- **The drawdown must be a ring buffer.** Painting every visible pick per
-  scroll frame is 4,000 `drawImage` calls; painting only the new pick and
-  blitting the ring is two. The ring slot is `(R - p mod R) mod R` so that
-  older picks sit on higher rows and the visible strip is two contiguous
-  copies at most.
-- **Which cloth is "the one being read" has to be resolved from geometry, not
-  from events.** Two cards side by side both contain the reading line; the
-  first in reading order wins, and a card beats its section because it is
-  deeper. An anchor jump lands on the right cloth for the same reason.
-- **The idle shafts stay drawn.** The loom has eight shafts; a four-shaft
-  cloth uses the bottom four. If the notation shrank to fit, the fell line
-  would move every time the cloth changed. The idle rows are ruled faintly
-  instead, which also happens to be true of the loom.
-- **`document.hidden` stops `requestAnimationFrame`.** A loom that is driven
-  by scroll through rAF does nothing in a hidden tab, which is correct — but
-  it makes an in-app preview pane that is not on screen look like a broken
+- **A rendered cloth next to a photographed one loses.** The scroll-driven
+  loom was the most technically interesting thing in the build and the first
+  thing the client asked to remove: beside real tweed, a canvas of shaded
+  tiles reads as a diagram, and "realistic" was the brief. The drafting room
+  keeps its rendered drawdown because there it is a tool, not a product
+  image. If the loom is ever wanted back, it lived in `js/loom.js` at commit
+  `304a425`: a ring buffer one drawdown tall, one pick per row, the page
+  scroll mapped one pixel to one pixel of cloth.
+- **`document.hidden` stops `requestAnimationFrame`.** Anything driven by
+  scroll through rAF does nothing in a hidden tab, which is correct — but it
+  makes an in-app preview pane that is not on screen look like a broken
   page. Verify in headless Chrome over CDP, or with the pane visible.
 - **The tabby tool must set the treadling too.** A tabby tie-up on its own
   leaves treadles three and four lifting nothing, and a treadling of
   1,2,3,4 then weaves two picks of pure weft float in every four.
-- **A single-colour draft on the loom reads as a basket, not a twill.** With
-  the same shade in warp and weft the only thing left to see is the tile
-  shading, and a grid of shaded squares looks like hopsack whatever the
-  tie-up says. Kirkbrae is camel on oat for that reason: close enough to be
-  one cloth, far enough apart to show the diagonal.
+- **A single-colour draft in the drafting room reads as a basket, not a
+  twill.** With the same shade in warp and weft the only thing left to see is
+  the tile shading, and a grid of shaded squares looks like hopsack whatever
+  the tie-up says. Kirkbrae is camel on oat for that reason: close enough to
+  be one cloth, far enough apart to show the diagonal.
 - **Free-tier stock decides the range, not the other way round.** Searching
   for the cloths the first draft imagined (a rosepath, a log cabin) found
   nothing honest; searching for what woven wool the free tier *had*, then

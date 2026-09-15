@@ -1,10 +1,10 @@
 /* ============================================================================
    HEDDLE — Kirkbrae Mill, Selkirk
    ----------------------------------------------------------------------------
-   Undyed-cloth ground, walnut ink, one madder. The madder is the fell line on
-   the loom and the colour of anything pressed — a button, a focus ring, a
-   link under the pointer. Every other colour on the site is yarn, painted
-   into a canvas by the weave engine; the stylesheet owns no swatches.
+   Undyed-cloth ground, walnut ink, one madder. The madder is the colour of
+   anything pressed — a button, a focus ring, a link under the pointer, the
+   numerals in the mill ledger. Every other colour on the site is cloth,
+   photographed; the stylesheet owns no swatches.
 
    Type is one grotesque with an optical axis, so display and text are the
    same drawing at two sizes, and one mono for anything counted: picks, ends,
@@ -25,7 +25,7 @@
   --mono:    'Sometype Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
 
   --head: 60px;
-  --loom-w: clamp(400px, 42vw, 680px);
+  --shell: 1440px;
   --gut:  clamp(1.25rem, 4vw, 4rem);
   --band: clamp(4rem, 8vw, 7.5rem);
   --hair: 1px solid var(--cloth-3);
@@ -65,7 +65,7 @@ a { color: inherit; }
 
 /* --- type roles -------------------------------------------------------- */
 
-h1, h2, h3, .foot-mark, .loom-title {
+h1, h2, h3, .foot-mark {
   font-family: var(--display);
   font-variation-settings: 'opsz' 96, 'wdth' 100, 'wght' 560;
   font-weight: 560;
@@ -153,56 +153,33 @@ p:last-child { margin-bottom: 0; }
 .drawer .label { margin-top: 1rem; }
 .drawer[data-open="true"] { display: block; }
 
-/* --- the shell: loom column + page ------------------------------------- */
+/* --- page rhythm ------------------------------------------------------- */
 
-.shell { display: grid; grid-template-columns: var(--loom-w) minmax(0, 1fr); }
-
-.loom {
-  position: sticky; top: var(--head);
-  height: calc(100vh - var(--head));
-  height: calc(100dvh - var(--head));
-  display: flex; flex-direction: column;
-  padding: 1.1rem 1.4rem 1rem;
-  border-right: var(--hair);
-  background: var(--cloth);
-}
-.loom-head { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: .25rem 1rem; padding-bottom: .9rem; }
-.loom-head .label:first-child { grid-column: 1; grid-row: 1; }
-.loom-title { grid-column: 1; grid-row: 2; font-size: clamp(1.4rem, 1.7vw, 1.9rem); }
-.loom-structure { grid-column: 2; grid-row: 2; text-align: right; max-width: 18em; }
-.loom-canvas { flex: 1 1 auto; min-height: 0; width: 100%; }
-.loom-foot { padding-top: .8rem; display: grid; gap: .3rem; }
-.loom-legend { display: flex; gap: 1.1rem; color: var(--ink-3); }
-.loom-legend span::before { content: ''; display: inline-block; width: .55em; height: .55em; margin-right: .4em; background: var(--ink); vertical-align: -.02em; }
-.loom-legend span:last-child::before { background: var(--madder); }
-.loom-edit { text-decoration: none; color: var(--madder); border-bottom: 1px solid transparent; width: max-content; }
-.loom-edit:hover { border-color: currentColor; }
-
-.band { display: none; }
-
-.page { min-width: 0; }
-main > section, .foot { padding: var(--band) var(--gut); border-bottom: var(--hair); }
+/* Sections run full width and centre their content at the shell width; the
+   padding does the centring so there is no wrapper to keep in step. */
+main > section, .foot { padding: var(--band) max(var(--gut), calc((100vw - var(--shell)) / 2)); border-bottom: var(--hair); }
 .foot { border-bottom: 0; }
 
 .sec-head { max-width: 40em; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
 .sec-head .label { margin-bottom: .9rem; }
 .sec-head h2 { margin-bottom: 1rem; }
 .sec-head p:last-child { color: var(--ink-2); }
+.sec-head a { color: var(--ink); text-decoration-color: var(--cloth-3); text-underline-offset: .2em; }
+.sec-head a:hover { color: var(--madder); text-decoration-color: currentColor; }
 
 /* --- hero ------------------------------------------------------------- */
 
-.hero { min-height: calc(100vh - var(--head)); min-height: calc(100dvh - var(--head)); display: flex; flex-direction: column; justify-content: center; }
+/* The statement and the photograph side by side: the cloth is the subject
+   and the type is not asked to fight it. */
+.hero { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; min-height: calc(100vh - var(--head)); min-height: calc(100dvh - var(--head)); }
+.hero-copy { max-width: 36em; }
 .hero-kicker { margin-bottom: 1.4rem; }
 .hero h1 { max-width: 10.5em; margin-bottom: 1.4rem; }
 .hero .lede { margin-bottom: 2rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2.4rem; }
 .hero-spec { color: var(--ink-3); }
-.w-above { display: none; }
-
-/* The hero photograph sits under the statement, not behind it: the cloth is
-   the subject and the type is not asked to fight it. */
-.hero-plate { margin: clamp(2rem, 4vw, 3.5rem) 0 0; }
-.hero-plate img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border: var(--hair); background: var(--cloth-2); }
+.hero-plate { margin: 0; }
+.hero-plate img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border: var(--hair); background: var(--cloth-2); }
 .hero-plate figcaption { margin-top: .7rem; color: var(--ink-3); }
 
 /* --- buttons ---------------------------------------------------------- */
@@ -221,7 +198,7 @@ main > section, .foot { padding: var(--band) var(--gut); border-bottom: var(--ha
 
 /* --- the range ---------------------------------------------------------- */
 
-.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
 .cloth-card {
   display: grid; grid-template-rows: auto 1fr;
   text-decoration: none; border: var(--hair); background: var(--cloth-2);
@@ -244,7 +221,7 @@ main > section, .foot { padding: var(--band) var(--gut); border-bottom: var(--ha
 
 /* --- the mill --------------------------------------------------------- */
 
-.ledger { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: var(--hair); border-left: var(--hair); }
+.ledger { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: var(--hair); border-left: var(--hair); }
 .ledger li { padding: 0 1.6rem 1.7rem 1.4rem; border-right: var(--hair); border-bottom: var(--hair); display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto auto; gap: .6rem 1.1rem; }
 .ledger-plate { grid-column: 1 / -1; grid-row: 1; display: block; width: calc(100% + 3rem); max-width: none; height: auto; margin: 0 -1.6rem 1rem -1.4rem; aspect-ratio: 3 / 2; object-fit: cover; border-bottom: var(--hair); background: var(--cloth-2); }
 .ledger .n { grid-column: 1; grid-row: 2 / span 2; font-family: var(--mono); font-size: 2rem; line-height: 1; color: var(--madder); font-variation-settings: 'wght' 500; }
@@ -255,11 +232,10 @@ main > section, .foot { padding: var(--band) var(--gut); border-bottom: var(--ha
 .facts div { display: grid; gap: .2rem; }
 .facts dt { font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
 .facts dd { margin: 0; font-family: var(--mono); font-size: 1.5rem; line-height: 1; font-variation-settings: 'wght' 500; }
-.mill-note { margin-top: 2.5rem; max-width: 40em; color: var(--ink-2); }
 
 /* --- ordering --------------------------------------------------------- */
 
-.order-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.order-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; max-width: 1200px; }
 .order-plate { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; margin-bottom: 1.6rem; border: var(--hair); background: var(--cloth-2); }
 .order-copy h3 { margin-bottom: .5rem; }
 .order-copy p { color: var(--ink-2); margin-bottom: 1.6rem; }
@@ -277,7 +253,6 @@ input, select, textarea {
 input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--madder); outline-offset: 0; border-color: var(--madder); }
 textarea { resize: vertical; min-height: 6rem; }
 select { appearance: none; -webkit-appearance: none; padding-right: 2.2rem; background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 1.15rem) 50%, calc(100% - .8rem) 50%; background-size: .35rem .35rem; background-repeat: no-repeat; }
-.sampler { color: var(--ink-3); }
 .enquiry .btn { justify-self: start; }
 .form-note { color: var(--madder); }
 
@@ -411,26 +386,16 @@ select { appearance: none; -webkit-appearance: none; padding-right: 2.2rem; back
   .howto { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (max-width: 1039px) {
-  /* The loom becomes a band across the top of the page, the fell at the
-     right-hand edge. The column and its notation are put away: a phone is a
-     poor place to read a threading, and the drafting room still has it. */
-  :root { --head: 56px; }
-  .shell { display: block; }
-  .loom { display: none; }
-  .band {
-    display: block; position: sticky; top: var(--head); z-index: 20;
-    height: 118px; border-bottom: var(--hair); background: var(--cloth);
-  }
-  .band .loom-canvas { width: 100%; height: 100%; }
-  .band-read {
-    position: absolute; left: .8rem; bottom: .55rem;
-    background: var(--cloth); color: var(--ink); padding: .25rem .5rem;
-    border: var(--hair);
-  }
-  .w-beside { display: none; }
-  .w-above { display: inline; }
+@media (max-width: 1199px) {
+  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 
+@media (max-width: 1099px) {
+  .ledger { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1039px) {
+  :root { --head: 56px; }
   .top { grid-template-columns: auto 1fr auto; gap: 1rem; }
   .nav, .top-note { display: none; }
   .burger {
@@ -447,25 +412,31 @@ select { appearance: none; -webkit-appearance: none; padding-right: 2.2rem; back
   .burger[aria-expanded="true"] span::before { transform: translateY(7px) rotate(45deg); }
   .burger[aria-expanded="true"] span::after { transform: translateY(-7px) rotate(-45deg); }
 
-  .hero { min-height: 0; padding-top: clamp(2.5rem, 8vw, 4rem); }
-  .cards { grid-template-columns: 1fr; gap: 1rem; }
+  /* The hero stacks: statement, then the photograph at 4:3 so it does not
+     run a whole screen tall on a phone. */
+  .hero { grid-template-columns: 1fr; min-height: 0; padding-top: clamp(2.5rem, 8vw, 4rem); gap: 2.5rem; }
+  .hero-plate img { aspect-ratio: 4 / 3; }
   .length { grid-template-columns: 1fr; }
   .length-plate { grid-column: 1; grid-row: 1; }
   .length-body { grid-column: 1; grid-row: 2; }
   .length-draft { grid-column: 1; grid-row: 3; }
 }
 
+@media (max-width: 899px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 880px) {
   .order-grid { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ledger { grid-template-columns: 1fr; }
   .length-draft { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
-  /* The card becomes a row: a square of cloth beside its name, so the list
-     reads as a shade card and the band above weaves whichever one is under
-     the reading line. */
+  /* The card becomes a row: a square of cloth beside its name, so the range
+     reads as a shade card. */
+  .cards { grid-template-columns: 1fr; gap: 1rem; }
+  .ledger { grid-template-columns: 1fr; }
   .cloth-card { grid-template-columns: 112px minmax(0, 1fr); grid-template-rows: auto; }
   .cloth-card .swatch { grid-column: 1; grid-row: 1; aspect-ratio: auto; height: 100%; min-height: 128px; border-bottom: 0; border-right: var(--hair); }
   .hero-plate figcaption { font-size: .66rem; }

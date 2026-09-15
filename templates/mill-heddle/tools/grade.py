@@ -81,7 +81,7 @@ PLATES = [
     ('mill-threading',  '415208523',  3/2, 1.0,  0.5, 0.5, 'mill'),
     ('mill-weaving',    '634321794',  3/2, 1.0,  0.5, 0.5, 'mill'),
     ('mill-finishing',  '480915499',  3/2, 1.0,  0.35, 0.5, 'mill'),
-    ('hero',            '182899738',  16/9, 1.0, 0.5, 0.55, 'mill'),
+    ('hero',            '182899738',  4/5,  1.0, 0.5, 0.5,  'mill'),
     ('order',           '615231335',  3/2, 0.9,  0.5, 0.5, 'white'),
 ]
 
@@ -98,7 +98,7 @@ def main():
         elif treat == 'mill':
             im = mill_grade(im)
         if name == 'hero':
-            export(im, name, [1600, 900], ratio, 78)
+            export(im, name, [1000, 600], ratio, 80)
         elif name == 'order':
             export(im, name, [1000, 600], ratio, 80)
         else:
