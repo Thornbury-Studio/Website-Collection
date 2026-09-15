@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Request a flight &mdash; Apogee</title>
+  <meta name="description" content="A route, a date, a number of seats. Someone who can say yes replies within the hour, day or night, with a firm price. Or call +44 20 7946 0110.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/apogee-charter/request.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Apogee">
+  <meta property="og:title" content="Apogee &mdash; request a flight">
+  <meta property="og:description" content="A route, a date, a number of seats. A firm price by reply, within the hour.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/apogee-charter/request.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/apogee-charter/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apogee &mdash; request a flight">
+  <meta name="twitter:description" content="A route, a date, a number of seats. A firm price by reply, within the hour.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/apogee-charter/img/og.webp">
+  <meta name="theme-color" content="#ECE9E2">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body class="page-request">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <a class="mark" href="index.html" aria-label="Apogee, home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 20c2-9 7-14 10-14s8 5 10 14"/><circle cx="12" cy="6" r="2"/></svg>Apogee</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="fleet.html">Fleet</a>
+    <a href="programme.html">Programme</a>
+    <a href="request.html" aria-current="page">Request</a>
+  </nav>
+  <a class="btn" href="#form">Request a flight</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+<div class="drawer" id="drawer" data-open="false">
+  <a href="fleet.html">Fleet</a>
+  <a href="programme.html">Programme</a>
+  <a href="request.html">Request</a>
+  <a class="btn btn--solid" href="#form">Request a flight</a>
+</div>
+
+<main id="main">
+
+  <section class="hero hero--inner" aria-labelledby="req-title">
+    <figure class="plate plate--cover">
+      <video muted playsinline loop preload="metadata" poster="img/apron-poster.webp" data-src="video/apron.mp4" aria-hidden="true"></video>
+    </figure>
+    <div class="hero-top">
+      <span class="small">Request a flight</span>
+      <span class="small">A firm price by reply, within the hour</span>
+    </div>
+    <div class="hero-inner">
+      <h1 class="giant lean wipe" id="req-title">Tell us when.</h1>
+      <div class="hero-copy">
+        <p class="lede reveal d1">A route, a date, a number of seats. Someone who can say yes reads it, day or night.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="form" aria-labelledby="form-title">
+    <div class="grid">
+      <div class="aside col-aside">
+        <p class="small mute reveal">The request</p>
+        <h2 class="h3 lean wipe" id="form-title">It opens a message with everything already in it.</h2>
+        <p class="reveal d1 measure-s">We reply from the same desk that dispatches the aircraft, with a firm price and the name of your host. Nothing is booked until you say so, and nothing you write here is stored anywhere but your own mail.</p>
+        <div class="contact reveal d2">
+          <a href="tel:+442079460110">+44 20 7946 0110</a>
+          <a href="mailto:fly@apogeecharter.com">fly@apogeecharter.com</a>
+          <span class="small mute">Any hour, any day</span>
+        </div>
+      </div>
+      <form class="form light reveal d1 col-form" id="request-form" novalidate>
+        <div class="two">
+          <div class="field"><label for="r-from">From</label><div class="sel"><select id="r-from" name="from"></select></div></div>
+          <div class="field"><label for="r-to">To</label><div class="sel"><select id="r-to" name="to"></select></div></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="r-date">Date</label><input id="r-date" name="date" type="date" required></div>
+          <div class="field"><label for="r-time">Wheels up</label><input id="r-time" name="time" type="time" value="09:00"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="r-seats">Seats</label><input id="r-seats" name="seats" type="number" min="1" max="14" value="2" inputmode="numeric"></div>
+          <div class="field"><label for="r-type">Aircraft</label><div class="sel"><select id="r-type" name="type"></select></div></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="r-name">Name</label><input id="r-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="r-contact">Email or number</label><input id="r-contact" name="contact" type="text" autocomplete="email" required></div>
+        </div>
+        <output id="r-out" for="r-from r-to r-type r-seats" aria-live="polite"></output>
+        <button class="btn btn--solid" type="submit">Send the request<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></button>
+      </form>
+    </div>
+  </section>
+
+  <section class="wrap pb-lg" aria-label="On board">
+    <figure class="plate pano plate-in para" data-para="0.15">
+      <img src="img/service-1400.webp" srcset="img/service-800.webp 800w, img/service-1400.webp 1400w, img/service.webp 2400w" sizes="(min-width: 900px) calc(100vw - 2 * var(--gutter)), 100vw" width="2400" height="745" alt="A host laying a table in the cabin, a guest seated beside the window." loading="lazy" decoding="async">
+      <figcaption class="plate-cap">The table is laid before you board</figcaption>
+    </figure>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-mark" aria-hidden="true">Apogee</p>
+    <div class="foot-grid">
+      <div>
+        <h4>Apogee</h4>
+        <p class="measure-s">Private jet charter. Fourteen aircraft, one cabin standard, a host on every flight. Head office at Farnborough Airport, Hampshire.</p>
+      </div>
+      <div>
+        <h4>Fly</h4>
+        <ul><li><a href="fleet.html">The fleet</a></li><li><a href="fleet.html#route">Where it can go</a></li><li><a href="programme.html">The programme</a></li><li><a href="request.html">Request a flight</a></li></ul>
+      </div>
+      <div>
+        <h4>Bases</h4>
+        <ul><li>Farnborough</li><li>Geneva</li><li>Dubai &middot; Al Maktoum</li><li>Singapore &middot; Seletar</li></ul>
+      </div>
+      <div>
+        <h4>Any hour</h4>
+        <ul><li><a href="tel:+442079460110">+44 20 7946 0110</a></li><li><a href="mailto:fly@apogeecharter.com">fly@apogeecharter.com</a></li><li><a href="mailto:press@apogeecharter.com">press@apogeecharter.com</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>&copy; 2026 Apogee Charter Ltd</span>
+      <span>Apogee, noun &mdash; the highest point of an orbit</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

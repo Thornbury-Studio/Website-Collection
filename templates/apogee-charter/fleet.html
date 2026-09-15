@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>The fleet &mdash; four aircraft types, and where they can go &mdash; Apogee</title>
+  <meta name="description" content="Fourteen aircraft, four types, one cabin standard: Global 7500, Praetor 600, Challenger 350 and Phenom 300E. Cabin plans to scale, and a route tool that draws the great circle and says which aircraft can fly it nonstop.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/apogee-charter/fleet.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Apogee">
+  <meta property="og:title" content="Apogee &mdash; the fleet">
+  <meta property="og:description" content="Fourteen aircraft, four sizes, one cabin standard. Pick two cities and see which can do it nonstop.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/apogee-charter/fleet.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/apogee-charter/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apogee &mdash; the fleet">
+  <meta name="twitter:description" content="Fourteen aircraft, four sizes, one cabin standard. Pick two cities and see which can do it nonstop.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/apogee-charter/img/og.webp">
+  <meta name="theme-color" content="#ECE9E2">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body class="page-fleet">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <a class="mark" href="index.html" aria-label="Apogee, home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 20c2-9 7-14 10-14s8 5 10 14"/><circle cx="12" cy="6" r="2"/></svg>Apogee</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="fleet.html" aria-current="page">Fleet</a>
+    <a href="programme.html">Programme</a>
+    <a href="request.html">Request</a>
+  </nav>
+  <a class="btn" href="request.html">Request a flight</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+<div class="drawer" id="drawer" data-open="false">
+  <a href="fleet.html">Fleet</a>
+  <a href="programme.html">Programme</a>
+  <a href="request.html">Request</a>
+  <a class="btn btn--solid" href="request.html">Request a flight</a>
+</div>
+
+<main id="main">
+
+  <section class="hero hero--inner" aria-labelledby="fleet-title">
+    <figure class="plate plate--cover para" data-para="0.3">
+      <img src="img/approach-1400.webp" srcset="img/approach-800.webp 800w, img/approach-1400.webp 1400w, img/approach.webp 2400w" sizes="100vw" width="2400" height="1600" alt="A business jet on final approach, landing lights on, against a clear sky." decoding="async" fetchpriority="high">
+    </figure>
+    <div class="hero-top">
+      <span class="small">The fleet</span>
+      <span class="small"><span data-fleet-count>14</span> aircraft &middot; four types &middot; one standard</span>
+    </div>
+    <div class="hero-inner">
+      <h1 class="giant lean wipe" id="fleet-title">Four sizes.</h1>
+      <div class="hero-copy">
+        <p class="lede reveal d1">All ours, all fitted the same way. The only decision is how far you are going and how many are coming.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" id="types"></div>
+
+  <!-- Where it can go -->
+  <section class="route dark section" id="route" aria-labelledby="route-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="small mute reveal">Where it can go</p>
+        <h2 class="h2 lean wipe" id="route-title">Two cities. One line.</h2>
+        <p class="lede reveal d1">Pick a pair. The line is the great circle between them; the list is how long each aircraft takes, and whether it needs to stop for fuel on the way.</p>
+      </div>
+      <div class="route-grid reveal">
+        <div class="map" id="map" role="img" aria-label="A dot-matrix world map with the chosen route drawn as a great-circle arc">
+          <canvas></canvas>
+          <svg></svg>
+        </div>
+        <div class="route-form">
+          <div class="field"><label for="from">From</label><div class="sel"><select id="from"></select></div></div>
+          <div class="field"><label for="to">To</label><div class="sel"><select id="to"></select></div></div>
+          <p><button class="link" type="button" id="swap">Swap<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5h10M10 2l3 3-3 3M13 11H3M6 8l-3 3 3 3"/></svg></button></p>
+          <div class="route-out">
+            <b class="big" id="route-nm">0<small>nm</small></b>
+            <span class="small mute" id="route-line">&mdash;</span>
+            <ul class="route-types" id="route-types"></ul>
+          </div>
+          <p><a class="link" href="request.html">Request this route<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-label="Details">
+    <div class="grid">
+      <figure class="plate plate-in para col-l ratio-32" data-para="0.1">
+        <img src="img/gear-900.webp" srcset="img/gear-900.webp 900w, img/gear.webp 1600w" sizes="(min-width: 1100px) 50vw, 100vw" width="1600" height="1000" alt="The nose gear of a business jet, a red streamer still on the pin, seen from the apron." loading="lazy" decoding="async">
+        <figcaption class="plate-cap">Every aircraft, every morning</figcaption>
+      </figure>
+      <div class="col-r stack-c">
+        <p class="small mute reveal">Maintained by us</p>
+        <h2 class="h2 h2--md lean wipe">Nobody else has touched it.</h2>
+        <p class="lede reveal d1 measure">Our engineers, our hangars, our schedule. Every aircraft is walked at dawn by the crew who will fly it, and nothing goes out with an open item in the log. If it is not right, another one is, and you will not be told the difference.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-mark" aria-hidden="true">Apogee</p>
+    <div class="foot-grid">
+      <div>
+        <h4>Apogee</h4>
+        <p class="measure-s">Private jet charter. Fourteen aircraft, one cabin standard, a host on every flight. Head office at Farnborough Airport, Hampshire.</p>
+      </div>
+      <div>
+        <h4>Fly</h4>
+        <ul><li><a href="fleet.html">The fleet</a></li><li><a href="fleet.html#route">Where it can go</a></li><li><a href="programme.html">The programme</a></li><li><a href="request.html">Request a flight</a></li></ul>
+      </div>
+      <div>
+        <h4>Bases</h4>
+        <ul><li>Farnborough</li><li>Geneva</li><li>Dubai &middot; Al Maktoum</li><li>Singapore &middot; Seletar</li></ul>
+      </div>
+      <div>
+        <h4>Any hour</h4>
+        <ul><li><a href="tel:+442079460110">+44 20 7946 0110</a></li><li><a href="mailto:fly@apogeecharter.com">fly@apogeecharter.com</a></li><li><a href="mailto:press@apogeecharter.com">press@apogeecharter.com</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>&copy; 2026 Apogee Charter Ltd</span>
+      <span>Apogee, noun &mdash; the highest point of an orbit</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/landgrid.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

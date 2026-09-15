@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>The programme &mdash; hours, not flights &mdash; Apogee</title>
+  <meta name="description" content="Buy hours a year at a time at a rate we hold for the term, and fly any aircraft in the fleet on them. Guaranteed availability with twenty-four hours&rsquo; notice, no positioning charges, no peak-day surcharges. See what any leg costs in hours.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/apogee-charter/programme.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Apogee">
+  <meta property="og:title" content="Apogee &mdash; the programme">
+  <meta property="og:description" content="Hours, not flights. Fifty, one hundred or two hundred a year, on any aircraft in the fleet.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/apogee-charter/programme.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/apogee-charter/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apogee &mdash; the programme">
+  <meta name="twitter:description" content="Hours, not flights. Fifty, one hundred or two hundred a year, on any aircraft in the fleet.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/apogee-charter/img/og.webp">
+  <meta name="theme-color" content="#ECE9E2">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body class="page-programme">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <a class="mark" href="index.html" aria-label="Apogee, home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 20c2-9 7-14 10-14s8 5 10 14"/><circle cx="12" cy="6" r="2"/></svg>Apogee</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="fleet.html">Fleet</a>
+    <a href="programme.html" aria-current="page">Programme</a>
+    <a href="request.html">Request</a>
+  </nav>
+  <a class="btn" href="request.html">Request a flight</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+<div class="drawer" id="drawer" data-open="false">
+  <a href="fleet.html">Fleet</a>
+  <a href="programme.html">Programme</a>
+  <a href="request.html">Request</a>
+  <a class="btn btn--solid" href="request.html">Request a flight</a>
+</div>
+
+<main id="main">
+
+  <section class="hero hero--inner" aria-labelledby="prog-title">
+    <figure class="plate plate--cover para" data-para="0.3">
+      <img src="img/night-1400.webp" srcset="img/night-800.webp 800w, img/night-1400.webp 1400w, img/night.webp 2400w" sizes="100vw" width="2400" height="1600" alt="A wing over a snow-covered runway at night, the blue taxiway lights running away into the dark." decoding="async" fetchpriority="high">
+    </figure>
+    <div class="hero-top">
+      <span class="small">The programme</span>
+      <span class="small">Fifty &middot; one hundred &middot; two hundred hours</span>
+    </div>
+    <div class="hero-inner">
+      <h1 class="giant lean wipe" id="prog-title">Hours,<br>not flights.</h1>
+      <div class="hero-copy">
+        <p class="lede reveal d1">You buy a year of hours at a rate we hold. Any aircraft in the fleet, any base, twenty-four hours&rsquo; notice. The rest is a phone call.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="tiers-section" aria-labelledby="tiers-title">
+    <div class="head">
+      <p class="small mute reveal">Three sizes of year</p>
+      <h2 class="h2 lean wipe" id="tiers-title">Pick a number.</h2>
+      <p class="lede reveal d1">Hours are flown on any type at that type&rsquo;s rate. Two hours in the Phenom and two in the Global are four hours off the year and two very different invoices.</p>
+    </div>
+    <ul class="tiers reveal" id="tiers"></ul>
+    <ul class="terms reveal d1" id="terms"></ul>
+  </section>
+
+  <section class="section wrap bg-2" id="calc" aria-labelledby="calc-title">
+    <div class="head">
+      <p class="small mute reveal">What a leg costs</p>
+      <h2 class="h2 lean wipe" id="calc-title">In hours, honestly.</h2>
+      <p class="lede reveal d1">Gate to gate, taxi and climb included, with a technical stop added when the leg is beyond the aircraft&rsquo;s planning range. The number is what comes off your year.</p>
+    </div>
+    <div class="calc reveal">
+      <div class="route-form light">
+        <div class="field"><label for="c-from">From</label><div class="sel"><select id="c-from"></select></div></div>
+        <div class="field"><label for="c-to">To</label><div class="sel"><select id="c-to"></select></div></div>
+        <div class="field"><label for="c-type">Aircraft</label><div class="sel"><select id="c-type"></select></div></div>
+        <div class="field"><label for="c-tier">Your year</label><div class="sel"><select id="c-tier"></select></div></div>
+      </div>
+      <div class="calc-out" aria-live="polite">
+        <b class="big" id="c-hours">0<small>hours</small></b>
+        <span class="small mute" id="c-line">&mdash;</span>
+        <ul class="calc-rows" id="c-rows"></ul>
+        <p class="calc-note">Rates are for the aircraft, all in: fuel, crew, host, catering, handling and landing fees. A return doubles the hours; the price is the same whether it is a Tuesday in March or Christmas Eve.</p>
+        <p><a class="link" href="request.html">Request this leg<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark section wrap" aria-labelledby="ondemand-title">
+    <div class="band">
+      <h2 class="h2 lean wipe" id="ondemand-title">Or just once.</h2>
+      <div class="band-copy">
+        <p class="lede reveal d1 measure-s">No programme, no card, no minimum. One flight, one firm price by reply, the same aircraft and the same host as a member would get.</p>
+        <p class="reveal d2"><a class="btn btn--solid" href="request.html">Request a flight<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-mark" aria-hidden="true">Apogee</p>
+    <div class="foot-grid">
+      <div>
+        <h4>Apogee</h4>
+        <p class="measure-s">Private jet charter. Fourteen aircraft, one cabin standard, a host on every flight. Head office at Farnborough Airport, Hampshire.</p>
+      </div>
+      <div>
+        <h4>Fly</h4>
+        <ul><li><a href="fleet.html">The fleet</a></li><li><a href="fleet.html#route">Where it can go</a></li><li><a href="programme.html">The programme</a></li><li><a href="request.html">Request a flight</a></li></ul>
+      </div>
+      <div>
+        <h4>Bases</h4>
+        <ul><li>Farnborough</li><li>Geneva</li><li>Dubai &middot; Al Maktoum</li><li>Singapore &middot; Seletar</li></ul>
+      </div>
+      <div>
+        <h4>Any hour</h4>
+        <ul><li><a href="tel:+442079460110">+44 20 7946 0110</a></li><li><a href="mailto:fly@apogeecharter.com">fly@apogeecharter.com</a></li><li><a href="mailto:press@apogeecharter.com">press@apogeecharter.com</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>&copy; 2026 Apogee Charter Ltd</span>
+      <span>Apogee, noun &mdash; the highest point of an orbit</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
