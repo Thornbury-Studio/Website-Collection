@@ -312,7 +312,10 @@ select { appearance: none; -webkit-appearance: none; padding-right: 2.2rem; back
    ========================================================================= */
 
 .room-grid { display: grid; grid-template-columns: minmax(0, 1fr) 22rem; gap: clamp(2rem, 4vw, 4rem); align-items: start; padding-bottom: var(--band); }
-.draft-scroll { overflow: auto; padding-bottom: .5rem; }
+.room-grid > * { min-width: 0; }
+/* The draft is wider than a phone and pans inside this box; the box itself
+   must never be wider than the page, or the whole page pans with it. */
+.draft-scroll { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-bottom: .5rem; }
 .pan-hint { display: none; margin-bottom: .8rem; color: var(--ink-3); }
 .draft-layout {
   --cell: 16px; --n: 40; --p: 40;
@@ -382,7 +385,7 @@ select { appearance: none; -webkit-appearance: none; padding-right: 2.2rem; back
    ========================================================================= */
 
 @media (max-width: 1240px) {
-  .room-grid { grid-template-columns: 1fr; }
+  .room-grid { grid-template-columns: minmax(0, 1fr); }
   .howto { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -433,6 +436,9 @@ select { appearance: none; -webkit-appearance: none; padding-right: 2.2rem; back
 }
 
 @media (max-width: 640px) {
+  /* Labels a touch larger on a phone, and every footer link a real target. */
+  .label { font-size: .74rem; }
+  .foot ul a { display: inline-block; padding-block: .2rem; }
   /* The card becomes a row: a square of cloth beside its name, so the range
      reads as a shade card. */
   .cards { grid-template-columns: 1fr; gap: 1rem; }
