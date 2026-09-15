@@ -46,6 +46,11 @@ img { max-width: 100%; height: auto; display: block; }
 [hidden] { display: none !important; }
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
+/* Native dropdown lists often paint a light panel; force readable option ink. */
+select option {
+  color: #0a0b0c;
+  background-color: #f4f2ee;
+}
 button { background: none; border: 0; cursor: pointer; }
 
 h1, h2, h3 {
@@ -384,6 +389,17 @@ body.nav-open .drawer { transform: none; }
   padding: 12px 0;
   color: var(--bone);
   border-radius: 0;
+}
+.filter-field select,
+.field select {
+  /* Closed control stays light-on-dark; open list uses dark text on bone (see select option rules). */
+  background-color: transparent;
+  color: var(--bone);
+}
+.filter-field select option,
+.field select option {
+  color: #0a0b0c;
+  background-color: #f4f2ee;
 }
 .field textarea { min-height: 110px; resize: vertical; }
 .catalogue {
