@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+  <title>Shipping &amp; Restrictions — Copper Ridge Cartridge Co.</title>
+  <meta name="description" content="Ground hazmat shipping, signature requirements, and state restrictions for Copper Ridge Cartridge Co.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/retail-copper-ridge/shipping.html">
+  <base href="/templates/retail-copper-ridge/">
+  <meta name="theme-color" content="#E8E4DC">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip" href="#policy">Skip to policy</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle" hidden>
+    <div class="age-card">
+      <h2 id="ageTitle">Age verification</h2>
+      <p>You must be 21 or older to browse Copper Ridge Cartridge Co.</p>
+      <div class="age-actions">
+        <button class="btn btn-brass" type="button" id="ageEnter">I am 21 or older</button>
+        <button class="btn btn-ghost" type="button" id="ageLeave">Leave</button>
+      </div>
+      <p class="age-deny" id="ageDeny" hidden>Access restricted.</p>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="index.html">
+      <span class="brand-name">Copper Ridge</span>
+      <span class="brand-est">Cartridge Co. · Missoula, MT</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main">
+      <a href="index.html#shop">Shop</a>
+      <a href="index.html#finder">Calibers</a>
+      <a href="shipping.html">Shipping</a>
+    </nav>
+    <div class="header-actions">
+      <button class="cart-btn" type="button" data-cart-open aria-label="Open cart">
+        Cart <span class="cart-count">0</span>
+      </button>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#shop">Shop</a>
+    <a href="shipping.html">Shipping</a>
+  </div>
+
+  <article class="policy" id="policy">
+    <p class="kicker">Policy</p>
+    <h1>Shipping &amp; restrictions</h1>
+    <p>Copper Ridge ships ammunition, primers, and powder by ground hazmat from Missoula, Montana. We sell to adults 21 and older. Card payment is authorized at fulfillment.</p>
+
+    <h2>Ground hazmat</h2>
+    <p>Loaded ammunition and primers are classified as ORM-D / limited quantity for ground carriers. We do not offer air, overnight, or PO Box delivery on hazmat lines. Expect 5–8 business days to most Lower 48 addresses after the order leaves the floor.</p>
+
+    <h2>Signature &amp; ID</h2>
+    <p>Every ammunition order requires an adult signature. The carrier may ask for government ID that matches the ship-to name. We do not leave ammo on doorsteps.</p>
+
+    <h2>Destinations we do not serve</h2>
+    <p>We cannot ship ammunition, primers, or powder to:</p>
+    <ul class="state-list">
+      <li>AK</li>
+      <li>HI</li>
+    </ul>
+    <p>Individual SKUs (especially defensive hollow points and certain rifle loads) list additional blocked states on the product page. Checkout re-checks those rules against your selected state.</p>
+
+    <h2>Returns</h2>
+    <p>Unopened factory-sealed ammunition may be returned within 14 days for store credit. We do not accept opened boxes, mixed lots, or powder canisters once shipped. Reloading presses and die sets follow the same sealed-carton rule.</p>
+
+    <h2>Contact</h2>
+    <p>Shipping desk: <a href="tel:+14065550198">(406) 555-0198</a> · Mon–Sat 8:00–18:00 Mountain Time<br>
+    418 Railroad Street, Suite B, Missoula, MT 59802</p>
+
+    <p style="margin-top:36px"><a class="btn btn-brass" href="index.html#shop">Back to catalog</a></p>
+  </article>
+
+  <footer class="site-footer">
+    <div class="footer-legal">
+      <span>© <span id="year">2026</span> Copper Ridge Cartridge Co.</span>
+      <span>Must be 21+ to purchase ammunition</span>
+    </div>
+  </footer>
+
+  <div class="veil" id="cartVeil" hidden data-cart-close></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+    <header class="cart-head">
+      <h2 id="cartTitle">Cart</h2>
+      <button class="btn btn-ghost" type="button" data-cart-close style="padding:6px 10px">Close</button>
+    </header>
+    <ul class="cart-lines" id="cartLines"></ul>
+    <p class="cart-empty" id="cartEmpty">Your cart is empty.</p>
+    <div class="cart-tail" id="cartTail" hidden>
+      <div class="cart-sums" id="cartSums">
+        <div><span>Goods</span><strong id="sumGoods">$0.00</strong></div>
+        <div><span>Ground shipping</span><strong id="sumShip">$0.00</strong></div>
+        <div class="total"><span>Total</span><strong id="sumTotal">$0.00</strong></div>
+      </div>
+      <p class="ship-note" id="shipNote"></p>
+      <p class="ship-error" id="shipError" hidden></p>
+      <p class="order-success" id="orderSuccess" hidden></p>
+      <form class="checkout-form" id="checkoutForm" onsubmit="return false;">
+        <label>Full name<input id="shipName" name="name" autocomplete="name" required></label>
+        <div class="form-row">
+          <label>ZIP<input id="shipZip" name="zip" inputmode="numeric" autocomplete="postal-code" required></label>
+          <label>State<select id="shipState" name="state" required></select></label>
+        </div>
+      </form>
+      <button class="btn btn-brass" type="button" id="placeOrder">Place order</button>
+    </div>
+  </aside>
+
+  <script src="js/catalog-data.js"></script>
+  <script src="js/shipping-rules.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
