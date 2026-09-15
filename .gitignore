@@ -31,3 +31,7 @@ templates/travel-yorimichi/tools/raw/
 # Full-resolution licensed Adobe Stock originals — graded and exported to
 # templates/apogee-charter/img/ and video/ by tools/; the originals stay local.
 templates/apogee-charter/tools/raw/
+
+# Full-resolution licensed Adobe Stock originals (ProRes/H.264 masters, JPEGs) — graded and
+# exported to templates/ascent-protocol/img/ and video/ by tools/; the originals stay local.
+templates/ascent-protocol/tools/raw/

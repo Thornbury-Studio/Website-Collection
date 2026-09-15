@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Apply &mdash; Ascent</title>
+  <meta name="description" content="Apply to Ascent: twelve places in cohort 09 from 2 November 2026, or one-to-one from a date you choose. One honest paragraph, one call, a yes or a no in writing.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/ascent-protocol/apply.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Ascent">
+  <meta property="og:title" content="Apply &mdash; Ascent">
+  <meta property="og:description" content="Twelve places in cohort 09, or one-to-one from a date you choose. One paragraph, one call, a straight answer.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/ascent-protocol/apply.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/ascent-protocol/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apply &mdash; Ascent">
+  <meta name="twitter:description" content="Twelve places in cohort 09, or one-to-one from a date you choose.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/ascent-protocol/img/og.webp">
+  <meta name="theme-color" content="#0A0C0F">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Hanken+Grotesk:ital,wght@0,300..800;1,300..800&family=Geist+Mono:wght@300..600&display=swap">
+  <link rel="preload" as="image" href="img/road-poster.webp" fetchpriority="high">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body class="apply-page">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <div class="top-bg glass glass--bar" aria-hidden="true"></div>
+  <a class="mark" href="index.html" aria-label="Ascent, home"><svg viewBox="0 0 10 26" aria-hidden="true"><circle cx="5" cy="4" r="3"/><line x1="5" y1="9" x2="5" y2="26"/></svg>Ascent</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="protocol.html">The protocol</a>
+    <a href="index.html#week">The week</a>
+    <a href="apply.html" aria-current="page">Apply</a>
+  </nav>
+  <a class="btn" href="#apply">Apply for cohort 09</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+<div class="drawer glass glass--drawer" id="drawer" data-open="false">
+  <a href="protocol.html">The protocol</a>
+  <a href="index.html#week">The week</a>
+  <a href="index.html#notes">Field notes</a>
+  <a href="apply.html">Apply</a>
+  <a class="btn btn--solid" href="#apply">Apply for cohort 09</a>
+</div>
+
+<div class="spine" id="spine" aria-hidden="true"></div>
+<div class="dots" id="dots" aria-hidden="true"></div>
+<div class="marker" id="marker" aria-hidden="true"><i></i></div>
+
+<main id="main">
+
+  <section class="apply-hero" data-spine-from="top" aria-label="Apply">
+    <div class="hero-media plate">
+      <video muted playsinline loop preload="none" poster="img/road-poster.webp" data-src="video/road.mp4" data-src-sm="video/road-sm.mp4" aria-hidden="true"></video>
+    </div>
+    <div class="wrap">
+      <div class="cols">
+        <div class="l apply-copy">
+          <p class="eyebrow mono rv">Apply</p>
+          <h1 class="giant rv d1">Say what you&rsquo;re under.</h1>
+          <p class="lede rv d2 measure">Twelve places in a cohort, four one-to-one places a quarter. The application is short on purpose: one honest paragraph tells us more than a form. We reply within three working days with a call time, or a straight no.</p>
+          <ol class="phase-map rv d3" style="margin-top:34px; max-width: 420px" aria-label="What happens next">
+            <li><span class="mono">01</span><span class="bar" aria-hidden="true"><i style="--w:.34"></i></span><span class="mono"><b>We read it</b> &middot; 3 days</span></li>
+            <li><span class="mono">02</span><span class="bar" aria-hidden="true"><i style="--w:.34"></i></span><span class="mono"><b>One call</b> &middot; 30 min</span></li>
+            <li><span class="mono">03</span><span class="bar" aria-hidden="true"><i style="--w:.34"></i></span><span class="mono"><b>Yes or no</b> &middot; in writing</span></li>
+          </ol>
+        </div>
+        <div class="r">
+          <form class="form-sheet glass glass--decide rv d2" id="apply" action="#" method="post" novalidate data-marker-off>
+            <span class="dot-anchor" data-dot="|Apply"></span>
+            <p class="eyebrow mono" id="form-title">Application</p>
+            <div class="field">
+              <label class="mono" for="f-name">Name</label>
+              <input class="glass glass--field" id="f-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label class="mono" for="f-email">Email</label>
+              <input class="glass glass--field" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            </div>
+            <fieldset class="field" style="border:0;padding:0;margin:0 0 18px">
+              <legend class="mono lab" style="padding:0;margin-bottom:8px">You are</legend>
+              <div class="roles">
+                <label><input type="radio" name="role" value="Founder" checked><span>Founder</span></label>
+                <label><input type="radio" name="role" value="Operator"><span>Operator</span></label>
+                <label><input type="radio" name="role" value="Athlete"><span>Athlete</span></label>
+                <label><input type="radio" name="role" value="Something else"><span>Something else</span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label class="mono" for="f-format">Format</label>
+              <select class="glass glass--field" id="f-format" name="format">
+                <option value="c09">Cohort 09 &middot; from 2 Nov 2026</option>
+                <option value="c10">Cohort 10 &middot; from 1 Feb 2027</option>
+                <option value="one">One-to-one &middot; my own date</option>
+              </select>
+            </div>
+            <div class="field" id="start-field">
+              <label class="mono" for="f-start">Day one</label>
+              <input class="glass glass--field" id="f-start" name="start" type="date" min="2026-09-16">
+            </div>
+            <div class="field">
+              <label class="mono" for="f-pressure">What are you under right now?</label>
+              <textarea class="glass glass--field" id="f-pressure" name="pressure" rows="5" placeholder="One paragraph. Specific beats impressive." required></textarea>
+            </div>
+            <div class="field">
+              <label class="mono" for="f-floor">The smallest thing you could do every day, on your worst day <span class="mute">(optional)</span></label>
+              <textarea class="glass glass--field" id="f-floor" name="floor" rows="2" placeholder="Twenty minutes of nothing. Lights out by eleven. One page."></textarea>
+            </div>
+            <div class="form-foot">
+              <button class="btn btn--ember" type="submit">Send the application<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></button>
+              <span class="mono">Sends from your own mail client</span>
+            </div>
+            <p class="form-note form-sent" id="form-sent" hidden><b>Drafted.</b> Your mail client should have opened with the application addressed to apply@ascentprotocol.co. If it didn&rsquo;t, write to that address with the same answers and the word &ldquo;cohort&rdquo; in the subject.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--tight wrap" aria-labelledby="terms-title">
+    <div class="cols">
+      <div class="l">
+        <span class="dot-anchor" data-dot="|Terms"></span>
+        <p class="eyebrow mono rv">Before you send</p>
+        <h2 class="h2 rv d1" id="terms-title">Three things we&rsquo;ll ask on the call.</h2>
+      </div>
+      <div class="r">
+        <dl class="spec rv d2">
+          <div><dt class="mono">Monday</dt><dd>Can you hold forty-five minutes, same time, for twelve weeks<small>If the honest answer is no, the protocol will not work and we will say so.</small></dd></div>
+          <div><dt class="mono">The log</dt><dd>Will you write three lines every night by 21:00<small>Not to us. To the log. We read it Monday.</small></dd></div>
+          <div><dt class="mono">The fee</dt><dd>SGD 7,200, once, before week one<small>Companies can be invoiced. The log is yours either way.</small></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="call" aria-labelledby="call-title">
+    <div class="plate" aria-hidden="true">
+      <img class="px" src="img/haze-1400.webp" srcset="img/haze-800.webp 800w, img/haze-1400.webp 1400w, img/haze.webp 2400w" sizes="100vw" alt="" loading="lazy" decoding="async">
+      <div class="scrim scrim--band"></div>
+    </div>
+    <div class="wrap">
+      <div class="cols">
+        <div class="l">
+          <span class="dot-anchor" data-dot="|The decision"></span>
+          <p class="eyebrow mono rv">Not sure yet</p>
+          <h2 class="giant rv d1" id="call-title">Go and move <em>the words</em> first.</h2>
+        </div>
+        <div class="r">
+          <p class="lede rv d2 measure">There is a rail on the home page with two words on it. Most people drag it once and come back here. It takes about four seconds.</p>
+          <div class="hero-ctas rv d3" style="margin-top:30px">
+            <a class="btn" href="index.html#decide">One day, or day one<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
+            <a class="link" href="protocol.html">The twelve weeks<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div>
+    <a class="mark" href="index.html" aria-label="Ascent, home"><svg viewBox="0 0 10 26" aria-hidden="true"><circle cx="5" cy="4" r="3"/><line x1="5" y1="9" x2="5" y2="26"/></svg>Ascent</a>
+    <p class="mono" style="margin-top:18px">Performance coaching &middot; Singapore &middot; London &middot; Remote</p>
+  </div>
+  <nav aria-label="Footer">
+    <a href="protocol.html">The protocol</a>
+    <a href="index.html#week">The week</a>
+    <a href="index.html#notes">Field notes</a>
+    <a href="apply.html">Apply</a>
+    <a href="mailto:hello@ascentprotocol.co">hello@ascentprotocol.co</a>
+  </nav>
+  <div class="fine mono">
+    <span>&copy; <span data-date="year">2026</span> Ascent Performance Pte. Ltd.</span>
+    <span>Focus &middot; Discipline &middot; Consistency &middot; Repetition</span>
+  </div>
+</footer>
+
+<script src="js/site.js"></script>
+</body>
+</html>
