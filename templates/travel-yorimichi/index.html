@@ -36,7 +36,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400..900&display=swap">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -230,7 +229,8 @@
 
   <!-- ===== film band ===== -->
   <section class="film" aria-labelledby="filmTitle">
-    <img class="film__bg" src="img/plate-milkyway.webp" alt="" width="1920" height="823" loading="lazy">
+    <img class="film__bg" id="skyPhoto" src="img/plate-milkyway.webp" alt="" width="1920" height="823" loading="lazy">
+    <canvas class="film__sky" id="sky" aria-hidden="true"></canvas>
     <div class="film__grid">
       <div class="reveal">
         <span class="kicker">The film</span>
@@ -433,5 +433,6 @@
 <script src="js/tours-data.js"></script>
 <script src="js/site.js"></script>
 <script src="js/home.js"></script>
+<script src="js/sky.js"></script>
 </body>
 </html>
