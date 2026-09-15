@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>ORRIS — Iris root, compounded while you watch</title>
+<meta name="description" content="ORRIS compounds iris-led perfume in small runs. Build a top–heart–base formula on the blotter; the flacon and the discovery kit price follow.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/fragrance-orris/index.html">
+<meta name="theme-color" content="#f6f5f2">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ORRIS">
+<meta property="og:title" content="ORRIS — Iris root, compounded while you watch">
+<meta property="og:description" content="Build a top–heart–base formula on the blotter; the flacon and the discovery kit price follow.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/fragrance-orris/index.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/fragrance-orris/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ORRIS — Iris root, compounded while you watch">
+<meta name="twitter:description" content="Build a top–heart–base formula on the blotter; the flacon and the discovery kit price follow.">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/fragrance-orris/img/og.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="topbar">Free shipping on discovery kits · ships in 3–7 working days</div>
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap site-header__bar">
+    <a class="mark" href="index.html">orris</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html#shop">Shop</a>
+      <a href="index.html#builder" aria-current="page">Compound</a>
+      <a href="notes.html">Notes</a>
+      <a href="collection.html">Collection</a>
+      <a class="nav-cta" href="sample.html">Sample kit</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><i></i><i></i><i></i></button>
+  </div>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="wrap" aria-label="Menu">
+      <a href="index.html#shop">Shop</a>
+      <a href="index.html#builder">Compound</a>
+      <a href="notes.html">Notes</a>
+      <a href="collection.html">Collection</a>
+      <a href="sample.html">Sample kit</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<div class="scrim" id="scrim" hidden></div>
+
+<main id="main">
+  <section class="hero" id="top">
+    <figure class="hero__plate">
+      <img src="img/hero-photo.jpg" alt="Unlabeled amber dropper bottle on a wooden stand, lit so a leaf shadow falls across the wall." width="1800" height="1200" fetchpriority="high" decoding="async">
+    </figure>
+    <div class="wrap hero__copy">
+      <h1>orris</h1>
+      <p class="lede">Iris root perfume, compounded while you watch — then bottled in a 50&nbsp;ml run.</p>
+      <div class="btn-row">
+        <a class="btn" href="#shop">Shop house scents</a>
+        <a class="btn btn--ghost" href="#builder">Compound your own</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop" id="shop">
+    <div class="wrap">
+      <header class="shop__head reveal">
+        <div>
+          <h2>house scents</h2>
+          <p>Finished 50&nbsp;ml formulas with readable notes, stock counts, and ship times.</p>
+        </div>
+        <a class="btn btn--ghost" href="collection.html">View all</a>
+      </header>
+      <div class="product-grid" id="shopGrid"></div>
+    </div>
+  </section>
+
+  <section class="builder" id="builder">
+    <div class="wrap">
+      <header class="builder__head reveal">
+        <h2>write it on the blotter.</h2>
+        <div class="builder__rail" aria-label="Bench facts">
+          <div><span>solvent</span><strong>ethanol 96%</strong></div>
+          <div><span>vessel</span><strong>15 ml amber</strong></div>
+          <div><span>limit</span><strong>2 notes / tier</strong></div>
+          <div><span>kit base</span><strong>$48 + notes</strong></div>
+        </div>
+        <p>Choose up to two notes per tier. The flacon’s liquid follows the formula; the discovery kit price is the sum of what you picked.</p>
+      </header>
+
+      <div class="builder__layout">
+        <div class="bench">
+          <canvas class="beam-layer" id="beamCanvas" aria-hidden="true"></canvas>
+          <div id="notePalette" aria-label="Fragrance notes"></div>
+
+          <div class="formula-panel reveal">
+            <ul class="formula-list" id="formulaList"></ul>
+            <div class="formula-stats" aria-live="polite">
+              <div class="stat"><span class="stat__label">notes</span><span class="stat__value" id="noteCount">0</span></div>
+              <div class="stat"><span class="stat__label">profile</span><span class="stat__value" id="concentration">0%</span></div>
+              <div class="stat"><span class="stat__label">kit</span><span class="stat__value" id="kitPrice">$48</span></div>
+            </div>
+            <div class="formula-actions">
+              <a class="btn is-disabled" id="sampleCta" href="sample.html" aria-disabled="true">request this kit</a>
+              <button class="btn btn--ghost" id="clearFormula" type="button">clear blotter</button>
+            </div>
+            <p class="sr-only" id="builderStatus" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <aside class="flacon-panel reveal" aria-label="Live flacon">
+          <div class="flacon-panel__head">
+            <strong>live formula</strong>
+            <span>glass · blotters</span>
+          </div>
+          <div class="flacon-panel__body">
+            <p class="flacon-panel__hint">liquid colour + density track the formula. strips below = blotters.</p>
+            <div class="mini-vial">
+              <canvas id="vialCanvas"></canvas>
+            </div>
+            <div class="blotter-rack" id="blotterRack" aria-live="polite">
+              <p class="blotter-rack__empty">no strips yet — pick a note</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="atelier" id="house">
+    <div class="wrap">
+      <div class="atelier__stack reveal">
+        <div class="sheet sheet--under" aria-hidden="true">
+          <p>batch · iris butter · current run</p>
+        </div>
+        <article class="sheet sheet--main">
+          <header>
+            <h2>named for the root, not the flower.</h2>
+            <p class="sheet__ref">We start from iris butter — powder, stone, quiet wood — then open with brighter materials before a full bottle.</p>
+          </header>
+          <div class="sheet__cols">
+            <div>
+              <h3>on the bench</h3>
+              <dl class="ledger">
+                <div>
+                  <dt>heart</dt>
+                  <dd>Florence orris butter, aged rhizome paste</dd>
+                </div>
+                <div>
+                  <dt>top</dt>
+                  <dd>Cold citrus and dry spice for the first lift</dd>
+                </div>
+                <div>
+                  <dt>base</dt>
+                  <dd>Vetiver, cedar, resin to hold the trail</dd>
+                </div>
+                <div>
+                  <dt>format</dt>
+                  <dd>Three-vial discovery kit, then 50&nbsp;ml if you keep it</dd>
+                </div>
+              </dl>
+            </div>
+            <div>
+              <h3>process</h3>
+              <ol class="steps">
+                <li>Build top, heart, and base on the blotter.</li>
+                <li>We compound the three vials from your weights.</li>
+                <li>Wear them for a week; keep the ones that settle on skin.</li>
+                <li>Scale the keepers into a 50&nbsp;ml from the current run.</li>
+              </ol>
+            </div>
+          </div>
+          <div class="sheet__foot btn-row">
+            <a class="btn" href="notes.html">read the notes</a>
+            <a class="btn btn--ghost" href="ritual.html">how it wears</a>
+            <a class="btn btn--ghost" href="collection.html">house scents</a>
+          </div>
+        </article>
+        <aside class="sheet sheet--clip">
+          <p><strong>iris first.</strong> The house is built around the root butter, not a flower story. Everything else is chosen to frame that powder.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div>
+      <a class="mark" href="index.html">orris</a>
+      <p>Iris-led perfume, compounded in small runs.</p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="notes.html">notes</a>
+      <a href="collection.html">collection</a>
+      <a href="sample.html">sample kit</a>
+      <a href="about.html">about</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="js/notes-data.js"></script>
+<script src="js/vial.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
