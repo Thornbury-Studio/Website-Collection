@@ -3570,12 +3570,15 @@
     let active = 'all';
 
     const byDate = (a, b) => a.dataset.date.localeCompare(b.dataset.date);
-    const byHref = (a, b) => a.getAttribute('href').localeCompare(b.getAttribute('href'));
+    // Cards are appended to the grid in the order they shipped, so on an
+    // equal date the one later in the markup is the newer one. Ties break
+    // on that position (stable across re-sorts), never on the href.
+    const pos = new Map(items.map((c, i) => [c, i]));
+    const byPos = (a, b) => pos.get(a) - pos.get(b);
     const COMPARE = {
-      // stable ties on href so a re-sort never shuffles equal-dated cards
-      newest:   (a, b) => byDate(b, a) || byHref(a, b),
-      oldest:   (a, b) => byDate(a, b) || byHref(a, b),
-      advanced: (a, b) => (+b.dataset.tier - +a.dataset.tier) || byDate(b, a) || byHref(a, b),
+      newest:   (a, b) => byDate(b, a) || byPos(b, a),
+      oldest:   (a, b) => byDate(a, b) || byPos(a, b),
+      advanced: (a, b) => (+b.dataset.tier - +a.dataset.tier) || byDate(b, a) || byPos(b, a),
     };
 
     function apply() {
