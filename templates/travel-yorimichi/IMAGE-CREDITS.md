@@ -68,7 +68,11 @@ survives the desaturation on purpose; it is the accent colour of the site.
 Each plate is exported at the crops the pages actually use — 16:9 at 1 920 px
 for the hero slider, 4:5 at 900 px for the same slides on a phone (a taller
 composition, not a squeezed desktop frame), 3:4 at 720 px for the tour cards,
-3:2 at 1 600 px for headers and galleries. All exports are WebP through
+3:2 at 1 600 px for headers and galleries. Every photograph that fills the
+viewport — the five slides, the page headers, the tour headers and the film
+band — also ships a 2 560 px export (and the phone crops a 1 400 px one),
+offered through `srcset` so a 2× screen gets a file that is sharp at its
+size while a 1× screen never downloads it. All exports are WebP through
 Pillow at quality 70–76, Lanczos downsample. The clips are re-encoded with
 ffmpeg (libx264, CRF 25, the same saturation pull) at 1280×720 with the
 audio track dropped.

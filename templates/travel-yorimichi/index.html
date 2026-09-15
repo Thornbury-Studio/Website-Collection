@@ -84,32 +84,32 @@
 
       <div class="slide" data-slide="0" aria-hidden="false">
         <picture>
-          <source media="(max-width: 700px)" srcset="img/hero-kyoto-tall.webp">
-          <img src="img/hero-kyoto.webp" alt="The Senbon Torii at Fushimi Inari, Kyoto, before dawn" width="1920" height="1080" fetchpriority="high">
+          <source media="(max-width: 700px)" srcset="img/hero-kyoto-tall.webp 900w, img/hero-kyoto-tall-1400.webp 1400w" sizes="100vw">
+          <img src="img/hero-kyoto.webp" srcset="img/hero-kyoto.webp 1920w, img/hero-kyoto-2560.webp 2560w" sizes="100vw" alt="The Senbon Torii at Fushimi Inari, Kyoto, before dawn" width="1920" height="1080" fetchpriority="high">
         </picture>
       </div>
       <div class="slide" data-slide="1" aria-hidden="true">
         <picture>
-          <source media="(max-width: 700px)" srcset="img/hero-tokyo-tall.webp">
-          <img src="img/hero-tokyo.webp" alt="Shibuya, Tokyo, from above at night" width="1920" height="1080" loading="lazy">
+          <source media="(max-width: 700px)" srcset="img/hero-tokyo-tall.webp 900w, img/hero-tokyo-tall-1400.webp 1400w" sizes="100vw">
+          <img src="img/hero-tokyo.webp" srcset="img/hero-tokyo.webp 1920w, img/hero-tokyo-2560.webp 2560w" sizes="100vw" alt="Shibuya, Tokyo, from above at night" width="1920" height="1080" loading="lazy">
         </picture>
       </div>
       <div class="slide" data-slide="2" aria-hidden="true">
         <picture>
-          <source media="(max-width: 700px)" srcset="img/hero-miyajima-tall.webp">
-          <img src="img/hero-miyajima.webp" alt="The floating torii of Itsukushima Shrine, Miyajima, in evening light" width="1920" height="1080" loading="lazy">
+          <source media="(max-width: 700px)" srcset="img/hero-miyajima-tall.webp 900w, img/hero-miyajima-tall-1400.webp 1400w" sizes="100vw">
+          <img src="img/hero-miyajima.webp" srcset="img/hero-miyajima.webp 1920w, img/hero-miyajima-2560.webp 2560w" sizes="100vw" alt="The floating torii of Itsukushima Shrine, Miyajima, in evening light" width="1920" height="1080" loading="lazy">
         </picture>
       </div>
       <div class="slide" data-slide="3" aria-hidden="true">
         <picture>
-          <source media="(max-width: 700px)" srcset="img/hero-shirakawa-tall.webp">
-          <img src="img/hero-shirakawa.webp" alt="Shirakawa-go's thatched farmhouses lit at dusk under snow" width="1920" height="1080" loading="lazy">
+          <source media="(max-width: 700px)" srcset="img/hero-shirakawa-tall.webp 900w, img/hero-shirakawa-tall-1400.webp 1400w" sizes="100vw">
+          <img src="img/hero-shirakawa.webp" srcset="img/hero-shirakawa.webp 1920w, img/hero-shirakawa-2560.webp 2560w" sizes="100vw" alt="Shirakawa-go's thatched farmhouses lit at dusk under snow" width="1920" height="1080" loading="lazy">
         </picture>
       </div>
       <div class="slide" data-slide="4" aria-hidden="true">
         <picture>
-          <source media="(max-width: 700px)" srcset="img/hero-fuji-tall.webp">
-          <img src="img/hero-fuji.webp" alt="Chureito Pagoda with Mount Fuji behind it at dusk" width="1920" height="1080" loading="lazy">
+          <source media="(max-width: 700px)" srcset="img/hero-fuji-tall.webp 900w, img/hero-fuji-tall-1400.webp 1400w" sizes="100vw">
+          <img src="img/hero-fuji.webp" srcset="img/hero-fuji.webp 1920w, img/hero-fuji-2560.webp 2560w" sizes="100vw" alt="Chureito Pagoda with Mount Fuji behind it at dusk" width="1920" height="1080" loading="lazy">
         </picture>
       </div>
 
@@ -229,12 +229,12 @@
 
   <!-- ===== film band ===== -->
   <section class="film" aria-labelledby="filmTitle">
-    <img class="film__bg" id="skyPhoto" src="img/plate-milkyway.webp" alt="" width="1920" height="823" loading="lazy">
+    <img class="film__bg" id="skyPhoto" src="img/plate-milkyway.webp" srcset="img/plate-milkyway.webp 1920w, img/plate-milkyway-2560.webp 2560w" sizes="100vw" alt="" width="1920" height="823" loading="lazy">
     <canvas class="film__sky" id="sky" aria-hidden="true"></canvas>
     <div class="film__grid">
       <div class="reveal">
         <span class="kicker">The film</span>
-        <h2 class="h2 film__title" id="filmTitle">Go the<br>scenic<br>way round</h2>
+        <h2 class="h2 film__title" id="filmTitle">Go the <br>scenic <br>way round</h2>
         <button class="play" type="button" id="filmPlay" data-chapter="0">
           <span class="play__ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg></span>
           <span class="play__label">Watch the film<small>Two chapters &middot; 0:17</small></span>
@@ -265,7 +265,7 @@
     <div class="wrap">
       <div class="section__head section__head--left reveal">
         <span class="kicker">How we travel</span>
-        <h2 class="h2" id="howTitle">Small groups, early starts,<br>free afternoons</h2>
+        <h2 class="h2" id="howTitle">Small groups, early starts, <br>free afternoons</h2>
       </div>
       <div class="how">
         <div class="how__item reveal">
@@ -355,7 +355,7 @@
     <div class="wrap cta__grid">
       <div class="reveal">
         <span class="kicker">Talk to a planner</span>
-        <h2 class="h2" id="ctaTitle">Not sure which<br>tour is yours?</h2>
+        <h2 class="h2" id="ctaTitle">Not sure which <br>tour is yours?</h2>
         <p class="lede" style="margin-top:14px">Twenty minutes on the phone, or come to the office. We will tell you which departure fits your dates, your walking pace and the season you want &mdash; and we will tell you if it is not the right year for it.</p>
         <p style="margin-top:22px"><a class="btn" href="contact.html">Send an enquiry
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></p>
