@@ -1,7 +1,7 @@
 /* YORIMICHI — the live sky on the film band.
    A canvas of small stars twinkles over the night photograph; the stars near
    the pointer wake up and brighten; the whole sky drifts a few pixels against
-   the pointer so the photo has depth; every few seconds a meteor crosses.
+   the pointer so the photo has depth; a meteor crosses every couple of seconds.
    Runs only while the band is on screen, draws nothing under
    prefers-reduced-motion beyond a still field of stars. */
 (function () {
@@ -17,7 +17,7 @@
 
   var W = 0, H = 0, stars = [], visible = false, raf = 0, last = 0;
   var pointer = { x: 0.5, y: 0.4, tx: 0.5, ty: 0.4, on: false };
-  var meteor = null, nextMeteor = 0;
+  var meteors = [], nextMeteor = 0;
 
   function size() {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -56,16 +56,17 @@
 
   function spawnMeteor(t) {
     var fromLeft = Math.random() < 0.5;
-    meteor = {
+    meteors.push({
       t0: t,
-      life: 650 + Math.random() * 350,
+      life: 900 + Math.random() * 500,
       x: fromLeft ? W * (0.05 + Math.random() * 0.4) : W * (0.55 + Math.random() * 0.4),
-      y: H * (0.04 + Math.random() * 0.22),
+      y: H * (0.03 + Math.random() * 0.24),
       dx: (fromLeft ? 1 : -1) * (0.55 + Math.random() * 0.3),
-      dy: 0.28 + Math.random() * 0.14,
-      len: 90 + Math.random() * 90,
-    };
-    nextMeteor = t + 5000 + Math.random() * 6000;
+      dy: 0.26 + Math.random() * 0.16,
+      len: 170 + Math.random() * 130,
+    });
+    // one every couple of seconds, so the first visit catches one
+    nextMeteor = t + 1400 + Math.random() * 1800;
   }
 
   function frame(t) {
@@ -105,32 +106,40 @@
       ctx.fill();
     }
 
-    // one meteor now and then
-    if (!meteor && t > nextMeteor) spawnMeteor(t);
-    if (meteor) {
-      var k2 = (t - meteor.t0) / meteor.life;
-      if (k2 >= 1) { meteor = null; }
-      else {
-        var hx = meteor.x + meteor.dx * k2 * 900, hy = meteor.y + meteor.dy * k2 * 900;
-        var fade = k2 < 0.2 ? k2 / 0.2 : 1 - (k2 - 0.2) / 0.8;
-        var g = ctx.createLinearGradient(hx, hy, hx - meteor.dx * meteor.len, hy - meteor.dy * meteor.len);
-        g.addColorStop(0, 'rgba(255,255,255,' + (0.9 * fade).toFixed(3) + ')');
-        g.addColorStop(1, 'rgba(255,255,255,0)');
-        ctx.strokeStyle = g;
-        ctx.lineWidth = 1.4;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(hx, hy);
-        ctx.lineTo(hx - meteor.dx * meteor.len, hy - meteor.dy * meteor.len);
-        ctx.stroke();
-      }
+    // meteors: a new one every couple of seconds, two may overlap
+    if (meteors.length < 2 && t > nextMeteor) spawnMeteor(t);
+    for (var m = meteors.length - 1; m >= 0; m--) {
+      var mt = meteors[m];
+      var k2 = (t - mt.t0) / mt.life;
+      if (k2 >= 1) { meteors.splice(m, 1); continue; }
+      var hx = mt.x + mt.dx * k2 * 1000, hy = mt.y + mt.dy * k2 * 1000;
+      var fade = k2 < 0.15 ? k2 / 0.15 : 1 - (k2 - 0.15) / 0.85;
+      var g = ctx.createLinearGradient(hx, hy, hx - mt.dx * mt.len, hy - mt.dy * mt.len);
+      g.addColorStop(0, 'rgba(255,255,255,' + (0.95 * fade).toFixed(3) + ')');
+      g.addColorStop(0.35, 'rgba(226,236,255,' + (0.5 * fade).toFixed(3) + ')');
+      g.addColorStop(1, 'rgba(226,236,255,0)');
+      ctx.strokeStyle = g;
+      ctx.lineWidth = 2.2;
+      ctx.shadowColor = 'rgba(255,255,255,' + (0.8 * fade).toFixed(3) + ')';
+      ctx.shadowBlur = 8;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(hx, hy);
+      ctx.lineTo(hx - mt.dx * mt.len, hy - mt.dy * mt.len);
+      ctx.stroke();
+      // a bright head
+      ctx.beginPath();
+      ctx.arc(hx, hy, 2.2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,' + fade.toFixed(3) + ')';
+      ctx.fill();
+      ctx.shadowBlur = 0;
     }
   }
 
   function start() {
     if (reduce || raf) return;
     last = 0;
-    if (!nextMeteor) nextMeteor = performance.now() + 2500;
+    if (!nextMeteor) nextMeteor = performance.now() + 500;   // the first one almost at once
     raf = requestAnimationFrame(frame);
   }
 
