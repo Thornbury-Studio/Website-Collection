@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Case study — LODE</title>
-<meta name="description" content="Selected case notes from LODE — brand and web work for B2B teams.">
+<title>Contact — LODE</title>
+<meta name="description" content="Start a project with LODE. Tell us what you're shipping — brand systems, websites, and motion for B2B teams.">
 <meta name="robots" content="index, follow">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="canonical" href="https://templates.thornburystudio.com/templates/agency-lode/case.html">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/agency-lode/contact.html">
 <meta name="theme-color" content="#F7F4EF">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231652F0'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23F7F4EF'/%3E%3C/svg%3E">
+<meta property="og:title" content="Contact — LODE">
+<meta property="og:description" content="Tell us what you're shipping. We'll tell you how we'd make the market notice.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/agency-lode/contact.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -23,11 +26,11 @@
 <header class="nav" id="nav">
   <a href="index.html" class="logo" aria-label="LODE home">LODE</a>
   <nav class="nav-links" aria-label="Primary">
-    <a href="work.html" aria-current="page">Work</a>
+    <a href="work.html">Work</a>
     <a href="studio.html">Studio</a>
     <a href="expertise.html">Expertise</a>
     <a href="news.html">News</a>
-    <a href="contact.html">Contact</a>
+    <a href="contact.html" aria-current="page">Contact</a>
   </nav>
   <a href="contact.html" class="nav-cta">Start a project</a>
   <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
@@ -42,24 +45,34 @@
 </div>
 
 <main>
-  <article class="stub" id="caseStub">
-    <a class="stub-back" href="work.html">&larr; All work</a>
-    <div class="stub-cover">
-      <img data-stub-cover src="img/news-06.png" alt="" width="1200" height="675">
+  <div class="contact-page">
+    <div class="contact-intro" data-contact-enter>
+      <p class="contact-brand">LODE</p>
+      <p class="eyebrow">Contact</p>
+      <h1>It starts with a conversation.</h1>
+      <p class="contact-pitch">Tell us what you're shipping. We'll tell you what we'd cut, what we'd keep, and how we'd make the market notice.</p>
+      <a class="contact-email" href="mailto:hello@lode.studio">hello@lode.studio</a>
     </div>
-    <div class="stub-meta">
-      <span class="tag-pill" data-stub-tag>Case</span>
-      <time data-stub-date>2025</time>
-    </div>
-    <h1 data-stub-title>HALE</h1>
-    <p class="stub-body" data-stub-body>Loading case notes…</p>
-  </article>
 
-  <section class="cta">
-    <p class="eyebrow">Next</p>
-    <h2 class="cta-title">Start a project like this.</h2>
-    <a class="btn btn-primary btn-lg" href="contact.html">Talk to us</a>
-  </section>
+    <form class="contact-form" id="contactForm" data-contact-enter action="mailto:hello@lode.studio" method="get">
+      <p class="form-success" role="status">Thanks — your mail client should open with the note. If it doesn't, write us at hello@lode.studio.</p>
+      <div class="form-fields">
+        <label>Name
+          <input type="text" name="name" autocomplete="name" required placeholder="Your name">
+        </label>
+        <label>Email
+          <input type="email" name="email" autocomplete="email" required placeholder="you@company.com">
+        </label>
+        <label>Message
+          <textarea name="message" required placeholder="What are you shipping, and when does it need to land?"></textarea>
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" data-magnetic-submit>Send message</button>
+          <p class="form-note">Opens your email app — no account required.</p>
+        </div>
+      </div>
+    </form>
+  </div>
 </main>
 
 <footer class="foot">
@@ -67,6 +80,7 @@
   <p>Brand &amp; web for B2B teams · Brooklyn &amp; remote</p>
   <nav aria-label="Footer">
     <a href="work.html">Work</a>
+    <a href="studio.html">Studio</a>
     <a href="news.html">News</a>
     <a href="contact.html">Contact</a>
   </nav>
