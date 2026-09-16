@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>Origins &mdash; First Crack</title>
+  <meta name="description" content="The six coffees on First Crack&rsquo;s table this week: Ethiopia Guji, Kenya Nyeri, Colombia Huila, Brazil Cerrado, Sumatra Kerinci and the Dawn blend. Farm, process, altitude, and exactly where on the roast curve each one is dropped.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/first-crack/origins.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="First Crack">
+  <meta property="og:title" content="Origins &mdash; six coffees, six drop points">
+  <meta property="og:description" content="Farm, process, altitude and the roast curve for every bag on the table this week.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/first-crack/origins.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/first-crack/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Origins &mdash; six coffees, six drop points">
+  <meta name="twitter:description" content="Farm, process, altitude and the roast curve for every bag on the table this week.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/first-crack/img/og.webp">
+  <meta name="theme-color" content="#1E1410">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..800,0..100,0..1;1,9..144,300..800,0..100,0..1&family=Archivo:ital,wdth,wght@0,62..125,300..800;1,62..125,300..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="preload" as="image" href="img/sack-1400.webp" imagesrcset="img/sack-800.webp 800w, img/sack-1400.webp 1400w, img/sack.webp 2400w" imagesizes="100vw" fetchpriority="high">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body class="origins">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <div class="top-bg glass glass--bar" data-mode="light" aria-hidden="true"></div>
+  <a class="mark" href="index.html" aria-label="First Crack, home"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M3 19c2.4-5.6 6.6-9.4 11-9.4 3.2 0 4.6 2.2 5.6 4.4L22 18"/><circle cx="18.2" cy="13.6" r="2.3"/></svg>First Crack</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#bags">Bags</a>
+    <a href="index.html#roast">The roast</a>
+    <a href="index.html#subscribe">Subscribe</a>
+    <a href="origins.html" aria-current="page">Origins</a>
+  </nav>
+  <button class="cart-btn" id="cart-btn" type="button" aria-controls="cart" aria-expanded="false" aria-label="Your bag, 0 items"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3L5 8z"/><path d="M8.5 8V6.5a3.5 3.5 0 0 1 7 0V8"/></svg><span>Bag</span><b id="cart-count">0</b></button>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+<div class="drawer glass glass--drawer" id="drawer" data-mode="dark" data-open="false">
+  <a href="index.html#bags">Bags</a>
+  <a href="index.html#roast">The roast</a>
+  <a href="index.html#fresh">Freshness</a>
+  <a href="index.html#subscribe">Subscribe</a>
+  <a href="origins.html">Origins</a>
+  <a class="btn btn--primary" href="index.html#bags">Shop this week&rsquo;s roast</a>
+</div>
+
+<div class="veil" id="veil" aria-hidden="true"></div>
+<aside class="cart glass glass--cart" id="cart" data-mode="dark" data-open="false" aria-hidden="true" aria-label="Your bag">
+  <div class="cart-head">
+    <h2>Your bag</h2>
+    <button class="x" type="button" aria-label="Close your bag"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg></button>
+  </div>
+  <div class="cart-list" id="cart-list"></div>
+  <div class="cart-foot">
+    <div class="row"><span>Subtotal</span><span class="mono" id="c-sub">SGD 0</span></div>
+    <div class="row"><span>Delivery</span><span class="mono" id="c-ship">&mdash;</span></div>
+    <div class="row total"><span>Total</span><span class="mono" id="c-total">SGD 0</span></div>
+    <button class="btn btn--primary" id="c-order" type="button" disabled>Place the order<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></button>
+    <p class="hint" id="c-hint">Free delivery over SGD 40</p>
+    <p class="cart-sent" id="c-sent" hidden>Your mail client should have opened with the order addressed to orders@firstcrack.sg. Add your name and address, send it, and we roast it Thursday.</p>
+  </div>
+</aside>
+
+<main id="main">
+
+  <section class="band pagehero" data-plate="light" aria-label="Origins">
+    <div class="plate plate--still">
+      <img src="img/sack-1400.webp" srcset="img/sack-800.webp 800w, img/sack-1400.webp 1400w, img/sack.webp 2400w" sizes="100vw" alt="" fetchpriority="high" decoding="async">
+      <div class="scrim scrim--hero"></div>
+    </div>
+    <div class="wrap">
+      <div class="glass glass--sheet rv" data-meter>
+        <p class="eyebrow">Origins</p>
+        <h1 class="display">Six coffees. <em>Six places</em> on the line.</h1>
+        <p class="lede">Every coffee we buy is dropped at its own point on the roast curve, chosen at the cupping table and held for the season. Below: the farm, the process, the altitude, and exactly where we stop the roast. Change your level and we tell you which of them are roasted there.</p>
+        <div class="seg seg--lg level" id="level-origins" role="radiogroup" aria-label="Roast level" style="margin-top:22px">
+          <span class="seg-thumb" aria-hidden="true"></span>
+          <label><input type="radio" name="level" value="light"><span>Light</span></label>
+          <label><input type="radio" name="level" value="medium" checked><span>Medium</span></label>
+          <label><input type="radio" name="level" value="dark"><span>Dark</span></label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="list" data-plate="light" aria-label="The coffees">
+    <div class="plate">
+      <img class="px" src="img/split-1400.webp" srcset="img/split-800.webp 800w, img/split-1400.webp 1400w, img/split.webp 2400w" sizes="100vw" alt="" loading="lazy" decoding="async">
+      <div class="scrim scrim--band"></div>
+    </div>
+    <div class="wrap">
+
+      <article class="origin">
+        <div class="glass glass--sheet o-sheet rv" data-meter>
+          <div class="origin-name"><b>Ethiopia &middot; Washed</b><span>Guji, above Hambela</span><span class="cap rec" data-rec-for="light" hidden style="color:var(--cherry);margin-top:8px">Roasted at your level</span></div>
+          <div>
+            <p class="story-p">Picked by hand on farms of a hectare or two, fermented for thirty-six hours, dried on raised beds. The kind of lot that tastes like fruit before it tastes like coffee. We take it light and stop forty seconds after first crack, so the bergamot survives.</p>
+            <dl class="spec" style="margin-top:16px">
+              <div><dt>Variety</dt><dd>74158, local landrace</dd></div>
+              <div><dt>Altitude</dt><dd>2,050 &ndash; 2,200 m</dd></div>
+              <div><dt>Process</dt><dd>Washed, raised-bed dried</dd></div>
+              <div><dt>Cupping</dt><dd>Apricot, bergamot, black tea</dd></div>
+            </dl>
+          </div>
+          <div class="o-buy"><span class="price"><b>SGD 24</b><small>250 g &middot; light &middot; for filter</small></span><button class="btn btn--primary btn--sm" type="button" data-add="guji"><span>Add a bag</span></button></div>
+        </div>
+        <div class="glass glass--card o-vis rv d1" data-meter>
+          <figure class="bag bag--matte"><img src="img/bag-matte-700.webp" alt="" loading="lazy" decoding="async"><div class="label" aria-hidden="true"><i><span>First Crack</span><span>250 g</span></i><b>Ethiopia<small>Guji &middot; Washed</small></b><u><span>Roasted <span data-roast-date-short>Thursday</span></span><span class="dots"><i class="on"></i><i></i><i></i></span></u></div></figure>
+          <svg class="mini" data-drop="9.4" role="img" aria-label="Roast curve for Guji, dropped at 9:24"></svg>
+          <p class="cap-row mono"><span>First crack <b>8:40</b></span><span>Dropped <b>9:24 &middot; 205&deg;</b></span></p>
+        </div>
+      </article>
+
+      <article class="origin">
+        <div class="glass glass--sheet o-sheet rv" data-meter>
+          <div class="origin-name"><b>Kenya &middot; Washed</b><span>Nyeri, above Karatina</span><span class="cap rec" data-rec-for="light" hidden style="color:var(--cherry);margin-top:8px">Roasted at your level</span></div>
+          <div>
+            <p class="story-p">Double-washed, soaked overnight, dried slowly under shade. Kenyan coffee is savoury and sharp at once; this one is the reason people fall for it. The most expensive green on the table and the bag we would least like to run out of.</p>
+            <dl class="spec" style="margin-top:16px">
+              <div><dt>Variety</dt><dd>SL28, SL34</dd></div>
+              <div><dt>Altitude</dt><dd>1,750 m</dd></div>
+              <div><dt>Process</dt><dd>Washed, double fermentation</dd></div>
+              <div><dt>Cupping</dt><dd>Blackcurrant, tomato, brown sugar</dd></div>
+            </dl>
+          </div>
+          <div class="o-buy"><span class="price"><b>SGD 26</b><small>250 g &middot; light &middot; for filter</small></span><button class="btn btn--primary btn--sm" type="button" data-add="nyeri"><span>Add a bag</span></button></div>
+        </div>
+        <div class="glass glass--card o-vis rv d1" data-meter>
+          <figure class="bag bag--matte"><img src="img/bag-matte-700.webp" alt="" loading="lazy" decoding="async"><div class="label" aria-hidden="true"><i><span>First Crack</span><span>250 g</span></i><b>Kenya<small>Nyeri &middot; Washed</small></b><u><span>Roasted <span data-roast-date-short>Thursday</span></span><span class="dots"><i class="on"></i><i></i><i></i></span></u></div></figure>
+          <svg class="mini" data-drop="9.6" role="img" aria-label="Roast curve for Nyeri, dropped at 9:36"></svg>
+          <p class="cap-row mono"><span>First crack <b>8:44</b></span><span>Dropped <b>9:36 &middot; 207&deg;</b></span></p>
+        </div>
+      </article>
+
+      <article class="origin">
+        <div class="glass glass--sheet o-sheet rv" data-meter>
+          <div class="origin-name"><b>Colombia &middot; Washed</b><span>Huila, one farm above Pitalito</span><span class="cap rec" data-rec-for="medium" hidden style="color:var(--cherry);margin-top:8px">Roasted at your level</span></div>
+          <div>
+            <p class="story-p">The bag we sell most of. Clean, sweet, forgiving of your grinder and your water. If you only buy one, buy this. Dropped a minute and a half after first crack, where the apple turns to caramel and the acidity stops arguing.</p>
+            <dl class="spec" style="margin-top:16px">
+              <div><dt>Variety</dt><dd>Caturra, Castillo</dd></div>
+              <div><dt>Altitude</dt><dd>1,650 m</dd></div>
+              <div><dt>Process</dt><dd>Washed, patio dried</dd></div>
+              <div><dt>Cupping</dt><dd>Red apple, panela, cocoa</dd></div>
+            </dl>
+          </div>
+          <div class="o-buy"><span class="price"><b>SGD 22</b><small>250 g &middot; medium &middot; filter or espresso</small></span><button class="btn btn--primary btn--sm" type="button" data-add="huila"><span>Add a bag</span></button></div>
+        </div>
+        <div class="glass glass--card o-vis rv d1" data-meter>
+          <figure class="bag bag--matte"><img src="img/bag-matte-700.webp" alt="" loading="lazy" decoding="async"><div class="label" aria-hidden="true"><i><span>First Crack</span><span>250 g</span></i><b>Colombia<small>Huila &middot; Washed</small></b><u><span>Roasted <span data-roast-date-short>Thursday</span></span><span class="dots"><i></i><i class="on"></i><i></i></span></u></div></figure>
+          <svg class="mini" data-drop="10.3" role="img" aria-label="Roast curve for Huila, dropped at 10:18"></svg>
+          <p class="cap-row mono"><span>First crack <b>8:38</b></span><span>Dropped <b>10:18 &middot; 213&deg;</b></span></p>
+        </div>
+      </article>
+
+      <article class="origin">
+        <div class="glass glass--sheet o-sheet rv" data-meter>
+          <div class="origin-name"><b>Brazil &middot; Natural</b><span>Cerrado, a family fazenda near Patroc&iacute;nio</span><span class="cap rec" data-rec-for="medium" hidden style="color:var(--cherry);margin-top:8px">Roasted at your level</span></div>
+          <div>
+            <p class="story-p">Dried whole in the cherry, so the fruit sugars soak into the bean. Low acidity, big body, the espresso that makes a flat white taste like dessert. Dropped later than the Huila, just short of where chocolate becomes char.</p>
+            <dl class="spec" style="margin-top:16px">
+              <div><dt>Variety</dt><dd>Yellow Catua&iacute;</dd></div>
+              <div><dt>Altitude</dt><dd>1,100 m</dd></div>
+              <div><dt>Process</dt><dd>Natural, dried in the cherry</dd></div>
+              <div><dt>Cupping</dt><dd>Hazelnut, milk chocolate, dried fig</dd></div>
+            </dl>
+          </div>
+          <div class="o-buy"><span class="price"><b>SGD 20</b><small>250 g &middot; medium &middot; for espresso</small></span><button class="btn btn--primary btn--sm" type="button" data-add="cerrado"><span>Add a bag</span></button></div>
+        </div>
+        <div class="glass glass--card o-vis rv d1" data-meter>
+          <figure class="bag bag--matte"><img src="img/bag-matte-700.webp" alt="" loading="lazy" decoding="async"><div class="label" aria-hidden="true"><i><span>First Crack</span><span>250 g</span></i><b>Brazil<small>Cerrado &middot; Natural</small></b><u><span>Roasted <span data-roast-date-short>Thursday</span></span><span class="dots"><i></i><i class="on"></i><i></i></span></u></div></figure>
+          <svg class="mini" data-drop="10.6" role="img" aria-label="Roast curve for Cerrado, dropped at 10:36"></svg>
+          <p class="cap-row mono"><span>First crack <b>8:42</b></span><span>Dropped <b>10:36 &middot; 216&deg;</b></span></p>
+        </div>
+      </article>
+
+      <article class="origin">
+        <div class="glass glass--sheet o-sheet rv" data-meter>
+          <div class="origin-name"><b>Sumatra &middot; Wet-hulled</b><span>Kerinci, a cooperative on the volcano</span><span class="cap rec" data-rec-for="dark" hidden style="color:var(--cherry);margin-top:8px">Roasted at your level</span></div>
+          <div>
+            <p class="story-p">Hulled while still wet, which is why Sumatra tastes like nowhere else: earthy, heavy, almost savoury. Taken dark on purpose, nearly to second crack, because that is where the cedar and the molasses live. The bag for milk.</p>
+            <dl class="spec" style="margin-top:16px">
+              <div><dt>Variety</dt><dd>Andung Sari, Sigarar Utang</dd></div>
+              <div><dt>Altitude</dt><dd>1,400 &ndash; 1,600 m</dd></div>
+              <div><dt>Process</dt><dd>Giling basah, wet-hulled</dd></div>
+              <div><dt>Cupping</dt><dd>Cedar, dark chocolate, molasses</dd></div>
+            </dl>
+          </div>
+          <div class="o-buy"><span class="price"><b>SGD 22</b><small>250 g &middot; dark &middot; espresso and milk</small></span><button class="btn btn--primary btn--sm" type="button" data-add="kerinci"><span>Add a bag</span></button></div>
+        </div>
+        <div class="glass glass--card o-vis rv d1" data-meter>
+          <figure class="bag bag--matte"><img src="img/bag-matte-700.webp" alt="" loading="lazy" decoding="async"><div class="label" aria-hidden="true"><i><span>First Crack</span><span>250 g</span></i><b>Sumatra<small>Kerinci &middot; Wet-hulled</small></b><u><span>Roasted <span data-roast-date-short>Thursday</span></span><span class="dots"><i></i><i></i><i class="on"></i></span></u></div></figure>
+          <svg class="mini" data-drop="11.4" role="img" aria-label="Roast curve for Kerinci, dropped at 11:24"></svg>
+          <p class="cap-row mono"><span>First crack <b>8:40</b></span><span>Dropped <b>11:24 &middot; 222&deg;</b></span></p>
+        </div>
+      </article>
+
+      <article class="origin">
+        <div class="glass glass--sheet o-sheet rv" data-meter>
+          <div class="origin-name"><b>Blend &middot; Post-roast</b><span>The Dawn: Huila and Cerrado</span><span class="cap rec" data-rec-for="medium" hidden style="color:var(--cherry);margin-top:8px">Roasted at your level</span></div>
+          <div>
+            <p class="story-p">The blend for people who want the same cup every day. Two of our medium roasts, each dropped where it should be and blended afterwards, so neither is compromised for the other. Kraft bag, because it is the everyday one.</p>
+            <dl class="spec" style="margin-top:16px">
+              <div><dt>Components</dt><dd>60% Huila, 40% Cerrado</dd></div>
+              <div><dt>Altitude</dt><dd>1,100 &ndash; 1,650 m</dd></div>
+              <div><dt>Process</dt><dd>Washed and natural</dd></div>
+              <div><dt>Cupping</dt><dd>Toffee, red apple, milk chocolate</dd></div>
+            </dl>
+          </div>
+          <div class="o-buy"><span class="price"><b>SGD 19</b><small>250 g &middot; medium &middot; anything</small></span><button class="btn btn--primary btn--sm" type="button" data-add="dawn"><span>Add a bag</span></button></div>
+        </div>
+        <div class="glass glass--card o-vis rv d1" data-meter>
+          <figure class="bag bag--kraft"><img src="img/bag-kraft-700.webp" alt="" loading="lazy" decoding="async"><div class="label" aria-hidden="true"><i><span>First Crack</span><span>250 g</span></i><b>The Dawn<small>Huila &middot; Cerrado</small></b><u><span>Roasted <span data-roast-date-short>Thursday</span></span><span class="dots"><i></i><i class="on"></i><i></i></span></u></div></figure>
+          <svg class="mini" data-drop="10.5" role="img" aria-label="Roast curve for the Dawn blend, dropped at 10:30"></svg>
+          <p class="cap-row mono"><span>First crack <b>8:40</b></span><span>Dropped <b>10:30 &middot; 215&deg;</b></span></p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="band" id="brew" data-plate="light" aria-labelledby="brew-title">
+    <div class="plate">
+      <img class="px" src="img/dripper-1400.webp" srcset="img/dripper-800.webp 800w, img/dripper-1400.webp 1400w, img/dripper.webp 2400w" sizes="100vw" alt="" loading="lazy" decoding="async">
+      <div class="scrim scrim--band"></div>
+    </div>
+    <div class="wrap">
+      <div class="glass glass--strip sec-head rv" data-meter style="margin-bottom:0">
+        <p class="eyebrow">Brewing</p>
+        <h2 class="display display--m" id="brew-title">Three recipes <em>we actually use.</em></h2>
+        <p class="lede">Ratios are by weight. Water just off the boil for light roasts, a little cooler for dark. Grind is the variable you own; if it tastes sour go finer, if it tastes bitter go coarser.</p>
+      </div>
+      <div class="brew">
+        <div class="glass glass--card rv" data-meter>
+          <h3>Pour-over</h3>
+          <dl><dt>Ratio</dt><dd>1 : 16</dd><dt>Dose</dt><dd>15 g / 240 g</dd><dt>Water</dt><dd>94 &deg;C</dd><dt>Time</dt><dd>2:45 &ndash; 3:15</dd></dl>
+          <p>Bloom with twice the coffee&rsquo;s weight for forty seconds, then two even pours. Best for the Guji and the Nyeri.</p>
+        </div>
+        <div class="glass glass--card rv d1" data-meter>
+          <h3>Espresso</h3>
+          <dl><dt>Ratio</dt><dd>1 : 2</dd><dt>Dose</dt><dd>18 g / 36 g</dd><dt>Water</dt><dd>93 &deg;C</dd><dt>Time</dt><dd>26 &ndash; 30 s</dd></dl>
+          <p>Rest the bag ten days first. The Cerrado and the Kerinci were dropped for this; the Huila gets there with a slightly longer shot.</p>
+        </div>
+        <div class="glass glass--card rv d2" data-meter>
+          <h3>French press</h3>
+          <dl><dt>Ratio</dt><dd>1 : 14</dd><dt>Dose</dt><dd>30 g / 420 g</dd><dt>Water</dt><dd>92 &deg;C</dd><dt>Time</dt><dd>4:00, then break the crust</dd></dl>
+          <p>Coarse grind, no plunge until you pour. The Dawn was built for this and for the moka pot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div>
+    <a class="mark" href="index.html" aria-label="First Crack, home"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M3 19c2.4-5.6 6.6-9.4 11-9.4 3.2 0 4.6 2.2 5.6 4.4L22 18"/><circle cx="18.2" cy="13.6" r="2.3"/></svg>First Crack</a>
+    <p class="mono" style="margin-top:16px">Coffee roasters &middot; Tai Seng, Singapore &middot; Roast day Thursday</p>
+  </div>
+  <nav aria-label="Footer">
+    <a href="index.html#bags">Bags</a>
+    <a href="index.html#roast">The roast</a>
+    <a href="index.html#subscribe">Subscribe</a>
+    <a href="origins.html">Origins</a>
+    <a href="mailto:hello@firstcrack.sg">hello@firstcrack.sg</a>
+  </nav>
+  <div class="fine mono">
+    <span>&copy; <span data-year>2026</span> First Crack Coffee Pte. Ltd.</span>
+    <span>Roasted to order &middot; Delivered within 48 hours &middot; Singapore</span>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

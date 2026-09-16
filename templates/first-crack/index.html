@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <title>First Crack &mdash; coffee roasted Thursday, at your door by Saturday</title>
+  <meta name="description" content="First Crack is a specialty coffee roastery in Singapore selling direct to your door. Six single-origin bags roasted every Thursday on a 15-kilo drum, bagged the same afternoon, delivered by Saturday. Subscriptions from two bags a fortnight.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://templates.thornburystudio.com/templates/first-crack/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="First Crack">
+  <meta property="og:title" content="First Crack &mdash; roasted Thursday, at your door by Saturday">
+  <meta property="og:description" content="Specialty coffee roasted in Singapore and delivered days after the roast. Choose your roast level on the curve; we drop the beans where you say.">
+  <meta property="og:url" content="https://templates.thornburystudio.com/templates/first-crack/index.html">
+  <meta property="og:image" content="https://templates.thornburystudio.com/templates/first-crack/img/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="First Crack &mdash; roasted Thursday, at your door by Saturday">
+  <meta name="twitter:description" content="Specialty coffee roasted in Singapore and delivered days after the roast.">
+  <meta name="twitter:image" content="https://templates.thornburystudio.com/templates/first-crack/img/og.webp">
+  <meta name="theme-color" content="#1E1410">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..800,0..100,0..1;1,9..144,300..800,0..100,0..1&family=Archivo:ital,wdth,wght@0,62..125,300..800;1,62..125,300..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="preload" as="image" href="img/hero-poster.webp" fetchpriority="high">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body class="home">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <div class="top-bg glass glass--bar" data-mode="light" aria-hidden="true"></div>
+  <a class="mark" href="index.html" aria-current="page" aria-label="First Crack, home"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M3 19c2.4-5.6 6.6-9.4 11-9.4 3.2 0 4.6 2.2 5.6 4.4L22 18"/><circle cx="18.2" cy="13.6" r="2.3"/></svg>First Crack</a>
+  <nav class="nav" aria-label="Primary">
+    <a href="#bags">Bags</a>
+    <a href="#roast">The roast</a>
+    <a href="#subscribe">Subscribe</a>
+    <a href="origins.html">Origins</a>
+  </nav>
+  <button class="cart-btn" id="cart-btn" type="button" aria-controls="cart" aria-expanded="false" aria-label="Your bag, 0 items"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3L5 8z"/><path d="M8.5 8V6.5a3.5 3.5 0 0 1 7 0V8"/></svg><span>Bag</span><b id="cart-count">0</b></button>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</header>
+<div class="drawer glass glass--drawer" id="drawer" data-mode="dark" data-open="false">
+  <a href="#bags">Bags</a>
+  <a href="#roast">The roast</a>
+  <a href="#fresh">Freshness</a>
+  <a href="#subscribe">Subscribe</a>
+  <a href="origins.html">Origins</a>
+  <a class="btn btn--primary" href="#bags">Shop this week&rsquo;s roast</a>
+</div>
+
+<div class="veil" id="veil" aria-hidden="true"></div>
+<aside class="cart glass glass--cart" id="cart" data-mode="dark" data-open="false" aria-hidden="true" aria-label="Your bag">
+  <div class="cart-head">
+    <h2>Your bag</h2>
+    <button class="x" type="button" aria-label="Close your bag"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg></button>
+  </div>
+  <div class="cart-list" id="cart-list"></div>
+  <div class="cart-foot">
+    <div class="row"><span>Subtotal</span><span class="mono" id="c-sub">SGD 0</span></div>
+    <div class="row"><span>Delivery</span><span class="mono" id="c-ship">&mdash;</span></div>
+    <div class="row total"><span>Total</span><span class="mono" id="c-total">SGD 0</span></div>
+    <button class="btn btn--primary" id="c-order" type="button" disabled>Place the order<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></button>
+    <p class="hint" id="c-hint">Free delivery over SGD 40</p>
+    <p class="cart-sent" id="c-sent" hidden>Your mail client should have opened with the order addressed to orders@firstcrack.sg. Add your name and address, send it, and we roast it Thursday.</p>
+  </div>
+</aside>
+
+<main id="main">
+
+  <section class="hero band" id="hero" data-plate="light" aria-label="First Crack. Coffee roasted Thursday, at your door by Saturday">
+    <div class="plate">
+      <video muted playsinline loop preload="none" poster="img/hero-poster.webp" data-src="video/hero.mp4" data-src-sm="video/hero-sm.mp4" aria-hidden="true"></video>
+      <div class="scrim scrim--hero"></div>
+    </div>
+    <div class="wrap hero-grid">
+      <div class="glass glass--sheet hero-sheet rv" data-meter>
+        <p class="eyebrow">Roasted in Singapore &middot; Sent the morning after</p>
+        <h1 class="display">Roasted Thursday. <em>At your door</em> by Saturday.</h1>
+        <p class="lede">Single-origin coffee, roasted in small batches on a fifteen-kilo drum, bagged the same afternoon and sent straight to you. No shelf, no warehouse, no best-before. Just a roast date.</p>
+        <div class="ctas">
+          <a class="btn btn--primary" href="#bags">Shop this week&rsquo;s roast<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
+          <a class="btn btn--ghost" href="#roast">Hear the first crack</a>
+        </div>
+        <ul class="hero-facts mono">
+          <li>Roast day <b data-roast-date>Thursday</b></li>
+          <li>Order by <b data-cutoff>Wed 18:00</b></li>
+          <li>Free delivery over <b>SGD 40</b></li>
+        </ul>
+      </div>
+      <div class="hero-product rv d2" data-hero-bag="guji">
+        <figure class="bag bag--hero">
+          <img src="img/bag-gloss-700.webp" srcset="img/bag-gloss-700.webp 700w, img/bag-gloss.webp 1400w" sizes="(max-width: 860px) 52vw, 26vw" alt="A 250 gram bag of this week&rsquo;s roast, black with a one-way valve" fetchpriority="high" decoding="async">
+        </figure>
+        <div class="glass glass--pill hero-tag" data-meter><span class="cap">This week</span><b data-hero-origin>Ethiopia &middot; Guji</b></div>
+        <div class="glass glass--pill hero-pill" data-meter><span class="mono">250 g &middot; light roast</span><b data-hero-price>SGD 24</b><small>Roasted <span data-roast-date-short>Thursday</span></small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band roast" id="roast" data-plate="dark" aria-labelledby="roast-title">
+    <div class="plate">
+      <video muted playsinline loop preload="none" poster="img/roast-poster.webp" data-src="video/roast.mp4" data-src-sm="video/roast-sm.mp4" aria-hidden="true"></video>
+      <div class="scrim scrim--band"></div>
+    </div>
+    <div class="wrap">
+      <div class="glass glass--sheet roast-sheet rv" data-meter>
+        <div class="roast-head">
+          <div>
+            <p class="eyebrow">The roast, minute by minute</p>
+            <h2 class="display display--m" id="roast-title">Every bag is dropped somewhere on this line. <em>You choose where.</em></h2>
+          </div>
+          <div class="seg seg--lg level" id="level" role="radiogroup" aria-label="Roast level">
+            <span class="seg-thumb" aria-hidden="true"></span>
+            <label><input type="radio" name="level" value="light"><span>Light</span></label>
+            <label><input type="radio" name="level" value="medium" checked><span>Medium</span></label>
+            <label><input type="radio" name="level" value="dark"><span>Dark</span></label>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <svg class="chart" id="chart" viewBox="0 0 880 400" role="img" tabindex="0" aria-labelledby="chart-title chart-desc">
+            <title id="chart-title">Bean temperature through the roast</title>
+            <desc id="chart-desc">Temperature rises from a charge at 190 degrees, falls to a turning point near 86 degrees at ninety seconds, then climbs through drying and Maillard stages to first crack at 8:40 and 196 degrees. The roast is dropped shortly after first crack for a light roast, at about 10:15 for medium, and at 11:30 for dark. Move the pointer or use the arrow keys to read the temperature at any moment.</desc>
+          </svg>
+          <div class="tip glass glass--tip" id="tip" data-mode="light" hidden aria-hidden="true"><b id="tip-t">8:40</b><span id="tip-temp">196 &deg;C</span><i id="tip-stage">Development</i><span id="tip-ror">+8.4 &deg;/min</span></div>
+        </div>
+        <dl class="readouts" aria-live="polite">
+          <div><dt>Drop</dt><dd><b id="ro-drop-t">10:15</b><small id="ro-drop-c">213 &deg;C</small></dd></div>
+          <div><dt>Development</dt><dd><b id="ro-dev">1:35</b><small id="ro-dtr">15% of the roast, after first crack</small></dd></div>
+          <div><dt>Weight lost</dt><dd><b id="ro-loss">14%</b><small>water and chaff, gone as steam</small></dd></div>
+          <div class="ro-taste"><dt>In the cup</dt><dd id="ro-taste">Sugars caramelised, acidity rounded into red fruit, more body.</dd></div>
+        </dl>
+        <p class="roast-note"><span class="cap">Listen</span><span>First crack is the sound the beans make when the steam inside them breaks the cell walls, a snap like popcorn about eight and a half minutes in. It is the one moment every roaster listens for, because <b>everything after it is a decision, and everything before it is chemistry</b>. Hover the line to read the roast at any second.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band bags" id="bags" data-plate="light" aria-labelledby="bags-title">
+    <div class="plate">
+      <img class="px" src="img/green-1400.webp" srcset="img/green-800.webp 800w, img/green-1400.webp 1400w, img/green.webp 2400w" sizes="100vw" alt="" loading="lazy" decoding="async">
+      <div class="scrim scrim--band"></div>
+    </div>
+    <div class="wrap">
+      <div class="glass glass--strip sec-head rv" data-meter>
+        <p class="eyebrow">This week&rsquo;s roast</p>
+        <h2 class="display display--m" id="bags-title">Six bags, one roast date, <em>no old stock.</em></h2>
+        <p class="lede">Every bag below is roasted this <span data-roast-date>Thursday</span> and reaches you <span data-door-date>Saturday</span>. Each carries its roast date on the label, the level we drop it at, and what it tastes like when we cup it.</p>
+        <p class="mono hint" id="bags-hint">Your roast level is <b>medium</b></p>
+      </div>
+      <div class="grid" id="grid" aria-label="This week&rsquo;s bags"></div>
+    </div>
+  </section>
+
+  <section class="band fresh" id="fresh" data-plate="dark" aria-labelledby="fresh-title">
+    <div class="plate">
+      <video muted playsinline loop preload="none" poster="img/pour-poster.webp" data-src="video/pour.mp4" data-src-sm="video/pour-sm.mp4" aria-hidden="true"></video>
+      <div class="scrim scrim--band"></div>
+    </div>
+    <div class="wrap two">
+      <div class="glass glass--sheet fresh-sheet rv" data-meter>
+        <p class="eyebrow">Freshness, as a schedule</p>
+        <h2 class="display display--m" id="fresh-title">We print the roast date. <em>You choose the day.</em></h2>
+        <p class="body">Coffee is a fresh product with a short window and a long shelf life, which is why most of it is sold stale. We roast once a week, to order, and the bag leaves the roastery within a day. The week looks like this, every week.</p>
+        <ol class="strip" id="strip" aria-label="This week"></ol>
+        <p class="countdown"><b id="cutdown">&mdash;</b><span>until the cutoff for <span data-roast-date>Thursday</span>&rsquo;s roast</span></p>
+      </div>
+      <div class="glass glass--card rest rv d1" data-meter>
+        <p class="eyebrow">Resting</p>
+        <p class="body mute">Fresh is not the same as freshest. A bag needs a few days to let go of its CO&#8322; before the water can get in. We mark the window on every bag.</p>
+        <div class="bar" aria-hidden="true"><i></i></div>
+        <ol>
+          <li><span class="mono">Day 0&ndash;4</span><div><b>Too fresh</b><small>The gas fights the water. Bright, thin, hard to dial in.</small></div></li>
+          <li class="win"><span class="mono">Day 5&ndash;14</span><div><b>The window</b><small>Everything we tasted at the cupping table, in your cup.</small></div></li>
+          <li><span class="mono">Day 15&ndash;30</span><div><b>Still good</b><small>Grind a touch finer. Espresso often peaks here.</small></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="band notes" id="notes" data-plate="light" aria-labelledby="notes-title">
+    <div class="plate">
+      <img class="px" src="img/morning-1400.webp" srcset="img/morning-800.webp 800w, img/morning-1400.webp 1400w, img/morning.webp 2400w" sizes="100vw" alt="" loading="lazy" decoding="async">
+      <div class="scrim scrim--band"></div>
+    </div>
+    <div class="wrap">
+      <div class="glass glass--strip sec-head rv" data-meter>
+        <p class="eyebrow">From the doorstep</p>
+        <h2 class="display display--m" id="notes-title">What it tastes like <em>at home.</em></h2>
+      </div>
+      <div class="notes-grid" id="notes-grid"></div>
+    </div>
+  </section>
+
+  <section class="band subscribe" id="subscribe" data-plate="dark" aria-labelledby="sub-title">
+    <div class="plate">
+      <video muted playsinline loop preload="none" poster="img/scatter-poster.webp" data-src="video/scatter.mp4" data-src-sm="video/scatter-sm.mp4" aria-hidden="true"></video>
+      <div class="scrim scrim--band"></div>
+    </div>
+    <div class="wrap">
+      <div class="glass glass--sheet sub-sheet rv" id="sub" data-meter>
+        <div>
+          <p class="eyebrow">Subscription</p>
+          <h2 class="display display--m" id="sub-title">Stop thinking <em>about coffee.</em></h2>
+          <p class="body">Twelve per cent off every bag, delivery free, the roast date always this week&rsquo;s. Pause or stop whenever; there is nothing to cancel because you never paid ahead.</p>
+          <div class="sub-side">
+            <figure class="bag bag--kraft"><img src="img/bag-kraft-700.webp" srcset="img/bag-kraft-700.webp 700w, img/bag-kraft.webp 1400w" sizes="(max-width: 860px) 46vw, 18vw" alt="" loading="lazy" decoding="async"><div class="label" aria-hidden="true"><i><span>First Crack</span><span>250 g</span></i><b>Roaster&rsquo;s pick<small>Matched to your roast level</small></b><u><span>Every fortnight</span><span class="dots"><i></i><i class="on"></i><i></i></span></u></div></figure>
+          </div>
+        </div>
+        <div>
+          <div class="opt">
+            <div class="lab"><span class="cap">Bags per delivery</span><small>250 g each</small></div>
+            <div class="seg" data-k="bags" style="--n:3" role="radiogroup" aria-label="Bags per delivery"><span class="seg-thumb" aria-hidden="true"></span><label><input type="radio" name="s-bags" value="1"><span>One</span></label><label><input type="radio" name="s-bags" value="2" checked><span>Two</span></label><label><input type="radio" name="s-bags" value="3"><span>Three</span></label></div>
+          </div>
+          <div class="opt">
+            <div class="lab"><span class="cap">Every</span><small>Skip a week any time</small></div>
+            <div class="seg" data-k="every" style="--n:2" role="radiogroup" aria-label="Delivery frequency"><span class="seg-thumb" aria-hidden="true"></span><label><input type="radio" name="s-every" value="2" checked><span>Two weeks</span></label><label><input type="radio" name="s-every" value="4"><span>Four weeks</span></label></div>
+          </div>
+          <div class="opt">
+            <div class="lab"><span class="cap">What&rsquo;s in it</span></div>
+            <div class="seg" data-k="pick" style="--n:2" role="radiogroup" aria-label="Selection"><span class="seg-thumb" aria-hidden="true"></span><label><input type="radio" name="s-pick" value="pick" checked><span>Roaster&rsquo;s pick</span></label><label><input type="radio" name="s-pick" value="bag"><span>Same bag</span></label></div>
+            <p class="mono mute" id="s-pickrow">Whatever we are proudest of that week, roasted <b id="s-level">medium</b> to match the level you chose above.</p>
+            <div id="s-bagrow" hidden><label class="vh" for="s-bag">Which bag</label><select id="s-bag"></select></div>
+          </div>
+          <div class="sub-sum" aria-live="polite">
+            <div class="row"><span id="s-unit">SGD 22 &times; 2</span><span class="mono" id="s-full">SGD 44</span></div>
+            <div class="row"><span>Subscriber price, 12% off</span><span class="mono" id="s-disc">&minus; SGD 5.28</span></div>
+            <div class="row"><span>Delivery</span><span class="mono">Free</span></div>
+            <div class="row total"><span>Per delivery</span><b id="s-net">SGD 38.72</b></div>
+            <div class="row"><small id="s-per">SGD 19.36 a bag</small></div>
+            <button class="btn btn--primary" id="s-start" type="button"><span>Start the subscription</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band roastery" id="roastery" data-plate="light" aria-labelledby="roastery-title">
+    <div class="plate">
+      <img class="px" src="img/hopper-1400.webp" srcset="img/hopper-800.webp 800w, img/hopper-1400.webp 1400w, img/hopper.webp 2400w" sizes="100vw" alt="" loading="lazy" decoding="async">
+      <div class="scrim scrim--band"></div>
+    </div>
+    <div class="wrap story">
+      <div class="glass glass--sheet rv" data-meter>
+        <p class="eyebrow">The roastery</p>
+        <h2 class="display display--m" id="roastery-title">A fifteen-kilo drum in a unit off Tai Seng, <em>and one roast day.</em></h2>
+        <p class="body">We roast on Thursdays because Thursday lets a bag rest over the weekend and land in the window by the following week. Green coffee comes in sixty-kilo sacks from importers we have visited, is cupped on arrival, and is profiled on a two-kilo sample roaster before the first production batch. Every batch is logged: charge weight, first crack, drop. The log is below, and it is real.</p>
+        <div class="facts">
+          <div><b>15 kg</b><small>drum roaster, gas-fired</small></div>
+          <div><b>6</b><small>coffees on the table this week</small></div>
+          <div><b>&lt; 48 h</b><small>from drop to your door, in Singapore</small></div>
+        </div>
+      </div>
+      <div class="glass glass--card log-card rv d1" data-meter>
+        <p class="eyebrow">Last roast day</p>
+        <ol class="log" id="log" aria-label="Roast log">
+          <li class="h"><span class="cap">Bag</span><span class="cap">Date &middot; charge</span><span class="cap">First crack</span><span class="cap">Drop</span></li>
+        </ol>
+        <p class="mono mute" style="margin-top:14px">Your level is <b data-level-name>medium</b>. The <a class="link" href="#roast" style="padding-bottom:2px">line above</a> shows where that drops.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div>
+    <a class="mark" href="index.html" aria-label="First Crack, home"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M3 19c2.4-5.6 6.6-9.4 11-9.4 3.2 0 4.6 2.2 5.6 4.4L22 18"/><circle cx="18.2" cy="13.6" r="2.3"/></svg>First Crack</a>
+    <p class="mono" style="margin-top:16px">Coffee roasters &middot; Tai Seng, Singapore &middot; Roast day Thursday</p>
+  </div>
+  <nav aria-label="Footer">
+    <a href="#bags">Bags</a>
+    <a href="#roast">The roast</a>
+    <a href="#subscribe">Subscribe</a>
+    <a href="origins.html">Origins</a>
+    <a href="mailto:hello@firstcrack.sg">hello@firstcrack.sg</a>
+  </nav>
+  <div class="fine mono">
+    <span>&copy; <span data-year>2026</span> First Crack Coffee Pte. Ltd.</span>
+    <span>Roasted to order &middot; Delivered within 48 hours &middot; Singapore</span>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
