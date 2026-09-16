@@ -29,7 +29,7 @@
       : p.status === 'reserved'
         ? '<a class="textlink" href="visit.html?plot=' + p.no + '&amp;wait=1#book">Tell me</a>'
         : '';
-    return '<li class="plot plot--' + p.status + '">' +
+    return '<li class="plot plot--' + p.status + '" data-no="' + p.no + '">' +
       '<span class="plot__no">' + p.no + '</span>' +
       '<span class="plot__type">' + TYPE[p.type] + '<small>' + A.esc(p.note) + '</small></span>' +
       '<span class="plot__meta"><b>' + p.size.toLocaleString('en-GB') + ' m&sup2;</b>' + acres(p.size) + ' acres</span>' +

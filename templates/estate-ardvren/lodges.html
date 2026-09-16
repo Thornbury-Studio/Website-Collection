@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
   <title>Lodges &mdash; The Bothy, The Pine and The Ridge, turnkey from &pound;212,000 &mdash; Ardvren</title>
   <meta name="description" content="Three turnkey larch lodges drawn for Ardvren's plots: The Bothy (58 m², £212,000), The Pine (86 m², £298,000) and The Ridge (124 m², £395,000). Price yours with a plot, cladding and options.">
   <meta name="robots" content="index, follow">
@@ -63,6 +63,7 @@
         <source media="(max-width: 860px)" srcset="img/head-lodges-tall.webp">
         <img src="img/head-lodges.webp" width="2560" height="1000" alt="Spruce and pine on the ridge above Loch Ardvren in blue evening mist" fetchpriority="high" decoding="async">
       </picture>
+      <video data-src="video/film-shore.mp4" poster="img/film-shore-poster.webp" muted loop playsinline preload="none" aria-hidden="true"></video>
     </div>
     <div class="hero__body hero__body--short">
       <h1 class="hero__title" id="page-title">Three lodges. One larch.</h1>
@@ -139,16 +140,16 @@
       <h2 id="inside-title">Turnkey means the kettle works</h2>
       <p>Every price on this page includes the whole building and everything needed to sleep in it the night it is handed over. The only things missing are your furniture and the boots by the door.</p>
     </div>
-    <div class="tiles">
-      <div class="tile tile--photo">
+    <div class="tiles tiles--3d">
+      <div class="tile tile--photo" data-tilt>
         <img src="img/lodge-interior.webp" width="1400" height="1050" alt="Inside a lodge: a deep picture window framed in pale pine, looking out over the tops of the trees" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>Inside</h3><p>Oak floors, Scots pine linings, kitchens by a Perth joiner, bathrooms in Caithness stone</p></div>
       </div>
-      <div class="tile tile--photo">
+      <div class="tile tile--photo" data-tilt>
         <img src="img/lodge-winter.webp" width="1400" height="1050" alt="A lodge in deep snow at dusk, warm light through its glass wall, two chairs on the deck" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>Winter</h3><p>Air-source heat pump, triple glazing, 300 mm of wood-fibre insulation &middot; around &pound;62 a month to heat The Pine</p></div>
       </div>
-      <div class="tile tile--photo">
+      <div class="tile tile--photo" data-tilt>
         <img src="img/lodge-sauna.webp" width="1400" height="1050" alt="A charred-larch shore sauna moored at the loch edge on its own timber jetty" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>Shore sauna</h3><p>Optional, lochside plots only: a 2.4 &times; 3.6 m wood-fired sauna on its own jetty, with the ladder into the loch</p><span class="price">&pound;24,500</span></div>
       </div>
