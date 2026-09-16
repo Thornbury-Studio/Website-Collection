@@ -1,0 +1,14 @@
+---
+description: Default creator credit for YeeHao’s new Website Collection templates
+alwaysApply: true
+---
+
+# YeeHao creator credit (new templates)
+
+When building **new** child-site templates in sessions for/by this user (YeeHao):
+
+- Hub registration must use `data-creator="YeeHao"` and a matching creator-tag, e.g. `<span class="creator-tag" data-rank="junior">YeeHao</span>` (rank as appropriate for the build).
+- Spelling is **YeeHao** (one word, capital H) — same as existing hub cards and the creator filter.
+- Do **not** default to Zane, Jayden, Matt, or other creators unless the user explicitly names another creator for that build.
+- Still register new templates the usual way (card on root `index.html` + `sitemap.xml`). Do **not** redesign the hub.
+- This is a **future default only**. Do not rewrite existing hub cards or change past templates’ attribution unless fixing a mis-attribution introduced in the current session.
