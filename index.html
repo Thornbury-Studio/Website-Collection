@@ -16,11 +16,11 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Website Collection">
 <meta property="og:title" content="Website Template Portfolio | Original Client-Ready Templates">
-<meta property="og:description" content="A growing gallery of original, self-contained website templates for client demos â€” every one a working site, not a screenshot.">
+<meta property="og:description" content="A growing gallery of original, self-contained website templates for client demos â€?every one a working site, not a screenshot.">
 <meta property="og:url" content="https://templates.thornburystudio.com/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Website Template Portfolio | Original Client-Ready Templates">
-<meta name="twitter:description" content="A growing gallery of original, self-contained website templates for client demos â€” every one a working site, not a screenshot.">
+<meta name="twitter:description" content="A growing gallery of original, self-contained website templates for client demos â€?every one a working site, not a screenshot.">
 
 <script type="application/ld+json">
 {
@@ -67,12 +67,12 @@
   a { color: inherit; }
   ::selection { background: var(--accent); color: var(--bg); }
 
-  /* custom cursor disabled â€” using the system cursor */
+  /* custom cursor disabled â€?using the system cursor */
 
   /* ---------- grain texture ----------
      A pre-baked 128px tile (a real Photoshop grain pass, ~5KB), not a live
      SVG feTurbulence filter. The filter version recomputed noise and
-     re-blended the whole viewport on every scrolled frame â€” the single
+     re-blended the whole viewport on every scrolled frame â€?the single
      most expensive thing on the page. A tiled raster at 5% opacity is
      visually the same and costs one cached texture. */
   .grain {
@@ -89,7 +89,7 @@
      Deliberately the native one. A JS-driven cursor can never beat the OS
      here: the pointer is composited by the system at hardware latency,
      while any DIV that "follows" it must wait for a mousemove event, a
-     script frame and a composite â€” so it always reads as lag, no matter
+     script frame and a composite â€?so it always reads as lag, no matter
      how tight the lerp. The hover affordance lives on the card instead
      (see .card-link / .preview), which costs nothing to track. */
 
@@ -133,7 +133,7 @@
   .page { position: relative; z-index: 2; }
 
   /* ---------- expired-preview-link banner ----------
-     display must stay OFF by default and only turn on for :not([hidden]) â€”
+     display must stay OFF by default and only turn on for :not([hidden]) â€?
      an author-stylesheet `display` set directly on this class would win over
      the browser's built-in `[hidden] { display: none }` regardless of the
      hidden attribute's value, since author rules beat user-agent rules
@@ -204,7 +204,7 @@
     background: var(--accent);
     box-shadow: 0 0 0 3px var(--accent-soft);
   }
-  /* A quiet "live" beacon â€” the one thing on the page that's always moving,
+  /* A quiet "live" beacon â€?the one thing on the page that's always moving,
      even before the visitor touches anything. Reinforces "Actively expanding"
      with actual motion instead of just the word. */
   .status .dot::after {
@@ -257,7 +257,7 @@
     line-height: 1.12;
     letter-spacing: -0.01em;
   }
-  /* overflow:hidden masks the slide-up reveal, but it also clips descenders â€”
+  /* overflow:hidden masks the slide-up reveal, but it also clips descenders â€?
      the italic g of "glanced" and the j of "just". Pad the mask below the
      baseline and pull the same amount back so the spacing is unchanged. */
   .hero h1 .line { display: block; overflow: hidden; padding-bottom: 0.16em; margin-bottom: -0.16em; }
@@ -316,7 +316,7 @@
     overflow: hidden;
     margin-top: 60px;
   }
-  /* No gap on the track â€” spacing lives on the row. See PATTERNS.md. */
+  /* No gap on the track â€?spacing lives on the row. See PATTERNS.md. */
   .marquee {
     display: flex;
     width: max-content;
@@ -371,7 +371,7 @@
     #gallery .grid { grid-template-columns: repeat(4, 1fr); }
   }
   /* [hidden] loses to any class rule that sets display, and the filter below
-     hides cards with it â€” so pin it. */
+     hides cards with it â€?so pin it. */
   .grid .card[hidden] { display: none !important; }
   /* A grid item's default min-width is auto, so a 480px screenshot sets the
      track's minimum and auto-fit collapses the whole gallery to one column. */
@@ -414,7 +414,7 @@
     transform: perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px);
     transition: transform 0.5s ease, border-color 0.4s ease;
     /* Off-screen cards skip layout and paint entirely. This is what keeps
-       the grid's rendering cost flat as it grows into the hundreds â€” the
+       the grid's rendering cost flat as it grows into the hundreds â€?the
        browser only ever works on the cards near the viewport. The
        intrinsic size approximates a card so the scrollbar stays honest. */
     content-visibility: auto;
@@ -423,7 +423,7 @@
   .card:hover { border-color: rgba(182, 147, 95, 0.45); }
 
   /* Stagger the idle shimmer per card via nth-child rather than inline
-     styles â€” the custom property inherits down into .preview::before.
+     styles â€?the custom property inherits down into .preview::before.
      7n+k so the stagger cycles forever: card 8 shares card 1's phase, and
      a grid of hundreds never falls into lockstep. */
   .grid .card:nth-child(7n+1) { --sweep-delay: 0s; }
@@ -455,7 +455,7 @@
   }
   .card:hover .preview::after { left: 130%; }
 
-  /* Ambient shimmer â€” a second, slower sweep that runs on its own timer so the
+  /* Ambient shimmer â€?a second, slower sweep that runs on its own timer so the
      grid still feels alive on a glance or on touch, where nothing hovers.
      Separate layer (::before) and property (transform, not left) from the
      hover sweep above, so the two never fight each other. Staggered per card
@@ -470,7 +470,7 @@
     animation: idleSweep 8s ease-in-out infinite;
     animation-delay: var(--sweep-delay, 0s);
     pointer-events: none;
-    /* Paused until an observer marks the card visible â€” a hundred cards
+    /* Paused until an observer marks the card visible â€?a hundred cards
        must not mean a hundred always-running animations. */
     animation-play-state: paused;
   }
@@ -498,7 +498,7 @@
     height: 22px; align-items: center; padding: 0 10px;
     /* Fully opaque, not backdrop-filter. This bar sits on EVERY card, and a
        backdrop-filter is per-element compositor work (separate backdrop
-       root + readback) paid the moment a card scrolls into view â€” the exact
+       root + readback) paid the moment a card scrolls into view â€?the exact
        moment jank is visible. The blur was only ever hiding the 20% of the
        screenshot bleeding through; going solid removes the bleed-through
        instead of smearing it, which is what a browser chrome bar should
@@ -524,10 +524,10 @@
   /* ---------- stealth cards ----------
      A stronger cover than .locked alone: an opaque veil over the WHOLE
      card (image + title + description), not just a dimmed screenshot.
-     Used for work that shouldn't be publicly readable yet â€” e.g. a real
+     Used for work that shouldn't be publicly readable yet â€?e.g. a real
      client project before the client has signed off on it going live.
      The card stays in the grid at its normal spot; only its contents are
-     hidden. Same admin password / same modal as every other locked card â€”
+     hidden. Same admin password / same modal as every other locked card â€?
      this is a visibility toggle, not a second security system. Remove the
      "stealth" class (and "locked", and data-lock, if no longer needed)
      once the project is ready to show. */
@@ -542,7 +542,7 @@
     gap: 10px;
     text-align: center;
     padding: 28px;
-    /* Fully opaque â€” not a semi-transparent scrim. This covers a real
+    /* Fully opaque â€?not a semi-transparent scrim. This covers a real
        client's unreleased work, so nothing underneath may be visible at
        any alpha, not even faintly at the edges. */
     background: var(--bg);
@@ -781,7 +781,7 @@
 
   /* ---------- creator credit ----------
      Sits in the same tag row as .tag/.facet-tag, right behind them, styled
-     as one of the pack rather than singled out â€” same pill as .facet-tag,
+     as one of the pack rather than singled out â€?same pill as .facet-tag,
      just a distinct element so the filter's data-creator stays independent
      of the capability facets. */
   .card .creator-tag {
@@ -792,7 +792,7 @@
   }
   .card .facet-tag + .creator-tag,
   .card .tag + .creator-tag { margin-left: 2px; }
-  /* Same rank colours as the Our Team legend (Settings â†’ Our Team), applied
+  /* Same rank colours as the Our Team legend (Settings â†?Our Team), applied
      the same light-touch way as the flagship facet-tag above: just text and
      border, no fill, so it stays a tag among tags instead of a badge. */
   .card .creator-tag[data-rank="junior"]   { color: #b7b7bf; border-color: rgba(160,160,170,0.4); }
@@ -1029,7 +1029,7 @@
       <form id="unlockForm" novalidate>
         <label class="field">
           <span>Password</span>
-          <input type="password" id="unlockPass" autocomplete="current-password" placeholder="â€¢â€¢â€¢â€¢">
+          <input type="password" id="unlockPass" autocomplete="current-password" placeholder="â€¢â€¢â€¢â€?>
         </label>
         <p class="msg" id="unlockMsg" role="status"></p>
         <button class="btn btn-primary" type="submit">Unlock</button>
@@ -1142,7 +1142,7 @@
     <span class="line"><span>Designed to be opened,</span></span>
     <span class="line"><span>not just <em>glanced at.</em></span></span>
   </h1>
-  <p>A growing collection of original, self-contained website templates for client demos. Every one is a working site, not a screenshot â€” click in and see for yourself.</p>
+  <p>A growing collection of original, self-contained website templates for client demos. Every one is a working site, not a screenshot â€?click in and see for yourself.</p>
   <div class="hero-actions">
     <a href="#gallery" class="btn btn-primary" data-view="gallery">Browse Gallery</a>
     <a href="#clients" class="btn btn-outline" data-view="clients">Our Clients</a>
@@ -1424,7 +1424,7 @@
       <div class="card-body">
         <span class="tag">Restaurant / Online Ordering</span>
         <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span><span class="creator-tag" data-rank="advanced">Jayden</span>
-        <h3>KIYO æ¸…</h3>
+        <h3>KIYO æ¸?/h3>
         <p>A mobile-first Japanese kitchen where ordering, filters and checkout are the whole site.</p>
         <span class="card-foot">
           <span class="card-link">View Template
@@ -1653,12 +1653,12 @@
     <a class="card reveal" href="templates/art-atelier8/index.html" data-facet="standard" data-date="2026-08-09" data-tier="2" data-category="culture" data-creator="Jayden" data-style="photography-led typography-led">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <img src="img/art-atelier8-sm.webp" alt="The ATELIER â„– 8 frontispiece: one abstract painting centred on near-white, a catalogue caption beneath." width="480" height="300" loading="lazy" decoding="async">
+        <img src="img/art-atelier8-sm.webp" alt="The ATELIER â„?8 frontispiece: one abstract painting centred on near-white, a catalogue caption beneath." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Members' Club / Art Gallery</span>
         <span class="facet-tag" data-f="standard">Standard</span><span class="creator-tag" data-rank="advanced">Jayden</span>
-        <h3>ATELIER â„– 8</h3>
+        <h3>ATELIER â„?8</h3>
         <p>A private art club presented as the catalogue of its current show.</p>
         <span class="card-foot">
           <span class="card-link">View Template
@@ -2085,7 +2085,7 @@
     <a class="card reveal" href="templates/lighting-kelvin/index.html" data-facet="standard" data-date="2026-09-02" data-tier="3" data-category="product" data-creator="Jayden" data-style="dark data-technical">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <img src="img/lighting-kelvin-sm.webp" alt="KELVIN: a warm near-black dining room under a hanging filament lamp, headline â€˜Stop lighting dinner like a lobby,â€™ colour temperature at 2700K." width="480" height="300" loading="lazy" decoding="async">
+        <img src="img/lighting-kelvin-sm.webp" alt="KELVIN: a warm near-black dining room under a hanging filament lamp, headline â€˜Stop lighting dinner like a lobby,â€?colour temperature at 2700K." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Hospitality / Lighting Control</span>
@@ -2667,7 +2667,7 @@
         <span class="tag">Home Services / Aircon Triage</span>
         <span class="facet-tag" data-f="booking">Booking</span><span class="creator-tag" data-rank="junior">YeeHao</span>
         <h3>holdfast</h3>
-        <p>Aircon conversion kit â€” triage, price menu, quarterly plan, and WhatsApp dispatch for SG homes.</p>
+        <p>Aircon conversion kit â€?triage, price menu, quarterly plan, and WhatsApp dispatch for SG homes.</p>
         <span class="card-foot">
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
@@ -2685,7 +2685,7 @@
         <span class="tag">Product / Spatial Audio</span>
         <span class="facet-tag" data-f="flagship">Flagship</span><span class="creator-tag" data-rank="junior">YeeHao</span>
         <h3>AURIS</h3>
-        <p>A sideways industrial product page â€” real photos, hotspots, field demo, and waitlist reserve.</p>
+        <p>A sideways industrial product page â€?real photos, hotspots, field demo, and waitlist reserve.</p>
         <span class="card-foot">
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
@@ -2703,7 +2703,7 @@
         <span class="tag">Fragrance / Perfume</span>
         <span class="facet-tag" data-f="flagship">Flagship</span><span class="creator-tag" data-rank="junior">YeeHao</span>
         <h3>ORRIS</h3>
-        <p>Iris-root house with a live accord builder â€” pick notes, watch the flacon, price a discovery kit.</p>
+        <p>Iris-root house with a live accord builder â€?pick notes, watch the flacon, price a discovery kit.</p>
         <span class="card-foot">
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
@@ -2715,13 +2715,13 @@
     <a class="card reveal" href="templates/skincare-lume/index.html" data-facet="booking" data-date="2026-09-16" data-tier="4" data-category="hospitality" data-creator="YeeHao" data-style="photography-led minimal">
       <div class="preview preview--shot">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <img src="img/skincare-lume-sm.jpg" alt="Lume Skin: soft sage hero with â€˜Skin that settles into itselfâ€™ over a facial ritual video still." width="480" height="300" loading="lazy" decoding="async">
+        <img src="img/skincare-lume-sm.jpg" alt="Lume Skin: soft sage hero with â€˜Skin that settles into itselfâ€?over a facial ritual video still." width="480" height="300" loading="lazy" decoding="async">
       </div>
       <div class="card-body">
         <span class="tag">Skincare / Facial Studio</span>
         <span class="facet-tag" data-f="booking">Booking</span><span class="creator-tag" data-rank="junior">YeeHao</span>
         <h3>LUME SKIN</h3>
-        <p>ClearPath-style wellness layout remade for barrier-first skincare â€” full-bleed ritual video, facial grid, plans, journal, and consult booking.</p>
+        <p>ClearPath-style wellness layout remade for barrier-first skincare â€?full-bleed ritual video, facial grid, plans, journal, and consult booking.</p>
         <span class="card-foot">
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
@@ -2739,7 +2739,7 @@
         <span class="tag">Indian / Fine Dining</span>
         <span class="facet-tag" data-f="booking">Booking</span><span class="creator-tag" data-rank="junior">YeeHao</span>
         <h3>ZARI</h3>
-        <p>Qissa-system luxury Indian house â€” stars canvas, gold marquee, plate slider, private salons, reservation-first evenings.</p>
+        <p>Qissa-system luxury Indian house â€?stars canvas, gold marquee, plate slider, private salons, reservation-first evenings.</p>
         <span class="card-foot">
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
@@ -2757,7 +2757,7 @@
         <span class="tag">Korean / Spirits</span>
         <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span><span class="creator-tag" data-rank="junior">YeeHao</span>
         <h3>DAL</h3>
-        <p>Bellussi-system Korean spirits house â€” age gate, bottle-over-type hero, line cards, shop grid, and mini cart.</p>
+        <p>Bellussi-system Korean spirits house â€?age gate, bottle-over-type hero, line cards, shop grid, and mini cart.</p>
         <span class="card-foot">
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
@@ -2793,7 +2793,7 @@
         <span class="tag">E-Commerce / Ammunition</span>
         <span class="facet-tag" data-f="ecommerce">E&#8209;Commerce</span><span class="creator-tag" data-rank="junior">YeeHao</span>
         <h3>Copper Ridge</h3>
-        <p>A US ammo warehouse catalog â€” caliber filters, age gate, hazmat ground shipping, and state checkout rules.</p>
+        <p>A US ammo warehouse catalog â€?caliber filters, age gate, hazmat ground shipping, and state checkout rules.</p>
         <span class="card-foot">
           <span class="card-link">View Template
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
@@ -2928,6 +2928,24 @@
       </div>
     </a>
 
+    <a class="card reveal" href="templates/agency-lode/index.html" data-facet="flagship" data-date="2026-09-16" data-tier="4" data-category="business" data-creator="Zane" data-style="light typography-led">
+      <div class="preview preview--shot">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="img/agency-lode-sm.svg" alt="LODE homepage card: cobalt mark on warm paper with the wordmark LODE and the line Make the market notice." width="480" height="300" loading="lazy" decoding="async">
+      </div>
+      <div class="card-body">
+        <span class="tag">Agency / B2B Design</span>
+        <span class="facet-tag" data-f="flagship">Flagship</span><span class="creator-tag" data-rank="lead">Zane</span>
+        <h3>LODE</h3>
+        <p>A print-poster agency site with GSAP kinetic type and one signature move &mdash; a client-wall image trail that follows the cursor.</p>
+        <span class="card-foot">
+          <span class="card-link">View Template
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </span>
+      </div>
+    </a>
+
     <a class="card locked reveal" href="portfolio/index.html" data-lock="portfolio" data-category="portfolio" data-creator="Zane" data-style="dark typography-led">
       <div class="preview preview--shot">
 
@@ -2937,7 +2955,7 @@
       <div class="card-body">
         <span class="tag">Portfolio / Personal</span><span class="creator-tag" data-rank="lead">Zane</span>
         <h3>Zhang Zhijie</h3>
-        <p>My own portfolio â€” five channels of work, with this whole gallery inside it.</p>
+        <p>My own portfolio â€?five channels of work, with this whole gallery inside it.</p>
         <span class="card-foot">
           <span class="card-link">View Site
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
@@ -3133,7 +3151,7 @@
   </div>
 </section>
 
-<footer><strong>Website Collection</strong> â€” every site here is designed and built by members of our agency for showcase purposes only. Imagery is either licensed royalty-free or generated with AI.<span class="site-signature">Zane</span></footer>
+<footer><strong>Website Collection</strong> â€?every site here is designed and built by members of our agency for showcase purposes only. Imagery is either licensed royalty-free or generated with AI.<span class="site-signature">Zane</span></footer>
 
 </div>
 
@@ -3143,7 +3161,7 @@
 
      The password itself never reaches this script. Unlocking, changing the
      password, and reading the simulated test data are all separate calls to
-     /api/* â€” plain Vercel serverless functions (no framework, no build
+     /api/* â€?plain Vercel serverless functions (no framework, no build
      step) that hold the Supabase service key and a session secret, neither
      of which is ever sent to the browser. This file only tracks the last
      answer those endpoints gave it (`state.role`) so the UI can paint
@@ -3163,7 +3181,7 @@
     var pendingHref = null;   // where to go once the visitor unlocks
     var pendingView = null;   // which in-page view to switch to once the visitor unlocks
     var pendingKind = 'admin'; // which password the open unlock prompt is checking: 'admin' or 'client'
-    var state = { role: null }; // null | 'admin' | 'client' | 'client-scoped' â€” mirrors /api/session
+    var state = { role: null }; // null | 'admin' | 'client' | 'client-scoped' â€?mirrors /api/session
 
     var TITLES = { menu: 'Settings', about: 'About', team: 'Our Team', admin: 'Admin', unlock: 'Locked' };
 
@@ -3189,10 +3207,10 @@
 
     // Admin opens /portfolio, the Admin panel, and every Client Preview slug.
     // 'client' (the shared Client Preview password) and 'client-scoped' (a
-    // per-client signed link) never count as admin â€” a client session must
+    // per-client signed link) never count as admin â€?a client session must
     // never paint the Admin row as open.
     function isAdminOpen() { return state.role === 'admin'; }
-    // Client Preview's own row/gallery â€” the shared password OR admin opens
+    // Client Preview's own row/gallery â€?the shared password OR admin opens
     // it. A 'client-scoped' link session deliberately does NOT: it's good
     // for exactly the one slug it was minted for, not the whole gallery, so
     // a client who came in via their own link still sees Client Preview as
@@ -3220,7 +3238,7 @@
         if (b) b.lastChild.textContent = adminOpen ? ' Unlocked' : ' Locked';
       });
       // Stealth cards additionally hide their real title/description from
-      // assistive tech while veiled â€” the veil's own text becomes the
+      // assistive tech while veiled â€?the veil's own text becomes the
       // card's accessible name via aria-label, since aria-hidden children
       // don't stop an ancestor's own aria-label from being announced.
       document.querySelectorAll('.card.stealth[data-lock]').forEach(function (c) {
@@ -3231,7 +3249,7 @@
           if (preview) preview.removeAttribute('aria-hidden');
           if (body) body.removeAttribute('aria-hidden');
         } else {
-          c.setAttribute('aria-label', 'Hidden project. Not public yet â€” enter the admin password to preview.');
+          c.setAttribute('aria-label', 'Hidden project. Not public yet â€?enter the admin password to preview.');
           if (preview) preview.setAttribute('aria-hidden', 'true');
           if (body) body.setAttribute('aria-hidden', 'true');
         }
@@ -3381,7 +3399,7 @@
 
       submitBtn.disabled = true;
       msg.removeAttribute('data-state');
-      msg.textContent = 'Checkingâ€¦';
+      msg.textContent = 'Checkingâ€?;
 
       var unlockUrl = pendingKind === 'client' ? '/api/unlock-client' : '/api/unlock';
 
@@ -3392,7 +3410,7 @@
       }).then(function (r) {
         submitBtn.disabled = false;
         if (r.ok) {
-          // Re-derive state.role from the server rather than assuming â€”
+          // Re-derive state.role from the server rather than assuming â€?
           // single source of truth for what the cookie actually grants.
           return refreshSession().then(function () {
             if (pendingHref) { window.location.href = pendingHref; return; }
@@ -3453,7 +3471,7 @@
 
       submitBtn.disabled = true;
       msg.removeAttribute('data-state');
-      msg.textContent = 'Savingâ€¦';
+      msg.textContent = 'Savingâ€?;
 
       api('/api/admin/password', {
         method: 'POST',
@@ -3513,7 +3531,7 @@
 
       submitBtn.disabled = true;
       msg.removeAttribute('data-state');
-      msg.textContent = 'Savingâ€¦';
+      msg.textContent = 'Savingâ€?;
 
       api('/api/client/password', {
         method: 'POST',
@@ -3562,7 +3580,7 @@
       submitBtn.disabled = true;
       resultWrap.hidden = true;
       msg.removeAttribute('data-state');
-      msg.textContent = 'Generatingâ€¦';
+      msg.textContent = 'Generatingâ€?;
 
       api('/api/client/generate-link', {
         method: 'POST',
@@ -3621,7 +3639,7 @@
     }
 
     function renderTestList(el, rows, renderRow) {
-      if (!rows) { el.innerHTML = '<p class="test-error">Could not load â€” try again.</p>'; return; }
+      if (!rows) { el.innerHTML = '<p class="test-error">Could not load â€?try again.</p>'; return; }
       if (!rows.length) { el.innerHTML = '<p class="test-empty">No records.</p>'; return; }
       el.innerHTML = rows.map(renderRow).join('');
     }
@@ -3630,8 +3648,8 @@
       var clientsEl = document.getElementById('testClients');
       var backendEl = document.getElementById('testBackend');
       if (!clientsEl || !backendEl) return;
-      clientsEl.textContent = 'Loadingâ€¦';
-      backendEl.textContent = 'Loadingâ€¦';
+      clientsEl.textContent = 'Loadingâ€?;
+      backendEl.textContent = 'Loadingâ€?;
 
       api('/api/test/clients').then(function (r) {
         renderTestList(clientsEl, r.ok ? r.body.clients : null, function (c) {
@@ -3668,7 +3686,7 @@
       window.history.replaceState({}, '', clean);
 
       // `locked` arrives from the query string, so treat it as hostile. Only a
-      // single-slash, same-origin path is allowed to become a navigation â€”
+      // single-slash, same-origin path is allowed to become a navigation â€?
       // "//evil.com" and "https://evil.com" are both protocol-relative or
       // absolute and would turn this into an open redirect.
       if (target.charAt(0) !== '/' || target.charAt(1) === '/') return;
@@ -3694,7 +3712,7 @@
     /* --- expired/invalid per-client link ----------------------------------
        api/preview/redeem.js sends an unrecognised or expired token here as
        /?preview=invalid. There's no password to offer a client in that
-       state â€” just say so and let them get back to browsing. */
+       state â€?just say so and let them get back to browsing. */
     function resumeFromInvalidPreview() {
       var params = new URLSearchParams(location.search);
       if (params.get('preview') !== 'invalid') return;
@@ -3704,7 +3722,7 @@
       if (notice) notice.hidden = false;
     }
 
-    // Bound on the whole bar, not just the small Ã— â€” a click anywhere on it
+    // Bound on the whole bar, not just the small Ã— â€?a click anywhere on it
     // dismisses, so a slightly-off click on the button still works.
     var previewNoticeBar = document.getElementById('previewNotice');
     if (previewNoticeBar) {
@@ -3719,7 +3737,7 @@
   })();
 
   /* =====================================================================
-     View switching â€” Gallery / Client Preview / Our Clients share this one
+     View switching â€?Gallery / Client Preview / Our Clients share this one
      page frame (topbar, hero, footer, settings). Only the section below the
      marquee swaps; nothing here ever navigates to a different file.
      ===================================================================== */
@@ -3741,7 +3759,7 @@
 
   /* =====================================================================
      Facet filter + sort.
-     State lives entirely in data-* attributes on the cards â€” data-facet
+     State lives entirely in data-* attributes on the cards â€?data-facet
      (one or two cross-cutting facets), data-date (the template's first
      commit date, read out of git at build time) and data-tier (an internal
      ordering key, never rendered). No JSON sidecar, no CMS.
@@ -3758,7 +3776,7 @@
 
     const all = Array.prototype.slice.call(grid.querySelectorAll('.card'));
     // Only real template cards take part. The portfolio card is not a
-    // template â€” it carries no data-facet, stays pinned last, and shows
+    // template â€?it carries no data-facet, stays pinned last, and shows
     // only under "All".
     const items = all.filter((c) => c.dataset.facet);
     const pinned = all.filter((c) => !c.dataset.facet);
@@ -3836,7 +3854,7 @@
     apply();
   })();
 
-  // A real count, not a placeholder â€” read straight from the gallery grid
+  // A real count, not a placeholder â€?read straight from the gallery grid
   // rather than hardcoded, so it can't drift out of sync as templates are
   // added. Counts up once on load since the topbar isn't sticky and this is
   // the first thing a visitor sees.
@@ -3863,7 +3881,7 @@
     })(start);
   })();
 
-  /* True-loop marquee â€” see PATTERNS.md.
+  /* True-loop marquee â€?see PATTERNS.md.
      Clones the first row until half the track covers its container, keeping the
      total even so -50% stays a whole period. Two copies is not enough on a wide
      monitor: the tail ran out mid-screen and you watched it reset. Duration
@@ -3879,7 +3897,7 @@
       // whatever duration the stylesheet declares. If we later change
       // animation-duration on that already-running animation, the browser
       // recomputes the played fraction against the NEW duration using the
-      // SAME elapsed real time â€” the visible result is a sudden jump/teleport
+      // SAME elapsed real time â€?the visible result is a sudden jump/teleport
       // the moment this script finishes. animation-name:none + a forced
       // reflow + reapplying the name restarts the animation as a clean new
       // instance at 0%, so there is nothing to recompute a jump from.
@@ -3924,7 +3942,7 @@
 
   // Idle-shimmer gate: only cards near the viewport run their sweep, so a
   // grid of hundreds never means hundreds of always-running animations.
-  // (Applies on touch too â€” the shimmer exists precisely for touch, where
+  // (Applies on touch too â€?the shimmer exists precisely for touch, where
   // nothing hovers.)
   (function () {
     const cards = document.querySelectorAll('.grid .card');
@@ -3943,12 +3961,12 @@
 
   /* Pointer feedback engine.
      The cursor itself is the browser's own (see the cursor note in the CSS).
-     What's left is feedback attached to elements â€” magnetic buttons and card
-     tilt â€” plus mesh parallax, funnelled into ONE requestAnimationFrame
+     What's left is feedback attached to elements â€?magnetic buttons and card
+     tilt â€?plus mesh parallax, funnelled into ONE requestAnimationFrame
      writer built on three rules that keep it cheap at any card count:
 
      1. Handlers record state; only the rAF writes styles. Events can fire
-        far faster than the display refreshes â€” work done per-event is
+        far faster than the display refreshes â€?work done per-event is
         wasted, work done per-frame is bounded.
      2. Frames never read layout. Geometry is captured once on hover entry
         and invalidated by scroll/resize; reading getBoundingClientRect
@@ -3957,7 +3975,7 @@
         a pair of listeners on every link, button and card, so new cards
         cost zero wiring. With no cursor element to ease into place there is
         nothing to settle, so the loop stops on the very next frame after
-        the pointer leaves a button or card â€” an idle page, and a page
+        the pointer leaves a button or card â€?an idle page, and a page
         whose pointer is merely passing over dead space, runs no script. */
   if (isFinePointer) {
     const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
