@@ -9,7 +9,6 @@ THREE.ColorManagement.enabled = false;
   if (!canvas) return;
 
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var asciiEl = document.getElementById("ascii");
   var fallback = document.getElementById("knotStill");
 
   var renderer;
@@ -30,8 +29,8 @@ THREE.ColorManagement.enabled = false;
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
 
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(28, 1, 0.1, 40);
-  camera.position.set(0, 1.35, 9.2);
+  var camera = new THREE.PerspectiveCamera(32, 1, 0.1, 40);
+  camera.position.set(0, 0.08, 6.35);
 
   var group = new THREE.Group();
   scene.add(group);
@@ -50,9 +49,9 @@ THREE.ColorManagement.enabled = false;
   }
 
   var layers = [
-    knot(2, 3, 1.35, 0.055, 0xe8e8e8, 0.95),
-    knot(3, 4, 1.05, 0.04, 0xd7efa8, 0.22),
-    knot(1, 2, 1.7, 0.03, 0x9a9a9a, 0.18)
+    knot(2, 3, 1.48, 0.06, 0xe8e8e8, 0.96),
+    knot(3, 4, 1.16, 0.05, 0xd7efa8, 0.68),
+    knot(1, 2, 1.82, 0.028, 0x9a9a9a, 0.22)
   ];
 
   var mouse = { x: 0, y: 0 };
@@ -65,45 +64,19 @@ THREE.ColorManagement.enabled = false;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
-  }
-
-  var chars = " ·•+=%#";
-  var asciiW = 92;
-  var asciiH = 42;
-  var read = document.createElement("canvas");
-  var readCtx = read.getContext("2d", { willReadFrequently: true });
-
-  function drawAscii() {
-    if (!asciiEl || reduced) return;
-    var w = canvas.width;
-    var h = canvas.height;
-    if (w < 8 || h < 8) return;
-    read.width = asciiW;
-    read.height = asciiH;
-    readCtx.clearRect(0, 0, asciiW, asciiH);
-    readCtx.drawImage(canvas, 0, 0, asciiW, asciiH);
-    var data = readCtx.getImageData(0, 0, asciiW, asciiH).data;
-    var out = "";
-    for (var y = 0; y < asciiH; y++) {
-      for (var x = 0; x < asciiW; x++) {
-        var i = (y * asciiW + x) * 4;
-        var v = (data[i] + data[i + 1] + data[i + 2]) / 3 * (data[i + 3] / 255);
-        out += chars[Math.min(chars.length - 1, (v / 255 * (chars.length - 1)) | 0)];
-      }
-      out += "\n";
-    }
-    asciiEl.textContent = out;
+    var compact = w < 700;
+    camera.position.z = compact ? 7.55 : 6.35;
+    camera.position.y = compact ? -0.12 : 0.08;
   }
 
   function frame(t) {
-    target.x += (mouse.x - target.x) * 0.04;
-    target.y += (mouse.y - target.y) * 0.04;
-    group.position.y = -1.55;
-    group.rotation.y = t * 0.00018 + target.x * 0.35;
-    group.rotation.x = 0.38 + target.y * 0.2;
-    layers[1].rotation.z = t * 0.00012;
+    target.x += (mouse.x - target.x) * 0.05;
+    target.y += (mouse.y - target.y) * 0.05;
+    group.position.y = -0.22;
+    group.rotation.y = t * 0.00048 + target.x * 0.32;
+    group.rotation.x = 0.22 + target.y * 0.12;
+    layers[1].rotation.z = t * 0.00032;
     renderer.render(scene, camera);
-    if (asciiEl && asciiEl.classList.contains("is-on")) drawAscii();
     if (!reduced) requestAnimationFrame(frame);
   }
 
@@ -114,29 +87,8 @@ THREE.ColorManagement.enabled = false;
 
   window.addEventListener("resize", resize);
 
-  document.querySelectorAll("[data-layer]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var id = Number(btn.getAttribute("data-layer"));
-      document.querySelectorAll("[data-layer]").forEach(function (b) {
-        b.classList.toggle("is-on", b === btn);
-      });
-      layers.forEach(function (mesh, i) {
-        mesh.material.opacity = i === id ? 0.95 : 0.12;
-        mesh.material.color.setHex(i === id ? 0xe8e8e8 : 0x666666);
-      });
-      var copy = document.getElementById("layerCopy");
-      if (copy) {
-        var texts = [
-          "Sense. Live demand, inventory, and market signal land in one control layer.",
-          "Decide. Agents propose the next move. Operators keep judgement and risk.",
-          "Act. Replenishment, cash, and service execute while the loop keeps learning."
-        ];
-        copy.textContent = texts[id] || texts[0];
-      }
-      if (asciiEl) asciiEl.classList.toggle("is-on", id === 2);
-    });
-  });
-
+  group.position.y = -0.22;
+  group.rotation.x = 0.22;
   resize();
   if (reduced) {
     renderer.render(scene, camera);

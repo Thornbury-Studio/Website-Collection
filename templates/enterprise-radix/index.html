@@ -58,7 +58,7 @@ FORM: Competitor craft bar (SentientX), original brand and copy. Seed skipped �
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
 -->
 <a class="skip" href="#main">Skip to content</a>
-<a class="back-link" href="../../index.html">Collection</a>
+<a class="back-link is-tucked" href="../../index.html">Collection</a>
 <div class="dots-bg" aria-hidden="true"></div>
 
 <header class="top">
@@ -100,15 +100,14 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <section class="section wrap split" id="layers">
     <div class="reveal">
       <h2 class="display" style="font-size: clamp(2.2rem, 5vw, 3.4rem)">One intelligence, three layers</h2>
-      <p class="lede" id="layerCopy">An AI core that orchestrates execution, rebuilds the enterprise around it, and protects human identity while the company runs.</p>
-      <div class="layers">
-        <button type="button" class="is-on" data-layer="0">Sense in real time</button>
-        <button type="button" data-layer="1">From data to judgement</button>
-        <button type="button" data-layer="2">Feedback into foresight</button>
-      </div>
+      <p class="lede">An AI core that orchestrates execution, rebuilds the enterprise around it, and protects human identity while the company runs.</p>
+      <ul class="layer-list">
+        <li><strong>Sense</strong>Live demand, inventory, and market signal land in one control layer.</li>
+        <li><strong>Decide</strong>Agents propose the next move. Operators keep judgement and risk.</li>
+        <li><strong>Act</strong>Replenishment, cash, and service execute while the loop keeps learning.</li>
+      </ul>
     </div>
     <div class="split-media contain">
-      <pre class="ascii" id="ascii" aria-hidden="true"></pre>
       <img src="img/radix-knot.webp" alt="Wireframe torus knot standing for the RADIX operating layer." width="1600" height="900">
     </div>
   </section>
@@ -120,7 +119,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
   <section class="media-band">
     <video muted loop playsinline preload="none" poster="img/radix-identity.webp" data-src="video/identity.mp4" aria-hidden="true"></video>
-    <img src="img/radix-identity.webp" alt="A person standing beside a wireframe identity halo in a dark studio." width="1600" height="900">
+    <img hidden src="img/radix-identity.webp" alt="A person standing beside a wireframe identity halo in a dark studio." width="1600" height="900">
     <div class="media-copy">
       <h2 class="display" style="font-size: clamp(2.2rem, 5vw, 3.6rem)">Protect the human in the loop.</h2>
       <p class="lede">Verid is RADIX’s custodian for voice, image, and persona — built for a world where anyone can be replicated in seconds.</p>
@@ -151,7 +150,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <div class="split">
       <div class="split-media">
         <video muted loop playsinline preload="none" poster="img/radix-warehouse.webp" data-src="video/supply.mp4"></video>
-        <img src="img/radix-warehouse.webp" alt="Night warehouse with high racking and a forklift under LED work lights." width="1600" height="900">
+        <img hidden src="img/radix-warehouse.webp" alt="Night warehouse with high racking and a forklift under LED work lights." width="1600" height="900">
       </div>
       <div>
         <h2 class="display" style="font-size: clamp(2.1rem, 4.6vw, 3.2rem)">Move fast. Deliver. Scale.</h2>
@@ -194,7 +193,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     </div>
   </section>
 
-  <section class="section wrap">
+  <section class="section wrap traps-block">
     <h2 class="display" style="font-size: clamp(2.1rem, 4.6vw, 3.2rem)">Traps to avoid</h2>
     <div class="traps" aria-label="Common failure modes">
       <div class="traps-track" id="trapsTrack">
@@ -211,6 +210,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <div class="trap"><strong>No clear owner</strong><span>Without accountability, the stack stalls.</span></div>
         </div>
       </div>
+      <div class="traps-fade traps-fade--top" aria-hidden="true"></div>
+      <div class="traps-fade traps-fade--bot" aria-hidden="true"></div>
     </div>
   </section>
 

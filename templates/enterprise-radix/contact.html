@@ -20,7 +20,7 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<a class="back-link" href="../../index.html">Collection</a>
+<a class="back-link is-tucked" href="../../index.html">Collection</a>
 <div class="dots-bg" aria-hidden="true"></div>
 <header class="top">
   <a class="chip chip--ghost" href="contact.html">&lt; Contact &gt;</a>
@@ -49,22 +49,24 @@
     <p class="lede">450 Park Avenue, Floor 32, New York, NY 10022<br><a href="mailto:hello@radixops.com">hello@radixops.com</a></p>
   </header>
   <section class="section wrap split">
-    <form class="form" id="sessionForm">
-      <label>Name <input name="name" required autocomplete="name"></label>
-      <label>Work email <input type="email" name="email" required autocomplete="email"></label>
-      <label>Company <input name="company" required autocomplete="organization"></label>
-      <label>Where should we start
-        <select name="focus">
-          <option>Supply chain</option>
-          <option>Finance</option>
-          <option>Customer operations</option>
-          <option>Identity / Verid</option>
-        </select>
-      </label>
-      <label>What has to move in ninety days <textarea name="note" required></textarea></label>
-      <button type="submit">Request the session</button>
-    </form>
-    <p class="form-ok" id="formOk" hidden>Received. An operator will reply from hello@radixops.com.</p>
+    <div>
+      <form class="form" id="sessionForm">
+        <label>Name <input name="name" required autocomplete="name"></label>
+        <label>Work email <input type="email" name="email" required autocomplete="email"></label>
+        <label>Company <input name="company" required autocomplete="organization"></label>
+        <label>Where should we start
+          <select name="focus">
+            <option>Supply chain</option>
+            <option>Finance</option>
+            <option>Customer operations</option>
+            <option>Identity / Verid</option>
+          </select>
+        </label>
+        <label>What has to move in ninety days <textarea name="note" required></textarea></label>
+        <button type="submit">Request the session</button>
+      </form>
+      <p class="form-ok" id="formOk" hidden>Received. An operator will reply from hello@radixops.com.</p>
+    </div>
     <div class="split-media">
       <img src="img/radix-contact.webp" alt="Night view of a glass office tower and wet plaza." width="1600" height="900">
     </div>
