@@ -72,11 +72,27 @@
     if (!reduced) trueLoopMarquee(t, 14);
   });
 
-  /* ---------- font playground (works without GSAP) ---------- */
+  /* ---------- font playground (lazy-load non-default) ---------- */
+  var FONT_HREFS = {
+    syne: 'https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&display=swap',
+    fraunces: 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700;800&display=swap'
+  };
+  var loadedFonts = { unbounded: true };
+
+  function ensureFont(name) {
+    if (loadedFonts[name] || !FONT_HREFS[name]) return;
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = FONT_HREFS[name];
+    document.head.appendChild(link);
+    loadedFonts[name] = true;
+  }
+
   var fontSwitch = document.getElementById('fontSwitch');
   if (fontSwitch) {
     var saved = localStorage.getItem('lode-font');
-    if (saved) {
+    if (saved && saved !== 'unbounded') {
+      ensureFont(saved);
       document.body.classList.remove('font-unbounded', 'font-syne', 'font-fraunces');
       document.body.classList.add('font-' + saved);
       fontSwitch.querySelectorAll('button').forEach(function (b) {
@@ -87,6 +103,7 @@
       var btn = e.target.closest('button[data-font]');
       if (!btn) return;
       var name = btn.getAttribute('data-font');
+      ensureFont(name);
       document.body.classList.remove('font-unbounded', 'font-syne', 'font-fraunces');
       document.body.classList.add('font-' + name);
       fontSwitch.querySelectorAll('button').forEach(function (b) {
@@ -96,21 +113,27 @@
     });
   }
 
-  /* ---------- studio video ---------- */
+  /* ---------- all videos respect reduced motion ---------- */
+  function pauseVideosForReducedMotion() {
+    document.querySelectorAll('video').forEach(function (vid) {
+      vid.removeAttribute('autoplay');
+      try { vid.pause(); } catch (e) {}
+      vid.style.display = 'none';
+      var poster = vid.parentElement && vid.parentElement.querySelector('.studio-poster');
+      if (poster) poster.style.opacity = '1';
+    });
+  }
+
   var studioVideo = document.getElementById('studioVideo');
   var studioPoster = document.querySelector('.studio-poster');
-  if (studioVideo) {
-    if (reduced) {
-      studioVideo.removeAttribute('autoplay');
-      studioVideo.pause();
-      studioVideo.style.display = 'none';
-    } else {
-      studioVideo.addEventListener('playing', function () {
-        if (studioPoster) studioPoster.style.opacity = '0';
-      });
-      var playPromise = studioVideo.play();
-      if (playPromise && playPromise.catch) playPromise.catch(function () {});
-    }
+  if (reduced) {
+    pauseVideosForReducedMotion();
+  } else if (studioVideo) {
+    studioVideo.addEventListener('playing', function () {
+      if (studioPoster) studioPoster.style.opacity = '0';
+    });
+    var playPromise = studioVideo.play();
+    if (playPromise && playPromise.catch) playPromise.catch(function () {});
   }
 
   /* ---------- news category filter (no GSAP needed) ---------- */
@@ -131,18 +154,223 @@
     });
   }
 
+  /* ---------- case / article stubs ---------- */
+  var CASES = {
+    hale: {
+      title: 'HALE',
+      tag: 'Care platform',
+      date: '2025',
+      cover: 'img/news-06.png',
+      body: 'HALE needed a site that felt clinical without going cold — a care platform that patients and investors could both trust. We rebuilt the brand system, then shipped a conversion-led marketing site with product storytelling that scales across fundraising and go-to-market.'
+    },
+    pike: {
+      title: 'PIKE',
+      tag: 'Venture brand',
+      date: '2025',
+      cover: 'img/news-02.png',
+      body: 'PIKE came to us with a mission deck and a half-finished logo. We defined the visual system, voice, and a site architecture that lets partners move from thesis to portfolio without another redesign.'
+    },
+    quill: {
+      title: 'QUILL',
+      tag: 'Finance brand',
+      date: '2026',
+      cover: 'img/news-01.png',
+      body: 'QUILL expanded into a second product line and needed the brand to stretch without snapping. We redesigned the mark, type, and web presence so the finance story reads premium on day one and still holds after the next launch.'
+    },
+    north: {
+      title: 'NORTH',
+      tag: 'Design system',
+      date: '2026',
+      cover: 'img/news-05.png',
+      body: 'NORTH asked for a product-grade design system — tokens, components, and documentation their eng team could ship from. We delivered a living library that cut design debt and kept marketing and product in the same visual language.'
+    },
+    arc: {
+      title: 'ARC',
+      tag: 'RIA growth site',
+      date: '2025',
+      cover: 'img/news-03.png',
+      body: 'ARC needed a growth site that felt as careful as their advice. We built a calm, high-trust marketing experience with clear CTAs for prospects and a CMS their team can update without calling us every Friday.'
+    },
+    vox: {
+      title: 'VOX',
+      tag: 'Venture firm',
+      date: '2024',
+      cover: 'img/news-04.png',
+      body: 'VOX wanted a redesign that signaled conviction without the usual VC chrome. We stripped the noise, rebuilt the narrative around thesis and team, and shipped a site partners still send when they open a conversation.'
+    }
+  };
+
+  var ARTICLES = {
+    'north-system': {
+      title: 'New launch: NORTH design system',
+      date: 'Sep 1, 2026',
+      datetime: '2026-09-01',
+      cover: 'img/news-06.png',
+      tag: 'Launch',
+      body: 'NORTH’s component library is live — tokens, documentation, and a marketing site that finally matches the product. Here’s how we kept design and engineering in the same room from kickoff to ship.'
+    },
+    storytelling: {
+      title: 'Why visual storytelling beats better copy',
+      date: 'May 26, 2026',
+      datetime: '2026-05-26',
+      cover: 'img/news-02.png',
+      tag: 'Essay',
+      body: 'Stronger sentences help. Stronger scenes convert. We argue for image-led narratives on B2B sites — not decoration, but the argument itself — and how to brief them without bloating the timeline.'
+    },
+    expertise: {
+      title: 'The expertise agency and AI augmentation',
+      date: 'Apr 28, 2026',
+      datetime: '2026-04-28',
+      cover: 'img/news-03.png',
+      tag: 'Essay',
+      body: 'AI accelerates production. It does not replace judgment. We share how LODE uses tooling to move faster on systems work while keeping principals on the creative calls that still decide the brand.'
+    },
+    sotd: {
+      title: 'LODE ships a Site of the Day contender',
+      date: 'Jan 17, 2026',
+      datetime: '2026-01-17',
+      cover: 'img/news-04.png',
+      tag: 'Studio',
+      body: 'A look at the build that earned us a nod — motion restraint, poster-scale type, and a launch checklist we now run on every high-stakes project.'
+    },
+    'behind-build': {
+      title: 'Behind the build: a product-grade system',
+      date: 'Jan 13, 2026',
+      datetime: '2026-01-13',
+      cover: 'img/news-05.png',
+      tag: 'Essay',
+      body: 'From Figma tokens to production CSS variables — the decisions that kept NORTH’s system coherent across product UI and the marketing site without a second brand file.'
+    },
+    hale: {
+      title: 'New launch: HALE care platform',
+      date: 'Jan 8, 2026',
+      datetime: '2026-01-08',
+      cover: 'img/news-01.png',
+      tag: 'Launch',
+      body: 'HALE is live. A care platform site that balances clinical clarity with investor-grade polish — and a CMS their team owns from day one.'
+    }
+  };
+
+  function fillStub(map, rootId) {
+    var root = document.getElementById(rootId);
+    if (!root) return;
+    var key = (location.hash || '').replace(/^#/, '') ||
+      new URLSearchParams(location.search).get('id') ||
+      Object.keys(map)[0];
+    var data = map[key] || map[Object.keys(map)[0]];
+    if (!data) return;
+    var titleEl = root.querySelector('[data-stub-title]');
+    var tagEl = root.querySelector('[data-stub-tag]');
+    var dateEl = root.querySelector('[data-stub-date]');
+    var coverEl = root.querySelector('[data-stub-cover]');
+    var bodyEl = root.querySelector('[data-stub-body]');
+    if (titleEl) titleEl.textContent = data.title;
+    if (tagEl) tagEl.textContent = data.tag || '';
+    if (dateEl) {
+      dateEl.textContent = data.date;
+      if (data.datetime) dateEl.setAttribute('datetime', data.datetime);
+    }
+    if (coverEl) {
+      coverEl.src = data.cover;
+      coverEl.alt = data.title;
+    }
+    if (bodyEl) bodyEl.textContent = data.body;
+    document.title = data.title + ' — LODE';
+  }
+  fillStub(CASES, 'caseStub');
+  fillStub(ARTICLES, 'articleStub');
+  window.addEventListener('hashchange', function () {
+    fillStub(CASES, 'caseStub');
+    fillStub(ARTICLES, 'articleStub');
+  });
+
+  /* ---------- client wall: touch / coarse fallback ---------- */
+  var wall = document.getElementById('clientWall');
+  var trail = document.getElementById('trail');
+  if (wall && trail && (!fine || reduced)) {
+    wall.classList.add('is-touch');
+    if (reduced) wall.classList.add('is-reduced-trail');
+    var note = wall.parentElement && wall.parentElement.querySelector('.section-note');
+    if (note) {
+      note.textContent = reduced
+        ? 'Selected client posters.'
+        : 'Tap the wall to cycle posters.';
+    }
+
+    var imgs = Array.prototype.slice.call(trail.querySelectorAll('img'));
+    var touchIdx = 0;
+    imgs.forEach(function (img, i) {
+      img.style.visibility = 'visible';
+      img.style.clipPath = 'none';
+      if (reduced) {
+        img.classList.toggle('is-active', i < 4);
+        img.style.opacity = i < 4 ? '1' : '0';
+      } else {
+        img.classList.toggle('is-active', i === 0);
+        img.style.opacity = i === 0 ? '1' : '0';
+      }
+    });
+
+    if (!reduced && !fine) {
+      wall.addEventListener('click', function () {
+        imgs.forEach(function (img) {
+          img.classList.remove('is-active');
+          img.style.opacity = '0';
+        });
+        touchIdx = (touchIdx + 1) % imgs.length;
+        var next = imgs[touchIdx];
+        next.classList.add('is-active');
+        next.style.opacity = '1';
+      });
+    }
+  }
+
+  /* ---------- hero FOUC guard (before GSAP gate) ---------- */
+  function showHero() {
+    document.body.classList.remove('hero-animating');
+    document.body.classList.add('hero-ready');
+    if (hasGSAP) {
+      try {
+        window.gsap.set('.hero-brand-inner, .hero-line-inner, .reveal-line span, .reveal-fade', { clearProps: 'transform,opacity' });
+      } catch (e) {}
+    }
+  }
+
+  var heroEl = document.querySelector('.hero');
+  if (heroEl && !reduced && hasGSAP) {
+    /* wait — animation starts below */
+  } else {
+    showHero();
+  }
+
   if (!hasGSAP) return;
 
   var gsap = window.gsap;
 
-  /* ---------- hero ---------- */
-  if (!reduced) {
-    gsap.set('.reveal-line span', { y: 16, opacity: 0 });
-    gsap.set('.reveal-fade', { y: 18, opacity: 0 });
-    gsap.timeline({ defaults: { ease: 'power4.out' } })
-      .to('.hero-line-inner', { y: 0, duration: 1.05, stagger: 0.12 }, 0.05)
-      .to('.reveal-line span', { opacity: 1, y: 0, duration: 0.7 }, 0.35)
-      .to('.reveal-fade', { opacity: 1, y: 0, duration: 0.8, stagger: 0.08 }, 0.55);
+  /* ---------- hero (only hide text once GSAP timeline starts) ---------- */
+  if (heroEl && !reduced) {
+    var heroSafety = setTimeout(showHero, 2200);
+    try {
+      document.body.classList.add('hero-animating');
+      gsap.set('.hero-brand-inner, .hero-line-inner', { yPercent: 110 });
+      gsap.set('.reveal-line span', { y: 16, opacity: 0 });
+      gsap.set('.reveal-fade', { y: 18, opacity: 0 });
+      gsap.timeline({
+        defaults: { ease: 'power4.out' },
+        onComplete: function () {
+          clearTimeout(heroSafety);
+          document.body.classList.remove('hero-animating');
+          document.body.classList.add('hero-ready');
+        }
+      })
+        .to('.hero-brand-inner', { yPercent: 0, duration: 0.95 }, 0)
+        .to('.hero-line-inner', { yPercent: 0, duration: 1.0, stagger: 0.1 }, 0.15)
+        .to('.reveal-line span', { opacity: 1, y: 0, duration: 0.65 }, 0.4)
+        .to('.reveal-fade', { opacity: 1, y: 0, duration: 0.75, stagger: 0.08 }, 0.55);
+    } catch (err) {
+      clearTimeout(heroSafety);
+      showHero();
+    }
   }
 
   /* ---------- stats count ---------- */
@@ -207,17 +435,28 @@
   /* ---------- news: cursor-follow preview ---------- */
   var newsFloat = document.getElementById('newsFloat');
   var newsFloatImg = document.getElementById('newsFloatImg');
-  if (newsList && newsFloat && newsFloatImg && fine && !reduced && hasGSAP) {
-    var gsapNF = window.gsap;
-    var qx = gsapNF.quickTo(newsFloat, 'x', { duration: 0.45, ease: 'power3.out' });
-    var qy = gsapNF.quickTo(newsFloat, 'y', { duration: 0.45, ease: 'power3.out' });
-    gsapNF.set(newsFloat, { xPercent: -50, yPercent: -50 });
+  if (newsList && newsFloat && newsFloatImg && fine && !reduced) {
+    var qx = gsap.quickTo(newsFloat, 'x', { duration: 0.45, ease: 'power3.out' });
+    var qy = gsap.quickTo(newsFloat, 'y', { duration: 0.45, ease: 'power3.out' });
+    gsap.set(newsFloat, { xPercent: -50, yPercent: -50, scale: 0.92 });
+
+    /* preload covers */
+    var seen = {};
+    newsList.querySelectorAll('.news-item').forEach(function (item) {
+      var src = item.getAttribute('data-img');
+      if (src && !seen[src]) {
+        seen[src] = true;
+        var pre = new Image();
+        pre.src = src;
+      }
+    });
 
     newsList.querySelectorAll('.news-item').forEach(function (item) {
       item.addEventListener('mouseenter', function () {
         var src = item.getAttribute('data-img');
         if (src) newsFloatImg.src = src;
         newsFloat.classList.add('is-on');
+        gsap.to(newsFloat, { scale: 1, duration: 0.45, ease: 'power3.out', overwrite: 'auto' });
       });
       item.addEventListener('mousemove', function (e) {
         qx(e.clientX + 28);
@@ -225,19 +464,20 @@
       });
       item.addEventListener('mouseleave', function () {
         newsFloat.classList.remove('is-on');
+        gsap.to(newsFloat, { scale: 0.94, duration: 0.35, ease: 'power2.in', overwrite: 'auto' });
       });
     });
   }
 
   /* ---------- magnetic team cards ---------- */
-  if (fine && !reduced && hasGSAP) {
+  if (fine && !reduced) {
     document.querySelectorAll('[data-magnetic]').forEach(function (card) {
       var strength = 14;
       card.addEventListener('mousemove', function (e) {
         var r = card.getBoundingClientRect();
         var dx = e.clientX - (r.left + r.width / 2);
         var dy = e.clientY - (r.top + r.height / 2);
-        window.gsap.to(card, {
+        gsap.to(card, {
           x: (dx / r.width) * strength,
           y: (dy / r.height) * strength,
           duration: 0.35,
@@ -245,20 +485,17 @@
         });
       });
       card.addEventListener('mouseleave', function () {
-        window.gsap.to(card, { x: 0, y: 0, duration: 0.55, ease: 'elastic.out(1, 0.45)' });
+        gsap.to(card, { x: 0, y: 0, duration: 0.55, ease: 'elastic.out(1, 0.45)' });
       });
     });
   }
 
   /* ---------- L2 signature: kinetic image trail ---------- */
-  var wall = document.getElementById('clientWall');
-  var trail = document.getElementById('trail');
-  if (!wall || !trail || reduced || !fine || !hasGSAP) return;
+  if (!wall || !trail || reduced || !fine) return;
 
-  var imgs = Array.prototype.slice.call(trail.querySelectorAll('img'));
-  if (!imgs.length) return;
+  var trailImgs = Array.prototype.slice.call(trail.querySelectorAll('img'));
+  if (!trailImgs.length) return;
 
-  var gsap = window.gsap;
   var idx = 0;
   var last = 0;
   var gap = 55;
@@ -269,7 +506,7 @@
   window.addEventListener('resize', measure, { passive: true });
   window.addEventListener('scroll', measure, { passive: true });
 
-  imgs.forEach(function (img) {
+  trailImgs.forEach(function (img) {
     gsap.set(img, {
       xPercent: -50,
       yPercent: -50,
@@ -288,7 +525,7 @@
 
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
-    var img = imgs[idx % imgs.length];
+    var img = trailImgs[idx % trailImgs.length];
     idx++;
 
     gsap.killTweensOf(img);
@@ -321,7 +558,7 @@
   }, { passive: true });
 
   wall.addEventListener('mouseleave', function () {
-    imgs.forEach(function (img) {
+    trailImgs.forEach(function (img) {
       gsap.to(img, {
         opacity: 0,
         duration: 0.25,
