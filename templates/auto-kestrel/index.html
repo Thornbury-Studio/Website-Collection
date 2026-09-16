@@ -28,31 +28,34 @@
   <a class="skip" href="#main">Skip to main content</a>
 
   <div class="loader" id="loader" aria-hidden="true">
-    <svg class="loader-mark" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-      <path d="M14 8v32"/><path d="M14 26 32 8"/><path d="M18 22 34 40"/>
-    </svg>
+    <div class="loader-mark" id="loaderMark">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path class="ld ld-1" d="M14 8v32"/><path class="ld ld-2" d="M14 26 32 8"/><path class="ld ld-3" d="M18 22 34 40"/>
+      </svg>
+    </div>
   </div>
 
-  <header class="site-head" id="siteHead">
+  <header class="site-head" id="siteHead" data-theme="dark">
     <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
       <span></span><span></span>
     </button>
-    <a class="brand" href="#top" aria-label="Kestrel Automobiles — home">
+    <a class="brand" id="brand" href="#top" aria-label="Kestrel Automobiles — home">
       <svg class="brand-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="2"/><path d="M12 10V2.5M12 14v7.5"/><path d="M10 12H2.5M14 12h7.5"/></svg>
       <span class="brand-word">Kestrel</span>
     </a>
     <a class="head-cta" href="#register">Register</a>
   </header>
 
+  <div class="menu-backdrop" id="menuBackdrop" hidden></div>
   <nav class="menu" id="menu" aria-label="Main navigation" hidden>
     <div class="menu-inner">
       <ul class="menu-list">
-        <li><a href="#top" data-menu-link>Home</a></li>
-        <li><a href="#aviator" data-menu-link>K8 Aviator Coupé</a></li>
-        <li><a href="#heritage" data-menu-link>Heritage</a></li>
-        <li><a href="#news" data-menu-link>News</a></li>
-        <li><a href="#register" data-menu-link>Register</a></li>
-        <li><a href="#contact" data-menu-link>Contact</a></li>
+        <li><a class="nav-link" href="#top" data-menu-link>Home</a></li>
+        <li><a class="nav-link" href="#aviator" data-menu-link>K8 Aviator Coupé</a></li>
+        <li><a class="nav-link" href="#heritage" data-menu-link>Heritage</a></li>
+        <li><a class="nav-link" href="#news" data-menu-link>News</a></li>
+        <li><a class="nav-link" href="#register" data-menu-link>Register</a></li>
+        <li><a class="nav-link" href="#contact" data-menu-link>Contact</a></li>
       </ul>
       <figure class="menu-fig">
         <img src="img/register-bg.jpg" alt="A machined air vent set into saddle leather and carbon fibre inside the K8 Aviator." width="1920" height="1280" loading="lazy" decoding="async">
@@ -76,57 +79,67 @@
   <main id="main">
     <span id="top" class="anchor"></span>
 
-    <!-- Hero: pinned video that fades to black as the page scrolls -->
-    <section class="hero" id="hero" aria-labelledby="heroTitle">
-      <div class="hero-pin">
-        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="img/detail-taillight.jpg">
-          <source src="video/hero.mp4" type="video/mp4">
-        </video>
+    <!-- Hero: scales down as it scrolls out; the film parallaxes inside a taller mask -->
+    <section class="hero" id="hero" data-theme="dark" aria-labelledby="heroTitle">
+      <div class="hero-scale" id="heroScale">
+        <div class="hero-media" id="heroMedia">
+          <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="img/detail-taillight.jpg">
+            <source src="video/hero.mp4" type="video/mp4">
+          </video>
+        </div>
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="hero-copy">
-          <p class="eyebrow eyebrow--light">The first of the new era</p>
-          <h1 class="display" id="heroTitle">The next chapter<br>of Kestrel</h1>
-          <a class="btn btn--ghost" href="#aviator">Discover the Kestrel K8 Aviator Coupé</a>
+          <p class="eyebrow eyebrow--light" data-reveal="chars" data-reveal-hold>The first of the new era</p>
+          <h1 class="display" id="heroTitle" data-reveal="chars" data-reveal-hold>The next chapter<br>of Kestrel</h1>
+          <a class="btn btn--ghost reveal" data-btn data-reveal-hold href="#aviator">Discover the Kestrel K8 Aviator Coupé</a>
         </div>
       </div>
     </section>
 
     <!-- The making of -->
-    <section class="making" id="aviator" aria-labelledby="makingTitle">
+    <section class="making" id="aviator" data-theme="light" aria-labelledby="makingTitle">
       <div class="making-grid">
-        <div class="making-intro reveal">
-          <p class="eyebrow">The making of the Aviator</p>
-          <h2 class="display display--md" id="makingTitle">Pure Passion</h2>
-          <p class="lede">The Kestrel K8 Aviator Coupé was created by a small circle of designers, engineers and coachbuilders whose work already belongs to Kestrel's modern history. Many had shaped the marque before. Reunited around one conviction, they set out to create the car.</p>
+        <div class="making-intro">
+          <p class="eyebrow" data-reveal="chars">The making of the Aviator</p>
+          <h2 class="display display--md" id="makingTitle" data-reveal="chars">Pure Passion</h2>
+          <p class="lede" data-reveal="lines">The Kestrel K8 Aviator Coupé was created by a small circle of designers, engineers and coachbuilders whose work already belongs to Kestrel's modern history. Many had shaped the marque before. Reunited around one conviction, they set out to create the car.</p>
         </div>
 
-        <figure class="making-fig making-fig--a reveal">
-          <img src="img/detail-carbon.jpg" alt="A carbon-fibre panel with a machined access hatch, its weave catching a single studio light." width="1400" height="933" loading="lazy" decoding="async">
-          <figcaption>Iso-grid began as an aerospace solution: interlocking triangles that reduce weight without sacrificing strength. On the K8 Aviator Coupé it becomes a recurring geometry across the front and rear mesh, the air inlets, pedals, upholstery and engine covers — an engineering principle carried through every detail.</figcaption>
+        <figure class="making-fig making-fig--a" data-fig data-drift="-0.04">
+          <div class="fig-media">
+            <div class="fig-par"><img src="img/detail-carbon.jpg" alt="A carbon-fibre panel with a machined access hatch, its weave catching a single studio light." width="1400" height="933" loading="lazy" decoding="async"></div>
+          </div>
+          <figcaption data-reveal="lines">Iso-grid began as an aerospace solution: interlocking triangles that reduce weight without sacrificing strength. On the K8 Aviator Coupé it becomes a recurring geometry across the front and rear mesh, the air inlets, pedals, upholstery and engine covers — an engineering principle carried through every detail.</figcaption>
         </figure>
 
-        <figure class="making-fig making-fig--b reveal">
-          <img src="img/detail-taillight.jpg" alt="A sculpted rear lamp glowing red across a dark quarter panel." width="1400" height="933" loading="lazy" decoding="async">
-          <figcaption>The rear lights are formed around the image of a jet afterburner. Rose-gold fins give the light depth, while the turbine housings preserve a line of continuity with the first Aviator.</figcaption>
+        <figure class="making-fig making-fig--b" data-fig data-drift="0.05">
+          <div class="fig-media">
+            <div class="fig-par"><img src="img/detail-taillight.jpg" alt="A sculpted rear lamp glowing red across a dark quarter panel." width="1400" height="933" loading="lazy" decoding="async"></div>
+          </div>
+          <figcaption data-reveal="lines">The rear lights are formed around the image of a jet afterburner. Rose-gold fins give the light depth, while the turbine housings preserve a line of continuity with the first Aviator.</figcaption>
         </figure>
 
-        <figure class="making-fig making-fig--c reveal">
-          <img src="img/detail-wing.jpg" alt="The rear wing and exposed carbon deck of the Aviator at dusk, reflections running along its edge." width="1400" height="933" loading="lazy" decoding="async">
-          <figcaption>Every exterior surface is hand-finished before paint. The rear deck is left in exposed weave and lacquered twelve times, so the structure of the car remains visible through the depth of the finish.</figcaption>
+        <figure class="making-fig making-fig--c" data-fig data-drift="-0.06">
+          <div class="fig-media">
+            <div class="fig-par"><img src="img/detail-wing.jpg" alt="The rear wing and exposed carbon deck of the Aviator at dusk, reflections running along its edge." width="1400" height="933" loading="lazy" decoding="async"></div>
+          </div>
+          <figcaption data-reveal="lines">Every exterior surface is hand-finished before paint. The rear deck is left in exposed weave and lacquered twelve times, so the structure of the car remains visible through the depth of the finish.</figcaption>
         </figure>
 
-        <figure class="making-fig making-fig--d reveal">
-          <img src="img/detail-exhaust.jpg" alt="A polished exhaust tip set into a dark rear diffuser, photographed in black and white." width="1400" height="933" loading="lazy" decoding="async">
-          <figcaption>Both exhaust tips, engraved with Kestrel's axiom since 1912, reflect in the hand-polished stainless-steel fintail like a mirror.</figcaption>
+        <figure class="making-fig making-fig--d" data-fig data-drift="0.04">
+          <div class="fig-media">
+            <div class="fig-par"><img src="img/detail-exhaust.jpg" alt="A polished exhaust tip set into a dark rear diffuser, photographed in black and white." width="1400" height="933" loading="lazy" decoding="async"></div>
+          </div>
+          <figcaption data-reveal="lines">Both exhaust tips, engraved with Kestrel's axiom since 1912, reflect in the hand-polished stainless-steel fintail like a mirror.</figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- Axiom: black band with a clip-path video reveal -->
-    <section class="axiom" id="axiom" aria-labelledby="axiomTitle">
-      <div class="axiom-head reveal">
-        <h2 class="display display--xl" id="axiomTitle">Alis Volat<br>Propriis</h2>
-        <p class="axiom-sub">She flies with her own wings.</p>
+    <!-- Axiom: the whole black band clips inward as it leaves -->
+    <section class="axiom" id="axiom" data-theme="dark" aria-labelledby="axiomTitle">
+      <div class="axiom-head">
+        <h2 class="display display--xl" id="axiomTitle" data-reveal="chars">Alis Volat<br>Propriis</h2>
+        <p class="axiom-sub" data-reveal="lines">She flies with her own wings.</p>
       </div>
       <div class="axiom-frame" id="axiomFrame">
         <video class="axiom-video" id="axiomVideo" muted loop playsinline preload="none" poster="img/detail-taillight.jpg">
@@ -139,70 +152,85 @@
     </section>
 
     <!-- Heritage: floating archive -->
-    <section class="heritage" id="heritage" aria-labelledby="heritageTitle">
+    <section class="heritage" id="heritage" data-theme="light" aria-labelledby="heritageTitle">
       <div class="heritage-field" aria-hidden="true">
-        <img class="hf hf-1" data-speed="0.18" src="img/her-1.jpg" alt="" width="700" height="466" loading="lazy" decoding="async">
-        <img class="hf hf-2" data-speed="-0.10" src="img/her-2.jpg" alt="" width="700" height="466" loading="lazy" decoding="async">
-        <img class="hf hf-3" data-speed="0.26" src="img/her-3.jpg" alt="" width="700" height="466" loading="lazy" decoding="async">
-        <img class="hf hf-4" data-speed="-0.22" src="img/her-4.jpg" alt="" width="700" height="466" loading="lazy" decoding="async">
-        <img class="hf hf-5" data-speed="0.14" src="img/her-5.jpg" alt="" width="700" height="466" loading="lazy" decoding="async">
-        <img class="hf hf-6" data-speed="-0.16" src="img/her-6.jpg" alt="" width="700" height="466" loading="lazy" decoding="async">
-        <img class="hf hf-7" data-speed="0.30" src="img/her-7.jpg" alt="" width="700" height="466" loading="lazy" decoding="async">
-        <img class="hf hf-8" data-speed="-0.28" src="img/her-8.jpg" alt="" width="700" height="466" loading="lazy" decoding="async">
+        <div class="hf hf-9" data-speed="0.08" data-op="1"><img src="img/her-7.jpg" alt="" width="700" height="466" loading="lazy" decoding="async"></div>
+        <div class="hf hf-1" data-speed="0.18" data-op="0.34"><img src="img/her-1.jpg" alt="" width="700" height="466" loading="lazy" decoding="async"></div>
+        <div class="hf hf-2" data-speed="-0.10" data-op="0.3"><img src="img/her-2.jpg" alt="" width="700" height="466" loading="lazy" decoding="async"></div>
+        <div class="hf hf-3" data-speed="0.26" data-op="0.32"><img src="img/her-3.jpg" alt="" width="700" height="466" loading="lazy" decoding="async"></div>
+        <div class="hf hf-4" data-speed="-0.22" data-op="0.85"><img src="img/her-4.jpg" alt="" width="700" height="466" loading="lazy" decoding="async"></div>
+        <div class="hf hf-5" data-speed="0.14" data-op="0.3"><img src="img/her-5.jpg" alt="" width="700" height="466" loading="lazy" decoding="async"></div>
+        <div class="hf hf-6" data-speed="-0.16" data-op="0.9"><img src="img/her-6.jpg" alt="" width="700" height="466" loading="lazy" decoding="async"></div>
+        <div class="hf hf-7" data-speed="0.30" data-op="0.3"><img src="img/her-9.jpg" alt="" width="1280" height="853" loading="lazy" decoding="async"></div>
+        <div class="hf hf-8" data-speed="-0.28" data-op="0.3"><img src="img/her-8.jpg" alt="" width="700" height="466" loading="lazy" decoding="async"></div>
       </div>
-      <div class="heritage-copy reveal">
-        <p class="eyebrow">Since 1898</p>
-        <h2 class="display display--md" id="heritageTitle">The Kestrel<br>heritage</h2>
-        <p>From royal carriages and early aviation to endurance racing and hand-built grand tourers, Kestrel's history has always been shaped by more than one discipline.</p>
-        <a class="btn" href="#news">Explore Kestrel heritage</a>
+      <div class="heritage-copy">
+        <p class="eyebrow" data-reveal="chars">Since 1898</p>
+        <h2 class="display display--md" id="heritageTitle" data-reveal="chars">The Kestrel<br>heritage</h2>
+        <p data-reveal="lines">From royal carriages and early aviation to endurance racing and hand-built grand tourers, Kestrel's history has always been shaped by more than one discipline.</p>
+        <a class="btn reveal" data-btn href="#news">Explore Kestrel heritage</a>
       </div>
     </section>
 
-    <!-- Partnerships & News -->
-    <section class="news" id="news" aria-labelledby="newsTitle">
-      <h2 class="news-title" id="newsTitle">Partnerships &amp; News</h2>
-      <div class="news-track" id="newsTrack">
-        <a class="news-card reveal" href="#news">
-          <figure class="news-media"><img src="img/news-1.jpg" alt="The rear lamp of the K8 Aviator lit at dusk, its sculpted housing catching the last light." width="1200" height="800" loading="lazy" decoding="async"></figure>
-          <p class="news-meta"><time datetime="2026-08-14">14.08.26</time><span class="tag-pill">Press release</span></p>
-          <h3>Kestrel K8 Aviator Coupé. 128 years in the making. A new era begins.</h3>
-          <p>Kestrel unveils the K8 Aviator Coupé, marking a new era for the 128-year-old Dutch marque.</p>
-        </a>
-        <a class="news-card reveal" href="#news">
-          <figure class="news-media"><img src="img/news-2.jpg" alt="The K8 Double Twelve at a historic circuit, photographed in black and white." width="1200" height="800" loading="lazy" decoding="async"></figure>
-          <p class="news-meta"><time datetime="2026-06-25">25.06.26</time><span class="tag-pill">Press release</span></p>
-          <h3>Kestrel returns to Le Mans Classic with the K8 Double Twelve</h3>
-          <p>Just weeks after the announcement of new ownership, Kestrel is heading back to the Circuit de la Sarthe with its historic endurance car, marking the marque's first appearance there in over a decade.</p>
-        </a>
-        <a class="news-card reveal" href="#news">
-          <figure class="news-media"><img src="img/news-3.jpg" alt="A forged wheel and carbon-ceramic disc on a red Kestrel, low afternoon light." width="1200" height="800" loading="lazy" decoding="async"></figure>
-          <p class="news-meta"><time datetime="2026-06-09">09.06.26</time><span class="tag-pill">Press release</span></p>
-          <h3>Van der Meer Group becomes co-owner of Kestrel Automobiles</h3>
-          <p>The Rotterdam industrial group has acquired a significant stake in the marque, securing production of the Aviator series at the Haarlem works through the end of the decade.</p>
-        </a>
+    <!-- Partnerships & News: draggable looping slider -->
+    <section class="news" id="news" data-theme="light" aria-labelledby="newsTitle">
+      <h2 class="news-title" id="newsTitle" data-reveal="lines">Partnerships &amp; News</h2>
+      <div class="slider" id="newsSlider" role="group" aria-roledescription="carousel" aria-label="Partnerships and news">
+        <div class="slider-track" id="newsTrack">
+          <a class="news-card slide" href="#news">
+            <figure class="news-media"><img src="img/news-1.jpg" alt="The rear lamp of the K8 Aviator lit at dusk, its sculpted housing catching the last light." width="1200" height="800" loading="lazy" decoding="async" draggable="false"></figure>
+            <p class="news-meta"><time datetime="2026-08-14">14.08.26</time><span class="tag-pill">Press release</span></p>
+            <h3>Kestrel K8 Aviator Coupé. 128 years in the making. A new era begins.</h3>
+            <p>Kestrel unveils the K8 Aviator Coupé, marking a new era for the 128-year-old Dutch marque.</p>
+          </a>
+          <a class="news-card slide" href="#news">
+            <figure class="news-media"><img src="img/news-2.jpg" alt="The K8 Double Twelve at a historic circuit, photographed in black and white." width="1200" height="800" loading="lazy" decoding="async" draggable="false"></figure>
+            <p class="news-meta"><time datetime="2026-06-25">25.06.26</time><span class="tag-pill">Press release</span></p>
+            <h3>Kestrel returns to Le Mans Classic with the K8 Double Twelve</h3>
+            <p>Just weeks after the announcement of new ownership, Kestrel is heading back to the Circuit de la Sarthe with its historic endurance car, marking the marque's first appearance there in over a decade.</p>
+          </a>
+          <a class="news-card slide" href="#news">
+            <figure class="news-media"><img src="img/news-3.jpg" alt="A forged wheel and carbon-ceramic disc on a red Kestrel, low afternoon light." width="1200" height="800" loading="lazy" decoding="async" draggable="false"></figure>
+            <p class="news-meta"><time datetime="2026-06-09">09.06.26</time><span class="tag-pill">Press release</span></p>
+            <h3>Van der Meer Group becomes co-owner of Kestrel Automobiles</h3>
+            <p>The Rotterdam industrial group has acquired a significant stake in the marque, securing production of the Aviator series at the Haarlem works through the end of the decade.</p>
+          </a>
+        </div>
       </div>
       <div class="news-foot">
-        <a class="btn" href="#news">View all news</a>
+        <a class="btn reveal" data-btn href="#news">View all news</a>
       </div>
     </section>
 
     <!-- Register -->
-    <section class="register" id="register" aria-labelledby="registerTitle">
+    <section class="register" id="register" data-theme="dark" aria-labelledby="registerTitle">
       <img class="register-bg" src="img/register-bg.jpg" alt="" width="1920" height="1280" loading="lazy" decoding="async" aria-hidden="true">
-      <div class="register-inner reveal">
-        <h2 id="registerTitle">Register for Exclusive Updates</h2>
-        <p>Join an exclusive circle of connoisseurs who will receive updates before the world sees what's next.</p>
-        <form class="register-form" id="registerForm" novalidate>
-          <label class="sr-only" for="regEmail">Your email</label>
-          <input id="regEmail" name="email" type="email" placeholder="YOUR EMAIL" autocomplete="email" required>
-          <button type="submit">Subscribe</button>
+      <div class="register-inner">
+        <h2 id="registerTitle" data-reveal="lines">Register for Exclusive Updates</h2>
+        <p data-reveal="lines">Join an exclusive circle of connoisseurs who will receive updates before the world sees what's next.</p>
+        <form class="register-form reveal" id="registerForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label class="sr-only" for="regFirst">First name</label>
+              <input id="regFirst" name="firstname" type="text" placeholder="FIRSTNAME" autocomplete="given-name" required>
+            </div>
+            <div class="field">
+              <label class="sr-only" for="regLast">Last name</label>
+              <input id="regLast" name="lastname" type="text" placeholder="LASTNAME" autocomplete="family-name" required>
+            </div>
+          </div>
+          <div class="field field--submit">
+            <label class="sr-only" for="regEmail">Your email</label>
+            <input id="regEmail" name="email" type="email" placeholder="YOUR EMAIL" autocomplete="email" required>
+            <button type="submit">Subscribe</button>
+          </div>
         </form>
         <p class="register-note" id="registerNote" role="status" aria-live="polite" hidden>Thank you. You'll hear from us first.</p>
       </div>
     </section>
   </main>
 
-  <footer class="site-foot" id="contact">
+  <footer class="site-foot" id="contact" data-theme="light">
     <div class="foot-main">
       <a class="foot-brand" href="#top" aria-label="Kestrel Automobiles — home">
         <span class="brand-word brand-word--lg">Kestrel</span>
@@ -210,12 +238,12 @@
       </a>
       <nav class="foot-nav" aria-label="Footer navigation">
         <ul>
-          <li><a href="#top">Home</a></li>
-          <li><a href="#aviator">K8 Aviator Coupé</a></li>
-          <li><a href="#heritage">Heritage</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#register">Register</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a class="nav-link" href="#top">Home</a></li>
+          <li><a class="nav-link" href="#aviator">K8 Aviator Coupé</a></li>
+          <li><a class="nav-link" href="#heritage">Heritage</a></li>
+          <li><a class="nav-link" href="#news">News</a></li>
+          <li><a class="nav-link" href="#register">Register</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
         <ul class="social" aria-label="Social">
           <li><a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V14h2.7v8h3.3Z"/></svg></a></li>
@@ -225,11 +253,11 @@
         </ul>
       </nav>
       <ul class="foot-aside">
-        <li><a href="#">Cookie policy</a></li>
-        <li><a href="#">Privacy policy</a></li>
-        <li><a href="#">Terms and conditions</a></li>
-        <li class="foot-aside-gap"><a href="#register">Subscribe to the newsletter</a></li>
-        <li><a href="#">Kestrel Owners' Club</a></li>
+        <li><a class="nav-link" href="#">Cookie policy</a></li>
+        <li><a class="nav-link" href="#">Privacy policy</a></li>
+        <li><a class="nav-link" href="#">Terms and conditions</a></li>
+        <li class="foot-aside-gap"><a class="nav-link" href="#register">Subscribe to the newsletter</a></li>
+        <li><a class="nav-link" href="#">Kestrel Owners' Club</a></li>
       </ul>
     </div>
     <div class="contact-bar">
