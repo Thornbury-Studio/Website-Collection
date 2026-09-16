@@ -1,25 +1,38 @@
 # LODE — Design brief
 
 B2B brand & web design agency sales sample. Motion language inspired by
-papertiger.com (GSAP kinetic type + one mouse-trail signature), not a clone:
-cobalt on paper, original brand, no Webflow.
+papertiger.com (GSAP kinetic type + image trail + news hover preview), not a
+clone: cobalt on paper, original brand, no Webflow.
 
 ## Decisions
 
-1. **Material:** print-poster on warm paper — flat ink, bold type, handmade
-   client posters (SVG). Not glassmorphism.
-2. **Light:** hard graphic contrast; trail posters carry the color hits.
-3. **L1 tactility:** project-card mask reveal; services scrub numbers.
-4. **L2 signature (one only):** Clients Gallery kinetic image trail
-   (GSAP `quickTo` + staggered lag). No custom cursor, no WebGL, no Lenis
-   scroll-jacking.
+1. **Material:** print-poster on warm paper — flat ink, bold type, photo +
+   poster covers. Not glassmorphism.
+2. **Light:** hard graphic contrast; trail/float media carry the color hits.
+3. **L1 tactility:** project-card mask reveal; services scrub; magnetic team.
+4. **L2 signatures (page-scoped):**
+   - Home: Clients Gallery kinetic image trail
+   - News: row-hover cover that follows the cursor (`quickTo`)
+5. **Fonts:** default **Unbounded + Plus Jakarta Sans**. Live switcher also
+   tries Syne / Instrument Sans and Fraunces / Plus Jakarta (persisted in
+   `localStorage`).
+
+## Pages
+
+| Page | Role |
+|---|---|
+| `index.html` | Hero, clients trail, work teaser, services, quotes, CTA |
+| `work.html` | Project grid + looping motion study |
+| `studio.html` | Video hero, principles, magnetic team |
+| `expertise.html` | Capability marquees + principles |
+| `news.html` | Insight index + cursor-follow covers |
 
 ## Stack
 
-Static `index.html` + `expertise.html` + `css/style.css` + `js/main.js`.
-CDN: GSAP 3.15 + ScrollTrigger. Fonts: Syne + Instrument Sans.
+Static HTML + `css/style.css` + `js/main.js`. CDN GSAP 3.15 + ScrollTrigger.
+Media: generated PNG covers + Pexels MP4 (credited).
 
 ## Reduced motion
 
-Hero lines visible immediately; trail disabled; marquee paused; entrances
-become simple opacity fades.
+Hero lines visible; trails/floats/magnetic off; marquees paused; video
+paused with poster only; entrances become opacity fades.

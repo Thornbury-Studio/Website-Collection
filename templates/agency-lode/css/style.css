@@ -14,8 +14,8 @@
   --shadow-3: 0 24px 48px rgba(17,17,17,.12);
   --shadow-4: 0 40px 80px rgba(17,17,17,.14);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --font-display: "Syne", system-ui, sans-serif;
-  --font-body: "Instrument Sans", system-ui, sans-serif;
+  --font-display: "Unbounded", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
   --pad: clamp(1.25rem, 4vw, 3.5rem);
   --max: 1200px;
 }
@@ -575,7 +575,242 @@ body:not(.is-reduced) .reveal-fade {
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none !important; }
-  .trail { display: none !important; }
+  .trail, .news-float { display: none !important; }
   .work-media img, .work-mask, .btn, .nav-cta { transition: none !important; }
   .client-wall { cursor: default; }
+  .studio-video { display: none; }
 }
+
+/* Font playground — swap display stacks live */
+body.font-syne {
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-body: "Instrument Sans", system-ui, sans-serif;
+}
+body.font-fraunces {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+body.font-unbounded {
+  --font-display: "Unbounded", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+.font-switch {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 90;
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.35rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-2);
+  border-radius: 999px;
+}
+.font-switch button {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  color: var(--mute);
+}
+.font-switch button.is-on {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* NEWS — list + cursor-follow preview (Paper Tiger news pattern) */
+.news-hero {
+  padding: calc(6rem + 2vw) var(--pad) 2rem;
+  max-width: calc(var(--max) + 2 * var(--pad));
+  margin: 0 auto;
+}
+.news-hero h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.75rem, 9vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  max-width: 12ch;
+}
+.news-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2rem 0 0;
+}
+.news-filters button {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.news-filters button.is-on {
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+  color: var(--paper);
+}
+.news-list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 2rem var(--pad) 5rem;
+  max-width: calc(var(--max) + 2 * var(--pad));
+}
+.news-item {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+.news-item:last-child { border-bottom: 1px solid var(--line); }
+.news-item time {
+  font-size: 0.8125rem;
+  color: var(--mute);
+  font-variant-numeric: tabular-nums;
+}
+.news-item h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  transition: color 0.25s var(--ease-out), transform 0.35s var(--ease-out);
+}
+.news-item:hover h2 { color: var(--cobalt); transform: translateX(6px); }
+.news-item .tag-pill {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+.news-float {
+  position: fixed;
+  width: min(320px, 40vw);
+  aspect-ratio: 4 / 3;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--shadow-2), var(--shadow-3), var(--shadow-4);
+  will-change: transform, opacity;
+}
+.news-float img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.news-float.is-on {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* STUDIO */
+.studio-hero {
+  position: relative;
+  min-height: 78vh;
+  display: grid;
+  align-items: end;
+  padding: calc(6rem + 2vw) var(--pad) 3rem;
+  overflow: hidden;
+  color: var(--paper);
+  background: var(--ink);
+}
+.studio-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+}
+.studio-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  transition: opacity 0.6s var(--ease-out);
+}
+.studio-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(17,17,17,0.85) 10%, rgba(17,17,17,0.25) 60%, rgba(22,82,240,0.25));
+  pointer-events: none;
+}
+.studio-hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 18ch;
+}
+.studio-hero-copy h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+.studio-hero-copy p {
+  margin: 1rem 0 0;
+  max-width: 28rem;
+  color: rgba(247,244,239,0.75);
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 1rem;
+  padding: 0 var(--pad) 5rem;
+  max-width: calc(var(--max) + 2 * var(--pad));
+  margin: 0 auto;
+}
+.team-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-1), var(--shadow-2);
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s;
+  will-change: transform;
+}
+.team-card:hover {
+  box-shadow: var(--shadow-2), var(--shadow-3);
+}
+.team-card h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+.team-card p {
+  margin: 0.35rem 0 0;
+  font-size: 0.875rem;
+  color: var(--mute);
+}
+
+/* WORK page media */
+.work-page .work-media img { object-fit: cover; }
+.work-page .work-card.is-video .work-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
