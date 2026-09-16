@@ -22,7 +22,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
   <title>Ardvren &mdash; Heritable forest plots and turnkey lodges on Loch Ardvren, Perthshire</title>
   <meta name="description" content="Forty heritable plots in 640 acres of Caledonian pine on Loch Ardvren, Perthshire. Phase 2 released September 2026: twenty-four plots from £148,000 and three turnkey larch lodges from £212,000. Viewing days every Saturday.">
   <meta name="robots" content="index, follow">
@@ -173,10 +173,10 @@
   <!-- what you own -->
   <section class="frame block reveal" id="own" aria-labelledby="own-title">
     <div class="band">
-      <picture>
+      <div class="band__par"><picture>
         <source media="(max-width: 860px)" srcset="img/band-river-tall.webp">
         <img src="img/band-river.webp" width="2000" height="900" alt="The Allt Ardvren burn cutting white through the pine canopy, seen from above" loading="lazy" decoding="async">
-      </picture>
+      </picture></div>
       <h2 class="band__title" id="own-title"><small>The estate</small>What you own /<br>what you don&rsquo;t</h2>
     </div>
     <div class="tiles">
@@ -277,10 +277,10 @@
   <!-- plots -->
   <section class="frame block reveal" aria-labelledby="plots-title">
     <div class="band band--foot">
-      <picture>
+      <div class="band__par"><picture>
         <source media="(max-width: 860px)" srcset="img/band-aerial-tall.webp">
         <img src="img/band-aerial.webp" width="2000" height="900" alt="Loch Ardvren from the air: a long loch with a wooded island, pine forest to every horizon" loading="lazy" decoding="async">
-      </picture>
+      </picture></div>
       <h2 class="band__title" id="plots-title"><small>Phase 2 &middot; released 12 September 2026</small>Twenty-four plots, three kinds of ground</h2>
     </div>
     <div class="tiles tiles--scroll tiles--3d">
@@ -304,6 +304,23 @@
         <span><i class="dot dot--sold"></i><b>4</b> sold</span>
       </div>
       <a class="textlink" href="plots.html#model">Find yours on the model <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </section>
+
+  <!-- the estate as a model -->
+  <section class="frame block reveal" aria-labelledby="model-home-title">
+    <div class="model model--compact" id="model" data-compact>
+      <div class="model__fallback" aria-hidden="true">
+        <img src="img/band-aerial.webp" width="2000" height="900" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="model__canvas" id="modelCanvas" role="img" aria-label="A turntable model of the estate with the twenty-four Phase 2 plots marked"></div>
+      <div class="model__title">
+        <h2 id="model-home-title">The estate, as a model</h2>
+        <p>The 1:2,000 site model from the Steading. Drag to turn it; every numbered pad is a Phase 2 plot &mdash; click one to see it in the schedule.</p>
+      </div>
+      <div class="model__tip" id="modelTip" aria-hidden="true"></div>
+      <p class="model__hint">Drag to turn &middot; click a plot</p>
+      <a class="btn model__cta" href="plots.html#model">Open the full model</a>
     </div>
   </section>
 
@@ -417,5 +434,7 @@
 
 <script src="js/site.js"></script>
 <script src="js/home.js"></script>
+<script src="js/plots-data.js"></script>
+<script src="js/model.js"></script>
 </body>
 </html>

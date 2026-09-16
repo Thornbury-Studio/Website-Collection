@@ -74,3 +74,28 @@ Asked for "the Yorimichi hero and interactions, more visuals, more 3D":
   back to the aerial photograph without WebGL.
 - Clips are 1280 × 720 H.264 at 0.9–3.5 MB and never load on phones; the
   poster frame stands in.
+
+## Third pass — full bleed, and the model everywhere
+
+Asked for the hero to fill the whole background, the same for the rest of
+the images, and more 3D:
+
+- **Full bleed.** The framed layout is gone: the hero, bands, tile rows,
+  film band, gallery and models run edge to edge, and the hero fills the
+  viewport (`100svh` minus the header) on desktop and phone alike. Only
+  text-bearing blocks — header, intros, footer, the configurator — keep the
+  gutters. The bands now carry the same 3D pointer drift as the hero, and the
+  hero photograph tilts a degree or two in perspective under the pointer.
+- **The model on the home page** too: a compact turntable of the estate
+  (same scene, no schedule UI, click a pad to open it on the Plots page).
+- **The lodge, as a massing model**: the configurator summary carries a
+  three.js turntable that rebuilds from the form — the chosen design at its
+  true footprint and heights, natural or charred larch, the flue for the
+  stove, the longer deck, the boot room, the panels on the south pitch, and
+  the shore sauna on its jetty when the plot is lochside, with the ground
+  dressed for the kind of plot (pines, heather and rock, or the loch).
+  Glass and zinc reflect a baked sky so the massing reads as a model, not a
+  diagram; the real photographs of the three lodges stay beside it.
+- three.js (`three.module.min.js`, jsdelivr) now loads by dynamic `import()`
+  only when a 3D section is within 500 px of the viewport, so pages without
+  a model in view never fetch it.

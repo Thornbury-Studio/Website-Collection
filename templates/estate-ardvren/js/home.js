@@ -94,7 +94,7 @@
         my = (e.clientY - r.top) / r.height - 0.5;
         if (!raf) raf = requestAnimationFrame(function () {
           raf = 0;
-          if (par) par.style.transform = 'translate3d(' + (-mx * 22).toFixed(1) + 'px,' + (-my * 14).toFixed(1) + 'px,0)';
+          if (par) par.style.transform = 'perspective(1600px) rotateX(' + (my * 1.6).toFixed(2) + 'deg) rotateY(' + (-mx * 2.2).toFixed(2) + 'deg) translate3d(' + (-mx * 22).toFixed(1) + 'px,' + (-my * 14).toFixed(1) + 'px,0) scale(1.04)';
           if (body) body.style.transform = 'translate3d(' + (mx * 8).toFixed(1) + 'px,' + (my * 5).toFixed(1) + 'px,0)';
         });
       });
@@ -104,6 +104,25 @@
       });
     }
     show(0);
+  }
+
+  /* ---- the photo bands drift against the pointer, like the hero ---- */
+  if (fine && !reduce) {
+    document.querySelectorAll('.band').forEach(function (band) {
+      var layer = band.querySelector('.band__par');
+      if (!layer) return;
+      var raf = 0, bx = 0, by = 0;
+      band.addEventListener('pointermove', function (e) {
+        var r = band.getBoundingClientRect();
+        bx = (e.clientX - r.left) / r.width - 0.5;
+        by = (e.clientY - r.top) / r.height - 0.5;
+        if (!raf) raf = requestAnimationFrame(function () {
+          raf = 0;
+          layer.style.transform = 'perspective(1600px) rotateX(' + (by * 1.2).toFixed(2) + 'deg) rotateY(' + (-bx * 1.6).toFixed(2) + 'deg) translate3d(' + (-bx * 18).toFixed(1) + 'px,' + (-by * 12).toFixed(1) + 'px,0) scale(1.03)';
+        });
+      });
+      band.addEventListener('pointerleave', function () { layer.style.transform = ''; });
+    });
   }
 
   /* ---- film band: the loop wakes when the band nears the viewport ---- */
