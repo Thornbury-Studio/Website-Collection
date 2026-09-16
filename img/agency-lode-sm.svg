@@ -1,0 +1,8 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600">
+  <rect width="960" height="600" fill="#F7F4EF"/>
+  <rect x="0" y="0" width="960" height="12" fill="#1652F0"/>
+  <text x="64" y="280" font-family="Georgia, serif" font-size="120" font-weight="700" fill="#111111" letter-spacing="-4">LODE</text>
+  <text x="64" y="360" font-family="Arial, sans-serif" font-size="28" fill="#1652F0">Make the market notice.</text>
+  <circle cx="820" cy="160" r="72" fill="#1652F0"/>
+  <circle cx="820" cy="160" r="28" fill="#F7F4EF"/>
+</svg>
