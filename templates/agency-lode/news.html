@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News &amp; Insights — LODE</title>
+<meta name="description" content="Latest launches, essays, and build notes from LODE — brand and web design for B2B teams.">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/agency-lode/news.html">
+<meta name="theme-color" content="#F7F4EF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231652F0'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23F7F4EF'/%3E%3C/svg%3E">
+<meta property="og:title" content="News &amp; Insights — LODE">
+<meta property="og:description" content="Latest launches, essays, and build notes from LODE.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/agency-lode/news.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="font-unbounded">
+<div class="grain" aria-hidden="true"></div>
+<a href="../../index.html" class="back-link">&larr; Portfolio</a>
+
+<header class="nav" id="nav">
+  <a href="index.html" class="logo" aria-label="LODE home">LODE</a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="work.html">Work</a>
+    <a href="studio.html">Studio</a>
+    <a href="expertise.html">Expertise</a>
+    <a href="news.html" aria-current="page">News</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+  <a href="index.html#contact" class="nav-cta">Start a project</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" hidden>
+  <a href="work.html">Work</a>
+  <a href="studio.html">Studio</a>
+  <a href="expertise.html">Expertise</a>
+  <a href="news.html">News</a>
+  <a href="index.html#contact">Contact</a>
+</div>
+
+<main>
+  <header class="news-hero">
+    <p class="eyebrow">News</p>
+    <h1>Latest news &amp; insights</h1>
+    <div class="news-filters" role="tablist" aria-label="Filter by category">
+      <button type="button" class="is-on" data-filter="all" role="tab" aria-selected="true">All</button>
+      <button type="button" data-filter="launch" role="tab" aria-selected="false">Launches</button>
+      <button type="button" data-filter="essay" role="tab" aria-selected="false">Essays</button>
+      <button type="button" data-filter="studio" role="tab" aria-selected="false">Studio</button>
+    </div>
+  </header>
+
+  <div class="news-float" id="newsFloat" aria-hidden="true">
+    <img id="newsFloatImg" src="img/news-01.png" alt="" width="640" height="480">
+  </div>
+
+  <div class="news-list" id="newsList">
+    <a class="news-item" href="#article" data-cat="launch" data-img="img/news-06.png">
+      <time datetime="2026-09-01">Sep 1, 2026</time>
+      <div>
+        <h2>New launch: NORTH design system</h2>
+        <span class="tag-pill">Launch</span>
+      </div>
+    </a>
+    <a class="news-item" href="#article" data-cat="essay" data-img="img/news-02.png">
+      <time datetime="2026-05-26">May 26, 2026</time>
+      <div>
+        <h2>Why visual storytelling beats better copy</h2>
+        <span class="tag-pill">Essay</span>
+      </div>
+    </a>
+    <a class="news-item" href="#article" data-cat="essay" data-img="img/news-03.png">
+      <time datetime="2026-04-28">Apr 28, 2026</time>
+      <div>
+        <h2>The expertise agency and AI augmentation</h2>
+        <span class="tag-pill">Essay</span>
+      </div>
+    </a>
+    <a class="news-item" href="#article" data-cat="studio" data-img="img/news-04.png">
+      <time datetime="2026-01-17">Jan 17, 2026</time>
+      <div>
+        <h2>LODE ships a Site of the Day contender</h2>
+        <span class="tag-pill">Studio</span>
+      </div>
+    </a>
+    <a class="news-item" href="#article" data-cat="essay" data-img="img/news-05.png">
+      <time datetime="2026-01-13">Jan 13, 2026</time>
+      <div>
+        <h2>Behind the build: a product-grade system</h2>
+        <span class="tag-pill">Essay</span>
+      </div>
+    </a>
+    <a class="news-item" href="#article" data-cat="launch" data-img="img/news-01.png">
+      <time datetime="2026-01-08">Jan 8, 2026</time>
+      <div>
+        <h2>New launch: HALE care platform</h2>
+        <span class="tag-pill">Launch</span>
+      </div>
+    </a>
+  </div>
+
+  <section class="cta" id="article">
+    <p class="eyebrow">Read next</p>
+    <h2 class="cta-title">Full articles ship with the client build.</h2>
+    <p class="cta-sub">This template shows the index pattern — hover a row and the cover follows your cursor, the same kinetic family as the client wall.</p>
+    <a class="btn btn-primary btn-lg" href="index.html#contact">Start a project</a>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-brand">LODE</div>
+  <p>Brand &amp; web for B2B teams · Brooklyn &amp; remote</p>
+  <nav aria-label="Footer">
+    <a href="work.html">Work</a>
+    <a href="studio.html">Studio</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</footer>
+
+<div class="font-switch" id="fontSwitch" role="group" aria-label="Try display fonts">
+  <button type="button" data-font="unbounded" class="is-on">Unbounded</button>
+  <button type="button" data-font="syne">Syne</button>
+  <button type="button" data-font="fraunces">Fraunces</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

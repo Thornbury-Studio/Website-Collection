@@ -72,6 +72,65 @@
     if (!reduced) trueLoopMarquee(t, 14);
   });
 
+  /* ---------- font playground (works without GSAP) ---------- */
+  var fontSwitch = document.getElementById('fontSwitch');
+  if (fontSwitch) {
+    var saved = localStorage.getItem('lode-font');
+    if (saved) {
+      document.body.classList.remove('font-unbounded', 'font-syne', 'font-fraunces');
+      document.body.classList.add('font-' + saved);
+      fontSwitch.querySelectorAll('button').forEach(function (b) {
+        b.classList.toggle('is-on', b.getAttribute('data-font') === saved);
+      });
+    }
+    fontSwitch.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-font]');
+      if (!btn) return;
+      var name = btn.getAttribute('data-font');
+      document.body.classList.remove('font-unbounded', 'font-syne', 'font-fraunces');
+      document.body.classList.add('font-' + name);
+      fontSwitch.querySelectorAll('button').forEach(function (b) {
+        b.classList.toggle('is-on', b === btn);
+      });
+      try { localStorage.setItem('lode-font', name); } catch (err) {}
+    });
+  }
+
+  /* ---------- studio video ---------- */
+  var studioVideo = document.getElementById('studioVideo');
+  var studioPoster = document.querySelector('.studio-poster');
+  if (studioVideo) {
+    if (reduced) {
+      studioVideo.removeAttribute('autoplay');
+      studioVideo.pause();
+      studioVideo.style.display = 'none';
+    } else {
+      studioVideo.addEventListener('playing', function () {
+        if (studioPoster) studioPoster.style.opacity = '0';
+      });
+      var playPromise = studioVideo.play();
+      if (playPromise && playPromise.catch) playPromise.catch(function () {});
+    }
+  }
+
+  /* ---------- news category filter (no GSAP needed) ---------- */
+  var newsList = document.getElementById('newsList');
+  if (newsList) {
+    document.querySelectorAll('.news-filters button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var cat = btn.getAttribute('data-filter');
+        document.querySelectorAll('.news-filters button').forEach(function (b) {
+          b.classList.toggle('is-on', b === btn);
+          b.setAttribute('aria-selected', String(b === btn));
+        });
+        newsList.querySelectorAll('.news-item').forEach(function (item) {
+          var show = cat === 'all' || item.getAttribute('data-cat') === cat;
+          item.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  }
+
   if (!hasGSAP) return;
 
   var gsap = window.gsap;
@@ -145,14 +204,61 @@
     });
   }
 
+  /* ---------- news: cursor-follow preview ---------- */
+  var newsFloat = document.getElementById('newsFloat');
+  var newsFloatImg = document.getElementById('newsFloatImg');
+  if (newsList && newsFloat && newsFloatImg && fine && !reduced && hasGSAP) {
+    var gsapNF = window.gsap;
+    var qx = gsapNF.quickTo(newsFloat, 'x', { duration: 0.45, ease: 'power3.out' });
+    var qy = gsapNF.quickTo(newsFloat, 'y', { duration: 0.45, ease: 'power3.out' });
+    gsapNF.set(newsFloat, { xPercent: -50, yPercent: -50 });
+
+    newsList.querySelectorAll('.news-item').forEach(function (item) {
+      item.addEventListener('mouseenter', function () {
+        var src = item.getAttribute('data-img');
+        if (src) newsFloatImg.src = src;
+        newsFloat.classList.add('is-on');
+      });
+      item.addEventListener('mousemove', function (e) {
+        qx(e.clientX + 28);
+        qy(e.clientY + 18);
+      });
+      item.addEventListener('mouseleave', function () {
+        newsFloat.classList.remove('is-on');
+      });
+    });
+  }
+
+  /* ---------- magnetic team cards ---------- */
+  if (fine && !reduced && hasGSAP) {
+    document.querySelectorAll('[data-magnetic]').forEach(function (card) {
+      var strength = 14;
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width / 2);
+        var dy = e.clientY - (r.top + r.height / 2);
+        window.gsap.to(card, {
+          x: (dx / r.width) * strength,
+          y: (dy / r.height) * strength,
+          duration: 0.35,
+          ease: 'power3.out'
+        });
+      });
+      card.addEventListener('mouseleave', function () {
+        window.gsap.to(card, { x: 0, y: 0, duration: 0.55, ease: 'elastic.out(1, 0.45)' });
+      });
+    });
+  }
+
   /* ---------- L2 signature: kinetic image trail ---------- */
   var wall = document.getElementById('clientWall');
   var trail = document.getElementById('trail');
-  if (!wall || !trail || reduced || !fine) return;
+  if (!wall || !trail || reduced || !fine || !hasGSAP) return;
 
   var imgs = Array.prototype.slice.call(trail.querySelectorAll('img'));
   if (!imgs.length) return;
 
+  var gsap = window.gsap;
   var idx = 0;
   var last = 0;
   var gap = 55;
