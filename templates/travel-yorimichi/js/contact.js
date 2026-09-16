@@ -38,5 +38,11 @@
     var done = document.getElementById('enquiryDone');
     done.hidden = false;
     done.scrollIntoView({ block: 'nearest' });
+    /* Hiding the form takes the submit button — and with it the keyboard
+       focus — out of the document, dropping focus to <body>. A screen reader
+       user would be told nothing and land back at the top of the page. Move
+       focus onto the confirmation, which carries role="status" and
+       tabindex="-1" for exactly this. */
+    done.focus();
   });
 })();

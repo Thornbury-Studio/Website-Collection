@@ -12,9 +12,19 @@
   --line-strong: rgba(255, 255, 255, .24);
   --text: #F3F1EC;
   --muted: #9AA3B5;
-  --dim: #6B7386;
+  --dim: #7B8398;
   --shu: #E4512B;
   --shu-hover: #F06A45;
+  /* Vermilion carrying WHITE TEXT has to be deeper than the brand vermilion:
+     #E4512B against white is 3.79:1, which fails AA for anything that is not
+     large text, and every use of it here is 11–16px. --shu stays exactly as it
+     was wherever it is seen as a colour — icons, numerals, stars, rules, the
+     logo square — because those are all graphics or 24px+ display type and
+     pass on 3:1 comfortably. Only the surfaces with small white text on them
+     take these two, so the brand mark is unchanged and only the failing
+     elements move. #CC4722 = 4.68:1 white, #B23D1C = 5.87:1 white. */
+  --shu-solid: #CC4722;
+  --shu-solid-hover: #B23D1C;
   --gold: #D9A441;
   --ok: #4FB286;
   --font-display: 'Nunito', 'Segoe UI', system-ui, sans-serif;
@@ -48,12 +58,12 @@ h1, h2, h3, h4 { margin: 0; font-weight: 700; }
 p { margin: 0; }
 ul { margin: 0; padding: 0; list-style: none; }
 table { border-collapse: collapse; width: 100%; }
-::selection { background: var(--shu); color: #fff; }
+::selection { background: var(--shu-solid); color: #fff; }
 :focus-visible { outline: 2px solid var(--shu); outline-offset: 3px; }
 
 .skip {
   position: absolute; left: 16px; top: -60px; z-index: 100;
-  background: var(--shu); color: #fff; padding: 10px 14px; border-radius: var(--radius);
+  background: var(--shu-solid); color: #fff; padding: 10px 14px; border-radius: var(--radius);
 }
 .skip:focus { top: 16px; }
 
@@ -90,10 +100,10 @@ table { border-collapse: collapse; width: 100%; }
   display: inline-flex; align-items: center; gap: 10px;
   padding: 14px 22px; border-radius: var(--radius);
   font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
-  background: var(--shu); color: #fff; transition: background .2s var(--ease), transform .2s var(--ease);
+  background: var(--shu-solid); color: #fff; transition: background .2s var(--ease), transform .2s var(--ease);
   white-space: nowrap;
 }
-.btn:hover { background: var(--shu-hover); }
+.btn:hover { background: var(--shu-solid-hover); }
 .btn:active { transform: translateY(1px); }
 .btn--ghost { background: transparent; box-shadow: inset 0 0 0 1px var(--line-strong); }
 .btn--ghost:hover { background: rgba(255, 255, 255, .06); }
@@ -262,7 +272,9 @@ table { border-collapse: collapse; width: 100%; }
   position: absolute; top: 12px; left: 12px; z-index: 1; font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
   background: rgba(11, 15, 26, .7); padding: 6px 9px; border-radius: 2px; font-weight: 600;
 }
-.tcard__tag--shu { background: var(--shu); }
+/* pure #fff, not --text: at 11px the off-white #F3F1EC gives 4.14:1 here,
+   which is under AA. White on the same ground is 4.68:1. */
+.tcard__tag--shu { background: var(--shu-solid); color: #fff; }
 .tcard__body { padding: 16px 4px 0; text-align: center; }
 .tcard__body .h3 { font-size: 21px; }
 .tcard__body p { color: var(--muted); font-size: 13px; margin-top: 6px; }
@@ -331,7 +343,7 @@ dialog::backdrop { background: rgba(4, 6, 12, .9); }
   transition: color .2s, background .2s;
 }
 .chip:hover { color: var(--text); }
-.chip[aria-pressed="true"] { background: var(--shu); box-shadow: none; color: #fff; }
+.chip[aria-pressed="true"] { background: var(--shu-solid); box-shadow: none; color: #fff; }
 
 /* how we travel */
 .how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
@@ -544,7 +556,7 @@ dialog::backdrop { background: rgba(4, 6, 12, .9); }
 /* contact */
 .contact { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
 .info { display: grid; gap: 28px; }
-.info h3 { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.info h2, .info h3 { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 .info p, .info li { font-size: 16px; }
 .info a { border-bottom: 1px solid var(--line-strong); }
 .info a:hover { border-color: var(--shu); }
