@@ -9,14 +9,20 @@
   set on them and rows of three colour-block tiles — heading at the top, the
   fact at the bottom. Every number is real to the business: plot sizes and
   prices, three turnkey lodges with their floor areas, the service charge,
-  the covenants, the address and the viewing days. Motion is one reveal on
-  entry; nothing else moves.
+  the covenants, the address and the viewing days.
+
+  Second pass: Yorimichi's cinematic layer on top of the mosaic — a five-slide
+  hero (a loch clip, then four plates) with a numbered index, arrows, keys,
+  swipe and a seven-second dwell; a three-item strip at its foot; a film band
+  with a looping drone clip and a three-chapter dialog; a lightbox gallery of
+  the estate through the year; photo tiles that tilt in 3D under the pointer.
+  Video only loads on wide screens; everything respects reduced motion.
 -->
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
   <title>Ardvren &mdash; Heritable forest plots and turnkey lodges on Loch Ardvren, Perthshire</title>
   <meta name="description" content="Forty heritable plots in 640 acres of Caledonian pine on Loch Ardvren, Perthshire. Phase 2 released September 2026: twenty-four plots from £148,000 and three turnkey larch lodges from £212,000. Viewing days every Saturday.">
   <meta name="robots" content="index, follow">
@@ -64,31 +70,108 @@
 
 <main id="main">
 
-  <!-- hero -->
-  <section class="hero frame" aria-labelledby="wordmark">
+  <!-- hero slider -->
+  <section class="hero frame" id="hero" aria-labelledby="wordmark">
     <nav class="tabs" aria-label="Sections">
       <a href="index.html" aria-current="page">The Estate</a>
       <a href="lodges.html">Lodges</a>
       <a href="plots.html">Plots</a>
       <a href="visit.html">Visit</a>
     </nav>
-    <div class="hero__media">
-      <picture>
-        <source media="(max-width: 860px)" srcset="img/hero-forest-tall.webp">
-        <img src="img/hero-forest.webp" width="2560" height="1200" alt="Scots pine forest on the slopes above Loch Ardvren in morning mist" fetchpriority="high" decoding="async">
-      </picture>
+    <div class="hero__stage" id="heroStage">
+      <div class="hero__par">
+        <div class="slide" data-slide="0" aria-hidden="false">
+          <picture>
+            <source media="(max-width: 860px)" srcset="img/hero-loch-tall.webp">
+            <img src="img/hero-loch.webp" width="2560" height="1200" alt="Fog lifting off Loch Ardvren at seven in the morning, the pines of the south shore behind it" fetchpriority="high" decoding="async">
+          </picture>
+          <video data-src="video/film-loch.mp4" poster="img/hero-loch.webp" muted loop playsinline preload="none" aria-hidden="true"></video>
+        </div>
+        <div class="slide" data-slide="1" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 860px)" srcset="img/hero-forest-tall.webp">
+            <img src="img/hero-forest.webp" width="2560" height="1200" alt="Scots pine forest on the slopes above Loch Ardvren in morning mist" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="slide" data-slide="2" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 860px)" srcset="img/hero-aerial-tall.webp">
+            <img src="img/hero-aerial.webp" width="2560" height="1200" alt="Loch Ardvren from the air: the long loch, its wooded island, pine to every horizon" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="slide" data-slide="3" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 860px)" srcset="img/hero-pine-tall.webp">
+            <img src="img/hero-pine.webp" width="2560" height="1200" alt="The Pine lodge in charred larch, its glass wall slid open onto a long deck" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="slide" data-slide="4" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 860px)" srcset="img/hero-winter-tall.webp">
+            <img src="img/hero-winter.webp" width="2560" height="1200" alt="A lodge in deep snow at dusk, warm light through its glass wall" loading="lazy" decoding="async">
+          </picture>
+        </div>
+      </div>
     </div>
+    <div class="hero__media" aria-hidden="true"></div>
     <div class="hero__body">
       <h1 class="wordmark" id="wordmark" aria-label="Ardvren">A<i>&middot;</i>R<i>&middot;</i>D<i>&middot;</i>V<i>&middot;</i>R<i>&middot;</i>E<i>&middot;</i>N</h1>
-      <div class="hero__foot">
-        <p><b>Forty heritable plots on Loch Ardvren, Perthshire.</b>Phase 2 &mdash; twenty-four plots and three turnkey lodge designs &mdash; released 12 September 2026. Plots from &pound;148,000, lodges from &pound;212,000.</p>
-        <a class="btn" href="visit.html#book">Book a viewing</a>
+      <div class="hero__foot hero__foot--v2">
+        <div id="heroCaps" aria-live="polite">
+          <div class="hero__cap">
+            <p><b>The loch at seven.</b>Loch Ardvren is 3.1 miles long and 41 metres deep. Six of the Phase 2 plots run to its waterline; every plot shares 900 metres of common shore, the jetty and the boathouse.</p>
+            <a class="btn" href="plots.html?type=lochside">Lochside plots</a>
+          </div>
+          <div class="hero__cap" hidden>
+            <p><b>640 acres of Caledonian pine.</b>In one ownership since 1911, walked by the same forester for twenty-two years. Forty heritable plots, with covenants that keep the trees.</p>
+            <a class="btn" href="#own">What you own</a>
+          </div>
+          <div class="hero__cap" hidden>
+            <p><b>Phase 2, from above.</b>Twenty-four plots along the south shore and up the ridge behind it, released 12 September 2026. Fourteen are still available.</p>
+            <a class="btn" href="plots.html#model">Find your plot on the model</a>
+          </div>
+          <div class="hero__cap" hidden>
+            <p><b>The Pine, &pound;298,000 turnkey.</b>Eighty-six square metres, two bedrooms, and a larch deck the length of the house. Nine months from the day your plot completes.</p>
+            <a class="btn" href="lodges.html#pine">The lodges</a>
+          </div>
+          <div class="hero__cap" hidden>
+            <p><b>Winter, heated for &pound;62 a month.</b>Triple glazing, 300 millimetres of wood fibre and an air-source heat pump in every lodge. The loch freezes at the edges; the road does not close.</p>
+            <a class="btn" href="lodges.html#configure">Price your lodge</a>
+          </div>
+        </div>
+        <div class="hero__ctl">
+          <div class="hero__index" id="heroIndex" role="tablist" aria-label="Slides">
+            <button type="button" role="tab" data-go="0" aria-current="true" aria-label="Slide 1, the loch">01<i></i></button>
+            <button type="button" role="tab" data-go="1" aria-current="false" aria-label="Slide 2, the forest">02<i></i></button>
+            <button type="button" role="tab" data-go="2" aria-current="false" aria-label="Slide 3, from above">03<i></i></button>
+            <button type="button" role="tab" data-go="3" aria-current="false" aria-label="Slide 4, The Pine">04<i></i></button>
+            <button type="button" role="tab" data-go="4" aria-current="false" aria-label="Slide 5, winter">05<i></i></button>
+          </div>
+          <div class="hero__arrows">
+            <button class="icon-btn" type="button" id="heroPrev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></button>
+            <button class="icon-btn" type="button" id="heroNext" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+  <div class="frame stripe reveal">
+    <div class="stripe__item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-7h6v7"/></svg>
+      <div><p><b>Heritable, in your name.</b>A registered title to the ground, the trees on it and the shore below it. No ground rent, no lease to run out.</p><a class="textlink" href="#own">What you own</a></div>
+    </div>
+    <div class="stripe__item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <div><p><b>Turnkey in nine months.</b>Three lodge designs, built by the estate&rsquo;s own contractor and handed over finished, the kettle working.</p><a class="textlink" href="lodges.html">The lodges</a></div>
+    </div>
+    <div class="stripe__item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      <div><p><b>Saturdays and Wednesdays.</b>Two-hour viewings on foot, by appointment: the plots you ask for, a Phase 1 lodge, the shore.</p><a class="textlink" href="visit.html#book">Book a viewing</a></div>
+    </div>
+  </div>
 
   <!-- what you own -->
-  <section class="frame block reveal" aria-labelledby="own-title">
+  <section class="frame block reveal" id="own" aria-labelledby="own-title">
     <div class="band">
       <picture>
         <source media="(max-width: 860px)" srcset="img/band-river-tall.webp">
@@ -114,22 +197,54 @@
     </div>
   </section>
 
+  <!-- the film -->
+  <section class="frame block reveal" aria-labelledby="film-title">
+    <div class="film" id="film">
+      <div class="film__bg">
+        <img src="img/film-forest-poster.webp" width="1280" height="720" alt="" loading="lazy" decoding="async">
+        <video data-src="video/film-forest.mp4" poster="img/film-forest-poster.webp" muted loop playsinline preload="none" aria-hidden="true"></video>
+      </div>
+      <div class="film__copy">
+        <h2 id="film-title">The estate, in motion</h2>
+        <button class="play" type="button" id="filmPlay" data-chapter="0">
+          <span class="play__ring"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+          <span class="play__label">Watch the film<small>Three chapters &middot; 0:34</small></span>
+        </button>
+        <p>Flown in one week of September: the pines from above at first light, the fog lifting off the loch, and the south shore where Phase 2 begins.</p>
+      </div>
+      <div class="film__chapters">
+        <button class="chapter" type="button" data-chapter="0" aria-label="Play chapter one, the forest at first light">
+          <span class="chapter__thumb"><img src="img/film-forest-poster.webp" width="1280" height="720" alt="" loading="lazy" decoding="async"><span class="chapter__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span></span>
+          <span class="chapter__cap"><strong>01</strong>The forest, first light<small>0:12 &middot; the ridge from above</small></span>
+        </button>
+        <button class="chapter" type="button" data-chapter="1" aria-label="Play chapter two, the loch">
+          <span class="chapter__thumb"><img src="img/film-loch-poster.webp" width="1280" height="720" alt="" loading="lazy" decoding="async"><span class="chapter__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span></span>
+          <span class="chapter__cap"><strong>02</strong>The loch, seven o&rsquo;clock<small>0:12 &middot; fog lifting off the water</small></span>
+        </button>
+        <button class="chapter" type="button" data-chapter="2" aria-label="Play chapter three, the south shore">
+          <span class="chapter__thumb"><img src="img/film-shore-poster.webp" width="1280" height="720" alt="" loading="lazy" decoding="async"><span class="chapter__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span></span>
+          <span class="chapter__cap"><strong>03</strong>The south shore<small>0:10 &middot; where Phase 2 begins</small></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
   <!-- lodges -->
   <section class="frame block reveal" aria-labelledby="lodges-title">
     <div class="intro">
       <h2 id="lodges-title">Three lodges, drawn for these plots</h2>
       <p>Each is built by the estate&rsquo;s own contractor in Scottish larch, on a floor plan sized to its plot type, and handed over finished: foundations, frame, triple glazing, an air-source heat pump, kitchen, bathrooms and the deck. Nine months from the day your plot completes.</p>
     </div>
-    <div class="tiles tiles--scroll">
-      <a class="tile tile--photo" href="lodges.html#bothy">
+    <div class="tiles tiles--scroll tiles--3d">
+      <a class="tile tile--photo" href="lodges.html#bothy" data-tilt>
         <img src="img/lodge-bothy.webp" width="1400" height="1050" alt="The Bothy: a small charred-larch lodge with a glazed gable, log store under the deck, birch and pine behind" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>The Bothy</h3><p>58 m&sup2; &middot; one bedroom and a sleeping loft</p><span class="price">&pound;212,000 turnkey</span></div>
       </a>
-      <a class="tile tile--photo" href="lodges.html#pine">
+      <a class="tile tile--photo" href="lodges.html#pine" data-tilt>
         <img src="img/lodge-pine.webp" width="1400" height="1050" alt="The Pine: a single-storey charred-larch lodge with a full-height sliding window onto a wide larch deck" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>The Pine</h3><p>86 m&sup2; &middot; two bedrooms, one deck the length of the house</p><span class="price">&pound;298,000 turnkey</span></div>
       </a>
-      <a class="tile tile--photo" href="lodges.html#ridge">
+      <a class="tile tile--photo" href="lodges.html#ridge" data-tilt>
         <img src="img/lodge-ridge.webp" width="1400" height="1050" alt="The Ridge: a two-storey lodge in natural and charred larch with a standing-seam roof and a covered porch" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>The Ridge</h3><p>124 m&sup2; &middot; three bedrooms over two floors</p><span class="price">&pound;395,000 turnkey</span></div>
       </a>
@@ -143,7 +258,7 @@
   <!-- trees and shore -->
   <section class="frame block reveal" aria-label="The trees and the shore">
     <div class="tiles">
-      <div class="tile tile--photo">
+      <div class="tile tile--photo" data-tilt>
         <img src="img/tile-pine.webp" width="1200" height="1500" alt="Rain held on the needles of a Scots pine branch" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>Three hundred years, kept</h3></div>
       </div>
@@ -168,16 +283,16 @@
       </picture>
       <h2 class="band__title" id="plots-title"><small>Phase 2 &middot; released 12 September 2026</small>Twenty-four plots, three kinds of ground</h2>
     </div>
-    <div class="tiles tiles--scroll">
-      <a class="tile tile--photo" href="plots.html?type=woodland">
+    <div class="tiles tiles--scroll tiles--3d">
+      <a class="tile tile--photo" href="plots.html?type=woodland" data-tilt>
         <img src="img/plot-woodland.webp" width="1200" height="900" alt="Woodland plot: straight Scots pine trunks over a floor of deep moss" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>Woodland</h3><p>Ten plots &middot; 1,150&ndash;1,900 m&sup2; &middot; under the canopy, a walk from the shore</p><span class="price">from &pound;148,000</span></div>
       </a>
-      <a class="tile tile--photo" href="plots.html?type=ridge">
+      <a class="tile tile--photo" href="plots.html?type=ridge" data-tilt>
         <img src="img/plot-ridge.webp" width="1200" height="900" alt="Ridge plot: mossed granite boulders between old pines on the slope above the loch" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>Ridge</h3><p>Eight plots &middot; 1,600&ndash;2,400 m&sup2; &middot; 36 to 51 metres above the loch, with the view</p><span class="price">from &pound;172,000</span></div>
       </a>
-      <a class="tile tile--photo" href="plots.html?type=lochside">
+      <a class="tile tile--photo" href="plots.html?type=lochside" data-tilt>
         <img src="img/plot-lochside.webp" width="1200" height="900" alt="Lochside plot: a timber jetty running out into still water under morning mist" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>Lochside</h3><p>Six plots &middot; 1,900&ndash;2,900 m&sup2; &middot; 32 to 58 metres of your own shore</p><span class="price">from &pound;236,000</span></div>
       </a>
@@ -188,14 +303,32 @@
         <span><i class="dot dot--reserved"></i><b>6</b> reserved</span>
         <span><i class="dot dot--sold"></i><b>4</b> sold</span>
       </div>
-      <a class="textlink" href="plots.html">See every plot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+      <a class="textlink" href="plots.html#model">Find yours on the model <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </section>
+
+  <!-- the year -->
+  <section class="frame block reveal" aria-labelledby="year-title">
+    <div class="intro">
+      <h2 id="year-title">The year at Ardvren</h2>
+      <p>Eight months from the estate&rsquo;s own album. The stags are on the ridge in October, the swimming ladder goes back in the water in May, and the fire on the point is lit for the longest day.</p>
+    </div>
+    <div class="gallery" id="gallery">
+      <button type="button" class="g-w2 g-h2" data-full="img/g-deer.webp" data-title="The October rut" data-when="A stag on the ridge road at first light, 6 October 2025"><img src="img/g-deer.webp" width="1600" height="1067" alt="A red deer stag standing between dark pine trunks" loading="lazy" decoding="async"><span><b>October</b>The rut on the ridge</span></button>
+      <button type="button" data-full="img/g-swim.webp" data-title="The ladder goes back in" data-when="The swimming ladder at the point, first swim of the year, 3 May 2026"><img src="img/g-swim.webp" width="1600" height="1067" alt="A man in a red wool hat swimming in the still loch at dawn" loading="lazy" decoding="async"><span><b>May</b>First swim, 11 degrees</span></button>
+      <button type="button" data-full="img/g-winter.webp" data-title="The woodland loop, dusk" data-when="Snow on the loop road behind plots 31 to 40, 14 January 2026"><img src="img/g-winter.webp" width="1600" height="1200" alt="The woodland road in deep snow at blue dusk, dark pines either side" loading="lazy" decoding="async"><span><b>January</b>The loop road at dusk</span></button>
+      <button type="button" class="g-w2" data-full="img/g-boat.webp" data-title="The boathouse boats" data-when="One of the four estate rowing boats, moored off the jetty in mist, 21 September 2025"><img src="img/g-boat.webp" width="1600" height="900" alt="A wooden rowing boat moored on still teal water in mist" loading="lazy" decoding="async"><span><b>September</b>A boathouse boat, moored</span></button>
+      <button type="button" class="g-h2" data-full="img/g-fire.webp" data-title="Midsummer on the point" data-when="The owners&rsquo; fire on the point, lit at eleven on the longest day, 21 June 2026"><img src="img/g-fire.webp" width="1000" height="1333" alt="A fire burning on the shore at blue dusk, the loch behind it" loading="lazy" decoding="async"><span><b>June</b>The longest day</span></button>
+      <button type="button" data-full="img/g-boats.webp" data-title="Morning on the jetty" data-when="The estate boats in the morning fog below the boathouse, 2 November 2025"><img src="img/g-boats.webp" width="1600" height="1067" alt="Three rowing boats tied up in thick morning fog on the loch" loading="lazy" decoding="async"><span><b>November</b>Fog on the jetty</span></button>
+      <button type="button" class="g-w2 g-h2" data-full="img/g-heather.webp" data-title="Heather on the ridge" data-when="The open ground above the ridge plots in flower, 18 August 2025"><img src="img/g-heather.webp" width="1600" height="1067" alt="Purple heather in bloom on a hillside above a loch, hills beyond" loading="lazy" decoding="async"><span><b>August</b>Heather above the ridge plots</span></button>
+      <button type="button" data-full="img/g-snow.webp" data-title="The woodland from above" data-when="The woodland loop under snow, flown 9 February 2026"><img src="img/g-snow.webp" width="1600" height="1067" alt="Snow-covered pine forest seen straight down from above" loading="lazy" decoding="async"><span><b>February</b>The woodland, from above</span></button>
     </div>
   </section>
 
   <!-- owners and visit -->
   <section class="frame block reveal" aria-labelledby="visit-title">
     <div class="tiles">
-      <div class="tile tile--photo">
+      <div class="tile tile--photo" data-tilt>
         <img src="img/tile-owners.webp" width="1200" height="1500" alt="Two owners sitting on the deck of their lodge, looking out into the birch wood" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>Phase 1, occupied</h3><p>Sixteen lodges, every one of them lived in</p></div>
       </div>
@@ -221,6 +354,33 @@
   </section>
 
 </main>
+
+<dialog class="filmdlg" id="filmModal" aria-label="The Ardvren film">
+  <div class="filmdlg__bar">
+    <div class="filmdlg__chips" role="group" aria-label="Chapters">
+      <button class="chip" type="button" data-chapter="0" aria-pressed="true">01 &middot; The forest</button>
+      <button class="chip" type="button" data-chapter="1" aria-pressed="false">02 &middot; The loch</button>
+      <button class="chip" type="button" data-chapter="2" aria-pressed="false">03 &middot; The shore</button>
+    </div>
+    <button class="icon-btn" type="button" id="filmClose" aria-label="Close the film"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <video id="filmVideo" controls playsinline preload="none" poster="img/film-forest-poster.webp"><source src="video/film-forest.mp4" type="video/mp4"></video>
+</dialog>
+
+<dialog class="lightbox" id="lightbox" aria-label="Gallery">
+  <figure class="lightbox__fig">
+    <img id="lbImg" alt="">
+    <div class="lightbox__bar">
+      <figcaption id="lbCap"></figcaption>
+      <div class="lightbox__nav">
+        <span class="chip" id="lbCount" aria-live="polite"></span>
+        <button class="icon-btn" type="button" id="lbPrev" aria-label="Previous photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></button>
+        <button class="icon-btn" type="button" id="lbNext" aria-label="Next photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
+        <button class="icon-btn" type="button" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+  </figure>
+</dialog>
 
 <footer class="foot frame">
   <div>
@@ -256,5 +416,6 @@
 </footer>
 
 <script src="js/site.js"></script>
+<script src="js/home.js"></script>
 </body>
 </html>

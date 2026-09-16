@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
   <title>Plots &mdash; Phase 2, twenty-four heritable plots from &pound;148,000 &mdash; Ardvren</title>
   <meta name="description" content="The Phase 2 plot schedule at Ardvren: twenty-four heritable plots of 1,150 to 2,900 m² on Loch Ardvren, Perthshire. Woodland from £148,000, ridge from £172,000, lochside from £236,000. Fourteen still available.">
   <meta name="robots" content="index, follow">
@@ -109,18 +109,53 @@
   </section>
 
   <section class="frame block reveal" aria-label="Kinds of plot">
-    <div class="tiles tiles--scroll">
-      <div class="tile tile--photo">
+    <div class="tiles tiles--scroll tiles--3d">
+      <div class="tile tile--photo" data-tilt>
         <img src="img/plot-woodland.webp" width="1200" height="900" alt="Woodland plot: straight Scots pine trunks over a floor of deep moss" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>Woodland</h3><p>Under the canopy on the loop road, two to six minutes&rsquo; walk from the common shore. The quietest ground and the deepest shade; The Bothy and The Pine were drawn for it.</p></div>
       </div>
-      <div class="tile tile--photo">
+      <div class="tile tile--photo" data-tilt>
         <img src="img/plot-ridge.webp" width="1200" height="900" alt="Ridge plot: mossed granite boulders between old pines on the slope above the loch" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>Ridge</h3><p>Thirty-six to fifty-one metres above the loch on the granite shoulder, with the water below and Schiehallion on the skyline. The Ridge lodge earns its second floor here.</p></div>
       </div>
-      <div class="tile tile--photo">
+      <div class="tile tile--photo" data-tilt>
         <img src="img/plot-lochside.webp" width="1200" height="900" alt="Lochside plot: a timber jetty running out into still water under morning mist" loading="lazy" decoding="async">
         <div class="tile__cap"><h3>Lochside</h3><p>Thirty-two to fifty-eight metres of your own shore, running to the waterline, with a mooring on the estate jetty and the option of a shore sauna on its own.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="frame block reveal" id="model-section" aria-labelledby="model-title">
+    <div class="intro">
+      <h2 id="model-title">The model</h2>
+      <p>The 1:2,000 site model that stands in the Steading, here in the browser. Drag to turn it, pinch or the buttons to zoom. Every plot is a numbered pad: larch for available, mist for reserved, dark for sold. Hover one for its facts; click it to reserve it or find it in the schedule below.</p>
+    </div>
+    <div class="model" id="model">
+      <div class="model__fallback" aria-hidden="true">
+        <img src="img/head-plots.webp" width="2560" height="1000" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="model__canvas" id="modelCanvas" aria-label="A turntable model of the estate with the twenty-four Phase 2 plots marked" role="img"></div>
+      <div class="model__seg seg" id="modelSeg" role="group" aria-label="Show plots of one kind">
+        <button type="button" data-type="all" aria-pressed="true">All</button>
+        <button type="button" data-type="woodland" aria-pressed="false">Woodland</button>
+        <button type="button" data-type="ridge" aria-pressed="false">Ridge</button>
+        <button type="button" data-type="lochside" aria-pressed="false">Lochside</button>
+      </div>
+      <p class="model__hint">Drag to turn &middot; hover a plot</p>
+      <div class="model__tip" id="modelTip" aria-hidden="true"></div>
+      <div class="model__card" id="modelCard" hidden></div>
+      <div class="model__ui">
+        <div class="model__legend" aria-label="Key">
+          <span><i class="dot"></i>Available</span>
+          <span><i class="dot dot--reserved"></i>Reserved</span>
+          <span><i class="dot dot--sold"></i>Sold</span>
+          <span>1 : 2,000 &middot; north is away from you</span>
+        </div>
+        <div class="model__btns">
+          <button class="icon-btn" type="button" data-zoom="in" aria-label="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button class="icon-btn" type="button" data-zoom="out" aria-label="Zoom out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+          <button class="icon-btn" type="button" id="modelReset" aria-label="Reset the view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        </div>
       </div>
     </div>
   </section>
@@ -195,5 +230,6 @@
 <script src="js/site.js"></script>
 <script src="js/plots-data.js"></script>
 <script src="js/plots.js"></script>
+<script type="module" src="js/model.js"></script>
 </body>
 </html>
