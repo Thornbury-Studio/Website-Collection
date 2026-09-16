@@ -1,0 +1,77 @@
+{
+  "asset": {
+    "version": "2.0",
+    "generator": "RADIX"
+  },
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "scene": 0,
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "RadixKnot"
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0
+          },
+          "indices": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 2353,
+      "type": "VEC3",
+      "min": [
+        -2.938638738120683,
+        -3.4709199667798454,
+        -1.369999644284132
+      ],
+      "max": [
+        3.6699986525037818,
+        3.470862646424615,
+        1.3699996429155616
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5123,
+      "count": 12960,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 28236,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 28236,
+      "byteLength": 25920,
+      "target": 34963
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 54156,
+      "uri": "radix-knot.bin"
+    }
+  ]
+}
