@@ -7,8 +7,6 @@
    hover a plot for its facts, click one to reserve it or find it in the
    schedule below. One unit is ten metres. Renders only while on screen. */
 
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
-
 (function () {
   'use strict';
 
@@ -17,9 +15,21 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
   var host = document.getElementById('modelCanvas');
   if (!A || !PLOTS || !wrap || !host) return;
 
+  var compact = wrap.hasAttribute('data-compact');   // the home-page teaser: no schedule, click opens the full model
   var fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   var small = matchMedia('(max-width: 860px)').matches;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // three.js is fetched only when the model is about to be seen
+  var THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.min.js';
+  var loader = new IntersectionObserver(function (entries) {
+    if (!entries[0].isIntersecting) return;
+    loader.disconnect();
+    import(THREE_URL).then(function (THREE) { build(THREE); }).catch(function () { wrap.classList.add('no-webgl'); });
+  }, { rootMargin: '500px 0px' });
+  loader.observe(wrap);
+
+  function build(THREE) {
 
   /* ---------------- renderer ---------------- */
   var renderer;
@@ -365,8 +375,10 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
     ray.setFromCamera(ndc, camera);
     var hits = ray.intersectObjects(pads.concat(pads.map(function (p) { return p.userData.sprite; })), false);
     var plot = hits.length ? hits[0].object.userData.plot : null;
-    if (click) select(plot, e);
-    else setHover(plot, e);
+    if (click) {
+      if (compact) { if (plot) location.href = 'plots.html#plot-' + plot.no; }
+      else select(plot, e);
+    } else setHover(plot, e);
   }
 
   function setHover(plot, e) {
@@ -375,8 +387,9 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
     }
     hover = plot;
     el.style.cursor = plot ? 'pointer' : '';
-    if (!plot) { tip.classList.remove('is-on'); need = true; return; }
+    if (!plot) { if (tip) tip.classList.remove('is-on'); need = true; return; }
     var m = padByNo[plot.no]; m.material.emissiveIntensity = 0.45; m.scale.y = 1.6;
+    if (!tip) { need = true; return; }
     tip.innerHTML = '<b>Plot ' + plot.no + '</b>' + typeName(plot) + ' &middot; ' + plot.size.toLocaleString('en-GB') + ' m&sup2;<br><em>' + A.money(plot.price) + '</em> &middot; ' + plot.status.charAt(0).toUpperCase() + plot.status.slice(1);
     var r = wrap.getBoundingClientRect();
     tip.style.left = (e.clientX - r.left) + 'px';
@@ -388,6 +401,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
 
   function select(plot) {
     selected = plot;
+    if (!card) return;
     if (!plot) { card.hidden = true; return; }
     var acres = (plot.size / 4046.86).toFixed(2);
     var meta = plot.type === 'lochside' ? plot.shore + ' m of shore, to the waterline' : plot.type === 'ridge' ? plot.elev + ' m above the loch' : 'under the canopy, on the loop road';
@@ -407,7 +421,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
     goal.dist = Math.min(goal.dist, 92);
     need = true;
   }
-  card.addEventListener('click', function (e) {
+  if (card) card.addEventListener('click', function (e) {
     if (e.target.closest('.close')) { select(null); target.set(-2, 2, 12); need = true; }
     var b = e.target.closest('[data-show]');
     if (b) {
@@ -464,7 +478,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
     if (!visible) return;
     var dt = Math.min(0.05, (t - last) / 1000 || 0.016);
     last = t;
-    if (auto) goal.yaw += dt * 0.06;
+    if (auto) goal.yaw += dt * (compact ? 0.05 : 0.06);
     var k = 1 - Math.pow(0.001, dt);
     var dy = goal.yaw - view.yaw, dp = goal.pitch - view.pitch, dd = goal.dist - view.dist;
     view.yaw += dy * k; view.pitch += dp * k; view.dist += dd * k;
@@ -481,6 +495,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
   raf = requestAnimationFrame(tick);
 
   // arriving with a plot in the hash (plots.html#plot-19) selects it
-  var m = /plot-(\d+)/.exec(location.hash);
-  if (m) { var p0 = PLOTS.filter(function (p) { return p.no === +m[1]; })[0]; if (p0) select(p0); }
+  var hm = /plot-(\d+)/.exec(location.hash);
+  if (hm && !compact) { var p0 = PLOTS.filter(function (p) { return p.no === +hm[1]; })[0]; if (p0) select(p0); }
+  }
 })();

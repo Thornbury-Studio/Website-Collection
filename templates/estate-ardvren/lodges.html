@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'">
   <title>Lodges &mdash; The Bothy, The Pine and The Ridge, turnkey from &pound;212,000 &mdash; Ardvren</title>
   <meta name="description" content="Three turnkey larch lodges drawn for Ardvren's plots: The Bothy (58 m², £212,000), The Pine (86 m², £298,000) and The Ridge (124 m², £395,000). Price yours with a plot, cladding and options.">
   <meta name="robots" content="index, follow">
@@ -236,6 +236,12 @@
           <p class="tile__eyebrow">Your lodge</p>
           <h3 class="tile__h" id="sumTitle">The Pine on a woodland plot</h3>
         </div>
+        <div>
+          <div class="lodge3d" id="lodge3d" role="img" aria-label="A turntable massing model of the chosen lodge with the options you have ticked">
+            <span class="lodge3d__cap" id="lodge3dCap">The Pine &middot; natural larch &middot; woodland plot &middot; massing at 1:1</span>
+          </div>
+          <p class="lodge3d__note">The massing model rebuilds as you choose: cladding, the flue, the longer deck, the boot room, the panels, the shore sauna. Drag to turn it.</p>
+        </div>
         <ul class="sum__lines" id="sumLines"></ul>
         <div class="sum__total"><span>Estimated total</span><b id="sumTotal">&pound;446,000</b></div>
         <p class="sum__note">Plus the annual service charge of &pound;1,140, LBTT and your own legal fees. Lodge prices are fixed at missives; the plot price is the one on the schedule for the plot you choose.</p>
@@ -315,5 +321,6 @@
 
 <script src="js/site.js"></script>
 <script src="js/lodges.js"></script>
+<script src="js/lodge3d.js"></script>
 </body>
 </html>
