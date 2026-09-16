@@ -359,13 +359,13 @@
         defaults: { ease: 'power4.out' },
         onComplete: function () {
           clearTimeout(heroSafety);
-          document.body.classList.remove('hero-animating');
-          document.body.classList.add('hero-ready');
+          /* Always clear inline transforms — CSS FOUC class alone can leave
+             brand/headline clipped inside overflow:hidden after the tween. */
+          showHero();
         }
       })
         .to('.hero-brand-inner', { yPercent: 0, duration: 0.95 }, 0)
         .to('.hero-line-inner', { yPercent: 0, duration: 1.0, stagger: 0.1 }, 0.15)
-        .to('.reveal-line span', { opacity: 1, y: 0, duration: 0.65 }, 0.4)
         .to('.reveal-fade', { opacity: 1, y: 0, duration: 0.75, stagger: 0.08 }, 0.55);
     } catch (err) {
       clearTimeout(heroSafety);
