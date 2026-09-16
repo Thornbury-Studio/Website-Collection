@@ -37,6 +37,7 @@ clone: cobalt on paper, original brand, no Webflow.
 | `expertise.html` | Capability marquees + principles |
 | `news.html` | Insight index + cursor-follow covers |
 | `article.html` | Shared article stub (hash id) |
+| `contact.html` | Pitch, mailto, simple inquiry form |
 
 ## Stack
 

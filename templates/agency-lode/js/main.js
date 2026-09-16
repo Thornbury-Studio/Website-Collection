@@ -343,6 +343,29 @@
     showHero();
   }
 
+  /* ---------- contact form submit (works without GSAP) ---------- */
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nameEl = contactForm.querySelector('[name="name"]');
+      var emailEl = contactForm.querySelector('[name="email"]');
+      var messageEl = contactForm.querySelector('[name="message"]');
+      var name = nameEl ? nameEl.value.trim() : '';
+      var email = emailEl ? emailEl.value.trim() : '';
+      var message = messageEl ? messageEl.value.trim() : '';
+      var subject = encodeURIComponent('Project inquiry from ' + (name || 'the LODE site'));
+      var body = encodeURIComponent(
+        (message || '(No message)') +
+        '\n\n—\n' + name + (email ? ' · ' + email : '')
+      );
+      contactForm.classList.add('is-sent');
+      window.setTimeout(function () {
+        window.location.href = 'mailto:hello@lode.studio?subject=' + subject + '&body=' + body;
+      }, 400);
+    });
+  }
+
   if (!hasGSAP) return;
 
   var gsap = window.gsap;
@@ -370,6 +393,38 @@
     } catch (err) {
       clearTimeout(heroSafety);
       showHero();
+    }
+  }
+
+  /* ---------- contact page light motion ---------- */
+  if (contactForm && fine && !reduced) {
+    var submitBtn = contactForm.querySelector('[data-magnetic-submit]');
+    if (submitBtn) {
+      submitBtn.addEventListener('mousemove', function (e) {
+        var r = submitBtn.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width / 2);
+        var dy = e.clientY - (r.top + r.height / 2);
+        gsap.to(submitBtn, {
+          x: dx * 0.16,
+          y: dy * 0.2,
+          duration: 0.35,
+          ease: 'power3.out'
+        });
+      });
+      submitBtn.addEventListener('mouseleave', function () {
+        gsap.to(submitBtn, { x: 0, y: 0, duration: 0.55, ease: 'elastic.out(1, 0.45)' });
+      });
+    }
+    var contactBits = gsap.utils.toArray('[data-contact-enter]');
+    if (contactBits.length) {
+      gsap.from(contactBits, {
+        y: 18,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: 'power3.out',
+        clearProps: 'all'
+      });
     }
   }
 
