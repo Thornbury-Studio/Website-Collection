@@ -47,3 +47,13 @@ templates/first-crack/tools/raw/
 # Full-resolution licensed Adobe Stock originals — cropped, graded and exported to
 # templates/estate-ardvren/img/ by tools/grade.py; the originals stay local.
 templates/estate-ardvren/tools/raw/
+
+# Full-resolution licensed Adobe Stock originals (4K ProRes/MJPEG masters, full-res JPEGs,
+# ~1.9GB) — migrated from a Showcase capability-test build 2026-09-20. Regenerate web encodes
+# with templates/slake/tools/encode.sh if a master changes; the originals stay local.
+templates/slake/assets/raw/
+
+# Full-resolution licensed Adobe Stock originals (full-res JPEGs, ~200MB) — migrated from a
+# Showcase capability-test build 2026-09-20. Regenerate web encodes with
+# templates/kiam/tools/encode.py if a master changes; the originals stay local.
+templates/kiam/assets/raw/
