@@ -80,8 +80,10 @@
     });
   }
 
-  /* ---------- Hero line-up: stagger index for the fill ---------- */
-  $$('.lineup-item').forEach(function (el, i) { el.style.setProperty('--i', i); });
+  /* ---------- The pour: never autoplay for people who asked for less motion ---------- */
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    $$('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+  }
 
   /* ---------- Six-pack builder (sodas page) ---------- */
   var pack = $('.pack');

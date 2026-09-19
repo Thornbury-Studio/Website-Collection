@@ -40,7 +40,7 @@ r.headingJumps = hs.filter((n, i) => i && n > hs[i - 1] + 1).length;
 r.unlabelled = [...document.querySelectorAll('input, textarea, select')].filter((el) => !el.labels || !el.labels.length).length;
 
 // 7. bottle labels: does the name text overflow its label box?
-r.labelOverflow = [...document.querySelectorAll('.bottle')].map((svg) => {
+r.labelOverflow = [...document.querySelectorAll('svg.bottle')].map((svg) => {
   const box = svg.querySelector('.label').getBBox();
   const over = [...svg.querySelectorAll('.t-name')].filter((t) => { const b = t.getBBox(); return b.x + b.width > box.x + box.width - 4; }).map((t) => t.textContent);
   return over.length ? over.join(', ') : null;

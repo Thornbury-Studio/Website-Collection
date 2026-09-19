@@ -53,3 +53,5 @@ templates/slake/assets/raw/
 # Showcase capability-test build 2026-09-20. Regenerate web encodes with
 # templates/kiam/tools/encode.py if a master changes; the originals stay local.
 templates/kiam/assets/raw/
+# Kiam verification captures (tools/shot.mjs, tools/interact.mjs)
+templates/kiam/tools/shots/
