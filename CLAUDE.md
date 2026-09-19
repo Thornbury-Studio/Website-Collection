@@ -22,6 +22,22 @@ templates before building; for 3D work, prefer `carnival-null`,
 `festival-voltflood`, `horology-eon-v2`, and `logistics-northline` first. If
 token use grows before implementation, pause and narrow scope.
 
+# Company design system
+
+**Added 2026-09-19.** Read `C:\School\Personal\Company\DESIGN-SYSTEM\DESIGN.md`
+before any new template build or restyle — it's the company-wide taste
+system: the anti-slop checklist, the accessibility/motion floor, and the
+process every design task should follow. It applies regardless of which
+template's specific aesthetic is being built — this repo's whole point is
+many distinct styles, and the company file's rules are about not looking
+generic, not about forcing one shared palette across templates. If a
+specific template has its own `DESIGN.md` (several under `templates/`
+already do, e.g. `templates/studio-basin/DESIGN.md`), that one supplies
+its own tokens; the company file still supplies the shared taste rules on
+top. Also invoke the `frontend-design` and `impeccable` skills (installed
+at the user level) before planning a new template's visual direction, and
+run `web-design-guidelines` before calling any UI work shipped.
+
 # Portfolio content policy
 
 For AI video generation tasks, see [VIDEO-POLICY.md](VIDEO-POLICY.md) — credit
