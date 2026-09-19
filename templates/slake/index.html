@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slake — small-batch ginger soda. It burns. Then it doesn’t.</title>
+  <meta name="description" content="Slake is a small-batch ginger soda made from 38 g of pressed fresh ginger and charred ginger skins, bottled to be served at two degrees. It burns. Then it doesn’t.">
+  <meta name="theme-color" content="#150703">
+  <meta property="og:title" content="Slake — small-batch ginger soda">
+  <meta property="og:description" content="Pressed root, charred skins, served at two degrees. It burns. Then it doesn’t.">
+  <meta property="og:image" content="assets/img/pour-poster.jpg">
+  <meta property="og:type" content="website">
+
+  <link rel="preload" href="fonts/BodoniModa.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/img/coals-poster.webp" as="image" type="image/webp" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- The furnace: the coals sit behind the entire heat register and are
+       dissolved by --heat. Decorative; the page describes itself in text. -->
+  <div class="furnace" aria-hidden="true">
+    <video class="furnace__video" muted loop playsinline preload="auto" width="3840" height="2160" poster="assets/img/coals-poster.webp">
+      <source src="assets/video/coals-2160.av1.mp4" type='video/mp4; codecs="av01.0.12M.08"' media="(min-width: 1024px)">
+      <source src="assets/video/coals-2160.mp4" type='video/mp4; codecs="avc1.640033"' media="(min-width: 1024px)">
+      <source src="assets/video/coals-1080.mp4" type='video/mp4; codecs="avc1.640028"'>
+    </video>
+    <img class="furnace__poster" src="assets/img/coals-poster.webp" alt="" width="1920" height="1080">
+  </div>
+
+  <a class="skip" href="#top">Skip to content</a>
+
+  <header class="top">
+    <a class="wordmark" href="#top" translate="no">Slake</a>
+    <nav class="top__nav" aria-label="Site">
+      <button class="top__motion" type="button" aria-pressed="false" hidden>Pause footage</button>
+      <a class="top__link" href="#order">Get a case</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="hero__line">Small-batch ginger soda. Pressed root, charred skins, carbonated cold. Thirty-eight grams of ginger in every 250&nbsp;ml bottle, and it tastes like it.</p>
+      <h1 class="hero__mark" id="hero-title" translate="no">Slake</h1>
+      <a class="hero__cue" href="#stage">Scroll to cool it down</a>
+    </section>
+
+    <section class="burn" aria-labelledby="burn-title">
+      <div class="burn__grid">
+        <h2 class="burn__title" id="burn-title">Thirty-eight grams of fresh ginger in a bottle you can hold in one hand.</h2>
+
+        <div class="burn__copy">
+          <p>Most ginger beer is sugar water with a ginger smell. Slake is <strong>pressed root</strong>: the fibrous, throat-catching kind, juiced the day it’s bottled. The skins go over an open flame until they blacken, then steep back in for the smoke.</p>
+          <p>It’s a burn you feel behind your ears. That’s not a flaw we’re working on.</p>
+        </div>
+
+        <div class="label">
+          <p class="label__title" id="label-title">In every 250&nbsp;ml bottle</p>
+          <dl aria-labelledby="label-title">
+            <div class="label__row"><dt>Fresh ginger, pressed</dt><dd>38&nbsp;g</dd></div>
+            <div class="label__row"><dt>Charred ginger skins, steeped</dt><dd>6&nbsp;g</dd></div>
+            <div class="label__row"><dt>Cane sugar</dt><dd>14&nbsp;g</dd></div>
+            <div class="label__row"><dt>Lime, juiced</dt><dd>½</dd></div>
+            <div class="label__row"><dt>Spring water, carbonated</dt><dd>to 250&nbsp;ml</dd></div>
+          </dl>
+          <p class="label__note">Nothing else. No extract, no “natural flavours”, no preservatives. Keep it cold and drink it within the month.</p>
+        </div>
+
+        <ol class="seconds" aria-label="The four seconds: what a sip does, in order">
+          <li class="seconds__title" aria-hidden="true">The four seconds</li>
+          <li class="seconds__item">
+            <span class="seconds__t">0.0<small>s</small></span>
+            <p>Ginger hits the tongue. Sharp, not sweet. You think you’ve got the measure of it.</p>
+          </li>
+          <li class="seconds__item">
+            <span class="seconds__t">1.5<small>s</small></span>
+            <p>The heat blooms. Back of the throat first, then somewhere near your ears.</p>
+          </li>
+          <li class="seconds__item">
+            <span class="seconds__t">3.0<small>s</small></span>
+            <p>You reach for the glass again. It’s the only way out, and you know it.</p>
+          </li>
+          <li class="seconds__item">
+            <span class="seconds__t">4.0<small>s</small></span>
+            <p>Cold. The burn’s still there. It just has somewhere to go now.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- The stage: 300vh of track, 100vh pinned. --heat runs 1 → 0 across its
+         middle; the coals give way to the pour and the scorch to frost. -->
+    <section class="stage" id="stage" aria-labelledby="stage-title">
+      <div class="stage__pin">
+        <video class="pour" muted playsinline preload="metadata" width="3840" height="2160" poster="assets/img/pour-poster.webp" aria-hidden="true">
+          <source src="assets/video/pour-2160.av1.mp4" type='video/mp4; codecs="av01.0.12M.08"' media="(min-width: 1024px)">
+          <source src="assets/video/pour-2160.mp4" type='video/mp4; codecs="avc1.640033"' media="(min-width: 1024px)">
+          <source src="assets/video/pour-1080.mp4" type='video/mp4; codecs="avc1.640028"'>
+        </video>
+        <img class="pour-poster" src="assets/img/pour-poster.webp" alt="" width="1920" height="1080" loading="lazy">
+        <div class="stage__scrim" aria-hidden="true"></div>
+        <div class="stage__frost" aria-hidden="true"></div>
+        <h2 class="stage__title" id="stage-title">
+          <span class="stage__a">It burns.</span>
+          <span class="stage__b">Then it doesn’t.</span>
+        </h2>
+        <p class="stage__note">Poured over ice at two degrees, the ginger has to push through the cold to reach you. It still does. It just finishes clean.</p>
+      </div>
+    </section>
+
+    <section class="cold" aria-labelledby="cold-title">
+      <h2 class="cold__title" id="cold-title">Serve at two degrees. Colder than feels reasonable.</h2>
+      <div class="cold__copy">
+        <p>Chill the bottle, not the glass. Pour over big ice, the kind that doesn’t rush. The condensation running down the bottle is the whole point: <strong>the colder it is, the further the ginger has to travel</strong>, and the cleaner it finishes.</p>
+        <p>Neat is the honest way. With mezcal is the popular way. We don’t argue with either.</p>
+      </div>
+      <dl class="facts">
+        <div class="facts__item"><dt>250&nbsp;ml</dt><dd>Brown glass, crown cap. One serving, no second-guessing.</dd></div>
+        <div class="facts__item"><dt>2&nbsp;°C</dt><dd>The serving temperature the recipe was built for. Warmer, and the sugar shows.</dd></div>
+        <div class="facts__item"><dt>Five things</dt><dd>Ginger, charred skins, cane sugar, lime, spring water. The label is the recipe.</dd></div>
+      </dl>
+    </section>
+
+    <section class="people" aria-labelledby="people-title">
+      <h2 class="people__title" id="people-title">People, mid-sip. Nobody was ready.</h2>
+      <div class="moments">
+
+        <figure class="moment moment--1">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hit-800.webp 800w, assets/img/hit-1400.webp 1400w" sizes="(max-width: 900px) 84vw, 38vw">
+            <img class="moment__img" src="assets/img/hit-1400.jpg" srcset="assets/img/hit-800.jpg 800w, assets/img/hit-1400.jpg 1400w" sizes="(max-width: 900px) 84vw, 38vw" width="1400" height="933" loading="lazy" decoding="async" alt="A bearded man in a vest, sunglasses pushed up on his head, holding a glass and staring at the camera with his mouth open.">
+          </picture>
+          <figcaption>
+            <p class="moment__q">Nobody told me. I took a normal-sized sip like it was a normal-sized drink.</p>
+            <p class="moment__who">Tomas, Rotterdam</p>
+          </figcaption>
+        </figure>
+
+        <figure class="moment moment--2">
+          <picture>
+            <source type="image/webp" srcset="assets/img/sip-800.webp 800w, assets/img/sip-1400.webp 1400w" sizes="(max-width: 900px) 84vw, 46vw">
+            <img class="moment__img" src="assets/img/sip-1400.jpg" srcset="assets/img/sip-800.jpg 800w, assets/img/sip-1400.jpg 1400w" sizes="(max-width: 900px) 84vw, 46vw" width="1400" height="935" loading="lazy" decoding="async" alt="Close crop of a woman drinking from a tall glass full of ice, eyes down, mid-sip.">
+          </picture>
+          <figcaption>
+            <p class="moment__q">Second bottle’s the one. The first bottle you’re just finding out.</p>
+            <p class="moment__who">Priya, Singapore</p>
+          </figcaption>
+        </figure>
+
+        <figure class="moment moment--3">
+          <picture>
+            <source type="image/webp" srcset="assets/img/fan-800.webp 800w, assets/img/fan-1400.webp 1400w" sizes="(max-width: 900px) 84vw, 38vw">
+            <img class="moment__img" src="assets/img/fan-1400.jpg" srcset="assets/img/fan-800.jpg 800w, assets/img/fan-1400.jpg 1400w" sizes="(max-width: 900px) 84vw, 38vw" width="1400" height="933" loading="lazy" decoding="async" alt="A woman drinking from a bottle with her eyes closed, sitting right in front of a large metal desk fan.">
+          </picture>
+          <figcaption>
+            <p class="moment__q">It was thirty-four degrees. I had a bottle in front of the fan and honestly it fixed both problems.</p>
+            <p class="moment__who">Léa, Marseille</p>
+          </figcaption>
+        </figure>
+
+        <figure class="moment moment--4">
+          <picture>
+            <source type="image/webp" srcset="assets/img/straw-800.webp 800w, assets/img/straw-1400.webp 1400w" sizes="(max-width: 900px) 84vw, 24vw">
+            <img class="moment__img" src="assets/img/straw-1400.jpg" srcset="assets/img/straw-800.jpg 800w, assets/img/straw-1400.jpg 1400w" sizes="(max-width: 900px) 84vw, 24vw" width="1400" height="933" loading="lazy" decoding="async" alt="A man in a white t-shirt against a blue corrugated wall, drinking from a glass bottle through a straw, one eyebrow raised.">
+          </picture>
+          <figcaption>
+            <p class="moment__q">Straw was a mistake. Straw puts it straight on the back of your throat.</p>
+            <p class="moment__who">Dan, Leeds</p>
+          </figcaption>
+        </figure>
+
+        <figure class="moment moment--5">
+          <picture>
+            <source type="image/webp" srcset="assets/img/street-800.webp 800w, assets/img/street-1400.webp 1400w" sizes="(max-width: 900px) 84vw, 24vw">
+            <img class="moment__img" src="assets/img/street-1400.jpg" srcset="assets/img/street-800.jpg 800w, assets/img/street-1400.jpg 1400w" sizes="(max-width: 900px) 84vw, 24vw" width="1400" height="933" loading="lazy" decoding="async" alt="A man with a backpack drinking from a bottle in front of a weathered concrete wall on a hot street.">
+          </picture>
+          <figcaption>
+            <p class="moment__q">Walked forty minutes in Bangkok heat for the one shop that had it. Would do it again. Won’t tell you which shop.</p>
+            <p class="moment__who">Kenji, Osaka</p>
+          </figcaption>
+        </figure>
+
+        <figure class="moment moment--6">
+          <picture>
+            <source type="image/webp" srcset="assets/img/glass-800.webp 800w, assets/img/glass-1400.webp 1400w" sizes="(max-width: 900px) 84vw, 38vw">
+            <img class="moment__img" src="assets/img/glass-1400.jpg" srcset="assets/img/glass-800.jpg 800w, assets/img/glass-1400.jpg 1400w" sizes="(max-width: 900px) 84vw, 38vw" width="1400" height="933" loading="lazy" decoding="async" alt="A laughing woman holding a glass of amber drink with a straw, in front of a painted wall.">
+          </picture>
+          <figcaption>
+            <p class="moment__q">Over ice with too much lime. My whole face went hot, and then it was the best thing I’d drunk all summer.</p>
+            <p class="moment__who">Ana, Lisbon</p>
+          </figcaption>
+        </figure>
+
+        <figure class="moment moment--7">
+          <picture>
+            <source type="image/webp" srcset="assets/img/heat-800.webp 800w, assets/img/heat-1400.webp 1400w" sizes="(max-width: 900px) 84vw, 30vw">
+            <img class="moment__img" src="assets/img/heat-1400.jpg" srcset="assets/img/heat-800.jpg 800w, assets/img/heat-1400.jpg 1400w" sizes="(max-width: 900px) 84vw, 30vw" width="1400" height="933" loading="lazy" decoding="async" alt="A woman outdoors in the heat, eyes closed, one hand on her forehead, a bottle in the other.">
+          </picture>
+          <figcaption>
+            <p class="moment__q">Fair warning: the burn turns up about a second after you think you’ve got away with it.</p>
+            <p class="moment__who">Marta, Warsaw</p>
+          </figcaption>
+        </figure>
+
+        <figure class="moment moment--8">
+          <picture>
+            <source type="image/webp" srcset="assets/img/sunset-800.webp 800w, assets/img/sunset-1400.webp 1400w" sizes="(max-width: 900px) 84vw, 38vw">
+            <img class="moment__img" src="assets/img/sunset-1400.jpg" srcset="assets/img/sunset-800.jpg 800w, assets/img/sunset-1400.jpg 1400w" sizes="(max-width: 900px) 84vw, 38vw" width="1400" height="867" loading="lazy" decoding="async" alt="A young woman on a beach at sunset, backlit, drinking from a bottle with her hair blowing across her face.">
+          </picture>
+          <figcaption>
+            <p class="moment__q">Drank one on the beach at sunset and then stopped talking for a bit.</p>
+            <p class="moment__who">Nia, Cape Town</p>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <section class="order" id="order" aria-labelledby="order-title">
+      <div class="order__lead">
+        <h2 class="order__title" id="order-title">A case is twelve. That’s about a week.</h2>
+        <div class="order__price">
+          <p><strong>S$48&nbsp;a case, delivered.</strong> Twelve 250&nbsp;ml bottles, packed cold, sent the day they’re bottled.</p>
+          <p>Bars and shops: order the same way and say so in the email. We’ll come back with the trade sheet.</p>
+        </div>
+      </div>
+      <form class="order__form" action="#order" method="post" novalidate>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="email-hint">
+          <p class="field__hint" id="email-hint">We send one payment link and nothing else.</p>
+        </div>
+        <div class="field">
+          <label for="cases">Cases</label>
+          <input id="cases" name="cases" type="number" inputmode="numeric" autocomplete="off" min="1" max="20" value="1" required aria-describedby="cases-hint">
+          <p class="field__hint" id="cases-hint">One to twenty. More than that, email us first.</p>
+        </div>
+        <button class="button" type="submit">Get a case</button>
+        <p class="order__done" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <a class="wordmark" href="#top" translate="no">Slake</a>
+    <p>Made in small batches in Singapore. Keep cold. Drink cold.</p>
+  </footer>
+
+  <script src="site.js" defer></script>
+</body>
+</html>
