@@ -184,24 +184,18 @@ button { font: inherit; color: inherit; }
 .link-quiet { color: var(--ink); }
 
 /* ---------- The bottle ---------- */
-.bottle { --fill: var(--calamansi); width: 100%; height: auto; overflow: visible; font-family: var(--display); }
-.bottle .glass { fill: rgba(255,255,255,.13); stroke: var(--plum); stroke-width: 1.5; }
-.bottle .cap { fill: var(--plum); }
-.bottle .liquid { fill: var(--fill); }
-.bottle .shine { fill: #fff; opacity: .16; }
-.bottle .label { fill: var(--salt); stroke: var(--plum); stroke-width: 1; }
-.bottle .label-rule { stroke: var(--plum); stroke-width: .75; }
-.bottle text { fill: var(--plum); }
-.bottle .t-mark { font-weight: 850; font-stretch: 150%; font-size: 12px; letter-spacing: -.01em; }
-.bottle .t-sc { font-family: var(--sc); font-weight: 900; font-size: 9px; }
-.bottle .t-name { font-weight: 720; font-stretch: 112%; font-size: 9.6px; letter-spacing: -.005em; }
-.bottle .t-ml { font-weight: 550; font-stretch: 100%; font-size: 7.5px; letter-spacing: .02em; }
-.bottle .level { transform-box: fill-box; transform-origin: bottom; }
-
-/* the one load moment: liquid rises in the five hero bottles */
-.lineup .bottle .level { animation: fill 1.1s var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms + 120ms); }
-@keyframes fill { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-@media (prefers-reduced-motion: reduce) { .lineup .bottle .level { animation: none; } }
+/* One licensed photograph (Adobe Stock 525762808), re-coloured and labelled per soda by
+   tools/bottles.py — see DESIGN.md §4. Transparent WebP, 285 × 800, base flush with the shelf. */
+.bottle { width: 100%; height: auto; display: block; }
+.bottle--calamansi  { --fill: var(--calamansi); }
+.bottle--grapefruit { --fill: var(--grapefruit); }
+.bottle--pineapple  { --fill: var(--pineapple); }
+.bottle--roselle    { --fill: var(--roselle); }
+.bottle--watermelon { --fill: var(--watermelon); }
+/* the shelf shadow: a soft ellipse under the base, drawn by the item, not baked into the file */
+.stands { position: relative; }
+.stands::before { content: ""; position: absolute; left: 8%; right: 8%; bottom: -7px; height: 18px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(61,26,27,.42), rgba(61,26,27,0) 70%); pointer-events: none; }
+.stands > .bottle { position: relative; }
 
 /* ---------- Home: hero ---------- */
 .hero { padding-block: clamp(24px, 4vw, 56px) 0; }
@@ -214,6 +208,8 @@ button { font: inherit; color: inherit; }
 .lineup-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: clamp(12px, 2.4vw, 40px); align-items: end; padding-inline: clamp(0px, 3vw, 48px); }
 .lineup-item { text-decoration: none; color: var(--ink); display: grid; gap: 0; }
 .lineup-item .bottle { width: min(100%, 170px); margin-inline: auto; transition: transform .25s var(--ease); }
+.lineup-item .stands { width: min(100%, 170px); margin-inline: auto; }
+.lineup-item .stands .bottle { width: 100%; }
 .lineup-item:hover .bottle, .lineup-item:focus-visible .bottle { transform: translateY(-6px); }
 .lineup-item:focus-visible { outline-offset: 6px; }
 .shelf { border-top: 1px solid var(--rule); margin-top: -1px; }
@@ -241,6 +237,7 @@ button { font: inherit; color: inherit; }
 .panel tr.total th, .panel tr.total td { border-top: 2px solid var(--ink); font-weight: 700; }
 
 .serve { position: relative; }
+.serve .pour { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; background: #e9dcb8; }
 .serve .media { grid-column: 1 / 9; }
 .serve .copy { grid-column: 9 / 13; align-self: end; }
 .serve ol { padding-left: 1.2em; margin: var(--s5) 0 0; }
@@ -293,7 +290,8 @@ button { font: inherit; color: inherit; }
 .soda { padding-block: clamp(48px, 7vw, 96px); scroll-margin-top: var(--s5); }
 .soda .grid { align-items: center; }
 .soda .s-bottle { grid-column: 1 / 4; }
-.soda .s-bottle .bottle { width: min(100%, 220px); }
+.soda .s-bottle .stands { width: min(100%, 240px); }
+.soda .s-bottle .stands::before { bottom: -6px; height: 20px; }
 .soda .s-copy { grid-column: 4 / 9; }
 .soda .s-photo { grid-column: 9 / 13; }
 .soda.soda--flip .s-bottle { grid-column: 10 / 13; grid-row: 1; }
@@ -449,7 +447,7 @@ button { font: inherit; color: inherit; }
   .top { position: relative; }
   .lineup-row { display: flex; align-items: flex-start; overflow-x: auto; scroll-snap-type: x proximity; gap: var(--s5); padding: 0 var(--gutter) var(--s3); margin-inline: calc(-1 * var(--gutter)); scrollbar-width: thin; scrollbar-color: var(--plum) transparent; }
   .lineup-item { flex: 0 0 46vw; scroll-snap-align: center; }
-  .lineup-item .bottle { width: 100%; }
+  .lineup-item .bottle, .lineup-item .stands { width: 100%; }
   .lineup-names { display: none; }
   .lineup-item .lineup-cap { display: grid; grid-template-rows: 2.4em auto; }
   .soda .s-bottle, .soda.soda--flip .s-bottle { grid-column: 1 / 5; }
@@ -478,10 +476,3 @@ button { font: inherit; color: inherit; }
 .mt-6 { margin-top: var(--s6); }
 .mb-6 { margin-bottom: var(--s6); }
 .mb-7 { margin-bottom: var(--s7); }
-
-/* fill per soda — classes, not inline styles, so the CSP can stay without unsafe-inline */
-.bottle--calamansi  { --fill: var(--calamansi); }
-.bottle--grapefruit { --fill: var(--grapefruit); }
-.bottle--pineapple  { --fill: var(--pineapple); }
-.bottle--roselle    { --fill: var(--roselle); }
-.bottle--watermelon { --fill: var(--watermelon); }
