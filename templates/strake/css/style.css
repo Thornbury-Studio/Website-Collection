@@ -71,10 +71,12 @@ input, textarea { caret-color: var(--bronze-ink); }
 }
 .wordmark::after { content: ''; position: absolute; left: 0; right: 0; bottom: 5px; height: 1.5px; background: var(--bronze); }
 .nav ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: var(--s6); }
-.nav a { font-family: var(--display); font-weight: 500; font-size: 0.9375rem; text-decoration: none; padding: var(--s2) 0; position: relative; }
+.nav a:not(.button) { font-family: var(--display); font-weight: 500; font-size: 0.9375rem; text-decoration: none; padding: var(--s2) 0; position: relative; }
+.nav a { text-decoration: none; }
 .nav a:not(.button)::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--bronze); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
 .nav a:not(.button):hover::after, .nav a[aria-current="true"]::after { transform: scaleX(1); }
-.nav a:hover { color: var(--bronze-ink); }
+.nav a:not(.button):hover { color: var(--bronze-ink); }
+.nav .button { padding: 11px 18px; }
 .menu { display: none; }
 
 .button {
@@ -91,33 +93,64 @@ input, textarea { caret-color: var(--bronze-ink); }
 /* ---------------------------------------------------------------- hero */
 .hero {
   min-height: 100svh;
-  padding-top: calc(var(--top-h) + var(--s8));
-  display: grid; grid-template-rows: auto 1fr; justify-items: center; align-items: end;
+  padding-top: calc(var(--top-h) + clamp(1.5rem, 4vh, 3rem));
+  padding-bottom: clamp(0.5rem, 2vh, 1.5rem);
+  /* a column, so the stage takes exactly the height the copy leaves and the car is never
+     sliced by the fold */
+  display: flex; flex-direction: column; align-items: center;
   overflow: hidden;
 }
 .hero__copy { text-align: center; padding-inline: var(--gutter); }
-.hero__copy p { font-size: clamp(1.125rem, 1.6vw, 1.375rem); line-height: 1.45; margin: var(--s5) auto 0; max-width: 36ch; color: var(--ink); }
-.hero__car {
-  width: auto; height: min(calc(94vw * 0.4083), calc(100svh - 400px)); max-width: 94vw;
-  aspect-ratio: 3600 / 1470;
-  margin-top: var(--s4);
-  transform-origin: 50% 80%;
+.hero__copy p { font-size: clamp(1.0625rem, 1.5vw, 1.3125rem); line-height: 1.45; margin: var(--s4) auto 0; max-width: 34ch; color: var(--ink); }
+.hero__cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--s6); margin-top: var(--s6); }
+.hero__cta .button { padding: 16px 28px; font-size: 1rem; }
+.link-quiet { font-family: var(--display); font-size: 0.9375rem; color: var(--slate); text-decoration-color: var(--hairline); display: inline-block; padding: 12px 0; }
+.link-quiet:hover { color: var(--bronze-ink); }
+
+/* The 2.5D stage. The car is three exported layers of one render - its cast shadow, its body,
+   its wheels - stacked and moved at different rates, so the pointer and the scroll open a small
+   amount of real parallax between them instead of sliding one flat picture. */
+.stage { position: relative; width: 100%; --px: 0; --py: 0; --sy: 0; }
+.stage__l {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+  will-change: transform;
+  transform: translate3d(calc(var(--px) * var(--f, 0) * 1px), calc((var(--py) * var(--f, 0) * 0.45 + var(--sy) * var(--g, 0)) * 1px), 0);
 }
+.stage__shadow { --f: 3; --g: 6; opacity: .85; }
+.stage__body { --f: 11; --g: 16; }
+.stage__wheels { --f: 17; --g: 24; }
+.stage--hero {
+  flex: 1 1 auto; min-height: min(38vh, 300px);
+  width: min(96vw, 1560px);
+  margin-top: clamp(0.5rem, 2vh, 1.75rem);
+}
+.stage--hero .stage__l { object-position: 50% 100%; }
+@media (prefers-reduced-motion: reduce) { .stage__l { transform: none; } }
 @media (prefers-reduced-motion: no-preference) {
   .hero__copy h1, .hero__copy p { animation: settle .8s cubic-bezier(.2, .7, .2, 1) both; }
-  .hero__copy p { animation-delay: .12s; }
-  .hero__car { animation: arrive 1.2s cubic-bezier(.2, .7, .1, 1) .25s both; }
+  .hero__copy p { animation-delay: .1s; }
+  .hero__cta { animation-delay: .2s; }
+  .stage--hero .stage__l { animation: arrive 1.1s cubic-bezier(.2, .7, .1, 1) .2s backwards; }
+  .stage--hero .stage__shadow { animation-delay: .2s; }
+  .stage--hero .stage__body { animation-delay: .28s; }
+  .stage--hero .stage__wheels { animation-delay: .34s; }
 }
 @keyframes settle { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-@keyframes arrive { from { opacity: 0; transform: translateY(18px) scale(1.025); } to { opacity: 1; transform: none; } }
+@keyframes arrive { from { opacity: 0; } to { opacity: 1; } }
 
 .facts {
-  list-style: none; margin: 0 auto; padding: var(--s6) 0; width: var(--wrap);
+  list-style: none; margin: 0 auto; padding: clamp(var(--s6), 5vw, var(--s8)) 0; width: var(--wrap);
   border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s6);
-  font-family: var(--display); font-size: 0.9375rem; line-height: 1.4; color: var(--ink);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(var(--s6), 4vw, var(--s8));
 }
-.facts li + li { border-left: 1px solid var(--hairline); padding-left: var(--s6); }
+.facts li { display: grid; gap: var(--s3); align-content: start; }
+.facts b {
+  font-family: var(--display); font-weight: 500; font-size: clamp(2.5rem, 4.4vw, 3.75rem);
+  line-height: 0.95; letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
+}
+.facts b i { font-style: normal; font-size: 0.3em; letter-spacing: 0; margin-left: 0.35em; color: var(--slate); }
+.facts span { font-size: 1rem; line-height: 1.5; color: var(--slate); max-width: 34ch; }
+.facts li + li { border-left: 1px solid var(--hairline); padding-left: clamp(var(--s6), 4vw, var(--s8)); }
 
 /* ---------------------------------------------------------------- blocks */
 .block { padding-block: var(--block); }
@@ -151,6 +184,7 @@ input, textarea { caret-color: var(--bronze-ink); }
 @keyframes slide { to { transform: translateX(calc(100vw - 100%)); } }
 .chapter { width: clamp(260px, 30vw, 440px); margin: 0; flex: none; }
 .chapter--lead { width: clamp(300px, 34vw, 520px); align-self: center; padding-right: var(--s6); }
+.chapter--lead .hint { display: block; margin-top: var(--s6); font-family: var(--display); font-size: 0.8125rem; color: var(--bronze-ink); }
 .chapter--lead p { margin-top: var(--s5); color: var(--slate); font-size: clamp(1.0625rem, 1.3vw, 1.25rem); max-width: 34ch; }
 .chapter img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; filter: grayscale(1) sepia(.22) contrast(1.02); }
 .chapter__year { font-family: var(--display); font-weight: 500; font-size: 2.25rem; line-height: 1; letter-spacing: -0.02em; margin-top: var(--s5); color: var(--bronze-ink); }
@@ -186,27 +220,26 @@ input, textarea { caret-color: var(--bronze-ink); }
 }
 
 /* ---------------------------------------------------------------- configurator */
-.cfg { display: grid; grid-template-columns: minmax(0, 7fr) minmax(280px, 4fr); gap: clamp(var(--s6), 5vw, var(--s9)); align-items: start; }
-.cfg__stage { position: relative; aspect-ratio: 2400 / 980; --wipe: 0; }
-.cfg__img { position: absolute; inset: 0; width: 100%; height: 100%; }
-.cfg__img--next { clip-path: inset(0 calc((1 - var(--wipe)) * 100%) 0 0); }
-.cfg__sweep {
+.cfg { display: grid; grid-template-columns: minmax(0, 7fr) minmax(260px, 3fr); gap: clamp(var(--s6), 4vw, var(--s8)); align-items: start; }
+.stage--cfg { aspect-ratio: 2860 / 1055; --wipe: 0; }
+.stage--cfg .stage__l { --f: 0; --g: 0; transform: none; }
+.stage__body--next { clip-path: inset(0 calc((1 - var(--wipe)) * 100%) 0 0); }
+.stage__sweep {
   position: absolute; inset: 0; pointer-events: none; opacity: 0;
-  /* the pass is masked by the car itself, so the light only crosses bodywork */
   background: linear-gradient(90deg, transparent calc(var(--wipe) * 100% - 9%), rgba(255, 255, 255, .5) calc(var(--wipe) * 100%), transparent calc(var(--wipe) * 100% + 9%));
   -webkit-mask-position: center; mask-position: center;
   -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
 }
-.cfg__stage.is-wiping .cfg__sweep { opacity: 1; }
+.stage--cfg.is-wiping .stage__sweep { opacity: 1; }
 
-.cfg__panel { display: grid; gap: var(--s6); }
-.opts { border: 0; margin: 0; padding: var(--s5) 0 0; border-top: 1px solid var(--hairline); display: grid; gap: var(--s3); }
+.cfg__panel { display: grid; gap: var(--s6); position: sticky; top: calc(var(--top-h) + var(--s5)); }
+.opts { border: 0; margin: 0; padding: var(--s5) 0 0; border-top: 1px solid var(--hairline); display: grid; gap: var(--s2); }
 .opts legend { font-family: var(--display); font-weight: 500; font-size: 0.9375rem; padding: 0; margin-bottom: var(--s2); float: left; width: 100%; }
 .opt { display: flex; align-items: center; gap: var(--s3); cursor: pointer; min-height: 44px; font-family: var(--display); font-size: 0.9375rem; }
 .opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .opt__chip {
-  width: 36px; height: 36px; border-radius: 999px; flex: none;
+  width: 34px; height: 34px; border-radius: 999px; flex: none;
   background: var(--chip, var(--hairline)); box-shadow: 0 0 0 2px var(--cloth), 0 0 0 3px var(--hairline);
 }
 .block--white .opt__chip { box-shadow: 0 0 0 2px var(--white), 0 0 0 3px var(--hairline); }
@@ -218,13 +251,14 @@ input, textarea { caret-color: var(--bronze-ink); }
 .opt__chip--m-peat { background-image: url('../img/m-peat-400.webp'); }
 .opt__chip--m-sailcloth { background-image: url('../img/m-sailcloth-400.webp'); }
 .opt input:checked + .opt__chip { box-shadow: 0 0 0 2px var(--cloth), 0 0 0 4px var(--bronze); }
+.block--white .opt input:checked + .opt__chip { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--bronze); }
 .opt input:focus-visible + .opt__chip { box-shadow: 0 0 0 2px var(--cloth), 0 0 0 4px var(--bronze-ink); }
 .opt input:checked ~ .opt__name { color: var(--bronze-ink); }
 .opt__name small { font-size: 0.8125rem; color: var(--slate); margin-left: var(--s1); }
 .cfg__sum { border-top: 1px solid var(--hairline); padding-top: var(--s5); }
 .cfg__spec { font-family: var(--text); font-size: 1.0625rem; }
 .cfg__price { margin-top: var(--s3); font-family: var(--display); }
-.cfg__price > span:first-child { font-weight: 500; font-size: 2.25rem; letter-spacing: -0.02em; line-height: 1; display: block; }
+.cfg__price > span:first-child { font-weight: 500; font-size: 2.25rem; letter-spacing: -0.02em; line-height: 1; display: block; font-variant-numeric: tabular-nums; }
 .cfg__hull { display: block; margin-top: var(--s2); font-size: 0.9375rem; color: var(--slate); }
 .cfg__sum .button { margin-top: var(--s5); }
 
@@ -264,6 +298,10 @@ input, textarea { caret-color: var(--bronze-ink); }
 @media (max-width: 1100px) {
   .four { grid-template-columns: repeat(2, 1fr); }
 }
+@media (max-width: 860px) {
+  .cfg { grid-template-columns: 1fr; }
+  .cfg__panel { position: static; }
+}
 @media (max-width: 800px) {
   :root { --top-h: 60px; }
   .menu {
@@ -279,12 +317,14 @@ input, textarea { caret-color: var(--bronze-ink); }
   .nav a.button { margin-top: var(--s4); text-align: center; }
   .nav a:not(.button)::after { display: none; }
 
-  .hero { padding-top: calc(var(--top-h) + var(--s7)); }
-  .hero__car { height: auto; width: 100vw; max-width: none; }
+  .hero { padding-top: calc(var(--top-h) + var(--s6)); }
+  .stage--hero { width: 104vw; min-height: min(30vh, 220px); }
   .hero__copy p { max-width: 34ch; margin-inline: auto; }
-  .facts { grid-template-columns: 1fr; gap: var(--s4); }
-  .facts li + li { border-left: 0; padding-left: 0; border-top: 1px solid var(--hairline); padding-top: var(--s4); }
-  .three, .cfg, .yard { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr; gap: var(--s5); }
+  .facts li { grid-template-columns: auto 1fr; align-items: baseline; gap: var(--s4); }
+  .facts b { font-size: 2.25rem; }
+  .facts li + li { border-left: 0; padding-left: 0; border-top: 1px solid var(--hairline); padding-top: var(--s5); }
+  .three, .yard { grid-template-columns: 1fr; }
   .three--press .story + .story { border-top: 1px solid var(--hairline); padding-top: var(--s5); }
   .detail + .detail { margin-top: var(--s5); }
   .yard__pics { margin-top: var(--s6); }

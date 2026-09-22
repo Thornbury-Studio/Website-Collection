@@ -20,7 +20,7 @@ type:
   display: "Familjen Grotesk (variable 400–700 + italic) — self-hosted, latin"
   text: "Source Serif 4 (variable opsz 8–60, wght 200–900 + italic) — self-hosted, latin"
 radius: "0 on every layout element and button; 999px only on the paint and hide swatches, because they are samples, not chrome"
-motion: "two moments — the hero settles once on load, and the heritage timeline slides sideways while it is pinned. The configurator answers a click with a spring-driven paint pass. Nothing else moves unprompted."
+motion: "three moments — the hero settles once on load, its three layers drift apart under the pointer and the scroll, and the heritage timeline slides sideways while it is pinned. The configurator answers a click with a spring-driven paint pass. Nothing else moves unprompted."
 ---
 
 # STRAKE — design tokens and brand rules
@@ -150,6 +150,12 @@ eyebrow labels: a block's heading is its label.
 - **Inputs**: 1px hairline border, radius 0, ink text, 12px 14px padding.
   Focus: bronze border. Invalid after submit: bronze-ink border and a plain
   sentence underneath.
+- **The car stage**: one render exported as three layers — cast shadow, body, wheels — stacked
+  absolutely and translated at 3 / 11 / 17 px per unit of pointer travel and 6 / 16 / 24 px
+  across the first viewport of scroll. The parallax is damped (0.08 lerp) so the car settles
+  rather than tracking the cursor, and is off entirely under `prefers-reduced-motion`. The
+  configurator reuses the same stack with the parallax factors set to 0, so a paint change
+  swaps only the body layer and a wheel change swaps only the wheels.
 - **Timeline chapter**: image (4:3, greyed with `filter: grayscale(1)` and a
   bronze-tinted duotone via `mix-blend` on the cloth ground), year as a large
   numeral, one short paragraph. Not interactive.
@@ -176,7 +182,9 @@ Don't
 - No hover-lift on cards, no fade-up on every section. Two moments of motion
   and one interaction response, as declared in the front matter.
 - Never show a swatch row that does not change the car. Every paint and wheel
-  option re-renders the product.
+  option swaps a real layer of the product.
+- The car is one render, recoloured; it is never a tint over a flat picture, and the
+  bronze strake and the smoked canopy keep their own colour in every paint.
 
 ## 9. Agent instructions
 
