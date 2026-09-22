@@ -93,7 +93,8 @@ short, specific, occasionally ungrammatical — and attributed by first
 name and where they drank it.
 
 ## Constraints that are load-bearing
-1. The bottle is drawn, never photographed. There is no product photo
-   to fake; every photograph on the site is a real, licensed moment.
+1. One bottle photograph, five edits of it (see DESIGN.md §4). Every
+   other photograph and the pour clip are real, licensed moments; no
+   AI-generated imagery anywhere.
 2. The salty · sour · sweet profile is the product's own data and the
    sodas page is built around it — not decoration.

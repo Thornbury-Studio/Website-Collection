@@ -18,7 +18,6 @@ os.makedirs(OUT, exist_ok=True)
 # name: (stock id, aspect w:h or None for native, focal x, focal y, widths)
 SPEC = {
     # home
-    "serve":        ("433413800", (3, 2),  0.60, 0.50, (1800, 1000)),
     "salt-bowl":    ("288832452", (4, 5),  0.50, 0.50, (1000, 600)),
     "two-glasses":  ("328009746", (4, 5),  0.50, 0.45, (1000, 600)),
     # sodas page — one photo per band
