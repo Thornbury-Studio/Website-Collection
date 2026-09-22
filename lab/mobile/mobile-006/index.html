@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOBILE-006 — Bottom sheet — Thornbury Lab</title>
+<meta name="description" content="three resting heights, one drag">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0c'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-style='italic' font-size='18' fill='%23b6935f' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/lab.css">
+<link rel="stylesheet" href="css/mobile-006.css">
+</head>
+<body>
+
+<!-- MOBILE-006 was split out of interaction-002 ("The Effects Room"), an
+     81-effect catalog that had been archived into the Lab as a single
+     entry. Split into individually catalogued Lab entries 2026-09-22.
+     See lab/archive/ for the original bundle. -->
+<div class="lab-topbar">
+  <a class="lab-back" href="../index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+    Mobile Lab
+  </a>
+  <div class="lab-mark"><span class="dot"></span> MOBILE-006</div>
+</div>
+
+<div class="tb-room">
+<section class="tstage dark">
+  <div class="thead"><span class="id"><span class="no">T06</span><span class="nm">Bottom sheet — three resting heights, one drag</span></span><span class="src">Source — 2026 mobile UX reporting, &ldquo;bottom-sheet architecture&rdquo; as a named pattern</span><span class="pair swap">Desktop &mdash; <b>swapped</b> for a click-open dropdown, not a sheet</span></div>
+  <div class="phone-row">
+    <div class="phone-frame"><div class="notch"></div>
+      <div class="phone-screen dark-scr">
+        <div class="bs-stage">
+          <div class="bs-bg"><span class="hd">The audit</span><p>What's checked before anything ships — pull the sheet up for the list.</p></div>
+          <div class="bs-sheet" id="bsSheet">
+            <div class="bs-handle" id="bsHandle"><i></i></div>
+            <div class="in">
+              <div class="hd2">Checked on every deploy</div>
+              <div class="bs-row"><span>Security headers</span><span>✓</span></div>
+              <div class="bs-row"><span>Lighthouse</span><span>98/100</span></div>
+              <div class="bs-row"><span>Broken links</span><span>✓</span></div>
+              <div class="bs-row"><span>Schema markup</span><span>valid</span></div>
+              <div class="bs-row"><span>Image weight</span><span>✓</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="tnote"><strong>Drag the handle.</strong> Release anywhere and it settles on the nearest of three heights — peek, half, full — by velocity, not just position.</p>
+</section>
+</div>
+
+<footer class="lab-footer">
+  <span>Thornbury Lab — internal R&amp;D, not part of the public showcase.</span>
+  <span>Website Collection</span>
+</footer>
+
+<script src="js/mobile-006.js"></script>
+</body>
+</html>

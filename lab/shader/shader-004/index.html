@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHADER-004 — Displacement — Thornbury Lab</title>
+<meta name="description" content="the surface ripples where you touch it">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0c'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-style='italic' font-size='18' fill='%23b6935f' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/lab.css">
+<link rel="stylesheet" href="css/shader-004.css">
+</head>
+<body>
+
+<!-- SHADER-004 was split out of interaction-002 ("The Effects Room"), an
+     81-effect catalog that had been archived into the Lab as a single
+     entry. Split into individually catalogued Lab entries 2026-09-22.
+     See lab/archive/ for the original bundle. -->
+<div class="lab-topbar">
+  <a class="lab-back" href="../index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+    Shader Lab
+  </a>
+  <div class="lab-mark"><span class="dot"></span> SHADER-004</div>
+</div>
+
+<div class="tb-room">
+<section class="stage dark">
+  <div class="stage-label"><span class="no">30</span><span class="nm">Displacement — the surface ripples where you touch it</span></div>
+  <div class="disp-stage">
+    <div class="disp-plate" id="dispPlate">
+      <canvas></canvas>
+      <div class="rgb"></div>
+    </div>
+    <div class="disp-cap">
+      <strong>Liquid on hover</strong>
+      Turbulence drives a displacement map over the plate, and the channels separate a little at the edges. The whole thing is one SVG filter — no WebGL, no library.
+    </div>
+  </div>
+  <div class="stage-note">Hover the plate. The noise frequency and the displacement scale both ride your distance from the centre.</div>
+  <div class="stage-src">Source — Codrops WebGL/OGL fluid distortion hover demos — rebuilt as an SVG filter</div>
+</section>
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="dispF" x="-12%" y="-12%" width="124%" height="124%">
+      <feTurbulence id="dispTurb" type="fractalNoise" baseFrequency="0.008 0.014" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap id="dispMap" in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+</div>
+
+<footer class="lab-footer">
+  <span>Thornbury Lab — internal R&amp;D, not part of the public showcase.</span>
+  <span>Website Collection</span>
+</footer>
+
+<script src="js/shader-004.js"></script>
+</body>
+</html>
