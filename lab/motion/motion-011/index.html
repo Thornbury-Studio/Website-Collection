@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOTION-011 — The stack — Thornbury Lab</title>
+<meta name="description" content="cards that pile up instead of scrolling past">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0c'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-style='italic' font-size='18' fill='%23b6935f' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/lab.css">
+<link rel="stylesheet" href="css/motion-011.css">
+</head>
+<body>
+
+<!-- MOTION-011 was split out of interaction-002 ("The Effects Room"), an
+     81-effect catalog that had been archived into the Lab as a single
+     entry. Split into individually catalogued Lab entries 2026-09-22.
+     See lab/archive/ for the original bundle. -->
+<div class="lab-topbar">
+  <a class="lab-back" href="../index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+    Motion Lab
+  </a>
+  <div class="lab-mark"><span class="dot"></span> MOTION-011</div>
+</div>
+
+<div class="tb-room">
+<section class="stage">
+  <div class="stage-label"><span class="no">33</span><span class="nm">The stack — cards that pile up instead of scrolling past</span></div>
+  <div class="stack-wrap">
+    <article class="stack-card" style="background:linear-gradient(150deg,#0c2530,#1f5d50);">
+      <span class="n">01 — BRIEF</span>
+      <div><h3>What is actually broken</h3><p>Before anything is designed, the current site gets measured: what it loads, what it says, what it fails to say to a search engine reading it aloud.</p></div>
+    </article>
+    <article class="stack-card" style="background:linear-gradient(150deg,#2a0d07,#9a3324);">
+      <span class="n">02 — DESIGN</span>
+      <div><h3>Drawn, not assembled</h3><p>No template picked from a rack. The page is composed around your actual content, and the type is chosen for the words you really have.</p></div>
+    </article>
+    <article class="stack-card" style="background:linear-gradient(150deg,#0c1b33,#2c4a7c);">
+      <span class="n">03 — BUILD</span>
+      <div><h3>Fast because it is small</h3><p>Real markup, real semantics, images sized for the device that asked for them. The speed is structural, not a plugin.</p></div>
+    </article>
+    <article class="stack-card" style="background:linear-gradient(150deg,#1c1029,#6b4a8a);">
+      <span class="n">04 — HANDOVER</span>
+      <div><h3>The keys, all of them</h3><p>Repo, domain, mailbox, analytics. You leave with everything, including the ability to leave us.</p></div>
+    </article>
+  </div>
+  <div class="stage-note">Each card sticks at the same height, so the next one arrives on top of it. Four steps become one object.</div>
+  <div class="stage-src">Source — the sticky-stack pattern across 2026 award galleries; scroll-snap + sticky, no library</div>
+</section>
+</div>
+
+<footer class="lab-footer">
+  <span>Thornbury Lab — internal R&amp;D, not part of the public showcase.</span>
+  <span>Website Collection</span>
+</footer>
+
+</body>
+</html>

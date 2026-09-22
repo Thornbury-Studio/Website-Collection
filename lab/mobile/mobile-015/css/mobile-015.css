@@ -1,0 +1,85 @@
+.tstage{position:relative;border-top:1px solid var(--line);padding:8vh 6vw 7vh;display:flex;flex-direction:column;align-items:center;gap:26px;}
+  .tstage.dark{background:var(--room);color:#f2efe6;border-top-color:#2e2d27;}
+  .tstage .thead{max-width:680px;width:100%;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+  .tstage .thead .id{display:flex;gap:12px;align-items:baseline;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;}
+  .tstage .thead .id .no{color:var(--ink);background:var(--accent);padding:2px 7px;}
+  .tstage .thead .id .nm{color:var(--muted);}
+  .tstage.dark .thead .id .nm{color:#a5a29a;}
+  .tstage .thead .src{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#a8a49c;text-align:right;max-width:30ch;}
+  .tstage.dark .thead .src{color:#8b877e;}
+  /* the desktop-pairing tag — does this gesture have a cursor life too?
+     forced onto its own row via flex-basis so it never fights .id/.src
+     for the same line. Three answers, three treatments: LINKED gets the
+     accent fill (nothing to build, it already works); SWAPPED names the
+     cursor-native pattern that should replace it; TOUCH ONLY says so
+     plainly rather than forcing a fake desktop mode. */
+  .tstage .thead .pair{
+    flex-basis:100%;margin-top:2px;display:flex;align-items:center;gap:7px;
+    font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  }
+  .tstage.dark .thead .pair{color:#8f8c83;}
+  .tstage .thead .pair b{font-weight:700;padding:1px 6px;}
+  .tstage .thead .pair.link b{background:var(--accent);color:var(--ink);}
+  .tstage .thead .pair.swap b{border:1px solid currentColor;color:inherit;}
+  .tstage .thead .pair.only b{color:var(--rust);}
+  .tstage.dark .thead .pair.only b{color:#e0864f;}
+  .tnote{max-width:680px;width:100%;font-family:var(--mono);font-size:10px;letter-spacing:.05em;line-height:1.85;color:var(--muted);text-transform:uppercase;}
+  .tstage.dark .tnote{color:#8f8c83;}
+  .tnote strong{color:inherit;font-weight:700;}
+
+  /* the shared bezel — everything below lives inside one of these */
+  .phone-row{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;align-items:flex-start;}
+  .phone-frame{
+    width:min(82vw,320px);aspect-ratio:9/18.5;border-radius:34px;
+    background:#0c0c0b;padding:9px;position:relative;flex:0 0 auto;
+    box-shadow:0 34px 64px -32px rgba(17,17,16,.55),inset 0 0 0 1px rgba(255,255,255,.05);
+  }
+  .phone-frame .notch{position:absolute;left:50%;top:9px;translate:-50% 0;width:60px;height:5px;border-radius:3px;background:#000;z-index:9;}
+  .phone-screen{
+    width:100%;height:100%;border-radius:25px;overflow:clip;position:relative;
+    background:var(--bg);font-size:14px;line-height:1.4;
+  }
+  .phone-screen .ph-cap{
+    position:absolute;left:0;right:0;bottom:0;z-index:8;padding:8px 12px;text-align:center;
+    font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+    background:linear-gradient(to top,var(--bg) 55%,transparent);pointer-events:none;
+  }
+  .phone-screen.dark-scr{background:#141412;}
+  .phone-screen.dark-scr .ph-cap{color:#8f8c83;background:linear-gradient(to top,#141412 55%,transparent);}
+
+.marq-track .dot{display:inline-block;width:.55em;height:.55em;background:var(--accent);border-radius:0;margin-right:3.2rem;vertical-align:baseline;}
+
+.fab-stage{position:relative;width:100%;height:100%;background:linear-gradient(160deg,#fbfaf7,#efece4);}
+
+.fab-scrim{position:absolute;inset:0;background:rgba(17,17,16,.28);opacity:0;pointer-events:none;transition:opacity .25s;}
+
+.fab-scrim.on{opacity:1;pointer-events:auto;}
+
+.fab-wrap{position:absolute;right:16px;bottom:18px;display:flex;flex-direction:column;align-items:flex-end;gap:12px;}
+
+.fab-mini{
+    display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(10px) scale(.85);
+    transition:opacity .25s cubic-bezier(.16,1,.3,1),transform .25s cubic-bezier(.16,1,.3,1);
+  }
+
+.fab-wrap.on .fab-mini{opacity:1;transform:none;}
+
+.fab-mini .lbl{background:var(--ink);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;white-space:nowrap;}
+
+.fab-mini .dot{width:38px;height:38px;border-radius:50%;background:#fff;box-shadow:0 8px 20px -8px rgba(17,17,16,.4);display:grid;place-items:center;font-size:15px;}
+
+.fab-main{
+    width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--accent);border:none;
+    font-size:22px;display:grid;place-items:center;box-shadow:0 12px 26px -8px rgba(17,17,16,.5);
+    cursor:pointer;transition:transform .3s cubic-bezier(.16,1,.3,1);
+  }
+
+.fab-wrap.on .fab-main{transform:rotate(45deg);}
+
+@media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important;}
+    .scrub-wrap,.roll-wrap,.hz-wrap,.wt-wrap,.dw,.cyl{height:auto;}
+    .scrub-pin,.roll-pin,.hz-pin,.wt-pin,.dw-pin,.cyl-pin{position:static;height:auto;min-height:0;padding:10vh 6vw;}
+    .stack-card{position:static;height:auto;margin-top:6vh;}
+    .crt .roll{display:none;}
+  }

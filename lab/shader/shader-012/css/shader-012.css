@@ -1,0 +1,88 @@
+.tb-room{
+    --ink:#111110;
+    --bg:#ffffff;
+    --surface:#fafaf9;
+    --muted:#6b6b68;
+    --line:#e7e5e2;
+    --accent:#f5c518;
+    --room:#1f1f1c;
+    --rust:#9a3324;
+    --green:#1f5d50;
+    --blue:#2c4a7c;
+    --purple:#6b4a8a;
+    --olive:#8a6a2f;
+    --serif:"Instrument Serif",Georgia,serif;
+    --body:"Newsreader",Georgia,serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  /* scoped to .tb-room, not body — body belongs to the Lab shell */
+  .tb-room{
+    background:var(--bg);color:var(--ink);
+    font-family:var(--body);font-size:17px;line-height:1.55;
+    overflow-x:clip;
+  }
+  .tb-room ::selection{background:var(--ink);color:var(--accent);}
+
+  .mono{font-family:var(--mono);}
+  .stage{
+    position:relative;border-top:1px solid var(--line);
+    padding:0;overflow:clip;
+  }
+  .stage-label{
+    position:absolute;top:18px;left:22px;z-index:20;
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    display:flex;gap:14px;align-items:baseline;pointer-events:none;
+  }
+  .stage-label .no{color:var(--accent);background:var(--ink);padding:2px 7px;}
+  .stage-label .nm{color:var(--muted);}
+  .stage.dark .stage-label .nm{color:#a5a29a;}
+  .stage-note{
+    position:absolute;bottom:16px;left:22px;z-index:20;max-width:44ch;
+    font-family:var(--mono);font-size:10px;letter-spacing:.06em;line-height:1.7;
+    color:var(--muted);text-transform:uppercase;pointer-events:none;
+  }
+  .stage.dark{background:var(--room);color:#f2efe6;}
+  .stage.dark .stage-note{color:#8f8c83;}
+
+.stage-src{
+    position:absolute;top:18px;right:22px;z-index:20;max-width:36ch;text-align:right;
+    font-family:var(--mono);font-size:9px;letter-spacing:.13em;line-height:1.8;
+    color:#a8a49c;text-transform:uppercase;pointer-events:none;
+  }
+  .stage.dark .stage-src{color:#8b877e;}
+  /* several stages put drawn artwork right under these captions — a scrim
+     keeps them readable without printing a box over the picture */
+  .stage.dark .stage-src,.stage.dark .stage-note{
+    text-shadow:0 1px 3px rgba(0,0,0,.95),0 0 12px rgba(0,0,0,.8);
+  }
+  @media (max-width:900px){.stage-src{display:none;}}
+
+@keyframes aurC{from{transform:translateX(-5%) scaleY(.82);}to{transform:translateX(15%) scaleY(1.18);}}
+
+@keyframes aurA{from{transform:translateX(-8%) scaleY(1);}to{transform:translateX(11%) scaleY(1.3);}}
+
+@keyframes aurB{from{transform:translateX(7%) skewX(-4deg);}to{transform:translateX(-13%) skewX(6deg);}}
+
+.aur-stage{height:76vh;position:relative;overflow:clip;background:#04070a;}
+
+.aur-stage .ribbons{position:absolute;inset:-10% -20%;filter:blur(30px);mix-blend-mode:screen;}
+
+.aur-stage .r{position:absolute;left:0;right:0;height:46%;opacity:.55;will-change:transform;}
+
+.aur-stage .r1{top:2%;background:linear-gradient(180deg,transparent,#1f5d50 40%,#7fb069 55%,transparent);animation:aurA 15s ease-in-out infinite alternate;}
+
+.aur-stage .r2{top:22%;background:linear-gradient(180deg,transparent,#2c4a7c 35%,#6b4a8a 60%,transparent);opacity:.4;animation:aurB 19s ease-in-out infinite alternate;}
+
+.aur-stage .r3{top:40%;background:linear-gradient(180deg,transparent,#f5c518 30%,#1f5d50 65%,transparent);opacity:.25;animation:aurC 23s ease-in-out infinite alternate;}
+
+.aur-stage .cap{position:relative;z-index:3;height:100%;display:flex;align-items:flex-end;padding:6vh 6vw;font-family:var(--serif);font-style:italic;color:#f2efe6;font-size:clamp(1.6rem,4vw,2.8rem);}
+
+@media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important;}
+    .scrub-wrap,.roll-wrap,.hz-wrap,.wt-wrap,.dw,.cyl{height:auto;}
+    .scrub-pin,.roll-pin,.hz-pin,.wt-pin,.dw-pin,.cyl-pin{position:static;height:auto;min-height:0;padding:10vh 6vw;}
+    .stack-card{position:static;height:auto;margin-top:6vh;}
+    .crt .roll{display:none;}
+  }

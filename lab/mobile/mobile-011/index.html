@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOBILE-011 — Drag to reorder — Thornbury Lab</title>
+<meta name="description" content="pick a row up, the rest step aside">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'self';">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0c'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-style='italic' font-size='18' fill='%23b6935f' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/lab.css">
+<link rel="stylesheet" href="css/mobile-011.css">
+</head>
+<body>
+
+<!-- MOBILE-011 was split out of interaction-002 ("The Effects Room"), an
+     81-effect catalog that had been archived into the Lab as a single
+     entry. Split into individually catalogued Lab entries 2026-09-22.
+     See lab/archive/ for the original bundle. -->
+<div class="lab-topbar">
+  <a class="lab-back" href="../index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+    Mobile Lab
+  </a>
+  <div class="lab-mark"><span class="dot"></span> MOBILE-011</div>
+</div>
+
+<div class="tb-room">
+<section class="tstage">
+  <div class="thead"><span class="id"><span class="no">T11</span><span class="nm">Drag to reorder — pick a row up, the rest step aside</span></span><span class="src">Source — native list-reorder pattern (Reminders, Home Screen)</span><span class="pair link">Desktop &mdash; <b>linked</b>, drag-to-reorder is native desktop UX</span></div>
+  <div class="phone-row">
+    <div class="phone-frame"><div class="notch"></div>
+      <div class="phone-screen">
+        <div class="ro-list" id="roList">
+          <div class="ro-row" data-k="home"><span class="grip"><i></i><i></i><i></i></span><span class="t">Home</span><span class="n">01</span></div>
+          <div class="ro-row" data-k="services"><span class="grip"><i></i><i></i><i></i></span><span class="t">Services</span><span class="n">02</span></div>
+          <div class="ro-row" data-k="templates"><span class="grip"><i></i><i></i><i></i></span><span class="t">Templates</span><span class="n">03</span></div>
+          <div class="ro-row" data-k="contact"><span class="grip"><i></i><i></i><i></i></span><span class="t">Contact</span><span class="n">04</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="tnote"><strong>Drag a grip up or down.</strong> Rows reflow live under your thumb; the numbers renumber themselves on release.</p>
+</section>
+</div>
+
+<footer class="lab-footer">
+  <span>Thornbury Lab — internal R&amp;D, not part of the public showcase.</span>
+  <span>Website Collection</span>
+</footer>
+
+<script src="js/mobile-011.js"></script>
+</body>
+</html>
