@@ -59,3 +59,10 @@ templates/slake/assets/raw/
 templates/kiam/assets/raw/
 # Kiam verification captures (tools/shot.mjs, tools/interact.mjs)
 templates/kiam/tools/shots/
+
+# Full-resolution licensed Adobe Stock originals and the Blender/Cycles car renders (PNG masters,
+# GLB) — cropped and exported to templates/strake/img/ by tools/grade.py; regenerate the renders
+# with tools/render-all.sh if the model changes; the originals stay local. tools/shots/ is the
+# CDP verification output.
+templates/strake/tools/raw/
+templates/strake/tools/shots/
