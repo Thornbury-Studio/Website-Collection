@@ -6,8 +6,8 @@ type: DESIGN.md
 brand: KIAM 咸 — small-batch salted sodas, Singapore
 status: Website-Collection template (migrated from a Showcase capability-test build, 2026-09-20)
 inherits: C:\School\Personal\Company\DESIGN-SYSTEM\DESIGN.md
-version: 1.0.0
-last_updated: 2026-09-19
+version: 1.1.0
+last_updated: 2026-09-20
 colors:
   salt: "#EFEFEA"
   plum: "#3D1A1B"
@@ -24,7 +24,7 @@ type:
   text: "Newsreader (variable: opsz 6–72, wght 200–800, italic) — self-hosted"
   mark: "Noto Sans SC 900, subset to 咸酸甜汽水 only (1.9 KB)"
 radius: "0 on layout; 999px only on the pill button and the profile dots"
-motion: "one load moment — the five hero bottles fill from the base (1.1 s, staggered). Nothing else moves unprompted."
+motion: "one moving thing — the pour, a licensed 16 s clip in the Cold section (muted, looped, poster-only under reduced motion). Nothing else moves unprompted."
 ---
 
 # KIAM — design tokens and brand rules
@@ -154,13 +154,27 @@ rounded things are the pill action button and the taste-profile dots,
 because they are the same shape as a bottle cap. The bottle illustration
 has its own drawn shoulders and is not a CSS radius.
 
-The bottle: an inline SVG (viewBox 120 × 368) — a 250 ml straight-sided
-bottle with a crown cap, written out per instance (the label text
-differs), filled per soda through a `.bottle--<soda>` class that sets
-`--fill`, carrying its label as SVG text in the page's own fonts. Its
-base sits exactly on the 1px plum shelf line; bottles are never floated,
-tilted, or given a drop shadow. The liquid is clipped by a rect that
-scales from the base — that is the fill animation.
+The bottle: one photograph. Adobe Stock 525762808 — a clear 250 ml
+contour bottle of red drink with a crown cap, front-lit on white — is
+the only bottle on the site. `tools/bottles.py` makes the five sodas
+from that single frame: the liquid is re-mapped to the soda's colour
+while keeping the photo's own brightness and saturation structure (an
+HSV remap, never a flat tint), the silver cap is re-tinted plum from its
+luminance, and the printed label (rendered by `tools/labels.mjs` from
+`tools/label.html`, same fonts as the page) is wrapped onto the body as
+a cylinder and lit by the glass's own shading and specular streak. Every
+bottle therefore has the same light, because it is the same light. The
+files are transparent WebP (`assets/img/bottle-<soda>-{1400,800}.webp`,
+289 × 800), cropped so the base is 6 px from the bottom edge and stands
+on the 1px plum shelf; a soft elliptical shadow comes from `.stands`, not
+from the file. Bottles are never floated, tilted, or drop-shadowed as a
+silhouette. `.bottle--<soda>` still sets `--fill` for the swatches.
+
+**Why one frame and not five photographs:** five separate stock bottles
+can never share a light, and a set that does not share a light reads as
+a collage. One frame, three edits, is the honest version of a product
+shoot this business has not had yet — and it is the same recipe a real
+label printer's mock-up uses.
 
 ## 5. Elevation & Depth
 
@@ -196,9 +210,13 @@ similar value.
 - **Inputs** (contact form): 1px plum border, 12px padding, Newsreader
   body; focus-visible ring as above; invalid after submit shows a plum
   message beneath, never a red border alone.
-- **Reveal**: none. Content is visible on load; the only animation is
-  the hero fill, and `prefers-reduced-motion: reduce` sets the bottles
-  full from the start.
+- **Reveal**: none. Content is visible on load. The one moving thing is
+  the pour (`.serve .pour`): Adobe Stock 605543896 cut to 16 s — the
+  pour at 2×, then the settled fizz, the last 1.2 s dissolved into the
+  first — `autoplay muted loop playsinline`, poster from its own first
+  frame. The `<source>` elements carry `(prefers-reduced-motion:
+  no-preference)`, and `site.js` also strips `autoplay` under reduce, so
+  those users get the poster and nothing moves.
 
 ## 7. Do's and Don'ts
 
@@ -212,8 +230,10 @@ Do
   whole allowance.
 
 Don't
-- Don't photograph-fake the product: no stock bottle with a label
-  composited on. The drawn bottle is honest; a fake photo is not.
+- Don't mix bottle photographs. There is one frame (525762808) and
+  five edits of it; never a second stock bottle, never an AI render, and
+  never a flat colour tint over the liquid — the remap keeps the photo's
+  shading or it does not ship.
 - Don't put the range colours behind body text on salt, or use them
   for links.
 - Don't stack the five sodas in a card grid. They are bands (sodas

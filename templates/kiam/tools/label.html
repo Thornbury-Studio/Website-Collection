@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KIAM label — render sheet</title>
+<style>
+  /* Tool page only (not shipped): renders one printed label at 1170 × 740 CSS px for tools/labels.mjs,
+     which wraps it onto the photographed bottle in tools/bottles.py. Same fonts and tokens as the site. */
+  @font-face { font-family: "Anybody"; font-style: normal; font-weight: 100 900; font-stretch: 50% 150%; src: url("../fonts/anybody-roman.woff2") format("woff2"); }
+  @font-face { font-family: "Kiam SC"; font-weight: 900; src: url("../fonts/notosc-subset.woff2") format("woff2"); unicode-range: U+54B8, U+9178, U+751C, U+6C7D, U+6C34; }
+  html, body { margin: 0; background: #efefea; }
+  .label { position: relative; width: 1170px; height: 740px; background: #efefea; color: #3d1a1b; font-family: "Anybody", sans-serif; box-sizing: border-box; padding: 58px 64px 52px; overflow: hidden; }
+  .frame { position: absolute; inset: 22px; border: 3px solid #3d1a1b; pointer-events: none; }
+  .frame::after { content: ""; position: absolute; inset: 6px; border: 1px solid #3d1a1b; opacity: .55; }
+  .head { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 3px solid #3d1a1b; padding-bottom: 14px; }
+  .mark { font-weight: 850; font-stretch: 150%; font-size: 118px; line-height: .9; letter-spacing: -.01em; }
+  .sc { font-family: "Kiam SC", sans-serif; font-weight: 900; font-size: 92px; line-height: 1; }
+  .name { margin-top: 28px; font-weight: 720; font-stretch: 112%; font-size: 108px; line-height: .98; letter-spacing: -.01em; text-wrap: balance; }
+  .name small { display: block; font-weight: 720; font-stretch: 112%; font-size: 108px; }
+  .foot { position: absolute; left: 64px; right: 64px; bottom: 52px; display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; font-stretch: 100%; font-size: 40px; letter-spacing: .01em; }
+  .foot .place { font-weight: 550; font-size: 34px; }
+  .tag { display: inline-block; margin-top: 18px; border: 2px solid #3d1a1b; padding: 8px 18px; font-weight: 600; font-size: 34px; }
+</style>
+</head>
+<body>
+<div class="label" id="label">
+  <div class="frame"></div>
+  <div class="head"><span class="mark">KIAM</span><span class="sc">咸</span></div>
+  <div class="name" id="name"></div>
+  <div class="foot"><span>250&nbsp;ml</span><span class="place">Tai Seng, Singapore</span></div>
+</div>
+<script>
+  const names = {
+    calamansi:  ['Calamansi', '& Sour Plum'],
+    grapefruit: ['Pink Grapefruit', '& Sea Salt'],
+    pineapple:  ['Pineapple', '& Sea Salt'],
+    roselle:    ['Roselle', '& Sea Salt'],
+    watermelon: ['Watermelon', '& Sea Salt']
+  };
+  const soda = new URLSearchParams(location.search).get('soda') || 'calamansi';
+  const n = names[soda];
+  document.getElementById('name').innerHTML = n[0] + '<small>' + n[1] + '</small>' + (soda === 'watermelon' ? '<span class="tag">seasonal</span>' : '');
+  document.title = 'label ' + soda;
+</script>
+</body>
+</html>

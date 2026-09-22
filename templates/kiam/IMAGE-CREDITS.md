@@ -7,9 +7,20 @@ AI-generated imagery anywhere, and no AI-generated faces). Licensed on
 full-resolution masters are in `assets/raw/<id>.jpg` (gitignored) and the
 web encodes in `assets/img/` are produced from them by `tools/encode.py`.
 
-The bottle is not a photograph. It is an inline SVG drawn for this site
-(`index.html`, `sodas.html`), filled per soda from the range tokens in
-`css/style.css`.
+The five bottles are one photograph: Adobe Stock 525762808 (a clear
+glass soda bottle of red drink, crown cap, isolated on white; free
+collection, not AI-generated). Background removed with Adobe's cutout
+(`assets/raw/bottle-cutout.png`), then `tools/bottles.py` re-colours the
+liquid per soda, re-tints the cap plum and wraps the printed label
+(rendered from `tools/label.html` in the site's own fonts) onto the
+body — one frame, one light, five edits. Output:
+`assets/img/bottle-<soda>-{1400,800}.webp`.
+
+The pour in the "Cold" section is Adobe Stock 605543896 (orange soda
+poured over ice on a wooden table; 4K ProRes, 32 s, free collection, not
+AI-generated), cut and encoded by `tools/encode-video.sh` to
+`assets/video/pour-{1600,1000}.mp4` with a poster from its own first
+frame. Same grade as the stills.
 
 Fonts: Anybody (Tyler Finck / ETC, OFL), Newsreader (Production Type, OFL)
 and a five-glyph subset of Noto Sans SC (Google, OFL), all self-hosted from
@@ -17,7 +28,6 @@ Google Fonts' woff2 builds.
 
 | File(s) in assets/img | Adobe Stock id | Used on | Subject |
 |---|---|---|---|
-| serve-* | 433413800 | home, "Cold" | lime highball with mint on a pale yellow table |
 | salt-bowl-* | 288832452 | home, "Salt makes fruit…" | sea salt flakes, bowl on wood, overhead |
 | two-glasses-* | 328009746 | home, stockists teaser | two highballs with lemon and rosemary on grey |
 | calamansi-* | 638782676 | sodas, band 1 | calamansi in a basket, grey table |
@@ -38,7 +48,9 @@ Google Fonts' woff2 builds.
 | r-toast-* | 585702790 | reviews | hands clinking lime drinks in low sun |
 | r-lunch-* | 252898932 | reviews | friends clinking glasses over lunch, sun flare |
 
-Licensed but not used (kept in `assets/raw/` only): 315204534, 1215362983,
+Also licensed for this build: 525762808 (the bottle), 605543896 (the pour).
+
+Licensed but not used (kept in `assets/raw/` only): 433413800, 315204534, 1215362983,
 629742198, 321036720, 555691043, 389583425, 214176338, 301752234, 519751339,
 680115229.
 
