@@ -6,26 +6,44 @@ address, phone number and email on the site are original to this template. No
 real marque's identity, imagery, product names or prices are used. The places
 and boats in the photographs are real; the yard that claims them is invented.
 
-## The car — rendered, not photographed and not generated
+## The car — rendered, then layered and recoloured in Adobe
 
-The Carvel does not exist, so no photograph of it does. The brief's default
-(a Higgsfield product render) was not reachable from this session — the
-Higgsfield connector exposed only its 3D-scene tools, and the catalogue's
-fallback (Gemini image generation via the repo's `.env`) returned HTTP 402,
-prepaid credits depleted. Rather than pass off a real car's stock photo as an
-invented one, the car was **modelled and rendered from scratch in Blender 5.2**:
-`tools/carvel.py` lofts the body as a hull of thirteen cross-sections, cuts the
-arches, grille, lamps and shut lines, builds the wheels, the bronze strake and
-the canopy, lights a white studio and renders with Cycles (OptiX) to a
-transparent PNG so the page's own off-white shows through. The same script
-renders every configurator combination — five paints, two wheel finishes — so
-the configurator swaps real renders, not tinted copies. No AI image generation
-of any kind is used anywhere on this template.
+The Carvel does not exist, so no photograph of it does. Every high-quality car-on-a-plain-
+background on this Adobe Stock tier is a recognisable production model (an Audi A7, a Mercedes
+SLS), and the only brandless ones are poor renders — so the car is **modelled and rendered from
+scratch in Blender 5.2**, and the Adobe image tools are used for the layering and the colour.
+No AI image generation of any kind is used anywhere on this template.
 
-| Render | Exported as | Used on |
+`tools/carvel.py` lofts the body as a hull of thirteen cross-sections, cuts the arches, grille,
+lamps and shut lines, builds the wheels and the bronze strake, and lights a studio built as
+geometry — five emissive softboxes and two negative-fill cards, so the glossy paint has
+something real to reflect. It renders four passes of the same frame through Cycles (OptiX):
+
+| Pass | What it is | Used as |
 |---|---|---|
-| `hero-solent.png` (3600 × 2025, 256 samples) | `hero-carvel-{2400,1600,1000}`, `og-1200`, `d-strake`, `h-2019` | Hero; social card; "The strake" detail; 2019 heritage chapter |
-| `cfg-{paint}-{wheels}.png` × 10 (2400 × 1350, 128 samples) | `cfg-{paint}-{wheels}-{1600,1000}` | Configurator |
+| `body` | the car with the wheels hidden | the body layer |
+| `wheels` | the wheels, with the bodywork kept as a holdout so the far side stays hidden | the wheels layer |
+| `shadow` | the car invisible to camera but still casting | the shadow layer |
+| `matte` / `mattewheel` | every material black except the paint (or the rims) | the masks Adobe is given |
+
+The layers are what the hero parallaxes and what the configurator swaps.
+
+**The colourways are made in Adobe, from one render.** `up-body.jpg` and `up-wheels.jpg` were
+uploaded to Creative Cloud, and `image_apply_adjustments` was run with `colorize` against the
+Blender-rendered mattes as `maskURI` — an exact mask, so the bronze strake, the smoked canopy,
+the lamps and the tyres keep their own colour while only the painted panels move:
+
+| Colourway | HSL applied through the paint matte |
+|---|---|
+| Sailcloth | hue 38°, saturation 9, lightness +16 |
+| Keel black | hue 210°, saturation 3, lightness −62 |
+| Ebb | hue 178°, saturation 34, lightness −44 |
+| Red lead | hue 8°, saturation 46, lightness −30 |
+| Cast bronze wheels | hue 33°, saturation 44, lightness +4, through the rim matte |
+
+Solent silver and satin graphite are the render itself. `tools/compose.py` blends each Adobe
+result back into its render through the same matte and restores the alpha from it, so a later
+change to a part Adobe never touched carries into every colourway without re-running it.
 
 Masters live in `tools/raw/` (gitignored); `tools/render-all.sh` regenerates them.
 

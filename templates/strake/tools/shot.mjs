@@ -33,8 +33,17 @@ const scrollTo = async (y) => { await evaluate(`window.scrollTo({top:${y}, behav
 const y = async (sel, frac = 0) => evaluate(`(() => { const r = document.querySelector('${sel}').getBoundingClientRect(); return Math.round(r.top + scrollY + r.height * ${frac}); })()`);
 
 const out = { mode, vp };
-out.load = await evaluate(`({ title: document.title, overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth ? document.documentElement.scrollWidth : 0, h: document.documentElement.scrollHeight, native: CSS.supports('animation-timeline: view()'), fonts: [...document.fonts].filter(f => f.status === 'loaded').map(f => f.family), heroCar: (() => { const i = document.querySelector('.hero__car'); return { w: i.clientWidth, src: i.currentSrc.split('/').pop(), complete: i.complete }; })() })`);
+out.load = await evaluate(`({ title: document.title, overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth ? document.documentElement.scrollWidth : 0, h: document.documentElement.scrollHeight, native: CSS.supports('animation-timeline: view()'), fonts: [...document.fonts].filter(f => f.status === 'loaded').map(f => f.family), heroCar: (() => { const i = document.querySelector('.stage__body'); const s = document.querySelector('.stage--hero').getBoundingClientRect(); return { w: i.clientWidth, src: i.currentSrc.split('/').pop(), complete: i.complete, stageBottom: Math.round(s.bottom), belowFold: Math.round(s.bottom - innerHeight) }; })() })`);
 await shot('00-hero');
+// the 2.5D stage: move the pointer and read that the three layers separate by different amounts
+out.parallax = await evaluate(`(async () => {
+  const s = document.querySelector('#hero-stage');
+  dispatchEvent(new PointerEvent('pointermove', { pointerType: 'mouse', clientX: innerWidth * 0.95, clientY: innerHeight * 0.12, bubbles: true }));
+  await new Promise(r => setTimeout(r, 900));
+  const m = (sel) => new DOMMatrixReadOnly(getComputedStyle(document.querySelector(sel)).transform);
+  return { px: +s.style.getPropertyValue('--px'), shadow: Math.round(m('.stage__shadow').e), body: Math.round(m('.stage__body').e), wheels: Math.round(m('.stage__wheels').e) };
+})()`);
+await shot('00b-parallax');
 await scrollTo(await y('.facts')); await shot('01-facts');
 await scrollTo(await y('#details') - 40); await shot('02-details');
 await scrollTo(await y('#materials') - 40); await shot('03-materials');
@@ -49,7 +58,7 @@ await scrollTo(await y('#press') - 40); await shot('07-press');
 await scrollTo(await y('.band')); await shot('08-band');
 await scrollTo(await y('#configure') - 40); await shot('09-configure');
 // configurator: pick Ebb + bronze, wait for the spring, read the base image
-out.cfgBefore = await evaluate(`document.querySelector('#cfg-base').currentSrc.split('/').pop()`);
+out.cfgBefore = await evaluate(`document.querySelector('#cfg-body').currentSrc.split('/').pop()`);
 await evaluate(`(() => { const f = document.querySelector('#cfg-form'); f.elements.paint.value = 'ebb'; f.elements.paint[3].dispatchEvent(new Event('change', { bubbles: true })); return true; })()`);
 await sleep(180);
 out.cfgMid = await evaluate(`(() => { const s = document.querySelector('#cfg-stage'); return { wipe: getComputedStyle(s).getPropertyValue('--wipe').trim(), wiping: s.classList.contains('is-wiping'), next: document.querySelector('#cfg-next').src.split('/').pop() }; })()`);
@@ -57,7 +66,7 @@ await shot('10-configure-mid-wipe');
 await sleep(1400);
 await evaluate(`(() => { const f = document.querySelector('#cfg-form'); f.elements.wheels.value = 'bronze'; f.elements.wheels[1].dispatchEvent(new Event('change', { bubbles: true })); return true; })()`);
 await sleep(1800);
-out.cfgAfter = await evaluate(`(() => ({ base: document.querySelector('#cfg-base').src.split('/').pop(), wiping: document.querySelector('#cfg-stage').classList.contains('is-wiping'), spec: document.querySelector('#cfg-spec').textContent, price: document.querySelector('#cfg-price').textContent, alt: document.querySelector('#cfg-base').alt }))()`);
+out.cfgAfter = await evaluate(`(() => ({ body: document.querySelector('#cfg-body').src.split('/').pop(), wheels: document.querySelector('#cfg-wheels').src.split('/').pop(), wiping: document.querySelector('#cfg-stage').classList.contains('is-wiping'), spec: document.querySelector('#cfg-spec').textContent, price: document.querySelector('#cfg-price').textContent, alt: document.querySelector('#cfg-body').alt }))()`);
 await shot('11-configure-ebb-bronze');
 await scrollTo(await y('#visit') - 40); await shot('12-visit');
 // reserve carries the spec into the form; the form validates

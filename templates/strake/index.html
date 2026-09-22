@@ -18,7 +18,7 @@
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/familjen-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/hero-carvel-1600.webp" as="image" imagesrcset="img/hero-carvel-2400.webp 2400w, img/hero-carvel-1600.webp 1600w, img/hero-carvel-1000.webp 1000w" imagesizes="(max-width: 800px) 100vw, min(94vw, 1520px)">
+<link rel="preload" href="img/car-solent-1600.webp" as="image" imagesrcset="img/car-solent-2400.webp 2400w, img/car-solent-1600.webp 1600w" imagesizes="(max-width: 800px) 104vw, min(96vw, 1560px)">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -45,14 +45,22 @@
     <div class="hero__copy">
       <h1 id="hero-title">Built like<br>a hull.</h1>
       <p>The Carvel. One car, forty a year, planked by hand in a boat shed on the Hamble.</p>
+      <p class="hero__cta">
+        <a class="button button--solid" href="#configure">Specify a hull</a>
+        <a class="link-quiet" href="#details">How it is built</a>
+      </p>
     </div>
-    <img class="hero__car" src="img/hero-carvel-1600.webp" srcset="img/hero-carvel-2400.webp 2400w, img/hero-carvel-1600.webp 1600w, img/hero-carvel-1000.webp 1000w" sizes="(max-width: 800px) 100vw, min(94vw, 1520px)" width="2400" height="980" fetchpriority="high" decoding="async" alt="The Carvel from the front three-quarter: a long-bonneted silver coupé with a bronze strake along its flank, twin round lamps, a low oval grille and a smoked glass canopy, standing on a white studio floor">
+    <div class="stage stage--hero" id="hero-stage">
+      <img class="stage__l stage__shadow" src="img/car-shadow-1600.webp" srcset="img/car-shadow-2400.webp 2400w, img/car-shadow-1600.webp 1600w" sizes="(max-width: 800px) 104vw, min(96vw, 1560px)" width="2400" height="1350" alt="" aria-hidden="true" decoding="async">
+      <img class="stage__l stage__body" src="img/car-solent-1600.webp" srcset="img/car-solent-2400.webp 2400w, img/car-solent-1600.webp 1600w" sizes="(max-width: 800px) 104vw, min(96vw, 1560px)" width="2400" height="1350" fetchpriority="high" decoding="async" alt="The Carvel: a low, long-bonneted aluminium coupé in Solent silver, a bronze strake running the length of its flank, photographed on a white studio floor">
+      <img class="stage__l stage__wheels" src="img/car-wheels-graphite-1600.webp" srcset="img/car-wheels-graphite-2400.webp 2400w, img/car-wheels-graphite-1600.webp 1600w" sizes="(max-width: 800px) 104vw, min(96vw, 1560px)" width="2400" height="1350" alt="" aria-hidden="true" decoding="async">
+    </div>
   </section>
 
-  <ul class="facts" aria-label="The Carvel in three facts">
-    <li>4.4-litre V8, naturally aspirated, 460 bhp, built forty a year on a bench in Coventry.</li>
-    <li>1,290 kg. Forty-one aluminium panels wheeled over cedar bucks; no press tooling exists.</li>
-    <li>Six-speed manual. A bronze dial, a cradle for your phone, and no screen in the cabin.</li>
+  <ul class="facts" aria-label="The Carvel in three numbers">
+    <li><b>4.4</b><span>litre V8, naturally aspirated, 460&nbsp;bhp. Built on a bench by two people in Coventry.</span></li>
+    <li><b>1,290<i>kg</i></b><span>Forty-one aluminium panels wheeled over cedar bucks. No press tooling exists.</span></li>
+    <li><b>40<i>a year</i></b><span>Nine weeks a car, in order of deposit. Six-speed manual, and no screen in the cabin.</span></li>
   </ul>
 
   <section class="block block--white" id="details" aria-labelledby="details-title">
@@ -123,6 +131,7 @@
         <header class="chapter chapter--lead">
           <h2 id="heritage-title">A hundred and five years of hulls.</h2>
           <p>The yard built boats for fifty-eight years, nothing for thirty-five, and cars for the last twelve. The tools are the same.</p>
+          <span class="hint">Scroll on &mdash; the years run to the right.</span>
         </header>
         <article class="chapter">
           <img src="img/h-1921-600.webp" srcset="img/h-1921-1200.webp 1200w, img/h-1921-600.webp 600w" sizes="(max-width: 800px) 80vw, 30vw" width="1200" height="900" loading="lazy" decoding="async" alt="A rowing crew carrying a racing shell into still water at dawn">
@@ -214,10 +223,12 @@
         <p>Every choice below changes the car in front of you. Prices include VAT. Delivery is fourteen months from deposit.</p>
       </header>
       <div class="cfg">
-        <div class="cfg__stage" id="cfg-stage">
-          <img class="cfg__img cfg__img--base" id="cfg-base" src="img/cfg-solent-graphite-1000.webp" srcset="img/cfg-solent-graphite-1600.webp 1600w, img/cfg-solent-graphite-1000.webp 1000w" sizes="(max-width: 800px) 94vw, 56vw" width="1600" height="653" loading="lazy" decoding="async" alt="The Carvel in Solent silver on satin graphite wheels">
-          <img class="cfg__img cfg__img--next" id="cfg-next" src="img/cfg-solent-graphite-1000.webp" width="1600" height="653" alt="" aria-hidden="true" decoding="async">
-          <div class="cfg__sweep" id="cfg-sweep" aria-hidden="true"></div>
+        <div class="stage stage--cfg" id="cfg-stage">
+          <img class="stage__l stage__shadow" src="img/car-shadow-1600.webp" srcset="img/car-shadow-2400.webp 2400w, img/car-shadow-1600.webp 1600w" sizes="(max-width: 860px) 96vw, 56vw" width="2400" height="1350" alt="" aria-hidden="true" decoding="async" loading="lazy">
+          <img class="stage__l stage__body" id="cfg-body" src="img/car-solent-1600.webp" srcset="img/car-solent-2400.webp 2400w, img/car-solent-1600.webp 1600w" sizes="(max-width: 860px) 96vw, 56vw" width="2400" height="1350" alt="The Carvel in Solent silver on satin graphite wheels" decoding="async" loading="lazy">
+          <img class="stage__l stage__body stage__body--next" id="cfg-next" src="img/car-solent-1600.webp" width="2400" height="1350" alt="" aria-hidden="true" decoding="async">
+          <img class="stage__l stage__wheels" id="cfg-wheels" src="img/car-wheels-graphite-1600.webp" srcset="img/car-wheels-graphite-2400.webp 2400w, img/car-wheels-graphite-1600.webp 1600w" sizes="(max-width: 860px) 96vw, 56vw" width="2400" height="1350" alt="" aria-hidden="true" decoding="async" loading="lazy">
+          <div class="stage__sweep" id="cfg-sweep" aria-hidden="true"></div>
         </div>
         <form class="cfg__panel" id="cfg-form" novalidate>
           <fieldset class="opts" data-group="paint">
