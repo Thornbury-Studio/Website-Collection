@@ -84,3 +84,8 @@ templates/crater/tools/shots/
 # tools/shots/ is the CDP verification output.
 templates/coffee-bloom-dark/tools/raw/
 templates/coffee-bloom-dark/tools/shots/
+
+# COIL: Unsplash, Pexels and Adobe Stock masters, re-derived into templates/coil/img/ by
+# tools/grade.py and tools/tin.py. tools/shots/ is the label render and verification output.
+templates/coil/tools/raw/
+templates/coil/tools/shots/
