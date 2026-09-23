@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>UNFURL. tin label (print artwork)</title>
+<!-- Print artwork for the tin band. Rendered to a transparent PNG by
+     tools/label.mjs, then wrapped round the tin by tools/tin.py. The band is
+     the front 150° of the cylinder: 1945 x 500 CSS px at 2x. Keep anything
+     that must read inside the middle 60% — the sides turn away. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: transparent; }
+  #label {
+    position: relative; width: 1945px; height: 500px; box-sizing: border-box;
+    background: #111411; color: #ece7da;
+    display: grid; place-items: center; overflow: hidden;
+  }
+  .rule { position: absolute; left: 0; right: 0; height: 3px; background: #d98a2b; }
+  .rule.t { top: 26px; } .rule.b { bottom: 26px; }
+  .core { text-align: center; transform: translateY(6px); }
+  .kicker {
+    font: 600 21px/1 'Archivo', sans-serif; font-stretch: 112%;
+    letter-spacing: .34em; text-transform: uppercase; color: #d98a2b; margin: 0 0 22px;
+  }
+  .word {
+    font: 820 150px/0.82 'Archivo', sans-serif; font-stretch: 125%;
+    letter-spacing: -0.02em; margin: 0;
+  }
+  .where {
+    font: italic 400 30px/1.2 'Newsreader', serif; margin: 24px 0 0; color: #d9cdb8;
+  }
+  .side {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    font: 500 17px/1.55 'Archivo', sans-serif; font-stretch: 100%;
+    letter-spacing: .08em; text-transform: uppercase; color: #bfb29c;
+  }
+  .side.l { left: 250px; text-align: left; }
+  .side.r { right: 250px; text-align: right; }
+  .side b { display: block; font-weight: 700; color: #efe6d7; letter-spacing: .02em; font-size: 30px; font-stretch: 112%; text-transform: none; }
+</style>
+</head>
+<body>
+<div id="label">
+  <span class="rule t"></span><span class="rule b"></span>
+  <div class="side l"><b><span data-l="grams">100</span> g</b>net weight<br>rolled leaf</div>
+  <div class="core">
+    <p class="kicker">Charcoal-roasted oolong</p>
+    <p class="word">UNFURL.</p>
+    <p class="where">Alishan, Taiwan · <span data-l="alt">1,300</span> m · Spring 2026</p>
+  </div>
+  <div class="side r"><b><span data-l="dose">5</span> g · <span data-l="temp">95</span> °C</b><span data-l="water">300</span> ml pot<br>first steep <span data-l="first">3:00</span></div>
+</div>
+<!-- the printed numbers come from the same model as the site -->
+<script src="../js/steep-model.js"></script>
+<script>
+  (function (S) {
+    var v = { grams: S.TIN.grams, alt: S.num(S.LOT.altitudeM), dose: S.POT.doseG, temp: S.POT.tempC,
+              water: S.POT.waterMl, first: S.clock(S.POT.steeps[0]) };
+    document.querySelectorAll('[data-l]').forEach(function (e) { e.textContent = v[e.getAttribute('data-l')]; });
+  })(window.STEEP);
+</script>
+</body>
+</html>

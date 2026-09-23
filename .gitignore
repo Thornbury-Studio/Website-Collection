@@ -89,3 +89,7 @@ templates/coffee-bloom-dark/tools/shots/
 # tools/grade.py and tools/tin.py. tools/shots/ is the label render and verification output.
 templates/coil/tools/raw/
 templates/coil/tools/shots/
+
+# UNFURL. licensed masters (re-derived by tools/) and verification shots
+templates/tea-unfurl-dark/tools/raw/
+templates/tea-unfurl-dark/tools/shots/
