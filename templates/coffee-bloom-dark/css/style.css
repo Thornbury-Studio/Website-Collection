@@ -573,7 +573,7 @@ figcaption b { color: var(--paper); font-weight: 600; }
 .order legend, .order .field-l { font: 500 11px/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 0; margin-bottom: 0.6rem; }
 .qty { display: inline-grid; grid-template-columns: 48px 64px 48px; border: 1px solid var(--line); }
 .qty button { background: none; border: 0; min-height: 48px; font: 500 20px/1 var(--mono); cursor: pointer; color: var(--paper); }
-.qty button:disabled { color: var(--dim); cursor: default; }
+.qty button:disabled { color: var(--muted); cursor: default; }
 .qty input { width: 100%; text-align: center; background: none; border: 0; border-inline: 1px solid var(--line); font: 500 18px/1 var(--mono); -moz-appearance: textfield; appearance: textfield; }
 .qty input::-webkit-outer-spin-button, .qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .methods { display: grid; gap: 8px; }

@@ -443,11 +443,6 @@
     plate.src = window.innerWidth * Math.min(window.devicePixelRatio || 1, 1.5) > 1500 ?
       'img/bed.webp' : 'img/bed-1024.webp';
 
-    canvas.addEventListener('webglcontextlost', function (e) {
-      e.preventDefault();
-      ready = false;
-      section.classList.remove('is-live');
-    });
     return true;
   }
 
@@ -544,6 +539,18 @@
   var live = initGL();
   if (!live) section.classList.add('no-gl');
 
+  // context loss/restore: GPU resources (program, buffer, texture) are gone
+  // once lost, so recovery re-runs the same setup initGL() already does,
+  // rather than leaving the mechanic permanently dead for the pageview.
+  canvas.addEventListener('webglcontextlost', function (e) {
+    e.preventDefault();
+    ready = false;
+    section.classList.remove('is-live');
+  });
+  canvas.addEventListener('webglcontextrestored', function () {
+    if (initGL()) section.classList.remove('no-gl');
+  });
+
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
       visible = entries[0].isIntersecting;
@@ -563,7 +570,7 @@
       var d = B.daysSince(dateInput.value);
       if (d === null || d < 0) return;
       var clamped = Math.min(365, d);
-      if (dayInput) dayInput.value = String(Math.min(120, clamped));
+      if (dayInput) dayInput.value = String(clamped);
       setDay(yours, clamped);
     });
   }
