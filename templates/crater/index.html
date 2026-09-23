@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f2ece3">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'self'">
+<title>CRATER — one coffee, grown in the ash of Acatenango</title>
+<meta name="description" content="CRATER is one single-origin coffee from the volcanic slopes of Acatenango, Guatemala, roasted every Monday and sold as whole beans. Pour a little hot water and watch it rise: the proof takes forty-five seconds.">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/crater/">
+<meta property="og:title" content="CRATER — the proof takes forty-five seconds">
+<meta property="og:description" content="One coffee, grown in volcanic ash in Acatenango, Guatemala. Roasted on Mondays, sold whole, fresh enough to bloom.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/crater/">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/crater/img/og-1200.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/crater/img/og-1200.webp">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/mona-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/bloom-0-1080.webp" as="image" fetchpriority="high">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" data-top>
+  <div class="top__in">
+    <a class="wordmark" href="#bloom" translate="no" aria-label="Crater, back to the top">Crater</a>
+    <nav class="nav" aria-label="Sections">
+      <ul>
+        <li><a href="#bloom">The bloom</a></li>
+        <li><a href="#origin">Origin</a></li>
+        <li><a href="#bag">The bag</a></li>
+        <li><a href="#brew">Brew</a></li>
+      </ul>
+    </nav>
+    <a class="chip" href="#bloom" data-chip hidden>
+      <span class="chip__dot" aria-hidden="true"></span>
+      <span class="chip__clock" data-chip-clock>0:00</span>
+      <span class="chip__phase" data-chip-phase>Rise</span>
+    </a>
+    <a class="button button--top" href="#buy">Buy <span data-fig="price">S$26</span></a>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="bloom" id="bloom" aria-labelledby="bloom-title">
+    <div class="bloom__stage">
+      <figure class="porthole" data-porthole>
+        <video class="porthole__film" data-film controls muted playsinline preload="none" poster="img/bloom-0-1080.webp" width="1080" height="1080" aria-describedby="film-desc">
+          <source src="video/bloom-720.mp4" type="video/mp4" media="(max-width: 699px)">
+          <source src="video/bloom-1080.mp4" type="video/mp4">
+        </video>
+        <img class="porthole__still" data-still src="img/bloom-0-1080.webp" alt="" width="1080" height="1080" hidden>
+        <figcaption class="sr" id="film-desc">Filmed from above: dry coffee grounds in a paper filter. Water goes in, the bed swells into a dome, splits open as bubbles break through, then sinks and goes still.</figcaption>
+      </figure>
+    </div>
+
+    <div class="bloom__copy">
+      <p class="clock" data-clock aria-hidden="true"><span class="clock__d">0</span><span class="clock__c">:</span><span class="clock__d">0</span><span class="clock__d">0</span></p>
+      <p class="clock__note" data-note>Press Pour and watch in real time. Nothing is sped up.</p>
+      <h1 class="bloom__title" id="bloom-title">The proof takes forty-five seconds.</h1>
+      <p class="lede">Hot water on fresh coffee sets off the bloom: the grounds rise, split and settle as the gas from roasting escapes. <span translate="no">CRATER</span> is one coffee from Acatenango, Guatemala, roasted on Mondays and sold whole.</p>
+      <div class="pour">
+        <button class="pour__btn" type="button" data-pour aria-describedby="pour-note" hidden><span data-pour-label>Pour</span></button>
+        <p class="pour__note" id="pour-note">36&nbsp;g of water at 94&nbsp;°C on 18&nbsp;g of fresh grounds. Then hands off.</p>
+      </div>
+      <p class="sr" role="status" aria-live="polite" data-status></p>
+    </div>
+
+    <div class="ruler" data-ruler>
+      <div class="ruler__track" aria-hidden="true"><span class="ruler__ink" data-ink></span></div>
+      <ol class="ruler__phases" aria-label="The forty-five seconds, in order">
+        <li class="phase" data-phase="rise" data-from="0" data-to="10">
+          <p class="phase__time"><time datetime="PT0S">0:00</time></p>
+          <img class="phase__still" src="img/bloom-5-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async">
+          <h2 class="phase__name">Rise</h2>
+          <p class="phase__text">The bed swells into a dome, lifted by gas left over from the roast.</p>
+        </li>
+        <li class="phase" data-phase="crater" data-from="10" data-to="30">
+          <p class="phase__time"><time datetime="PT10S">0:10</time></p>
+          <img class="phase__still" src="img/bloom-20-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async">
+          <h2 class="phase__name">Crater</h2>
+          <p class="phase__text">The dome splits. Bubbles break through, burst, and break through again.</p>
+        </li>
+        <li class="phase" data-phase="settle" data-from="30" data-to="45">
+          <p class="phase__time"><time datetime="PT30S">0:30</time></p>
+          <img class="phase__still" src="img/bloom-40-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async">
+          <h2 class="phase__name">Settle</h2>
+          <p class="phase__text">The gas runs out. The bed sinks, goes still, and waits for the rest.</p>
+          <p class="phase__end"><time datetime="PT45S">0:45</time></p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="why" id="why" aria-labelledby="why-title">
+    <h2 class="why__title" id="why-title">Stale coffee lies flat.</h2>
+    <div class="why__text">
+      <p>Roasting fills every bean with carbon dioxide. It seeps out slowly for weeks, and fast once the bean is ground.</p>
+      <p>When hot water reaches fresh grounds, the gas still inside rushes out at once and lifts the bed. That is the bloom. It is the one sign of freshness you can check with your own eyes, and no label can fake it.</p>
+      <p>It also clears the way for the brew. While gas streams out, water can’t get in, so forty-five seconds of waiting lets the rest of the water reach every ground evenly.</p>
+    </div>
+    <figure class="why__still">
+      <img src="img/beans-800.webp" srcset="img/beans-800.webp 800w, img/beans-1200.webp 1200w" sizes="(min-width: 960px) 38vw, 92vw" alt="Two roasted coffee beans lying on a pale surface." width="1200" height="846" loading="lazy" decoding="async">
+    </figure>
+    <div class="age">
+      <h3 class="age__title">How the bloom changes as coffee ages</h3>
+      <ol class="age__list">
+        <li><span class="age__when">Days 4 to 14 after roasting</span><span class="age__what">It rises hard and splits wide.</span></li>
+        <li><span class="age__when">Weeks 3 to 5</span><span class="age__what">It still rises, more gently.</span></li>
+        <li><span class="age__when">After about six weeks</span><span class="age__what">It barely moves.</span></li>
+      </ol>
+      <p class="age__note"><span translate="no">CRATER</span> is roasted on Mondays and posted on Tuesdays, so every bag arrives with its best weeks ahead of it.</p>
+    </div>
+  </section>
+
+  <section class="origin" id="origin" aria-labelledby="origin-title">
+    <div class="origin__head">
+      <h2 class="origin__title" id="origin-title">Grown in ash.</h2>
+      <p class="origin__lede">Acatenango Valley, Guatemala. Across the ravine, Volcán de Fuego sends up a puff of ash most hours of most days.</p>
+    </div>
+    <figure class="plate plate--wide">
+      <picture>
+        <source media="(max-width: 699px)" srcset="img/fuego-dawn-800.webp 800w, img/fuego-dawn-1200.webp 1200w" sizes="100vw" width="1200" height="1500">
+        <img src="img/fuego-1600.webp" srcset="img/fuego-1000.webp 1000w, img/fuego-1600.webp 1600w, img/fuego-2400.webp 2400w" sizes="100vw" alt="Volcán de Fuego sending a column of grey ash into a clear sky, its cone rising above a layer of cloud." width="2400" height="1372" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>Fuego from the slopes of Acatenango.</figcaption>
+    </figure>
+    <div class="origin__body">
+      <div class="origin__text">
+        <p>The ash drifts down onto the farms. Over centuries it weathers into soil that is dark, loose and rich in minerals, and that holds water through the dry months from November to April.</p>
+        <p>Coffee grows slowly up here, and slow coffee is dense coffee: more sugar in the bean, and a bean that holds on to its gas longer after roasting.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Region</dt><dd>Acatenango Valley, Chimaltenango</dd></div>
+        <div><dt>Altitude</dt><dd>1,500 to 1,900&nbsp;m</dd></div>
+        <div><dt>Next door</dt><dd>Volcán de Fuego, 3,763&nbsp;m, active</dd></div>
+        <div><dt>Varieties</dt><dd>Bourbon and Caturra</dd></div>
+        <div><dt>Process</dt><dd>Washed, dried on patios</dd></div>
+        <div><dt>Harvest</dt><dd>December to March</dd></div>
+      </dl>
+    </div>
+    <div class="origin__pair">
+      <figure class="plate plate--slope">
+        <img src="img/slope-1000.webp" srcset="img/slope-1000.webp 1000w, img/slope-1600.webp 1600w" sizes="(min-width: 960px) 58vw, 100vw" alt="The upper cone of Volcán de Fuego, its flank lit a deep rust red, with a small plume of ash at the summit." width="1600" height="862" loading="lazy" decoding="async">
+        <figcaption>Fuego’s upper cone, seen from Acatenango.</figcaption>
+      </figure>
+      <figure class="plate plate--cherries">
+        <img src="img/cherries-800.webp" srcset="img/cherries-800.webp 800w, img/cherries-1200.webp 1200w" sizes="(min-width: 960px) 30vw, 70vw" alt="Coffee cherries ripening on a branch, most still green, a few turned red and orange." width="1200" height="1333" loading="lazy" decoding="async">
+        <figcaption>Cherries ripening in the Guatemalan highlands.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="bag" id="bag" aria-labelledby="bag-title">
+    <figure class="bag__plate">
+      <img src="img/bag-900.webp" srcset="img/bag-480.webp 480w, img/bag-900.webp 900w, img/bag-1400.webp 1400w" sizes="(min-width: 960px) 44vw, 88vw" alt="A clay-red paper bag of CRATER coffee with a plain off-white label and a small round valve, standing on a pale backdrop with four roasted beans in front of it." width="1400" height="1655" loading="lazy" decoding="async">
+    </figure>
+    <div class="bag__text">
+      <h2 class="bag__title" id="bag-title">One coffee, one bag.</h2>
+      <p class="bag__notes">Panela, blood orange and cocoa nib, with a clean, drying finish.</p>
+      <dl class="spec">
+        <div><dt>Weight</dt><dd>250&nbsp;g, whole beans</dd></div>
+        <div><dt>Roast</dt><dd>Light to medium, for filter</dd></div>
+        <div><dt>Roasted</dt><dd>Mondays, in Singapore. Next: <span data-fig="roast">Monday 28 September</span></dd></div>
+        <div><dt>Posted</dt><dd><span data-fig="ship">Tuesday 29 September</span>, arriving within two days</dd></div>
+        <div><dt>At its best</dt><dd>From day 4 to about day 35 after roasting</dd></div>
+        <div><dt>Price</dt><dd><span data-fig="price">S$26</span> a bag, or <span data-fig="sub-price">S$23.40</span> on a subscription</dd></div>
+      </dl>
+      <p class="bag__grind">We send whole beans unless you ask us to grind them. Ground coffee lets go of its gas within hours, and most of the bloom goes with it.</p>
+      <p class="bag__valve">The small round valve on the front lets gas out and keeps air from getting in. If you squeeze a fresh bag gently, you can smell it working.</p>
+      <a class="button" href="#buy">Buy a bag</a>
+    </div>
+  </section>
+
+  <section class="brew" id="brew" aria-labelledby="brew-title">
+    <div class="brew__head">
+      <h2 class="brew__title" id="brew-title">See it in your own cup.</h2>
+      <ul class="kit">
+        <li>18&nbsp;g of <span translate="no">CRATER</span>, ground medium-fine, about like sea salt</li>
+        <li>300&nbsp;g of water at 94&nbsp;°C, around thirty seconds off the boil</li>
+        <li>A cone dripper and a paper filter, rinsed with hot water first</li>
+      </ul>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <p class="step__t"><time datetime="PT0S">0:00</time></p>
+        <p>Pour 36&nbsp;g, twice the weight of the coffee: just enough to wet every ground. Then watch it rise.</p>
+        <a class="textlink" href="#bloom" data-pour-link>Time it with the film</a>
+      </li>
+      <li class="step">
+        <p class="step__t"><time datetime="PT45S">0:45</time></p>
+        <p>Pour in slow circles to 180&nbsp;g.</p>
+      </li>
+      <li class="step">
+        <p class="step__t"><time datetime="PT1M15S">1:15</time></p>
+        <p>Pour to 300&nbsp;g. Give the dripper one gentle swirl.</p>
+      </li>
+      <li class="step">
+        <p class="step__t"><time datetime="PT3M">3:00</time></p>
+        <p>The bed drains flat. That’s your cup.</p>
+      </li>
+    </ol>
+    <aside class="flat" aria-labelledby="flat-title">
+      <h3 class="flat__title" id="flat-title">No bloom?</h3>
+      <p>If the bed lies flat, one of three things happened: the coffee is more than about six weeks from roasting, it was ground hours ago, or the water was too cool. Every bag carries its roast date, so start there.</p>
+    </aside>
+  </section>
+
+  <section class="buy" id="buy" aria-labelledby="buy-title">
+    <form class="order" data-order action="#buy" method="post" novalidate>
+      <div class="order__lead">
+        <img class="order__bag" src="img/bag-480.webp" srcset="img/bag-480.webp 480w, img/bag-900.webp 900w" sizes="(min-width: 960px) 22vw, 220px" alt="" width="480" height="568" loading="lazy" decoding="async">
+        <h2 class="order__title" id="buy-title">Buy <span translate="no">CRATER</span></h2>
+        <p class="order__sub">250&nbsp;g of whole beans from <span data-fig="roast">Monday 28 September</span>’s roast.</p>
+      </div>
+
+      <div class="order__fields">
+        <fieldset class="choice">
+          <legend>Grind</legend>
+          <label><input type="radio" name="grind" value="Whole beans" checked><span>Whole beans</span></label>
+          <label><input type="radio" name="grind" value="Ground for filter"><span>Ground for filter</span></label>
+          <label><input type="radio" name="grind" value="Ground for cafetière"><span>Ground for cafetière</span></label>
+        </fieldset>
+
+        <fieldset class="choice">
+          <legend>How often</legend>
+          <label><input type="radio" name="freq" value="once" checked><span>Just this once <em class="choice__price"><span data-fig="price-2dp">S$26.00</span> a bag</em></span></label>
+          <label><input type="radio" name="freq" value="2"><span>Every two weeks <em class="choice__price"><span data-fig="sub-price">S$23.40</span> a bag</em></span></label>
+          <label><input type="radio" name="freq" value="4"><span>Every four weeks <em class="choice__price"><span data-fig="sub-price">S$23.40</span> a bag</em></span></label>
+          <p class="choice__hint">Subscriptions are <span data-fig="sub-off">10%</span> off, post free, and stop whenever you reply “stop”.</p>
+        </fieldset>
+
+        <div class="qty">
+          <label class="qty__label" for="qty">Bags</label>
+          <div class="qty__row">
+            <button class="qty__btn" type="button" data-step="-1" aria-label="One bag fewer" aria-controls="qty">−</button>
+            <input class="qty__input" id="qty" name="qty" type="number" inputmode="numeric" autocomplete="off" min="1" max="6" value="1" aria-describedby="qty-hint">
+            <button class="qty__btn" type="button" data-step="1" aria-label="One bag more" aria-controls="qty">+</button>
+          </div>
+          <p class="qty__hint" id="qty-hint">1 to 6 bags. Postage is free from <span data-fig="free-from">2 bags</span>.</p>
+        </div>
+      </div>
+
+      <div class="order__total">
+        <dl class="sum" aria-live="polite">
+          <div><dt>Coffee</dt><dd data-sum="coffee">1 × S$26.00</dd></div>
+          <div><dt>Postage</dt><dd data-sum="post">S$4.00</dd></div>
+          <div class="sum__total"><dt>Total</dt><dd data-sum="total">S$30.00</dd></div>
+        </dl>
+        <button class="button button--big" type="submit" data-order-btn>Order for S$30.00</button>
+        <p class="order__how">Your email app opens with the order written out. Send it and we reply with one payment link. Orders in by Sunday night go into Monday’s roast.</p>
+        <p class="order__done" data-order-done role="status" aria-live="polite" hidden></p>
+      </div>
+    </form>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <a class="wordmark wordmark--foot" href="#bloom" translate="no" aria-label="Crater, back to the top">Crater</a>
+    <p>One coffee, from Acatenango, Guatemala. Roasted in Singapore on Mondays, posted on Tuesdays.</p>
+    <p><a href="mailto:orders@cratercoffee.sg">orders@cratercoffee.sg</a></p>
+    <p class="foot__small">© 2026 Crater Coffee</p>
+  </div>
+</footer>
+
+<script src="js/site.js" defer></script>
+</body>
+</html>
