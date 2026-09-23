@@ -93,3 +93,8 @@ templates/coil/tools/shots/
 # UNFURL. licensed masters (re-derived by tools/) and verification shots
 templates/tea-unfurl-dark/tools/raw/
 templates/tea-unfurl-dark/tools/shots/
+
+# GROUND. photography sources (Unsplash + Pexels, ids in IMAGE-CREDITS.md) are graded and
+# exported to templates/pen-ground-dark/img/ by tools/grade.py; the originals stay local.
+templates/pen-ground-dark/tools/raw/
+templates/pen-ground-dark/tools/shots/
