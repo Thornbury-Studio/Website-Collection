@@ -72,3 +72,9 @@ templates/strake/tools/shots/
 # tools/shots/ is the CDP verification output.
 templates/perfume-tallow-dark/tools/raw/
 templates/perfume-tallow-dark/tools/shots/
+
+# Full-resolution Pexels clips, Unsplash originals and the Higgsfield bag master — cut, graded and
+# exported to templates/crater/img/ and video/ by tools/grade.py and tools/film.sh; the originals
+# stay local. tools/shots/ is verification output and film intermediates.
+templates/crater/tools/raw/
+templates/crater/tools/shots/
