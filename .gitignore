@@ -78,3 +78,9 @@ templates/perfume-tallow-dark/tools/shots/
 # stay local. tools/shots/ is verification output and film intermediates.
 templates/crater/tools/raw/
 templates/crater/tools/shots/
+
+# Full-resolution Pexels originals — cropped, graded and exported to
+# templates/coffee-bloom-dark/img/ by tools/grade.py; the originals stay local.
+# tools/shots/ is the CDP verification output.
+templates/coffee-bloom-dark/tools/raw/
+templates/coffee-bloom-dark/tools/shots/
