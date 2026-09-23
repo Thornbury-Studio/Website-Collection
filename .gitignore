@@ -66,3 +66,9 @@ templates/kiam/tools/shots/
 # CDP verification output.
 templates/strake/tools/raw/
 templates/strake/tools/shots/
+
+# Full-resolution Pexels originals — cropped, graded and exported to
+# templates/perfume-tallow-dark/img/ by tools/grade.py; the originals stay local.
+# tools/shots/ is the CDP verification output.
+templates/perfume-tallow-dark/tools/raw/
+templates/perfume-tallow-dark/tools/shots/
