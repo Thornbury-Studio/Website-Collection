@@ -53,6 +53,21 @@ reading `READY`. See the `vercel-github-org-split` memory.
 | `.env` | `GEMINI_API_KEY` for template imagery (nano-banana) — local to this machine, gitignored |
 | `~/.claude/projects/.../memory/` | Cross-session knowledge: build recipe, image-gen usage, verification traps, multi-machine sync notes |
 
+## No backend, ever, in any template folder
+
+**Real incident, 2026-09-09:** a contact-form backend for
+`thornbury-digital-v5` got built in-place inside this repo — a `.env` and
+an `api/contact.js` sitting alongside dozens of unrelated demo templates —
+before it was caught and fully extracted to its own repo and Vercel
+project. "No shared build, no bundler" above is a tooling statement; this
+is the explicit rule it was always meant to also cover, written down
+directly after that incident showed the tooling statement alone wasn't
+unambiguous enough: **no `templates/<slug>/` folder may ever have its own
+`.env`, `api/`, `vercel.json`, or `package.json`, full stop.** The moment
+a task needs a real backend, working form submission, database, or auth,
+the first step is extraction to a new standalone repo and deployment —
+never "build it here, move it later."
+
 ## Commit & push policy
 
 A **one-shot prompt targeted at the website-template collection** — "build me a
