@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- The BLOOM. bag label, as printed. Rendered to a transparent PNG by
+     tools/label.mjs and printed onto the kraft pouch by tools/bag.py.
+     One ink, black; bag.py decides what colour black is on kraft.
+     The empty box under "Roasted on" is where the site lays the live,
+     red, hand-stamped date (see .bagshot .stamp in css/style.css). -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  html, body { margin: 0; background: transparent; }
+  .label {
+    width: 800px; height: 1180px; box-sizing: border-box;
+    padding: 34px 38px 40px;
+    color: #000; font-family: "Bricolage Grotesque", sans-serif;
+    display: flex; flex-direction: column;
+  }
+  .mark {
+    font-weight: 800; font-stretch: 75%; font-size: 314px; line-height: 0.8;
+    letter-spacing: -0.02em; margin: 0 0 0 -6px;
+  }
+  .rule { height: 3px; background: #000; margin: 26px 0 22px; }
+  .mono { font-family: "IBM Plex Mono", monospace; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+  .farm { font-size: 44px; font-weight: 700; line-height: 1.05; letter-spacing: -0.01em; }
+  .where { font-size: 25px; margin-top: 14px; line-height: 1.5; }
+  .notes { font-size: 34px; font-weight: 500; line-height: 1.2; margin-top: 30px; max-width: 16ch; }
+  .grow { flex: 1; }
+  .boxes { display: grid; grid-template-columns: 1.9fr 1fr; gap: 20px; }
+  .box { border: 3px solid #000; height: 150px; position: relative; }
+  .box span { position: absolute; left: 14px; top: 11px; font-size: 19px; }
+  .foot { display: flex; justify-content: space-between; margin-top: 24px; font-size: 22px; }
+</style>
+</head>
+<body>
+  <div class="label" id="label">
+    <div class="mark">BLOOM.</div>
+    <div class="rule"></div>
+    <div class="farm">Alto de las Guacharacas</div>
+    <div class="where mono">Planadas · Tolima · Colombia<br>Washed Caturra · 1,900 masl · Lot 03</div>
+    <div class="notes">Red grape, panela, orange peel.</div>
+    <div class="grow"></div>
+    <div class="boxes">
+      <div class="box" id="roasted"><span class="mono">Roasted on</span></div>
+      <div class="box" id="batch"><span class="mono">Batch</span></div>
+    </div>
+    <div class="foot mono"><span>250 g · whole bean</span><span>Brunswick VIC</span></div>
+  </div>
+</body>
+</html>
