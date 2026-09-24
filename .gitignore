@@ -98,3 +98,6 @@ templates/tea-unfurl-dark/tools/shots/
 # exported to templates/pen-ground-dark/img/ by tools/grade.py; the originals stay local.
 templates/pen-ground-dark/tools/raw/
 templates/pen-ground-dark/tools/shots/
+
+# LATENT. CDP verification output (tools/shot.mjs).
+templates/darkroom-latent/tools/shots/
