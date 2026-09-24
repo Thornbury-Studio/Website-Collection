@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>LATENT. — a black-and-white darkroom on Jalan Besar</title>
+<meta name="description" content="LATENT. is a community black-and-white darkroom in Singapore: six enlarger bays by the hour, film developed by Friday, and Saturday printing classes. Make a print on bay 3 right here.">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/darkroom-latent/index.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LATENT.">
+<meta property="og:title" content="LATENT. — it’s on the paper, you just can’t see it yet">
+<meta property="og:description" content="A black-and-white darkroom on Jalan Besar. Six enlarger bays, film by Friday, and a bench on the home page where you expose, dodge and develop a real print.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/darkroom-latent/index.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/darkroom-latent/img/og.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The LATENT. bench under amber safelight: a red seven-segment timer reading 0:52 in the developer beside a print of a street cobbler coming up in the tray.">
+<meta property="og:locale" content="en_SG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LATENT. — it’s on the paper, you just can’t see it yet">
+<meta name="twitter:description" content="A black-and-white darkroom on Jalan Besar. Expose, dodge and develop a print on the home page.">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/darkroom-latent/img/og.webp">
+<meta name="theme-color" content="#0e0b09">
+
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..800;1,62..125,400..600&family=Permanent+Marker&display=swap">
+<link rel="preload" as="font" type="font/woff2" href="fonts/DSEG7Classic-Bold.woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<svg class="u-vh" aria-hidden="true" focusable="false">
+  <filter id="grease" x="-5%" y="-10%" width="110%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" result="d"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.9" result="gaps"/>
+    <feComposite in="d" in2="gaps" operator="in"/>
+  </filter>
+</svg>
+
+<header class="top" data-top>
+  <a class="wordmark" href="#main" aria-label="LATENT. home">LATENT<span class="dot">.</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="#bench">The bench</a>
+    <a href="#hire">Hire a bay</a>
+    <a href="#film">Film</a>
+    <a href="#classes">Classes</a>
+    <a href="#visit">Visit</a>
+  </nav>
+  <p class="roomlight" data-roomlight><span class="roomlight-dot" aria-hidden="true"></span><span data-roomlight-text>Safelight</span></p>
+</header>
+
+<main id="main">
+
+  <!-- ───────────────────────────── the bench ───────────────────────────── -->
+  <section class="bench" id="bench" data-bench aria-labelledby="bench-h">
+    <div class="bench-copy">
+      <p class="kicker">Bay 3 · Durst M605<span class="kicker-more"> · 10×8 in RC glossy</span></p>
+      <h1 id="bench-h" class="bench-h">It’s on the paper.<br><span>You just can’t see it yet.</span></h1>
+      <p class="bench-lede bench-lede-short">Set a time, expose, develop. Lights on only once it’s fixed.</p>
+      <p class="bench-lede">There’s a negative in the carrier and a sheet on the easel. Set a time, press Expose, then put it in the developer. Keep your hand in the light to hold a part back. Don’t turn the lights on until it’s fixed.</p>
+    </div>
+
+    <div class="bench-easel">
+      <ol class="carrier" aria-label="Negative carrier: choose a frame" data-carrier>
+        <li><button type="button" class="frame" data-neg="0" aria-pressed="true">
+          <img src="img/neg-cobbler-900.webp" alt="" width="900" height="600" decoding="async">
+          <span class="frame-no">14</span><span class="u-vh">Frame 14: Cobbler, under the awning</span></button></li>
+        <li><button type="button" class="frame" data-neg="1" aria-pressed="false">
+          <img src="img/neg-street-900.webp" alt="" width="900" height="600" decoding="async" loading="lazy">
+          <span class="frame-no">22</span><span class="u-vh">Frame 22: Six lanes, after rain</span></button></li>
+        <li><button type="button" class="frame" data-neg="2" aria-pressed="false">
+          <img src="img/neg-alley-900.webp" alt="" width="900" height="600" decoding="async" loading="lazy">
+          <span class="frame-no">31</span><span class="u-vh">Frame 31: Supper, one table lit</span></button></li>
+      </ol>
+
+      <div class="easel-deck">
+      <div class="easel" data-easel tabindex="0" aria-describedby="easel-help">
+        <canvas class="easel-gl" role="img" aria-label="A blank 10 by 8 inch sheet on the easel, with frame 14 projected through the red filter." data-canvas></canvas>
+        <img class="easel-still" src="img/neg-cobbler-900.webp" alt="The house print of frame 14: a cobbler at work under a market stall, printed at grade 3." width="900" height="600" data-still>
+        <div class="strip-labels" data-strip-labels hidden></div>
+      </div>
+      <p class="u-vh" id="easel-help">With the hand tool set to dodge or burn, move the pointer over the easel, or focus it and use the arrow keys, to hold light back or let it through.</p>
+
+      <ol class="process" aria-label="Where the sheet is" data-process>
+        <li data-p="expose"><span>Expose</span></li>
+        <li data-p="develop"><span>Develop <small>60 s</small></span></li>
+        <li data-p="fix"><span>Stop + fix <small>40 s</small></span></li>
+        <li data-p="light"><span>Lights</span></li>
+      </ol>
+      <p class="status" role="status" aria-live="polite" data-status>Red filter under the lens: frame 14 is on the easel and the paper can’t see it. Set a time and press Expose.</p>
+        <div class="deck-bar">
+          <p class="deck-led" aria-hidden="true"><span data-deck-led><!--b:led-->!8.0<!--/b--></span><small data-deck-unit>sec</small></p>
+          <button type="button" class="act deck-go is-next" data-deck-go>Expose</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="console" aria-label="Enlarger timer">
+      <div class="led" aria-hidden="true">
+        <span class="led-ghost" data-led-ghost>88.8</span>
+        <span class="led-val" data-led><!--b:led-->!8.0<!--/b--></span>
+        <span class="led-unit" data-led-unit>sec</span>
+      </div>
+      <p class="led-sub"><span data-stops-text><!--b:stopsText-->3 stops<!--/b--></span> · grade <span data-grade-text>2</span></p>
+      <p class="u-vh" aria-live="polite" data-time-sr>Timer <!--b:led.sr-->8.0<!--/b--> seconds, grade 2.</p>
+
+      <div class="keys keys-time" role="group" aria-label="Exposure time">
+        <button type="button" class="key" data-step="-1" aria-label="One stop less">−1</button>
+        <button type="button" class="key" data-step="-0.3333333" aria-label="A third of a stop less">−⅓</button>
+        <button type="button" class="key" data-step="0.3333333" aria-label="A third of a stop more">+⅓</button>
+        <button type="button" class="key" data-step="1" aria-label="One stop more">+1</button>
+      </div>
+
+      <fieldset class="grades" data-grades>
+        <legend>Multigrade filter</legend>
+        <div class="grades-row">
+          <button type="button" class="g" data-grade="00" aria-pressed="false">00</button>
+          <button type="button" class="g" data-grade="0" aria-pressed="false">0</button>
+          <button type="button" class="g" data-grade="1" aria-pressed="false">1</button>
+          <button type="button" class="g" data-grade="2" aria-pressed="true">2</button>
+          <button type="button" class="g" data-grade="3" aria-pressed="false">3</button>
+          <button type="button" class="g" data-grade="4" aria-pressed="false">4</button>
+          <button type="button" class="g" data-grade="5" aria-pressed="false">5</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="tools">
+        <legend>Your hand</legend>
+        <div class="tools-row">
+          <button type="button" class="t" data-tool="hand" aria-pressed="true">Out of the light</button>
+          <button type="button" class="t" data-tool="dodge" aria-pressed="false">Dodge</button>
+          <button type="button" class="t" data-tool="burn" aria-pressed="false">Burn</button>
+        </div>
+      </fieldset>
+
+      <div class="acts">
+        <button type="button" class="act act-main is-next" data-act="expose">Expose</button>
+        <button type="button" class="act" data-act="focus" aria-pressed="true">Red filter</button>
+        <button type="button" class="act" data-act="strip">Test strip</button>
+        <button type="button" class="act act-main" data-act="develop" disabled>Develop</button>
+        <button type="button" class="act" data-act="fix" disabled>Stop + fix</button>
+        <button type="button" class="act act-light" data-act="lights" aria-pressed="false">Lights on</button>
+        <button type="button" class="act" data-act="hang" disabled>Hang it up</button>
+        <button type="button" class="act" data-act="sheet">New sheet</button>
+        <button type="button" class="act act-house" data-act="house">House settings</button>
+      </div>
+      <p class="console-note">The bench runs faster than the room: the lamp at 2×, the trays at 6×. The times it shows are real darkroom seconds.</p>
+    </div>
+
+    <div class="line" data-line-wrap hidden>
+      <h2 class="line-h">Tonight’s line</h2>
+      <ul class="line-list" data-line></ul>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────── the paper ───────────────────────────── -->
+  <section class="paper" id="paper" aria-labelledby="paper-h">
+    <div class="paper-copy">
+      <p class="kicker">What the sheet just did</p>
+      <h2 id="paper-h" class="h2">Seconds go in. Density comes out.</h2>
+      <p>Paper doesn’t record light in a straight line. It ignores a little, then answers fast, then runs out of black. Each Multigrade filter bends that curve. Grade 00 stretches it across a wide range of light, and grade 5 squeezes it into a narrow one. A flat negative wants a hard grade and a contrasty one wants a soft grade. You only find out which by printing.</p>
+      <p>We count in stops, not seconds. A third of a stop is <!--b:third-->26<!--/b-->% more light, and a whole stop is double. That’s why the timer on bay 3 jumps from <!--b:steps-->8.0 to 10.1 to 12.7<!--/b--> and not in tidy seconds. Every step looks the same size on the print.</p>
+      <p class="paper-live" aria-live="polite" data-landing>On <span data-landing-grade>grade <!--b:landing.grade-->2<!--/b--></span> at <span data-landing-time><!--b:landing.time-->8.0<!--/b--> s</span>, <span data-landing-frame>frame 14</span>’s brightest detail lands at density <span data-landing-hi><!--b:landing.hi-->0.12<!--/b--></span> and its darkest textured shadow at <span data-landing-lo><!--b:landing.lo-->1.35<!--/b--></span>. The paper runs from <!--b:dmin-->0.06<!--/b--> to <!--b:dmax-->2.05<!--/b-->.</p>
+    </div>
+
+    <figure class="curve" data-curve>
+      <svg class="curve-svg" viewBox="0 0 640 420" role="img" aria-labelledby="curve-t" data-curve-svg>
+        <title id="curve-t">Characteristic curves for Multigrade grades 00 to 5: print density against log exposure. The current grade is drawn in amber, with the range of the negative in the carrier marked along the exposure axis.</title>
+      </svg>
+      <figcaption>Density against log exposure, all seven grades as modelled for this bench. The amber curve is the filter in the drawer, and the bar underneath is the negative in the carrier at the time on the clock.</figcaption>
+    </figure>
+
+    <div class="sheet">
+      <table class="grade-table">
+        <caption>The filter drawer</caption>
+        <thead><tr><th scope="col">Grade</th><th scope="col">Exposure range it accepts</th><th scope="col">Time</th><th scope="col">Light on the easel</th></tr></thead>
+        <tbody>
+          <!--b:grades-->
+          <tr><th scope="row">00</th><td>1.70 log units</td><td>×1</td><td><span class="swatch" style="--sw: rgb(255,219,77)"></span>yellow</td></tr>
+          <tr><th scope="row">0</th><td>1.50 log units</td><td>×1</td><td><span class="swatch" style="--sw: rgb(255,209,97)"></span>yellow</td></tr>
+          <tr><th scope="row">1</th><td>1.30 log units</td><td>×1</td><td><span class="swatch" style="--sw: rgb(255,204,133)"></span>pale amber</td></tr>
+          <tr><th scope="row">2</th><td>1.10 log units</td><td>×1</td><td><span class="swatch" style="--sw: rgb(255,214,184)"></span>near white</td></tr>
+          <tr><th scope="row">3</th><td>0.90 log units</td><td>×1</td><td><span class="swatch" style="--sw: rgb(255,168,189)"></span>pink</td></tr>
+          <tr><th scope="row">4</th><td>0.70 log units</td><td>×2</td><td><span class="swatch" style="--sw: rgb(255,117,184)"></span>magenta</td></tr>
+          <tr><th scope="row">5</th><td>0.55 log units</td><td>×2</td><td><span class="swatch" style="--sw: rgb(250,82,179)"></span>magenta</td></tr>
+          <!--/b-->
+        </tbody>
+      </table>
+      <p class="sheet-note">Grades 00 to 3 print at the same time. Put the 4 or the 5 in and double it, or the print comes out a stop light. That’s the most common first-night mistake on the bench.</p>
+    </div>
+  </section>
+
+  <figure class="band develop">
+    <img src="img/line.webp" srcset="img/line-800.webp 800w, img/line.webp 1400w" sizes="100vw" width="1400" height="933" alt="Two blank sheets of photographic paper pegged to a line under red safelight." loading="lazy" decoding="async">
+  </figure>
+
+  <!-- ───────────────────────────── hire ───────────────────────────── -->
+  <section class="hire" id="hire" aria-labelledby="hire-h">
+    <div class="hire-media">
+      <figure class="develop tall">
+        <img src="img/enlarger.webp" srcset="img/enlarger-800.webp 800w, img/enlarger.webp 1400w" sizes="(min-width: 900px) 38vw, 92vw" width="1400" height="2100" alt="A condenser enlarger on its column under red light, the baseboard and easel below it." loading="lazy" decoding="async">
+      </figure>
+      <figure class="develop small">
+        <img src="img/head.webp" srcset="img/head-800.webp 800w, img/head.webp 1400w" sizes="(min-width: 900px) 20vw, 44vw" width="1400" height="2100" alt="The head of an enlarger in its bay, the column and focus knob lit red." loading="lazy" decoding="async">
+      </figure>
+    </div>
+
+    <div class="hire-copy">
+      <p class="kicker">Hire a bay</p>
+      <h2 id="hire-h" class="h2">Six bays, one rule about the door.</h2>
+      <p>Bays 1 to 4 are Durst M605s with colour heads dialled for Multigrade, for 35 mm to 6×6. Bays 5 and 6 are Laborator 1200s and take up to 4×5. Every bay has an f-stop timer, a grain focuser and a four-blade easel. Chemistry is mixed fresh on Mondays and it’s included.</p>
+
+      <table class="rates">
+        <caption class="u-vh">Bench rates</caption>
+        <thead><tr><th scope="col">Bench</th><th scope="col">When</th><th scope="col" class="num">Price</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">By the hour</th><td>Tue–Fri</td><td class="num">S$16</td></tr>
+          <tr><th scope="row">By the hour</th><td>Sat–Sun</td><td class="num">S$20</td></tr>
+          <tr><th scope="row">Three-hour block</th><td>any day</td><td class="num">S$42</td></tr>
+          <tr><th scope="row">Night bench, 7–11 pm</th><td>Tue–Fri</td><td class="num">S$50</td></tr>
+          <tr><th scope="row">Membership, 10 hours</th><td>per month</td><td class="num">S$110</td></tr>
+        </tbody>
+      </table>
+
+      <table class="rates rates-paper">
+        <caption>Paper, at the counter</caption>
+        <tbody>
+          <tr><th scope="row">RC glossy, 10×8 in</th><td class="num">S$1.60 a sheet</td></tr>
+          <tr><th scope="row">Fibre, 10×8 in</th><td class="num">S$3.40 a sheet</td></tr>
+          <tr><th scope="row">Or bring your own</th><td class="num">no charge</td></tr>
+        </tbody>
+      </table>
+
+      <p class="rule"><strong>The door:</strong> the light-trap door stays shut when anyone’s paper is out of the box. Knock twice and wait for someone to call “clear”. It’s saved more sheets than any other rule we have.</p>
+      <p>First time on a bench? Do a Saturday First Print class once, or show whoever’s on shift that you can load a carrier and run a test strip. After that the bay’s yours.</p>
+      <a class="cta" href="mailto:bench@latentdarkroom.sg?subject=Bench%20booking">Book a bench by email</a>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────── film ───────────────────────────── -->
+  <section class="film" id="film" aria-labelledby="film-h">
+    <div class="film-head">
+      <p class="kicker">Film</p>
+      <h2 id="film-h" class="h2">Drop it off Tuesday. Pick it up Friday with a contact sheet.</h2>
+      <p>We develop black-and-white 35 mm and 120 by hand in steel tanks, a few rolls at a time, using the maker’s own times at 20 °C. Every roll comes back sleeved with a contact sheet printed on 10×8. Mark it up with the red pencil on the counter and book a bench to print the ones you ringed.</p>
+    </div>
+
+    <figure class="contact" data-contact>
+      <div class="contact-sheet">
+        <div class="contact-edge" aria-hidden="true">LATENT 400 · ROLL 0917</div>
+        <ol class="contact-grid" data-contact-grid>
+          <li><span class="cf" style="background-image: url(img/neg-cobbler-900.webp); --x: 18%; --y: 30%; --z: 1.35"></span><i>11</i></li>
+          <li><span class="cf" style="background-image: url(img/neg-cobbler-900.webp); --x: 30%; --y: 55%; --z: 1.2"></span><i>12</i></li>
+          <li><span class="cf" style="background-image: url(img/neg-cobbler-900.webp); --x: 70%; --y: 40%; --z: 1.5"></span><i>13</i></li>
+          <li class="pick"><button type="button" class="cf-btn" data-load="0" aria-label="Print frame 14 on the bench"><span class="cf" style="background-image: url(img/neg-cobbler-900.webp); --x: 50%; --y: 50%; --z: 1"></span></button><i>14</i><svg class="ring" viewBox="0 0 100 70" aria-hidden="true"><path d="M9 11 C 28 3, 70 2, 93 8 C 98 26, 97 47, 93 62 C 66 69, 31 68, 7 63 C 3 44, 2 24, 14 5 L 22 1"/><path class="ring-2" d="M9 11 C 28 3, 70 2, 93 8 C 98 26, 97 47, 93 62 C 66 69, 31 68, 7 63 C 3 44, 2 24, 14 5 L 22 1"/></svg><b class="cs-note" aria-hidden="true">print</b></li>
+          <li><span class="cf" style="background-image: url(img/neg-street-900.webp); --x: 50%; --y: 80%; --z: 1.5"></span><i>19</i></li>
+          <li><span class="cf" style="background-image: url(img/neg-street-900.webp); --x: 20%; --y: 60%; --z: 1.3"></span><i>20</i></li>
+          <li><span class="cf" style="background-image: url(img/neg-street-900.webp); --x: 80%; --y: 30%; --z: 1.4"></span><i>21</i></li>
+          <li class="pick"><button type="button" class="cf-btn" data-load="1" aria-label="Print frame 22 on the bench"><span class="cf" style="background-image: url(img/neg-street-900.webp); --x: 50%; --y: 50%; --z: 1"></span></button><i>22</i><svg class="ring" viewBox="0 0 100 70" aria-hidden="true"><path d="M12 7 C 36 1, 72 4, 95 11 C 97 30, 98 48, 91 64 C 62 68, 27 67, 5 61 C 2 40, 4 22, 8 9 C 10 6, 13 4, 19 2"/><path class="ring-2" d="M12 7 C 36 1, 72 4, 95 11 C 97 30, 98 48, 91 64 C 62 68, 27 67, 5 61 C 2 40, 4 22, 8 9 C 10 6, 13 4, 19 2"/></svg><b class="cs-note" aria-hidden="true">yes</b></li>
+          <li><span class="cf" style="background-image: url(img/neg-alley-900.webp); --x: 30%; --y: 40%; --z: 1.6"></span><i>28</i></li>
+          <li><span class="cf" style="background-image: url(img/neg-alley-900.webp); --x: 85%; --y: 35%; --z: 1.5"></span><i>29</i></li>
+          <li><span class="cf" style="background-image: url(img/neg-alley-900.webp); --x: 40%; --y: 60%; --z: 1.25"></span><i>30</i></li>
+          <li class="pick"><button type="button" class="cf-btn" data-load="2" aria-label="Print frame 31 on the bench"><span class="cf" style="background-image: url(img/neg-alley-900.webp); --x: 50%; --y: 50%; --z: 1"></span></button><i>31</i><svg class="ring" viewBox="0 0 100 70" aria-hidden="true"><path d="M6 9 C 30 4, 68 1, 94 7 C 99 27, 96 50, 94 61 C 70 69, 33 69, 6 64 C 1 45, 4 25, 10 8 L 16 12"/><path class="ring-2" d="M6 9 C 30 4, 68 1, 94 7 C 99 27, 96 50, 94 61 C 70 69, 33 69, 6 64 C 1 45, 4 25, 10 8 L 16 12"/></svg><b class="cs-note" aria-hidden="true">burn sign</b></li>
+        </ol>
+      </div>
+      <figcaption>A contact sheet as it comes back, ringed in china marker. Press a ringed frame to put it in the carrier on bay 3.</figcaption>
+    </figure>
+
+    <div class="film-media-wrap">
+      <div class="film-media">
+        <figure class="develop"><img src="img/reel.webp" srcset="img/reel-800.webp 800w, img/reel.webp 1400w" sizes="(min-width: 900px) 22vw, 44vw" width="1400" height="2100" alt="Gloved hands loading film onto a spiral reel under red light." loading="lazy" decoding="async"></figure>
+        <figure class="develop"><img src="img/tank.webp" srcset="img/tank-800.webp 800w, img/tank.webp 1400w" sizes="(min-width: 900px) 22vw, 44vw" width="1400" height="2100" alt="An open developing tank with the processed film curling out of its reel." loading="lazy" decoding="async"></figure>
+        <figure class="develop"><img src="img/wash.webp" srcset="img/wash-800.webp 800w, img/wash.webp 1400w" sizes="(min-width: 900px) 22vw, 44vw" width="1400" height="2100" alt="Hands rinsing a strip of film under a running tap at a steel sink." loading="lazy" decoding="async"></figure>
+      </div>
+    </div>
+
+    <div class="film-body">
+      <table class="rates">
+        <caption class="u-vh">Film developing prices</caption>
+        <thead><tr><th scope="col">Service</th><th scope="col" class="num">Price</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Develop, 35 mm or 120, black and white</th><td class="num">S$14 a roll</td></tr>
+          <tr><th scope="row">Push or pull, up to two stops</th><td class="num">+S$4</td></tr>
+          <tr><th scope="row">Contact sheet, 10×8 RC</th><td class="num">included</td></tr>
+          <tr><th scope="row">Flat scans, 16 MP, every frame</th><td class="num">S$10 a roll</td></tr>
+          <tr><th scope="row">Tank bench, develop your own</th><td class="num">S$8 an hour</td></tr>
+        </tbody>
+      </table>
+      <p>Drop off by 8 pm Tuesday and collect from 2 pm Friday. Colour film goes out to a lab we trust and takes a week longer. We’ll tell you which one.</p>
+
+    </div>
+  </section>
+
+  <!-- ───────────────────────────── classes ───────────────────────────── -->
+  <section class="classes" id="classes" aria-labelledby="classes-h">
+    <figure class="develop classes-media">
+      <img src="img/hands.webp" srcset="img/hands-800.webp 800w, img/hands.webp 1400w" sizes="(min-width: 900px) 40vw, 92vw" width="1400" height="2100" alt="A printer reaching up to a line of black-and-white prints drying on pegs above the trays." loading="lazy" decoding="async">
+    </figure>
+    <div class="classes-copy">
+      <p class="kicker">Classes</p>
+      <h2 id="classes-h" class="h2">Four people, one room, three hours.</h2>
+      <p>Classes run small because the room is small. Bring a roll of negatives or use ours. Everyone leaves with finished prints, dry and flat.</p>
+
+      <ul class="sessions">
+        <li class="session">
+          <p class="session-when"><time datetime="2026-10-03T10:00">Sat 3 Oct</time> · 10:00–13:00</p>
+          <h3>First Print</h3>
+          <p>Load a carrier, focus, run a test strip, read it, make a straight print. Twenty sheets of 10×8 RC included, and you go home with two prints.</p>
+          <p class="session-meta"><span>S$95</span><span>2 of 4 places left</span></p>
+        </li>
+        <li class="session">
+          <p class="session-when"><time datetime="2026-10-10T14:00">Sat 10 Oct</time> · 14:00–17:30</p>
+          <h3>Split-grade and dodging</h3>
+          <p>Two exposures on one sheet, one soft and one hard, and a card, a wire and your hands to push the light around. Bring a negative that has beaten you.</p>
+          <p class="session-meta"><span>S$120</span><span>4 of 4 places left</span></p>
+        </li>
+        <li class="session">
+          <p class="session-when"><time datetime="2026-10-17T10:00">Sat 17 Oct</time> · 10:00–13:00</p>
+          <h3>First Print</h3>
+          <p>Same class as the 3rd, for anyone who missed it.</p>
+          <p class="session-meta"><span>S$95</span><span class="full">Full · waitlist open</span></p>
+        </li>
+        <li class="session">
+          <p class="session-when"><time datetime="2026-10-25T10:00">Sun 25 Oct</time> · 10:00–16:00</p>
+          <h3>Fibre paper and selenium</h3>
+          <p>Fibre-based paper, a long wash and a selenium bath that makes the blacks go deeper and slightly cold. It’s a full day, and lunch from the coffee shop downstairs is on us.</p>
+          <p class="session-meta"><span>S$180</span><span>3 of 3 places left</span></p>
+        </li>
+      </ul>
+      <a class="cta" href="mailto:classes@latentdarkroom.sg?subject=Class%20place">Hold a place by email</a>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────── visit ───────────────────────────── -->
+  <section class="visit" id="visit" aria-labelledby="visit-h">
+    <figure class="develop visit-media">
+      <img src="img/room.webp" srcset="img/room-800.webp 800w, img/room.webp 1400w" sizes="(min-width: 900px) 34vw, 92vw" width="1400" height="1867" alt="The wet side of the darkroom: a row of trays on a sink under a single red safelight on the wall." loading="lazy" decoding="async">
+    </figure>
+    <div class="visit-copy">
+      <p class="kicker">Visit</p>
+      <h2 id="visit-h" class="h2">Up the side stairs, past the hardware shop.</h2>
+      <address class="addr">
+        Level 2, 118 Jalan Besar<br>
+        Singapore 208848<br>
+        Four minutes from Jalan Besar MRT, Exit A
+      </address>
+      <dl class="hours">
+        <div><dt>Tue–Fri</dt><dd>2 pm – 11 pm</dd></div>
+        <div><dt>Sat–Sun</dt><dd>10 am – 10 pm</dd></div>
+        <div><dt>Mon</dt><dd>Closed. We mix chemistry and clean the trays.</dd></div>
+      </dl>
+      <h3 class="rules-h">In the room</h3>
+      <ul class="rules">
+        <li>Phones go face down on the shelf by the door. A lit screen fogs paper faster than our safelights do.</li>
+        <li>We test the safelights every month. Paper is safe under them for four minutes on the bench and not much longer.</li>
+        <li>Tongs stay with their tray: developer, stop, fix. One drop of fixer in the developer and everyone’s night goes grey.</li>
+      </ul>
+      <p class="mail"><a href="mailto:hello@latentdarkroom.sg">hello@latentdarkroom.sg</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p class="foot-mark">LATENT<span class="dot">.</span></p>
+  <p>A black-and-white darkroom on Jalan Besar since 2019.</p>
+  <p>© <span data-year>2026</span> LATENT. Darkroom</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="js/paper.js" defer></script>
+<script src="js/bench.js" defer></script>
+<script src="js/curve.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>
