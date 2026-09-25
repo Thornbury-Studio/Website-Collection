@@ -101,3 +101,8 @@ templates/pen-ground-dark/tools/shots/
 
 # LATENT. CDP verification output (tools/shot.mjs).
 templates/darkroom-latent/tools/shots/
+
+# REDLINE. licensed 4K masters and full-resolution Pexels photographs (ids in
+# IMAGE-CREDITS.md), re-derived by tools/media.py; verification shots stay local.
+templates/pc-redline-dark/tools/raw/
+templates/pc-redline-dark/tools/shots/
