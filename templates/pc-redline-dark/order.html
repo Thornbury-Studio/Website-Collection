@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order — REDLINE.</title>
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/pc-redline-dark/order.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Order — REDLINE.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/pc-redline-dark/order.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/pc-redline-dark/img/og.jpg">
+<!--b:meta.order--><meta name="description" content="REDLINE One, one configuration: S$11,480 GST included, 9 working days from order to dispatch, 72-hour burn-in, 3 years parts and labour.">
+<meta property="og:description" content="S$11,480. 9 working days. 72 hours at full load before it ships."><!--/b-->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/pc-redline-dark/img/og.jpg">
+<meta name="theme-color" content="#09090a">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" as="image" href="film/tower-poster.webp">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <a class="wordmark" href="./" aria-label="REDLINE, home">Redline<span>.</span></a>
+  <nav class="nav" aria-label="Site">
+    <a class="home" href="./">Machine</a>
+    <a href="gx9900.html">GX9900</a>
+    <a href="airflow.html">Airflow</a>
+    <a href="order.html" aria-current="page">Order</a>
+  </nav>
+</header>
+
+<canvas class="heat" data-heat aria-hidden="true"></canvas>
+
+<main id="main">
+  <section class="hero page-hero" aria-labelledby="hero-h">
+    <figure class="film" data-film>
+      <video autoplay muted loop playsinline preload="metadata" poster="film/tower-poster.webp" aria-hidden="true">
+        <source src="film/tower-s.mp4" type="video/mp4" media="(max-width: 700px)">
+        <source src="film/tower.mp4" type="video/mp4">
+      </video>
+      <button class="film-toggle" type="button" data-film-toggle aria-pressed="false">Pause film</button>
+    </figure>
+    <div class="wrap">
+      <h1 id="hero-h"><span class="line"><span>One configuration.</span></span><span class="line"><span class="hot"><!--b:price-->S$11,480<!--/b--></span></span></h1>
+      <p class="lede">GST included. <!--b:lead-->9 working days<!--/b--> from order to dispatch. There's nothing to choose because we already chose — every part below is the one we'd buy for ourselves.</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="row" aria-labelledby="bom-h" style="align-items:start">
+      <div class="media">
+        <p class="label">What's in it</p>
+        <h2 id="bom-h" style="margin:12px 0 28px">REDLINE One</h2>
+        <ul class="bom">
+          <li><span>Graphics</span><span><!--b:name-->GX9900<!--/b-->, <!--b:vram-->48 GB<!--/b--> GDDR7, <!--b:boardW-->600 W<!--/b--></span></li>
+          <li><span>Processor</span><span>Desktop, <!--b:cpu-->16 cores, 32 threads, 5.7 GHz boost<!--/b-->, <!--b:cpuW-->230 W<!--/b--> package power</span></li>
+          <li><span>Memory</span><span><!--b:ram-->96 GB DDR5-6400 (2 × 48 GB)<!--/b--></span></li>
+          <li><span>Storage</span><span><!--b:ssd-->4 TB PCIe 5.0 NVMe, 14,500 MB/s read<!--/b--></span></li>
+          <li><span>Power</span><span><!--b:psu-->1,300 W ATX 3.1, 80 PLUS Platinum<!--/b--></span></li>
+          <li><span>Cooling</span><span>Air. <!--b:airFans-->7 × 140 mm<!--/b--> case fans, filtered intakes; the card's own <!--b:gpuFans-->3 × 110 mm<!--/b--></span></li>
+          <li><span>Case</span><span>Steel and tempered glass, <!--b:ship-->31 kg<!--/b--> shipped, in a fitted crate</span></li>
+          <li><span>Software</span><span>None by default. We'll install Windows 11 Pro or Ubuntu 24.04 LTS on request — you bring the licence.</span></li>
+        </ul>
+      </div>
+      <div class="copy" id="hold">
+        <form class="order" data-order novalidate aria-labelledby="order-h">
+          <p class="label" id="order-h">Hold a build slot</p>
+          <p class="price"><!--b:price-->S$11,480<!--/b--></p>
+          <p style="color:var(--ink-2);margin-top:10px">We build <!--b:builds-->6<!--/b--> a week. A hold keeps your week for 48 hours while we send the deposit invoice.</p>
+          <div class="field">
+            <label for="week">Build week</label>
+            <select id="week" name="week"></select>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required inputmode="email">
+          </div>
+          <button class="btn" type="submit">Hold this week</button>
+          <p class="fine">Nothing is charged here. Delivery in Singapore is included; elsewhere we quote the crate.</p>
+          <div class="held" data-held hidden tabindex="-1" role="status">
+            <p data-held-text></p>
+            <button class="linkish" type="button" data-undo>Release the hold</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="row wide nine" id="burn" aria-labelledby="burn-h">
+      <figure class="media film" data-film style="margin:0;aspect-ratio:1920/672">
+        <video muted loop playsinline preload="none" poster="film/boot-poster.webp" aria-hidden="true">
+          <source src="film/boot-s.mp4" type="video/mp4" media="(max-width: 700px)">
+          <source src="film/boot.mp4" type="video/mp4">
+        </video>
+        <button class="film-toggle" type="button" data-film-toggle aria-pressed="false">Pause film</button>
+      </figure>
+      <div class="copy nine-head">
+        <p class="label">The nine days</p>
+        <h2 id="burn-h">Built, then made to prove it.</h2>
+      </div>
+      <div class="copy nine-list">
+        <ol class="days">
+          <li><b>Days 1–4</b><p><strong>Built by one person</strong>, start to finish, with their name on the log. Every cable measured and cut for this case.</p></li>
+          <li><b>Day 5, morning</b><p>First boot. The board walks through its power-on codes on the display you see above; we don't move on until it lands clean every time from cold. Then the burn-in starts.</p></li>
+          <li><b>Day 5 → day 8</b><p><strong><!--b:burnH-->72<!--/b--> hours at full load.</strong> <!--b:burn-->259,200<!--/b--> readings per sensor, one a second, ending at the hour it started. Any fault restarts the clock.</p></li>
+          <li><b>Day 9</b><p>Dust-off, photographs of your machine, crated, dispatched. The burn-in log is on the drive.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="row" id="service" aria-labelledby="svc-h">
+      <div class="media">
+        <img src="img/service.webp" srcset="img/service-700.webp 700w, img/service.webp 1000w" sizes="(max-width: 960px) 100vw, 58vw" width="1000" height="1203" alt="Hands holding an open case steady while an air blower clears dust from the fans." loading="lazy">
+      </div>
+      <div class="copy">
+        <p class="label">Service &amp; warranty</p>
+        <h2 id="svc-h">Month <!--b:serviceMonth-->24<!--/b-->, we come back.</h2>
+        <p><!--b:warranty-->3 years<!--/b--> parts and labour, collected from your door in Singapore. At <!--b:service-->month 24<!--/b--> we collect it anyway: dust out, fresh thermal paste on the processor and card, a shorter burn-in, and it's back within the week. Included.</p>
+      </div>
+    </section>
+
+    <section class="row flip" aria-labelledby="psu-h">
+      <div class="media">
+        <img src="img/gold.webp" srcset="img/gold-900.webp 900w, img/gold.webp 1600w" sizes="(max-width: 960px) 100vw, 58vw" width="1600" height="1200" alt="Gold contacts and components on a dark board, close up." loading="lazy">
+      </div>
+      <div class="copy">
+        <p class="label">Power</p>
+        <h2 id="psu-h"><!--b:psuShare-->69%<!--/b--> at full tilt.</h2>
+        <p>Everything in the machine at once — card, processor, drive, fans — peaks at <strong><!--b:peak-->900 W<!--/b--></strong>. On a <!--b:psuW-->1,300 W<!--/b--> supply that's <!--b:psuShare-->69%<!--/b-->: inside the band where a Platinum unit runs most efficiently, and nowhere near where it runs hot.</p>
+      </div>
+    </section>
+  </div>
+
+  <section class="close" aria-labelledby="close-h">
+    <div class="wrap">
+      <h2 id="close-h">Questions first? <span class="hot">Ask.</span></h2>
+      <p>A person who builds these answers <a href="mailto:build@redline.sg">build@redline.sg</a>, usually the same day. Or come and see one running — the workshop is in Kaki Bukit, weekdays by appointment.</p>
+      <div class="actions"><a class="btn" href="#hold">Hold a build slot</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="brand">
+      <a class="wordmark" href="./">Redline<span>.</span></a>
+      <p>Hand-built workstations. Kaki Bukit, Singapore.</p>
+    </div>
+    <ul aria-label="Pages">
+      <li><a href="./">Machine</a></li>
+      <li><a href="gx9900.html">GX9900</a></li>
+      <li><a href="airflow.html">Airflow</a></li>
+    </ul>
+    <ul aria-label="Contact">
+      <li><a href="mailto:build@redline.sg">build@redline.sg</a></li>
+      <li><a href="#service">Service &amp; warranty</a></li>
+    </ul>
+    <p class="legal">© <span data-year>2026</span> REDLINE Workstations Pte. Ltd.</p>
+  </div>
+</footer>
+
+<aside class="hud" data-hud aria-label="Live readout">
+  <p class="hud-state"><i></i><span data-t="state"><!--b:idle.state-->Idle<!--/b--></span></p>
+  <dl class="hud-read">
+    <div><dt>Load</dt><dd data-t="load"><!--b:idle.load-->0%<!--/b--></dd></div>
+    <div><dt>GPU</dt><dd data-t="temp"><!--b:idle.temp-->34 °C<!--/b--></dd></div>
+    <div><dt>Fans</dt><dd data-t="rpm"><!--b:idle.rpm-->Stopped<!--/b--></dd></div>
+    <div><dt>Draw</dt><dd data-t="watts"><!--b:idle.watts-->31 W<!--/b--></dd></div>
+  </dl>
+  <button class="hud-toggle" type="button" data-hud-toggle aria-pressed="true" data-short="On">Readout on</button>
+  <p class="sr-only" aria-live="polite" data-live></p>
+</aside>
+
+<script src="js/redline-model.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="js/heat.js" defer></script>
+<script src="js/telemetry.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Airflow — REDLINE.</title>
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/pc-redline-dark/airflow.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Airflow — REDLINE.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/pc-redline-dark/airflow.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/pc-redline-dark/img/og.jpg">
+<!--b:meta.air--><meta name="description" content="REDLINE is air-cooled on purpose: 7 × 140 mm fans, 336 m³ an hour at full load, and a GX9900 fan curve that stops below 50 °C.">
+<meta property="og:description" content="Why a 900 W workstation ships without water — and the fan curve its live readout runs on."><!--/b-->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/pc-redline-dark/img/og.jpg">
+<meta name="theme-color" content="#09090a">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" as="image" href="film/air-poster.webp">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <a class="wordmark" href="./" aria-label="REDLINE, home">Redline<span>.</span></a>
+  <nav class="nav" aria-label="Site">
+    <a class="home" href="./">Machine</a>
+    <a href="gx9900.html">GX9900</a>
+    <a href="airflow.html" aria-current="page">Airflow</a>
+    <a href="order.html">Order</a>
+  </nav>
+</header>
+
+<canvas class="heat" data-heat aria-hidden="true"></canvas>
+
+<main id="main">
+  <section class="hero page-hero" aria-labelledby="hero-h">
+    <figure class="film" data-film>
+      <video autoplay muted loop playsinline preload="metadata" poster="film/air-poster.webp" aria-hidden="true">
+        <source src="film/air-s.mp4" type="video/mp4" media="(max-width: 700px)">
+        <source src="film/air.mp4" type="video/mp4">
+      </video>
+      <button class="film-toggle" type="button" data-film-toggle aria-pressed="false">Pause film</button>
+    </figure>
+    <div class="wrap">
+      <h1 id="hero-h"><span class="line"><span>Air, on</span></span><span class="line"><span>purpose.</span></span></h1>
+      <p class="lede"><b><!--b:airFans-->7 × 140 mm<!--/b--></b> case fans, three on the card, no pump, no coolant, nothing to top up. The fastest way to make <!--b:peak-->900 W<!--/b--> of heat disappear from a room is to move a lot of air through it, quietly.</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="row wide" aria-labelledby="curve-h" style="align-items:start">
+      <div class="copy">
+        <p class="label">The fan curve</p>
+        <h2 id="curve-h">This is the curve the readout runs on.</h2>
+        <p>The dot is the machine's state right now, from the same model as the readout along the bottom. Scroll hard and watch it climb out of the quiet zone; stop, and watch it come home.</p>
+      </div>
+      <div class="media">
+        <div class="chart-wrap">
+        <!--b:chart-->
+          <svg class="chart" viewBox="0 0 720 400" role="img" aria-labelledby="curve-t curve-d">
+            <title id="curve-t">GX9900 fan speed against core temperature</title>
+            <desc id="curve-d">Fans stopped below 50 °C. At 50 °C they start at 900 RPM and climb in a straight line to 2,600 RPM at 74 °C, then to a ceiling of 3,200 RPM. Idle sits at 34 °C with the fans stopped; sustained full load settles at 68 °C and 2,170 RPM.</desc>
+            <rect class="quiet" x="64.0" y="34" width="235.6" height="310"/>
+            <text class="quiet-l" x="76.0" y="56">fans stopped</text>
+            <g class="grid"><line x1="64" x2="700" y1="266.5" y2="266.5"/><line x1="64" x2="700" y1="189.0" y2="189.0"/><line x1="64" x2="700" y1="111.5" y2="111.5"/><line x1="64" x2="700" y1="34.0" y2="34.0"/><line x1="64" x2="700" y1="344.0" y2="344.0"/></g>
+            <g class="axis"><text x="54" y="348.0" text-anchor="end">0</text><text x="54" y="270.5" text-anchor="end">800</text><text x="54" y="193.0" text-anchor="end">1,600</text><text x="54" y="115.5" text-anchor="end">2,400</text><text x="54" y="38.0" text-anchor="end">3,200</text><text x="64.0" y="368" text-anchor="middle">30</text><text x="181.8" y="368" text-anchor="middle">40</text><text x="299.6" y="368" text-anchor="middle">50</text><text x="417.3" y="368" text-anchor="middle">60</text><text x="535.1" y="368" text-anchor="middle">70</text><text x="652.9" y="368" text-anchor="middle">80</text><text x="700" y="396" text-anchor="end">GPU core, °C</text><text x="64" y="16" text-anchor="start">RPM</text></g>
+            <path class="curve" d="M64.0 344.0L66.9 344.0L69.9 344.0L72.8 344.0L75.8 344.0L78.7 344.0L81.7 344.0L84.6 344.0L87.6 344.0L90.5 344.0L93.4 344.0L96.4 344.0L99.3 344.0L102.3 344.0L105.2 344.0L108.2 344.0L111.1 344.0L114.1 344.0L117.0 344.0L119.9 344.0L122.9 344.0L125.8 344.0L128.8 344.0L131.7 344.0L134.7 344.0L137.6 344.0L140.6 344.0L143.5 344.0L146.4 344.0L149.4 344.0L152.3 344.0L155.3 344.0L158.2 344.0L161.2 344.0L164.1 344.0L167.1 344.0L170.0 344.0L172.9 344.0L175.9 344.0L178.8 344.0L181.8 344.0L184.7 344.0L187.7 344.0L190.6 344.0L193.6 344.0L196.5 344.0L199.4 344.0L202.4 344.0L205.3 344.0L208.3 344.0L211.2 344.0L214.2 344.0L217.1 344.0L220.1 344.0L223.0 344.0L225.9 344.0L228.9 344.0L231.8 344.0L234.8 344.0L237.7 344.0L240.7 344.0L243.6 344.0L246.6 344.0L249.5 344.0L252.4 344.0L255.4 344.0L258.3 344.0L261.3 344.0L264.2 344.0L267.2 344.0L270.1 344.0L273.1 344.0L276.0 344.0L278.9 344.0L281.9 344.0L284.8 344.0L287.8 344.0L290.7 344.0L293.7 344.0L296.6 344.0L299.6 256.8L299.6 256.8L302.5 255.1L305.4 253.4L308.4 251.7L311.3 250.0L314.3 248.2L317.2 246.5L320.2 244.8L323.1 243.1L326.1 241.4L329.0 239.7L331.9 237.9L334.9 236.2L337.8 234.5L340.8 232.8L343.7 231.1L346.7 229.4L349.6 227.6L352.6 225.9L355.5 224.2L358.4 222.5L361.4 220.8L364.3 219.1L367.3 217.4L370.2 215.6L373.2 213.9L376.1 212.2L379.1 210.5L382.0 208.8L384.9 207.1L387.9 205.3L390.8 203.6L393.8 201.9L396.7 200.2L399.7 198.5L402.6 196.8L405.6 195.1L408.5 193.3L411.4 191.6L414.4 189.9L417.3 188.2L420.3 186.5L423.2 184.8L426.2 183.0L429.1 181.3L432.1 179.6L435.0 177.9L437.9 176.2L440.9 174.5L443.8 172.8L446.8 171.0L449.7 169.3L452.7 167.6L455.6 165.9L458.6 164.2L461.5 162.5L464.4 160.7L467.4 159.0L470.3 157.3L473.3 155.6L476.2 153.9L479.2 152.2L482.1 150.5L485.1 148.7L488.0 147.0L490.9 145.3L493.9 143.6L496.8 141.9L499.8 140.2L502.7 138.4L505.7 136.7L508.6 135.0L511.6 133.3L514.5 131.6L517.4 129.9L520.4 128.2L523.3 126.4L526.3 124.7L529.2 123.0L532.2 121.3L535.1 119.6L538.1 117.9L541.0 116.1L543.9 114.4L546.9 112.7L549.8 111.0L552.8 109.3L555.7 107.6L558.7 105.8L561.6 104.1L564.6 102.4L567.5 100.7L570.4 99.0L573.4 97.3L576.3 95.6L579.3 93.8L582.2 92.1L585.2 90.7L588.1 89.2L591.1 87.8L594.0 86.3L596.9 84.9L599.9 83.4L602.8 82.0L605.8 80.5L608.7 79.0L611.7 77.6L614.6 76.1L617.6 74.7L620.5 73.2L623.4 71.8L626.4 70.3L629.3 68.9L632.3 67.4L635.2 66.0L638.2 64.5L641.1 63.1L644.1 61.6L647.0 60.2L649.9 58.7L652.9 57.3L655.8 55.8L658.8 54.3L661.7 52.9L664.7 51.4L667.6 50.0L670.6 48.5L673.5 47.1L676.4 45.6L679.4 44.2L682.3 42.7L685.3 41.3L688.2 39.8L691.2 38.4L694.1 36.9L697.1 35.5L700.0 34.0"/>
+            <circle class="mark" cx="111.1" cy="344.0" r="5"/><text class="mark-l" x="121.1" y="332.0" text-anchor="start">idle</text>
+            <circle class="mark" cx="511.6" cy="133.8" r="5"/><text class="mark-l" x="499.6" y="121.8" text-anchor="end">full load</text>
+            <circle class="now" data-now cx="111.1" cy="344.0" r="9"/>
+          </svg><!--/b-->
+        </div>
+        <p class="caption label">Stopped below <!--b:fanStop-->50 °C<!--/b-->. Once turning, they keep turning until <!--b:fanRest-->46 °C<!--/b--> so they never flutter on and off at the edge.</p>
+      </div>
+    </section>
+
+    <section class="row" aria-labelledby="heat-h">
+      <div class="media">
+        <img src="img/red-fan.webp" srcset="img/red-fan-900.webp 900w, img/red-fan.webp 1600w" sizes="(max-width: 960px) 100vw, 58vw" width="1600" height="1617" alt="An intake fan lit red, close up, its blades a blur." loading="lazy">
+      </div>
+      <div class="copy">
+        <p class="label">The arithmetic</p>
+        <h2 id="heat-h"><!--b:peak-->900 W<!--/b--> has to go somewhere.</h2>
+        <p>Full load is <!--b:boardW-->600 W<!--/b--> for the card, <!--b:cpuW-->230 W<!--/b--> for the processor and <!--b:restW-->70 W<!--/b--> for everything else. Let the exhaust run <!--b:airRise-->8 °C<!--/b--> above the room and carrying that away takes <strong><!--b:airM3h-->336<!--/b--> m³ of air an hour</strong> — <!--b:airCFM-->198<!--/b--> CFM.</p>
+        <p>After filters and the case's own resistance, the <!--b:airIntakes-->4<!--/b--> intakes deliver that at <strong><!--b:intakeRPM-->1,730<!--/b--> RPM</strong>, <!--b:airShare-->87%<!--/b--> of their top speed.</p>
+        <p class="caption label">Air needed = heat ÷ (specific heat × density × temperature rise).</p>
+      </div>
+    </section>
+
+    <section class="row flip" aria-labelledby="loop-h">
+      <div class="media">
+        <img src="img/blades.webp" srcset="img/blades-900.webp 900w, img/blades.webp 1600w" sizes="(max-width: 960px) 100vw, 58vw" width="1600" height="1067" alt="Black fan blades and hub, close up in the dark." loading="lazy">
+      </div>
+      <div class="copy">
+        <p class="label">The loop we didn't ship</p>
+        <h2 id="loop-h">Four degrees wasn't worth it.</h2>
+        <p>We built REDLINE twice. The second one had a <!--b:loopMl-->720 ml<!--/b--> custom loop: two radiators, a pump, a reservoir, hard tubing. Under the same <!--b:burnH-->72<!--/b-->-hour burn-in it held the card <strong><!--b:loopC-->4 °C<!--/b--> cooler</strong>.</p>
+        <p>It also wanted its coolant changed every <!--b:loopMonths-->12<!--/b--> months, added a pump you can hear at idle, and gave the machine a way to fail that involves liquid. The air version won.</p>
+      </div>
+    </section>
+
+    <section class="row" aria-labelledby="quiet-h">
+      <div class="media">
+        <img src="img/sink.webp" srcset="img/sink-900.webp 900w, img/sink.webp 1600w" sizes="(max-width: 960px) 100vw, 58vw" width="1600" height="1520" alt="A round finned heatsink lit from one side against black." loading="lazy">
+      </div>
+      <div class="copy">
+        <p class="label">Noise</p>
+        <h2 id="quiet-h"><!--b:dBIdle-->19 dBA<!--/b--> at idle.</h2>
+        <p>With the card's fans stopped and the case fans at their floor, REDLINE measures <!--b:dBIdle-->19 dBA<!--/b--> at a metre — below most rooms it will sit in. At sustained full load it's <strong><!--b:dBLoad-->36 dBA<!--/b--></strong>: you'll know it's working, and you'll still hear the person next to you.</p>
+      </div>
+    </section>
+
+    <section class="row wide" aria-labelledby="fin-h">
+      <div class="media">
+        <img src="img/stripes.webp" srcset="img/stripes-900.webp 900w, img/stripes.webp 1600w" sizes="100vw" width="1600" height="1065" alt="Heatsink fins in raking light, a field of bright stripes." loading="lazy">
+      </div>
+      <div class="copy" style="margin-top:32px">
+        <p class="label">Dust</p>
+        <h2 id="fin-h">Every intake is filtered.</h2>
+        <p>Magnetic mesh on all <!--b:airIntakes-->4<!--/b--> intakes, off in a second, rinsed under a tap. At <!--b:service-->month 24<!--/b--> we collect the machine and clean what the filters didn't catch — included, like the burn-in.</p>
+      </div>
+    </section>
+  </div>
+
+  <nav class="next" aria-label="Next page">
+    <a href="order.html" class="wrap">
+      <span class="label">Next — the order</span>
+      <span class="next-t">Hold a build slot. <span class="arrow" aria-hidden="true">→</span></span>
+    </a>
+  </nav>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="brand">
+      <a class="wordmark" href="./">Redline<span>.</span></a>
+      <p>Hand-built workstations. Kaki Bukit, Singapore.</p>
+    </div>
+    <ul aria-label="Pages">
+      <li><a href="./">Machine</a></li>
+      <li><a href="gx9900.html">GX9900</a></li>
+      <li><a href="order.html">Order</a></li>
+    </ul>
+    <ul aria-label="Contact">
+      <li><a href="mailto:build@redline.sg">build@redline.sg</a></li>
+      <li><a href="order.html#service">Service &amp; warranty</a></li>
+    </ul>
+    <p class="legal">© <span data-year>2026</span> REDLINE Workstations Pte. Ltd.</p>
+  </div>
+</footer>
+
+<aside class="hud" data-hud aria-label="Live readout">
+  <p class="hud-state"><i></i><span data-t="state"><!--b:idle.state-->Idle<!--/b--></span></p>
+  <dl class="hud-read">
+    <div><dt>Load</dt><dd data-t="load"><!--b:idle.load-->0%<!--/b--></dd></div>
+    <div><dt>GPU</dt><dd data-t="temp"><!--b:idle.temp-->34 °C<!--/b--></dd></div>
+    <div><dt>Fans</dt><dd data-t="rpm"><!--b:idle.rpm-->Stopped<!--/b--></dd></div>
+    <div><dt>Draw</dt><dd data-t="watts"><!--b:idle.watts-->31 W<!--/b--></dd></div>
+  </dl>
+  <button class="hud-toggle" type="button" data-hud-toggle aria-pressed="true" data-short="On">Readout on</button>
+  <p class="sr-only" aria-live="polite" data-live></p>
+</aside>
+
+<script src="js/redline-model.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="js/heat.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/telemetry.js" defer></script>
+</body>
+</html>

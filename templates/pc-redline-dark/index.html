@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REDLINE. — one workstation, run flat out</title>
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/pc-redline-dark/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="REDLINE. — one workstation, run flat out">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/pc-redline-dark/index.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/pc-redline-dark/img/og.jpg">
+<!--b:meta.index--><meta name="description" content="REDLINE One: a single desktop workstation built around the GX9900 — 48 GB of GDDR7, 600 W, fans that stop at idle. One configuration, hand-built in Singapore, 6 a week.">
+<meta property="og:description" content="One machine around the GX9900. 48 GB, 600 W, and a fan curve that stops completely when you don't need it."><!--/b-->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/pc-redline-dark/img/og.jpg">
+<meta name="theme-color" content="#09090a">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" as="image" href="film/rig-poster.webp">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <a class="wordmark" href="./" aria-label="REDLINE, home">Redline<span>.</span></a>
+  <nav class="nav" aria-label="Site">
+    <a class="home" href="./" aria-current="page">Machine</a>
+    <a href="gx9900.html">GX9900</a>
+    <a href="airflow.html">Airflow</a>
+    <a href="order.html">Order</a>
+  </nav>
+</header>
+
+<canvas class="heat" data-heat aria-hidden="true"></canvas>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-h">
+    <figure class="film" data-film>
+      <video autoplay muted loop playsinline preload="metadata" poster="film/rig-poster.webp" aria-hidden="true">
+        <source src="film/rig-s.mp4" type="video/mp4" media="(max-width: 700px)">
+        <source src="film/rig.mp4" type="video/mp4">
+      </video>
+      <button class="film-toggle" type="button" data-film-toggle aria-pressed="false">Pause film</button>
+    </figure>
+    <div class="wrap">
+      <h1 id="hero-h"><span class="line"><span>One machine.</span></span><span class="line"><span>Run flat</span></span><span class="line"><span class="hot">out.</span></span></h1>
+      <p class="lede">REDLINE One is a single desktop workstation around the <b><!--b:name-->GX9900<!--/b--></b>: <b><!--b:vram-->48 GB<!--/b--></b> of memory, <b><!--b:boardW-->600 W<!--/b--></b>, and a fan curve that stops completely when you don't need it. One configuration, built by hand in Singapore, <!--b:builds-->6<!--/b--> a week.</p>
+      <div class="actions">
+        <a class="btn" href="order.html">Hold a build slot <span class="num">— <!--b:price-->S$11,480<!--/b--></span></a>
+        <a class="btn ghost" href="gx9900.html">The <!--b:name-->GX9900<!--/b--> <span class="arrow">→</span></a>
+      </div>
+      <p class="hint label">Scroll fast. The readout along the bottom is live.</p>
+    </div>
+  </section>
+
+  <section class="stage" id="stage" aria-labelledby="stage-h">
+    <div class="stage-pin">
+      <div class="stage-fan">
+        <img class="plate" src="film/fan/l/000.webp" alt="" width="1000" height="1000">
+        <canvas class="plate" data-fan width="1000" height="1000" role="img" aria-label="One of the GX9900's fans, photographed. It lights and turns only when the readout says it does."></canvas>
+      </div>
+      <div class="stage-copy">
+        <h2 id="stage-h">It idles at zero.</h2>
+        <p class="stage-cue" data-cue>Scroll hard. Keep going.</p>
+        <p>Below <!--b:fanStop-->50 °C<!--/b--> the <!--b:name-->GX9900<!--/b-->'s three fans don't turn at all — the card sits at <!--b:idle.temp-->34 °C<!--/b--> on <!--b:idleW-->31 W<!--/b--> and makes no sound. It takes real, sustained work to wake them.</p>
+        <div class="stage-live">
+          <div class="gauge" aria-hidden="true">
+            <p class="gauge-load"><span class="big" data-t="load"><!--b:idle.load-->0%<!--/b--></span><span class="label">Load</span></p>
+            <dl class="gauge-rows">
+              <div><dt>GPU core</dt><dd data-t="temp"><!--b:idle.temp-->34 °C<!--/b--></dd></div>
+              <div><dt>Fans</dt><dd data-t="rpm"><!--b:idle.rpm-->Stopped<!--/b--></dd></div>
+              <div><dt>Board power</dt><dd data-t="watts"><!--b:idle.watts-->31 W<!--/b--></dd></div>
+            </dl>
+          </div>
+          <p class="stage-state label">State: <span data-t="state"><!--b:idle.state-->Idle<!--/b--></span> · runs the card's own power and fan curves off how fast you're actually scrolling. Stop, and it idles back down.</p>
+        </div>
+        <div class="stage-static">
+          <div class="pair">
+            <figure><img src="film/fan/l/000.webp" alt="The fan stopped and dark." width="1000" height="1000" loading="lazy"><figcaption><b>Idle</b><!--b:idle.sentence-->Load 0%, GPU 34 °C, fans stopped, drawing 31 W.<!--/b--></figcaption></figure>
+            <figure><img src="film/fan/l/040.webp" alt="The same fan lit red and spinning." width="1000" height="1000" loading="lazy"><figcaption><b>Sustained full load</b><!--b:full.sentence-->Load 100%, GPU 68 °C, fans at 2,170 RPM, drawing 600 W.<!--/b--></figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="row" aria-labelledby="card-h">
+      <div class="media">
+        <img src="img/card-side.webp" srcset="img/card-side-900.webp 900w, img/card-side.webp 1600w" sizes="(max-width: 960px) 100vw, 58vw" width="1600" height="1367" alt="The GX9900's fans lit copper-red inside the case." loading="lazy">
+      </div>
+      <div class="copy">
+        <p class="label">The card</p>
+        <h2 id="card-h"><!--b:name-->GX9900<!--/b-->. <!--b:vram-->48 GB<!--/b-->, one cable.</h2>
+        <p><!--b:modules-->16 × 3 GB<!--/b--> of memory on a <!--b:bus-->512-bit<!--/b--> bus at <!--b:gbps-->32 Gbps<!--/b-->: <strong><!--b:bw-->2,048 GB/s<!--/b--></strong>, <!--b:vs.bw-->+14%<!--/b--> past the fastest card you can buy today. <!--b:tflops-->128.8<!--/b--> TFLOPS of FP32.</p>
+        <p>And <strong><!--b:boardW-->600 W<!--/b--></strong> — exactly what one 12V-2×6 connector is rated to carry. We don't run it past the cable.</p>
+        <a class="more" href="gx9900.html">Read the spec sheet <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section class="row flip" aria-labelledby="air-h">
+      <figure class="media film" data-film style="margin:0">
+        <video muted loop playsinline preload="none" poster="film/mesh-poster.webp" aria-hidden="true">
+          <source src="film/mesh-s.mp4" type="video/mp4" media="(max-width: 700px)">
+          <source src="film/mesh.mp4" type="video/mp4">
+        </video>
+        <button class="film-toggle" type="button" data-film-toggle aria-pressed="false">Pause film</button>
+      </figure>
+      <div class="copy">
+        <p class="label">Cooling</p>
+        <h2 id="air-h">No water in it.</h2>
+        <p>We built a <!--b:loopMl-->720 ml<!--/b--> custom loop against this machine. It ran the card <!--b:loopC-->4 °C<!--/b--> cooler and wanted fresh coolant every <!--b:loopMonths-->12<!--/b--> months. We shipped air.</p>
+        <p><strong><!--b:airFans-->7 × 140 mm<!--/b--> fans</strong> move <!--b:airM3h-->336<!--/b--> m³ of air an hour at full load — enough to carry <!--b:peak-->900 W<!--/b--> out of the case with the exhaust only <!--b:airRise-->8 °C<!--/b--> over the room.</p>
+        <a class="more" href="airflow.html">How the air works <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </div>
+
+  <section class="figure-line" aria-labelledby="burn-h">
+    <div class="wrap">
+      <h2 id="burn-h" class="sr-only">Burn-in</h2>
+      <span class="n"><!--b:burn-->259,200<!--/b--></span>
+      <p class="label">readings per sensor, before it ships</p>
+      <p>Every REDLINE runs <strong><!--b:burnH-->72<!--/b--> hours at full load</strong> on our bench before it's boxed — one reading a second from every temperature, fan and power sensor in it. The log is on the drive when you open it. If a machine can't hold <!--b:boardW-->600 W<!--/b--> for three days here, it doesn't leave.</p>
+      <a class="more" href="order.html#burn">What happens in the nine days <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="close" aria-labelledby="close-h">
+    <div class="wrap">
+      <h2 id="close-h">One configuration. <span class="hot price-line"><!--b:price-->S$11,480<!--/b--></span></h2>
+      <p>GST included, <!--b:lead-->9 working days<!--/b--> from order to dispatch, <!--b:warranty-->3 years<!--/b--> parts and labour, and a service visit at <!--b:service-->month 24<!--/b--> on us. There's nothing to choose because we already chose.</p>
+      <div class="actions"><a class="btn" href="order.html">Hold a build slot</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="brand">
+      <a class="wordmark" href="./">Redline<span>.</span></a>
+      <p>Hand-built workstations. Kaki Bukit, Singapore.</p>
+    </div>
+    <ul aria-label="Pages">
+      <li><a href="gx9900.html">GX9900</a></li>
+      <li><a href="airflow.html">Airflow</a></li>
+      <li><a href="order.html">Order</a></li>
+    </ul>
+    <ul aria-label="Contact">
+      <li><a href="mailto:build@redline.sg">build@redline.sg</a></li>
+      <li><a href="order.html#service">Service &amp; warranty</a></li>
+    </ul>
+    <p class="legal">© <span data-year>2026</span> REDLINE Workstations Pte. Ltd.</p>
+  </div>
+</footer>
+
+<aside class="hud" data-hud aria-label="Live readout">
+  <p class="hud-state"><i></i><span data-t="state"><!--b:idle.state-->Idle<!--/b--></span></p>
+  <dl class="hud-read">
+    <div><dt>Load</dt><dd data-t="load"><!--b:idle.load-->0%<!--/b--></dd></div>
+    <div><dt>GPU</dt><dd data-t="temp"><!--b:idle.temp-->34 °C<!--/b--></dd></div>
+    <div><dt>Fans</dt><dd data-t="rpm"><!--b:idle.rpm-->Stopped<!--/b--></dd></div>
+    <div><dt>Draw</dt><dd data-t="watts"><!--b:idle.watts-->31 W<!--/b--></dd></div>
+  </dl>
+  <button class="hud-toggle" type="button" data-hud-toggle aria-pressed="true" data-short="On">Readout on</button>
+  <p class="sr-only" aria-live="polite" data-live></p>
+</aside>
+
+<script src="js/redline-model.js" defer></script>
+<script src="js/fan-data.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="js/heat.js" defer></script>
+<script src="js/telemetry.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>
