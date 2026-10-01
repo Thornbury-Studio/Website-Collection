@@ -6,7 +6,7 @@ type: PRODUCT.md
 # CRATER — product truth
 
 This file plus this template's `DESIGN.md` (which inherits
-`../../../DESIGN-SYSTEM/DESIGN.md`) is what any design or copy pass reads
+`../../../../DESIGN-SYSTEM/DESIGN.md`) is what any design or copy pass reads
 first. Every number below is also in `js/site.js` `CATALOGUE`; the page
 renders prices and dates from there, never from typed copy.
 

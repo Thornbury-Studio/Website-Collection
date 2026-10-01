@@ -1,11 +1,11 @@
-This project inherits ../../../DESIGN-SYSTEM/DESIGN.md (`C:\School\Personal\Company\DESIGN-SYSTEM\DESIGN.md`). Below are this project's own tokens and brand-specific rules.
+This project inherits ../../../../DESIGN-SYSTEM/DESIGN.md (`C:\School\Personal\Company\DESIGN-SYSTEM\DESIGN.md`). Below are this project's own tokens and brand-specific rules.
 
 ---
 name: crater
 type: DESIGN.md
 brand: CRATER — one single-origin whole-bean coffee (Acatenango, Guatemala), roasted in Singapore on Mondays. An invented brand with exactly one product.
 status: Website-Collection template (capability-test build, 2026-09-23)
-inherits: ../../../DESIGN-SYSTEM/DESIGN.md
+inherits: ../../../../DESIGN-SYSTEM/DESIGN.md
 engine: light
 version: 1.0.0
 last_updated: 2026-09-23
@@ -194,7 +194,7 @@ throughout; nothing is centred except the porthole on phones.
 Before writing, editing, or restyling any front-end UI in this repo:
 1. Invoke the `frontend-design` skill and, if installed, `impeccable`
    and this project's own design-critique skill.
-2. Read this repo's own DESIGN.md AND ../../../DESIGN-SYSTEM/DESIGN.md
+2. Read this repo's own DESIGN.md AND ../../../../DESIGN-SYSTEM/DESIGN.md
    (the company-wide taste system — adjust the `../` depth to match
    this project's actual nesting, see the note above). Treat both as
    hard constraints.

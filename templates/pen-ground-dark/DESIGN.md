@@ -1,4 +1,4 @@
-This project inherits ../../../DESIGN-SYSTEM/DARK.md. Below are this project's own tokens and brand-specific rules.
+This project inherits ../../../../DESIGN-SYSTEM/DARK.md. Below are this project's own tokens and brand-specific rules.
 
 # DESIGN.md — GROUND.
 

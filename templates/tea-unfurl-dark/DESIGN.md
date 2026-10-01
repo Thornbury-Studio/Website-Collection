@@ -1,6 +1,6 @@
-This project inherits ../../../DESIGN-SYSTEM/DARK.md. Below are this project's own tokens and brand-specific rules.
+This project inherits ../../../../DESIGN-SYSTEM/DARK.md. Below are this project's own tokens and brand-specific rules.
 
-(Path verified 2026-09-23: from `Company/Website-Collection/templates/tea-unfurl-dark/`, `../../../DESIGN-SYSTEM/DARK.md` resolves to `C:\School\Personal\Company\DESIGN-SYSTEM\DARK.md`. Per DARK.md §8's exception, DESIGN-SYSTEM/DESIGN.md §2 and §6 were also read and apply here as hard constraints; nothing else in DESIGN.md does.)
+(Path re-verified 2026-10-02, after the repo moved under Tools/: from `Company/Tools/Website-Collection/templates/tea-unfurl-dark/`, `../../../../DESIGN-SYSTEM/DARK.md` resolves to `C:\School\Personal\Company\DESIGN-SYSTEM\DARK.md`. Per DARK.md §8's exception, DESIGN-SYSTEM/DESIGN.md §2 and §6 were also read and apply here as hard constraints; nothing else in DESIGN.md does.)
 
 # UNFURL. — design
 
