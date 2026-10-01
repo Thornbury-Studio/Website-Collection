@@ -6,7 +6,7 @@ type: PRODUCT.md
 # COIL — product truth
 
 This file plus this template's `DESIGN.md` (which inherits
-`../../../DESIGN-SYSTEM/DESIGN.md`) is what any design or copy pass reads
+`../../../../DESIGN-SYSTEM/DESIGN.md`) is what any design or copy pass reads
 first. Every number below is also in `js/site.js` (`CATALOGUE` and `STEEPS`);
 the page renders prices, weights, times and the per-cup sum from there, never
 from typed copy, and `node tools/check-figs.mjs` fails if an HTML fallback

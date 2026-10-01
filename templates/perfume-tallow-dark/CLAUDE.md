@@ -12,10 +12,10 @@ Before writing, editing, or restyling any front-end UI in this repo:
    NOT read DESIGN-SYSTEM/DESIGN.md — those belong to the light engine
    only, mixing them in is exactly what the engine split exists to
    prevent.
-2. Read this repo's own DESIGN.md AND ../../../DESIGN-SYSTEM/DARK.md (the
-   company-wide dark taste system — the `../` count is three because this
-   project sits at `Company/Website-Collection/templates/<slug>/`, i.e.
-   three levels below company root; verified to resolve to a real file).
+2. Read this repo's own DESIGN.md AND ../../../../DESIGN-SYSTEM/DARK.md (the
+   company-wide dark taste system — the `../` count is four because this
+   project sits at `Company/Tools/Website-Collection/templates/<slug>/`, i.e.
+   four levels below company root; verified to resolve to a real file).
    Treat both as hard constraints.
 3. Reach for the real open-source stack named in DARK.md §5 by default
    rather than hand-rolling the effect from scratch. Compose from real

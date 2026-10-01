@@ -6,9 +6,9 @@ Child site in the Website-Collection hub. Self-contained: three HTML pages
 
 The Agent Instructions block below is DARK.md §8's, verbatim except the
 `../` count in rule 2: this project sits at
-`Company/Website-Collection/templates/pen-ground-dark/`, three levels below
-company root, so the path is `../../../DESIGN-SYSTEM/DARK.md` (verified to
-resolve to a real file, 2026-09-23). The absolute path is
+`Company/Tools/Website-Collection/templates/pen-ground-dark/`, four levels below
+company root, so the path is `../../../../DESIGN-SYSTEM/DARK.md` (re-verified to
+resolve to a real file, 2026-10-02, after the repo moved under Tools/). The absolute path is
 `C:\School\Personal\Company\DESIGN-SYSTEM\DARK.md`.
 
 # UI Generation Rules (DARK engine)
@@ -24,7 +24,7 @@ Before writing, editing, or restyling any front-end UI in this repo:
    are NOT restated anywhere in DARK.md — read those two sections
    directly, they are hard constraints here too. Nothing else in
    DESIGN.md applies.**
-2. Read this repo's own DESIGN.md AND ../../../DESIGN-SYSTEM/DARK.md (the
+2. Read this repo's own DESIGN.md AND ../../../../DESIGN-SYSTEM/DARK.md (the
    company-wide dark taste system — adjust the `../` depth to match
    this project's actual nesting, or use an absolute path if nested
    inside a shared catalog repo, see the note above). Treat both as

@@ -22,7 +22,7 @@ Before writing, editing, or restyling any front-end UI in this repo:
    are NOT restated anywhere in DARK.md — read those two sections
    directly, they are hard constraints here too. Nothing else in
    DESIGN.md applies.**
-2. Read this repo's own DESIGN.md AND ../../../DESIGN-SYSTEM/DARK.md (the
+2. Read this repo's own DESIGN.md AND ../../../../DESIGN-SYSTEM/DARK.md (the
    company-wide dark taste system — adjust the `../` depth to match
    this project's actual nesting, or use an absolute path if nested
    inside a shared catalog repo, see the note above). Treat both as
@@ -37,6 +37,6 @@ Before writing, editing, or restyling any front-end UI in this repo:
    mobile) and check them against DARK.md §4's checklist directly
    against the image, not just the code (DARK.md §6).
 
-Path note: this project sits at `Company/Website-Collection/templates/pc-redline-dark/`,
-three levels below company root, so rule 2's path is `../../../DESIGN-SYSTEM/DARK.md`
+Path note: this project sits at `Company/Tools/Website-Collection/templates/pc-redline-dark/`,
+four levels below company root, so rule 2's path is `../../../../DESIGN-SYSTEM/DARK.md`
 (verified to resolve; absolute: `C:\School\Personal\Company\DESIGN-SYSTEM\DARK.md`).
