@@ -1,7 +1,6 @@
 """Re-derive every served film and still from the two masters in tools/raw/.
 
-    python tools/media.py            # films + stills
-    python tools/media.py --test     # also writes encode variants to tools/shots/enc/ for the seek test
+    python tools/media.py            # film sequences + stills
 
 Masters (gitignored, see IMAGE-CREDITS.md):
   raw/descent-master.mp4   Kling 3.0, 3852x2152, 24 fps, 193 frames: a tilt UP from the lodge
@@ -10,11 +9,14 @@ Masters (gitignored, see IMAGE-CREDITS.md):
 
 The site plays the clip REVERSED, so scroll position 0 is the sky and 1 is the lodge.
 
-Scrubbing sets video.currentTime on every scroll frame, so the encode has to be
-frame-seekable: every frame is a keyframe (-g 1). A seek then decodes exactly one
-frame instead of walking forward from the last I-frame. See DESIGN.md section 7.
+The film is served as an image sequence, not a video: every second frame of the
+reversed clip, 97 frames, film/l/ (1600x894) and film/s/ (720x1280, the 9:16 cut
+centred on the lodge). js/main.js draws them on a canvas, blending neighbours.
+A scrubbed <video> has to seek on every scroll frame, which waits on the browser's
+decoder and on the file having arrived; on a busy laptop that is what stuttered
+(DESIGN.md section 7).
 """
-import subprocess, sys, pathlib
+import subprocess, pathlib
 
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
@@ -40,12 +42,20 @@ def run(args):
     subprocess.run([str(a) for a in args], check=True)
 
 
-def film(out, vf, crf, gop=1, extra=()):
+FRAMES = 97      # every second frame of the 193
+QUALITY = 72    # WebP; 70 starts to lose the faint stars, 80 adds ~25% for no visible gain
+
+
+def sequence(folder, vf):
+    folder.mkdir(parents=True, exist_ok=True)
+    for old in folder.glob("*.webp"):
+        old.unlink()
     run(["ffmpeg", "-v", "error", "-y", "-i", MASTER,
-         "-vf", f"reverse,{vf},{GRADE},format=yuv420p",
-         "-c:v", "libx264", "-preset", "slow", "-crf", crf, "-tune", "film",
-         "-g", gop, "-keyint_min", gop, "-sc_threshold", 0, "-bf", 0,
-         "-profile:v", "high", "-movflags", "+faststart", "-an", *extra, out])
+         "-vf", rf"reverse,select=not(mod(n\,2)),{vf},{GRADE}", "-fps_mode", "vfr",
+         "-c:v", "libwebp", "-quality", QUALITY, "-compression_level", 6, "-start_number", 0,
+         folder / "%03d.webp"])
+    n = len(list(folder.glob("*.webp")))
+    assert n == FRAMES, f"{folder}: {n} frames, expected {FRAMES}"
 
 
 def still(out, vf, frame_from_end=None, src=None, q=82):
@@ -63,8 +73,8 @@ def main():
     wide = "scale=1920:-2:flags=lanczos"
     tall = f"crop={PORTRAIT_W}:{SRC_H}:{PORTRAIT_X}:0,scale=720:1280:flags=lanczos"
 
-    film(FILM / "descent.mp4", wide, 27)
-    film(FILM / "descent-s.mp4", tall, 27)
+    sequence(FILM / "l", "scale=1600:-2:flags=lanczos")
+    sequence(FILM / "s", tall)
 
     # Posters: sky (scroll 0), ridge (scroll ~0.5), lodge (scroll 1). Same frames
     # the film shows at those points, so the no-video state tells the same story.
@@ -83,13 +93,6 @@ def main():
     # Open Graph card: the keyframe itself, 1200x630.
     run(["ffmpeg", "-v", "error", "-y", "-i", KEY, "-vf",
          f"crop=2752:1445:0:60,scale=1200:630:flags=lanczos,{GRADE}", "-frames:v", 1, "-q:v", 3, IMG / "og.jpg"])
-
-    if "--test" in sys.argv:
-        enc = HERE / "shots" / "enc"
-        enc.mkdir(parents=True, exist_ok=True)
-        for crf in (23, 27, 31):
-            film(enc / f"intra-crf{crf}.mp4", wide, crf)
-        film(enc / "gop12-crf27.mp4", wide, 27, gop=12)
 
 
 if __name__ == "__main__":
