@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hours, directions and booking | Ember &amp; Oak, Hudson NY</title>
+<meta name="description" content="Ember &amp; Oak is at 214 Tanner Street, Hudson NY. Dinner Wednesday to Saturday from 5, Sunday from 12:30. Ask for a table by email or call (518) 555-0142.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#f1efe9">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/restaurant-ember-oak-v2/visit.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b1a18'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23ff8552'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ember &amp; Oak">
+<meta property="og:title" content="Visit Ember &amp; Oak">
+<meta property="og:description" content="214 Tanner Street, Hudson NY. Dinner Wednesday to Saturday from 5, Sunday from 12:30.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/restaurant-ember-oak-v2/visit.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/restaurant-ember-oak-v2/img/room-1600.webp">
+<meta property="og:image:alt" content="The dining room at Ember &amp; Oak before service">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Visit Ember &amp; Oak">
+<meta name="twitter:description" content="214 Tanner Street, Hudson NY. Dinner Wednesday to Saturday from 5, Sunday from 12:30.">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/restaurant-ember-oak-v2/img/room-1600.webp">
+
+<link rel="preload" href="fonts/league-gothic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/libre-caslon-text-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+
+<header class="wrap">
+  <div class="top">
+    <a class="mark" href="index.html" aria-label="Ember and Oak, home">Ember <span>&amp;</span> Oak</a>
+    <p class="status" data-status>Dinner Wednesday to Sunday</p>
+    <nav class="nav" aria-label="Main">
+      <a href="menu.html">Menu</a>
+      <a href="visit.html" aria-current="page">Visit</a>
+      <a class="btn" href="#book">Book<span class="long">&nbsp;a table</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="wrap page-head">
+    <h1 class="bill"><span class="fit" style="--k:24.9">Come and eat</span></h1>
+    <div class="prose">
+      <p>We keep about half the room for bookings and the rest, including the counter, for whoever walks in. Tables are for two to six. For seven or more, call and we will work something out.</p>
+    </div>
+  </div>
+
+  <div class="wrap visit-grid">
+
+    <div>
+      <section class="block book" id="book" aria-labelledby="book-h">
+        <h2 class="gothic" id="book-h">Ask for a table</h2>
+        <p class="lede">This form does not book anything on its own. It writes the email for you and opens it in your own mail app, ready to send. We answer by the next afternoon we are open, and the table is yours when you hear back.</p>
+
+        <noscript>
+          <p><strong>The form needs JavaScript to write the email.</strong> Without it, send the date, time, number of people and your phone number to the address below, or call.</p>
+        </noscript>
+
+        <form class="book-form" data-book hidden novalidate>
+          <div class="fields">
+            <div class="field">
+              <label for="b-name">Your name</label>
+              <input id="b-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="b-phone">Phone, in case we need to reach you</label>
+              <input id="b-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+            </div>
+            <div class="field">
+              <label for="b-date">Date</label>
+              <input id="b-date" name="date" type="date" required aria-describedby="b-date-msg">
+              <span class="hint" id="b-date-msg" aria-live="polite">Wednesday to Sunday.</span>
+            </div>
+            <div class="field">
+              <label for="b-time">Time</label>
+              <select id="b-time" name="time" required disabled>
+                <option value="">Pick a date first</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="b-party">How many people</label>
+              <select id="b-party" name="party" required>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="b-seat">High chair needed?</label>
+              <select id="b-seat" name="highchair">
+                <option value="No">No</option>
+                <option value="One">One</option>
+                <option value="Two">Two</option>
+              </select>
+            </div>
+            <div class="field field--wide">
+              <label for="b-notes">Allergies, a birthday, anything we should know</label>
+              <textarea id="b-notes" name="notes" rows="3"></textarea>
+            </div>
+          </div>
+          <p class="err" data-book-error role="alert" hidden></p>
+          <div class="actions">
+            <button class="btn" type="submit">Write the email</button>
+            <span class="aside-note">Nothing is sent from this page.</span>
+          </div>
+        </form>
+
+        <div class="book-out" data-book-out hidden>
+          <p><strong>Your mail app should have opened with this written out.</strong> If it did not, copy the text and send it to <a class="link" href="mailto:tables@emberandoak.example">tables@emberandoak.example</a>.</p>
+          <pre data-book-text tabindex="0" aria-label="Your table request"></pre>
+          <div class="actions">
+            <button class="btn btn--line" type="button" data-book-copy>Copy the text</button>
+            <span class="aside-note" data-book-copied aria-live="polite"></span>
+          </div>
+        </div>
+
+        <p class="direct">Or skip the form.<br>Email <a class="link" href="mailto:tables@emberandoak.example?subject=Table%20request">tables@emberandoak.example</a><br>Call <a class="link" href="tel:+15185550142">(518) 555-0142</a> after two on any day we are open.</p>
+      </section>
+
+      <section class="block" aria-labelledby="here-h">
+        <h2 class="gothic" id="here-h">Getting here</h2>
+        <div class="prose">
+          <p><strong>By train.</strong> Hudson is two hours from Penn Station on the Empire Service. From the platform it is ten minutes on foot, uphill all the way. Check the time of the last train south before you order the ribeye.</p>
+          <p><strong>By car.</strong> There is metered parking on Tanner Street, free after six, and a public lot one block north. We have no lot of our own.</p>
+          <p><strong>Finding the door.</strong> Brick front, green door, no sign bigger than the brass plate. In the evening you will smell it before you see it.</p>
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="faq-h">
+        <h2 class="gothic" id="faq-h">Asked often</h2>
+        <div class="faq">
+          <details>
+            <summary>Do I need to book?</summary>
+            <p>Friday and Saturday, yes, usually a week ahead. Midweek you can often walk in. The eight counter seats are never booked, and if you arrive at five there is a good chance of one.</p>
+          </details>
+          <details>
+            <summary>How long do we have the table?</summary>
+            <p>Two hours for two people, two and a half for larger tables. We hold a booking for fifteen minutes, so ring if you are running late and we will keep it.</p>
+          </details>
+          <details>
+            <summary>Is there much for vegetarians?</summary>
+            <p>Four starters, the cauliflower, three of the sides and all the sweet things. Vegans have fewer choices but will not go hungry. The menu page marks every dish.</p>
+          </details>
+          <details>
+            <summary>Can you cook for an allergy?</summary>
+            <p>Often, but not always. One grill and one oven do everything, so we cannot keep fish, flour or nuts fully apart. Tell us when you book and we will say plainly what is and is not safe.</p>
+          </details>
+          <details>
+            <summary>Do you take a deposit or charge for no-shows?</summary>
+            <p>No. We do not take card details to hold a table. Please just tell us if you are not coming, because the table goes to someone standing at the door.</p>
+          </details>
+          <details>
+            <summary>Can we have the whole room?</summary>
+            <p>On a Monday or Tuesday, when we are otherwise closed, for up to forty people. We cook one menu for everyone from the fire. Call to talk it through.</p>
+          </details>
+          <details>
+            <summary>Can I bring a dog?</summary>
+            <p>Not inside, apart from service animals. In warm months there are two tables on the sidewalk where dogs are welcome.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="block" id="privacy" aria-labelledby="privacy-h">
+        <h2 class="gothic" id="privacy-h">Privacy</h2>
+        <div class="prose">
+          <p>This website sets no cookies and runs no analytics or advertising trackers. The table form above works entirely in your browser: what you type is turned into an email in your own mail app, and nothing is sent to us or to anyone else until you press send there.</p>
+          <p>When you do email or call, we keep your name, number and booking details in the reservations book for ninety days and then delete them. We do not share them or add you to a mailing list. To have your details removed sooner, write to <a class="link" href="mailto:tables@emberandoak.example?subject=Remove%20my%20details">tables@emberandoak.example</a>.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stick" aria-label="Hours and address">
+      <div>
+        <table class="hours" data-hours>
+          <caption>Open hours, first seating to last order</caption>
+          <tbody>
+            <tr class="shut" data-day="1"><th scope="row">Monday</th><td>Closed</td></tr>
+            <tr class="shut" data-day="2"><th scope="row">Tuesday</th><td>Closed</td></tr>
+            <tr data-day="3"><th scope="row">Wednesday</th><td>5:00 to 9:30 pm</td></tr>
+            <tr data-day="4"><th scope="row">Thursday</th><td>5:00 to 9:30 pm</td></tr>
+            <tr data-day="5"><th scope="row">Friday</th><td>5:00 to 10:30 pm</td></tr>
+            <tr data-day="6"><th scope="row">Saturday</th><td>5:00 to 10:30 pm</td></tr>
+            <tr data-day="0"><th scope="row">Sunday</th><td>12:30 to 8:00 pm</td></tr>
+          </tbody>
+        </table>
+        <p class="aside-note mt-s">Closed Thanksgiving Day, December 24 and 25, and the first two weeks of January.</p>
+      </div>
+      <address class="where mt">
+        <p class="big">214 Tanner Street<br>Hudson, NY 12534</p>
+        <p class="contact-line"><a class="link" href="tel:+15185550142">(518) 555-0142</a><br><a class="link" href="mailto:tables@emberandoak.example">tables@emberandoak.example</a></p>
+      </address>
+      <figure class="visit-fig mt">
+        <img src="img/embers-800.webp"
+             srcset="img/embers-800.webp 800w, img/embers-1600.webp 1600w"
+             sizes="(max-width: 1020px) 50vw, 36vw"
+             width="800" height="533" loading="lazy"
+             alt="A deep bed of glowing oak coals">
+        <figcaption>What the grill looks like at five. This is what we cook on.</figcaption>
+      </figure>
+    </aside>
+
+  </div>
+
+</main>
+
+<footer class="dark foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="mark" href="index.html" aria-label="Ember and Oak, home">Ember <span>&amp;</span> Oak</a>
+        <p>Wood-fired cooking in Hudson, New York, since 2019.</p>
+      </div>
+      <address>
+        214 Tanner Street<br>Hudson, NY 12534<br>
+        <a class="link" href="tel:+15185550142">(518) 555-0142</a><br>
+        <a class="link" href="mailto:tables@emberandoak.example">tables@emberandoak.example</a>
+      </address>
+      <ul>
+        <li><a class="link" href="menu.html">Menu</a></li>
+        <li><a class="link" href="visit.html">Hours and directions</a></li>
+        <li><a class="link" href="#book">Book a table</a></li>
+        <li><a class="link" href="#privacy">Privacy</a></li>
+      </ul>
+    </div>
+    <p class="foot-small">&copy; 2026 Ember &amp; Oak. Dinner Wednesday to Sunday.</p>
+  </div>
+</footer>
+</body>
+</html>
