@@ -95,7 +95,7 @@ No purple. The aurora is green because the clip is; the only warm colour is the 
 ## 5. Elevation & Depth
 
 Layers, back to front:
-1. `.film`: the video and its fallback stills.
+1. `.film`: the film canvas and its fallback stills.
 2. `.film__scrim`
 3. `.inside-layer`: three photographs, clipped to the lit window.
 4. `main`: the text.
@@ -132,24 +132,60 @@ No shadows on boxes, no cards. Depth comes from the film and the window reveal o
 
 ## 7. Motion, the film, and reduced motion
 
-**The encode is what makes scrubbing work.**
-- The clip is played reversed and re-encoded **all-intra** (`-g 1`, every frame a
-  keyframe, `-bf 0`, faststart), so any `currentTime` seek decodes one frame.
-- Measured in headless Chrome on this machine with `requestVideoFrameCallback`, to
-  the frame actually presented:
-  - Median 6.1 ms; p95 13.6 ms single-frame steps, 14 ms random jumps.
-  - A 12-frame-GOP encode measured about the same here. It was not kept: phones pay
-    for every P-frame walked on a seek, and an all-intra file is the one that can't stutter.
-- CRF 27 at 1920×1072 (9.7 MB) and 720×1280 (4.4 MB) keeps the faint stars; CRF 31
-  lost them visibly.
-- The film is served at a fixed size whatever the DPR. That is the DPR cap: no
-  canvas or WebGL anywhere, so nothing else scales with it.
+**The film is an image sequence on a canvas, not a scrubbed `<video>`.**
 
-**The scrub:** scroll progress (from the top to just before the window opens) maps
-to film time. A 0.22 ease on top makes a flick read as a camera move. A seek is
-only issued when the frame would change, and never while one is in flight; the
-latest target is kept for when it lands. Lenis smooths wheel input on GSAP's
-ticker; ScrollTrigger drives the heading line reveals and the chapter dimming.
+**Why it changed (2026-10-02):**
+- The first version scrubbed an all-intra MP4 by setting `currentTime` every frame.
+  It measured fine in clean Chrome profiles (seeks of 1–2 ms).
+- The boss saw it "extremely laggy" in his everyday Chrome on this laptop: Intel
+  integrated GPU, ~3 Mbps, many tabs.
+- A seek waits on the browser's video decoder, which every other tab shares, and on
+  the 9.7 MB file having arrived. When either isn't true, the film stalls and jumps.
+- No encode setting fixes that.
+
+**The sequence:**
+- Every second frame of the reversed clip: 97 WebP frames at quality 72, made by
+  `tools/media.py`.
+  - `film/l/`: 1600×894, 5.7 MB.
+  - `film/s/`: 720×1280, the 9:16 cut centred on the lodge, 3.5 MB.
+- Frames load coarse to fine: every 16th first (7 frames, about 400 KB, the whole
+  descent at low resolution), then every 8th, 4th, 2nd and 1st. The film works
+  within a second and sharpens as the rest arrive.
+- Each frame is fetched as a blob. `createImageBitmap` decodes it off the main
+  thread. Only the 12 frames either side of the one on screen stay decoded; the
+  rest are closed.
+- The canvas draws the frame below the scroll position and blends the next one in
+  over it, in 32 steps. A slow scroll therefore moves continuously, not frame by
+  frame.
+- Blending frames two source frames apart showed no visible ghosting at 2× zoom
+  (checked on a frame stopped at 82.26).
+- The canvas has the frame's own size and is scaled with `object-fit: cover`. That
+  is the DPR cap: nothing renders at device resolution.
+
+**Measured:**
+- Visible Chrome on this laptop, 1707×932 at DPR 1.5, `tools/perf.mjs`:
+  - ~150 fps, 0 long tasks, no frame over 50 ms.
+  - The canvas redraws 75–140 times a second and trails the scroll by under one
+    film frame (p95 1.9).
+- The three interiors and the stills are decoded ahead (`warmInside`) after the
+  film starts. That removed a 54 ms hitch the first time the window opened.
+
+**The scrub:**
+- Scroll progress maps to film position. The progress runs from the top to just
+  before the window opens.
+- An ease on top makes a flick read as a camera move. It runs by elapsed time
+  (`1 − e^(−16·dt)`), not by frame, so it feels the same at 60 and at 165 Hz.
+- Lenis smooths wheel input on GSAP's ticker. ScrollTrigger drives the heading line
+  reveals and the chapter dimming.
+
+**No layout reads in the loop:**
+- Every position the loop needs is measured once per layout by `measure()`:
+  chapter tops, the inside section, the footer and the window rectangle.
+- `measure()` re-runs on a `ResizeObserver` on `body`, on resize, on load and when
+  fonts are ready.
+- Styles are written only when their value changes.
+- The first version read `offsetTop` and `getBoundingClientRect` after writing
+  styles, every frame. That forced a synchronous layout each time.
 
 **The window:** `clip-path: inset()` computed every frame from the second lit
 window's rectangle, which is measured from the film's last frame and mapped
@@ -194,7 +230,8 @@ cut at its roof.
 - **Do** let the film carry the page. New content goes in a chapter at the height where the camera is.
 - **Do** keep every sun figure tied to `js/sun.js`; run `node tools/check-season.mjs` after any copy edit.
 - **Do** re-run `tools/contrast.mjs` after any change to scrims, copy position or the clip.
-- **Don't** re-encode the film with a GOP, B-frames or without faststart.
+- **Don't** go back to scrubbing a `<video>` with `currentTime`: it measures fine in a clean profile and stutters in a real one.
+- **Don't** read layout (`offsetTop`, `getBoundingClientRect`) inside the scroll loop. Add it to `measure()`.
 - **Don't** add a second film. The interiors are stills on purpose: the clip is the journey, and the window is the door.
 - **Don't** add glass panels, pills above headlines, card grids or a stat strip. The facts list under the chart is the
   chart's legend, not a stat banner.

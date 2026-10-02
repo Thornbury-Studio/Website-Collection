@@ -28,7 +28,7 @@ inspect, keep.
 
 | Served as | Source | Notes |
 |---|---|---|
-| `film/descent.mp4` (1920×1072), `film/descent-s.mp4` (720×1280), `film/sky*.webp`, `film/ridge*.webp`, `film/lodge*.webp` | **Kling 3.0** image-to-video on Higgsfield, 2026-10-02. 4K (3852×2152), 24 fps, 8.04 s, 193 frames. 48 credits. Prompt enhancement and audio off | Start frame: the keyframe below. One slow tilt up from the lodge into the aurora; played **reversed** on the site. Accepted on the first generation. Mobile file is a 9:16 cut centred on the lodge. Posters are frames 0, 96 and 192 of the reversed clip |
+| `film/l/000–096.webp` (1600×894), `film/s/000–096.webp` (720×1280), `film/sky*.webp`, `film/ridge*.webp`, `film/lodge*.webp` | **Kling 3.0** image-to-video on Higgsfield, 2026-10-02. 4K (3852×2152), 24 fps, 8.04 s, 193 frames. 48 credits. Prompt enhancement and audio off | Start frame: the keyframe below. One slow tilt up from the lodge into the aurora; played **reversed** on the site. Accepted on the first generation. Served as 97 frames, every second frame of the reversed clip; the phone set is a 9:16 cut centred on the lodge. Posters are frames 0, 96 and 192 of the reversed clip |
 | `img/og.jpg` (1200×630) | **Nano Banana Pro** on Higgsfield, 2026-10-02, 2752×1536, a free generation | The keyframe: an invented black-timber lodge with four lit windows, a frozen fjord, one green aurora. Checked at full size: no text, no signage, no people, no smoke. Cropped to 1200×630 |
 
 **Rights in the generated media.** Higgsfield claims no ownership of outputs and
