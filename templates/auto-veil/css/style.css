@@ -45,6 +45,11 @@ video { display: block; }
 .skip:focus { top: 12px; }
 
 :focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+/* on the white spec section and the nav over it, the ring is ink; the body
+   tabs clip their overflow, so theirs sits inside, in the tab's own colour */
+.order :focus-visible,
+.nav.on-paper :focus-visible { outline-color: #171a20; }
+.models button:focus-visible { outline: 2px solid currentColor; outline-offset: -6px; }
 
 /* ---------- nav ---------- */
 
