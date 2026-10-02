@@ -315,12 +315,26 @@ footer nav { display: flex; gap: 18px; }
   .links a { padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: #fff; }
   .burger { display: block; }
   .nav-cta { display: none; }
+  .screen { padding-bottom: 64px; }
   .copy { padding-top: 16vh; }
-  .pills { flex-direction: column; align-items: center; }
-  .btn { max-width: 100%; width: min(256px, 100%); }
+  /* two equal buttons on one row; under ~340px they wrap to full width */
+  .pills { gap: 12px; width: 100%; max-width: 360px; margin: 0 auto; }
+  .btn,
+  .order .btn {
+    flex: 1 1 140px;
+    width: auto;
+    max-width: none;
+    min-height: 50px;
+    font-size: 17px;
+  }
   .hud { gap: 20px; }
-  .models { width: 100%; }
-  .models button { flex: 1; min-width: 0; }
+  .models { width: 100%; max-width: 360px; }
+  .models button { flex: 1; min-width: 0; min-height: 44px; }
+}
+
+/* stacked buttons make the spec taller; keep the fine print clear of .back */
+@media (max-width: 339px) {
+  .order { padding-top: 76px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
