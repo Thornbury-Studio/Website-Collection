@@ -106,3 +106,9 @@ templates/darkroom-latent/tools/shots/
 # IMAGE-CREDITS.md), re-derived by tools/media.py; verification shots stay local.
 templates/pc-redline-dark/tools/raw/
 templates/pc-redline-dark/tools/shots/
+
+# MØRKE generated masters (Higgsfield: Nano Banana Pro keyframe, Kling 3.0 4K
+# clip; see IMAGE-CREDITS.md), re-derived by tools/media.py; verification
+# shots stay local.
+templates/lodge-morke/tools/raw/
+templates/lodge-morke/tools/shots/
