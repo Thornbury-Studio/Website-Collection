@@ -48,5 +48,15 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)\\.(mp4|webm)",
+      "destination": "https://wc-media.zj36088.workers.dev/$1.$2"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "https://website-collection-public.zj36088.workers.dev/$1"
+    }
   ]
 }
