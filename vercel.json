@@ -2,6 +2,24 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "headers": [
     {
+      "source": "/(.*)\\.(mp4|webm|mp3)",
+      "headers": [
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(webp|png|jpg|jpeg|gif|svg|woff2|woff|ttf|css|js|mjs|json|glb|wasm|hdr|mp4|webm|mp3|html)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
       "source": "/(.*)\\.(webp|png|jpg|jpeg|gif|svg|mp4|woff2|glb|wasm)",
       "headers": [
         {
@@ -87,7 +105,7 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)\\.(mp4|webm)",
+      "source": "/(.*)\\.(mp4|webm|mp3)",
       "destination": "https://wc-media.zj36088.workers.dev/$1.$2"
     },
     {

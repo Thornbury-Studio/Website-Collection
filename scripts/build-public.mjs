@@ -30,6 +30,7 @@ const PRIVATE_PREFIXES = ['portfolio/', 'api/', 'db/', ...GATED_SLUGS.map(s => `
 const SERVER_FILES = new Set(['middleware.js', 'vercel.json', '.vercelignore', '.gitignore']);
 // same intent as .vercelignore: internal docs/tooling, never served
 const isIgnoredByVercelRules = p =>
+  p.startsWith('scripts/') ||            // migration tooling lives in git, never in the public copy
   /(^|\/)\.DS_Store$/.test(p) || /\.md$/i.test(p) || p.startsWith('.claude/') || p.startsWith('.impeccable/') ||
   p.includes('/.claude/') || p.includes('/.impeccable/') || /(^|\/)\.gitignore$/.test(p);
 
@@ -61,7 +62,7 @@ const manifest = {}, mediaManifest = {}; const problems = [];
 
 // Videos (mp4/webm) do NOT go to the static-assets origin: Cloudflare static assets ignore Range requests and
 // were unreliable for video in testing. They go to ./dist-media (exact bytes, same relative paths) for R2.
-const isMedia = p => /\.(mp4|webm)$/i.test(p);
+const isMedia = p => /\.(mp4|webm|mp3)$/i.test(p);   // anything a browser seeks with Range (Safari needs it for audio too)
 const mediaDir = join(outDir, '..', 'dist-media');
 if (existsSync(mediaDir)) rmSync(mediaDir, { recursive: true, force: true });
 mkdirSync(mediaDir, { recursive: true });
