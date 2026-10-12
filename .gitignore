@@ -112,3 +112,8 @@ templates/pc-redline-dark/tools/shots/
 # shots stay local.
 templates/lodge-morke/tools/raw/
 templates/lodge-morke/tools/shots/
+
+# Full-resolution source images for each template's tools/gen.mjs; the originals
+# stay local, the exported files under img/ are what ships.
+templates/cafe-cinder/tools/raw/
+templates/wick-tallow/tools/raw/
