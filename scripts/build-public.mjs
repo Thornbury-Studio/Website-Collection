@@ -31,6 +31,7 @@ const SERVER_FILES = new Set(['middleware.js', 'vercel.json', '.vercelignore', '
 // same intent as .vercelignore: internal docs/tooling, never served
 const isIgnoredByVercelRules = p =>
   p.startsWith('scripts/') ||            // migration tooling lives in git, never in the public copy
+  /^templates\/[^/]+\/tools\//.test(p) || // per-template build and grading tools, same rule
   /(^|\/)\.DS_Store$/.test(p) || /\.md$/i.test(p) || p.startsWith('.claude/') || p.startsWith('.impeccable/') ||
   p.includes('/.claude/') || p.includes('/.impeccable/') || /(^|\/)\.gitignore$/.test(p);
 

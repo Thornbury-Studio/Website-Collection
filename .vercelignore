@@ -11,6 +11,7 @@ db/
 Thumbs.db
 .env*
 templates/*/src/
+templates/*/tools/
 # migration tooling: lives in git, never served
 /scripts/
 

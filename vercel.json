@@ -29,7 +29,7 @@
       ]
     },
     {
-      "source": "/templates/(.*)",
+      "source": "/templates/:path((?!pontil-pistil(?:/|$)).*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
