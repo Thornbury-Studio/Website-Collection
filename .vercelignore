@@ -20,10 +20,7 @@ templates/*/tools/
 /.nojekyll
 /_config.yml
 /img/
-/index.html
 /lab/
-/robots.txt
-/sitemap.xml
 /templates/agency-lode/
 /templates/animator-fenn/
 /templates/apiary-skep/
