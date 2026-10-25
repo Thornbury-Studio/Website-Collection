@@ -174,7 +174,7 @@ p { margin: 0 0 1em; max-width: 62ch; text-wrap: pretty; }
 .switch label span::before { content: attr(data-n); margin-right: .55em; opacity: .55; }
 .no-gl .switch { display: none; }
 
-.tilt-btn { position: absolute; z-index: 5; right: var(--gut); top: calc(var(--head) + .3rem); display: none; font: 600 .68rem var(--mono); letter-spacing: .13em; text-transform: uppercase; color: var(--ink); background: transparent; border: 1px solid var(--line); padding: .85rem 1rem; min-height: 44px; cursor: pointer; }
+.tilt-btn { position: absolute; z-index: 5; right: var(--gut); bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 54px); display: none; font: 600 .68rem var(--mono); letter-spacing: .13em; text-transform: uppercase; color: var(--ink); background: transparent; border: 1px solid var(--line); padding: .85rem 1rem; min-height: 44px; cursor: pointer; }
 .tilt-btn[data-show] { display: block; }
 
 .cue { display: none; position: absolute; left: var(--gut); bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 62px); color: var(--mute); display: flex; align-items: center; gap: .7rem; }
