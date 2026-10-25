@@ -213,7 +213,8 @@ p { margin: 0 0 1em; max-width: 62ch; text-wrap: pretty; }
 /* ---------------- sections ---------------- */
 main { display: block; }
 .wrap { padding: 0 var(--gut); max-width: 88rem; margin: 0 auto; }
-.sec { padding: clamp(4.5rem, 10vw, 9rem) 0; border-top: 1px solid var(--line-soft); }
+.sec { position: relative; overflow: hidden; padding: clamp(4.5rem, 10vw, 9rem) 0; border-top: 1px solid var(--line-soft); }
+.sec > .wrap { position: relative; z-index: 1; }
 .sec__head { display: grid; gap: 1.2rem; margin-bottom: clamp(2rem, 5vw, 4rem); }
 .sec__head .eyebrow { margin: 0; }
 .sec__head p { color: var(--mute); }
@@ -366,3 +367,30 @@ td small { display: block; color: var(--mute); font-size: .82rem; }
   background:
     radial-gradient(ellipse 62% 56% at 50% 52%, rgba(142, 232, 242, .34), rgba(142, 232, 242, .08) 62%, transparent 78%);
 }
+
+/* The same photograph, cropped differently behind each section. It follows the world:
+   orange when living, mint when scanned, amber against the glass-world ground. */
+.bg-lily, .page-bg {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: url('../img/lily-1600.webp') no-repeat; opacity: .46;
+  transition: filter .7s ease, opacity .7s ease;
+}
+:root[data-world="scan"] .bg-lily, :root[data-world="scan"] .page-bg { filter: grayscale(1) sepia(1) hue-rotate(125deg) saturate(2.4) brightness(1.05); opacity: .4; }
+:root[data-world="glass"] .bg-lily, :root[data-world="glass"] .page-bg { filter: saturate(.85) brightness(1) contrast(1.05); opacity: .4; }
+.bg-lily--a { background-size: 135% auto; background-position: 100% 36%; -webkit-mask-image: linear-gradient(to left, #000 8%, rgba(0,0,0,.55) 38%, transparent 78%); mask-image: linear-gradient(to left, #000 8%, rgba(0,0,0,.55) 38%, transparent 78%); }
+.bg-lily--b { background-size: 130% auto; background-position: 0% 62%; -webkit-mask-image: linear-gradient(to right, #000 6%, rgba(0,0,0,.5) 40%, transparent 80%); mask-image: linear-gradient(to right, #000 6%, rgba(0,0,0,.5) 40%, transparent 80%); }
+.bg-lily--c { background-size: 125% auto; background-position: 50% 100%; -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0,0,0,.5) 45%, transparent 85%); mask-image: linear-gradient(to top, #000 0%, rgba(0,0,0,.5) 45%, transparent 85%); }
+.bg-lily--d { background-size: 130% auto; background-position: 100% 0%; -webkit-mask-image: linear-gradient(to left, #000 4%, rgba(0,0,0,.45) 36%, transparent 74%); mask-image: linear-gradient(to left, #000 4%, rgba(0,0,0,.45) 36%, transparent 74%); }
+.bg-lily--e { background-size: 115% auto; background-position: 100% 55%; -webkit-mask-image: linear-gradient(to left, #000 6%, rgba(0,0,0,.5) 40%, transparent 78%); mask-image: linear-gradient(to left, #000 6%, rgba(0,0,0,.5) 40%, transparent 78%); }
+.page { position: relative; }
+.page > .wrap { position: relative; z-index: 1; }
+.page-bg { inset: 0 0 auto 0; height: min(84vh, 56rem); background-size: 100% auto; background-position: 100% 18%; opacity: .5;
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 100%), linear-gradient(to left, #000 10%, transparent 80%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to bottom, #000 30%, transparent 100%), linear-gradient(to left, #000 10%, transparent 80%); mask-composite: intersect; }
+.page-bg--history { background-position: 100% 30%; background-size: 96% auto; }
+.page-bg--cabinet { background-position: 100% 60%; background-size: 108% auto; }
+@media (max-width: 899px) {
+  .bg-lily { opacity: .3; background-size: 230% auto; }
+  .page-bg { background-size: 190% auto; background-position: 70% 0%; opacity: .36; height: 52vh; }
+  .bg-lily--a { background-position: 62% 40%; } .bg-lily--c { background-position: 50% 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .bg-lily, .page-bg { transition: none; } }
