@@ -65,10 +65,10 @@
     var r = hero.getBoundingClientRect();
     var total = r.height - window.innerHeight;
     var p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
-    if (p < 0.08) return 0;
-    if (p < 0.44) return ease((p - 0.08) / 0.36);
-    if (p < 0.54) return 1;
-    if (p < 0.9) return 1 + ease((p - 0.54) / 0.36);
+    if (p < 0.07) return 0;
+    if (p < 0.33) return ease((p - 0.07) / 0.26);
+    if (p < 0.55) return 1;
+    if (p < 0.85) return 1 + ease((p - 0.55) / 0.30);
     return 2;
   }
   var pin = hero && hero.querySelector('.pin');

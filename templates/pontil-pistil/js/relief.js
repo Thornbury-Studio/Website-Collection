@@ -34,15 +34,18 @@
     COMMON,
     'uniform sampler2D uRelief;',
     'uniform vec2 uGrid;',
-    'uniform float uDepth, uMid, uPersp, uDpr, uPoint, uStride;',
+    'uniform float uDepth, uMid, uPersp, uDpr, uPoint, uStride, uJitter;',
     'out vec2 vUv;',
     'out float vD;',
     'out vec3 vN;',
+    'invariant gl_Position;',
     'void main(){',
     '  float id = float(gl_VertexID);',
     '  float col = mod(id, uGrid.x + 1.0), row = floor(id / (uGrid.x + 1.0));',
     '  vec2 uv = vec2(col / uGrid.x, row / uGrid.y);',
     '  if (uStride > 1.5 && (mod(col, uStride) > 0.5 || mod(row, uStride) > 0.5)) { gl_Position = vec4(2.0, 2.0, 2.0, 1.0); gl_PointSize = 0.0; return; }',
+    // scan points are scattered inside their cell so the cloud does not read as a screen-door grid
+    '  uv = clamp(uv + (vec2(fract(sin(id * 12.9898) * 43758.5453), fract(sin(id * 78.233) * 12345.6789)) - 0.5) * uJitter * max(uStride, 1.0) / uGrid, 0.0, 1.0);',
     '  float d = textureLod(uRelief, uv, 0.0).r;',
     '  vec3 p = rot(vec3(uv.x - 0.5, (uv.y - 0.5) * 0.75, (d - uMid) * uDepth));',
     '  float w = 1.0 - p.z * uPersp;',
@@ -113,13 +116,21 @@
     '  float fres = pow(1.0 - ndv, 3.2);',
     '  float thick = clamp(1.0 - length((vUv - uThroat) * vec2(1.0, 0.75)) * 2.3, 0.0, 1.0) * 0.8 + vD * 0.2;',
     '  vec2 off = n.xy * 0.040;',
-    '  vec3 tr = vec3(texture(uPhoto, vUv + off).r, texture(uPhoto, vUv + off * 1.35).g, texture(uPhoto, vUv + off * 1.8).b);',
-    '  if (uQ < 0.5) tr = texture(uPhoto, vUv + off * 1.3).rgb;',
+    // refraction that stops at the silhouette: a sample that lands on the backdrop falls back to the
+    // pixel's own colour, so there is no dark outline around the glass
+    '  vec3 t1 = texture(uPhoto, vUv + off).rgb, t2 = texture(uPhoto, vUv + off * 1.35).rgb, t3 = texture(uPhoto, vUv + off * 1.8).rgb;',
+    '  vec3 tr = vec3(mix(ph.r, t1.r, cover(t1)), mix(ph.g, t2.g, cover(t2)), mix(ph.b, t3.b, cover(t3)));',
+    '  if (uQ < 0.5) { vec3 sq = texture(uPhoto, vUv + off * 1.3).rgb; tr = mix(ph.rgb, sq, cover(sq)); }',
     '  float l = dot(tr, LUMA);',
     '  float lb = dot(textureLod(uPhoto, vUv, 3.5).rgb, LUMA);',
     '  vec3 thin = vec3(l) * vec3(1.45, 1.10, 0.66) + vec3(0.30, 0.20, 0.08);',
     '  vec3 deep = pow(tr, vec3(0.70)) * vec3(1.32, 1.00, 0.70);',
+    // clear glass carries only a pale tint; colour deepens with thickness, and the anthers stay opaque enamel
     '  vec3 body = mix(thin, deep, thick);',
+    '  body = mix(vec3(dot(body, LUMA)), body, mix(0.35, 0.80, thick)) * vec3(1.0, 0.97, 0.88);',
+    '  float chromaP = max(ph.r, max(ph.g, ph.b)) - min(ph.r, min(ph.g, ph.b));',
+    '  float enamel = smoothstep(0.34, 0.20, dot(ph.rgb, LUMA)) * smoothstep(0.10, 0.22, chromaP);',
+    '  body = mix(body, ph.rgb * vec3(1.25, 0.95, 0.85), enamel);',
     '  body += vec3(1.0, 0.93, 0.78) * clamp((dot(ph.rgb, LUMA) - lb) * 3.6, -0.05, 0.42);',
 
     '  float e = 0.0024;',
@@ -132,12 +143,13 @@
     '  float p1 = (1.0 - smoothstep(0.0, 0.07, abs(re.x + 0.24 + uTilt.x * 1.1) - 0.055)) * (1.0 - smoothstep(0.0, 0.22, abs(re.y - 0.12 - uTilt.y * 1.1) - 0.34));',
     '  float p2 = (1.0 - smoothstep(0.0, 0.05, abs(re.y + 0.30 + uTilt.y * 1.1) - 0.035)) * (1.0 - smoothstep(0.0, 0.2, abs(re.x - 0.10 + uTilt.x * 1.1) - 0.40));',
     '  vec3 k1 = normalize(vec3(-0.30 - uTilt.x * 1.4, 0.62 + uTilt.y * 1.4, 0.72));',
-    '  float s1 = pow(max(dot(R, k1), 0.0), 150.0) * 2.4;',
-    '  vec3 shine = vec3(1.0, 0.98, 0.94) * (p1 * 0.34 + s1) + vec3(0.70, 0.93, 1.0) * p2 * 0.26;',
-    '  vec3 rim = vec3(0.72, 0.96, 1.0) * (edge * 1.15 + fres * 0.55);',
+    '  float s1 = pow(max(dot(R, k1), 0.0), 170.0) * 1.1;',
+    '  vec3 shine = vec3(1.0, 0.98, 0.94) * (p1 * 0.16 + s1) + vec3(0.70, 0.93, 1.0) * p2 * 0.20;',
+    '  vec3 rim = vec3(0.72, 0.96, 1.0) * (edge * 0.75 + fres * 0.55);',
     '  vec3 caustic = vec3(1.0, 0.82, 0.52) * smoothstep(0.55, 0.98, ndv) * pow(l, 1.5) * 0.30 * thick;',
 
-    '  float ag = clamp(mix(0.40, 0.90, thick) + fres * 0.5 + edge * 0.45, 0.0, 1.0);',
+    '  float ag = clamp(mix(0.16, 0.56, thick) + fres * 0.55 + edge * 0.22, 0.0, 1.0);',
+    '  ag = mix(ag, 0.96, enamel);',
     '  vec3 gBody = body * ag;',
     '  vec3 gAdd = shine + rim + caustic;',
 
@@ -169,6 +181,23 @@
     '  float sw = exp(-abs(vUv.y - uSweep) / 0.010);',
     '  c += vec3(0.9, 1.0, 1.0) * sw * 0.85;',
     '  frag = vec4(c * a, a);',
+    '}'
+  ].join('\n');
+
+  // Depth-only pass: where the displaced mesh folds over itself, a translucent surface would be blended
+  // twice and show as thin bright rows. Writing depth first lets only the nearest layer reach the colour pass.
+  var FRAG_DEPTH = [
+    '#version 300 es',
+    'precision highp float;',
+    'uniform sampler2D uPhoto;',
+    'in vec2 vUv;',
+    'in float vD;',
+    'in vec3 vN;',
+    'out vec4 frag;',
+    'void main(){',
+    '  vec3 c = texture(uPhoto, vUv).rgb;',
+    '  if (max(c.r, max(c.g, c.b)) - min(c.r, min(c.g, c.b)) < 0.03) discard;',
+    '  frag = vec4(0.0);',
     '}'
   ].join('\n');
 
@@ -224,7 +253,8 @@
     function build() {
       G.surf = link(gl, FRAG_SURFACE);
       G.pts = link(gl, FRAG_POINTS);
-      if (!G.surf || !G.pts) return false;
+      G.depth = link(gl, FRAG_DEPTH);
+      if (!G.surf || !G.pts || !G.depth) return false;
       G.vao = gl.createVertexArray();
       gl.bindVertexArray(G.vao);
       var idx = new Uint16Array(GRID_X * GRID_Y * 6), k = 0;
@@ -240,9 +270,9 @@
       gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, idx, gl.STATIC_DRAW);
       G.ptCount = (GRID_X + 1) * (GRID_Y + 1);
       G.u = {};
-      [['surf', G.surf], ['pts', G.pts]].forEach(function (pair) {
+      [['surf', G.surf], ['pts', G.pts], ['depth', G.depth]].forEach(function (pair) {
         var u = {};
-        ['uTilt', 'uRelief', 'uGrid', 'uStride', 'uDepth', 'uMid', 'uPersp', 'uDpr', 'uPoint', 'uPhoto', 'uPhase', 'uTime', 'uQ', 'uSweep', 'uAccent', 'uThroat']
+        ['uTilt', 'uRelief', 'uGrid', 'uStride', 'uJitter', 'uDepth', 'uMid', 'uPersp', 'uDpr', 'uPoint', 'uPhoto', 'uPhase', 'uTime', 'uQ', 'uSweep', 'uAccent', 'uThroat']
           .forEach(function (n) { u[n] = gl.getUniformLocation(pair[1], n); });
         G.u[pair[0]] = u;
       });
@@ -340,6 +370,7 @@
         gl.uniform1f(u.uDpr, dpr);
         gl.uniform1f(u.uPoint, pointCss);
         gl.uniform1f(u.uStride, prog === G.pts ? stride : 1);
+        gl.uniform1f(u.uJitter, prog === G.pts ? 0.9 : 0);
         gl.uniform1f(u.uPhase, S.phase);
         gl.uniform1f(u.uTime, reduced ? 0 : time);
         gl.uniform1f(u.uQ, t.q);
@@ -347,6 +378,11 @@
         gl.uniform3f(u.uAccent, S.accent[0], S.accent[1], S.accent[2]);
         gl.uniform2f(u.uThroat, THROAT[0], THROAT[1]);
       }
+
+      gl.colorMask(false, false, false, false);
+      common(G.u.depth, G.depth);
+      gl.drawElements(gl.TRIANGLES, G.idxCount, gl.UNSIGNED_SHORT, 0);
+      gl.colorMask(true, true, true, true);
 
       gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
       common(G.u.surf, G.surf);

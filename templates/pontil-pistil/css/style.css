@@ -31,8 +31,8 @@
   --scan: #7cf5da;
 }
 :root[data-world="glass"] {
-  --bg: #061214;
-  --bg-raise: #0a1c1f;
+  --bg: #07191c;
+  --bg-raise: #0b2226;
   --ink: #e4f4f2;
   --mute: #9bbab7;
   --line: rgba(142, 232, 242, .36);
@@ -86,7 +86,8 @@ p { margin: 0 0 1em; max-width: 62ch; text-wrap: pretty; }
   position: fixed; inset: 0 0 auto 0; z-index: 40; height: var(--head);
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   padding: 0 var(--gut);
-  background: linear-gradient(to bottom, var(--bg) 25%, transparent);
+  background: linear-gradient(to bottom, var(--bg) 70%, color-mix(in srgb, var(--bg) 0%, transparent));
+  border-bottom: 1px solid transparent;
 }
 .brand { font: 440 1.18rem/1 var(--display); letter-spacing: -.01em; text-decoration: none; white-space: nowrap; }
 .brand i { font-style: italic; color: var(--accent); padding: 0 .08em; }
@@ -365,14 +366,15 @@ td small { display: block; color: var(--mute); font-size: .82rem; }
 :root[data-world="glass"] .specimen::before {
   opacity: 1;
   background:
-    radial-gradient(ellipse 62% 56% at 50% 52%, rgba(142, 232, 242, .34), rgba(142, 232, 242, .08) 62%, transparent 78%);
+    radial-gradient(ellipse 60% 54% at 50% 50%, rgba(170, 238, 248, .62), rgba(110, 200, 214, .24) 46%, rgba(142, 232, 242, .06) 70%, transparent 82%),
+    repeating-linear-gradient(to bottom, rgba(210, 250, 255, .16) 0 1px, transparent 1px 5.5%);
 }
 
 /* The same photograph, cropped differently behind each section. It follows the world:
    orange when living, mint when scanned, amber against the glass-world ground. */
 .bg-lily, .page-bg {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: url('../img/lily-1600.webp') no-repeat; opacity: .46;
+  background: url('../img/lily-1600.webp') no-repeat; opacity: .34;
   transition: filter .7s ease, opacity .7s ease;
 }
 :root[data-world="scan"] .bg-lily, :root[data-world="scan"] .page-bg { filter: grayscale(1) sepia(1) hue-rotate(125deg) saturate(2.4) brightness(1.05); opacity: .4; }
@@ -394,3 +396,10 @@ td small { display: block; color: var(--mute); font-size: .82rem; }
   .bg-lily--a { background-position: 62% 40%; } .bg-lily--c { background-position: 50% 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .bg-lily, .page-bg { transition: none; } }
+
+.states { margin: clamp(2.5rem, 6vw, 5rem) 0 0; }
+.states__row { display: grid; gap: 1rem; }
+.states img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: var(--bg-raise); }
+.states p { margin: .6rem 0 0; color: var(--mute); max-width: none; }
+.states figcaption { margin-top: 1.1rem; max-width: 60ch; }
+@media (min-width: 760px) { .states__row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; } }

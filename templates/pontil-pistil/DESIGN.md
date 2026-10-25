@@ -10,7 +10,7 @@ A studio that makes scientifically exact glass botanical models in the Blaschka 
 
 - **LIVING** (phase 0): the photograph, relit only by how far the surface has turned.
 - **SCAN** (phase 1): a point cloud built from the baked depth map.
-- **GLASS** (phase 2): the same relief shaded as cast glass (refraction with dispersion, painted body, internal veins, rim, two studio-panel reflections).
+- **GLASS** (phase 2): the same relief shaded as cast glass: mostly clear and pale where the tepals are thin, denser toward the throat, anthers kept as opaque enamel, a hairline rim and two studio-panel reflections, on a lit ground with ruled lines behind it so the transmission shows. A depth-only prepass makes each pixel blend once; without it, folds in the displaced mesh show as bright rows.
 
 Order is LIVING, SCAN, GLASS because that is the order it happens in at the bench. Scroll scrubs 0 to 2 across the pinned hero; the switch jumps to any state.
 
