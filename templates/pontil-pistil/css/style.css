@@ -180,6 +180,17 @@ p { margin: 0 0 1em; max-width: 62ch; text-wrap: pretty; }
 .cue { display: none; position: absolute; left: var(--gut); bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 62px); color: var(--mute); display: flex; align-items: center; gap: .7rem; }
 .cue::before { content: ''; width: 1px; height: 1.6rem; background: var(--line); }
 
+/* short portrait phones (iPhone SE class): tighter stack so the copy clears the switch */
+@media (max-width: 899px) and (max-height: 720px) and (orientation: portrait) {
+  .specimen { width: 88vw; left: 6vw; top: calc(var(--head) + .6rem); }
+  .hero__copy { top: calc(var(--head) + .6rem + 66vw + .5rem); }
+  .hero__copy .eyebrow { margin-bottom: .5rem; }
+  .hero__copy h1 { font-size: clamp(1.85rem, .9rem + 4.4vw, 2.2rem); }
+  .hero__copy .lede { font-size: .88rem; line-height: 1.42; margin-top: .55rem; }
+  .hero__copy .state-line { margin-top: .55rem; min-height: 0; }
+  .cue { display: none; }
+}
+
 @media (min-width: 900px) {
   :root { --spec: min(63vw, 114svh); }
   .specimen { width: min(63vw, 114svh); left: auto; right: -3vw; top: 50%; translate: 0 -47%; }
@@ -319,7 +330,6 @@ td small { display: block; color: var(--mute); font-size: .82rem; }
 .foot nav { display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; }
 .foot nav a { text-decoration: none; padding: .55rem 0; }
 .foot nav a:hover { color: var(--ink); }
-.foot .concept { max-width: 56ch; }
 @media (min-width: 900px) { .foot .wrap { grid-template-columns: 1fr auto; align-items: end; } .foot { padding-bottom: 3rem; } }
 
 .js [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
