@@ -25,12 +25,13 @@ const MAX_FILES = 19000;                 // free plan: 20,000
 // ---- the private side: never copied -------------------------------------
 // Keep in sync with CLIENT_PREVIEW_SLUGS in middleware.js (checked below).
 const GATED_SLUGS = ['professor-brawn', 'timestealer-cafe', 'gig-cafe', 'fancy-nails-paradise',
-  'cafe-bombom', 'threes-a-crowd', 'ae-unisex-salon', 'esteem-auto-medics-v3', 'esteem-auto-medics'];
+  'cafe-bombom', 'threes-a-crowd', 'ae-unisex-salon', 'esteem-auto-medics-v3', 'esteem-auto-medics-v2', 'esteem-auto-medics'];
 const PRIVATE_PREFIXES = ['portfolio/', 'api/', 'db/', ...GATED_SLUGS.map(s => `templates/${s}/`)];
 const SERVER_FILES = new Set(['middleware.js', 'vercel.json', '.vercelignore', '.gitignore']);
 // same intent as .vercelignore: internal docs/tooling, never served
 const isIgnoredByVercelRules = p =>
   p.startsWith('scripts/') ||            // migration tooling lives in git, never in the public copy
+  p.startsWith('.cursor/') ||            // editor rules folder, same rule
   /^templates\/[^/]+\/tools\//.test(p) || // per-template build and grading tools, same rule
   /(^|\/)\.DS_Store$/.test(p) || /\.md$/i.test(p) || p.startsWith('.claude/') || p.startsWith('.impeccable/') ||
   p.includes('/.claude/') || p.includes('/.impeccable/') || /(^|\/)\.gitignore$/.test(p);
