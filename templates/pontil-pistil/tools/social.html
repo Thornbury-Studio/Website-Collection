@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: 'Fraunces'; src: url('../fonts/fraunces-latin-wght-normal.woff2'); font-weight: 100 900; }
+@font-face { font-family: 'Fraunces'; src: url('../fonts/fraunces-latin-wght-italic.woff2'); font-weight: 100 900; font-style: italic; }
+@font-face { font-family: 'Spline Sans Mono'; src: url('../fonts/spline-sans-mono-latin-wght-normal.woff2'); font-weight: 300 700; }
+html, body { margin: 0; background: #0a0807; color: #f2e7d7; }
+.og { width: 1200px; height: 630px; position: relative; overflow: hidden; }
+.og img { position: absolute; right: -120px; top: -10px; width: 860px; }
+.og .copy { position: absolute; left: 64px; bottom: 64px; width: 520px; }
+.og .eyebrow { font: 500 15px 'Spline Sans Mono'; letter-spacing: .14em; text-transform: uppercase; color: #ff9b3d; margin-bottom: 18px; }
+.og h1 { font: 380 70px/1.02 'Fraunces'; margin: 0; letter-spacing: -.02em; }
+.og h1 em { color: #ff9b3d; }
+.og .lbl { position: absolute; left: 560px; top: 88px; font: 500 14px 'Spline Sans Mono'; letter-spacing: .14em; color: #f2e7d7; }
+.og .brand { position: absolute; left: 64px; top: 56px; font: 440 30px 'Fraunces'; }
+.og .brand i { color: #ff9b3d; }
+.og svg { position: absolute; inset: 0; }
+.mark { width: 512px; height: 512px; background: #0a0807; display: grid; place-items: center; }
+.touch { width: 180px; height: 180px; }
+</style>
+</head>
+<body>
+<div id="og" class="og" hidden>
+  <img src="../img/lily-1600.webp" alt="">
+  <svg width="1200" height="630" fill="none" stroke="#f2e7d7" stroke-opacity=".6"><path d="M560 120 L640 120 L700 190"/><circle cx="700" cy="190" r="3.4" fill="#ff9b3d" stroke="none"/><circle cx="700" cy="190" r="9" stroke="#ff9b3d"/></svg>
+  <div class="lbl">01 &nbsp;TEPAL</div>
+  <div class="brand">Pontil <i>&amp;</i> Pistil</div>
+  <div class="copy"><div class="eyebrow">Glass botanical models</div><h1>Made from <em>one living bloom.</em></h1></div>
+</div>
+<div id="mark" class="mark" hidden>
+  <svg viewBox="0 0 64 64" width="512" height="512"><rect width="64" height="64" fill="#0a0807"/><circle cx="32" cy="32" r="17" fill="none" stroke="#ff9b3d" stroke-width="2.5"/><circle cx="32" cy="32" r="6.5" fill="#ff9b3d"/><path d="M32 6v9M32 49v9M6 32h9M49 32h9" stroke="#f2e7d7" stroke-width="2" stroke-linecap="square"/></svg>
+</div>
+<script>document.getElementById(location.hash.slice(1)).hidden = false;</script>
+</body>
+</html>
