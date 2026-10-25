@@ -4001,7 +4001,13 @@
       // single-slash, same-origin path is allowed to become a navigation —
       // "//evil.com" and "https://evil.com" are both protocol-relative or
       // absolute and would turn this into an open redirect.
-      if (target.charAt(0) !== '/' || target.charAt(1) === '/') return;
+      // The URL parser is the judge, not string checks: a tab or newline after the first
+      // slash is stripped by browsers and turns "/	/evil.com" into "//evil.com".
+      if (target.charAt(0) !== '/') return;
+      var dest;
+      try { dest = new URL(target, location.origin); } catch (e) { return; }
+      if (dest.origin !== location.origin) return;
+      target = dest.pathname + dest.search + dest.hash;
 
       pendingHref = target;
       pendingView = null;
