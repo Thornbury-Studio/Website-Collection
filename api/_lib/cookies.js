@@ -6,7 +6,8 @@ function parseCookies(req) {
     if (idx === -1) return;
     const key = pair.slice(0, idx).trim();
     const val = pair.slice(idx + 1).trim();
-    if (key) out[key] = decodeURIComponent(val);
+    if (!key) return;
+    try { out[key] = decodeURIComponent(val); } catch { /* malformed escape: treat as absent */ }
   });
   return out;
 }
