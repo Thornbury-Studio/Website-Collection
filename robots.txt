@@ -2,16 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-# Search and answer crawlers, named so the permission is on record. Same rules as the default group,
-# which is also what lets every crawler not listed here in.
-User-agent: Googlebot
-User-agent: Bingbot
-User-agent: DuckDuckBot
-User-agent: Applebot
-User-agent: OAI-SearchBot
-User-agent: PerplexityBot
-User-agent: Perplexity-User
-Allow: /
-Disallow: /api/
-
 Sitemap: https://templates.thornburystudio.com/sitemap.xml
