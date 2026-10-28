@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maison Attente — dressed for the wait</title>
+<meta name="description" content="Maison Attente presents its Autumn–Winter 2026 collection: one man, one receipt, an estimated ten minutes. The Seated Collection, in a single piece.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: blob:; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1b0709">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/maison-attente/index.html">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Maison Attente">
+<meta property="og:title" content="Maison Attente — dressed for the wait">
+<meta property="og:description" content="One man, one receipt, an estimated ten minutes. The Autumn–Winter 2026 Seated Collection.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/maison-attente/index.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/maison-attente/img/waiting-portrait.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preload" href="fonts/bodoni-moda-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/tenor-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar" id="bar">
+  <a class="mark" href="#top" aria-label="Maison Attente, back to the top">Maison Attente</a>
+  <nav class="bar-nav" aria-label="Primary">
+    <a href="#piece">La pièce</a>
+    <a href="#collection">Collection</a>
+    <a href="#maison">Maison</a>
+    <a href="#provenance">Provenance</a>
+    <a href="#boutique" class="bar-cta">Order status</a>
+  </nav>
+</header>
+
+<!-- The scene is decoration: every word of the site is in the DOM below. -->
+<div class="stage" id="stage" aria-hidden="true">
+  <img class="stage-fallback" src="img/waiting-portrait.webp" alt="" width="720" height="1280">
+  <canvas id="gl"></canvas>
+  <div class="callouts" id="callouts">
+    <div class="callout" data-anchor="receipt" data-side="up"><i></i><span><b>Order No. 0417</b>Held, not read</span></div>
+    <div class="callout" data-anchor="sign" data-side="right"><i></i><span><b>Shopping · Connecting</b>The house motto, as found</span></div>
+    <div class="callout" data-anchor="shirt" data-side="down"><i></i><span><b>NEWYORK USA</b>Provenance, as stated</span></div>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============================================================ CAMPAGNE -->
+  <section class="s s--hero" id="top" data-cam="campagne" aria-labelledby="h-hero">
+    <h1 id="h-hero" class="wm"><span class="sr">Maison </span>Attente</h1>
+    <p class="tag">Dressed<br>for the wait.</p>
+    <div class="hero-sub">
+      <p class="season">Collection Automne–Hiver 2026</p>
+      <p>One man. One receipt.<br>Estimated: ten minutes.</p>
+    </div>
+    <div class="hero-foot">
+      <p class="hero-meta"><span>Order No.</span> 0417</p>
+      <a class="cue" href="#piece">Continue waiting <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+      <p class="hero-meta hero-meta--r"><span>Status</span> Being prepared</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ LA PIÈCE -->
+  <section class="s s--l" id="piece" data-cam="piece" aria-labelledby="h-piece">
+    <div class="col">
+      <p class="eyebrow rv">La pièce</p>
+      <h2 id="h-piece" class="rv">The receipt.</h2>
+      <p class="lead rv">Eighty millimetres of thermal paper, carried at the hip between thumb and fingers. Never consulted. Never mislaid. The most important object at the table, and the Maison&rsquo;s only accessory.</p>
+
+      <div class="slip rv" role="group" aria-labelledby="slip-h">
+        <p class="slip-brand" id="slip-h">Maison Attente</p>
+        <p class="slip-sub">Fiche technique &middot; Spec sheet</p>
+        <dl class="slip-rows">
+          <div><dt>Order No.</dt><dd>0417</dd></div>
+          <div><dt>Contents</dt><dd>Withheld</dd></div>
+          <div><dt>Estimated wait</dt><dd>About 10 min</dd></div>
+          <div><dt>Remaining</dt><dd>About 10 min</dd></div>
+          <div><dt>Composure</dt><dd>9.7 / 10</dd></div>
+          <div><dt>Chin angle</dt><dd>4&deg; above level</dd></div>
+          <div><dt>Receipt held</dt><dd>1, right hand</dd></div>
+          <div><dt>Garment</dt><dd>Grey, NEWYORK USA</dd></div>
+          <div><dt>Motto</dt><dd>Shopping &middot; Connecting</dd></div>
+          <div><dt>Status</dt><dd>Being prepared</dd></div>
+        </dl>
+        <p class="slip-note">Composure rating withholds 0.3 on grounds of tradition. Please keep this receipt.</p>
+        <p class="slip-bars" aria-hidden="true"></p>
+        <p class="slip-no" aria-hidden="true">0417 &nbsp; 0417 &nbsp; 0417</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ COLLECTION -->
+  <section class="s s--plates" id="collection" data-cam="collection" aria-labelledby="h-coll">
+    <div class="plates-head">
+      <p class="eyebrow rv">The Seated Collection</p>
+      <h2 id="h-coll" class="rv">One piece.</h2>
+      <p class="lead rv">Automne–Hiver 2026 introduces a single pose, cut from a single afternoon. Pieces II and III follow the order.</p>
+    </div>
+    <ol class="plates">
+      <li class="plate plate--live">
+        <div class="plate-frame" id="slot1">
+          <img class="plate-fallback" src="img/waiting-portrait.webp" alt="Pose I: a man seated at a table, chin lifted a few degrees, holding a paper receipt at his hip." width="720" height="1280" loading="lazy" decoding="async">
+        </div>
+        <p class="plate-no">Plate I</p>
+        <h3>Composed, chin slightly up</h3>
+        <p class="plate-cap">Receipt: right hand. Available now. The only one.</p>
+      </li>
+      <li class="plate">
+        <div class="plate-frame plate-frame--empty" role="img" aria-label="An empty frame. Pose II has not yet arrived."><span aria-hidden="true">II</span></div>
+        <p class="plate-no">Plate II</p>
+        <h3>Receipt handed over</h3>
+        <p class="plate-cap">Awaiting preparation.</p>
+      </li>
+      <li class="plate">
+        <div class="plate-frame plate-frame--empty" role="img" aria-label="An empty frame. Pose III is waiting on Pose II."><span aria-hidden="true">III</span></div>
+        <p class="plate-no">Plate III</p>
+        <h3>Departure, satisfied</h3>
+        <p class="plate-cap">Awaiting Plate II.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============================================================ MAISON -->
+  <section class="s s--l s--tall" id="maison" data-cam="maison" aria-labelledby="h-maison">
+    <div class="col col--wide">
+      <p class="eyebrow rv">La Maison</p>
+      <h2 id="h-maison" class="rv">Savoir-attendre.</h2>
+      <p class="lead rv">Savoir-faire is knowing how to make. Savoir-attendre is knowing how to hold the receipt and look at nothing in particular. The Maison practises only the second.</p>
+
+      <ol class="chron">
+        <li class="rv"><span class="chron-t">Minute 0</span><p>The order is placed. The Maison is founded at the counter and has no other premises.</p></li>
+        <li class="rv"><span class="chron-t">Minute 2</span><p>A receipt is issued, bearing a number. The number is adopted as the house&rsquo;s coat of arms.</p></li>
+        <li class="rv"><span class="chron-t">Minute 4</span><p>The first estimate, &ldquo;about ten minutes&rdquo;, is announced. It becomes the standing figure and has not been revised.</p></li>
+        <li class="rv"><span class="chron-t">Minute 9</span><p>A table is chosen. The Maison does not otherwise decorate.</p></li>
+        <li class="rv"><span class="chron-t">Minute 14</span><p>The Seated Collection is unveiled: one piece, in grey.</p></li>
+        <li class="rv"><span class="chron-t">Today</span><p>Independent, unlisted, and owned entirely by whoever holds the receipt.</p></li>
+      </ol>
+
+      <figure class="motto rv">
+        <blockquote><p>Shopping &middot; Connecting</p></blockquote>
+        <figcaption>The house motto, hung above the table in letters a metre high. The Maison did not write it. The Maison has decided to stand by it.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================ PROVENANCE -->
+  <section class="s s--r" id="provenance" data-cam="provenance" aria-labelledby="h-prov">
+    <div class="col">
+      <p class="eyebrow rv">Provenance</p>
+      <h2 id="h-prov" class="rv">Made in NEWYORK USA.</h2>
+      <p class="lead rv">The garment carries the legend in capitals, as one word, without a space. The Maison regards this as a statement of origin and has not asked it to elaborate.</p>
+
+      <div class="cert rv" role="group" aria-labelledby="cert-h">
+        <p class="cert-h" id="cert-h">Certificat d&rsquo;origine</p>
+        <dl>
+          <div><dt>Legend</dt><dd>NEWYORK USA</dd></div>
+          <div><dt>Worn in</dt><dd>Singapore</dd></div>
+          <div><dt>Distance travelled by the legend</dt><dd>15,300 km</dd></div>
+          <div><dt>Care</dt><dd>As per the label, which the Maison has not seen</dd></div>
+          <div><dt>Edition</dt><dd>1 of 1</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ PRESSE -->
+  <section class="s s--press" id="presse" data-cam="presse" aria-labelledby="h-press">
+    <div class="press-in">
+      <p class="eyebrow rv">Presse</p>
+      <h2 id="h-press" class="rv">What is being said.</h2>
+      <div class="quotes">
+        <figure class="rv"><blockquote><p><span aria-hidden="true">&ldquo;</span><span class="sr">No statement.</span><span aria-hidden="true" class="gap"></span><span aria-hidden="true">&rdquo;</span></p></blockquote><figcaption>Nobody, on seeing the receipt</figcaption></figure>
+        <figure class="rv"><blockquote><p><span aria-hidden="true">&ldquo;</span><span class="sr">No statement.</span><span aria-hidden="true" class="gap"></span><span aria-hidden="true">&rdquo;</span></p></blockquote><figcaption>No one, on the record</figcaption></figure>
+        <figure class="rv"><blockquote><p><span aria-hidden="true">&ldquo;</span><span class="sr">No statement.</span><span aria-hidden="true" class="gap"></span><span aria-hidden="true">&rdquo;</span></p></blockquote><figcaption>Absent critics, Autumn issue</figcaption></figure>
+      </div>
+      <p class="press-foot rv">As seen in: nowhere, yet. Press enquiries are held at the counter and will be answered when the order arrives.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ BOUTIQUE -->
+  <section class="s s--r s--tall" id="boutique" data-cam="boutique" aria-labelledby="h-shop">
+    <div class="col">
+      <p class="eyebrow rv">La boutique</p>
+      <h2 id="h-shop" class="rv">Your order is being prepared.</h2>
+
+      <div class="bag rv">
+        <p class="bag-h">Your bag</p>
+        <ul class="bag-lines">
+          <li><span>Pose I &mdash; Composed, chin slightly up</span><span>1 &times;</span></li>
+          <li><span>Pose II &mdash; Receipt handed over</span><span>Pre-order</span></li>
+        </ul>
+        <p class="bag-total"><span>Total</span><span>One (1) receipt</span></p>
+        <div class="bag-act">
+          <button type="button" class="btn" id="btn-status">Complete order</button>
+          <button type="button" class="btn btn--ghost" id="btn-collect" aria-disabled="true">Collect order</button>
+        </div>
+      </div>
+
+      <div class="ticket rv" aria-live="polite" aria-atomic="false">
+        <p class="ticket-no"><span>Order No.</span> 0417</p>
+        <p class="ticket-now"><span>Now serving</span> <b id="now">0412</b></p>
+        <div class="meter" role="progressbar" aria-label="Preparation" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90"><i id="meter"></i></div>
+        <ol class="log" id="log"><li><time>—:—</time> Your order is being prepared.</li></ol>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p class="foot-mark">Maison Attente</p>
+  <p class="foot-line">Shopping &middot; Connecting</p>
+  <p class="foot-fine">&copy; 2026 Maison Attente. All rights reserved. Please retain your receipt.</p>
+</footer>
+
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="vendor/lenis.min.js" defer></script>
+<script type="module" src="js/page.js"></script>
+<script type="module" src="js/stage.js"></script>
+</body>
+</html>
