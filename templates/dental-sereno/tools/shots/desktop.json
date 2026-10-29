@@ -1,0 +1,185 @@
+{
+ "mode": "desktop",
+ "reduced": false,
+ "vp": {
+  "width": 1440,
+  "height": 900,
+  "mobile": false,
+  "deviceScaleFactor": 1
+ },
+ "pages": {
+  "index": {
+   "title": "Sereno Dental — Know before you sit. Family dentist in Tiong Bahru",
+   "h1": 1,
+   "headingJump": null,
+   "overflow": 0,
+   "height": 6448,
+   "noAlt": 0,
+   "brokenImg": [],
+   "lazyAbove": 0,
+   "fonts": [
+    "Sereno Serif",
+    "Sereno Sans"
+   ],
+   "og": true,
+   "canonical": "https://templates.thornburystudio.com/templates/dental-sereno/",
+   "favicon": true,
+   "jsonld": true,
+   "smallTargets": [],
+   "gridMix": [],
+   "demoWords": false,
+   "pinned": true,
+   "scrollTriggers": 1,
+   "pin": {
+    "start": 1151,
+    "end": 3551
+   },
+   "clock": {
+    "01-visit-00": {
+     "read": "0:00",
+     "hand": "rotate(0deg)",
+     "on": "0:00",
+     "detailOpacity": "1"
+    },
+    "02-visit-30": {
+     "read": "0:14",
+     "hand": "rotate(84deg)",
+     "on": "0:12",
+     "detailOpacity": "1"
+    },
+    "03-visit-60": {
+     "read": "0:27",
+     "hand": "rotate(162deg)",
+     "on": "0:23",
+     "detailOpacity": "1"
+    },
+    "04-visit-85": {
+     "read": "0:38",
+     "hand": "rotate(228deg)",
+     "on": "0:38",
+     "detailOpacity": "1"
+    },
+    "05-visit-100": {
+     "read": "0:45",
+     "hand": "rotate(270deg)",
+     "on": "0:43",
+     "detailOpacity": "1"
+    }
+   },
+   "errors": [],
+   "tabOrder": [
+    "A Skip to content | outline solid 2px",
+    "A Sereno Dental | outline solid 2px",
+    "A Treatments | outline solid 2px",
+    "A Team | outline solid 2px",
+    "A New patients | outline solid 2px",
+    "A Contact | outline solid 2px",
+    "A WhatsApp | outline solid 2px",
+    "A Book on WhatsApp | outline solid 2px",
+    "A See the 45 minutes, minute b | outline solid 2px",
+    "A Every treatment, with its ra | outline solid 2px",
+    "A Meet the team | outline solid 2px",
+    "A Directions and how to reach  | outline solid 2px",
+    "A Sereno Dental | outline solid 2px",
+    "A +65 6219 0450 | outline solid 2px"
+   ]
+  },
+  "treatments": {
+   "title": "Treatments and prices — Sereno Dental, Tiong Bahru",
+   "h1": 1,
+   "headingJump": null,
+   "overflow": 0,
+   "height": 5626,
+   "noAlt": 0,
+   "brokenImg": [],
+   "lazyAbove": 0,
+   "fonts": [
+    "Sereno Serif",
+    "Sereno Sans",
+    "Sereno Sans Fallback"
+   ],
+   "og": true,
+   "canonical": "https://templates.thornburystudio.com/templates/dental-sereno/treatments.html",
+   "favicon": true,
+   "jsonld": false,
+   "smallTargets": [],
+   "gridMix": [],
+   "demoWords": false,
+   "errors": []
+  },
+  "team": {
+   "title": "The team — Sereno Dental, Tiong Bahru",
+   "h1": 1,
+   "headingJump": null,
+   "overflow": 0,
+   "height": 2990,
+   "noAlt": 0,
+   "brokenImg": [],
+   "lazyAbove": 0,
+   "fonts": [
+    "Sereno Serif",
+    "Sereno Sans",
+    "Sereno Serif Fallback"
+   ],
+   "og": true,
+   "canonical": "https://templates.thornburystudio.com/templates/dental-sereno/team.html",
+   "favicon": true,
+   "jsonld": false,
+   "smallTargets": [],
+   "gridMix": [],
+   "demoWords": false,
+   "errors": []
+  },
+  "new-patients": {
+   "title": "New patients: what to bring, schemes, payment, the clinic — Sereno Dental",
+   "h1": 1,
+   "headingJump": null,
+   "overflow": 0,
+   "height": 3224,
+   "noAlt": 0,
+   "brokenImg": [],
+   "lazyAbove": 0,
+   "fonts": [
+    "Sereno Serif",
+    "Sereno Sans",
+    "Sereno Sans Fallback",
+    "Sereno Serif Fallback"
+   ],
+   "og": true,
+   "canonical": "https://templates.thornburystudio.com/templates/dental-sereno/new-patients.html",
+   "favicon": true,
+   "jsonld": false,
+   "smallTargets": [],
+   "gridMix": [],
+   "demoWords": false,
+   "errors": []
+  },
+  "contact": {
+   "title": "Contact, hours and directions — Sereno Dental, 71 Seng Poh Road",
+   "h1": 1,
+   "headingJump": null,
+   "overflow": 0,
+   "height": 2330,
+   "noAlt": 0,
+   "brokenImg": [],
+   "lazyAbove": 0,
+   "fonts": [
+    "Sereno Serif",
+    "Sereno Sans"
+   ],
+   "og": true,
+   "canonical": "https://templates.thornburystudio.com/templates/dental-sereno/contact.html",
+   "favicon": true,
+   "jsonld": true,
+   "smallTargets": [],
+   "gridMix": [],
+   "demoWords": false,
+   "form": {
+    "ready": "https://wa.me/6582190450?text=Hello%20Sereno%20Dental.%20My%20name%20is%20Test%20Name.%20A%20chipped%20front%20tooth.%20Preferred%20time%3A%20Saturday%20morning.%20You%20can%20reach%20me%20on%209123%204567.",
+    "out": "Opening WhatsApp with your message. If nothing happens, your message is below so you can paste it.",
+    "href": "http://localhost:8125/templates/dental-sereno/contact.html"
+   },
+   "errors": []
+  }
+ }
+}
