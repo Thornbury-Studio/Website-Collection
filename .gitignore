@@ -117,3 +117,8 @@ templates/lodge-morke/tools/shots/
 # stay local, the exported files under img/ are what ships.
 templates/cafe-cinder/tools/raw/
 templates/wick-tallow/tools/raw/
+
+# LONGLIGHT: Unsplash originals (ids in CREDITS.md) re-derived into templates/expedition-longlight/img/
+# by tools/media.py; the originals and verification shots stay local.
+templates/expedition-longlight/tools/raw/
+templates/expedition-longlight/tools/shots/
