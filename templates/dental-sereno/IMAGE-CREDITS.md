@@ -62,8 +62,10 @@ high-rises dominating the frame), 4687340 and 4687246 (the same model as
 4687163, so not a second person), 3881440 and 6627857 (clinicians who
 did not fit the names).
 
-Hub thumbnail `../../img/dental-sereno-sm.webp` is a 480×300 downscale of
-the home page hero at 1440 px.
+Hub thumbnail `img/hub-thumb.webp` is a 480×300 downscale of the home page
+hero at 1440 px. It lives in the template folder, not the hub's root `img/`,
+because the root folder is served from Cloudflare and only changes on a
+public rebuild, while the template folder is served by Vercel.
 
 ## Fonts
 
