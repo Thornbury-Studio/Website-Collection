@@ -10,4 +10,4 @@ There is one photograph on this site: a candid taken and supplied by the site's 
 | `img/waiting-portrait-backdrop.webp` | The same photograph with the sitter painted out (inpaint + blur inside the hole). |
 | `img/favicon.svg` | Drawn for this page: an "A" in paper white on oxblood with a rouge rule. |
 
-Hub thumbnail: `/img/maison-attente-sm.webp` (a screenshot of the hero at 1440 × 900).
+Hub thumbnail: `img/hub-thumb.webp` (a screenshot of the hero at 1440 × 900).
