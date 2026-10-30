@@ -30,6 +30,18 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.hasAttribute('data-open')) close(); });
   }
 
+  /* ---------- nav backing: solid once the top 48px of the page has scrolled away.
+     A sentinel + IntersectionObserver rather than a scroll listener, so it is
+     independent of Lenis and of how the scroll happened. ---------- */
+  const nav = document.querySelector('.nav');
+  if (nav && 'IntersectionObserver' in window) {
+    const sentinel = document.createElement('div');
+    sentinel.setAttribute('aria-hidden', 'true');
+    sentinel.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:48px;pointer-events:none;visibility:hidden';
+    document.body.prepend(sentinel);
+    new IntersectionObserver((en) => nav.toggleAttribute('data-solid', !en[0].isIntersecting), { threshold: 0 }).observe(sentinel);
+  }
+
   /* ---------- reveals ---------- */
   const reveals = document.querySelectorAll('.reveal');
   if (reveals.length && 'IntersectionObserver' in window && !LL.reduced) {
