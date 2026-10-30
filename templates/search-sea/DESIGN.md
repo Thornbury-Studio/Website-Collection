@@ -1,10 +1,10 @@
 # SEA
 
-A24-style disc theatre for Search Engine Adapter. Music CDs (not film discs). The active CD **seats into the song list**.
+Product site for Search Engine Adapter — one browser search box that routes by how you ask.
 
-## Story
-Ask / Define / Find — three routes, one search box. Meaning in liner notes and Why; config is a quiet link.
+## Direction
+Not a film gallery. Not a CD player. The product *is* the search box: type, see the destination, understand why.
 
 ## Tokens
-- Stage `#E6E3DC` · Ink `#161411` · Sea `#1A5F6A`
-- Instrument Serif + IBM Plex Sans / Mono
+- Fog `#E8ECF0` · Paper `#F7F9FA` · Ink `#0E1A1F` · Mute `#5A6A72` · Sea `#0F6B75` · Signal `#1AA6B3`
+- Instrument Serif (brand / titles) · IBM Plex Sans · IBM Plex Mono (queries)

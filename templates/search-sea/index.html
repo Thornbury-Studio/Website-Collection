@@ -4,123 +4,133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SEA — Search Engine Adapter</title>
-<meta name="description" content="SEA routes one search box to Google, ChatGPT, or Wikipedia from how you ask. Questions ending in ? go to ChatGPT.">
+<meta name="description" content="SEA is a lightweight Nginx proxy: one search box that routes to Google, ChatGPT, or Wikipedia from the words you type. End with ? for ChatGPT.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="theme-color" content="#E6E3DC">
+<meta name="theme-color" content="#E8ECF0">
 <meta name="color-scheme" content="light">
 <link rel="canonical" href="https://templates.thornburystudio.com/templates/search-sea/">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SEA">
 <meta property="og:title" content="SEA — Search Engine Adapter">
-<meta property="og:description" content="One search box. Routes by how you ask — Google, ChatGPT, or Wikipedia.">
+<meta property="og:description" content="One search box. Routes to Google, ChatGPT, or Wikipedia from how you ask.">
 <meta property="og:url" content="https://templates.thornburystudio.com/templates/search-sea/">
 <meta property="og:image" content="https://templates.thornburystudio.com/templates/search-sea/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/plex-sans.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/cd-ask.webp" as="image">
 <link rel="stylesheet" href="css/style.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"SEA — Search Engine Adapter","applicationCategory":"DeveloperApplication","operatingSystem":"Nginx","url":"https://templates.thornburystudio.com/templates/search-sea/","description":"A lightweight Nginx proxy that routes browser search queries to Google, ChatGPT, or Wikipedia based on how you type.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"SEA — Search Engine Adapter","applicationCategory":"DeveloperApplication","operatingSystem":"Nginx","url":"https://templates.thornburystudio.com/templates/search-sea/","description":"Lightweight Nginx proxy that routes browser search queries to Google, ChatGPT, or Wikipedia.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="grain" aria-hidden="true"></div>
 
-<header class="top">
-  <p class="now-playing" id="now-title">Ask</p>
-  <a class="logo" href="#main" aria-label="SEA home"><i></i>SEA</a>
-  <div class="top-right">
-    <nav aria-label="Primary">
-      <a href="#main" aria-current="page">Playlist</a>
-      <a href="#try">Try</a>
-      <a href="#why">Why</a>
-    </nav>
-    <button type="button" class="index-btn" id="index-btn" aria-expanded="false" aria-controls="index">Index</button>
-  </div>
+<header class="bar">
+  <a class="mark" href="#top">SEA</a>
+  <nav aria-label="Primary">
+    <a href="#routes">Routes</a>
+    <a href="#why">Why</a>
+    <a href="#get">Get SEA</a>
+  </nav>
 </header>
 
-<div class="index" id="index" hidden>
-  <ol id="index-list"></ol>
-</div>
-
 <main id="main">
-  <section class="theatre" id="theatre" tabindex="0" aria-label="SEA music discs" aria-roledescription="carousel" aria-describedby="help">
-    <p class="sr" id="help">Drag the discs, use arrow keys, or pick a track in the song list. The active CD seats into the list.</p>
-    <h1 class="sr">SEA — one search box, three destinations</h1>
 
-    <aside class="credits" aria-live="polite">
-      <div class="row"><span>Routed to</span><b id="c-engine">ChatGPT</b></div>
-      <div class="row"><span>Trigger</span><b id="c-trigger">Ends with ?</b></div>
-      <div class="row"><span>Sample</span><b class="mono" id="c-sample">why is the sky blue?</b></div>
-    </aside>
+  <section class="hero" id="top" aria-labelledby="brand">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <p class="brand" id="brand">SEA</p>
+    <h1>One search box.<br>Three destinations.</h1>
+    <p class="deck">Search Engine Adapter is a thin Nginx proxy. Type once — it sends you to Google, ChatGPT, or Wikipedia based on the words you use.</p>
 
-    <div class="stage-wrap">
-      <div class="stage" id="stage">
-        <div class="discs" id="discs"></div>
+    <form class="box" id="form" action="#" method="get">
+      <label class="sr" for="q">Try a search</label>
+      <div class="box-row">
+        <input id="q" name="q" type="search" autocomplete="off" spellcheck="false" value="why is the sky blue?" placeholder="Type a search…">
+        <button type="submit">Route</button>
       </div>
-      <p class="tagline">One search box. Routes by how you ask.</p>
-    </div>
-
-    <section class="songs" aria-labelledby="songs-h">
-      <h2 id="songs-h">The song list</h2>
-      <p class="songs-sub">Pick a track — the CD drops into the slot.</p>
-      <ol class="song-list" id="song-list" role="listbox" aria-label="Routes" aria-activedescendant="song-ask"></ol>
-    </section>
-
-    <figure class="liner" aria-live="polite">
-      <figcaption>Liner notes</figcaption>
-      <blockquote id="liner">A question wants an answer, not ten blue links. End with ? and SEA seats ChatGPT.</blockquote>
-    </figure>
-  </section>
-
-  <section class="band try" id="try" aria-labelledby="try-h">
-    <div>
-      <h2 id="try-h">Type a thought.</h2>
-      <p>SEA listens to the shape of the words. The matching disc seats itself in the song list.</p>
-    </div>
-    <form id="form">
-      <label class="sr" for="q">Query</label>
-      <div class="qrow">
-        <input id="q" type="search" autocomplete="off" spellcheck="false" value="why is the sky blue?" placeholder="why is the sky blue?">
-        <button type="submit">Seat the CD</button>
-      </div>
-      <p class="status" id="status" role="status">Playing on <strong>ChatGPT</strong></p>
-      <div class="hints">
-        <button type="button" data-q="why is the sky blue?">a question</button>
-        <button type="button" data-q="what is nginx">a definition</button>
-        <button type="button" data-q="best espresso machines 2026">a search</button>
+      <p class="box-out" id="out" role="status" data-route="ask">
+        <span class="pill" id="pill">ChatGPT</span>
+        <span id="reason">Ends with <code>?</code> — you asked a question, so SEA answers.</span>
+      </p>
+      <div class="examples" aria-label="Examples">
+        <button type="button" data-q="why is the sky blue?">why is the sky blue?</button>
+        <button type="button" data-q="what is nginx">what is nginx</button>
+        <button type="button" data-q="best espresso machines 2026">best espresso machines 2026</button>
       </div>
     </form>
   </section>
 
-  <section class="band why" id="why" aria-labelledby="why-h">
-    <h2 id="why-h">Why SEA</h2>
-    <p class="lead">Search used to be one habit. Now you look up, ask, and browse — three instincts, one keyboard. SEA is the adapter that keeps them in a single box.</p>
-    <div class="cols">
-      <article>
-        <h3>Listen once</h3>
-        <p>Point the browser’s search here. You stop choosing a tab; the words choose the destination.</p>
-      </article>
-      <article>
-        <h3>Questions are different</h3>
-        <p><span class="mono">?</span> means you want an answer → ChatGPT. “What is…” means a page → Wikipedia. Anything else → Google.</p>
-      </article>
-      <article>
-        <h3>Thin on purpose</h3>
-        <p>No app, no login. A compiled Nginx map. The meaning stays in how you type.</p>
-      </article>
-    </div>
-    <p class="soft">Ready to run it yourself? <a href="https://github.com/dense-analysis/sea" rel="noopener noreferrer">Get the config on GitHub</a>.</p>
+  <section class="routes" id="routes" aria-labelledby="routes-h">
+    <header class="sec-h">
+      <h2 id="routes-h">How it chooses</h2>
+      <p>Three simple listens. No dashboard. No account.</p>
+    </header>
+    <ol class="route-list">
+      <li data-route="ask">
+        <span class="n">01</span>
+        <div>
+          <h3>Ask → ChatGPT</h3>
+          <p>If your query ends with a question mark, you want an answer — not a page of links. SEA sends it to ChatGPT.</p>
+          <p class="ex"><code>why is the sky blue?</code></p>
+        </div>
+      </li>
+      <li data-route="define">
+        <span class="n">02</span>
+        <div>
+          <h3>Define → Wikipedia</h3>
+          <p>Words like “what is”, “wiki”, or “meaning” sound like a lookup. Those go to Wikipedia.</p>
+          <p class="ex"><code>what is nginx</code></p>
+        </div>
+      </li>
+      <li data-route="find">
+        <span class="n">03</span>
+        <div>
+          <h3>Find → Google</h3>
+          <p>Everything else is still a search. SEA falls through to Google.</p>
+          <p class="ex"><code>best espresso machines 2026</code></p>
+        </div>
+      </li>
+    </ol>
   </section>
+
+  <section class="why" id="why" aria-labelledby="why-h">
+    <h2 id="why-h">Why it exists</h2>
+    <p class="lead">You already switch between looking things up, asking questions, and browsing results. SEA keeps those three habits behind one URL — the search box you already have.</p>
+    <ul class="points">
+      <li>
+        <h3>One endpoint</h3>
+        <p>Point your browser’s default search at SEA. Stop opening three tabs out of habit.</p>
+      </li>
+      <li>
+        <h3>Rules, not an app</h3>
+        <p>A Go program compiles your config into Nginx <code>map</code> directives. There is no web app to host or exploit.</p>
+      </li>
+      <li>
+        <h3>Yours to change</h3>
+        <p>Edit the keywords, add destinations, turn on TLS. Reload Nginx. Done.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="get" id="get" aria-labelledby="get-h">
+    <div>
+      <h2 id="get-h">Run it on Nginx</h2>
+      <p>Open source from Dense Analysis. Needs Go 1.22+ and Nginx 1.14+.</p>
+      <a class="btn" href="https://github.com/dense-analysis/sea" rel="noopener noreferrer">View on GitHub</a>
+    </div>
+    <pre class="code" tabindex="0"><code>cp config-example.toml config.toml
+go run cmd/sea/main.go &gt; sea.conf
+# include under conf.d / sites-enabled, then reload</code></pre>
+  </section>
+
 </main>
 
 <footer class="foot">
   <span>SEA — Search Engine Adapter</span>
-  <a href="https://github.com/dense-analysis/sea" rel="noopener noreferrer">Source</a>
+  <a href="https://github.com/dense-analysis/sea" rel="noopener noreferrer">dense-analysis/sea</a>
 </footer>
 
 <script src="js/main.js" defer></script>
