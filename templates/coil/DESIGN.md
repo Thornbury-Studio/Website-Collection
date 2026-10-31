@@ -304,22 +304,3 @@ Two families, clearly different jobs:
 - **Don't** use "S$" in Anybody, all-caps labels, eyebrows, middle-dot meta
   strings, or the banned words ("artisanal", "ceremony", "zen", "mindful",
   "journey").
-
-## 9. Agent Instructions
-
-```
-# UI Generation Rules
-Before writing, editing, or restyling any front-end UI in this repo:
-1. Invoke the `frontend-design` skill and, if installed, `impeccable`
-   and this project's own design-critique skill.
-2. Read this repo's own DESIGN.md AND ../../../../DESIGN-SYSTEM/DESIGN.md
-   (the company-wide taste system — adjust the `../` depth to match
-   this project's actual nesting, see the note above). Treat both as
-   hard constraints.
-3. Do not introduce unapproved fonts, unmapped tokens, or any pattern
-   listed in DESIGN-SYSTEM/DESIGN.md §3 (the anti-slop checklist)
-   without stating the reason it's a real choice, not a default.
-4. Before calling any UI work done, run the `web-design-guidelines`
-   skill against the changed files and screenshot the result at
-   desktop and mobile widths.
-```

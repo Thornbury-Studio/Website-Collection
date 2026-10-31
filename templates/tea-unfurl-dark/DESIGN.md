@@ -91,10 +91,6 @@ Every other photograph appears on exactly one page.
 - Don't put paper text straight onto the film or a photo without a scrim.
 - Don't add a product grid, a subscription, or a second tin.
 
-## 11. Agent instructions
-
-See `CLAUDE.md` in this folder: DARK.md §8's block verbatim, depth adjusted to three.
-
 ## Critique log (DARK.md §6)
 
 **Round 1** — fresh-context critic, given only desktop + mobile screenshots, the two references (Apple's scroll-scrubbed product pages; BLOOM., the sibling this must not repeat) and §4's checklist, asked to disprove that it was good enough. Verdict: **No.**

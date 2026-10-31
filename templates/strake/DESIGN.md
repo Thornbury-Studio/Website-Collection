@@ -1,4 +1,4 @@
-This project inherits the company-wide taste system at `C:\School\Personal\Company\DESIGN-SYSTEM\DESIGN.md` (see this repo's own root `CLAUDE.md` — the pointer is absolute, not relative, because this repo lives outside the company folder). Below are this project's own tokens and brand-specific rules.
+This project inherits the company-wide taste system at `C:\School\Personal\Company\DESIGN-SYSTEM\DESIGN.md`. Below are this project's own tokens and brand-specific rules.
 
 ---
 name: strake
@@ -185,23 +185,3 @@ Don't
   option swaps a real layer of the product.
 - The car is one render, recoloured; it is never a tint over a flat picture, and the
   bronze strake and the smoked canopy keep their own colour in every paint.
-
-## 9. Agent instructions
-
-```
-# UI Generation Rules
-Before writing, editing, or restyling any front-end UI in this repo:
-1. Invoke the `frontend-design` skill and, if installed, `impeccable`
-   and this project's own design-critique skill.
-2. Read this repo's own DESIGN.md AND C:\School\Personal\Company\DESIGN-SYSTEM\DESIGN.md
-   (the company-wide taste system — this template uses the absolute
-   path because the Website-Collection repo does not live at a fixed
-   depth under the company folder; see the repo root CLAUDE.md). Treat
-   both as hard constraints.
-3. Do not introduce unapproved fonts, unmapped tokens, or any pattern
-   listed in DESIGN-SYSTEM/DESIGN.md §3 (the anti-slop checklist)
-   without stating the reason it's a real choice, not a default.
-4. Before calling any UI work done, run the `web-design-guidelines`
-   skill against the changed files and screenshot the result at
-   desktop and mobile widths.
-```

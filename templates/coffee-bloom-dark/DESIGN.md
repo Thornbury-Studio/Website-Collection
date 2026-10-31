@@ -174,7 +174,7 @@ panel.
   radios, a tally computed by `BLOOM.orderTotal`, the posting window
   computed from the calendar. "Hold my bag" stores the hold on this
   device only and confirms it; there is no payment and no personal data
-  collected (no backend, per AGENT.md).
+  collected (no backend).
 - **Focus** — `outline: 2px solid var(--crema); outline-offset: 3px`,
   never removed.
 
@@ -238,8 +238,3 @@ Notices: `LICENSES.md`. Photography: `IMAGE-CREDITS.md`.
   still printed. No JS: the static page carries the baked numbers.
 - Images: webp, two widths each, `srcset`/`sizes`, explicit dimensions,
   lazy below the fold.
-
-## 10. Agent Instructions
-
-See `CLAUDE.md` in this folder (DARK.md §8 block, depth adjusted to
-three levels).

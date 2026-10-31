@@ -1,4 +1,4 @@
-This project inherits the company-wide taste system at `C:\School\Personal\Company\DESIGN-SYSTEM\DESIGN.md` (see this repo's own root `CLAUDE.md` — the pointer is absolute, not relative, because this repo lives outside the company folder). Below are this project's own tokens and brand-specific rules.
+This project inherits the company-wide taste system at `C:\School\Personal\Company\DESIGN-SYSTEM\DESIGN.md`. Below are this project's own tokens and brand-specific rules.
 
 ---
 name: kiam
@@ -244,11 +244,3 @@ Don't
   motion is one moment, and it has been spent on the fill.
 - Don't use the 咸 glyph decoratively at random; it marks the wordmark
   and the salty axis, nothing else.
-
-## 8. Agent Instructions
-
-This repo's own root `CLAUDE.md` already states the Agent Instructions
-block once for every template in this catalog (frontend-design/impeccable
-invocation, the company DESIGN-SYSTEM pointer, web-design-guidelines
-before done) — not repeated here per-template, matching how every other
-template in this catalog works.

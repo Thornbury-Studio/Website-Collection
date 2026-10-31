@@ -124,7 +124,7 @@ No shadows on boxes, no cards. Depth comes from the film and the window reveal o
   - A live estimate (NOK 11,400 × guests × nights) in an `aria-live` line.
   - Submit validates name and email, sets `aria-invalid` and focuses the first
     bad field.
-  - It then composes a `mailto:` to booking@morkelodge.no (no backend: AGENT.md).
+  - It then composes a `mailto:` to booking@morkelodge.no (no backend).
   - It dispatches a cancelable `morke:enquire` event first, so tests can stop the
     real mail client opening.
 - **Focus:** 2px ember outline, 3px offset, on everything. Touch targets ≥ 44px; the
@@ -222,8 +222,7 @@ cut at its roof.
 - One grade for everything (`eq=gamma=0.94:saturation=1.04`), so the photographs and the film sit in
   one light.
 - Masters stay in `tools/raw/` (gitignored); `python tools/media.py` re-derives every served file.
-- Provenance and licences: `IMAGE-CREDITS.md`, `LICENSES.md`. No disclaimer in the page itself
-  (repo CLAUDE.md).
+- Provenance and licences: `IMAGE-CREDITS.md`, `LICENSES.md`. No disclaimer in the page itself.
 
 ## 9. Do's and Don'ts
 
@@ -236,35 +235,3 @@ cut at its roof.
 - **Don't** add glass panels, pills above headlines, card grids or a stat strip. The facts list under the chart is the
   chart's legend, not a stat banner.
 - **Don't** put a static sun position in the HTML.
-
-## 10. Agent Instructions
-
-```
-# UI Generation Rules (DARK engine)
-Before writing, editing, or restyling any front-end UI in this repo:
-1. This project is DARK-engine (see .claude/engine-mode). Do NOT invoke
-   `frontend-design`, `impeccable`, or `web-design-guidelines`, and do
-   NOT read DESIGN-SYSTEM/DESIGN.md — those belong to the light engine
-   only, mixing them in is exactly what the engine split exists to
-   prevent. **Exception, added 2026-09-24 after a real build (`BLOOM.`)
-   followed this line and skipped both: DESIGN.md §2 (the over-constraint
-   rule) and §6 (the accessibility & motion floor, the no-hand-geometry
-   rule, and the ask-before-generating gate on AI image/video generation)
-   are NOT restated anywhere in DARK.md — read those two sections
-   directly, they are hard constraints here too. Nothing else in
-   DESIGN.md applies.**
-2. Read this repo's own DESIGN.md AND ../../../../DESIGN-SYSTEM/DARK.md (the
-   company-wide dark taste system — adjust the `../` depth to match
-   this project's actual nesting, or use an absolute path if nested
-   inside a shared catalog repo, see the note above). Treat both as
-   hard constraints.
-3. Reach for the real open-source stack named in DARK.md §5 by default
-   rather than hand-rolling the effect from scratch. Compose from real
-   licensed scaffolding (§1.2) — original execution and content on top,
-   never a copy of a finished real brand.
-4. Check licensing as each dependency/asset is added (DARK.md §2), not
-   as cleanup at the end.
-5. Before calling any UI work done: take real screenshots (desktop +
-   mobile) and check them against DARK.md §4's checklist directly
-   against the image, not just the code (DARK.md §6).
-```

@@ -132,8 +132,7 @@ the heat layer only. The only blend mode is `screen` on the heat canvas.
   the bars are the actual ratios, baked.
 - **Fan curve** (`airflow.html`): baked SVG with `title`/`desc`; the live
   dot is the model state.
-- **Order hold** (`order.html`): client-side only (no backend, per
-  `AGENT.md`). Holds a build week on this device, gives a reference, and
+- **Order hold** (`order.html`): client-side only (no backend). Holds a build week on this device, gives a reference, and
   says so in plain words; focus moves to the confirmation.
 
 Focus: 2 px `--red` outline, 3 px offset, on everything. Touch targets:
@@ -173,8 +172,3 @@ and photography carry the whole pitch without the mechanism.
 - Don't name a real product in copy. "Today's fastest card" is anchored by
   its numbers, not its name.
 - Don't let red become decoration: it means load, focus or price.
-
-## 10. Agent Instructions
-
-See `CLAUDE.md` in this folder (DARK.md §8 block, verbatim with the depth
-adjusted).

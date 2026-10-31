@@ -4,7 +4,7 @@
     python tools/grade.py bag fuego  # just these
 
 Masters live in tools/raw/ (gitignored): Unsplash originals in raw/unsplash/,
-the Higgsfield bag render in raw/higgsfield/, film stills in shots/film/
+the bag render in raw/bag/, film stills in shots/film/
 (written by tools/film.sh). Missing masters are skipped, so a fresh clone can
 re-run whatever it has. Every photograph goes through the same grade so the
 set reads as one light: blacks lifted a touch, highlights warmed toward the
@@ -75,8 +75,8 @@ SLOTS = {
     "cherries": ("unsplash/W1VqcpcnSHk.jpg", (0.02, 0.0, 0.62, 1.0), dict(sat=0.86), (1200, 800)),
     # why: two roasted beans on cream (Unsplash mQrhnVh9ALk)
     "beans": ("unsplash/mQrhnVh9ALk.jpg", (0, 0.5, 1, 0.97), dict(warmth=0.0, sat=0.8), (1200, 800)),
-    # the bag (Higgsfield nano_banana_pro, job 17ddd7fb); already on the page's ground
-    "bag": ("higgsfield/bag-17ddd7fb.png", (0.08, 0.14, 0.92, 0.94), dict(lift=0.0, sat=1.0, warmth=0.0), (1400, 900, 480)),
+    # the bag render; already on the page's ground
+    "bag": ("bag/bag-master.png", (0.08, 0.14, 0.92, 0.94), dict(lift=0.0, sat=1.0, warmth=0.0), (1400, 900, 480)),
 }
 
 FILM = {

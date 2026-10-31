@@ -80,7 +80,3 @@ No glassmorphism, no drop shadows, no rounded panels larger than 2 px.
 - No blue or purple in UI; no second accent; no gradient text.
 - No pill above the headline, no icon-topped three-card grid, no stat banner strip, no "Empower / Unlock / Transform", no demo or AI disclaimers in copy.
 - No modelled terrain, no DEM, no real mountain silhouettes in the relief. It is a noise field and says so nowhere.
-
-## 8. Agent instructions
-
-See `CLAUDE.md` in this folder (the DARK.md §8 block, verbatim, with the absolute path).

@@ -401,7 +401,7 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
-/* AI-generated ambient plate, blurred into pure atmosphere */
+/* Generated ambient plate, blurred into pure atmosphere */
 .hero-ambient {
   position: absolute;
   inset: -8%;

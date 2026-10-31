@@ -8,7 +8,7 @@ A prestige-house campaign site, played completely straight, for one man holding 
 
 Tone rule, binding: affectionate. The roast is the **situation** (waiting, the receipt, the composure, the shirt's provenance, the ceiling sign). Never the sitter's face, body, looks or glasses, and nothing invented about *him* (no age, job, hobbies, personal facts). Everything the page asserts is about the order, the table, the receipt or the garment.
 
-Because `CLAUDE.md` forbids demo / fictional / joke-site disclaimers on child sites, the joke has to be self-evident: it is carried by deadpan specificity ("Composure rating withholds 0.3 on grounds of tradition").
+Because the hub forbids demo / fictional / joke-site disclaimers on child sites, the joke has to be self-evident: it is carried by deadpan specificity ("Composure rating withholds 0.3 on grounds of tradition").
 
 **The one idea:** the photograph is rebuilt as a three-layer 3D scene (room, wordmark, sitter) that tilts with the pointer and is dollied by scroll to the receipt, the ceiling sign and the shirt. The relief on the sitter comes from a depth model, not from hand-authored geometry.
 
@@ -74,10 +74,6 @@ Callouts (projected from the scene each frame, hidden when their section is not 
 - Scene is `aria-hidden`; every word is in the DOM. The `<h1>` stays in the DOM (visually hidden only once WebGL is running); no-WebGL falls back to the flat photograph with the wordmark as live text.
 - DPR cap 2 (1.5 on coarse pointers); render loop stops when the tab is hidden; `webglcontextlost` is prevented and `webglcontextrestored` re-uploads every texture.
 - Touch targets ≥ 44 px; visible focus ring on everything interactive; skip link.
-
-## 10. Agent instructions
-
-(see `CLAUDE.md` in this folder — verbatim block from DARK.md §8)
 
 ## 11. DARK.md §4 checklist, run against the screenshots
 

@@ -168,7 +168,7 @@ gradient borders, pills.
 - **Order form** — native inputs, `1px` bottom rule, label always visible,
   error text in `--gold` with the field's `aria-describedby`. Submit
   produces a reference and a `mailto:` — nothing is charged, nothing is
-  sent anywhere (no backend, per AGENT.md).
+  sent anywhere (no backend).
 - **Touch targets** — every control ≥ 44×44px on `pointer: coarse`.
 
 ## 8. Do's and Don'ts

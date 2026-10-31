@@ -1,4 +1,4 @@
-This project inherits the company-wide taste system at `C:\School\Personal\Company\DESIGN-SYSTEM\DESIGN.md` (see this repo's own root `CLAUDE.md` — the pointer is absolute, not relative, because this repo lives outside the company folder). Below are this project's own tokens and brand-specific rules.
+This project inherits the company-wide taste system at `C:\School\Personal\Company\DESIGN-SYSTEM\DESIGN.md`. Below are this project's own tokens and brand-specific rules.
 
 ---
 name: slake
@@ -221,11 +221,3 @@ opposite of "and nothing else". Ginger gold is the second color. If a
 future pass finds the heat register reading as "generic dark site with
 an orange accent", the fix is more char texture and more gold, not less
 flame.
-
-## 8. Agent Instructions
-
-This repo's own root `CLAUDE.md` already states the Agent Instructions
-block once for every template in this catalog (frontend-design/impeccable
-invocation, the company DESIGN-SYSTEM pointer, web-design-guidelines
-before done) — not repeated here per-template, matching how every other
-template in this catalog works.

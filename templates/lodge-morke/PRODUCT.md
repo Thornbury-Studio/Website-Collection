@@ -23,7 +23,7 @@ showcase, except the astronomy, which is real and checked (`tools/check-season.m
   transfer both ways, guiding, all meals, the sauna, suits and boots. Flights to
   Longyearbyen are not included.
 - **Enquiries:** booking@morkelodge.no. The site's form writes the email; there is no
-  backend (AGENT.md).
+  backend.
 
 ## Facts the page states (real, computed for 78.43° N)
 

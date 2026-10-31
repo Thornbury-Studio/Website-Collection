@@ -3,9 +3,9 @@
     python tools/media.py            # film sequences + stills
 
 Masters (gitignored, see IMAGE-CREDITS.md):
-  raw/descent-master.mp4   Kling 3.0, 3852x2152, 24 fps, 193 frames: a tilt UP from the lodge
-  raw/keyframe-master.png  Nano Banana Pro, 2752x1536: the lodge, the frame the clip starts on
-  raw/{table,room,sauna}-master.png  Nano Banana Pro, 2752x1536, keyframe as reference: the inside
+  raw/descent-master.mp4   video, 3852x2152, 24 fps, 193 frames: a tilt UP from the lodge
+  raw/keyframe-master.png  still, 2752x1536: the lodge, the frame the clip starts on
+  raw/{table,room,sauna}-master.png  still, 2752x1536, keyframe as reference: the inside
 
 The site plays the clip REVERSED, so scroll position 0 is the sky and 1 is the lodge.
 
@@ -82,7 +82,7 @@ def main():
         still(FILM / f"{name}.webp", wide, n)
         still(FILM / f"{name}-s.webp", tall, n)
 
-    # Inside the lodge: three Nano Banana Pro stills made with the keyframe as the
+    # Inside the lodge: three generated stills made with the keyframe as the
     # reference (IMAGE-CREDITS.md), so the larch, the windows and the light match the
     # outside. Same grade as the film; phones get a 9:16 cut centred on the subject.
     for name, cx in (("table", 0.5), ("room", 0.6), ("sauna", 0.68)):

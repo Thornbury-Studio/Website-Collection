@@ -18,5 +18,5 @@ Regenerate the product imagery from the licensed masters in `assets/raw/`:
     bash tools/encode-video.sh     # the pour loop and its poster
     python tools/encode.py         # every other web image
 
-Read `CLAUDE.md` first, then `DESIGN.md` (tokens and rules), `PRODUCT.md`
+Read `DESIGN.md` (tokens and rules), `PRODUCT.md`
 (every number the pages quote) and `IMAGE-CREDITS.md` (provenance).

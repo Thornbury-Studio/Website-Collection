@@ -259,7 +259,3 @@ column; the treatments table's name column was too narrow; the stool
 photograph was oversized; "curved stairwell" is now "external stairwell"
 because the stairwell is angular; and the second "before you sit"
 headline on the home page is gone.
-
-## 12. Agent Instructions
-
-See `CLAUDE.md` in this folder (the DARK.md §8 block, absolute path).

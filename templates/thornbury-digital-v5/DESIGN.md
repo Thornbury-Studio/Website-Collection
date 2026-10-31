@@ -372,8 +372,7 @@ something a visitor can go and do, on this site, right now:
 | Ownership | Source files, hosting account and email account all go to the client | `css/layout.css` opens as the stylesheet itself — commented, unminified, not generated |
 
 All three are true of this build and were measured or read here, not asserted.
-The ownership line is the handover already written down in the repo's own
-`AGENT.md`: Vercel account, email account and all source files go to the client,
+The ownership line is the handover policy: Vercel account, email account and all source files go to the client,
 nothing stays on the agency's side.
 
 **The stack, in the client's terms.** Vercel, Supabase, Resend, OWASP ZAP and
