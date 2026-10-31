@@ -13,8 +13,8 @@ Their published menu and store data were read once for *factual* extraction
 
 ## Generated concept imagery
 
-Everything below was generated on 18 Aug 2026 via Higgsfield (submitted as
-`nano_banana_2`, reported back as `nano_banana_flash`), one set sharing a
+Everything below was generated on 18 Aug 2026 via AI generator (submitted as
+image model, reported back as image model), one set sharing a
 single verbatim style block — warm evening tungsten, caramel wood, cream
 ceramics, cocoa shadows — so it reads as one campaign shoot. These frames are
 **concept imagery**: they do not depict the real Three's A Crowd premises,

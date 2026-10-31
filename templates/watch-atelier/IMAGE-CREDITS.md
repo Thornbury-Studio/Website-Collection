@@ -15,15 +15,15 @@ diamond markers) are hand-written SVG/CSS in this template.
 
 ## Generation
 
-**Tool:** Higgsfield MCP
-**Image model:** `nano_banana_flash` (Google), 2K — text-to-image for the master,
+**Tool:** AI generation MCP
+**Image model:** image model (Google), 2K — text-to-image for the master,
 image-to-image from the master for everything else
 **Video model:** `grok_video_v15` (xAI), 1080p, 6 s, silent, driven from a start frame
 
 The master shot established the design; every other image passed it back as a
 reference so the case, dial furniture, hands and strap stay the same watch across the
-set. (Seedance `std` 1080p and Kling `pro` — the first choices — are gated behind a
-higher Higgsfield plan; Grok 1.5 rendered 1080p on the starter plan.)
+set. (video model 1080p and video model — the first choices — are gated behind a
+higher AI generation plan; Grok 1.5 rendered 1080p on the starter plan.)
 
 | File | Shot | Source |
 |---|---|---|

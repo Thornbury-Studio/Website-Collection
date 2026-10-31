@@ -1,10 +1,10 @@
 # Image credits — CHALKLINE
 
 Every photograph in `img/` was generated for this template on 4 Sep 2026
-with Google Gemini `nano-banana-pro-preview` (2K, 16:9) through the direct
+with AI image generation image model (2K, 16:9) through the direct
 API, and converted to WebP at 1600 px and 800 px with ffmpeg. No stock
-photography and no third-party imagery was used. Higgsfield was not used
-(balance was 2.3 credits); Gemini cost nothing beyond the account's plan.
+photography and no third-party imagery was used. AI generator was not used
+(balance was 2.3 credits); the generator cost nothing beyond the account's plan.
 
 ## Method
 

@@ -8,9 +8,9 @@ single shoot.
 ## 1. The desserts — generated
 
 Product photography was generated on **18 August 2026** with Google's
-**Nano Banana 2** (`nano_banana_2`, served as `nano_banana_flash`) via the
-Higgsfield API — the originally planned direct Gemini route
-(`nano-banana-pro-preview` / `gemini-3.1-flash-image`) had returned HTTP 429
+**image model 2** (image model) via the
+AI generation API — the originally planned direct the generator route
+(image model / image model) had returned HTTP 429
 for the whole of the original build session, which is what left this template
 unfinished. Square frames were generated at 2K and the wide frames at 2K–4K,
 then graded and exported to WebP at 800 px and 400 px squares (hero and wide
@@ -26,7 +26,7 @@ the same footed stainless bowl clause; the warm counter shares the same
 stoneware plate clause.
 
 **Per-file model attribution:** every frame in both tables below was
-generated with `nano_banana_2` at 2K, except `hero-pour` and `ice-texture`,
+generated with image model at 2K, except `hero-pour` and `ice-texture`,
 which were re-rolled at 2K after 4K attempts failed, and `sharing-spoons`,
 which returned 5504x3072. `hero-pour` took three attempts — the first two
 failed outright — and its final subject sentence is lightly rephrased from

@@ -84,7 +84,7 @@ that were not*. No blueprint frame, no reticle, no coordinate
 readouts — that scaffolding read as an unfinished tool, not a studio. A hook is a
 subject plus restraint; everything that is not the subject is either a word you
 need or it is noise. Nothing labels the film any more: the caption that used to
-sit in the corner announced it as a stand-in for a Higgsfield shot that was never
+sit in the corner announced it as a stand-in for a AI generator shot that was never
 going to be a better hook than this one. VIDEO-POLICY's own asset order stops at tier 1 here —
 excellent licensed footage already exists, so generating video would be spending
 credits to replace something that works. The film is the hero; its licence and
@@ -1249,7 +1249,7 @@ plays `hero-lg.mp4?v=2` at 2560×1440, at 390 it plays `hero-m.mp4?v=2` at
 1080×1920 over `poster-hero-m.webp?v=2`; console clean; zero overflow.
 
 **Decided against, and why.** A generated pair of my own for the reveal:
-Gemini's prepaid credits were exhausted mid-pass and no other generator is
+the generator's prepaid credits were exhausted mid-pass and no other generator is
 wired to this machine, so a real fallback was built first — a live site from
 the Work page as the surface, its actual DOM drawn as a schematic underneath —
 and then retired the moment the studio's own pair arrived, because the brief

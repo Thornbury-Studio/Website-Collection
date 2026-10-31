@@ -7,14 +7,14 @@ and nothing was taken from a real agent, agency or listing.
 
 | File | Frame | Model | Notes |
 |---|---|---|---|
-| `img/portrait-1000.webp` | `portrait` | Higgsfield `soul_2` (text2image_soul_v2), 2K | Hero portrait. First generation kept. |
-| `img/portrait-alt-1000.webp` | `portrait-alt` | Higgsfield `soul_2`, 2K | Story page. First generation kept. |
-| `img/home-tower-{1800,900}.webp` | `home-tower` | Higgsfield `soul_2`, 2K | First generation kept. |
-| `img/home-block-{1800,900}.webp` | `home-block` | Higgsfield `soul_2`, 2K | **One re-roll.** v1 returned a six-storey European slab, which contradicted the "twelfth floor" copy; the prompt was changed only to pin storey count and tropical typology. |
-| `img/home-kitchen-{1800,900}.webp` | `home-kitchen` | Higgsfield `soul_2`, 2K | First generation kept. |
-| `img/home-bedroom-{1200,800}.webp` | `home-bedroom` | Higgsfield `soul_2`, 2K | First generation kept. |
-| `img/home-terrace-{1800,900}.webp` | `home-terrace` | Higgsfield `soul_2`, 2K | First generation kept. |
-| `img/keys-1000.webp` | `keys` | Higgsfield `soul_2`, 2K | First generation kept. |
+| `img/portrait-1000.webp` | `portrait` | AI generator `soul_2` (text2image_soul_v2), 2K | Hero portrait. First generation kept. |
+| `img/portrait-alt-1000.webp` | `portrait-alt` | AI generator `soul_2`, 2K | Story page. First generation kept. |
+| `img/home-tower-{1800,900}.webp` | `home-tower` | AI generator `soul_2`, 2K | First generation kept. |
+| `img/home-block-{1800,900}.webp` | `home-block` | AI generator `soul_2`, 2K | **One re-roll.** v1 returned a six-storey European slab, which contradicted the "twelfth floor" copy; the prompt was changed only to pin storey count and tropical typology. |
+| `img/home-kitchen-{1800,900}.webp` | `home-kitchen` | AI generator `soul_2`, 2K | First generation kept. |
+| `img/home-bedroom-{1200,800}.webp` | `home-bedroom` | AI generator `soul_2`, 2K | First generation kept. |
+| `img/home-terrace-{1800,900}.webp` | `home-terrace` | AI generator `soul_2`, 2K | First generation kept. |
+| `img/keys-1000.webp` | `keys` | AI generator `soul_2`, 2K | First generation kept. |
 | `img/og.webp` | — | derived | Crop of the graded `portrait` frame to 1200×630. |
 | `../../img/property-bluehour-sm.webp` | — | derived | 960×600 screenshot of the homepage, for the hub gallery card. |
 
@@ -24,14 +24,14 @@ was generated.
 
 ## Route taken
 
-`src/gen.mjs` is the Gemini (nano-banana) batch this set was planned for, and
+`src/gen.mjs` is the the generator (image model) batch this set was planned for, and
 it is kept because it holds the prompts. It never ran: both
-`nano-banana-pro-preview` and `gemini-3.1-flash-image` returned HTTP 429 on
+image model and image model returned HTTP 429 on
 every attempt across ~17 retry passes over roughly an hour — the same
 quota-event pattern recorded in memory. Adobe Stock's free tier was searched
 next and could supply plausible interiors but no portrait that did not read as
 generic corporate stock, which is fatal for a site whose whole subject is one
-person. Higgsfield `soul_2` absorbed the entire set at 0.12 credits a frame.
+person. AI generator `soul_2` absorbed the entire set at 0.12 credits a frame.
 
 `src/grade.mjs` holds the grading pass and the responsive encodes. Every frame
 goes through one identical chain — a little contrast, blue into the shadows,

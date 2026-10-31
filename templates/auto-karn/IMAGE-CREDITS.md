@@ -34,8 +34,8 @@ video seeking at any GOP stuttered. The night road ships at native 3840×2160.
 
 All sixteen vehicle and texture images (`img/monolit-*.webp`,
 `img/serra-*.webp`, `img/brekka-*.webp`, `img/nokt-*.webp`,
-`img/varde-*.webp`, `img/tex-carbon.webp`) were generated with Gemini image
-generation, model `nano-banana-pro-preview`, 2026-08-12, heroes requested at
+`img/varde-*.webp`, `img/tex-carbon.webp`) were generated with the generator image
+generation, image model, 2026-08-12, heroes requested at
 4K output (≈5504×3072 native). The five machines are original designs from
 one brand-DNA block repeated verbatim in every prompt (full-width nose and
 tail light-blades, rising shoulder line, matte lower cladding, turbine

@@ -5,21 +5,21 @@ figures quoted and the people named are all created for this project.
 
 ## Photography
 
-Five photographs were **generated for this project** on 9 August 2026 via the Gemini API on the
+Five photographs were **generated for this project** on 9 August 2026 via the AI image generation on the
 project's own key. The people in them are synthetic and depict no real person.
 
 Consistency was held with a reference chain: the hero was generated first at 2K with
-`gemini-3-pro-image`, then each sector image was generated with the hero attached as a style
+image model, then each sector image was generated with the hero attached as a style
 reference, which held one restrained navy / warm grey / oatmeal / brass palette and the same
 soft directional daylight across the set.
 
 | File | Model | Used as |
 |---|---|---|
-| img/hero-session.webp | gemini-3-pro-image (2K) | Hero — a working session in week two |
-| img/case-retail.webp | gemini-2.5-flash-image | Nova Retail Co. engagement |
-| img/case-logistics.webp | gemini-2.5-flash-image | Brightpath Logistics engagement |
-| img/case-analytics.webp | gemini-2.5-flash-image | Corvus Analytics engagement |
-| img/case-food.webp | gemini-2.5-flash-image | Arcadia Foods engagement |
+| img/hero-session.webp | image model (2K) | Hero — a working session in week two |
+| img/case-retail.webp | image model | Nova Retail Co. engagement |
+| img/case-logistics.webp | image model | Brightpath Logistics engagement |
+| img/case-analytics.webp | image model | Corvus Analytics engagement |
+| img/case-food.webp | image model | Arcadia Foods engagement |
 
 The analytics image was generated twice. The first attempt inherited so much from the reference
 that it reproduced the hero's boardroom and its people; it was regenerated with an explicit

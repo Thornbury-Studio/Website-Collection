@@ -63,13 +63,13 @@ Rejected: two aerial craters that would have rhymed with the porthole —
 3_WfbuGPF1I (Calderón Hondo, Fuerteventura) and fhudqmMoWHM (Iceland) —
 because placing them in an Acatenango section would misstate where they are.
 
-## Generated — the bag (Higgsfield)
+## Generated — the bag (AI generator)
 
-`img/bag-*.webp` — Higgsfield, model `nano_banana_pro`, 4K, 4:5, one
+`img/bag-*.webp` — AI generator, image model, 4K, 4:5, one
 generation, kept on first inspection (4 credits). Job
 `17ddd7fb-252d-48a1-ba6e-f17387c4f693`, 23 Sep 2026. Inspected at 1:1: the
 word CRATER is spelled correctly, no other text or marks appeared, the valve
-reads as a real one-way valve. Master: `tools/raw/higgsfield/bag-17ddd7fb.png`
+reads as a real one-way valve. Master: `tools/raw/bag/bag-master.png`
 (gitignored). The only change after generation is a crop and resize; the
 page feathers its backdrop with a CSS mask. Prompt, verbatim:
 

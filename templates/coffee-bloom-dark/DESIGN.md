@@ -47,7 +47,7 @@ gives — is the site's single authored mechanism and its only proof.
    on the bag page. The date on the bag and the day on the stage are the
    same number from the same calendar.
 
-*Critique round 1 (fresh-context critic, DARK.md §6).* Largest gap: **the
+*Critique round 1 (outside critic, DARK.md §6).* Largest gap: **the
 bag never appeared** — the hero was a stock kettle-over-dripper shot,
 "One bag." sat beside loose beans, the bag page opened on an unbranded
 pouch. Fixed by the printed, relit bag (`tools/bag.py`) with the live

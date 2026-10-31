@@ -50,7 +50,7 @@ stock plate that arrives mis-graded.
 ## Generated imagery
 
 None. No AI image or video generation was used for this template, so
-`VIDEO-POLICY.md`'s credit-conservation rules were not engaged. The Gemini path
+`VIDEO-POLICY.md`'s credit-conservation rules were not engaged. The the generator path
 (`tools/gen.mjs`) was not called.
 
 ## No faces

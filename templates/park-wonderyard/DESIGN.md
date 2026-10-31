@@ -97,7 +97,7 @@ with personality, "now" status derived deterministically from time of day.
 ## Imagery
 
 Per repo recipe: imagery FIRST, layout follows what exists.
-- Generated (Higgsfield nano_banana_pro, ~2cr/frame): the frames that define
+- Generated (AI generator image model, ~2cr/frame): the frames that define
   WONDERYARD's own architecture — gate hero + one establishing frame per
   world. One STYLE block verbatim across all; "real destination photography
   of a place that happens not to exist"; NO readable text anywhere.

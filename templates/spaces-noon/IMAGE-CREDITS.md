@@ -33,7 +33,7 @@ is a frame from this clip.
 
 `img/ext-*.webp` (four building portraits), `img/int-*.webp` (four
 interiors), `img/mat-*.webp` (three material macros) — generated with
-Gemini image generation, model `nano-banana-pro-preview` (all eleven
+AI image generation, image model (all eleven
 first-try), 2026-08-12, from two shared STYLE blocks (one for exteriors,
 one for interiors: clear Nordic morning light, pale honey brick and white
 render, no people, lettering explicitly forbidden). Zoom-audited for stray

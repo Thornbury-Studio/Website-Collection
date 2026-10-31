@@ -29,7 +29,7 @@ luxurious"; the page performs the turn instead.
    visitor's hand. Each readout card is only shown on its own side of the
    line: the parfum card appears once the melt reaches it.
 
-   *Critique round 1 (fresh-context critic):* the first version graded the
+   *Critique round 1 (outside critic):* the first version graded the
    lower half as a warm gradient-map of the intact slab, which read as
    "stained butter" and contradicted its own `CLEAR` readout. Fixed by the
    dissolve above; do not regress to grading the texture in place.

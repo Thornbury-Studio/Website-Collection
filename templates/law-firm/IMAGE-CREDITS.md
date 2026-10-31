@@ -16,8 +16,8 @@ original to this template.
 
 ## Generation
 
-**Tool:** Higgsfield MCP
-**Image model:** `nano_banana_flash` (Google), 1K, text-to-image
+**Tool:** AI generation MCP
+**Image model:** image model (Google), 1K, text-to-image
 
 All four portraits share one prompt scaffold — soft window light from the left, warm
 ivory backdrop, muted earth-tone tailoring — so they read as one photo shoot. Prompts

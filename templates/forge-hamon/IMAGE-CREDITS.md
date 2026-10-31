@@ -51,10 +51,10 @@ than an outcome.
 
 ## Generated imagery
 
-None. The Gemini image path this repo normally uses
+None. The the generator image path this repo normally uses
 (`tools/gen.mjs`, kept in place with its prompt set) returned
-`RESOURCE_EXHAUSTED` on `nano-banana-pro-preview`, `gemini-3.1-flash-image` and
-`gemini-2.5-flash-image` — prepayment credits are depleted — so the set was
+`RESOURCE_EXHAUSTED` on image model, and
+image model — prepayment credits are depleted — so the set was
 sourced from licensed stock instead, per the asset decision order in
 `VIDEO-POLICY.md`. No video was generated.
 

@@ -42,10 +42,10 @@ matches the folder.
 `img/coastal-saltfield-sm.webp` in the repository root is a screenshot of this template's own
 homepage, used as its card in the hub gallery.
 
-## Generated illustrations — Gemini (Nano Banana Pro)
+## Generated illustrations
 
 Two assets no stock library could supply — the property's own map and its brand sketch — were
-generated on **11 August 2026** with Google's `nano-banana-pro-preview` model via the Gemini
+generated on **11 August 2026** with an AI image model via the the generator
 API, from original text prompts written for this template:
 
 | File | What it is |

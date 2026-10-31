@@ -2,9 +2,9 @@
 
 Every still on this site was generated for it. Nothing is licensed stock.
 
-Gemini prepaid credits were depleted (`RESOURCE_EXHAUSTED` on
-`nano-banana-pro-preview`, `gemini-3.1-flash-image`, and
-`gemini-2.5-flash-image`) so the set was generated in Cursor image-gen with
+the generator prepaid credits were depleted (`RESOURCE_EXHAUSTED` on
+image model,, and
+image model) so the set was generated in Cursor image-gen with
 one STYLE held across the batch, then restaged from the approved dip-hall
 master. Packing, vault and yard were re-rolled once to kill gibberish
 lettering. No video.

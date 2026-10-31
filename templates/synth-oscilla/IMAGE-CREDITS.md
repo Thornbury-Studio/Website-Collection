@@ -4,12 +4,12 @@ Oscilla is a **fictional business**. The company, the four instruments (Field, T
 North), their specifications, firmware versions, prices and all copy are original to this
 template. No real manufacturer's identity, products or pricing are used.
 
-## The instruments — generated (Gemini)
+## The instruments — generated 
 
 No stock library sells photographs of hardware that does not exist, so the entire product range
-was generated on **11 August 2026** through the Gemini API from original prompts written for
-this template. The flagship frame came from `nano-banana-pro-preview`; the rest fell back to
-`gemini-3.1-flash-image` when the pro model returned 503s mid-run.
+was generated on **11 August 2026** through the AI image generation from original prompts written for
+this template. The flagship frame came from image model; the rest fell back to
+image model when the pro model returned 503s mid-run.
 
 The design brief was written once and repeated verbatim in every prompt — charcoal anodised
 panel, solid oak end cheeks, knurled black knobs with amber indicator caps, identical studio

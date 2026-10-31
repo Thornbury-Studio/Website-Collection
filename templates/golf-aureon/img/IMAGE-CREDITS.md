@@ -1,7 +1,7 @@
 # Image credits — AUREON (golf-aureon)
 
-All seven photographs were generated with Google Gemini (`gemini-3-pro-image` for the
-course master, `gemini-2.5-flash-image` for the derived shots, 2026-08-09), each derived
+All seven photographs were generated with AI image generation (image model for the
+course master, image model for the derived shots, 2026-08-09), each derived
 shot using the course master as the colour-grade/light/mood reference. The grade is a
 sunny vintage-film look — warm Kodachrome-brochure tones with gentle grain. The
 practice-bay golfer is synthetic, shot from behind; no real person or club is depicted.

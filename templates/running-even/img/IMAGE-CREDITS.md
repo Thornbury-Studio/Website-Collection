@@ -1,7 +1,7 @@
 # Image credits — EVEN (running-even)
 
-All three photographs were generated with Google Gemini (`gemini-3-pro-image` for the
-hero master, `gemini-2.5-flash-image` for the two derived shots, 2026-08-09), using the
+All three photographs were generated with AI image generation (image model for the
+hero master, image model for the two derived shots, 2026-08-09), using the
 hero as the style/palette/lighting reference for the chain. The runner is synthetic; no
 real person is depicted.
 

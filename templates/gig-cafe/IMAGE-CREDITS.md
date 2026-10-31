@@ -13,8 +13,8 @@ pixel of them is reused.
 
 ## Generated concept imagery
 
-Everything below was generated on 18 Aug 2026 via Higgsfield (model reported as
-`nano_banana_flash`, submitted as `nano_banana_2`), as one set sharing a single
+Everything below was generated on 18 Aug 2026 via AI generator (model reported as
+image model, submitted as image model), as one set sharing a single
 verbatim style block so it reads as one campaign shoot. These frames are
 **concept imagery**: they do not depict the real GIG Cafe premises, staff,
 customers or exact dishes, and must be replaced with the client's approved

@@ -194,7 +194,7 @@ bar, and this matches it.
 ## Open
 
 **The atmospheric plate is not shipped.** One generated 4K loop was planned for
-the environment; the Higgsfield account was at 4.78 credits against a 20-credit
+the environment; the AI generation account was at 4.78 credits against a 20-credit
 floor (MiniMax H3, the cheapest video model), so nothing was generated —
 generating a worse thing was not the alternative, generating nothing was. The
 procedural air stands alone and the page is complete without it.

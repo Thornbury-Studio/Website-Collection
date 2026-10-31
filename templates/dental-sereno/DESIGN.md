@@ -218,7 +218,7 @@ clock the first-visit section runs on; the caption says so.
 
 ## 11. Critique rounds (DARK.md §6)
 
-**Round one** (fresh-context critic, screenshots + reference + §4 only;
+**Round one** (outside critic, screenshots + reference + §4 only;
 7/10). The checklist found nothing. The single largest gap: the
 photographs were the only thing on the site not about this clinic, and
 the copy was specific enough to expose them: a European room with a
@@ -241,7 +241,7 @@ now an outline), three consecutive two-column modules on the home page
 beats too faint, and the `figure` default margin that inset every
 photograph by 40 px.
 
-**Round two** (second fresh critic; 7.5/10, "a real improvement, not a
+**Round two** (second outside critic; 7.5/10, "a real improvement, not a
 material one"). Place closed, hero closed, team page judged not closed:
 masked stock portraits read as strangers, and the critic's own fix (real
 photographs, or an honest empty slot) is outside what a showcase template

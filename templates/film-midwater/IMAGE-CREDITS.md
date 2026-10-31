@@ -38,5 +38,5 @@ The sonar ping is synthesized in Web Audio at runtime — no file.
 ## Generated art
 
 `img/onesheet.webp` / `img/onesheet-sm.webp` — the film's one-sheet key art,
-generated with Gemini (gemini-3-pro-image) using two of the licensed clips'
+generated with the generator (image model) using two of the licensed clips'
 frames as palette/lighting references. No real person or place depicted.

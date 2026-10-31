@@ -143,7 +143,7 @@ never typed into copy — per the repo-wide arithmetic rule.
 
 ## Imagery
 
-Generated set (Gemini nano-banana-pro 4K, per IMAGE-CREDITS.md): five stage
+Generated set (the generator image model 4K, per IMAGE-CREDITS.md): five stage
 three-quarter portraits on one identical graphite cyclorama with volt rim
 light, one bone-ground side profile for the teardown, one cinematic hero
 keyframe. Detail crops are cut from the 4K stage frames, never generated

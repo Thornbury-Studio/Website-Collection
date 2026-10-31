@@ -9,8 +9,8 @@ the artwork was generated to match that bible — not the other way around.
 
 ## Generation
 
-All 30 illustration masters were generated 20 Aug 2026 via **Higgsfield**
-(Nano Banana 2 / Nano Banana Pro, both Google-provided models) at 2K
+All 30 illustration masters were generated 20 Aug 2026 via **AI generator**
+(image model 2 / image model, both Google-provided models) at 2K
 portrait (1792×2400, 3:4), 2 credits per frame. One STYLE block — painterly
 scientific-romantic natural-history plate, dark water, self-lit subject,
 "NO text, NO border, pure artwork bleeding to every edge" — was repeated
@@ -18,10 +18,10 @@ verbatim across the whole set with only the creature sentence varying;
 that is what makes thirty subjects read as one illustrator.
 
 Operational note for future sets: the first submissions ran on the
-`nano_banana_flash` backend and failed at 66–83% (transient backend
+image model backend and failed at 66–83% (transient backend
 trouble; failures were **not** charged). The same prompts resubmitted on
-**`nano_banana_pro` completed 12/12 at the same 2-credit price**. The
-Gemini free path was unavailable outright ("monthly spending cap
+**image model completed 12/12 at the same 2-credit price**. The
+the generator free path was unavailable outright ("monthly spending cap
 exceeded"). Total spend for all 30 masters incl. the wasted flash attempts:
 **60 credits** (verified against the balance: 820 → 760).
 

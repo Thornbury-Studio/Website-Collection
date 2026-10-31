@@ -4,7 +4,7 @@ Two families of imagery, one palette.
 
 ## 1. Menu items — generated (16 frames)
 
-Every item photograph was generated with Google's `nano-banana-pro-preview`
+Every item photograph was generated with Google's image model
 at 4K (4096×4096, 1:1), then graded and exported to WebP at 800px and 400px.
 
 They read as one photographer because a single STYLE block was repeated

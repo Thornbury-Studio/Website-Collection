@@ -1,8 +1,8 @@
 # CINDER — image credits
 
 All product stills generated as dark-studio keyframes (Cursor image gen)
-after Gemini Nano Banana returned HTTP 429 — prepayment credits depleted.
-`tools/gen.mjs` remains the Gemini batch path when `GEMINI_API_KEY` has
+after AI image generation returned HTTP 429 — prepayment credits depleted.
+`tools/gen.mjs` remains the the generator batch path when `API key` has
 credit. One STYLE block held verbatim; only the subject sentence changed.
 No video.
 

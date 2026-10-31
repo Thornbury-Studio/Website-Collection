@@ -17,10 +17,10 @@ screen aperture with a signal trace. It is original to this template.
 
 ## Generation
 
-**Tool:** Higgsfield MCP
-**Image model:** `nano_banana_2` (Google), 2K, text-to-image for the master shot and
+**Tool:** AI generation MCP
+**Image model:** image model (Google), 2K, text-to-image for the master shot and
 image-to-image for the rest
-**Video model:** `seedance_2_0` (Bytedance), 720p, 5 s, silent, driven from a start frame
+**Video model:** `video model` (Bytedance), 720p, 5 s, silent, driven from a start frame
 
 The first render (`device-master.webp`) established the industrial design. Every subsequent
 image passed it back as a reference so the chassis, dial, toggle rail, gauge, grille, sensor pod

@@ -78,8 +78,8 @@ the ones that separate a line item from its total.
 ## What was deliberately left out
 
 - No testimonial carousel, no service-icon triplet, no "why choose us".
-- No stock photography. Every room is one photographed set (Gemini
-  `nano-banana-pro-preview`, one STYLE block held verbatim across the set;
+- No stock photography. Every room is one photographed set (the generator
+  image model, one STYLE block held verbatim across the set;
   each "before" is re-staged from its own "after" so the pair is the same
   room from the same camera). Provenance in IMAGE-CREDITS.md.
 - No regulator or accreditation names claimed as endorsement. The permit

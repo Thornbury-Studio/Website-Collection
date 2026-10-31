@@ -55,7 +55,7 @@ the client clock. Charts are value-true (handicap eases downward).
 
 ## Imagery
 
-One sunny vintage-film world in a Gemini reference chain (see img/IMAGE-CREDITS.md) —
+One sunny vintage-film world in a the generator reference chain (see img/IMAGE-CREDITS.md) —
 Kodachrome-brochure grade: warm golden morning light, gentle grain, faded-film greens,
 honey and champagne tones. Course master 21:9, lounge, dining, lockers, practice bay,
 green, recovery room. (Regraded 2026-08-09 from the original champagne-mist set, which

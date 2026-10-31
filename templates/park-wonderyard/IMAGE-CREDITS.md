@@ -4,7 +4,7 @@ All frames pass through one identical grade
 (`eq=contrast=1.045:saturation=1.02:brightness=0.004` + light unsharp) —
 see `src/export.sh`.
 
-## Generated (Higgsfield, model `nano_banana_pro` → `nano_banana_2` backend, 21 Aug 2026)
+## Generated (AI generator, image model → backend, 21 Aug 2026)
 
 One shared STYLE block across the set (documentary destination photography,
 believable engineering/materials, no readable text — abstract-symbol signage

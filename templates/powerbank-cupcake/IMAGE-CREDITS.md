@@ -25,7 +25,7 @@ Originals were center-cropped and re-encoded to WebP locally with Pillow
 
 ## The product shots (AI-generated)
 
-The four product images are **AI-generated (Google Gemini)**, supplied by the site owner.
+The four product images are **AI-generated**, supplied by the site owner.
 They depict a product that does not exist.
 
 | File | Shown as | Source |
@@ -35,13 +35,13 @@ They depict a product that does not exist.
 | `img/product-matcha.webp` | Colorway — Matcha | `58cce670-…jpg` |
 | `img/product-macaron.webp` | Special edition — The Macaron | `Cup 3.jpg` |
 
-Each source was 768×1024 and carried Gemini's visible four-point sparkle badge on the
+Each source was 768×1024 and carried the generator's visible four-point sparkle badge on the
 table edge at roughly `(668, 919)`, spanning y≈897–941. All four are **cropped to
 768×885** — the badge falls outside the frame with ~12px to spare, while the product and
 most of the cable stay in shot. No retouching or clone-stamping was used. Re-encoded to
 WebP (quality 82–84, `method=6`), **182 KB** for the set.
 
-As with the portrait, cropping removes only the *visible* badge; Gemini's invisible
+As with the portrait, cropping removes only the *visible* badge; the generator's invisible
 SynthID watermark survives cropping and re-encoding and is left intact.
 
 An earlier hand-built composite (`product-cupcake.webp` — a licensed Adobe Stock power
@@ -52,19 +52,19 @@ replaced by these and deleted. The two Stock licences remain on the account.
 
 | File | Used in | Origin | Notes |
 |---|---|---|---|
-| `img/eric-ceo.webp` | Founder card — "Eric, chief executive officer" | **AI-generated** (Google Gemini), supplied by the site owner | Depicts no real person |
+| `img/eric-ceo.webp` | Founder card — "Eric, chief executive officer" | **AI-generated** (AI image generation), supplied by the site owner | Depicts no real person |
 
 Eric is a **fictional executive of a fictional company**. The on-page notes that said so
 were removed on 8 August 2026 at the owner's request, so this file is now the only place
 that records it.
 
-The source file carried Gemini's visible four-point sparkle badge on the subject's left
+The source file carried the generator's visible four-point sparkle badge on the subject's left
 shoulder, centred near `(668, 923)` in the 768×1024 original. It is **not** retouched out:
 the image is cropped to `(57, 40) → (713, 860)` for a 4:5 head-and-shoulders portrait, and
 that framing — the normal crop for a headshot card — leaves the badge outside the frame
 with ~40px to spare. Re-encoded to 640×800 WebP (quality 82, `method=6`), **31 KB**.
 
-Note that the crop removes only the *visible* badge. Gemini also embeds an invisible
+Note that the crop removes only the *visible* badge. the generator also embeds an invisible
 SynthID watermark in the pixels, which survives cropping and re-encoding; that provenance
 signal is intentionally left intact, and the AI origin is stated in plain text above and
 in the page footer.

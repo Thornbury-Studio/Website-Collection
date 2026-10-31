@@ -25,8 +25,8 @@ All photography on this template was **generated for this project** via Cursor i
 
 Colour swatches on model pages swap to the matching paint plate. Gallery index 0 follows the selected colour; Side and Detail stay angle-locked.
 
-`tools/gen.mjs` remains available for Gemini Nano Banana when `GEMINI_API_KEY` is present.
+`tools/gen.mjs` remains available for AI image generation when `API key` is present.
 
 ## Ghost-feel pass (15 Sep 2026)
-- `img/hero.png` — bright coastal cinematic plate replacing studio hero for Rolls-Royce Ghost showroom feeling.
+- `img/hero.png` ï¿½ bright coastal cinematic plate replacing studio hero for Rolls-Royce Ghost showroom feeling.
 

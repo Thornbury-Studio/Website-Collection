@@ -4,23 +4,23 @@ FORM/01 is a **fictional label** built as a portfolio template. The name, the pi
 prices and all copy are original. No real brand's identity, silhouettes or marks are used, and
 the garments deliberately carry no visible logos.
 
-## Photography — AI-generated (Google Gemini)
+## Photography — AI-generated
 
-Every image was **generated for this project** on 9 August 2026 via the Gemini API on the
+Every image was **generated for this project** on 9 August 2026 via the AI image generation on the
 project's own key. No stock photography, no scraped images; the model in the campaign
 photograph is not a real person.
 
 Consistency was held with a reference chain: the campaign master (full-body model on seamless
-grey) was generated first at 2K with `gemini-3-pro-image`; all six product shots were then
+grey) was generated first at 2K with image model; all six product shots were then
 generated with the master attached as an image reference, and three of them ("the same … from
 the photograph") are the literal garments the model is wearing, re-shot as floating product
 images. One palette — black, white, silver — one backdrop, one light.
 
 | File | Model | Role |
 |---|---|---|
-| img/hero.webp | gemini-3-pro-image (2K) | Campaign master |
-| img/t01-tee.webp, img/p03-trouser.webp, img/s05-sneaker.webp, img/b06-bag.webp | gemini-2.5-flash-image | The exact pieces worn in the master |
-| img/j02-jacket.webp, img/c04-cargo.webp, img/l07-longsleeve.webp, img/h08-hoodie.webp, img/v09-vest.webp, img/r10-runner.webp, img/t11-tote.webp, img/k12-beanie.webp | gemini-2.5-flash-image | Collection pieces in the same system |
+| img/hero.webp | image model (2K) | Campaign master |
+| img/t01-tee.webp, img/p03-trouser.webp, img/s05-sneaker.webp, img/b06-bag.webp | image model | The exact pieces worn in the master |
+| img/j02-jacket.webp, img/c04-cargo.webp, img/l07-longsleeve.webp, img/h08-hoodie.webp, img/v09-vest.webp, img/r10-runner.webp, img/t11-tote.webp, img/k12-beanie.webp | image model | Collection pieces in the same system |
 
 The sock runner was generated twice: the first attempt came out with side-stripe markings too
 close to a real sportswear brand's design language, so it was regenerated with an explicitly
@@ -31,8 +31,8 @@ The LOCKERS section adds two more models — none of the three people depicted a
 | File | Model | Role |
 |---|---|---|
 | img/locker01.webp | crop of the campaign master | LOCKER/01 — The Commute |
-| img/locker02.webp | gemini-3-pro-image (2K), refs: master + shell + runner | LOCKER/02 — The Downpour |
-| img/locker03.webp | gemini-3-pro-image (2K), refs: master + vest + tote | LOCKER/03 — The Load-Out |
+| img/locker02.webp | image model (2K), refs: master + shell + runner | LOCKER/02 — The Downpour |
+| img/locker03.webp | image model (2K), refs: master + vest + tote | LOCKER/03 — The Load-Out |
 
 Each locker shot was generated with the campaign master **and the relevant product images**
 attached as references, so the new models wear the literal pieces sold on the page.

@@ -1,7 +1,7 @@
 # Image credits — ATELIER № 8 (art-atelier8)
 
-All eight images were generated with Google Gemini (`gemini-3-pro-image` for the master
-plate, `gemini-2.5-flash-image` for the rest, 2026-08-09), each using the master as the
+All eight images were generated with AI image generation (image model for the master
+plate, image model for the rest, 2026-08-09), each using the master as the
 wall/light/plate-photography reference. Every artwork and artist on this site is
 fictional; no real artist's work is depicted or imitated.
 

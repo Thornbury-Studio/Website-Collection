@@ -42,11 +42,11 @@ re-inks the films live at zero bytes of additional weight.
 Poster frames (`img/hero-poster.webp`, `img/pour-poster.webp`, `img/collide-poster.webp`)
 are single frames extracted from the licensed clips above.
 
-## Generated imagery — Gemini
+## Generated imagery
 
 Photographs cannot be licensed of a product that does not exist, so the can range was
-generated on **11 August 2026** via the Gemini API (`gemini-3.1-flash-image`; the
-`nano-banana-pro-preview` model was listed as fallback but was not needed this run).
+generated on **11 August 2026** via the AI image generation (image model; the
+image model model was listed as fallback but was not needed this run).
 
 | File | Subject |
 |---|---|

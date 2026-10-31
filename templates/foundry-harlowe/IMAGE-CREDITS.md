@@ -39,7 +39,7 @@ Poster frames (`img/poster-*.webp`) are frames from the clips above.
 `img/bell-single.webp`, `img/bell-ring.webp`, `img/bell-carillon.webp`,
 `img/bell-hand.webp`, `img/macro-band.webp`, `img/macro-lip.webp`,
 `img/tuning-lathe.webp`, `img/mould-pit.webp`, `img/foundry-wide.webp` —
-generated with Gemini image generation, model `nano-banana-pro-preview`
+generated with AI image generation, image model
 (all nine first-try, no fallback needed), 2026-08-12, from one shared STYLE
 block (single tungsten key light, umber darkness, satin bronze; lettering
 explicitly forbidden — ornament bands are laurel/rope/dot motifs only).

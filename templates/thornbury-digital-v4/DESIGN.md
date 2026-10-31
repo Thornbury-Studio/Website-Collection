@@ -12,7 +12,7 @@ collection as stills — not the same five sites on a loop.
 2. **Sites** — every picture is either a live collection template, or a
    cinema plate dressed as one. One clip, one job. Never reused.
 
-Internet footage is allowed as the *body* of an invented site. Higgsfield
+Internet footage is allowed as the *body* of an invented site. AI generator
 remakes a locked frame later. Credits stay in `IMAGE-CREDITS.md`.
 
 ## Story
@@ -40,7 +40,7 @@ Native scroll — no Lenis. Off on touch, reduced-motion, and stacked layout.
 
 Fix those after this cut lands. Do not hunt another metaphor.
 
-## Higgsfield later
+## AI generator later
 
 Subject: the approved Orris frame (bottle, left type, same crop).
 Camera: the existing slow hand move. Generate once, inspect, keep or stop.

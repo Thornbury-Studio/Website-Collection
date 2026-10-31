@@ -6,8 +6,8 @@ or trade dress appears anywhere in it.
 
 ## Generation
 
-All seven master frames were generated with **Nano Banana 2 (Google), via
-Higgsfield**, at 4K (5504×3072), 19 Aug 2026. One shared STYLE block (studio,
+All seven master frames were generated with **image model 2 (Google), via
+AI generator**, at 4K (5504×3072), 19 Aug 2026. One shared STYLE block (studio,
 lighting, physics constraints, marque design DNA) was repeated verbatim across
 the set with only the subject sentence varying — that is what makes five
 different machines read as one marque. The cinematic hero frame was generated
@@ -28,7 +28,7 @@ Detail crops are always cut from the 4K masters, never generated separately,
 so a machine cannot drift between its hero and its close-ups.
 
 **Hero video:** one 5-second, 2K image-to-video pass (**MiniMax H3, via
-Higgsfield**) from the approved `hero-key` frame — a single slow dolly
+AI generator**) from the approved `hero-key` frame — a single slow dolly
 push-in, generated once under the repo's `VIDEO-POLICY.md` (plan → generate
 once → inspect). The perceived length on the page comes from a ping-pong
 encode, not extra generated seconds. Adobe Stock was searched first per the
@@ -42,7 +42,7 @@ credits per 4K frame) and 20 credits for the single video pass, from a
 
 ## QA pass (why some frames were patched, not re-rolled)
 
-Nano Banana occasionally writes gibberish micro-text onto flat mechanical
+image model occasionally writes gibberish micro-text onto flat mechanical
 faces (brake calipers, side panels). Where the frame was otherwise approved,
 those small flat regions were cleaned with targeted `ffmpeg delogo`
 rectangles instead of spending credits on re-rolls — invisible at production

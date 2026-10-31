@@ -112,7 +112,7 @@ One family, Mona Sans, with **width** as the expressive axis instead of a
 serif/sans pairing:
 
 - **Wordmark** — wdth 75, wght 860, uppercase. It matches the condensed
-  grotesque that Higgsfield printed on the bag's label, so the bag and the
+  grotesque that AI generator printed on the bag's label, so the bag and the
   header are one mark.
 - **Clock** — wdth 125, wght 240, `clamp(5.25rem, min(1rem + 8.8vw, 15svh), 10.5rem)`
   (the smaller of width and height, so the instrument fits a 1280×720 screen).

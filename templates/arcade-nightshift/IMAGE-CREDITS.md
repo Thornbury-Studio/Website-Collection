@@ -5,7 +5,7 @@ All frames pass one identical grade (`eq=contrast=1.04:saturation=0.98`
 desaturating variant to sit with the amber house palette. See
 `src/export.sh`.
 
-## Generated (Higgsfield, model `nano_banana_pro` → `nano_banana_2` backend, 25 Aug 2026)
+## Generated (AI generator, image model → backend, 25 Aug 2026)
 
 One shared STYLE block (commercial architectural interior photography,
 believable construction, abstract-symbol signage, no readable text).

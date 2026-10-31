@@ -208,12 +208,12 @@ cut at its roof.
 - **The film and the keyframe are AI-generated, with the boss's explicit OK** (DESIGN.md §6 gate).
   - **Why:** a search of Pexels, Pixabay, Mixkit, Coverr and Adobe Stock's free tier found no
     real clip that films a sky-to-lodge move in polar night.
-  - **The still:** one Nano Banana Pro keyframe, a free generation.
-  - **The clip:** one Kling 3.0 image-to-video, 48 credits.
+  - **The still:** one image model keyframe, a free generation.
+  - **The clip:** one video model image-to-video, 48 credits.
   - **Prompts:** the policy's subject / composition / camera / motion / constraints order.
   - **Excluded:** smoke and falling snow, because the clip plays reversed.
   - Accepted on the first generation; nothing regenerated (VIDEO-POLICY.md).
-- **The three interiors are generated too:** Nano Banana Pro, with the keyframe as the reference.
+- **The three interiors are generated too:** image model, with the keyframe as the reference.
   - **History:** the first build used Pexels stock. The round-2 critic showed it contradicted the product: trees
     outside the window, a wedding banquet, three gradings.
   - **Look:** the same black larch, the same square deep-framed windows, and aurora over treeless snow in every
