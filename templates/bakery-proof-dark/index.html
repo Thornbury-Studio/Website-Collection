@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PROOF. — A neighbourhood bakery in Singapore that bakes from 02:00 to 07:00</title>
+<meta name="description" content="PROOF. is a neighbourhood bakery-cafe in Singapore. The dough is mixed at 02:00, the first tray comes out at 05:52 and the doors open at 07:00. Loaves from S$4.80, croissants from S$4.60, closed Mondays.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self' blob:; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#120e0a">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/bakery-proof-dark/">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PROOF.">
+<meta property="og:title" content="PROOF. — Bread is made while you sleep.">
+<meta property="og:description" content="A Singapore bakery-cafe whose page runs the night shift from 02:00 to 07:00. Menu sorted by bake time, not by category.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/bakery-proof-dark/">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/bakery-proof-dark/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A baker scraping dough from a spiral mixer bowl in warm light, with the clock reading 02:00 and the line Bread is made while you sleep.">
+<meta property="og:locale" content="en_SG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PROOF. — Bread is made while you sleep.">
+<meta name="twitter:description" content="A Singapore bakery-cafe. Mixed at 02:00, first tray at 05:52, doors at 07:00.">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/bakery-proof-dark/img/og.jpg">
+
+<link rel="preload" href="fonts/fraunces-wght.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/hanken-grotesk-wght.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" type="image/avif" imagesrcset="img/p-mix-960.avif 960w, img/p-mix-1920.avif 1920w" imagesizes="100vw" fetchpriority="high">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/boot.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "@id": "https://templates.thornburystudio.com/templates/bakery-proof-dark/#bakery",
+  "name": "PROOF.",
+  "description": "Neighbourhood bakery-cafe in Singapore. Dough is mixed at 02:00 and the doors open at 07:00.",
+  "url": "https://templates.thornburystudio.com/templates/bakery-proof-dark/",
+  "image": "https://templates.thornburystudio.com/templates/bakery-proof-dark/img/og.jpg",
+  "servesCuisine": "Bakery",
+  "priceRange": "S$3.60 - S$9.50",
+  "telephone": "+65 6100 0147",
+  "address": { "@type": "PostalAddress", "streetAddress": "37 Pelangi Lane, #01-14", "addressLocality": "Singapore", "addressCountry": "SG" },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "07:00", "closes": "17:00" }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#menu">Skip the night shift, go to the menu</a>
+
+<header class="top" id="top">
+  <a class="mark" href="#mix" aria-label="PROOF., back to the start of the night">PROOF<span>.</span></a>
+  <nav aria-label="Main">
+    <a href="#mix">The night</a>
+    <a href="#menu">Menu</a>
+    <a href="#visit">Visit</a>
+  </nav>
+  <button class="motion" id="motion" type="button" aria-pressed="false">Motion <b>on</b></button>
+</header>
+
+<canvas class="dust" id="dust" aria-hidden="true"></canvas>
+<div class="clock" id="clock" aria-hidden="true"></div>
+<p class="sr-only" id="hour-live" aria-live="polite"></p>
+
+<main>
+
+<!-- 02:00 -->
+<section class="ch ch--night" id="mix" data-hour="2" aria-labelledby="t-mix">
+  <div class="stage">
+    <div class="plate">
+      <picture><source type="image/avif" srcset="img/p-mix-960.avif 960w, img/p-mix-1920.avif 1920w" sizes="100vw"><img class="poster" src="img/p-mix-1920.webp" srcset="img/p-mix-960.webp 960w, img/p-mix-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="A baker's hand scraping pale dough down the side of a spiral mixer bowl under warm light." fetchpriority="high"></picture>
+      <video muted loop playsinline preload="none" data-name="mix" data-rungs="2160,1080,720" aria-hidden="true" tabindex="-1"></video>
+    </div>
+    <div class="copy">
+      <p class="eyebrow"><span>Hour 1 of 5</span> Mix</p>
+      <h1 id="t-mix">Bread is made while you sleep.</h1>
+      <p class="lede">At 02:00 the first bowl is already turning: 62&nbsp;kg of flour, a levain that has been working cold since four yesterday afternoon, and two people who would rather you did not ask them anything until the dough is at 24&nbsp;&deg;C.</p>
+      <dl class="facts">
+        <div><dt>First bowl</dt><dd>62 kg</dd></div>
+        <div><dt>Dough</dt><dd>24 &deg;C</dd></div>
+        <div><dt>On shift</dt><dd>2</dd></div>
+      </dl>
+    </div>
+    <figure class="inset" aria-hidden="true">
+      <video data-late muted loop playsinline preload="none" data-name="flour" data-rungs="1080,720" tabindex="-1"></video>
+      <figcaption>Dusting the bench</figcaption>
+    </figure>
+    <p class="scrollcue" aria-hidden="true">Scroll to run the clock</p>
+  </div>
+</section>
+
+<!-- 03:00 -->
+<section class="ch ch--night ch--r" id="shape" data-hour="3" aria-labelledby="t-shape">
+  <div class="stage">
+    <div class="plate">
+      <picture><source type="image/avif" srcset="img/p-knead-960.avif 960w, img/p-knead-1920.avif 1920w" sizes="100vw"><img class="poster" src="img/p-knead-1920.webp" srcset="img/p-knead-960.webp 960w, img/p-knead-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="Two hands folding a round of dough beside a bench scraper and a floured basket." loading="lazy" decoding="async"></picture>
+      <video muted loop playsinline preload="none" data-name="knead" data-rungs="2160,1080,720" aria-hidden="true" tabindex="-1"></video>
+    </div>
+    <div class="copy">
+      <p class="eyebrow"><span>Hour 2 of 5</span> Shape</p>
+      <h2 id="t-shape">Hands, not machines.</h2>
+      <p class="lede">The country loaves are folded by hand, 14 to a board, 780&nbsp;g each. Baguettes get a 20-minute rest after pre-shaping and are then rolled out to 62&nbsp;cm, one at a time, by whoever has the steadiest wrists that week.</p>
+      <dl class="facts">
+        <div><dt>Country loaf</dt><dd>780 g</dd></div>
+        <div><dt>Baguette</dt><dd>62 cm</dd></div>
+        <div><dt>Rest</dt><dd>20 min</dd></div>
+      </dl>
+    </div>
+    <figure class="inset" aria-hidden="true">
+      <video data-late muted loop playsinline preload="none" data-name="baguette" data-rungs="1080,720" tabindex="-1"></video>
+      <figcaption>Baguettes into the pan</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 04:00 -->
+<section class="ch ch--night ch--big" id="fold" data-hour="4" aria-labelledby="t-fold">
+  <div class="stage">
+    <div class="plate">
+      <picture><source type="image/avif" srcset="img/p-roll-960.avif 960w, img/p-roll-1920.avif 1920w" sizes="100vw"><img class="poster" src="img/p-roll-1920.webp" srcset="img/p-roll-960.webp 960w, img/p-roll-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="A low view of a rolling pin pressing dough across a floured steel bench, flour hanging in the air." loading="lazy" decoding="async"></picture>
+      <video muted loop playsinline preload="none" data-name="roll" data-rungs="2160,1080,720" aria-hidden="true" tabindex="-1"></video>
+    </div>
+    <div class="copy">
+      <p class="eyebrow"><span>Hour 3 of 5</span> Roll and fold</p>
+      <h2 id="t-fold">Roll. Fold. Chill. Again.</h2>
+      <p class="lede">Croissant dough takes three folds in ninety minutes, and every fold ends in the fridge so the butter stays a sheet instead of a smear. Three folds make 27 layers. The bench stays cold, the pin stays heavy, and nobody opens the door to the hot kitchen until the last one is done.</p>
+      <dl class="facts sr-only">
+        <div><dt>Folds</dt><dd>3</dd></div>
+        <div><dt>Layers</dt><dd>27</dd></div>
+        <div><dt>Window</dt><dd>90 min</dd></div>
+      </dl>
+    </div>
+    <p class="big" aria-hidden="true"><b>27</b><span>layers, after three folds</span></p>
+  </div>
+</section>
+
+<!-- 05:00 -->
+<section class="ch ch--night ch--big" id="bake" data-hour="5" aria-labelledby="t-bake">
+  <div class="stage">
+    <div class="plate">
+      <picture><source type="image/avif" srcset="img/p-oven-960.avif 960w, img/p-oven-1920.avif 1920w" sizes="100vw"><img class="poster" src="img/p-oven-1920.webp" srcset="img/p-oven-960.webp 960w, img/p-oven-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="A row of shaped baguettes with slashed tops glowing amber inside a deck oven." loading="lazy" decoding="async"></picture>
+      <video muted loop playsinline preload="none" data-name="oven" data-rungs="2160,1080,720" aria-hidden="true" tabindex="-1"></video>
+    </div>
+    <div class="copy">
+      <p class="eyebrow"><span>Hour 4 of 5</span> Bake</p>
+      <h2 id="t-bake">The oven woke at half past three.</h2>
+      <p class="lede">The deck oven goes in at 250&nbsp;&deg;C and the first load gets twelve seconds of steam before the door is shut. The country loaves stay in for 40 minutes; baguettes need 24. Nothing in this hour is hurried, because everything in it is now fixed.</p>
+      <dl class="facts sr-only">
+        <div><dt>Oven</dt><dd>250 &deg;C</dd></div>
+        <div><dt>Steam</dt><dd>12 s</dd></div>
+        <div><dt>Baguette</dt><dd>24 min</dd></div>
+      </dl>
+    </div>
+    <p class="big big--amber" aria-hidden="true"><b>250&deg;</b><span>the deck, before the first load</span></p>
+  </div>
+</section>
+
+<!-- 06:00 -->
+<section class="ch ch--night ch--r ch--out" id="out" data-hour="6" aria-labelledby="t-out">
+  <div class="stage">
+    <div class="plate">
+      <picture><source type="image/avif" srcset="img/p-rack-960.avif 960w, img/p-rack-1920.avif 1920w" sizes="100vw"><img class="poster" src="img/p-rack-1920.webp" srcset="img/p-rack-960.webp 960w, img/p-rack-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="Racks of freshly baked baguettes with deeply coloured crusts, seen at a slow slide past the shelves." loading="lazy" decoding="async"></picture>
+      <video muted loop playsinline preload="none" data-name="rack" data-rungs="2160,1080,720" aria-hidden="true" tabindex="-1"></video>
+    </div>
+    <div class="copy">
+      <p class="eyebrow"><span>Hour 5 of 5</span> First tray out</p>
+      <h2 id="t-out">They sing on the rack.</h2>
+      <p class="lede">The first baguettes leave the oven at 05:52. For the next ten minutes the crust cools faster than the crumb and crackles, and the people who work here stand very still and listen to it. Then somebody sweeps the floor, and the doors are almost ready.</p>
+      <dl class="facts">
+        <div><dt>First tray</dt><dd>05:52</dd></div>
+        <div><dt>Loaves</dt><dd>38</dd></div>
+        <div><dt>Crackle</dt><dd>10 min</dd></div>
+      </dl>
+    </div>
+    <figure class="inset" aria-hidden="true">
+      <video data-late muted loop playsinline preload="none" data-name="tray" data-rungs="1080,720" tabindex="-1"></video>
+      <figcaption>The first one off the peel</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 07:00 doors -->
+<section class="open" id="open" aria-labelledby="t-open">
+  <div class="stage">
+    <div class="day-back">
+      <div class="bloom"></div>
+      <p class="eyebrow"><span>07:00</span> Doors</p>
+      <h2 id="t-open">We open at seven.</h2>
+      <p class="lede">Everything below came out of the oven this morning, in the order it came out.</p>
+      <ul class="first" aria-label="First out of the oven today">
+        <li><time datetime="05:40">05:40</time><span>Country sourdough</span></li>
+        <li><time datetime="05:52">05:52</time><span>Baguette tradition</span></li>
+        <li><time datetime="06:20">06:20</time><span>Butter croissant</span></li>
+      </ul>
+    </div>
+    <div class="door door--l" aria-hidden="true"><span>07:00</span></div>
+    <div class="door door--r" aria-hidden="true"><span>07:00</span></div>
+  </div>
+</section>
+
+<!-- the day -->
+<div class="day">
+
+<section class="menu" id="menu" aria-labelledby="t-menu">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--day"><span>Menu</span> Sorted by bake time</p>
+    <div class="menu-head"><h2 id="t-menu">What came out of the oven, and when.</h2>
+    <p class="lede lede--day">A tray is warm for about three hours and good for the rest of the morning. The bar on each line shows when it left the oven and how long we would still hand it to you without apologising. Ask for the next tray and we will tell you the truth.</p></div>
+
+    <div class="ruler" aria-hidden="true"><span>05:00</span><span>07:00</span><span>09:00</span><span>11:00</span><span>13:00</span></div>
+    <ol class="rows">
+      <li class="row" style="--from:0.083;--to:1.000">
+        <time class="t" datetime="05:40">05:40</time>
+        <div class="what"><h3>Country sourdough</h3><p>780&nbsp;g, 38-hour levain, blistered crust, a crumb you can see light through.</p></div>
+        <picture class="thumb"><source type="image/avif" srcset="img/bread-country-800.avif" sizes="160px"><img src="img/bread-country-800.webp" width="800" height="533" sizes="160px" alt="Rustic sourdough loaves and floured buns, close up, with dark crackled crusts." loading="lazy" decoding="async"></picture>
+        <p class="price">S$9.50</p>
+        <div class="bar"><i></i><span class="sr-only">Out of the oven at 05:40, at its best until 13:00.</span></div>
+      </li>
+      <li class="row" style="--from:0.108;--to:0.500">
+        <time class="t" datetime="05:52">05:52</time>
+        <div class="what"><h3>Baguette tradition</h3><p>24 minutes at 250&nbsp;&deg;C. Eat it on the pavement, in the first ten.</p></div>
+        <picture class="thumb"><source type="image/avif" srcset="img/baguette-800.avif" sizes="160px"><img src="img/baguette-800.webp" width="800" height="533" sizes="160px" alt="Two baguettes with golden, flour-streaked crusts resting side by side." loading="lazy" decoding="async"></picture>
+        <p class="price">S$4.80</p>
+        <div class="bar"><i></i><span class="sr-only">Out of the oven at 05:52, at its best until 09:00.</span></div>
+      </li>
+      <li class="row" style="--from:0.135;--to:0.750">
+        <time class="t" datetime="06:05">06:05</time>
+        <div class="what"><h3>Milk loaf</h3><p>Soft enough for toast and for lunchboxes. Sold whole or by the half.</p></div>
+        <picture class="thumb"><source type="image/avif" srcset="img/cooling-800.avif" sizes="160px"><img src="img/cooling-800.webp" width="800" height="533" sizes="160px" alt="Round golden loaves sitting on a cooling rack in a bakery kitchen." loading="lazy" decoding="async"></picture>
+        <p class="price">S$7.20</p>
+        <div class="bar"><i></i><span class="sr-only">Out of the oven at 06:05, at its best until 11:00.</span></div>
+      </li>
+      <li class="row" style="--from:0.167;--to:0.562">
+        <time class="t" datetime="06:20">06:20</time>
+        <div class="what"><h3>Butter croissant</h3><p>27 layers, 31&nbsp;% butter, baked until the tips are nearly dark. Gone by ten most days.</p></div>
+        <picture class="thumb"><source type="image/avif" srcset="img/croissant-tray-800.avif" sizes="160px"><img src="img/croissant-tray-800.webp" width="800" height="533" sizes="160px" alt="A tray of glossy croissants with visible layers, in rows." loading="lazy" decoding="async"></picture>
+        <p class="price">S$4.60</p>
+        <div class="bar"><i></i><span class="sr-only">Out of the oven at 06:20, at its best until 09:30.</span></div>
+      </li>
+      <li class="row" style="--from:0.188;--to:0.562">
+        <time class="t" datetime="06:30">06:30</time>
+        <div class="what"><h3>Croissants, half a dozen</h3><p>For the office or the flat. Boxed on the rack, ready from the second tray.</p></div>
+        <picture class="thumb"><source type="image/avif" srcset="img/croissant-rack-800.avif" sizes="160px"><img src="img/croissant-rack-800.webp" width="800" height="534" sizes="160px" alt="Golden croissants lying on a wire cooling rack." loading="lazy" decoding="async"></picture>
+        <p class="price">S$24.00</p>
+        <div class="bar"><i></i><span class="sr-only">Out of the oven at 06:30, at its best until 09:30.</span></div>
+      </li>
+      <li class="row" style="--from:0.198;--to:0.500">
+        <time class="t" datetime="06:35">06:35</time>
+        <div class="what"><h3>Kouign-amann</h3><p>Caramelised on the outside, folded like a croissant, sold in a paper cup because of the sugar.</p></div>
+        <div class="thumb thumb--t" aria-hidden="true"><span>Best until</span><b>09:00</b></div>
+        <p class="price">S$5.80</p>
+        <div class="bar"><i></i><span class="sr-only">Out of the oven at 06:35, at its best until 09:00.</span></div>
+      </li>
+      <li class="row" style="--from:0.229;--to:0.625">
+        <time class="t" datetime="06:50">06:50</time>
+        <div class="what"><h3>Cinnamon roll</h3><p>Rolled thin, so there is more cinnamon than bread. Warm from the oven, never glazed in advance.</p></div>
+        <div class="thumb thumb--t" aria-hidden="true"><span>Best until</span><b>10:00</b></div>
+        <p class="price">S$5.20</p>
+        <div class="bar"><i></i><span class="sr-only">Out of the oven at 06:50, at its best until 10:00.</span></div>
+      </li>
+      <li class="row" style="--from:0.312;--to:0.812">
+        <time class="t" datetime="07:30">07:30</time>
+        <div class="what"><h3>Pandan kaya danish</h3><p>Our own kaya, made on Wednesdays. The only thing here that is allowed to be sweet before noon.</p></div>
+        <div class="thumb thumb--t" aria-hidden="true"><span>Best until</span><b>11:30</b></div>
+        <p class="price">S$5.50</p>
+        <div class="bar"><i></i><span class="sr-only">Out of the oven at 07:30, at its best until 11:30.</span></div>
+      </li>
+      <li class="row" style="--from:0.625;--to:1.000">
+        <time class="t" datetime="10:00">10:00</time>
+        <div class="what"><h3>Rosemary focaccia</h3><p>The second oven of the day. Cut to order, olive oil on the board, salt flakes you can hear.</p></div>
+        <div class="thumb thumb--t" aria-hidden="true"><span>Best until</span><b>13:00</b></div>
+        <p class="price">S$6.00</p>
+        <div class="bar"><i></i><span class="sr-only">Out of the oven at 10:00, at its best until 13:00.</span></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="glass" aria-label="The pastry case at five past seven">
+  <picture><source type="image/avif" srcset="img/p-display-960.avif"><img src="img/p-display-960.webp" width="960" height="540" alt="Croissants and sugared pastries in a dark glass case, a red tray beneath them." loading="lazy" decoding="async"></picture>
+  <video muted loop playsinline preload="none" data-name="display" data-rungs="1080,720" aria-hidden="true" tabindex="-1"></video>
+  <p class="glass-cap">07:05 &mdash; the case, filled</p>
+</section>
+
+<section class="coffee" aria-labelledby="t-coffee">
+  <div class="coffee-media">
+    <picture><source type="image/avif" srcset="img/p-espresso-960.avif"><img src="img/p-espresso-960.webp" width="960" height="540" alt="Espresso running from a group head into a small black cup, with warm blurred lights behind." loading="lazy" decoding="async"></picture>
+    <video muted loop playsinline preload="none" data-name="espresso" data-rungs="1080,720" aria-hidden="true" tabindex="-1"></video>
+  </div>
+  <div class="coffee-copy">
+    <p class="eyebrow eyebrow--day"><span>From 07:00</span> Coffee</p>
+    <h2 id="t-coffee">Coffee starts when the doors do.</h2>
+    <p class="lede lede--day">One house blend, ground to order, pulled on a two-group machine that gets cleaned at 05:00 like everything else.</p>
+    <ul class="drinks">
+      <li><span>Espresso</span><b>S$3.80</b></li>
+      <li><span>Flat white</span><b>S$5.20</b></li>
+      <li><span>Kopi-o gao, our way</span><b>S$3.60</b></li>
+      <li><span>Cold brew, 18 hours</span><b>S$5.80</b></li>
+    </ul>
+  </div>
+</section>
+
+<section class="counter" aria-labelledby="t-counter">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--day"><span>The shop</span> After the doors</p>
+    <h2 id="t-counter">A counter, eleven seats and a window.</h2>
+  </div>
+  <div class="counter-grid">
+    <figure class="c1"><picture><source type="image/avif" srcset="img/window-800.avif 800w, img/window-1600.avif 1600w" sizes="(min-width:900px) 62vw, 92vw"><img src="img/window-800.webp" srcset="img/window-800.webp 800w, img/window-1600.webp 1600w" sizes="(min-width:900px) 62vw, 92vw" width="800" height="437" alt="A bakery window lit from inside, shelves of pastries and loaves behind the glass." loading="lazy" decoding="async"></picture><figcaption>The window</figcaption></figure>
+    <figure class="c2"><picture><source type="image/avif" srcset="img/shelves-800.avif 800w, img/shelves-1600.avif 1600w" sizes="(min-width:900px) 30vw, 92vw"><img src="img/shelves-800.webp" srcset="img/shelves-800.webp 800w, img/shelves-1600.webp 1600w" sizes="(min-width:900px) 30vw, 92vw" width="800" height="533" alt="Wooden shelves of loaves and rolls above a long wooden counter." loading="lazy" decoding="async"></picture><figcaption>Wall of bread, labelled by bake time</figcaption></figure>
+    <figure class="c3"><picture><source type="image/avif" srcset="img/counter-800.avif 800w, img/counter-1600.avif 1600w" sizes="(min-width:900px) 40vw, 92vw"><img src="img/counter-800.webp" srcset="img/counter-800.webp 800w, img/counter-1600.webp 1600w" sizes="(min-width:900px) 40vw, 92vw" width="800" height="533" alt="A customer, seen from behind, choosing at a warmly lit pastry counter." loading="lazy" decoding="async"></picture><figcaption>Queue at 07:10</figcaption></figure>
+    <figure class="c4"><picture><source type="image/avif" srcset="img/cafe-800.avif 800w, img/cafe-1600.avif 1600w" sizes="(min-width:900px) 30vw, 92vw"><img src="img/cafe-800.webp" srcset="img/cafe-800.webp 800w, img/cafe-1600.webp 1600w" sizes="(min-width:900px) 30vw, 92vw" width="800" height="600" alt="A cafe room with arched wall niches, round tables and warm pendant lights." loading="lazy" decoding="async"></picture><figcaption>Seats by the wall</figcaption></figure>
+    <figure class="c5"><picture><source type="image/avif" srcset="img/espresso-800.avif 800w, img/espresso-1600.avif 1600w" sizes="(min-width:900px) 26vw, 92vw"><img src="img/espresso-800.webp" srcset="img/espresso-800.webp 800w, img/espresso-1600.webp 1600w" sizes="(min-width:900px) 26vw, 92vw" width="800" height="533" alt="A barista's hand setting down a small espresso on a wooden counter." loading="lazy" decoding="async"></picture><figcaption>Espresso, handed over</figcaption></figure>
+  </div>
+</section>
+
+<section class="bench" aria-labelledby="t-bench">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--day"><span>Left on the bench</span> What the night leaves</p>
+    <h2 id="t-bench">Flour, crust and a peel by the door.</h2>
+  </div>
+  <div class="strip-wrap" tabindex="0" role="region" aria-label="Photographs from the bench, scroll sideways"><ul class="strip">
+    <li><picture><source type="image/avif" srcset="img/flour-hands-800.avif 800w, img/flour-hands-1600.avif 1600w" sizes="(min-width:900px) 34vw, 80vw"><img src="img/flour-hands-800.webp" srcset="img/flour-hands-800.webp 800w, img/flour-hands-1600.webp 1600w" sizes="(min-width:900px) 34vw, 80vw" width="800" height="534" alt="A pair of hands pressing a disc of dough on a bench while a cloud of flour drifts up behind them." loading="lazy" decoding="async"></picture><span>Flour on everything</span></li>
+    <li><picture><source type="image/avif" srcset="img/oven-loaves-800.avif 800w, img/oven-loaves-1600.avif 1600w" sizes="(min-width:900px) 34vw, 80vw"><img src="img/oven-loaves-800.webp" srcset="img/oven-loaves-800.webp 800w, img/oven-loaves-1600.webp 1600w" sizes="(min-width:900px) 34vw, 80vw" width="800" height="530" alt="Round loaves browning on two shelves of an oven, lit from inside." loading="lazy" decoding="async"></picture><span>Second shelf</span></li>
+    <li><picture><source type="image/avif" srcset="img/shaping-800.avif 800w, img/shaping-1600.avif 1600w" sizes="(min-width:900px) 34vw, 80vw"><img src="img/shaping-800.webp" srcset="img/shaping-800.webp 800w, img/shaping-1600.webp 1600w" sizes="(min-width:900px) 34vw, 80vw" width="800" height="533" alt="Hands scoring proved bread loaves lined up on a tray, ready for the oven." loading="lazy" decoding="async"></picture><span>Scored, ready</span></li>
+    <li><picture><source type="image/avif" srcset="img/peel-800.avif 800w, img/peel-1600.avif 1600w" sizes="(min-width:900px) 34vw, 80vw"><img src="img/peel-800.webp" srcset="img/peel-800.webp 800w, img/peel-1600.webp 1600w" sizes="(min-width:900px) 34vw, 80vw" width="800" height="533" alt="A baker leaning in to slide dough into a brick oven on a long wooden peel." loading="lazy" decoding="async"></picture><span>The peel</span></li>
+    <li><picture><source type="image/avif" srcset="img/deck-oven-800.avif 800w, img/deck-oven-1600.avif 1600w" sizes="(min-width:900px) 34vw, 80vw"><img src="img/deck-oven-800.webp" srcset="img/deck-oven-800.webp 800w, img/deck-oven-1600.webp 1600w" sizes="(min-width:900px) 34vw, 80vw" width="800" height="533" alt="Two shelves of a deck oven, one with golden loaves, one with a tray being pulled out." loading="lazy" decoding="async"></picture><span>Two decks</span></li>
+    <li><picture><source type="image/avif" srcset="img/flour-burst-800.avif 800w, img/flour-burst-1600.avif 1600w" sizes="(min-width:900px) 34vw, 80vw"><img src="img/flour-burst-800.webp" srcset="img/flour-burst-800.webp 800w, img/flour-burst-1600.webp 1600w" sizes="(min-width:900px) 34vw, 80vw" width="800" height="533" alt="A hand clapping together, a burst of white flour hanging against black." loading="lazy" decoding="async"></picture><span>Flour, 02:10</span></li>
+    <li><picture><source type="image/avif" srcset="img/crust-800.avif 800w, img/crust-1600.avif 1600w" sizes="(min-width:900px) 34vw, 80vw"><img src="img/crust-800.webp" srcset="img/crust-800.webp 800w, img/crust-1600.webp 1600w" sizes="(min-width:900px) 34vw, 80vw" width="800" height="532" alt="Macro of a baguette crust, blistered and caramel-brown with flour in the cracks." loading="lazy" decoding="async"></picture><span>Crust, at 1:1</span></li>
+  </ul></div>
+</section>
+
+<section class="visit" id="visit" aria-labelledby="t-visit">
+  <div class="wrap visit-grid">
+    <div>
+      <p class="eyebrow eyebrow--day"><span>Visit</span> Find the door</p>
+      <h2 id="t-visit">37 Pelangi Lane, #01-14.</h2>
+      <p class="lede lede--day">Look for the light on at five in the morning and the line at seven. If the street door is shut, the back is open and someone will let you in for a loaf.</p>
+      <p class="order">Want a loaf set aside for tomorrow? Call or message before 18:00 today and it will be on the rack with your name on a bit of paper.</p>
+      <p class="contact"><a href="tel:+6561000147">+65 6100 0147</a><br><a href="mailto:hello@proofbakehouse.sg">hello@proofbakehouse.sg</a></p>
+    </div>
+    <div class="hours">
+      <h3>Hours, and the night before them</h3>
+      <dl>
+        <div><dt>Tuesday to Friday</dt><dd>07:00 &ndash; 17:00</dd><div class="daybar" aria-hidden="true"><i class="n" style="--from:0;--to:0.294"></i><i class="o" style="--from:0.294;--to:0.882"></i></div></div>
+        <div><dt>Saturday and Sunday</dt><dd>07:00 &ndash; 16:00</dd><div class="daybar" aria-hidden="true"><i class="n" style="--from:0;--to:0.294"></i><i class="o" style="--from:0.294;--to:0.824"></i></div></div>
+        <div><dt>Monday</dt><dd>The ovens rest</dd></div>
+      </dl>
+      <div class="axis" aria-hidden="true"><span>02:00</span><span>07:00</span><span>12:00</span><span>17:00</span></div>
+      <p class="note">The dark bar is the night shift, the amber bar is the shop. Most loaves are gone by 13:00. The last croissants usually go before ten.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="mark">PROOF<span>.</span></p>
+    <nav class="foot-nav" aria-label="Footer"><a href="#mix">The night</a><a href="#menu">Menu</a><a href="#visit">Visit</a></nav>
+    <p>37 Pelangi Lane, #01-14, Singapore. Open Tuesday to Sunday from 07:00. &copy; 2026 PROOF. Bakehouse.</p>
+  </div>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="vendor/split-type.min.js"></script>
+<script src="js/night.js"></script>
+</body>
+</html>
