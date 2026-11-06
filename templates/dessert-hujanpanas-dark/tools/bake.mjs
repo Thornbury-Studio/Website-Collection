@@ -65,9 +65,18 @@ const read = `<!--bake:read-->
     <p class="now__line" id="now-line">${words.line}</p>
     <!--/bake:read-->`;
 
+const heroRow = (r, i) => { const m = MOVES[r.item.id]; return `<li data-id="${r.item.id}" style="view-transition-name: h-${r.item.id}"><span class="hb__n">${pad(i + 1)}</span><span class="hb__nm">${esc(r.item.name)}</span><span class="hb__mv" data-move="${m > 0 ? 'up' : m < 0 ? 'down' : 'same'}"><span aria-hidden="true">${HP.moveText(m)}</span><span class="sr-only">${HP.moveSr(m)}</span></span></li>`; };
 const top3 = `<!--bake:top3-->
-      ${ranked.slice(0, 3).map((r, i) => `<li><span>${pad(i + 1)}</span> ${esc(r.item.name)}</li>`).join('\n      ')}
+      ${ranked.slice(0, 5).map(heroRow).join('\n      ')}
       <!--/bake:top3-->`;
+const hd = ranked.find((r) => r.item.img).item;
+const hdish = `<!--bake:hdish-->
+    <figure class="hb__dish" id="hb-dish" data-id="${hd.id}">
+      <picture><source type="image/avif" data-srcset="img/${hd.img}-640.avif 640w, img/${hd.img}-1280.avif 1280w" sizes="(min-width: 900px) 26rem, 92vw"><img data-src="img/${hd.img}-640.webp" data-srcset="img/${hd.img}-640.webp 640w, img/${hd.img}-1280.webp 1280w" sizes="(min-width: 900px) 26rem, 92vw" width="640" height="427" alt="${esc(ALT[hd.img] || '')}" decoding="async"></picture>
+      <noscript><img src="img/${hd.img}-640.webp" width="640" height="427" alt="${esc(ALT[hd.img] || '')}"></noscript>
+      <figcaption><span class="hb__tag" id="hb-dish-tag">${ranked[0].item.id === hd.id ? 'No. 1 right now' : 'Highest with a photograph'}</span> <b id="hb-dish-name">${esc(hd.name)}</b> <span class="hb__price" id="hb-dish-price">${money(hd.price)}</span></figcaption>
+    </figure>
+    <!--/bake:hdish-->`;
 
 const leadItem = ranked.find((r) => r.item.img).item;
 const lead = `<!--bake:lead-->
@@ -135,7 +144,7 @@ const put = (name, block) => {
   if (!re.test(html)) throw new Error('missing bake block ' + name);
   html = html.replace(re, block);
 };
-put('read', read); put('dial', dial); put('top3', top3); put('board', board); put('lead', lead); put('sr', sr); put('log', svg); put('logfacts', logFacts);
+put('read', read); put('dial', dial); put('top3', top3); put('hdish', hdish); put('board', board); put('lead', lead); put('sr', sr); put('log', svg); put('logfacts', logFacts);
 html = html.replace(/data-state="[a-z-]+"/, `data-state="${st}"`);
 fs.writeFileSync(file, html);
 console.log(`baked ${st} ${w.temp}C ${w.rain}mm; top: ${ranked.slice(0, 3).map((r) => r.item.id).join(', ')}; wet ${share(wet)}% dry ${share(dry)}%`);

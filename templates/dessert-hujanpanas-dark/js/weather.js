@@ -125,5 +125,5 @@
     }).catch(function () { clearTimeout(timer); return null; });
   }
 
-  root.HP = { SHOP: SHOP, MENU: MENU, moves: moves, moveText: moveText, moveSr: moveSr, typical: typical, coolness: coolness, state: state, WORDS: WORDS, rank: rank, live: live, clamp: clamp };
+  root.HP = { SHOP: SHOP, MENU: MENU, USUAL: USUAL, moves: moves, moveText: moveText, moveSr: moveSr, typical: typical, coolness: coolness, state: state, WORDS: WORDS, rank: rank, live: live, clamp: clamp };
 })(typeof window !== 'undefined' ? window : globalThis);

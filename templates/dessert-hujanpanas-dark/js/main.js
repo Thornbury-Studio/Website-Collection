@@ -70,7 +70,8 @@
     if (heroFilm && heroFilm.key === key && heroFilm.src === src && !force) return;
     var changedKey = !heroFilm || heroFilm.key !== key;
     heroFilm = { key: key, src: src };
-    if (changedKey) setPoster(f);
+    /* with motion on, the film covers the poster, so the baked poster stays and no second one is fetched */
+    if (changedKey && !motionOn) setPoster(f);
     if (!loaded || !motionOn) { heroVideo.removeAttribute('src'); heroVideo.classList.remove('is-playing'); return; }
     heroVideo.classList.remove('is-playing');
     heroVideo.src = src;
@@ -160,13 +161,60 @@
   var rows = {};
   $$('.dish', list).forEach(function (li) { rows[li.dataset.id] = li; });
   var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  /* ---------- the hero board: five lines, the dish, the usual-day slide ---------- */
+  var heroList = $('#now-three'), heroRows = {}, heroWhen = $('#hb-when'), intro = root.classList.contains('intro'), heroLatest = null;
+  $$('li', heroList).forEach(function (li) { heroRows[li.dataset.id] = li; });
+  var byId = {}; HP.MENU.forEach(function (it) { byId[it.id] = it; });
+  function heroRow(id) {
+    if (heroRows[id]) return heroRows[id];
+    var li = document.createElement('li'), n = document.createElement('span'), nm = document.createElement('span'), mv = document.createElement('span');
+    li.dataset.id = id; li.style.viewTransitionName = 'h-' + id;
+    n.className = 'hb__n'; nm.className = 'hb__nm'; nm.textContent = byId[id].name; mv.className = 'hb__mv';
+    mv.append(document.createElement('span'), document.createElement('span')); mv.firstChild.setAttribute('aria-hidden', 'true'); mv.lastChild.className = 'sr-only';
+    li.append(n, nm, mv); return (heroRows[id] = li);
+  }
+  function paintHero(ids, moves, when) {
+    heroList.replaceChildren.apply(heroList, ids.slice(0, 5).map(function (id, i) {
+      var li = heroRow(id), mv = li.querySelector('.hb__mv'), m = moves ? moves[id] : 0;
+      li.querySelector('.hb__n').textContent = pad(i + 1);
+      mv.dataset.move = !moves ? 'same' : m > 0 ? 'up' : m < 0 ? 'down' : 'same';
+      mv.firstChild.textContent = moves ? HP.moveText(m) : '';
+      mv.lastChild.textContent = moves ? HP.moveSr(m) : 'its place on a usual day';
+      return li;
+    }));
+    heroWhen.textContent = when;
+  }
+  var dishFig = $('#hb-dish');
+  function heroDish(ranked) {
+    if (!dishFig) return;
+    var it = ranked.filter(function (r) { return r.item.img; })[0].item;
+    $('#hb-dish-tag').textContent = ranked[0].item.id === it.id ? 'No. 1 right now' : 'Highest with a photograph';
+    $('#hb-dish-name').textContent = it.name; $('#hb-dish-price').textContent = 'S$' + it.price.toFixed(2);
+    if (dishFig.dataset.id === it.id && dishFig.dataset.on) return;
+    if (!loaded) { dishFig.dataset.id = it.id; return; }
+    var src = dishFig.querySelector('source'), img = dishFig.querySelector('img');
+    src.srcset = 'img/' + it.img + '-640.avif 640w, img/' + it.img + '-1280.avif 1280w';
+    img.srcset = 'img/' + it.img + '-640.webp 640w, img/' + it.img + '-1280.webp 1280w';
+    img.src = 'img/' + it.img + '-640.webp';
+    img.alt = (rows[it.id] && rows[it.id].dataset.alt) || it.name;
+    dishFig.dataset.id = it.id; dishFig.dataset.on = '1';
+  }
+  if (intro) {
+    paintHero(HP.USUAL, null, 'On a usual day');
+    heroWhen.parentNode.classList.add('is-usual');
+    root.classList.remove('intro');
+  }
+
   function reorder(ranked) {
     var order = ranked.map(function (r) { return r.item.id; });
     var now = $$('.dish', list).map(function (li) { return li.dataset.id; });
-    if (order.join() === now.join()) return;
+    var mvs = HP.moves(ranked);
+    heroLatest = ranked;
     function apply() {
       order.forEach(function (id, i) { var li = rows[id]; li.querySelector('.dish__rank').textContent = pad(i + 1); list.appendChild(li); });
+      if (!intro) { paintHero(order, mvs, 'Right now'); heroDish(ranked); }
     }
+    if (order.join() === now.join() && (intro || heroList.firstElementChild && heroList.firstElementChild.dataset.id === order[0])) { if (!intro) { paintHero(order, mvs, 'Right now'); heroDish(ranked); } return; }
     if (document.startViewTransition && motionOn && !firstRender && !quiet()) {
       var vt = document.startViewTransition(apply);
       [vt.ready, vt.finished, vt.updateCallbackDone].forEach(function (p) { if (p && p.catch) p.catch(function () {}); });
@@ -214,7 +262,7 @@
       var hh = tm ? tm.toLocaleTimeString('en-SG', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Singapore' }) : '';
       return 'Live from the NEA station at ' + w.station + (hh ? ', read at ' + hh : '') + '. Rain from ' + (w.rainStation || 'the nearest gauge') + '.';
     }
-    if (w.source === 'dial') return 'You moved the dial. The real weather is one button away on the board.';
+    if (w.source === 'dial') return 'You moved the dial. The real weather is one button away.';
     if (w.source === 'preview') return 'Preview from the address bar. Remove ?weather or ?temp to read the real sky.';
     return 'No live reading reached this page, so these are the usual numbers for this month and hour.';
   }
@@ -230,12 +278,6 @@
     $('#now-word').textContent = words.word;
     $('#now-line').textContent = words.line;
     $('#now-src').textContent = sourceLine(w);
-    $('#dial-pin').style.setProperty('--x', (c * 100).toFixed(1) + '%');
-    var three = $('#now-three');
-    three.replaceChildren.apply(three, ranked.slice(0, 3).map(function (r, i) {
-      var li = document.createElement('li'), s = document.createElement('span');
-      s.textContent = pad(i + 1); li.append(s, ' ' + r.item.name); return li;
-    }));
     reorder(ranked);
     var mv = HP.moves(ranked);
     ranked.forEach(function (r) {
@@ -281,6 +323,14 @@
     (window.requestIdleCallback || function (f) { setTimeout(f, 200); })(function () {
       loaded = true;
       if (heroFilm) setHeroFilm(heroFilm.key, true);
+      if (heroLatest) heroDish(heroLatest);
+      if (intro) setTimeout(function () {
+        intro = false;
+        heroWhen.parentNode.classList.remove('is-usual');
+        var r = heroLatest, ids = r.map(function (x) { return x.item.id; }), m = HP.moves(r);
+        var go = function () { paintHero(ids, m, 'Right now'); };
+        if (document.startViewTransition && motionOn) { var vt = document.startViewTransition(go); [vt.ready, vt.finished, vt.updateCallbackDone].forEach(function (p) { if (p && p.catch) p.catch(function () {}); }); } else go();
+      }, 900);
       chapterVideos.forEach(function (v) { ensureSrc(v); playIfVisible(v); });
     }, { timeout: 1200 });
   });
@@ -365,6 +415,7 @@
     } else {
       if (lenis) { lenis.destroy(); lenis = null; }
       chapterVideos.concat(heroVideo).forEach(function (v) { v.pause(); });
+      if (heroFilm) setPoster(FILMS[heroFilm.key]);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
   });

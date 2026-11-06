@@ -122,21 +122,42 @@
     <p class="now__src" id="now-src">No live reading on this page yet; the numbers are what this hour usually looks like.</p>
   </div>
 
-  <div class="now__dial" aria-hidden="true">
-    <span>Hujan</span><i><b id="dial-pin"></b></i><span>Panas</span>
-  </div>
-
-  <div class="now__top">
-    <p class="eyebrow">Top of the board right now</p>
-    <ol class="now__three" id="now-three">
+  <aside class="now__board" aria-labelledby="hb-title">
+    <!--bake:hdish-->
+    <figure class="hb__dish" id="hb-dish" data-id="tangyuan">
+      <picture><source type="image/avif" data-srcset="img/tangyuan-640.avif 640w, img/tangyuan-1280.avif 1280w" sizes="(min-width: 900px) 26rem, 92vw"><img data-src="img/tangyuan-640.webp" data-srcset="img/tangyuan-640.webp 640w, img/tangyuan-1280.webp 1280w" sizes="(min-width: 900px) 26rem, 92vw" width="640" height="427" alt="Two rice balls, one white and one pandan green, in a bowl of amber ginger syrup with crushed peanuts." decoding="async"></picture>
+      <noscript><img src="img/tangyuan-640.webp" width="640" height="427" alt="Two rice balls, one white and one pandan green, in a bowl of amber ginger syrup with crushed peanuts."></noscript>
+      <figcaption><span class="hb__tag" id="hb-dish-tag">No. 1 right now</span> <b id="hb-dish-name">Tang yuan in ginger syrup</b> <span class="hb__price" id="hb-dish-price">S$3.80</span></figcaption>
+    </figure>
+    <!--/bake:hdish-->
+    <p class="eyebrow hb__title" id="hb-title"><span id="hb-when">Right now</span>, the top of the board</p>
+    <ol class="hb__list" id="now-three">
       <!--bake:top3-->
-      <li><span>01</span> Tang yuan in ginger syrup</li>
-      <li><span>02</span> Pulut hitam</li>
-      <li><span>03</span> Tau suan</li>
+      <li data-id="tangyuan" style="view-transition-name: h-tangyuan"><span class="hb__n">01</span><span class="hb__nm">Tang yuan in ginger syrup</span><span class="hb__mv" data-move="same"><span aria-hidden="true">–</span><span class="sr-only">where it sits on a usual day</span></span></li>
+      <li data-id="pulut" style="view-transition-name: h-pulut"><span class="hb__n">02</span><span class="hb__nm">Pulut hitam</span><span class="hb__mv" data-move="up"><span aria-hidden="true">▲ 1</span><span class="sr-only">up 1 place on a usual day</span></span></li>
+      <li data-id="tausuan" style="view-transition-name: h-tausuan"><span class="hb__n">03</span><span class="hb__nm">Tau suan</span><span class="hb__mv" data-move="up"><span aria-hidden="true">▲ 2</span><span class="sr-only">up 2 places on a usual day</span></span></li>
+      <li data-id="redbean" style="view-transition-name: h-redbean"><span class="hb__n">04</span><span class="hb__nm">Red bean soup</span><span class="hb__mv" data-move="up"><span aria-hidden="true">▲ 3</span><span class="sr-only">up 3 places on a usual day</span></span></li>
+      <li data-id="orhnee" style="view-transition-name: h-orhnee"><span class="hb__n">05</span><span class="hb__nm">Orh nee</span><span class="hb__mv" data-move="up"><span aria-hidden="true">▲ 5</span><span class="sr-only">up 5 places on a usual day</span></span></li>
       <!--/bake:top3-->
     </ol>
-    <a class="now__more" href="#board">The whole board <span aria-hidden="true">&darr;</span></a>
-  </div>
+      <form class="dial dial--hero" id="dial" aria-label="Try another afternoon">
+        <fieldset>
+          <legend>Try another afternoon</legend>
+          <!--bake:dial-->
+        <label for="dial-temp">Air temperature <output id="dial-temp-out" for="dial-temp">29.1&deg;C</output></label>
+        <input type="range" id="dial-temp" min="24" max="35" step="0.1" value="29.1" aria-valuetext="29.1 degrees">
+        <fieldset class="dial__rain">
+          <legend>Rain</legend>
+          <label><input type="radio" name="rain" value="0"> Dry</label>
+          <label><input type="radio" name="rain" value="0.6" checked> Drizzle</label>
+          <label><input type="radio" name="rain" value="2.4"> Downpour</label>
+        </fieldset>
+        <!--/bake:dial-->
+          <button type="button" class="dial__live" id="dial-live">Back to the real weather</button>
+        </fieldset>
+      </form>
+    <a class="now__more" href="#board">All twelve, and why <span aria-hidden="true">&darr;</span></a>
+  </aside>
 </section>
 <nav class="jump" aria-label="Chapters"><a href="#warm">Warm end</a><a href="#cool">Cool end</a><a href="#pot">The pot</a><a href="#kueh">Kueh</a><a href="#log">October</a></nav>
 
@@ -147,22 +168,6 @@
     <h2 class="board__title" id="board-title">Twelve things, sorted by the sky.</h2>
     <p class="board__lede">We used to write the menu on a whiteboard and move the soups up by hand when it rained. Now the board does it from the nearest weather station, every five minutes.</p>
 
-    <form class="dial" id="dial" aria-label="Try another afternoon">
-      <fieldset>
-        <legend>Try another afternoon</legend>
-        <!--bake:dial-->
-        <label for="dial-temp">Air temperature <output id="dial-temp-out" for="dial-temp">29.1&deg;C</output></label>
-        <input type="range" id="dial-temp" min="24" max="35" step="0.1" value="29.1" aria-valuetext="29.1 degrees">
-        <fieldset class="dial__rain">
-          <legend>Rain</legend>
-          <label><input type="radio" name="rain" value="0"> Dry</label>
-          <label><input type="radio" name="rain" value="0.6" checked> Drizzle</label>
-          <label><input type="radio" name="rain" value="2.4"> Downpour</label>
-        </fieldset>
-        <!--/bake:dial-->
-        <button type="button" class="dial__live" id="dial-live">Back to the real weather</button>
-      </fieldset>
-    </form>
     <p class="board__note">Above about 31&deg;C on a dry day, chilled tau huay overtakes everything by three o'clock. Below 28&deg;C, or once it rains, tang yuan takes the top line.</p>
   </div>
 
