@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hujan Panas — sweet soups and kueh whose menu follows the Singapore weather</title>
+<meta name="description" content="Hujan Panas is a dessert house in Singapore: tang yuan in ginger syrup, pulut hitam, tau huay, cheng tng and kueh. The board re-sorts itself by the live NEA temperature and rainfall. From S$1.40, closed Mondays.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; script-src 'self'; connect-src 'self' https://api-open.data.gov.sg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0c100e">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/dessert-hujanpanas-dark/">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hujan Panas">
+<meta property="og:title" content="Hujan Panas — the menu follows the weather">
+<meta property="og:description" content="Sweet soups and kueh in Singapore. When it rains the warm end of the board moves up; above 31°C the chilled tau huay does.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/dessert-hujanpanas-dark/">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/dessert-hujanpanas-dark/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Rain on banana leaves, the reading 29.1°C and the word Hujan, with the top of the board: tang yuan in ginger syrup, pulut hitam, tau suan.">
+<meta property="og:locale" content="en_SG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hujan Panas — the menu follows the weather">
+<meta name="twitter:description" content="Sweet soups and kueh in Singapore. The board re-sorts by live temperature and rain.">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/dessert-hujanpanas-dark/img/og.jpg">
+
+<link rel="preload" href="fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" type="image/avif" media="(min-width: 900px), (orientation: landscape)" imagesrcset="img/p-leaves-960.avif 960w, img/p-leaves-1920.avif 1920w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" media="(max-width: 899px) and (orientation: portrait)" imagesrcset="img/p-railv-540.avif 540w, img/p-railv-1080.avif 1080w" imagesizes="100vw" fetchpriority="high">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/boot.js"></script>
+<script src="js/weather.js" defer></script>
+<script src="js/main.js" defer></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DessertShop",
+  "@id": "https://templates.thornburystudio.com/templates/dessert-hujanpanas-dark/#shop",
+  "name": "Hujan Panas",
+  "description": "Dessert house in Singapore for sweet soups and kueh: tang yuan, pulut hitam, tau suan, tau huay, cheng tng, ang ku kueh. The menu board is sorted by the live weather.",
+  "url": "https://templates.thornburystudio.com/templates/dessert-hujanpanas-dark/",
+  "image": "https://templates.thornburystudio.com/templates/dessert-hujanpanas-dark/img/og.jpg",
+  "servesCuisine": ["Singaporean", "Peranakan", "Chinese desserts"],
+  "priceRange": "S$1.40 - S$4.80",
+  "telephone": "+65 6100 0218",
+  "email": "hello@hujanpanas.sg",
+  "address": { "@type": "PostalAddress", "streetAddress": "21 Jalan Gerimis, #01-03", "addressLocality": "Singapore", "addressCountry": "SG" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 1.3121, "longitude": 103.9035 },
+  "acceptsReservations": false,
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Thursday"], "opens": "12:00", "closes": "22:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday", "Saturday"], "opens": "12:00", "closes": "23:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "22:00" }
+  ],
+  "hasMenu": {
+    "@type": "Menu",
+    "hasMenuSection": [
+      { "@type": "MenuSection", "name": "Warm", "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Tang yuan in ginger syrup", "offers": { "@type": "Offer", "price": "3.80", "priceCurrency": "SGD" } },
+        { "@type": "MenuItem", "name": "Pulut hitam", "offers": { "@type": "Offer", "price": "3.60", "priceCurrency": "SGD" } },
+        { "@type": "MenuItem", "name": "Tau suan", "offers": { "@type": "Offer", "price": "3.20", "priceCurrency": "SGD" } },
+        { "@type": "MenuItem", "name": "Red bean soup", "offers": { "@type": "Offer", "price": "3.20", "priceCurrency": "SGD" } },
+        { "@type": "MenuItem", "name": "Orh nee", "offers": { "@type": "Offer", "price": "4.80", "priceCurrency": "SGD" } }
+      ] },
+      { "@type": "MenuSection", "name": "Cold", "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Tau huay, chilled", "offers": { "@type": "Offer", "price": "2.80", "priceCurrency": "SGD" } },
+        { "@type": "MenuItem", "name": "Cheng tng, iced", "offers": { "@type": "Offer", "price": "3.80", "priceCurrency": "SGD" } }
+      ] },
+      { "@type": "MenuSection", "name": "Kueh", "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Ang ku kueh", "offers": { "@type": "Offer", "price": "1.40", "priceCurrency": "SGD" } },
+        { "@type": "MenuItem", "name": "Ondeh-ondeh, six", "offers": { "@type": "Offer", "price": "3.00", "priceCurrency": "SGD" } },
+        { "@type": "MenuItem", "name": "Kueh lapis, per slice", "offers": { "@type": "Offer", "price": "1.60", "priceCurrency": "SGD" } }
+      ] }
+    ]
+  }
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#board">Skip to the menu board</a>
+
+<header class="top" id="top">
+  <a class="mark" href="#now" aria-label="Hujan Panas, back to the top">Hujan&nbsp;<span>Panas</span></a>
+  <nav aria-label="Main">
+    <a href="#board">Board</a>
+    <a href="#pot">The pot</a>
+    <a href="#kueh">Kueh</a>
+    <a href="#visit">Visit</a>
+  </nav>
+  <button class="motion" id="motion" type="button" aria-pressed="false">Motion <b>on</b></button>
+</header>
+
+<main>
+
+<!-- 1. NOW: the weather outside, read live -->
+<section class="now" id="now" data-state="hujan" aria-labelledby="now-word">
+  <div class="now__film">
+    <picture class="now__poster" id="now-poster">
+      <source media="(max-width: 899px) and (orientation: portrait)" type="image/avif" srcset="img/p-railv-540.avif 540w, img/p-railv-1080.avif 1080w" sizes="100vw">
+      <source media="(max-width: 899px) and (orientation: portrait)" type="image/webp" srcset="img/p-railv-540.webp 540w, img/p-railv-1080.webp 1080w" sizes="100vw">
+      <source type="image/avif" srcset="img/p-leaves-960.avif 960w, img/p-leaves-1920.avif 1920w" sizes="100vw">
+      <img src="img/p-leaves-1920.webp" srcset="img/p-leaves-960.webp 960w, img/p-leaves-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" fetchpriority="high">
+    </picture>
+    <video class="now__video" id="now-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+    <canvas class="rain" id="rain" aria-hidden="true"></canvas>
+    <div class="now__scrim" aria-hidden="true"></div>
+  </div>
+
+  <div class="now__read">
+    <!--bake:read-->
+    <p class="now__where" id="now-where">A typical November afternoon in Singapore</p>
+    <p class="now__temp"><span class="now__num" id="now-temp">29.1</span><span class="now__unit">&deg;C</span></p>
+    <p class="now__rain"><span id="now-rain">0.6</span> mm of rain in the last five minutes</p>
+    <h1 class="now__word"><span class="sr-only">Hujan Panas, a dessert house in Singapore. The weather now: </span><span id="now-word">Hujan</span></h1>
+    <p class="now__line" id="now-line">Ginger-soup weather. The warm end moves up.</p>
+    <!--/bake:read-->
+    <p class="now__src" id="now-src">No live reading on this page yet; the numbers are what this hour usually looks like.</p>
+  </div>
+
+  <div class="now__dial" aria-hidden="true">
+    <span>Hujan</span><i><b id="dial-pin"></b></i><span>Panas</span>
+  </div>
+
+  <div class="now__top">
+    <p class="eyebrow">Top of the board right now</p>
+    <ol class="now__three" id="now-three">
+      <!--bake:top3-->
+      <li><span>01</span> Tang yuan in ginger syrup</li>
+      <li><span>02</span> Pulut hitam</li>
+      <li><span>03</span> Tau suan</li>
+      <!--/bake:top3-->
+    </ol>
+    <a class="now__more" href="#board">The whole board <span aria-hidden="true">&darr;</span></a>
+  </div>
+</section>
+<nav class="jump" aria-label="Chapters"><a href="#warm">Warm end</a><a href="#cool">Cool end</a><a href="#pot">The pot</a><a href="#kueh">Kueh</a><a href="#log">October</a></nav>
+
+<!-- 2. THE BOARD: twelve things, sorted by the weather -->
+<section class="board" id="board" aria-labelledby="board-title">
+  <div class="board__rail">
+    <p class="eyebrow">The board</p>
+    <h2 class="board__title" id="board-title">Twelve things, sorted by the sky.</h2>
+    <p class="board__lede">We used to write the menu on a whiteboard and move the soups up by hand when it rained. Now the board does it from the nearest weather station, every five minutes.</p>
+
+    <form class="dial" id="dial" aria-label="Try another afternoon">
+      <fieldset>
+        <legend>Try another afternoon</legend>
+        <!--bake:dial-->
+        <label for="dial-temp">Air temperature <output id="dial-temp-out" for="dial-temp">29.1&deg;C</output></label>
+        <input type="range" id="dial-temp" min="24" max="35" step="0.1" value="29.1" aria-valuetext="29.1 degrees">
+        <fieldset class="dial__rain">
+          <legend>Rain</legend>
+          <label><input type="radio" name="rain" value="0"> Dry</label>
+          <label><input type="radio" name="rain" value="0.6" checked> Drizzle</label>
+          <label><input type="radio" name="rain" value="2.4"> Downpour</label>
+        </fieldset>
+        <!--/bake:dial-->
+        <button type="button" class="dial__live" id="dial-live">Back to the real weather</button>
+      </fieldset>
+    </form>
+    <p class="board__note">Above about 31&deg;C on a dry day, chilled tau huay overtakes everything by three o'clock. Below 28&deg;C, or once it rains, tang yuan takes the top line.</p>
+  </div>
+
+  <div class="board__list">
+    <!--bake:sr--><p class="sr-only" id="board-live" aria-live="polite">Board sorted for 29.1 degrees and 0.6 millimetres of rain. First: Tang yuan in ginger syrup.</p><!--/bake:sr-->
+    <!--bake:lead-->
+      <figure class="board__lead" id="board-lead">
+        <picture><source type="image/avif" srcset="img/tangyuan-640.avif 640w, img/tangyuan-1280.avif 1280w" sizes="(min-width: 900px) 52vw, 92vw"><img src="img/tangyuan-1280.webp" srcset="img/tangyuan-640.webp 640w, img/tangyuan-1280.webp 1280w" sizes="(min-width: 900px) 52vw, 92vw" width="1280" height="853" alt="Two rice balls, one white and one pandan green, in a bowl of amber ginger syrup with crushed peanuts." loading="lazy" decoding="async"></picture>
+        <figcaption>Highest on the board with a photograph: <b>Tang yuan in ginger syrup</b></figcaption>
+      </figure>
+      <!--/bake:lead-->
+    <p class="dishes__head" aria-hidden="true"><span>No.</span><span>Today</span><span>Against a usual day</span><span>Price</span></p>
+    <ol class="dishes" id="dishes">
+      <!--bake:board-->
+      <li class="dish" data-id="tangyuan" data-warmth="1" data-alt="Two rice balls, one white and one pandan green, in a bowl of amber ginger syrup with crushed peanuts." style="view-transition-name: d-tangyuan">
+        <span class="dish__rank" aria-hidden="true">01</span>
+        <div class="dish__main"><h3 class="dish__name">Tang yuan in ginger syrup <span lang="zh-Hans">汤圆</span></h3><p class="dish__desc">Plain and pandan glutinous rice balls in old-ginger syrup boiled for three hours, crushed peanuts on top.</p><p class="dish__served">Served hot</p></div>
+        <span class="dish__move" data-move="same"><span aria-hidden="true">–</span><span class="sr-only">where it sits on a usual day</span></span>
+        <span class="dish__price">S$3.80</span>
+      </li>
+      <li class="dish" data-id="pulut" data-warmth="0.9" data-alt="A white bowl of glossy black glutinous rice on a dark slate table, a wooden spoon beside it." style="view-transition-name: d-pulut">
+        <span class="dish__rank" aria-hidden="true">02</span>
+        <div class="dish__main"><h3 class="dish__name">Pulut hitam</h3><p class="dish__desc">Black glutinous rice cooked down with pandan, a spoon of salted coconut milk on top.</p><p class="dish__served">Served hot</p></div>
+        <span class="dish__move" data-move="up"><span aria-hidden="true">▲ 1</span><span class="sr-only">up 1 place on a usual day</span></span>
+        <span class="dish__price">S$3.60</span>
+      </li>
+      <li class="dish" data-id="tausuan" data-warmth="0.85" style="view-transition-name: d-tausuan">
+        <span class="dish__rank" aria-hidden="true">03</span>
+        <div class="dish__main"><h3 class="dish__name">Tau suan <span lang="zh-Hans">豆糊</span></h3><p class="dish__desc">Split mung beans thickened with sweet potato starch, with cut you char kway on the side.</p><p class="dish__served">Served hot</p></div>
+        <span class="dish__move" data-move="up"><span aria-hidden="true">▲ 2</span><span class="sr-only">up 2 places on a usual day</span></span>
+        <span class="dish__price">S$3.20</span>
+      </li>
+      <li class="dish" data-id="redbean" data-warmth="0.75" style="view-transition-name: d-redbean">
+        <span class="dish__rank" aria-hidden="true">04</span>
+        <div class="dish__main"><h3 class="dish__name">Red bean soup <span lang="zh-Hans">红豆汤</span></h3><p class="dish__desc">Red beans and dried tangerine peel, cooked until a third of the beans have given up.</p><p class="dish__served">Served hot</p></div>
+        <span class="dish__move" data-move="up"><span aria-hidden="true">▲ 3</span><span class="sr-only">up 3 places on a usual day</span></span>
+        <span class="dish__price">S$3.20</span>
+      </li>
+      <li class="dish" data-id="orhnee" data-warmth="0.6" style="view-transition-name: d-orhnee">
+        <span class="dish__rank" aria-hidden="true">05</span>
+        <div class="dish__main"><h3 class="dish__name">Orh nee <span lang="zh-Hans">芋泥</span></h3><p class="dish__desc">Yam paste, ginkgo nuts and pumpkin. Served warm. Heavier than it looks.</p><p class="dish__served">Served hot</p></div>
+        <span class="dish__move" data-move="up"><span aria-hidden="true">▲ 5</span><span class="sr-only">up 5 places on a usual day</span></span>
+        <span class="dish__price">S$4.80</span>
+      </li>
+      <li class="dish" data-id="bubur" data-warmth="0.1" style="view-transition-name: d-bubur">
+        <span class="dish__rank" aria-hidden="true">06</span>
+        <div class="dish__main"><h3 class="dish__name">Bubur cha cha</h3><p class="dish__desc">Sweet potato, yam and sago in coconut milk. The one people order for their mother.</p><p class="dish__served">Served warm or cold</p></div>
+        <span class="dish__move" data-move="same"><span aria-hidden="true">–</span><span class="sr-only">where it sits on a usual day</span></span>
+        <span class="dish__price">S$3.60</span>
+      </li>
+      <li class="dish" data-id="greenbean" data-warmth="0.25" data-alt="Green bean soup with coconut milk in a green-rimmed bowl, a steel spoon resting in it." style="view-transition-name: d-greenbean">
+        <span class="dish__rank" aria-hidden="true">07</span>
+        <div class="dish__main"><h3 class="dish__name">Green bean soup, coconut milk <span lang="zh-Hans">绿豆汤</span></h3><p class="dish__desc">Whole mung beans and a pour of coconut milk. Warm at night, cold after lunch.</p><p class="dish__served">Served warm or cold</p></div>
+        <span class="dish__move" data-move="up"><span aria-hidden="true">▲ 1</span><span class="sr-only">up 1 place on a usual day</span></span>
+        <span class="dish__price">S$3.20</span>
+      </li>
+      <li class="dish" data-id="akk" data-warmth="0" data-alt="Rows of red ang ku kueh on squares of banana leaf." style="view-transition-name: d-akk">
+        <span class="dish__rank" aria-hidden="true">08</span>
+        <div class="dish__main"><h3 class="dish__name">Ang ku kueh <span lang="zh-Hans">红龟粿</span></h3><p class="dish__desc">Red tortoise kueh with peanut or mung bean filling, pressed in the old wooden mould.</p><p class="dish__served">Served room</p></div>
+        <span class="dish__move" data-move="up"><span aria-hidden="true">▲ 3</span><span class="sr-only">up 3 places on a usual day</span></span>
+        <span class="dish__price">S$1.40</span>
+      </li>
+      <li class="dish" data-id="ondeh" data-warmth="-0.2" data-alt="Ondeh-ondeh coated in grated coconut, sitting in half coconut shells beside pandan leaves." style="view-transition-name: d-ondeh">
+        <span class="dish__rank" aria-hidden="true">09</span>
+        <div class="dish__main"><h3 class="dish__name">Ondeh-ondeh, six</h3><p class="dish__desc">Pandan dough round a pocket of palm sugar, rolled in fresh grated coconut.</p><p class="dish__served">Served room</p></div>
+        <span class="dish__move" data-move="same"><span aria-hidden="true">–</span><span class="sr-only">where it sits on a usual day</span></span>
+        <span class="dish__price">S$3.00</span>
+      </li>
+      <li class="dish" data-id="lapis" data-warmth="-0.1" data-alt="A plate of assorted kueh: rainbow kueh lapis, red ang ku kueh, white coconut kueh and brown cakes." style="view-transition-name: d-lapis">
+        <span class="dish__rank" aria-hidden="true">10</span>
+        <div class="dish__main"><h3 class="dish__name">Kueh lapis, per slice</h3><p class="dish__desc">Nine steamed layers. Peel them one at a time; nobody is watching.</p><p class="dish__served">Served room</p></div>
+        <span class="dish__move" data-move="up"><span aria-hidden="true">▲ 2</span><span class="sr-only">up 2 places on a usual day</span></span>
+        <span class="dish__price">S$1.60</span>
+      </li>
+      <li class="dish" data-id="tauhuay" data-warmth="-0.9" data-alt="Silken beancurd with barley in a blue and white bowl on a wooden table." style="view-transition-name: d-tauhuay">
+        <span class="dish__rank" aria-hidden="true">11</span>
+        <div class="dish__main"><h3 class="dish__name">Tau huay, chilled <span lang="zh-Hans">豆花</span></h3><p class="dish__desc">Silken beancurd set this morning, with barley and a thin rock-sugar syrup.</p><p class="dish__served">Served cold</p></div>
+        <span class="dish__move" data-move="down"><span aria-hidden="true">▼ 9</span><span class="sr-only">down 9 places on a usual day</span></span>
+        <span class="dish__price">S$2.80</span>
+      </li>
+      <li class="dish" data-id="chengtng" data-warmth="-0.8" data-alt="A bowl of cheng tng from above: longan, red dates, lotus seeds and barley in clear syrup on a banana leaf." style="view-transition-name: d-chengtng">
+        <span class="dish__rank" aria-hidden="true">12</span>
+        <div class="dish__main"><h3 class="dish__name">Cheng tng, iced <span lang="zh-Hans">清汤</span></h3><p class="dish__desc">Longan, red dates, white fungus, lotus seeds and barley in a light syrup, over ice.</p><p class="dish__served">Served cold</p></div>
+        <span class="dish__move" data-move="down"><span aria-hidden="true">▼ 8</span><span class="sr-only">down 8 places on a usual day</span></span>
+        <span class="dish__price">S$3.80</span>
+      </li>
+      <!--/bake:board-->
+    </ol>
+  </div>
+</section>
+
+<!-- 3. THE WARM END: a sideways run of bowls over the steam -->
+<section class="warm" id="warm" aria-labelledby="warm-title">
+  <div class="warm__steam" aria-hidden="true">
+    <picture><source type="image/avif" srcset="img/p-steam-960.avif 960w, img/p-steam-1920.avif 1920w" sizes="100vw"><img src="img/p-steam-1920.webp" srcset="img/p-steam-960.webp 960w, img/p-steam-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" loading="lazy" decoding="async"></picture>
+    <video muted loop playsinline preload="none" data-name="steam" data-rungs="2160,1080,720" tabindex="-1"></video>
+  </div>
+  <div class="warm__track" id="warm-track">
+    <div class="warm__intro">
+      <p class="eyebrow">When it rains</p>
+      <h2 id="warm-title">The warm end.</h2>
+      <p>Four pots stay on the low flame from noon. The ginger syrup goes on at six in the morning and is tasted again at eleven. If it is too sharp we add rock sugar; we never add water.</p>
+      <p class="warm__hint" aria-hidden="true">Scroll <span>&rarr;</span></p>
+    </div>
+    <figure class="bowl bowl--a">
+      <picture><source type="image/avif" srcset="img/tangyuan-spoon-640.avif 640w, img/tangyuan-spoon-1280.avif 1280w" sizes="(min-width: 900px) 46vw, 84vw"><img src="img/tangyuan-spoon-1280.webp" srcset="img/tangyuan-spoon-640.webp 640w, img/tangyuan-spoon-1280.webp 1280w" sizes="(min-width: 900px) 46vw, 84vw" width="1280" height="853" alt="A hand lifting a pandan-green rice ball on a spoon from a bowl of ginger syrup." loading="lazy" decoding="async"></picture>
+      <figcaption><b>Tang yuan</b> <span>Plain and pandan balls, crushed peanuts on top, three hours of old ginger. S$3.80</span></figcaption>
+    </figure>
+    <figure class="bowl bowl--b">
+      <picture><source type="image/avif" srcset="img/pulut-640.avif 640w, img/pulut-1280.avif 1280w" sizes="(min-width: 900px) 40vw, 84vw"><img src="img/pulut-1280.webp" srcset="img/pulut-640.webp 640w, img/pulut-1280.webp 1280w" sizes="(min-width: 900px) 40vw, 84vw" width="1280" height="758" alt="A white bowl of black glutinous rice on dark slate." loading="lazy" decoding="async"></picture>
+      <figcaption><b>Pulut hitam</b> <span>Soaked overnight, cooked for 90 minutes with two knotted pandan leaves. S$3.60</span></figcaption>
+    </figure>
+    <figure class="bowl bowl--c">
+      <picture><source type="image/avif" srcset="img/tangyuan-640.avif 640w, img/tangyuan-1280.avif 1280w" sizes="(min-width: 900px) 30vw, 70vw"><img src="img/tangyuan-1280.webp" srcset="img/tangyuan-640.webp 640w, img/tangyuan-1280.webp 1280w" sizes="(min-width: 900px) 30vw, 70vw" width="1280" height="853" alt="Two rice balls, one white and one pandan green, in a bowl of amber ginger syrup with crushed peanuts." loading="lazy" decoding="async"></picture>
+      <figcaption><b>Ginger syrup</b> <span>The base of half the warm end. Old ginger only; young ginger is too polite.</span></figcaption>
+    </figure>
+    <figure class="bowl bowl--d">
+      <picture><source type="image/avif" srcset="img/greenbean-640.avif 640w, img/greenbean-1280.avif 1280w" sizes="(min-width: 900px) 40vw, 84vw"><img src="img/greenbean-1280.webp" srcset="img/greenbean-640.webp 640w, img/greenbean-1280.webp 1280w" sizes="(min-width: 900px) 40vw, 84vw" width="1280" height="960" alt="Green bean soup with coconut milk in a green-rimmed bowl." loading="lazy" decoding="async"></picture>
+      <figcaption><b>Green bean soup</b> <span>Coconut milk poured at the counter, not before. S$3.20</span></figcaption>
+    </figure>
+    <p class="warm__end">Tau suan and orh nee are the two things regulars ask for by name. Neither is pretty. Both are gone by eight on a wet night.</p>
+  </div>
+</section>
+
+<!-- 4. THE COOL END: one numeral, one window -->
+<section class="cool" id="cool" aria-labelledby="cool-title">
+  <p class="cool__num" aria-hidden="true">4&deg;</p>
+  <div class="cool__copy">
+    <p class="eyebrow">When it is panas</p>
+    <h2 id="cool-title">The cool end.</h2>
+    <p>The tau huay sets at half past eight and goes straight into the chiller at four degrees. On the hottest afternoons we sell out of it before the school bell; on a wet day the same tray lasts until dinner.</p>
+  </div>
+  <figure class="cool__pic cool__pic--a">
+    <picture><source type="image/avif" srcset="img/tauhuay-640.avif 640w, img/tauhuay-1280.avif 1280w" sizes="(min-width: 900px) 30vw, 60vw"><img src="img/tauhuay-1280.webp" srcset="img/tauhuay-640.webp 640w, img/tauhuay-1280.webp 1280w" sizes="(min-width: 900px) 30vw, 60vw" width="1280" height="853" alt="Silken beancurd with barley in a blue and white bowl." loading="lazy" decoding="async"></picture>
+    <figcaption>Tau huay, chilled. S$2.80</figcaption>
+  </figure>
+  <figure class="cool__pic cool__pic--b">
+    <picture><source type="image/avif" srcset="img/chengtng-640.avif 640w, img/chengtng-1280.avif 1280w" sizes="(min-width: 900px) 36vw, 64vw"><img src="img/chengtng-1280.webp" srcset="img/chengtng-640.webp 640w, img/chengtng-1280.webp 1280w" sizes="(min-width: 900px) 36vw, 64vw" width="1280" height="853" alt="Cheng tng from above on a banana leaf: longan, red dates, lotus seeds and barley." loading="lazy" decoding="async"></picture>
+    <figcaption>Cheng tng, iced. S$3.80</figcaption>
+  </figure>
+</section>
+
+<!-- 5. THE POT: a morning, logged -->
+<section class="pot" id="pot" aria-labelledby="pot-title">
+  <div class="pot__head">
+    <p class="eyebrow">Before the shutters go up</p>
+    <h2 id="pot-title">Six in the morning, logged.</h2>
+  </div>
+  <ol class="pot__log">
+    <li><time>06:00</time><p><b>Beans drained.</b> Mung beans and red beans have soaked for eight hours. The water goes on the plants.</p></li>
+    <li><time>06:20</time><p><b>Ginger on.</b> 2.4 kg of old ginger, bruised with the back of a cleaver, into 18 litres of water for three hours.</p></li>
+    <li class="pot__has-film"><time>07:10</time><p><b>Soy milk on.</b> 32 litres, stirred the whole time and never brought to a hard boil, or the tau huay tastes of the pot.</p>
+      <div class="pot__film"><picture><source type="image/avif" srcset="img/p-vatv-540.avif 540w, img/p-vatv-1080.avif 1080w" sizes="(min-width: 900px) 22vw, 60vw"><img src="img/p-vatv-1080.webp" srcset="img/p-vatv-540.webp 540w, img/p-vatv-1080.webp 1080w" sizes="(min-width: 900px) 22vw, 60vw" width="1080" height="1920" alt="" loading="lazy" decoding="async"></picture><video muted loop playsinline preload="none" data-name="vatv" data-rungs="1080,720" data-portrait aria-hidden="true" tabindex="-1"></video></div></li>
+    <li><time>08:30</time><p><b>Tau huay set.</b> Forty minutes with the lid on. Nobody opens the lid.</p></li>
+    <li class="pot__has-film"><time>10:00</time><p><b>Coconut.</b> Twelve coconuts grated and squeezed by hand; the first press goes on the soups, the second into the pulut hitam.</p>
+      <div class="pot__film"><picture><source type="image/avif" srcset="img/p-coconutv-540.avif 540w, img/p-coconutv-1080.avif 1080w" sizes="(min-width: 900px) 22vw, 60vw"><img src="img/p-coconutv-1080.webp" srcset="img/p-coconutv-540.webp 540w, img/p-coconutv-1080.webp 1080w" sizes="(min-width: 900px) 22vw, 60vw" width="1080" height="1920" alt="" loading="lazy" decoding="async"></picture><video muted loop playsinline preload="none" data-name="coconutv" data-rungs="1080,720" data-portrait aria-hidden="true" tabindex="-1"></video></div></li>
+    <li><time>11:30</time><p><b>Tasting.</b> One spoon of everything. Sugar is adjusted now, never after we open.</p></li>
+    <li><time>11:50</time><p><b>Syrup poured.</b> The ginger syrup goes into a warmed jug, then over the first tray of tang yuan.</p></li>
+    <li><time>12:00</time><p><b>Shutters up.</b> The board reads the weather for the first time today.</p></li>
+  </ol>
+</section>
+
+<!-- 6. THE KUEH TRAY -->
+<section class="kueh" id="kueh" aria-labelledby="kueh-title">
+  <div class="kueh__copy">
+    <p class="eyebrow">Not on the weather</p>
+    <h2 id="kueh-title">The kueh tray.</h2>
+    <p>Kueh does not care about the sky, so it sits outside the sort. Two aunties in the next street make it and walk it over at half past ten, about 140 pieces on a weekday and 220 on a Saturday. When the tray is empty, it is empty.</p>
+  </div>
+  <figure class="tray tray--akk">
+    <picture><source type="image/avif" srcset="img/akk-steamer-640.avif 640w, img/akk-steamer-1280.avif 1280w" sizes="(min-width: 900px) 34vw, 92vw"><img src="img/akk-steamer-1280.webp" srcset="img/akk-steamer-640.webp 640w, img/akk-steamer-1280.webp 1280w" sizes="(min-width: 900px) 34vw, 92vw" width="1280" height="1707" alt="Red ang ku kueh on banana leaf squares in a steamer, the tortoise pattern pressed into each one." loading="lazy" decoding="async"></picture>
+    <figcaption>Ang ku kueh, peanut or mung bean. S$1.40</figcaption>
+  </figure>
+  <figure class="tray tray--ondeh">
+    <picture><source type="image/avif" srcset="img/ondeh-640.avif 640w, img/ondeh-1280.avif 1280w" sizes="(min-width: 900px) 22vw, 46vw"><img src="img/ondeh-1280.webp" srcset="img/ondeh-640.webp 640w, img/ondeh-1280.webp 1280w" sizes="(min-width: 900px) 22vw, 46vw" width="1280" height="1920" alt="Ondeh-ondeh in grated coconut sitting in half coconut shells, pandan leaves behind." loading="lazy" decoding="async"></picture>
+    <figcaption>Ondeh-ondeh, six for S$3.00</figcaption>
+  </figure>
+  <figure class="tray tray--green">
+    <picture><source type="image/avif" srcset="img/akk-green-640.avif 640w, img/akk-green-1280.avif 1280w" sizes="(min-width: 900px) 18vw, 46vw"><img src="img/akk-green-1280.webp" srcset="img/akk-green-640.webp 640w, img/akk-green-1280.webp 1280w" sizes="(min-width: 900px) 18vw, 46vw" width="1280" height="2275" alt="Two green ang ku kueh on a banana leaf on a dark wooden plate." loading="lazy" decoding="async"></picture>
+    <figcaption>Pandan ang ku kueh, Saturdays</figcaption>
+  </figure>
+  <figure class="tray tray--plate">
+    <picture><source type="image/avif" srcset="img/kueh-plate-640.avif 640w, img/kueh-plate-1280.avif 1280w" sizes="(min-width: 900px) 24vw, 92vw"><img src="img/kueh-plate-1280.webp" srcset="img/kueh-plate-640.webp 640w, img/kueh-plate-1280.webp 1280w" sizes="(min-width: 900px) 24vw, 92vw" width="1280" height="1920" alt="A plate of assorted kueh including rainbow kueh lapis and red ang ku kueh." loading="lazy" decoding="async"></picture>
+    <figcaption>Kueh lapis, nine layers. S$1.60 a slice</figcaption>
+  </figure>
+  <figure class="tray tray--rack">
+    <picture><source type="image/avif" srcset="img/pandan-kueh-640.avif 640w, img/pandan-kueh-1280.avif 1280w" sizes="(min-width: 900px) 30vw, 92vw"><img src="img/pandan-kueh-1280.webp" srcset="img/pandan-kueh-640.webp 640w, img/pandan-kueh-1280.webp 1280w" sizes="(min-width: 900px) 30vw, 92vw" width="1280" height="854" alt="Flower-shaped green pandan kueh cooling on a wire rack, a hand lifting one with tongs." loading="lazy" decoding="async"></picture>
+    <figcaption>Pandan kueh, off the rack at 10:30</figcaption>
+  </figure>
+</section>
+
+<!-- 7. THE LOG: what the weather did to the pot last month -->
+<section class="log" id="log" aria-labelledby="log-title-h">
+  <div class="log__head">
+    <p class="eyebrow">Our own count, October</p>
+    <h2 id="log-title-h">What the weather did to the pot.</h2>
+    <p class="log__key"><span><span class="k k--warm"></span>Warm bowls</span> <span><span class="k k--cold"></span>Cold bowls</span> <span><span class="k k--rain"></span>Rained after lunch</span> <span><span class="k k--t"></span>15:00 temperature, 26 to 34&deg;C</span></p>
+  </div>
+  <div class="log__chart">
+    <!--bake:log-->
+      <svg class="log__svg" viewBox="0 0 1200 380" role="img" aria-labelledby="log-title log-desc" preserveAspectRatio="xMidYMid meet">
+        <title id="log-title">Bowls sold each afternoon in October, warm and cold</title>
+        <desc id="log-desc">27 days. On the 11 afternoons with rain, 69 per cent of bowls were warm. On the 16 dry afternoons, 36 per cent were warm.</desc>
+        <path class="t-line" d="M29.9 76.0L73.8 88.0L117.6 67.0L161.5 59.5L205.3 107.5L249.2 79.0L293.0 85.0L336.9 118.0L380.7 98.5L424.6 64.0L468.4 71.5L512.3 80.5L556.1 103.0L600.0 70.0L643.9 110.5L687.7 55.0L731.6 91.0L775.4 77.5L819.3 62.5L863.1 109.0L907.0 73.0L950.8 94.0L994.7 65.5L1038.5 82.0L1082.4 113.5L1126.2 74.5L1170.1 97.0"/>
+        <g class="day" style="--i:0"><rect class="b-warm" x="16.3" y="242.4" width="27.2" height="57.6"/><rect class="b-cold" x="16.3" y="134.4" width="27.2" height="108.1"/></g><g class="day day--wet" style="--i:1"><rect class="b-warm" x="60.2" y="201.7" width="27.2" height="98.3"/><rect class="b-cold" x="60.2" y="148.4" width="27.2" height="53.3"/><rect class="b-rain" x="60.2" y="310" width="27.2" height="6"/></g><g class="day" style="--i:2"><rect class="b-warm" x="104.0" y="246.7" width="27.2" height="53.3"/><rect class="b-cold" x="104.0" y="117.5" width="27.2" height="129.1"/></g><g class="day" style="--i:3"><rect class="b-warm" x="147.9" y="238.2" width="27.2" height="61.8"/><rect class="b-cold" x="147.9" y="96.5" width="27.2" height="141.8"/></g><g class="day day--wet" style="--i:4"><rect class="b-warm" x="191.7" y="176.5" width="27.2" height="123.5"/><rect class="b-cold" x="191.7" y="133.0" width="27.2" height="43.5"/><rect class="b-rain" x="191.7" y="310" width="27.2" height="6"/></g><g class="day" style="--i:5"><rect class="b-warm" x="235.6" y="235.4" width="27.2" height="64.6"/><rect class="b-cold" x="235.6" y="131.6" width="27.2" height="103.9"/></g><g class="day" style="--i:6"><rect class="b-warm" x="279.4" y="227.0" width="27.2" height="73.0"/><rect class="b-cold" x="279.4" y="134.4" width="27.2" height="92.6"/></g><g class="day day--wet" style="--i:7"><rect class="b-warm" x="323.3" y="189.1" width="27.2" height="110.9"/><rect class="b-cold" x="323.3" y="151.2" width="27.2" height="37.9"/><rect class="b-rain" x="323.3" y="310" width="27.2" height="6"/></g><g class="day day--wet" style="--i:8"><rect class="b-warm" x="367.1" y="196.1" width="27.2" height="103.9"/><rect class="b-cold" x="367.1" y="140.0" width="27.2" height="56.1"/><rect class="b-rain" x="367.1" y="310" width="27.2" height="6"/></g><g class="day" style="--i:9"><rect class="b-warm" x="411.0" y="234.0" width="27.2" height="66.0"/><rect class="b-cold" x="411.0" y="97.9" width="27.2" height="136.2"/></g><g class="day" style="--i:10"><rect class="b-warm" x="454.9" y="218.6" width="27.2" height="81.4"/><rect class="b-cold" x="454.9" y="95.1" width="27.2" height="123.5"/></g><g class="day" style="--i:11"><rect class="b-warm" x="498.7" y="236.8" width="27.2" height="63.2"/><rect class="b-cold" x="498.7" y="140.0" width="27.2" height="96.9"/></g><g class="day day--wet" style="--i:12"><rect class="b-warm" x="542.6" y="203.1" width="27.2" height="96.9"/><rect class="b-cold" x="542.6" y="154.0" width="27.2" height="49.1"/><rect class="b-rain" x="542.6" y="310" width="27.2" height="6"/></g><g class="day" style="--i:13"><rect class="b-warm" x="586.4" y="243.9" width="27.2" height="56.1"/><rect class="b-cold" x="586.4" y="127.3" width="27.2" height="116.5"/></g><g class="day day--wet" style="--i:14"><rect class="b-warm" x="630.3" y="186.3" width="27.2" height="113.7"/><rect class="b-cold" x="630.3" y="144.2" width="27.2" height="42.1"/><rect class="b-rain" x="630.3" y="310" width="27.2" height="6"/></g><g class="day" style="--i:15"><rect class="b-warm" x="674.1" y="231.2" width="27.2" height="68.8"/><rect class="b-cold" x="674.1" y="74.0" width="27.2" height="157.2"/></g><g class="day day--wet" style="--i:16"><rect class="b-warm" x="718.0" y="173.7" width="27.2" height="126.3"/><rect class="b-cold" x="718.0" y="111.9" width="27.2" height="61.8"/><rect class="b-rain" x="718.0" y="310" width="27.2" height="6"/></g><g class="day" style="--i:17"><rect class="b-warm" x="761.8" y="239.6" width="27.2" height="60.4"/><rect class="b-cold" x="761.8" y="140.0" width="27.2" height="99.7"/></g><g class="day" style="--i:18"><rect class="b-warm" x="805.7" y="245.3" width="27.2" height="54.7"/><rect class="b-cold" x="805.7" y="124.5" width="27.2" height="120.7"/></g><g class="day day--wet" style="--i:19"><rect class="b-warm" x="849.5" y="193.3" width="27.2" height="106.7"/><rect class="b-cold" x="849.5" y="152.6" width="27.2" height="40.7"/><rect class="b-rain" x="849.5" y="310" width="27.2" height="6"/></g><g class="day" style="--i:20"><rect class="b-warm" x="893.4" y="228.4" width="27.2" height="71.6"/><rect class="b-cold" x="893.4" y="110.5" width="27.2" height="117.9"/></g><g class="day day--wet" style="--i:21"><rect class="b-warm" x="937.2" y="182.1" width="27.2" height="117.9"/><rect class="b-cold" x="937.2" y="116.1" width="27.2" height="66.0"/><rect class="b-rain" x="937.2" y="310" width="27.2" height="6"/></g><g class="day" style="--i:22"><rect class="b-warm" x="981.1" y="222.8" width="27.2" height="77.2"/><rect class="b-cold" x="981.1" y="89.4" width="27.2" height="133.4"/></g><g class="day" style="--i:23"><rect class="b-warm" x="1024.9" y="234.0" width="27.2" height="66.0"/><rect class="b-cold" x="1024.9" y="135.8" width="27.2" height="98.3"/></g><g class="day day--wet" style="--i:24"><rect class="b-warm" x="1068.8" y="198.9" width="27.2" height="101.1"/><rect class="b-cold" x="1068.8" y="162.4" width="27.2" height="36.5"/><rect class="b-rain" x="1068.8" y="310" width="27.2" height="6"/></g><g class="day" style="--i:25"><rect class="b-warm" x="1112.6" y="235.4" width="27.2" height="64.6"/><rect class="b-cold" x="1112.6" y="124.5" width="27.2" height="110.9"/></g><g class="day day--wet" style="--i:26"><rect class="b-warm" x="1156.5" y="169.5" width="27.2" height="130.5"/><rect class="b-cold" x="1156.5" y="96.5" width="27.2" height="73.0"/><rect class="b-rain" x="1156.5" y="310" width="27.2" height="6"/></g>
+        <text x="16.3" y="358" class="tick">1 Oct</text><text x="323.3" y="358" class="tick">8 Oct</text><text x="630.3" y="358" class="tick">15 Oct</text><text x="937.2" y="358" class="tick">22 Oct</text>
+      </svg>
+      <!--/bake:log-->
+  </div>
+  <div class="log__facts">
+    <!--bake:logfacts-->
+      <p class="log__big"><span>69%</span> of bowls were warm on the 11 wet afternoons.</p>
+      <p class="log__big log__big--dry"><span>36%</span> on the 16 dry ones.</p>
+      <p class="log__small">3,360 bowls in October. The busiest cold day was 18 October, 32.6&deg;C at three o'clock.</p>
+      <!--/bake:logfacts-->
+  </div>
+</section>
+
+<!-- 8. VISIT -->
+<section class="visit" id="visit" aria-labelledby="visit-title">
+  <div class="visit__film">
+    <picture><source type="image/avif" srcset="img/p-housesv-540.avif 540w, img/p-housesv-1080.avif 1080w" sizes="(min-width: 900px) 30vw, 100vw"><img src="img/p-housesv-1080.webp" srcset="img/p-housesv-540.webp 540w, img/p-housesv-1080.webp 1080w" sizes="(min-width: 900px) 30vw, 100vw" width="1080" height="1920" alt="" loading="lazy" decoding="async"></picture>
+    <video muted loop playsinline preload="none" data-name="housesv" data-rungs="1080,720" data-portrait aria-hidden="true" tabindex="-1"></video>
+  </div>
+  <div class="visit__copy">
+    <p class="eyebrow">Find us</p>
+    <h2 id="visit-title">Two streets from the shophouses everyone photographs.</h2>
+    <address>
+      <p>21 Jalan Gerimis, #01-03<br>Singapore</p>
+      <p><a href="tel:+6561000218">+65 6100 0218</a><br><a href="mailto:hello@hujanpanas.sg">hello@hujanpanas.sg</a></p>
+    </address>
+    <table class="hours">
+      <caption>Opening hours</caption>
+      <tbody>
+        <tr><th scope="row">Tuesday to Thursday</th><td>12:00 &ndash; 22:30</td></tr>
+        <tr><th scope="row">Friday and Saturday</th><td>12:00 &ndash; 23:30</td></tr>
+        <tr><th scope="row">Sunday</th><td>12:00 &ndash; 22:00</td></tr>
+        <tr><th scope="row">Monday</th><td>Closed</td></tr>
+      </tbody>
+    </table>
+    <p class="visit__rule">One house rule: if it is still raining at closing time, the pot stays on for another half hour.</p>
+  </div>
+  <figure class="visit__pic">
+    <picture><source type="image/avif" srcset="img/rain-street-640.avif 640w, img/rain-street-1280.avif 1280w" sizes="(min-width: 900px) 34vw, 92vw"><img src="img/rain-street-1280.webp" srcset="img/rain-street-640.webp 640w, img/rain-street-1280.webp 1280w" sizes="(min-width: 900px) 34vw, 92vw" width="1280" height="853" alt="A person under a black umbrella on a wet Singapore street, a green bus passing the old police station's coloured shutters." loading="lazy" decoding="async"></picture>
+  </figure>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p class="foot__mark">Hujan <span>Panas</span></p>
+  <nav aria-label="Footer"><a href="#board">Board</a> <a href="#pot">The pot</a> <a href="#kueh">Kueh</a> <a href="#visit">Visit</a></nav>
+  <p>Contains information from NEA real-time weather readings, accessed live from data.gov.sg, made available under the terms of the Singapore Open Data Licence version 1.0. When a reading cannot be fetched the page shows a typical one for the month and hour, and says so.</p>
+  <p>&copy; 2026 Hujan Panas. 21 Jalan Gerimis, #01-03, Singapore. Closed Mondays.</p>
+</footer>
+</body>
+</html>
