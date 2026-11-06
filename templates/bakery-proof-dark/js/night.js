@@ -20,22 +20,25 @@
 
   /* ---------- smooth scroll ---------- */
   var lenis = null;
-  if (window.Lenis) {
+  function startLenis() {
+    if (!window.Lenis || lenis) return;
     lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(function (t) { if (lenis) lenis.raf(t * 1000); });
-    gsap.ticker.lagSmoothing(0);
-    $$('a[href^="#"]').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        var id = a.getAttribute('href').slice(1), el = id && document.getElementById(id);
-        if (!el || a.classList.contains('skip')) return;
-        e.preventDefault();
-        var dist = Math.abs(el.getBoundingClientRect().top);
-        lenis.scrollTo(el, { duration: clamp(dist / 2600, 0.9, 4.2), offset: 0 });
-        history.replaceState(null, '', '#' + id);
-      });
-    });
   }
+  startLenis();
+  gsap.ticker.add(function (t) { if (lenis) lenis.raf(t * 1000); });
+  gsap.ticker.lagSmoothing(0);
+  $$('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1), el = id && document.getElementById(id);
+      if (!el || a.classList.contains('skip')) return;
+      e.preventDefault();
+      var dist = Math.abs(el.getBoundingClientRect().top);
+      if (lenis) lenis.scrollTo(el, { duration: clamp(dist / 2600, 0.9, 4.2), offset: 0 });
+      else el.scrollIntoView({ behavior: 'auto', block: 'start' });
+      history.replaceState(null, '', '#' + id);
+    });
+  });
   var scrollY = function () { return lenis ? lenis.scroll : window.scrollY; };
 
   /* ---------- geometry cache ---------- */
@@ -120,7 +123,7 @@
   });
   document.addEventListener('visibilitychange', function () { videos.forEach(syncVideo); });
   /* nothing is fetched before the page has loaded, so the poster is the first view */
-  function go() { ready = true; videos.forEach(ensureSrc); }
+  function go() { ready = true; videos.forEach(function (v) { ensureSrc(v); syncVideo(v); }); }
   window.addEventListener('load', function () { (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(go, { timeout: 1500 }); });
 
   /* ---------- the dust: pure points, 2D canvas ---------- */
@@ -194,7 +197,7 @@
     if (idx === 0) play();
   });
   // doors copy
-  var dayBack = $$('.day-back > :not(.bloom)');
+  var dayBack = $$('.day-back > *');
   // menu bars
   var bars = $$('.bar i');
   ScrollTrigger.create({
@@ -202,6 +205,45 @@
     onEnter: function () { gsap.to(bars, { '--k': 1, duration: 1.1, ease: 'power3.out', stagger: .09 }); }
   });
   gsap.set(bars, { '--k': 0 });
+
+
+  /* ---------- the live menu: where Singapore's clock sits on the bake-time bars ---------- */
+  var board = $('#board'), nowline = $('.nowline', board), rowsEl = $$('.row', board);
+  function sgMinutes() {
+    var q = new URLSearchParams(location.search).get('now');   /* ?now=08:15 previews a time of day */
+    if (q && /^\d{1,2}:\d{2}$/.test(q)) { var p = q.split(':'); return +p[0] * 60 + +p[1]; }
+    var f = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Singapore', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date()), o = {};
+    f.forEach(function (x) { o[x.type] = x.value; });
+    return (+o.hour % 24) * 60 + +o.minute;
+  }
+  var nowFrac = 0, grow = { v: 0 };
+  function placeNow() {
+    var m = sgMinutes(), pad = function (n) { return String(n).padStart(2, '0'); };
+    var open = m >= 420 && m <= 780;
+    nowFrac = open ? clamp((m - 300) / 480, 0, 1) : .25;      /* closed: a ghost tick at the doors, 07:00 */
+    nowline.hidden = false; board.classList.add('is-live'); board.classList.toggle('is-idle', !open); nowline.classList.toggle('is-idle', !open);
+    board.style.setProperty('--now', (nowFrac * grow.v).toFixed(4));
+    $('span', nowline).textContent = open ? 'Now ' + pad(Math.floor(m / 60)) + ':' + pad(m % 60) : 'Doors 07:00';
+    rowsEl.forEach(function (r) {
+      var to = parseFloat(getComputedStyle(r).getPropertyValue('--to')), end = 300 + to * 480;
+      r.classList.toggle('is-gone', open && m > end);
+    });
+  }
+  placeNow(); setInterval(placeNow, 30000);
+  ScrollTrigger.create({ trigger: board, start: 'top 78%', once: true, onEnter: function () { gsap.to(grow, { v: 1, duration: 1.6, ease: 'power3.out', onUpdate: function () { board.style.setProperty('--now', (nowFrac * grow.v).toFixed(4)); } }); } });
+
+
+  var mpics = $$('.menu-photo picture'), mrows = $$('.row[data-photo]');
+  if (mpics.length) {
+    var mio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var role = e.target.dataset.photo;
+        mpics.forEach(function (p) { p.classList.toggle('is-on', p.dataset.role === role); });
+      });
+    }, { rootMargin: '-42% 0px -48% 0px', threshold: 0 });
+    mrows.forEach(function (r) { mio.observe(r); });
+  }
 
   /* ---------- per-frame work ---------- */
   var doors = { l: $('.door--l'), r: $('.door--r'), bloom: $('.bloom') };
@@ -236,19 +278,20 @@
     }
     if (cur !== lastIdx && cur >= 0) {
       lastIdx = cur;
-      clock.setAttribute('data-pos', geo.ch[cur].el.classList.contains('ch--r') && !geo.ch[cur].el.classList.contains('ch--out') ? 'r' : 'l');
+      clock.setAttribute('data-pos', geo.ch[cur].el.classList.contains('ch--split') ? 'r' : geo.ch[cur].el.classList.contains('ch--low') ? 't' : 'l');
       var t = String(geo.ch[cur].hour).padStart(2, '0') + ':00';
       live.textContent = t + ', ' + $('.eyebrow', geo.ch[cur].el).textContent.replace(/Hour \d of \d/, '').trim();
     }
 
     // doors
-    var po = clamp((y - geo.open.top) / geo.open.len, 0, 1), t2 = ease(clamp((po - .2) / .46, 0, 1));
+    var po = clamp((y - geo.open.top) / geo.open.len, 0, 1), t2 = ease(clamp((po - .03) / .5, 0, 1));
     doors.l.style.transform = 'translate3d(' + (-t2 * 101).toFixed(2) + '%,0,0)';
     doors.r.style.transform = 'translate3d(' + (t2 * 101).toFixed(2) + '%,0,0)';
     doors.bloom.style.setProperty('--bs', (.2 + t2 * .9).toFixed(3));
-    doors.bloom.style.setProperty('--bo', (clamp(t2 * 1.25, 0, 1) * .55).toFixed(3));
-    var dk = clamp((po - .7) / .22, 0, 1);
-    for (var j = 0; j < dayBack.length; j++) { dayBack[j].style.opacity = String(clamp(dk * 1.3 - j * .15, 0, 1)); dayBack[j].style.transform = 'translateY(' + ((1 - dk) * 24).toFixed(1) + 'px)'; }
+    doors.bloom.style.setProperty('--bo', (clamp(t2 * 1.3, 0, 1) * (.85 - clamp((po - .7) / .3, 0, 1) * .5)).toFixed(3));
+    var dk = clamp((po - .74) / .16, 0, 1);
+    open.style.setProperty('--wash', clamp((po - .82) / .18, 0, 1).toFixed(3));
+    for (var j = 0; j < dayBack.length; j++) { dayBack[j].style.opacity = String(clamp((dk - j * .12) * 3, 0, 1)); dayBack[j].style.transform = 'translateY(' + ((1 - dk) * 24).toFixed(1) + 'px)'; }
     if (po > .26 && po < .7 && burstArmed && prevPo <= .26) { burst = 1; }
     burstArmed = po < .1 ? true : burstArmed;
     prevPo = po;
@@ -257,7 +300,7 @@
     if (y > geo.open.top + geo.vh * .1) clock.setAttribute('data-hide', ''); else clock.removeAttribute('data-hide');
 
     // header colour: dark text only over the cream ground
-    var yy = y + 34, day = yy > geo.open.top + geo.open.len * .72 && !(yy > geo.cof[0] && yy < geo.cof[1]) && yy < geo.foot;
+    var yy = y + 34, day = yy > geo.menuTop - 10 && !(yy > geo.cof[0] && yy < geo.cof[1]) && yy < geo.foot;
     header.dataset.theme = day ? 'day' : 'night';
 
     dust(time);
@@ -272,7 +315,7 @@
     btn.setAttribute('aria-pressed', String(motionOn));
     $('b', btn).textContent = motionOn ? 'on' : 'off';
     videos.forEach(syncVideo);
-    if (!motionOn && lenis) { lenis.destroy(); lenis = null; }
+    if (!motionOn && lenis) { lenis.destroy(); lenis = null; } else if (motionOn) startLenis();
   });
 
   /* ---------- go ---------- */

@@ -50,7 +50,7 @@ for name, pid in STILLS.items():
     for w in (800, 1600):
         save(fit(os.path.join(RAW, pid + '.jpg'), w, CROP.get(name, 0.0)), f'{name}-{w}')
 for name in ([] if ONLY else POSTER):
-    big = name in ('mix', 'knead', 'roll', 'oven', 'rack')
+    big = name in ('mix', 'knead', 'roll', 'oven', 'rack', 'display')
     for w in ((1920, 960) if big else (960, 480)):
         save(fit(os.path.join(POSTERS, f'poster-{name}.png'), w), f'p-{name}-{w}')
 for n, (w, h), b in rows:
