@@ -1,0 +1,17 @@
+name: ratings
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Ratings are valid and only managers changed them
+        run: node scripts/ratings.mjs check --base "${{ github.event.before || github.event.pull_request.base.sha }}"
