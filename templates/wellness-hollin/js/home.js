@@ -55,15 +55,16 @@
   if (HOLL.lenis) HOLL.lenis.on('scroll', request);
   var rt;
   window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { measure(); lastT = null; update(); }, 150); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); lastT = null; update(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); lastT = null; update(); if (window.ScrollTrigger) ScrollTrigger.refresh(); });
   window.addEventListener('load', function () { measure(); lastT = null; update(); });
 
   /* The shape of a session: the trace draws itself as the rest section arrives. */
   var path = document.querySelector('[data-trace]');
   if (path && window.gsap && window.ScrollTrigger && !HOLL.reduced) {
+    /* time-based, once: a scrubbed draw could be left half-finished on screen */
     gsap.fromTo(path, { strokeDashoffset: 1 }, {
-      strokeDashoffset: 0, ease: 'none',
-      scrollTrigger: { trigger: path, start: 'top 92%', end: 'top 30%', scrub: 0.6 }
+      strokeDashoffset: 0, ease: 'power2.inOut', duration: 2.6,
+      scrollTrigger: { trigger: path, start: 'top 80%', once: true }
     });
   }
 })();

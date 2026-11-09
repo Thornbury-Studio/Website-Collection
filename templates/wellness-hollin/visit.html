@@ -36,6 +36,7 @@
   <a class="nav__mark" href="index.html">Hollin</a>
   <nav aria-label="Main"><ul class="nav__links"><li><a href="rounds.html">The Rounds</a></li><li><a href="sessions.html">Sessions &amp; prices</a></li><li><a href="visit.html" aria-current="page">Visit</a></li><li><a href="guest-book.html">Guest Book</a></li></ul></nav>
   <p class="nav__temp" aria-hidden="true"><span data-temp-readout><span data-bake="stage.plunge.temp">4</span></span><span>°C</span></p>
+  <button class="nav__fb" type="button" data-fb-open aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4h16v12H9l-5 4z"/></svg><span class="nav__fb-txt">Feedback</span></button>
   <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h18M3 16h18"/></svg></button>
 </header>
 <div class="menu" id="menu" hidden>
@@ -132,7 +133,6 @@
     </div>
   </div>
 </footer>
-<button class="fb-open" type="button" data-fb-open aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4h16v12H9l-5 4z"/></svg><span class="fb-open__txt">Feedback</span></button>
 <dialog class="fb" id="fb" aria-labelledby="fb-title">
   <div class="fb__head"><h2 id="fb-title">Leave a note</h2><button class="fb__close" type="button" data-fb-close><span class="sr-only">Close</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
   <div class="fb__body">
@@ -178,7 +178,7 @@
     <button class="btn" type="button" data-again>Write another</button>
     <button class="btn btn--quiet" type="button" data-delete>Delete from this device</button>
   </div>
-  <p class="fb__intro">The email button opens your own mail app with the note filled in, addressed to hello@example.com (a placeholder in this template). It is only sent if you press send there.</p>
+  <p class="fb__intro">Opens your own mail app with the note filled in, to hello@example.com. It goes only if you press send there.</p>
 </div>
   </div>
 </dialog>

@@ -70,7 +70,7 @@
     '  vec2 e=min(uv,1.-uv);e.x*=uRes.x/uRes.y;',
     '  float edge=min(e.x,e.y);',
     '  float front=uCold*1.3-edge*1.6+(fbm(p*1.5+11.)-.5)*1.1+(fbm(p*5.+3.)-.5)*.35;',
-    '  float cover=smoothstep(0.,.3,front);',
+    '  float cover=smoothstep(-.1,.6,front);',
     '  float fr=frost(p*2.2);',
     '  float rim=smoothstep(0.,.03,front)*(1.-smoothstep(.03,.12,front));',
     '  vec3 iceDark=mix(uGround,vec3(.80,.90,.97),.16);',

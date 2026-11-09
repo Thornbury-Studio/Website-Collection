@@ -75,7 +75,7 @@ button { font: inherit; color: inherit; }
   position: fixed; inset: 0 0 auto 0; z-index: 50; height: var(--nav-h);
   display: flex; align-items: center; gap: clamp(1rem, 3vw, 2.5rem);
   padding: 0 var(--gutter);
-  background: color-mix(in srgb, var(--ground) 88%, transparent);
+  background: color-mix(in srgb, var(--ground) 97%, transparent);
   border-bottom: 1px solid var(--line);
 }
 .nav__mark {
@@ -207,8 +207,9 @@ html[data-state="cold"] .field--static { --p-hot: 0; --p-mid: 0; --p-cold: 1; }
 }
 /* a clearing in the steam / frost behind the copy, so text never sits on the brightest part of the field */
 .stage__text::before {
-  content: ''; position: absolute; z-index: -1; inset: -4% -14% -4% -30%;
-  background: radial-gradient(ellipse 60% 55% at 42% 52%, color-mix(in srgb, var(--ground) 82%, transparent) 0%, color-mix(in srgb, var(--ground) 60%, transparent) 55%, transparent 100%);
+  content: ''; position: absolute; z-index: -1; inset: -6% -8% -6% -8%;
+  /* closest-side: the ellipse is fully transparent before it reaches the box edge, so the clearing never shows a seam */
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--ground) 82%, transparent) 0%, color-mix(in srgb, var(--ground) 66%, transparent) 60%, transparent 100%);
   pointer-events: none;
 }
 .stage__title { font-size: clamp(4rem, 11.2vw, 11.5rem); margin: .5rem 0 1.6rem -.04em; white-space: nowrap; }
@@ -226,8 +227,8 @@ html[data-state="cold"] .field--static { --p-hot: 0; --p-mid: 0; --p-cold: 1; }
 .stage--plunge .stage__photo img { aspect-ratio: 3 / 4; }
 @media (max-width: 880px) {
   .stage { min-height: 0; padding-top: 14vh; padding-bottom: 24vh; }
-  .stage__text, .stage--rinse .stage__text { grid-column: 1 / -1; position: relative; padding: 0; }
-  .stage__photo, .stage--rinse .stage__photo, .stage--plunge .stage__photo { grid-column: 1 / -1; grid-row: 2; position: static; margin-top: 2.5rem; }
+  .stage__text, .stage--rinse .stage__text { grid-column: 1 / -1; grid-row: 1; position: relative; top: auto; padding: 0; }
+  .stage__photo, .stage--rinse .stage__photo, .stage--plunge .stage__photo { grid-column: 1 / -1; grid-row: 2; position: static; top: auto; margin-top: 2rem; }
   .stage--rinse .stage__photo, .stage--plunge .stage__photo { width: 78%; }
   .stage--plunge .stage__photo { justify-self: end; }
   .stage__title { font-size: 21vw; }
@@ -242,14 +243,16 @@ html[data-state="cold"] .field--static { --p-hot: 0; --p-mid: 0; --p-cold: 1; }
 .trace svg { width: 100%; height: auto; overflow: visible; }
 .trace .grid line { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
 .trace .axis text { fill: var(--dim); font: 600 12px var(--text); letter-spacing: .1em; }
-.trace .path { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 1 1; stroke-dashoffset: 0; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+/* no non-scaling-stroke here: it would break pathLength=1, which the draw-on relies on */
+.trace .path { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 1 1; stroke-dashoffset: 0; stroke-linejoin: round; }
 .trace .zone { fill: color-mix(in srgb, var(--accent) 12%, transparent); }
 .trace figcaption { margin-top: 1.25rem; max-width: 44em; color: var(--dim); font-size: .9375rem; }
 @media (max-width: 880px) {
   .rest__head, .rest__text { grid-column: 1 / -1; }
   .rest__text { grid-row: 2; margin-top: 1.5rem; }
   .trace { grid-row: 3; }
-  .trace .axis text { font-size: 22px; }
+  .trace .axis text { font-size: 30px; }
+  .trace .path { stroke-width: 5; }
 }
 
 /* ---------- photo band with copy (always dark) ---------- */
@@ -354,23 +357,22 @@ th .dim, td .dim { display: block; font-size: .9375rem; font-weight: 400; margin
 @media (max-width: 640px) { .list li { grid-template-columns: 1fr; } }
 
 .address { font-style: normal; font-size: clamp(1.5rem, 2.6vw, 2.25rem); line-height: 1.25; font-family: var(--display); font-stretch: 92%; font-weight: 400; }
-.hours { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: .6rem 2rem; }
+.hours { margin: 0 0 1.5rem; display: grid; grid-template-columns: auto 1fr; gap: .6rem 2rem; }
 .hours dt { color: var(--dim); }
 .hours dd { margin: 0; font-variant-numeric: tabular-nums; }
 
 /* ---------- feedback ---------- */
-.fb-open {
-  position: fixed; right: var(--gutter); bottom: clamp(1rem, 3vh, 2rem); z-index: 40;
-  display: inline-flex; align-items: center; gap: .55rem; min-height: 44px; padding: 0 1rem;
-  background: var(--ground2); color: var(--ink); border: 1px solid var(--line-strong); border-radius: 2px; cursor: pointer;
-  font-size: .75rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+.nav__fb {
+  display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; padding: 0 .9rem;
+  background: transparent; color: var(--ink); border: 1px solid var(--line-strong); border-radius: 2px; cursor: pointer;
+  font-size: .6875rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
 }
-.fb-open:hover { border-color: var(--accent); }
-.fb-open svg { width: 16px; height: 16px; }
+.nav__fb:hover { border-color: var(--accent); }
+.nav__fb svg { width: 15px; height: 15px; }
 @media (max-width: 880px) {
-  .fb-open { width: 48px; height: 48px; padding: 0; justify-content: center; right: 12px; bottom: 12px; }
-  .fb-open svg { width: 20px; height: 20px; }
-  .fb-open .fb-open__txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .nav__fb { width: 44px; padding: 0; justify-content: center; border-color: transparent; }
+  .nav__fb svg { width: 20px; height: 20px; }
+  .nav__fb-txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }
 
 dialog.fb {
@@ -387,7 +389,6 @@ dialog.fb::backdrop { background: rgba(3, 5, 8, .72); }
 
 .form { display: grid; gap: 1.35rem; }
 .form[hidden] { display: none; }
-.fb-open[data-away] { opacity: 0; visibility: hidden; transition: opacity .2s, visibility 0s .2s; }
 .form fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .form legend, .form label.lbl { display: block; padding: 0; margin-bottom: .55rem; font-size: .75rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
 .form .opt { color: var(--dim); font-weight: 500; letter-spacing: .08em; text-transform: none; }
@@ -401,10 +402,10 @@ dialog.fb::backdrop { background: rgba(3, 5, 8, .72); }
 .form textarea.short { min-height: 4.25rem; }
 .form input:hover, .form textarea:hover { border-color: var(--ink); }
 .form [aria-invalid="true"] { border-color: var(--err); box-shadow: inset 0 0 0 1px var(--err); }
-.rating { display: flex; flex-wrap: wrap; gap: .5rem; }
+.rating { display: flex; flex-wrap: wrap; gap: .45rem; }
 .rating input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
 .rating label {
-  display: grid; place-items: center; width: 52px; height: 52px; cursor: pointer;
+  display: grid; place-items: center; width: 48px; height: 48px; cursor: pointer;
   border: 1px solid var(--line-strong); border-radius: 2px; background: var(--ground);
   font-family: var(--display); font-size: 1.25rem; font-weight: 600; font-stretch: 100%;
 }

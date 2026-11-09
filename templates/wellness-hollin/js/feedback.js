@@ -156,17 +156,6 @@
     });
   });
 
-  /* On the Guest Book page the floating button steps aside while the page's own
-     form (or its saved note) is on screen, so it never sits on top of a field. */
-  var openBtn = document.querySelector('[data-fb-open]');
-  var inline = document.getElementById('gb');
-  if (openBtn && inline && 'IntersectionObserver' in window) {
-    var zone = inline.closest('section') || inline;
-    new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) openBtn.setAttribute('data-away', ''); else openBtn.removeAttribute('data-away'); });
-    }).observe(zone);
-  }
-
   /* ---------- the dialog, reachable from every page ---------- */
   var dlg = document.getElementById('fb');
   var opener = document.querySelector('[data-fb-open]');

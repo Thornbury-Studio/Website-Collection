@@ -40,7 +40,7 @@
 
   /* Display type: Anybody's width and weight follow the heat. Hot type is
      expanded and heavy; cold type is condensed and light. */
-  H.TYPE = { hot: { wdth: 150, wght: 860 }, mid: { wdth: 100, wght: 520 }, cold: { wdth: 56, wght: 230 } };
+  H.TYPE = { hot: { wdth: 150, wght: 860 }, mid: { wdth: 100, wght: 520 }, cold: { wdth: 62, wght: 320 } };
 
   /* H.at(T): the whole look of the page at T °C. Used at runtime by
      js/temp.js (every frame on the home page) and at build time by

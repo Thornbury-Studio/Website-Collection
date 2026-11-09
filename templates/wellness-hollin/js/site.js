@@ -61,7 +61,7 @@
         gsap.from(split.chars, {
           yPercent: 112, duration: inHero ? 1.15 : 0.95, ease: 'expo.out', stagger: inHero ? 0.055 : 0.04,
           delay: inHero ? 0.12 : 0,
-          scrollTrigger: inHero ? null : { trigger: el, start: 'top 82%', once: true }
+          scrollTrigger: inHero ? null : { trigger: el, start: 'top bottom', once: true }
         });
       });
     };

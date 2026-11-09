@@ -142,6 +142,7 @@ function nav(p) {
   <a class="nav__mark" href="index.html"${p.file === 'index.html' ? ' aria-current="page"' : ''}>Hollin</a>
   <nav aria-label="Main"><ul class="nav__links">${links}</ul></nav>
   <p class="nav__temp" aria-hidden="true">${p.id === 'home' ? `<span class="nav__room" data-temp-label>${S.hot.name}</span>` : ''}<span data-temp-readout>${b(p.tempPath, p.id === 'home' ? '1' : undefined)}</span><span>°C</span></p>
+  <button class="nav__fb" type="button" data-fb-open aria-haspopup="dialog">${ICON.note}<span class="nav__fb-txt">Feedback</span></button>
   <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span>${ICON.menu}</button>
 </header>
 <div class="menu" id="menu" hidden>
@@ -196,13 +197,12 @@ function feedbackForm(id, opts = {}) {
     <button class="btn" type="button" data-again>Write another</button>
     <button class="btn btn--quiet" type="button" data-delete>Delete from this device</button>
   </div>
-  <p class="fb__intro">The email button opens your own mail app with the note filled in, addressed to ${H.contact.email} (a placeholder in this template). It is only sent if you press send there.</p>
+  <p class="fb__intro">Opens your own mail app with the note filled in, to ${H.contact.email}. It goes only if you press send there.</p>
 </div>`;
 }
 
 function feedbackDialog() {
-  return `<button class="fb-open" type="button" data-fb-open aria-haspopup="dialog">${ICON.note}<span class="fb-open__txt">Feedback</span></button>
-<dialog class="fb" id="fb" aria-labelledby="fb-title">
+  return `<dialog class="fb" id="fb" aria-labelledby="fb-title">
   <div class="fb__head"><h2 id="fb-title">Leave a note</h2><button class="fb__close" type="button" data-fb-close><span class="sr-only">Close</span>${ICON.close}</button></div>
   <div class="fb__body">
     <p class="fb__intro">How was your visit? Notes are kept on this device. Read them, or write a longer one, in the <a href="guest-book.html">Guest Book</a>.</p>
