@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js t-90" data-temp="90" data-page="home">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hollin — a contrast-bathing club</title>
+<meta name="description" content="Hot room at 90 °C, cold plunge at 4 °C, a rest room between. A round of each, 3 rounds, 90 minutes.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#170703">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/wellness-hollin/">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hollin">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="Hollin — a contrast-bathing club">
+<meta property="og:description" content="A contrast-bathing club. This page is one round: it starts in the hot room and cools to the plunge as you scroll.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/wellness-hollin/">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/wellness-hollin/img/og-home.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The word Hollin in heavy, wide amber type over a dark field of rising heat.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hollin — a contrast-bathing club">
+<meta name="twitter:description" content="A contrast-bathing club. This page is one round: it starts in the hot room and cools to the plunge as you scroll.">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/wellness-hollin/img/og-home.webp">
+<link rel="preload" href="fonts/anybody-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/temps.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <a class="nav__mark" href="index.html" aria-current="page">Hollin</a>
+  <nav aria-label="Main"><ul class="nav__links"><li><a href="rounds.html">The Rounds</a></li><li><a href="sessions.html">Sessions &amp; prices</a></li><li><a href="visit.html">Visit</a></li><li><a href="guest-book.html">Guest Book</a></li></ul></nav>
+  <p class="nav__temp" aria-hidden="true"><span class="nav__room" data-temp-label>Hot room</span><span data-temp-readout><span data-bake="stage.hot.temp" data-bake-fmt="1">90.0</span></span><span>°C</span></p>
+  <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h18M3 16h18"/></svg></button>
+</header>
+<div class="menu" id="menu" hidden>
+  <button class="menu__close" type="button"><span class="sr-only">Close menu</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  <nav aria-label="Main, mobile"><ul><li><a href="index.html" aria-current="page">Home</a></li><li><a href="rounds.html">The Rounds</a></li><li><a href="sessions.html">Sessions &amp; prices</a></li><li><a href="visit.html">Visit</a></li><li><a href="guest-book.html">Guest Book</a></li></ul></nav>
+</div>
+<main id="main">
+<div class="field" id="field" aria-hidden="true">
+  <img class="field__poster" data-for="hot" src="img/field-hot.webp" alt="" width="1600" height="1000" decoding="async">
+  <img class="field__poster" data-for="mid" src="img/field-mid.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+  <img class="field__poster" data-for="cold" src="img/field-cold.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+</div>
+<p class="sr-only" aria-live="polite" id="temp-live">Page temperature <span data-bake="stage.hot.temp">90</span> degrees: hot room.</p>
+
+<section class="hero" data-stage="hot" aria-labelledby="hero-title">
+  <div class="hero__intro">
+    <p class="lede">A contrast-bathing club. Hot room, cold plunge, rest room: a round of each, <span data-bake="session.rounds">3</span> rounds, <span data-bake="session.total">90</span> minutes.</p>
+    <p class="dim measure">This page is one round. It starts at <span data-bake="stage.hot.temp">90</span> degrees. Scroll, and it cools down to the plunge.</p>
+  </div>
+  <div class="hero__cue">
+    <div class="readout" aria-hidden="true">
+      <span class="readout__label label" data-temp-label>Hot room</span>
+      <span class="readout__value"><span data-temp-readout><span data-bake="stage.hot.temp" data-bake-fmt="1">90.0</span></span><small>°C</small></span>
+      <span class="readout__bar"><i></i></span>
+    </div>
+    <p class="hero__scroll label"><i></i>Scroll to cool</p>
+  </div>
+  <h1 class="hero__word display split-chars" id="hero-title">Hollin</h1>
+</section>
+
+<div id="ritual">
+<section class="stage stage--hot" data-stage="hot" aria-labelledby="st-hot">
+  <div class="stage__text">
+    <p class="label">Hot room · <span data-bake="stage.hot.min">12</span> minutes</p>
+    <h2 class="stage__title display split-chars" id="st-hot">Heat</h2>
+    <p class="lede"><span data-bake="stage.hot.temp">90</span> degrees on the top bench, <span data-bake="stage.hot.low">80</span> on the bottom. Water goes on the stones every ten minutes and the room lets you know about it.</p>
+    <p>Nobody talks much. You'll know when you've had enough; leave a minute before that.</p>
+    <ul class="stage__facts"><li><b><span data-bake="stage.hot.temp">90</span> °C</b> top bench</li><li><b><span data-bake="stage.hot.min">12</span> min</b> a round</li><li><b><span data-bake="stage.hot.places">16</span></b> places</li></ul>
+  </div>
+  <figure class="stage__photo"><picture><source type="image/avif" srcset="img/home-heat-1400.avif 1400w, img/home-heat-800.avif 800w" sizes="(max-width: 880px) 100vw, 36vw"><img src="img/home-heat-800.webp" srcset="img/home-heat-1400.webp 1400w, img/home-heat-800.webp 800w" sizes="(max-width: 880px) 100vw, 36vw" width="800" height="1200" alt="A ladle of water poured over dark sauna stones, steam lifting off them." loading="lazy" decoding="async"></picture><figcaption class="label">Water on the stones</figcaption></figure>
+</section>
+
+<section class="stage stage--rinse" data-stage="rinse" aria-labelledby="st-rinse">
+  <div class="stage__text">
+    <p class="label">The rinse · <span data-bake="stage.rinse.min">1</span> minute</p>
+    <h2 class="stage__title display split-chars" id="st-rinse">Rinse</h2>
+    <p class="lede">Out of the heat and under the shower at <span data-bake="stage.rinse.temp">38</span> degrees: your own temperature, give or take.</p>
+    <p>It takes the sweat off and tells your skin what's coming. Don't skip it. The plunge is shared.</p>
+    <ul class="stage__facts"><li><b><span data-bake="stage.rinse.temp">38</span> °C</b> shower</li><li><b><span data-bake="stage.rinse.min">1</span> min</b></li></ul>
+  </div>
+  <figure class="stage__photo"><picture><source type="image/avif" srcset="img/home-turn-1400.avif 1400w, img/home-turn-800.avif 800w" sizes="(max-width: 880px) 78vw, 28vw"><img src="img/home-turn-800.webp" srcset="img/home-turn-1400.webp 1400w, img/home-turn-800.webp 800w" sizes="(max-width: 880px) 78vw, 28vw" width="800" height="1200" alt="Condensation beading on cold glass." loading="lazy" decoding="async"></picture><figcaption class="label">Glass between the rooms</figcaption></figure>
+</section>
+
+<section class="stage stage--plunge" data-stage="plunge" aria-labelledby="st-plunge">
+  <div class="stage__text">
+    <p class="label">Cold plunge · <span data-bake="stage.plunge.min">2</span> minutes</p>
+    <h2 class="stage__title display split-chars" id="st-plunge">Cold</h2>
+    <p class="lede"><span data-bake="stage.plunge.temp">4</span> degrees. <span data-bake="stage.plunge.tubs">2</span> tubs, <span data-bake="stage.plunge.perTub">2</span> people each, <span data-bake="stage.plunge.depth">1.2</span> metres deep, so you're in to the shoulders.</p>
+    <p>First round, <span data-bake="stage.plunge.first">1</span> minute. After that, <span data-bake="stage.plunge.min">2</span>. Breathe out for longer than you breathe in, and get out before you want to.</p>
+    <ul class="stage__facts"><li><b><span data-bake="stage.plunge.temp">4</span> °C</b> water</li><li><b><span data-bake="stage.plunge.min">2</span> min</b> at most</li><li><b><span data-bake="stage.plunge.depth">1.2</span> m</b> deep</li></ul>
+  </div>
+  <figure class="stage__photo"><picture><source type="image/avif" srcset="img/home-cold-1400.avif 1400w, img/home-cold-800.avif 800w" sizes="(max-width: 880px) 78vw, 26vw"><img src="img/home-cold-800.webp" srcset="img/home-cold-1400.webp 1400w, img/home-cold-800.webp 800w" sizes="(max-width: 880px) 78vw, 26vw" width="800" height="468" alt="A man swimming through a channel cut in snow and ice, eyes half closed." loading="lazy" decoding="async"></picture><figcaption class="label">Shoulders under</figcaption></figure>
+</section>
+</div>
+
+<section class="rest" aria-labelledby="rest-title">
+  <div class="rest__head">
+    <p class="label">Rest room · <span data-bake="stage.rest.temp">21</span> °C</p>
+    <h2 class="rest__title display" id="rest-title">Then rest</h2>
+  </div>
+  <div class="rest__text">
+    <p class="lede">You lie down. <span data-bake="stage.rest.loungers">14</span> loungers, blankets, no phones and no music, for <span data-bake="stage.rest.min">10</span> minutes or until your heart has come back to its own speed.</p>
+    <p>Then you go round again. <span data-bake="session.rounds">3</span> rounds is a session.</p>
+    <p><a href="rounds.html">What happens in each room</a></p>
+  </div>
+  <figure class="trace reveal">
+  <svg viewBox="0 0 900 300" role="img" aria-labelledby="trace-cap" preserveAspectRatio="xMidYMid meet">
+    <g><rect class="zone" x="138.4" y="10" width="113.3" height="256.0"/><rect class="zone" x="374.6" y="10" width="113.3" height="256.0"/><rect class="zone" x="610.7" y="10" width="113.3" height="256.0"/></g><g class="grid"><line x1="44" x2="900" y1="255.8" y2="255.8"/><line x1="44" x2="900" y1="212.2" y2="212.2"/><line x1="44" x2="900" y1="168.7" y2="168.7"/><line x1="44" x2="900" y1="35.6" y2="35.6"/></g><g class="axis"><text x="34" y="259.8" text-anchor="end"><tspan data-bake="stage.plunge.temp">4</tspan>°</text><text x="34" y="216.2" text-anchor="end"><tspan data-bake="stage.rest.temp">21</tspan>°</text><text x="34" y="172.7" text-anchor="end"><tspan data-bake="stage.rinse.temp">38</tspan>°</text><text x="34" y="39.6" text-anchor="end"><tspan data-bake="stage.hot.temp">90</tspan>°</text><text x="44.0" y="292" text-anchor="start">0 min</text><text x="327.3" y="292" text-anchor="middle">30 min</text><text x="610.7" y="292" text-anchor="middle">60 min</text><text x="894.0" y="292" text-anchor="end"><tspan data-bake="session.total">90</tspan> min</text></g>
+    <path class="path" data-trace pathLength="1" d="M44.0 212.2L138.4 212.2L138.4 35.6L251.8 35.6L251.8 168.7L261.2 168.7L261.2 255.8L280.1 255.8L280.1 212.2L374.6 212.2L374.6 35.6L487.9 35.6L487.9 168.7L497.3 168.7L497.3 255.8L516.2 255.8L516.2 212.2L610.7 212.2L610.7 35.6L724.0 35.6L724.0 168.7L733.4 168.7L733.4 255.8L752.3 255.8L752.3 212.2L846.8 212.2L846.8 212.2L894.0 212.2"/>
+  </svg>
+  <figcaption id="trace-cap">One session, <span data-bake="session.total">90</span> minutes. Arrive and change (<span data-bake="session.arrive">10</span> min), then <span data-bake="session.rounds">3</span> rounds of the hot room (<span data-bake="stage.hot.temp">90</span> °C, <span data-bake="stage.hot.min">12</span> min), the rinse (<span data-bake="stage.rinse.temp">38</span> °C, <span data-bake="stage.rinse.min">1</span> min), the plunge (<span data-bake="stage.plunge.temp">4</span> °C, <span data-bake="stage.plunge.min">2</span> min) and the rest room (<span data-bake="stage.rest.temp">21</span> °C, <span data-bake="stage.rest.min">10</span> min), then <span data-bake="session.leave">5</span> minutes to shower and dress. Shaded: time in the heat.</figcaption>
+</figure>
+</section>
+
+<section class="band" aria-labelledby="band-title">
+  <picture><source type="image/avif" srcset="img/home-street-1920.avif 1920w, img/home-street-1080.avif 1080w" sizes="100vw"><img src="img/home-street-1080.webp" srcset="img/home-street-1920.webp 1920w, img/home-street-1080.webp 1080w" sizes="100vw" width="1080" height="810" alt="A city street at night in falling snow, one street lamp lit." loading="lazy" decoding="async"></picture>
+  <div class="band__inner">
+    <p class="label">Doors at <span data-bake="hours.first">06:30</span></p>
+    <h2 class="band__title display" id="band-title">Outside is usually colder than the plunge</h2>
+    <p>Weekdays from <span data-bake="hours.first">06:30</span>, weekends from 08:00. The last session starts at <span data-bake="hours.last">21:00</span>. Sessions start on the hour and half hour, <span data-bake="session.guests">12</span> guests at a time.</p>
+    <div class="actions"><a class="btn btn--solid" href="sessions.html">Sessions &amp; prices <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a><a class="btn" href="visit.html">How to find us</a></div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="footer__grid">
+    <a class="footer__mark display" href="index.html">Hollin</a>
+    <div class="footer__col">
+      <p class="label">Find us</p>
+      <address>Hollin<br>14 Ropewalk Yard<br>Harbour Quarter</address>
+      <p><a href="mailto:hello@example.com">hello@example.com</a></p>
+    </div>
+    <div class="footer__col">
+      <p class="label">Open</p>
+      <p>Weekdays <span data-bake="hours.week">06:30 to 22:30</span><br>Weekends <span data-bake="hours.weekend">08:00 to 22:30</span></p>
+    </div>
+    <div class="footer__col">
+      <p class="label">Pages</p>
+      <ul><li><a href="rounds.html">The Rounds</a></li><li><a href="sessions.html">Sessions &amp; prices</a></li><li><a href="visit.html">Visit</a></li><li><a href="guest-book.html">Guest Book</a></li></ul>
+    </div>
+    <div class="footer__legal">
+      <p>Sample content. Hollin is a fictional club made to show this template: the address, hours, prices and email are placeholders, and nothing on this site is a medical claim.</p>
+      <p>&copy; 2026 Hollin. Photographs: Unsplash.</p>
+    </div>
+  </div>
+</footer>
+<button class="fb-open" type="button" data-fb-open aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4h16v12H9l-5 4z"/></svg><span class="fb-open__txt">Feedback</span></button>
+<dialog class="fb" id="fb" aria-labelledby="fb-title">
+  <div class="fb__head"><h2 id="fb-title">Leave a note</h2><button class="fb__close" type="button" data-fb-close><span class="sr-only">Close</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
+  <div class="fb__body">
+    <p class="fb__intro">How was your visit? Notes are kept on this device. Read them, or write a longer one, in the <a href="guest-book.html">Guest Book</a>.</p>
+    <form class="form" data-feedback id="fbd" novalidate>
+  <p class="form__summary" id="fbd-summary" role="alert"></p>
+  <fieldset aria-describedby="fbd-rating-err">
+    <legend>Overall, out of 5</legend>
+    <div class="rating" id="fbd-rating"><input type="radio" id="fbd-r1" name="rating" value="1" required><label for="fbd-r1">1<span class="sr-only"> out of 5</span></label><input type="radio" id="fbd-r2" name="rating" value="2" required><label for="fbd-r2">2<span class="sr-only"> out of 5</span></label><input type="radio" id="fbd-r3" name="rating" value="3" required><label for="fbd-r3">3<span class="sr-only"> out of 5</span></label><input type="radio" id="fbd-r4" name="rating" value="4" required><label for="fbd-r4">4<span class="sr-only"> out of 5</span></label><input type="radio" id="fbd-r5" name="rating" value="5" required><label for="fbd-r5">5<span class="sr-only"> out of 5</span></label></div>
+    <p class="rating__scale" aria-hidden="true"><span>1 not for me</span><span>5 I'll be back</span></p>
+    <span class="err" id="fbd-rating-err"></span>
+  </fieldset>
+  <div>
+    <label class="lbl" for="fbd-worked">What worked <span class="opt">(optional)</span></label>
+    <span class="hint" id="fbd-worked-hint">The heat, the cold, the quiet, the staff: anything.</span>
+    <textarea class="short" id="fbd-worked" name="worked" maxlength="400" aria-describedby="fbd-worked-hint"></textarea>
+  </div>
+  <div>
+    <label class="lbl" for="fbd-didnt">What didn't <span class="opt">(optional)</span></label>
+    <span class="hint" id="fbd-didnt-hint">Too busy, too hot, a cold shower that wasn't: tell us.</span>
+    <textarea class="short" id="fbd-didnt" name="didnt" maxlength="400" aria-describedby="fbd-didnt-hint"></textarea>
+  </div>
+  <div>
+    <label class="lbl" for="fbd-name">Name <span class="opt">(optional)</span></label>
+    <input type="text" id="fbd-name" name="name" maxlength="60" autocomplete="given-name">
+  </div>
+  <div>
+    <label class="lbl" for="fbd-message">Your note</label>
+    <span class="hint" id="fbd-message-hint">At least 10 characters.</span>
+    <textarea id="fbd-message" name="message" required minlength="10" maxlength="1200" aria-describedby="fbd-message-hint fbd-message-err"></textarea>
+    <span class="err" id="fbd-message-err"></span>
+  </div>
+  <div class="form__foot">
+    <p>There is no server behind this form. Saving keeps your note in this browser only; nothing is sent. To reach us, use the email button that appears after you save.</p>
+    <div class="actions"><button class="btn btn--solid" type="submit">Save on this device</button></div>
+  </div>
+</form>
+<div class="saved" id="fbd-saved" hidden tabindex="-1">
+  <p class="saved__status" data-saved-status></p>
+  <div data-saved-entry></div>
+  <div class="actions">
+    <a class="btn btn--solid" data-mailto href="mailto:hello@example.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg>Email it to Hollin</a>
+    <button class="btn" type="button" data-again>Write another</button>
+    <button class="btn btn--quiet" type="button" data-delete>Delete from this device</button>
+  </div>
+  <p class="fb__intro">The email button opens your own mail app with the note filled in, addressed to hello@example.com (a placeholder in this template). It is only sent if you press send there.</p>
+</div>
+  </div>
+</dialog>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="js/hollin-data.js"></script>
+<script src="js/temp.js"></script>
+<script src="js/site.js"></script>
+<script src="js/feedback.js"></script>
+<script src="js/field.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

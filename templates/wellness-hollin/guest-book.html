@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js t-21" data-temp="21" data-page="guest">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guest Book — Hollin</title>
+<meta name="description" content="Tell Hollin how your session went. Notes are kept on your device; send one to the club by email if you want it read.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0A1016">
+<link rel="canonical" href="https://templates.thornburystudio.com/templates/wellness-hollin/guest-book.html">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hollin">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="Guest Book — Hollin">
+<meta property="og:description" content="Tell Hollin how your session went. Notes are kept on your device; send one to the club by email if you want it read.">
+<meta property="og:url" content="https://templates.thornburystudio.com/templates/wellness-hollin/guest-book.html">
+<meta property="og:image" content="https://templates.thornburystudio.com/templates/wellness-hollin/img/guestbook-hero-1920.webp">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1280">
+<meta property="og:image:alt" content="An icy bay at dusk with a city skyline low on the far shore.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guest Book — Hollin">
+<meta name="twitter:description" content="Tell Hollin how your session went. Notes are kept on your device; send one to the club by email if you want it read.">
+<meta name="twitter:image" content="https://templates.thornburystudio.com/templates/wellness-hollin/img/guestbook-hero-1920.webp">
+<link rel="preload" href="fonts/anybody-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/temps.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <a class="nav__mark" href="index.html">Hollin</a>
+  <nav aria-label="Main"><ul class="nav__links"><li><a href="rounds.html">The Rounds</a></li><li><a href="sessions.html">Sessions &amp; prices</a></li><li><a href="visit.html">Visit</a></li><li><a href="guest-book.html" aria-current="page">Guest Book</a></li></ul></nav>
+  <p class="nav__temp" aria-hidden="true"><span data-temp-readout><span data-bake="stage.rest.temp">21</span></span><span>°C</span></p>
+  <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h18M3 16h18"/></svg></button>
+</header>
+<div class="menu" id="menu" hidden>
+  <button class="menu__close" type="button"><span class="sr-only">Close menu</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  <nav aria-label="Main, mobile"><ul><li><a href="index.html">Home</a></li><li><a href="rounds.html">The Rounds</a></li><li><a href="sessions.html">Sessions &amp; prices</a></li><li><a href="visit.html">Visit</a></li><li><a href="guest-book.html" aria-current="page">Guest Book</a></li></ul></nav>
+</div>
+<main id="main">
+<section class="page-hero">
+  <picture><source type="image/avif" srcset="img/guestbook-hero-1920.avif 1920w, img/guestbook-hero-1080.avif 1080w" sizes="100vw"><img src="img/guestbook-hero-1080.webp" srcset="img/guestbook-hero-1920.webp 1920w, img/guestbook-hero-1080.webp 1080w" sizes="100vw" width="1080" height="720" alt="An icy bay at dusk with a city skyline low on the far shore." fetchpriority="high" decoding="async"></picture>
+  <div class="page-hero__inner">
+    <p class="label">Guest Book</p>
+    <h1 class="display split-chars">Guest Book</h1>
+    <p class="lede">Tell us how it went. Good, bad, too hot, not cold enough. We read every note we get.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="g-write">
+  <div class="grid12">
+    <div class="col-a">
+      <p class="label">Write a note</p>
+      <h2 class="h2 display" id="g-write">How was it?</h2>
+      <p>This page has no server behind it, so here is exactly what happens. When you press save, your note is checked and kept in this browser, on this device, and shown back to you. Nothing leaves your device.</p>
+      <p>If you want us to read it, press <b>Email it to Hollin</b>. That opens your own mail app with the note already written, addressed to <span class="dim">hello@example.com</span>. It is sent only if you press send there.</p>
+    </div>
+    <div class="col-b">
+      <form class="form" data-feedback id="gb" novalidate>
+  <p class="form__summary" id="gb-summary" role="alert"></p>
+  <fieldset aria-describedby="gb-rating-err">
+    <legend>Overall, out of 5</legend>
+    <div class="rating" id="gb-rating"><input type="radio" id="gb-r1" name="rating" value="1" required><label for="gb-r1">1<span class="sr-only"> out of 5</span></label><input type="radio" id="gb-r2" name="rating" value="2" required><label for="gb-r2">2<span class="sr-only"> out of 5</span></label><input type="radio" id="gb-r3" name="rating" value="3" required><label for="gb-r3">3<span class="sr-only"> out of 5</span></label><input type="radio" id="gb-r4" name="rating" value="4" required><label for="gb-r4">4<span class="sr-only"> out of 5</span></label><input type="radio" id="gb-r5" name="rating" value="5" required><label for="gb-r5">5<span class="sr-only"> out of 5</span></label></div>
+    <p class="rating__scale" aria-hidden="true"><span>1 not for me</span><span>5 I'll be back</span></p>
+    <span class="err" id="gb-rating-err"></span>
+  </fieldset>
+  <div>
+    <label class="lbl" for="gb-worked">What worked <span class="opt">(optional)</span></label>
+    <span class="hint" id="gb-worked-hint">The heat, the cold, the quiet, the staff: anything.</span>
+    <textarea class="short" id="gb-worked" name="worked" maxlength="400" aria-describedby="gb-worked-hint"></textarea>
+  </div>
+  <div>
+    <label class="lbl" for="gb-didnt">What didn't <span class="opt">(optional)</span></label>
+    <span class="hint" id="gb-didnt-hint">Too busy, too hot, a cold shower that wasn't: tell us.</span>
+    <textarea class="short" id="gb-didnt" name="didnt" maxlength="400" aria-describedby="gb-didnt-hint"></textarea>
+  </div>
+  <div>
+    <label class="lbl" for="gb-name">Name <span class="opt">(optional)</span></label>
+    <input type="text" id="gb-name" name="name" maxlength="60" autocomplete="given-name">
+  </div>
+  <div>
+    <label class="lbl" for="gb-message">Your note</label>
+    <span class="hint" id="gb-message-hint">At least 10 characters.</span>
+    <textarea id="gb-message" name="message" required minlength="10" maxlength="1200" aria-describedby="gb-message-hint gb-message-err"></textarea>
+    <span class="err" id="gb-message-err"></span>
+  </div>
+  <div class="form__foot">
+    <p>There is no server behind this form. Saving keeps your note in this browser only; nothing is sent. To reach us, use the email button that appears after you save.</p>
+    <div class="actions"><button class="btn btn--solid" type="submit">Save on this device</button></div>
+  </div>
+</form>
+<div class="saved" id="gb-saved" hidden tabindex="-1">
+  <p class="saved__status" data-saved-status></p>
+  <div data-saved-entry></div>
+  <div class="actions">
+    <a class="btn btn--solid" data-mailto href="mailto:hello@example.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg>Email it to Hollin</a>
+    <button class="btn" type="button" data-again>Write another</button>
+    <button class="btn btn--quiet" type="button" data-delete>Delete from this device</button>
+  </div>
+  <p class="fb__intro">The email button opens your own mail app with the note filled in, addressed to hello@example.com (a placeholder in this template). It is only sent if you press send there.</p>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight t-38" aria-labelledby="g-mine">
+  <div class="grid12">
+    <div class="col-a">
+      <p class="label">On this device</p>
+      <h2 class="h3" id="g-mine">Your notes</h2>
+      <p class="dim">Only you can see these. Clearing your browser's site data removes them.</p>
+    </div>
+    <div class="col-b">
+      <div id="my-notes" aria-live="polite"><p class="dim" data-empty>No notes saved on this device yet.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="g-sample">
+  <div class="grid12">
+    <div class="col-a">
+      <p class="label">Sample content</p>
+      <h2 class="h3" id="g-sample">What a guest book looks like</h2>
+      <p class="dim">These three notes were written for this template to show the layout. They are not from real guests.</p>
+    </div>
+    <div class="col-b notes">
+      <article><p class="entry__rating" aria-label="Rating 5 out of 5">5/5</p><p>Came for the first-light session in the dark. Three of us in the hot room and nobody said a word for twelve minutes. The plunge is no joke. I'll be back on Thursday. <span class="dim">— Sample note</span></p></article>
+      <article><p class="entry__rating" aria-label="Rating 3 out of 5">3/5</p><p>Loved the rooms. Saturday at four was too busy for me; I waited for a tub both rounds. Would come off-peak next time. <span class="dim">— Sample note</span></p></article>
+      <article><p class="entry__rating" aria-label="Rating 4 out of 5">4/5</p><p>The rest room is the best room. Would have liked a second blanket. <span class="dim">— Sample note</span></p></article>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="footer__grid">
+    <a class="footer__mark display" href="index.html">Hollin</a>
+    <div class="footer__col">
+      <p class="label">Find us</p>
+      <address>Hollin<br>14 Ropewalk Yard<br>Harbour Quarter</address>
+      <p><a href="mailto:hello@example.com">hello@example.com</a></p>
+    </div>
+    <div class="footer__col">
+      <p class="label">Open</p>
+      <p>Weekdays <span data-bake="hours.week">06:30 to 22:30</span><br>Weekends <span data-bake="hours.weekend">08:00 to 22:30</span></p>
+    </div>
+    <div class="footer__col">
+      <p class="label">Pages</p>
+      <ul><li><a href="rounds.html">The Rounds</a></li><li><a href="sessions.html">Sessions &amp; prices</a></li><li><a href="visit.html">Visit</a></li><li><a href="guest-book.html">Guest Book</a></li></ul>
+    </div>
+    <div class="footer__legal">
+      <p>Sample content. Hollin is a fictional club made to show this template: the address, hours, prices and email are placeholders, and nothing on this site is a medical claim.</p>
+      <p>&copy; 2026 Hollin. Photographs: Unsplash.</p>
+    </div>
+  </div>
+</footer>
+<button class="fb-open" type="button" data-fb-open aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4h16v12H9l-5 4z"/></svg><span class="fb-open__txt">Feedback</span></button>
+<dialog class="fb" id="fb" aria-labelledby="fb-title">
+  <div class="fb__head"><h2 id="fb-title">Leave a note</h2><button class="fb__close" type="button" data-fb-close><span class="sr-only">Close</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
+  <div class="fb__body">
+    <p class="fb__intro">How was your visit? Notes are kept on this device. Read them, or write a longer one, in the <a href="guest-book.html">Guest Book</a>.</p>
+    <form class="form" data-feedback id="fbd" novalidate>
+  <p class="form__summary" id="fbd-summary" role="alert"></p>
+  <fieldset aria-describedby="fbd-rating-err">
+    <legend>Overall, out of 5</legend>
+    <div class="rating" id="fbd-rating"><input type="radio" id="fbd-r1" name="rating" value="1" required><label for="fbd-r1">1<span class="sr-only"> out of 5</span></label><input type="radio" id="fbd-r2" name="rating" value="2" required><label for="fbd-r2">2<span class="sr-only"> out of 5</span></label><input type="radio" id="fbd-r3" name="rating" value="3" required><label for="fbd-r3">3<span class="sr-only"> out of 5</span></label><input type="radio" id="fbd-r4" name="rating" value="4" required><label for="fbd-r4">4<span class="sr-only"> out of 5</span></label><input type="radio" id="fbd-r5" name="rating" value="5" required><label for="fbd-r5">5<span class="sr-only"> out of 5</span></label></div>
+    <p class="rating__scale" aria-hidden="true"><span>1 not for me</span><span>5 I'll be back</span></p>
+    <span class="err" id="fbd-rating-err"></span>
+  </fieldset>
+  <div>
+    <label class="lbl" for="fbd-worked">What worked <span class="opt">(optional)</span></label>
+    <span class="hint" id="fbd-worked-hint">The heat, the cold, the quiet, the staff: anything.</span>
+    <textarea class="short" id="fbd-worked" name="worked" maxlength="400" aria-describedby="fbd-worked-hint"></textarea>
+  </div>
+  <div>
+    <label class="lbl" for="fbd-didnt">What didn't <span class="opt">(optional)</span></label>
+    <span class="hint" id="fbd-didnt-hint">Too busy, too hot, a cold shower that wasn't: tell us.</span>
+    <textarea class="short" id="fbd-didnt" name="didnt" maxlength="400" aria-describedby="fbd-didnt-hint"></textarea>
+  </div>
+  <div>
+    <label class="lbl" for="fbd-name">Name <span class="opt">(optional)</span></label>
+    <input type="text" id="fbd-name" name="name" maxlength="60" autocomplete="given-name">
+  </div>
+  <div>
+    <label class="lbl" for="fbd-message">Your note</label>
+    <span class="hint" id="fbd-message-hint">At least 10 characters.</span>
+    <textarea id="fbd-message" name="message" required minlength="10" maxlength="1200" aria-describedby="fbd-message-hint fbd-message-err"></textarea>
+    <span class="err" id="fbd-message-err"></span>
+  </div>
+  <div class="form__foot">
+    <p>There is no server behind this form. Saving keeps your note in this browser only; nothing is sent. To reach us, use the email button that appears after you save.</p>
+    <div class="actions"><button class="btn btn--solid" type="submit">Save on this device</button></div>
+  </div>
+</form>
+<div class="saved" id="fbd-saved" hidden tabindex="-1">
+  <p class="saved__status" data-saved-status></p>
+  <div data-saved-entry></div>
+  <div class="actions">
+    <a class="btn btn--solid" data-mailto href="mailto:hello@example.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg>Email it to Hollin</a>
+    <button class="btn" type="button" data-again>Write another</button>
+    <button class="btn btn--quiet" type="button" data-delete>Delete from this device</button>
+  </div>
+  <p class="fb__intro">The email button opens your own mail app with the note filled in, addressed to hello@example.com (a placeholder in this template). It is only sent if you press send there.</p>
+</div>
+  </div>
+</dialog>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="js/hollin-data.js"></script>
+<script src="js/temp.js"></script>
+<script src="js/site.js"></script>
+<script src="js/feedback.js"></script>
+</body>
+</html>

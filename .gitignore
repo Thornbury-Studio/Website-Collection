@@ -122,3 +122,8 @@ templates/wick-tallow/tools/raw/
 # by tools/media.py; the originals and verification shots stay local.
 templates/expedition-longlight/tools/raw/
 templates/expedition-longlight/tools/shots/
+
+# HOLLIN: Unsplash originals (ids in CREDITS.md) re-derived into templates/wellness-hollin/img/
+# by tools/media.py, plus shader/hero captures; the originals and verification shots stay local.
+templates/wellness-hollin/tools/raw/
+templates/wellness-hollin/tools/shots/
