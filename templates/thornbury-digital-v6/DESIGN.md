@@ -149,9 +149,8 @@ password-gated client previews are excluded: the wall is public, they are not.
 
 ## The rate
 
-The two figures on Services are the studio's real published rates and only
-those: S$500 promotional and S$800 fixed. Nothing else on the site states a
-price.
+The figures on Services were the studio's real published rates and only
+those. Nothing else on the site states a price.
 
 ## Mobile
 

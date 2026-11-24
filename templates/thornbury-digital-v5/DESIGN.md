@@ -240,12 +240,10 @@ The fifth page is the one a studio site usually gets wrong. Three plan cards in 
 row is a SaaS pattern, and a reviewer reads it as one before reading a word of
 it — so the page is built out of what this site already is: a hairline index.
 
-**The figures are the studio's real published rates**, and only those:
-S$500 promotional, up to five pages, three months of free changes; S$800 fixed,
-no page limit, one month of free changes. An earlier draft of this page carried
-an invented three-tier ledger (S$6,800 / S$22,000 / S$48,000) that read as
-plausible and was not true. Nothing on the page states a figure that is not one
-of these two — grep it: `S\$[\d,]+` returns exactly `S$500` and `S$800`.
+**The figures are the studio's real published rates**, and only those. An
+earlier draft of this page carried an invented three-tier ledger (S$6,800 /
+S$22,000 / S$48,000) that read as plausible and was not true. Nothing on the
+page states a figure that was not a published rate.
 
 **A small real number is a typographic problem, not a pricing one.** The
 invented ledger leaned on big tier names because the prices were big; the real
@@ -851,8 +849,7 @@ offered “Under S$10k” to “S$60k and up”, which contradicts the published
 the page next door. It is now *What you need*, listing the four real services and
 nothing that is not on the Services page, with the two unlaunched ones marked
 *in development* in the option text itself. Beside it, the rate is stated in the
-copy rather than asked for: S$500 promotional and S$800 fixed, with a link to
-where they are set out. And **“Mon – Fri, 10:00 – 18:00 SGT” is gone** — it
+copy rather than asked for, with a link to where it is set out. And **“Mon – Fri, 10:00 – 18:00 SGT” is gone** — it
 traced to the same creation commit as Tanjong Pagar and Q1 2027, nobody has
 confirmed it, and the standing rule is that an unconfirmed claim does not stay
 up while we wait for one. If those hours are real, they are one line to put back.
@@ -1600,7 +1597,7 @@ clean, the harness's uncapped rAF at 165 fps.
 
 **Put back.** Commit 4886863 did more than the hero. Restored: the home
 page's three teaser sections (Approach, What it costs, Studio) and the
-hero's two calls to action; the S$800 rate card on Services, which had been
+hero's two calls to action; the rate card on Services, which had been
 demoted to one line; the "05 — Contact" head on Contact and the standard
 head on Studio; and seven rules that hid copy outright on phones (the
 section subs, the process lead, the figure's provenance note, the rates,
@@ -1880,8 +1877,8 @@ promotion's framing follows as a line of body copy, and the four things both
 rates carry run as one ruled strip (`.strip`: four cells with hairlines
 between; two by two under 1080 px; one column on a phone). Services keeps the
 ledger; the same numbers, byte for byte, in a shape that is a sentence rather
-than a card. Verified: every figure and period present on the page, S$500 ×7
-and S$800 ×4 across the recap, the table and the twelve; no straight quotes;
+than a card. Verified: every figure and period present on the page, across the
+recap, the table and the twelve; no straight quotes;
 zero overflow at 1440, 1024 and 390; Services' figures and terms unchanged.
 
 ## The charter as a document
