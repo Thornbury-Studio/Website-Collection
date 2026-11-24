@@ -72,9 +72,9 @@ applies: plan once, generate once, inspect.
 
 ## Facts
 
-The only price anywhere is the real published rate: S$500 promotional /
-S$800 fixed. The menu board carries that one honest row; everything else on
-the board describes, it does not price. No invented clients, metrics or
+The only price anywhere is the real published rate. The menu board carries
+that one honest row; everything else on the board describes, it does not
+price. No invented clients, metrics or
 testimonials. Local time in the header is the real clock (Asia/Singapore).
 
 ## State
